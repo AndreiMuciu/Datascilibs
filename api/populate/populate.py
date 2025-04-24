@@ -14,6 +14,9 @@ if __name__ == '__main__':
 
     df = pd.read_csv(csv_file)
 
+    # Replace all NaN with None
+    df = df.where(pd.notnull(df), None)
+
     for _, row in df.iterrows():
         doc = row.to_dict()
         doc['_id'] = doc.pop('rank')
