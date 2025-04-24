@@ -13,7 +13,8 @@ def read_root():
 
 @app.get('/repos/sorted')
 def sorted_repos(by: str = 'stars'):
-    repos = list(DB['repos'].find().sort(by, -1).limit(50))
+    fields = {'_id', 'full_name', 'url', 'stars','forks'}
+    repos = list(DB['repos'].find({}, fields).sort(by, -1).limit(50))
     return json_http_resp(repos)
 
 
