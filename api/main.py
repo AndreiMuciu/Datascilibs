@@ -9,7 +9,7 @@ DB = get_db()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return 'Hi world!'
 
 @app.get('/repos/sorted')
 def sorted_repos(by: str = 'stars'):

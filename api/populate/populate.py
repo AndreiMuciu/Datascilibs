@@ -15,6 +15,7 @@ if __name__ == '__main__':
     df = pd.read_csv(csv_file)
 
     # Replace all NaN with None
+    df = df.fillna('')
     df = df.where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
