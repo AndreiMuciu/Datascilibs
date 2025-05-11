@@ -1,0 +1,144 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+Avaiga/taipy,3052352402,2610,[🐛 BUG] Text disappears in certain condition,"### 🔍 What went wrong?
+
+It seems that having a multiline string with `""""""` and a line break before the text will make the text disappear.
+
+### ✅ Expected Behavior
+
+It should not disappear.
+
+### 🔄 Steps to Reproduce
+
+Run:
+```python
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+
+selected_tutorial = ""Test""
+
+with tgb.Page() as page:
+    tgb.text(
+        """"""
+Finding a rate: {selected_tutorial}"""""",
+    )
+
+Gui(page).run()
+
+```
+
+The page will show nothing.
+
+The page 
+
+### 💡 Possible Solution (Optional)
+
+_No response_
+
+### 🖼️ Screenshots (Optional)
+
+_No response_
+
+### 💻 Runtime Environment
+
+_No response_
+
+### 🌐 Browser (if applicable)
+
+_No response_
+
+### 🖥️ Operating System
+
+_No response_
+
+### 📦 Taipy Version
+
+4.0.3
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in
+",FlorianJacta,98709993,open,False,0,2025-05-09T14:29:13+00:00,2025-05-09T14:29:47+00:00,,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,3050649437,2609,[✨ FEATURE] Improve table stylekit,"### 🔍 Feature Description
+
+In the following image, the first row is selected and I'm hovering over the second row. The background color is (almost?) the same:
+
+![Image](https://github.com/user-attachments/assets/2f04e3ad-ba05-41a6-ac97-2da1946f3aa7)
+
+It would be good to be more visually obvious when a row is selected vs. hovered.
+
+Example code:
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {""a"": [1, 2, 3, 4, 5], ""b"": [5, 4, 3, 2, 1]}
+
+selected = [0]
+
+
+def num_on_action(state, var_name, payload):
+    index = payload.get(""index"")
+    if index in state.selected:
+        state.selected = list(set(state.selected) - {index})
+    else:
+        state.selected = state.selected + [index]
+
+
+with tgb.Page() as page:
+    tgb.toggle(theme=True)
+
+    tgb.table(""{data}"", selected=""{selected}"", on_action=num_on_action)
+
+    tgb.table(""{data}"", selected=""{selected}"", on_action=num_on_action, class_name=""rows-similar rows-bordered"")
+
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page)
+    gui.run(run_browser=False, use_reloader=True)
+```
+
+Play around with:
+1. Changing the theme
+2. Selected different rows
+3. Hovering over different rows
+
+I quickly get very confused with the colors. It's much better on the table with ""rows-similar"" though.
+
+### 💡 Proposed Solution
+
+Overhaul the stylekit for taipy tables. Consider interaction with:
+1. Theme
+2. ""rows-similar"" stylekit class
+3. ""selected"" rows (Mui-selected)
+4. Hovering on selected/unselected rows
+
+Consider adding:
+1. Different background color for table header row
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",arcanaxion,48582724,open,False,0,2025-05-09T03:35:08+00:00,2025-05-09T03:35:19+00:00,,,0,0,0,0,0,0,0

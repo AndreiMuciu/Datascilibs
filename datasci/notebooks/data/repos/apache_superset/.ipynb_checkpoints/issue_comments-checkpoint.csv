@@ -1,0 +1,63 @@
+repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+apache/superset,3054450412,2869082726,dosubot[bot],131922026,2025-05-10T18:38:46+00:00,2025-05-10T18:38:46+00:00,"<!-- Greeting -->
+Hello @antonio-andrade! I'm [Dosu](https://dosu.dev), here to help you with bugs, answer your questions, and assist you on your journey as a contributor. While you wait for a human maintainer, feel free to share more about your issue, and I'll do my best to assist you!
+
+<!-- Answer -->
+The error ""Invalid SSL Certificate Requirements Flag: CERT_NONE"" suggests that there might be an issue with how SSL certificates are being handled in your DuckDB setup within Superset. This error typically occurs when the SSL configuration is not set correctly or when an unsupported SSL flag is used.
+
+Here are a few steps you can take to troubleshoot and potentially resolve this issue:
+
+1. **SSL Configuration**: Ensure that the SSL settings in your DuckDB connection are correctly configured. The error indicates that `CERT_NONE` is not a valid flag, so you might need to adjust the SSL certificate requirements. Check if there are any specific SSL settings required by DuckDB or Superset that you might have missed.
+
+2. **DuckDB Version**: Verify that the version of DuckDB you are using is compatible with the SSL settings you are trying to apply. Sometimes, newer versions of libraries or engines have different requirements or deprecate certain flags.
+
+3. **Superset Configuration**: Double-check the Superset configuration to ensure that it supports the SSL settings you are trying to use. There might be additional configuration needed in Superset to handle SSL connections properly.
+
+4. **Python Environment**: Since the connection works fine with a standalone Python script, compare the environment and dependencies used in the script with those in the Superset environment. There might be differences in library versions or configurations that could affect SSL handling.
+
+5. **Helm Chart and Kubernetes**: Ensure that the Helm Chart and Kubernetes configurations are correctly set up to support SSL connections. There might be environment variables or configurations that need to be adjusted to allow SSL connections.
+
+If these steps do not resolve the issue, you may need to look into the specific SSL requirements and configurations for DuckDB and how they are integrated with Superset.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3053802239,2868534229,dosubot[bot],131922026,2025-05-10T06:47:58+00:00,2025-05-10T06:47:58+00:00,"<!-- Answer -->
+I found some similar threads that might be relevant to your issue:
+
+1. [Installing error](https://github.com/apache/superset/discussions/33017) - This discussion is open and might contain useful insights for installation errors <sup>[[1]](https://github.com/apache/superset/discussions/33017)</sup>.
+2. [Issues with NPM run build version 4.1.1](https://github.com/apache/superset/discussions/31923) - This discussion is open and addresses issues with the `npm run build` step, which could be similar to what you're experiencing <sup>[[2]](https://github.com/apache/superset/discussions/31923)</sup>.
+
+To resolve the error during the `npm run build` step for Apache Superset version 4.1.2, you can try the following steps:
+
+1. Ensure you are using the correct versions of Node.js and npm as specified in the project's package.json file. Apache Superset requires Node.js version 20.16.0 and npm version 10.8.1. Update your Dockerfile or environment to use these versions to prevent build freezes.
+
+2. Add npm to the system dependencies in your Dockerfile:
+```dockerfile
+RUN /app/docker/apt-install.sh build-essential python3 zstd npm
+```
+
+3. Configure npm to use a mirror registry:
+```bash
+npm config set registry http://mirrors.ustc.edu.cn/
+```
+
+4. Ensure you have the latest code by pulling from the master branch.
+
+5. Access Superset through port 9000 (http://localhost:9000) instead of port 8088.
+
+6. In docker-compose.yml, set the Superset URL to 'http://superset:8088' instead of 'http://host.docker.internal:8088'.
+
+These changes should help resolve the 'npm run build' failure in the Docker setup by ensuring compatibility with the project's requirements and proper communication between containers <sup>[[3]](https://github.com/apache/superset/issues/31714)</sup><sup>[[4]](https://github.com/apache/superset/issues/33050)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=other)</sup>
+",0,0,0,0,0,0,0

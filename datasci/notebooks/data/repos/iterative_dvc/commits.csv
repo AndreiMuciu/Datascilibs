@@ -1,0 +1,21 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+iterative/dvc,9908ca7f8e9166506bbd7fa85cead8194fba9aa0,https://github.com/iterative/dvc/commit/9908ca7f8e9166506bbd7fa85cead8194fba9aa0,skshetry,18718008,User,2025-05-07T08:49:27+00:00,web-flow,2025-05-07T08:49:27+00:00,"drop inputs passed to codecov-action (#10740)
+
+It can already search and find these coverage files.",0,3,3,1,0eebeb9900eea9117c78922b04b4e46cb7df3009
+iterative/dvc,0eebeb9900eea9117c78922b04b4e46cb7df3009,https://github.com/iterative/dvc/commit/0eebeb9900eea9117c78922b04b4e46cb7df3009,skshetry,18718008,User,2025-05-07T06:55:51+00:00,web-flow,2025-05-07T06:55:51+00:00,"tests: fix flaky test in test_get_used_objs (#10739)
+
+Clear logs before assertions so that logs from other tests do not interfere with the test.
+Some destructors may also run in between due to GC, so hopefully this will fix that issue too,
+or reduce the chances of it happening.
+
+See
+https://github.com/iterative/dvc/actions/runs/14873217814/job/41775314725#step:6:97.
+
+```console
+>       assert first(caplog.messages) == expected_message
+E       assert 'RC: discarding all clients' == ""Output 'path... 'stage.dvc'.""
+E
+E         + RC: discarding all clients
+E         - Output 'path'(stage: 'stage.dvc') is missing version info. Cache for it will not be collected. Use `dvc repro` to get your pipeline up to date.
+E         - You can also use `dvc commit stage.dvc` to associate existing 'path' with stage: 'stage.dvc'.
+```",1,0,1,1,415d4bc9804400e6e8c4e9976db65b2df85dad49

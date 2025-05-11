@@ -1,0 +1,15 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+d2l-ai/d2l-en,3048758729,2646,fix expectation for densities,"*Description of changes:*
+Current version shows the following:
+
+$E[X] = \int x \;dp(x)$
+
+Updated to:
+
+$E[X] = \int x p(x)\;dx$
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Mrutyunjay01,53314831,open,False,0,2025-05-08T11:50:52+00:00,2025-05-08T11:50:52+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,3041548343,2645,Define logit,"I don't think logits are ever formally defined anywhere in the book, they're just suddenly mentioned in 4.1 Softmax Regression.",rdong8,66289396,open,False,0,2025-05-06T05:20:32+00:00,2025-05-06T05:20:32+00:00,,,0,0,0,0,0,0,0

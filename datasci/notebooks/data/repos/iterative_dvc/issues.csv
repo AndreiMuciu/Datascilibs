@@ -1,0 +1,58 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+iterative/dvc,3053248985,10743,"add: can't set the cache type to ""copy"" if the filesystem supports reflinks","# Bug Report
+
+## Description
+
+When the underlying filesystem (for instance ZFS 2.3) supports reflinks, DVC will always use them, even if you set the cache type to ""copy"".
+
+### Reproduce
+
+1. Set the DVC cache type to ""copy""
+2. Do a dvc add
+3. Observe that the reflink() function in dvc_objects/fs/local.py is called
+
+### Expected
+
+DVC should use the copy strategy
+
+### Environment information
+
+<!--
+This is required to ensure that we can reproduce the bug.
+-->
+
+**Output of `dvc doctor`:**
+
+```console
+$ dvc doctor
+DVC version: 3.59.2 (pip)
+-------------------------
+Platform: Python 3.11.6 on Linux-6.8.0-59-generic-x86_64-with-glibc2.35
+Subprojects:
+        dvc_data = 3.16.10
+        dvc_objects = 5.1.0
+        dvc_render = 1.0.2
+        dvc_task = 0.40.2
+        scmrepo = 3.3.11
+Supports:
+        http (aiohttp = 3.11.18, aiohttp-retry = 2.9.1),
+        https (aiohttp = 3.11.18, aiohttp-retry = 2.9.1),
+        s3 (s3fs = 2025.3.0, boto3 = 1.37.3)
+Config:
+        Global: /home/mermerico/.config/dvc
+        System: /etc/xdg/dvc
+Cache types: reflink
+Cache directory: zfs on tank
+Caches: local
+Remotes: s3
+Workspace directory: zfs on tank
+Repo: dvc, git
+Repo.site_cache_dir: /home/mermerico/dvc_site_cache/repo/54ea0ca1cd8a6432245cbe79e3f79d2f
+```
+
+**Additional Information (if any):**
+
+There's some bug in the reflink strategy where I get ""resource not available"" errors (using ZFS 2.3.2) I'd like to collect more information about that bug and submit a report but I'm using a cache that's shared with others on this machine. I need to enable reflinks on the FS level and then have all the other users use the ""copy"" strategy so they aren't blocked while I'm debugging.",mermerico,3631507,open,False,2,2025-05-09T21:39:07+00:00,2025-05-10T15:48:47+00:00,,,0,0,0,0,0,0,0
+iterative/dvc,3053001378,10742,Add .toml support,"Right now DVC uses files such as params.yaml. Meanwhile .toml files are becoming an integral part of the python ecosystem through pyproject.toml being the standard project information file and even the tomllib library becoming part of the standard library.
+
+It would be amazing to support the equivalent versions of the .yaml files but in .toml.",jrr96,92081722,open,False,2,2025-05-09T19:18:43+00:00,2025-05-10T13:29:58+00:00,,,0,0,0,0,0,0,0

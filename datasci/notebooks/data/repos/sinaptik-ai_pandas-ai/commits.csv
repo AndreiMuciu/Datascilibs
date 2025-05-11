@@ -1,0 +1,7 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+sinaptik-ai/pandas-ai,85b31665e2b6cb6adcf040a7a77f77201b8cfb86,https://github.com/sinaptik-ai/pandas-ai/commit/85b31665e2b6cb6adcf040a7a77f77201b8cfb86,ArslanSaleem,11032815,User,2025-04-14T08:01:54+00:00,ArslanSaleem,2025-04-14T08:01:54+00:00,release/b17,1,1,2,1,9b579452f2d9d59db7a61cafe1c7b28815b62848
+sinaptik-ai/pandas-ai,9b579452f2d9d59db7a61cafe1c7b28815b62848,https://github.com/sinaptik-ai/pandas-ai/commit/9b579452f2d9d59db7a61cafe1c7b28815b62848,ArslanSaleem,11032815,User,2025-04-11T09:38:33+00:00,web-flow,2025-04-11T09:38:33+00:00,"fix(duckdbConnection): make duckdb connection manager non singleton (#1710)
+
+* fix(duckdbConnection): shared connection space between duckdb
+
+* fix(dataset): add test case",24,19,43,2,455dfdbf688ba79db527029f51e6d216354d88aa

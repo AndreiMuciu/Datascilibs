@@ -1,0 +1,97 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+marimo-team/marimo,3054819136,4869,Support system message for Gemini,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+The system message was ignored for Gemini; this PR fixes that.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+The system message is now passed as an argument to `GenerativeModel`.
+In addition, a redundant line has been deleted.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",guyrosin,1250162,open,False,3,2025-05-11T08:04:10+00:00,2025-05-11T08:15:10+00:00,,,0,0,0,0,0,0,0
+marimo-team/marimo,3054706274,4868,write_csv() on a marimo.table.value also writes extra row number,"### Describe the bug
+
+Take a DataFrame, wrap it with marimo.ui.table, interactively select rows, then call the table's .values.write_csv() to write the selected rows.
+
+I couldn't recall since which version, the row number (seemingly an internal hidden column ""_marimo_row_id"") also gets written into the resulting CSV as an unexpected extra column.
+
+This behaviour should at least be opt-in via a parameter. Thanks for the attention.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Windows"",
+  ""OS Version"": ""11"",
+  ""Processor"": ""AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD"",
+  ""Python Version"": ""3.13.3"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""--""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.2.0"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.38.2"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""altair"": ""5.5.0"",
+    ""polars"": ""1.29.0"",
+    ""pycrdt"": ""0.11.1""
+  },
+  ""Experimental Flags"": {
+    ""chat_sidebar"": true,
+    ""tracing"": true
+  }
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",Vrantheo,132968157,open,False,0,2025-05-11T04:43:50+00:00,2025-05-11T04:43:50+00:00,,bug,0,0,0,0,0,0,0

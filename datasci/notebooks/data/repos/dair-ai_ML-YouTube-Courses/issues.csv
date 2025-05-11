@@ -1,0 +1,31 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+dair-ai/ML-YouTube-Courses,2989326532,48,Add Pollinations.AI as a generative AI resource for students,"## Description
+This PR adds Pollinations.AI as a free generative AI resource for students learning machine learning. It introduces a new section ""Generative AI Tools and Resources"" to complement the existing course content.
+
+### Added Components:
+1. New section in the table of contents for ""Generative AI Tools and Resources""
+2. Detailed description of Pollinations.AI with its key features for students:
+   - No signup required
+   - No API key needed
+   - Free to use
+   - Multiple modalities (text, image, audio)
+   - OpenAI-compatible API
+   - Educational focus
+
+### Why Pollinations.AI is valuable for ML students:
+- **Hands-on learning**: Students can immediately experiment with generative AI models without setup barriers
+- **Practical application**: Complements theoretical course content with practical tools
+- **Accessibility**: Free access makes it ideal for educational settings
+- **API experience**: Students can learn industry-standard API patterns
+- **Prompt engineering practice**: Provides a platform to test and refine prompts
+
+This addition enhances the repository by providing students with a practical tool to experiment with the generative AI concepts they learn about in the courses listed in this repository.
+
+## Checklist
+- [x] Added new section to the table of contents
+- [x] Created detailed description of Pollinations.AI with educational benefits
+- [x] Maintained consistent formatting with the rest of the README
+- [x] Added relevant links to the platform and documentation",voodoohop,5099901,open,False,0,2025-04-11T17:43:23+00:00,2025-04-11T17:43:23+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2911870569,47,Add DGM courses,"Created a section for courses on **Deep Generative Models**.
+Moved the _Deep Unsupervised Learning_  course to this section as it is a better fit (it previously belonged to the deep learning courses).
+I also added 3 new courses on DGM from Cornell, Stanford, and MIT.",RamtinMoslemi,76493699,open,False,0,2025-03-11T20:56:32+00:00,2025-03-11T20:56:32+00:00,,,0,0,0,0,0,0,0

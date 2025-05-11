@@ -1,0 +1,1202 @@
+repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+apache/superset,3054450412,2869082726,dosubot[bot],131922026,2025-05-10T18:38:46+00:00,2025-05-10T18:38:46+00:00,"<!-- Greeting -->
+Hello @antonio-andrade! I'm [Dosu](https://dosu.dev), here to help you with bugs, answer your questions, and assist you on your journey as a contributor. While you wait for a human maintainer, feel free to share more about your issue, and I'll do my best to assist you!
+
+<!-- Answer -->
+The error ""Invalid SSL Certificate Requirements Flag: CERT_NONE"" suggests that there might be an issue with how SSL certificates are being handled in your DuckDB setup within Superset. This error typically occurs when the SSL configuration is not set correctly or when an unsupported SSL flag is used.
+
+Here are a few steps you can take to troubleshoot and potentially resolve this issue:
+
+1. **SSL Configuration**: Ensure that the SSL settings in your DuckDB connection are correctly configured. The error indicates that `CERT_NONE` is not a valid flag, so you might need to adjust the SSL certificate requirements. Check if there are any specific SSL settings required by DuckDB or Superset that you might have missed.
+
+2. **DuckDB Version**: Verify that the version of DuckDB you are using is compatible with the SSL settings you are trying to apply. Sometimes, newer versions of libraries or engines have different requirements or deprecate certain flags.
+
+3. **Superset Configuration**: Double-check the Superset configuration to ensure that it supports the SSL settings you are trying to use. There might be additional configuration needed in Superset to handle SSL connections properly.
+
+4. **Python Environment**: Since the connection works fine with a standalone Python script, compare the environment and dependencies used in the script with those in the Superset environment. There might be differences in library versions or configurations that could affect SSL handling.
+
+5. **Helm Chart and Kubernetes**: Ensure that the Helm Chart and Kubernetes configurations are correctly set up to support SSL connections. There might be environment variables or configurations that need to be adjusted to allow SSL connections.
+
+If these steps do not resolve the issue, you may need to look into the specific SSL requirements and configurations for DuckDB and how they are integrated with Superset.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/f54b40d2-9eee-4382-aba3-2ce715694a84?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3053802239,2868534229,dosubot[bot],131922026,2025-05-10T06:47:58+00:00,2025-05-10T06:47:58+00:00,"<!-- Answer -->
+I found some similar threads that might be relevant to your issue:
+
+1. [Installing error](https://github.com/apache/superset/discussions/33017) - This discussion is open and might contain useful insights for installation errors <sup>[[1]](https://github.com/apache/superset/discussions/33017)</sup>.
+2. [Issues with NPM run build version 4.1.1](https://github.com/apache/superset/discussions/31923) - This discussion is open and addresses issues with the `npm run build` step, which could be similar to what you're experiencing <sup>[[2]](https://github.com/apache/superset/discussions/31923)</sup>.
+
+To resolve the error during the `npm run build` step for Apache Superset version 4.1.2, you can try the following steps:
+
+1. Ensure you are using the correct versions of Node.js and npm as specified in the project's package.json file. Apache Superset requires Node.js version 20.16.0 and npm version 10.8.1. Update your Dockerfile or environment to use these versions to prevent build freezes.
+
+2. Add npm to the system dependencies in your Dockerfile:
+```dockerfile
+RUN /app/docker/apt-install.sh build-essential python3 zstd npm
+```
+
+3. Configure npm to use a mirror registry:
+```bash
+npm config set registry http://mirrors.ustc.edu.cn/
+```
+
+4. Ensure you have the latest code by pulling from the master branch.
+
+5. Access Superset through port 9000 (http://localhost:9000) instead of port 8088.
+
+6. In docker-compose.yml, set the Superset URL to 'http://superset:8088' instead of 'http://host.docker.internal:8088'.
+
+These changes should help resolve the 'npm run build' failure in the Docker setup by ensuring compatibility with the project's requirements and proper communication between containers <sup>[[3]](https://github.com/apache/superset/issues/31714)</sup><sup>[[4]](https://github.com/apache/superset/issues/33050)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/dd058f06-6128-4b8d-b024-d5837a786884?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3052960270,2867625844,korbit-ai[bot],131444098,2025-05-09T18:59:04+00:00,2025-05-09T18:59:04+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](0d5e1250-592e-411a-b7b4-f5a153651e41)",0,0,0,0,0,0,0
+apache/superset,3052960270,2867637590,codecov[bot],22429695,2025-05-09T19:03:51+00:00,2025-05-09T19:13:44+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33398?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 83.20%. Comparing base [(`8c94f9c`)](https://app.codecov.io/gh/apache/superset/commit/8c94f9c435f126e3bd30890a61966ee81be0f68f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`724f012`)](https://app.codecov.io/gh/apache/superset/commit/724f012f8d2a39ce9a7504e99435f154c9d78e10?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 73 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33398       +/-   ##
+===========================================
++ Coverage        0   83.20%   +83.20%     
+===========================================
+  Files           0      553      +553     
+  Lines           0    39983    +39983     
+===========================================
++ Hits            0    33266    +33266     
+- Misses          0     6717     +6717     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.24% <100.00%> (?)` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.40% <100.00%> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.46% <100.00%> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.70% <100.00%> (?)` | |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `83.20% <100.00%> (?)` | |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.95% <100.00%> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33398/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `61.33% <100.00%> (?)` | |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33398?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3052446895,2866888032,korbit-ai[bot],131444098,2025-05-09T15:00:48+00:00,2025-05-09T15:00:48+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](7562c1ca-64c3-479d-86f8-16809d5ba74b)",0,0,0,0,0,0,0
+apache/superset,3049690776,2863819878,korbit-ai[bot],131444098,2025-05-08T17:47:30+00:00,2025-05-08T17:47:30+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](f100494b-427c-406d-a046-2c9d9361d934)",0,0,0,0,0,0,0
+apache/superset,3049690776,2863820792,ethan-l-geotab,165913720,2025-05-08T17:47:55+00:00,2025-05-08T17:47:55+00:00,/korbit-review.,0,0,0,0,0,0,0
+apache/superset,3049054100,2863124537,korbit-ai[bot],131444098,2025-05-08T13:43:54+00:00,2025-05-08T13:43:54+00:00,"Korbit doesn't automatically review large (3000+ lines changed) pull requests such as this one. If you want me to review anyway, use `/korbit-review`.
+
+
+[](b2d505d8-be7b-4dc8-9d37-1a432ee471e9)",0,0,0,0,0,0,0
+apache/superset,3048227880,2862220347,dosubot[bot],131922026,2025-05-08T08:33:32+00:00,2025-05-08T08:33:32+00:00,"<!-- Answer -->
+The issue you're experiencing with the `databricks-sqlalchemy` driver in Superset seems to be related to the pre-fetching of schemas and catalogs. Superset determines which schemas and catalogs to pre-fetch by checking user permissions for catalog access, schema access, and datasource access. This process involves querying the database for accessible catalogs and schemas, which might be causing the repeated `SHOW SCHEMAS` requests you're observing <sup>[[1]](https://github.com/apache/superset/blob/master/superset/security/manager.py)</sup><sup>[[2]](https://github.com/apache/superset/blob/master/superset/db_engine_specs/README.md)</sup>.
+
+To address this, you might want to look into how Superset handles the pre-fetching logic and see if there are configuration options or code modifications that can limit the scope of these queries to only the necessary catalogs and schemas. This could potentially reduce the load and prevent the looping behavior you're encountering.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/b84d29aa-593d-4352-a67b-2eae6749b156?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3048227880,2862537570,martimors,41419288,2025-05-08T10:21:59+00:00,2025-05-08T10:21:59+00:00,@dosu Can you point out the specific place in the superset code where this happens?,0,0,0,0,0,0,0
+apache/superset,3048227880,2862541612,dosubot[bot],131922026,2025-05-08T10:23:12+00:00,2025-05-08T10:23:12+00:00,"<!-- Answer -->
+The pre-fetching of schemas and catalogs in Superset occurs in the `useSchemas` function within the `superset-frontend/src/hooks/apiResources/schemas.ts` file. This function uses the `useLazySchemasQuery` and `useSchemasQuery` hooks to trigger the fetching of schemas. The `fetchData` function is responsible for making the request to fetch schemas, and it is called within a `useEffect` hook to automatically fetch data when the `dbId` or `catalog` changes. This setup could lead to repeated `SHOW SCHEMAS` requests if the `dbId` or `catalog` changes frequently or if the `forceRefresh` parameter is set to true. Here is the relevant code snippet:
+
+```ts
+useEffect(() => {
+    fetchData(dbId, catalog, false);
+  }, [dbId, catalog, fetchData]);
+```
+
+This `useEffect` hook triggers the `fetchData` function whenever `dbId` or `catalog` changes, potentially causing repeated requests <sup>[[1]](https://github.com/apache/superset/blob/master/superset-frontend/src/hooks/apiResources/schemas.ts)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/7e7936f5-853d-4eaa-baec-cfd07ed4ada1?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3048227880,2862660531,martimors,41419288,2025-05-08T11:10:15+00:00,2025-05-08T11:10:15+00:00,"It is definitely not in the frontend, bot! 🤦 ",0,0,0,0,0,0,0
+apache/superset,3048227880,2862939559,martimors,41419288,2025-05-08T12:49:07+00:00,2025-05-08T12:49:07+00:00,I understand what's happening now. It is creating view_menu_resource entries for _all_ the tables. That's whats taking so long. I guess this is by design then.,0,0,0,0,0,0,0
+apache/superset,3048162571,2862140922,dosubot[bot],131922026,2025-05-08T08:04:00+00:00,2025-05-08T08:04:00+00:00,"<!-- Greeting -->
+Hello @Nethaje! 👋 I'm [Dosu](https://dosu.dev), your friendly bug-squashing bot here to help tackle issues, answer your questions, and assist with contributions while you wait for a human maintainer. Let's get to work! 🚀
+
+<!-- Answer -->
+I found a similar unsolved discussion that might be relevant to your issue: [Jinja Template](https://github.com/apache/superset/discussions/30448), which was last updated on April 22, 2025 <sup>[[1]](https://github.com/apache/superset/discussions/30448)</sup>.
+
+Regarding your question, dynamic Jinja filters are supported in Superset dashboards. To ensure the filter value is passed correctly from the dashboard into the query, you can use the `{{ filter_values() }}` function. This function retrieves the value for a specific filter as a list, which can then be used in your SQL query. For example:
+
+```sql
+SELECT action, count(*) as times
+FROM logs
+WHERE
+    action in {{ filter_values('action_type')|where_in }}
+GROUP BY action
+```
+
+In this example, `filter_values('action_type')` retrieves the filter values for 'action_type', and the `where_in` filter converts this list into a string suitable for an `IN` expression in SQL <sup>[[2]](https://github.com/apache/superset/blob/master/docs/docs/configuration/sql-templating.mdx)</sup>. 
+
+You might need to adjust your query to use `filter_values()` to ensure the dynamic input is correctly passed from the dashboard.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/e8d812f6-c310-485d-92c1-bcf381713b58?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3044383654,2856719380,dosubot[bot],131922026,2025-05-07T00:58:27+00:00,2025-05-07T00:58:27+00:00,"<!-- Answer -->
+I found a similar unsolved discussion titled [Smart completion like hue](https://github.com/apache/superset/discussions/33270), which was last updated on April 29, 2025 <sup>[[1]](https://github.com/apache/superset/discussions/33270)</sup>.
+
+Regarding your question, Superset version 4.1.2 does support an autocomplete feature for SQL queries. The autocomplete functionality includes schema and table suggestions, which are generated using the `useMemo` hook to map over available schema and table options. This feature provides suggestions with associated metadata like `name`, `value`, `score`, and `meta` <sup>[[2]](https://github.com/apache/superset/blob/master/superset-frontend/src/SqlLab/components/AceEditorWrapper/useKeywords.ts)</sup>.
+
+However, the current implementation requires selecting a schema on the left to get table prompts, which differs from Hue's behavior. There are no specific details available about plans to enhance this feature to match Hue's functionality in future releases <sup>[[1]](https://github.com/apache/superset/discussions/33270)</sup>.
+
+If you want to adjust the behavior of the autocomplete feature, you can modify the autocomplete score weights in the configuration settings to prioritize different types of suggestions <sup>[[3]](https://github.com/apache/superset/blob/master/superset-frontend/src/SqlLab/constants.ts)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/29c84270-0370-4fe8-8c01-12c7e6997246?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3044383654,2860447253,rusackas,812905,2025-05-07T21:35:17+00:00,2025-05-07T21:35:17+00:00,"Closing this since it's not a bug, but we can keep chatting on your [Discussion](https://github.com/apache/superset/discussions/33270) (which is the right place for this, thanks)",0,0,0,0,0,0,0
+apache/superset,3043144893,2854903643,korbit-ai[bot],131444098,2025-05-06T15:03:02+00:00,2025-05-06T15:03:02+00:00,"Korbit doesn't automatically review large (3000+ lines changed) pull requests such as this one. If you want me to review anyway, use `/korbit-review`.
+
+
+[](1fc0e23f-be5c-49a6-92b5-5e84c70d0eac)",0,0,0,0,0,0,0
+apache/superset,3043144893,2856396366,mistercrunch,487433,2025-05-06T22:56:13+00:00,2025-05-06T22:56:13+00:00,merging to track CI and confirm it updates the docs,0,0,0,0,0,0,0
+apache/superset,3043144893,2856397475,mistercrunch,487433,2025-05-06T22:56:46+00:00,2025-05-06T22:56:46+00:00,here -> https://github.com/apache/superset/actions/runs/14871296813/job/41760081795,0,0,0,0,0,0,0
+apache/superset,3042884438,2854617374,korbit-ai[bot],131444098,2025-05-06T13:37:57+00:00,2025-05-06T13:37:57+00:00,"Korbit doesn't automatically review large (3000+ lines changed) pull requests such as this one. If you want me to review anyway, use `/korbit-review`.
+
+
+[](cd050645-3da4-4d0b-8b0c-e61c307d0656)",0,0,0,0,0,0,0
+apache/superset,3042884438,2854641766,arthi-arumugam99,62213284,2025-05-06T13:45:23+00:00,2025-05-06T13:45:23+00:00,"/korbit-review
+",0,0,0,0,0,0,0
+apache/superset,3042884438,2860951113,mistercrunch,487433,2025-05-08T00:40:59+00:00,2025-05-08T00:40:59+00:00,"PR isn't right, shows 215 commits. Please start from a recent commit on `master` as a base",0,0,0,0,0,0,0
+apache/superset,3042884438,2867362600,rusackas,812905,2025-05-09T17:29:15+00:00,2025-05-09T17:29:15+00:00,Looks like a rebase went wrong here. You can open a fresh PR or try the rebase again. ,0,0,0,0,0,0,0
+apache/superset,3042353725,2854069058,dosubot[bot],131922026,2025-05-06T10:32:01+00:00,2025-05-06T10:32:01+00:00,"<!-- Greeting -->
+Hello @seqwait! I'm [Dosu](https://dosu.dev), a friendly bot here to help you solve bugs, answer questions, and guide you as a contributor while you wait for a human maintainer. Let's tackle that ClickHouse connection issue together!
+
+<!-- Answer -->
+The issue you're experiencing, where the ClickHouse connection remains in a pending state, could be related to several factors. Here are some potential causes and solutions:
+
+1. **Async Query Initialization**: The pending state might be due to the initialization of async query jobs, which set the status to `STATUS_PENDING` initially. This is a normal part of the process before the job starts running or encounters an error <sup>[[1]](https://github.com/apache/superset/blob/master/superset/async_events/async_query_manager.py)</sup>.
+
+2. **Timeout Settings**: Check the timeout settings for database connections in Superset. You can configure these settings in the Superset configuration file. For example, `SQLLAB_TIMEOUT`, `SUPERSET_TIMEOUT`, and `SUPERSET_SQLALCHEMY_TIMEOUT` are some of the parameters you can adjust to change the timeout duration <sup>[[2]](https://github.com/apache/superset/issues/33218)</sup>.
+
+3. **Network Issues**: Ensure there are no network issues that might be causing the request to hang. Superset handles network errors by providing specific error messages, such as 'Network error' for failed fetch attempts <sup>[[3]](https://github.com/apache/superset/blob/master/superset-frontend/packages/superset-ui-core/src/query/getClientErrorObject.ts)</sup>.
+
+4. **ClickHouse Configuration**: Verify that the ClickHouse connection string and parameters are correctly configured. Ensure that the `clickhouse-connect` library is installed and the connection string is formatted correctly <sup>[[4]](https://github.com/apache/superset/blob/master/docs/docs/configuration/databases.mdx)</sup>.
+
+5. **Retry Mechanisms**: Superset has retry mechanisms for handling failed connection attempts. Ensure that these are functioning correctly and that the system is not stuck in a retry loop <sup>[[5]](https://github.com/apache/superset/blob/master/superset-frontend/packages/superset-ui-core/src/connection/constants.ts)</sup>.
+
+If none of these solutions resolve the issue, consider checking the Superset logs for any error messages or stack traces that might provide more insight into the problem.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/b382c938-6f95-4cb0-8827-e314816ea9bb?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3041005805,2852536651,korbit-ai[bot],131444098,2025-05-05T22:44:56+00:00,2025-05-05T22:44:56+00:00,"By default, I don't review pull requests opened by bots. If you would like me to review this pull request anyway, you can request a review via the `/korbit-review` command in a comment.
+
+[](1d6fd267-4804-4ee9-9cb3-09a616bd0126)",0,0,0,0,0,0,0
+apache/superset,3041004714,2852533823,korbit-ai[bot],131444098,2025-05-05T22:44:31+00:00,2025-05-05T22:44:31+00:00,"By default, I don't review pull requests opened by bots. If you would like me to review this pull request anyway, you can request a review via the `/korbit-review` command in a comment.
+
+[](33503920-0feb-4223-af58-52f8c397edc5)",0,0,0,0,0,0,0
+apache/superset,3041003588,2852531697,korbit-ai[bot],131444098,2025-05-05T22:44:00+00:00,2025-05-05T22:44:00+00:00,"By default, I don't review pull requests opened by bots. If you would like me to review this pull request anyway, you can request a review via the `/korbit-review` command in a comment.
+
+[](4cb6a9b8-2caf-4181-9d1f-ed395a36ca93)",0,0,0,0,0,0,0
+apache/superset,3041003374,2852530958,korbit-ai[bot],131444098,2025-05-05T22:43:50+00:00,2025-05-05T22:43:50+00:00,"By default, I don't review pull requests opened by bots. If you would like me to review this pull request anyway, you can request a review via the `/korbit-review` command in a comment.
+
+[](f0a0ab93-2aa5-441a-9589-01c5830e68af)",0,0,0,0,0,0,0
+apache/superset,3041002861,2852530337,korbit-ai[bot],131444098,2025-05-05T22:43:40+00:00,2025-05-05T22:43:40+00:00,"By default, I don't review pull requests opened by bots. If you would like me to review this pull request anyway, you can request a review via the `/korbit-review` command in a comment.
+
+[](0d0745fb-f0bd-4812-ad32-1fc947a9107e)",0,0,0,0,0,0,0
+apache/superset,3040255700,2863718858,rusackas,812905,2025-05-08T17:01:39+00:00,2025-05-08T17:01:39+00:00,@sadpandajoe @michael-s-molina wondering if y'all are seeing this too. ,0,0,0,0,0,0,0
+apache/superset,3040148561,2852488413,codecov[bot],22429695,2025-05-05T22:26:22+00:00,2025-05-07T20:57:11+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33364?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+Attention: Patch coverage is `0%` with `16 lines` in your changes missing coverage. Please review.
+> Project coverage is 83.15%. Comparing base [(`76d897e`)](https://app.codecov.io/gh/apache/superset/commit/76d897eaa2f9e137102bc194c2e3109c29d0348f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`3744dcb`)](https://app.codecov.io/gh/apache/superset/commit/3744dcb1c4c5001a1c85a1e3f47dc8a56860ae37?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 1845 commits behind head on master.
+
+| [Files with missing lines](https://app.codecov.io/gh/apache/superset/pull/33364?dropdown=coverage&src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Patch % | Lines |
+|---|---|---|
+| [superset/viz.py](https://app.codecov.io/gh/apache/superset/pull/33364?src=pr&el=tree&filepath=superset%2Fviz.py&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#diff-c3VwZXJzZXQvdml6LnB5) | 0.00% | [16 Missing :warning: ](https://app.codecov.io/gh/apache/superset/pull/33364?src=pr&el=tree&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) |
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33364       +/-   ##
+===========================================
++ Coverage   60.48%   83.15%   +22.66%     
+===========================================
+  Files        1931      553     -1378     
+  Lines       76236    39982    -36254     
+  Branches     8568        0     -8568     
+===========================================
+- Hits        46114    33246    -12868     
++ Misses      28017     6736    -21281     
++ Partials     2105        0     -2105     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.23% <0.00%> (-0.92%)` | :arrow_down: |
+| [javascript](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.35% <0.00%> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.41% <0.00%> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.69% <0.00%> (-1.12%)` | :arrow_down: |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `83.15% <0.00%> (+19.64%)` | :arrow_up: |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.91% <0.00%> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33364/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `61.27% <0.00%> (+3.64%)` | :arrow_up: |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33364?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3040148561,2858835815,syedbarimanjan,112156147,2025-05-07T14:34:47+00:00,2025-05-08T18:51:34+00:00,@geido ,0,0,0,0,0,0,0
+apache/superset,3040148561,2860337652,github-actions[bot],41898282,2025-05-07T20:57:06+00:00,2025-05-07T20:57:06+00:00,@rusackas Processing your ephemeral environment request [here](https://github.com/apache/superset/actions/runs/14893110370). Action: **up**. More information on [how to use or configure ephemeral environments](https://superset.apache.org/docs/contributing/howtos/#github-ephemeral-environments),0,0,0,0,0,0,0
+apache/superset,3040148561,2860363765,github-actions[bot],41898282,2025-05-07T21:06:16+00:00,2025-05-07T21:06:16+00:00,@rusackas Ephemeral environment spinning up at http://34.208.227.125:8080. Credentials are 'admin'/'admin'. Please allow several minutes for bootstrapping and startup.,0,0,0,0,0,0,0
+apache/superset,3040148561,2867361203,rusackas,812905,2025-05-09T17:28:30+00:00,2025-05-09T17:28:30+00:00,Approving CI to run again 🤞 ,0,0,0,0,0,0,0
+apache/superset,3039872009,2851217647,codecov[bot],22429695,2025-05-05T14:35:41+00:00,2025-05-05T23:03:24+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33363?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 83.18%. Comparing base [(`76d897e`)](https://app.codecov.io/gh/apache/superset/commit/76d897eaa2f9e137102bc194c2e3109c29d0348f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`0321211`)](https://app.codecov.io/gh/apache/superset/commit/032121153071952c23ff8ba6df1d9fce55d64dd5?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 1835 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33363       +/-   ##
+===========================================
++ Coverage   60.48%   83.18%   +22.69%     
+===========================================
+  Files        1931      553     -1378     
+  Lines       76236    39966    -36270     
+  Branches     8568        0     -8568     
+===========================================
+- Hits        46114    33246    -12868     
++ Misses      28017     6720    -21297     
++ Partials     2105        0     -2105     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.25% <ø> (-0.90%)` | :arrow_down: |
+| [javascript](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.38% <ø> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.44% <ø> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.71% <ø> (-1.10%)` | :arrow_down: |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `83.18% <ø> (+19.68%)` | :arrow_up: |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.94% <ø> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33363/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `61.30% <ø> (+3.67%)` | :arrow_up: |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33363?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3039814336,2851151340,dosubot[bot],131922026,2025-05-05T14:14:40+00:00,2025-05-05T14:14:40+00:00,"<!-- Greeting -->
+Hello @jaki102! I'm [Dosu](https://dosu.dev), a friendly bot here to help you solve bugs, answer questions, and guide you in becoming a contributor. I'm here while you wait for a human maintainer. Let's tackle this together! 😊
+
+<!-- Answer -->
+The ""Select all"" option in the `Select.tsx` file is indeed hardcoded and not localized. Unfortunately, I couldn't find specific information about any plans to fix this issue or details about the comment with a TODO in the `Select.tsx` file regarding localization <sup>[[1]](https://github.com/apache/superset/blob/master/superset-frontend/src/components/Select/Select.tsx)</sup>. 
+
+For localization in Superset, the functions `t()` and `tn()` from the `@superset-ui/core` package are used. These could potentially be applied to localize the ""Select all"" option <sup>[[2]](https://github.com/apache/superset/blob/master/superset-frontend/packages/superset-ui-core/test/translation/index.test.ts)</sup>. Additionally, the current localization setup in Superset involves language packs and configurations that support multiple languages <sup>[[3]](https://github.com/apache/superset/blob/master/superset-frontend/packages/superset-ui-core/test/translation/languagePacks/en.ts)</sup><sup>[[4]](https://github.com/apache/superset/blob/master/superset-frontend/CHANGELOG.md)</sup>.
+
+If you are looking to implement localization for this option, you might consider using these existing localization mechanisms.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/001c2c47-4200-4988-bac4-476512b11a73?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3039814336,2851247916,jaki102,26798796,2025-05-05T14:46:00+00:00,2025-05-05T14:46:00+00:00,"ok, I guess [this PR](https://github.com/apache/superset/pull/33043) resolved the problem 🙂",1,0,0,0,1,0,0
+apache/superset,3039700153,2851039114,dosubot[bot],131922026,2025-05-05T13:36:34+00:00,2025-05-05T13:36:34+00:00,"<!-- Greeting -->
+Hello @harelorinctera! I'm [Dosu](https://dosu.dev), a friendly bot here to help you with bugs, answer your questions, and assist you in becoming a contributor. I'm here while you wait for a human maintainer. How can I assist you today?
+
+<!-- Answer -->
+The issue you're experiencing with the ""Clear All Filters"" button setting a required time filter to 'No filter' seems to be related to how Superset handles default values and required filters. When the ""Clear All Filters"" button is used, Superset should ideally reset the filter to its default value instead of clearing it entirely, especially if the filter is marked as required.
+
+The logic for handling default values in native filters involves checking configurations like `defaultToFirstItem` and `enableEmptyFilter`. If `defaultToFirstItem` is enabled, the default value is set to the first item automatically. If `enableEmptyFilter` is false, a default value must be set when the filter is required <sup>[[1]](https://github.com/apache/superset/blob/master/superset-frontend/src/dashboard/components/nativeFilters/FiltersConfigModal/FiltersConfigForm/state.ts)</sup><sup>[[2]](https://github.com/apache/superset/blob/master/superset-frontend/src/dashboard/components/nativeFilters/FiltersConfigModal/FiltersConfigForm/DefaultValue.tsx)</sup>.
+
+In your case, it seems that the required time filter is not reverting to its default value when ""Clear All Filters"" is triggered, which leads to the backend query error due to the absence of a valid timestamp. This behavior might be a bug in the current version of Superset (4.0.2) you are using.
+
+To address this, you might want to ensure that the default value logic is correctly implemented in your filter configuration. If the issue persists, it may require a fix in the Superset codebase to ensure that required filters revert to their default values when cleared, rather than being set to 'No filter'.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/61265cff-7c6f-41a0-8e40-f409bbb448f4?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3039700153,2854393739,harelorinctera,193132100,2025-05-06T12:28:15+00:00,2025-05-06T12:28:15+00:00,This issue needs to be changed to type BUG and assigned to someone for fixing,0,0,0,0,0,0,0
+apache/superset,3039700153,2855385619,rusackas,812905,2025-05-06T17:29:32+00:00,2025-05-06T17:29:32+00:00,"It's an issue, so it's already a bug report. Pinging @sadpandajoe to see if we've run into this before in our QA suite. ",0,0,0,0,0,0,0
+apache/superset,3039700153,2855387007,rusackas,812905,2025-05-06T17:30:12+00:00,2025-05-06T17:30:12+00:00,"Not sure if/when this'll be prioritized (there's a lot to do!) so if it's blocking you, please feel free to investigate and open a PR/fix if you have the bandwidth!",0,0,0,0,0,0,0
+apache/superset,3039697275,2851028187,korbit-ai[bot],131444098,2025-05-05T13:32:42+00:00,2025-05-05T13:32:42+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](83bb71b2-de04-4b15-b35e-cec3473c6d1b)",0,0,0,0,0,0,0
+apache/superset,3038887694,2850193301,korbit-ai[bot],131444098,2025-05-05T07:54:03+00:00,2025-05-05T07:54:03+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](09e8dad8-bd12-4987-b1f4-7ae5a6d582b7)",0,0,0,0,0,0,0
+apache/superset,3038887694,2850604708,codecov[bot],22429695,2025-05-05T10:46:39+00:00,2025-05-05T14:34:59+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33359?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 75.87%. Comparing base [(`76d897e`)](https://app.codecov.io/gh/apache/superset/commit/76d897eaa2f9e137102bc194c2e3109c29d0348f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`d33230f`)](https://app.codecov.io/gh/apache/superset/commit/d33230ff8e765ae1e401b00a2239a6298ca7dd29?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 1828 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33359       +/-   ##
+===========================================
++ Coverage   60.48%   75.87%   +15.38%     
+===========================================
+  Files        1931      553     -1378     
+  Lines       76236    39964    -36272     
+  Branches     8568        0     -8568     
+===========================================
+- Hits        46114    30323    -15791     
++ Misses      28017     9641    -18376     
++ Partials     2105        0     -2105     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.25% <ø> (-0.91%)` | :arrow_down: |
+| [javascript](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.38% <ø> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.44% <ø> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.70% <ø> (-1.10%)` | :arrow_down: |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.87% <ø> (+12.37%)` | :arrow_up: |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.93% <ø> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33359/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33359?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3038640516,2849953334,korbit-ai[bot],131444098,2025-05-05T05:32:16+00:00,2025-05-05T05:32:16+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](b50da9b0-6a3d-4800-80bf-c99b77580192)",0,0,0,0,0,0,0
+apache/superset,3038640516,2849967698,codecov[bot],22429695,2025-05-05T05:44:25+00:00,2025-05-09T17:28:20+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33357?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 83.18%. Comparing base [(`76d897e`)](https://app.codecov.io/gh/apache/superset/commit/76d897eaa2f9e137102bc194c2e3109c29d0348f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`7d05b61`)](https://app.codecov.io/gh/apache/superset/commit/7d05b61e7f98ab6053ee0bfaaf726b048585b00a?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 1851 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33357       +/-   ##
+===========================================
++ Coverage   60.48%   83.18%   +22.69%     
+===========================================
+  Files        1931      553     -1378     
+  Lines       76236    39967    -36269     
+  Branches     8568        0     -8568     
+===========================================
+- Hits        46114    33247    -12867     
++ Misses      28017     6720    -21297     
++ Partials     2105        0     -2105     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.25% <40.00%> (-0.91%)` | :arrow_down: |
+| [javascript](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.38% <100.00%> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.44% <100.00%> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.71% <100.00%> (-1.10%)` | :arrow_down: |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `83.18% <100.00%> (+19.68%)` | :arrow_up: |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.94% <100.00%> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33357/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `61.30% <60.00%> (+3.67%)` | :arrow_up: |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33357?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3038640516,2854629511,amaannawab923,206851456,2025-05-06T13:41:36+00:00,2025-05-06T13:41:36+00:00,"Hey @Antonio-RiveroMartnez  , Can you please review this pr whenever available",1,0,0,0,0,0,0
+apache/superset,3038640516,2854649301,github-actions[bot],41898282,2025-05-06T13:47:26+00:00,2025-05-06T13:47:26+00:00,@Antonio-RiveroMartnez Processing your ephemeral environment request [here](https://github.com/apache/superset/actions/runs/14861335391). Action: **up**. More information on [how to use or configure ephemeral environments](https://superset.apache.org/docs/contributing/howtos/#github-ephemeral-environments),0,0,0,0,0,0,0
+apache/superset,3038640516,2854678409,github-actions[bot],41898282,2025-05-06T13:56:05+00:00,2025-05-06T13:56:05+00:00,@Antonio-RiveroMartnez Ephemeral environment spinning up at http://54.190.200.46:8080. Credentials are 'admin'/'admin'. Please allow several minutes for bootstrapping and startup.,0,0,0,0,0,0,0
+apache/superset,3038640516,2854797673,betodealmeida,1534870,2025-05-06T14:31:05+00:00,2025-05-06T14:31:36+00:00,"Taking a look now, but a few initial comments:
+
+1. In general, any PR that changes the UI/UX significantly should go [through a discussion](https://github.com/apache/superset/issues/5602). For uncontroversial changes the process is usually quick, since you can request ""lazy consensus"" and people don't have to vote. I think we're OK in this one, just letting you know for the future.
+2. Splitting the PR into 4 would've been better, even if it takes more time/work upfront. It makes reviews quicker and it's simpler to revert features if something goes wrong.
+3. I'm a bit concerned about the performance of the `LIKE` search, and wondering if we should have optional ways of optimizing it, but let me look at the PR in details before we start worrying about this. (For example, will this do a full table scan on BigQuery?)",0,0,0,0,0,0,0
+apache/superset,3038640516,2860316935,github-actions[bot],41898282,2025-05-07T20:49:40+00:00,2025-05-07T20:49:40+00:00,@geido Processing your ephemeral environment request [here](https://github.com/apache/superset/actions/runs/14892995603). Action: **up**. More information on [how to use or configure ephemeral environments](https://superset.apache.org/docs/contributing/howtos/#github-ephemeral-environments),0,0,0,0,0,0,0
+apache/superset,3038640516,2860355792,github-actions[bot],41898282,2025-05-07T21:02:11+00:00,2025-05-07T21:02:11+00:00,@geido Ephemeral environment spinning up at http://34.221.88.197:8080. Credentials are 'admin'/'admin'. Please allow several minutes for bootstrapping and startup.,0,0,0,0,0,0,0
+apache/superset,3038640516,2861854726,amaannawab923,206851456,2025-05-08T05:51:56+00:00,2025-05-08T05:51:56+00:00,"Resolved all the comments @betodealmeida  @Antonio-RiveroMartnez 
+Removed the Text search operator & refactored the process row limit function as per comments & removed redundant implementation
+
+Please re review whenever available, Thanks !",1,1,0,0,0,0,0
+apache/superset,3038640516,2863174201,github-actions[bot],41898282,2025-05-08T13:57:55+00:00,2025-05-08T13:57:55+00:00,@Antonio-RiveroMartnez Processing your ephemeral environment request [here](https://github.com/apache/superset/actions/runs/14908287774). Action: **up**. More information on [how to use or configure ephemeral environments](https://superset.apache.org/docs/contributing/howtos/#github-ephemeral-environments),0,0,0,0,0,0,0
+apache/superset,3038640516,2863208225,github-actions[bot],41898282,2025-05-08T14:08:38+00:00,2025-05-08T14:08:38+00:00,@Antonio-RiveroMartnez Ephemeral environment spinning up at http://54.187.252.12:8080. Credentials are 'admin'/'admin'. Please allow several minutes for bootstrapping and startup.,0,0,0,0,0,0,0
+apache/superset,3038640516,2867358181,rusackas,812905,2025-05-09T17:27:28+00:00,2025-05-09T17:27:28+00:00,Merging!,0,0,0,0,0,0,0
+apache/superset,3038513535,2852575502,irodriguez-nebustream,81891746,2025-05-05T23:03:06+00:00,2025-05-05T23:03:42+00:00,I notice this happen a few times on my builds too. I get that 429 as well `urllib.error.HTTPError: HTTP Error 429: Too Many Requests` seems to be a rate limit thing on github. ,0,0,0,0,0,0,0
+apache/superset,3038513535,2854736168,morngaraf,8363799,2025-05-06T14:13:09+00:00,2025-05-06T14:13:09+00:00,"@irodriguez-nebustream 
+Thank you for opening a PR to fix the issue. I noticed it as well, but ended up monkey patching during deployment on my side for the time-being.
+
+In my first attempt I tried to replace only `/api/v1/me/roles/` with the expected path, but it was not enough: React routes, e.g. `<Route path=""/embedded/:uuid/"" component={EmbeddedRoute} />`, are also broken. When I ""fixed"" the routes, dashboard started loading, but all API calls the dashboard itself is making (like `/api/v1/dashboard` etc.) were still using the wrong path.
+
+I suspect that the following changes have to be done to fix all of the above:
+```ts
+import getBootstrapData, { applicationRoot } from 'src/utils/getBootstrapData';
+
+...
+
+const EmbeddedApp = () => (
+  <Router basename={applicationRoot()}>
+    {/* todo (embedded) remove this line after uuids are deployed */}
+    <Route path=""/dashboard/:idOrSlug/embedded/"" component={EmbeddedRoute} />
+    <Route path=""/embedded/:uuid/"" component={EmbeddedRoute} />
+  </Router>
+);
+
+...
+
+function setupGuestClient(guestToken: string) {
+  setupClient({
+    appRoot: applicationRoot(),
+    guestToken,
+    guestTokenHeaderName: bootstrapData.config?.GUEST_TOKEN_HEADER_NAME,
+    unauthorizedHandler: guestUnauthorizedHandler,
+  });
+}
+```
+
+
+`<Router basename={applicationRoot()}>` is taken from `App.tsx`, 
+`setupClient({ appRoot: applicationRoot() });` is used in `preamble.ts`.
+
+Since `makeApi` by default uses singleton of `SupersetClient`, which is configured by `setupClient`, we should not have to modify the actual '/api/v1/me/roles/' endpoint with these changes, and all other ""broken"" api calls should also be fixed automatically.
+
+Anyways, these are simply my guesses and I'm quite new to Superset. Maybe later this month I or one of my colleagues will have time to verify the theories locally, and we would be happy to help moving this forward.",0,0,0,0,0,0,0
+apache/superset,3038513535,2854766962,Vitor-Avila,96086495,2025-05-06T14:22:30+00:00,2025-05-06T14:22:30+00:00,"@rusackas I noticed you added me as a reviewer here. I can def do manual testing to make sure these code changes don't impact the standard (without `SUPERSET_APP_ROOT` configured) flow. 
+
+I don't currently have a Superset instance running with `SUPERSET_APP_ROOT` configured to test if this would solve for that, tho. Do we have clear docs on how to setup Superset that way? happy to help testing but would need some guidance on that.",0,0,0,0,0,0,0
+apache/superset,3038513535,2854776105,Vitor-Avila,96086495,2025-05-06T14:24:54+00:00,2025-05-06T14:24:54+00:00,"@irodriguez-nebustream I was also thinking about @morngaraf thoughts as well about the potential required changes to `EmbeddedApp` as well. But again, I don't have Superset running as a subpath so couldn't manually test it.",0,0,0,0,0,0,0
+apache/superset,3038513535,2855381789,rusackas,812905,2025-05-06T17:27:51+00:00,2025-05-06T17:27:51+00:00,I think this will need a rebase to get the CI to pass (it's stuck on a docker fix that was contributed after this PR opened).,0,0,0,0,0,0,0
+apache/superset,3038513535,2855426242,irodriguez-nebustream,81891746,2025-05-06T17:46:46+00:00,2025-05-06T17:46:46+00:00,@Vitor-Avila @rusackas Let me try implementing the other things that @morngaraf mentioned. I think its worth looking into and I can thoroughly test locally. ,0,0,0,0,0,0,0
+apache/superset,3038513535,2856404819,irodriguez-nebustream,81891746,2025-05-06T22:59:58+00:00,2025-05-06T23:00:53+00:00,"![image](https://github.com/user-attachments/assets/8ba7bd3a-fdf4-4f1d-845e-e480709a88b9)
+Okay, I can 100% confirm that the changes  that @morngaraf mentioned worked locally. I was able to get the embedded section working . To test I built the image, tagged it locally then spun up a container and called it from my webapp. I can add a screenshot of the network call if that helps. 
+
+CC: @rusackas @Vitor-Avila ",1,1,0,0,0,0,0
+apache/superset,3038513535,2860406302,rusackas,812905,2025-05-07T21:17:12+00:00,2025-05-07T21:17:12+00:00,running CI... ping me if it looks good 🤞 ,0,0,0,0,0,0,0
+apache/superset,3038513535,2860498688,irodriguez-nebustream,81891746,2025-05-07T22:04:02+00:00,2025-05-07T22:04:02+00:00,@rusackas I think everything passed. Except for that skipped check.,0,0,0,0,0,0,0
+apache/superset,3038513535,2864798560,irodriguez-nebustream,81891746,2025-05-09T00:56:29+00:00,2025-05-09T00:56:29+00:00,"@mistercrunch @rusackas I went ahead an updated the code to match what the comments and suggested changes that were mentioned. I verified the changes locally and everything works the same. Attached a new screenshot 
+![image](https://github.com/user-attachments/assets/dc9ac6a2-a8c0-44c9-b0d3-0055b13cea29)
+",0,0,0,0,0,0,0
+apache/superset,3038513535,2867356034,rusackas,812905,2025-05-09T17:26:41+00:00,2025-05-09T17:26:41+00:00,Approving CI to run again 🤞 ,0,0,0,0,0,0,0
+apache/superset,3038225012,2849404407,dosubot[bot],131922026,2025-05-04T20:30:07+00:00,2025-05-04T20:30:07+00:00,"<!-- Greeting -->
+Hello @smile2008! I'm here to help you with any bugs, questions, or contributions you have in mind. Let's tackle this issue together while we wait for a human maintainer. How can I assist you today?
+
+<!-- Answer -->
+To resolve the ""Error: Cannot find module '@airbnb/config-babel'"" when running ""npm run build"" for your Superset plugin, you need to install the missing module. You can do this by running the following command in the `/tmp/superset-plugin-chart-hello-world` directory:
+
+```bash
+npm install @airbnb/config-babel@^2.2.4
+```
+
+This will install the required module specified in the `peerDependencies` section of your package configuration, ensuring compatibility with other dependencies <sup>[[1]](https://github.com/apache/superset/blob/master/superset-frontend/packages/generator-superset/generators/plugin-chart/templates/package.erb)</sup><sup>[[2]](https://github.com/apache/superset/blob/master/superset-frontend/packages/generator-superset/generators/plugin-chart/templates/package-lock.erb)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/1fd6bc1b-e44f-46d1-9b32-90497dbcb173?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3038225012,2849408708,smile2008,65974102,2025-05-04T20:41:59+00:00,2025-05-04T21:15:59+00:00,"@dosu, Unfortunately, I have already tried to do this ((
+`smile@bi-dev:/tmp/superset-plugin-chart-hello-world$ npm install @airbnb/config-babel@^2.2.4
+npm error Cannot read properties of undefined (reading 'spec')
+npm error A complete log of this run can be found in: /home/smile/.npm/_logs/2025-05-04T20_39_40_615Z-debug-0.log`
+
+<details><summary>Details</summary>
+<p>
+
+smile@bi-dev:/tmp/superset-plugin-chart-hello-world$ cat /home/smile/.npm/_logs/2025-05-04T20_39_40_615Z-debug-0.log
+0 verbose cli /home/smile/.nvm/versions/node/v20.19.1/bin/node /home/smile/.nvm/versions/node/v20.19.1/bin/npm
+1 info using npm@10.8.1
+2 info using node@v20.19.1
+3 silly config load:file:/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/npmrc
+4 silly config load:file:/tmp/superset-plugin-chart-hello-world/.npmrc
+5 silly config load:file:/home/smile/.npmrc
+6 silly config load:file:/home/smile/.nvm/versions/node/v20.19.1/etc/npmrc
+7 verbose title npm install @airbnb/config-babel@^2.2.4
+8 verbose argv ""install"" ""@airbnb/config-babel@^2.2.4""
+9 verbose logfile logs-max:10 dir:/home/smile/.npm/_logs/2025-05-04T20_39_40_615Z-
+10 verbose logfile /home/smile/.npm/_logs/2025-05-04T20_39_40_615Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly reify moves {}
+16 silly audit bulk request {
+16 silly audit   '@ampproject/remapping': [ '2.3.0' ],
+16 silly audit   '@babel/cli': [ '7.16.8' ],
+16 silly audit   '@babel/code-frame': [ '7.24.7' ],
+16 silly audit   '@babel/compat-data': [ '7.25.4' ],
+16 silly audit   '@babel/core': [ '7.25.2' ],
+16 silly audit   'convert-source-map': [ '2.0.0', '1.8.0' ],
+16 silly audit   semver: [ '6.3.1', '7.6.3', '5.7.1', '6.3.0' ],
+16 silly audit   '@babel/generator': [ '7.25.6' ],
+16 silly audit   '@babel/helper-compilation-targets': [ '7.25.2' ],
+16 silly audit   '@babel/helper-module-imports': [ '7.24.7' ],
+16 silly audit   '@babel/helper-module-transforms': [ '7.25.2' ],
+16 silly audit   '@babel/helper-plugin-utils': [ '7.24.8' ],
+16 silly audit   '@babel/helper-simple-access': [ '7.24.7' ],
+16 silly audit   '@babel/helper-string-parser': [ '7.24.8' ],
+16 silly audit   '@babel/helper-validator-identifier': [ '7.24.7' ],
+16 silly audit   '@babel/helper-validator-option': [ '7.24.8' ],
+16 silly audit   '@babel/helpers': [ '7.25.6' ],
+16 silly audit   '@babel/highlight': [ '7.24.7' ],
+16 silly audit   '@babel/parser': [ '7.25.6' ],
+16 silly audit   '@babel/plugin-syntax-async-generators': [ '7.8.4' ],
+16 silly audit   '@babel/plugin-syntax-bigint': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-class-properties': [ '7.12.13' ],
+16 silly audit   '@babel/plugin-syntax-class-static-block': [ '7.14.5' ],
+16 silly audit   '@babel/plugin-syntax-import-attributes': [ '7.25.6' ],
+16 silly audit   '@babel/plugin-syntax-import-meta': [ '7.10.4' ],
+16 silly audit   '@babel/plugin-syntax-json-strings': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-jsx': [ '7.16.7' ],
+16 silly audit   '@babel/plugin-syntax-logical-assignment-operators': [ '7.10.4' ],
+16 silly audit   '@babel/plugin-syntax-nullish-coalescing-operator': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-numeric-separator': [ '7.10.4' ],
+16 silly audit   '@babel/plugin-syntax-object-rest-spread': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-optional-catch-binding': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-optional-chaining': [ '7.8.3' ],
+16 silly audit   '@babel/plugin-syntax-private-property-in-object': [ '7.14.5' ],
+16 silly audit   '@babel/plugin-syntax-top-level-await': [ '7.14.5' ],
+16 silly audit   '@babel/plugin-syntax-typescript': [ '7.16.7' ],
+16 silly audit   '@babel/template': [ '7.25.0' ],
+16 silly audit   '@babel/traverse': [ '7.25.6' ],
+16 silly audit   '@babel/types': [ '7.25.6' ],
+16 silly audit   '@bcoe/v8-coverage': [ '0.2.3' ],
+16 silly audit   '@istanbuljs/load-nyc-config': [ '1.1.0' ],
+16 silly audit   'resolve-from': [ '5.0.0' ],
+16 silly audit   '@istanbuljs/schema': [ '0.1.3' ],
+16 silly audit   '@jest/console': [ '29.7.0' ],
+16 silly audit   '@jest/types': [ '29.6.3', '26.6.2' ],
+16 silly audit   '@types/yargs': [ '17.0.33', '15.0.14' ],
+16 silly audit   'ansi-styles': [ '4.3.0', '5.2.0', '3.2.1' ],
+16 silly audit   chalk: [ '4.1.2', '2.4.2' ],
+16 silly audit   'color-convert': [ '2.0.1', '1.9.3' ],
+16 silly audit   'color-name': [ '1.1.4', '1.1.3' ],
+16 silly audit   'has-flag': [ '4.0.0', '3.0.0' ],
+16 silly audit   slash: [ '3.0.0', '2.0.0' ],
+16 silly audit   'supports-color': [ '7.2.0', '8.1.1', '5.5.0' ],
+16 silly audit   '@jest/core': [ '29.7.0' ],
+16 silly audit   'ci-info': [ '3.9.0' ],
+16 silly audit   'pretty-format': [ '29.7.0', '26.6.2' ],
+16 silly audit   'react-is': [ '18.3.1', '17.0.2' ],
+16 silly audit   '@jest/environment': [ '29.7.0' ],
+16 silly audit   '@jest/expect': [ '29.7.0' ],
+16 silly audit   '@jest/expect-utils': [ '29.7.0' ],
+16 silly audit   'jest-get-type': [ '29.6.3', '26.3.0' ],
+16 silly audit   '@jest/fake-timers': [ '29.7.0' ],
+16 silly audit   '@jest/globals': [ '29.7.0' ],
+16 silly audit   '@jest/reporters': [ '29.7.0' ],
+16 silly audit   '@jest/schemas': [ '29.6.3' ],
+16 silly audit   '@jest/source-map': [ '29.6.3' ],
+16 silly audit   '@jest/test-result': [ '29.7.0' ],
+16 silly audit   '@jest/test-sequencer': [ '29.7.0' ],
+16 silly audit   '@jest/transform': [ '29.7.0' ],
+16 silly audit   '@jridgewell/gen-mapping': [ '0.3.5' ],
+16 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+16 silly audit   '@jridgewell/set-array': [ '1.2.1' ],
+16 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.0' ],
+16 silly audit   '@jridgewell/trace-mapping': [ '0.3.25' ],
+16 silly audit   '@nicolo-ribaudo/chokidar-2': [ '2.1.8-no-fsevents.3' ],
+16 silly audit   '@sinclair/typebox': [ '0.27.8' ],
+16 silly audit   '@sinonjs/commons': [ '3.0.1' ],
+16 silly audit   '@sinonjs/fake-timers': [ '10.3.0' ],
+16 silly audit   '@tootallnate/once': [ '2.0.0' ],
+16 silly audit   '@types/babel__core': [ '7.1.18' ],
+16 silly audit   '@types/babel__generator': [ '7.6.4' ],
+16 silly audit   '@types/babel__template': [ '7.4.1' ],
+16 silly audit   '@types/babel__traverse': [ '7.14.2' ],
+16 silly audit   '@types/graceful-fs': [ '4.1.9' ],
+16 silly audit   '@types/istanbul-lib-coverage': [ '2.0.4' ],
+16 silly audit   '@types/istanbul-lib-report': [ '3.0.0' ],
+16 silly audit   '@types/istanbul-reports': [ '3.0.1' ],
+16 silly audit   '@types/jest': [ '26.0.24' ],
+16 silly audit   '@types/jsdom': [ '20.0.1' ],
+16 silly audit   '@types/node': [ '17.0.9' ],
+16 silly audit   '@types/stack-utils': [ '2.0.3' ],
+16 silly audit   '@types/tough-cookie': [ '4.0.5' ],
+16 silly audit   '@types/yargs-parser': [ '15.0.0' ],
+16 silly audit   abab: [ '2.0.6' ],
+16 silly audit   acorn: [ '8.12.1' ],
+16 silly audit   'acorn-globals': [ '7.0.1' ],
+16 silly audit   'acorn-walk': [ '8.3.3' ],
+16 silly audit   'agent-base': [ '6.0.2' ],
+16 silly audit   'ansi-escapes': [ '4.3.2' ],
+16 silly audit   'ansi-regex': [ '5.0.1' ],
+16 silly audit   anymatch: [ '3.1.2' ],
+16 silly audit   argparse: [ '1.0.10' ],
+16 silly audit   asynckit: [ '0.4.0' ],
+16 silly audit   'babel-jest': [ '29.7.0' ],
+16 silly audit   'babel-plugin-istanbul': [ '6.1.1' ],
+16 silly audit   'istanbul-lib-instrument': [ '5.2.1', '6.0.3' ],
+16 silly audit   'babel-plugin-jest-hoist': [ '29.6.3' ],
+16 silly audit   'babel-preset-current-node-syntax': [ '1.1.0' ],
+16 silly audit   'babel-preset-jest': [ '29.6.3' ],
+16 silly audit   'balanced-match': [ '1.0.2' ],
+16 silly audit   'binary-extensions': [ '2.2.0' ],
+16 silly audit   'brace-expansion': [ '1.1.11' ],
+16 silly audit   braces: [ '3.0.2' ],
+16 silly audit   browserslist: [ '4.23.3' ],
+16 silly audit   bser: [ '2.1.1' ],
+16 silly audit   'buffer-from': [ '1.1.2' ],
+16 silly audit   callsites: [ '3.1.0' ],
+16 silly audit   camelcase: [ '5.3.1', '6.3.0' ],
+16 silly audit   'caniuse-lite': [ '1.0.30001655' ],
+16 silly audit   'escape-string-regexp': [ '1.0.5', '2.0.0' ],
+16 silly audit   'char-regex': [ '1.0.2' ],
+16 silly audit   chokidar: [ '3.5.2' ],
+16 silly audit   'cjs-module-lexer': [ '1.4.0' ],
+16 silly audit   co: [ '4.6.0' ],
+16 silly audit   'collect-v8-coverage': [ '1.0.2' ],
+16 silly audit   'combined-stream': [ '1.0.8' ],
+16 silly audit   commander: [ '4.1.1' ],
+16 silly audit   'concat-map': [ '0.0.1' ],
+16 silly audit   'create-jest': [ '29.7.0' ],
+16 silly audit   'cross-spawn': [ '7.0.3' ],
+16 silly audit   cssom: [ '0.5.0', '0.3.8' ],
+16 silly audit   cssstyle: [ '2.3.0' ],
+16 silly audit   'data-urls': [ '3.0.2' ],
+16 silly audit   'whatwg-mimetype': [ '3.0.0' ],
+16 silly audit   debug: [ '4.3.3' ],
+16 silly audit   'decimal.js': [ '10.4.3' ],
+16 silly audit   deepmerge: [ '4.3.1' ],
+16 silly audit   'delayed-stream': [ '1.0.0' ],
+16 silly audit   'detect-newline': [ '3.1.0' ],
+16 silly audit   'diff-sequences': [ '26.6.2', '29.6.3' ],
+16 silly audit   domexception: [ '4.0.0' ],
+16 silly audit   'electron-to-chromium': [ '1.5.13' ],
+16 silly audit   emittery: [ '0.13.1' ],
+16 silly audit   'emoji-regex': [ '8.0.0' ],
+16 silly audit   'error-ex': [ '1.3.2' ],
+16 silly audit   escalade: [ '3.2.0' ],
+16 silly audit   escodegen: [ '2.1.0' ],
+16 silly audit   'source-map': [ '0.6.1', '0.5.7' ],
+16 silly audit   esprima: [ '4.0.1' ],
+16 silly audit   estraverse: [ '5.3.0' ],
+16 silly audit   esutils: [ '2.0.3' ],
+16 silly audit   exit: [ '0.1.2' ],
+16 silly audit   expect: [ '29.7.0' ],
+16 silly audit   'fast-json-stable-stringify': [ '2.1.0' ],
+16 silly audit   'fb-watchman': [ '2.0.1' ],
+16 silly audit   'fill-range': [ '7.0.1' ],
+16 silly audit   'find-up': [ '4.1.0' ],
+16 silly audit   'form-data': [ '4.0.0' ],
+16 silly audit   'fs-readdir-recursive': [ '1.1.0' ],
+16 silly audit   'fs.realpath': [ '1.0.0' ],
+16 silly audit   fsevents: [ '2.3.2' ],
+16 silly audit   'function-bind': [ '1.1.1' ],
+16 silly audit   gensync: [ '1.0.0-beta.2' ],
+16 silly audit   'get-caller-file': [ '2.0.5' ],
+16 silly audit   'get-package-type': [ '0.1.0' ],
+16 silly audit   glob: [ '7.2.0' ],
+16 silly audit   'glob-parent': [ '5.1.2' ],
+16 silly audit   globals: [ '11.12.0' ],
+16 silly audit   'graceful-fs': [ '4.2.9' ],
+16 silly audit   has: [ '1.0.3' ],
+16 silly audit   'html-encoding-sniffer': [ '3.0.0' ],
+16 silly audit   'iconv-lite': [ '0.6.3' ],
+16 silly audit   'whatwg-encoding': [ '2.0.0' ],
+16 silly audit   'html-escaper': [ '2.0.2' ],
+16 silly audit   'http-proxy-agent': [ '5.0.0' ],
+16 silly audit   'https-proxy-agent': [ '5.0.1' ],
+16 silly audit   'import-local': [ '3.2.0' ],
+16 silly audit   imurmurhash: [ '0.1.4' ],
+16 silly audit   inflight: [ '1.0.6' ],
+16 silly audit   inherits: [ '2.0.4' ],
+16 silly audit   'is-arrayish': [ '0.2.1' ],
+16 silly audit   'is-binary-path': [ '2.1.0' ],
+16 silly audit   'is-core-module': [ '2.8.1' ],
+16 silly audit   'is-extglob': [ '2.1.1' ],
+16 silly audit   'is-fullwidth-code-point': [ '3.0.0' ],
+16 silly audit   'is-generator-fn': [ '2.1.0' ],
+16 silly audit   'is-glob': [ '4.0.3' ],
+16 silly audit   'is-number': [ '7.0.0' ],
+16 silly audit   'is-potential-custom-element-name': [ '1.0.1' ],
+16 silly audit   'is-stream': [ '2.0.1' ],
+16 silly audit   isexe: [ '2.0.0' ],
+16 silly audit   'istanbul-lib-coverage': [ '3.2.2' ],
+16 silly audit   'istanbul-lib-report': [ '3.0.1' ],
+16 silly audit   'make-dir': [ '4.0.0', '2.1.0' ],
+16 silly audit   'istanbul-lib-source-maps': [ '4.0.1' ],
+16 silly audit   'istanbul-reports': [ '3.1.7' ],
+16 silly audit   jest: [ '29.7.0' ],
+16 silly audit   'jest-changed-files': [ '29.7.0' ],
+16 silly audit   execa: [ '5.1.1' ],
+16 silly audit   'get-stream': [ '6.0.1' ],
+16 silly audit   'human-signals': [ '2.1.0' ],
+16 silly audit   'p-limit': [ '3.1.0', '2.3.0' ],
+16 silly audit   'jest-circus': [ '29.7.0' ],
+16 silly audit   dedent: [ '1.5.3' ],
+16 silly audit   'jest-cli': [ '29.7.0' ],
+16 silly audit   cliui: [ '8.0.1' ],
+16 silly audit   'wrap-ansi': [ '7.0.0' ],
+16 silly audit   y18n: [ '5.0.8' ],
+16 silly audit   yargs: [ '17.7.2' ],
+16 silly audit   'yargs-parser': [ '21.1.1' ],
+16 silly audit   'jest-config': [ '29.7.0' ],
+16 silly audit   'jest-diff': [ '26.6.2', '29.7.0' ],
+16 silly audit   'jest-docblock': [ '29.7.0' ],
+16 silly audit   'jest-each': [ '29.7.0' ],
+16 silly audit   'jest-environment-jsdom': [ '29.7.0' ],
+16 silly audit   'jest-environment-node': [ '29.7.0' ],
+16 silly audit   'jest-haste-map': [ '29.7.0' ],
+16 silly audit   'jest-leak-detector': [ '29.7.0' ],
+16 silly audit   'jest-matcher-utils': [ '29.7.0' ],
+16 silly audit   'jest-message-util': [ '29.7.0' ],
+16 silly audit   'jest-mock': [ '29.7.0' ],
+16 silly audit   'jest-pnp-resolver': [ '1.2.2' ],
+16 silly audit   'jest-regex-util': [ '29.6.3' ],
+16 silly audit   'jest-resolve': [ '29.7.0' ],
+16 silly audit   'jest-resolve-dependencies': [ '29.7.0' ],
+16 silly audit   'jest-runner': [ '29.7.0' ],
+16 silly audit   'source-map-support': [ '0.5.13' ],
+16 silly audit   'jest-runtime': [ '29.7.0' ],
+16 silly audit   'jest-snapshot': [ '29.7.0' ],
+16 silly audit   'jest-util': [ '29.7.0' ],
+16 silly audit   'jest-validate': [ '29.7.0' ],
+16 silly audit   'jest-watcher': [ '29.7.0' ],
+16 silly audit   'jest-worker': [ '29.7.0' ],
+16 silly audit   'js-tokens': [ '4.0.0' ],
+16 silly audit   'js-yaml': [ '3.14.1' ],
+16 silly audit   jsdom: [ '20.0.3' ],
+16 silly audit   'xml-name-validator': [ '4.0.0' ],
+16 silly audit   jsesc: [ '2.5.2' ],
+16 silly audit   'json-parse-even-better-errors': [ '2.3.1' ],
+16 silly audit   json5: [ '2.2.3' ],
+16 silly audit   kleur: [ '3.0.3' ],
+16 silly audit   leven: [ '3.1.0' ],
+16 silly audit   'lines-and-columns': [ '1.2.4' ],
+16 silly audit   'locate-path': [ '5.0.0' ],
+16 silly audit   'lru-cache': [ '5.1.1' ],
+16 silly audit   makeerror: [ '1.0.12' ],
+16 silly audit   'merge-stream': [ '2.0.0' ],
+16 silly audit   micromatch: [ '4.0.4' ],
+16 silly audit   'mime-db': [ '1.51.0' ],
+16 silly audit   'mime-types': [ '2.1.34' ],
+16 silly audit   'mimic-fn': [ '2.1.0' ],
+16 silly audit   minimatch: [ '3.0.4' ],
+16 silly audit   ms: [ '2.1.2' ],
+16 silly audit   'natural-compare': [ '1.4.0' ],
+16 silly audit   'node-int64': [ '0.4.0' ],
+16 silly audit   'node-releases': [ '2.0.18' ],
+16 silly audit   'normalize-path': [ '3.0.0' ],
+16 silly audit   'npm-run-path': [ '4.0.1' ],
+16 silly audit   nwsapi: [ '2.2.12' ],
+16 silly audit   once: [ '1.4.0' ],
+16 silly audit   onetime: [ '5.1.2' ],
+16 silly audit   'p-locate': [ '4.1.0' ],
+16 silly audit   'p-try': [ '2.2.0' ],
+16 silly audit   'parse-json': [ '5.2.0' ],
+16 silly audit   parse5: [ '7.1.2' ],
+16 silly audit   entities: [ '4.5.0' ],
+16 silly audit   'path-exists': [ '4.0.0' ],
+16 silly audit   'path-is-absolute': [ '1.0.1' ],
+16 silly audit   'path-key': [ '3.1.1' ],
+16 silly audit   'path-parse': [ '1.0.7' ],
+16 silly audit   picocolors: [ '1.0.1' ],
+16 silly audit   picomatch: [ '2.3.1' ],
+16 silly audit   pify: [ '4.0.1' ],
+16 silly audit   pirates: [ '4.0.4' ],
+16 silly audit   'pkg-dir': [ '4.2.0' ],
+16 silly audit   prompts: [ '2.4.2' ],
+16 silly audit   psl: [ '1.8.0' ],
+16 silly audit   punycode: [ '2.1.1' ],
+16 silly audit   'pure-rand': [ '6.1.0' ],
+16 silly audit   querystringify: [ '2.2.0' ],
+16 silly audit   readdirp: [ '3.6.0' ],
+16 silly audit   'require-directory': [ '2.1.1' ],
+16 silly audit   'requires-port': [ '1.0.0' ],
+16 silly audit   resolve: [ '1.21.0' ],
+16 silly audit   'resolve-cwd': [ '3.0.0' ],
+16 silly audit   'resolve.exports': [ '2.0.2' ],
+16 silly audit   rimraf: [ '3.0.2' ],
+16 silly audit   'safe-buffer': [ '5.1.2' ],
+16 silly audit   'safer-buffer': [ '2.1.2' ],
+16 silly audit   saxes: [ '6.0.0' ],
+16 silly audit   'shebang-command': [ '2.0.0' ],
+16 silly audit   'shebang-regex': [ '3.0.0' ],
+16 silly audit   'signal-exit': [ '3.0.7' ],
+16 silly audit   sisteransi: [ '1.0.5' ],
+16 silly audit   'sprintf-js': [ '1.0.3' ],
+16 silly audit   'stack-utils': [ '2.0.6' ],
+16 silly audit   'string-length': [ '4.0.2' ],
+16 silly audit   'string-width': [ '4.2.3' ],
+16 silly audit   'strip-ansi': [ '6.0.1' ],
+16 silly audit   'strip-bom': [ '4.0.0' ],
+16 silly audit   'strip-final-newline': [ '2.0.0' ],
+16 silly audit   'strip-json-comments': [ '3.1.1' ],
+16 silly audit   'supports-preserve-symlinks-flag': [ '1.0.0' ],
+16 silly audit   'symbol-tree': [ '3.2.4' ],
+16 silly audit   'test-exclude': [ '6.0.0' ],
+16 silly audit   tmpl: [ '1.0.5' ],
+16 silly audit   'to-fast-properties': [ '2.0.0' ],
+16 silly audit   'to-regex-range': [ '5.0.1' ],
+16 silly audit   'tough-cookie': [ '4.1.4' ],
+16 silly audit   universalify: [ '0.2.0' ],
+16 silly audit   tr46: [ '3.0.0' ],
+16 silly audit   'type-detect': [ '4.0.8' ],
+16 silly audit   'type-fest': [ '0.21.3' ],
+16 silly audit   typescript: [ '4.5.4' ],
+16 silly audit   'update-browserslist-db': [ '1.1.0' ],
+16 silly audit   'url-parse': [ '1.5.10' ],
+16 silly audit   'v8-to-istanbul': [ '9.3.0' ],
+16 silly audit   'w3c-xmlserializer': [ '4.0.0' ],
+16 silly audit   walker: [ '1.0.8' ],
+16 silly audit   'webidl-conversions': [ '7.0.0' ],
+16 silly audit   'whatwg-url': [ '11.0.0' ],
+16 silly audit   which: [ '2.0.2' ],
+16 silly audit   wrappy: [ '1.0.2' ],
+16 silly audit   'write-file-atomic': [ '4.0.2' ],
+16 silly audit   ws: [ '8.18.0' ],
+16 silly audit   xmlchars: [ '2.2.0' ],
+16 silly audit   yallist: [ '3.1.1' ],
+16 silly audit   'yocto-queue': [ '0.1.0' ]
+16 silly audit }
+17 verbose reify failed optional dependency /tmp/superset-plugin-chart-hello-world/node_modules/fsevents
+18 silly reify mark deleted [ '/tmp/superset-plugin-chart-hello-world/node_modules/fsevents' ]
+19 verbose stack TypeError: Cannot read properties of undefined (reading 'spec')
+19 verbose stack     at updateNodes (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:1302:44)
+19 verbose stack     at [saveIdealTree] (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:1471:11)
+19 verbose stack     at Arborist.reify (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:148:31)
+19 verbose stack     at async Install.exec (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/lib/commands/install.js:150:5)
+19 verbose stack     at async Npm.exec (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/lib/npm.js:207:9)
+19 verbose stack     at async module.exports (/home/smile/.nvm/versions/node/v20.19.1/lib/node_modules/npm/lib/cli/entry.js:74:5)
+20 error Cannot read properties of undefined (reading 'spec')
+21 silly unfinished npm timer reify 1746391180803
+22 silly unfinished npm timer reify:audit 1746391181054
+23 silly unfinished npm timer auditReport:getReport 1746391181055
+24 silly unfinished npm timer reify:save 1746391181097
+25 verbose cwd /tmp/superset-plugin-chart-hello-world
+26 verbose os Linux 6.11.0-25-generic
+27 verbose node v20.19.1
+28 verbose npm  v10.8.1
+29 verbose exit 1
+30 verbose code 1
+31 error A complete log of this run can be found in: /home/smile/.npm/_logs/2025-05-04T20_39_40_615Z-debug-0.log
+
+</p>
+</details> 
+
+",0,0,0,0,0,0,0
+apache/superset,3038225012,2852086727,smile2008,65974102,2025-05-05T19:17:16+00:00,2025-05-05T19:17:16+00:00,I got it. NVM is madness(((( Fresh install node 20 without nvm and problem gone.,2,0,0,0,2,0,0
+apache/superset,3038225012,2852091178,dosubot[bot],131922026,2025-05-05T19:19:09+00:00,2025-05-05T19:19:09+00:00,"<!-- Answer -->
+The error ""Cannot read properties of undefined (reading 'spec')"" during the npm install process might be related to a corrupted npm cache or a problem with the npm version. Here are some steps you can try to resolve this issue:
+
+1. **Clear npm cache**: Run the following command to clear the npm cache, which might resolve any corruption issues:
+   ```bash
+   npm cache clean --force
+   ```
+
+2. **Reinstall npm**: Sometimes, reinstalling npm can fix underlying issues. You can do this by running:
+   ```bash
+   npm install -g npm@latest
+   ```
+
+3. **Check npm configuration**: Ensure that your npm configuration files (`.npmrc`) do not contain any incorrect or conflicting settings. You can temporarily rename or remove these files to test if they are causing the issue.
+
+4. **Use a different Node.js version**: Although your current Node.js version (v20.19.1) should be compatible, you can try switching to a different version using nvm (Node Version Manager) to see if it resolves the issue:
+   ```bash
+   nvm install 18
+   nvm use 18
+   ```
+
+5. **Install dependencies with a different approach**: If the above steps don't work, try installing the dependencies using a different approach, such as using `yarn` instead of `npm`:
+   ```bash
+   yarn add @airbnb/config-babel@^2.2.4
+   ```
+
+These steps should help you troubleshoot and resolve the installation error. If the issue persists, it might be worth checking the npm issue tracker for any known bugs related to your npm version.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/8a434fe9-ac73-4794-b1d8-d30084388935?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3038208333,2852184354,IdlePhysicist,20644761,2025-05-05T19:55:25+00:00,2025-05-05T19:55:25+00:00,@mistercrunch @geido is there a plan to cut a release with this fix in the near term future?,0,0,0,0,0,0,0
+apache/superset,3037677066,2848864121,dosubot[bot],131922026,2025-05-03T23:58:18+00:00,2025-05-03T23:58:18+00:00,"<!-- Answer -->
+To resolve the issue with the API endpoint not accounting for the `SUPERSET_APP_ROOT` subpath routing, you can modify the endpoint to dynamically include the application root. This can be achieved by using the `getUrl` method from the `SupersetClientClass` in the Superset SDK. Here's how you can adjust the endpoint in your code:
+
+Replace the hardcoded endpoint in `superset-frontend/src/embedded/index.tsx` with a dynamic one:
+
+```typescript
+import { SupersetClient } from 'superset-ui-core';
+
+const client = new SupersetClient();
+
+const getMeWithRole = makeApi<void, { result: UserWithPermissionsAndRoles }>({
+  method: 'GET',
+  endpoint: client.getUrl({ endpoint: '/api/v1/me/roles/' }),  // Use getUrl to include app root
+});
+```
+
+This change will ensure that the API call correctly includes the `SUPERSET_APP_ROOT` prefix, preventing the 404 error when accessing the endpoint <sup>[[1]](https://github.com/apache/superset/blob/master/superset-frontend/src/utils/pathUtils.ts)</sup><sup>[[2]](https://github.com/apache/superset/blob/master/superset-frontend/packages/superset-ui-core/src/connection/SupersetClientClass.ts)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/49bd75fa-eaed-4ed8-bf46-367bb672b750?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3037677066,2849824491,irodriguez-nebustream,81891746,2025-05-05T03:34:24+00:00,2025-05-05T03:34:24+00:00,Very new to doing any PR's but here is my attempt at a fix https://github.com/apache/superset/pull/33356,0,0,0,0,0,0,0
+apache/superset,3037677066,2851376534,irodriguez-nebustream,81891746,2025-05-05T15:30:39+00:00,2025-05-05T15:30:39+00:00,"@rusackas Hello, i'm fairly new to contributing, but I believe this is a simple enough fix. Can you help me get this through",1,0,0,0,0,0,0
+apache/superset,3037677066,2855381643,rusackas,812905,2025-05-06T17:27:48+00:00,2025-05-06T17:27:48+00:00,Leaving comments on the PR...,0,0,0,0,0,0,0
+apache/superset,3037512291,2851064736,sadpandajoe,47334392,2025-05-05T13:45:16+00:00,2025-05-05T13:45:16+00:00,"Any reason why we wouldn't add what we have for sql lab where we can have the default order as is, and then allow a user to sort alphabetically or reverse alphabetically? This should give users a bit more control on what they want to see or not.
+
+<img width=""195"" alt=""Image"" src=""https://github.com/user-attachments/assets/954881ff-9d11-48bc-bc5e-0590a09c2cad"" />",1,1,0,0,0,0,0
+apache/superset,3037512291,2856830527,vanaigr,65824523,2025-05-07T02:22:00+00:00,2025-05-07T02:22:00+00:00,"> Any reason why we wouldn't add what we have for sql lab where we can have the default order as is, and then allow a user to sort alphabetically or reverse alphabetically? This should give users a bit more control on what they want to see or not.
+
+I can add that, though I'm not sure where the button would best fit.
+
+I assume it would switch to sorting by `id` in the metadata?
+",0,0,0,0,0,0,0
+apache/superset,3037512291,2859190674,rusackas,812905,2025-05-07T16:13:55+00:00,2025-05-07T16:13:55+00:00,"I don't see a DISCUSS thread on the dev@ mailing list. You'll need to do that, or this may eventually be closed as abandoned.
+
+",0,0,0,0,0,0,0
+apache/superset,3037512291,2859303558,vanaigr,65824523,2025-05-07T16:52:16+00:00,2025-05-07T16:52:16+00:00,"> I don't see a DISCUSS thread on the dev@ mailing list. You'll need to do that, or this may eventually be closed as abandoned.
+
+Do I need to do something other than this?
+
+![Image](https://github.com/user-attachments/assets/f42eaa9d-5a8a-477c-aeac-4de9600f8534)",0,0,0,0,0,0,0
+apache/superset,3037204590,2859191255,rusackas,812905,2025-05-07T16:14:10+00:00,2025-05-07T16:14:10+00:00,"I don't see a DISCUSS thread on the dev@ mailing list. You'll need to do that, or this may eventually be closed as abandoned.",1,0,0,0,0,0,0
+apache/superset,3037120687,2848396009,korbit-ai[bot],131444098,2025-05-03T03:16:18+00:00,2025-05-03T03:16:18+00:00,"Based on your review schedule, I'll hold off on reviewing this PR until it's marked as ready for review. If you'd like me to take a look now, comment `/korbit-review`.
+
+> Your admin can change your review schedule in the [Korbit Console](https://app.korbit.ai/settings)
+
+
+
+[](41ebb408-bb16-47f1-b777-c3f9ca9305cc)",0,0,0,0,0,0,0
+apache/superset,3037120687,2867354473,rusackas,812905,2025-05-09T17:25:52+00:00,2025-05-09T17:25:52+00:00,"A rebase will fix the docker build problem on CI. If you do that, we can review/merge. Love the feature!",0,0,0,0,0,0,0
+apache/superset,3037120687,2868629995,Quatters,73882772,2025-05-10T08:27:16+00:00,2025-05-10T08:27:16+00:00,@rusackas thanks! CI has passed.,0,0,0,0,0,0,0
+apache/superset,3036796259,2848078607,dosubot[bot],131922026,2025-05-02T20:38:12+00:00,2025-05-02T20:38:12+00:00,"<!-- Greeting -->
+Hello @teocherasco! I'm here to help you tackle any bugs, answer your questions, and guide you as you contribute. While we wait for a human maintainer, feel free to share more about your issue! 🚀
+
+<!-- Answer -->
+I found a similar closed issue regarding the reconnection to PostgreSQL failing with a ""Database Creation Error"" after changing the DB password on AWS RDS. The issue was related to the SQL Alchemy URI not being updated with the new password, which could cause the connection to fail despite successful connection tests <sup>[[1]](https://github.com/apache/superset/blob/master/superset/commands/database/validate.py)</sup>.
+
+Additionally, the error log mentions the 'ab_view_menu_id_seq' sequence, which is used to generate unique IDs for the 'id' column in the 'ab_view_menu' table. If this sequence is missing, it might be due to an incomplete or incorrect database migration <sup>[[2]](https://github.com/apache/superset/blob/master/superset/migrations/versions/2020-09-24_12-04_3fbbc6e8d654_fix_data_access_permissions_for_virtual_.py)</sup>.
+
+To resolve the issue, ensure that the SQL Alchemy URI in Superset's configuration is updated with the new password. Also, verify that the database schema is correctly set up, including the presence of the 'ab_view_menu_id_seq' sequence.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/b50e2d14-c342-433c-9105-05f5d6f78b3e?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3036796259,2848776368,teocherasco,103511601,2025-05-03T19:37:59+00:00,2025-05-03T19:42:34+00:00,@dosu I do not have that specific sequence on my schema. Should I create it myself_ Or there is anyway to solve this problem automatically?,0,0,0,0,0,0,0
+apache/superset,3036796259,2848776762,dosubot[bot],131922026,2025-05-03T19:39:10+00:00,2025-05-03T19:39:10+00:00,"<!-- Answer -->
+You should not manually create the ""ab_view_menu_id_seq"" sequence in your database schema. This sequence is defined in the code using SQLAlchemy's `Sequence` class, which should automatically handle its creation when the database schema is created or migrated using SQLAlchemy's migration tools. To resolve this issue, ensure that your database migrations are properly set up and executed. You can do this by running the following command to apply the necessary migrations:
+
+```bash
+superset db upgrade
+```
+
+This command will execute the migration scripts and should automatically create the required sequence and any other necessary database objects <sup>[[1]](https://github.com/apache/superset/blob/master/superset/migrations/shared/security_converge.py)</sup>.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/4b8a7496-cfbc-4f43-85db-5729dfd39e64?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3036796259,2855378515,rusackas,812905,2025-05-06T17:26:25+00:00,2025-05-06T17:26:25+00:00,"Was there anything useful under ""see more"" as the error message suggests? Not sure if @sadpandajoe has ever run into this one. ",0,0,0,0,0,0,0
+apache/superset,3036796259,2856579343,sadpandajoe,47334392,2025-05-06T23:45:34+00:00,2025-05-06T23:45:34+00:00,"I think I have changed passwords once and it works fine. The weird thing that you mentioned is that you deleted your connection and datasets and you are still getting this error. Also when testing, you don't need to necessarily delete your connection as you can create another connection with the same credentials but just name the database something else. I think @rusackas makes a good point to see if there are other errors when selecting see more. Also it looks like you're getting this on the master branch, have you tried either the 4.1.2 release or the 5.0.0rc2 release to see if you're still getting an issue? May be something in master that has broken it but is not in those releases yet.",0,0,0,0,0,0,0
+apache/superset,3036796259,2868938073,UncoveredBread,63697473,2025-05-10T14:40:10+00:00,2025-05-10T14:40:10+00:00,"Hi all,
+
+I investigated the UI loading issue related to issue #33347 and made progress debugging it. The UI failed to display content due to missing frontend assets, with browser errors: `WebSocket connection to 'ws://localhost:8088/ws' failed` and `[webpack-dev-server] Trying to reconnect...`. I found an `npm install` error caused by a missing root `package.json` but confirmed `superset-frontend/package.json` was present. The `npm run build` process got stuck at 92% (TerserPlugin), possibly due to resource constraints.
+
+I also verified the Docker setup (`postgres-data` on port 5432, `postgres-meta` on port 5433) and prepared steps to reproduce the issue (connect `data_db`, change password, run query). I’ve documented my findings in this gist: https://gist.github.com/UncoveredBread/7cee6de36f8ca0368821b4857825a00e. I couldn’t fully resolve the UI issue, but I’m happy to assist further or provide more details!
+
+Environment:
+- Superset: master branch
+- OS: Ubuntu
+- Docker: PostgreSQL containers (ports 5432, 5433)",0,0,0,0,0,0,0
+apache/superset,3036534005,2847779823,dosubot[bot],131922026,2025-05-02T17:52:17+00:00,2025-05-02T17:52:17+00:00,"<!-- Answer -->
+The issue you're experiencing is related to how Apache Superset handles Row-Level Security (RLS) when creating charts directly from SQL Lab. When you create a chart directly from SQL Lab without saving the query as a dataset, the RLS filters are not applied. This is because the chart creation process from SQL Lab does not automatically incorporate RLS constraints unless the query is saved as a dataset or virtual dataset first.
+
+In Superset, RLS is typically applied when queries are executed within SQL Lab, and the results are correctly filtered. However, when transitioning directly to chart creation from SQL Lab, the RLS predicates are not automatically included in the chart's data source unless the query is saved as a dataset. This behavior is due to the way Superset handles data sources for charts, which requires the dataset to be explicitly defined with RLS constraints.
+
+To ensure that RLS is applied when creating charts, you should save the SQL Lab query as a dataset first. This will preserve the RLS constraints and ensure that the chart reflects the filtered data as expected.
+
+
+<!-- Dosu Comment Footer -->
+*To continue talking to [Dosu](https://dosu.dev), mention @dosu.*
+
+---
+<sup>Help Dosu learn! Give it feedback: [Great Response](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=great_response) | [Irrelevant Answer](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=irrelevant_answer) | [Incorrect Sources](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=incorrect_sources) | [Too Verbose](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=too_verbose) | [Hallucination](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=hallucination) | [Bug Report](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=bug_report) | [Other](https://app.dosu.dev/response-feedback/5a0545ad-bf9e-426f-a08a-6edb4a73cbaa?feedback_type=other)</sup>
+",0,0,0,0,0,0,0
+apache/superset,3036534005,2847851590,suryanshpratap825,66510843,2025-05-02T18:34:10+00:00,2025-05-02T18:34:10+00:00,"Yes, this happens because RLS isn't applied when creating a chart directly from SQL Lab unless the query is saved as a dataset. Saving it first is a good workaround for now. ",0,0,0,0,0,0,0
+apache/superset,3036534005,2847863657,Yassuip,91147712,2025-05-02T18:41:22+00:00,2025-05-02T18:41:22+00:00,"@suryanshpratap825  Do we have any specific permission that can hide the ""Create Chart"" button or disable the related API? Since that option allows users to access the entire dataset, it could potentially expose all data.",0,0,0,0,0,0,0
+apache/superset,3036534005,2847886153,suryanshpratap825,66510843,2025-05-02T18:54:38+00:00,2025-05-02T18:54:38+00:00,"@Yassuip , I found these two link it will helps you out to achevie it.
+
+https://github.com/apache/superset/issues/28760
+
+
+https://stackoverflow.com/questions/68478219/restrict-access-to-a-table-in-sql-lab-in-superset#:~:text=If%20you%20give%20access%20to,and%20query%20from%20that%20dataset.",1,1,0,0,0,0,0
+apache/superset,3036534005,2855374361,rusackas,812905,2025-05-06T17:25:05+00:00,2025-05-06T17:25:05+00:00,"If anyone wants to add some clarity here in the docs, that would be SO VERY welcome :D 
+
+Is that answer sufficient to close the issue for now?",0,0,0,0,0,0,0
+apache/superset,3036534005,2857073988,Yassuip,91147712,2025-05-07T05:13:15+00:00,2025-05-07T05:13:15+00:00,"If RLS is not supported when creating charts from raw SQL queries, then allowing users to build charts without first saving the dataset poses a potential data security risk. Currently, I haven't found any permission setting that restricts this behavior—aside from completely removing SQL Lab or dataset access. If RLS can't be enforced in this flow, there should be a built-in mechanism to disable chart creation from raw queries to prevent unintended data exposure.
+Given this, we should treat the ability to bypass RLS as a data exposure issue and consider implementing a fix. Ideally, RLS should be enforced even for raw queries, especially **_since SQL Lab itself applies RLS when returning raw query results. And  a user clicks “Create Chart” from the same SQL Lab screen, the chart should be based on the already-filtered data—not the full underlying dataset_**.",0,0,0,0,0,0,0
+apache/superset,3035321225,2846509379,codecov[bot],22429695,2025-05-02T06:58:25+00:00,2025-05-07T21:18:18+00:00,"## [Codecov](https://app.codecov.io/gh/apache/superset/pull/33345?dropdown=coverage&src=pr&el=h1&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) Report
+All modified and coverable lines are covered by tests :white_check_mark:
+> Project coverage is 83.18%. Comparing base [(`76d897e`)](https://app.codecov.io/gh/apache/superset/commit/76d897eaa2f9e137102bc194c2e3109c29d0348f?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) to head [(`d66aa3d`)](https://app.codecov.io/gh/apache/superset/commit/d66aa3d07d2c4fc44acdbaebbc9a1d579d4c2d65?dropdown=coverage&el=desc&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+> Report is 1846 commits behind head on master.
+
+<details><summary>Additional details and impacted files</summary>
+
+
+```diff
+@@             Coverage Diff             @@
+##           master   #33345       +/-   ##
+===========================================
++ Coverage   60.48%   83.18%   +22.69%     
+===========================================
+  Files        1931      553     -1378     
+  Lines       76236    39966    -36270     
+  Branches     8568        0     -8568     
+===========================================
+- Hits        46114    33246    -12868     
++ Misses      28017     6720    -21297     
++ Partials     2105        0     -2105     
+```
+
+| [Flag](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flags&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | Coverage Δ | |
+|---|---|---|
+| [hive](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `48.25% <ø> (-0.90%)` | :arrow_down: |
+| [javascript](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `?` | |
+| [mysql](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.38% <ø> (?)` | |
+| [postgres](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `75.44% <ø> (?)` | |
+| [presto](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `52.71% <ø> (-1.10%)` | :arrow_down: |
+| [python](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `83.18% <ø> (+19.68%)` | :arrow_up: |
+| [sqlite](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `74.94% <ø> (?)` | |
+| [unit](https://app.codecov.io/gh/apache/superset/pull/33345/flags?src=pr&el=flag&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache) | `61.30% <ø> (+3.67%)` | :arrow_up: |
+
+Flags with carried forward coverage won't be shown. [Click here](https://docs.codecov.io/docs/carryforward-flags?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache#carryforward-flags-in-the-pull-request-comment) to find out more.
+
+</details>
+
+[:umbrella: View full report in Codecov by Sentry](https://app.codecov.io/gh/apache/superset/pull/33345?dropdown=coverage&src=pr&el=continue&utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).   
+:loudspeaker: Have feedback on the report? [Share it here](https://about.codecov.io/codecov-pr-comment-feedback/?utm_medium=referral&utm_source=github&utm_content=comment&utm_campaign=pr+comments&utm_term=apache).
+
+<details><summary> :rocket: New features to boost your workflow: </summary>
+
+- :snowflake: [Test Analytics](https://docs.codecov.com/docs/test-analytics): Detect flaky tests, report on failures, and find test suite problems.
+- :package: [JS Bundle Analysis](https://docs.codecov.com/docs/javascript-bundle-analysis): Save yourself from yourself by tracking and limiting bundle sizes in JS merges.
+</details>",0,0,0,0,0,0,0
+apache/superset,3035321225,2847761504,rusackas,812905,2025-05-02T17:41:22+00:00,2025-05-02T17:41:22+00:00,@mistercrunch any idea what's up with the CI errors? They seem pretty wide-spread today.,0,0,0,0,0,0,0
+apache/superset,3035321225,2849720014,mistercrunch,487433,2025-05-05T01:40:56+00:00,2025-05-05T01:40:56+00:00,this should help -> https://github.com/apache/superset/pull/33354,0,0,0,0,0,0,0

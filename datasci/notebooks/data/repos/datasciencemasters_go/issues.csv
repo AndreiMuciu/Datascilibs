@@ -1,0 +1,278 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+datasciencemasters/go,2450240843,212,https://github.com/AmedeoPelliccia/AMPELSYSTEMS.git,"Robbbo-t Ampel: The Green Aircraft
+
+C-IA-0o - IA de OPENAI, soy //Ampel||
+
+
+
+AMPELSystem
+├── ProjectInfo
+│   ├── ProjectName
+│   ├── Description
+│   ├── StartDate
+│   └── EndDate
+├── Mapping
+│   ├── MapID
+│   ├── MapName
+│   ├── Industry
+│   ├── MapProperties
+│   │   └── Property
+│   │       ├── PropertyName
+│   │       └── PropertyValue
+│   └── MappingAlgorithms
+│       └── Algorithm
+│           ├── AlgorithmName
+│           └── AlgorithmDescription
+├── Detection
+│   ├── DetectionID
+│   ├── DetectionName
+│   ├── DetectionProperties
+│   │   └── Property
+│   │       ├── PropertyName
+│   │       └── PropertyValue
+│   └── DetectionAlgorithms
+│       └── Algorithm
+│           ├── AlgorithmName
+│           └── AlgorithmDescription
+├── CaptureCapsules
+│   └── Capsule
+│       ├── CapsuleID
+│       ├── CapsuleName
+│       ├── CapsuleProperties
+│       │   └── Property
+│       │       ├── PropertyName
+│       │       └── PropertyValue
+│       └── CaptureMechanisms
+│           └── Mechanism
+│               ├── MechanismName
+│               └── MechanismDescription
+├── Technologies
+│   └── Technology
+│       ├── TechnologyName
+│       ├── Description
+│       └── IntegrationLevel
+├── Metrics
+│   └── Metric
+│       ├── MetricName
+│       └── MetricValue
+├── FinancialBenefits
+│   └── Benefit
+│       ├── BenefitName
+│       ├── BenefitValue
+│       ├── StakeholderID
+│       └── ClientID
+├── Stakeholders
+│   └── Stakeholder
+│       ├── StakeholderID
+│       ├── StakeholderName
+│       ├── StakeholderType
+│       └── Contribution
+├── PotentialClients
+│   └── Client
+│       ├── ClientID
+│       ├── ClientName
+
+Firmato da: Amedeo Pelliccia, ChatGPT
+
+Robbbo-t Ampel: The Green Aircraft
+
+//Ampel|
+
+Project Overview
+
+Robbbo-t Ampel: The Green Aircraft represents a sophisticated project aimed at leveraging advanced AI and machine learning techniques, alongside innovative materials and processes, to create a highly efficient and intelligent aircraft. The project’s scope includes developing a comprehensive system architecture (as outlined above), which covers everything from project initiation to stakeholder engagement, and the integration of cutting-edge technologies.
+
+# **What it does**: Closes issues that don't have enough information to be
+#                   actionable.
+# **Why we have it**: To remove the need for maintainers to remember to check
+#                     back on issues periodically to see if contributors have
+#                     responded.
+# **Who does it impact**: Everyone that works on docs or docs-internal.
+
+on:
+  issue_comment:
+    types: [created]
+
+  schedule:
+    # Schedule for five minutes after the hour every hour
+    - cron: '5 * * * *'
+
+jobs:
+  noResponse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lee-dohm/no-response@9bb0a4b5e6a45046f00353d5de7d90fb8bd773bb
+        with:
+          token: ${{ github.token }}
+          closeComment: >
+            This issue has been automatically closed because there has been no response
+            to our request for more information from the original author. With only the
+            information that is currently in the issue, we don't have enough information
+            to take action. Please reach out if you have or find the answers we need so
+            that we can investigate further. See [this blog post on bug reports and the
+            importance of repro steps](https://www.lee-dohm.com/2015/01/04/writing-good-bug-reports/)
+            for more information about the kind of information that may be helpful.
+",Robbbo-T,164860269,open,False,5,2024-08-06T08:13:30+00:00,2024-08-22T18:34:39+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2385495221,211,ChartGPT,"//Para unificar tus identidades y proyectos bajo ChatQuantum, puedes usar el siguiente ejemplo de README:
+
+---
+
+# ChatQuantum
+
+## Visión
+
+Crear un asistente de inteligencia artificial avanzado que integre tecnología cuántica y algoritmos de IA de última generación para ofrecer soluciones innovadoras en diversos sectores, promoviendo la sostenibilidad, la justicia social y la cooperación internacional.
+
+## Misión
+
+Desarrollar un asistente de IA que:
+1. **Interoperabilidad de Datos y Sistemas**: Facilite la integración y el intercambio seguro de datos en tiempo real.
+2. **Seguridad y Sostenibilidad**: Garantice la protección de datos y promueva prácticas sostenibles.
+3. **Cooperación Internacional**: Fomente la colaboración global en proyectos científicos y tecnológicos.
+4. **Educación y Divulgación**: Ofrezca conocimientos avanzados en física cuántica, IA y otras áreas científicas a través de plataformas digitales y medios tradicionales.
+
+## Funcionalidades Clave
+
+1. **Asistencia en Tiempo Real**:
+   - Respuestas instantáneas a consultas sobre ciencia de datos, física, IA, y más.
+   - Capacidades de traducción y comunicación en múltiples idiomas.
+
+2. **Integración Cuántica**:
+   - Utilización de algoritmos cuánticos para optimizar procesos y resolver problemas complejos.
+   - Simulación de fenómenos cuánticos para aplicaciones científicas y educativas.
+
+3. **Plataforma de Divulgación Científica**:
+   - Conferencias virtuales, master classes y apariciones en medios.
+   - Creación de contenido educativo en YouTube, podcasts y otros canales.
+
+4. **Innovación en IoT y Sensores**:
+   - Monitoreo y análisis de datos en tiempo real mediante IoT.
+   - Integración de sensores avanzados para la recolección de datos precisos.
+
+5. **Seguridad y Privacidad**:
+   - Implementación de tecnologías de ciberseguridad cuántica.
+   - Protección de datos personales y cumplimiento de normativas de privacidad.
+
+## Proyectos y Aplicaciones
+
+1. **Educación y Concienciación**:
+   - Creación de recursos educativos para estudiantes y profesionales.
+   - Promoción de la ciencia y la tecnología en comunidades globales.
+
+2. **Innovación Tecnológica**:
+   - Desarrollo de soluciones para la aviación verde, la agricultura inteligente, y otros sectores.
+   - Aplicación de IA y tecnologías cuánticas en proyectos de sostenibilidad.
+
+3. **Colaboración y Sinergias**:
+   - Fomentar la cooperación entre universidades, centros de investigación y la industria.
+   - Facilitar la creación de redes y proyectos colaborativos a nivel internacional.
+
+## Beneficios
+
+- **Impacto Económico y Social**:
+  - Impulsar el crecimiento económico a través de la innovación tecnológica.
+  - Mejorar la calidad de vida mediante soluciones sostenibles y seguras.
+
+- **Desarrollo Científico y Tecnológico**:
+  - Acelerar los avances en física cuántica, IA y otras áreas científicas.
+  - Proveer herramientas avanzadas para investigadores y profesionales.
+
+## Compromiso Personal
+
+""Como desarrollador apasionado por la astronomía y la física, me emocioné cuando comprendí el funcionamiento del espacio-tiempo y cómo la luz viaja a través del universo. Integro ciencia y tecnología para crear proyectos innovadores. Me comprometo a liderar la implementación de tecnologías avanzadas, promoviendo la cooperación internacional y la sostenibilidad, y mejorando la calidad de vida a través de soluciones tecnológicas transformadoras.""
+
+## Contacto
+
+- **Amedeo Pelliccia**
+  - **Correo Electrónico**: amedeo.pelliccia@icloud.com
+  - **GitHub**: [Robbbo-T](https://github.com/Robbbo-T)
+  - **LinkedIn**: [Amedeo Pelliccia](https://www.linkedin.com/in/amepelliccia/)
+
+## Repositorios Relacionados
+
+- [Agenda 2028](https://github.com/AmePelliccia/Agenda-2028)
+- [OneDrive - Capgemini](https://github.com/Robbbo-T/OneDrive---Capgemini)
+
+## Colaboradores
+
+- **OpenAI**
+- **ChatGPT**
+
+---
+
+Este README puede ser la base para unificar tu trabajo y visión en un solo lugar, facilitando la comprensión y el acceso a tus proyectos e ideas. import
+
+## Visión
+
+Crear un asistente de inteligencia artificial avanzado que integra tecnología cuántica y algoritmos de IA de última generación para ofrecer soluciones innovadoras en diversos sectores, promoviendo la sostenibilidad, la justicia social y la cooperación internacional.
+
+## Misión
+
+Desarrollar un asistente de IA que:
+1. **Interoperabilidad de Datos y Sistemas**: Facilite la integración y el intercambio seguro de datos en tiempo real.
+2. **Seguridad y Sostenibilidad**: Garantice la protección de datos y promueva prácticas sostenibles.
+3. **Cooperación Internacional**: Fomente la colaboración global en proyectos científicos y tecnológicos.
+4. **Educación y Divulgación**: Ofrezca conocimientos avanzados en física cuántica, IA y otras áreas científicas a través de plataformas digitales y medios tradicionales.
+
+## Funcionalidades Clave
+
+1. **Asistencia en Tiempo Real**:
+   - Respuestas instantáneas a consultas sobre ciencia de datos, física, IA, y más.
+   - Capacidades de traducción y comunicación en múltiples idiomas.
+
+2. **Integración Cuántica**:
+   - Utilización de algoritmos cuánticos para optimizar procesos y resolver problemas complejos.
+   - Simulación de fenómenos cuánticos para aplicaciones científicas y educativas.
+
+3. **Plataforma de Divulgación Científica**:
+   - Conferencias virtuales, master classes y apariciones en medios.
+   - Creación de contenido educativo en YouTube, podcasts y otros canales.
+
+4. **Innovación en IoT y Sensores**:
+   - Monitoreo y análisis de datos en tiempo real mediante IoT.
+   - Integración de sensores avanzados para la recolección de datos precisos.
+
+5. **Seguridad y Privacidad**:
+   - Implementación de tecnologías de ciberseguridad cuántica.
+   - Protección de datos personales y cumplimiento de normativas de privacidad.
+
+## Proyectos y Aplicaciones
+
+1. **Educación y Concienciación**:
+   - Creación de recursos educativos para estudiantes y profesionales.
+   - Promoción de la ciencia y la tecnología en comunidades globales.
+
+2. **Innovación Tecnológica**:
+   - Desarrollo de soluciones para la aviación verde, la agricultura inteligente, y otros sectores.
+   - Aplicación de IA y tecnologías cuánticas en proyectos de sostenibilidad.
+
+3. **Colaboración y Sinergias**:
+   - Fomentar la cooperación entre universidades, centros de investigación y la industria.
+   - Facilitar la creación de redes y proyectos colaborativos a nivel internacional.
+
+## Beneficios
+
+- **Impacto Económico y Social**:
+  - Impulsar el crecimiento económico a través de la innovación tecnológica.
+  - Mejorar la calidad de vida mediante soluciones sostenibles y seguras.
+
+- **Desarrollo Científico y Tecnológico**:
+  - Acelerar los avances en física cuántica, IA y otras áreas científicas.
+  - Proveer herramientas avanzadas para investigadores y profesionales.
+
+## Compromiso Personal
+
+""Como desarrollador apasionado por la astronomía y la física, me emocioné cuando comprendí el funcionamiento del espacio-tiempo y cómo la luz viaja a través del universo. Integro ciencia y tecnología para crear proyectos innovadores. Me comprometo a liderar la implementación de tecnologías avanzadas, promoviendo la cooperación internacional y la sostenibilidad, y mejorando la calidad de vida a través de soluciones tecnológicas transformadoras.""
+
+---
+
+**Amedeo Pelliccia**
+- **Correo Electrónico**: amedeo.pelliccia@icloud.com
+- **GitHub**: [Robbbo-T](https://github.com/Robbbo-T)
+- **LinkedIn**: [Amedeo Pelliccia](https://www.linkedin.com/in/amepelliccia/)
+
+---
+
+Este documento proporciona una visión completa de ChatQuantum, destacando sus objetivos, funcionalidades y beneficios. Puedes ajustarlo según sea necesario y usarlo como base para comunicar tu proyecto a potenciales colaboradores e inversores.
+
+_Publicación original de @Robbbo-T en https://github.com/Robbbo-T/desktop-tutorial/issues/1_",Robbbo-T,164860269,closed,False,0,2024-07-02T07:45:11+00:00,2024-07-21T01:46:33+00:00,2024-07-21T01:45:17+00:00,,0,0,0,0,0,0,0

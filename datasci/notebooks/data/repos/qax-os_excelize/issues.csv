@@ -1,0 +1,90 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+qax-os/excelize,3050596547,2128,"This related with #2123, made editAs attribute value empty for one cell anchor drawing object","# PR Details
+
+Made editAs attribute value empty for one cell anchor drawing object
+
+## Description
+
+Fix generated workbook corrupted on Office 2007.
+
+## Related Issue
+
+#2123 (pull request)
+#2001
+#2002
+
+## Motivation and Context
+
+Follow maintainer's suggestion in pull request #2123.
+
+## How Has This Been Tested
+
+Test with `go test -v` locally
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",Now-Shimmer,130445987,closed,False,2,2025-05-09T02:54:26+00:00,2025-05-09T16:03:26+00:00,2025-05-09T16:03:03+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,3046055673,2127,"DefinedNames SheetNames are not escaped correctly, if a sheet gets renamed","# PR Details
+
+DefinedNames SheetNames are not escaped correctly, if a sheet gets renamed
+
+## Description
+
+Renaming a sheet might cause Microsoft Excel to show a warning that the file contains broken links. This happens if the sheet name contains whitespaces for example and definedNames referencing this sheet. This is also the reason why some sheet names are escaped and others not. This PR checks via regex for non word characters and escapes sheet names in definedNames if required. The current implementation only preserves already present escaping, even if it is not required anymore.
+Currently ""Sheet 2!$A$1:$A$2""
+Required ""'Sheet 2'!$A$1:$A$2""
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+#2126 
+
+## Motivation and Context
+
+Fixes ""broken links"".
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+Tested in a local project.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",R3dByt3,20931260,closed,False,2,2025-05-07T13:52:17+00:00,2025-05-08T11:59:00+00:00,2025-05-08T11:58:30+00:00,size/S,0,0,0,0,0,0,0

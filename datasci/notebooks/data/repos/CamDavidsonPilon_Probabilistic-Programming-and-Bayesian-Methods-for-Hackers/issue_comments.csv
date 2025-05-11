@@ -1,0 +1,13 @@
+repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2422064726,2290373542,miba2020,65517557,2024-08-15T02:17:55+00:00,2024-08-15T07:10:57+00:00,"I also want to know where these numbers come from.
+
+Now I think 0.05 and 0.35 might have their roots in the plot. Something like majority of mass falling in the range of [0.05, 0.35].  After reading chapter 3, I try az.plot_posterior with hdi_prob=0.8, then I get a plot saying 80% hdi lies between 0.042 and 0.35. 
+
+Don't know whether the above guess is correct or not. But I decide to read on later chapters in the hope of things will get clear thereafter.",1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2373625449,2189934004,review-notebook-app[bot],41993974,2024-06-25T20:43:02+00:00,2024-06-25T20:43:02+00:00,"Check out this pull request on&nbsp; <a href=""https://app.reviewnb.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/pull/568""><img align=""absmiddle""  alt=""ReviewNB"" height=""28"" class=""BotMessageButtonImage"" src=""https://raw.githubusercontent.com/ReviewNB/support/master/images/button_reviewnb.png""/></a> 
+
+ See visual diffs & provide feedback on Jupyter Notebooks. 
+
+---
+
+ <i>Powered by <a href='https://www.reviewnb.com/?utm_source=gh'>ReviewNB</a></i>",0,0,0,0,0,0,0

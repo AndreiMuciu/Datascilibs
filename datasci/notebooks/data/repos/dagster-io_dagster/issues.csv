@@ -1,0 +1,38 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+dagster-io/dagster,3054772388,29913,[dagster-cloud-cli] Add `--wait` to `job launch` command,"## Summary & Motivation
+
+Adding the `--wait` flag to `dagster-cloud job launch` is particularly useful in CI pipelines where you're wanting to launch a job to test changes and ensure the dagster run succeeds before merging.
+
+## How I Tested These Changes
+
+Local manual testing
+
+## Changelog
+
+> [dagster-cloud-cli] Add `--wait` to `job launch` command
+",stevenayers,16361214,open,False,0,2025-05-11T06:39:56+00:00,2025-05-11T06:56:04+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3053940513,29912,[dg] Refactor shims so operate on the RequestObject instead of splitting it apart,"## Summary & Motivation
+
+`ShimScaffolder` had a bit of an odd inheritance structure. This new structure is more straightforward and makes it easier to overload and test
+
+```python
+class ShimScaffolder(Scaffolder[TModel]):
+    @abstractmethod
+    def get_text(self, request: ScaffoldRequest[TModel]) -> str: ...
+
+    def scaffold(self, request: ScaffoldRequest[TModel]) -> None:
+        if request.target_path.suffix != "".py"":
+            raise ValueError(""Invalid target path suffix. Expected a path ending in `.py`."")
+        # temporary hack as currently all scaffold requests target directories
+        # that are auto-created
+        request.target_path.rmdir()
+        request.target_path.write_text(self.get_text(request))
+```
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",schrockn,28738937,open,False,1,2025-05-10T09:07:46+00:00,2025-05-10T10:16:32+00:00,,,0,0,0,0,0,0,0

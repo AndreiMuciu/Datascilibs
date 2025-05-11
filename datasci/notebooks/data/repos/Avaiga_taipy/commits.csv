@@ -1,0 +1,19 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+Avaiga/taipy,6c5fd6ee9e591d602f96acbe8800a92774d11eb0,https://github.com/Avaiga/taipy/commit/6c5fd6ee9e591d602f96acbe8800a92774d11eb0,jrobinAV,88036007,User,2025-05-09T11:56:37+00:00,web-flow,2025-05-09T11:56:37+00:00,"Enterprise 666 prepare migration feature (#2605)
+
+* Expose scope in task configuration
+
+* scope has moved
+
+* scope has moved
+
+* fix linter
+
+* fix linter
+
+* Apply suggestions",60,32,92,4,bd9576b5f68b93fb88be31407f3d895fadca954c
+Avaiga/taipy,bd9576b5f68b93fb88be31407f3d895fadca954c,https://github.com/Avaiga/taipy/commit/bd9576b5f68b93fb88be31407f3d895fadca954c,jrobinAV,88036007,User,2025-05-07T11:12:31+00:00,web-flow,2025-05-07T11:12:31+00:00,"#2597 Fix missing parent_ids (#2601)
+
+* #2597 Fix missing parent_ids
+
+* remove unused task_manager._create method",70,44,114,12,85af59e2bb85d0d299886e993487f9f8a5bcdbd9

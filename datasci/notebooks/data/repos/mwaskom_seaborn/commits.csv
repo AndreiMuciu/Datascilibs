@@ -1,0 +1,9 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+mwaskom/seaborn,86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef,https://github.com/mwaskom/seaborn/commit/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef,mwaskom,315810,User,2025-01-26T16:55:13+00:00,web-flow,2025-01-26T16:55:13+00:00,"Fix mock __array__ interface (#3821)
+
+Addresses a backwards compatibility bug introduced in #3803",2,2,4,1,eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1
+mwaskom/seaborn,eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1,https://github.com/mwaskom/seaborn/commit/eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1,mariosasko,47462742,User,2025-01-26T15:24:34+00:00,web-flow,2025-01-26T15:24:34+00:00,"Support array-like mask in heatmaps (#3803)
+
+* Support array-like mask in heatmaps
+
+* Nit",26,8,34,2,e0c2431789384559050cc81b8cd97dfbf7738bdc

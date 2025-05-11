@@ -1,0 +1,37 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+ydataai/ydata-profiling,c3ce66ca4cc9564e013f71cbb96ed7b3d8fa5c72,https://github.com/ydataai/ydata-profiling/commit/c3ce66ca4cc9564e013f71cbb96ed7b3d8fa5c72,fabclmnt,30911746,User,2025-03-26T00:32:10+00:00,web-flow,2025-03-26T00:32:10+00:00,"chore: add more unit tests for better code coverage (#1745)
+
+* chore: add more unit tests for better code coverage
+
+* chore: remove unused code from tests
+
+* fix(linting): code formatting
+
+* chore: fix whitespaces
+
+* chore: test no longer valid
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",178,64,242,3,15494ddab4240f3fa560a9d8ccb07cff0753c0d2
+ydataai/ydata-profiling,15494ddab4240f3fa560a9d8ccb07cff0753c0d2,https://github.com/ydataai/ydata-profiling/commit/15494ddab4240f3fa560a9d8ccb07cff0753c0d2,fabclmnt,30911746,User,2025-03-25T23:15:33+00:00,web-flow,2025-03-25T23:15:33+00:00,"fix: add html metrics support for compare (#1744)
+
+* fix: add html metrics support for compare
+
+* fix: add html metrics support for compare
+
+* fix(linting): code formatting
+
+* chore: fix test to include request header
+
+* fix(linting): code formatting
+
+* chore: add unit tests for the compat file
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",110,21,131,4,45c47c7d514ebc58930ec9b7c3de81185ee9ba1e

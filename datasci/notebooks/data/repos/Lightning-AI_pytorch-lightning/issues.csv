@@ -1,0 +1,119 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+Lightning-AI/pytorch-lightning,3054865516,20812,Reloading every_n_epochs (trainer flag reload_dataloaders_every_n_epochs) not working in 2.5.1.,"### Bug description
+
+When using pytorch-lightning==2.5.1, the train_dataloader() method of a LightningDataModule is only called once at the very beginning of the training process (before Epoch 0), even when trainer.reload_dataloaders_every_n_epochs is explicitly set to 1 on the Trainer instance.
+
+The expected behavior is that train_dataloader() should be called by the Trainer at the start of every epoch (Epoch 1, Epoch 2, etc.) when reload_dataloaders_every_n_epochs=1.
+
+This prevents the intended dynamic reloading or switching of the training dataset each epoch.
+
+Environment:
+
+PyTorch Lightning Version: 2.5.1
+PyTorch Version: 2.7.0
+Python Version: 3.11
+CUDA/GPU information: NVIDIA A100
+
+### What version are you seeing the problem on?
+
+v2.5
+
+### Reproduced in studio
+
+_No response_
+
+### How to reproduce the bug
+
+```python
+
+```
+
+### Error messages and logs
+
+```
+# Error messages and logs here please
+```
+
+
+### Environment
+
+<details>
+  <summary>Current environment</summary>
+
+```
+#- PyTorch Lightning Version (e.g., 2.5.0):
+#- PyTorch Version (e.g., 2.5):
+#- Python version (e.g., 3.12):
+#- OS (e.g., Linux):
+#- CUDA/cuDNN version:
+#- GPU models and configuration:
+#- How you installed Lightning(`conda`, `pip`, source):
+```
+
+</details>
+
+
+### More info
+
+_No response_",carlos10garrido,29857305,closed,False,0,2025-05-11T09:37:17+00:00,2025-05-11T11:58:19+00:00,2025-05-11T11:58:19+00:00,bug;needs triage;ver: 2.5.x,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,3054781299,20811,WIP: to_onnx return ONNXProgram,"## What does this PR do?
+
+<!--
+Please include a summary of the change and which issue is fixed.
+Please also include relevant motivation and context.
+List any dependencies that are required for this change.
+
+If we didn't discuss your PR in Github issues there's a high chance it will not be merged.
+
+The following links the related issue to the PR (https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)
+-->
+
+Fixes #20810
+
+<!-- Does your PR introduce any breaking changes? If yes, please list them. -->
+
+<details>
+  <summary><b>Before submitting</b></summary>
+
+- Was this **discussed/agreed** via a GitHub issue? (not for typos and docs)
+- [ ] Did you read the [contributor guideline](https://github.com/Lightning-AI/lightning/blob/master/.github/CONTRIBUTING.md), **Pull Request** section?
+- [ ] Did you make sure your **PR does only one thing**, instead of bundling different changes together?
+- Did you make sure to **update the documentation** with your changes? (if necessary)
+- Did you write any **new necessary tests**? (not for typos and docs)
+- [ ] Did you verify new and **existing tests pass** locally with your changes?
+- Did you list all the **breaking changes** introduced by this pull request?
+- Did you **update the CHANGELOG**? (not for typos, docs, test updates, or minor internal changes/refactors)
+
+<!-- In the CHANGELOG, separate each item in the unreleased section by a blank line to reduce collisions -->
+
+</details>
+
+## PR review
+
+Anyone in the community is welcome to review the PR.
+Before you start reviewing, make sure you have read the [review guidelines](https://github.com/Lightning-AI/lightning/wiki/Review-guidelines). In short, see the following bullet-list:
+
+<details>
+  <summary>Reviewer checklist</summary>
+
+- [ ] Is this pull request ready for review? (if not, please submit in draft mode)
+- [ ] Check that all items from **Before submitting** are resolved
+- [ ] Make sure the title is self-explanatory and the description concisely explains the PR
+- [ ] Add labels and milestones (and optionally projects) to the PR so it can be classified
+
+</details>
+
+<!--
+
+Did you have fun?
+
+Make sure you had fun coding 🙃
+
+-->
+
+
+<!-- readthedocs-preview pytorch-lightning start -->
+----
+📚 Documentation preview 📚: https://pytorch-lightning--20811.org.readthedocs.build/en/20811/
+
+<!-- readthedocs-preview pytorch-lightning end -->",GdoongMathew,25893369,open,False,0,2025-05-11T07:01:31+00:00,2025-05-11T11:37:45+00:00,,pl;dependencies;package,0,0,0,0,0,0,0

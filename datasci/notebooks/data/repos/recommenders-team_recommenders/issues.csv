@@ -1,0 +1,59 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+recommenders-team/recommenders,3048343514,2231,Staging to main: fixed issue with wikidata,"### Description
+<!--- Describe your changes in detail -->
+<!--- Why is this change required? What problem does it solve? -->
+
+
+### Related Issues
+<!--- If it fixes an open issue, please link to the issue here. -->
+
+
+### References
+<!--- References would be helpful to understand the changes. -->
+<!--- References can be books, links, etc. -->
+
+
+### Checklist:
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+- [ ] I have followed the [contribution guidelines](CONTRIBUTING.md) and code style for this project.
+- [ ] I have added tests covering my contributions.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have [signed the commits](https://github.com/recommenders-team/recommenders/wiki/How-to-sign-commits), e.g. `git commit -s -m ""your commit message""`. 
+- [ ] This PR is being made to `staging branch` AND NOT TO `main branch`.
+",miguelgfierro,3491412,closed,False,0,2025-05-08T09:14:11+00:00,2025-05-08T19:01:52+00:00,2025-05-08T19:01:52+00:00,,0,0,0,0,0,0,0
+recommenders-team/recommenders,3039793401,2230,[BUG] Mismatch between the streaming logs that we get from azure-ai-ml and the log file we download at the end,"### Description
+<!--- Describe your issue/bug/request in detail -->
+See details https://github.com/recommenders-team/recommenders/pull/2223
+
+Also related to https://github.com/recommenders-team/recommenders/issues/2210
+
+We thought we fixed this issue in #2223 but it is still happening. See https://github.com/recommenders-team/recommenders/actions/runs/14809177082/job/41598022202
+
+
+### In which platform does it happen?
+<!--- Describe the platform where the issue is happening (use a list if needed) -->
+<!--- For example: -->
+<!--- * Azure Data Science Virtual Machine. -->
+<!--- * Azure Databricks.  -->
+<!--- * Other platforms.  -->
+
+### How do we replicate the issue?
+<!--- Please be specific as possible (use a list if needed). -->
+<!--- For example: -->
+<!--- * Create a conda environment for pyspark -->
+<!--- * Run unit test `test_sar_pyspark.py` with `pytest -m 'spark'` -->
+<!--- * ... -->
+
+### Expected behavior (i.e. solution)
+<!--- For example:  -->
+<!--- * The tests for SAR PySpark should pass successfully. -->
+
+### Willingness to contribute
+<!--- Go over all the following points, and put an `x` in the box that apply. -->
+- [ ] Yes, I can contribute for this issue independently.
+- [ ] Yes, I can contribute for this issue with guidance from Recommenders community.
+- [ ] No, I cannot contribute at this time.
+
+### Other Comments
+",miguelgfierro,3491412,open,False,1,2025-05-05T14:06:15+00:00,2025-05-06T05:38:18+00:00,,bug,0,0,0,0,0,0,0

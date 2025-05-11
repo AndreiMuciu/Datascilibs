@@ -1,0 +1,96 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+GokuMohandas/Made-With-ML,2951350799,274,ModuleNotFoundError: No module named 'pkg_resources._vendor',"Although I did install all the packages as instructed in [Setup ](https://madewithml.com/courses/mlops/setup/). But when I do run the cell code in [Distributed Data Processing](https://madewithml.com/courses/mlops/distributed-data/), I get the following error.
+
+```python
+# Data ingestion
+ds = ray.data.read_csv(DATASET_LOC)
+ds = ds.random_shuffle(seed=1234)
+ds.take(1)
+```
+
+```shell
+---------------------------------------------------------------------------
+RayTaskError(ModuleNotFoundError)         Traceback (most recent call last)
+Cell In[40], line 2
+      1 # Data ingestion
+----> 2 ds = ray.data.read_csv(DATASET_LOC)
+      3 ds = ds.random_shuffle(seed=1234)
+      4 ds.take(1)
+
+File d:\madewithml\venv\lib\site-packages\ray\data\read_api.py:1208, in read_csv(paths, filesystem, parallelism, ray_remote_args, arrow_open_stream_args, meta_provider, partition_filter, partitioning, ignore_missing_paths, **arrow_csv_args)
+   1206 if meta_provider is None:
+   1207     meta_provider = get_generic_metadata_provider(CSVDatasource._FILE_EXTENSION)
+-> 1208 return read_datasource(
+   1209     CSVDatasource(),
+   1210     parallelism=parallelism,
+   1211     paths=paths,
+   1212     filesystem=filesystem,
+   1213     ray_remote_args=ray_remote_args,
+   1214     open_stream_args=arrow_open_stream_args,
+   1215     meta_provider=meta_provider,
+   1216     partition_filter=partition_filter,
+   1217     partitioning=partitioning,
+   1218     ignore_missing_paths=ignore_missing_paths,
+   1219     **arrow_csv_args,
+   1220 )
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\auto_init_hook.py:24, in wrap_auto_init.<locals>.auto_init_wrapper(*args, **kwargs)
+     21 @wraps(fn)
+     22 def auto_init_wrapper(*args, **kwargs):
+     23     auto_init_ray()
+---> 24     return fn(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\data\read_api.py:371, in read_datasource(datasource, parallelism, ray_remote_args, **read_args)
+    363     scheduling_strategy = NodeAffinitySchedulingStrategy(
+    364         ray.get_runtime_context().get_node_id(),
+    365         soft=False,
+    366     )
+    367     get_reader = cached_remote_fn(
+    368         _get_reader, retry_exceptions=False, num_cpus=0
+    369     ).options(scheduling_strategy=scheduling_strategy)
+--> 371     (requested_parallelism, min_safe_parallelism, inmemory_size, reader,) = ray.get(
+    372         get_reader.remote(
+    373             datasource,
+    374             ctx,
+    375             cur_pg,
+    376             parallelism,
+    377             local_uri,
+    378             _wrap_arrow_serialization_workaround(read_args),
+    379         )
+    380     )
+    382 # TODO(hchen/chengsu): Remove the duplicated get_read_tasks call here after
+    383 # removing LazyBlockList code path.
+    384 read_tasks = reader.get_read_tasks(requested_parallelism)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\auto_init_hook.py:24, in wrap_auto_init.<locals>.auto_init_wrapper(*args, **kwargs)
+     21 @wraps(fn)
+     22 def auto_init_wrapper(*args, **kwargs):
+     23     auto_init_ray()
+---> 24     return fn(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\client_mode_hook.py:103, in client_mode_hook.<locals>.wrapper(*args, **kwargs)
+    101     if func.__name__ != ""init"" or is_client_mode_enabled_by_default:
+    102         return getattr(ray, func.__name__)(*args, **kwargs)
+--> 103 return func(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\worker.py:2547, in get(object_refs, timeout)
+   2545     worker.core_worker.dump_object_store_memory_usage()
+   2546 if isinstance(value, RayTaskError):
+-> 2547     raise value.as_instanceof_cause()
+   2548 else:
+   2549     raise value
+
+RayTaskError(ModuleNotFoundError): ray::_get_reader() (pid=17388, ip=127.0.0.1)
+  File ""python\ray\_raylet.pyx"", line 1616, in ray._raylet.execute_task
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\read_api.py"", line 2348, in _get_reader
+    reader = ds.create_reader(**kwargs)
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\datasource\file_based_datasource.py"", line 256, in create_reader
+    return _FileBasedDatasourceReader(self, **kwargs)
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\datasource\file_based_datasource.py"", line 476, in __init__
+    _check_pyarrow_version()
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\_internal\util.py"", line 78, in _check_pyarrow_version
+    from pkg_resources._vendor.packaging.version import parse as parse_version
+ModuleNotFoundError: No module named 'pkg_resources._vendor'
+```
+",hoangziet,108646783,open,False,1,2025-03-27T03:07:07+00:00,2025-04-02T07:35:56+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2801614505,273,Fix course link in README.md,Fix course link in README.md,kudosscience,45144290,open,False,0,2025-01-21T11:51:37+00:00,2025-01-21T11:51:37+00:00,,,0,0,0,0,0,0,0

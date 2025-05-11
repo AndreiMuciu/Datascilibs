@@ -1,0 +1,28 @@
+repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+PrefectHQ/prefect,3053602113,2869035140,zzstoatzz,31014960,2025-05-10T17:12:07+00:00,2025-05-10T18:01:18+00:00,"hi @bogdibota - thanks for the issue! this should be fixed in the PR linked above
+
+can you try your reproduction against this branch? for example, copying everything besides the inline script metadata
+```bash
+pbpaste | uv run \
+--with git+https://github.com/prefecthq/prefect.git@redis-locking-serialization#subdirectory=src/integrations/prefect-redis \
+--with git+https://github.com/prefecthq/prefect.git@redis-locking-serialization#subdirectory=src/integrations/prefect-ray \
+--with git+https://github.com/prefecthq/prefect.git@redis-locking-serialization#subdirectory=src/integrations/prefect-dask -
+```",0,0,0,0,0,0,0
+PrefectHQ/prefect,3053041523,2867739988,codspeed-hq[bot],117304815,2025-05-09T19:48:48+00:00,2025-05-09T20:52:11+00:00,"<!-- __CODSPEED_PERFORMANCE_REPORT_COMMENT__ -->
+<!-- __CODSPEED_INSTRUMENTATION_PERFORMANCE_REPORT_COMMENT__ -->
+
+## [CodSpeed Performance Report](https://codspeed.io/PrefectHQ/prefect/branches/task-worker-hygiene)
+
+### Merging #18016 will **not alter performance**
+
+<sub>Comparing <code>task-worker-hygiene</code> (41a0904) with <code>main</code> (f9346cb)</sub>
+
+
+
+### Summary
+
+`✅ 2` untouched benchmarks  
+
+
+
+",0,0,0,0,0,0,0

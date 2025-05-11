@@ -1,0 +1,132 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+scikit-learn/scikit-learn,3054688147,31350,"SimpleImputer casts `category` into `object` when using ""most_frequent"" strategy","### Describe the bug
+
+The column `dtype` changes from `category` to `object` when I transform it using `SimpleImputer`.
+
+Here is a list of related Issues and PRs that I found while trying to solve this problem:
+#29381 
+#18860
+#17625 
+#17526
+#17525
+
+If this is truly a bug, I would like to work on a fix.
+
+### Steps/Code to Reproduce
+
+```python
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+df = pd.DataFrame(data=['A', 'B', 'C', 'A', pd.NA], columns=['column_1'], dtype='category')
+
+df.info()
+
+imputer = SimpleImputer(missing_values=pd.NA, strategy=""most_frequent"").set_output(transform='pandas')
+
+output = imputer.fit_transform(df)
+
+output.info()
+```
+
+### Expected Results
+
+This is the output I expected to see on the terminal
+```
+> > > df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 1 columns):
+ #   Column    Non-Null Count  Dtype   
+---  ------    --------------  -----   
+ 0   column_1  4 non-null      category
+dtypes: category(1)
+memory usage: 269.0 bytes
+
+>>> output.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 1 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   column_1  5 non-null      category
+dtypes: object(1)
+memory usage: 172.0+ bytes
+```
+
+I expected `output` to keep the same `dtype` as the original `pd.DataFrame`.
+
+### Actual Results
+
+The actual results for when `output.info()` is called is:
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 1 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   column_1  5 non-null      object
+dtypes: object(1)
+memory usage: 172.0+ bytes
+```
+Observe that the `Dtype` for `column_1` is now object instead of category.
+
+### Versions
+
+```shell
+System:
+    python: 3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]
+executable: /home/user/miniconda3/envs/prod/bin/python
+   machine: Linux-6.8.0-59-lowlatency-x86_64-with-glibc2.39
+
+Python dependencies:
+      sklearn: 1.5.2
+          pip: 25.0
+   setuptools: 75.8.0
+        numpy: 2.1.1
+        scipy: 1.14.1
+       Cython: None
+       pandas: 2.2.3
+   matplotlib: 3.9.2
+       joblib: 1.4.2
+threadpoolctl: 3.5.0
+
+Built with OpenMP: True
+
+threadpoolctl info:
+       user_api: blas
+   internal_api: openblas
+    num_threads: 16
+         prefix: libscipy_openblas
+       filepath: /home/user/miniconda3/envs/prod/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-ff651d7f.so
+        version: 0.3.27
+threading_layer: pthreads
+   architecture: SkylakeX
+
+       user_api: blas
+   internal_api: openblas
+    num_threads: 16
+         prefix: libscipy_openblas
+       filepath: /home/user/miniconda3/envs/prod/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-c128ec02.so
+        version: 0.3.27.dev
+threading_layer: pthreads
+   architecture: SkylakeX
+
+       user_api: openmp
+   internal_api: openmp
+    num_threads: 16
+         prefix: libgomp
+       filepath: /home/user/miniconda3/envs/prod/lib/python3.12/site-packages/scikit_learn.libs/libgomp-a34b3233.so.1.0.0
+        version: None
+```",jschubnell,17047494,open,False,0,2025-05-11T03:55:11+00:00,2025-05-11T03:55:11+00:00,,Bug;Needs Triage,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,3053902770,31349,Add Multiple Kernel Learning (MKL) for Support Vector Machines (SVM),"### Describe the workflow you want to enable
+
+I propose adding a [Multiple Kernel Learning (MKL)](https://en.wikipedia.org/wiki/Multiple_kernel_learning) module for kernel optimization in kernel-based methods (such as SVM) to scikit-learn. MKL is a more advanced approach compared to GridSearchCV, offering a way to combine multiple kernels into a single, optimal kernel. In the worst case, MKL will behave like GridSearchCV by assigning a weight of 1 to the best kernel, but in the other cases, it will provide a weighted combination of kernels for better generalization.
+
+### Describe your proposed solution
+
+I have already implemented a complete MKL solution for regression, binary and multi-class classification, and clustering (One-Class). This implementation includes the [SimpleMKL algorithm](https://www.jmlr.org/papers/volume9/rakotomamonjy08a/rakotomamonjy08a.pdf), which optimizes the weights of the kernels, as well as the AverageMKL (simply averages the kernels) and SumMKL (simply sums the kernels) algorithms. This implementation is available on a [previously closed pull request](https://github.com/scikit-learn/scikit-learn/pull/31166).
+
+### Describe alternatives you've considered, if relevant
+
+An alternative would be to continue relying on GridSearchCV for kernel selection. However, GridSearchCV is limited to selecting only one kernel and does not consider the possibility of combining multiple kernels, which can result in suboptimal performance. MKL provides a more sophisticated approach by optimizing kernel weights, leading to better performance in many machine learning tasks.",thomasbauer76,33568196,open,False,0,2025-05-10T08:24:28+00:00,2025-05-10T08:24:43+00:00,,New Feature;Needs Triage,0,0,0,0,0,0,0

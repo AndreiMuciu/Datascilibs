@@ -1,0 +1,10 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+afshinea/stanford-cs-229-machine-learning,2618236916,29,"Error in p-norm definition, Algebra & Calculus refresher","Hi, thanks for putting together & sharing this information source.
+
+I believe there is an error in the p-norm formula, in the [Algebra and Calculus refresher](https://stanford.edu/~shervine/teaching/cs-229/refresher-algebra-calculus#properties):
+![image](https://github.com/user-attachments/assets/5cff602b-e48e-47c3-adff-7be1dd9af6df)
+I think $x_i^p$ should be replaced with $|x_i|^p$. This way, we end up with the L1 norm (Manhattan distance) when p = 1.
+",AhmetZamanis,56347957,open,False,0,2024-10-28T12:08:27+00:00,2024-10-28T12:08:27+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,2394209306,28,Math notation,"I appreciate your work, however there are some major drawbacks. Notation is not clear.  You did not explain the mathematical notation ( like %99 of the teachers ) in your cheat sheets, it looks like a textbook  therefore they are not useful for the beginners.  It is possible that a beginner does not heard anything about transpose of a matrix, gradient, Laplacian, or even what conditional probability is. At least you should note the requirements for the learners.
+
+Thanks",O-Memis,62514392,open,False,0,2024-07-07T20:38:21+00:00,2024-07-07T20:38:21+00:00,,,0,0,0,0,0,0,0

@@ -1,0 +1,27 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+dagster-io/dagster,be9a732f930f18ae63d724d9ba98f7f51d40f8c6,https://github.com/dagster-io/dagster/commit/be9a732f930f18ae63d724d9ba98f7f51d40f8c6,schrockn,28738937,User,2025-05-09T21:41:06+00:00,web-flow,2025-05-09T21:41:06+00:00,"[dg] Add tests for existing scaffolders (#29860)
+
+## Summary & Motivation
+
+Add tests for all shim scaffolders such as they are. I think we should always produce a valid definition for a scaffold command but will do that in a followup.
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",127,2,129,6,1d478e7ec20768edfb15f10c84d11475a243c592
+dagster-io/dagster,1d478e7ec20768edfb15f10c84d11475a243c592,https://github.com/dagster-io/dagster/commit/1d478e7ec20768edfb15f10c84d11475a243c592,schrockn,28738937,User,2025-05-09T21:38:33+00:00,web-flow,2025-05-09T21:38:33+00:00,"[dg] Add test for asset shim and extract common function (#29859)
+
+## Summary & Motivation
+
+This adds a test for the asset scaffolder and also extracts out the common functionality to a shared utility
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",83,34,117,3,0af95e59a784aebedb850e1f28d6468a81716681

@@ -1,0 +1,94 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+ray-project/ray,66b19d390d156635c32403226d6d6c6e82fb079d,https://github.com/ray-project/ray/commit/66b19d390d156635c32403226d6d6c6e82fb079d,lk-chen,5988771,User,2025-05-10T19:12:10+00:00,web-flow,2025-05-10T19:12:10+00:00,"[ray.data.llm] Unify fields in SGLang and vLLM config (#52823)
+
+Signed-off-by: Linkun Chen <github@lkchen.net>
+Signed-off-by: lkchen <github@lkchen.net>",78,95,173,5,e7bff7f09e7f5f75603c2a301a9fb19706381dbc
+ray-project/ray,e7bff7f09e7f5f75603c2a301a9fb19706381dbc,https://github.com/ray-project/ray/commit/e7bff7f09e7f5f75603c2a301a9fb19706381dbc,pcmoritz,113316,User,2025-05-10T05:31:50+00:00,web-flow,2025-05-10T05:31:50+00:00,"Fix uv run when use with vllm's Ray backend (#52916)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+If vllm's Ray backend is used in the vllm V1 architecture, it will start
+a subprocess and then call ray.init in that subprocess to launch the
+actual vllm replicas. This PR makes it so the uv environment still gets
+propagated correctly in that case.
+
+This change is consistent with the behavior of how uv environments
+propagate to subprocesses with just vanilla `uv run` without Ray:
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat pyproject.toml 
+[project]
+name = ""test""
+version = ""0.1""
+dependencies = [
+   ""ray"",
+]
+```
+```
+(base) (base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat test.py 
+import sys
+
+import ray
+import subprocess
+import psutil
+
+print(sys.executable)
+print(ray.__path__)
+
+# avoid fork bomb
+if len(psutil.Process().parents()) > 10:
+    sys.exit(0)
+
+subprocess.check_call([sys.executable, ""test.py""])
+```
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % uv run test.py
+warning: No `requires-python` value found in the workspace. Defaulting to `>=3.12`.
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+```
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Co-authored-by: pcmoritz <pcmoritz@anyscale.com>",54,7,61,2,f3e86752eee651ee839dc97c13d558fdb370b08e

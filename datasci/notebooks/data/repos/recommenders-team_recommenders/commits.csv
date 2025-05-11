@@ -1,0 +1,7 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+recommenders-team/recommenders,45e1b215a35e69b92390e16eb818d4528d0a33a2,https://github.com/recommenders-team/recommenders/commit/45e1b215a35e69b92390e16eb818d4528d0a33a2,miguelgfierro,3491412,User,2025-05-08T19:01:52+00:00,web-flow,2025-05-08T19:01:52+00:00,"Merge pull request #2231 from recommenders-team/staging
+
+Staging to main: fixed issue with wikidata",2,0,2,1,"d0d315368a28615591f8860683ae66207fc8c49d,c275ec9802f9da1b4289123a2c79c2254da42435"
+recommenders-team/recommenders,c275ec9802f9da1b4289123a2c79c2254da42435,https://github.com/recommenders-team/recommenders/commit/c275ec9802f9da1b4289123a2c79c2254da42435,miguelgfierro,3491412,User,2025-05-06T05:35:38+00:00,web-flow,2025-05-06T05:35:38+00:00,"Merge pull request #2229 from recommenders-team/skip_wikidata
+
+Skip wikidata notebooks due to the API being unstable",2,0,2,1,"ea07f412370b5f1d80b23b8f4aa9681cb678d260,d588c9a60887d18aa3b374cd41d2e9dd855c2cfb"

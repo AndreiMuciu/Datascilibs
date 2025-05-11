@@ -1,0 +1,11 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+fastai/fastbook,3038567411,675,Fix set_categories deprecation in 09_tabular.ipynb and clean/09_tabul…,"original: df['ProductSize'].cat.set_categories(sizes, ordered=True, inplace=True)
+
+after:
+df['ProductSize'] = df['ProductSize'].cat.set_categories(sizes, ordered=True)
+",OmarElghamry1,85800688,open,False,1,2025-05-05T04:24:09+00:00,2025-05-05T04:24:16+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,3038541926,674,Inplace = True is no longer supported in set_categories in pandas in chapter 9: tabular,"Original: df['ProductSize'].cat.set_categories(sizes, ordered=True, inplace=True) 
+
+should be replaced with
+
+df['ProductSize'] = df['ProductSize'].cat.set_categories(sizes, ordered=True)",OmarElghamry1,85800688,closed,False,0,2025-05-05T03:59:32+00:00,2025-05-05T04:24:25+00:00,2025-05-05T04:24:25+00:00,,0,0,0,0,0,0,0

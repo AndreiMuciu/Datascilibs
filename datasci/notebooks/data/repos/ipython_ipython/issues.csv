@@ -1,0 +1,38 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ipython/ipython,3049206975,14896,`%%time` does not stop execution on exceptions,"- https://github.com/ipython/ipython/issues/14889 reported that interruption does not stop execution of `%%time`,
+- which was fixed by https://github.com/ipython/ipython/pull/14890
+
+However, non-system exceptions also allow the execution to continue although it should not. Instead, we should probably call `sys.exit(SIGINT)` after any exception gets caught.",krassowski,5832902,open,False,1,2025-05-08T14:36:24+00:00,2025-05-08T14:54:23+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,3045233000,14895,SyntaxError raised too early when typing code,"Consider this valid Python code:
+```py
+def foo():
+    def bar():
+        return val
+    def bax():
+        nonlocal val
+        return val
+
+    val = 42
+    return bar, bax
+
+
+a, b = foo()
+print(a())
+print(b())
+```
+
+I'm trying to type it line by line:
+
+```py
+In [1]: def foo():
+   ...:     def bar():
+   ...:         return val
+   ...:     def bax():
+   ...:         nonlocal val
+  Cell In[1], line 5
+    nonlocal val
+    ^
+SyntaxError: no binding for nonlocal 'val' found
+```
+
+",dimaqq,662249,open,False,1,2025-05-07T08:54:25+00:00,2025-05-10T11:42:15+00:00,,,1,0,0,0,0,0,0

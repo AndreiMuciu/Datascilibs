@@ -1,0 +1,55 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+mwaskom/seaborn,3054480230,3849,"`sns.scatterplot(...)` -> UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown","hi,
+came across the bug with scatterplot
+
+with:
+
+`sns.scatterplot(x=""x_axis_attr"", y=""y_axis_attr"", data=some_dataset)`
+
+`UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown`
+
+
+problem can be solved by installing [PyQt6](https://pypi.org/project/PyQt6/):
+
+```
+pip install PyQt6 / uv add pyqt6 / poetry add pyqt6
+```",janas-adam,48211033,closed,False,1,2025-05-10T19:22:12+00:00,2025-05-10T19:54:25+00:00,2025-05-10T19:54:23+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3048351412,3848,BUG: Vertical plots can't change line width,"I was doing a plot that needed some specific references, a horizontal and a vertical line. Did this by using 2 `lineplot`, if you try to increase the line width for the vertical one it produces no change at all (screenshot). However if the line is not exactly vertical the changes do get applied, meaning you have to add a small epsilon to the data so it interprets it as not vertical.
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+plt.figure(figsize=(12, 8))
+
+sns.set_theme(style=""whitegrid"")
+sns.lineplot(x=[0,6E11], y=[80,80], color='blue', linestyle='--', linewidth=2, zorder = 1000)
+sns.lineplot(x=[6E11,6E11], y=[0,80], color='red', linestyle='--', linewidth=2) # <--- Notice the line width
+
+plt.show()
+```
+Produces:
+
+![Image](https://github.com/user-attachments/assets/64dda74b-1a67-4f37-8433-a03524ccaa3b)
+
+And if we change the second `lineplot`'s `x` to `[6E11,6.005E11]` :
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(12, 8))
+
+sns.set_theme(style=""whitegrid"")
+sns.lineplot(x=[0,6E11], y=[80,80], color='blue', linestyle='--', linewidth=2, zorder = 1000)
+sns.lineplot(x=[6E11,6.005E11], y=[0,80], color='red', linestyle='--', linewidth=2)
+
+plt.show()
+```
+It produces:
+
+![Image](https://github.com/user-attachments/assets/52464d30-a6bd-451b-9d91-886cf00587f6)
+
+So, the expected behaviour is that we should not need to add that epsilon 😄
+
+**EDIT**: I tested it using plain `matplotlib` to validate it is not their bug and indeed it is not",Davidhervil,12719889,closed,False,1,2025-05-08T09:17:33+00:00,2025-05-08T11:12:16+00:00,2025-05-08T11:12:15+00:00,,0,0,0,0,0,0,0

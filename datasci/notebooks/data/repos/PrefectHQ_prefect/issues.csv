@@ -1,0 +1,44 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+PrefectHQ/prefect,3054953594,18019,Deploy a deployment without overriding values that were declared in the UI,"### Describe the current behavior
+
+When updating a deployment, the parameters and schedules declared in the `prefect.yaml` are all overriding the current values.
+For most cases it's fine.
+But I have a case when there is an operation team that make changes in the UI only!
+Once in a while, I need to update the image of the deployment, but I don't want to override any (or most) of the UI parameters, schedules and more. 
+
+### Describe the proposed behavior
+
+There are a few ideas I can think of.
+
+1. Add an extra flag named `--no-override-ui` (or similar) that overrides the data only if it is explicitly declared. It will keep the current behavior and only add that specific use case.
+2. Add a special key in the yaml itself that enables the same behavior.
+3. In the prefect.yaml, if the keys of `parameters`, `schedules`, etc. are not declared, it will keep the values declared in the UI. Then, if I don't want schedules at all, I explicitly declare it as an empty value (`{}` or `none`) in the yaml. I believe this is the best approach.
+
+### Example Use
+
+How option 3 would look like:
+```
+deployments:
+  - name: deployment-1
+    # Because ""schedules"" key is missing, it will keep the current values.
+    entrypoint: flows/hello.py:my_flow
+   # Overrides the parameters ""number"", ""message""  and ""need_to_override"" from the UI. If there are other parameters, they keep the same value that was declared in the UI.
+    parameters: 
+        number: 42,
+        message: Don't panic!
+        need_to_override: none
+    work_pool:
+        name: my-process-work-pool
+        work_queue_name: primary-queue
+```
+
+### Additional context
+
+_No response_",ChrisPaul33,136223436,open,False,0,2025-05-11T12:11:38+00:00,2025-05-11T12:11:38+00:00,,enhancement,0,0,0,0,0,0,0
+PrefectHQ/prefect,3054332811,18018,make `RedisLockManager` picklable for ray/dask compat,"resolves #18017 where unpicklable `_thread.lock` in `RedisLockManager` caused issues when used with Ray/Dask
+
+this PR:
+- updates `__init__`: Now calls a new `self._init_clients()` method to instantiate `self.client` and `self.async_client` immediately
+- adds `_init_clients()`: private method containing the client instantiation logic
+- adds `__getstate__`: pickle only connection parameters (host, port, etc.), excluding live clients and `_locks`.
+- adds `__setstate__`: after restoring state, now calls `self._init_clients()` to ensure fresh client connections are established, resets `self._locks = {}`.",zzstoatzz,31014960,open,False,0,2025-05-10T16:23:23+00:00,2025-05-11T03:51:29+00:00,,bug,0,0,0,0,0,0,0

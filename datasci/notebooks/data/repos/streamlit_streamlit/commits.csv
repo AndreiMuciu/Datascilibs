@@ -1,0 +1,10 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+streamlit/streamlit,18b10a260c6cd0810c9d5ea6b95bbfa6955037bf,https://github.com/streamlit/streamlit/commit/18b10a260c6cd0810c9d5ea6b95bbfa6955037bf,mayagbarnes,63436329,User,2025-05-11T07:03:03+00:00,web-flow,2025-05-11T07:03:03+00:00,"Remove `set_page_config` restrictions (#11286)
+
+This PR remove the two `st.set_page_config` restrictions:
+- It can only be called as the first `st` command (with some exceptions)
+- It can only be called once per script run
+The properties are additive (if the first call sets a `page_title` and the second call sets a `page_icon`, the page now has both the provided title & icon). This also applies for `menu_items`.",166,127,293,9,48250df4f5206e3670f351ff28b53759097d9eef
+streamlit/streamlit,48250df4f5206e3670f351ff28b53759097d9eef,https://github.com/streamlit/streamlit/commit/48250df4f5206e3670f351ff28b53759097d9eef,co63oc,4617245,User,2025-05-11T05:04:35+00:00,web-flow,2025-05-11T05:04:35+00:00,"Fix typos in multiple files (#11311)
+
+Fix typos in multiple files found by codespell",68,68,136,52,cc040df25dfaeb7888f60b76490770ee781c7f37

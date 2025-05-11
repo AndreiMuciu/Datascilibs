@@ -1,0 +1,96 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+pandas-dev/pandas,3054604088,61428,DOC: Broken Link in IO Tools - HDF5 Data Description,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/docs/user_guide/io.html
+
+### Documentation problem
+
+The link for HDF5 data description is broken and leads to a 404 error.
+
+Current [HDF5 link](https://support.hdfgroup.org/HDF5/whatishdf5.html#gsc.tab=0)
+
+### Suggested fix for documentation
+
+I believe a good replacement link would be to this [Introduction to HDF5](https://support.hdfgroup.org/documentation/hdf5/latest/_intro_h_d_f5.html).
+
+I would like to update the documentation with this link and create a pull request.",ConnorWallace15,146393496,open,False,2,2025-05-11T00:23:23+00:00,2025-05-11T04:39:47+00:00,,Docs;IO HDF5,0,0,0,0,0,0,0
+pandas-dev/pandas,3054507099,61427,ENH: access arrow-backed map as a python dictionary,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+Users should be able to accessing a dataframe element–that is an Arrow-backed map–with normal python dict semantics.
+
+Today, accessing an *Arrow-backed* map element will return a list of tuples per [`as_py()`](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639) from [`MapScalar`](https://arrow.apache.org/docs/python/generated/pyarrow.MapScalar.html) type–thus list semantics and not dictionary access semantics. Historically, this is because Arrow allows multiple keys, and ordering is not enforced. So converting to a python dictionary removes those two behaviors. (1) multiple keys *will* be removed and (2) the ordering *may* be changed. In practice, this is not the common case, and so it makes the common case hard. 
+
+The common case is that users want to interact with a map with traditional key/value access semantics. It's often a burden and source of confusion when users need to manually convert, a la
+
+```
+# pseudocode
+df = table.to_pandas(types_mapper=pd.ArrowDtype)
+my_dict = df[""col_a""].iloc[0]
+
+val = my_dict[""key""]  # error, no key/value access semantics
+val = dict(my_dict)[""key""]  # users need to manually convert to a dict on each access
+```
+
+This behavior should also be available when using imperative iteration based methods like `.iterrows()`, which is another common patter for accessing element-by-element.
+
+### Feature Description
+
+We can have a configuration for this in `ArrowExtensionArray`.
+
+Arrow already has a `maps_as_pydicts` flag: [`.to_pandas(maps_as_pydicts=True)`](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.to_pandas) which controls this behavior *only* when *not* using pyarrow backed data frames (when using numpy backed data frames). This feature is already widely used in at last one large company.
+
+The flag will generate a [native python dictionary](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/src/arrow/python/arrow_to_pandas.cc#L1026) instead of a python list of `(key, value)` tuples. This flag has also made its way to [lower-level apis](https://github.com/apache/arrow/pull/45471) and come up with [competing dataframe libraries](https://github.com/pola-rs/polars/issues/21745).
+
+There's not an obvious place to put this in the `types_mapper` API. But, we can already see *unexpected* behavior when combining `maps_as_pydicts=True` with the `types_mapper=pd.ArrowDtype`
+
+```
+# pseudocode
+df = table.to_pandas(types_mapper=pd.ArrowDtype, maps_as_pydicts=True)
+
+# my_dict is still a `MapScalar`!! 
+my_dict = df[""col_a""].iloc[0]
+```
+
+When combined, `maps_as_pydicts` is effectively ignored, because the code path taken for `types_mapper=pd.ArrowDtype` makes no use of the flag.
+
+So, this is all to say, when we see both of those flags, we should *propagate the configuration* to Pandas, so that it will use it during element access [1](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L634), [2](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639)
+
+Such a change requires changes in both Arrow and Pandas.
+
+
+
+
+### Alternative Solutions
+
+Alternatively, we can save some state in the underlying pyarrow array, so that calling [`as_py()`](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1085) on the `MapScalar` will automatically do the right thing.
+
+Some breadcrumbs for context:
+*  a `MapScalar` is generated when accessing a pyarrow MapArray [1](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/array.pxi#L1530C16-L1530C27), [2](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L36)
+* this is accessed when retrieving an element from an `ArrowExtensionArray` [1](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L634), [2](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639)
+
+So, one can imagine that this information is saved in the `MapArray`/`Table` itself. However, that also introduces action at a distance when converting a table to a dataframe, and then performing element access. It would be more straightforward to configure this during the conversion to Pandas and holding that configuration state in the dataframe.
+
+----
+
+
+Another partial alternative is making a `.map` [accessor](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/series.py#L5852). I lack context on these accessors and don't know if they are an obvious solution, or a ham-fisted one.
+
+### Additional Context
+
+Performance can be a consideration. When doing an element access, we'd be doing a conversion from the native `Arrow` array to a Python dictionary. 
+
+However, *this is already the case*. Element access on a `MapScalar` already traverses the underlying `MapArray` and coverts it to a python list [1](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1112C30-L1113C1), [2](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1082)",mikelui,9659800,open,False,0,2025-05-10T20:29:32+00:00,2025-05-10T21:40:05+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0

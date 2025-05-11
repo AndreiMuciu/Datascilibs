@@ -1,0 +1,24 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+streamlit/streamlit,3054833073,11322,Refactor `Form` component to pull `formsData`,"## Describe your changes
+As a follow-up to https://github.com/streamlit/streamlit/pull/11278, move the `formsData` retrieval from `FormsContext` out of `Block.tsx` to reduce unnecessary rerenders
+
+## Testing Plan
+- Refactor: existing tests should pass
+",mayagbarnes,63436329,open,False,2,2025-05-11T08:33:13+00:00,2025-05-11T08:38:56+00:00,,security-assessment-completed;impact:internal;change:refactor,0,0,0,0,0,0,0
+streamlit/streamlit,3054315039,11321,"[WIP][AdvancedLayouts] Adds st.column(gap=""none"")","## Describe your changes
+
+We allow users to have no gap between columns. 
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this project are made under the Apache 2.0 license.
+",sfc-gh-lwilby,103002751,open,False,1,2025-05-10T16:07:59+00:00,2025-05-10T16:13:33+00:00,,security-assessment-completed;change:feature;impact:users,0,0,0,0,0,0,0
