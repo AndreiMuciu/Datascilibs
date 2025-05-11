@@ -1,7 +1,0 @@
-repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
-apache/airflow,5cc14d1fc401f0c269d55c9001d03909d4f78a91,https://github.com/apache/airflow/commit/5cc14d1fc401f0c269d55c9001d03909d4f78a91,guan404ming,105915352,User,2025-05-11T13:17:32+00:00,web-flow,2025-05-11T13:17:32+00:00,"Migrate `ElasticsearchSQLHook` to use `get_df` (#50454)
-
-* Migrate `ElasticsearchSQLHook` to use `get_df`
-
-* Add todo comment",17,2,19,4,da3a8c9b08f5febc33e36fe37f229d76bcbe9415
-apache/airflow,da3a8c9b08f5febc33e36fe37f229d76bcbe9415,https://github.com/apache/airflow/commit/da3a8c9b08f5febc33e36fe37f229d76bcbe9415,nailo2c,11390254,User,2025-05-11T13:00:31+00:00,web-flow,2025-05-11T13:00:31+00:00,Replace `converted_rows[0].keys()` with `fields` (#50442),1,1,2,1,8747131adb54089e54ca662c218724fe7721eb1f

@@ -1,7 +1,0 @@
-repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
-plotly/dash,3052992356,3299,Autofilled values in dcc.Input with debounce=True are not detected on submit,"dash version: `#3.0.4`
-
-When using dcc.Input with debounce=True, values autofilled by a browser are not captured unless the user manually interacts with the input (e.g., clicks or types).
-
-This leads to None values being submitted, even though the fields appear visually filled.",brogrammeur,104312435,open,False,1,2025-05-09T19:15:00+00:00,2025-05-09T22:55:02+00:00,,,0,0,0,0,0,0,0
-plotly/dash,3042930820,3298,Fix dev only resource filtering,,T4rk1n,9417722,closed,False,0,2025-05-06T13:52:22+00:00,2025-05-06T15:55:39+00:00,2025-05-06T15:55:34+00:00,,0,0,0,0,0,0,0

@@ -1,8 +1,0 @@
-repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
-donnemartin/data-science-ipython-notebooks,2661326545,112,Enhancement: Complete AlexNet Architecture with Additional Convolutional Layers (Issue 64),"This pull request enhances the `alexnet.ipynb` notebook by aligning its architecture with the standard AlexNet model. The following changes have been made:
-
-- **Added `conv4` and `conv5` layers** to extend the convolutional section, including pooling, normalization, and dropout for each.
-- **Updated the `weights` and `biases` dictionaries** to include parameters for the new layers.
-- **Adjusted the input to the fully connected layers** to match the output of the added `conv5` layer.
-",T-Ezzoury,176526807,open,False,0,2024-11-15T09:10:31+00:00,2024-12-09T15:34:04+00:00,,,0,0,0,0,0,0,0
-donnemartin/data-science-ipython-notebooks,2523290607,110,Create SECURITY.md,برای استفاده از نرم‌افزارهای داخل سایت نمیدونم دارم درست پیش میروم یا خیر,ghlamhsn,181410878,open,False,0,2024-09-12T20:25:53+00:00,2024-12-10T05:47:02+00:00,,,0,0,0,0,0,0,0

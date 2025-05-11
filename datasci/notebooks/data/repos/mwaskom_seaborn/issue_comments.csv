@@ -1,5 +1,0 @@
-repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
-mwaskom/seaborn,3054480230,2869131673,mwaskom,315810,2025-05-10T19:54:23+00:00,2025-05-10T19:54:23+00:00,Doesn't sound like a seaborn bug; sounds like a problem with your matplotlib configuration 👍 ,0,0,0,0,0,0,0
-mwaskom/seaborn,3048351412,2862665084,mwaskom,315810,2025-05-08T11:12:16+00:00,2025-05-08T11:12:16+00:00,"Your issue is that lineplot aggregates over repeated `x` positions by default, so you're seeing a point with a very thin errorbar between the min and max values.
-
-If you disable that, you should get your line.",0,0,0,0,0,0,0

@@ -25,8 +25,7 @@ from github import Github
 def load_token() -> str:
     """Încarcă GH_TOKEN din .env sau din mediul de sistem."""
     load_dotenv()
-    # token = os.getenv("GH_TOKEN")
-    token = "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"
+    token = os.getenv("GH_TOKEN")
     if not token:
         raise ValueError("Environment variable GH_TOKEN is not set")
     return token
@@ -43,12 +42,12 @@ def read_repo_list(csv_path: str) -> list[str]:
     return df["full_name"].dropna().unique().tolist()
 
 
-def ensure_repo_folder(full_name: str, base_dir: str = "data/repos") -> Path:
+def ensure_repo_folder(full_name: str, base_dir: Path) -> Path:
     """
     Creează folderul data/repos/owner_repo dacă nu există și îl returnează.
     """
     owner, repo = full_name.split("/")
-    folder = Path(base_dir) / f"{owner}_{repo}"
+    folder = base_dir / f"{owner}_{repo}"
     folder.mkdir(parents=True, exist_ok=True)
     return folder
 
@@ -81,21 +80,21 @@ def extract_issue_comments(
                 break
             r = comment.raw_data.get("reactions", {})
             rows.append({
-                "repo_full_name":  repo_full_name,
-                "issue_id":        issue.id,
-                "comment_id":      comment.id,
-                "user_login":      comment.user.login,
-                "user_id":         comment.user.id,
-                "created_at":      comment.created_at.isoformat(),
-                "updated_at":      comment.updated_at.isoformat(),
-                "body":            comment.body,
-                "reactions_total": r.get("total_count", 0),
-                "reactions_plus1": r.get("+1", 0),
-                "reactions_minus1":r.get("-1", 0),
-                "reactions_laugh": r.get("laugh", 0),
-                "reactions_hooray":r.get("hooray", 0),
-                "reactions_confused": r.get("confused", 0),
-                "reactions_heart": r.get("heart", 0)
+                "repo_full_name":    repo_full_name,
+                "issue_id":          issue.id,
+                "comment_id":        comment.id,
+                "user_login":        comment.user.login,
+                "user_id":           comment.user.id,
+                "created_at":        comment.created_at.isoformat(),
+                "updated_at":        comment.updated_at.isoformat(),
+                "body":              comment.body,
+                "reactions_total":   r.get("total_count", 0),
+                "reactions_plus1":   r.get("+1", 0),
+                "reactions_minus1":  r.get("-1", 0),
+                "reactions_laugh":   r.get("laugh", 0),
+                "reactions_hooray":  r.get("hooray", 0),
+                "reactions_confused":r.get("confused", 0),
+                "reactions_heart":   r.get("heart", 0)
             })
             count += 1
         if max_comments and count >= max_comments:
@@ -128,12 +127,21 @@ def main():
     token = load_token()
     gh = Github(token)
 
+    base_dir = Path("data/repos")
+
+    # ——— ȘTERGERE GLOBALĂ (toate issue_comments.csv) ———
+    if base_dir.exists():
+        for old in base_dir.rglob("issue_comments.csv"):
+            old.unlink()
+            log(f"Removed old file → {old.resolve()}")
+    # ————————————————————————————————————————
+
     repos = read_repo_list(args.csv)
     log(f"Starting issue-comments extraction for {len(repos)} repos")
 
     for full_name in repos:
         log(f"Processing issue comments → {full_name}")
-        folder = ensure_repo_folder(full_name)
+        folder = ensure_repo_folder(full_name, base_dir)
         extract_issue_comments(full_name, gh, folder, max_comments=args.max_comments)
 
 

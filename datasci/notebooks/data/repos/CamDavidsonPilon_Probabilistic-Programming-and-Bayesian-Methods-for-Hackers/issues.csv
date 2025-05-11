@@ -1,9 +1,0 @@
-repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
-CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,3036957887,576,Gcash,,pahadismael,210096210,open,False,0,2025-05-02T23:03:30+00:00,2025-05-02T23:03:30+00:00,,,0,0,0,0,0,0,0
-CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2953244632,574,Chapter 4: error about sorting posteriors of reddit submissions,"this code doesn't produce the 5% quantile:
-
-`v = np.sort( posteriors[i] )[ int(0.05*N) ]`
-
-this would do it:
-
-`v = np.sort( posteriors[i] , axis=0)[ int(0.05*N) ]`",fralc,22327226,open,False,0,2025-03-27T14:38:07+00:00,2025-03-27T15:39:00+00:00,,,0,0,0,0,0,0,0

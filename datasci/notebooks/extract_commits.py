@@ -25,8 +25,7 @@ from github import Github
 def load_token() -> str:
     """Încarcă GH_TOKEN din .env sau din mediul de sistem."""
     load_dotenv()
-    # token = os.getenv("GH_TOKEN")
-    token = "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"
+    token = os.getenv("GH_TOKEN")
     if not token:
         raise ValueError("Environment variable GH_TOKEN is not set")
     return token
@@ -43,12 +42,12 @@ def read_repo_list(csv_path: str) -> list[str]:
     return df["full_name"].dropna().unique().tolist()
 
 
-def ensure_repo_folder(full_name: str, base_dir: str = "data/repos") -> Path:
+def ensure_repo_folder(full_name: str, base_dir: Path) -> Path:
     """
     Creează folderul data/repos/owner_repo dacă nu există și îl returnează.
     """
     owner, repo = full_name.split("/")
-    folder = Path(base_dir) / f"{owner}_{repo}"
+    folder = base_dir / f"{owner}_{repo}"
     folder.mkdir(parents=True, exist_ok=True)
     return folder
 
@@ -79,21 +78,21 @@ def extract_commits(
         author    = commit.author
         committer = commit.committer
         rows.append({
-            "repo_full_name":     repo_full_name,
-            "sha":                commit.sha,
-            "html_url":           commit.html_url,
-            "author_login":       author.login    if author    else None,
-            "author_id":          author.id       if author    else None,
-            "author_type":        author.type     if author    else None,
-            "authored_date":      commit.commit.author.date.isoformat(),
-            "committer_login":    committer.login if committer else None,
-            "committed_date":     commit.commit.committer.date.isoformat(),
-            "message":            commit.commit.message,
-            "additions":          stats.additions,
-            "deletions":          stats.deletions,
-            "total_changes":      stats.total,
-            "files_changed_count": len(list(commit.files)),
-            "parent_shas":        ",".join(p.sha for p in commit.parents)
+            "repo_full_name":      repo_full_name,
+            "sha":                 commit.sha,
+            "html_url":            commit.html_url,
+            "author_login":        author.login    if author    else None,
+            "author_id":           author.id       if author    else None,
+            "author_type":         author.type     if author    else None,
+            "authored_date":       commit.commit.author.date.isoformat(),
+            "committer_login":     committer.login if committer else None,
+            "committed_date":      commit.commit.committer.date.isoformat(),
+            "message":             commit.commit.message,
+            "additions":           stats.additions,
+            "deletions":           stats.deletions,
+            "total_changes":       stats.total,
+            "files_changed_count": len(commit.files),
+            "parent_shas":         ",".join(p.sha for p in commit.parents)
         })
 
     df = pd.DataFrame(rows)
@@ -123,12 +122,21 @@ def main():
     token = load_token()
     gh = Github(token)
 
+    base_dir = Path("data/repos")
+
+    # ——— ȘTERGERE GLOBALĂ (toate commits.csv) ———
+    if base_dir.exists():
+        for old in base_dir.rglob("commits.csv"):
+            old.unlink()
+            log(f"Removed old file → {old.resolve()}")
+    # ——————————————————————————————————————————
+
     repos = read_repo_list(args.csv)
     log(f"Starting commits extraction for {len(repos)} repos")
 
     for full_name in repos:
         log(f"Processing commits → {full_name}")
-        folder = ensure_repo_folder(full_name)
+        folder = ensure_repo_folder(full_name, base_dir)
         extract_commits(full_name, gh, folder, max_commits=args.max_commits)
 
 

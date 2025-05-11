@@ -1,7 +1,0 @@
-repo_full_name,issue_id,comment_id,user_login,user_id,created_at,updated_at,body,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
-iterative/dvc,3053248985,2868362616,skshetry,18718008,2025-05-10T04:51:29+00:00,2025-05-10T04:51:29+00:00,"Related:
-
-- https://github.com/iterative/dvc/issues/10686
-
-AFAIK this was supposed to be fixed ZFS 2.3.0, and is likely a bug in the filesystem. `ficlone` should either error or fully clone, so it should not raise this error later.",0,0,0,0,0,0,0
-iterative/dvc,3053248985,2868985277,mermerico,3631507,2025-05-10T15:48:47+00:00,2025-05-10T15:48:47+00:00,Yeah I'd like to dig into the underlying issue. In my brief investigation before I had to turn off bclone at the FS level it seemed like it was erroring at ficlone time and `cp --reflink=always` worked. Not sure if that gives any clarity.,0,0,0,0,0,0,0
