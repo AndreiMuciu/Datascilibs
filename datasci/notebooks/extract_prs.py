@@ -25,8 +25,6 @@ from github import Github
 def load_token() -> str:
     load_dotenv()
     token = os.getenv("GH_TOKEN")
-    # Poți pune direct token-ul pentru test, dar în producție folosește variabila de mediu
-    # token = "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"
     if not token:
         raise ValueError("Environment variable GH_TOKEN is not set")
     return token
