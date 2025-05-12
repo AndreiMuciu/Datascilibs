@@ -1,0 +1,714 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+marimo-team/marimo,b7fe8af5ca95c47f4b3505f92a33cea7423ab9b6,https://github.com/marimo-team/marimo/commit/b7fe8af5ca95c47f4b3505f92a33cea7423ab9b6,mscolnick,2753772,User,2025-05-12T14:27:09+00:00,web-flow,2025-05-12T14:27:09+00:00,chore: test snapshots (#4879),1,1,2,1,b68457776c6293d7b04304b0cda6be4c5dba438f
+marimo-team/marimo,b68457776c6293d7b04304b0cda6be4c5dba438f,https://github.com/marimo-team/marimo/commit/b68457776c6293d7b04304b0cda6be4c5dba438f,krassowski,5832902,User,2025-05-12T14:18:02+00:00,web-flow,2025-05-12T14:18:02+00:00,"fix: `typos` failing on pre-commit CI (#4874)
+
+## 📝 Summary
+
+Fixes pre-commit failures following recommendation to set
+`pass_filenames: false` from
+https://github.com/crate-ci/typos/issues/926
+
+## 🔍 Description of Changes
+
+- [x] add the `pass_filenames: false` workaround
+- [ ] fix typos in codebase which were smuggled through while the
+`typos` check was malfunctioning; :confused: while it passes on CI, it
+fails locally for me on:
+   ```
+
+typos....................................................................Failed
+    - hook id: typos
+    - exit code: 2
+    
+    error: `fo` should be `of`, `for`, `do`, `go`, `to`
+      --> ./codemirror-languageserver-marimo/src/utils.test.ts:117:35
+        |
+117 | expect(createMockContext(""fo"").matchBefore(pattern)).toEqual({
+        |                                   ^^
+        |
+    error: `fo` should be `of`, `for`, `do`, `go`, `to`
+      --> ./codemirror-languageserver-marimo/src/utils.test.ts:120:20
+        |
+    120 |             text: ""fo"",
+        |                    ^^
+        |
+    ```
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick",1,0,1,1,808446ff460b8469644fdb177d62f445bef3ae2d
+marimo-team/marimo,808446ff460b8469644fdb177d62f445bef3ae2d,https://github.com/marimo-team/marimo/commit/808446ff460b8469644fdb177d62f445bef3ae2d,mscolnick,2753772,User,2025-05-12T13:58:42+00:00,web-flow,2025-05-12T13:58:42+00:00,fix: add rtc feature-flag in Labs UI (#4867),24,0,24,1,1592b6ee60149cad786a8f537681c919af42958f
+marimo-team/marimo,1592b6ee60149cad786a8f537681c919af42958f,https://github.com/marimo-team/marimo/commit/1592b6ee60149cad786a8f537681c919af42958f,mscolnick,2753772,User,2025-05-12T13:58:31+00:00,web-flow,2025-05-12T13:58:31+00:00,"fix: don't fail if url does not have port (#4872)
+
+Maybe a fix for #4871. It won't fail on printing the URL",6,2,8,1,eef23534ad4bcd40302f7af00e650f3609d8c4ae
+marimo-team/marimo,eef23534ad4bcd40302f7af00e650f3609d8c4ae,https://github.com/marimo-team/marimo/commit/eef23534ad4bcd40302f7af00e650f3609d8c4ae,mscolnick,2753772,User,2025-05-12T13:58:08+00:00,web-flow,2025-05-12T13:58:08+00:00,"fix: drop internal row id in `table.value` (#4873)
+
+Fixes #4868",27,1,28,2,2eb2d6fd8d17f48e99c4bbd8ae338035c3ef2262
+marimo-team/marimo,2eb2d6fd8d17f48e99c4bbd8ae338035c3ef2262,https://github.com/marimo-team/marimo/commit/2eb2d6fd8d17f48e99c4bbd8ae338035c3ef2262,krassowski,5832902,User,2025-05-12T13:57:29+00:00,web-flow,2025-05-12T13:57:29+00:00,"Format signatures in LSP hover and completion documentation (#4864)
+
+## 📝 Summary
+
+- formats signatures using ruff so that they are easier to read
+- depends on https://github.com/python-lsp/python-lsp-server/pull/631
+
+## 🔍 Description of Changes
+
+Adds `pylsp_signatures_to_markdown` hook, re-using existing `ruff`
+formatting utility.
+
+| Before | After |
+|--|--|
+|
+![image](https://github.com/user-attachments/assets/2ffb4e27-6a26-4f69-ae7a-ed51faa5afc2)
+| ![Screenshot from 2025-05-09
+22-01-22](https://github.com/user-attachments/assets/56bde23c-193d-4800-a2c6-81b80ab72025)
+|
+
+Note: this does not help with `pd.read_csv`; I am not sure why it is not
+hitting this code path, but notably it happens on the completion items
+which do not have a docstring either.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick",35,0,35,2,aa3a7f6403c0d0203b96afb27b044c8d6646e981
+marimo-team/marimo,aa3a7f6403c0d0203b96afb27b044c8d6646e981,https://github.com/marimo-team/marimo/commit/aa3a7f6403c0d0203b96afb27b044c8d6646e981,Light2Dark,19585239,User,2025-05-12T03:22:24+00:00,web-flow,2025-05-12T03:22:24+00:00,"feat: updates to row viewer panel (#4866)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+
+![image](https://github.com/user-attachments/assets/c31e3273-af1a-42e7-b4ae-f6124f1cad5c)
+- Change to Row viewer panel
+- Adds cell-aware config
+- Keyboard shortcuts when element is active
+
+open to name/tooltip suggestions. Context-aware(?), reactive, adaptive
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@mscolnick",222,80,302,11,50d99144bfc9f5d741372e2cf7b6ec59406bb986
+marimo-team/marimo,50d99144bfc9f5d741372e2cf7b6ec59406bb986,https://github.com/marimo-team/marimo/commit/50d99144bfc9f5d741372e2cf7b6ec59406bb986,mscolnick,2753772,User,2025-05-12T00:52:47+00:00,mscolnick,2025-05-12T00:52:47+00:00,style: add back ul,4,4,8,1,35f44056f0b5770044011c75e46ec0edde402559
+marimo-team/marimo,35f44056f0b5770044011c75e46ec0edde402559,https://github.com/marimo-team/marimo/commit/35f44056f0b5770044011c75e46ec0edde402559,mscolnick,2753772,User,2025-05-11T20:26:01+00:00,web-flow,2025-05-11T20:26:01+00:00,fix: [rtc] edge cases for auto-run and focus (#4861),507,205,712,26,5c6766ebd32be6bfde0005e257cb619d738495db
+marimo-team/marimo,5c6766ebd32be6bfde0005e257cb619d738495db,https://github.com/marimo-team/marimo/commit/5c6766ebd32be6bfde0005e257cb619d738495db,guyrosin,1250162,User,2025-05-11T20:25:42+00:00,web-flow,2025-05-11T20:25:42+00:00,Support system message for Gemini (#4869),1,1,2,1,265c6215b415a6984b9520e3b5cb000ad07fbb9a
+marimo-team/marimo,265c6215b415a6984b9520e3b5cb000ad07fbb9a,https://github.com/marimo-team/marimo/commit/265c6215b415a6984b9520e3b5cb000ad07fbb9a,bjoaquinc,75667013,User,2025-05-11T19:32:27+00:00,web-flow,2025-05-11T19:32:27+00:00,feat: added input field to ui slider (#4870),25,0,25,2,2b8e2fc686447f2f09bc7e0393f8c64dfc59afa5
+marimo-team/marimo,2b8e2fc686447f2f09bc7e0393f8c64dfc59afa5,https://github.com/marimo-team/marimo/commit/2b8e2fc686447f2f09bc7e0393f8c64dfc59afa5,akshayka,1994308,User,2025-05-09T23:21:53+00:00,web-flow,2025-05-09T23:21:53+00:00,"feat: mo.thread lifecycle (#4782)
+
+Closes #4564 
+
+This change adds a `should_exit` property to `mo.Thread` which evaluates
+to `True`
+when the thread's spawning cell lifecycle has ended. This makes it
+possible for developers to clean up their threads.
+
+This change also adds a utility method, mo.current_thread(), that
+returns the current thread of control if it is a marimo.Thread object,
+and raises otherwise. Developers could technically use
+threading.current_thread() instead, but this method provides
+type safety and validation.
+
+---------
+
+Co-authored-by: Dylan Madisetti <dylan@marimo.io>",223,8,231,7,a93eac74ef809a2764bf0d1158384af9797f4fae
+marimo-team/marimo,a93eac74ef809a2764bf0d1158384af9797f4fae,https://github.com/marimo-team/marimo/commit/a93eac74ef809a2764bf0d1158384af9797f4fae,dmadisetti,2689338,User,2025-05-09T23:21:23+00:00,web-flow,2025-05-09T23:21:23+00:00,"fix: doc errors (#4865)
+
+## 📝 Summary
+
+Fix doc errors
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",16,29,45,5,1913a1591dd2284c5c11e62c7c81082733475e78
+marimo-team/marimo,1913a1591dd2284c5c11e62c7c81082733475e78,https://github.com/marimo-team/marimo/commit/1913a1591dd2284c5c11e62c7c81082733475e78,yjoer,47742486,User,2025-05-09T22:38:50+00:00,web-flow,2025-05-09T22:38:50+00:00,"fix: align font size for line numbers with the code editor (#4862)
+
+## 📝 Summary
+
+The font size for the line numbers remained unchanged when the ""Code
+editor font size"" was changed in the user settings. The following video
+demonstrates the difference when the font size is increased to 16px
+before and after applying the patch.
+
+
+https://github.com/user-attachments/assets/63bd8ec5-c380-46a3-9527-843b1eefed89
+
+## 🔍 Description of Changes
+I added a CSS class that uses the font size for the code editor on the
+line numbers.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@akshayka OR @mscolnick",4,0,4,1,646536c0364a06a8cf61eea5a43c43a3d6c6acbe
+marimo-team/marimo,646536c0364a06a8cf61eea5a43c43a3d6c6acbe,https://github.com/marimo-team/marimo/commit/646536c0364a06a8cf61eea5a43c43a3d6c6acbe,mscolnick,2753772,User,2025-05-09T20:47:16+00:00,web-flow,2025-05-09T20:47:16+00:00,"fix: narwhals.pyarrow does not support mean/quantile (#4860)
+
+Fixes #4859",67,1,68,2,383e6c3cb25930d284ce0ae09dbe5d274480478c
+marimo-team/marimo,383e6c3cb25930d284ce0ae09dbe5d274480478c,https://github.com/marimo-team/marimo/commit/383e6c3cb25930d284ce0ae09dbe5d274480478c,mscolnick,2753772,User,2025-05-09T17:56:13+00:00,web-flow,2025-05-09T17:56:13+00:00,"fix: don't block on background tasks created in cells (#4858)
+
+Fixes #3780 
+
+This gives other async tasks a chance to execute while the control
+request is empty. For example, we create our own background tasks (e.g.
+writing session metadata) and sometimes a cell can as well (holoviews
+does, for example in the datashader)",63,1,64,2,5b2b51d8ec178c8e2c9e0b6f9e7d8f4742cdb9ef
+marimo-team/marimo,5b2b51d8ec178c8e2c9e0b6f9e7d8f4742cdb9ef,https://github.com/marimo-team/marimo/commit/5b2b51d8ec178c8e2c9e0b6f9e7d8f4742cdb9ef,Haleshot,57552973,User,2025-05-09T17:23:11+00:00,web-flow,2025-05-09T17:23:11+00:00,"docs: add relevant video for `mo.output.replace` (#4857)
+
+## 📝 Summary
+
+Added a relevant YouTube video showcase for `mo.output.replace` function
+by @koaning!
+
+## 🔍 Description of Changes
+
+Tip admonition that links to a YouTube short demonstrating
+`mo.output.replace` (shown in the prompt and the animation later on).
+Thought it might be a nice thing to link to (even though the video is
+based on Zero shotting w/ marimo.app/ai).
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ]  I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@akshayka OR @mscolnick",4,0,4,1,36576ae61e7b7216bef6adcf77159a9aca3cf3f1
+marimo-team/marimo,36576ae61e7b7216bef6adcf77159a9aca3cf3f1,https://github.com/marimo-team/marimo/commit/36576ae61e7b7216bef6adcf77159a9aca3cf3f1,dmadisetti,2689338,User,2025-05-09T01:02:30+00:00,web-flow,2025-05-09T01:02:30+00:00,"fix: Restart cell in pdb (#4855)
+
+## 📝 Summary
+
+Still doing a bit of a deep dive into PDB. Worth actually trying to use
+it and making sure we aren't serving up a broken experience. restart/run
+failed dramatically- but now actually restart
+
+I think pretty formatting for PDB can be done FE- but like we said
+probably not worth it just yet.
+
+@mscolnick",49,2,51,2,595700472899b6e3c2a922e77f7f39b1cccc0cb3
+marimo-team/marimo,595700472899b6e3c2a922e77f7f39b1cccc0cb3,https://github.com/marimo-team/marimo/commit/595700472899b6e3c2a922e77f7f39b1cccc0cb3,ZacHooper,19284719,User,2025-05-09T00:38:59+00:00,web-flow,2025-05-09T00:38:59+00:00,"fix: uv, start tutorial (#4856)",1,1,2,1,1f5f2df0a50a23d91184329dbf8a7474dc9271ca
+marimo-team/marimo,1f5f2df0a50a23d91184329dbf8a7474dc9271ca,https://github.com/marimo-team/marimo/commit/1f5f2df0a50a23d91184329dbf8a7474dc9271ca,mscolnick,2753772,User,2025-05-08T21:42:55+00:00,web-flow,2025-05-08T21:42:55+00:00,"improvement: show toast for waiting on stdin (#4854)
+
+![Screenshot 2025-05-08 at 4 39
+40 PM](https://github.com/user-attachments/assets/9d32e175-d83a-444f-a0ca-ce8f82ff0e95)",88,1,89,4,63dfa9d8eebc4ca67f66ed2bd5e886bcfcb2c819
+marimo-team/marimo,63dfa9d8eebc4ca67f66ed2bd5e886bcfcb2c819,https://github.com/marimo-team/marimo/commit/63dfa9d8eebc4ca67f66ed2bd5e886bcfcb2c819,dmadisetti,2689338,User,2025-05-08T20:40:56+00:00,web-flow,2025-05-08T20:40:56+00:00,"fix: prevent hanging PDB on interact (#4852)
+
+## 📝 Summary
+
+@mscolnick",10,0,10,1,7d03f0427b24d9129452dff486ea8cc39124d775
+marimo-team/marimo,7d03f0427b24d9129452dff486ea8cc39124d775,https://github.com/marimo-team/marimo/commit/7d03f0427b24d9129452dff486ea8cc39124d775,mscolnick,2753772,User,2025-05-08T20:40:47+00:00,web-flow,2025-05-08T20:40:47+00:00,"fix: [rtc] sync language metadata (#4850)
+
+* Sync language metadata (markdown prefix, sql dataframe name, sql
+conection, etc.) between clients.
+* Couple backend fixes when closing",250,56,306,6,06ca0e19b0f43dd9acec99eab72d9ad8b49ce209
+marimo-team/marimo,06ca0e19b0f43dd9acec99eab72d9ad8b49ce209,https://github.com/marimo-team/marimo/commit/06ca0e19b0f43dd9acec99eab72d9ad8b49ce209,dmadisetti,2689338,User,2025-05-08T20:40:32+00:00,web-flow,2025-05-08T20:40:32+00:00,"fix: brittle code extraction broken with live marimo.app/e?slug=xxxx (#4851)
+
+## 📝 Summary
+
+The live tag is `<marimo-filename hidden>`, which didn't match
+
+@mscolnick
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",15,22,37,1,6c6d21871615463d05e20af8c673e9a3d55e4a2b
+marimo-team/marimo,6c6d21871615463d05e20af8c673e9a3d55e4a2b,https://github.com/marimo-team/marimo/commit/6c6d21871615463d05e20af8c673e9a3d55e4a2b,mscolnick,2753772,User,2025-05-08T20:40:17+00:00,web-flow,2025-05-08T20:40:17+00:00,"fix: only show one stdin (#4853)
+
+Only show one `pdb` input. Hide controls on regular `stdin`",20,3,23,1,0706f7a35d432645bd84be964ca63dbb0334c5c9
+marimo-team/marimo,0706f7a35d432645bd84be964ca63dbb0334c5c9,https://github.com/marimo-team/marimo/commit/0706f7a35d432645bd84be964ca63dbb0334c5c9,dmadisetti,2689338,User,2025-05-08T19:38:03+00:00,web-flow,2025-05-08T19:38:03+00:00,"fix: Issue side effects to invalidate cache blocks (#4848)
+
+## 📝 Summary
+
+fixes #3876
+
+Issue side effects on cach usage and exceptions
+
+## 🔍 Description of Changes
+
+@mscolnick",476,39,515,5,d692a735b7bb358d4bc496dce4d0075eec55f0ca
+marimo-team/marimo,d692a735b7bb358d4bc496dce4d0075eec55f0ca,https://github.com/marimo-team/marimo/commit/d692a735b7bb358d4bc496dce4d0075eec55f0ca,mscolnick,2753772,User,2025-05-08T17:52:52+00:00,web-flow,2025-05-08T17:52:52+00:00,"fix: ibis data types, from upgrade (#4847)
+
+Newer version of ibis has changed the expected datatype response. Also
+handles some more cases in type conversion.",33,43,76,2,68954a3974264f1d15e809b51e463203f9aad4bf
+marimo-team/marimo,68954a3974264f1d15e809b51e463203f9aad4bf,https://github.com/marimo-team/marimo/commit/68954a3974264f1d15e809b51e463203f9aad4bf,mscolnick,2753772,User,2025-05-08T16:52:06+00:00,web-flow,2025-05-08T16:52:06+00:00,"chore: refactor cm language files (#4846)
+
+Bit of file structure cleanup",55,55,110,21,2df378242f17ff7f24167bf24eb469a783ee2964
+marimo-team/marimo,2df378242f17ff7f24167bf24eb469a783ee2964,https://github.com/marimo-team/marimo/commit/2df378242f17ff7f24167bf24eb469a783ee2964,mscolnick,2753772,User,2025-05-08T16:38:03+00:00,web-flow,2025-05-08T16:38:03+00:00,"chore: make LanguageAdapters stateless, store metadata in EditorState (#4845)
+
+This makes the `LanguageAdapter` stateless and instead adds
+`LanguageAdapterMetadata` which is a map of state that is easier to
+access/update.
+
+This change makes real-time syncing much easier. 
+
+This also adds some new test converge and cleans up some code (moving to
+to new files)",890,629,1519,29,8fda46c5516301c5446ab16d4ecbe83b41c0b94d
+marimo-team/marimo,8fda46c5516301c5446ab16d4ecbe83b41c0b94d,https://github.com/marimo-team/marimo/commit/8fda46c5516301c5446ab16d4ecbe83b41c0b94d,mscolnick,2753772,User,2025-05-08T14:43:42+00:00,web-flow,2025-05-08T14:43:42+00:00,"fix: support mairmo edit on marimo.app (#4840)
+
+Suport for `marimo edit ""https://marimo.app/e?slug=oitgic""`",24,13,37,2,a58df288c5bfa3adbe496ed56d26215a86e35ba5
+marimo-team/marimo,a58df288c5bfa3adbe496ed56d26215a86e35ba5,https://github.com/marimo-team/marimo/commit/a58df288c5bfa3adbe496ed56d26215a86e35ba5,mscolnick,2753772,User,2025-05-08T14:00:25+00:00,web-flow,2025-05-08T14:00:25+00:00,"chore: refactor markdown file, pull out completions (#4844)
+
+Cleanup to file, since i plan to make some bigger changes here",278,261,539,2,4df3636ce27af4a7bafb85fabf0556b70b0a5859
+marimo-team/marimo,4df3636ce27af4a7bafb85fabf0556b70b0a5859,https://github.com/marimo-team/marimo/commit/4df3636ce27af4a7bafb85fabf0556b70b0a5859,mscolnick,2753772,User,2025-05-08T13:13:42+00:00,web-flow,2025-05-08T13:13:42+00:00,"[rtc] awareness (#4839)
+
+Adds awareness cursor for each users
+
+<img width=""674"" alt=""Screenshot 2025-05-07 at 5 36 07 PM""
+src=""https://github.com/user-attachments/assets/bafdf05a-fb55-4681-9e05-ffe0da40d538""
+/>",820,129,949,15,c6cc574db18dd35029637f7adb16a2ddeac6a17f
+marimo-team/marimo,c6cc574db18dd35029637f7adb16a2ddeac6a17f,https://github.com/marimo-team/marimo/commit/c6cc574db18dd35029637f7adb16a2ddeac6a17f,mscolnick,2753772,User,2025-05-07T20:14:20+00:00,web-flow,2025-05-07T20:14:20+00:00,"improvement: [rtc] migrate y-js to Loro (#4831)
+
+This moves from loro to yjs. There may be a few edge cases, but this is
+a huge improvement over yjs. Better devx and performance, and fewer
+bugs.
+
+Closes #4699
+Closes #4694
+Closes #4693
+Closes #4692",983,1093,2076,16,6587fc33406e1338d58592278a4ee73007972fbb
+marimo-team/marimo,6587fc33406e1338d58592278a4ee73007972fbb,https://github.com/marimo-team/marimo/commit/6587fc33406e1338d58592278a4ee73007972fbb,mscolnick,2753772,User,2025-05-07T18:05:16+00:00,web-flow,2025-05-07T18:05:16+00:00,"fix: update common llm models (#4838)
+
+Just some name updates",11,8,19,1,40014339393f5a6d7d582770583c0f736c0e27f5
+marimo-team/marimo,40014339393f5a6d7d582770583c0f736c0e27f5,https://github.com/marimo-team/marimo/commit/40014339393f5a6d7d582770583c0f736c0e27f5,Light2Dark,19585239,User,2025-05-07T17:48:36+00:00,web-flow,2025-05-07T17:48:36+00:00,"feat: row expanded view for table data (#4787)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+Popover that displays single row data vertically. By default, it will
+show all rows in current page. If there is selection, it will show those
+rows instead.
+
+<img width=""259"" alt=""image""
+src=""https://github.com/user-attachments/assets/2df873ed-41cf-4fd8-9008-15f7e003f9e7""
+/>
+
+
+![image](https://github.com/user-attachments/assets/2898dc0b-d78b-4b74-a551-945c019c3e2c)
+
+Some limitations:
+- The data is limited to whatever page the table is on. Does not persist
+selections across pages.
+- When you navigate through the page and select/deselect, the index on
+the page stays the same, meaning you could view different data as you
+select more rows. We don't keep track of the selected row id as the page
+number.
+
+Todo:
+- [ ] add tanstack table feature (focus row)
+- [ ] tests
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [X] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+---------
+
+Co-authored-by: Myles Scolnick <myles@marimo.io>",1126,216,1342,29,d80de72213e6a681cb76c4829a52d6559dcaa9f3
+marimo-team/marimo,d80de72213e6a681cb76c4829a52d6559dcaa9f3,https://github.com/marimo-team/marimo/commit/d80de72213e6a681cb76c4829a52d6559dcaa9f3,Light2Dark,19585239,User,2025-05-07T16:40:51+00:00,web-flow,2025-05-07T16:40:51+00:00,"feat: refresh db connections (#4834)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+Provides a button to refresh datasource connections, except internal
+duckdb engine.
+
+![image](https://github.com/user-attachments/assets/f57bc5e9-05ee-41ab-b19f-fe905408413c)
+
+- Artificially spin the button on click
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@mscolnick",231,18,249,19,d6b8e86c9d7a3b25a1c656bdc522612fec4ce37a
+marimo-team/marimo,d6b8e86c9d7a3b25a1c656bdc522612fec4ce37a,https://github.com/marimo-team/marimo/commit/d6b8e86c9d7a3b25a1c656bdc522612fec4ce37a,Light2Dark,19585239,User,2025-05-07T04:19:58+00:00,web-flow,2025-05-07T04:19:58+00:00,"feat: add both left and right resize handlers to a column. (#4820)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+I think resizing a column from the left also solves some issues with
+viewport so it's preferred imo.
+The left line is only displayed when hovered. Not sure what the right
+styles are
+
+
+![image](https://github.com/user-attachments/assets/1cfddb3b-abd2-490c-8fa8-6f43bcbd582e)
+
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@akshayka OR @mscolnick",139,46,185,3,9896b1568d7c04047a8c8328e6ec9396b25f95b3
+marimo-team/marimo,9896b1568d7c04047a8c8328e6ec9396b25f95b3,https://github.com/marimo-team/marimo/commit/9896b1568d7c04047a8c8328e6ec9396b25f95b3,dmadisetti,2689338,User,2025-05-06T21:42:01+00:00,web-flow,2025-05-06T21:42:01+00:00,"fix: File level cache settings are not passed to store (#4832)
+
+## 📝 Summary
+
+@mscolnick Still compat with pyodide right?",5,5,10,3,b229ca39b35ba582b4c5c1a43cfdedaffa006add
+marimo-team/marimo,b229ca39b35ba582b4c5c1a43cfdedaffa006add,https://github.com/marimo-team/marimo/commit/b229ca39b35ba582b4c5c1a43cfdedaffa006add,AH-Merii,43741215,User,2025-05-06T19:12:39+00:00,web-flow,2025-05-06T19:12:39+00:00,"docs: correct on_change desc in `mo.ui.form.form` (#4829)
+
+This makes it so that the description for `on_change` in the
+method-level API matches the class-level API.
+
+## 📝 Summary
+As mentioned in #4827 :
+> The [**class-level** API reference for `marimo.ui.form`
+](https://docs.marimo.io/api/inputs/form/#marimo.ui.form)correctly
+distinguishes the two parameters:
+> 
+> * **validate** (`Callable[[Optional[JSONType]], Optional[str]]`): A
+function that takes the form's value and returns an error message if the
+value is invalid, or None if the value is valid. Defaults to None.
+> * **on_change** (`Callable[[Optional[T]], None]`): Optional callback
+to run when this element's value changes. Defaults to None.
+> 
+> However, the [**method-level**
+docs](https://docs.marimo.io/api/inputs/form/#marimo.ui.form.form)
+wrongly describe **both** parameters as returning an error message,
+implying they’re interchangeable.
+
+## 🔍 Description of Changes
+This Fixes #4827 by making sure the:
+>**method-level** documentation matches the **class-level** docs for
+`on_change`.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [ ] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@akshayka OR @mscolnick",1,2,3,1,f5d439304df9223102739721c8b9fc34a5033a3c
+marimo-team/marimo,f5d439304df9223102739721c8b9fc34a5033a3c,https://github.com/marimo-team/marimo/commit/f5d439304df9223102739721c8b9fc34a5033a3c,dmadisetti,2689338,User,2025-05-06T17:42:10+00:00,web-flow,2025-05-06T17:42:10+00:00,"feat: Post mortem for debugging failures (#4816)
+
+## 📝 Summary
+
+Opposed to inserting a breakpoint, drop into ""post mortem mode""
+Played around a bit before deciding this was. the best way. LMK if you
+have feedback on the api namespace
+
+Adding tests:
+ - [x] exceptions correctly set on failure in cell_runner
+
+@Light2Dark @mscolnick",271,64,335,22,3970cd5552f5f4046dd3b45babd283ea8e2e3b40
+marimo-team/marimo,3970cd5552f5f4046dd3b45babd283ea8e2e3b40,https://github.com/marimo-team/marimo/commit/3970cd5552f5f4046dd3b45babd283ea8e2e3b40,mscolnick,2753772,User,2025-05-06T16:32:34+00:00,mscolnick,2025-05-06T16:32:34+00:00,release: 0.13.6,1,1,2,1,55136c813a0ac5a3142d9ca77bd5d070f0c08e69
+marimo-team/marimo,55136c813a0ac5a3142d9ca77bd5d070f0c08e69,https://github.com/marimo-team/marimo/commit/55136c813a0ac5a3142d9ca77bd5d070f0c08e69,mscolnick,2753772,User,2025-05-06T16:32:11+00:00,web-flow,2025-05-06T16:32:11+00:00,"fix: remove starlette from top level import (#4826)
+
+Remove some eager imports that bring in starlette and break wasm",12,9,21,2,f5d698670b73b3a55f05ad5ef8e09bb36b508aa5
+marimo-team/marimo,f5d698670b73b3a55f05ad5ef8e09bb36b508aa5,https://github.com/marimo-team/marimo/commit/f5d698670b73b3a55f05ad5ef8e09bb36b508aa5,mscolnick,2753772,User,2025-05-06T13:18:53+00:00,mscolnick,2025-05-06T13:18:53+00:00,release: 0.13.5,1,1,2,1,d2ad7aa088efc3b3d93ac9b83a5b233efad1a0fe
+marimo-team/marimo,d2ad7aa088efc3b3d93ac9b83a5b233efad1a0fe,https://github.com/marimo-team/marimo/commit/d2ad7aa088efc3b3d93ac9b83a5b233efad1a0fe,Light2Dark,19585239,User,2025-05-06T13:17:49+00:00,web-flow,2025-05-06T13:17:49+00:00,"fix: default to medium width for columns (#4822)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [X] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@akshayka OR @mscolnick",6,3,9,2,b40e8904fa6f98ded30ec96de9ade1253cdf2fab
+marimo-team/marimo,b40e8904fa6f98ded30ec96de9ade1253cdf2fab,https://github.com/marimo-team/marimo/commit/b40e8904fa6f98ded30ec96de9ade1253cdf2fab,dmadisetti,2689338,User,2025-05-05T23:44:38+00:00,web-flow,2025-05-05T23:44:38+00:00,"fix: mo.cache args for docs (#4818)
+
+closes #4813 
+@mscolnick",4,0,4,1,d9d0d09ac056179d07fe5a5730b2dd36680228b6
+marimo-team/marimo,d9d0d09ac056179d07fe5a5730b2dd36680228b6,https://github.com/marimo-team/marimo/commit/d9d0d09ac056179d07fe5a5730b2dd36680228b6,mscolnick,2753772,User,2025-05-05T23:35:09+00:00,mscolnick,2025-05-05T23:35:09+00:00,internal: enter lifespan,5,2,7,2,966076bea0356e4ef79d7eb87fd8e9059120ef71
+marimo-team/marimo,966076bea0356e4ef79d7eb87fd8e9059120ef71,https://github.com/marimo-team/marimo/commit/966076bea0356e4ef79d7eb87fd8e9059120ef71,bjoaquinc,75667013,User,2025-05-05T23:12:18+00:00,web-flow,2025-05-05T23:12:18+00:00,"feat: added collapseAll and expandAll hotkeys (#4814)
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes
+#123).
+-->
+Added hotkeys Mod + shift + \ for collapse All and Mod + shift + / for
+expandAll. Partially resolves #4163 by adding the hotkeys to as
+mentioned in the issue.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the
+problem addressed and how it was resolved. If applicable, provide before
+and after comparisons, screenshots, or any relevant details to help
+reviewers understand the changes easily.
+-->
+- Added hotkeys for collapseAll and expandAll in hotkeys.ts
+- Added hotkeys to the action buttons so they show in the Main Menu in
+useNotebookActions.tsx
+- Added useHotkey() functions for collapseAll and expandAll in
+edit-app.tsx to manage the functionality
+
+## 📋 Checklist
+
+- [x] I have read the [contributor
+guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this
+change was discussed or approved through an issue, on
+[Discord](https://marimo.io/discord?ref=pr), or the community
+[discussions](https://github.com/marimo-team/marimo/discussions) (Please
+provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@mscolnick
+
+---------
+
+Co-authored-by: Myles Scolnick <myles@marimo.io>",20,1,21,3,390ca9ed62a93323b12eb81768e487f08a517fbc
+marimo-team/marimo,390ca9ed62a93323b12eb81768e487f08a517fbc,https://github.com/marimo-team/marimo/commit/390ca9ed62a93323b12eb81768e487f08a517fbc,mscolnick,2753772,User,2025-05-05T21:43:00+00:00,web-flow,2025-05-05T21:43:00+00:00,internal: add entrypoints registries (#4815),468,50,518,12,220153f8dd5c44a7c7b514240ae3cbd7301d1684
+marimo-team/marimo,220153f8dd5c44a7c7b514240ae3cbd7301d1684,https://github.com/marimo-team/marimo/commit/220153f8dd5c44a7c7b514240ae3cbd7301d1684,leventov,609240,User,2025-05-05T20:15:03+00:00,web-flow,2025-05-05T20:15:03+00:00,"lint: unspecified encoding in text file operations (#4202)
+
+Check if text files are opened with utf-8 encoding specified.
+
+## What else can be considered/done
+
+- Run lint on examples/, scripts/, and docs/ code
+- For code within Marimo notebooks themselves, enable [UTF-8
+Mode](https://docs.python.org/3/library/os.html#utf8-mode) by default,
+e.g. when the user runs `marimo run`, or in WASM environment.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be
+interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right
+person to tag with @ -->
+
+@mscolnick or @dmadisetti
+
+---------
+
+Co-authored-by: Myles Scolnick <myles@marimo.io>",33,32,65,12,8db8be3b22de4497f7a2979919b35317efcb6631
+marimo-team/marimo,8db8be3b22de4497f7a2979919b35317efcb6631,https://github.com/marimo-team/marimo/commit/8db8be3b22de4497f7a2979919b35317efcb6631,mscolnick,2753772,User,2025-05-05T20:14:33+00:00,web-flow,2025-05-05T20:14:33+00:00,fix: fix micropip patch (#4812),2,9,11,2,701cce8e7a9557cd002dc72460f00125a063455f
+marimo-team/marimo,701cce8e7a9557cd002dc72460f00125a063455f,https://github.com/marimo-team/marimo/commit/701cce8e7a9557cd002dc72460f00125a063455f,mscolnick,2753772,User,2025-05-05T18:57:30+00:00,web-flow,2025-05-05T18:57:30+00:00,"improvement: use script metadata for config and deps in pyodide (#4806)
+
+This adds support for inline-script metadata for pyodide.
+
+If there are dependencies declared inline, then we use those. Otherwise
+we fallback to the pyodide parsing of imports (which was what we did
+previously).
+
+This also parses inline script metadata for config.
+
+--------------
+
+
+This looks like more lines of code, but mostly:
+1. lots of tests written and backfilled
+2. some utils moved around",1365,531,1896,25,69da3b41acb703266f1fcc642f4f4ebaf5e64256

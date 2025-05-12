@@ -1,0 +1,632 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+dagster-io/dagster,32720dd3790fcde3083c8b84ce6a1fc5368587ed,https://github.com/dagster-io/dagster/commit/32720dd3790fcde3083c8b84ce6a1fc5368587ed,jmsanders,10291790,User,2025-05-12T15:17:23+00:00,web-flow,2025-05-12T15:17:23+00:00,"Pin click < 8.2 (#29919)
+
+To get to a healthy build. We'll triage out fixing the broken behavior
+and relaxing the pin before this week's release.",2,2,4,2,2fd4fedc2eb07143d77b27c85c698659c6ed8d59
+dagster-io/dagster,2fd4fedc2eb07143d77b27c85c698659c6ed8d59,https://github.com/dagster-io/dagster/commit/2fd4fedc2eb07143d77b27c85c698659c6ed8d59,neverett,417209,User,2025-05-12T14:05:44+00:00,web-flow,2025-05-12T14:05:44+00:00,"DOC-1142 update docs version dropdown for 1.10.15 release (#29917)
+
+## Summary & Motivation
+
+See
+https://linear.app/dagster-labs/issue/DOC-1142/update-version-dropdown
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+
+Signed-off-by: nikki everett <nikki@dagsterlabs.com>",1,1,2,1,eafa8fbe540f4e301238980a467d35ef66ac71e5
+dagster-io/dagster,eafa8fbe540f4e301238980a467d35ef66ac71e5,https://github.com/dagster-io/dagster/commit/eafa8fbe540f4e301238980a467d35ef66ac71e5,deepyaman,14007150,User,2025-05-12T13:53:37+00:00,web-flow,2025-05-12T13:53:37+00:00,"Fix typo and update copyright year across LICENSEs (#29909)
+
+## Summary & Motivation
+
+Stumbled upon it while creating a new library
+
+## How I Tested These Changes
+
+BK
+
+---------
+
+Co-authored-by: graphite-app[bot] <96075541+graphite-app[bot]@users.noreply.github.com>",65,65,130,65,a74a6604d200d383af09b345b3342addeb0b321c
+dagster-io/dagster,a74a6604d200d383af09b345b3342addeb0b321c,https://github.com/dagster-io/dagster/commit/a74a6604d200d383af09b345b3342addeb0b321c,agrueneberg,527708,User,2025-05-12T13:25:06+00:00,web-flow,2025-05-12T13:25:06+00:00,"docs: Add missing type hint (#29911)
+
+The type hint for `context` was missing.",2,2,4,1,be9a732f930f18ae63d724d9ba98f7f51d40f8c6
+dagster-io/dagster,be9a732f930f18ae63d724d9ba98f7f51d40f8c6,https://github.com/dagster-io/dagster/commit/be9a732f930f18ae63d724d9ba98f7f51d40f8c6,schrockn,28738937,User,2025-05-09T21:41:06+00:00,web-flow,2025-05-09T21:41:06+00:00,"[dg] Add tests for existing scaffolders (#29860)
+
+## Summary & Motivation
+
+Add tests for all shim scaffolders such as they are. I think we should always produce a valid definition for a scaffold command but will do that in a followup.
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",127,2,129,6,1d478e7ec20768edfb15f10c84d11475a243c592
+dagster-io/dagster,1d478e7ec20768edfb15f10c84d11475a243c592,https://github.com/dagster-io/dagster/commit/1d478e7ec20768edfb15f10c84d11475a243c592,schrockn,28738937,User,2025-05-09T21:38:33+00:00,web-flow,2025-05-09T21:38:33+00:00,"[dg] Add test for asset shim and extract common function (#29859)
+
+## Summary & Motivation
+
+This adds a test for the asset scaffolder and also extracts out the common functionality to a shared utility
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",83,34,117,3,0af95e59a784aebedb850e1f28d6468a81716681
+dagster-io/dagster,0af95e59a784aebedb850e1f28d6468a81716681,https://github.com/dagster-io/dagster/commit/0af95e59a784aebedb850e1f28d6468a81716681,schrockn,28738937,User,2025-05-09T21:36:05+00:00,web-flow,2025-05-09T21:36:05+00:00,"[dg] Resource Scaffolding (#29839)
+
+## Summary & Motivation
+
+Enables the command `dg scaffold dagster.resources path/to/resources.py`
+
+This generates a file:
+
+```python
+import dagster as dg
+from dagster.components import definitions
+
+
+@definitions
+def resources() -> dg.Definitions:
+    return dg.Definitions(resources={})
+```
+
+If you do require the `ComponentLoadContext` for this invocation, you can add it:
+
+```python
+import dagster as dg
+from dagster.components import definitions, ComponentLoadContext
+
+
+@definitions(has_context_arg=True)
+def resources(context: ComponentLoadContext) -> dg.Definitions:
+    return dg.Definitions(resources={})
+```
+
+No matter where you are in the component hierarchy, these resource keys apply globally to the entire location, something we may have to improve at a later date.
+
+## How I Tested These Changes
+
+Unit tests and manual testing in a standalone project
+
+## Changelog
+
+* Add support for scaffolding resources via `dg scaffold dagster.resources path/to/resources.py`",100,2,102,11,04306e31d85e737d98611b530deb19debf07d3d2
+dagster-io/dagster,04306e31d85e737d98611b530deb19debf07d3d2,https://github.com/dagster-io/dagster/commit/04306e31d85e737d98611b530deb19debf07d3d2,schrockn,28738937,User,2025-05-09T21:33:44+00:00,web-flow,2025-05-09T21:33:44+00:00,"[dg] Support @definitions in the defs hierarchy (#29838)
+
+## Summary & Motivation
+
+This adds support for `@definitions` in the `defs` hierarchy. Current we support it at code location entry points, and this mirrors that support in the defs module component. I believe we should default all scaffolding to use this mechanism in order to avoid import-based side effects.
+
+So instead of 
+
+```python
+import dagster as dg
+
+defs = dg.Definitions(resources={'some_resource': 'value'})
+```
+
+you can write
+
+```python
+from dagster.components import definitions
+
+@definitions
+def resources():
+   return dg.Definitions({'some_resource': 'value'})
+```
+
+## How I Tested These Changes
+
+BK. Also manual tests in standalone projects.
+
+## Changelog
+
+* Support the usage of `@definitions` in the `defs` hierarchy.",201,70,271,7,4b6e686554d9153af3fe054226c3d0fd8ed8d73d
+dagster-io/dagster,4b6e686554d9153af3fe054226c3d0fd8ed8d73d,https://github.com/dagster-io/dagster/commit/4b6e686554d9153af3fe054226c3d0fd8ed8d73d,clairelin135,29110579,User,2025-05-09T20:17:58+00:00,web-flow,2025-05-09T20:17:58+00:00,"Add new states to asset catalog rate card (#29908)
+
+## Summary & Motivation
+Instead of displaying infinite loading spinner when there is no data,
+let's show an empty state
+
+Companion internal PR: https://github.com/dagster-io/internal/pull/15575
+
+## How I Tested These Changes
+Locally viewed:
+<img width=""699"" alt=""image""
+src=""https://github.com/user-attachments/assets/ea941615-af2d-4dd4-92d1-1baecf939729""
+/>
+Loading states:
+<img width=""707"" alt=""image""
+src=""https://github.com/user-attachments/assets/36cc80f8-179b-4ef6-a25c-0d767e766788""
+/>
+
+## Changelog
+NOCHANGELOG",90,39,129,2,13b593a5cd15f573f0274112ec91187f127ae6a0
+dagster-io/dagster,13b593a5cd15f573f0274112ec91187f127ae6a0,https://github.com/dagster-io/dagster/commit/13b593a5cd15f573f0274112ec91187f127ae6a0,alangenfeld,202219,User,2025-05-09T18:12:10+00:00,web-flow,2025-05-09T18:12:10+00:00,"[dg] in process mode (#29362)
+
+in the case that we are in a `dg` context where we are targeting the
+python environment we are already in, avoid a process hop and call the
+target cli directly via `CliRunner`
+
+
+Here is a diagram visualizing things
+
+![image](https://github.com/user-attachments/assets/fbf81ac8-5ae7-47f5-b749-bd227e8a7dc5)
+
+
+The main remaining issue currently that led to some tests being kept on
+`uv_managed` is that the plugin system depends on import entry group
+metadata that is only set when the module is properly installed. I think
+we could add env var injection for plugins to deal with this issue.
+
+## How I Tested These Changes
+
+update the test util defaults to leverage this new mode",232,162,394,21,5e5e610cc0a92f6c6a3c9a698647b7c0c5cb6c50
+dagster-io/dagster,5e5e610cc0a92f6c6a3c9a698647b7c0c5cb6c50,https://github.com/dagster-io/dagster/commit/5e5e610cc0a92f6c6a3c9a698647b7c0c5cb6c50,alangenfeld,202219,User,2025-05-09T18:02:52+00:00,web-flow,2025-05-09T18:02:52+00:00,"[dagster tests] add missing tox entry (#29874)
+
+not sure when this got accidentally removed
+
+## How I Tested These Changes
+
+bk",9,9,18,5,e0fcbf87f2ed915ee67ccd794e62790cd5e14795
+dagster-io/dagster,e0fcbf87f2ed915ee67ccd794e62790cd5e14795,https://github.com/dagster-io/dagster/commit/e0fcbf87f2ed915ee67ccd794e62790cd5e14795,OwenKephart,22457492,User,2025-05-09T17:16:38+00:00,web-flow,2025-05-09T17:16:38+00:00,"[ui] Add new re-execute from asset failure option (#29889)
+
+## Summary & Motivation
+
+This is @prha's ui changes for adding a feature flag enabling re-execution from asset failure in the UI
+
+## How I Tested These Changes",49,7,56,14,3d8e8dd6498b4726f4ca9cc8ae2af5312a684642
+dagster-io/dagster,3d8e8dd6498b4726f4ca9cc8ae2af5312a684642,https://github.com/dagster-io/dagster/commit/3d8e8dd6498b4726f4ca9cc8ae2af5312a684642,OwenKephart,22457492,User,2025-05-09T17:13:29+00:00,web-flow,2025-05-09T17:13:29+00:00,"[ui] Update the behavior of ""view lineage"" on the runs view (#29894)
+
+## Summary & Motivation
+
+https://dagsterlabs.slack.com/archives/C03CCE471E0/p1746749043149529
+
+Previously, we would include the downstreams of each key on the run when you clicked the ""View lineage"" button.
+
+I found this unintuitive, as the ""view list"" button only shows the keys directly on the run. I also added parens to the wider expression to make it easier to add further clauses (e.g. (<big expression>) and status:degraded))
+
+## How I Tested These Changes",14,7,21,3,6fc06616385d4ad9076160f59d571398ea8fa6d0
+dagster-io/dagster,6fc06616385d4ad9076160f59d571398ea8fa6d0,https://github.com/dagster-io/dagster/commit/6fc06616385d4ad9076160f59d571398ea8fa6d0,hellendag,2823852,User,2025-05-09T17:11:20+00:00,web-flow,2025-05-09T17:11:20+00:00,"[ui] Remove Overview alerts section (#29905)
+
+## Summary & Motivation
+
+OSS counterpart to https://app.graphite.dev/github/pr/dagster-io/internal/15565, which removes the AMP alert currently shown on Overview. It's the only banner there, so I'm just removing this altogether instead of leaving a couple null-rendering components lying around.
+
+## How I Tested These Changes
+
+TS, lint.",0,3,3,2,21ee6787e90cc48dd6308911b80e1de71ac26125
+dagster-io/dagster,21ee6787e90cc48dd6308911b80e1de71ac26125,https://github.com/dagster-io/dagster/commit/21ee6787e90cc48dd6308911b80e1de71ac26125,OwenKephart,22457492,User,2025-05-09T16:46:22+00:00,web-flow,2025-05-09T16:46:22+00:00,"[da] validate cron string in `cron_tick_passed` condition (#29885)
+
+## Summary & Motivation
+
+Make sure people don't make invalid conditions that will fail when evaluated
+
+## How I Tested These Changes",30,0,30,2,0921b833d4f8d2b41d71a97356294bb788474d89
+dagster-io/dagster,0921b833d4f8d2b41d71a97356294bb788474d89,https://github.com/dagster-io/dagster/commit/0921b833d4f8d2b41d71a97356294bb788474d89,deepyaman,14007150,User,2025-05-09T16:34:34+00:00,web-flow,2025-05-09T16:34:34+00:00,"Remove changes introduced to Spark Pythonic config (#29903)
+
+This reverts commit ad8131daa78d40fb4dcbccd2b1e94eb05a590643.
+
+## Summary & Motivation
+
+Seems they changed it back...?
+
+## How I Tested These Changes
+
+BK",8,62,70,2,8529bbaf521c900603c36c18a27c11eb993352eb
+dagster-io/dagster,8529bbaf521c900603c36c18a27c11eb993352eb,https://github.com/dagster-io/dagster/commit/8529bbaf521c900603c36c18a27c11eb993352eb,jjyeo,107100255,User,2025-05-09T15:27:45+00:00,web-flow,2025-05-09T15:27:45+00:00,"[docs] fix airflow migration docs (#29246)
+
+## Summary & Motivation
+- Fix #29212 
+
+## How I Tested These Changes
+- Local build and test
+
+## Changelog
+- Replace relative paths with full paths
+- Fix broken link and typo",2,2,4,2,ad8131daa78d40fb4dcbccd2b1e94eb05a590643
+dagster-io/dagster,ad8131daa78d40fb4dcbccd2b1e94eb05a590643,https://github.com/dagster-io/dagster/commit/ad8131daa78d40fb4dcbccd2b1e94eb05a590643,deepyaman,14007150,User,2025-05-09T15:17:11+00:00,web-flow,2025-05-09T15:17:11+00:00,"Restore auto-generation and `diff` of Spark config (#29872)
+
+## Summary & Motivation
+
+Add back Spark config automation
+
+## How I Tested These Changes
+
+BK",65,8,73,3,36ca0b4b3a6a8720c745de7c496c888bdbc77de9
+dagster-io/dagster,36ca0b4b3a6a8720c745de7c496c888bdbc77de9,https://github.com/dagster-io/dagster/commit/36ca0b4b3a6a8720c745de7c496c888bdbc77de9,jamiedemaria,19783112,User,2025-05-09T14:41:34+00:00,web-flow,2025-05-09T14:41:34+00:00,"[gql] handle failed to materialize events in run logs (#29900)
+
+## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.",66,0,66,2,c175d6eb9a1cd8121511858cf74fb176be0d7d56
+dagster-io/dagster,c175d6eb9a1cd8121511858cf74fb176be0d7d56,https://github.com/dagster-io/dagster/commit/c175d6eb9a1cd8121511858cf74fb176be0d7d56,prha,1040172,User,2025-05-09T03:57:14+00:00,web-flow,2025-05-09T03:57:14+00:00,"hide evaluations button if shown on evaluations table (#29647)
+
+## Summary & Motivation
+The button doesn't make sense if the dialog was already opened on the
+evaluations history page.
+
+## How I Tested These Changes
+Inspection",12,2,14,2,c59fee75ee1fa9e6c00c4a24e474b5885f661442
+dagster-io/dagster,c59fee75ee1fa9e6c00c4a24e474b5885f661442,https://github.com/dagster-io/dagster/commit/c59fee75ee1fa9e6c00c4a24e474b5885f661442,prha,1040172,User,2025-05-09T03:56:56+00:00,web-flow,2025-05-09T03:56:56+00:00,"add automation condition information on the global asset graph (#29583)
+
+## Summary & Motivation
+A very natural way to explore the automation conditions (and the
+relationship between asset dependencies) is via the asset graph view.
+
+One thing to note is that we are now pulling a good bit more information
+for every node (sensors/schedule state). Might be worthwhile to
+progressively pull in that information only if the facet is enabled.
+
+
+https://github.com/user-attachments/assets/7be87d8c-5fc7-489e-a5a8-633a0bcdaec9
+
+
+
+## How I Tested These Changes
+BK
+
+## Changelog
+Added a asset graph node facet for viewing automation conditions and the
+most recent evaluation",543,12,555,9,73f2816de9e63638d220fc1fe63006235763dec5
+dagster-io/dagster,73f2816de9e63638d220fc1fe63006235763dec5,https://github.com/dagster-io/dagster/commit/73f2816de9e63638d220fc1fe63006235763dec5,dpeng817,17576880,User,2025-05-08T23:59:41+00:00,web-flow,2025-05-08T23:59:41+00:00,"Ignore glob patterns in crawl (#29887)
+
+## Summary & Motivation
+per slack discussion
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.",9,0,9,1,c95e52b5b90079f92cea153f14aa24eaa57c29dc
+dagster-io/dagster,c95e52b5b90079f92cea153f14aa24eaa57c29dc,https://github.com/dagster-io/dagster/commit/c95e52b5b90079f92cea153f14aa24eaa57c29dc,benpankow,10215173,User,2025-05-08T21:50:37+00:00,web-flow,2025-05-08T21:50:37+00:00,"[docs][components] dlt component docs (#29602)
+
+## Summary
+
+Adds some basic docs for the `dagster-dlt` component.
+
+Not sure where we'll want this to live, but put in its own folder for
+now.",482,1,483,18,4e56fd7ed5fc1185dd5756ecbd17fea90b71b223
+dagster-io/dagster,4e56fd7ed5fc1185dd5756ecbd17fea90b71b223,https://github.com/dagster-io/dagster/commit/4e56fd7ed5fc1185dd5756ecbd17fea90b71b223,maximearmstrong,46797220,User,2025-05-08T21:26:31+00:00,web-flow,2025-05-08T21:26:31+00:00,"[dagster-tableau] Update Tableau guide with refreshable data sources (#29886)
+
+## Summary & Motivation
+
+Reflect changes made in https://github.com/dagster-io/dagster/pull/29682
+in our docs
+
+## How I Tested These Changes
+
+Docs preview",10,12,22,4,b0520d77bb8b97d81072a68b8470678f65e941c5
+dagster-io/dagster,b0520d77bb8b97d81072a68b8470678f65e941c5,https://github.com/dagster-io/dagster/commit/b0520d77bb8b97d81072a68b8470678f65e941c5,benpankow,10215173,User,2025-05-08T20:50:11+00:00,web-flow,2025-05-08T20:50:11+00:00,"[dg] Add consuming components to `dg list env` (#29730)
+
+## Summary
+
+This was somewhere in the env demo stack and never got split into its
+own PR.
+
+Adds a column to the `dg list env` output showing which components
+consume an env var:
+```sh
+$ dg list env
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Env Var                                        ┃ Value ┃ Components ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__DATABASE  │       │ envvar2    │
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__HOST      │       │ envvar2    │
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__PASSWORD  │       │ envvar2    │
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__ROLE      │       │ envvar2    │
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__USERNAME  │       │ envvar2    │
+│ DESTINATION__SNOWFLAKE__CREDENTIALS__WAREHOUSE │       │ envvar2    │
+│ SOURCES__GITHUB__ACCESS_TOKEN                  │       │ envvar2    │
+└────────────────────────────────────────────────┴───────┴────────────┘
+```
+
+## TEst Plan
+
+Unit test.",78,11,89,3,25a425a2fceb780aaca6348abd2c676fdaf39ac5
+dagster-io/dagster,25a425a2fceb780aaca6348abd2c676fdaf39ac5,https://github.com/dagster-io/dagster/commit/25a425a2fceb780aaca6348abd2c676fdaf39ac5,benpankow,10215173,User,2025-05-08T20:48:46+00:00,web-flow,2025-05-08T20:48:46+00:00,"Wipe asset check evaluations when wiping assets (#29883)
+
+## Summary
+
+Wipes asset check evaluations when an asset is wiped in the SQL event
+log storage.
+
+## Test Plan
+
+Update asset checks storage unit test.
+
+## Changelog
+
+> Wiping an asset will now wipe associated asset check evaluations.",11,0,11,2,339c9ebe4f66b43da24f4b73b7b073c5d9e1a965
+dagster-io/dagster,339c9ebe4f66b43da24f4b73b7b073c5d9e1a965,https://github.com/dagster-io/dagster/commit/339c9ebe4f66b43da24f4b73b7b073c5d9e1a965,maximearmstrong,46797220,User,2025-05-08T19:37:14+00:00,web-flow,2025-05-08T19:37:14+00:00,"[docs] Remove beta flag in Fivetran guide (#29856)
+
+## Summary & Motivation
+
+As title.",0,4,4,1,364b0648c5d93cbb51906bad01e561357081a30b
+dagster-io/dagster,364b0648c5d93cbb51906bad01e561357081a30b,https://github.com/dagster-io/dagster/commit/364b0648c5d93cbb51906bad01e561357081a30b,maximearmstrong,46797220,User,2025-05-08T19:05:33+00:00,web-flow,2025-05-08T19:05:33+00:00,"[dagster-fivetran] reorganize Fivetran test suite (#29855)
+
+## Summary & Motivation
+
+As title, after marking `FivetranWorkspace` as GA and `FivetranResource`
+as deprecated. The tests for the deprecated resource will be removed as
+the same time as the resource.",661,661,1322,15,356e8d2064f06470e4c5b49386e2f6e7adf4dcd3
+dagster-io/dagster,356e8d2064f06470e4c5b49386e2f6e7adf4dcd3,https://github.com/dagster-io/dagster/commit/356e8d2064f06470e4c5b49386e2f6e7adf4dcd3,hellendag,2823852,User,2025-05-08T18:56:43+00:00,web-flow,2025-05-08T18:56:43+00:00,"[ui] New list items, flagged Jobs list implementation (#29849)
+
+## Summary & Motivation
+
+Introduce a handful of new components, intended to support new list designs for Observe UI changes and beyond. Open to renaming and API discussion.
+
+- `ListItem`, which is a pretty simple list item abstraction intended to show:
+  - A linked main piece of content, `left`
+  - A horizontal list of interactive controls or non-interactive content, `right`
+  - Hover states, focus states, borders, etc. for the individual list items
+- `HorizontalControls`, which renders the provided children in a horizontal list with vertical keylines between them
+- `HoverButton`, a button style intended more for hover states (plus tooltips or popovers) instead of actual button clicks. Still implemented as a button because it's an interactive element.
+
+The intent is that this list item will generally be used in virtualized lists, since we should be virtualizing pretty much all of our lists at this point.
+
+Additionally, I have implemented the Jobs list page with the new components, behind the Observe UI feature flag.
+
+## How I Tested These Changes
+
+With flag disabled, verify that the existing Jobs list renders correctly, including virtualization windowing.
+
+With flag enabled, verify virtualization rendering and windowing, plus link behavior, hover and focus states, and interactivity with `right` items.",1137,153,1290,20,b02e97e7d30cf4d1f033b078ba17a767960ce9f5
+dagster-io/dagster,b02e97e7d30cf4d1f033b078ba17a767960ce9f5,https://github.com/dagster-io/dagster/commit/b02e97e7d30cf4d1f033b078ba17a767960ce9f5,anuthebananu,25062350,User,2025-05-08T18:38:42+00:00,web-flow,2025-05-08T18:38:42+00:00,"New freshness policies - docs for private preview (#29831)
+
+## Summary & Motivation
+Unlisted docs for new freshness policies, intended to ship to design partners for a private preview. 
+
+## How I Tested These Changes
+Ran docs site on local
+
+## Changelog
+
+> Insert changelog entry or delete this section.",161,0,161,6,087f43462d394b1452fa4e41060122b85ba655f4
+dagster-io/dagster,087f43462d394b1452fa4e41060122b85ba655f4,https://github.com/dagster-io/dagster/commit/087f43462d394b1452fa4e41060122b85ba655f4,salazarm,2286579,User,2025-05-08T18:37:48+00:00,web-flow,2025-05-08T18:37:48+00:00,"[1/2] Update link to code location in asset search to go to catalog with code location asset selection syntax filter (#29879)
+
+## Summary & Motivation
+
+as titled.
+
+
+## How I Tested These Changes
+Click the link and saw it went to the catalog.
+<img width=""1168"" alt=""Screenshot 2025-05-08 at 2 17 29 PM""
+src=""https://github.com/user-attachments/assets/8222aa56-76b9-4eaa-942d-31605e434300""
+/>",12,3,15,2,66cd3af53b28ab82467a60095682b2dff7570991
+dagster-io/dagster,66cd3af53b28ab82467a60095682b2dff7570991,https://github.com/dagster-io/dagster/commit/66cd3af53b28ab82467a60095682b2dff7570991,benpankow,10215173,User,2025-05-08T18:34:11+00:00,web-flow,2025-05-08T18:34:11+00:00,"changelog 1.10.14 (#29880)
+
+## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.",37,0,37,1,25e22d8f39dd2a6cee6cf81e2ea6714bdc261cb4
+dagster-io/dagster,25e22d8f39dd2a6cee6cf81e2ea6714bdc261cb4,https://github.com/dagster-io/dagster/commit/25e22d8f39dd2a6cee6cf81e2ea6714bdc261cb4,prha,1040172,User,2025-05-08T18:30:20+00:00,web-flow,2025-05-08T18:30:20+00:00,"auto-expand automation conditions in evaluations dialog (#29561)
+
+## Summary & Motivation
+Enables less clicking to dig into the root causes of why an asset was
+requested or not requested in a given tick.
+
+## How I Tested These Changes
+
+
+https://github.com/user-attachments/assets/38d48866-6889-42b2-87e5-8211060eb9f7
+
+
+
+## Changelog
+[ui] By default expands a set of automation conditions for a given
+evaluation tick.",467,122,589,10,7dfc47066b514eeacf34c157c892b2e719b108b8
+dagster-io/dagster,7dfc47066b514eeacf34c157c892b2e719b108b8,https://github.com/dagster-io/dagster/commit/7dfc47066b514eeacf34c157c892b2e719b108b8,maximearmstrong,46797220,User,2025-05-08T18:19:51+00:00,web-flow,2025-05-08T18:19:51+00:00,"[dagster-fivetran] mark legacy Fivetran integration as deprecated (#29854)
+
+## Summary & Motivation
+
+Now that the new Fivetran resource is GA, the legacy resource should be
+deprecated.
+
+## Changelog
+
+[dagster-fivetran] the `FivetranResource` resource is now deprecated.",16,11,27,3,4017508d3da9e61660b49813bc0e9472e16f2942
+dagster-io/dagster,4017508d3da9e61660b49813bc0e9472e16f2942,https://github.com/dagster-io/dagster/commit/4017508d3da9e61660b49813bc0e9472e16f2942,maximearmstrong,46797220,User,2025-05-08T17:57:56+00:00,web-flow,2025-05-08T17:57:56+00:00,"[dagster-fivetran] mark new Fivetran integration as GA (#29853)
+
+## Summary & Motivation
+
+The integration has been stable for some time now and is used by several
+users. Removing the beta marked to move to GA.
+
+## Changelog
+
+[dagster-fivetran] the `FivetranWorkspace` resource is now marked as
+generally available (GA)",3,11,14,4,ebeb13f38d0c16c8fb89391ca1b432c40de6656f
+dagster-io/dagster,ebeb13f38d0c16c8fb89391ca1b432c40de6656f,https://github.com/dagster-io/dagster/commit/ebeb13f38d0c16c8fb89391ca1b432c40de6656f,benpankow,10215173,User,2025-05-08T17:51:23+00:00,web-flow,2025-05-08T17:51:23+00:00,"[components] Automatically enable code references for dbt component (#29827)
+
+## Summary
+
+Enables code references to underlying SQL files, by default, for the DBT
+component.
+
+## Test Plan
+
+Unit test.",25,3,28,2,efc41cd997fc91f91cb7b6565d84b99a536f29cb
+dagster-io/dagster,efc41cd997fc91f91cb7b6565d84b99a536f29cb,https://github.com/dagster-io/dagster/commit/efc41cd997fc91f91cb7b6565d84b99a536f29cb,katefarrar,455281,User,2025-05-08T17:42:45+00:00,web-flow,2025-05-08T17:42:45+00:00,"Adding an empty state to favorites saved selection (#29557)
+
+## Summary & Motivation
+- Adding empty state for Favorites Saved Selection so users learn how to
+add to Favorites
+<img width=""1378"" alt=""Screenshot 2025-04-23 at 4 27 05 PM""
+src=""https://github.com/user-attachments/assets/716eb02b-71bf-41dd-b0c1-7d5676cc632f""
+/>
+
+
+## How I Tested These Changes
+- Remove any assets from your favorites list
+- Go to `favorites/assets` to see the empty state
+
+---------
+
+Co-authored-by: Marco Salazar <salazarm93@gmail.com>",21,1,22,1,ff40ed219252a77adda35d685af803391584d592
+dagster-io/dagster,ff40ed219252a77adda35d685af803391584d592,https://github.com/dagster-io/dagster/commit/ff40ed219252a77adda35d685af803391584d592,prha,1040172,User,2025-05-08T17:33:19+00:00,web-flow,2025-05-08T17:33:19+00:00,"add operator type graphql field for automation condition (#29560)
+
+## Summary & Motivation
+Enables auto-expansion of automation conditions in the evaluations view.
+
+## How I Tested These Changes
+BK",8,1,9,4,5756326befd72ced0699d642337d941bc5e587b9
+dagster-io/dagster,5756326befd72ced0699d642337d941bc5e587b9,https://github.com/dagster-io/dagster/commit/5756326befd72ced0699d642337d941bc5e587b9,prha,1040172,User,2025-05-08T17:32:38+00:00,web-flow,2025-05-08T17:32:38+00:00,"enable declarative automation lineage navigation (#29516)
+
+## Summary & Motivation
+One main component of observability for DA is providing clarity on why a
+given asset did or did not materialize in a particular materialization.
+Often this is due to some condition of one of its dependencies. However,
+it's currently very difficult to navigate the lineage tree in the DA
+evaluation context.
+
+
+https://github.com/user-attachments/assets/1da3952a-4288-41ac-a40e-f837c3e30580
+
+
+
+## How I Tested These Changes
+BK, above
+
+## Changelog
+[ui] Added asset lineage navigation within the automation condition
+evaluation tree.",386,39,425,10,2d35f836835d0195678b17dd3380586ab2a8aae4
+dagster-io/dagster,2d35f836835d0195678b17dd3380586ab2a8aae4,https://github.com/dagster-io/dagster/commit/2d35f836835d0195678b17dd3380586ab2a8aae4,benpankow,10215173,User,2025-05-08T17:23:10+00:00,web-flow,2025-05-08T17:23:10+00:00,"[components] Augment YAML components with code references (#29806)
+
+## Summary
+
+Automatically attach Dagster code references to components assets
+sourced from YAML.
+Updates the dbt component to also attach SQL references to its assets
+via the translator.
+
+
+## Test Plan
+<img width=""992"" alt=""Screenshot 2025-05-06 at 10 42 58 AM""
+src=""https://github.com/user-attachments/assets/f5244657-4b16-486b-ae17-0b797aee76cc""
+/>
+
+New unit tests.
+
+## Changelog
+
+> [components] Dagster components now include code references by
+default. When viewing an asset emitted by a component in the asset
+catalog, this will allow you to jump to the backing `component.yaml`
+file in your editor.",144,32,176,12,8c2431eb2861b1403c2e05759e0f648fe7fd0d46
+dagster-io/dagster,8c2431eb2861b1403c2e05759e0f648fe7fd0d46,https://github.com/dagster-io/dagster/commit/8c2431eb2861b1403c2e05759e0f648fe7fd0d46,benpankow,10215173,User,2025-05-08T16:44:34+00:00,web-flow,2025-05-08T16:44:34+00:00,"[dagster-sling][components] Use translation pattern for SlingReplicationCollectionComponent (#29878)
+
+## Summary
+
+Use the translation pattern for the
+`SlingReplicationCollectionComponent`, modeled after our DBT component.
+
+## How I Tested These Changes
+
+Updated unit tests.
+
+## Changelog
+
+> [dagster-sling] When using the SlingReplicationCollectionComponent,
+the `asset_attributes` parameter has been updated to `translation` to
+match our other integration components.",64,73,137,4,11d69eb4098a23555ffa292bcc6d62abdd45d9a3
+dagster-io/dagster,11d69eb4098a23555ffa292bcc6d62abdd45d9a3,https://github.com/dagster-io/dagster/commit/11d69eb4098a23555ffa292bcc6d62abdd45d9a3,alangenfeld,202219,User,2025-05-08T16:33:35+00:00,web-flow,2025-05-08T16:33:35+00:00,"[Loadable] add context type generic (#29873)
+
+Add the ability to narrow the specific `LoadingContext` type a
+`LoadableBy` can work with
+
+## How I Tested These Changes
+
+updated test",33,33,66,2,e053acb7231534197a6583927c257fdbdbce68fc
+dagster-io/dagster,e053acb7231534197a6583927c257fdbdbce68fc,https://github.com/dagster-io/dagster/commit/e053acb7231534197a6583927c257fdbdbce68fc,jmsanders,10291790,User,2025-05-08T15:38:39+00:00,web-flow,2025-05-08T15:38:39+00:00,"Temporarily skip make dataproc/spark_docs diff (#29871)
+
+These unfortunately live outside of pytest so they can't be muted
+directly in Buildkite.
+
+I'm disabling them for now and we can figure out what caused them to
+regress:
+
+
+https://buildkite.com/dagster/dagster-dagster/builds/121995#0196b03d-62f1-4328-bcac-a2e19bdbb2d3/300-1156",0,3,3,1,06c5d09b3765d8e43a930547a5478a13ae7477bb
+dagster-io/dagster,06c5d09b3765d8e43a930547a5478a13ae7477bb,https://github.com/dagster-io/dagster/commit/06c5d09b3765d8e43a930547a5478a13ae7477bb,jmsanders,10291790,User,2025-05-08T15:09:38+00:00,web-flow,2025-05-08T15:09:38+00:00,"Retry docker daemon exit code 125 (#29869)
+
+We're seeing intermittent failures with:
+
+https://docs.docker.com/engine/containers/run/#125
+
+For example:
+
+
+https://buildkite.com/dagster/dagster-dagster/builds/121996#0196b037-f82b-486d-a2dc-047d4315615b/306-312
+
+I think the exit code is sufficiently narrowly scoped that we can retry
+on it for now.",1,0,1,1,b028fd68a13277eea2d8817a506a07c942e1947e
+dagster-io/dagster,b028fd68a13277eea2d8817a506a07c942e1947e,https://github.com/dagster-io/dagster/commit/b028fd68a13277eea2d8817a506a07c942e1947e,hellendag,2823852,User,2025-05-08T14:38:29+00:00,web-flow,2025-05-08T14:38:29+00:00,"[ui] Move switch fragments out of component files (#29844)
+
+## Summary & Motivation
+
+I was running into what looked like a circular dependency issue related to `ScheduleSwitchFragment` and `SensorSwitchFragment` in another branch, so I'm breaking these out into their own files. I'm a little surprised we hadn't done this sooner.
+
+## How I Tested These Changes
+
+TS, lint, jest.",73,68,141,15,51f6013c2994572ca710cb1ee24c2b6ae345e6b9
+dagster-io/dagster,51f6013c2994572ca710cb1ee24c2b6ae345e6b9,https://github.com/dagster-io/dagster/commit/51f6013c2994572ca710cb1ee24c2b6ae345e6b9,neverett,417209,User,2025-05-08T14:04:39+00:00,web-flow,2025-05-08T14:04:39+00:00,"DOC-1132 Move missing branch deployments info from legacy to current docs (#29834)
+
+## Summary & Motivation
+
+See
+https://linear.app/dagster-labs/issue/DOC-1132/move-missing-info-on-branch-deployments-from-legacy-docs-to-new-docs
+
+## How I Tested These Changes
+
+Local build.
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+
+---------
+
+Signed-off-by: nikki everett <nikki@dagsterlabs.com>",82,4,86,2,2defb41b8692427455927e6135c497d16580dfb4
+dagster-io/dagster,2defb41b8692427455927e6135c497d16580dfb4,https://github.com/dagster-io/dagster/commit/2defb41b8692427455927e6135c497d16580dfb4,sbquinlan,1011062,User,2025-05-07T21:27:55+00:00,web-flow,2025-05-07T21:27:55+00:00,"ruff (#29857)
+
+tsia",2,7,9,1,10690671a17c50b88ade3ea7db57ba057783227c
+dagster-io/dagster,10690671a17c50b88ade3ea7db57ba057783227c,https://github.com/dagster-io/dagster/commit/10690671a17c50b88ade3ea7db57ba057783227c,dpeng817,17576880,User,2025-05-07T20:07:10+00:00,web-flow,2025-05-07T20:07:10+00:00,"Remove hot path tag fetching (#29852)
+
+## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.",7,19,26,4,87fcf34c446532a032eabebd3e04ddd8f8b30425
+dagster-io/dagster,87fcf34c446532a032eabebd3e04ddd8f8b30425,https://github.com/dagster-io/dagster/commit/87fcf34c446532a032eabebd3e04ddd8f8b30425,alangenfeld,202219,User,2025-05-07T18:30:28+00:00,web-flow,2025-05-07T18:30:28+00:00,"[bk] dont force-reinstall uv (#29848)
+
+random guess at what is causing sporadic hash mismatches when installing
+this
+
+## How I Tested These Changes
+
+bk",1,1,2,1,38ef4cd760dd6948e94b6b26886f9c56de865d67
+dagster-io/dagster,38ef4cd760dd6948e94b6b26886f9c56de865d67,https://github.com/dagster-io/dagster/commit/38ef4cd760dd6948e94b6b26886f9c56de865d67,alangenfeld,202219,User,2025-05-07T17:35:41+00:00,web-flow,2025-05-07T17:35:41+00:00,"[dbt component] path resolution fix (#29842)
+
+another resolution self own. I missed that the tutorial integration test
+was overwriting the scaffolded value before check defs.
+
+## How I Tested These Changes
+
+added and updated tests",23,3,26,3,30a2f59ebc56a10c78a513a50706b22c472d427a

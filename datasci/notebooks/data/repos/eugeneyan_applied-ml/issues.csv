@@ -1,0 +1,240 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+eugeneyan/applied-ml,2272052756,257,Add new post: 'Building and Maintaining Internal Tools for DS/ML team…,Link: https://building.nubank.com.br/building-and-maintaining-internal-tools-for-ds-ml-teams-lessons-learned/,queirozfcom,1554354,closed,False,0,2024-04-30T16:57:51+00:00,2024-05-14T17:24:28+00:00,2024-05-02T14:44:23+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,2103670113,256,Ml,,prerna098,110772675,closed,False,0,2024-01-27T16:48:31+00:00,2024-01-29T05:46:35+00:00,2024-01-29T05:46:35+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1947693903,255,Removed unicode char in title,"I noticed under Data Engineering Item 15 what looks to be an unintentional additional unicode character (see screenshot). This PR is a simple fix to remove that. 
+
+<img width=""961"" alt=""image"" src=""https://github.com/eugeneyan/applied-ml/assets/16997867/c674b787-4cd5-422e-9d38-704126ebf403"">
+
+
+",ddanieltan,16997867,closed,False,1,2023-10-17T15:24:51+00:00,2023-10-18T01:12:59+00:00,2023-10-18T01:12:59+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1887895825,254,Fix for Databricks session links,"Databricks session links were forwarding to the Databricks YT channel. Replaced all links with matching video results with the correct YT video.
+
+No matching video found for the Deep Anomaly Detection with Spark and Tensorflow session.",mbar0,5559296,closed,False,1,2023-09-08T15:25:54+00:00,2023-09-09T07:29:21+00:00,2023-09-09T07:29:20+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1878306819,253,"Add post on de-risking real-time ML projects, from Nubank","Added under `Practices`.
+
+Link: https://building.nubank.com.br/de-risking-real-time-ml-projects-addressing-common-failure-modes/
+",queirozfcom,1554354,closed,False,1,2023-09-02T03:16:38+00:00,2023-09-09T07:31:07+00:00,2023-09-09T07:31:06+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1843087927,252,NLP Pipeline Books,Please add NLP pipeline book.,Adesoji1,20457308,closed,False,0,2023-08-09T11:59:33+00:00,2024-01-29T05:46:44+00:00,2024-01-29T05:46:44+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1778106074,251,Add new post on train-serve skew by nubank,Added new guide under **model management** on how to deal with train-serve skew for real-time models: https://building.nubank.com.br/dealing-with-train-serve-skew-in-real-time-ml-models-a-short-guide/,queirozfcom,1554354,closed,False,1,2023-06-28T03:21:58+00:00,2023-06-29T02:40:33+00:00,2023-06-29T02:40:33+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1726540510,250,"Adding presentations by Spotify, BazaarVoice","covering embeddings at scale and using CV for search ranking, respectively",PubliusAu,119470903,closed,False,1,2023-05-25T22:00:58+00:00,2023-05-26T01:41:10+00:00,2023-05-26T01:41:10+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1658434957,249,Fixed a url link!,Fixed the url link!,Phrrancis,60043467,closed,False,2,2023-04-07T06:40:26+00:00,2023-05-19T14:21:13+00:00,2023-05-19T14:21:12+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1637799710,248,Add differential privacy refs,"Hi @eugeneyan. I added 3 references for privacy preserving ML. There's some overlap between three fields: differential privacy, federated learning, and distributed ML. But, I think these 3 references are a good place to start. 
+
+#227 could be included under this topic as well, but I've to re-read those papers to be sure.",chongshenng,29951306,closed,False,2,2023-03-23T15:47:07+00:00,2023-05-19T14:19:10+00:00,2023-05-19T14:19:10+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1582651324,247,Request to add new article in Search section,"This article seems relevant under Search section - 
+https://github.blog/2023-02-06-the-technology-behind-githubs-new-code-search/",arunachalamev,249746,closed,False,0,2023-02-13T16:16:09+00:00,2023-02-13T16:21:48+00:00,2023-02-13T16:21:48+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1582289314,246,Added a few new articles,,krishkatyal,89596037,closed,False,1,2023-02-13T12:47:22+00:00,2023-02-19T15:57:04+00:00,2023-02-19T15:57:04+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1581259249,245,Added some Papers,Added some Papers,R-Mahmoudi,108347344,closed,False,1,2023-02-12T13:27:30+00:00,2023-06-29T02:37:48+00:00,2023-06-29T02:37:48+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1581151605,244,"Add article from the first open-source feature store, Hopsworks",,jimdowling,1904928,closed,False,1,2023-02-12T07:10:09+00:00,2023-02-19T16:03:32+00:00,2023-02-19T16:03:32+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1581087640,243,Clean up readme,,eugeneyan,6831355,closed,False,0,2023-02-12T02:08:20+00:00,2023-04-20T23:13:49+00:00,2023-02-12T02:08:42+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1580827029,242,Added some resources (articles and code) on ML Testing and Failures,,alexcombessie,4739848,closed,False,4,2023-02-11T12:52:30+00:00,2023-02-22T05:20:51+00:00,2023-02-21T03:12:32+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1580175060,241,added few papers,Great list: just added few papers,R-Mahmoudi,108347344,closed,False,1,2023-02-10T18:58:47+00:00,2023-02-12T02:00:10+00:00,2023-02-12T02:00:10+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1579913119,240,Added few papers,Great list: just added few papers,jacopotagliabue,3503170,closed,False,1,2023-02-10T15:40:50+00:00,2023-02-10T16:16:10+00:00,2023-02-10T16:16:06+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1575493107,239,Add a couple of new papers,,eugeneyan,6831355,closed,False,0,2023-02-08T05:14:16+00:00,2023-02-08T05:14:24+00:00,2023-02-08T05:14:24+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1575484133,238,Add some new papers and tech blogs,,eugeneyan,6831355,closed,False,0,2023-02-08T05:06:05+00:00,2023-02-08T05:07:58+00:00,2023-02-08T05:07:58+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1554437767,237,Add an article on feature store,This article describes feature store design at ML-first product discovery startup Constructor.io,yevtu,11173098,closed,False,1,2023-01-24T07:08:05+00:00,2023-02-12T01:59:34+00:00,2023-02-12T01:59:26+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1524404686,236,add to data quality section link to label error finding with cleanlab,"This same procedure has been used in many companies like Google, Amazon, Wells Fargo, etc. to find label errors in internal datasets.
+
+It has also been featured in various media:
+[[1](https://www.wired.com/story/foundations-ai-riddled-errors/), [2](https://www.technologyreview.com/2021/04/01/1021619/ai-data-errors-warp-machine-learning-progress/), [3](https://www.theregister.com/2021/04/01/mit_ai_accuracy/), [4](https://www.engadget.com/mit-datasets-ai-machine-learning-label-errors-040042574.html), [5](https://venturebeat.com/2021/03/28/mit-study-finds-systematic-labeling-errors-in-popular-ai-benchmark-datasets/), [6](https://www.csail.mit.edu/news/major-ml-datasets-have-tens-thousands-errors), [7](https://www.techtimes.com/articles/258516/20210329/mit-study-shows-labeling-errors-more-10-ai-testing-datasets.htm), [8](https://www.siliconrepublic.com/machines/mit-ai-datasets-errors)]
+",jwmueller,1390638,closed,False,1,2023-01-08T08:41:48+00:00,2023-01-08T18:08:42+00:00,2023-01-08T18:08:42+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1508752030,235,Add two new posts from Nubank,"- [Best Practices for Real-time Machine Learning: Alerting](https://building.nubank.com.br/best-practices-for-real-time-machine-learning-alerting/)
+
+- [Automatic Retraining for Machine Learning Models: Tips and Lessons Learned](https://building.nubank.com.br/automatic-retraining-for-machine-learning-models/)",queirozfcom,1554354,closed,False,0,2022-12-23T01:22:58+00:00,2022-12-23T01:32:55+00:00,2022-12-23T01:32:55+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1444019205,234,Add new a/b testing article,Fix numbering sequence for `Validation and A/B Testing`session and add `48. [A gentle and practical introduction to A/B tests](https://building.nubank.com.br/introduction-to-a-b-tests/)` `Nubank` `2022`.,idellapicci,39106520,closed,False,1,2022-11-10T14:35:59+00:00,2022-12-23T01:33:47+00:00,2022-12-23T01:33:47+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1419642245,233,add real-time machine learning post by nubank,Add post under `Practices`: https://building.nubank.com.br/real-time-machine-learning-models-in-real-life/,queirozfcom,1554354,closed,False,1,2022-10-23T05:18:01+00:00,2022-10-25T15:25:59+00:00,2022-10-25T15:25:58+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1418916175,232,Add DoorDash blog post,,tonghuikang,17105577,closed,False,1,2022-10-21T22:25:06+00:00,2022-10-25T15:24:09+00:00,2022-10-25T15:24:09+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1418909617,231,Add blogpost on model calibration from Pinterest,"There is not much mentioned about model calibration, this is a valuable blog post.",tonghuikang,17105577,closed,False,1,2022-10-21T22:13:52+00:00,2022-10-25T15:24:39+00:00,2022-10-25T15:24:39+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1408035764,230,Update README.md - 2019 NLP Active Annotation paper,"Adding Natural Language Processing paper.
+
+Title: 'Active Annotation: bootstrapping annotation lexicon and guidelines for supervised NLU learning'. 
+
+ArXiv link: https://arxiv.org/abs/1908.04092
+
+Conference: INTERSPEECH 2019",feedmari,18480610,closed,False,1,2022-10-13T15:43:07+00:00,2022-10-14T05:08:20+00:00,2022-10-14T05:08:19+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1388706000,229,Fix paper publishing year,,Hao-Project,10459523,closed,False,0,2022-09-28T04:25:32+00:00,2022-09-29T02:30:25+00:00,2022-09-29T02:30:24+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1360590842,228,Add Nubank post on Practical Interview Tips for DS and ML,"Fresh post just off the printer: https://building.nubank.com.br/data-science-interview-pratical-tips/
+
+I placed it under `Team Structure` but maybe you want to add a new Section (maybe called `Hiring`) instead?",queirozfcom,1554354,closed,False,1,2022-09-02T20:34:47+00:00,2022-09-29T02:31:01+00:00,2022-09-29T02:31:01+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1335274054,227,privacy preserving machine learning,It would be great if we can add a privacy-preserving machine learning section as well.,bhusalb,8558553,open,False,4,2022-08-10T22:38:22+00:00,2025-03-15T16:56:05+00:00,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1333633858,226,Adds outerbounds post on scalable feature engineering DAGs,"This is a post on two open source tools, one from Netflix, the other from Stitch Fix.
+This post is a good thought piece about setting up code to be productive for feature 
+engineering and how it connects to machine learning; often a much overlooked topic.
+
+It is written by Outerbounds, the company around Metaflow that came out of Netflix.",skrawcz,2328071,closed,False,1,2022-08-09T18:27:26+00:00,2022-08-10T17:58:03+00:00,2022-08-10T03:51:04+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1333626890,225,Adds a blog post on Stitch Fix's ML platform,Figured this blog post we wrote fits in -- fairly new one!,elijahbenizzy,3886307,closed,False,1,2022-08-09T18:24:29+00:00,2022-08-10T03:50:07+00:00,2022-08-10T03:50:07+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1284425050,224,Update README.md,"Added under Computer VIsion:
+`
+DeepFusion: Lidar-Camera Deep Fusion for Multi-Modal 3D Object Detection
+` by `Google`
+ ",Mohit-robo,82194525,closed,False,0,2022-06-25T03:20:58+00:00,2022-06-25T18:58:22+00:00,2022-06-25T18:47:59+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1273208689,223,Fix Year,,MiWeiss,4815944,closed,False,1,2022-06-16T08:08:09+00:00,2022-07-13T23:38:04+00:00,2022-06-17T01:55:38+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1248956374,222,Add doordash AB testing,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+- Add google docs summarization and amazon graphs
+- Add shopify merlin platform
+- Add Meta and Monzo platforms
+- Add Zalado ml platform, Lyft and Booking AB testing, and more
+- Add doordoash ab testing
+",eugeneyan,6831355,closed,False,0,2022-05-26T00:57:18+00:00,2022-05-26T00:57:27+00:00,2022-05-26T00:57:27+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1221971030,221,Add new nubank post about ds and mles,"New post about the differences between Data Scientists and Machine Learning Engineers, from Nubank's Technical Blog",queirozfcom,1554354,closed,False,1,2022-05-01T01:14:50+00:00,2022-07-05T07:14:48+00:00,2022-05-01T04:37:37+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1218026709,220,"Add Zalado ml platform, Lyft and Booking AB testing, and more","- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+- Add google docs summarization and amazon graphs
+- Add shopify merlin platform
+- Add Meta and Monzo platforms
+- Add Zalado ml platform, Lyft and Booking AB testing, and more
+",eugeneyan,6831355,closed,False,0,2022-04-28T00:36:54+00:00,2022-04-28T00:37:02+00:00,2022-04-28T00:37:02+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1218022923,219,Add Meta and Monzo platforms,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+- Add google docs summarization and amazon graphs
+- Add shopify merlin platform
+- Add Meta and Monzo platforms
+",eugeneyan,6831355,closed,False,0,2022-04-28T00:30:56+00:00,2022-04-28T00:31:09+00:00,2022-04-28T00:31:09+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1195446593,218,Add shopify merlin platform,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+- Add google docs summarization and amazon graphs
+- Add shopify merlin platform
+",eugeneyan,6831355,closed,False,0,2022-04-07T02:38:56+00:00,2022-04-07T02:39:11+00:00,2022-04-07T02:39:10+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1181475125,217,Add google docs summarization and amazon graphs,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+- Add google docs summarization and amazon graphs
+",eugeneyan,6831355,closed,False,0,2022-03-26T02:40:05+00:00,2022-03-26T02:40:27+00:00,2022-03-26T02:40:26+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1178994615,216,Add spotify RL,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+- Add spotify RL
+",eugeneyan,6831355,closed,False,0,2022-03-24T04:38:27+00:00,2022-03-24T04:38:39+00:00,2022-03-24T04:38:39+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1174502931,215,Update README.md,"Added the article A Gentle Introduction to Vector Databases in the embedding section.
+",krishnakatyal,37455387,closed,False,1,2022-03-20T10:40:59+00:00,2022-03-26T00:07:56+00:00,2022-03-26T00:07:56+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1171753105,214,Add Airbnb blogs on counterfactual estimation,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+- Add Airbnb blogs on counterfactual estimation
+",eugeneyan,6831355,closed,False,0,2022-03-17T01:04:28+00:00,2022-03-17T01:04:41+00:00,2022-03-17T01:04:41+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1167495291,213,Add Amazon Complementary Product Recs,"- Add more tech blogs from 2022
+- Add Amazon complementary product paper
+",eugeneyan,6831355,closed,False,0,2022-03-13T06:35:58+00:00,2022-03-13T06:36:11+00:00,2022-03-13T06:36:11+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1166690392,212,New data,I have added some articles that I believe are relevant to the list you have created.,magdaKonki,22093987,closed,False,1,2022-03-11T17:44:02+00:00,2022-03-12T03:09:47+00:00,2022-03-12T03:09:47+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1160862438,211,Add more tech blogs from 2022,,eugeneyan,6831355,closed,False,0,2022-03-07T03:40:08+00:00,2022-03-07T03:40:19+00:00,2022-03-07T03:40:19+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1160835779,210,Add Walmart's product classification,,eugeneyan,6831355,closed,False,0,2022-03-07T02:55:07+00:00,2022-03-07T02:55:22+00:00,2022-03-07T02:55:20+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1160833742,209,Add several new papers from end 2021 to start 2022,,eugeneyan,6831355,closed,False,0,2022-03-07T02:49:44+00:00,2022-03-07T02:50:39+00:00,2022-03-07T02:50:39+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1160831789,208,Add a bunch of new papers from end 2021 to early 2022,"- Add Disney's universal holdout
+- Add several new papers from end 2021 to start 2022
+",eugeneyan,6831355,closed,False,0,2022-03-07T02:44:34+00:00,2022-03-07T02:46:07+00:00,2022-03-07T02:46:07+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1152590380,207,Mixed messages ,https://cash.app/$ttayllormoon,quantumfs,11482976,closed,False,0,2022-02-27T01:17:43+00:00,2022-02-27T02:50:18+00:00,2022-02-27T02:50:18+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1151059419,206,"Negative balance, gas leak.",https://cash.app/$ttayllormoon,quantumfs,11482976,closed,False,1,2022-02-26T02:06:37+00:00,2022-02-26T02:51:02+00:00,2022-02-26T02:51:02+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1151031506,205,Thid,https://cash.app/$ttayllormoon,quantumfs,11482976,closed,False,0,2022-02-26T01:41:58+00:00,2022-02-26T02:50:56+00:00,2022-02-26T02:50:56+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1151017523,204,Stitchfix ,,quantumfs,11482976,closed,False,0,2022-02-26T01:23:37+00:00,2022-02-26T01:29:55+00:00,2022-02-26T01:29:55+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1127542348,203,Add LinkedIN Data Science + MLOps platform article,Recent article about LinkedIN's experimentation and MLOps platform setup,safurrier,25537482,closed,False,0,2022-02-08T17:21:29+00:00,2022-02-09T01:30:15+00:00,2022-02-09T01:30:15+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1122605864,202,Update README.md,Adding publishing year to Doordash article.,raghavsaboo,8752216,closed,False,0,2022-02-03T03:11:34+00:00,2022-02-03T03:12:30+00:00,2022-02-03T03:12:30+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1118044153,201,Adds link to post about Hamilton from Stitch Fix,"In this post, Stitch Fix show cases a very light weight framework for doing some feature engineering that makes
+code easy and simple to grok & maintain.
+Its genesis was for creating wide data-frames for time-series modeling, but this can be applied to
+general featurization contexts easily.",skrawcz,2328071,closed,False,0,2022-01-29T06:13:53+00:00,2022-02-25T22:23:51+00:00,2022-01-30T11:58:43+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1108961530,200,debiasing embeddings,Added a paper on how to debias item embeddings,eliekawerk,15185325,closed,False,1,2022-01-20T07:38:42+00:00,2022-01-20T17:17:48+00:00,2022-01-20T17:17:48+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1102206527,199,Added: Using deep learning to detect abusive sequences of member activity,,jverbus,1706506,closed,False,1,2022-01-13T19:16:02+00:00,2022-01-14T01:05:17+00:00,2022-01-14T01:05:17+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1100302528,198,Adding Doordash Data Eng Framework,A recent blog post that provides details on Doordash's Data Engineering framework: [link](https://doordash.engineering/2022/01/11/introducing-fabricator-a-declarative-feature-engineering-framework/),raghavsaboo,8752216,closed,False,2,2022-01-12T12:49:30+00:00,2022-01-14T01:06:08+00:00,2022-01-12T17:28:15+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1092030032,197,Indexhtml edit,,hyungchulkim,29919927,closed,False,0,2022-01-02T14:21:23+00:00,2022-01-02T14:24:03+00:00,2022-01-02T14:23:40+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1073385678,196,Fixed formatting issue in Features Stores,Entry number 14 was not showing up in the next line and caused an error in the numbering of the list. ,ribhu97,6207389,closed,False,1,2021-12-07T13:58:25+00:00,2021-12-07T18:06:07+00:00,2021-12-07T18:06:07+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1071984729,195,Add Seznam relevance paper,"Add [Siamese BERT-based Model for Web Search Relevance Ranking Evaluated on a New Czech Dataset
+](https://arxiv.org/pdf/2112.01810.pdf) by Seznam.cz to **Search & Ranking** section.",stancld,46073029,closed,False,1,2021-12-06T10:30:16+00:00,2021-12-07T02:15:59+00:00,2021-12-07T02:15:59+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1066493649,194,Added line breaks to resources from a few sections,"<img width=""848"" alt=""CleanShot 2021-11-29 at 15 56 12@2x"" src=""https://user-images.githubusercontent.com/39353286/143941779-559d4995-54fb-410f-b299-ae78f2c335fa.png"">
+",brandonxlaw,39353286,closed,False,1,2021-11-29T20:56:32+00:00,2021-11-30T00:20:21+00:00,2021-11-30T00:20:21+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1065306233,193,Replace link to youtube from databricks,"Databricks link yields 404, moved the link to youtube instead",mat-mo,4245366,closed,False,1,2021-11-28T11:27:58+00:00,2021-11-29T03:18:11+00:00,2021-11-29T03:18:11+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1059897034,192,Add LinkedIn search article,Add [Deep Natural Language Processing for LinkedIn Search Systems](https://arxiv.org/abs/2108.08252) by LinkedIn to **Search & Ranking** section.,stancld,46073029,closed,False,1,2021-11-22T09:22:51+00:00,2021-11-23T01:44:11+00:00,2021-11-23T01:44:11+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1058193141,191,Reorder list based on year of publication (ascending),"Hi @eugeneyan ,
+
+Again referencing #188, I have reordered the list category-wise in an increasing year fashion.
+
+",shreyansh26,20071112,closed,False,2,2021-11-19T06:46:46+00:00,2021-11-19T15:35:46+00:00,2021-11-19T15:34:53+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1057699019,190,Add year of publication to the papers and blogs,"Solves issue #188. 
+
+I have added the year of publication to each blog/article, except a few which are either active open source projects or the year was not there in the article at all.
+
+Also fixed a few broken links in the process 😃 ",shreyansh26,20071112,closed,False,1,2021-11-18T19:02:58+00:00,2021-11-18T19:05:49+00:00,2021-11-18T19:05:49+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1056975136,189,Add Flyte blog to MLOps section,Signed-off-by: Samhita Alla <aallasamhita@gmail.com>,samhita-alla,27777173,closed,False,0,2021-11-18T06:05:33+00:00,2021-11-18T16:28:20+00:00,2021-11-18T16:28:20+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1056426201,188,Adding year of publication to the papers/blogs,"Do you think having the year of publishing can be a good idea to have along with the names of the articles/papers? It can help understand the recency of articles and also the trend the industry is taking.
+
+It would take a lot of time given the number of articles 😅 , but I can take it up if you are interested.",shreyansh26,20071112,closed,False,9,2021-11-17T17:57:17+00:00,2021-11-19T15:35:41+00:00,2021-11-19T15:35:41+00:00,,1,1,0,0,0,0,0
+eugeneyan/applied-ml,1053156691,187,Add `Stitching together spaces for query-based recommendations` ,"Added my blog post about contextual image search and recommendation to the Search Ranking section.
+
+Hope it's ok to add my own blog post here. 😅",BBischof,5480181,closed,False,1,2021-11-15T02:57:37+00:00,2021-11-16T07:05:06+00:00,2021-11-16T07:04:58+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1047021320,186,Add a Google paper proposed WARP loss to the recommendation system.,"# Papers
+
+## Learning to rank recommendations with the k-order statistic loss
+- Published: Conference paper (RecSys'13)
+- Company: Google
+- Category: Recommendation
+
+### ✅ Checklist: real-world results 
+
+In the paper's abstract:
+> Our approach is studied in two real-world systems, Google Music and YouTube video recommendations, where we obtain improvements for computable metrics, and in the YouTube case, increased user click through and watch duration when deployed live on www.youtube.com.
+
+",chmnsk,3639141,closed,False,0,2021-11-08T05:02:00+00:00,2021-11-08T06:57:53+00:00,2021-11-08T05:11:58+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1041699302,185,Add Disney's universal holdout,,eugeneyan,6831355,closed,False,2,2021-11-01T22:28:21+00:00,2021-11-16T07:04:07+00:00,2021-11-01T22:28:38+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1040593495,184,Add paper on seasonal relevance in search,,eugeneyan,6831355,closed,False,0,2021-10-31T22:05:47+00:00,2021-10-31T22:06:04+00:00,2021-10-31T22:06:04+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1040591486,183,"Add AB testing practices, data security, and some ML applications",,eugeneyan,6831355,closed,False,0,2021-10-31T21:56:23+00:00,2021-10-31T21:59:04+00:00,2021-10-31T21:59:04+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1031839647,182,New LinkedIn Article,,okwilkins,5969778,closed,False,0,2021-10-20T21:19:38+00:00,2021-10-31T21:57:54+00:00,2021-10-31T21:57:54+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1019320700,181,Remove duplicate NLP item,"Hi, Eugene! 
+
+Found a duplicate under NLP:
+
+> Dynaboard: Moving Beyond Accuracy to Holistic Model Evaluation in NLP (Code) Facebook
+> ...
+> Dynaboard: Moving Beyond Accuracy to Holistic Model Evaluation in NLP Facebook
+
+Andrew",amqdn,40281306,closed,False,1,2021-10-06T21:59:06+00:00,2021-10-07T04:26:30+00:00,2021-10-07T04:26:30+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1012849921,180,Unify company names,"Unify company names
+- Doordash -> DoorDash
+- GoJek -> Gojek
+- NetFlix -> Netflix
+- StitchFix -> Stitch Fix
+- WalmartLabs -> Walmart",chmnsk,3639141,closed,False,1,2021-10-01T03:45:35+00:00,2021-10-01T04:01:03+00:00,2021-10-01T04:00:40+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1011772509,179,Remove redundant Recommendation item,"Duplication in 'Recommendation':
+- E-commerce in Your Inbox: Product Recommendations at Scale
+- Product Recommendations at Scale",chmnsk,3639141,closed,False,1,2021-09-30T06:33:22+00:00,2021-09-30T15:15:51+00:00,2021-09-30T15:15:51+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1011548351,178,Remove redundant data discovery item,,eugeneyan,6831355,closed,False,0,2021-09-29T23:59:58+00:00,2021-09-30T00:00:10+00:00,2021-09-30T00:00:10+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1011391146,177,Duplicated resource,"Hi (:
+First of all, thank you so much for gathering all this intel.
+
+Just opening a very simple issue: on the [Data Discovery](https://github.com/eugeneyan/applied-ml#data-discovery) section of the README file, there are two identical resources, cf. items 10 & 18 on the rendered blob. The only difference is that one of them also includes a link to the corresponding repo.
+
+Here's a screenshot, showing that the URLs are the same:
+![duplicate](https://user-images.githubusercontent.com/78153441/135339358-c98470c4-81a9-4557-89f3-5f84edd1e51a.png)
+",almeida-caio,78153441,closed,False,1,2021-09-29T20:01:33+00:00,2021-09-30T00:00:27+00:00,2021-09-30T00:00:27+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1009440167,176,Papers and blogs by companies leveraging data science for decision making.,,somf4e,58367703,closed,False,1,2021-09-28T08:22:52+00:00,2021-09-30T00:00:55+00:00,2021-09-30T00:00:55+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1009282593,175,Add missing chapter 'Infra' to toc,Add missing chapter 'Infra' to the table of contents.,chmnsk,3639141,closed,False,0,2021-09-28T05:36:57+00:00,2021-09-28T13:21:49+00:00,2021-09-28T13:21:49+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1007197745,174,Update README.md,"Add TXtract (ACL '20, Amazon) and ASTRA (NAACL '21, Microsoft) papers",gkaramanolakis,9289064,closed,False,2,2021-09-25T21:12:44+00:00,2021-09-27T14:56:04+00:00,2021-09-27T14:56:04+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1000166631,171,Adding a RecSys'21 paper for visual representation learning ,"Semi-Supervised Visual Representation Learning for Fashion Compatibility.
+
+Please take a look at the PR. Thanks!",revanurambareesh,12644365,closed,False,2,2021-09-19T00:20:39+00:00,2021-09-26T16:13:02+00:00,2021-09-19T05:15:11+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,999852116,170,Add YouTube RecSys Blogpost,Adding YouTube's blog post on their recsys - https://blog.youtube/inside-youtube/on-youtubes-recommendation-system/,kennethleungty,16691614,closed,False,1,2021-09-18T02:58:46+00:00,2021-09-18T15:52:41+00:00,2021-09-18T15:52:40+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,993890305,169,Added available link to Grab + New Speech model from Facebook,,bharatr21,13381361,closed,False,5,2021-09-11T17:30:32+00:00,2021-09-11T19:40:15+00:00,2021-09-11T19:17:56+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,993779522,168,Easier ways to get started in recommendation algos?,"This is treasure! Thanks for collecting and sharing them across. I'm new to the world recommendation algorithms and have a basic understanding of common systems out there. These are certainly cutting edge. However, I find it hard to start or understand from these papers. Are there any video links explaining these or conference talks for the same? ",Nithanaroy,670556,open,False,1,2021-09-11T07:59:34+00:00,2021-10-31T22:00:12+00:00,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,992173637,167,New,,vietqh,49814255,closed,False,0,2021-09-09T12:36:27+00:00,2021-09-09T12:52:50+00:00,2021-09-09T12:52:50+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,988194261,166,Update README.md,,edwinnglabs,43593379,closed,False,1,2021-09-04T02:55:05+00:00,2021-09-04T14:20:44+00:00,2021-09-04T14:20:44+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,987591397,165,Applied ML,Collection,bouzid-s,7836621,closed,False,0,2021-09-03T09:35:07+00:00,2021-09-09T13:52:25+00:00,2021-09-09T13:52:25+00:00,,1,1,0,0,0,0,0
+eugeneyan/applied-ml,986271038,164,"Added ""MLOps at GreenSteam""",,PawNep,89253870,closed,False,1,2021-09-02T07:12:48+00:00,2021-09-04T14:18:56+00:00,2021-09-04T14:18:56+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,984099080,163,Update README.md,"Facebook's approach for A/B experimentation when network effects are suspected ( Almost always the case with any social network structure ).
+
+1. Algorithms for balanced and un-balanced partitioning are described
+2. Building an estimator for measuring suspected network effects is described
+3. Results from 2 real-worlds experiments is described to show this works",nilesh-patil,4813079,closed,False,1,2021-08-31T17:16:40+00:00,2021-09-01T01:16:15+00:00,2021-09-01T01:16:09+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,980442469,162,add Netflix's Metaflow to MLOps section,,tuulos,18241,closed,False,1,2021-08-26T16:37:11+00:00,2021-08-26T18:24:51+00:00,2021-08-26T18:24:51+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,978634794,161,Add additional papers and link to applyingML,,eugeneyan,6831355,closed,False,0,2021-08-25T02:14:29+00:00,2021-08-25T02:14:41+00:00,2021-08-25T02:14:41+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,972147159,160,Add nubank post on model monitoring,Added a new link to a new post on Model Monitoring written on Nubank's Technical Blog.,queirozfcom,1554354,closed,False,1,2021-08-16T22:29:11+00:00,2021-08-17T02:06:39+00:00,2021-08-17T02:04:09+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,967805748,159,Add Gojek article (How We Built a Matchmaking Algorithm to Cross-Sell Products),"Hi Eugene, this article by GoJek might be a useful addition to the Recommendations section. I took reference from this recently for my own RecSys project",kennethleungty,16691614,closed,False,2,2021-08-12T01:38:01+00:00,2021-08-12T19:34:08+00:00,2021-08-12T19:34:08+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,957305077,158,Add Scribd's technical blog in Embeddings,,yatharth96,19370570,closed,False,1,2021-07-31T19:14:31+00:00,2021-07-31T19:22:44+00:00,2021-07-31T19:22:44+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,952129102,157,"Add DoorDash forecasting, Scribd CV, and Netflix data exploration",,eugeneyan,6831355,closed,False,0,2021-07-24T18:50:34+00:00,2021-07-24T18:50:43+00:00,2021-07-24T18:50:43+00:00,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,950130111,156,Updated README with open source project for MLOps,"Added the repo at: https://github.com/jacopotagliabue/you-dont-need-a-bigger-boat, which is an open source implementation of a serverless data pipeline for MLOps, showing how to combine open source tools from data ingestion to predictions.",jacopotagliabue,3503170,closed,False,1,2021-07-21T21:37:21+00:00,2021-07-23T01:48:23+00:00,2021-07-23T01:48:23+00:00,,0,0,0,0,0,0,0

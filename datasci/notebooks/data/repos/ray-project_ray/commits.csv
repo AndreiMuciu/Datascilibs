@@ -1,0 +1,978 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+ray-project/ray,983d1ab957fb489001c4d5ae1835f48477f49f71,https://github.com/ray-project/ray/commit/983d1ab957fb489001c4d5ae1835f48477f49f71,davidxia,480621,User,2025-05-12T05:26:15+00:00,web-flow,2025-05-12T05:26:15+00:00,"[Doc] improve prometheus-grafana.md (#52821)
+
+Signed-off-by: David Xia <david@davidxia.com>",21,18,39,1,66b19d390d156635c32403226d6d6c6e82fb079d
+ray-project/ray,66b19d390d156635c32403226d6d6c6e82fb079d,https://github.com/ray-project/ray/commit/66b19d390d156635c32403226d6d6c6e82fb079d,lk-chen,5988771,User,2025-05-10T19:12:10+00:00,web-flow,2025-05-10T19:12:10+00:00,"[ray.data.llm] Unify fields in SGLang and vLLM config (#52823)
+
+Signed-off-by: Linkun Chen <github@lkchen.net>
+Signed-off-by: lkchen <github@lkchen.net>",78,95,173,5,e7bff7f09e7f5f75603c2a301a9fb19706381dbc
+ray-project/ray,e7bff7f09e7f5f75603c2a301a9fb19706381dbc,https://github.com/ray-project/ray/commit/e7bff7f09e7f5f75603c2a301a9fb19706381dbc,pcmoritz,113316,User,2025-05-10T05:31:50+00:00,web-flow,2025-05-10T05:31:50+00:00,"Fix uv run when use with vllm's Ray backend (#52916)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+If vllm's Ray backend is used in the vllm V1 architecture, it will start
+a subprocess and then call ray.init in that subprocess to launch the
+actual vllm replicas. This PR makes it so the uv environment still gets
+propagated correctly in that case.
+
+This change is consistent with the behavior of how uv environments
+propagate to subprocesses with just vanilla `uv run` without Ray:
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat pyproject.toml 
+[project]
+name = ""test""
+version = ""0.1""
+dependencies = [
+   ""ray"",
+]
+```
+```
+(base) (base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat test.py 
+import sys
+
+import ray
+import subprocess
+import psutil
+
+print(sys.executable)
+print(ray.__path__)
+
+# avoid fork bomb
+if len(psutil.Process().parents()) > 10:
+    sys.exit(0)
+
+subprocess.check_call([sys.executable, ""test.py""])
+```
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % uv run test.py
+warning: No `requires-python` value found in the workspace. Defaulting to `>=3.12`.
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+```
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Co-authored-by: pcmoritz <pcmoritz@anyscale.com>",54,7,61,2,f3e86752eee651ee839dc97c13d558fdb370b08e
+ray-project/ray,f3e86752eee651ee839dc97c13d558fdb370b08e,https://github.com/ray-project/ray/commit/f3e86752eee651ee839dc97c13d558fdb370b08e,GokuMohandas,8000987,User,2025-05-10T05:27:32+00:00,web-flow,2025-05-10T05:27:32+00:00,"Entity recognition with LLMs (#52342)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Signed-off-by: GokuMohandas <gokumd@gmail.com>
+Signed-off-by: Goku Mohandas <gokumd@gmail.com>
+Signed-off-by: angelinalg <angelina@anyscale.com>
+Co-authored-by: angelinalg <122562471+angelinalg@users.noreply.github.com>
+Co-authored-by: angelinalg <angelina@anyscale.com>",3059,24,3083,28,7d58cd76f00d8d96dc494f32a034f154308f9ce4
+ray-project/ray,7d58cd76f00d8d96dc494f32a034f154308f9ce4,https://github.com/ray-project/ray/commit/7d58cd76f00d8d96dc494f32a034f154308f9ce4,aslonnie,95255098,User,2025-05-10T01:33:52+00:00,web-flow,2025-05-10T01:33:52+00:00,"[release] support using any dir in the repo as working dir (#52925)
+
+to support testing from docs dir
+
+Signed-off-by: Lonnie Liu <lonnie@anyscale.com>",27,43,70,5,c983d99626e290e30efcd6f5bdc92e56b561d6bd
+ray-project/ray,c983d99626e290e30efcd6f5bdc92e56b561d6bd,https://github.com/ray-project/ray/commit/c983d99626e290e30efcd6f5bdc92e56b561d6bd,dayshah,85444498,User,2025-05-10T00:45:12+00:00,web-flow,2025-05-10T00:45:12+00:00,"[core] Record grpc client failures (#52790)
+
+Signed-off-by: dayshah <dhyey2019@gmail.com>",57,21,78,16,8addae4ed4d154ec999187277d4300cc592bfbbd
+ray-project/ray,8addae4ed4d154ec999187277d4300cc592bfbbd,https://github.com/ray-project/ray/commit/8addae4ed4d154ec999187277d4300cc592bfbbd,chris-ray-zhang,10645555,User,2025-05-10T00:30:34+00:00,web-flow,2025-05-10T00:30:34+00:00,remove anyscale navbar on docs.ray.io (#52907),0,9,9,2,40779a4fa92ad0b60adde92344fc52c6347ec4dd
+ray-project/ray,40779a4fa92ad0b60adde92344fc52c6347ec4dd,https://github.com/ray-project/ray/commit/40779a4fa92ad0b60adde92344fc52c6347ec4dd,TimothySeah,5440944,User,2025-05-10T00:13:50+00:00,web-flow,2025-05-10T00:13:50+00:00,"[train][doc] Remove unused configuration-overview page (#52912)
+
+
+Signed-off-by: Timothy Seah <tseah@Mac.attlocal.net>
+Co-authored-by: Timothy Seah <tseah@Mac.attlocal.net>",1,33,34,2,257df20e399008254d0104b65d46bd52acf7a8a8
+ray-project/ray,257df20e399008254d0104b65d46bd52acf7a8a8,https://github.com/ray-project/ray/commit/257df20e399008254d0104b65d46bd52acf7a8a8,alexeykudinkin,428277,User,2025-05-10T00:02:34+00:00,web-flow,2025-05-10T00:02:34+00:00,"[Data] Cleaning up Executor shutdown sequence (#52828)
+
+## Why are these changes needed?
+
+1. Log exception prompting the shutdown (if any)
+2. Round durations logged (to millis)
+
+---------
+
+Signed-off-by: Alexey Kudinkin <ak@anyscale.com>",12,2,14,1,d258fee55dc2051ea67b2422290d11e89985a484
+ray-project/ray,d258fee55dc2051ea67b2422290d11e89985a484,https://github.com/ray-project/ray/commit/d258fee55dc2051ea67b2422290d11e89985a484,c8ef,90297911,User,2025-05-09T21:57:43+00:00,web-flow,2025-05-09T21:57:43+00:00,"[RLLIB] Fix simple typo in `rllib/evaluation/collectors/agent_collector.py` (#52773)
+
+Signed-off-by: Connector Switch <c8ef@outlook.com>",1,1,2,1,5c5590895ad10b956e4ad9fba4c2cda2be68541d
+ray-project/ray,5c5590895ad10b956e4ad9fba4c2cda2be68541d,https://github.com/ray-project/ray/commit/5c5590895ad10b956e4ad9fba4c2cda2be68541d,eicherseiji,58963096,User,2025-05-09T21:16:41+00:00,web-flow,2025-05-09T21:16:41+00:00,"[Doc] Update configure-manage-dashboard.md (#52890)
+
+Signed-off-by: Seiji Eicher <58963096+eicherseiji@users.noreply.github.com>",1,1,2,1,cc6790d8fc471f262395d3066b5d7bcac3241efd
+ray-project/ray,cc6790d8fc471f262395d3066b5d7bcac3241efd,https://github.com/ray-project/ray/commit/cc6790d8fc471f262395d3066b5d7bcac3241efd,kevin85421,20109646,User,2025-05-09T21:13:48+00:00,web-flow,2025-05-09T21:13:48+00:00,"[chore] Delete unused build.sh (#50649)
+
+Signed-off-by: kaihsun <kaihsun@anyscale.com>",0,15,15,2,86c0958a5f051780e1f4cf08ad37bde942040774
+ray-project/ray,86c0958a5f051780e1f4cf08ad37bde942040774,https://github.com/ray-project/ray/commit/86c0958a5f051780e1f4cf08ad37bde942040774,ArthurBook,49250723,User,2025-05-09T20:15:03+00:00,web-flow,2025-05-09T20:15:03+00:00,"[data][llm] fix: remove-no-longer needed guided decoding vllm v0 constraint (#52903)
+
+Signed-off-by: Arthur <atte.book@gmail.com>",0,3,3,1,c769942d8251b3ab139cf823f4894340b77bb1cf
+ray-project/ray,c769942d8251b3ab139cf823f4894340b77bb1cf,https://github.com/ray-project/ray/commit/c769942d8251b3ab139cf823f4894340b77bb1cf,srinathk10,68668616,User,2025-05-09T19:03:35+00:00,web-flow,2025-05-09T19:03:35+00:00,"ImageDatasource::_read_stream Avoid unnecessary resize and convert (#52885)
+
+
+Signed-off-by: Srinath Krishnamachari <srinath.krishnamachari@anyscale.com>",2,2,4,1,3ad416c562bb4fd2ce58b93d2116573a4acc00a0
+ray-project/ray,3ad416c562bb4fd2ce58b93d2116573a4acc00a0,https://github.com/ray-project/ray/commit/3ad416c562bb4fd2ce58b93d2116573a4acc00a0,dayshah,85444498,User,2025-05-09T16:27:48+00:00,web-flow,2025-05-09T16:27:48+00:00,"[core] Raylet Node Manager RPC Failure Documentation (#52710)
+
+Documentation for what happens when node manager rpc's fail.
+
+Signed-off-by: dayshah <dhyey2019@gmail.com>",64,6,70,3,478877e8f92faa1665adb9db967d4e88d5072279
+ray-project/ray,478877e8f92faa1665adb9db967d4e88d5072279,https://github.com/ray-project/ray/commit/478877e8f92faa1665adb9db967d4e88d5072279,kevin85421,20109646,User,2025-05-09T16:27:01+00:00,web-flow,2025-05-09T16:27:01+00:00,"[core] Implement a thread pool and call the CPython API on all threads within the same concurrency group (#52575)
+
+We see the following error message from the CI runs of
+`test_threaded_actor.py`
+([example1](https://buildkite.com/ray-project/postmerge-macos/builds/5543#019659f5-7285-48fc-b1cf-588fd19bd050),
+[example2](https://buildkite.com/ray-project/postmerge-macos/builds/5534#01965796-294c-41de-8e6f-ef2970134df2)).
+
+
+![image](https://github.com/user-attachments/assets/d3a5d47a-1dc6-41b8-b258-d33699d4a04a)
+
+The message ""Fatal Python error: PyGILState_Release: auto-releasing
+thread-state, but no thread-state for this thread"" is very scary, but it
+will not cause any tests to fail.
+
+The root cause is that `PyGILState_Release` is called on a thread that
+has never called `PyGILState_Ensure`. See the [CPython source
+code](https://github.com/python/cpython/blob/a94c7528b596e9ec234f12ebeeb45fc731412b18/Python/pystate.c#L2870)
+for more details.
+
+The reason is that we can't control which thread in the thread pool will
+run the initializer/releaser. Hence, if a concurrency group has more
+than one thread, the error message above may be printed when we
+gracefully shut down an actor (i.e., `ray.actor.exit_actor()`).
+
+In this PR, we implement our own thread pool using `std::thread`,
+ensuring that both the initializer and the releaser run on the same
+thread. Consequently, from the Python interpreter’s perspective, all
+Python threads in the same concurrency group remain active even after
+they finish executing Ray tasks.
+
+## Related issue number
+
+Closes #51071
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+
+```python
+# test.py
+import ray
+
+@ray.remote
+class ThreadActor:
+    def __init__(self):
+        self.counter = 0
+
+    def increment(self):
+        self.counter += 1
+        return self.counter
+
+    def terminate(self):
+        ray.actor.exit_actor()
+
+actor = ThreadActor.options(max_concurrency=10).remote()
+print(ray.get(actor.increment.remote()))
+ray.get(actor.terminate.remote())
+```
+
+* Without this PR: Ran the test 20 times and encountered the error
+""PyGILState_Release: auto-releasing thread-state"" 20 times.
+<img width=""1728"" alt=""Screenshot 2025-04-30 at 5 23 27 PM""
+src=""https://github.com/user-attachments/assets/644ffd89-8edf-4678-a0cd-528eb642fe66""
+/>
+* With this PR: Ran the test 20 times and encountered the error 0 times.
+<img width=""1728"" alt=""Screenshot 2025-04-30 at 5 25 10 PM""
+src=""https://github.com/user-attachments/assets/03afaa26-0027-4df4-915d-6165bb83583f""
+/>
+
+---------
+
+Signed-off-by: Kai-Hsun Chen <kaihsun@anyscale.com>",296,73,369,9,0697b746c901b50125d8e6ba776bd6d5fe260224
+ray-project/ray,0697b746c901b50125d8e6ba776bd6d5fe260224,https://github.com/ray-project/ray/commit/0697b746c901b50125d8e6ba776bd6d5fe260224,dayshah,85444498,User,2025-05-09T16:25:36+00:00,web-flow,2025-05-09T16:25:36+00:00,"[core] [docs] Dynamic generator deprecation (#52887)
+
+Deprecating the dynamic ref generator.
+
+It was supposed to be deprecated a long time ago in favor of streaming
+generators but found that the deprecation warning on the docs page was
+actually never showing
+https://docs.ray.io/en/releases-2.46.0/ray-core/tasks/generators.html
+because the warning is above the title of the page.
+
+Moved the dynamic ref generator page under deprecated at the bottom of
+the ray generators page and outside the tasks subsection.
+
+
+Signed-off-by: dayshah <dhyey2019@gmail.com>",12,5,17,3,262af06532209c4dd81fe2046e29dab5af91bc9c
+ray-project/ray,262af06532209c4dd81fe2046e29dab5af91bc9c,https://github.com/ray-project/ray/commit/262af06532209c4dd81fe2046e29dab5af91bc9c,dayshah,85444498,User,2025-05-09T04:34:53+00:00,web-flow,2025-05-09T04:34:53+00:00,"[core] Label selector enum as class to fix windows build (#52884)
+
+Signed-off-by: dayshah <dhyey2019@gmail.com>",18,14,32,4,2bb3c5b62094ae468aeba9e2c52abaf64d5dadba
+ray-project/ray,2bb3c5b62094ae468aeba9e2c52abaf64d5dadba,https://github.com/ray-project/ray/commit/2bb3c5b62094ae468aeba9e2c52abaf64d5dadba,thomasdesr,681004,User,2025-05-08T23:19:20+00:00,web-flow,2025-05-08T23:19:20+00:00,"[pydoclint] core/_private docstring minimal format fixes (#52872)
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",93,71,164,13,489f233ffcd0789282c16ab6e5806ee7fea1b037
+ray-project/ray,489f233ffcd0789282c16ab6e5806ee7fea1b037,https://github.com/ray-project/ray/commit/489f233ffcd0789282c16ab6e5806ee7fea1b037,thomasdesr,681004,User,2025-05-08T22:48:23+00:00,web-flow,2025-05-08T22:48:23+00:00,"[pydoclint] util docstring minimal format errors (#52880)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",20,18,38,4,94125f4c51d7a3369d3393d332f12dde7fc18b58
+ray-project/ray,94125f4c51d7a3369d3393d332f12dde7fc18b58,https://github.com/ray-project/ray/commit/94125f4c51d7a3369d3393d332f12dde7fc18b58,matthewdeng,3967392,User,2025-05-08T22:20:35+00:00,web-flow,2025-05-08T22:20:35+00:00,"[tune][train] update test_train_v2_integration to use correct RunConfig (#52882)
+
+Fixes an issue in which the wrong `RunConfig` was being used.
+
+Signed-off-by: Matthew Deng <matt@anyscale.com>",1,1,2,1,e629be1cb48f59a3b34ac5cbe095832cd8c38e98
+ray-project/ray,e629be1cb48f59a3b34ac5cbe095832cd8c38e98,https://github.com/ray-project/ray/commit/e629be1cb48f59a3b34ac5cbe095832cd8c38e98,thomasdesr,681004,User,2025-05-08T22:01:49+00:00,web-flow,2025-05-08T22:01:49+00:00,"[pydoclint] data docstring minimal format errors (#52883)
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+## Related issue number
+
+Extends https://github.com/ray-project/ray/pull/52874 w/ a few more
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",9,7,16,4,b094f84690be3e8648aa93e5f28cb11c01dce2b6
+ray-project/ray,b094f84690be3e8648aa93e5f28cb11c01dce2b6,https://github.com/ray-project/ray/commit/b094f84690be3e8648aa93e5f28cb11c01dce2b6,thomasdesr,681004,User,2025-05-08T21:28:03+00:00,web-flow,2025-05-08T21:28:03+00:00,"[pydoclint] core/autoscaler docstring minimal format errors (#52873)
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",58,57,115,6,e3235250621029f5053642db8ec78ea51f12ba57
+ray-project/ray,e3235250621029f5053642db8ec78ea51f12ba57,https://github.com/ray-project/ray/commit/e3235250621029f5053642db8ec78ea51f12ba57,janimo,50138,User,2025-05-08T21:04:24+00:00,web-flow,2025-05-08T21:04:24+00:00,[llm] Embedding api (#52229),352,14,366,17,6cc103e0b509b85368e4ee669f52a41d90ad6e89
+ray-project/ray,6cc103e0b509b85368e4ee669f52a41d90ad6e89,https://github.com/ray-project/ray/commit/6cc103e0b509b85368e4ee669f52a41d90ad6e89,thomasdesr,681004,User,2025-05-08T21:01:55+00:00,web-flow,2025-05-08T21:01:55+00:00,"[pydoclint] workflow docstring minimal format errors (#52881)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",4,2,6,1,ebdcd2e0db7271daa2bfbd98d528021b1b7a3f6b
+ray-project/ray,ebdcd2e0db7271daa2bfbd98d528021b1b7a3f6b,https://github.com/ray-project/ray/commit/ebdcd2e0db7271daa2bfbd98d528021b1b7a3f6b,thomasdesr,681004,User,2025-05-08T20:56:58+00:00,web-flow,2025-05-08T20:56:58+00:00,"[pydoclint] tune docstring minimal format errors (#52879)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",13,11,24,3,67b2469f943a58e316fc686690933236240f3be7
+ray-project/ray,67b2469f943a58e316fc686690933236240f3be7,https://github.com/ray-project/ray/commit/67b2469f943a58e316fc686690933236240f3be7,thomasdesr,681004,User,2025-05-08T20:56:35+00:00,web-flow,2025-05-08T20:56:35+00:00,"[pydoclint] serve docstring minimal format errors (#52877)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",14,13,27,4,ee5cc4510ff44b297deb8ea3f7cdf0a75b2190fa
+ray-project/ray,ee5cc4510ff44b297deb8ea3f7cdf0a75b2190fa,https://github.com/ray-project/ray/commit/ee5cc4510ff44b297deb8ea3f7cdf0a75b2190fa,thomasdesr,681004,User,2025-05-08T20:55:32+00:00,web-flow,2025-05-08T20:55:32+00:00,"[pydoclint] llm docstring minimal format errors (#52876)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",4,3,7,2,2e98bce60a7e6dfd5040895a3ed6b68a1357199c
+ray-project/ray,2e98bce60a7e6dfd5040895a3ed6b68a1357199c,https://github.com/ray-project/ray/commit/2e98bce60a7e6dfd5040895a3ed6b68a1357199c,thomasdesr,681004,User,2025-05-08T20:50:20+00:00,web-flow,2025-05-08T20:50:20+00:00,"[pydoclint] train docstring minimal format errors (#52878)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",1,1,2,1,f6cc12ef4a5634d419b868aa67d8e40c8876577f
+ray-project/ray,f6cc12ef4a5634d419b868aa67d8e40c8876577f,https://github.com/ray-project/ray/commit/f6cc12ef4a5634d419b868aa67d8e40c8876577f,srinathk10,68668616,User,2025-05-08T20:48:30+00:00,web-flow,2025-05-08T20:48:30+00:00,"Handle non-contiguous Tensors based GPU transfer (#52548)
+
+## Why are these changes needed?
+Handle non-contiguous Tensors based GPU transfer. This allows removing
+the overhead of combining Arrow chunked arrays during Arrow -> Numpy ->
+Tensor conversion.
+
+---------
+
+Signed-off-by: Srinath Krishnamachari <srinath.krishnamachari@anyscale.com>
+Signed-off-by: srinathk10 <68668616+srinathk10@users.noreply.github.com>",1088,81,1169,9,c66bdf203278567d5a6ac3dfdcaff857899c1dba
+ray-project/ray,c66bdf203278567d5a6ac3dfdcaff857899c1dba,https://github.com/ray-project/ray/commit/c66bdf203278567d5a6ac3dfdcaff857899c1dba,thomasdesr,681004,User,2025-05-08T20:26:55+00:00,web-flow,2025-05-08T20:26:55+00:00,"[pydoclint] dashboard docstring minimal format errors (#52875)
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be
+minimally pydoclint compliant. This PR focuses on making them at least
+pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Signed-off-by: Thomas Desrosiers <thomas@anyscale.com>",58,69,127,2,05ba14660f552f11c464d017678ed97eb67b2401
+ray-project/ray,05ba14660f552f11c464d017678ed97eb67b2401,https://github.com/ray-project/ray/commit/05ba14660f552f11c464d017678ed97eb67b2401,NeilGirdhar,730137,User,2025-05-08T18:00:27+00:00,web-flow,2025-05-08T18:00:27+00:00,"[tune] Remove loguniform's base (#50415)
+
+Analytically, the base doesn't have any effect on the calculation
+for tune.loguniform and its variants.
+Numerically, it seems that the base can only make the calculation less
+precise, and definitely adds computation.
+
+Signed-off-by: Neil Girdhar <mistersheik@gmail.com>",61,37,98,5,62c6771f3f509868361bc9b360f3f61b056bb89b
+ray-project/ray,62c6771f3f509868361bc9b360f3f61b056bb89b,https://github.com/ray-project/ray/commit/62c6771f3f509868361bc9b360f3f61b056bb89b,alexeykudinkin,428277,User,2025-05-08T17:53:21+00:00,web-flow,2025-05-08T17:53:21+00:00,"[Data] Fix internal queues accounting for all Operators w/ an internal queue (#52806)
+
+## Why are these changes needed?
+
+While working on https://github.com/ray-project/ray/pull/52754, i've
+realized that actually most of the operators w/ internal queues aren't
+reporting these properly.
+
+This PR addresses that problem by 
+
+1. Adding `InternalQueueOperatorMixin` forcing classes to implement
+required methods
+2. Fixes `OpState` methods to properly distinguish b/w bundled pending
+dispatch and queued internally
+---------
+
+Signed-off-by: Alexey Kudinkin <ak@anyscale.com>",253,90,343,13,fba9084aae34f5339b8db7858364321eb3a18419
+ray-project/ray,fba9084aae34f5339b8db7858364321eb3a18419,https://github.com/ray-project/ray/commit/fba9084aae34f5339b8db7858364321eb3a18419,kevin85421,20109646,User,2025-05-08T16:55:44+00:00,web-flow,2025-05-08T16:55:44+00:00,"[core] `SetTaskStatus` should only be called within the same lock scope where `task_entry` is retrieved (#52770)
+
+This PR reverts https://github.com/ray-project/ray/pull/52695 and adds
+comments to explain where should `SetTaskStatus` be called.
+
+#52695 updates the value in submissble_tasks_ without acquiring the
+mutex lock. If multiple threads or coroutines write to the map, a rehash
+or deletion may occur, causing the pointer to the value to become
+invalid.
+
+### Outdated PR statement
+
+#### Question
+
+https://github.com/ray-project/ray/pull/52695#discussion_r2072477177
+
+Pointers to values in a `flat_hash_map` become invalid after a rehash.
+Additionally, we dereference those pointers in `RetryTask`, which
+doesn’t hold a mutex lock. Hence, it’s possible for the pointers to
+become invalid when other coroutines or threads insert or delete
+elements from the map, triggering a rehash.
+
+""Iterators, references, and pointers to elements are invalidated on
+rehash."" ([reference](https://abseil.io/docs/cpp/guides/container))
+
+#### Solution
+
+Changing `submissible_tasks_` from `absl::flat_hash_map<TaskID,
+TaskEntry>` to `absl::flat_hash_map<TaskID, std::unique_ptr<TaskEntry>>`
+requires a lot of changes.
+
+Hence, this PR implements a short-term solution by copying the value
+(i.e., TaskEntry) while holding the mutex lock where rehash will not be
+triggered by other threads / coroutine.
+
+---------
+
+Signed-off-by: Kai-Hsun Chen <kaihsun@anyscale.com>",31,31,62,2,9c988ee61460b3205081e5d6b6d903e3bf4f826e
+ray-project/ray,9c988ee61460b3205081e5d6b6d903e3bf4f826e,https://github.com/ray-project/ray/commit/9c988ee61460b3205081e5d6b6d903e3bf4f826e,alanwguo,711935,User,2025-05-08T16:20:32+00:00,web-flow,2025-05-08T16:20:32+00:00,"fix grafana dashboards dropdowns for data and train dashboard (#52752)
+
+
+Previously the dropdown for variables for data and train dashboard
+wasn't working for a few reasons:
+- Data dashboard used the ray_data_allocated_bytes metric which doesn't
+seem to be guaranteed metric to be emitted when ray data is used
+- Both data and train dashboard used label_values which only shows
+values for live metrics. Since these variables represent entities that
+are expected to stop emitting metrics over time, I changed to use a
+query that checks for any values over the time range selected based on
+the approach [suggested
+here](https://stackoverflow.com/questions/52778031/how-to-provide-label-values-in-grafana-variables-with-time-range-for-prometheus)
+
+---------
+
+Signed-off-by: Alan Guo <aguo@anyscale.com>",13,13,26,2,589c1c94a5dcd80366a49418d28797b7f66aac99
+ray-project/ray,589c1c94a5dcd80366a49418d28797b7f66aac99,https://github.com/ray-project/ray/commit/589c1c94a5dcd80366a49418d28797b7f66aac99,alexeykudinkin,428277,User,2025-05-08T12:12:55+00:00,web-flow,2025-05-08T12:12:55+00:00,"[Data] Re-enable Actor locality-based scheduling (#52861)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+Context
+---
+
+Currently locality-aware scheduling is disabled due to
+https://github.com/ray-project/ray/issues/43466
+
+However, since we're already using the new API, i've cleaned up the
+ranking and scheduling sequence and re-enabled locality aware
+scheduling.
+
+Changes
+---
+
+- Added `RefBundle.get_preferred_object_locations` to compute a mapping
+of node-ids to total object bytes on the node
+ - Added tests
+ - Rebased `OutputSplitter` onto the new API
+ - Rebased `ActorPool` onto `get_preferred_locations`
+ - Re-enable locality hinting for actors by default
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git
+commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for
+https://docs.ray.io/en/master/.
+- [ ] I've added any new APIs to the API Reference. For example, if I
+added a
+method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a
+few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+---------
+
+Signed-off-by: Alexey Kudinkin <ak@anyscale.com>",264,95,359,8,1f084697c3d6d5286e68b853b43030d359df2012
+ray-project/ray,1f084697c3d6d5286e68b853b43030d359df2012,https://github.com/ray-project/ray/commit/1f084697c3d6d5286e68b853b43030d359df2012,angelinalg,122562471,User,2025-05-08T11:54:20+00:00,web-flow,2025-05-08T11:54:20+00:00,[docstring][rllib] Fix indentation errors in docstrings. (#52849),240,238,478,19,7a21b34f3876f70c1b12c65affab245d59b60cf7
+ray-project/ray,7a21b34f3876f70c1b12c65affab245d59b60cf7,https://github.com/ray-project/ray/commit/7a21b34f3876f70c1b12c65affab245d59b60cf7,sven1977,5839854,User,2025-05-08T07:06:24+00:00,web-flow,2025-05-08T07:06:24+00:00,[RLlib] Add extra `self.stopped` check to APPO/IMPALA Learner (in case learner thread should stop while waiting for queue). (#52834),5,0,5,1,988b689a08d18380afc7b70969dd4ed0c3b8ecee
+ray-project/ray,988b689a08d18380afc7b70969dd4ed0c3b8ecee,https://github.com/ray-project/ray/commit/988b689a08d18380afc7b70969dd4ed0c3b8ecee,khluu,51931015,User,2025-05-08T05:26:47+00:00,web-flow,2025-05-08T05:26:47+00:00,"[docker] Update latest Docker dependencies for 2.46.0 release (#52863)
+
+Created by release automation bot.
+
+Update with commit 52b43d0998f40d8aada0ffb89f41497fea4878b2
+
+Signed-off-by: dayshah <dhyey2019@gmail.com>
+Co-authored-by: dayshah <dhyey2019@gmail.com>",31,29,60,3,5868480f6bb20fbc49e4dea7d5adb1279f36b464
+ray-project/ray,5868480f6bb20fbc49e4dea7d5adb1279f36b464,https://github.com/ray-project/ray/commit/5868480f6bb20fbc49e4dea7d5adb1279f36b464,kevin85421,20109646,User,2025-05-08T04:22:10+00:00,web-flow,2025-05-08T04:22:10+00:00,"[core][chore] Correct `num_retries_left` and `num_oom_retries_left` in the log (#52857)
+
+Signed-off-by: Kai-Hsun Chen <kaihsun@anyscale.com>",4,1,5,1,d1823655707a7708ad99fda9cff93c1ac28b2f04
+ray-project/ray,d1823655707a7708ad99fda9cff93c1ac28b2f04,https://github.com/ray-project/ray/commit/d1823655707a7708ad99fda9cff93c1ac28b2f04,angelinalg,122562471,User,2025-05-08T04:09:20+00:00,web-flow,2025-05-08T04:09:20+00:00,[docstring][train] fix indentation errors in docstrings (#52855),6,6,12,6,bcbee9fceeb4ff3edf2fa1518c915b8135aa204e
+ray-project/ray,bcbee9fceeb4ff3edf2fa1518c915b8135aa204e,https://github.com/ray-project/ray/commit/bcbee9fceeb4ff3edf2fa1518c915b8135aa204e,kevin85421,20109646,User,2025-05-08T04:07:32+00:00,web-flow,2025-05-08T04:07:32+00:00,"[core][refactor] Remove skip_execution (#52856)
+
+Signed-off-by: Kai-Hsun Chen <kaihsun@anyscale.com>",1,16,17,3,a698b631d3916866c9061ad22ad4fb0ec3574da8
+ray-project/ray,a698b631d3916866c9061ad22ad4fb0ec3574da8,https://github.com/ray-project/ray/commit/a698b631d3916866c9061ad22ad4fb0ec3574da8,kouroshHakha,31483498,User,2025-05-08T03:23:38+00:00,web-flow,2025-05-08T03:23:38+00:00,"[Serve.llm] Bugfix for duplication of `<bos>` token (#52853)
+
+Signed-off-by: Kourosh Hakhamaneshi <kourosh@anyscale.com>",30,4,34,3,0c1faa63df052c7509d783a3d0f05eb28ad79baa
+ray-project/ray,0c1faa63df052c7509d783a3d0f05eb28ad79baa,https://github.com/ray-project/ray/commit/0c1faa63df052c7509d783a3d0f05eb28ad79baa,angelinalg,122562471,User,2025-05-08T02:08:20+00:00,web-flow,2025-05-08T02:08:20+00:00,[docstring][data] fix indentation errors in docstrings (#52844),15,15,30,7,ce51640c81b6230e4375ae6dd75d9a9092f13e8d
+ray-project/ray,ce51640c81b6230e4375ae6dd75d9a9092f13e8d,https://github.com/ray-project/ray/commit/ce51640c81b6230e4375ae6dd75d9a9092f13e8d,angelinalg,122562471,User,2025-05-08T01:36:54+00:00,web-flow,2025-05-08T01:36:54+00:00,[docstring][serve] Fix indentation in doc strings.  (#52841),19,17,36,6,c0a3cbe6a9cd9960ef5822ca742fb05fa6408e8e
+ray-project/ray,c0a3cbe6a9cd9960ef5822ca742fb05fa6408e8e,https://github.com/ray-project/ray/commit/c0a3cbe6a9cd9960ef5822ca742fb05fa6408e8e,kouroshHakha,31483498,User,2025-05-08T01:08:49+00:00,web-flow,2025-05-08T01:08:49+00:00,"[Serve.llm][Bugfix] in stream batching, first part of the stream was always consumed and not streamed back from the router (#52848)
+
+This PR addresses a bug in stream batching where extra tokens in the
+first batch were being discarded and adds comprehensive unit tests to
+verify both chat and completion behaviors under different batching and
+streaming configurations.
+
+- Fixes token loss in stream batching by peeking at the first generator
+element and correctly handling batched responses.
+- Adds new fixtures and tests to cover various scenarios
+(chat/completion, stream true/false, and multiple batching intervals).
+- Removes redundant configuration in the LLM server test to align with
+the new streaming batching behavior.
+
+---------
+
+Signed-off-by: Kourosh Hakhamaneshi <kourosh@anyscale.com>",186,62,248,3,7c23b5a4d698066a789a8343692c805bd5242e3f
+ray-project/ray,7c23b5a4d698066a789a8343692c805bd5242e3f,https://github.com/ray-project/ray/commit/7c23b5a4d698066a789a8343692c805bd5242e3f,angelinalg,122562471,User,2025-05-08T00:31:46+00:00,web-flow,2025-05-08T00:31:46+00:00,[docstring][llm] fixing indent errors in docstrings (#52842),5,5,10,2,8910c3bcb543cd79ecc2b909da01e801a0f2a972
+ray-project/ray,8910c3bcb543cd79ecc2b909da01e801a0f2a972,https://github.com/ray-project/ray/commit/8910c3bcb543cd79ecc2b909da01e801a0f2a972,srinathk10,68668616,User,2025-05-08T00:05:34+00:00,web-flow,2025-05-08T00:05:34+00:00,"Train Tests: Update Image classification map fn (#52845)
+
+<!-- Thank you for your contribution! Please review
+https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before
+opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR.
+If you don't have the access to it, we will shortly find a reviewer and
+assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this
+solves. -->
+Train Tests: Update Image classification map fn.
+
+- Current Image processing does np->tensor conversion with transpose to
+CHW and normalization.
+```
+
+ 'train/epoch-avg': 37.75413007199859,
+ 'train/epoch-max': 37.75413007199859,
+ 'train/epoch-min': 37.75413007199859,
+ 'train/epoch-total': 37.75413007199859,
+ 'train/global_throughput': 3495.5491702359923,
+ 'train/iter_batch-avg': 0.03661318445453074,
+ 'train/iter_batch-max': 0.6135890130008193,
+ 'train/iter_batch-min': 1.593200067873113e-05,
+ 'train/iter_batch-total': 18.526271333992554,
+ 'train/iter_first_batch-avg': 19.143331854998905,
+ 'train/iter_first_batch-max': 19.143331854998905,
+ 'train/iter_first_batch-min': 19.143331854998905,
+ 'train/iter_first_batch-total': 19.143331854998905,
+ 'train/iter_skip_batch-avg': inf,
+ 'train/iter_skip_batch-max': 0,
+ 'train/iter_skip_batch-min': inf,
+ 'train/iter_skip_batch-total': 0,
+ 'train/local_throughput': 873.8872925589981,
+ 'train/rows_processed-avg': 32.0,
+ 'train/rows_processed-max': 32,
+ 'train/rows_processed-min': 32,
+ 'train/rows_processed-total': 16192,
+ 'train/step-avg': 4.809962454802502e-06,
+ 'train/step-max': 2.1455998648889363e-05,
+ 'train/step-min': 5.109995981911197e-07,
+ 'train/step-total': 0.002433841002130066,
+ 'validation/iter_batch-avg': inf,
+ 'validation/iter_batch-max': 0,
+ 'validation/iter_batch-min': inf,
+ 'validation/iter_batch-total': 0,
+ 'validation/step-avg': inf,
+ 'validation/step-max': 0,
+ 'validation/step-min': inf,
+ 'validation/step-total': 0}
+--------------------------------------------------------------------------------
+2025-05-07 12:12:11,659 INFO test_utils.py:1953 -- Wrote results to /tmp/release_test_output.json
+2025-05-07 12:12:11,660 INFO test_utils.py:1954 -- {""train/epoch-avg"": 37.75413007199859, ""train/epoch-min"": 37.75413007199859, ""train/epoch-max"": 37.75413007199859, ""train/epoch-total"": 37.75413007199859, ""train/iter_first_batch-avg"": 19.143331854998905, ""train/iter_first_batch-min"": 19.143331854998905, ""train/iter_first_batch-max"": 19.143331854998905, ""train/iter_first_batch-total"": 19.143331854998905, ""train/step-avg"": 4.809962454802502e-06, ""train/step-min"": 5.109995981911197e-07, ""train/step-max"": 2.1455998648889363e-05, ""train/step-total"": 0.002433841002130066, ""train/rows_processed-avg"": 32.0, ""train/rows_processed-min"": 32, ""train/rows_processed-max"": 32, ""train/rows_processed-total"": 16192, ""train/iter_batch-avg"": 0.03661318445453074, ""train/iter_batch-min"": 1.593200067873113e-05, ""train/iter_batch-max"": 0.6135890130008193, ""train/iter_batch-total"": 18.526271333992554, ""validation/step-avg"": Infinity, ""validation/step-min"": Infinity, ""validation/step-max"": 0, ""validation/step-total"": 0, ""validation/iter_batch-avg"": Infinity, ""validation/iter_batch-min"": Infinity, ""validation/iter_batch-max"": 0, ""validation/iter_batch-total"": 0, ""checkpoint/download-avg"": Infinity, ""checkpoint/download-min"": Infinity, ""checkpoint/download-max"": 0, ""checkpoint/download-total"": 0, ""checkpoint/load-avg"": Infinity, ""checkpoint/load-min"": Infinity, ""checkpoint/load-max"": 0, ""checkpoint/load-total"": 0, ""train/iter_skip_batch-avg"": Infinity, ""train/iter_skip_batch-min"": Infinity, ""train/iter_skip_batch-max"": 0, ""train/iter_skip_batch-total"": 0, ""train/local_throughput"": 873.8872925589981, ""train/global_throughput"": 3495.5491702359923, ""dataloader/train"": {""producer_throughput"": 1946.112621486268, ""iter_stats"": {""prefetch_block-avg"": Infinity, ""prefetch_block-min"": Infinity, ""prefetch_block-max"": 0, ""prefetch_block-total"": 0, ""fetch_block-avg"": 0.0027022377159291976, ""fetch_block-min"": 0.0005052189990237821, ""fetch_block-max"": 0.0197697479998169, ""fetch_block-total"": 0.218881254990265, ""block_to_batch-avg"": 0.001253903843829141, ""block_to_batch-min"": 1.9893001081072725e-05, ""block_to_batch-max"": 0.01351481799974863, ""block_to_batch-total"": 0.6344753449775453, ""format_batch-avg"": 3.4910411080130395e-05, ""format_batch-min"": 9.00899976841174e-06, ""format_batch-max"": 0.0005209999999351567, ""format_batch-total"": 0.01766466800654598, ""collate-avg"": 0.0019578944209519855, ""collate-min"": 0.00021700100114685483, ""collate-max"": 0.013516342000002624, ""collate-total"": 0.9906945770017046, ""finalize-avg"": 0.011252377077071, ""finalize-min"": 0.004483607999645756, ""finalize-max"": 0.03162657899883925, ""finalize-total"": 5.693702800997926, ""time_spent_blocked-avg"": 0.0742146621321331, ""time_spent_blocked-min"": 6.807998943259008e-06, ""time_spent_blocked-max"": 19.143022770000243, ""time_spent_blocked-total"": 37.62683370099148, ""time_spent_training-avg"": 0.00021408673321073962, ""time_spent_training-min"": 9.916999260894954e-06, ""time_spent_training-max"": 0.009087054999326938, ""time_spent_training-total"": 0.10832788700463425}}}
+```
+
+- Updated Image processing does np->PIL->Tensor.
+
+```
+ 'train/epoch-avg': 30.73613611499968,
+ 'train/epoch-max': 30.73613611499968,
+ 'train/epoch-min': 30.73613611499968,
+ 'train/epoch-total': 30.73613611499968,
+ 'train/global_throughput': 5434.769027373354,
+ 'train/iter_batch-avg': 0.023547696209505146,
+ 'train/iter_batch-max': 0.3791560619993106,
+ 'train/iter_batch-min': 1.732300006551668e-05,
+ 'train/iter_batch-total': 11.915134282009603,
+ 'train/iter_first_batch-avg': 18.71798381300141,
+ 'train/iter_first_batch-max': 18.71798381300141,
+ 'train/iter_first_batch-min': 18.71798381300141,
+ 'train/iter_first_batch-total': 18.71798381300141,
+ 'train/iter_skip_batch-avg': inf,
+ 'train/iter_skip_batch-max': 0,
+ 'train/iter_skip_batch-min': inf,
+ 'train/iter_skip_batch-total': 0,
+ 'train/local_throughput': 1358.6922568433386,
+ 'train/rows_processed-avg': 32.0,
+ 'train/rows_processed-max': 32,
+ 'train/rows_processed-min': 32,
+ 'train/rows_processed-total': 16192,
+ 'train/step-avg': 4.362646225640153e-06,
+ 'train/step-max': 2.6562000130070373e-05,
+ 'train/step-min': 4.579997039400041e-07,
+ 'train/step-total': 0.0022074989901739173,
+ 'validation/iter_batch-avg': inf,
+ 'validation/iter_batch-max': 0,
+ 'validation/iter_batch-min': inf,
+ 'validation/iter_batch-total': 0,
+ 'validation/step-avg': inf,
+ 'validation/step-max': 0,
+ 'validation/step-min': inf,
+ 'validation/step-total': 0}
+--------------------------------------------------------------------------------
+2025-05-07 12:32:57,439 INFO test_utils.py:1953 -- Wrote results to /tmp/release_test_output.json
+2025-05-07 12:32:57,439 INFO test_utils.py:1954 -- {""train/epoch-avg"": 30.73613611499968, ""train/epoch-min"": 30.73613611499968, ""train/epoch-max"": 30.73613611499968, ""train/epoch-total"": 30.73613611499968, ""train/iter_first_batch-avg"": 18.71798381300141, ""train/iter_first_batch-min"": 18.71798381300141, ""train/iter_first_batch-max"": 18.71798381300141, ""train/iter_first_batch-total"": 18.71798381300141, ""train/step-avg"": 4.362646225640153e-06, ""train/step-min"": 4.579997039400041e-07, ""train/step-max"": 2.6562000130070373e-05, ""train/step-total"": 0.0022074989901739173, ""train/rows_processed-avg"": 32.0, ""train/rows_processed-min"": 32, ""train/rows_processed-max"": 32, ""train/rows_processed-total"": 16192, ""train/iter_batch-avg"": 0.023547696209505146, ""train/iter_batch-min"": 1.732300006551668e-05, ""train/iter_batch-max"": 0.3791560619993106, ""train/iter_batch-total"": 11.915134282009603, ""validation/step-avg"": Infinity, ""validation/step-min"": Infinity, ""validation/step-max"": 0, ""validation/step-total"": 0, ""validation/iter_batch-avg"": Infinity, ""validation/iter_batch-min"": Infinity, ""validation/iter_batch-max"": 0, ""validation/iter_batch-total"": 0, ""checkpoint/download-avg"": Infinity, ""checkpoint/download-min"": Infinity, ""checkpoint/download-max"": 0, ""checkpoint/download-total"": 0, ""checkpoint/load-avg"": Infinity, ""checkpoint/load-min"": Infinity, ""checkpoint/load-max"": 0, ""checkpoint/load-total"": 0, ""train/iter_skip_batch-avg"": Infinity, ""train/iter_skip_batch-min"": Infinity, ""train/iter_skip_batch-max"": 0, ""train/iter_skip_batch-total"": 0, ""train/local_throughput"": 1358.6922568433386, ""train/global_throughput"": 5434.769027373354, ""dataloader/train"": {""producer_throughput"": 2485.456671547162, ""iter_stats"": {""prefetch_block-avg"": Infinity, ""prefetch_block-min"": Infinity, ""prefetch_block-max"": 0, ""prefetch_block-total"": 0, ""fetch_block-avg"": 0.0023951276418054837, ""fetch_block-min"": 0.0004556420008157147, ""fetch_block-max"": 0.009860608999588294, ""fetch_block-total"": 0.19400533898624417, ""block_to_batch-avg"": 0.0011380414249187495, ""block_to_batch-min"": 1.991700082726311e-05, ""block_to_batch-max"": 0.02047159200083115, ""block_to_batch-total"": 0.5758489610088873, ""format_batch-avg"": 2.7870620556763306e-05, ""format_batch-min"": 9.097000656765886e-06, ""format_batch-max"": 0.00015905799955362454, ""format_batch-total"": 0.014102534001722233, ""collate-avg"": 0.0019216830711812067, ""collate-min"": 0.00023257399880094454, ""collate-max"": 0.021248375000141095, ""collate-total"": 0.9723716340176907, ""finalize-avg"": 0.008927913114603718, ""finalize-min"": 0.0044454970011429396, ""finalize-max"": 0.020735431000503013, ""finalize-total"": 4.5175240359894815, ""time_spent_blocked-avg"": 0.0603644016410606, ""time_spent_blocked-min"": 7.908000043244101e-06, ""time_spent_blocked-max"": 18.717657721999785, ""time_spent_blocked-total"": 30.604751632017724, ""time_spent_training-avg"": 0.00022997682214121696, ""time_spent_training-min"": 1.0375999409006909e-05, ""time_spent_training-max"": 0.013436835000902647, ""time_spent_training-total"": 0.11636827200345579}}}
+```
+
+Signed-off-by: Srinath Krishnamachari <srinath.krishnamachari@anyscale.com>",6,5,11,1,7f12c9ebd3612cd60a008a93e09bff1c73b2f03a
+ray-project/ray,7f12c9ebd3612cd60a008a93e09bff1c73b2f03a,https://github.com/ray-project/ray/commit/7f12c9ebd3612cd60a008a93e09bff1c73b2f03a,raulchen,2883335,User,2025-05-07T23:49:39+00:00,web-flow,2025-05-07T23:49:39+00:00,"[data] replace np.array to np.asarray (#52851)
+
+replace some np.array to np.asarray to avoid unnecessary copies
+
+Signed-off-by: Hao Chen <chenh1024@gmail.com>",7,7,14,5,83a7e27b5b427c13955d066f69e6b13b7d0d699a
+ray-project/ray,83a7e27b5b427c13955d066f69e6b13b7d0d699a,https://github.com/ray-project/ray/commit/83a7e27b5b427c13955d066f69e6b13b7d0d699a,raulchen,2883335,User,2025-05-07T23:46:08+00:00,web-flow,2025-05-07T23:46:08+00:00,"[data] Fix backpressure for FileBasedDatasource (#52852)
+
+Currently there is no backpressure for FileBasedDatasource, because the
+`buffer_size` is incorrectly set to the total number of files.
+This issue can lead to OOMs for jobs using `read_images`, `read_video`,
+`read_audio`, `read_binary`, etc.
+
+Signed-off-by: Hao Chen <chenh1024@gmail.com>",0,1,1,1,7ece32ed99c4df0888c1eb8802b6284de5d0443c

@@ -1,0 +1,307 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+Avaiga/taipy,c2eb910c05149dc1aca5ae7c2ba82ab98e3502dc,https://github.com/Avaiga/taipy/commit/c2eb910c05149dc1aca5ae7c2ba82ab98e3502dc,FredLL-Avaiga,90181748,User,2025-05-12T13:04:00+00:00,web-flow,2025-05-12T13:04:00+00:00,"Drag n Drop (native) (#2585)
+
+* dnd with pragmatic (atlassian)
+
+* with native drag and drop
+
+* fix expandable test
+
+* fix test
+
+* fix test
+
+* rename to dndData and doc
+
+* doc
+
+* params to data
+
+* source & target Data
+
+* source & target Data
+
+* naming
+
+* fab's comments
+
+* tests
+
+* doc
+
+---------
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",1968,580,2548,13,6c5fd6ee9e591d602f96acbe8800a92774d11eb0
+Avaiga/taipy,6c5fd6ee9e591d602f96acbe8800a92774d11eb0,https://github.com/Avaiga/taipy/commit/6c5fd6ee9e591d602f96acbe8800a92774d11eb0,jrobinAV,88036007,User,2025-05-09T11:56:37+00:00,web-flow,2025-05-09T11:56:37+00:00,"Enterprise 666 prepare migration feature (#2605)
+
+* Expose scope in task configuration
+
+* scope has moved
+
+* scope has moved
+
+* fix linter
+
+* fix linter
+
+* Apply suggestions",60,32,92,4,bd9576b5f68b93fb88be31407f3d895fadca954c
+Avaiga/taipy,bd9576b5f68b93fb88be31407f3d895fadca954c,https://github.com/Avaiga/taipy/commit/bd9576b5f68b93fb88be31407f3d895fadca954c,jrobinAV,88036007,User,2025-05-07T11:12:31+00:00,web-flow,2025-05-07T11:12:31+00:00,"#2597 Fix missing parent_ids (#2601)
+
+* #2597 Fix missing parent_ids
+
+* remove unused task_manager._create method",70,44,114,12,85af59e2bb85d0d299886e993487f9f8a5bcdbd9
+Avaiga/taipy,85af59e2bb85d0d299886e993487f9f8a5bcdbd9,https://github.com/Avaiga/taipy/commit/85af59e2bb85d0d299886e993487f9f8a5bcdbd9,jrobinAV,88036007,User,2025-05-07T10:17:53+00:00,web-flow,2025-05-07T10:17:53+00:00,"Event consumer API simplification into develop  (#2566)
+
+* implement EventConsumer
+
+* Implement UTs for EventConsumer
+
+* fix imports
+
+* Update __init__.py
+
+* Update __init__.py
+
+* Decorate not implemented method with @abstractmethod
+
+* oups
+
+* Make mypy happy
+
+* Make ruff happy
+
+* Update codeql-analysis.yml
+
+* fix UT
+
+* fix UT
+
+* Feedback from Eric and Florian: Systematically pass the gui as param
+
+* Attempt to fix pipfile.lock
+
+* Revert ""Attempt to fix pipfile.lock""
+
+This reverts commit ec6dc934642cd3a920e1f39116cb63334e7896f5.
+
+* #2597 Fix missing parent_ids
+
+* Yet another consumer API version
+
+* Linter + Giang's feedback
+
+* Linter + Giang's feedback
+
+* Linter + Giang's feedback",2915,47,2962,30,2c55be7d919b1be5813a07038468ac204de25e3d
+Avaiga/taipy,2c55be7d919b1be5813a07038468ac204de25e3d,https://github.com/Avaiga/taipy/commit/2c55be7d919b1be5813a07038468ac204de25e3d,trgiangdo,37588363,User,2025-05-06T15:30:53+00:00,web-flow,2025-05-06T15:30:53+00:00,"Merge pull request #2592 from Avaiga/refactor/allow-expanding-read-write-filebaseddn-with-custom-path
+
+Refactor - Allow expanding read/write FileBasedDataNode with custom path",63,49,112,8,"236f8c64b00ed59d3d0c908efd6b62d131e3017b,dcc09ee21ad448d1c5602ae391913e42f6247134"
+Avaiga/taipy,236f8c64b00ed59d3d0c908efd6b62d131e3017b,https://github.com/Avaiga/taipy/commit/236f8c64b00ed59d3d0c908efd6b62d131e3017b,trgiangdo,37588363,User,2025-05-05T16:29:08+00:00,web-flow,2025-05-05T16:29:08+00:00,"Merge pull request #2577 from Avaiga/refactor/allow-passing-extra-package-to-check-dependencies
+
+Refactor - Allow passing extra package name to check dependency",38,31,69,16,"761a6a74c0879f382bf833b2e9056c8023b0cd3a,c81e0f2836680f12611b16bad706c27c187ffa78"
+Avaiga/taipy,dcc09ee21ad448d1c5602ae391913e42f6247134,https://github.com/Avaiga/taipy/commit/dcc09ee21ad448d1c5602ae391913e42f6247134,trgiangdo,37588363,User,2025-05-05T16:19:18+00:00,trgiangdo,2025-05-05T16:19:18+00:00,refactor: remove _get_last_modified_datetime from DataNode,9,12,21,6,6154ba2a8991d5d350b45deb305a14393b7dbb45
+Avaiga/taipy,6154ba2a8991d5d350b45deb305a14393b7dbb45,https://github.com/Avaiga/taipy/commit/6154ba2a8991d5d350b45deb305a14393b7dbb45,trgiangdo,37588363,User,2025-05-05T10:05:19+00:00,web-flow,2025-05-05T10:05:19+00:00,Merge branch 'develop' into refactor/allow-expanding-read-write-filebaseddn-with-custom-path,53,41,94,11,"95226fa8b9849ddbacc90247c5b9fc505aef7d6b,761a6a74c0879f382bf833b2e9056c8023b0cd3a"
+Avaiga/taipy,c81e0f2836680f12611b16bad706c27c187ffa78,https://github.com/Avaiga/taipy/commit/c81e0f2836680f12611b16bad706c27c187ffa78,trgiangdo,37588363,User,2025-05-05T10:04:48+00:00,web-flow,2025-05-05T10:04:48+00:00,Merge branch 'develop' into refactor/allow-passing-extra-package-to-check-dependencies,53,43,96,11,"39e1ea01fe431e7aee051c1a5cf17dcb4ee7cc48,761a6a74c0879f382bf833b2e9056c8023b0cd3a"
+Avaiga/taipy,761a6a74c0879f382bf833b2e9056c8023b0cd3a,https://github.com/Avaiga/taipy/commit/761a6a74c0879f382bf833b2e9056c8023b0cd3a,trgiangdo,37588363,User,2025-05-05T10:03:35+00:00,web-flow,2025-05-05T10:03:35+00:00,"Fix/#2598 - Limit pipenv version to <2025.0.0 to fix dependencies installation issue with Windows (#2588)
+
+* fix: limit pipenv version to <2025.0.0",9,9,18,5,9875328ba81d1db1b689a95a9f1ba70e866b24cf
+Avaiga/taipy,9875328ba81d1db1b689a95a9f1ba70e866b24cf,https://github.com/Avaiga/taipy/commit/9875328ba81d1db1b689a95a9f1ba70e866b24cf,FredLL-Avaiga,90181748,User,2025-05-02T09:11:31+00:00,web-flow,2025-05-02T09:11:31+00:00,"support a list of Icon as Users (#2590)
+
+* support a list of Icon as Users
+resolves #2583
+
+* support emoji
+
+* linter
+
+---------
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",44,32,76,6,c76e4212a03946ce4074a9efaf3e6be3f0f95517
+Avaiga/taipy,95226fa8b9849ddbacc90247c5b9fc505aef7d6b,https://github.com/Avaiga/taipy/commit/95226fa8b9849ddbacc90247c5b9fc505aef7d6b,trgiangdo,37588363,User,2025-05-02T04:35:12+00:00,trgiangdo,2025-05-02T04:35:12+00:00,refactor: allow expanding read/write FileBasedDataNode with custom path,70,53,123,8,c76e4212a03946ce4074a9efaf3e6be3f0f95517
+Avaiga/taipy,39e1ea01fe431e7aee051c1a5cf17dcb4ee7cc48,https://github.com/Avaiga/taipy/commit/39e1ea01fe431e7aee051c1a5cf17dcb4ee7cc48,jrobinAV,88036007,User,2025-04-28T07:05:50+00:00,web-flow,2025-04-28T07:05:50+00:00,Merge branch 'develop' into refactor/allow-passing-extra-package-to-check-dependencies,2,2,4,1,"582b73d86a7a6e850fbf3f216730d268b175a2b7,c76e4212a03946ce4074a9efaf3e6be3f0f95517"
+Avaiga/taipy,c76e4212a03946ce4074a9efaf3e6be3f0f95517,https://github.com/Avaiga/taipy/commit/c76e4212a03946ce4074a9efaf3e6be3f0f95517,jrobinAV,88036007,User,2025-04-25T07:36:59+00:00,web-flow,2025-04-25T07:36:59+00:00,Update SECURITY.md,2,2,4,1,719977b94f18b3e01c587412a5b8d37960f340fb
+Avaiga/taipy,582b73d86a7a6e850fbf3f216730d268b175a2b7,https://github.com/Avaiga/taipy/commit/582b73d86a7a6e850fbf3f216730d268b175a2b7,trgiangdo,37588363,User,2025-04-22T09:46:35+00:00,trgiangdo,2025-04-22T09:46:35+00:00,fix: remove redundant space,1,1,2,1,65eee7bbc46ba238addc93cf710f5ff2e01c4f6d
+Avaiga/taipy,65eee7bbc46ba238addc93cf710f5ff2e01c4f6d,https://github.com/Avaiga/taipy/commit/65eee7bbc46ba238addc93cf710f5ff2e01c4f6d,trgiangdo,37588363,User,2025-04-21T09:27:38+00:00,trgiangdo,2025-04-21T09:27:38+00:00,refactor: move _check_dependencies to taipy.common,17,15,32,16,1fbe72bfcc1cbcd0c82b01d601f5f260e9bdef36
+Avaiga/taipy,1fbe72bfcc1cbcd0c82b01d601f5f260e9bdef36,https://github.com/Avaiga/taipy/commit/1fbe72bfcc1cbcd0c82b01d601f5f260e9bdef36,jrobinAV,88036007,User,2025-04-20T18:39:38+00:00,web-flow,2025-04-20T18:39:38+00:00,Merge branch 'develop' into refactor/allow-passing-extra-package-to-check-dependencies,21,13,34,3,"28685b9b873b27430b408f8762d606a6b8f8071f,719977b94f18b3e01c587412a5b8d37960f340fb"
+Avaiga/taipy,28685b9b873b27430b408f8762d606a6b8f8071f,https://github.com/Avaiga/taipy/commit/28685b9b873b27430b408f8762d606a6b8f8071f,trgiangdo,37588363,User,2025-04-18T08:24:35+00:00,trgiangdo,2025-04-18T08:24:35+00:00,fix: only run ruff on taipy and tests folders,2,0,2,1,6c6281c4d80abf701a2041a39d8f57ea154356ea
+Avaiga/taipy,6c6281c4d80abf701a2041a39d8f57ea154356ea,https://github.com/Avaiga/taipy/commit/6c6281c4d80abf701a2041a39d8f57ea154356ea,trgiangdo,37588363,User,2025-04-18T08:11:56+00:00,trgiangdo,2025-04-18T08:11:56+00:00,refactor: allow passing extra package name to _check_dependency_is_installed() function,20,15,35,3,127299583d40e978f6b4aa6e4659aff8076db789
+Avaiga/taipy,719977b94f18b3e01c587412a5b8d37960f340fb,https://github.com/Avaiga/taipy/commit/719977b94f18b3e01c587412a5b8d37960f340fb,jrobinAV,88036007,User,2025-04-17T13:14:00+00:00,web-flow,2025-04-17T13:14:00+00:00,Backport simplified build process (#2576),16,13,29,2,c2a76f3ca7541878c93d8f5852faecbc2e4c2e00
+Avaiga/taipy,c2a76f3ca7541878c93d8f5852faecbc2e4c2e00,https://github.com/Avaiga/taipy/commit/c2a76f3ca7541878c93d8f5852faecbc2e4c2e00,jrobinAV,88036007,User,2025-04-16T09:52:19+00:00,jrobinAV,2025-04-17T09:47:52+00:00,ded a step to install mandatory Python packages as part of the publishing process.,5,0,5,1,127299583d40e978f6b4aa6e4659aff8076db789
+Avaiga/taipy,127299583d40e978f6b4aa6e4659aff8076db789,https://github.com/Avaiga/taipy/commit/127299583d40e978f6b4aa6e4659aff8076db789,jrobinAV,88036007,User,2025-04-14T13:19:07+00:00,web-flow,2025-04-14T13:19:07+00:00,"process events under authorization. (#2540)
+
+* process events under authorization.
+* Add unit tests
+* fix linter",280,22,302,5,205c728e627c94060793faea8f23c0e95f1e2c3c
+Avaiga/taipy,205c728e627c94060793faea8f23c0e95f1e2c3c,https://github.com/Avaiga/taipy/commit/205c728e627c94060793faea8f23c0e95f1e2c3c,FredLL-Avaiga,90181748,User,2025-04-11T14:34:09+00:00,web-flow,2025-04-11T14:34:09+00:00,"Table with list (#2554)
+
+resolves #2553
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",1,1,2,1,34f3a3bed902831b6b3de35df8d8c41b326110a3
+Avaiga/taipy,34f3a3bed902831b6b3de35df8d8c41b326110a3,https://github.com/Avaiga/taipy/commit/34f3a3bed902831b6b3de35df8d8c41b326110a3,FabienLelaquais,86590727,User,2025-04-10T16:11:57+00:00,web-flow,2025-04-10T16:11:57+00:00,"Simplified build process (#2545)
+
+- Compute all dev release index (no more 'dev' in version.json)
+- Bump patch version when creating a production release
+- Favor pyproject.toml over setup and MANIFEST
+- Optimize Taipy build (cache on GUI bundle)
+- Removed unused scripts
+- Enforce tests and coverage
+
+Co-authored-by: Jean-Robin <jeanrobin.medori@avaiga.com>",1656,1024,2680,54,c5ec0659dac6324eee35a5ada14cc94af6882037
+Avaiga/taipy,c5ec0659dac6324eee35a5ada14cc94af6882037,https://github.com/Avaiga/taipy/commit/c5ec0659dac6324eee35a5ada14cc94af6882037,FredLL-Avaiga,90181748,User,2025-04-10T15:12:26+00:00,web-flow,2025-04-10T15:12:26+00:00,"make `lines_shown` more directive (#2548)
+
+resolves #2546
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",1,0,1,1,707f050c97e308d0f253defe0f764d6d15e02f72
+Avaiga/taipy,707f050c97e308d0f253defe0f764d6d15e02f72,https://github.com/Avaiga/taipy/commit/707f050c97e308d0f253defe0f764d6d15e02f72,namnguyen20999,36433663,User,2025-04-10T13:26:32+00:00,web-flow,2025-04-10T13:26:32+00:00,"Chart animation (#2443)
+
+* demo purposes
+
+* only 1 y value
+
+* resolve flickering issue while animating
+
+* remove test attribute
+
+* small issue
+
+* remove toggle
+
+* remove animation
+
+* resolve comments
+
+* move Plotly to window
+
+* update animation data to TaipyData
+
+* fix unit tests
+
+* per Fred
+
+* per Fab
+
+* minor issue
+
+* move test back to DIV
+
+* fix chart
+
+* fix cast
+
+* cleaning
+
+* Update taipy/gui/viselements.json
+
+Co-authored-by: Fabien Lelaquais <86590727+FabienLelaquais@users.noreply.github.com>
+
+* restore id
+
+* format
+
+* mypy
+
+* Simplify and generalize
+
+* Added doc example for chart animation
+
+* lint
+
+---------
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>
+Co-authored-by: Fred Lefévère-Laoide <90181748+FredLL-Avaiga@users.noreply.github.com>
+Co-authored-by: Fabien Lelaquais <86590727+FabienLelaquais@users.noreply.github.com>
+Co-authored-by: Fabien Lelaquais <fabien.lelaquais@avaiga.com>",316,111,427,9,0fad04a8e458e3be45d7892d369fb069448dfbec
+Avaiga/taipy,0fad04a8e458e3be45d7892d369fb069448dfbec,https://github.com/Avaiga/taipy/commit/0fad04a8e458e3be45d7892d369fb069448dfbec,FredLL-Avaiga,90181748,User,2025-04-08T13:10:54+00:00,web-flow,2025-04-08T13:10:54+00:00,"set default behavior (#2544)
+
+change name
+resolves #2344
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",41,42,83,10,0336c921371998629e0046b2ea02b5a9129ccae0
+Avaiga/taipy,0336c921371998629e0046b2ea02b5a9129ccae0,https://github.com/Avaiga/taipy/commit/0336c921371998629e0046b2ea02b5a9129ccae0,pranshugupta01,100456318,User,2025-04-08T08:42:21+00:00,web-flow,2025-04-08T08:42:21+00:00,"Fix URL encoding in content accessor by replacing quote_plus with quote for file URLs (#2542)
+
+* Fix URL encoding in content accessor by replacing quote_plus with quote for file URLs
+
+* Add test for file download handling with spaces in file path
+
+This commit introduces a new test case to verify the functionality of file downloads when the file path contains spaces. The test creates a temporary file, sets the content variable in the GUI, and checks the generated markdown string against expected output, ensuring proper URL encoding for spaces.
+
+* Update expected output for file download test to reflect correct file path with spaces
+
+This commit modifies the expected output in the test for file downloads to ensure the correct URL is generated when the file path contains spaces. The change updates the defaultContent attribute to include the proper path format.",21,1,22,2,b9edfd95dcdefaa6eb299b64c4b3531f872681d3
+Avaiga/taipy,b9edfd95dcdefaa6eb299b64c4b3531f872681d3,https://github.com/Avaiga/taipy/commit/b9edfd95dcdefaa6eb299b64c4b3531f872681d3,trgiangdo,37588363,User,2025-04-07T12:47:28+00:00,web-flow,2025-04-07T12:47:28+00:00,"Merge pull request #2533 from Avaiga/refactor/route-datanode-read-write-to-manager
+
+Refactor: route DataNode.read() and write() to _DataNodeManager",157,37,194,16,"758909168a82af9a8d6ac5302af7311df9b3962c,ff78847d9c4cae6a008dcc6b2df85134787da733"
+Avaiga/taipy,ff78847d9c4cae6a008dcc6b2df85134787da733,https://github.com/Avaiga/taipy/commit/ff78847d9c4cae6a008dcc6b2df85134787da733,trgiangdo,37588363,User,2025-04-04T10:49:04+00:00,trgiangdo,2025-04-04T10:49:04+00:00,fix: add fastparquet to dev-packages of max Pipfile,4,0,4,4,aca4117092df485338157fae07f1b7e1a08912e2
+Avaiga/taipy,758909168a82af9a8d6ac5302af7311df9b3962c,https://github.com/Avaiga/taipy/commit/758909168a82af9a8d6ac5302af7311df9b3962c,FredLL-Avaiga,90181748,User,2025-04-04T10:41:56+00:00,web-flow,2025-04-04T10:41:56+00:00,"chart none data (#2538)
+
+resolves #2537
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",35,1,36,3,a213bc24b8abec6b04e6101622a0b997a90eddae
+Avaiga/taipy,aca4117092df485338157fae07f1b7e1a08912e2,https://github.com/Avaiga/taipy/commit/aca4117092df485338157fae07f1b7e1a08912e2,trgiangdo,37588363,User,2025-04-04T08:33:21+00:00,trgiangdo,2025-04-04T08:33:21+00:00,test: add _DataManager's tests for read write append,65,1,66,2,092d78cd0f346478cc10ef3caf0972e0b8d8583b
+Avaiga/taipy,a213bc24b8abec6b04e6101622a0b997a90eddae,https://github.com/Avaiga/taipy/commit/a213bc24b8abec6b04e6101622a0b997a90eddae,NOF03,105490848,User,2025-04-04T07:48:29+00:00,web-flow,2025-04-04T07:48:29+00:00,"Refactor button and input components to use dynamic height based on size prop (#2507)
+
+* Refactor button and input components to use dynamic height based on size prop
+
+* Add input_button_height to default config and update Input component styles
+
+* Add size property to input configuration and update documentation
+
+* Add test for Input component size prop and remove unused constants on other functions
+
+* Refactor Button and Input components to use expandSx for styling and remove getInputButtonHeight utility
+
+* Refactor Button component to remove expandSx usage and adjust styles for medium and large sizes
+
+* Refactor Input component to remove expandSx usage and adjust width handling in textSx",28,3,31,6,7126ce62b6b54aa42948de7fa65810e8852e257a
+Avaiga/taipy,092d78cd0f346478cc10ef3caf0972e0b8d8583b,https://github.com/Avaiga/taipy/commit/092d78cd0f346478cc10ef3caf0972e0b8d8583b,trgiangdo,37588363,User,2025-04-03T13:45:51+00:00,trgiangdo,2025-04-03T13:45:51+00:00,fix: add back the public api DataNode.read_or_raise(),31,1,32,9,1fb1f443e84379cc75dc08515476ed93f81aba42
+Avaiga/taipy,1fb1f443e84379cc75dc08515476ed93f81aba42,https://github.com/Avaiga/taipy/commit/1fb1f443e84379cc75dc08515476ed93f81aba42,trgiangdo,37588363,User,2025-04-03T00:34:21+00:00,trgiangdo,2025-04-03T00:34:21+00:00,refactor: route DataNode.read() and write() to _DataNodeManager,79,57,136,11,a0065c4634d12b7f8cd603a651d0fd127c3cf50b
+Avaiga/taipy,7126ce62b6b54aa42948de7fa65810e8852e257a,https://github.com/Avaiga/taipy/commit/7126ce62b6b54aa42948de7fa65810e8852e257a,FredLL-Avaiga,90181748,User,2025-04-02T16:58:33+00:00,web-flow,2025-04-02T16:58:33+00:00,"order of parameter generation for builder (#2530)
+
+* order of parameter generation for builder
+resolves #2529
+
+* Fab's comment
+
+---------
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",15,14,29,1,2574f6ad598c9debb93be518fc10e11a20685f38
+Avaiga/taipy,2574f6ad598c9debb93be518fc10e11a20685f38,https://github.com/Avaiga/taipy/commit/2574f6ad598c9debb93be518fc10e11a20685f38,jrobinAV,88036007,User,2025-04-02T16:24:07+00:00,jrobinAV,2025-04-02T16:24:07+00:00,Improve GitHub PR and issue templates,185,162,347,7,a0065c4634d12b7f8cd603a651d0fd127c3cf50b
+Avaiga/taipy,a0065c4634d12b7f8cd603a651d0fd127c3cf50b,https://github.com/Avaiga/taipy/commit/a0065c4634d12b7f8cd603a651d0fd127c3cf50b,FredLL-Avaiga,90181748,User,2025-04-02T07:18:47+00:00,web-flow,2025-04-02T07:18:47+00:00,"line breaks in table cells (#2525)
+
+* line breaks in table cells
+resolves #2524
+
+* add lineBreak to column Description
+
+---------
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",34,7,41,2,1e3d4d7c19f0f4ba3c45baa0c54c1584f8fbd779
+Avaiga/taipy,1e3d4d7c19f0f4ba3c45baa0c54c1584f8fbd779,https://github.com/Avaiga/taipy/commit/1e3d4d7c19f0f4ba3c45baa0c54c1584f8fbd779,trgiangdo,37588363,User,2025-03-28T06:50:12+00:00,web-flow,2025-03-28T06:50:12+00:00,"Merge pull request #2509 from Avaiga/refactor/remove-manager-set-api-and-add-update-api
+
+Refactor - Remove _Manager._set() api and add _Manager._update()",921,671,1592,81,"67e90d25b5e0d5e1c6b430fe5f53535790d114a2,736a48a70a3e64e7fa8ccd4e0e164a64ff490b96"
+Avaiga/taipy,67e90d25b5e0d5e1c6b430fe5f53535790d114a2,https://github.com/Avaiga/taipy/commit/67e90d25b5e0d5e1c6b430fe5f53535790d114a2,MiguelLehmann,126074597,User,2025-03-26T09:07:58+00:00,web-flow,2025-03-26T09:07:58+00:00,"Feature/#2292 allow menu to be expanded by default (Redo) (#2510)
+
+* Compressed changes
+
+* Renamed 'unfolded' to 'expanded'",32,7,39,6,ae499ac5225c3205480862560ec3df3fa8ab4a03
+Avaiga/taipy,736a48a70a3e64e7fa8ccd4e0e164a64ff490b96,https://github.com/Avaiga/taipy/commit/736a48a70a3e64e7fa8ccd4e0e164a64ff490b96,jrobinAV,88036007,User,2025-03-26T08:55:45+00:00,web-flow,2025-03-26T08:55:45+00:00,Merge branch 'develop' into refactor/remove-manager-set-api-and-add-update-api,419,614,1033,8,"5beeb1513beede25981212f1c843cd8e7d7e20b6,ae499ac5225c3205480862560ec3df3fa8ab4a03"
+Avaiga/taipy,5beeb1513beede25981212f1c843cd8e7d7e20b6,https://github.com/Avaiga/taipy/commit/5beeb1513beede25981212f1c843cd8e7d7e20b6,trgiangdo,37588363,User,2025-03-25T10:17:51+00:00,trgiangdo,2025-03-25T10:17:51+00:00,fix: remove unnecessary _TaskManager._update() method,0,6,6,1,34b7868a8cd2592a7b8fdcb9066961be94064555
+Avaiga/taipy,34b7868a8cd2592a7b8fdcb9066961be94064555,https://github.com/Avaiga/taipy/commit/34b7868a8cd2592a7b8fdcb9066961be94064555,trgiangdo,37588363,User,2025-03-25T10:00:53+00:00,web-flow,2025-03-25T10:00:53+00:00,"Update taipy/core/exceptions/exceptions.py
+
+Co-authored-by: Jean-Robin <jeanrobin.medori@avaiga.com>",1,1,2,1,c81b5aa95cb651b98efa2e2d2f42db7fa8c82a9a
+Avaiga/taipy,c81b5aa95cb651b98efa2e2d2f42db7fa8c82a9a,https://github.com/Avaiga/taipy/commit/c81b5aa95cb651b98efa2e2d2f42db7fa8c82a9a,trgiangdo,37588363,User,2025-03-25T08:44:11+00:00,trgiangdo,2025-03-25T08:44:11+00:00,refactor: rename _DataManager.__create() to __instantiate,2,2,4,1,78cf90fdc4655046a8dc3d6c3301b78003082474
+Avaiga/taipy,78cf90fdc4655046a8dc3d6c3301b78003082474,https://github.com/Avaiga/taipy/commit/78cf90fdc4655046a8dc3d6c3301b78003082474,trgiangdo,37588363,User,2025-03-25T08:32:38+00:00,trgiangdo,2025-03-25T08:32:38+00:00,fix: failed rest tests,16,5,21,4,dd09091d96f197b78a82bf14ee7e731604d1ac46
+Avaiga/taipy,dd09091d96f197b78a82bf14ee7e731604d1ac46,https://github.com/Avaiga/taipy/commit/dd09091d96f197b78a82bf14ee7e731604d1ac46,trgiangdo,37588363,User,2025-03-25T08:17:23+00:00,trgiangdo,2025-03-25T08:17:23+00:00,fix: remove unused exceptions,1,17,18,1,be56a7398f714085fd617b49645a48cdb54e00cf
+Avaiga/taipy,be56a7398f714085fd617b49645a48cdb54e00cf,https://github.com/Avaiga/taipy/commit/be56a7398f714085fd617b49645a48cdb54e00cf,trgiangdo,37588363,User,2025-03-24T11:03:30+00:00,trgiangdo,2025-03-24T11:03:30+00:00,refactor: remove _Manager._set() api and add _Manager._update(),926,665,1591,78,c0ba439faba937ac4f16b09118ff02646ecf2838
+Avaiga/taipy,ae499ac5225c3205480862560ec3df3fa8ab4a03,https://github.com/Avaiga/taipy/commit/ae499ac5225c3205480862560ec3df3fa8ab4a03,jrobinAV,88036007,User,2025-03-21T09:53:31+00:00,jrobinAV,2025-03-21T09:53:31+00:00,minor changes,2,2,4,2,6c236cb8551765658402f6b5143be2c96505f725
+Avaiga/taipy,6c236cb8551765658402f6b5143be2c96505f725,https://github.com/Avaiga/taipy/commit/6c236cb8551765658402f6b5143be2c96505f725,FredLL-Avaiga,90181748,User,2025-03-21T08:04:50+00:00,web-flow,2025-03-21T08:04:50+00:00,"Chart title dynamic (#2506)
+
+resolves #2371
+
+Co-authored-by: Fred Lefévère-Laoide <Fred.Lefevere-Laoide@Taipy.io>",417,612,1029,6,c0ba439faba937ac4f16b09118ff02646ecf2838
+Avaiga/taipy,c0ba439faba937ac4f16b09118ff02646ecf2838,https://github.com/Avaiga/taipy/commit/c0ba439faba937ac4f16b09118ff02646ecf2838,jrobinAV,88036007,User,2025-03-19T17:05:36+00:00,web-flow,2025-03-19T17:05:36+00:00,"Make core event registration able to support multiple topics (#2505)
+
+* Make core event registration able to support multiple topics
+
+Co-authored-by: Đỗ Trường Giang <do.giang@avaiga.com>",349,58,407,7,439c7f52253fc09dd41c455a8a9f8da962d49dfa

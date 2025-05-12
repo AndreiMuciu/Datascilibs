@@ -1,0 +1,499 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+keras-team/keras,24d226b4d5ef2d3b508b3fde94d91d1e902c622e,https://github.com/keras-team/keras/commit/24d226b4d5ef2d3b508b3fde94d91d1e902c622e,shashaka,37043543,User,2025-05-12T01:50:05+00:00,web-flow,2025-05-12T01:50:05+00:00,"Implement hamming function in keras.ops (#21273)
+
+* Add hamming windows for first
+
+* Add hamming window for ops
+
+* Add hamming test for ops",90,0,90,12,cbb3682cab33ae3f97e1a3b7da3e6cbeae07b83b
+keras-team/keras,cbb3682cab33ae3f97e1a3b7da3e6cbeae07b83b,https://github.com/keras-team/keras/commit/cbb3682cab33ae3f97e1a3b7da3e6cbeae07b83b,cantonios,2538739,User,2025-05-08T20:27:05+00:00,web-flow,2025-05-08T20:27:05+00:00,"Allow variable layout to be set on construction. (#21264)
+
+If a variable has a particular layout (e.g. is sharded across
+multiple devices/hosts), then any corresponding auxiliary variables,
+like optimizer gradient accumulators, need to have the same layout.
+This requires use to set the variable layout prior to initialization
+so that it is initialized correctly and efficiently across devices.
+
+Added optional `kwargs` to the base `Variable` class so they can
+handle (and ignore) any backend-specific options.  Modified
+`JaxVariable` to allow setting the layout parameter on construction.
+Modified `add_variable_from_reference` to copy the layout from
+the reference variable.",22,5,27,3,583306d25b632fad608d625723d9d7426698daa0
+keras-team/keras,583306d25b632fad608d625723d9d7426698daa0,https://github.com/keras-team/keras/commit/583306d25b632fad608d625723d9d7426698daa0,cantonios,2538739,User,2025-05-08T20:26:21+00:00,web-flow,2025-05-08T20:26:21+00:00,"Add support for jax.experimental.layout layouts. (#21263)
+
+In some cases we need to explicitly specify the layout in JAX
+(e.g. for sparse-core tables).  The previous distribution lib
+was hard-coded to expect `jax.sharding.Sharding`.  Generalized
+to support explicit Layouts.
+
+The previous `distribute_variable`/`distribute_tensor` code
+also used explicit device placement calls.  JAX should be
+able to handle all this automatically.  See [Making process-spanning arrays from external data](https://docs.jax.dev/en/latest/multi_process.html#making-process-spanning-arrays-from-external-data).",103,107,210,2,44c2f831daed1a2f3413c8886e105f9ad8fcc9d4
+keras-team/keras,44c2f831daed1a2f3413c8886e105f9ad8fcc9d4,https://github.com/keras-team/keras/commit/44c2f831daed1a2f3413c8886e105f9ad8fcc9d4,cantonios,2538739,User,2025-05-08T20:24:35+00:00,web-flow,2025-05-08T20:24:35+00:00,"Increment optimizer._iterations in apply(...). (#21262)
+
+Previously the iterations count was incremented in `backend_apply_gradients(...)`.
+However, this meant that if all variables had `overwrite_with_gradient`, or
+any other special handling within a custom optimizer, the iteration count
+would never be increased.  The iteration isn't updated via ""applying gradients""
+anyways, so it seems to make more sense to increment it directly in `apply`.",14,17,31,2,8d22f21367712474392ee1cefe1a1c0be63f208c
+keras-team/keras,8d22f21367712474392ee1cefe1a1c0be63f208c,https://github.com/keras-team/keras/commit/8d22f21367712474392ee1cefe1a1c0be63f208c,Imokutmfon,204155772,User,2025-05-08T20:13:32+00:00,web-flow,2025-05-08T20:13:32+00:00,"Add openvino backend support for numpy.hstack (#21257)
+
+* Add openvino backend support for numpy.hstack
+
+* Handle non-tuple
+
+* Handle non-tuple 2
+
+* Handle non-tuple 3
+
+* Add support for numpy.hstack",13,3,16,2,5f2793ec63ede88dd6ef8b4296c4b837572fd095
+keras-team/keras,5f2793ec63ede88dd6ef8b4296c4b837572fd095,https://github.com/keras-team/keras/commit/5f2793ec63ede88dd6ef8b4296c4b837572fd095,cantonios,2538739,User,2025-05-08T17:37:59+00:00,web-flow,2025-05-08T17:37:59+00:00,"Initialize random seed for distributed models. (#21261)
+
+Keep track of a `global_random_seed`, and ensure it is set
+when initializing `keras.distribution.initialize(...)`.
+
+In multi-host processes in JAX, all processes require consistent
+random number generation.  Otherwise, initializers on different
+hosts would produce inconsistent values, resulting in both
+compilation and runtime failures.",67,0,67,2,d9f1874e1f595121c0c83c499b9a60989a58e594
+keras-team/keras,d9f1874e1f595121c0c83c499b9a60989a58e594,https://github.com/keras-team/keras/commit/d9f1874e1f595121c0c83c499b9a60989a58e594,james77777778,20734616,User,2025-05-08T17:36:19+00:00,web-flow,2025-05-08T17:36:19+00:00,Simplify the logic of `quantize` and float8 build. (#21248),49,91,140,4,f98b91f47190f69209d3fa7ea512a05cc58aea9a
+keras-team/keras,f98b91f47190f69209d3fa7ea512a05cc58aea9a,https://github.com/keras-team/keras/commit/f98b91f47190f69209d3fa7ea512a05cc58aea9a,hertschuh,1091026,User,2025-05-07T22:02:11+00:00,web-flow,2025-05-07T22:02:11+00:00,"Bug fixes in `plot_model` with nested models. (#21243)
+
+There were several issues with `keras.utils.plot_model()` / `keras.utils.model_to_dot()` when rendering nested models with `expand_nested=True`:
+- Sequential models were not expanded
+- Edges going into nested models would always connect to the first box in the subgraph, which is incorrect because:
+  - Functional models can have multiple inputs and the edge needs to point to the correct input
+  - The destination of the edge can be further nested sub-models like Sequential sub-models
+- Edges going out of nested models would always connect from the last box in the subgraph, which is incorrect because:
+  - Functional models can have multiple outputs and the edge needs to come from the correct layer
+  - The source of the edge can be further nested in sub-models since there is no ""output"" box
+
+This adds to the integration tests. In particular, it augments the way the topology is verified:
+- it provides detailed message for dangling edges
+- it can inspected nested subgraphs
+- it verifies there are no extra edges that the ones expected
+- it can verify splits in the graph
+
+Visual tests: https://colab.research.google.com/gist/hertschuh/fb7dfdbf4fb31139e33e750ab10aaad4/plot_model-testing.ipynb
+
+Fixes https://github.com/keras-team/keras/issues/21119",771,470,1241,2,d8f3f70670537b6e08149be853c43510626444e3
+keras-team/keras,d8f3f70670537b6e08149be853c43510626444e3,https://github.com/keras-team/keras/commit/d8f3f70670537b6e08149be853c43510626444e3,pctablet505,55033230,User,2025-05-07T20:03:20+00:00,web-flow,2025-05-07T20:03:20+00:00,"Fixed issue with dot_product_attention when using TPU.  (#21254)
+
+* Update nn.py
+
+* Update nn.py
+
+* Update nn.py
+
+* Update nn.py
+
+* Update nn.py
+
+Corrected indentation in doc string
+
+* Update nn.py",186,42,228,1,3318d8f7b1a6a3c696bee65936a565437d8ae92f
+keras-team/keras,3318d8f7b1a6a3c696bee65936a565437d8ae92f,https://github.com/keras-team/keras/commit/3318d8f7b1a6a3c696bee65936a565437d8ae92f,hertschuh,1091026,User,2025-05-07T04:51:32+00:00,web-flow,2025-05-07T04:51:32+00:00,"Fix `take_along_axis` with TensorFlow with non-int32 indices. (#21256)
+
+Change https://github.com/keras-team/keras/pull/21239 broke one use case when the axis dimension is dynamic, the type of the indices is not int32, and the op is run in graph mode.
+
+Note that the additional unit tests don't actually cover this.",11,5,16,2,6ddaefb73ceec2f62e6f1bc78acccc5d02b421a5
+keras-team/keras,6ddaefb73ceec2f62e6f1bc78acccc5d02b421a5,https://github.com/keras-team/keras/commit/6ddaefb73ceec2f62e6f1bc78acccc5d02b421a5,DavidLandup0,60978046,User,2025-05-05T17:26:44+00:00,web-flow,2025-05-05T17:26:44+00:00,"[Keras Ops] view_as_complex() and view_as_real() (#21221)
+
+* Add view_as_complex and view_as_real methods and tests
+
+* Make op jax compatible
+
+* Run linter
+
+* Remove outdated test
+
+* Remove is_complex() call
+
+* Skip tests for openvino
+
+* fix backend call
+
+* update tests
+
+* update tests
+
+* Use standardize_dtype for comparisons
+
+* Move impl to math.py
+
+* Remove math namespace",170,0,170,4,459523949ee53a936894ddd3de446545c651f378
+keras-team/keras,459523949ee53a936894ddd3de446545c651f378,https://github.com/keras-team/keras/commit/459523949ee53a936894ddd3de446545c651f378,cantonios,2538739,User,2025-05-05T04:30:18+00:00,web-flow,2025-05-05T04:30:18+00:00,"Interleave optimizer variable creation to restore backward-compatibility. (#21247)
+
+Added optimizer variables were orginally interleaved during `build` prior to #21232,
+e.g. `{momentum0, velocity0, momentum1, velocity1, ...}`.  In #21232, the order
+was changed to non-interleaved for some optimizers, e.g.
+`{momentum0, momentum1, ..., velocity0, velocity1, ...}`.  This broke some
+custom checkpoint serialization compatibility that relied on the order of
+variables remaining consistent.
+
+Here we modify the base function `add_optimizer_variables(...)` to support
+creating multiple optimizer variables per training variable, and interleaves
+creation to restore backward compatibility.",80,35,115,8,df36b8e8051f7c76019a32e017871490730ed5e9
+keras-team/keras,df36b8e8051f7c76019a32e017871490730ed5e9,https://github.com/keras-team/keras/commit/df36b8e8051f7c76019a32e017871490730ed5e9,shashaka,37043543,User,2025-05-05T04:20:26+00:00,web-flow,2025-05-05T04:20:26+00:00,Add NotImplementedError for angle & bartlett on openvino (#21246),10,0,10,1,f5171b36b388d9e78f231ca5bdcf83377cd99f1d
+keras-team/keras,f5171b36b388d9e78f231ca5bdcf83377cd99f1d,https://github.com/keras-team/keras/commit/f5171b36b388d9e78f231ca5bdcf83377cd99f1d,shashaka,37043543,User,2025-05-04T05:09:41+00:00,web-flow,2025-05-04T05:09:41+00:00,"Implement blackman function in keras.ops (#21235)
+
+* Add blackman for ops
+
+* Add numpy test for blackman
+
+* Add excluded_concrete_tests for blackman
+
+* Add NotImplementedError for openvino",96,0,96,12,ce955890b1f2b3cdd6c8f7cd0187f96d77db0730
+keras-team/keras,ce955890b1f2b3cdd6c8f7cd0187f96d77db0730,https://github.com/keras-team/keras/commit/ce955890b1f2b3cdd6c8f7cd0187f96d77db0730,hertschuh,1091026,User,2025-05-04T05:08:45+00:00,web-flow,2025-05-04T05:08:45+00:00,"Make `take_along_axis` with TF backend compilable. (#21239)
+
+When there are dynamic dimensions, like typically the batch size, `tf.broadcast_dynamic_shape` is not always compilable.
+
+Replace with an adhoc implementation for dynamic dimensions where we rely on the broadcast itself to fail when the shapes are not broadcastable.
+
+Tested with https://github.com/keras-team/keras-rs/blob/main/examples/listwise_ranking.py on GPU as I was not able to distill a simple reproduction of this.",34,18,52,1,4c6b7e32f279e5df4514a726d523e698014817d8
+keras-team/keras,4c6b7e32f279e5df4514a726d523e698014817d8,https://github.com/keras-team/keras/commit/4c6b7e32f279e5df4514a726d523e698014817d8,emmanuel-ferdman,35470921,User,2025-05-03T03:46:36+00:00,web-flow,2025-05-03T03:46:36+00:00,"Fix message formatting (#21241)
+
+* Fix message formatting
+
+Signed-off-by: Emmanuel Ferdman <emmanuelferdman@gmail.com>
+
+* Fix message formatting
+
+Signed-off-by: Emmanuel Ferdman <emmanuelferdman@gmail.com>
+
+---------
+
+Signed-off-by: Emmanuel Ferdman <emmanuelferdman@gmail.com>",10,9,19,8,48a669218ca1d5a2848d7ac25e318e79eef82a44
+keras-team/keras,48a669218ca1d5a2848d7ac25e318e79eef82a44,https://github.com/keras-team/keras/commit/48a669218ca1d5a2848d7ac25e318e79eef82a44,SiddharthV147,113883699,User,2025-05-01T21:41:12+00:00,web-flow,2025-05-01T21:41:12+00:00,"Openvino numpy ravel (#21231)
+
+* Add support for numpy.ravel using OpenVINO opset.reshape
+
+* Add support for numpy.ravel using OpenVINO opset.reshape
+
+* Add support for numpy.ravel using OpenVINO opset.reshape
+
+* Add support for numpy.ravel using OpenVINO opset.reshape
+
+* Update excluded_concrete_tests.txt",5,3,8,2,8cf14447b31a00bf9aa75e97095ecb43f092486a
+keras-team/keras,8cf14447b31a00bf9aa75e97095ecb43f092486a,https://github.com/keras-team/keras/commit/8cf14447b31a00bf9aa75e97095ecb43f092486a,dependabot[bot],49699333,Bot,2025-05-01T15:47:01+00:00,web-flow,2025-05-01T15:47:01+00:00,"Bump github/codeql-action in the github-actions group (#21237)
+
+Bumps the github-actions group with 1 update: [github/codeql-action](https://github.com/github/codeql-action).
+
+
+Updates `github/codeql-action` from 3.28.13 to 3.28.16
+- [Release notes](https://github.com/github/codeql-action/releases)
+- [Changelog](https://github.com/github/codeql-action/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/github/codeql-action/compare/1b549b9259bda1cb5ddde3b41741a82a2d15a841...28deaeda66b76a05916b6923827895f2b14ab387)
+
+---
+updated-dependencies:
+- dependency-name: github/codeql-action
+  dependency-version: 3.28.16
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+  dependency-group: github-actions
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,b2fe0a7a881ce9d308c25cf27ff37a80d21a34be
+keras-team/keras,b2fe0a7a881ce9d308c25cf27ff37a80d21a34be,https://github.com/keras-team/keras/commit/b2fe0a7a881ce9d308c25cf27ff37a80d21a34be,neo-alex,26087829,User,2025-05-01T03:03:04+00:00,web-flow,2025-05-01T03:03:04+00:00,"Fix stacked RNN with mask in JAX & Numpy backends (#21224)
+
+* Fix stacked RNN with mask in JAX backend
+
+* Add unit test for stacked RNN mask
+
+* Fix stacked RNN with mask in Numpy backend
+
+* Move unit test to stacked_rnn_cells_test",27,8,35,3,d71a7fe2fb7db9181b9cc5631cf61f34eb1d6af3
+keras-team/keras,d71a7fe2fb7db9181b9cc5631cf61f34eb1d6af3,https://github.com/keras-team/keras/commit/d71a7fe2fb7db9181b9cc5631cf61f34eb1d6af3,shashaka,37043543,User,2025-04-30T23:32:55+00:00,web-flow,2025-04-30T23:32:55+00:00,"Implement bartlett function in keras.ops (#21214)
+
+* Add bartlett for ops
+
+* Update excluded_concrete_tests.txt",92,0,92,11,c0017df36478328e9ccaeeac535ef7cf75ce6913
+keras-team/keras,c0017df36478328e9ccaeeac535ef7cf75ce6913,https://github.com/keras-team/keras/commit/c0017df36478328e9ccaeeac535ef7cf75ce6913,cantonios,2538739,User,2025-04-30T23:29:02+00:00,web-flow,2025-04-30T23:29:02+00:00,"Don't create unused optimizer variables. (#21232)
+
+If `variable.overwrite_with_gradient == True`, then the only optimizer
+variable ever used for that variable is `base_optimizer._accumulated_gradients`.
+All other optimizer variables are unused.  This can be extremely wasteful
+if the training variables are large, for example in the case of large embedding
+tables that span multiple hosts/devices.
+
+Added a convenience function in the base optimizer `add_optimizer_variables(...)`
+that loops through the variable list and automatically adds a variable only
+if appropriate.  If a variable would otherwise be unused, a `None` is inserted
+into the list.  This is needed to keep `optimizer._get_variable_index()` consistent.
+Updated all built-in optimizers to use this.
+
+NOTE: if a custom optimizer that exists out in the wild still does create
+unused optimizer variables, the optimizer should still work - it will just
+be wasteful.  IOW this should not be a breaking change.",132,178,310,15,16ef8fb54576482bca10aa90ca2a7431de90b15b
+keras-team/keras,16ef8fb54576482bca10aa90ca2a7431de90b15b,https://github.com/keras-team/keras/commit/16ef8fb54576482bca10aa90ca2a7431de90b15b,Kayyuri,180251040,User,2025-04-30T22:25:04+00:00,web-flow,2025-04-30T22:25:04+00:00,"Updated confusion_metrics.py (#21227)
+
+Modified compile() API Code.",1,1,2,1,ff42a375bb838f3fc74bf46bc901c409f4324d96
+keras-team/keras,ff42a375bb838f3fc74bf46bc901c409f4324d96,https://github.com/keras-team/keras/commit/ff42a375bb838f3fc74bf46bc901c409f4324d96,JyotinderSingh,33001894,User,2025-04-30T22:24:37+00:00,web-flow,2025-04-30T22:24:37+00:00,"Adds `_register_call_context_args` to declare and use call-context arguments. (#21222)
+
+* Adds register_call_context_args API to layer class for better UX
+
+* remove type hints
+
+* Fixes typo + adds tests
+
+* Fixes comment
+
+* Improves test coverage
+
+* Added tests
+
+* Makes methods underscore-private
+
+* Rename @property to _call_context_args
+
+* makes _register_call_context_args the canonical way to use call context args
+
+* minor test fix",154,18,172,2,3a3f025e01b0340141c4556f6d5984c90888ae52
+keras-team/keras,3a3f025e01b0340141c4556f6d5984c90888ae52,https://github.com/keras-team/keras/commit/3a3f025e01b0340141c4556f6d5984c90888ae52,sonali-kumari1,180251223,User,2025-04-30T22:17:02+00:00,web-flow,2025-04-30T22:17:02+00:00,"Update conftest.py (#21220)
+
+* Update conftest.py
+
+updated the requires_trainable_backend decorator to use in operator for checking backend values.
+
+* Update conftest.py",1,1,2,1,06392a17c8932d341e8fdd95787e148dcc367a05
+keras-team/keras,06392a17c8932d341e8fdd95787e148dcc367a05,https://github.com/keras-team/keras/commit/06392a17c8932d341e8fdd95787e148dcc367a05,cantonios,2538739,User,2025-04-30T22:05:27+00:00,web-flow,2025-04-30T22:05:27+00:00,"Clear static loss-scale for inner optimizer in LossScaleOptimizer. (#21233)
+
+The outer `LossScaleOptimizer` ignores the inner's loss-scale factor
+when scaling the loss.  When computing unscaled gradients, we therefore
+need to eliminate the inner's loss scale factor, otherwise the gradients
+get incorrectly scaled.",23,0,23,2,37eacb012dff7bc6ffece2d5992faa4d279ed244
+keras-team/keras,37eacb012dff7bc6ffece2d5992faa4d279ed244,https://github.com/keras-team/keras/commit/37eacb012dff7bc6ffece2d5992faa4d279ed244,11happy,76656712,User,2025-04-28T17:33:50+00:00,web-flow,2025-04-28T17:33:50+00:00,"[OpenVINO Backend] : add support for numpy.nan_to_num (#21186)
+
+* feat: add support for numpy.nan_to_num
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* use np.inf
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* correct implementation based on new tests
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* use np only torch having import errors
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* use inf approach
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* refactor code
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+---------
+
+Signed-off-by: 11happy <soni5happy@gmail.com>",64,5,69,3,d94e91f831a331edca80f2bb726fe478d53f9569
+keras-team/keras,d94e91f831a331edca80f2bb726fe478d53f9569,https://github.com/keras-team/keras/commit/d94e91f831a331edca80f2bb726fe478d53f9569,fchollet,710255,User,2025-04-27T18:09:19+00:00,fchollet,2025-04-27T18:09:26+00:00,Fix warnings,20,15,35,3,525c65bdbdfc9a651d0200be0314eb194f843393
+keras-team/keras,525c65bdbdfc9a651d0200be0314eb194f843393,https://github.com/keras-team/keras/commit/525c65bdbdfc9a651d0200be0314eb194f843393,shashaka,37043543,User,2025-04-26T22:02:33+00:00,web-flow,2025-04-26T22:02:33+00:00,"Implement angle function in keras.ops (#21200)
+
+* Add first version of angle operation on numpy
+
+* Skip test with bfloat16 on numpy
+
+* Remove bfloat16 checking on Angle
+
+* Fix test case for float16 on torch cuda
+
+* exclude openvino test case
+
+* exclude openvino test case
+
+* exclude openvino test case
+
+* Update init files",117,0,117,11,55adc5780f2326c4f7f98a2aaa75c1873984a56d
+keras-team/keras,55adc5780f2326c4f7f98a2aaa75c1873984a56d,https://github.com/keras-team/keras/commit/55adc5780f2326c4f7f98a2aaa75c1873984a56d,LarsKue,37488165,User,2025-04-25T21:13:28+00:00,web-flow,2025-04-25T21:13:28+00:00,Fix Trainer.get_compile_config base case (empty dict) (#21212),1,0,1,1,3fcdbe0d86b811ed6b087a4179e69924a91a2009
+keras-team/keras,3fcdbe0d86b811ed6b087a4179e69924a91a2009,https://github.com/keras-team/keras/commit/3fcdbe0d86b811ed6b087a4179e69924a91a2009,nicolas-aagnes,34720493,User,2025-04-25T21:08:49+00:00,web-flow,2025-04-25T21:08:49+00:00,"Recognize /tfhub as a remote location. (#21211)
+
+* Recognize /tfhub as a remote location.
+
+* Add test",6,2,8,2,81c509799723d815ce0ad59e08d661dd3ce6941f
+keras-team/keras,81c509799723d815ce0ad59e08d661dd3ce6941f,https://github.com/keras-team/keras/commit/81c509799723d815ce0ad59e08d661dd3ce6941f,JyotinderSingh,33001894,User,2025-04-25T15:59:29+00:00,web-flow,2025-04-25T15:59:29+00:00,"Adds Support For Custom Call-Context Arguments (#21204)
+
+* Adds support for call context args
+
+* formatting fixes
+
+* passes kwargs to compute_output_spec of each layer for a sequential model
+
+* removes requirement for outer layers to declare context args in call signature
+
+* renames call_context_flags to call_context_args
+
+* Adds default return value for dictionary lookup
+
+* addresses comments
+
+* fixup comments
+
+* modifies test case to not handle context-arg in intermediate layer
+
+* fix comment",204,46,250,4,80493013bcfe46875faf8be486be70c93d6ba774
+keras-team/keras,80493013bcfe46875faf8be486be70c93d6ba774,https://github.com/keras-team/keras/commit/80493013bcfe46875faf8be486be70c93d6ba774,srinjoydutta03,114402816,User,2025-04-24T17:47:23+00:00,web-flow,2025-04-24T17:47:23+00:00,"[OpenVINO Backend] Support numpy min operation (#21168)
+
+* Add numpy min for OV Backend
+
+* Add boolean case
+
+* Fix failing tests issue
+
+* Update implementation",41,3,44,2,87d99f2ed84416ce78bbd0261c39e97ac59f3525
+keras-team/keras,87d99f2ed84416ce78bbd0261c39e97ac59f3525,https://github.com/keras-team/keras/commit/87d99f2ed84416ce78bbd0261c39e97ac59f3525,fchollet,710255,User,2025-04-23T20:28:01+00:00,fchollet,2025-04-23T20:28:01+00:00,Update version number,1,1,2,1,29a95e8ab12a7d3b772460a508d6c1a6cbc0c476
+keras-team/keras,29a95e8ab12a7d3b772460a508d6c1a6cbc0c476,https://github.com/keras-team/keras/commit/29a95e8ab12a7d3b772460a508d6c1a6cbc0c476,mattdangerw,1389937,User,2025-04-23T01:51:44+00:00,web-flow,2025-04-23T01:51:44+00:00,"Fix nightly releases (#21203)
+
+They have been broken for a month",2,13,15,2,99a6bdc4a6bbbc09ba735b6d0b27611b3f0b5d98
+keras-team/keras,99a6bdc4a6bbbc09ba735b6d0b27611b3f0b5d98,https://github.com/keras-team/keras/commit/99a6bdc4a6bbbc09ba735b6d0b27611b3f0b5d98,mattdangerw,1389937,User,2025-04-22T19:32:01+00:00,web-flow,2025-04-22T19:32:01+00:00,"Add pre-commit to the common requirements file (#21199)
+
+We also want it for cuda installations.",1,3,4,2,f430bb5c5621784a4a041ad158132bd330c353dc
+keras-team/keras,f430bb5c5621784a4a041ad158132bd330c353dc,https://github.com/keras-team/keras/commit/f430bb5c5621784a4a041ad158132bd330c353dc,victorgearhead,161515697,User,2025-04-22T19:31:07+00:00,web-flow,2025-04-22T19:31:07+00:00,"[Keras 3 OpenVINO Backend]: Support numpy.log1p operation #29487 (#21129)
+
+* Supports numpy.log1p operation
+
+* Applied api-gen hook modifications
+
+* Revert ""Applied api-gen hook modifications""
+
+This reverts commit 2b880fa3a3c47650fdbd32ebc98005fa1949e887.
+
+* Excluded Concrete Tests
+
+* Put Blank Line",11,3,14,2,bcb5786a523894933e8da5ba440ec9e93fe4f756
+keras-team/keras,bcb5786a523894933e8da5ba440ec9e93fe4f756,https://github.com/keras-team/keras/commit/bcb5786a523894933e8da5ba440ec9e93fe4f756,mattdangerw,1389937,User,2025-04-22T19:30:37+00:00,web-flow,2025-04-22T19:30:37+00:00,"Add openvino to the basic requirements file (#21198)
+
+Unlike jax/torch/tensorflow which all vie for a certain cuda, I
+don't think openvino has trouble co-installing.
+
+And without the basic requirements.txt will not give a working
+dev environment. You can't run pre-commit without openvino installed.",2,14,16,5,6413e1d1e5dc87699a1747602ec2cc9ce4f25228
+keras-team/keras,6413e1d1e5dc87699a1747602ec2cc9ce4f25228,https://github.com/keras-team/keras/commit/6413e1d1e5dc87699a1747602ec2cc9ce4f25228,mattdangerw,1389937,User,2025-04-22T19:29:44+00:00,web-flow,2025-04-22T19:29:44+00:00,"Add back shell/format.sh, but it just runs pre-commit (#21197)
+
+For folks who are used to the old format, this will print instructions.
+And for people like me, saves needing to remember
+`SKIP=api-gen pre-commit run --all-files`
+When I just want the formatter. api_gen.py is too slow to run every time.",13,0,13,1,eb10d1fab9b06190d01d11088e6fea391deb591d
+keras-team/keras,eb10d1fab9b06190d01d11088e6fea391deb591d,https://github.com/keras-team/keras/commit/eb10d1fab9b06190d01d11088e6fea391deb591d,mattdangerw,1389937,User,2025-04-22T19:29:00+00:00,web-flow,2025-04-22T19:29:00+00:00,Redundant imports; no path hacking in package (#21187),3632,2813,6445,135,41d77373a3f7b90858f5a8a56651d59074f9e3e7
+keras-team/keras,41d77373a3f7b90858f5a8a56651d59074f9e3e7,https://github.com/keras-team/keras/commit/41d77373a3f7b90858f5a8a56651d59074f9e3e7,cantonios,2538739,User,2025-04-22T16:40:10+00:00,web-flow,2025-04-22T16:40:10+00:00,"Don't scale gradients if overwriting variable with gradient. (#21193)
+
+If overwriting, the gradient represents the desired final value of the variable,
+so if we did scale it, we're changing that value.",39,6,45,3,84c3bfc9bcdeda591d199ef6d378646e383413ba
+keras-team/keras,84c3bfc9bcdeda591d199ef6d378646e383413ba,https://github.com/keras-team/keras/commit/84c3bfc9bcdeda591d199ef6d378646e383413ba,cantonios,2538739,User,2025-04-21T23:27:32+00:00,web-flow,2025-04-21T23:27:32+00:00,"Return explicitly layout if already set on variable. (#21194)
+
+If explicitly overwriting a variable._layout, we want to keep this
+layout in any future calls.  This allows auxiliary variables (e.g.
+optimizer gradients, momentums) to use the same explicit layout.",39,0,39,2,1e9466a3367da6c42bd1736d3ac1e5b959b7a354
+keras-team/keras,1e9466a3367da6c42bd1736d3ac1e5b959b7a354,https://github.com/keras-team/keras/commit/1e9466a3367da6c42bd1736d3ac1e5b959b7a354,hertschuh,1091026,User,2025-04-21T22:32:58+00:00,web-flow,2025-04-21T22:32:58+00:00,"Allow `Embedding` subclasses to only override `compute_output_shape`. (#21195)
+
+Without the need to also override `compute_output_spec`.",1,1,2,1,8a6e83bd237e72a8306d95e3e82802c97b9f8ee8
+keras-team/keras,8a6e83bd237e72a8306d95e3e82802c97b9f8ee8,https://github.com/keras-team/keras/commit/8a6e83bd237e72a8306d95e3e82802c97b9f8ee8,hertschuh,1091026,User,2025-04-21T19:24:10+00:00,web-flow,2025-04-21T19:24:10+00:00,"Fix `Embedding.compute_output_spec` with a non-`KerasTensor` input. (#21192)
+
+The `ragged` attribute exists only with `KerasTensor`s.
+
+Minor fix of a unit tests that was using the same local variable for two nested loops.",4,3,7,2,72cc27fdbcecf62f93a1803c6d66172be325f248
+keras-team/keras,72cc27fdbcecf62f93a1803c6d66172be325f248,https://github.com/keras-team/keras/commit/72cc27fdbcecf62f93a1803c6d66172be325f248,dependabot[bot],49699333,Bot,2025-04-21T18:51:01+00:00,web-flow,2025-04-21T18:51:01+00:00,"Bump the python group with 5 updates (#21114)
+
+Updates the requirements on [tensorflow-cpu](https://github.com/tensorflow/tensorflow), [tensorflow](https://github.com/tensorflow/tensorflow), [torch](https://github.com/pytorch/pytorch), [torch-xla](https://github.com/pytorch/xla) and [tensorflow[and-cuda]](https://github.com/tensorflow/tensorflow) to permit the latest version.
+
+Updates `tensorflow-cpu` to 2.18.1
+- [Release notes](https://github.com/tensorflow/tensorflow/releases)
+- [Changelog](https://github.com/tensorflow/tensorflow/blob/v2.18.1/RELEASE.md)
+- [Commits](https://github.com/tensorflow/tensorflow/compare/v2.18.0...v2.18.1)
+
+Updates `tensorflow` to 2.18.1
+- [Release notes](https://github.com/tensorflow/tensorflow/releases)
+- [Changelog](https://github.com/tensorflow/tensorflow/blob/v2.18.1/RELEASE.md)
+- [Commits](https://github.com/tensorflow/tensorflow/compare/v2.18.0...v2.18.1)
+
+Updates `torch` from 2.5.1+cu121 to 2.6.0
+- [Release notes](https://github.com/pytorch/pytorch/releases)
+- [Changelog](https://github.com/pytorch/pytorch/blob/main/RELEASE.md)
+- [Commits](https://github.com/pytorch/pytorch/commits/v2.6.0)
+
+Updates `torch-xla` from 2.5.1 to 2.6.0
+- [Release notes](https://github.com/pytorch/xla/releases)
+- [Commits](https://github.com/pytorch/xla/compare/v2.5.1...v2.6.0)
+
+Updates `tensorflow[and-cuda]` to 2.18.1
+- [Release notes](https://github.com/tensorflow/tensorflow/releases)
+- [Changelog](https://github.com/tensorflow/tensorflow/blob/v2.18.1/RELEASE.md)
+- [Commits](https://github.com/tensorflow/tensorflow/compare/v2.18.0...v2.18.1)
+
+---
+updated-dependencies:
+- dependency-name: tensorflow-cpu
+  dependency-type: direct:production
+  dependency-group: python
+- dependency-name: tensorflow
+  dependency-type: direct:production
+  dependency-group: python
+- dependency-name: torch
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: python
+- dependency-name: torch-xla
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: python
+- dependency-name: tensorflow[and-cuda]
+  dependency-type: direct:production
+  dependency-group: python
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",10,10,20,4,dd9132ff68a4626ee6a1477611ce414f43e4d3de
+keras-team/keras,dd9132ff68a4626ee6a1477611ce414f43e4d3de,https://github.com/keras-team/keras/commit/dd9132ff68a4626ee6a1477611ce414f43e4d3de,cantonios,2538739,User,2025-04-18T18:49:47+00:00,web-flow,2025-04-18T18:49:47+00:00,"Fix dtype detection for JAX types. (#21184)
+
+The jax types like `jax.float32` have a string representation of
+```
+<class 'jax.numpy.float32'>
+```
+so with the previous code, would be ""standardized"" as `float32'>` (trailing quote and angle bracket),
+which is an invalid type.  But, the JAX dtypes _do_ have a `__name__` property, so should be
+properly detected if we switch the order around.
+
+Kept the old `jax.numpy` string version in place in case that worked with older versions of JAX.",2,2,4,1,50dae307fe9023742e9c91e567032eeb78c5b3c8
+keras-team/keras,50dae307fe9023742e9c91e567032eeb78c5b3c8,https://github.com/keras-team/keras/commit/50dae307fe9023742e9c91e567032eeb78c5b3c8,hertschuh,1091026,User,2025-04-18T02:08:21+00:00,web-flow,2025-04-18T02:08:21+00:00,"Add sparse support to `ops.ones_like` and `ops.zeros_like`. (#21181)
+
+`ops.zeros_like` is in particular useful for creating a mask of the populated values in the sparse tensor.",16,6,22,4,65f7e6dc0871236ffae4a20e1e398048e9e942e1
+keras-team/keras,65f7e6dc0871236ffae4a20e1e398048e9e942e1,https://github.com/keras-team/keras/commit/65f7e6dc0871236ffae4a20e1e398048e9e942e1,11happy,76656712,User,2025-04-17T20:43:01+00:00,web-flow,2025-04-17T20:43:01+00:00,"[OpenVINO BACKEND] - feat: implement numpy.nonzero for openvino backend (#21163)
+
+* feat: implement numpy.nonzero for openvino backend
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* format code
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+---------
+
+Signed-off-by: 11happy <soni5happy@gmail.com>",3,5,8,2,c7b6b424feef65b366bfa776d2155ee1b2967b5b
+keras-team/keras,c7b6b424feef65b366bfa776d2155ee1b2967b5b,https://github.com/keras-team/keras/commit/c7b6b424feef65b366bfa776d2155ee1b2967b5b,shashaka,37043543,User,2025-04-17T15:52:21+00:00,web-flow,2025-04-17T15:52:21+00:00,"Add sparse_sigmoid activation (#21175)
+
+* Add sparse_sigmoid activation layer
+
+* Correct typo",176,0,176,15,b840164a1b1804fa0007ce32e31126f0bcdb7066
+keras-team/keras,b840164a1b1804fa0007ce32e31126f0bcdb7066,https://github.com/keras-team/keras/commit/b840164a1b1804fa0007ce32e31126f0bcdb7066,hertschuh,1091026,User,2025-04-17T03:19:27+00:00,web-flow,2025-04-17T03:19:27+00:00,"Fix Embedding test with ragged tensors on GPU. (#21177)
+
+The loss needs to not have any non-compilable op.",7,4,11,1,8e4b4abcca0002c4435d54aa191d3e76a92e44d1
+keras-team/keras,8e4b4abcca0002c4435d54aa191d3e76a92e44d1,https://github.com/keras-team/keras/commit/8e4b4abcca0002c4435d54aa191d3e76a92e44d1,11happy,76656712,User,2025-04-16T19:17:58+00:00,web-flow,2025-04-16T19:17:58+00:00,"[OpenVINO Backend]: support numpy.ndim (#21176)
+
+* feat: support numpy.ndim
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+* use shapeof shapeof method
+
+Signed-off-by: 11happy <soni5happy@gmail.com>
+
+---------
+
+Signed-off-by: 11happy <soni5happy@gmail.com>",4,2,6,2,1ea81a16497644b5130862b0702c7315b6dfc887

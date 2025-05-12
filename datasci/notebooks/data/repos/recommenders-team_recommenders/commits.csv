@@ -1,0 +1,147 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+recommenders-team/recommenders,45e1b215a35e69b92390e16eb818d4528d0a33a2,https://github.com/recommenders-team/recommenders/commit/45e1b215a35e69b92390e16eb818d4528d0a33a2,miguelgfierro,3491412,User,2025-05-08T19:01:52+00:00,web-flow,2025-05-08T19:01:52+00:00,"Merge pull request #2231 from recommenders-team/staging
+
+Staging to main: fixed issue with wikidata",2,0,2,1,"d0d315368a28615591f8860683ae66207fc8c49d,c275ec9802f9da1b4289123a2c79c2254da42435"
+recommenders-team/recommenders,c275ec9802f9da1b4289123a2c79c2254da42435,https://github.com/recommenders-team/recommenders/commit/c275ec9802f9da1b4289123a2c79c2254da42435,miguelgfierro,3491412,User,2025-05-06T05:35:38+00:00,web-flow,2025-05-06T05:35:38+00:00,"Merge pull request #2229 from recommenders-team/skip_wikidata
+
+Skip wikidata notebooks due to the API being unstable",2,0,2,1,"ea07f412370b5f1d80b23b8f4aa9681cb678d260,d588c9a60887d18aa3b374cd41d2e9dd855c2cfb"
+recommenders-team/recommenders,d0d315368a28615591f8860683ae66207fc8c49d,https://github.com/recommenders-team/recommenders/commit/d0d315368a28615591f8860683ae66207fc8c49d,miguelgfierro,3491412,User,2025-05-05T13:55:59+00:00,web-flow,2025-05-05T13:55:59+00:00,"Merge pull request #2222 from recommenders-team/staging
+
+Staging to main",510,269,779,19,"d58014367f66cea4596a728ba3994c2ed3d12fe3,ea07f412370b5f1d80b23b8f4aa9681cb678d260"
+recommenders-team/recommenders,d588c9a60887d18aa3b374cd41d2e9dd855c2cfb,https://github.com/recommenders-team/recommenders/commit/d588c9a60887d18aa3b374cd41d2e9dd855c2cfb,miguelgfierro,3491412,User,2025-05-05T13:47:53+00:00,miguelgfierro,2025-05-05T13:47:53+00:00,"Skip wikidata notebooks due to the API being unstable
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",2,0,2,1,ea07f412370b5f1d80b23b8f4aa9681cb678d260
+recommenders-team/recommenders,ea07f412370b5f1d80b23b8f4aa9681cb678d260,https://github.com/recommenders-team/recommenders/commit/ea07f412370b5f1d80b23b8f4aa9681cb678d260,miguelgfierro,3491412,User,2025-05-03T08:27:35+00:00,web-flow,2025-05-03T08:27:35+00:00,"Merge pull request #2227 from recommenders-team/wiki_error
+
+Improve knowledge graph notebook and wikidata function",173,126,299,4,"fe2f289c056f40d8ebff5cfd632fa889f8f4f494,249e870abe384d7fd8ac7b93dd11536948e103df"
+recommenders-team/recommenders,249e870abe384d7fd8ac7b93dd11536948e103df,https://github.com/recommenders-team/recommenders/commit/249e870abe384d7fd8ac7b93dd11536948e103df,miguelgfierro,3491412,User,2025-05-02T14:21:44+00:00,miguelgfierro,2025-05-02T14:21:44+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,1,2,1,2878e28f3c91726e239468771abe29bc338c55d5
+recommenders-team/recommenders,2878e28f3c91726e239468771abe29bc338c55d5,https://github.com/recommenders-team/recommenders/commit/2878e28f3c91726e239468771abe29bc338c55d5,miguelgfierro,3491412,User,2025-05-02T14:21:14+00:00,miguelgfierro,2025-05-02T14:21:14+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",0,2,2,1,1a33b2373dcedc888c91d2d4999e77e918f1db94
+recommenders-team/recommenders,1a33b2373dcedc888c91d2d4999e77e918f1db94,https://github.com/recommenders-team/recommenders/commit/1a33b2373dcedc888c91d2d4999e77e918f1db94,miguelgfierro,3491412,User,2025-05-02T13:01:22+00:00,miguelgfierro,2025-05-02T13:01:22+00:00,Merge branch 'wiki_error' of github.com:recommenders-team/recommenders into wiki_error,0,0,0,0,"1ed430a34add2960ca7a63ef7a037fcde3a2ef9d,927bf0551c25c71840959c453324ae1e8ea2c31f"
+recommenders-team/recommenders,1ed430a34add2960ca7a63ef7a037fcde3a2ef9d,https://github.com/recommenders-team/recommenders/commit/1ed430a34add2960ca7a63ef7a037fcde3a2ef9d,miguelgfierro,3491412,User,2025-05-02T13:00:58+00:00,miguelgfierro,2025-05-02T13:00:58+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",7,1,8,1,65a65b361fd1cc1bf14ec1bff2d5e460dcc686e8
+recommenders-team/recommenders,65a65b361fd1cc1bf14ec1bff2d5e460dcc686e8,https://github.com/recommenders-team/recommenders/commit/65a65b361fd1cc1bf14ec1bff2d5e460dcc686e8,miguelgfierro,3491412,User,2025-05-02T10:57:47+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",3,2,5,1,8de24f298a505cb4fa33d47eb372d0c7c120b223
+recommenders-team/recommenders,8de24f298a505cb4fa33d47eb372d0c7c120b223,https://github.com/recommenders-team/recommenders/commit/8de24f298a505cb4fa33d47eb372d0c7c120b223,miguelgfierro,3491412,User,2025-05-02T10:54:49+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,1,2,1,3fc38aa8256cb727e12d887ce022709ba14d3e61
+recommenders-team/recommenders,3fc38aa8256cb727e12d887ce022709ba14d3e61,https://github.com/recommenders-team/recommenders/commit/3fc38aa8256cb727e12d887ce022709ba14d3e61,miguelgfierro,3491412,User,2025-05-02T10:54:27+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",12,6,18,1,583fe5cd6e6e0ed0d83a14ff5e9b67eb47eba784
+recommenders-team/recommenders,583fe5cd6e6e0ed0d83a14ff5e9b67eb47eba784,https://github.com/recommenders-team/recommenders/commit/583fe5cd6e6e0ed0d83a14ff5e9b67eb47eba784,miguelgfierro,3491412,User,2025-05-02T10:43:21+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",3,0,3,1,a7e07e0c108af3be553017f298beb6bff2059077
+recommenders-team/recommenders,a7e07e0c108af3be553017f298beb6bff2059077,https://github.com/recommenders-team/recommenders/commit/a7e07e0c108af3be553017f298beb6bff2059077,miguelgfierro,3491412,User,2025-05-02T10:40:11+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"stronger
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",12,11,23,1,1ab29ed85e350a2c5dcf80a579cc2af0b1668f87
+recommenders-team/recommenders,1ab29ed85e350a2c5dcf80a579cc2af0b1668f87,https://github.com/recommenders-team/recommenders/commit/1ab29ed85e350a2c5dcf80a579cc2af0b1668f87,miguelgfierro,3491412,User,2025-05-02T10:24:04+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",5,2,7,1,8e4b0539cc9cd5405c5263a77f5f3438ea55fe5b
+recommenders-team/recommenders,8e4b0539cc9cd5405c5263a77f5f3438ea55fe5b,https://github.com/recommenders-team/recommenders/commit/8e4b0539cc9cd5405c5263a77f5f3438ea55fe5b,miguelgfierro,3491412,User,2025-05-02T10:22:09+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,9e0fd1db727392c5ce19bbbc18423e205bf29437
+recommenders-team/recommenders,9e0fd1db727392c5ce19bbbc18423e205bf29437,https://github.com/recommenders-team/recommenders/commit/9e0fd1db727392c5ce19bbbc18423e205bf29437,miguelgfierro,3491412,User,2025-05-02T10:20:19+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,3,7,1,f59216b241176bf700d5d1e6155295c6d76ce921
+recommenders-team/recommenders,f59216b241176bf700d5d1e6155295c6d76ce921,https://github.com/recommenders-team/recommenders/commit/f59216b241176bf700d5d1e6155295c6d76ce921,miguelgfierro,3491412,User,2025-05-02T09:49:05+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"rerun
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",17,87,104,1,c6662c195966d17328ce9b97605be93a8b9ab9cf
+recommenders-team/recommenders,c6662c195966d17328ce9b97605be93a8b9ab9cf,https://github.com/recommenders-team/recommenders/commit/c6662c195966d17328ce9b97605be93a8b9ab9cf,miguelgfierro,3491412,User,2025-05-02T09:47:21+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,"run
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",129,73,202,1,7d8ae7ebe6f0bfb003112e3408d93fa84d0f1017
+recommenders-team/recommenders,7d8ae7ebe6f0bfb003112e3408d93fa84d0f1017,https://github.com/recommenders-team/recommenders/commit/7d8ae7ebe6f0bfb003112e3408d93fa84d0f1017,miguelgfierro,3491412,User,2025-05-02T09:39:30+00:00,miguelgfierro,2025-05-02T12:57:47+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,3,7,1,54e64c8d5518b45914924b6d2df55c514f35b84d
+recommenders-team/recommenders,54e64c8d5518b45914924b6d2df55c514f35b84d,https://github.com/recommenders-team/recommenders/commit/54e64c8d5518b45914924b6d2df55c514f35b84d,miguelgfierro,3491412,User,2025-05-02T09:38:16+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"simplification
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,6,7,1,502a4288e1aa597d48139b44bba56d737490b3dc
+recommenders-team/recommenders,502a4288e1aa597d48139b44bba56d737490b3dc,https://github.com/recommenders-team/recommenders/commit/502a4288e1aa597d48139b44bba56d737490b3dc,miguelgfierro,3491412,User,2025-05-02T09:22:17+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"@lru_cache(maxsize=1024)
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",6,0,6,1,bfc92bc7655e81ff3ac84770c736bcdd6e765647
+recommenders-team/recommenders,bfc92bc7655e81ff3ac84770c736bcdd6e765647,https://github.com/recommenders-team/recommenders/commit/bfc92bc7655e81ff3ac84770c736bcdd6e765647,miguelgfierro,3491412,User,2025-05-02T09:12:54+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"less retries
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,c87fb99e095fd7e9ae9cdc2864835d8728d3de05
+recommenders-team/recommenders,c87fb99e095fd7e9ae9cdc2864835d8728d3de05,https://github.com/recommenders-team/recommenders/commit/c87fb99e095fd7e9ae9cdc2864835d8728d3de05,miguelgfierro,3491412,User,2025-05-02T09:05:55+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"refact other functions
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",14,13,27,1,e8f5dcc4709d6fd0f948b9a0c790b8fdf628b5bf
+recommenders-team/recommenders,e8f5dcc4709d6fd0f948b9a0c790b8fdf628b5bf,https://github.com/recommenders-team/recommenders/commit/e8f5dcc4709d6fd0f948b9a0c790b8fdf628b5bf,miguelgfierro,3491412,User,2025-05-02T08:49:05+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",2,2,4,1,e10402b58315e9d38f55fc5c8c684c00b3c14b3a
+recommenders-team/recommenders,e10402b58315e9d38f55fc5c8c684c00b3c14b3a,https://github.com/recommenders-team/recommenders/commit/e10402b58315e9d38f55fc5c8c684c00b3c14b3a,miguelgfierro,3491412,User,2025-05-02T08:46:36+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"simplifycation
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",40,23,63,1,3dc4450f58c24b16fa63f16466f35188c7dd1dee
+recommenders-team/recommenders,3dc4450f58c24b16fa63f16466f35188c7dd1dee,https://github.com/recommenders-team/recommenders/commit/3dc4450f58c24b16fa63f16466f35188c7dd1dee,miguelgfierro,3491412,User,2025-05-02T08:30:06+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,1,2,1,13ad2164898b19cdf6c47bbf24cc316daf738c31
+recommenders-team/recommenders,13ad2164898b19cdf6c47bbf24cc316daf738c31,https://github.com/recommenders-team/recommenders/commit/13ad2164898b19cdf6c47bbf24cc316daf738c31,miguelgfierro,3491412,User,2025-05-02T08:27:26+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,958c1f17aabf5ca9ef703d02eea9373e3f02b06b
+recommenders-team/recommenders,958c1f17aabf5ca9ef703d02eea9373e3f02b06b,https://github.com/recommenders-team/recommenders/commit/958c1f17aabf5ca9ef703d02eea9373e3f02b06b,miguelgfierro,3491412,User,2025-05-02T08:24:21+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"log retries simplyfication
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",13,11,24,1,747d5f12c76b472fefdd2fe18f7727a1147c787d
+recommenders-team/recommenders,747d5f12c76b472fefdd2fe18f7727a1147c787d,https://github.com/recommenders-team/recommenders/commit/747d5f12c76b472fefdd2fe18f7727a1147c787d,miguelgfierro,3491412,User,2025-05-02T08:10:13+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"log retries
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",30,53,83,1,9b929670cda02cf519c0a778bb3dc5421f100f0d
+recommenders-team/recommenders,9b929670cda02cf519c0a778bb3dc5421f100f0d,https://github.com/recommenders-team/recommenders/commit/9b929670cda02cf519c0a778bb3dc5421f100f0d,miguelgfierro,3491412,User,2025-05-02T07:04:13+00:00,miguelgfierro,2025-05-02T12:57:46+00:00,"retry with logging
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",46,3,49,1,579ef7d50dd26d2e01dfe8dee61a8063bad0dcb8
+recommenders-team/recommenders,927bf0551c25c71840959c453324ae1e8ea2c31f,https://github.com/recommenders-team/recommenders/commit/927bf0551c25c71840959c453324ae1e8ea2c31f,miguelgfierro,3491412,User,2025-05-02T10:57:47+00:00,miguelgfierro,2025-05-02T10:57:47+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",3,2,5,1,17c90bfc6ee3fad5d6812f98fadde80f1e76313a
+recommenders-team/recommenders,17c90bfc6ee3fad5d6812f98fadde80f1e76313a,https://github.com/recommenders-team/recommenders/commit/17c90bfc6ee3fad5d6812f98fadde80f1e76313a,miguelgfierro,3491412,User,2025-05-02T10:54:49+00:00,miguelgfierro,2025-05-02T10:54:49+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,1,2,1,fe48468c2eeec173e6de593adc57f23fabc7cd44
+recommenders-team/recommenders,fe48468c2eeec173e6de593adc57f23fabc7cd44,https://github.com/recommenders-team/recommenders/commit/fe48468c2eeec173e6de593adc57f23fabc7cd44,miguelgfierro,3491412,User,2025-05-02T10:54:27+00:00,miguelgfierro,2025-05-02T10:54:27+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",12,6,18,1,f63ef3eff895aa95f266498cca3ac23414153371
+recommenders-team/recommenders,f63ef3eff895aa95f266498cca3ac23414153371,https://github.com/recommenders-team/recommenders/commit/f63ef3eff895aa95f266498cca3ac23414153371,miguelgfierro,3491412,User,2025-05-02T10:43:21+00:00,miguelgfierro,2025-05-02T10:43:21+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",3,0,3,1,72ff5bc1b269e95a15aa9218bdb806138a86db24
+recommenders-team/recommenders,72ff5bc1b269e95a15aa9218bdb806138a86db24,https://github.com/recommenders-team/recommenders/commit/72ff5bc1b269e95a15aa9218bdb806138a86db24,miguelgfierro,3491412,User,2025-05-02T10:40:11+00:00,miguelgfierro,2025-05-02T10:40:11+00:00,"stronger
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",12,11,23,1,fc02f53ce6db7adadff47c1ea5d30321f0583181
+recommenders-team/recommenders,fc02f53ce6db7adadff47c1ea5d30321f0583181,https://github.com/recommenders-team/recommenders/commit/fc02f53ce6db7adadff47c1ea5d30321f0583181,miguelgfierro,3491412,User,2025-05-02T10:24:04+00:00,miguelgfierro,2025-05-02T10:24:04+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",5,2,7,1,58f553ee6e9a5a5b033bff5dd7b271902c43da84
+recommenders-team/recommenders,58f553ee6e9a5a5b033bff5dd7b271902c43da84,https://github.com/recommenders-team/recommenders/commit/58f553ee6e9a5a5b033bff5dd7b271902c43da84,miguelgfierro,3491412,User,2025-05-02T10:22:09+00:00,miguelgfierro,2025-05-02T10:22:09+00:00,"tests
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,10c5886351d403fcd150ec76a2a76039a5cd5fb7
+recommenders-team/recommenders,10c5886351d403fcd150ec76a2a76039a5cd5fb7,https://github.com/recommenders-team/recommenders/commit/10c5886351d403fcd150ec76a2a76039a5cd5fb7,miguelgfierro,3491412,User,2025-05-02T10:20:19+00:00,miguelgfierro,2025-05-02T10:20:19+00:00,":bug:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,3,7,1,5bc1952c63e36d251bc19a1bc3683297a0804314
+recommenders-team/recommenders,5bc1952c63e36d251bc19a1bc3683297a0804314,https://github.com/recommenders-team/recommenders/commit/5bc1952c63e36d251bc19a1bc3683297a0804314,miguelgfierro,3491412,User,2025-05-02T09:49:05+00:00,miguelgfierro,2025-05-02T09:49:05+00:00,"rerun
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",17,87,104,1,d6365ff4dfe22035e0f83097a3449c24eb45b26b
+recommenders-team/recommenders,d6365ff4dfe22035e0f83097a3449c24eb45b26b,https://github.com/recommenders-team/recommenders/commit/d6365ff4dfe22035e0f83097a3449c24eb45b26b,miguelgfierro,3491412,User,2025-05-02T09:47:21+00:00,miguelgfierro,2025-05-02T09:47:21+00:00,"run
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",129,73,202,1,a883c0122f9b45710c2bfccc892292b6a9450453
+recommenders-team/recommenders,a883c0122f9b45710c2bfccc892292b6a9450453,https://github.com/recommenders-team/recommenders/commit/a883c0122f9b45710c2bfccc892292b6a9450453,miguelgfierro,3491412,User,2025-05-02T09:39:30+00:00,miguelgfierro,2025-05-02T09:39:30+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,3,7,1,094ff0dc0c7e7a379d26634ca8cdb35cbc162b20
+recommenders-team/recommenders,094ff0dc0c7e7a379d26634ca8cdb35cbc162b20,https://github.com/recommenders-team/recommenders/commit/094ff0dc0c7e7a379d26634ca8cdb35cbc162b20,miguelgfierro,3491412,User,2025-05-02T09:38:16+00:00,miguelgfierro,2025-05-02T09:38:16+00:00,simplification,1,6,7,1,8a00e1484524a867b085a192bc3525843c17f743
+recommenders-team/recommenders,8a00e1484524a867b085a192bc3525843c17f743,https://github.com/recommenders-team/recommenders/commit/8a00e1484524a867b085a192bc3525843c17f743,miguelgfierro,3491412,User,2025-05-02T09:22:17+00:00,miguelgfierro,2025-05-02T09:22:17+00:00,"@lru_cache(maxsize=1024)
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",6,0,6,1,0b3e71c6c223ae46b88e782e89219c56066d05a1
+recommenders-team/recommenders,0b3e71c6c223ae46b88e782e89219c56066d05a1,https://github.com/recommenders-team/recommenders/commit/0b3e71c6c223ae46b88e782e89219c56066d05a1,miguelgfierro,3491412,User,2025-05-02T09:12:54+00:00,miguelgfierro,2025-05-02T09:12:54+00:00,"less retries
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,dc3ebffe49ee3f29653a13089aeebc5e3e126b13
+recommenders-team/recommenders,dc3ebffe49ee3f29653a13089aeebc5e3e126b13,https://github.com/recommenders-team/recommenders/commit/dc3ebffe49ee3f29653a13089aeebc5e3e126b13,miguelgfierro,3491412,User,2025-05-02T09:05:55+00:00,miguelgfierro,2025-05-02T09:05:55+00:00,"refact other functions
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",14,13,27,1,9eeb68741232cfd3b8b7b1347a3993952dffcfec
+recommenders-team/recommenders,9eeb68741232cfd3b8b7b1347a3993952dffcfec,https://github.com/recommenders-team/recommenders/commit/9eeb68741232cfd3b8b7b1347a3993952dffcfec,miguelgfierro,3491412,User,2025-05-02T08:49:05+00:00,miguelgfierro,2025-05-02T08:49:05+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",2,2,4,1,ba80ecc0d39a65dcf1cf16663c6d00093ef39e6a
+recommenders-team/recommenders,ba80ecc0d39a65dcf1cf16663c6d00093ef39e6a,https://github.com/recommenders-team/recommenders/commit/ba80ecc0d39a65dcf1cf16663c6d00093ef39e6a,miguelgfierro,3491412,User,2025-05-02T08:46:36+00:00,miguelgfierro,2025-05-02T08:46:36+00:00,"simplifycation
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",40,23,63,1,34e2822a6d79e1074167780aee4f7e39742cf340
+recommenders-team/recommenders,34e2822a6d79e1074167780aee4f7e39742cf340,https://github.com/recommenders-team/recommenders/commit/34e2822a6d79e1074167780aee4f7e39742cf340,miguelgfierro,3491412,User,2025-05-02T08:30:06+00:00,miguelgfierro,2025-05-02T08:30:06+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",1,1,2,1,477f21bf8d392391b89ff96d5f7c7f932c1115b5
+recommenders-team/recommenders,477f21bf8d392391b89ff96d5f7c7f932c1115b5,https://github.com/recommenders-team/recommenders/commit/477f21bf8d392391b89ff96d5f7c7f932c1115b5,miguelgfierro,3491412,User,2025-05-02T08:27:26+00:00,miguelgfierro,2025-05-02T08:27:26+00:00,":memo:
+
+Signed-off-by: miguelgfierro <miguelgfierro@users.noreply.github.com>",4,4,8,1,cd1ed0dadbd9a17de454a0a39251579b7d1b858c

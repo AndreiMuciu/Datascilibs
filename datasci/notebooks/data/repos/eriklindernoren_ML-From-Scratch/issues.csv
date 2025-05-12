@@ -1,0 +1,1217 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+eriklindernoren/ML-From-Scratch,3002034876,115,added linear-regression-example to README.md,Added a simple linear regression code example using scikit-learn and matplotlib for visualization in README.md,student-dristi,179995836,open,False,0,2025-04-17T10:04:24+00:00,2025-04-17T10:04:24+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2827202734,114,Linear activation + requirements update,"Added a linear activation function, along with changing the deprecated ""sklearn"" it to ""scikit-learn"".",yazanmashal03,120487049,closed,False,0,2025-02-03T11:11:06+00:00,2025-02-06T10:14:30+00:00,2025-02-06T10:14:29+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2814187338,113,Remove useless (and wrong) import of class SquareLoss.,"Closes #111
+
+This PR fixes the issue described in issue #111, where the class `SquareLoss` was imported but not used, and the import was from an incorrect path, causing errors.
+
+",paolobighignoli,157036732,open,False,0,2025-01-27T22:26:16+00:00,2025-01-27T22:26:16+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2814169586,112,Changed sklearn to scikit-learn in requirements.txt file.,"Closes #109 
+Simply changed the name of the package from `sklearn` to `scikit-learn` in the `requirements.txt` file.",paolobighignoli,157036732,open,False,0,2025-01-27T22:13:55+00:00,2025-01-27T22:13:55+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2675027925,111,No module named 'mlfromscratch.utils.loss_functions',"Traceback (most recent call last):
+  File ""C:\G\ML-From-Scratch\mlfromscratch\examples\gradient_boosting_regressor.py"", line 9, in <module>
+    from mlfromscratch.utils.loss_functions import SquareLoss
+ModuleNotFoundError: No module named 'mlfromscratch.utils.loss_functions'",LeiYangGH,5386998,open,False,0,2024-11-20T08:51:03+00:00,2024-11-20T08:51:03+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2674954403,110,setting an array element with a sequence,"PS C:\G\ML-From-Scratch> python mlfromscratch/examples/polynomial_regression.py
+Finding regularization constant using cross validation:
+Traceback (most recent call last):
+  File ""C:\G\ML-From-Scratch\mlfromscratch\examples\polynomial_regression.py"", line 81, in <module>
+    main()
+  File ""C:\G\ML-From-Scratch\mlfromscratch\examples\polynomial_regression.py"", line 32, in main
+    cross_validation_sets = k_fold_cross_validation_sets(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\user\.conda\envs\tor\Lib\site-packages\mlfromscratch-0.0.4-py3.12.egg\mlfromscratch\utils\data_manipulation.py"", line 145, in k_fold_cross_validation_sets
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (10, 4) + inhomogeneous part.",LeiYangGH,5386998,open,False,1,2024-11-20T08:39:43+00:00,2025-02-28T17:19:01+00:00,,,2,2,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2674946669,109,scikit-learn instead of sklearn,"in my python install, i got
+
+> Setup script exited with The 'sklearn' PyPI package is deprecated, use 'scikit-learn'
+
+changing the module name in `requirements.txt` fixes.",LeiYangGH,5386998,open,False,0,2024-11-20T08:36:02+00:00,2024-11-20T08:36:02+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2204285450,108,Naive Bayes,"Shouldn't the coefficient be
+coeff = 1.0 / math.pi * math.sqrt(2.0 * math.pi) + eps
+In equation of normal equation the pi is outside of sqrt
+ ",StevenSopilidis,66069086,open,False,2,2024-03-24T10:33:59+00:00,2024-05-12T20:33:13+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,2095194543,107,(A doubt NOT an issue) Gradient of loss function having different sign after performing first-degree differentiation of LogisticLoss,"I differentiated the loss function in the LogisiticLoss() class used in XGboost to get the gradient. I am getting (y - p) but turns out that it is -(y - p). For more reference, here is the [link](https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/supervised_learning/xgboost.py) to the exact class and function, I am referring to. Am I missing something?",mehulofficial14,114902200,open,False,0,2024-01-23T04:00:11+00:00,2024-01-23T04:02:25+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1943736719,106,Update README.md,"<a href=""https://www.freecounterstat.com"" title=""counter for website""><img src=""https://counter6.optistats.ovh/private/freecounterstat.php?c=dp3ygaf2u5c3d18n5tygynykutw96gtd"" border=""0"" title=""counter for website"" alt=""counter for website""></a>",Sanjay0037,142281197,closed,False,0,2023-10-15T06:05:06+00:00,2023-10-15T08:47:25+00:00,2023-10-15T07:31:21+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1685283791,105,Linear Regression Regularization bias,"Minor suggestion: 
+Using all the weights (including bias) in regularization might end up in constraining aformentioned bias for non-normilized training data.
+e.g:
+```
+  class l1_regularization():
+      """""" Regularization for Lasso Regression """"""    
+      def __call__(self, w):
+          return self.alpha * np.linalg.norm(w) # this will constrain the bias too
+```
+
+It's extremely easy to fix, since you add bias as the zero'th column in data:
+```
+    def fit(self, X, y):
+        # Insert constant ones for bias weights
+        X = np.insert(X, 0, 1, axis=1)           
+        self.training_errors = []
+        self.initialize_weights(n_features=X.shape[1])
+   ``` 
+The new regularization should exclude zero'th weight from norms (and it's less than one line fix :)
+```
+  class l1_regularization():
+      """""" Regularization for Lasso Regression """"""
+      def __init__(self, alpha):
+          self.alpha = alpha
+      
+      def __call__(self, w):
+          return self.alpha * np.linalg.norm(w[1:]) # here
+  
+      def grad(self, w):
+          return self.alpha * np.sign(w[1:]) # and here
+
+```
+
+Same for the l2 and l1_l2",kotlyar-shapirov,33311367,open,False,1,2023-04-26T15:46:36+00:00,2023-12-17T16:31:39+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1590780794,104,Nestrov Accelerated Gradient Descent ,"class NesterovAcceleratedGradient():
+    def __init__(self, learning_rate=0.001, momentum=0.4):
+        self.learning_rate = learning_rate 
+        self.momentum = momentum
+        self.w_updt =  None#np.array([])
+
+    def update(self, w, grad_func):
+        # Calculate the gradient of the loss a bit further down the slope from w
+        
+        if self.w_updt is None:
+            self.w_updt = np.zeros(np.shape(w))
+
+        # print(""shape og w"",w.shape)
+        # print(""shape og w"",self.w_updt.shape)
+        approx_future_grad = np.clip((grad_func(w - self.momentum * self.w_updt)), -1, 1)
+        #print(approx_future_grad)
+        # Initialize on first update
+        if not self.w_updt.any():
+            self.w_updt = np.zeros(np.shape(w))
+
+        self.w_updt = self.momentum * self.w_updt + self.learning_rate * approx_future_grad
+        # Move against the gradient to minimize loss
+        return w - self.w_updt
+
+
+Here grad_func is not implemented! ",DataSenseiAryan,30952255,open,False,1,2023-02-19T17:29:04+00:00,2023-03-16T17:27:00+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1423449383,103,"Bug fix, use L1-norm instead of L2-norm for L1 regularization","The default norm for `np.linalg.norm` is the Frobenius norm or L2-norm. This needs to change to the L1 norm (Manhattan) to be correct.
+
+PS. This project is somewhat abandoned it seems, but I think it makes sense to have a PR for other people looking for things that might be incorrect. I spent some time trying to figure this one out :P ",klintan,3429513,open,False,0,2022-10-26T05:13:56+00:00,2022-10-26T05:13:56+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1423331096,102,Project dependencies may have API risk issues,"Hi, In **ML-From-Scratch**, inappropriate dependency versioning constraints can cause risks.
+
+Below are the dependencies and version constraints that the project is using
+
+```
+matplotlib
+numpy
+sklearn
+pandas
+cvxopt
+scipy
+progressbar33
+terminaltables
+gym
+```
+
+The version constraint **==** will introduce the risk of dependency conflicts because the scope of dependencies is too strict.
+The version constraint **No Upper Bound** and **\*** will introduce the risk of the missing API Error because the latest version of the dependencies may remove some APIs.
+
+After further analysis, in this project,
+The version constraint of dependency **numpy** can be changed to *>=1.8.0,<=1.23.0rc3*.
+The version constraint of dependency **pandas** can be changed to *>=0.4.0,<=1.2.5*.
+
+The above modification suggestions can reduce the dependency conflicts as much as possible, 
+and introduce the latest version as much as possible without calling Error in the projects.
+
+The invocation of the current project includes all the following methods.
+
+<details><summary>The calling methods from the numpy</summary>
+ <pre>numpy.linalg.eigh
+numpy.linalg.eig
+numpy.linalg.svd
+numpy.linalg.norm
+numpy.linalg.det
+numpy.linalg.inv
+numpy.linalg.pinv
+</pre>
+</details>
+<details><summary>The calling methods from the pandas</summary>
+ <pre>pandas.read_csv
+</pre>
+</details>
+<details><summary>The calling methods from the all methods</summary>
+ <pre>mlfromscratch.supervised_learning.LassoRegression.predict
+w.T.dot
+self.layer_input.T.dot
+progressbar.Percentage
+mlfromscratch.reinforcement_learning.DeepQNetwork
+self.W.reshape
+numpy.concatenate
+KNN
+model_builder
+matplotlib.pyplot.legend
+GAN.train
+layer.backward_pass
+mlfromscratch.utils.polynomial_features.dot
+mlfromscratch.utils.to_categorical.astype
+numpy.linalg.pinv
+NotImplementedError
+self.U_opt.update
+self._determine_frequent_itemsets
+self._mutate
+NaiveBayes.fit
+mlfromscratch.unsupervised_learning.KMeans
+mlfromscratch.supervised_learning.NaiveBayes.fit
+numpy.argsort
+self._transaction_contains_items
+sample_predictions.astype
+l1_l2_regularization
+sets.append
+self.output_shape
+self._calculate_centroids
+self._get_frequent_items
+mlfromscratch.supervised_learning.XGBoostRegressionTree.fit
+accum_grad.transpose.reshape
+mlfromscratch.supervised_learning.PolynomialRidgeRegression.predict
+y_pred.append
+mlfromscratch.supervised_learning.BayesianRegression.predict
+mlfromscratch.deep_learning.NeuralNetwork.add
+NeuralNetwork.add
+self.layers.append
+self._insert_tree
+numpy.random.shuffle
+self.combined.train_on_batch
+mlfromscratch.supervised_learning.BayesianRegression.fit
+self.output_activation
+ClassificationTree.fit
+sklearn.datasets.load_digits
+mlfromscratch.supervised_learning.LassoRegression
+numpy.mean
+cutoff.i.parent2.layers.w0.copy
+self.train_on_batch
+grad_wrt_state.T.dot
+self._transform
+mlfromscratch.supervised_learning.XGBoost.predict
+mlfromscratch.supervised_learning.KNN.predict
+self._converged
+self.GradientBoostingClassifier.super.__init__
+self.omega0.X_X.np.linalg.pinv.dot
+reversed
+gym.make
+accum_grad.transpose.ravel
+mlfromscratch.utils.calculate_covariance_matrix
+mlfromscratch.unsupervised_learning.PCA
+y.np.array.astype
+self.hidden_activation.gradient
+self.sigmoid
+numpy.split
+sigmoid.dot
+logging.basicConfig
+self.memory.pop
+self._get_frequent_itemsets
+X.diag_gradient.X.T.dot.dot.np.linalg.pinv.dot
+tmp_y2.astype
+mlfromscratch.deep_learning.layers.Reshape
+Autoencoder.train
+self._construct_tree
+self.ElasticNet.super.predict
+diff.any
+max
+self._sample
+mlfromscratch.deep_learning.NeuralNetwork
+isinstance
+self.LassoRegression.super.predict
+mean.sample.T.dot
+self.predict_value
+diag_gradient.X.T.dot.dot
+self.activation_func
+tmp_y1.astype
+os.path.dirname
+j.i.axs.axis
+neighbor_labels.astype
+numpy.expand_dims
+X.T.dot.dot
+dqn.model.summary
+batch.sum
+numpy.mean.append
+self._init_random_centroids
+self._calculate_likelihood
+grad_func
+mlfromscratch.utils.make_diagonal
+self._build_tree
+matplotlib.pyplot.get_cmap
+self.activation_func.gradient
+self.build_encoder
+mlfromscratch.reinforcement_learning.DeepQNetwork.play
+mlfromscratch.supervised_learning.decision_tree.RegressionTree
+mlfromscratch.supervised_learning.ParticleSwarmOptimizedNN
+SupportVectorMachine
+posteriors.append
+LogisticLoss
+hidden_output.T.dot
+self.omega0.dot
+gen_mult_ser
+grad_wrt_state.dot.dot
+mlfromscratch.supervised_learning.SupportVectorMachine.predict
+self.model.train_on_batch
+math.ceil
+V.dot
+sigmoid
+self._forward_pass
+layer.forward_pass
+numpy.array
+numpy.random.randint
+numpy.linalg.norm
+self.LinearRegression.super.__init__
+self._calculate_support
+numpy.round
+mlfromscratch.deep_learning.NeuralNetwork.test_on_batch
+LDA
+numpy.power
+matplotlib.pyplot.figure.add_subplot
+LDA.fit
+self.test_on_batch
+mlfromscratch.supervised_learning.Adaboost
+self.PolynomialRidgeRegression.super.__init__
+mlfromscratch.utils.make_diagonal.dot
+determine_padding
+layer.initialize
+self.save_imgs
+mlfromscratch.supervised_learning.LinearRegression.fit
+mlfromscratch.utils.data_operation.accuracy_score
+self._split
+self.find_frequent_itemsets
+min
+model.evolve.test_on_batch
+numpy.repeat
+self.__call__
+self.build_discriminator
+print
+numpy.linalg.inv
+mlfromscratch.supervised_learning.RandomForest.fit
+X.reshape.repeat
+LDA.predict
+numpy.linspace
+mlfromscratch.unsupervised_learning.PAM.predict
+l2_regularization
+self._calculate_fitness.append
+RandomForest
+enumerate
+mlfromscratch.utils.divide_on_feature
+mlfromscratch.utils.batch_iterator
+mlfromscratch.utils.data_manipulation.train_test_split
+X.resp.sum
+mlfromscratch.supervised_learning.NaiveBayes.predict
+mlfromscratch.utils.train_test_split
+self._pool_forward
+math.floor
+sklearn.datasets.make_classification
+layer.parameters
+self.LassoRegression.super.__init__
+numpy.clip
+f.read.split
+Perceptron.predict
+mlfromscratch.unsupervised_learning.Apriori
+calculate_std_dev
+self.env.render
+log2
+numpy.identity
+Perceptron.fit
+X.reshape.dot
+mlfromscratch.supervised_learning.SupportVectorMachine.fit
+self._expectation
+self.build_generator
+tree.predict
+numpy.tile
+filter_width.filter_height.channels.np.arange.np.repeat.reshape
+self.LassoRegression.super.fit
+mlfromscratch.unsupervised_learning.PCA.transform
+numpy.atleast_2d
+self.discriminator.summary
+batch_errors.append
+self._backward_pass
+numpy.linalg.det
+self.ElasticNet.super.fit
+layer.set_input_shape
+mlfromscratch.deep_learning.layers.Conv2D
+self._vote
+self.sigmoid.gradient
+mlfromscratch.utils.calculate_entropy
+numpy.sum
+self.model.predict
+mlfromscratch.unsupervised_learning.PAM
+individual.test_on_batch
+index_combinations
+progressbar.Bar
+col.mean
+numpy.ones
+numpy.arange
+cvxopt.solvers.qp
+NaiveBayes
+self.letters.index
+t.accum_grad.T.dot
+mlfromscratch.unsupervised_learning.FPGrowth.find_frequent_itemsets
+cutoff.i.parent1.layers.W.copy
+mlfromscratch.supervised_learning.GradientBoostingRegressor.fit
+matplotlib.pyplot.title
+range
+mlfromscratch.reinforcement_learning.DeepQNetwork.train
+matplotlib.pyplot.figure
+mlfromscratch.supervised_learning.ElasticNet.fit
+GradientBoostingClassifier.fit
+numpy.insert
+mlfromscratch.supervised_learning.Adaboost.predict
+os.path.join
+self.hidden_activation
+self.PolynomialRidgeRegression.super.predict
+mlfromscratch.deep_learning.loss_functions.CrossEntropy
+self._expand_cluster
+mlfromscratch.supervised_learning.PolynomialRidgeRegression.fit
+mlfromscratch.utils.k_fold_cross_validation_sets
+matplotlib.pyplot.axis
+self._calculate_scatter_matrices
+X.dot
+frequent.append
+self._get_non_medoids
+mlfromscratch.supervised_learning.BayesianRegression
+self.w0_opt.update
+mlfromscratch.deep_learning.layers.ZeroPadding2D
+mlfromscratch.deep_learning.activation_functions.Sigmoid
+X.std
+DCGAN.train
+sklearn.datasets.load_iris
+numpy.exp
+self.regularization.grad
+mlfromscratch.unsupervised_learning.DBSCAN.predict
+Perceptron
+self.XGBoostRegressionTree.super.fit
+x.strip.replace
+sigmoid.sum
+rules.append
+matplotlib.pyplot.close
+Adaboost.predict
+col.var
+KNN.predict
+matplotlib.pyplot.ylabel
+self._build_model
+mlfromscratch.unsupervised_learning.RBM
+self.cmap
+numpy.amax
+S.np.linalg.pinv.V.dot.dot
+self._calculate_prior
+float
+mlfromscratch.supervised_learning.XGBoost.fit
+mlfromscratch.supervised_learning.LDA.predict
+matplotlib.pyplot.subplots
+mlfromscratch.supervised_learning.KNN
+numpy.random.random_sample
+self.multivariate_gaussian
+image_to_column
+numpy.bincount
+matplotlib.pyplot.suptitle
+mlfromscratch.supervised_learning.ClassificationTree.fit
+self.env.close
+numpy.random.normal
+column_to_image
+sklearn.datasets.make_moons
+items.sort
+mu_n.T.dot
+sample_predictions.astype.np.bincount.argmax
+activation_function
+get_im2col_indices
+self.kernel
+X1.mean
+cutoff.i.parent2.layers.W.copy
+mlfromscratch.deep_learning.optimizers.Adam
+self.print_tree
+X_test.reshape.reshape
+mlfromscratch.supervised_learning.GradientBoostingClassifier.fit
+y_pred.np.sign.flatten
+mlfromscratch.supervised_learning.MultiClassLDA
+XGBoost.fit
+pow
+shuffle_data
+self.W_opt.update
+numpy.empty
+conditional_database.append
+cols.transpose.reshape
+self._closest_centroid
+XGBoost.predict
+mlfromscratch.supervised_learning.GradientBoostingRegressor.predict
+self._inherit_weights
+accum_grad.reshape.transpose
+mlfromscratch.utils.data_operation.calculate_covariance_matrix
+mlfromscratch.utils.accuracy_score
+self.transform
+numpy.ravel
+numpy.argmax
+X_train.reshape.reshape
+self._generate_candidates
+terminaltables.AsciiTable
+numpy.random.uniform
+mnist.data.reshape
+self.LinearRegression.super.fit
+X.T.X_X.np.linalg.pinv.dot.dot
+split_func
+self._leaf_value_calculation
+mlfromscratch.deep_learning.layers.Activation
+mlfromscratch.utils.calculate_variance
+mlfromscratch.supervised_learning.LogisticRegression.predict
+self.param.X.dot.self.sigmoid.np.round.astype
+self.loss.hess
+mlfromscratch.supervised_learning.LinearRegression
+mlfromscratch.supervised_learning.GradientBoostingRegressor
+numpy.pad.transpose
+i.self.parameters.append
+progressbar.ProgressBar
+model.evolve.add
+self.w_updt.any
+j.i.axs.imshow
+self.autoencoder.train_on_batch
+X.reshape.reshape
+x.strip
+self.PolynomialRegression.super.__init__
+numpy.percentile
+mlfromscratch.supervised_learning.LogisticRegression
+numpy.tile.reshape
+numpy.log
+self._calculate_cost
+mlfromscratch.supervised_learning.MultiClassLDA.plot_in_2d
+covar.np.linalg.pinv.mean.sample.T.dot.dot
+mlfromscratch.deep_learning.NeuralNetwork.summary
+mlfromscratch.reinforcement_learning.DeepQNetwork.set_model
+numpy.divide
+numpy.var
+numpy.add.at
+noise.self.generator.predict.reshape
+self.autoencoder.summary
+t.accum_grad.dot
+numpy.random.seed
+t.X.dot
+mlfromscratch.utils.polynomial_features
+mlfromscratch.utils.to_categorical
+mlfromscratch.supervised_learning.RegressionTree.predict
+math.sqrt
+model.velocity.append
+numpy.random.rand
+MultilayerPerceptron.fit
+mlfromscratch.supervised_learning.XGBoostRegressionTree
+y_pred.y.self.loss.hess.sum
+mlfromscratch.supervised_learning.RegressionTree.fit
+self._create_clusters
+mlfromscratch.unsupervised_learning.Apriori.find_frequent_itemsets
+super
+layer.output_shape
+mlfromscratch.supervised_learning.XGBoost
+X.T.X.diag_gradient.X.T.dot.dot.np.linalg.pinv.dot.dot
+i.parent.layers.W.copy
+self.loss_function.gradient
+mlfromscratch.deep_learning.layers.BatchNormalization
+self.trees.append
+self.W_col.T.dot
+numpy.roll
+self._initialize_weights
+self.V_opt.update
+i.self.trees.predict
+mlfromscratch.unsupervised_learning.Apriori.generate_rules
+slice
+self._get_likelihoods
+activation.activation_functions
+SW.np.linalg.inv.dot
+numpy.sign
+mlfromscratch.supervised_learning.ClassificationTree
+self.discriminator.train_on_batch
+math.log
+str
+self._memorize
+mlfromscratch.utils.euclidean_distance
+NeuralNetwork.predict
+self._get_non_medoids.append
+model.evolve.predict
+numpy.atleast_2d.reshape
+numpy.argmax.any
+hasattr
+SupportVectorMachine.predict
+self.X_col.T.accum_grad.dot.reshape
+numpy.zeros
+scipy.stats.chi2.rvs
+self._initialize_population
+DCGAN
+XGBoost
+SupportVectorMachine.fit
+y_pred.y.dot
+mlfromscratch.supervised_learning.LinearRegression.predict
+self.RegressionTree.super.fit
+self._update_weights
+mlfromscratch.supervised_learning.ClassificationTree.predict
+mlfromscratch.supervised_learning.Adaboost.fit
+X.mean
+NaiveBayes.predict
+mlfromscratch.utils.standardize
+mlfromscratch.supervised_learning.LDA
+self.beta_opt.update
+numpy.repeat.reshape
+numpy.full
+format
+batch.dot
+self.autoencoder.predict
+self._determine_prefixes
+os.path.abspath
+mlfromscratch.deep_learning.loss_functions.SquareLoss
+DecisionStump
+self.autoencoder.layers.extend
+self.population.append
+scipy.stats.multivariate_normal.rvs
+list
+f.read
+self.loss.gradient.dot
+sklearn.datasets.make_regression
+self._classify
+cluster.append
+sklearn.datasets.make_blobs
+numpy.multiply
+model
+self._closest_medoid
+numpy.shape
+self.bar
+self.RidgeRegression.super.__init__
+total_mean._mean.dot
+self._pool_backward
+mlfromscratch.supervised_learning.GradientBoostingClassifier.predict
+self.output_activation.gradient
+numpy.unique
+tuple
+accum_grad.reshape.reshape
+self.parameters.append
+numpy.outer
+mlfromscratch.utils.get_random_subsets
+Adaboost.fit
+self.activation.gradient
+numpy.zeros_like
+len
+self._gain
+numpy.array_equal
+X.diag_gradient.dot.dot
+self._get_frequent_items.index
+S.np.linalg.pinv.V.dot.dot.dot
+zip
+y.shape.X.shape.model_builder.summary
+self.clusters.append
+self._has_infrequent_itemsets
+self._init_random_medoids.copy
+t.self.states.dot
+self.reconstruct
+self.env.step
+self.size.X.repeat.repeat
+MultilayerPerceptron
+self.responsibility.argmax
+loss
+mlfromscratch.unsupervised_learning.DBSCAN
+sample.dot
+numpy.atleast_1d
+sklearn.datasets.fetch_mldata
+X.mean.X.T.dot
+mlfromscratch.utils.normalize.dot
+self.fit
+itertools.combinations_with_replacement
+mlfromscratch.deep_learning.layers.RNN
+self._init_random_gaussians
+centroid_i.clusters.append
+self.model_builder
+set
+self._draw_scaled_inv_chi_sq
+l1_regularization
+self.ElasticNet.super.__init__
+self.clfs.append
+self.PolynomialRegression.super.predict
+fig.savefig
+sum
+Y.mean
+mlfromscratch.supervised_learning.LDA.fit
+accum_grad.reshape.dot
+setuptools.setup
+LogisticRegression.predict
+mlfromscratch.supervised_learning.LassoRegression.fit
+self.initialize_weights
+self.memory.append
+mlfromscratch.supervised_learning.decision_tree.RegressionTree.predict
+X_X.np.linalg.pinv.dot
+X_col.np.argmax.flatten
+cmap
+cutoff.i.parent1.layers.w0.copy
+copy.copy
+self._crossover
+layer.layer_name
+y_pred.y.self.loss.gradient.y.sum
+name.activation_functions
+self.hidden_activation.dot
+self.GradientBoostingRegressor.super.__init__
+numpy.pad.reshape
+omega_n.dot
+GradientBoostingClassifier.predict
+numpy.bincount.argmax
+mlfromscratch.supervised_learning.Perceptron.fit
+numpy.inner
+mlfromscratch.supervised_learning.GradientBoostingClassifier
+join
+matplotlib.pyplot.scatter
+matplotlib.pyplot.show
+self._rules_from_itemset
+matplotlib.pyplot.xlabel
+MultilayerPerceptron.predict
+transaction.sort
+mlfromscratch.supervised_learning.PolynomialRidgeRegression
+mlfromscratch.supervised_learning.LogisticRegression.fit
+numpy.diag
+itertools.combinations
+self._sample.dot
+medoid_i.clusters.append
+numpy.append
+mlfromscratch.deep_learning.NeuralNetwork.predict
+self.env.reset
+X.T.dot
+LogisticRegression
+random.sample
+self.generator.predict
+self.responsibilities.append
+mlfromscratch.utils.Plot.plot_in_2d
+setuptools.find_packages
+self._get_cluster_labels
+Adaboost
+mlfromscratch.supervised_learning.RegressionTree
+self.PolynomialRegression.super.fit
+self.log_func
+mlfromscratch.unsupervised_learning.RBM.fit
+Autoencoder
+self.build_decoder
+mlfromscratch.unsupervised_learning.GeneticAlgorithm.run
+self.responsibility.sum
+self.loss_function.acc
+numpy.linalg.svd
+mlfromscratch.deep_learning.layers.UpSampling2D
+eigenvalues.argsort
+mlfromscratch.supervised_learning.RandomForest
+numpy.pad
+mlfromscratch.unsupervised_learning.FPGrowth
+mlfromscratch.supervised_learning.Neuroevolution
+mlfromscratch.supervised_learning.RandomForest.predict
+self._maximization
+self._get_itemset_key
+cols.transpose.transpose
+pandas.read_csv
+self._construct_training_set
+self.training_reconstructions.append
+numpy.linalg.eig
+numpy.argmax.astype
+math.exp
+self.progressbar
+table_data.append
+mlfromscratch.deep_learning.layers.Dropout
+numpy.expand_dims.dot
+numpy.max
+self._get_neighbors
+NeuralNetwork.fit
+mlfromscratch.supervised_learning.Perceptron
+self.training_errors.append
+RandomForest.predict
+cvxopt.matrix
+cov_tot.np.linalg.pinv.dot
+matplotlib.pyplot.plot
+X.T.X_sq_reg_inv.dot.dot
+mlfromscratch.deep_learning.layers.Flatten
+mlfromscratch.unsupervised_learning.GaussianMixtureModel
+self.generator.summary
+int
+fig.add_subplot.scatter
+numpy.where
+self.GradientBoostingClassifier.super.fit
+mlfromscratch.unsupervised_learning.GaussianMixtureModel.predict
+FPTreeNode
+neighbors.append
+self.visited_samples.append
+self.activation
+self.regularization
+cnt.gen_imgs.reshape
+RandomForest.fit
+mlfromscratch.supervised_learning.Perceptron.predict
+DecisionNode
+self._initialize
+i.parent.layers.w0.copy
+self.loss.gradient
+mlfromscratch.supervised_learning.ElasticNet.predict
+self.omega0.self.mu0.T.dot.dot
+self.errors.append
+self.freq_itemsets.append
+main
+abs
+self._generate_candidates.append
+self.combined.layers.extend
+self.W_col.dot
+i.self.trees.fit
+mlfromscratch.supervised_learning.SupportVectorMachine
+numpy.random.random
+self.ClassificationTree.super.fit
+GradientBoostingClassifier
+x.startswith
+GAN
+items.append
+batch_error.append
+codecs.open
+self.discriminator.set_trainable
+ClassificationTree.predict
+Rule
+self.loss_function.loss
+self._init_random_medoids
+numpy.random.binomial
+self._initialize_parameters
+mlfromscratch.supervised_learning.XGBoostRegressionTree.predict
+self.mu0.T.dot
+self.layers.output_shape
+mlfromscratch.utils.mean_squared_error
+self._impurity_calculation
+mean.X.T.dot
+numpy.prod
+model.evolve.evolve
+LogisticRegression.fit
+calculate_variance
+y.T.dot
+numpy.sqrt
+mlfromscratch.deep_learning.layers.Dense
+mlfromscratch.unsupervised_learning.KMeans.predict
+numpy.vstack
+class_distr.append
+mlfromscratch.deep_learning.NeuralNetwork.fit
+negative_visible.T.dot
+mlfromscratch.utils.data_operation.mean_squared_error
+numpy.expand_dims.sum
+numpy.random.choice
+self.gamma_opt.update
+progressbar.ETA
+mlfromscratch.utils.Plot
+X.astype.astype
+mlfromscratch.supervised_learning.NaiveBayes
+NeuralNetwork
+mlfromscratch.unsupervised_learning.GeneticAlgorithm
+ClassificationTree
+mlfromscratch.utils.normalize
+self.PolynomialRidgeRegression.super.fit
+batch.T.dot
+self._is_prefix
+mlfromscratch.deep_learning.activation_functions.Softmax
+X2.mean
+math.pow
+subsets.append
+imgs.self.autoencoder.predict.reshape
+numpy.linalg.eigh
+mlfromscratch.supervised_learning.ElasticNet
+y.reshape
+self._calculate_fitness
+self._select_action
+</pre>
+</details>
+
+@developer
+Could please help me check this issue?
+May I pull a request to fix it?
+Thank you very much.",PyDeps,109138844,open,False,0,2022-10-26T02:13:37+00:00,2022-10-26T02:13:37+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1269720608,101,XGBOOST Example added,,faiqrasulov,107264725,open,False,0,2022-06-13T17:07:26+00:00,2022-06-13T17:07:26+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1216556190,100,(dbscan) Use valid index for neighbors,"The DBSCAN implementation was producing garbage results for me because the `_get_neighbors` function was returning the wrong indices for valid neighbors.
+
+If comparing a sample with higher index than the argument, the returned indices were off by 1.
+
+This change fixes it.
+
+PS thanks for this implementation! It's a better fit for my use-case, where speed is not important but avoiding `scipy` is very convenient.",ezheidtmann,1178915,open,False,0,2022-04-26T22:47:26+00:00,2022-04-26T22:47:26+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1180478973,99,ML from scratch,,MinaFBK,80572966,closed,False,1,2022-03-25T08:15:54+00:00,2023-08-17T09:56:40+00:00,2023-08-17T09:56:40+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1021787438,98,cross entropy is correct?,,liyunrui,22557099,open,False,2,2021-10-09T19:30:28+00:00,2021-11-01T07:38:15+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1007500691,97,"No lambda, gamma for XGBoostRegressionTree?","I am new to XGBoost and I was trying to study it through your code.
+I found that lambda and gamma(min_split_loss) were missing and these values should be considered in function  _gain_by_taylor and _approximate_update.
+Also I think some of the important features such as pruning are missing in your code... Didn't look at the code thoroughly so I could be wrong",jinwoolim8180,81519786,open,False,0,2021-09-26T20:56:18+00:00,2021-09-26T20:56:18+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,1007083812,96,How to save the model?,I want to save models during training as the state_dict() function in pytorch. How can?,philipwelia,37130034,open,False,2,2021-09-25T13:15:55+00:00,2023-11-07T06:52:55+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,931613955,95,Add 4 Normalizing methods for data preprocessing and update Readme.md,"Add 4 Normalizing methods (MinMaxScaler,MaxAbsScale, StandardScaler, StandardScaler with selective mean and variance) for data preprocessing including add 1 newfolder + 5 py files and update Readme.md",m-abdollahi,75454418,open,False,0,2021-06-28T14:08:13+00:00,2021-06-28T14:08:13+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,920645225,94,can you add code for  intercept /bias to regressions,"great code
+but can you add code for  intercept /bias to regressions
+like
+https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/examples/lasso_regression.py
+
+for example you can use
+https://github.com/wiqaaas/youtube/blob/master/Machine_Learning_from_Scratch/Ridge_Regression/Ridge_Regression_using_Gradient_Descent.ipynb
+
+usually it is used by default 
+https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html
+fit_interceptbool, default=True
+Whether to calculate the intercept for this model. If set to false, no intercept will be used in calculations (i.e. data is expected to be already centered).
+",Sandy4321,11426119,open,False,1,2021-06-14T17:55:37+00:00,2021-08-30T11:50:54+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,893668488,93,Update README.md,,twicky99,75584250,open,False,1,2021-05-17T19:59:52+00:00,2021-05-17T20:03:22+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,870998174,92,Gradient Boosting: Added missing initial prediction value (mean of y) to y_pred,The initial prediction was missing inside the predict method.,TannerGilbert,36239763,open,False,0,2021-04-29T13:09:27+00:00,2021-04-29T13:09:27+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,838451155,91,clean imports,"There where some unused imports, and set `np.cov(X, rowvar=False)` in place of `calculate_covariance_matrix(X)` to make the file more simple.",niektuytel,46424968,open,False,2,2021-03-23T07:52:00+00:00,2021-03-26T00:38:49+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,816174391,90,Adam mhat and vhat updates,"https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/deep_learning/optimizers.py#L125
+
+
+While updating mhat and vhat in Adam, shouldn't we also consider the update number(t) for the weight decay?
+
+m_hat = m/(1 - pow(beta,t))",shivamsharma01,21052557,open,False,0,2021-02-25T07:37:15+00:00,2021-02-25T07:37:15+00:00,,,1,1,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,781256910,89,TypeError: make_blobs() got an unexpected keyword argument 'n_smaples',,Dedefo698,73931228,closed,False,0,2021-01-07T11:51:06+00:00,2021-01-07T11:51:32+00:00,2021-01-07T11:51:32+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,774995488,88,Linear Discriminant Analysis,"First of all thanks for the great reference, you've been created and it performs well in its current format.
+
+But, Is it acceptable to use covariance matrices instead of scatter matrices in LDA?
+shouldn't it use scatter matrices?
+https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/supervised_learning/linear_discriminant_analysis.py#L24-L25
+
+As we know the relation between these two matrices is  
+`scatter(X) = X.T.dot(X)` 
+`covariance(X) = X.T.dot(X) / N` 
+for a given X or `X = X - mean(X)` and `N = |X|`
+
+[reference](https://sebastianraschka.com/Articles/2014_python_lda.html#summarizing-the-lda-approach-in-5-steps)
+",realamirhe,23579958,open,False,1,2020-12-27T08:01:25+00:00,2021-02-16T09:22:05+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,773167547,87,ModuleNotFoundError: No module named 'mlfromscratch',,siAyush,28400861,closed,False,0,2020-12-22T18:48:11+00:00,2020-12-23T08:31:49+00:00,2020-12-23T08:31:49+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,772465656,86,"docs: fix simple typo, sampels -> samples","There is a small typo in mlfromscratch/supervised_learning/xgboost.py.
+
+Should read `samples` rather than `sampels`.
+
+
+Semi-automated pull request generated by
+https://github.com/timgates42/meticulous/blob/master/docs/NOTE.md",timgates42,47873678,open,False,0,2020-12-21T21:14:18+00:00,2020-12-21T21:14:18+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,738155727,85,Loglikelihood calculation to prevent overflow.,,KiLJ4EdeN,57220509,open,False,0,2020-11-07T03:53:11+00:00,2020-11-07T03:53:11+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,737331403,84,Implementations,,mbahadir,70413025,closed,False,0,2020-11-05T23:08:32+00:00,2020-11-05T23:12:42+00:00,2020-11-05T23:12:42+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,717573094,83,Update README.md,"produce
+    the user specified target string. This implementation calculates each
+    candidate's fitness based on the alphabetical distance between the candidate  ====
+produce the user-specified target string. This implementation calculates each candidate's fitness based on the alphabetical distance between the candidate and the target. A candidate is selected as a parent with probabilities proportional to the candidate's fitness. Reproduction is implemented as a single-point",ratan325,72519798,open,False,0,2020-10-08T18:37:03+00:00,2020-10-08T18:37:03+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,702663737,82,Update naive_bayes.py,"This pull request consists of adding the Bernoulli Naive Bayes to the Naive Bayes program which contains only the Gaussian Naive Bayes.
+I will add a combination of Bernoulli Naive Bayes and Gaussian Naive Bayes to be able to process with more precision datasets which contains categorical and continuous features.",yacth,71322097,open,False,0,2020-09-16T10:54:32+00:00,2021-06-11T02:11:50+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,680426516,81,Update data_operation.py,"Added Manhattan or City Block Distance (L1 distance), L-infinite norm, and p-th norm.",mohtashim-nawaz,35381380,open,False,0,2020-08-17T18:06:32+00:00,2020-08-17T18:24:08+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,671822451,80,"why LassoRegression need  X = normalize(polynomial_features(X, degree=self.degree)) code in LassoRegression class?",Is this wrong or is this have some other reasons?,ghost,10137,open,False,0,2020-08-03T06:12:57+00:00,2020-08-03T06:12:57+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,632170723,79,BN layer and dropout,"Thank you very much for your repo, it helped me a lot, but there are only two small doubts
+1) In the backpropagation implementation of the BN layer, is the derivative of Xmean missing one item, because self.stddev_inv also contains mean
+2) In the implementation of dropout, is the meaning of p different from p in the original dropout? The p in the original dropout is the proportion of the inactivated unit. It seems that it is not here, and the signal strength after the dropout is Isn’t it the same as before?",zy23456,52241791,open,False,0,2020-06-06T03:28:43+00:00,2020-06-06T03:44:03+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,557020590,78,PR type: refactor divide_on_feature for decision tree,Speed up divide_on_feature by using numpy vectorization,Superhzf,10473662,closed,False,0,2020-01-29T17:50:41+00:00,2020-06-27T11:35:35+00:00,2020-06-27T11:35:35+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,555196773,77,Error in MLP,"I am getting the following error in  the line
+ grad_wrt_hidden_l_input = grad_wrt_out_l_input.dot(self.V.T) * self.hidden_activation.gradient(hidden_input)
+
+which is ValueError: Dot product shape mismatch, (8999, 8999) vs (1, 16)
+what i have to do to avoid this error... 
+
+",nagireddy146,41734705,open,False,1,2020-01-26T08:29:56+00:00,2022-03-28T04:15:07+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,553739205,76,Missing number of neurons in grad_w for dense layer,"https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/deep_learning/layers.py#L82
+
+Please correct me if I'm wrong, I think for a dense layer, `grad_w = self.layer_input.T.dot(accum_grad)/the_number_of_neurons` ",Superhzf,10473662,open,False,0,2020-01-22T19:15:24+00:00,2020-01-22T19:15:24+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,550851173,75,python setup.py install does not work on Windows 10,"![install error](https://user-images.githubusercontent.com/29114222/72534193-644e3500-3844-11ea-94a8-24abd85bac42.png)
+
+It seems ""Easyinstall"" cannot access a certain set of files, so it automatically terminates. It suggested I contact the package creator.
+
+-Phil",Crossfire234,29114222,open,False,0,2020-01-16T14:42:14+00:00,2020-01-16T14:42:14+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,545262609,74,linear regression,"grad_w = -(y - y_pred).dot(X) + self.regularization.grad(self.w)
+
+in regression.py
+
+should it be grad_w = -(y - y_pred).dot(X) * (1/training_size) + self.regularization.grad(self.w) ?",ClarenceTeee,57555618,open,False,2,2020-01-04T09:17:49+00:00,2022-11-10T17:05:21+00:00,,,2,2,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,544570785,73,Fix bug in gradient of ELU activation function,"First of all, Thanks for sharing this amazing library. 
+
+#### Bug
+There was a bug in the `gradient` calculation of `ELU` activation function.",ankishb,19225359,open,False,0,2020-01-02T13:04:24+00:00,2020-01-02T13:04:24+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,544385072,72,Runtime error during backward_pass() of PoolingLayer,"I greatly appreciate your work and clearly written code which gives incredible insights into the back propagation technique.  I've encountered a bit of a bug which is pretty solvable, but I don't want to make a pull request as I'm not sure of default values here.
+
+It's at layers.py:400 (at the end of the line, last param):
+https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/deep_learning/layers.py#L400
+The last param is supposed to be in the string-style enum format of padding type.  It's passing a literal 0 when it should be passing self.padding.  PoolingLayer should also have a valid default value for self.padding which is also 0 (which of course causes this same error).  In the case of 0 being an acceptable default, that value should be acceptable by the receiving function determine_padding, which is where the error is raised:
+https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/deep_learning/layers.py#L718
+
+Again, thank you for this repository.  Amazing work.",krworks,6380775,open,False,1,2020-01-01T18:25:58+00:00,2020-01-01T19:31:05+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,541438538,71,may be a bug with activation_functions.py,the Class Softmax function gradient may be should return x * (p-1),zhouchiji,33052516,closed,False,0,2019-12-22T11:22:32+00:00,2019-12-22T11:56:01+00:00,2019-12-22T11:56:01+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,534327946,70,dbscan get_neighbors fix,"`i` is off by one for indexes after `sample_i`
+
+**Before**
+
+![before](https://user-images.githubusercontent.com/191903/70365961-f710b280-1848-11ea-8a91-9ca3a5286c89.png)
+
+Cluster count: 4-6
+
+**After**
+
+![after](https://user-images.githubusercontent.com/191903/70365965-fbd56680-1848-11ea-83e3-7c90966d4c30.png)
+
+Cluster count: 2-3",JesseAldridge,191903,closed,False,3,2019-12-07T00:57:22+00:00,2022-10-11T07:16:59+00:00,2022-04-26T22:54:46+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,533532730,69,do you have lstm for recurrent_neural_network.,"do you have lstm in
+https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/examples/recurrent_neural_network.py",Sandy4321,11426119,open,False,0,2019-12-05T18:56:21+00:00,2019-12-05T18:56:21+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,533529008,68,do you have xgboost classifier but not regression?,"do you have xgboost classifier in
+https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/supervised_learning/xgboost.py
+
+but not regression?",Sandy4321,11426119,open,False,4,2019-12-05T18:48:39+00:00,2020-03-18T13:50:06+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,529910692,67,XGBoost fit question,"https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/supervised_learning/xgboost.py#L88
+https://github.com/eriklindernoren/ML-From-Scratch/blob/a2806c6732eee8d27762edd6d864e0c179d8e9e8/mlfromscratch/supervised_learning/xgboost.py#L98
+When updating the predictions, why is it doing subtraction instead of accumulation since we want to do boost? ",leigao97,23533414,closed,False,0,2019-11-28T13:23:57+00:00,2019-11-29T12:18:34+00:00,2019-11-29T12:18:34+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,529493028,66,mnist = fetch_mldata('MNIST original'),"```
+URLError: <urlopen error [Errno 110] Connection timed out>
+```
+
+mldata.org appears to be down.
+
+Please see:
+https://github.com/scikit-learn/scikit-learn/issues/8588",dbl001,3105499,open,False,1,2019-11-27T17:45:38+00:00,2020-11-14T04:39:45+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,518202653,65,Update regression.py,,tangjackson,50070759,open,False,0,2019-11-06T02:48:59+00:00,2019-11-06T08:43:49+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,518154609,64,transposed V from svd in LinearRegression,"There's a mistake in the LinearRegression module.  
+
+You use the Moore-Penrose pseudoinverse on the values returned from np.linalg.svd().
+
+However, the values returned from Numpy's svd module are not the ones returned by traditional SVD.
+
+Normal SVD reduces to A = U @ S @ V.T, but Numpy's implementation is A = U @ S @ V.
+
+Basically, the V returned by Numpy's SVD is actually V.T.  
+
+However, when you implement the pseudoinverse you use this line:
+
+X_sq_reg_inv = V.dot(np.linalg.pinv(S)).dot(U.T).
+
+That's the doctrinaire way of the SVD-based pseudoinverse, but you need to transpose V here in order to get the correct results.
+
+I can provide more detail to demonstrate how this returns correct results, but right now your LinearRegression isn't correct as is.",JonathanBechtel,481696,closed,False,1,2019-11-06T00:29:01+00:00,2022-10-17T12:57:07+00:00,2022-04-12T15:27:28+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,513657587,63,Added support for Swish activation function.,Added activation function and updated options in other files to support Swish.,drake-smu,43159271,open,False,1,2019-10-29T02:35:15+00:00,2020-07-09T05:38:13+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,511394489,62,How did you generate the plots in the README?,"For example for the: `convolutional_neural_network`?
+",E3V3A,194392,open,False,2,2019-10-23T15:13:47+00:00,2020-01-12T02:15:55+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,511311104,61,Deep Learning Applications Classes,"Great work here! 
+However, please could you kindly make available how your deep learning examples can be applied for use? ie
+
+`__init__.py
+activation_functions.py
+layers.py
+loss_functions.py
+neural_network.py
+optimizers.py`",tobimichigan,5084987,open,False,0,2019-10-23T13:07:58+00:00,2019-10-23T13:07:58+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,503152546,60,Init using np.zeros instead of np.empty to avoid overflow,"* Using `np.zeros` instead of `np.empty` for initialization
+* Resolve random overflow error:
+```
+Python/2.7/lib/python/site-packages/ipykernel_launcher.py:5: RuntimeWarning: overflow encountered in square
+```
+",DandilionLau,19463356,closed,False,1,2019-10-06T20:03:35+00:00,2019-10-18T21:42:17+00:00,2019-10-18T21:42:17+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,499285890,59,Add Gaussian Process,Pretty cool project. Gaussian Process might be something you can add in the future.,shikunyu8,30034854,open,False,2,2019-09-27T07:33:28+00:00,2022-09-12T02:46:56+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,496558209,58,l1 regularization,"Shouldn't `class l1_regularization()` be defined as `self.alpha * np.linalg.norm(w, 1)` instead of `self.alpha * np.linalg.norm(w)`?",forcoogle,46506334,open,False,2,2019-09-20T21:43:19+00:00,2022-10-26T05:08:10+00:00,,,1,0,0,1,0,0,0
+eriklindernoren/ML-From-Scratch,490084159,57,Fix default stride and padding in Pooling2D ,"Hello.
+
+Common Pooling2D examples use same pool_shape value for stride and default padding is 'valid'.
+I also added a CNN with MaxPooling example.",aidevnn,47622664,closed,False,0,2019-09-06T01:31:46+00:00,2019-09-18T08:33:39+00:00,2019-09-18T08:33:39+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,466989126,56,mixture density network layer ,"Hey, I've added a mixture density network layer and an accompanying example under the name `mdn.py` in the examples' folder.",kirk86,2902390,open,False,0,2019-07-11T16:20:06+00:00,2019-07-11T16:20:06+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,458989737,55,Moore-Penrose pseudo-inverse in linear regression,"Hi, I am reimplementing ml algorithms based on yours
+
+But I am a little confused about the part of the calculation of Moore-Penrose pseudoinverse in linear regression. 
+
+https://github.com/eriklindernoren/ML-From-Scratch/blob/40b52e4edf9485c4e479568f5a41501914fdc55c/mlfromscratch/supervised_learning/regression.py#L111-L114
+
+Why do not use`np.linalg.pinv(X)`, according  to the docstring:
+
+![image](https://user-images.githubusercontent.com/11924130/59895491-661f5980-9417-11e9-95b6-858fe988f6ec.png)
+
+It can compute the Moore-Penrose pseudo-inverse directly.
+
+Thanks!",liadbiz,11924130,open,False,3,2019-06-21T03:27:28+00:00,2019-11-20T16:09:03+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,441671664,53,update README,Explaining added for python3. The script does not be installed if you run it with pytonh3.x. Most OSs (including Ubuntu and MacOSX) comes with python2.x and trying to removing python2.x is so dangerous because OS uses python2.x itself.,EmreSURK,9450430,open,False,0,2019-05-08T10:48:48+00:00,2019-05-08T10:48:48+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,412469010,52,Restricted Boltzmann Machine for Missing joints?,Can I use that method for missing joints in pose estimation?,JasOlean,18714008,open,False,0,2019-02-20T14:57:32+00:00,2019-02-20T14:57:32+00:00,,,1,1,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,376701916,51,Clean up import,standardize and calculate_correlation_matrix haven't been used,daviddwlee84,1515662,closed,False,0,2018-11-02T07:45:46+00:00,2019-01-23T19:22:24+00:00,2019-01-23T19:22:24+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,373364321,50,Cleaned up imports and some changes,"1. Modify some misspelling of comment.
+2. The support number seems to be an integer.
+3. Suffix passing.
+4. Clean up unused imports",daviddwlee84,1515662,open,False,0,2018-10-24T08:31:11+00:00,2018-10-24T08:31:11+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,358397864,49,Genetic algorithm mutation rate,"Issue with Genetic algorithm commit at Unsupervised learning. 
+
+The approach taken towards the initiation of mutation is a bit unrealistic. Given the fact that the mutation rate provided by the user isn't treated as a rate in it's original sense but rather it's being compared directly with the Numpy's random value, which makes it useless even if a high mutation rate was set. ",stillbigjosh,38938510,closed,False,7,2018-09-09T18:01:23+00:00,2018-09-29T09:15:58+00:00,2018-09-29T09:15:58+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,355533563,47,make genetic_algorithm py3 compliant,"Made a small change to the genetic_algorithm to make the code python 3 compliant.
+Noticed this bug when trying out the genetic algorithm example.",tvturnhout,16676419,closed,False,0,2018-08-30T11:00:05+00:00,2018-09-02T08:58:28+00:00,2018-09-02T08:58:27+00:00,,1,1,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,355496726,46,ipynb,i think ipynb is better than py.,zhyongquan,11530247,closed,False,1,2018-08-30T09:18:07+00:00,2018-08-30T14:36:47+00:00,2018-08-30T14:36:47+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,355127222,45,ImportError: when trying example,"Terminal Session:
+
+```sh
+$ python mlfromscratch/examples/polynomial_regression.py
+Traceback (most recent call last):
+  File ""mlfromscratch/examples/polynomial_regression.py"", line 6, in <module>
+    from mlfromscratch.supervised_learning import PolynomialRidgeRegression
+  File ""C:\users\aashutosh rathi\appdata\local\programs\python\python36\lib\site-packages\mlfromscratch-0.0.4-py3.6.egg\mlfromscratch\supervised_learning\__init__.py"", line 14, in <module>
+  File ""C:\users\aashutosh rathi\appdata\local\programs\python\python36\lib\site-packages\mlfromscratch-0.0.4-py3.6.egg\mlfromscratch\supervised_learning\support_vector_machine.py"", line 4, in <module>
+
+  File ""C:\users\aashutosh rathi\appdata\local\programs\python\python36\lib\site-packages\cvxopt-1.2.0-py3.6-win-amd64.egg\cvxopt\__init__.py"", line 50, in <module>
+    import cvxopt.base
+ImportError: DLL load failed: The specified module could not be found.
+```",aashutoshrathi,21199234,closed,False,5,2018-08-29T12:00:23+00:00,2019-04-19T22:10:19+00:00,2019-04-19T22:10:19+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,355126034,44,Installation on Windows throws an error,"Installation is complete but it throws this error multiple times during installation.
+
+```
+appdata\local\programs\python\python36\lib\site-packages\setuptools\pep425tags.py:89: RuntimeWarning: Config variable 'Py_DEBUG' is unset, Python ABI tag may be
+incorrect
+  warn=(impl == 'cp')):
+```",aashutoshrathi,21199234,open,False,4,2018-08-29T11:56:56+00:00,2019-12-07T06:39:49+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,354918900,43,df.as_matrix has been deprecated since 0.23.0,Refs: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.as_matrix.html,miku,53705,closed,False,0,2018-08-28T21:55:50+00:00,2018-08-30T07:19:18+00:00,2018-08-30T07:19:18+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,347623591,42,Data normalization etc.,"Hi,
+I see that there is no implementation for normalization, scaling etc. of the data. Can I implement that with a new pull request?",anjalibhavan,29330188,open,False,3,2018-08-04T14:36:33+00:00,2019-04-19T22:11:21+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,324720173,41,Suppport Vector Machine Problem,"I had implemented my own svm based on your implementation. Wierdly, the accuracy was very low. 
+I copied your code and use sklearn has a benchemark. Your svm implementation gives me back almost random prediction.
+
+Here is the code for you to check.
+
+https://github.com/tchaton/interviews_prep/blob/master/code_prep/mlfromscratch/supervised/svm.py",tchaton,12861981,open,False,2,2018-05-20T16:03:36+00:00,2019-03-25T18:38:10+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,321049142,40,Missing random feature selection in Random Forest construction.,"As far I am concerned when constructing each tree in the random forest it is necessary to choose a random subset of features at ""each"" node of the tree, so a DecisionTree class can't be reused.
+1) Sample a random subset of the training data. (bagging)
+2) At each node of the tree sample a random subset of the original features and select the best.
+
+What I observed in this implementation is that you are reusing the DecisionTree class and only randomly sampling the features once throughout all the tree.
+1) Sample a random subset of the training data. (bagging)
+2) Sample a random subset of the features of the sampled data.
+3) Feed the data into a DecisionTree.
+
+I would like to know whether this is a legit implementation and where could I find more information about this implementation option.
+
+By the way, your work is awesome and is helping students like me understand deeply machine learning algorithms.",cesar0205,13353159,closed,False,2,2018-05-08T05:41:04+00:00,2018-12-05T19:12:28+00:00,2018-12-05T19:12:28+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,317486585,39,_calculate_priori in naiveBayes could be simplified ,"def _calculate_priori(self, c):
+    return np.sum(self.Y == c) / self.Y.shape[0]",Zhang-O,18193972,closed,False,0,2018-04-25T05:49:06+00:00,2018-05-03T12:31:16+00:00,2018-05-03T12:31:16+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,308100060,38,The gradient in gradient descent is not correct.,"Since the gradient was built from MSE, it should be divided by the number of training examples. However, this number is omitted in the code. This makes the learning rate dependent on the number of training examples, because the more training examples you have, the bigger will be the gradient. The learning rate should not be dependent on the number of training examples.
+
+https://github.com/eriklindernoren/ML-From-Scratch/blob/f078fc384e3188922431e6747eefaa1561f361c4/mlfromscratch/supervised_learning/regression.py#L76",dschaehi,7567875,closed,False,1,2018-03-23T16:36:07+00:00,2019-10-03T08:35:21+00:00,2019-10-03T08:35:21+00:00,,5,5,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,304194098,37,"Add gru, lstm, weight initializers",Add gru.py to lib,jefkine,271074,closed,False,1,2018-03-11T21:08:30+00:00,2019-04-03T21:43:00+00:00,2019-04-03T21:43:00+00:00,,3,2,0,0,1,0,0
+eriklindernoren/ML-From-Scratch,304193886,36,Create initializers.py,Add init methods to library,jefkine,271074,closed,False,0,2018-03-11T21:05:45+00:00,2018-03-11T21:27:04+00:00,2018-03-11T21:21:33+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,303370420,35,Adam optimiser bias correction formula,"I observed that the bias correction in Adam optimiser in optimisers.py is not squared with t( time steps) as mentioned in ""https://arxiv.org/pdf/1412.6980.pdf"" is there any reason ?",veerendrab,18127755,open,False,0,2018-03-08T06:26:43+00:00,2018-03-08T06:26:43+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,301286075,34,Is there any special instructions to install it in windows?,"I have been trying to install it on windows 10 because it looks very cool for extra learning material, but 
+I have not been able to install it so far. I tried to install vs build tools as the requirements said but without luck. Any ideas or suggestions?",jaircastruita,14201923,open,False,4,2018-03-01T05:51:33+00:00,2020-10-15T10:53:48+00:00,,,1,0,0,1,0,0,0
+eriklindernoren/ML-From-Scratch,295369060,33,W0 in Linear Discriminant analyis,"When you take the threshold while predicting y, you did not account for the w0 terms in your equation. Hence, it always predicts y as 1, because h is always negative.
+The equation should be something like this.
+
+![screen shot 2018-02-07 at 10 00 04 pm 1](https://user-images.githubusercontent.com/16003130/35953382-55c96d76-0c52-11e8-8f15-368c83bb3812.png)
+",rahls7,16003130,open,False,1,2018-02-08T03:00:43+00:00,2020-09-01T14:29:00+00:00,,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,283673074,32,suggest renaming of acc_grad ,https://github.com/eriklindernoren/ML-From-Scratch/blob/c5256ff2d9e507a055094d7ce8064138706ab483/mlfromscratch/deep_learning/neural_network.py#L100  since you use .acc .loss in the function loss .. can be better change the name of the variable acc_grad,tomVeloso,19606573,closed,False,1,2017-12-20T19:37:45+00:00,2017-12-23T20:23:26+00:00,2017-12-23T20:23:26+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,283508733,31,Fix typo in examples/recurrent_neural_network.py,,vn09,22481592,closed,False,0,2017-12-20T10:01:45+00:00,2017-12-23T20:24:26+00:00,2017-12-23T20:24:26+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,274209747,30,issues when we set up Pooling layer in CNN,"clf.add(Conv2D(n_filters=16, filter_shape=(3,3), input_shape=(1,8,8), padding='same'))
+    clf.add(Activation('relu'))
+    clf.add(MaxPooling2D(pool_shape=(2, 2), stride=2))
+    clf.add(BatchNormalization())
+    clf.add(Dropout(0.25))
+    clf.add(Conv2D(n_filters=32, filter_shape=(3,3), padding='same'))
+    clf.add(Activation('relu'))
+    clf.add(Dropout(0.25))
+    clf.add(BatchNormalization())
+    clf.add(Flatten())
+    clf.add(Dense(256))
+    clf.add(Activation('relu'))
+    clf.add(Dropout(0.4))
+    clf.add(BatchNormalization())
+    clf.add(Dense(10))
+    clf.add(Activation('softmax'))
+
+
+When we add one more pooling layer to CNN, bug appears
+
+
+Traceback (most recent call last):                                                                                                                                           ] ETA:  --:--:--
+  File ""convolutional_neural_network.py"", line 85, in <module>
+    main()
+  File ""convolutional_neural_network.py"", line 71, in main
+    train_err, val_err = clf.fit(X_train, y_train, n_epochs=50, batch_size=256)
+  File ""/home/deng106/ML-From-Scratch/mlfromscratch/deep_learning/neural_network.py"", line 79, in fit
+    loss, _ = self.train_on_batch(X_batch, y_batch)
+  File ""/home/deng106/ML-From-Scratch/mlfromscratch/deep_learning/neural_network.py"", line 63, in train_on_batch
+    y_pred = self._forward_pass(X)
+  File ""/home/deng106/ML-From-Scratch/mlfromscratch/deep_learning/neural_network.py"", line 94, in _forward_pass
+    layer_output = layer.forward_pass(layer_output, training)
+  File ""/home/deng106/ML-From-Scratch/mlfromscratch/deep_learning/layers.py"", line 380, in forward_pass
+    X_col = image_to_column(X, self.pool_shape, self.stride, self.padding)
+  File ""/home/deng106/ML-From-Scratch/mlfromscratch/deep_learning/layers.py"", line 696, in image_to_column
+    pad_h, pad_w = determine_padding(filter_shape, output_shape)
+TypeError: 'NoneType' object is not iterable
+
+
+It turns out output_shape=0 appears for determine_padding(filter_shape, output_shape=""same"").
+
+waiting for your answer. Appreciate that.",WayneDW,18079879,closed,False,1,2017-11-15T16:02:05+00:00,2018-02-07T23:06:27+00:00,2018-02-07T23:06:27+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,258705223,29,An error raised when run dcgan.py.,"I run ` python mlfromscratch/unsupervised_learning/dcgan.py`,
+
+The output is like that:
+
+```
+33 [D loss: 0.029268, acc: 100.00%] [G loss: 5.641379, acc: 0.00%]
+34 [D loss: 0.024022, acc: 100.00%] [G loss: 5.165160, acc: 0.00%]
+35 [D loss: 0.043149, acc: 96.88%] [G loss: 5.387241, acc: 0.00%]
+36 [D loss: 0.017758, acc: 100.00%] [G loss: 5.255211, acc: 0.00%]
+python2.7/lib/python2.7/site-packages/mlfromscratch-0.0.4-py2.7.egg/mlfromscratch/utils/layers.py:486: RuntimeWarning: invalid value encountered in multiply
+python2.7/lib/python2.7/site-packages/mlfromscratch-0.0.4-py2.7.egg/mlfromscratch/utils/activation_functions.py:54: RuntimeWarning: invalid value encountered in greater_equal
+python2.7/lib/python2.7/site-packages/mlfromscratch-0.0.4-py2.7.egg/mlfromscratch/utils/activation_functions.py:57: RuntimeWarning: invalid value encountered in greater_equal
+37 [D loss: 0.020248, acc: 100.00%] [G loss: nan, acc: 100.00%]
+38 [D loss: nan, acc: 50.00%] [G loss: nan, acc: 100.00%]
+39 [D loss: nan, acc: 50.00%] [G loss: nan, acc: 100.00%]
+40 [D loss: nan, acc: 50.00%] [G loss: nan, acc: 100.00%]
+...
+```
+Thank you.",ljch2018,22562546,closed,False,2,2017-09-19T06:01:17+00:00,2017-09-20T02:25:16+00:00,2017-09-20T02:25:16+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,258350750,28,I create a tensor system by scratch python with numpy,https://github.com/ictxiangxin/paradox,ictxiangxin,3955842,closed,False,0,2017-09-18T01:18:10+00:00,2017-09-18T01:25:03+00:00,2017-09-18T01:25:03+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,258210983,27,LSTM layer support ?,Is there any way to implement LSTM layer from scratch ? Thanks.,ljch2018,22562546,closed,False,2,2017-09-16T05:56:53+00:00,2017-09-18T05:49:00+00:00,2017-09-18T05:49:00+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,258119097,26,progressbar is not python3 compatible,"Hi Great compilation
+
+but progressbar has not yet been updated to python3 on pypi, but you can install master:
+`pip install https://github.com/datalad/python-progressbar/archive/master.zip`",fenchu,11349883,closed,False,1,2017-09-15T18:03:03+00:00,2017-09-15T18:49:21+00:00,2017-09-15T18:49:21+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,257928898,25,Update README.md,File for Deep Reinforcement Learning already has already changed to deep_q_network.py.,ljch2018,22562546,closed,False,1,2017-09-15T05:09:15+00:00,2017-09-15T08:47:05+00:00,2017-09-15T08:45:31+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,257817882,24,corrected minor typo,aphabetical -> alphabetical,bhageena,14236753,closed,False,1,2017-09-14T18:42:51+00:00,2017-09-15T08:47:29+00:00,2017-09-15T08:45:30+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,257650261,23,MatplotlibWrapper is an undefined name,"MatplotlibWrapper is an undefined name in gaussian_mixture_model.py and k_means.py.  Undefined names can raise [NameError](https://docs.python.org/3/library/exceptions.html#NameError) at runtime.
+
+flake8 testing of https://github.com/eriklindernoren/ML-From-Scratch on Python 2.7.13
+
+$ flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics
+```
+./mlfromscratch/unsupervised_learning/gaussian_mixture_model.py:137:9: F821 undefined name 'MatplotlibWrapper'
+    p = MatplotlibWrapper()
+        ^
+```
+
+The same issue is __also present in k_means.py__ but [the * import](https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/unsupervised_learning/k_means.py#L11) masks it from flake8.",cclauss,3709715,closed,False,1,2017-09-14T09:19:28+00:00,2017-09-18T14:31:12+00:00,2017-09-18T14:31:12+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,257549891,22,mlfromscratch/supervised_learning/__init__.py has references to undefined python files.,"Everything you need to know is in the title. ` mlfromscratch/supervised_learning/__init__.py` has references to undefined python files.
+
+To reproduce, run: ""python demo.py"", you get:
+
+    ImportError: No module named linear_regression
+
+Because `supervisedLearning/__init__.py` has references to regression classes in files that don't exist.
+
+I was able to correct them in my fork and rebuild and all is well, just have to rename the ""whatever_regression"" to regression and do the setup again.
+
+Thinking it over, these may be intentional as an exercise for the user.  Good job.  :1st_place_medal: ",sentientmachine,330247,closed,False,1,2017-09-13T23:22:53+00:00,2017-09-13T23:29:26+00:00,2017-09-13T23:28:53+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,257542467,21,Typo in variable name: titel --> title,,cclauss,3709715,closed,False,1,2017-09-13T22:38:47+00:00,2017-09-13T22:44:23+00:00,2017-09-13T22:42:03+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,255858485,20,switched from progressbar to its Py3 compatible fork progressbar33,"Thanks for the great code, a small change to setup with python3.
+
+https://github.com/germangh/python-progressbar",QiBaobin,7072,closed,False,0,2017-09-07T08:38:28+00:00,2017-09-18T00:41:45+00:00,2017-09-15T18:41:18+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,255856582,19,use full module name for data_manipulation,"Hey Erik,
+
+I have to change the name before running 'python setup.py install' to make some examples work. I'm new to python, so feel free to close this PR and let me know if I missed something, thanks.
+
+FYI, I'm using python3 and on a Mac.",QiBaobin,7072,closed,False,1,2017-09-07T08:31:32+00:00,2017-09-08T00:56:04+00:00,2017-09-07T08:53:47+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,235490806,18,dbscan,"What's purpose of 60~64 lines of code? I think can omit it, and you?",whcn,15919565,closed,False,1,2017-06-13T09:26:27+00:00,2017-06-13T17:24:07+00:00,2017-06-13T17:24:07+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,233870505,17,Why the classifiers are the same in adaboost?,"I have following questions about adaboost implementation
+
+- Why the classifiers are the same in the end?
+- Why concatenate y_pred in `predict` function?
+
+Though the accuracy of classification has no problem,  I think the implementation is wrong. ",whcn,15919565,closed,False,5,2017-06-06T12:08:22+00:00,2017-07-13T21:27:43+00:00,2017-06-06T17:40:47+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,226165228,16,Maybe there is a mistake in loss_functions.py,"Is there a mistake in ML-From-Scratch/utils/loss_functions.py line 30 ? 
+I think it should be r = -(1 - y) * self.log_func(1-y_pred)",wcc0305,24715955,closed,False,1,2017-05-04T02:45:31+00:00,2017-05-04T13:53:45+00:00,2017-05-04T13:53:20+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,217296438,15,naive_bayes,"### in the navie bayes , X refer to Gaussian probability distribution, why? 
+because you define X is continuous,？
+
+thanks",rebornwwp,8930775,closed,False,2,2017-03-27T16:08:25+00:00,2017-05-04T20:34:52+00:00,2017-05-04T20:34:51+00:00,,0,0,0,0,0,0,0
+eriklindernoren/ML-From-Scratch,217064862,14,calculate_correlation_matrix,"# I use the calculate_correlation_matrix, and the result is greater than 1. is there any wrong?
+ it is convariance_matrix = (1 / (n_sample - 1)) * (X - X.mean(0)).T.dot(Y - Y.mean(0))?
+is there some meaningful thing when the relation is greater than 1?
+
+every function called has been tested. I think all are right.
+`    x = np.array(np.random.random((10, 4)))
+    print(calculate_variance(x))
+    print(calculate_std_dev(x))
+    print(calculate_convariance_matrix(x))
+    print(calculate_correlation_matrix(x))`
+#  the result is 
+[ 0.06257289  0.0854199   0.08613444  0.04435951]
+
+[ 0.25014574  0.29226683  0.2934867   0.21061698]
+
+[[ 0.06952543 -0.00037733  0.00416579  0.01641681]
+ [-0.00037733  0.094911   -0.02781782  0.0075379 ]
+ [ 0.00416579 -0.02781782  0.09570494  0.02909376]
+ [ 0.01641681  0.0075379   0.02909376  0.04928835]]
+
+[[ 1.11111111 -0.00516115  0.05674344  0.31160352]
+ [-0.00516115  1.11111111 -0.32430615  0.1224553 ]
+ [ 0.05674344 -0.32430615  1.11111111  0.47067173]
+ [ 0.31160352  0.1224553   0.47067173  1.11111111]]",rebornwwp,8930775,closed,False,1,2017-03-26T16:44:01+00:00,2017-03-26T19:54:44+00:00,2017-03-26T19:54:44+00:00,,0,0,0,0,0,0,0

@@ -1,0 +1,728 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+Lightning-AI/pytorch-lightning,01ba7a1489498858617690ab921e84d5479c2eb1,https://github.com/Lightning-AI/pytorch-lightning/commit/01ba7a1489498858617690ab921e84d5479c2eb1,KAVYANSHTYAGI,142140238,User,2025-05-12T10:22:10+00:00,web-flow,2025-05-12T10:22:10+00:00,"Fix: `TransformerEnginePrecision` conversion for layers with `bias=False` (#20805)
+
+* Update transformer_engine.py
+* Update test_transformer_engine.py
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",35,1,36,2,68f2adc8803a94facf4f30f366bc3a2e7d9c520c
+Lightning-AI/pytorch-lightning,68f2adc8803a94facf4f30f366bc3a2e7d9c520c,https://github.com/Lightning-AI/pytorch-lightning/commit/68f2adc8803a94facf4f30f366bc3a2e7d9c520c,dependabot[bot],49699333,Bot,2025-05-12T07:19:26+00:00,web-flow,2025-05-12T07:19:26+00:00,"build(deps): update setuptools requirement from <70.1.1 to <80.4.1 in /requirements (#20821)
+
+build(deps): update setuptools requirement in /requirements
+
+Updates the requirements on [setuptools](https://github.com/pypa/setuptools) to permit the latest version.
+- [Release notes](https://github.com/pypa/setuptools/releases)
+- [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst)
+- [Commits](https://github.com/pypa/setuptools/compare/0.6...v80.4.0)
+
+---
+updated-dependencies:
+- dependency-name: setuptools
+  dependency-version: 80.4.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,c431887efd06bd5bb1904f88e44fec2853eaf3ef
+Lightning-AI/pytorch-lightning,c431887efd06bd5bb1904f88e44fec2853eaf3ef,https://github.com/Lightning-AI/pytorch-lightning/commit/c431887efd06bd5bb1904f88e44fec2853eaf3ef,dependabot[bot],49699333,Bot,2025-05-12T07:19:18+00:00,web-flow,2025-05-12T07:19:18+00:00,"build(deps): bump click from 8.1.7 to 8.1.8 in /requirements (#20820)
+
+Bumps [click](https://github.com/pallets/click) from 8.1.7 to 8.1.8.
+- [Release notes](https://github.com/pallets/click/releases)
+- [Changelog](https://github.com/pallets/click/blob/main/CHANGES.rst)
+- [Commits](https://github.com/pallets/click/compare/8.1.7...8.1.8)
+
+---
+updated-dependencies:
+- dependency-name: click
+  dependency-version: 8.1.8
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,86aed16253776bd4d488bf56acc0a9f6b896c696
+Lightning-AI/pytorch-lightning,86aed16253776bd4d488bf56acc0a9f6b896c696,https://github.com/Lightning-AI/pytorch-lightning/commit/86aed16253776bd4d488bf56acc0a9f6b896c696,dependabot[bot],49699333,Bot,2025-05-12T07:19:11+00:00,web-flow,2025-05-12T07:19:11+00:00,"build(deps): update rich requirement from <13.6.0,>=12.3.0 to >=12.3.0,<14.1.0 in /requirements (#20819)
+
+build(deps): update rich requirement in /requirements
+
+Updates the requirements on [rich](https://github.com/Textualize/rich) to permit the latest version.
+- [Release notes](https://github.com/Textualize/rich/releases)
+- [Changelog](https://github.com/Textualize/rich/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/Textualize/rich/compare/v12.3.0...v14.0.0)
+
+---
+updated-dependencies:
+- dependency-name: rich
+  dependency-version: 14.0.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,da5ce90131fcfdee8ac2544642a001b01106d1b7
+Lightning-AI/pytorch-lightning,da5ce90131fcfdee8ac2544642a001b01106d1b7,https://github.com/Lightning-AI/pytorch-lightning/commit/da5ce90131fcfdee8ac2544642a001b01106d1b7,dependabot[bot],49699333,Bot,2025-05-12T07:19:03+00:00,web-flow,2025-05-12T07:19:03+00:00,"build(deps): bump sphinxcontrib-video from 0.2.0 to 0.4.1 in /requirements (#20818)
+
+build(deps): bump sphinxcontrib-video in /requirements
+
+Bumps [sphinxcontrib-video](https://github.com/sphinx-contrib/video) from 0.2.0 to 0.4.1.
+- [Release notes](https://github.com/sphinx-contrib/video/releases)
+- [Commits](https://github.com/sphinx-contrib/video/compare/v0.2.0...v0.4.1)
+
+---
+updated-dependencies:
+- dependency-name: sphinxcontrib-video
+  dependency-version: 0.4.1
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,08abb526ae1dc5cfa376ed577bfd8b4c3149a47c
+Lightning-AI/pytorch-lightning,08abb526ae1dc5cfa376ed577bfd8b4c3149a47c,https://github.com/Lightning-AI/pytorch-lightning/commit/08abb526ae1dc5cfa376ed577bfd8b4c3149a47c,dependabot[bot],49699333,Bot,2025-05-12T07:18:56+00:00,web-flow,2025-05-12T07:18:56+00:00,"build(deps): update tqdm requirement from <4.67.0,>=4.57.0 to >=4.57.0,<4.68.0 in /requirements (#20817)
+
+build(deps): update tqdm requirement in /requirements
+
+Updates the requirements on [tqdm](https://github.com/tqdm/tqdm) to permit the latest version.
+- [Release notes](https://github.com/tqdm/tqdm/releases)
+- [Commits](https://github.com/tqdm/tqdm/compare/v4.57.0...v4.67.1)
+
+---
+updated-dependencies:
+- dependency-name: tqdm
+  dependency-version: 4.67.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,90b8b59feb82968e3e632ebd0d01b12edc7e9a5b
+Lightning-AI/pytorch-lightning,90b8b59feb82968e3e632ebd0d01b12edc7e9a5b,https://github.com/Lightning-AI/pytorch-lightning/commit/90b8b59feb82968e3e632ebd0d01b12edc7e9a5b,dependabot[bot],49699333,Bot,2025-05-12T07:18:48+00:00,web-flow,2025-05-12T07:18:48+00:00,"build(deps): bump twine from 6.0.1 to 6.1.0 in /requirements (#20816)
+
+Bumps [twine](https://github.com/pypa/twine) from 6.0.1 to 6.1.0.
+- [Release notes](https://github.com/pypa/twine/releases)
+- [Changelog](https://github.com/pypa/twine/blob/main/docs/changelog.rst)
+- [Commits](https://github.com/pypa/twine/compare/6.0.1...6.1.0)
+
+---
+updated-dependencies:
+- dependency-name: twine
+  dependency-version: 6.1.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,3dc7470430b1ec6cdc4b5a5abe5aa2016e5511c6
+Lightning-AI/pytorch-lightning,3dc7470430b1ec6cdc4b5a5abe5aa2016e5511c6,https://github.com/Lightning-AI/pytorch-lightning/commit/3dc7470430b1ec6cdc4b5a5abe5aa2016e5511c6,dependabot[bot],49699333,Bot,2025-05-12T07:18:39+00:00,web-flow,2025-05-12T07:18:39+00:00,"build(deps): update nbsphinx requirement from <=0.9.2,>=0.8.5 to >=0.8.5,<=0.9.7 in /requirements (#20815)
+
+build(deps): update nbsphinx requirement in /requirements
+
+Updates the requirements on [nbsphinx](https://github.com/spatialaudio/nbsphinx) to permit the latest version.
+- [Release notes](https://github.com/spatialaudio/nbsphinx/releases)
+- [Changelog](https://github.com/spatialaudio/nbsphinx/blob/master/NEWS.rst)
+- [Commits](https://github.com/spatialaudio/nbsphinx/compare/0.8.5...0.9.7)
+
+---
+updated-dependencies:
+- dependency-name: nbsphinx
+  dependency-version: 0.9.7
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,7c418d6e9d603654348519545bd7c3c9c5f4ef35
+Lightning-AI/pytorch-lightning,7c418d6e9d603654348519545bd7c3c9c5f4ef35,https://github.com/Lightning-AI/pytorch-lightning/commit/7c418d6e9d603654348519545bd7c3c9c5f4ef35,dependabot[bot],49699333,Bot,2025-05-12T07:18:31+00:00,web-flow,2025-05-12T07:18:31+00:00,"build(deps): bump sphinx-toolbox from 3.5.0 to 3.10.0 in /requirements (#20814)
+
+Bumps [sphinx-toolbox](https://github.com/sphinx-toolbox/sphinx-toolbox) from 3.5.0 to 3.10.0.
+- [Release notes](https://github.com/sphinx-toolbox/sphinx-toolbox/releases)
+- [Changelog](https://github.com/sphinx-toolbox/sphinx-toolbox/blob/master/doc-source/changelog.rst)
+- [Commits](https://github.com/sphinx-toolbox/sphinx-toolbox/compare/v3.5.0...v3.10.0)
+
+---
+updated-dependencies:
+- dependency-name: sphinx-toolbox
+  dependency-version: 3.10.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,1b12c4bdd3dd0e221af03dd3deca18e21153cf47
+Lightning-AI/pytorch-lightning,1b12c4bdd3dd0e221af03dd3deca18e21153cf47,https://github.com/Lightning-AI/pytorch-lightning/commit/1b12c4bdd3dd0e221af03dd3deca18e21153cf47,Borda,6035284,User,2025-05-08T14:17:25+00:00,web-flow,2025-05-08T14:17:25+00:00,"updating issue template (#20720)
+
+* updating issue template
+
+* Update .github/ISSUE_TEMPLATE/1_bug_report.yaml
+
+* Update .github/ISSUE_TEMPLATE/1_bug_report.yaml
+
+* Apply suggestions from code review
+
+* Apply suggestions from code review
+
+---------
+
+Co-authored-by: Ali Alshaarawy <45029495+ali-alshaar7@users.noreply.github.com>",12,2,14,1,d5208f7052252baa3f2c5b59184b6cd38f0c80c4
+Lightning-AI/pytorch-lightning,d5208f7052252baa3f2c5b59184b6cd38f0c80c4,https://github.com/Lightning-AI/pytorch-lightning/commit/d5208f7052252baa3f2c5b59184b6cd38f0c80c4,pl-ghost,75324987,User,2025-05-06T09:05:19+00:00,web-flow,2025-05-06T09:05:19+00:00,"docs: update ref to latest tutorials (#20785)
+
+update tutorials to `fd70f511`
+
+Co-authored-by: Borda <Borda@users.noreply.github.com>",1,1,2,1,9caebba81e4e8c728a15e979c6b2126537f2dea3
+Lightning-AI/pytorch-lightning,9caebba81e4e8c728a15e979c6b2126537f2dea3,https://github.com/Lightning-AI/pytorch-lightning/commit/9caebba81e4e8c728a15e979c6b2126537f2dea3,mauvilsa,5780272,User,2025-05-06T08:24:11+00:00,web-flow,2025-05-06T08:24:11+00:00,"Remove LightningCLI `python>=3.11.9` xfail, since issue was resolved long ago (#20800)",1,29,30,3,4323cae1a3a430165b50d123da0197fa7fda538d
+Lightning-AI/pytorch-lightning,4323cae1a3a430165b50d123da0197fa7fda538d,https://github.com/Lightning-AI/pytorch-lightning/commit/4323cae1a3a430165b50d123da0197fa7fda538d,dependabot[bot],49699333,Bot,2025-05-05T18:47:48+00:00,web-flow,2025-05-05T18:47:48+00:00,"build(deps): bump pytest-random-order from 1.1.0 to 1.1.1 in /requirements (#20793)
+
+build(deps): bump pytest-random-order in /requirements
+
+Bumps [pytest-random-order](https://github.com/jbasko/pytest-random-order) from 1.1.0 to 1.1.1.
+- [Release notes](https://github.com/jbasko/pytest-random-order/releases)
+- [Commits](https://github.com/jbasko/pytest-random-order/compare/v1.1.0...v1.1.1)
+
+---
+updated-dependencies:
+- dependency-name: pytest-random-order
+  dependency-version: 1.1.1
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,23f02ce9794b4fd6f6f53c3c2bb8605cad1b4bac
+Lightning-AI/pytorch-lightning,23f02ce9794b4fd6f6f53c3c2bb8605cad1b4bac,https://github.com/Lightning-AI/pytorch-lightning/commit/23f02ce9794b4fd6f6f53c3c2bb8605cad1b4bac,dependabot[bot],49699333,Bot,2025-05-05T08:31:56+00:00,web-flow,2025-05-05T08:31:56+00:00,"build(deps): update onnx requirement from <1.17.0,>=1.12.0 to >=1.12.0,<1.18.0 in /requirements (#20795)
+
+build(deps): update onnx requirement in /requirements
+
+Updates the requirements on [onnx](https://github.com/onnx/onnx) to permit the latest version.
+- [Release notes](https://github.com/onnx/onnx/releases)
+- [Changelog](https://github.com/onnx/onnx/blob/main/docs/Changelog-ml.md)
+- [Commits](https://github.com/onnx/onnx/compare/v1.12.0...v1.17.0)
+
+---
+updated-dependencies:
+- dependency-name: onnx
+  dependency-version: 1.17.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,5886b5d1b5467e2949069ed16022dfc69af563c7
+Lightning-AI/pytorch-lightning,5886b5d1b5467e2949069ed16022dfc69af563c7,https://github.com/Lightning-AI/pytorch-lightning/commit/5886b5d1b5467e2949069ed16022dfc69af563c7,dependabot[bot],49699333,Bot,2025-05-05T08:31:48+00:00,web-flow,2025-05-05T08:31:48+00:00,"build(deps): update typing-extensions requirement from <4.11.0,>=4.4.0 to >=4.4.0,<4.14.0 in /requirements (#20794)
+
+build(deps): update typing-extensions requirement in /requirements
+
+Updates the requirements on [typing-extensions](https://github.com/python/typing_extensions) to permit the latest version.
+- [Release notes](https://github.com/python/typing_extensions/releases)
+- [Changelog](https://github.com/python/typing_extensions/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/python/typing_extensions/compare/4.4.0...4.13.2)
+
+---
+updated-dependencies:
+- dependency-name: typing-extensions
+  dependency-version: 4.13.2
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,585396c5efddc51c42e9dc918615fbb5925dcdf0
+Lightning-AI/pytorch-lightning,585396c5efddc51c42e9dc918615fbb5925dcdf0,https://github.com/Lightning-AI/pytorch-lightning/commit/585396c5efddc51c42e9dc918615fbb5925dcdf0,dependabot[bot],49699333,Bot,2025-05-05T08:31:40+00:00,web-flow,2025-05-05T08:31:40+00:00,"build(deps): update docutils requirement from <0.21,>=0.16 to >=0.16,<0.22 in /requirements (#20792)
+
+build(deps): update docutils requirement in /requirements
+
+Updates the requirements on [docutils](https://docutils.sourceforge.io) to permit the latest version.
+
+---
+updated-dependencies:
+- dependency-name: docutils
+  dependency-version: 0.21.2
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,c3ac7abcb47024728eabe71e5bb5d7ecab9a06fc
+Lightning-AI/pytorch-lightning,c3ac7abcb47024728eabe71e5bb5d7ecab9a06fc,https://github.com/Lightning-AI/pytorch-lightning/commit/c3ac7abcb47024728eabe71e5bb5d7ecab9a06fc,dependabot[bot],49699333,Bot,2025-05-05T08:31:31+00:00,web-flow,2025-05-05T08:31:31+00:00,"build(deps): update psutil requirement from <5.9.6 to <7.0.1 in /requirements (#20791)
+
+build(deps): update psutil requirement in /requirements
+
+Updates the requirements on [psutil](https://github.com/giampaolo/psutil) to permit the latest version.
+- [Changelog](https://github.com/giampaolo/psutil/blob/master/HISTORY.rst)
+- [Commits](https://github.com/giampaolo/psutil/compare/release-0.1.0...release-7.0.0)
+
+---
+updated-dependencies:
+- dependency-name: psutil
+  dependency-version: 7.0.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,2f676784a7011eb254215856badb618db50d5894
+Lightning-AI/pytorch-lightning,2f676784a7011eb254215856badb618db50d5894,https://github.com/Lightning-AI/pytorch-lightning/commit/2f676784a7011eb254215856badb618db50d5894,dependabot[bot],49699333,Bot,2025-05-05T08:31:21+00:00,web-flow,2025-05-05T08:31:21+00:00,"build(deps): update importlib-metadata requirement from <8.0.0 to <9.0.0 in /requirements (#20790)
+
+build(deps): update importlib-metadata requirement in /requirements
+
+Updates the requirements on [importlib-metadata](https://github.com/python/importlib_metadata) to permit the latest version.
+- [Release notes](https://github.com/python/importlib_metadata/releases)
+- [Changelog](https://github.com/python/importlib_metadata/blob/main/NEWS.rst)
+- [Commits](https://github.com/python/importlib_metadata/compare/0.1...v8.7.0)
+
+---
+updated-dependencies:
+- dependency-name: importlib-metadata
+  dependency-version: 8.7.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,30df45cfed0a02a80b9e9cd8064eabb52e2444c8
+Lightning-AI/pytorch-lightning,30df45cfed0a02a80b9e9cd8064eabb52e2444c8,https://github.com/Lightning-AI/pytorch-lightning/commit/30df45cfed0a02a80b9e9cd8064eabb52e2444c8,dependabot[bot],49699333,Bot,2025-05-05T08:31:03+00:00,web-flow,2025-05-05T08:31:03+00:00,"build(deps): bump pkginfo from 1.12.0 to 1.12.1.2 in /requirements (#20789)
+
+Bumps [pkginfo](https://code.launchpad.net/~tseaver/pkginfo/trunk) from 1.12.0 to 1.12.1.2.
+
+---
+updated-dependencies:
+- dependency-name: pkginfo
+  dependency-version: 1.12.1.2
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,156ccd974104c1819a3a97d82354a547c2bb07a7
+Lightning-AI/pytorch-lightning,156ccd974104c1819a3a97d82354a547c2bb07a7,https://github.com/Lightning-AI/pytorch-lightning/commit/156ccd974104c1819a3a97d82354a547c2bb07a7,dependabot[bot],49699333,Bot,2025-05-05T08:30:53+00:00,web-flow,2025-05-05T08:30:53+00:00,"build(deps): update ipython[notebook] requirement from <8.7.0 to <8.19.0 in /requirements (#20788)
+
+build(deps): update ipython[notebook] requirement in /requirements
+
+Updates the requirements on [ipython[notebook]](https://github.com/ipython/ipython) to permit the latest version.
+- [Release notes](https://github.com/ipython/ipython/releases)
+- [Commits](https://github.com/ipython/ipython/compare/rel-0.8.4...8.18.1)
+
+---
+updated-dependencies:
+- dependency-name: ipython[notebook]
+  dependency-version: 8.18.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,ec6e2e08ee45387299dc9c06a5d7e64977d1306e
+Lightning-AI/pytorch-lightning,ec6e2e08ee45387299dc9c06a5d7e64977d1306e,https://github.com/Lightning-AI/pytorch-lightning/commit/ec6e2e08ee45387299dc9c06a5d7e64977d1306e,dependabot[bot],49699333,Bot,2025-05-05T08:30:44+00:00,web-flow,2025-05-05T08:30:44+00:00,"build(deps): bump pytest-timeout from 2.1.0 to 2.3.1 in /requirements (#20787)
+
+Bumps [pytest-timeout](https://github.com/pytest-dev/pytest-timeout) from 2.1.0 to 2.3.1.
+- [Commits](https://github.com/pytest-dev/pytest-timeout/compare/2.1.0...2.3.1)
+
+---
+updated-dependencies:
+- dependency-name: pytest-timeout
+  dependency-version: 2.3.1
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,6da480d5e3304b91ac188b849ee06e369e878460
+Lightning-AI/pytorch-lightning,6da480d5e3304b91ac188b849ee06e369e878460,https://github.com/Lightning-AI/pytorch-lightning/commit/6da480d5e3304b91ac188b849ee06e369e878460,dependabot[bot],49699333,Bot,2025-04-28T12:33:12+00:00,web-flow,2025-04-28T12:33:12+00:00,"build(deps): bump mypy from 1.11.0 to 1.15.0 in /requirements (#20759)
+
+* build(deps): bump mypy from 1.11.0 to 1.15.0 in /requirements
+
+Bumps [mypy](https://github.com/python/mypy) from 1.11.0 to 1.15.0.
+- [Changelog](https://github.com/python/mypy/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python/mypy/compare/v1.11...v1.15.0)
+
+---
+updated-dependencies:
+- dependency-name: mypy
+  dependency-version: 1.15.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* fixing
+* ignore
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka B <j.borovec+github@gmail.com>
+Co-authored-by: Jirka Borovec <6035284+Borda@users.noreply.github.com>",7,8,15,5,749dc90f1b19aa0c2cefcaf8fa798c22304d6618
+Lightning-AI/pytorch-lightning,749dc90f1b19aa0c2cefcaf8fa798c22304d6618,https://github.com/Lightning-AI/pytorch-lightning/commit/749dc90f1b19aa0c2cefcaf8fa798c22304d6618,Borda,6035284,User,2025-04-28T12:32:35+00:00,web-flow,2025-04-28T12:32:35+00:00,"drop mergify (#20770)
+
+* drop mergify
+* label conflist",22,70,92,2,383c980b0f75e116b13361207779bad2941e3e59
+Lightning-AI/pytorch-lightning,383c980b0f75e116b13361207779bad2941e3e59,https://github.com/Lightning-AI/pytorch-lightning/commit/383c980b0f75e116b13361207779bad2941e3e59,Borda,6035284,User,2025-04-28T12:32:02+00:00,web-flow,2025-04-28T12:32:02+00:00,docs: update repo link preventing flakiness (#20769),3468,3471,6939,35,2b5d38d4d467c293c33a585740eb6156f536d622
+Lightning-AI/pytorch-lightning,2b5d38d4d467c293c33a585740eb6156f536d622,https://github.com/Lightning-AI/pytorch-lightning/commit/2b5d38d4d467c293c33a585740eb6156f536d622,dependabot[bot],49699333,Bot,2025-04-28T09:07:51+00:00,web-flow,2025-04-28T09:07:51+00:00,"build(deps): update scikit-learn requirement from <1.4.0,>0.22.1 to >0.22.1,<1.7.0 in /requirements (#20760)
+
+build(deps): update scikit-learn requirement in /requirements
+
+Updates the requirements on [scikit-learn](https://github.com/scikit-learn/scikit-learn) to permit the latest version.
+- [Release notes](https://github.com/scikit-learn/scikit-learn/releases)
+- [Commits](https://github.com/scikit-learn/scikit-learn/compare/0.22.2...1.6.1)
+
+---
+updated-dependencies:
+- dependency-name: scikit-learn
+  dependency-version: 1.6.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,c51b3472852ea7e3a9b38d2aad6035dce8707b2c
+Lightning-AI/pytorch-lightning,c51b3472852ea7e3a9b38d2aad6035dce8707b2c,https://github.com/Lightning-AI/pytorch-lightning/commit/c51b3472852ea7e3a9b38d2aad6035dce8707b2c,dependabot[bot],49699333,Bot,2025-04-28T09:06:30+00:00,web-flow,2025-04-28T09:06:30+00:00,"build(deps): update pandas requirement from <2.2.0,>1.0 to >1.0,<2.3.0 in /requirements (#20764)
+
+build(deps): update pandas requirement in /requirements
+
+Updates the requirements on [pandas](https://github.com/pandas-dev/pandas) to permit the latest version.
+- [Release notes](https://github.com/pandas-dev/pandas/releases)
+- [Commits](https://github.com/pandas-dev/pandas/compare/v1.0.1...v2.2.3)
+
+---
+updated-dependencies:
+- dependency-name: pandas
+  dependency-version: 2.2.3
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,82c584aca949589bc21c021b58706117df03f871
+Lightning-AI/pytorch-lightning,82c584aca949589bc21c021b58706117df03f871,https://github.com/Lightning-AI/pytorch-lightning/commit/82c584aca949589bc21c021b58706117df03f871,dependabot[bot],49699333,Bot,2025-04-28T09:06:16+00:00,web-flow,2025-04-28T09:06:16+00:00,"build(deps): bump torch from 2.6.0 to 2.7.0 in /requirements (#20765)
+
+* build(deps): bump torch from 2.6.0 to 2.7.0 in /requirements
+
+Bumps [torch](https://github.com/pytorch/pytorch) from 2.6.0 to 2.7.0.
+- [Release notes](https://github.com/pytorch/pytorch/releases)
+- [Changelog](https://github.com/pytorch/pytorch/blob/main/RELEASE.md)
+- [Commits](https://github.com/pytorch/pytorch/compare/v2.6.0...v2.7.0)
+
+---
+updated-dependencies:
+- dependency-name: torch
+  dependency-version: 2.7.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* torchvision >=0.16.0, <0.23.0
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka B <j.borovec+github@gmail.com>",5,5,10,5,c71cc8a100ec87ded8ff17ff3a891aab4ac7433e
+Lightning-AI/pytorch-lightning,c71cc8a100ec87ded8ff17ff3a891aab4ac7433e,https://github.com/Lightning-AI/pytorch-lightning/commit/c71cc8a100ec87ded8ff17ff3a891aab4ac7433e,dependabot[bot],49699333,Bot,2025-04-28T09:03:21+00:00,web-flow,2025-04-28T09:03:21+00:00,"build(deps): update wheel requirement from <0.44.0 to <0.46.0 in /requirements (#20763)
+
+build(deps): update wheel requirement in /requirements
+
+Updates the requirements on [wheel](https://github.com/pypa/wheel) to permit the latest version.
+- [Release notes](https://github.com/pypa/wheel/releases)
+- [Changelog](https://github.com/pypa/wheel/blob/main/docs/news.rst)
+- [Commits](https://github.com/pypa/wheel/compare/0.5...0.45.1)
+
+---
+updated-dependencies:
+- dependency-name: wheel
+  dependency-version: 0.45.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,8220d057f5c934292499528a5e38092d9c5053fa
+Lightning-AI/pytorch-lightning,8220d057f5c934292499528a5e38092d9c5053fa,https://github.com/Lightning-AI/pytorch-lightning/commit/8220d057f5c934292499528a5e38092d9c5053fa,dependabot[bot],49699333,Bot,2025-04-28T08:30:23+00:00,web-flow,2025-04-28T08:30:23+00:00,"build(deps): bump pytest-cov from 4.1.0 to 6.1.1 in /requirements (#20768)
+
+* build(deps): bump pytest-cov from 4.1.0 to 6.1.1 in /requirements
+
+Bumps [pytest-cov](https://github.com/pytest-dev/pytest-cov) from 4.1.0 to 6.1.1.
+- [Changelog](https://github.com/pytest-dev/pytest-cov/blob/master/CHANGELOG.rst)
+- [Commits](https://github.com/pytest-dev/pytest-cov/compare/v4.1.0...v6.1.1)
+
+---
+updated-dependencies:
+- dependency-name: pytest-cov
+  dependency-version: 6.1.1
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* coverage ==7.8.0
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka B <j.borovec+github@gmail.com>",4,4,8,2,efb02d79ebada7fb9d507f24293b5c23b3f545de
+Lightning-AI/pytorch-lightning,efb02d79ebada7fb9d507f24293b5c23b3f545de,https://github.com/Lightning-AI/pytorch-lightning/commit/efb02d79ebada7fb9d507f24293b5c23b3f545de,dependabot[bot],49699333,Bot,2025-04-28T07:08:58+00:00,web-flow,2025-04-28T07:08:58+00:00,"build(deps): update requests requirement from <2.32.0 to <2.33.0 in /requirements (#20762)
+
+build(deps): update requests requirement in /requirements
+
+Updates the requirements on [requests](https://github.com/psf/requests) to permit the latest version.
+- [Release notes](https://github.com/psf/requests/releases)
+- [Changelog](https://github.com/psf/requests/blob/main/HISTORY.md)
+- [Commits](https://github.com/psf/requests/compare/v0.2.0...v2.32.3)
+
+---
+updated-dependencies:
+- dependency-name: requests
+  dependency-version: 2.32.3
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,3fda67be536588b895048252ae923df527203c27
+Lightning-AI/pytorch-lightning,3fda67be536588b895048252ae923df527203c27,https://github.com/Lightning-AI/pytorch-lightning/commit/3fda67be536588b895048252ae923df527203c27,dependabot[bot],49699333,Bot,2025-04-28T07:08:19+00:00,web-flow,2025-04-28T07:08:19+00:00,"build(deps): update awscli requirement from <1.31.0,>=1.30.0 to >=1.30.0,<1.41.0 in /requirements (#20766)
+
+build(deps): update awscli requirement in /requirements
+
+Updates the requirements on [awscli](https://github.com/aws/aws-cli) to permit the latest version.
+- [Release notes](https://github.com/aws/aws-cli/releases)
+- [Commits](https://github.com/aws/aws-cli/compare/1.30.0...1.40.2)
+
+---
+updated-dependencies:
+- dependency-name: awscli
+  dependency-version: 1.40.2
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,90354eb407e8bb137af3e44df762d778feddfe2f
+Lightning-AI/pytorch-lightning,90354eb407e8bb137af3e44df762d778feddfe2f,https://github.com/Lightning-AI/pytorch-lightning/commit/90354eb407e8bb137af3e44df762d778feddfe2f,dependabot[bot],49699333,Bot,2025-04-28T07:08:04+00:00,web-flow,2025-04-28T07:08:04+00:00,"build(deps): update fsspec[http] requirement from <2024.4.0,>=2022.5.0 to >=2022.5.0,<2025.4.0 in /requirements (#20767)
+
+build(deps): update fsspec[http] requirement in /requirements
+
+Updates the requirements on [fsspec[http]](https://github.com/fsspec/filesystem_spec) to permit the latest version.
+- [Commits](https://github.com/fsspec/filesystem_spec/compare/2022.5.0...2025.3.2)
+
+---
+updated-dependencies:
+- dependency-name: fsspec[http]
+  dependency-version: 2025.3.2
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,69d8fa9b95261da552a42fc3bbde36d6de452e99
+Lightning-AI/pytorch-lightning,69d8fa9b95261da552a42fc3bbde36d6de452e99,https://github.com/Lightning-AI/pytorch-lightning/commit/69d8fa9b95261da552a42fc3bbde36d6de452e99,Borda,6035284,User,2025-04-25T18:29:32+00:00,web-flow,2025-04-25T18:29:32+00:00,bump: testing latest PT on GPU to `2.7` (#20754),12,10,22,4,6cf2581feb1454d26958f2b367ab68e1c3464f8d
+Lightning-AI/pytorch-lightning,6cf2581feb1454d26958f2b367ab68e1c3464f8d,https://github.com/Lightning-AI/pytorch-lightning/commit/6cf2581feb1454d26958f2b367ab68e1c3464f8d,Borda,6035284,User,2025-04-25T17:49:44+00:00,web-flow,2025-04-25T17:49:44+00:00,"update model message (#20753)
+
+* update model message
+* nitpick_ignore",6,4,10,4,1af7f73d4b1043b8be60babdfbd15637c96a0374
+Lightning-AI/pytorch-lightning,1af7f73d4b1043b8be60babdfbd15637c96a0374,https://github.com/Lightning-AI/pytorch-lightning/commit/1af7f73d4b1043b8be60babdfbd15637c96a0374,williamFalcon,3640001,User,2025-04-24T10:05:37+00:00,web-flow,2025-04-24T10:05:37+00:00,Release prep 2,1,1,2,1,f01ff1403f2d9b0efb65220acb9d3bc7fa6d85d8
+Lightning-AI/pytorch-lightning,f01ff1403f2d9b0efb65220acb9d3bc7fa6d85d8,https://github.com/Lightning-AI/pytorch-lightning/commit/f01ff1403f2d9b0efb65220acb9d3bc7fa6d85d8,Borda,6035284,User,2025-04-24T10:04:11+00:00,web-flow,2025-04-24T10:04:11+00:00,"release preparation (#20752)
+
+setting logger's codeower",3,0,3,1,73b785a4b31dc66c3e4324cd3cb9693e5b56414b
+Lightning-AI/pytorch-lightning,73b785a4b31dc66c3e4324cd3cb9693e5b56414b,https://github.com/Lightning-AI/pytorch-lightning/commit/73b785a4b31dc66c3e4324cd3cb9693e5b56414b,Borda,6035284,User,2025-04-24T07:24:01+00:00,Borda,2025-04-24T07:35:05+00:00,"Revert ""Add checkpoint artifact path prefix to MLflow logger (#20538)""
+
+This reverts commit 87108d82",2,69,71,4,f6ef4099b6996e03fe345cfb5f9f2f5b3cad159b
+Lightning-AI/pytorch-lightning,f6ef4099b6996e03fe345cfb5f9f2f5b3cad159b,https://github.com/Lightning-AI/pytorch-lightning/commit/f6ef4099b6996e03fe345cfb5f9f2f5b3cad159b,Borda,6035284,User,2025-04-24T07:23:13+00:00,Borda,2025-04-24T07:35:05+00:00,"Revert ""fix: MLFlowLogger artifact_path (#20669)""
+
+This reverts commit df5dee674243e124a2bf34d9975dd586ff008d4b.",1,1,2,1,0c9d4147e3569e24bf6130e78ae21b136562766e
+Lightning-AI/pytorch-lightning,0c9d4147e3569e24bf6130e78ae21b136562766e,https://github.com/Lightning-AI/pytorch-lightning/commit/0c9d4147e3569e24bf6130e78ae21b136562766e,dependabot[bot],49699333,Bot,2025-04-23T09:28:36+00:00,web-flow,2025-04-23T09:28:36+00:00,"build(deps): bump `torch` from 2.5.1 to 2.6.0 & `torchvision` from <0.21.0,>=0.16.0 to >=0.16.0,<0.22.0 in /requirements (#20728)
+
+* build(deps): bump torch from 2.5.1 to 2.6.0 in /requirements
+
+Bumps [torch](https://github.com/pytorch/pytorch) from 2.5.1 to 2.6.0.
+- [Release notes](https://github.com/pytorch/pytorch/releases)
+- [Changelog](https://github.com/pytorch/pytorch/blob/main/RELEASE.md)
+- [Commits](https://github.com/pytorch/pytorch/compare/v2.5.1...v2.6.0)
+
+---
+updated-dependencies:
+- dependency-name: torch
+  dependency-version: 2.6.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* build(deps): update torchvision requirement from <0.21.0,>=0.16.0 to >=0.16.0,<0.22.0 in /requirements (#20736)
+
+build(deps): update torchvision requirement in /requirements
+
+Updates the requirements on [torchvision](https://github.com/pytorch/vision) to permit the latest version.
+- [Release notes](https://github.com/pytorch/vision/releases)
+- [Commits](https://github.com/pytorch/vision/compare/v0.16.0...v0.21.0)
+
+---
+updated-dependencies:
+- dependency-name: torchvision
+  dependency-version: 0.21.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+* # type: ignore[arg-type]
+* type: ignore[arg-type]
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka B <j.borovec+github@gmail.com>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",23,21,44,12,3fb8dcf1d8c1ea7aa98972776de353f49acfeb33
+Lightning-AI/pytorch-lightning,3fb8dcf1d8c1ea7aa98972776de353f49acfeb33,https://github.com/Lightning-AI/pytorch-lightning/commit/3fb8dcf1d8c1ea7aa98972776de353f49acfeb33,dependabot[bot],49699333,Bot,2025-04-22T19:11:11+00:00,web-flow,2025-04-22T19:11:11+00:00,"build(deps): bump pytest from 7.4.0 to 8.3.5 in /requirements (#20732)
+
+* build(deps): bump pytest from 7.4.0 to 8.3.5 in /requirements
+
+Bumps [pytest](https://github.com/pytest-dev/pytest) from 7.4.0 to 8.3.5.
+- [Release notes](https://github.com/pytest-dev/pytest/releases)
+- [Changelog](https://github.com/pytest-dev/pytest/blob/main/CHANGELOG.rst)
+- [Commits](https://github.com/pytest-dev/pytest/compare/7.4.0...8.3.5)
+
+---
+updated-dependencies:
+- dependency-name: pytest
+  dependency-version: 8.3.5
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* pytest-doctestplus ==1.4.0
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka B <j.borovec+github@gmail.com>",4,4,8,3,948577b8cd12ffbaef70b62c90e9421bae9482f9
+Lightning-AI/pytorch-lightning,948577b8cd12ffbaef70b62c90e9421bae9482f9,https://github.com/Lightning-AI/pytorch-lightning/commit/948577b8cd12ffbaef70b62c90e9421bae9482f9,dependabot[bot],49699333,Bot,2025-04-22T18:55:05+00:00,web-flow,2025-04-22T18:55:05+00:00,"build(deps): update lightning-utilities requirement from <0.12.0,>=0.11.1 to >=0.11.1,<0.15.0 in /requirements (#20737)
+
+build(deps): update lightning-utilities requirement in /requirements
+
+Updates the requirements on [lightning-utilities](https://github.com/Lightning-AI/utilities) to permit the latest version.
+- [Release notes](https://github.com/Lightning-AI/utilities/releases)
+- [Changelog](https://github.com/Lightning-AI/utilities/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/Lightning-AI/utilities/compare/v0.11.1...v0.14.3)
+
+---
+updated-dependencies:
+- dependency-name: lightning-utilities
+  dependency-version: 0.14.3
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Jirka Borovec <6035284+Borda@users.noreply.github.com>",5,5,10,5,396038a7d4337288bbbf101b32eb1d28b8c0c5f7
+Lightning-AI/pytorch-lightning,396038a7d4337288bbbf101b32eb1d28b8c0c5f7,https://github.com/Lightning-AI/pytorch-lightning/commit/396038a7d4337288bbbf101b32eb1d28b8c0c5f7,dependabot[bot],49699333,Bot,2025-04-22T17:43:44+00:00,web-flow,2025-04-22T17:43:44+00:00,"build(deps): update packaging requirement from <24.2 to <25.1 in /requirements (#20734)
+
+build(deps): update packaging requirement in /requirements
+
+Updates the requirements on [packaging](https://github.com/pypa/packaging) to permit the latest version.
+- [Release notes](https://github.com/pypa/packaging/releases)
+- [Changelog](https://github.com/pypa/packaging/blob/main/CHANGELOG.rst)
+- [Commits](https://github.com/pypa/packaging/compare/20.0...25.0)
+
+---
+updated-dependencies:
+- dependency-name: packaging
+  dependency-version: '25.0'
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,3,ffec8706b2c7b22b89d7b12f4d77572a0582b2ae
+Lightning-AI/pytorch-lightning,ffec8706b2c7b22b89d7b12f4d77572a0582b2ae,https://github.com/Lightning-AI/pytorch-lightning/commit/ffec8706b2c7b22b89d7b12f4d77572a0582b2ae,dependabot[bot],49699333,Bot,2025-04-22T17:39:15+00:00,web-flow,2025-04-22T17:39:15+00:00,"build(deps): update onnxruntime requirement from <1.19.0,>=1.12.0 to >=1.12.0,<1.21.0 in /requirements (#20738)
+
+build(deps): update onnxruntime requirement in /requirements
+
+Updates the requirements on [onnxruntime](https://github.com/microsoft/onnxruntime) to permit the latest version.
+- [Release notes](https://github.com/microsoft/onnxruntime/releases)
+- [Changelog](https://github.com/microsoft/onnxruntime/blob/main/docs/ReleaseManagement.md)
+- [Commits](https://github.com/microsoft/onnxruntime/compare/v1.12.0...v1.20.1)
+
+---
+updated-dependencies:
+- dependency-name: onnxruntime
+  dependency-version: 1.20.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,fd1a38b27516ce073cef2c687a382d3c0484a45c
+Lightning-AI/pytorch-lightning,fd1a38b27516ce073cef2c687a382d3c0484a45c,https://github.com/Lightning-AI/pytorch-lightning/commit/fd1a38b27516ce073cef2c687a382d3c0484a45c,dependabot[bot],49699333,Bot,2025-04-22T17:30:17+00:00,web-flow,2025-04-22T17:30:17+00:00,"build(deps): update cloudpickle requirement from <2.3.0,>=1.3 to >=1.3,<3.2.0 in /requirements (#20740)
+
+build(deps): update cloudpickle requirement in /requirements
+
+Updates the requirements on [cloudpickle](https://github.com/cloudpipe/cloudpickle) to permit the latest version.
+- [Release notes](https://github.com/cloudpipe/cloudpickle/releases)
+- [Changelog](https://github.com/cloudpipe/cloudpickle/blob/master/CHANGES.md)
+- [Commits](https://github.com/cloudpipe/cloudpickle/compare/v1.3.0...v3.1.1)
+
+---
+updated-dependencies:
+- dependency-name: cloudpickle
+  dependency-version: 3.1.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,156aad119db30c62f6654dde9d6ff40b0b6b0cc3
+Lightning-AI/pytorch-lightning,156aad119db30c62f6654dde9d6ff40b0b6b0cc3,https://github.com/Lightning-AI/pytorch-lightning/commit/156aad119db30c62f6654dde9d6ff40b0b6b0cc3,dependabot[bot],49699333,Bot,2025-04-22T13:12:35+00:00,web-flow,2025-04-22T13:12:35+00:00,"build(deps): update torchmetrics requirement from <1.5.0,>=0.10.0 to >=0.10.0,<1.8.0 in /requirements (#20739)
+
+build(deps): update torchmetrics requirement in /requirements
+
+Updates the requirements on [torchmetrics](https://github.com/Lightning-AI/torchmetrics) to permit the latest version.
+- [Release notes](https://github.com/Lightning-AI/torchmetrics/releases)
+- [Changelog](https://github.com/Lightning-AI/torchmetrics/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/Lightning-AI/torchmetrics/compare/v0.10.0...v1.7.1)
+
+---
+updated-dependencies:
+- dependency-name: torchmetrics
+  dependency-version: 1.7.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,3,c88bb407b3e7d340cbf1653f14df6c31bf8b24fd
+Lightning-AI/pytorch-lightning,c88bb407b3e7d340cbf1653f14df6c31bf8b24fd,https://github.com/Lightning-AI/pytorch-lightning/commit/c88bb407b3e7d340cbf1653f14df6c31bf8b24fd,Borda,6035284,User,2025-04-22T13:09:35+00:00,web-flow,2025-04-22T13:09:35+00:00,ci: try to supress false failing check for create legacy checkpoint (#20746),2,1,3,1,08a04de85aa6c1304841f801ed4c6a2e397f7bed
+Lightning-AI/pytorch-lightning,08a04de85aa6c1304841f801ed4c6a2e397f7bed,https://github.com/Lightning-AI/pytorch-lightning/commit/08a04de85aa6c1304841f801ed4c6a2e397f7bed,Borda,6035284,User,2025-04-22T09:57:40+00:00,web-flow,2025-04-22T09:57:40+00:00,ci: try to suppress false failing check for create legacy checkpoint (#20745),1,1,2,1,58827d3889a76571c0b229bd3a731f07efa7d8a9
+Lightning-AI/pytorch-lightning,58827d3889a76571c0b229bd3a731f07efa7d8a9,https://github.com/Lightning-AI/pytorch-lightning/commit/58827d3889a76571c0b229bd3a731f07efa7d8a9,dependabot[bot],49699333,Bot,2025-04-22T09:05:18+00:00,web-flow,2025-04-22T09:05:18+00:00,"build(deps): update ipython[all] requirement from <8.15.0 to <8.19.0 in /requirements (#20733)
+
+build(deps): update ipython[all] requirement in /requirements
+
+Updates the requirements on [ipython[all]](https://github.com/ipython/ipython) to permit the latest version.
+- [Release notes](https://github.com/ipython/ipython/releases)
+- [Commits](https://github.com/ipython/ipython/compare/rel-0.8.4...8.18.1)
+
+---
+updated-dependencies:
+- dependency-name: ipython[all]
+  dependency-version: 8.18.1
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,df18e4c65ee7a2a7c0e827722e8a84abc33c82d1
+Lightning-AI/pytorch-lightning,df18e4c65ee7a2a7c0e827722e8a84abc33c82d1,https://github.com/Lightning-AI/pytorch-lightning/commit/df18e4c65ee7a2a7c0e827722e8a84abc33c82d1,dependabot[bot],49699333,Bot,2025-04-21T18:34:40+00:00,web-flow,2025-04-21T18:34:40+00:00,"build(deps): update tensorboard requirement from <2.15.0,>=2.9.1 to >=2.9.1,<2.20.0 in /requirements (#20735)
+
+build(deps): update tensorboard requirement in /requirements
+
+Updates the requirements on [tensorboard](https://github.com/tensorflow/tensorboard) to permit the latest version.
+- [Release notes](https://github.com/tensorflow/tensorboard/releases)
+- [Changelog](https://github.com/tensorflow/tensorboard/blob/master/RELEASE.md)
+- [Commits](https://github.com/tensorflow/tensorboard/compare/2.9.1...2.19.0)
+
+---
+updated-dependencies:
+- dependency-name: tensorboard
+  dependency-version: 2.19.0
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,8055717b9c73c7c270d09ffbaec6b0798d9c56a4
+Lightning-AI/pytorch-lightning,8055717b9c73c7c270d09ffbaec6b0798d9c56a4,https://github.com/Lightning-AI/pytorch-lightning/commit/8055717b9c73c7c270d09ffbaec6b0798d9c56a4,deependujha,76887609,User,2025-04-17T17:46:01+00:00,web-flow,2025-04-17T17:46:01+00:00,"feat: add tests for `save_hyperparameters` with `ignore` behavior and composition handling (#20718)
+
+* add tests to check for `save_hyperparameter: ignore`
+* update
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",35,0,35,1,fe79be174c6fda32aac625545a5780b6a7719e6b

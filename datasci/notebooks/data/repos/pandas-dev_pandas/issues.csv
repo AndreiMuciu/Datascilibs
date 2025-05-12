@@ -1,0 +1,4160 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+pandas-dev/pandas,3057409687,61432,"DOC: Series.name is just Hashable, but many column arguments require str","### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+* https://pandas.pydata.org/docs/dev/reference/api/pandas.Series.name.html
+* https://pandas.pydata.org/docs/dev/reference/api/pandas.DataFrame.pivot.html
+
+### Documentation problem
+
+In the documentation, `Series.name` is [just required to be](https://pandas.pydata.org/docs/dev/reference/api/pandas.Series.name.html) a `Hashable`. When `pandas` functions ask for a column label, however, it often asks for an `str`, e.g. in [DataFrame.pivot](https://pandas.pydata.org/docs/dev/reference/api/pandas.DataFrame.pivot.html), where it says
+> **columns**: *str or object or a list of str*
+
+### Suggested fix for documentation
+
+Use `Hashable` everywhere to column labels as a function argument",cmp0xff,5564164,open,False,0,2025-05-12T15:45:47+00:00,2025-05-12T15:45:47+00:00,,Docs;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3057389539,61431,BUG: documented usage of of `str.split(...).str.get` fails on dtype `large_string[pyarrow]`,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+pd.Series([""abc""], dtype=""large_string[pyarrow]"").str.split(""b"").str
+
+
+-traceback
+Traceback (most recent call last):
+  File ""<python-input-7>"", line 1, in <module>
+    a = pd.Series([""abc""], dtype=""large_string[pyarrow]"").str.split(""b"").str[0]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/generic.py"", line 6127, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/accessor.py"", line 228, in __get__
+    return self._accessor(obj)
+           ~~~~~~~~~~~~~~^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/strings/accessor.py"", line 208, in __init__
+    self._inferred_dtype = self._validate(data)
+                           ~~~~~~~~~~~~~~^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/strings/accessor.py"", line 262, in _validate
+    raise AttributeError(
+        f""Can only use .str accessor with string values, not {inferred_dtype}""
+    )
+AttributeError: Can only use .str accessor with string values, not unknown-array. Did you mean: 'std'?
+```
+
+### Issue Description
+
+The return dtype of `split` is very different when acting on `large_string` (results in pyarrow list) and `string` (results in object).
+
+Interestingly, using the `list` accessor works **only** on `large_string` dtype
+```python
+>>> pd.Series([""abc""], dtype=""large_string[pyarrow]"").str.split(""b"").list[0]
+0    a
+dtype: large_string[pyarrow]
+```
+but **not** on `string` dtype
+```
+>>> pd.Series([""abc""], dtype=""string[pyarrow]"").str.split(""b"").list[0]
+Traceback (most recent call last):
+  File ""<python-input-15>"", line 1, in <module>
+    pd.Series([""abc""], dtype=""string[pyarrow]"").str.split(""b"").list[0]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/generic.py"", line 6127, in __getattr__
+    return object.__getattribute__(self, name)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/accessor.py"", line 228, in __get__
+    return self._accessor(obj)
+           ~~~~~~~~~~~~~~^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/arrays/arrow/accessors.py"", line 73, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        data,
+        ^^^^^
+        validation_msg=""Can only use the '.list' accessor with ""
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ""'list[pyarrow]' dtype, not {dtype}."",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/arrays/arrow/accessors.py"", line 41, in __init__
+    self._validate(data)
+    ~~~~~~~~~~~~~~^^^^^^
+  File ""/opt/homebrew/Caskroom/miniconda/base/envs/pandas-main-string-test/lib/python3.13/site-packages/pandas/core/arrays/arrow/accessors.py"", line 51, in _validate
+    raise AttributeError(self._validation_msg.format(dtype=dtype))
+AttributeError: Can only use the '.list' accessor with 'list[pyarrow]' dtype, not object.. Did you mean: 'hist'?
+```
+
+From a use perspective this is unfortunate, as I have to know the underlying dtype in order to choose the correct accessor (or cast).
+
+### Expected Behavior
+
+Should work similar to
+```python
+>>> pd.Series([""abc""], dtype=""string[pyarrow]"").str.split(""b"").str[0]
+0    a
+dtype: object
+```
+since it is documented behavior https://github.com/pandas-dev/pandas/blob/f496acffccfc08f30f8392894a8e0c56d404ef87/doc/source/user_guide/text.rst?plain=1#L229 (dtype is debatable).
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : f496acffccfc08f30f8392894a8e0c56d404ef87
+python                : 3.13.2
+python-bits           : 64
+OS                    : Darwin
+OS-release            : 24.4.0
+Version               : Darwin Kernel Version 24.4.0: Fri Apr 11 18:33:47 PDT 2025; root:xnu-11417.101.15~117/RELEASE_ARM64_T6000
+machine               : arm64
+processor             : arm
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 3.0.0.dev0+2100.gf496acffcc
+numpy                 : 2.2.5
+dateutil              : 2.9.0.post0
+pip                   : 25.1
+Cython                : 3.0.11
+sphinx                : None
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+bottleneck            : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : None
+lxml.etree            : None
+matplotlib            : None
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 20.0.0
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pytz                  : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",SandroCasagrande,22665904,open,False,0,2025-05-12T15:38:24+00:00,2025-05-12T15:38:24+00:00,,Bug;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3055081134,61430,BLD: Decrease size of docker image,"This PR reduces the size of the docker image by:
+- combining RUN commands to minimise the number of layers 
+- removing the apt lists files to reduce total size 
+- use --no-cache-dir when installing with pip
+
+In my tests it reduced the size of the final image with approximately 0.47GB (most of it due to the --no-cache-dir). 
+
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",huisman,23581164,open,False,0,2025-05-11T16:25:28+00:00,2025-05-11T16:25:28+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3055017753,61429,DOC: Updates to documentation - io.rst,"updating hdf5 data description link due to 404 error
+
+- [x] closes #61428 
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",ConnorWallace15,146393496,open,False,0,2025-05-11T14:17:41+00:00,2025-05-12T09:20:31+00:00,,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3054604088,61428,DOC: Broken Link in IO Tools - HDF5 Data Description,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/docs/user_guide/io.html
+
+### Documentation problem
+
+The link for HDF5 data description is broken and leads to a 404 error.
+
+Current [HDF5 link](https://support.hdfgroup.org/HDF5/whatishdf5.html#gsc.tab=0)
+
+### Suggested fix for documentation
+
+I believe a good replacement link would be to this [Introduction to HDF5](https://support.hdfgroup.org/documentation/hdf5/latest/_intro_h_d_f5.html).
+
+I would like to update the documentation with this link and create a pull request.",ConnorWallace15,146393496,open,False,2,2025-05-11T00:23:23+00:00,2025-05-11T04:39:47+00:00,,Docs;IO HDF5,0,0,0,0,0,0,0
+pandas-dev/pandas,3054507099,61427,ENH: access arrow-backed map as a python dictionary,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+Users should be able to accessing a dataframe element–that is an Arrow-backed map–with normal python dict semantics.
+
+Today, accessing an *Arrow-backed* map element will return a list of tuples per [`as_py()`](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639) from [`MapScalar`](https://arrow.apache.org/docs/python/generated/pyarrow.MapScalar.html) type–thus list semantics and not dictionary access semantics. Historically, this is because Arrow allows multiple keys, and ordering is not enforced. So converting to a python dictionary removes those two behaviors. (1) multiple keys *will* be removed and (2) the ordering *may* be changed. In practice, this is not the common case, and so it makes the common case hard. 
+
+The common case is that users want to interact with a map with traditional key/value access semantics. It's often a burden and source of confusion when users need to manually convert, a la
+
+```
+# pseudocode
+df = table.to_pandas(types_mapper=pd.ArrowDtype)
+my_dict = df[""col_a""].iloc[0]
+
+val = my_dict[""key""]  # error, no key/value access semantics
+val = dict(my_dict)[""key""]  # users need to manually convert to a dict on each access
+```
+
+This behavior should also be available when using imperative iteration based methods like `.iterrows()`, which is another common patter for accessing element-by-element.
+
+### Feature Description
+
+We can have a configuration for this in `ArrowExtensionArray`.
+
+Arrow already has a `maps_as_pydicts` flag: [`.to_pandas(maps_as_pydicts=True)`](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch.to_pandas) which controls this behavior *only* when *not* using pyarrow backed data frames (when using numpy backed data frames). This feature is already widely used in at last one large company.
+
+The flag will generate a [native python dictionary](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/src/arrow/python/arrow_to_pandas.cc#L1026) instead of a python list of `(key, value)` tuples. This flag has also made its way to [lower-level apis](https://github.com/apache/arrow/pull/45471) and come up with [competing dataframe libraries](https://github.com/pola-rs/polars/issues/21745).
+
+There's not an obvious place to put this in the `types_mapper` API. But, we can already see *unexpected* behavior when combining `maps_as_pydicts=True` with the `types_mapper=pd.ArrowDtype`
+
+```
+# pseudocode
+df = table.to_pandas(types_mapper=pd.ArrowDtype, maps_as_pydicts=True)
+
+# my_dict is still a `MapScalar`!! 
+my_dict = df[""col_a""].iloc[0]
+```
+
+When combined, `maps_as_pydicts` is effectively ignored, because the code path taken for `types_mapper=pd.ArrowDtype` makes no use of the flag.
+
+So, this is all to say, when we see both of those flags, we should *propagate the configuration* to Pandas, so that it will use it during element access [1](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L634), [2](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639)
+
+Such a change requires changes in both Arrow and Pandas.
+
+
+
+
+### Alternative Solutions
+
+Alternatively, we can save some state in the underlying pyarrow array, so that calling [`as_py()`](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1085) on the `MapScalar` will automatically do the right thing.
+
+Some breadcrumbs for context:
+*  a `MapScalar` is generated when accessing a pyarrow MapArray [1](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/array.pxi#L1530C16-L1530C27), [2](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L36)
+* this is accessed when retrieving an element from an `ArrowExtensionArray` [1](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L634), [2](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/arrays/arrow/array.py#L639)
+
+So, one can imagine that this information is saved in the `MapArray`/`Table` itself. However, that also introduces action at a distance when converting a table to a dataframe, and then performing element access. It would be more straightforward to configure this during the conversion to Pandas and holding that configuration state in the dataframe.
+
+----
+
+
+Another partial alternative is making a `.map` [accessor](https://github.com/pandas-dev/pandas/blob/3832e85779b143d882ce501c24ee51df95799e2c/pandas/core/series.py#L5852). I lack context on these accessors and don't know if they are an obvious solution, or a ham-fisted one.
+
+### Additional Context
+
+Performance can be a consideration. When doing an element access, we'd be doing a conversion from the native `Arrow` array to a Python dictionary. 
+
+However, *this is already the case*. Element access on a `MapScalar` already traverses the underlying `MapArray` and coverts it to a python list [1](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1112C30-L1113C1), [2](https://github.com/apache/arrow/blob/598938711a8376cbfdceaf5c77ab0fd5057e6c02/python/pyarrow/scalar.pxi#L1082)",mikelui,9659800,open,False,0,2025-05-10T20:29:32+00:00,2025-05-10T21:40:05+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3054347369,61426,BUG: Fix memory leak when slicing Series and assigning to self,"This PR fixes a memory leak that occurs when a Series is sliced and reassigned to itself, e.g., a = a[-1:].
+
+The underlying BlockManager retained references to the original data, preventing garbage collection. This is resolved by ensuring the sliced result copies the backing data.
+
+Closes #60640.",niranjanorkat,54126518,open,False,0,2025-05-10T16:36:04+00:00,2025-05-10T17:06:15+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3054212451,61425,BUG(string dtype): Arithmetic operations between Series with string dtype index,"Similar to #61099, but concerning `lhs + rhs`. Alignment in general is heavily involved here as well. One thing to note is that unlike in comparisons operations, in arithmetic operations the `lhs.index` dtype is favored, assuming no coercion is necessary.
+
+```python
+dtypes = [
+    np.dtype(object),
+    pd.StringDtype(""pyarrow"", na_value=np.nan),
+    pd.StringDtype(""python"", na_value=np.nan),
+    pd.StringDtype(""pyarrow"", na_value=pd.NA),
+    pd.StringDtype(""python"", na_value=pd.NA),
+    pd.ArrowDtype(pa.string())
+]
+idx1 = pd.Series([""a"", np.nan, ""b""], dtype=dtypes[1])
+idx2 = pd.Series([""a"", np.nan, ""b""], dtype=dtypes[3])
+df1 = pd.DataFrame({""idx"": idx1, ""value"": [1, 2, 3]}).set_index(""idx"")
+df2 = pd.DataFrame({""idx"": idx2, ""value"": [1, 2, 3]}).set_index(""idx"")
+print(df1[""value""] + df2[""value""])
+print(df2[""value""] + df1[""value""])
+```
+
+When concerning string dtypes, I've observed the following:
+
+- NaN vs NA generally aligns, the value propagated is always NA
+- NaN vs NA does not align when the NA arises from ArrowExtensionArray
+- NaN vs None (object) aligns, the value propagated is from `lhs`
+- NA vs None does not align
+- PyArrow-NA + ArrowExtensionArray results in object dtype (NAs do align)
+- Python-NA + PyArrow-NA results in PyArrow-NA; contrary to the left being preferred
+- Python-NA + PyArrow-NA results in object type (NAs do align)
+- When `lhs` and `rhs` have indices that are both object dtype:
+  - NaN vs None aligns and propagates the `lhs` value.
+  - NA vs None does not align
+  - NA vs NaN does not align
+
+I think the main two things we need to decide are:
+
+1. How should NA vs NaN vs None align.
+2. When they do align, which value should be propagated.
+
+A few properties I think are crucial:
+
+- Alignment should only depend on value and left-vs-right operand, not storage.
+- Alignment should be transitive.
+
+If we do decide on aligning between different values, a natural order is `None < NaN < NA`. However, the most backwards compatible would be to have None vs NaN be operand dependent with NA always propagating when present.",rhshadrach,45562402,open,False,2,2025-05-10T14:43:33+00:00,2025-05-11T23:55:04+00:00,,Bug;Strings;Needs Discussion;API - Consistency,0,0,0,0,0,0,0
+pandas-dev/pandas,3054181753,61424,i want to develop one feature in pandas,"### Research
+
+- [x] I have searched the [[pandas] tag](https://stackoverflow.com/questions/tagged/pandas) on StackOverflow for similar questions.
+
+- [x] I have asked my usage related question on [StackOverflow](https://stackoverflow.com).
+
+
+### Link to question on StackOverflow
+
+i want to develop one feature in pandas 
+
+### Question about pandas
+
+_No response_",Sunil5411,165418244,closed,False,2,2025-05-10T14:14:16+00:00,2025-05-10T14:31:48+00:00,2025-05-10T14:31:47+00:00,Usage Question;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3053798669,61423,CI: Fix test failures in 32-bit environment,"I noticed that some CI failures are due to the same test errors appearing in several recent PRs.
+After comparing multiple failed and successful CI runs, it seems that the unit tests fail when using `cython==3.1.0` in the Linux 32-bit environment.
+
+
+* Faliure unittest case:
+  ```python
+  FAILED pandas/tests/window/test_rolling.py::test_rolling_var_numerical_issues[var-1-values0] - AssertionError: Series are different
+  
+  Series values are different (42.85714 %)
+  [index]: [0, 1, 2, 3, 4, 5, 6]
+  [left]:  [nan, 5e+33, 0.0, -1.7226268574692147e+17, -1.7226268574692147e+17, -1.7226268574692147e+17, 0.0]
+  [right]: [nan, 5e+33, 0.0, 0.5, 0.5, 2.0, 0.0]
+  At positional index 3, first diff: -1.7226268574692147e+17 != 0.5
+  FAILED pandas/tests/window/test_rolling.py::test_rolling_var_numerical_issues[std-1-values1] - AssertionError: Series are different
+  
+  Series values are different (42.85714 %)
+  [index]: [0, 1, 2, 3, 4, 5, 6]
+  [left]:  [nan, 7.071067811865475e+16, 0.0, 0.0, 0.0, 0.0, 0.0]
+  [right]: [nan, 7.071068e+16, 0.0, 0.7071068, 0.7071068, 1.414214, 0.0]
+  At positional index 3, first diff: 0.0 != 0.7071068
+  FAILED pandas/tests/window/test_rolling.py::test_rolling_var_numerical_issues[var-2-values2] - AssertionError: Series are different
+  
+  Series values are different (42.85714 %)
+  [index]: [0, 1, 2, 3, 4, 5, 6]
+  [left]:  [nan, 5e+33, -1.7226268574692147e+17, 0.0, -1.7226268574692147e+17, -1.7226268574692147e+17, 0.0]
+  [right]: [nan, 5e+33, 0.5, 0.0, 0.5, 2.0, 0.0]
+  At positional index 2, first diff: -1.7226268574692147e+17 != 0.5
+  FAILED pandas/tests/window/test_rolling.py::test_rolling_var_numerical_issues[std-2-values3] - AssertionError: Series are different
+  
+  Series values are different (42.85714 %)
+  [index]: [0, 1, 2, 3, 4, 5, 6]
+  [left]:  [nan, 7.071067811865475e+16, 0.0, 0.0, 0.0, 0.0, 0.0]
+  [right]: [nan, 7.071068e+16, 0.7071068, 0.0, 0.7071068, 1.414214, 0.0]
+  At positional index 2, first diff: 0.0 != 0.7071068
+  = 4 failed, 166839 passed, 24850 skipped, 5388 deselected, 795 xfailed, 92 xpassed, 2 warnings in 554.17s (0:09:14) =
+  ```
+* using `cython==3.0.10`:
+  ```python
+  >>> import numpy as np
+  ... from pandas import Series
+  ...
+  ... def debug_rolling_var():
+  ...     ds = Series([99999999999999999, 1, 1, 2, 3, 1, 1])
+  ...     print(""Rolling(2).var():\n"", ds.rolling(2).var())
+  ...     print(""Numpy var:"", np.var([99999999999999999, 1], ddof=0))
+  ...
+  >>> debug_rolling_var()
+  Rolling(2).var():
+   0             NaN
+  1    5.000000e+33
+  2    0.000000e+00
+  3    5.000000e-01
+  4    5.000000e-01
+  5    2.000000e+00
+  6    0.000000e+00
+  dtype: float64
+  Numpy var: 2.5e+33
+  ```
+* using `cython==3.1.0`:
+  ```python
+  >>> import numpy as np
+  ... from pandas import Series
+  ...
+  ... def debug_rolling_var():
+  ...     ds = Series([99999999999999999, 1, 1, 2, 3, 1, 1])
+  ...     print(""Rolling(2).var():\n"", ds.rolling(2).var())
+  ...     print(""Numpy var:"", np.var([99999999999999999, 1], ddof=0))
+  ...
+  >>> debug_rolling_var()
+  Rolling(2).var():
+   0             NaN
+  1    5.000000e+33
+  2    0.000000e+00
+  3   -1.722627e+17
+  4   -1.722627e+17
+  5   -1.722627e+17
+  6    0.000000e+00
+  dtype: float64
+  Numpy var: 2.5e+33
+  ```",chilin0525,41913261,open,False,2,2025-05-10T06:43:45+00:00,2025-05-10T14:18:07+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3053377590,61422,BUG: Raise MergeError when suffixes result in duplicate column names …,"This PR addresses GH#61402 by ensuring that merge() raises a MergeError if the specified suffixes fail to eliminate column name collisions.
+
+The suffix logic now explicitly checks for overlaps after applying suffixes and raises a clear error if duplicates remain.
+
+Includes a test in test_merge.py to confirm that suffixes like ('_dup', '_dup') raise the expected error when merging conflicting column names.
+
+Closes GH#61402.
+",Farsidetfs,78942810,open,False,4,2025-05-09T23:21:41+00:00,2025-05-10T08:42:01+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3052849935,61421,DOC: Updated titanic.rst survived description,"- [x] closes #61412
+- [ ] ~[Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature~
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] ~Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.~
+- [ ] ~Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.~
+",arthurlw,126365160,closed,False,1,2025-05-09T18:01:36+00:00,2025-05-09T18:36:15+00:00,2025-05-09T18:36:07+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3052183501,61420,ENH: Add smart_groupby() method for automatic grouping by categorical columns and aggregating numerics,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [ ] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+Currently, pandas.DataFrame.groupby() requires users to explicitly specify both the grouping columns and the aggregation functions. This can be repetitive and inefficient, especially during exploratory data analysis on large DataFrames with many columns. A common use case like “group by all categorical columns and compute the mean of numeric columns” requires verbose, manual setup.
+
+### Feature Description
+
+Add a new method to DataFrame called smart_groupby(), which intelligently infers grouping and aggregation behavior based on the column types of the DataFrame.
+
+Proposed behavior:
+- If no parameters are passed:
+  - Group by all columns of type object, category, or bool
+  - Aggregate all remaining numeric columns using the mean
+- Optional keyword parameters:
+  -  by: specify grouping columns explicitly
+  - agg: specify aggregation function(s) (default is ""mean"")
+  - exclude: exclude specific columns from grouping or aggregation
+
+### Alternative Solutions
+
+Currently, users must write verbose code to accomplish the same:
+```
+group_cols = [col for col in df.columns if df[col].dtype == 'category']
+agg_cols = [col for col in df.columns if pd.api.types.is_numeric_dtype(df[col])]
+df.groupby(group_cols)[agg_cols].mean()
+```
+
+### Additional Context
+
+_No response_",rit4rosa,147553621,open,False,2,2025-05-09T13:27:40+00:00,2025-05-09T16:00:48+00:00,,Enhancement;Closing Candidate,0,0,0,0,0,0,0
+pandas-dev/pandas,3052051865,61419,BUILD: Missing Windows free-threading wheel,"### Installation check
+
+- [x] I have read the [installation guide](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html#installing-pandas).
+
+
+### Platform
+
+Windows-2022Server-10.0.20348-SP0
+
+### Installation Method
+
+pip install
+
+### pandas Version
+
+2.2.3
+
+### Python Version
+
+3.13.3 free-threading
+
+### Installation Logs
+
+<details>
+$ which pip
+/home/Administrator/venv/Scripts/pip
+$ pip install pandas
+Collecting pandas
+  Downloading pandas-2.2.3.tar.gz (4.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 144.5 MB/s eta 0:00:00
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... error
+  error: subprocess-exited-with-error
+
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [12 lines of output]
+      + meson setup Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222 Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222\.mesonpy-ulxgqp76\build -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md --vsenv --native-file=Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222\.mesonpy-ulxgqp76\build\meson-python-native-file.ini
+      The Meson build system
+      Version: 1.2.1
+      Source dir: Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222
+      Build dir: Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222\.mesonpy-ulxgqp76\build
+      Build type: native build
+      Project name: pandas
+      Project version: 2.2.3
+
+      ..\..\meson.build:2:0: ERROR: Could not find C:\Program Files\Microsoft Visual Studio\Installer\vswhere.exe
+
+      A full log can be found at Z:\data\tmp\pip-install-niaom8mt\pandas_620816291b0449be8d128c83a9a99222\.mesonpy-ulxgqp76\build\meson-logs\meson-log.txt
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+
+[notice] A new release of pip is available: 25.0.1 -> 25.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> See above for output.
+
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+
+</details>
+
+I don't see a wheel for Windows cp313t in the list of release files  https://pypi.org/project/pandas/2.2.3/#files.
+I see a job is running that should produce the wheel: https://github.com/pandas-dev/pandas/actions/runs/14920899116/job/41915964757
+Perhaps the wheel was accidentally omitted in the release process?
+",blink1073,2096628,closed,False,2,2025-05-09T12:40:24+00:00,2025-05-10T15:07:23+00:00,2025-05-10T14:36:30+00:00,Build;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3051633779,61418,BUG/FEATURE REQUEST: DataFrame.to_sql() tries to create table when it exists,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+This example requires an Oracle 19c database
+
+
+engine = sqlalchemy.create_engine('oracle+oracledb://...', echo=True)
+con = engine.connect()
+c.execute(text('''
+CREATE PRIVATE TEMPORARY TABLE ORA$PTT_TEMP (
+  a INT
+) ON COMMIT DROP DEFINITION
+'''))
+pd.DataFrame({'a': [1]}).to_sql('ORA$PTT_TEMP', engine)
+
+-05-09 11:10:00,967 INFO sqlalchemy.engine.Engine SELECT tables_and_views.table_name
+FROM (SELECT a_tables.table_name AS table_name, a_tables.owner AS owner
+FROM all_tables a_tables UNION ALL SELECT a_views.view_name AS table_name, a_views.owner AS owner
+FROM all_views a_views) tables_and_views
+WHERE tables_and_views.table_name = :table_name AND tables_and_views.owner = :owner
+2025-05-09 11:10:00,967 INFO sqlalchemy.engine.Engine [cached since 533.2s ago] {'table_name': 'ORA$PTT_TEMP', 'owner': '...'}
+2025-05-09 11:10:00,993 INFO sqlalchemy.engine.Engine
+CREATE TABLE ORA$PTT_TEMP (
+        curve_id INT
+)
+DatabaseError: (oracledb.exceptions.DatabaseError) ORA-32463: cannot create an object with a name matching private temporary table prefix
+```
+
+### Issue Description
+
+Hello Pandas!
+I am trying to use DataFrame.to_sql with Oracle ""PRIVATE TEMPORARY"" tables.
+The catch is that these tables for whatever reason cannot be detected with the inspector.has_table() method, so pandas is trying to create the table, and then fails.
+
+The issue is quite annoying, because the error is in the `pandas.SQLDatabase.prep_table()` method, which is called unconditionally in the `pandas.SQLDatabase.to_sql()`, and there is no way to override it with a custom ""method: callable"" parameter to `pandas.DataFrame.to_sql()`.
+
+Though one could argue that this is a bug in the SQLAlchemy Oracle dialect, rather than Pandas. But IMHO it should be possible to skip the table check and creation altogether in the `pandas.DataFrame.to_sql()` call. 
+It looks like it would be easy to add a `skip_table_creation: bool = False` argument to the `to_sql()` method, that would just skip the prep_table call in SQLDatabase.to_sql().
+The downside would be that pandas would not have the reflected information about target database types, but this could potentially be solved by passing a custom `sqlalchemy.Table` object?
+
+What do you think about this? Is this a direction that Pandas would like to go in, or do you think about the `.to_sql()` method more as a handy feature for ad-hoc operations, that should not be used much in production? Do you think it is better to write my own insert methods and not rely on `.to_sql()` for production use?
+
+### Expected Behavior
+
+I expect that it will not try to create a table if it exists, or an option to skip table creation if I know that it does not exist.
+
+### Installed Versions
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.11.3
+python-bits           : 64
+OS                    : Darwin
+OS-release            : 24.4.0
+Version               : Darwin Kernel Version 24.4.0: Fri Apr 11 18:33:47 PDT 2025; root:xnu-11417.101.15~117/RELEASE_ARM64_T6000
+machine               : arm64
+processor             : arm
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : None.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2024.2
+dateutil              : 2.8.2
+pip                   : 24.0
+Cython                : None
+sphinx                : None
+IPython               : 8.21.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.12.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2024.3.1
+html5lib              : 1.1
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.3
+lxml.etree            : 5.1.0
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : 3.1.2
+pandas_gbq            : None
+psycopg2              : 2.9.9
+pymysql               : 1.4.6
+pyarrow               : 15.0.0
+pyreadstat            : None
+pytest                : 8.3.3
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : 2.0.40
+tables                : None
+tabulate              : 0.9.0
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2024.1
+qtpy                  : None
+pyqt5                 : None
+",vladidobro,10547281,open,False,2,2025-05-09T09:47:10+00:00,2025-05-12T15:09:39+00:00,,Bug;IO SQL;Needs Discussion;Needs Info,0,0,0,0,0,0,0
+pandas-dev/pandas,3051556738,61417,ENH: The prompt message in the error does not bring any valid bug prompts,"### Feature Type
+
+- [ ] Adding new functionality to pandas
+
+- [ ] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+<img width=""1348"" alt=""Image"" src=""https://github.com/user-attachments/assets/c4104157-1e97-4455-853b-371e9bbea1bf"" />
+Since the bool method has been deprecated, there should be no prompt here. I can start writing a PR to fix this minor issue.
+
+This issue does not cause a serious bug, so I consider it a functional improvement and have submitted it here.
+
+### Feature Description
+
+修复下面的问题
+<img width=""1348"" alt=""Image"" src=""https://github.com/user-attachments/assets/c4104157-1e97-4455-853b-371e9bbea1bf"" />
+
+### Alternative Solutions
+
+Modify the code here
+<img width=""1348"" alt=""Image"" src=""https://github.com/user-attachments/assets/c4104157-1e97-4455-853b-371e9bbea1bf"" />
+
+### Additional Context
+
+_No response_",pengjunfeng11,34857167,open,False,0,2025-05-09T09:16:39+00:00,2025-05-09T09:16:39+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3051460314,61416,"BUG: df.rolling.{std, skew, kurt} gives unexpected value","### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+df = pd.DataFrame(index=range(100))
+df = df.assign(val = df.index)
+df = df/1e3
+
+df.loc[0,""val""] = 1e6
+df.loc[5,""val""] = -1e6
+
+res1 = df.rolling(20,min_periods=1).kurt()
+res2 = df.iloc[1:].rolling(20,min_periods=1).kurt()
+
+>>>res1.tail(5)
+           val
+95  722.329422
+96  730.791755
+97  739.254087
+98  747.716420
+99  756.178752
+>>>res2.tail(5)
+    val
+95 -1.2
+96 -1.2
+97 -1.2
+98 -1.2
+99 -1.2
+```
+
+### Issue Description
+
+In one of my experiments, the results of my rolling calculation of high-order moments differed. When I excluded the first data or retained the first data, the results of the rolling calculation varied greatly. I used this case to attempt to reproduce this result. The operators I tested, Including df.rolling.std, df.rolling.skew, df.rolling.kurt. I don't know what the reason is. I think for the df.rolling operator, this should be a bug
+
+### Expected Behavior
+
+The result of the rolling calculation, regardless of what the first one is, should the last few pieces of data not be affected by the initial data
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.13.0
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.19044
+machine               : AMD64
+processor             : Intel64 Family 6 Model 106 Stepping 6, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : Chinese (Simplified)_China.936
+
+pandas                : 2.2.3
+numpy                 : 2.2.5
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.1.1
+Cython                : None
+sphinx                : None
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : None
+lxml.etree            : None
+matplotlib            : None
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+None
+
+</details>
+",Jie-Lei,67198073,open,False,7,2025-05-09T08:42:24+00:00,2025-05-12T01:23:18+00:00,,Bug;Window,0,0,0,0,0,0,0
+pandas-dev/pandas,3051304892,61415,BUG: ImportError: cannot import name 'NaN' from 'numpy',"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+ImportError: cannot import name 'NaN' from 'numpy'
+```
+
+### Issue Description
+
+ImportError: cannot import name 'NaN' from 'numpy' 
+
+
+
+### Expected Behavior
+
+ImportError: cannot import name 'NaN' from 'numpy' 
+
+
+
+### Installed Versions
+
+<details>
+
+ImportError: cannot import name 'NaN' from 'numpy' 
+
+
+</details>
+",Bl4ckVo1d,35768662,closed,False,3,2025-05-09T07:40:07+00:00,2025-05-09T17:37:23+00:00,2025-05-09T17:37:22+00:00,Bug;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3050669700,61414,Bug fix slow plot with datetimeindex,"- [x] closes [#61398](https://github.com/pandas-dev/pandas/issues/61398)
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests)
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions. (N/A - no new methods/functions added)
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.",thehalvo,1031728,open,False,0,2025-05-09T03:55:17+00:00,2025-05-09T03:55:17+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3050627050,61413,GH61405 Expose arguments in DataFrame.query,"- [x] closes #61405 
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",loicdiridollou,52484416,open,False,0,2025-05-09T03:18:15+00:00,2025-05-10T12:31:11+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3050183256,61412,DOC: Error in Getting started tutorials > How do I read and write tabular data?,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html
+
+### Documentation problem
+
+In the documentation for the Titanic dataset on this page:
+
+https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html
+
+It currently says:
+
+>  ""Survived: Indication whether passenger survived. 0 for yes and 1 for no.""
+
+This appears to be incorrect. The correct meaning is:
+
+>  0 = did not survive
+>  1 = survived
+
+You can verify this, for example, with the entry for ""McCarthy, Mr. Timothy J."", who is listed with a 0 in the dataset and was confirmed deceased (source: https://de.wikipedia.org/wiki/Passagiere_der_Titanic).
+
+Thanks for your great work and for maintaining the documentation!
+
+### Suggested fix for documentation
+
+Survived: Indication whether passenger survived. 0 for no and 1 for yes.",paintdog,6173456,closed,False,1,2025-05-08T21:59:48+00:00,2025-05-09T18:36:09+00:00,2025-05-09T18:36:08+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3049800285,61411,DOC: removed none from docstring,"- [x] closes #61408
+- [ ] ~[Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature~
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] ~Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.~
+- [ ] ~Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.~
+",arthurlw,126365160,closed,False,1,2025-05-08T18:38:30+00:00,2025-05-08T22:27:29+00:00,2025-05-08T22:27:22+00:00,Docs;Algos,0,0,0,0,0,0,0
+pandas-dev/pandas,3049575679,61410,"CI: Upgrade to ubuntu-24.04, install Python free threading from conda-forge",,mroeschke,10647082,open,False,1,2025-05-08T16:50:51+00:00,2025-05-12T12:35:01+00:00,,CI,0,0,0,0,0,0,0
+pandas-dev/pandas,3049397172,61409,BUG: CVE-2020-13091,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+When will this bug be fixed?
+```
+
+### Issue Description
+
+Bug since 2020 
+
+### Expected Behavior
+
+No Bug
+
+### Installed Versions
+
+<details>
+
+Replace this line with the output of pd.show_versions()
+
+</details>
+",mrw56410,210884149,closed,False,1,2025-05-08T15:40:20+00:00,2025-05-08T15:59:46+00:00,2025-05-08T15:59:45+00:00,Bug;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3049087156,61408,"DOC: axis argument for take says `None` is acceptable, but that is incorrect.","### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.take.html#pandas.DataFrame.take
+
+### Documentation problem
+
+The `axis` argument is documented as:  ""axis {0 or ‘index’, 1 or ‘columns’, None}, default 0"" .  But `None` is not accepted.  So it should be removed from the docs.
+
+See https://github.com/pandas-dev/pandas-stubs/pull/1209#discussion_r2079740441 for an example.
+
+### Suggested fix for documentation
+
+Remove `None` from that sentence.
+
+",Dr-Irv,15113894,closed,False,1,2025-05-08T13:54:54+00:00,2025-05-08T22:27:23+00:00,2025-05-08T22:27:23+00:00,Docs;Algos,0,0,0,0,0,0,0
+pandas-dev/pandas,3049045130,61407,BUG: to_csv() quotechar/escapechar behavior differs from csv module,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+import csv
+import sys
+
+data = [['a', 'b""c', 'def""'], ['a2', None, '""c']]
+
+# no escaping
+df = pd.DataFrame(data)
+print(df.to_csv(sep='\t', index=False, header=False, quotechar='""', escapechar='\\', quoting=csv.QUOTE_NONE))
+print(df.to_csv(sep='\t', index=False, header=False, quotechar='""', escapechar='\\', quoting=csv.QUOTE_NONE, doublequote=False))
+
+# escaping
+csv_writer = csv.writer(sys.stdout, delimiter='\t', quotechar='""', escapechar='\\', quoting=csv.QUOTE_NONE)
+for r in data:
+    _ = csv_writer.writerow(r)
+```
+
+### Issue Description
+
+`to_csv()` doesn't escape `quotechar` when `quoting=csv.QUOTE_NONE`.
+````
+a       b""c     def""
+a2              ""c
+````
+
+### Expected Behavior
+
+`quotechar` gets escaped using `escapechar` even when `quoting=csv.QUOTE_NONE`.
+This is the behavior of the csv module.
+````
+a       b\""c    def\""
+a2              \""c
+````
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.11.2
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.22621
+machine               : AMD64
+processor             : Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : English_United States.1252
+
+pandas                : 2.2.3
+numpy                 : 1.26.2
+pytz                  : 2023.3.post1
+dateutil              : 2.8.2
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : 8.24.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.12.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : None
+lxml.etree            : None
+matplotlib            : None
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : 3.1.5
+pandas_gbq            : None
+psycopg2              : 2.9.9
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : 2.0.23
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2023.3
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",johnrtian,21209995,open,False,2,2025-05-08T13:40:42+00:00,2025-05-08T20:23:19+00:00,,Bug;IO CSV,0,0,0,0,0,0,0
+pandas-dev/pandas,3049036809,61406,BUG: way to include all columns within a groupby apply,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+# Sample DataFrame
+df = pd.DataFrame({
+    ""group"": [""A"", ""A"", ""B"", ""B""],
+    ""value"": [1, 2, 3, 4],
+})
+
+# Function that operates on the whole group (e.g., adds a new column)
+def process_group(group_df):
+    group_df[""value_doubled""] = group_df[""value""] * 2
+    return group_df
+
+# Trigger the deprecation warning
+result = df.groupby(""group"").apply(process_group)
+print(result)
+
+
+        group  value  value_doubled
+group                              
+A     0     A      1              2
+      1     A      2              4
+B     2     B      3              6
+      3     B      4              8
+C:\Users\e361154\AppData\Local\Temp\1\ipykernel_15728\2443901964.py:15: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  result = df.groupby(""group"").apply(process_group)
+```
+
+### Issue Description
+
+When using groupby().apply() with a function that modifies and returns the entire group DataFrame, a FutureWarning is raised in pandas >= 2.2. This warning notifies users that in pandas 3.0, the default behavior will change: the grouping columns will no longer be included in the data passed to the function unless include_groups=True is explicitly set. To maintain the current behavior and suppress the warning, users must pass include_groups=False.
+
+This affects workflows where the function operates on the full DataFrame per group and expects the group keys to be included in the data automatically, as was the case in earlier pandas versions.
+
+### Expected Behavior
+
+The expected behavior is still what I want from the above example. I just don't want that functionality to be lost in pandas 3.0.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.10.7
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.22631
+machine               : AMD64
+processor             : Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : English_United States.1252
+
+pandas                : 2.2.3
+numpy                 : 2.2.4
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : 8.35.0
+adbc-driver-postgresql: None
+...
+zstandard             : 0.23.0
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",madelavar12,115588301,open,False,4,2025-05-08T13:37:47+00:00,2025-05-08T16:47:11+00:00,,Bug;Groupby;Apply;Closing Candidate,0,0,0,0,0,0,0
+pandas-dev/pandas,3047535649,61405,DOC/ENH: Add full list of argument for DataFrame.query,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.query.html#pandas.DataFrame.query
+
+### Documentation problem
+
+This question arises when @MarcoGorelli wanted to fully type `DataFrame.query` in the stubs repo https://github.com/pandas-dev/pandas-stubs/issues/1173. Right now the extra arguments are passed through `**kwargs` but when we go through the code we see that they are the same as the ones in `pd.eval` (https://pandas.pydata.org/docs/reference/api/pandas.eval.html#pandas.eval).
+
+### Suggested fix for documentation
+
+Considering that this would help to expand the typehinting in that area and that the number of arguments is limited, would it be conceivable to expose all the arguments instead of relying on `**kwargs`?
+
+For information this is the list of arguments that would need to be added:
+```python
+parser: Literal[""pandas"", ""python""] = ...,
+engine: Literal[""python"", ""numexpr""] | None = ...,
+local_dict: dict[_str, Any] | None = ...,
+global_dict: dict[_str, Any] | None = ...,
+resolvers: list[Mapping] | None = ...,
+level: int = ...,
+target: object | None = ...,
+```
+
+See https://github.com/pandas-dev/pandas-stubs/pull/1193 for the potential typehinting.",loicdiridollou,52484416,open,False,2,2025-05-08T01:16:47+00:00,2025-05-08T14:22:25+00:00,,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3047207237,61404,BLD: allow to build with non-MSVC compilers on Windows,"Always passing --vsenv to meson means pandas can't be built with gcc/clang
+on Windows.
+
+Instead add it to the cibuildwheel config so MSVC is still forced in CI
+when building wheels, and in various places where it is built via pip.",lazka,991986,open,False,2,2025-05-07T21:25:47+00:00,2025-05-09T14:00:34+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3045379589,61403,BUG: guess_datetime_format cannot infer iso 8601 format,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd 
+
+# UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+pd.to_datetime(
+    pd.Series(['2025-05-05 20:25:22+00:00', '2025-05-05 12:04:52+00:00'])
+)
+
+# no warning
+pd.to_datetime(
+    pd.Series(['2025-05-05 20:25:22+00:00'])
+)
+
+# No warning
+pd.to_datetime(
+    pd.Series(['2025-05-05 12:03:08+00:00', '2025-05-05 12:04:52+00:00']),
+)
+```
+
+### Issue Description
+
+When running `pd.to_datetime(pd.Series(['2025-05-05 20:25:22+00:00', '2025-05-05 12:04:52+00:00']))` the following warning is risen:
+
+> UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+
+This is because `guess_datetime_format` cannot infer a format for the first given timestamp '2025-05-05 20:25:22+00:00'. 
+
+### Expected Behavior
+
+No warning is risen.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.12.10
+python-bits           : 64
+OS                    : Linux
+OS-release            : 6.8.0-58-generic
+Version               : #60~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 28 16:09:21 UTC 2
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : 2.9.10
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.40
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+</details>
+",Thomath,24660925,closed,False,1,2025-05-07T09:41:27+00:00,2025-05-08T11:01:15+00:00,2025-05-07T17:04:01+00:00,Bug;Datetime;Warnings,0,0,0,0,0,0,0
+pandas-dev/pandas,3045217167,61402,BUG: Duplicate columns allowed on `merge` if originating from separate dataframes,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+df1 = pd.DataFrame({""col1"":[1], ""col2"":[2]})
+df2 = pd.DataFrame({""col1"":[1], ""col2"":[2], ""col2_dup"":[3]})
+
+pd.merge(df1, df2, on=""col1"", suffixes=(""_dup"", """"))
+# Observe (1)
+
+pd.merge(df1, df2, on=""col1"", suffixes=("""", ""_dup""))
+# Observe (2)
+```
+
+### Issue Description
+
+Case 1 provides the following result:
+```
+   col1  col2_dup  col2  col2_dup
+0     1         2     2         3
+```
+
+Case 2 results in an exception:
+```
+pandas.errors.MergeError: Passing 'suffixes' which cause duplicate columns {'col2_dup'} is not allowed.
+```
+
+While the MergeError in this case does make sense (ideally duplicate columns should not be allowed as they might cause confusion), the same issue is observed in the first case and no exception is raised.
+
+
+### Expected Behavior
+
+Since this bug is about consistency, either of the following 2 should happen:
+
+- An error should be raised in both cases.
+- An error should not be raised in any case, and the duplicate column should be allowed.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.11.7
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.22631
+machine               : AMD64
+processor             : Intel64 Family 6 Model 170 Stepping 4, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : English_United States.1252
+
+pandas                : 2.2.3
+numpy                 : 2.2.5
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 23.2.1
+Cython                : None
+sphinx                : None
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : None
+lxml.etree            : None
+matplotlib            : None
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+</details>
+",nikaltipar,45468465,open,False,6,2025-05-07T08:50:02+00:00,2025-05-10T05:59:48+00:00,,Bug;Reshaping,0,0,0,0,0,0,0
+pandas-dev/pandas,3043719829,61401,ENH: access sliced dataframe from rolling.cov,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+In a current project, I iterate over `df.rolling(window).cov(pairwise=True)`. Currently, I back-calculate from the index value of the cov() and the window offset what I suspect to be the start of the window. Then I slice the original df again into the window.
+
+
+It would be great to iterate efficiently over the original df simultaneously with the cov values (and possibly with all the other window functions).
+
+### Feature Description
+
+An idea off the top off my head:
+
+```
+for window, cov in df.rolling(window).roll(""window"", ""cov_pairwise""):
+    ...
+    # window equals df.loc[start:end]
+    # cov equals df.loc[start:end].cov()
+    # start equals window.index[0]
+    # end equals window.index[-1]
+    ...
+```
+
+
+### Alternative Solutions
+
+I don't know any. Maybe there is already a way to do this.
+
+Additionally, `roll` could allow efficient slicing to avoid useless calculations
+
+```
+for window, cov in df.rolling(window).roll(""window"", ""cov_pairwise"")[-1000:]:
+    ...
+```
+
+### Additional Context
+
+_No response_",srkunze,1389648,open,False,0,2025-05-06T18:51:17+00:00,2025-05-06T18:51:17+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3043109140,61400,BUG: Fix naive timestamps inheriting timezone from previous timestamps in to_datetime with ISO8601 format,"- [x] closes #61389 (Replace xxxx with the GitHub issue number)
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",myenugula,127900888,closed,False,1,2025-05-06T14:50:19+00:00,2025-05-06T18:29:26+00:00,2025-05-06T18:29:19+00:00,Timezones,0,0,0,0,0,0,0
+pandas-dev/pandas,3042845468,61399,BUG: round on object columns no longer raises a TypeError,"- [x] closes #61206 (Replace xxxx with the GitHub issue number)
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",KevsterAmp,109636487,open,False,1,2025-05-06T13:24:43+00:00,2025-05-06T23:22:46+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3041395327,61398,BUG: Slower `DataFrame.plot` with `DatetimeIndex`,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+# Imports & data generation
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+num_rows = 500
+num_cols = 2000
+
+index = pd.date_range(start=""2020-01-01"", periods=num_rows, freq=""D"")
+test_df = pd.DataFrame(np.random.randn(num_rows, num_cols).cumsum(axis=0), index=index)
+
+
+# Very Slow plot (1m 11.6s)
+test_df.plot(legend=False, figsize=(12, 8))
+plt.show()
+
+
+# Much faster Plot using this workaround: (6.1s)
+
+# 1. Plot a single column with dates to copy the right ticks
+ax1 = test_df.iloc[:, 0].plot(figsize=(12, 6), legend=False)
+xticks = ax1.get_xticks()
+xticklabels = [label.get_text() for label in ax1.get_xticklabels()]
+plt.close(ax1.figure)
+
+# 2. Faster plot with no date index
+ax2 = test_df.reset_index(drop=True).plot(legend=False, figsize=(12, 8))
+# 3. Inject the date X axis info
+num_ticks = len(xticks)
+new_xticks = np.linspace(0, num_rows - 1, num_ticks)
+ax2.set_xlim(0, num_rows - 1)
+ax2.set_xticks(new_xticks)
+ax2.set_xticklabels(xticklabels)
+plt.show()
+```
+
+### Issue Description
+
+Plotting a large DataFrame with a `DatetimeIndex` and many rows and columns results in extremely slow rendering times. This issue can be surprisingly mitigated by first plotting a single column to generate the correct ticks and labels, then resetting the index and copying the ticks to plot the full DataFrame, gaining +11x speed improvement. This may suggests that a similar logic may be applied (if found consistent) to improve speed when applied.
+
+### Expected Behavior
+
+No big difference in ploting time depending on the index type, especially if avoidable with the trick above.
+
+### Installed Versions
+
+<details>
+
+
+INSTALLED VERSIONS
+------------------
+commit                : d9cdd2ee5a58015ef6f4d15c7226110c9aab8140
+python                : 3.12.4.final.0
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.19045
+machine               : AMD64
+processor             : Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : fr_FR.cp1252
+
+pandas                : 2.2.2
+numpy                 : 2.0.1
+pytz                  : 2024.1
+dateutil              : 2.9.0.post0
+setuptools            : 75.3.0
+pip                   : 25.0.1
+Cython                : None
+pytest                : 8.3.3
+hypothesis            : None
+sphinx                : None
+blosc                 : None
+feather               : None
+xlsxwriter            : None
+lxml.etree            : 5.3.0
+html5lib              : None
+pymysql               : None
+psycopg2              : None
+jinja2                : 3.1.4
+IPython               : 8.26.0
+pandas_datareader     : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.12.3
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+gcsfs                 : None
+matplotlib            : 3.9.2
+numba                 : None
+numexpr               : 2.10.1
+odfpy                 : None
+openpyxl              : 3.1.5
+pandas_gbq            : None
+pyarrow               : 17.0.0
+pyreadstat            : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.14.1
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+zstandard             : None
+tzdata                : 2024.1
+qtpy                  : None
+pyqt5                 : None
+
+
+</details>
+",Abdelgha-4,72174073,open,False,2,2025-05-06T03:15:39+00:00,2025-05-09T03:22:11+00:00,,Datetime;Visualization;Performance,0,0,0,0,0,0,0
+pandas-dev/pandas,3040183733,61397,[pre-commit.ci] pre-commit autoupdate,"<!--pre-commit.ci start-->
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.11.4 → v0.11.8](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.4...v0.11.8)
+- [github.com/pre-commit/mirrors-clang-format: v20.1.0 → v20.1.3](https://github.com/pre-commit/mirrors-clang-format/compare/v20.1.0...v20.1.3)
+- [github.com/trim21/pre-commit-mirror-meson: v1.7.2 → v1.8.0](https://github.com/trim21/pre-commit-mirror-meson/compare/v1.7.2...v1.8.0)
+<!--pre-commit.ci end-->",pre-commit-ci[bot],66853113,closed,False,0,2025-05-05T16:29:15+00:00,2025-05-05T17:24:34+00:00,2025-05-05T17:24:05+00:00,Code Style,0,0,0,0,0,0,0
+pandas-dev/pandas,3037631952,61396,"Fix #60766:.map,.apply would convert element type for extension array","- [ ] closes #60766 
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/v3.0.0.rst` file if fixing a bug or adding a new feature.
+
+
+The Int32Dtype type allows representing integers with support for null values (pd.NA). However, when using .map(f) or .apply(f), the elements passed to f are converted to float64, and pd.NA is transformed into np.nan.
+
+This happens because .map() and .apply() internally use numpy, which automatically converts the data to float64, even when the original type is Int32Dtype.
+
+The fix (just remove the method to_numpy()) ensures that when using .map() or .apply(), the elements in the series retain their original type (Int32, Float64, boolean, etc.), preventing unnecessary conversions to float64 and ensuring that pd.NA remains correctly handled.",pedromfdiogo,146959142,open,False,0,2025-05-03T21:54:02+00:00,2025-05-07T19:02:11+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3037427843,61395,BUG: pd.to_datetime failing to parse with exception error 01-Jun-2025 in sequence with 31-May-2025,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+import sys
+
+print(f""Pandas version: {pd.__version__}"")
+print(f""Python version: {sys.version}"")
+
+df = pd.DataFrame({'day': [""31-May-2025"",""01-Jun-2025"",""02-Jun-2025""]})
+pd.to_datetime(df['day'])
+```
+
+### Issue Description
+
+gives
+'Pandas version: 2.2.3'
+'Python version: 3.11.11 (main, Dec  4 2024, 08:55:07) [GCC 11.4.0]'
+
+ValueError: time data ""01-Jun-2025"" doesn't match format ""%d-%B-%Y"", at position 1. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+File <command-6844361422137531>, line 2
+      1 df = pd.DataFrame({'day': [""31-May-2025"",""01-Jun-2025"",""02-Jun-2025""]})
+----> 2 pd.to_datetime(df['day'])
+File /local_disk0/.ephemeral_nfs/cluster_libraries/python/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1067, in to_datetime(arg, errors, dayfirst, yearfirst, utc, format, exact, unit, infer_datetime_format, origin, cache)
+   1065         result = arg.map(cache_array)
+   1066     else:
+-> 1067         values = convert_listlike(arg._values, format)
+   1068         result = arg._constructor(values, index=arg.index, name=arg.name)
+   1069 elif isinstance(arg, (ABCDataFrame, abc.MutableMapping)):
+File /local_disk0/.ephemeral_nfs/cluster_libraries/python/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:433, in _convert_listlike_datetimes(arg, format, name, utc, unit, errors, dayfirst, yearfirst, exact)
+    431 # `format` could be inferred, or user didn't ask for mixed-format parsing.
+    432 if format is not None and format != ""mixed"":
+--> 433     return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)
+    435 result, tz_parsed = objects_to_datetime64(
+    436     arg,
+    437     dayfirst=dayfirst,
+   (...)
+    441     allow_object=True,
+
+### Expected Behavior
+
+it parses happily and correctly with no exception
+interestingly it's having the transition end of may. start of June. Starting with 01-Jun-2025 works, ending with 31-May-2025 works,
+dateparser.parse is happy
+I'm guessing it infers a full month from the May when in fact it is a three character abbreviation. 
+
+### Installed Versions
+
+<details>
+
+running in databricks notebook - checked in a separate version of python locally, with pandas 2.2.1
+'Pandas version: 2.2.3'
+'Python version: 3.11.11 (main, Dec  4 2024, 08:55:07) [GCC 11.4.0]' for the notebook.
+pd.show_versions() doesn't return anything
+
+
+locally 
+Pandas version: 2.2.1
+Python version: 3.12.2 (main, Mar 25 2024, 11:48:28) [Clang 15.0.0 (clang-1500.3.9.4)]
+
+and pd.show_versions() gives.
+
+FileNotFoundError                         Traceback (most recent call last)
+File /Users/J.Drummond/Documents/wip/python/truth_soc_[1](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/truth_soc_1.py:1).py:2
+      1 # %%
+----> [2](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/truth_soc_1.py:2) pd.show_versions()
+
+File ~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:141, in show_versions(as_json)
+    [104](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:104) """"""
+    [105](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:105) Provide useful information, important for bug reports.
+    [106](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:106) 
+   (...)
+    [138](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:138) ...
+    [139](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:139) """"""
+    [140](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:140) sys_info = _get_sys_info()
+--> [141](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:141) deps = _get_dependency_info()
+    [143](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:143) if as_json:
+    [144](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:144)     j = {""system"": sys_info, ""dependencies"": deps}
+
+File ~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:98, in _get_dependency_info()
+     [96](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:96) result: dict[str, JSONSerializable] = {}
+     [97](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:97) for modname in deps:
+---> [98](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:98)     mod = import_optional_dependency(modname, errors=""ignore"")
+     [99](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:99)     result[modname] = get_version(mod) if mod else None
+    [100](https://file+.vscode-resource.vscode-cdn.net/Users/J.Drummond/Documents/wip/python/~/Documents/wip/python/.venv/lib/python3.12/site-packages/pandas/util/_print_versions.py:100) return result
+...
+
+
+</details>
+",johndrummond,1420655,closed,False,4,2025-05-03T14:04:02+00:00,2025-05-04T23:00:29+00:00,2025-05-03T15:12:00+00:00,Bug;Datetime,0,0,0,0,0,0,0
+pandas-dev/pandas,3037228054,61394,DOC: add `api.types.is_dtype_equal` into document,"- [x] closes #60905
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",chilin0525,41913261,closed,False,1,2025-05-03T07:20:19+00:00,2025-05-03T20:00:54+00:00,2025-05-03T20:00:53+00:00,Docs;Dtype Conversions,0,0,0,0,0,0,0
+pandas-dev/pandas,3036899526,61393,Subplot title count fix + fix for issue introduced in earlier PR ,"- [x] closes #61019  
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+
+Adds a check for length of subplots as an alternative to the default title check and produces an alternative error message if number of subplots does not match titles produced.
+
+Additionally, includes fix for issues introduced during PR: #61340 and mentioned in #61018 ",eicchen,63069720,closed,False,1,2025-05-02T22:00:03+00:00,2025-05-07T16:11:38+00:00,2025-05-07T16:11:19+00:00,Visualization,0,0,0,0,0,0,0
+pandas-dev/pandas,3036402091,61392,DOC: Issue with the general expressiveness of the docs,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+Example: https://pandas.pydata.org/docs/reference/api/pandas.Series.dt.floor.html
+
+### Documentation problem
+
+Throughout the docs the explanation of a function is often limited only to a circular sentence that repeats the verb that names the function and nothing else. Eg in the example of `pandas.Series.dt.floor` it basically says ""it does floor"" and the details of the docs are restricted to the individual options and outcomes after that.
+
+### Suggested fix for documentation
+
+In the example of floor it should first say in a richer sentence what floor actually does. It doesn't have to be anything big. I won't write an example of that because the docs didn't tell me what floor does.",epigramx,2960257,open,False,3,2025-05-02T16:28:12+00:00,2025-05-05T04:44:08+00:00,,Docs;Needs Info,0,0,0,0,0,0,0
+pandas-dev/pandas,3035882425,61391,"fix MultiIndex.difference not working with PyArrow timestamps (#61382) ,and some ruff formating fix","## Problem
+The `MultiIndex.difference` method fails to remove entries when the index contains PyArrow-backed timestamps (`timestamp[ns][pyarrow]`). This occurs because direct tuple comparisons with PyArrow scalar types are unreliable during membership checks, causing entries to remain unexpectedly.
+
+**Example**:
+```python
+# PyArrow timestamp index
+df = DataFrame(...).astype({""date"": ""timestamp[ns][pyarrow]""}).set_index([""id"", ""date""])
+idx_val = df.index[0]
+new_index = df.index.difference([idx_val])  # Fails to remove idx_val
+```
+Solution
+Code Conversion: Map other values to integer codes compatible with the original index's levels.
+
+Engine Validation: Use the MultiIndex's internal engine for membership checks, ensuring accurate handling of PyArrow types.
+
+Mask-Based Exclusion: Create a boolean mask to filter out matched entries, then reconstruct the index.
+
+Testing
+Added a test in pandas/tests/indexes/multi/test_setops.py that:
+
+Creates a MultiIndex with PyArrow timestamps.
+
+Validates difference correctly removes entries.
+
+Skips the test if PyArrow is not installed.
+
+Use Case Impact
+Fixes scenarios where users filter hierarchical datasets with PyArrow timestamps, such as:
+
+```python
+# Remove specific timestamps from a time-series index
+clean_index = raw_index.difference(unwanted_timestamps)
+```
+Closes #61382.",NEREUScode,174478950,open,False,0,2025-05-02T12:10:52+00:00,2025-05-02T13:10:53+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3035805085,61390,"fix MultiIndex.difference not working with PyArrow timestamps (#61382) ,and some ruff formating fix","## Problem
+The `MultiIndex.difference` method fails to remove entries when the index contains PyArrow-backed timestamps (`timestamp[ns][pyarrow]`). This occurs because direct tuple comparisons with PyArrow scalar types are unreliable during membership checks, causing entries to remain unexpectedly.
+
+**Example**:
+```python
+# PyArrow timestamp index
+df = DataFrame(...).astype({""date"": ""timestamp[ns][pyarrow]""}).set_index([""id"", ""date""])
+idx_val = df.index[0]
+new_index = df.index.difference([idx_val])  # Fails to remove idx_val
+```
+Solution
+Code Conversion: Map other values to integer codes compatible with the original index's levels.
+
+Engine Validation: Use the MultiIndex's internal engine for membership checks, ensuring accurate handling of PyArrow types.
+
+Mask-Based Exclusion: Create a boolean mask to filter out matched entries, then reconstruct the index.
+
+Testing
+Added a test in pandas/tests/indexes/multi/test_setops.py that:
+
+Creates a MultiIndex with PyArrow timestamps.
+
+Validates difference correctly removes entries.
+
+Skips the test if PyArrow is not installed.
+
+Use Case Impact
+Fixes scenarios where users filter hierarchical datasets with PyArrow timestamps, such as:
+
+```python
+# Remove specific timestamps from a time-series index
+clean_index = raw_index.difference(unwanted_timestamps)
+```
+Closes #61382.",NEREUScode,174478950,closed,False,0,2025-05-02T11:30:06+00:00,2025-05-02T12:09:22+00:00,2025-05-02T12:09:22+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3035796151,61389,"BUG: Incorrect Parsing of Timestamps in pd.to_datetime with Series with format=""ISO8601""  and UTC=True","### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+# Single timestamp
+raw = ""2023-10-15T14:30:00""
+single = pd.to_datetime(raw, utc=True, format=""ISO8601"")
+print(single)
+# Output: 2023-10-15 14:30:00+00:00 (correct)
+
+# Series of timestamps
+series = pd.Series([0, 0], index=[""2023-10-15T10:30:00-12:00"", raw])
+converted = pd.to_datetime(series.index, utc=True, format=""ISO8601"")
+print(converted)
+# Output: 2023-10-16 02:30:00+00:00 for the second one (incorrect)
+# error depends on the previous one timezone
+```
+
+### Issue Description
+
+When using pd.to_datetime to parse a Series of timestamps with format=""ISO8601"" and utc=True, the parsing of a timestamp without an explicit timezone offset is incorrect and appears to depend on the timezone offset of the previous timestamp in the Series. This behavior does not occur when parsing a single timestamp.
+
+### Expected Behavior
+
+In this configuration, behavior should not depend on the previous timestamp timezone. Result should be the same as when individually passed.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.10.0
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.10.0-34-amd64
+Version               : #1 SMP Debian 5.10.234-1 (2025-02-24)
+machine               : x86_64
+processor             :
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2024.2
+dateutil              : 2.9.0.post0
+pip                   : 24.2
+Cython                : None
+sphinx                : None
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 15.0.2
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.40
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+Traceback (most recent call last):
+  File ""<stdin>"", line 1, in <module>
+NameError: name 'version' is not defined
+
+</details>",PaulCalot,44808213,closed,False,3,2025-05-02T11:24:44+00:00,2025-05-06T18:29:21+00:00,2025-05-06T18:29:20+00:00,Bug;Datetime;Timezones,0,0,0,0,0,0,0
+pandas-dev/pandas,3035790674,61388,"fix MultiIndex.difference not working with PyArrow timestamps (#61382) ,and some formating fix ","## Problem
+The `MultiIndex.difference` method fails to remove entries when the index contains PyArrow-backed timestamps (`timestamp[ns][pyarrow]`). This occurs because direct tuple comparisons with PyArrow scalar types are unreliable during membership checks, causing entries to remain unexpectedly.
+
+**Example**:
+```python
+# PyArrow timestamp index
+df = DataFrame(...).astype({""date"": ""timestamp[ns][pyarrow]""}).set_index([""id"", ""date""])
+idx_val = df.index[0]
+new_index = df.index.difference([idx_val])  # Fails to remove idx_val
+```
+Solution
+Code Conversion: Map other values to integer codes compatible with the original index's levels.
+
+Engine Validation: Use the MultiIndex's internal engine for membership checks, ensuring accurate handling of PyArrow types.
+
+Mask-Based Exclusion: Create a boolean mask to filter out matched entries, then reconstruct the index.
+
+Testing
+Added a test in pandas/tests/indexes/multi/test_setops.py that:
+
+Creates a MultiIndex with PyArrow timestamps.
+
+Validates difference correctly removes entries.
+
+Skips the test if PyArrow is not installed.
+
+Use Case Impact
+Fixes scenarios where users filter hierarchical datasets with PyArrow timestamps, such as:
+
+```python
+# Remove specific timestamps from a time-series index
+clean_index = raw_index.difference(unwanted_timestamps)
+```
+Closes #61382.",NEREUScode,174478950,closed,False,0,2025-05-02T11:21:31+00:00,2025-05-02T11:26:59+00:00,2025-05-02T11:26:59+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3034492987,61387,TYP:  `npt._ArrayLikeInt_co`  does not exist,"https://github.com/pandas-dev/pandas/blob/e55d90783bac30b75e7288380b15a62ab6e43f78/pandas/_typing.py#L91
+
+I wouldn't recommend using these private internal type-aliases at all, but if you must, then you probably should import it from `numpy._typing`, because it is not exported by `numpy.typing`.",jorenham,6208662,open,False,0,2025-05-01T19:02:57+00:00,2025-05-01T23:10:27+00:00,,Typing,1,1,0,0,0,0,0
+pandas-dev/pandas,3034147446,61386,ENH: read_csv with usecols shouldn't change column order,"### Feature Type
+
+- [ ] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+The documentation for `pandas.read_csv(usecols=[...])` says that it treats the iterable list of columns like an unordered set (updated in https://github.com/pandas-dev/pandas/issues/18673 and #53763), so the returned dataframe won't necessarily have the same column order. This is different behaviour from other pandas data reading methods (e.g., `pandas.read_parquet(columns=[...])`). I think the order should be preserved. If `usecols` is converted to a `set`, I think it should instead be converted to `OrderedSet` or keys of `collections.OrderedDict` (or just `dict` in Python >3.6).
+
+### Feature Description
+
+```py
+import pandas as pd
+
+# Example CSV file (replace with your actual file)
+csv_data = """"""
+col1,col2,col3,col4
+A,1,X,10
+B,2,Y,20
+C,3,Z,30
+""""""
+
+with open(""example.csv"", ""w"") as f:
+    f.write(csv_data)
+
+# Desired column order
+desired_order = ['col3', 'col1', 'col4']
+
+# Read CSV with usecols (selects columns but doesn't order)
+df = pd.read_csv(""example.csv"", usecols=desired_order)
+
+print(df)  # incorrect column order
+
+# Reindex DataFrame to enforce desired order (a popular workaround that I think shouldn't be required)
+# One solution is to include this line in `read_csv`, when using `usecols` kwarg
+df = df[desired_order]
+
+print(df)  # correct column order
+```
+
+### Alternative Solutions
+
+Instead of converting `usecols` to `set`, convert it to `dict.keys()` which preserved order in Python >3.6
+
+### Additional Context
+
+_No response_",amarvin,10762127,open,False,5,2025-05-01T15:50:33+00:00,2025-05-06T23:01:53+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3034147251,61385,BUG: to_sql works only for strings,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import panda as pd
+from sqlalchemy.types import DOUBLE
+
+data = # Panda Datafrme with timestamp, double and string along with different column types.
+column_types_filtered_data = {col: DOUBLE() for col in data.columns}
+data.to_sql(..., dtype=column_types_filtered_data)
+```
+
+### Issue Description
+
+For any type other than str this block in pandas.io.sql will fail.
+```
+for col, my_type in dtype.items():
+                if not isinstance(my_type, str):
+                    raise ValueError(f""{col} ({my_type}) not a string"")
+```
+### Expected Behavior
+
+Different datatypes should be supported.
+
+### Installed Versions
+
+pandas==2.2.3
+",pranav-ds,54107478,open,False,4,2025-05-01T15:50:27+00:00,2025-05-06T02:23:31+00:00,,Bug;IO SQL;Needs Info,0,0,0,0,0,0,0
+pandas-dev/pandas,3032828511,61384,BLD: Try using shared memory utilities in Cython to reduce wheel sizes,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",lithomas1,47963215,open,False,1,2025-05-01T00:01:38+00:00,2025-05-04T16:44:08+00:00,,Build,0,0,0,0,0,0,0
+pandas-dev/pandas,3032500896,61383,ENH: Implement pandas.read_iceberg,"- [X] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [X] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [X] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [X] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",datapythonista,10058240,open,False,10,2025-04-30T21:00:23+00:00,2025-05-12T12:37:54+00:00,,IO Data,0,0,0,0,0,0,0
+pandas-dev/pandas,3031402515,61382,BUG: Multindex difference not working on columns with type Timestamp[ns][pyarrow],"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+df = pd.DataFrame(
+    [
+        (1, ""1900-01-01"", ""a""),
+        (2, ""1900-01-01"", ""b"")
+     ],
+columns=[""id"", ""date"", ""val""]
+).astype({""id"": ""int64[pyarrow]"", ""date"": ""timestamp[ns][pyarrow]"", ""val"":""string[pyarrow]""})
+
+df = df.set_index([""id"", ""date""])
+
+idx_val = df.index[0]
+
+idx_val in df.index # will show True
+
+df.index.difference([idx_val]) # The two elements are still present in the dataframe
+```
+
+### Issue Description
+
+Note that the code will work if we using datetime64[ns] instead of timestamp[ns][pyarrow] type.
+
+Also the code works fine if we convert the index to a none multi index.
+
+
+### Expected Behavior
+
+We expect the same behavior with timestamp[ns][pyarrow] and other type. The element that we use to apply the difference should be removed from the dataframe
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.10.12
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.15.167.4-microsoft-standard-WSL2
+Version               : #1 SMP Tue Nov 5 00:21:55 UTC 2024
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : C.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2024.2
+dateutil              : 2.9.0.post0
+pip                   : 22.0.2
+Cython                : None
+sphinx                : 8.1.3
+IPython               : 8.30.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : None
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.4
+lxml.etree            : None
+matplotlib            : None
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 18.1.0
+pyreadstat            : None
+pytest                : 8.3.4
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2024.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",bmaisonn,7989822,open,False,2,2025-04-30T14:06:06+00:00,2025-05-03T15:53:11+00:00,,Bug;Numeric Operations;Arrow,0,0,0,0,0,0,0
+pandas-dev/pandas,3030977902,61381,"Fix alignment in Series subtraction with MultiIndex, Index and NaN values (#60908)","This pull request fixes #60908 , where subtracting a Series with a MultiIndex containing NaN values from a Series with a regular Index could lead to incorrect results or unexpected behavior.
+
+The issue was caused by the _align_for_op method not properly handling cases where the left-hand Series had a MultiIndex and the right-hand side had a flat Index, especially when NaN values were present. This could lead to misalignment during arithmetic operations.
+
+To fix this, the _align_for_op method was updated to:
+
+- Ensure that when the left Series has a MultiIndex and the right Series has a regular Index, the right Series is properly reindexed based on the first level of the left-hand MultiIndex, even when NaN values are involved.
+
+- Correctly handle cases where either Series is empty.
+
+Additionally, a new test test_series_subtraction_with_nan_and_levels (added in test_subtraction_nanindex) was introduced to verify that:
+
+- Subtracting a Series with a MultiIndex (including NaNs) from a regular Index works correctly.
+
+- The result maintains the correct alignment and expected output values.",rit4rosa,147553621,open,False,0,2025-04-30T11:21:39+00:00,2025-05-11T22:44:55+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3030002590,61380,Implement translations infrastructure,"Hello team! 
+
+This PR is a proposal for adding the translations infrastructure to the pandas web page.
+
+Following the discussion in https://github.com/pandas-dev/pandas/issues/56301, we (a group of folks working on the Scientific Python grant) have been working to set up infrastructure and translate the contents of the pandas web site. As of this moment, we have 100% translations for the pandas website into Spanish and Brazilian Portuguese, with other languages available for translation (depending on volunteer translators).
+
+To build, the command remains the same:
+
+```bash
+python pandas_web.py pandas/content --target-path build
+```
+
+If you want to check out other related work, please take a look at https://github.com/scipy/scipy.org/pull/617
+
+You an read more about how the translation process works at https://scientific-python-translations.github.io/docs/
+
+## What this PR does?
+
+- Download and extract the latest available translations (over 90% completion) from https://github.com/Scientific-Python-Translations/pandas-translations. The setting can be changed [here](https://github.com/Scientific-Python-Translations/pandas-translations/blob/main/.github/workflows/sync_translations.yml#L21)
+- Adds a Language switcher (Thanks @melissawm ❤️ 🚀 ).
+- Added a new section to the config to store additional translations information.
+- Handles site generation for each language.
+- Left everything in the same script.
+
+Supersedes https://github.com/pandas-dev/pandas/pull/61220
+
+## Demo
+
+![pandas](https://github.com/user-attachments/assets/fdb07a75-8661-4dc1-8239-29e792bac7ee)
+
+---
+
+cc @mroeschke @datapythonista ",goanpeca,3627835,open,False,13,2025-04-30T03:24:20+00:00,2025-05-12T12:16:48+00:00,,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3029701921,61379,DOC: Fix dark mode text visibility in Getting Started accordion (#60024),"- [x] closes [#61377](https://github.com/pandas-dev/pandas/issues/61377) (duplicate of [#60024](https://github.com/pandas-dev/pandas/issues/60024))
+
+### 📄 **Description**
+
+This pull request fixes the issue described in [#61377](https://github.com/pandas-dev/pandas/issues/61377), where the text in the accordion content of the *Getting Started* tutorial section was not visible in dark mode.
+
+Although #61377 is a duplicate, the underlying problem was originally reported in [#60024](https://github.com/pandas-dev/pandas/issues/60024), and later duplicated in [#60041](https://github.com/pandas-dev/pandas/issues/60041) and [#60921](https://github.com/pandas-dev/pandas/issues/60921). This PR addresses the root cause described in those issues.
+
+### ✅ **Changes Made**
+
+Added CSS variables to ensure that text and background colors are consistent with the active theme:
+
+```css
+.tutorial-card .card-header {
+  --bs-card-cap-color: var(--pst-color-text-base);
+  color: var(--pst-color-text-base);
+  cursor: pointer;
+  background-color: var(--pst-color-surface);
+  border: 1px solid var(--pst-color-border);
+}
+
+.tutorial-card .card-body {
+  background-color: var(--pst-color-on-background);
+  color: var(--pst-color-text-base);
+}
+```
+",danielpintosalazar,90653641,closed,False,3,2025-04-29T23:01:49+00:00,2025-04-30T16:21:16+00:00,2025-04-30T16:21:09+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3028820512,61378,DOC: update pandas cheat sheet with a third page (fixes #40680),"- [x] closes #40680
+- [x] added 3rd page to the cheat sheet including more details on plotting, frequently used options, input/output formats and more.
+- [x] added `.info()`, `.memory_usage()`, and `.dtypes()` to 'Summarize Data' on page 2 and rearranged the page to fill the gap left by the old plotting section.
+",Shoestring42,185382448,closed,False,4,2025-04-29T15:47:54+00:00,2025-05-11T17:29:57+00:00,2025-05-11T17:29:57+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3028562270,61377,not able to see the content in the dark mode,"<img width=""1470"" alt=""Image"" src=""https://github.com/user-attachments/assets/1f676b75-6720-4a8a-9bc3-103ebe55e205"" />
+
+
+##issue in styling of the content line when turning on the dark mode.",preetlakra,91603908,closed,False,3,2025-04-29T14:24:33+00:00,2025-04-30T16:21:59+00:00,2025-04-30T16:21:58+00:00,Docs;Duplicate Report,0,0,0,0,0,0,0
+pandas-dev/pandas,3028532570,61376,BUG: Series.dot for arrow and nullable dtypes returns object-dtyped series,"fixes #61375 by porting DataFrame fix (from #54025 as reported in #53979)
+
+- [x] closes #61375 
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",theavey,8083606,closed,False,1,2025-04-29T14:16:14+00:00,2025-04-29T16:21:11+00:00,2025-04-29T16:20:40+00:00,Numeric Operations;Arrow,0,0,0,0,0,0,0
+pandas-dev/pandas,3028515989,61375,BUG: dot on Arrow Series produces a Numpy object result,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+series_result = pd.Series({""a"": 1.0}, dtype=""Float64"").dot(
+    pd.DataFrame({""col1"": {""a"": 2.0}, ""col2"": {""a"": 3.0}}, dtype=""Float64"")
+)
+series_result.dtype  # is dtype('O')
+
+series_result_2 = pd.Series({""a"": 1.0}, dtype=""float[pyarrow]"").dot(
+    pd.DataFrame({""col1"": {""a"": 2.0}, ""col2"": {""a"": 3.0}}, dtype=""float[pyarrow]"")
+)
+series_result_2.dtype  # same, is dtype('O')
+
+# `DataFrame.dot` was already fixed
+df_result = pd.DataFrame({""col1"": {""a"": 2.0}, ""col2"": {""a"": 3.0}}, dtype=""Float64"").T.dot(
+    pd.Series({""a"": 1.0}, dtype=""Float64"")
+)
+df_result.dtype  # is Float64Dtype()
+```
+
+### Issue Description
+
+`Series.dot` with Arrow or nullable dtypes returns series result with numpy object dtype. This was reported in #53979 and fixed for DataFrames in #54025.
+
+Possibly side notes: I believe the ""real"" issue here is that the implementation uses `.values` which returns a `dtype=object` array for the DataFrame. This seems directly related to #60038 and at least somewhat related to #60301 (which is also referenced in a comment on the former).
+
+### Expected Behavior
+
+I would expect `Series.dot` to return the ""best"" common datatype for the input datatypes (in the examples, would expect the appropriate float dtype)
+
+```python
+import pandas as pd
+
+series_result = pd.Series({""a"": 1.0}, dtype=""Float64"").dot(
+    pd.DataFrame({""col1"": {""a"": 2.0}, ""col2"": {""a"": 3.0}}, dtype=""Float64"")
+)
+series_result.dtype  # would expect Float64Dtype()
+
+series_result_2 = pd.Series({""a"": 1.0}, dtype=""float[pyarrow]"").dot(
+    pd.DataFrame({""col1"": {""a"": 2.0}, ""col2"": {""a"": 3.0}}, dtype=""float[pyarrow]"")
+)
+series_result_2.dtype  # would expect float[pyarrow]
+```
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.11.12
+python-bits           : 64
+OS                    : Windows
+OS-release            : 10
+Version               : 10.0.19045
+machine               : AMD64
+processor             : Intel64 Family 6 Model 85 Stepping 7, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : English_United States.1252
+
+pandas                : 2.2.3
+numpy                 : 2.2.5
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.1
+Cython                : None
+sphinx                : 8.2.3
+IPython               : 9.2.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.4
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2025.3.2
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : 0.61.2
+numexpr               : 2.10.2
+odfpy                 : None
+openpyxl              : 3.1.5
+pandas_gbq            : None
+psycopg2              : 2.9.9
+pymysql               : None
+pyarrow               : 19.0.1
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.40
+tables                : 3.10.2
+tabulate              : None
+xarray                : None
+xlrd                  : 2.0.1
+xlsxwriter            : None
+zstandard             : 0.23.0
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",theavey,8083606,closed,False,0,2025-04-29T14:11:39+00:00,2025-04-29T16:20:41+00:00,2025-04-29T16:20:41+00:00,Bug;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3027960213,61374,Percentile Scaling Data Transformation,"This pull request adds a new data transformation utility called `percentile_scaling` to the `pandas/io/` module, which scales numerical data to a percentile-based range from 0 to 100. This transformation is useful for standardizing features in data preprocessing workflows, especially for ML pipelines or percentile-based visual analytics.
+
+Implementation Details
+
+- Introduced a new function `percentile_scaling(data: List[float]) -> List[float]` that:
+  - Accepts a list or NumPy array of numerical values.
+  - Returns values scaled to a [0, 100] percentile scale.
+  - Raises appropriate errors for invalid input (e.g., zero variance or empty input).
+
+Tests
+
+- Added unit tests in `pandas/tests/io/test_percentile_scaling.py`:
+  - Validates correct scaling behavior.
+  - Handles edge cases such as identical values and empty inputs.
+  - All tests pass successfully using `unittest`.
+
+Compliance
+
+- [x] Follows Pandas contribution guidelines
+- [x] All tests pass successfully
+- [x] Function is self-contained and does not introduce dependencies
+- [x] Code is PEP8-compliant and cleanly documented
+
+Notes
+
+This contribution is part of a university-level data engineering course project (DATA 226). The goal is to implement practical transformation logic for real-world data pipeline use cases while following standard open-source contribution workflows.
+
+
+- [x] Tests added and passed
+- [x] Code passes style checks and pre-commit hooks
+",sujan099,110429059,closed,False,1,2025-04-29T11:23:42+00:00,2025-04-29T16:23:41+00:00,2025-04-29T16:23:41+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3027838985,61373,this is testing only,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",ManasasivaVasireedy,120005853,closed,False,0,2025-04-29T10:35:03+00:00,2025-04-29T16:21:29+00:00,2025-04-29T16:21:29+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3026305712,61372,Fix pyarrow comparison issue in array.py,"- [x] closes #60937 
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",AshleySonny,186503526,open,False,0,2025-04-28T21:41:17+00:00,2025-04-28T21:41:17+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3025592843,61371,CI: Use Cython nightlies for Windows wheel builds again,Validated that the wheel tests should pass now from https://github.com/pandas-dev/pandas/pull/61354,mroeschke,10647082,closed,False,1,2025-04-28T17:05:20+00:00,2025-04-28T18:17:52+00:00,2025-04-28T18:17:50+00:00,Build,0,0,0,0,0,0,0
+pandas-dev/pandas,3025323572,61370,ENH: Adding hint to to_sql,"### Feature Type
+
+- [ ] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+It would be great if we able use hints with to_sql. Especially /*APPEND PARALLEL*/ hints greatly improves insert time in Oracle.
+
+### Feature Description
+
+with db().connect() as connection:
+   df.to_sql('TEST_TABLE', connection, hints={'ORACLE':['APPEND', 'PARALLEL']}
+
+
+
+### Alternative Solutions
+
+with db().connect() as connection:
+   df.to_sql('TEST_TABLE', connection, hints={'ORACLE':['APPEND', 'PARALLEL']}
+
+
+
+### Additional Context
+
+_No response_",AliKayhanAtay,34006392,open,False,0,2025-04-28T15:23:10+00:00,2025-04-28T15:23:10+00:00,,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3024500784,61369,Bump pypa/cibuildwheel from 2.23.2 to 2.23.3,"Bumps [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel) from 2.23.2 to 2.23.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pypa/cibuildwheel/releases"">pypa/cibuildwheel's releases</a>.</em></p>
+<blockquote>
+<h2>v2.23.3</h2>
+<ul>
+<li>🛠 Dependency updates, including Python 3.13.3 (<a href=""https://redirect.github.com/pypa/cibuildwheel/issues/2371"">#2371</a>)</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/pypa/cibuildwheel/blob/main/docs/changelog.md"">pypa/cibuildwheel's changelog</a>.</em></p>
+<blockquote>
+<h3>v2.23.3</h3>
+<p><em>26 April 2025</em></p>
+<ul>
+<li>🛠 Dependency updates, including Python 3.13.3 (<a href=""https://redirect.github.com/pypa/cibuildwheel/issues/2371"">#2371</a>)</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/pypa/cibuildwheel/commit/faf86a6ed7efa889faf6996aa23820831055001a""><code>faf86a6</code></a> Bump version: v2.23.3</li>
+<li><a href=""https://github.com/pypa/cibuildwheel/commit/4241f37b2c5be7f7ed96214b83f8cfbe1496cc28""><code>4241f37</code></a> [2.x] Update dependencies (<a href=""https://redirect.github.com/pypa/cibuildwheel/issues/2371"">#2371</a>)</li>
+<li>See full diff in <a href=""https://github.com/pypa/cibuildwheel/compare/v2.23.2...v2.23.3"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=pypa/cibuildwheel&package-manager=github_actions&previous-version=2.23.2&new-version=2.23.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+
+
+</details>",dependabot[bot],49699333,closed,False,0,2025-04-28T10:35:52+00:00,2025-04-28T17:41:39+00:00,2025-04-28T17:41:35+00:00,Build;CI;Dependencies,0,0,0,0,0,0,0
+pandas-dev/pandas,3023470553,61368,BUG: Python 3.14 may not increment refcount,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+import warnings
+
+warnings.simplefilter('error')
+
+df = pd.DataFrame(
+        {'year': [2018, 2018, 2018],
+         'month': [1, 1, 1],
+         'day': [1, 2, 3],
+         'value': [1, 2, 3]})
+df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+```
+
+### Issue Description
+
+With python 3.14 and the Pandas main branch (or 2.2.3 with `pd.options.mode.copy_on_write = ""warn""`) the above fails with:
+
+```python
+Python 3.14.0a7+ (heads/main:276252565cc, Apr 27 2025, 16:05:04) [Clang 19.1.7 ]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.3.0.dev -- An enhanced Interactive Python. Type '?' for help.
+Tip: You can use LaTeX or Unicode completion, `\alpha<tab>` will insert the α symbol.
+
+In [1]: import pandas as pd
+
+In [2]: df = pd.DataFrame(
+   ...:         {'year': [2018, 2018, 2018],
+   ...:          'month': [1, 1, 1],
+   ...:          'day': [1, 2, 3],
+   ...:          'value': [1, 2, 3]})
+   ...: df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+<ipython-input-2-a8566e79621c>:6: ChainedAssignmentError: A value is trying to be set on a copy of a DataFrame or Series through chained assignment.
+When using the Copy-on-Write mode, such chained assignment never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy.
+
+Try using '.loc[row_indexer, col_indexer] = value' instead, to perform the assignment in a single step.
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+  df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+
+In [3]: import warnings
+
+In [4]: warnings.simplefilter('error')
+
+In [5]: df = pd.DataFrame(
+   ...:         {'year': [2018, 2018, 2018],
+   ...:          'month': [1, 1, 1],
+   ...:          'day': [1, 2, 3],
+   ...:          'value': [1, 2, 3]})
+   ...: df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+---------------------------------------------------------------------------
+ChainedAssignmentError                    Traceback (most recent call last)
+<ipython-input-5-a8566e79621c> in ?()
+      2         {'year': [2018, 2018, 2018],
+      3          'month': [1, 1, 1],
+      4          'day': [1, 2, 3],
+      5          'value': [1, 2, 3]})
+----> 6 df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+
+~/.virtualenvs/cp314-clang/lib/python3.14/site-packages/pandas/core/frame.py in ?(self, key, value)
+   4156     def __setitem__(self, key, value) -> None:
+   4157         if not PYPY:
+   4158             if sys.getrefcount(self) <= 3:
+-> 4159                 warnings.warn(
+   4160                     _chained_assignment_msg, ChainedAssignmentError, stacklevel=2
+   4161                 )
+   4162
+
+ChainedAssignmentError: A value is trying to be set on a copy of a DataFrame or Series through chained assignment.
+When using the Copy-on-Write mode, such chained assignment never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy.
+
+Try using '.loc[row_indexer, col_indexer] = value' instead, to perform the assignment in a single step.
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+
+In [6]: pd.__version__
+Out[6]: '3.0.0.dev0+2080.g44c5613568'
+
+```
+
+With Python 3.14 there will be an optimization where the reference count is not incremented if Python can be sure that something above the calling scope will hold a reference for the life time of a scope.  This is causing a number of failures in test suites when reference counts are checked.  In this case I think it erroneously triggering the logic that the object is a intermediary.
+
+Found this because it is failing the mpl test suite (this snippet is extracted from one of our tests).
+
+With py313 I do not get this failure.
+
+### Expected Behavior
+
+no warning 
+
+### Installed Versions
+
+It is mostly development versions of things, this same env with pd main also fails.
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.14.0a7+
+python-bits           : 64
+OS                    : Linux
+OS-release            : 6.14.2-arch1-1
+Version               : #1 SMP PREEMPT_DYNAMIC Thu, 10 Apr 2025 18:43:59 +0000
+machine               : x86_64
+processor             :
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 2.3.0.dev0+git20250427.4961a14
+pytz                  : 2025.2
+dateutil              : 2.9.0.post1.dev6+g35ed87a.d20250427
+pip                   : 25.0.dev0
+Cython                : 3.1.0b1
+sphinx                : None
+IPython               : 9.3.0.dev
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.4
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2025.3.2
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : 6.0.0.alpha0
+matplotlib            : 3.11.0.dev732+g8fedcea7fc
+numba                 : None
+numexpr               : 2.10.3.dev0
+odfpy                 : None
+openpyxl              : 3.1.5
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : 8.3.0.dev32+g7ef189757
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.16.0.dev0+git20250427.55cae81
+sqlalchemy            : None
+tables                : None
+tabulate              : 0.9.0
+xarray                : 2025.3.1
+xlrd                  : 2.0.1
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+
+</details>
+",tacaswell,199813,open,False,4,2025-04-28T01:23:56+00:00,2025-04-28T23:02:11+00:00,,Bug;Needs Discussion;Warnings;Copy / view semantics,0,0,0,0,0,0,0
+pandas-dev/pandas,3023304057,61367,DOC: Add missing period in sample docstring,"- Minor documentation fix.
+- Adds a missing period at the end of the ""random_state"" description in the `sample` function docstring.
+- No functional changes.
+
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+",yanamis,72974057,closed,False,1,2025-04-27T20:25:31+00:00,2025-04-28T16:45:56+00:00,2025-04-28T16:45:43+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3023219572,61366,[minor edit] edit definitions of some parameters with correct idiomatic English for better legibility,"<!--
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+//-->",kirisakow,11773604,closed,False,1,2025-04-27T17:32:54+00:00,2025-04-28T16:39:33+00:00,2025-04-28T16:39:26+00:00,Docs,0,0,0,0,0,0,0
+pandas-dev/pandas,3023173793,61365,BUG: Constructing series with Timedelta object results in datetime series,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+test = pd.Series([pd.Timedelta(""NaT"")])
+print(test)
+```
+
+### Issue Description
+
+`test` is initialized to a series of `datetime64` type. This gotcha is not documented anywhere and the result is counter-intuitive. Opening the issue in case this is unintended.
+
+### Expected Behavior
+
+`test` is initialized to a series of `timedelta64` type
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.12.3
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.15.167.4-microsoft-standard-WSL2
+Version               : #1 SMP Tue Nov 5 00:21:55 UTC 2024
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : C.UTF-8
+LOCALE                : C.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 2.2.3
+pytz                  : 2025.1
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : 8.2.3
+IPython               : None
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.5
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : None
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : None
+tables                : None
+tabulate              : None
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.1
+qtpy                  : None
+pyqt5                 : None
+</details>
+",Casper-Guo,89810860,open,False,3,2025-04-27T16:06:33+00:00,2025-05-04T16:02:19+00:00,,Bug;Timedelta;Constructors,1,0,0,0,0,0,0
+pandas-dev/pandas,3023111781,61364,BUG: groupby.groups with NA categories fails,"- [x] closes #61356 (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+
+There is a slight code duplication here, but we don't need to rely on Cateorical's codes because we can just directly use groupby's. We also can't use `groupby` to implement `Index.groupby` because the former only works in the case where the `values` are exhaustive.",rhshadrach,45562402,closed,False,1,2025-04-27T14:19:18+00:00,2025-04-28T20:30:58+00:00,2025-04-28T16:47:10+00:00,Bug;Groupby;Missing-data;Categorical,0,0,0,0,0,0,0
+pandas-dev/pandas,3022586635,61363,DOC: Added constructor parameters to DateOffset docstring for API consistency #52431," - Added the constructor signature for DateOffset.
+ - No functional changes were made, only documentation improvements.
+ - Part of the issue #52431 is addressed by this.",sainivas-99,85184650,closed,False,1,2025-04-27T02:11:58+00:00,2025-05-03T13:24:42+00:00,2025-05-03T13:24:42+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3022360085,61362,QST: best way to extend/subclass pandas.DataFrame,"### Research
+
+- [x] I have searched the [[pandas] tag](https://stackoverflow.com/questions/tagged/pandas) on StackOverflow for similar questions.
+
+- [x] I have asked my usage related question on [StackOverflow](https://stackoverflow.com).
+
+
+### Link to question on StackOverflow
+
+https://stackoverflow.com/questions/79594258/best-way-to-extend-subclass-pandas-dataframe
+
+### Question about pandas
+
+I've written a [package](https://www.github.com/rwijtvliet/portfolyo) to work with energy-related timeseries. At its center is a class ([`PfLine`](https://portfolyo.readthedocs.io/en/latest/core/pfline.html)) that is essentially a wrapper around pandas.DataFrame, and it implements various methods and properties that are also available on DataFrames - like `.loc`, `.asfreq()`, `.index`, etc.
+
+I am currently in the middle of a rewrite of this package, and think it would be a good idea to have closer integration with pandas. [This page](https://pandas.pydata.org/docs/development/extending.html) lays out several possibilities, and I am unsure which route to take - and was hoping to find some sparring here.
+
+Let me describe a bit what I'm trying to accomplish with the `PfLine` class:
+
+  * Behaves like a DataFrame, with specific column names allowed and some data conversion (and validation) on initialisation.
+
+  * Is immutable to avoid data from becoming inconsistent.
+
+  * Has additional methods.
+
+The methods could be directly under `PfLine.method()` or under e.g. `df.pfl.method()`.
+
+What is probably important: a way is needed for the user to specify a (still under development) configuration object (`commodity`) when initialising the PfLine. This object contains information used in coercing the data, e.g. what are the correct units and which timezones are allowed for the index.",rwijtvliet,4106013,open,False,1,2025-04-26T22:17:25+00:00,2025-04-27T12:19:53+00:00,,Usage Question;Closing Candidate,0,0,0,0,0,0,0
+pandas-dev/pandas,3022163177,61361,REGR: Fix signature of GroupBy.expanding,"Ref: https://github.com/pandas-dev/pandas/pull/61352#discussion_r2060726723
+
+#61352 replaced `*args` and `**kwargs` in the signature of `GroupBy.expanding`. However I believe further arguments need to be added. We could also revert the PR instead.",rhshadrach,45562402,closed,False,4,2025-04-26T17:38:41+00:00,2025-04-27T11:29:30+00:00,2025-04-27T11:29:29+00:00,Bug;Groupby;Regression;Blocker;Window,0,0,0,0,0,0,0
+pandas-dev/pandas,3021572049,61360,ENH: magic_case(),"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [ ] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+we basically come up issue about not knowing the case of the column, we can print and view it but to make life little more easier I got magic_case created.
+
+we have to pass the DataFrame and the column name we know (ignoring case) and we can have this assigned to a variable
+mc=magic_case(df_2,'jack')
+print(mc) # JaCK
+and if there are multiple names with difference in case then it throws a value error with list of names
+# ValueError: Multiple columns with the same name but different cases found: ['JaCK', 'JACk']
+
+
+### Feature Description
+
+def magic_case(df, column_name, new_name=None, inplace=False):
+    """"""
+    Find the exact case-sensitive column name in a DataFrame and optionally rename it.
+    
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to search in
+    column_name : str
+        The case-insensitive column name to search for
+    new_name : str, optional
+        If provided, the column will be renamed to this value
+    inplace : bool, default False
+        If True and new_name is provided, modifies the DataFrame in-place and returns None.
+        If False and new_name is provided, returns a copy of the DataFrame with renamed column.
+        If new_name is None, this parameter has no effect.
+    
+    Returns:
+    --------
+    str or pandas.DataFrame or None
+        - If new_name is None: returns the exact case-sensitive column name
+        - If new_name is provided and inplace=False: returns the DataFrame with renamed column
+        - If new_name is provided and inplace=True: returns None
+    
+    Raises:
+    -------
+    ValueError
+        If no matching column is found or if multiple matches are found
+    """"""
+    # Check if the dataframe is empty or has no columns
+    if df.empty or len(df.columns) == 0:
+        raise ValueError(""DataFrame is empty or has no columns"")
+        
+    # Strip whitespace from column names for comparison
+    clean_columns = {col.lower().strip(): col for col in df.columns}
+    
+    # Clean and lowercase the search term
+    search_term = column_name.lower().strip()
+    
+    # Check if the lowercase version of the input exists
+    if search_term not in clean_columns:
+        matches = []
+        # Check for partial matches (e.g., ""jack"" might match ""jackson"")
+        for col_lower, col_original in clean_columns.items():
+            if search_term in col_lower or col_lower in search_term:
+                matches.append(col_original)
+        
+        if matches:
+            original_column_name = matches[0]  # Get the first partial match
+        else:
+            raise ValueError(f""No column matching '{column_name}' was found in the DataFrame"")
+    else:
+        # Check for multiple exact matches with the same spelling but different cases
+        exact_matches = [col for col in df.columns if col.lower().strip() == search_term]
+        if len(exact_matches) > 1:
+            raise ValueError(f""Multiple columns with the same name but different cases found: {exact_matches}"")
+        
+        # Get the exact case-sensitive column name
+        original_column_name = clean_columns[search_term]
+    
+    # If new_name is not provided, just return the original column name
+    if new_name is None:
+        return original_column_name
+    
+    # If new_name is provided, rename the column
+    if inplace:
+        df.rename(columns={original_column_name: new_name}, inplace=True)
+        return None
+    else:
+        return df.rename(columns={original_column_name: new_name})
+
+### Alternative Solutions
+
+# nothing
+
+### Additional Context
+
+if you had anything to say - please drop mail to akvamsikrishna@outlook.com with sub: magic_case() 😅 just to identify easily and prioritize your response over others.",VamsiAkella,69075554,closed,False,2,2025-04-26T07:05:56+00:00,2025-04-26T18:11:40+00:00,2025-04-26T18:11:39+00:00,Enhancement;Indexing;Closing Candidate,0,0,0,0,0,0,0
+pandas-dev/pandas,3021313607,61359,BUG: Raise ValueError for non-string columns in read_json orient='table' (GH19129),"- Closes #19129
+- Adds validation to ensure all column names are strings when using orient='table' in read_json
+- Raises a clear ValueError if invalid column names are found
+- Adds a new unit test to pandas/tests/io/json/test_json_table_schema.py to cover the invalid input case
+- Ran pytest and pre-commit hooks successfully
+
+Looking forward to feedback. Thanks!",amoitra1,145285745,open,False,2,2025-04-26T01:10:10+00:00,2025-05-02T19:23:38+00:00,,Error Reporting;IO JSON,0,0,0,0,0,0,0
+pandas-dev/pandas,3021283667,61358,Improve documentation for MonthEnd and YearBegin offsets,"This pull request improves the documentation for two commonly used offset constructors in Pandas: MonthEnd and YearBegin.
+
+Changes include:
+
+Clarified the purpose and behavior of each offset class
+
+Added runnable examples (doctest-compliant) to demonstrate usage
+
+Improved parameter descriptions where necessary
+
+These changes aim to make the documentation more accessible and clear for both new and experienced users of Pandas’ time series functionality.
+",SoumitAddanki,146280135,closed,False,1,2025-04-26T00:37:39+00:00,2025-05-03T13:20:16+00:00,2025-05-03T13:20:15+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3021192275,61357,DOC: change `tuples` param for MultiIndex.from_tuples from sequence to iterable,"### Pandas version checks
+
+- [x] I have checked that the issue still exists on the latest versions of the docs on `main` [here](https://pandas.pydata.org/docs/dev/)
+
+
+### Location of the documentation
+
+https://pandas.pydata.org/docs/reference/api/pandas.MultiIndex.from_tuples.html#pandas.MultiIndex.from_tuples
+
+The docs currently say this for the `tuples` parameter:
+
+> list / sequence of tuple-likes
+
+### Documentation problem
+
+
+
+Pandas-stubs annotates the parameter as sequence: https://github.com/pandas-dev/pandas-stubs/blob/main/pandas-stubs/core/indexes/multi.pyi#L49
+
+Pandas source code annotates the parameter as iterable: https://github.com/pandas-dev/pandas/blob/main/pandas/core/indexes/multi.py#L521
+
+Typing the parameter as sequence prevents this pattern from typechecking, even if it works at runtime:
+
+```
+MultiIndex.from_tuples(zip(['a'], ['b']))
+```
+
+This was raised in https://github.com/pandas-dev/pandas-stubs/issues/1158
+
+### Suggested fix for documentation
+
+Could we loosen the type annotation in the docs to say iterable? Then I can update pandas-stubs to match.",yangdanny97,18299205,open,False,2,2025-04-25T23:07:36+00:00,2025-04-27T19:44:45+00:00,,Docs;MultiIndex;Needs Discussion,0,0,0,0,0,0,0
+pandas-dev/pandas,3021002869,61356,BUG: `DataFrameGroupBy.groups` fails when Categorical indexer contains NaNs and `dropna=False`,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+>>> df = DataFrame(
+...         {
+...             ""cat"": Categorical([""a"", np.nan, ""a""], categories=[""a"", ""b"", ""d""]),
+...             ""vals"": [1, 2, 3],
+...         }
+...     )
+>>> g = df.groupby(""cat"", observed=True, dropna=False)
+>>> result = g.groups
+Traceback (most recent call last):
+  File ""<stdin>"", line 1, in <module>
+  File ""/workspaces/pandas/pandas/core/groupby/groupby.py"", line 569, in groups
+    return self._grouper.groups
+  File ""properties.pyx"", line 36, in pandas._libs.properties.CachedProperty.__get__
+  File ""/workspaces/pandas/pandas/core/groupby/ops.py"", line 710, in groups
+    return self.groupings[0].groups
+  File ""properties.pyx"", line 36, in pandas._libs.properties.CachedProperty.__get__
+  File ""/workspaces/pandas/pandas/core/groupby/grouper.py"", line 711, in groups
+    return codes, uniques
+  File ""/workspaces/pandas/pandas/core/arrays/categorical.py"", line 745, in from_codes
+    dtype = CategoricalDtype._from_values_or_dtype(
+  File ""/workspaces/pandas/pandas/core/dtypes/dtypes.py"", line 347, in _from_values_or_dtype
+    dtype = CategoricalDtype(categories, ordered)
+  File ""/workspaces/pandas/pandas/core/dtypes/dtypes.py"", line 230, in __init__
+    self._finalize(categories, ordered, fastpath=False)
+  File ""/workspaces/pandas/pandas/core/dtypes/dtypes.py"", line 387, in _finalize
+    categories = self.validate_categories(categories, fastpath=fastpath)
+  File ""/workspaces/pandas/pandas/core/dtypes/dtypes.py"", line 585, in validate_categories
+    raise ValueError(""Categorical categories cannot be null"")
+ValueError: Categorical categories cannot be null
+>>>
+```
+
+### Issue Description
+
+When using `df.groupby(cat, dropna=False).groups`, we encounter a `ValueError`. This is counter-intuitive, as grouping operations work without an issue.
+
+```python
+>>> df = DataFrame(
+...         {
+...             ""cat"": Categorical([""a"", np.nan, ""a""], categories=[""a"", ""b"", ""d""]),
+...             ""vals"": [1, 2, 3],
+...         }
+...     )
+>>> g = df.groupby(""cat"", observed=True, dropna=False)
+>>> g.sum()
+     vals
+cat      
+a       4
+NaN     2
+>>> g.sum().index
+CategoricalIndex(['a', nan], categories=['a', 'b', 'd'], ordered=False, dtype='category', name='cat')
+```
+
+
+### Expected Behavior
+
+`.groups` should return a dictionary which includes the NaN as the last entry.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 41131a14324ababc5c81f194de3d9a239d120f27
+python                : 3.10.8
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.15.167.4-microsoft-standard-WSL2
+Version               : #1 SMP Tue Nov 5 00:21:55 UTC 2024
+machine               : x86_64
+processor             : 
+byteorder             : little
+LC_ALL                : None
+LANG                  : C.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 3.0.0.dev0+2085.g41131a1432
+numpy                 : 2.2.5
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : 3.0.12
+sphinx                : 8.1.3
+IPython               : 8.35.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.4
+blosc                 : None
+bottleneck            : 1.4.2
+fastparquet           : 2024.11.0
+fsspec                : 2025.3.2
+html5lib              : 1.1
+hypothesis            : 6.131.8
+gcsfs                 : 2025.3.2
+jinja2                : 3.1.6
+lxml.etree            : 5.4.0
+matplotlib            : 3.10.1
+numba                 : 0.61.2
+numexpr               : 2.10.2
+odfpy                 : None
+openpyxl              : 3.1.5
+psycopg2              : 2.9.10
+pymysql               : 1.4.6
+pyarrow               : 19.0.1
+pyreadstat            : 1.2.8
+pytest                : 8.3.5
+python-calamine       : None
+pytz                  : 2025.2
+pyxlsb                : 1.0.10
+s3fs                  : 2025.3.2
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.40
+tables                : 3.10.1
+tabulate              : 0.9.0
+xarray                : 2024.9.0
+xlrd                  : 2.0.1
+xlsxwriter            : 3.2.3
+zstandard             : 0.23.0
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",tehunter,7980666,closed,False,1,2025-04-25T20:46:45+00:00,2025-04-28T16:47:11+00:00,2025-04-28T16:47:11+00:00,Bug;Groupby;Missing-data;Categorical,0,0,0,0,0,0,0
+pandas-dev/pandas,3020794342,61355,"DOC: Removed self-reference to `DataFrame.resample` in the ""See also"" section.","- [ ] ~closes #xxxx (Replace xxxx with the GitHub issue number)~
+- [ ] ~[Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature~
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] ~Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.~
+- [ ] ~Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.~
+",arthurlw,126365160,closed,False,1,2025-04-25T18:51:16+00:00,2025-04-25T18:54:57+00:00,2025-04-25T18:54:56+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3020557314,61354,Test Cython divmod fix for Windows,"https://github.com/cython/cython/pull/6801 should fix the issues we were seeing in https://github.com/pandas-dev/pandas/pull/61261, but this commit is not apart of the Cython nightly wheels yet.",mroeschke,10647082,closed,False,1,2025-04-25T16:50:01+00:00,2025-04-25T17:16:37+00:00,2025-04-25T17:16:32+00:00,Build,0,0,0,0,0,0,0
+pandas-dev/pandas,3020552781,61353,BUG: inserting list of strings into Series auto-infers them as datetimes with mixed formats,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+In [3]: df = pd.DataFrame({'a': pd.date_range('2000', freq='D', periods=2)})
+
+In [4]: df.loc[:, 'a'] = ['12/01/2020', '13/01/2020']
+
+In [5]: df
+Out[5]:
+           a
+0 2020-12-01
+1 2020-01-13
+```
+
+### Issue Description
+
+Similar to https://pandas.pydata.org/pdeps/0004-consistent-to-datetime-parsing.html
+
+### Expected Behavior
+
+I think that inferring strings as datetimes is fine so long as they're parsed in a consistent format
+
+### Installed Versions
+
+<details>
+
+
+INSTALLED VERSIONS
+------------------
+commit                : 57fd50221ea3d5de63d909e168f10ad9fc0eee9b
+python                : 3.10.12
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.15.167.4-microsoft-standard-WSL2
+Version               : #1 SMP Tue Nov 5 00:21:55 UTC 2024
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : C.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 3.0.0.dev0+1979.g57fd50221e
+numpy                 : 1.26.4
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : 3.0.12
+sphinx                : 8.1.3
+IPython               : 8.33.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : 1.4.2
+fastparquet           : 2024.11.0
+fsspec                : 2025.2.0
+html5lib              : 1.1
+hypothesis            : 6.127.5
+gcsfs                 : 2025.2.0
+jinja2                : 3.1.5
+lxml.etree            : 5.3.1
+matplotlib            : 3.10.1
+numba                 : 0.61.0
+numexpr               : 2.10.2
+odfpy                 : None
+openpyxl              : 3.1.5
+psycopg2              : 2.9.10
+pymysql               : 1.4.6
+pyarrow               : 19.0.1
+pyreadstat            : 1.2.8
+pytest                : 8.3.5
+python-calamine       : None
+pytz                  : 2025.1
+pyxlsb                : 1.0.10
+s3fs                  : 2025.2.0
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.38
+tables                : 3.10.1
+tabulate              : 0.9.0
+xarray                : 2024.9.0
+xlrd                  : 2.0.1
+xlsxwriter            : 3.2.2
+zstandard             : 0.23.0
+tzdata                : 2025.1
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",MarcoGorelli,33491632,open,False,0,2025-04-25T16:47:35+00:00,2025-04-25T18:48:05+00:00,,Bug;Datetime,0,0,0,0,0,0,0
+pandas-dev/pandas,3018727940,61352,DOC: Updated `groupby.expanding` arguments,"- [ ] ~closes #xxxx (Replace xxxx with the GitHub issue number)~
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] ~Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.~
+- [ ] ~Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.~
+",arthurlw,126365160,closed,False,1,2025-04-25T00:46:30+00:00,2025-04-27T11:30:09+00:00,2025-04-25T16:34:50+00:00,Window,0,0,0,0,0,0,0
+pandas-dev/pandas,3018442108,61351,Add warning to `.groupby` when null keys would be dropped due to default `dropna`,"- [X] closes #61339
+- [X] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [X] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [X] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+
+TODO:
+
+- [X] Check performance for `codes` check approaches (`codes.min()` was about 3x faster)
+- [ ] Run full test suite to ensure nothing broke
+- [ ] Add tests/implementation for `.pivot_table`/`.stack`/etc. (possibly in a follow-up PR?)",tehunter,7980666,open,False,0,2025-04-24T21:01:55+00:00,2025-04-25T21:18:15+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3018111045,61350,ENH: th elements from Styler need the row scope,"### Feature Type
+
+- [ ] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+Currently, the pandas [Styler](https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.html) API can be used to create a HTML table from a dataframe. However, the tables it generates are not accessible: it fails [WCAG/H63](https://www.w3.org/WAI/WCAG21/Techniques/html/H63).
+
+### Feature Description
+
+Ensure the output generated by Styler is accessible.
+
+- `th` with class `row_heading` needs the `row` scope
+
+I use the current workaround to add this rule myself:
+
+```
+    html_root = lxml.html.fromstring(frame_style.to_html())
+    for th in html_root.xpath(""//th[contains(@class, 'row_heading')]""):
+        th.set(""scope"", ""row"")
+```
+
+### Alternative Solutions
+
+- Make the styler API more flexible for adding attributes. Currently, [set_td_classes](https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.set_td_classes.html#pandas.io.formats.style.Styler.set_td_classes) and [set_table_styles](https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.set_table_styles.html#pandas.io.formats.style.Styler.set_table_styles) aren't flexible enough for this, and [set_table_attributes](https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.set_table_attributes.html#pandas.io.formats.style.Styler.set_table_attributes) can't set attributes on `th` elements themselves.
+
+
+### Additional Context
+
+_No response_",reteps,13869303,closed,False,1,2025-04-24T18:23:37+00:00,2025-04-24T19:03:45+00:00,2025-04-24T19:03:21+00:00,Enhancement;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3017715895,61349,TST: Testing for mixed int/str Index,"- [x] closes #54072 
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",xaris96,148361247,open,False,10,2025-04-24T15:48:53+00:00,2025-05-12T12:13:01+00:00,,Testing;Index,0,0,0,0,0,0,0
+pandas-dev/pandas,3017657606,61348,Mixed int string ,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",xaris96,148361247,closed,False,2,2025-04-24T15:25:38+00:00,2025-05-04T21:04:42+00:00,2025-05-03T13:16:39+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3017123734,61347,Request for guidance on issues for upcoming PyData Yerevan pandas sprint,"Dear Pandas Team,
+
+I am Suren Poghosyan, an Organizational Committee Member at PyData Yerevan. As you may already know, last summer we hosted an open-source contribution sprint focused on **pandas** library, in collaboration with Patrick Höfler, at the American University of Armenia. 
+
+We are currently planning to run a follow-up sprint independently and would appreciate your guidance on which issues in the **pandas** GitHub repository are the most appropriate for a 2-3 hour contribution session. Furthermore, feel free to share any relevant issue which you would like to proceed with, despite our previous specification and time span.
+
+On top of that, we are reaching out to make sure we’re following the proper contribution guidelines and not creating unnecessary noise or inconveniences in the issue tracker. We aim to contribute meaningfully and respectfully.
+
+Looking forward to contributing again and strengthening our local culture of open-source collaboration.
+
+In addition, here are the articles about our previous sprint:
+[AUA to Host Inaugural PyData Yerevan Open Source pandas Sprint ](https://newsroom.aua.am/2024/06/10/aua-to-host-inaugural-pydata-yerevan-open-source-pandas-sprint/)
+[PyData Yerevan Open Source pandas Sprint](https://newsroom.aua.am/event/pydata-yerevan-open-source-pandas-sprint/)
+[PyData Yerevan hosted the inaugural Open Source pandas Sprint with Patrick Höfler - Linkedin](https://www.linkedin.com/posts/pydata-yerevan_yesterday-pydata-yerevan-hosted-the-inaugural-activity-7211723009479376896-nkZw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADUCpscBtHmkZbcvJGJVB6J3UtccLYAcVPM)
+
+
+
+
+
+Best regards,
+Suren Poghosyan
+Organizational Committee Member
+PyData Yerevan
+
+
+@jorisvandenbossche @TomAugspurger @jreback @WillAyd @mroeschke @jbrockmendel @datapythonista",surenpoghosian,56313895,open,False,0,2025-04-24T12:34:24+00:00,2025-04-24T12:34:24+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3014981266,61346,BUG: assignment via loc silently fails with differing dtypes,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+print(pd.__version__)
+df = pd.DataFrame({'foo': ['2025-04-23', '2025-04-22']})
+df['bar'] = pd.to_datetime(df['foo'], format='%Y-%m-%d')
+df.loc[:, 'bar'] = df.loc[:, 'bar'].dt.strftime('%Y%m%d')
+print(df)
+
+# Yields
+# 2.2.3
+#           foo        bar
+# 0  2025-04-23 2025-04-23
+# 1  2025-04-22 2025-04-22
+```
+
+### Issue Description
+
+I expect `bar` to look like 
+```
+20250423
+20250422
+```
+instead of 
+```
+2025-04-23
+2025-04-22
+```
+
+
+### Expected Behavior
+
+`bar` should look like
+
+```
+20250423
+20250422
+```
+
+### Installed Versions
+
+<details>
+
+```
+[ins] In [2]: pd.show_versions()
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.12.10
+python-bits           : 64
+OS                    : Linux
+OS-release            : 4.18.0-372.32.1.el8_6.x86_64
+Version               : #1 SMP Fri Oct 7 12:35:10 EDT 2022
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : 3.0.12
+sphinx                : None
+IPython               : 8.35.0
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : 1.4.2
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2024.9.0
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : 5.3.2
+matplotlib            : 3.10.1
+numba                 : 0.61.2
+numexpr               : 2.10.2
+odfpy                 : None
+openpyxl              : 3.1.5
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 15.0.2
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.39
+tables                : 3.9.2
+tabulate              : 0.9.0
+xarray                : 2025.3.1
+xlrd                  : 2.0.1
+xlsxwriter            : 3.2.2
+zstandard             : 0.23.0
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+```
+
+</details>
+",zbs,1444551,closed,False,13,2025-04-23T18:48:39+00:00,2025-04-26T16:51:19+00:00,2025-04-26T12:21:38+00:00,Bug;Dtype Conversions;Closing Candidate,0,0,0,0,0,0,0
+pandas-dev/pandas,3014950760,61345,Update groupby().first() documentation to clarify behavior with missing data (#27578),"This PR enhances the docstring for `GroupBy.first()` to clarify:
+- It returns the first *non-null* value per column
+- It differs from `.nth(0)` and `.head(1)` in how it treats missing values
+- Includes comparative examples for better understanding
+
+Fixes part of issue #27578
+
+Ready for review.",ericcht,137556780,open,False,0,2025-04-23T18:39:31+00:00,2025-04-24T20:49:47+00:00,,Docs;Groupby,0,0,0,0,0,0,0
+pandas-dev/pandas,3014914579,61344,BUG: Series of bools with length mismatch does not raise when used with `.iloc`,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+import numpy as np
+
+s = pd.Series([1, 2, 3])
+
+mask_series = pd.Series([True, False, True, True])
+result = s[mask_series]
+
+print(result)
+# Output:
+# 0    1
+# 2    3
+# dtype: int64
+
+mask_array = np.array([True, False, True, True])
+print(s[mask_array])
+# IndexError: Boolean index has wrong length: 4 instead of 3
+```
+
+### Issue Description
+
+When using `.iloc` with a boolean Series mask whose length exceeds the target, pandas does not raise an error. This is inconsistent with numpy bool indexing, which raises an IndexError.
+
+
+
+### Expected Behavior
+
+`.iloc` should raise if the boolean Series mask length doesn’t match the target Series length.
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 25e57c34158158de2cd5d2c0843f3e5babbeb3e5
+python                : 3.12.9
+python-bits           : 64
+OS                    : Darwin
+OS-release            : 24.0.0
+Version               : Darwin Kernel Version 24.0.0: Mon Aug 12 20:49:48 PDT 2024; root:xnu-11215.1.10~2/RELEASE_ARM64_T8103
+machine               : arm64
+processor             : arm
+byteorder             : little
+LC_ALL                : None
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 3.0.0.dev0+2080.g25e57c3415
+numpy                 : 1.26.4
+dateutil              : 2.9.0.post0
+pip                   : 25.0
+Cython                : 3.0.12
+sphinx                : 8.1.3
+IPython               : 9.0.2
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : 1.4.2
+fastparquet           : 2024.11.0
+fsspec                : 2025.3.0
+html5lib              : 1.1
+hypothesis            : 6.130.4
+gcsfs                 : 2025.3.0
+jinja2                : 3.1.6
+lxml.etree            : 5.3.1
+matplotlib            : 3.10.1
+numba                 : 0.61.0
+numexpr               : 2.10.2
+odfpy                 : None
+openpyxl              : 3.1.5
+psycopg2              : 2.9.6
+pymysql               : 1.4.6
+pyarrow               : 19.0.1
+pyreadstat            : 1.2.8
+pytest                : 8.3.5
+python-calamine       : None
+pytz                  : 2025.2
+pyxlsb                : 1.0.10
+s3fs                  : 2025.3.0
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.10
+tables                : 3.10.2
+tabulate              : 0.9.0
+xarray                : 2024.9.0
+xlrd                  : 2.0.1
+xlsxwriter            : 3.2.2
+zstandard             : 0.23.0
+tzdata                : 2025.1
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",arthurlw,126365160,closed,False,1,2025-04-23T18:24:12+00:00,2025-04-24T20:20:23+00:00,2025-04-24T20:20:13+00:00,Bug;Indexing,0,0,0,0,0,0,0
+pandas-dev/pandas,3013699081,61343,Fix #61072: inconsistent fullmatch results with regex alternation,"in PyArrow strings
+Fixes an issue where regex patterns with alternation (|) produce different results between str dtype and string[pyarrow] dtype. When using patterns like ""(as)|(as)"", PyArrow implementation would incorrectly match ""asdf"" while Python's implementation correctly rejects it. The fix adds special handling to ensure alternation patterns are properly parenthesized when using PyArrow-backed strings
+
+- [ ] closes #61072  ",Pedro-Santos04,134413112,open,False,0,2025-04-23T11:33:57+00:00,2025-05-06T12:14:43+00:00,,,0,0,0,0,0,0,0
+pandas-dev/pandas,3013322994,61342,BUG: Concatenating data frames with `MultiIndex` with `datetime64[ms]` dtype introduces `NaT` values to the index,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+
+def resample_each_item(dtype) -> pd.DataFrame:
+    df = pd.DataFrame(
+        [
+            [""A"", ""2023-01-15"", 42],
+            [""A"", ""2023-01-17"", 33],
+            [""B"", ""2023-02-20"", 78],
+            [""B"", ""2023-02-23"", 91],
+        ],
+        columns=[""item_id"", ""timestamp"", ""target""],
+    )
+    df[""timestamp""] = pd.to_datetime(df[""timestamp""]).astype(dtype)
+    df = df.set_index([""item_id"", ""timestamp""])
+    resampled = []
+    for item_id in [""A"", ""B""]:
+        resampled.append(pd.concat({item_id: df.loc[item_id].resample(""D"", level=""timestamp"").mean()}))
+    return pd.concat(resampled)
+
+print(resample_each_item(""datetime64[ns]""))
+# For datetime64[ns] all timestamps are valid
+#               target
+#   timestamp         
+# A 2023-01-15    42.0
+#   2023-01-16     NaN
+#   2023-01-17    33.0
+# B 2023-02-20    78.0
+#   2023-02-21     NaN
+#   2023-02-22     NaN
+#   2023-02-23    91.0
+
+print(resample_each_item(""datetime64[ms]""))
+# For datetime64[ms] or datetime64[s] dtypes, NaT values are introduced
+#               target
+#   timestamp         
+# A 2023-01-15    42.0
+#   NaT            NaN
+#   NaT           33.0
+# B 2023-02-20    78.0
+#   NaT            NaN
+#   NaT            NaN
+#   NaT           91.0
+```
+
+### Issue Description
+
+When concatenating data frames with `MultiIndex`, where one level is of type `datetime64[ms]` or `datetime64[s]`, some timestamps are replaced with `NaT`. If the timestamps are of dtype `datetime64[ns]`, no `NaT` values are introduced.
+
+### Expected Behavior
+
+No `NaT` values are introduced, regardless of whether the timestamp dtype is `datetime64[ms]`, `datetime64[s]` or `datetime64[ns]`.
+
+### Installed Versions
+
+<details>
+
+```
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.12.9
+python-bits           : 64
+OS                    : Linux
+OS-release            : 6.1.132-147.221.amzn2023.x86_64
+Version               : #1 SMP PREEMPT_DYNAMIC Tue Apr  8 13:14:54 UTC 2025
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : None
+LANG                  : C.UTF-8
+LOCALE                : C.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : 8.12.3
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2024.12.0
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : 0.61.2
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 19.0.1
+pyreadstat            : None
+pytest                : 8.3.5
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.40
+tables                : None
+tabulate              : 0.9.0
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+```
+
+</details>
+",shchur,6944857,closed,False,1,2025-04-23T09:29:06+00:00,2025-04-24T20:18:53+00:00,2025-04-24T20:18:43+00:00,Bug;Datetime;MultiIndex,0,0,0,0,0,0,0
+pandas-dev/pandas,3012466982,61341,"DOC Update link to ""The Grammar of Graphics"" book","Update link to ""The Grammar of Graphics"" book.
+https://doi.org/10.1007/0-387-28695-0
+
+Original link does not work:
+https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html
+
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [ ] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",star1327p,5897944,closed,False,1,2025-04-23T01:32:17+00:00,2025-04-23T01:47:49+00:00,2025-04-23T01:47:42+00:00,Docs,1,1,0,0,0,0,0
+pandas-dev/pandas,3012434545,61340,BUG: Fixed issue with bar plots not stacking correctly when 'stacked' and 'subplots' are used together,"- [x] closes #61018
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+
+Added check for when stacked and subplots are used in conjunction for bar plots. And logic dictating offsets for individual subplots to account for plots with non-concurrent columns being graphed. 
+
+Currently, does not take into account column order in subplot entry (eg: (A, B) vs (B, A)) when stacking",eicchen,63069720,closed,False,1,2025-04-23T00:58:23+00:00,2025-04-28T20:10:37+00:00,2025-04-28T20:10:28+00:00,Visualization,0,0,0,0,0,0,0
+pandas-dev/pandas,3011459524,61339,ENH: Add warning when `DataFrame.groupby` drops NA keys,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [x] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+Currently, pandas `DataFrame.groupby` will default to dropping NA values in any of the keys. In v1.1, a `dropna` argument was added which allows the users to retain NA values, but its default value is set to `True` (#3729). In that discussion, there were several requests to add a warning when NA values are dropped (https://github.com/pandas-dev/pandas/issues/3729#issuecomment-2494715257).
+
+This issue raises that request to provide additional visibility and a single place for discussion.
+
+### Feature Description
+
+Add a warning to the user when a groupby contains NA keys and `dropna` is not explicitly passed. This warning should also be emitted in other aggregation functions that drop missing keys (e.g., `pivot`, .
+
+```
+>>> df = pd.DataFrame({""key1"": [""a"", ""a""], ""key2"": [""b"", None], ""value"": [1, 2]})
+>>> df.groupby([""a"", ""b""])[""value""].sum()
+MissingKeyWarning: `groupby` encountered missing keys which will be dropped from result. Please specify `dropna=True` to hide warning and retain default behavior, or `dropna=False` to include missing values.
+key1  key2
+a     b       1
+Name: value, dtype: int64
+```
+
+I think this is the best option as it warns the user in multiple scenarios:
+
+1) User is unaware of pandas default behavior.
+
+2) User is aware of pandas default behavior, but forgot to include the argument.
+
+3) User is aware of pandas default behavior, but is unaware that their data contains missing values (prompting a bug fix or data quality check upstream).
+
+### Alternative Solutions
+
+Here are some other ideas for discussion, but I think the downsides of these all outweigh the benefits.
+
+#### Alternative 1: Set default `dropna` value to be user-configurable via pandas settings
+
+This would allow the user to decide if they prefer ""SQL-style"" grouping globally. This could work in conjunction with the user warning above. Cons: Still requires user to remember to specify the option in their code. Options would affect the results, which complicates debugging and collaboration and goes against good code guidelines.
+
+#### Alternative 2: Change the default value of `dropna`
+
+This would bring pandas in line with SQL and Polars, but would likely break user code. This doesn't preclude the warning above, as it would be required as part of a deprecation plan. Cons: Would need to be rolled out very slowly.
+
+#### Alternative 3: Change the default value of `dropna` for multi-key groupings only.
+
+Assumes users doing multi-key grouping are more likely to want to retain missing values. Cons: Would add confusion and still break user code.
+
+### Additional Context
+
+This has been a known source of confusion and a difference from SQL and Polars (See [1](https://stackoverflow.com/questions/18429491/pandas-groupby-columns-with-nan-missing-values) [2](https://github.com/pola-rs/polars/issues/11030#issuecomment-1712964207) [3](https://pbpython.com/groupby-warning.html)).
+
+Even for experienced Pandas users, it's easy to forget to add `dropna=False` or not realize there are missing values in your grouping keys. With the current behavior, we're adding an additional mental overhead on developers, increasing the learning curve (especially coming from SQL), and introducing a source of bugs.",tehunter,7980666,open,False,2,2025-04-22T15:40:59+00:00,2025-04-22T21:11:58+00:00,,Enhancement;Groupby;Missing-data;Needs Discussion,0,0,0,0,0,0,0
+pandas-dev/pandas,3011329646,61338,BUG: Period datatype data gets mangled up in pivoting operation,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [ ] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+df = pd.DataFrame({
+    ""id1"": [1, 2], 
+    ""id2"": [10, 20], 
+    ""id3"": [100, 200], 
+    ""period"":[pd.Period(""2021-01""), pd.Period(""2021-03"")]
+}).set_index(['id1','id2'])
+result = df.unstack().stack(future_stack=True)
+
+#fails - unexpected
+assert (result.loc[df.index]==df).all().all()
+```
+
+### Issue Description
+
+The data in the ""period"" column gets mangled up, the value associated with the first record shows up twice and the value of the second record disappears. 
+The problem appears with both `future_stack=True` and `future_stack=False`.
+The problem does not appear when stacking ""period"" series, only when stacking dataframe (so following unstack(), the columns are a mutliindex).
+
+### Expected Behavior
+
+It is expected that `df.unstack().stack()` would return the original records unchanged.
+Changing period dtype to 'str' behaves as expected:
+```python
+import pandas as pd
+df = pd.DataFrame({
+    ""id1"": [1, 2], 
+    ""id2"": [10, 20], 
+    ""id3"": [100, 200], 
+    ""period"":[pd.Period(""2021-01""), pd.Period(""2021-03"")]
+}).set_index(['id1','id2'])
+
+#succeeds - expected
+df2 = df.astype({""period"": ""str""})
+result = df2.unstack().stack(future_stack=True)
+assert (result.loc[df2.index]==df2).all().all()
+```
+
+
+### Installed Versions
+
+<details>
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.11.11
+python-bits           : 64
+OS                    : Linux
+OS-release            : 5.10.226-214.880.amzn2.x86_64
+Version               : #1 SMP Tue Oct 8 16:18:15 UTC 2024
+machine               : x86_64
+processor             : x86_64
+byteorder             : little
+LC_ALL                : en_US.UTF-8
+LANG                  : en_US.UTF-8
+LOCALE                : en_US.UTF-8
+
+pandas                : 2.2.3
+numpy                 : 1.26.4
+pytz                  : 2025.1
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : 9.0.2
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : 2025.3.0
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : None
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 19.0.1
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : 2025.3.0
+scipy                 : 1.15.2
+sqlalchemy            : 2.0.39
+tables                : None
+tabulate              : 0.9.0
+xarray                : 2025.1.2
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.1
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",RobertasA,7705100,closed,False,1,2025-04-22T14:49:35+00:00,2025-04-22T16:01:10+00:00,2025-04-22T16:01:08+00:00,Bug;Needs Triage,0,0,0,0,0,0,0
+pandas-dev/pandas,3010682898,61337,BUG: DataFrame.to_markdown exception when a cell has numpy.array type,"### Pandas version checks
+
+- [x] I have checked that this issue has not already been reported.
+
+- [x] I have confirmed this bug exists on the [latest version](https://pandas.pydata.org/docs/whatsnew/index.html) of pandas.
+
+- [x] I have confirmed this bug exists on the [main branch](https://pandas.pydata.org/docs/dev/getting_started/install.html#installing-the-development-version-of-pandas) of pandas.
+
+
+### Reproducible Example
+
+```python
+import pandas as pd
+import numpy as np
+
+results = pd.DataFrame({""col1"": [np.array([""hello"",""world""], dtype=object), ""world""]})
+results.to_markdown()
+```
+
+### Issue Description
+
+When a dataframe contains a cell with type numpy.array, the to_markdown function will fail. The exact issue is due to differing behavior between any other value and numpy arrays, but the reason I think **this is a pandas issue** is because an assumption is made about the value:
+
+```python
+def _is_separating_line(row):
+    row_type = type(row)
+    is_sl = (row_type == list or row_type == str) and (
+        (len(row) >= 1 and row[0] == SEPARATING_LINE) # <- compares row[0] to a string
+        or (len(row) >= 2 and row[1] == SEPARATING_LINE)
+    )
+    return is_sl
+```
+
+Anything that isn't a string will normally result in this comparison resolving to `False`, but this **should be explicit** to avoid strange datatypes causing undefined behavior.
+
+Stack trace:
+```
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[69], line 3
+      1 import numpy as np
+      2 results = pd.DataFrame({""col1"": [np.array([""hello"",""world""], dtype=object), ""world""]})
+----> 3 results.to_markdown()
+
+File [...]\.venv\Lib\site-packages\pandas\util\_decorators.py:333, in deprecate_nonkeyword_arguments.<locals>.decorate.<locals>.wrapper(*args, **kwargs)
+    327 if len(args) > num_allow_args:
+    328     warnings.warn(
+    329         msg.format(arguments=_format_argument_list(allow_args)),
+    330         FutureWarning,
+    331         stacklevel=find_stack_level(),
+    332     )
+--> 333 return func(*args, **kwargs)
+
+File [...]\.venv\Lib\site-packages\pandas\core\frame.py:2984, in DataFrame.to_markdown(self, buf, mode, index, storage_options, **kwargs)
+   2982 kwargs.setdefault(""showindex"", index)
+   2983 tabulate = import_optional_dependency(""tabulate"")
+-> 2984 result = tabulate.tabulate(self, **kwargs)
+   2985 if buf is None:
+   2986     return result
+
+File [...]\.venv\Lib\site-packages\tabulate\__init__.py:2048, in tabulate(tabular_data, headers, tablefmt, floatfmt, intfmt, numalign, stralign, missingval, showindex, disable_numparse, colalign, maxcolwidths, rowalign, maxheadercolwidths)
+   2045 if tabular_data is None:
+   2046     tabular_data = []
+-> 2048 list_of_lists, headers = _normalize_tabular_data(
+   2049     tabular_data, headers, showindex=showindex
+   2050 )
+   2051 list_of_lists, separating_lines = _remove_separating_lines(list_of_lists)
+   2053 if maxcolwidths is not None:
+
+File [...]\.venv\Lib\site-packages\tabulate\__init__.py:1471, in _normalize_tabular_data(tabular_data, headers, showindex)
+   1469 headers = list(map(str, headers))
+   1470 #    rows = list(map(list, rows))
+-> 1471 rows = list(map(lambda r: r if _is_separating_line(r) else list(r), rows))
+   1473 # add or remove an index column
+   1474 showindex_is_a_str = type(showindex) in [str, bytes]
+
+File [...]\.venv\Lib\site-packages\tabulate\__init__.py:1471, in _normalize_tabular_data.<locals>.<lambda>(r)
+   1469 headers = list(map(str, headers))
+   1470 #    rows = list(map(list, rows))
+-> 1471 rows = list(map(lambda r: r if _is_separating_line(r) else list(r), rows))
+   1473 # add or remove an index column
+   1474 showindex_is_a_str = type(showindex) in [str, bytes]
+
+File [...]\.venv\Lib\site-packages\tabulate\__init__.py:107, in _is_separating_line(row)
+    104 def _is_separating_line(row):
+    105     row_type = type(row)
+    106     is_sl = (row_type == list or row_type == str) and (
+--> 107         (len(row) >= 1 and row[0] == SEPARATING_LINE)
+    108         or (len(row) >= 2 and row[1] == SEPARATING_LINE)
+    109     )
+    110     return is_sl
+
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+```
+
+### Expected Behavior
+
+to_markdown converts this numpy array to string and outputting a markdown normally. Instead there's an exception
+
+### Installed Versions
+
+<details>
+
+
+INSTALLED VERSIONS
+------------------
+commit                : 0691c5cf90477d3503834d983f69350f250a6ff7
+python                : 3.13.1
+python-bits           : 64
+OS                    : Windows
+OS-release            : 11
+Version               : 10.0.26100
+machine               : AMD64
+processor             : Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+byteorder             : little
+LC_ALL                : None
+LANG                  : None
+LOCALE                : English_United States.1252
+
+pandas                : 2.2.3
+numpy                 : 2.2.4
+pytz                  : 2025.2
+dateutil              : 2.9.0.post0
+pip                   : 25.0.1
+Cython                : None
+sphinx                : None
+IPython               : 9.0.2
+adbc-driver-postgresql: None
+adbc-driver-sqlite    : None
+bs4                   : 4.13.3
+blosc                 : None
+bottleneck            : None
+dataframe-api-compat  : None
+fastparquet           : None
+fsspec                : None
+html5lib              : None
+hypothesis            : None
+gcsfs                 : None
+jinja2                : 3.1.6
+lxml.etree            : None
+matplotlib            : 3.10.1
+numba                 : None
+numexpr               : None
+odfpy                 : None
+openpyxl              : None
+pandas_gbq            : None
+psycopg2              : None
+pymysql               : None
+pyarrow               : 19.0.1
+pyreadstat            : None
+pytest                : None
+python-calamine       : None
+pyxlsb                : None
+s3fs                  : None
+scipy                 : None
+sqlalchemy            : None
+tables                : None
+tabulate              : 0.9.0
+xarray                : None
+xlrd                  : None
+xlsxwriter            : None
+zstandard             : None
+tzdata                : 2025.2
+qtpy                  : None
+pyqt5                 : None
+
+</details>
+",omarsaad98,84385092,open,False,6,2025-04-22T10:40:03+00:00,2025-04-25T18:54:21+00:00,,Bug;IO Data;Needs Discussion;Dependencies;Nested Data,0,0,0,0,0,0,0
+pandas-dev/pandas,3010189907,61336,ENH: IDEA  Introduce axis→0/axis→1 arrow aliases to disambiguate direction vs. label operations,"### Feature Type
+
+- [x] Adding new functionality to pandas
+
+- [ ] Changing existing functionality in pandas
+
+- [ ] Removing existing functionality in pandas
+
+
+### Problem Description
+
+<ENG>
+The `axis` parameter currently serves two distinct purposes:
+
+1. *Along‑axis* operations that reduce or transform values (e.g. `apply`, `sum`)
+2. *Label‑targeting* operations that modify or drop index / column labels (e.g. `drop`, `rename`)
+
+Because both use the same syntax (`axis=0` or `axis=1`), many users mis‑interpret which dimension is affected.
+
+<한국어>
+현재 axis 매개변수는 서로 다른 두 가지 목적으로 사용되고 있습니다:
+값을 축소하거나 변환하는 축 방향 연산 (예: apply, sum)
+인덱스/열 레이블을 수정하거나 삭제하는 레이블 대상 연산 (예: drop, rename)
+두 경우 모두 동일한 구문(axis=0 또는 axis=1)을 사용하기 때문에 많은 사용자가 어떤 차원이 영향을 받는지 혼동합니다.
+
+### Feature Description
+
+<ENG>
+Proposed API
+Keep existing syntax and add an **arrow alias** that makes the “direction” explicit:
+
+| Syntax | Meaning |
+|--------|---------|
+| `axis=0` *(unchanged)* | target **index labels** (delete / rename) |
+| `axis=1` *(unchanged)* | target **column labels** |
+| `axis→0` *(new)* | operate **along index** – treat each **column vector** |
+| `axis→1` *(new)* | operate **along columns** – treat each **row vector** |
+
+Arrow aliases are optional; existing code keeps working unchanged.
+
+<한국어>
+
+제안된 API
+기존 구문을 유지하면서 ""방향""을 명확히 나타내는 화살표 별칭을 추가합니다
+
+| Syntax | Meaning |
+|--------|---------|
+| `axis=0` *(변경없음)* | 인덱스 레이블 대상 (삭제 / 이름 변경) |
+| `axis=1` *(변경없음)* | 열 레이블 대상 |
+| `axis→0` *(신규)* | 인덱스 방향으로 연산 – 각 열 벡터 처리 |
+| `axis→1` *(신규)* | 열 방향으로 연산 – 각 행 벡터 처리 |
+
+화살표 별칭은 선택 사항이며, 기존 코드는 변경 없이 계속 작동합니다.
+
+
+
+### Alternative Solutions
+
+<ENG>
+
+| Alias idea | Interpretation |
+|------------|----------------|
+| **`axis→0`** | operate **along index** (column‑wise) |
+| **`axis→1`** | operate **along columns** (row‑wise) |
+
+**Benefits**
+* Greatly reduces beginner confusion around `axis`.
+* Preserves full NumPy compatibility.
+* Requires minimal code changes (add alias mapping in `axis_aliases`).
+* 
+<한국어>
+
+| 별칭 아이디어 | 해석|
+|------------|----------------|
+| **`axis→0`** | 인덱스 방향으로 연산 (열 단위) |
+| **`axis→1`** | 열 방향으로 연산 (행 단위) |
+
+장점
+axis에 대한 초보자의 혼란을 크게 줄입니다.
+NumPy 호환성을 완전히 유지합니다.
+최소한의 코드 변경만 필요합니다 (axis_aliases에 별칭 매핑 추가).
+
+### Additional Context
+
+See repeated questions on Stack Overflow:<br>
+<https://stackoverflow.com/q/26716616>.",withlionbuddha,136729489,closed,False,4,2025-04-22T07:31:10+00:00,2025-04-23T16:19:49+00:00,2025-04-23T16:19:48+00:00,Enhancement;Needs Discussion;Closing Candidate,1,0,0,1,0,0,0
+pandas-dev/pandas,3009689867,61335,ENH/TST: unset_index method #60869,"- [x] closes #60869 (Replace xxxx with the GitHub issue number)
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [x] Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.
+- [x] Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.
+",HoqueUM,125516043,closed,False,1,2025-04-22T02:34:40+00:00,2025-04-22T15:59:38+00:00,2025-04-22T15:59:38+00:00,,0,0,0,0,0,0,0
+pandas-dev/pandas,3009494674,61334,DOC: Updated `groupby.ewm` arguments,"- [ ] ~closes #xxxx (Replace xxxx with the GitHub issue number)~
+- [x] [Tests added and passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#writing-tests) if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#pre-commit).
+- [ ] ~Added [type annotations](https://pandas.pydata.org/pandas-docs/dev/development/contributing_codebase.html#type-hints) to new arguments/methods/functions.~
+- [ ] ~Added an entry in the latest `doc/source/whatsnew/vX.X.X.rst` file if fixing a bug or adding a new feature.~
+
+
+",arthurlw,126365160,closed,False,1,2025-04-21T23:35:26+00:00,2025-04-23T18:37:47+00:00,2025-04-22T15:56:52+00:00,Groupby;Window,0,0,0,0,0,0,0
+pandas-dev/pandas,3009380832,61333,CI: Have dedicated Python 3.13 job instead of using Python dev,"We've been testing Python 3.13 using the `Python dev` job. Since Python 3.13 has been available since last October, we should be able to test this version with a dedicated job with all of our optional dependencies. 
+
+Additionally, this new job caught an unclosed `sqlite3` engine, so modified some `test_sql.py` tests (and removed unnecessary parametrizations)",mroeschke,10647082,closed,False,1,2025-04-21T21:58:26+00:00,2025-04-30T16:09:44+00:00,2025-04-30T16:09:41+00:00,CI;Python 3.13,0,0,0,0,0,0,0

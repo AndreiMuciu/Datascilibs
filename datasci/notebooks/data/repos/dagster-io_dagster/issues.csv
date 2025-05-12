@@ -1,0 +1,1898 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+dagster-io/dagster,3057535688,29924,AssetCheck fails to execute when typecasting an input asset for an AssetCheck with a custom object,"### What's the issue?
+
+I created a custom class that I use as the output of my asset, then when typecasting the input of my asset check I got an error saying the asset check failed to load my code location, even though my code location runs just fine. When I removed the typecasting of the input parameters it ran fine.
+
+Here is the error -
+```
+Caught an unrecoverable error while dequeuing the run. Marking the run as failed and dropping it from the queue
+dagster._core.errors.DagsterCodeLocationLoadError: Failure loading my_code_location
+```
+
+### What did you expect to happen?
+
+I expected that the asset check would run without issue
+
+### How to reproduce?
+
+External library b_core -
+``` python
+from pydantic import BaseModel
+class CustomBaseModel(BaseModel):
+   ...
+```
+
+Code location -
+``` python
+from b_core import CustomBaseModel
+# my_model.py
+class MyModel(CustomBaseModel):
+  foo: str
+
+# my_assets.py
+@asset
+def my_asset() -> Output[list[MyModel]]:
+  ...
+
+# @asset_check(asset=my_asset)
+# def check_my_asset(my_asset: list[MyModel]): # this function signature causes the error to be thrown
+#   return AssetCheckResult(passed=len(my_asset) > 0)
+
+@asset_check(asset=my_asset)
+def check_my_asset(my_asset) # this function signature allows the asset check to function properly when typing was removed
+   return AssetCheckResult(passed=len(my_asset) > 0)
+```
+
+### Dagster version
+
+1.9.1
+
+### Deployment type
+
+Local
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",adjit,6991991,open,False,0,2025-05-12T16:38:29+00:00,2025-05-12T16:39:47+00:00,,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3057502561,29923,"dagster-cloud ci command throws error ""Invalid value for '--loglevel' (env var: 'None')""","### What's the issue?
+
+Try to run `dagster-cloud ci` command results in error: 
+
+```zsh
+╭─ Error ──────────────────────────────────────────────────────────────────────╮
+│ Invalid value for '--loglevel' (env var: 'None'): <LogLevel.warning:         │
+│ 'WARNING'> is not one of 'DEBUG', 'INFO', 'WARNING', 'ERROR'.                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+```
+
+### What did you expect to happen?
+
+_No response_
+
+### How to reproduce?
+
+_No response_
+
+### Dagster version
+
+1.10.13
+
+### Deployment type
+
+None
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",garethbrickman,50636644,open,False,1,2025-05-12T16:23:29+00:00,2025-05-12T16:29:59+00:00,,type: bug;Dagster+;area: dagster-cloud-cli,0,0,0,0,0,0,0
+dagster-io/dagster,3057423132,29922,Pin click < 8.2 in dagster-cloud-cli,On spot I missed in https://github.com/dagster-io/dagster/pull/29919,jmsanders,10291790,closed,False,0,2025-05-12T15:50:23+00:00,2025-05-12T15:52:11+00:00,2025-05-12T15:52:09+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3057343304,29921,Fix dagster-cloud-cli log level initialization,"Summary:
+This codepath started failing with the click 8.2 upgrade - but it doesn't seem like there was any way to set the underlying loglevel argument before. Source it from an env var instead.
+
+Test Plan:
+Run `dagster-cloud ci check` and `DAGSTER_CLOUD_CLI_LOG_LEVEL=DEBUG dagster-cloud-ci check`
+
+## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",gibsondan,8451211,open,False,0,2025-05-12T15:22:02+00:00,2025-05-12T15:52:29+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3057269266,29920,Aggregation of assets required to reduce asset function head.,"### What's the use case?
+
+Consider you have 10 or more assets and you would like to aggregate those into a single 
+`Dataset` class. 
+
+This is convenient, because then you can just pass this dataset asset to other assets that rely on it.
+Also the asset graph would look much less like a mess.
+
+
+I've tried multiple things, but I did not find a solid ""sexy"" solution and instead was bugging with IO-Managers and other things. Using IO-Manager is inconenvient for this purpose due to redundancy. 
+
+
+
+### Ideas of implementation
+
+It would be nice, if you could have assets in the UI defined but which are not materializable. They should only be materialized and then passed to other assets on dependency calls.
+
+This way you could define an asset 
+
+```
+@asset
+def combined(a1,a2,a3,a4,a5,a6 ...):
+""""""Is only executed for downstream dependencies""""""
+return #Aggregation goes here dict/class, whatever
+
+
+@asset 
+def trained_model(dataset):
+# do stuff with dataset here (dataset is not loaded with IO-Manager)
+```
+
+This would be nice, because then you wouldn't write the disk storage full of duplicated data but just aggregate those when needed and make em visible in the UI as a custom dataset, the data is always reachable if the upstream assets are materialized.
+
+Maybe there is some very easy solution. But I feel like bugging around with a bunch of IO-Managers etc. is not the best solution it could be so much easier
+
+
+like a decorator: @aggregated_asset()
+
+### Additional information
+
+Feel free to close this if not relevant enough, but I am quite new to dagster, hence even with chatgpt support I wasn't able to find a solution that suits me best. 
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",mathisloevenich,66358633,open,False,0,2025-05-12T14:57:11+00:00,2025-05-12T14:59:24+00:00,,type: feature-request,0,0,0,0,0,0,0
+dagster-io/dagster,3057260174,29919,Pin click < 8.2,To get to a healthy build. We'll triage out fixing the broken behavior and relaxing the pin before this week's release.,jmsanders,10291790,closed,False,3,2025-05-12T14:54:07+00:00,2025-05-12T15:48:53+00:00,2025-05-12T15:17:23+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3057250369,29918,[dagster-dbt] Failure while loading manifest.json in 1.10.14 (in execution),"### What's the issue?
+
+The problem is that Dagster is failing in some way to load the manifest.json and access the key 'nodes' from it in execution, in other words when i launch a asset materialization, the dagster-dbt dbt.cli().stream() is not finding the key 'nodes' as if it isn't loading the manifest.json in execution of dbt assets.
+Here's a print
+
+![Image](https://github.com/user-attachments/assets/9fcee0b0-d25c-409d-a2f1-54d8c7f06575)
+
+The project is loading correctly and the assets are loaded just fine, but when we launch a materialization, the error above happens everytime
+Also the command executed by the CLI changes from ```dbt run --select models --profiles-dir /path -target tar``` to ```dbt run --profiles-dir /path --target tar```
+
+### What did you expect to happen?
+
+The expected output was that no error should've be thrown and the models should've executed just fine as it happens in 1.10.13
+
+### How to reproduce?
+
+It's easy, you just need to upgrade to version 1.10.14, have a dbt project configured with @dbt_assets or similar, at any point have a dbt.cli().stream() command and materialize a asset after you dagster project loads and it's avaible in localhost:3000.  
+
+### Dagster version
+
+1.10.14
+
+### Deployment type
+
+Other Docker-based deployment
+
+### Deployment details
+
+```CMD dagster-webserver -h 0.0.0.0 -p 8080 & dagster-daemon run``` is the final command from my Dockerfile to make the project get up. 
+```
+
+DBT_MANIFEST = Path(
+    file_relative_path(__file__, ""../../my-awesome-dbt-project/target/manifest.json"")
+)
+
+@dbt_assets(
+    manifest=DBT_MANIFEST,
+    select=f""{MODELS}{MODELS_}{MODELS_D}"",
+    partitions_def=daily_partitions_def,
+    dagster_dbt_translator=CustomDagsterDbtTranslator(settings=DagsterDbtTranslatorSettings(enable_asset_checks=True)),
+    backfill_policy=BackfillPolicy.single_run(),
+)
+def dbt_assets(context: OpExecutionContext, dbt_resource: DbtCliResource):
+    yield from _process_partitioned_dbt_assets(context=context, dbt=dbt_resource)
+
+def _process_partitioned_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
+    # map partition key range to dbt vars
+    first_partition, last_partition = context.partition_time_window
+    context.log.error(context.partition_time_window)
+    dbt_vars = {""min_date"": str(first_partition), ""max_date"": str(last_partition)}
+    dbt_args = [""build"", ""--vars"", json.dumps(dbt_vars)]
+
+    yield from dbt.cli(dbt_args, context=context).stream()
+
+
+
+```
+
+### Additional information
+
+I don't think so, if you have any questions, I'll be looking at this thread daily and eager to answer them
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",IsmaelRDeMelo,54531312,open,False,0,2025-05-12T14:50:41+00:00,2025-05-12T14:51:30+00:00,,type: bug;integration: dbt,0,0,0,0,0,0,0
+dagster-io/dagster,3057051765,29917,DOC-1142 update docs version dropdown for 1.10.15 release,"## Summary & Motivation
+
+See https://linear.app/dagster-labs/issue/DOC-1142/update-version-dropdown
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",neverett,417209,closed,False,1,2025-05-12T13:49:28+00:00,2025-05-12T14:05:47+00:00,2025-05-12T14:05:44+00:00,area: docs,0,0,0,0,0,0,0
+dagster-io/dagster,3056885463,29916,Observe UI dogfooding feedback/polish,"## Summary & Motivation
+
+A bunch of polish changes from https://www.notion.so/dagster/Observe-dogfooding-1ed18b92e462809fb98bd1932d0bae7a?showMoveTo=true&saveParent=true
+
+## How I Tested These Changes
+
+locally with app-proxy",salazarm,2286579,open,False,1,2025-05-12T12:57:11+00:00,2025-05-12T14:55:20+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3056111042,29914,Allow native integration with Loguru,"### What's the use case?
+
+Dagster does not natively integrate with Loguru. By default, Dagster only captures logs from the standard Python logging module. Log messages from Loguru will not automatically appear in Dagster's event logs or UI unless you explicitly bridge Loguru to the standard logging system.
+
+The recommended workaround, as suggested by Dagster's AI assistant, is to configure a Loguru handler to forward messages to the standard Python logging module's `logging.getLogger()`. This allows Dagster to capture these logs. However, this approach introduces additional overhead and complexity.
+
+### Ideas of implementation
+
+- Env approach: Introduce a config option or environment variable that users can set in their Dagster `dagster.yaml` or via pipeline/job configuration to indicate that Loguru is being used.
+
+- Automatic approach: Or automatically during Dagster initialization, check if the Loguru module is imported and if any Loguru loggers are configured. If detected, automatically set up a bridge handler that forwards Loguru messages to the standard Python logging system (e.g., using `logger.add(...)` to attach a sink that calls `logging.getLogger().handle(...)`).
+
+- Util approach: Provide a utility function (e.g., `dagster.utils.integrate_loguru()`) that users can call early in their pipeline/job startup. This function would create a `logging.Handler`-compatible sink for Loguru as discussed previously.
+
+### Additional information
+
+Optionally suppress Loguru's default handlers to avoid duplicate output.
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",obrienciaran,31419980,open,False,0,2025-05-12T08:33:37+00:00,2025-05-12T13:24:08+00:00,,area: integrations;area: logging;type: feature-request,7,7,0,0,0,0,0
+dagster-io/dagster,3054772388,29913,[dagster-cloud-cli] Add `--wait` to `job launch` command,"## Summary & Motivation
+
+Adding the `--wait` flag to `dagster-cloud job launch` is particularly useful in CI pipelines where you're wanting to launch a job to test changes and ensure the dagster run succeeds before merging.
+
+## How I Tested These Changes
+
+Local manual testing
+
+## Changelog
+
+> [dagster-cloud-cli] Add `--wait` to `job launch` command
+",stevenayers,16361214,open,False,0,2025-05-11T06:39:56+00:00,2025-05-12T14:16:33+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3053940513,29912,[dg] Refactor shims so operate on the RequestObject instead of splitting it apart,"## Summary & Motivation
+
+`ShimScaffolder` had a bit of an odd inheritance structure. This new structure is more straightforward and makes it easier to overload and test
+
+```python
+class ShimScaffolder(Scaffolder[TModel]):
+    @abstractmethod
+    def get_text(self, request: ScaffoldRequest[TModel]) -> str: ...
+
+    def scaffold(self, request: ScaffoldRequest[TModel]) -> None:
+        if request.target_path.suffix != "".py"":
+            raise ValueError(""Invalid target path suffix. Expected a path ending in `.py`."")
+        # temporary hack as currently all scaffold requests target directories
+        # that are auto-created
+        request.target_path.rmdir()
+        request.target_path.write_text(self.get_text(request))
+```
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",schrockn,28738937,open,False,1,2025-05-10T09:07:46+00:00,2025-05-10T10:16:32+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3053700241,29911,docs: Add missing type hint,The type hint for `context` was missing.,agrueneberg,527708,closed,False,0,2025-05-10T05:13:57+00:00,2025-05-12T13:25:07+00:00,2025-05-12T13:25:07+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3053198902,29910,[wip] add owner references to k8s executor job,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",benpankow,10215173,open,False,2,2025-05-09T21:11:13+00:00,2025-05-09T21:49:46+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3053178030,29909,Fix typo and update copyright year across LICENSEs,"## Summary & Motivation
+
+Stumbled upon it while creating a new library
+
+## How I Tested These Changes
+
+BK
+",deepyaman,14007150,closed,False,1,2025-05-09T21:01:12+00:00,2025-05-12T13:53:39+00:00,2025-05-12T13:53:37+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3053049681,29908,Add new states to asset catalog rate card,"## Summary & Motivation
+Instead of displaying infinite loading spinner when there is no data, let's show an empty state
+
+Companion internal PR: https://github.com/dagster-io/internal/pull/15575
+
+## How I Tested These Changes
+Locally viewed:
+<img width=""699"" alt=""image"" src=""https://github.com/user-attachments/assets/ea941615-af2d-4dd4-92d1-1baecf939729"" />
+Loading states:
+<img width=""707"" alt=""image"" src=""https://github.com/user-attachments/assets/36cc80f8-179b-4ef6-a25c-0d767e766788"" />
+
+## Changelog
+NOCHANGELOG
+",clairelin135,29110579,closed,False,2,2025-05-09T19:46:18+00:00,2025-05-09T20:17:59+00:00,2025-05-09T20:17:58+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3053010633,29907,Support providing params in AWS redshift execute_query,"### What's the use case?
+
+RedshiftClient in dagster_aws package has `execute_query` but that does not support passing params to the query, can we forward params to the underlying psycopg2 call?
+
+### Ideas of implementation
+
+- add an additional params argument in execute_query 
+- forward it to `cursor.execute(query, params)`
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",marcosfede,16232610,open,False,0,2025-05-09T19:24:29+00:00,2025-05-09T19:27:08+00:00,,type: feature-request,0,0,0,0,0,0,0
+dagster-io/dagster,3052978383,29906,Dagster incorrectly removes sys.path[0] when PYTHONSAFEPATH is set.,"### What's the issue?
+
+```
+dagster api grpc -h 0.0.0.0 -p 8000 -m mypackage.dagster_definitions
+
+...
+ModuleNotFoundError: No module named 'mypackage'
+```
+
+`mypackage` _is_ on the PYTHONPATH, and if I `unset PYTHONSAFEPATH` before running dagster this works.
+
+The root of the issue is here: https://github.com/dagster-io/dagster/blob/13b593a5cd15f573f0274112ec91187f127ae6a0/python_modules/dagster/dagster/_core/code_pointer.py#L133
+
+Dagster is unconditionally removing `sys.path[0]` under the incorrect assumption that it will always be ""the script path"".
+
+### What did you expect to happen?
+
+_No response_
+
+### How to reproduce?
+
+_No response_
+
+### Dagster version
+
+dagster, version 1.10.10
+
+### Deployment type
+
+None
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",apmorton,63636,open,False,0,2025-05-09T19:07:41+00:00,2025-05-09T19:07:41+00:00,,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3052689002,29905,[ui] Remove Overview alerts section,"## Summary & Motivation
+
+OSS counterpart to https://app.graphite.dev/github/pr/dagster-io/internal/15565, which removes the AMP alert currently shown on Overview. It's the only banner there, so I'm just removing this altogether instead of leaving a couple null-rendering components lying around.
+
+## How I Tested These Changes
+
+TS, lint.",hellendag,2823852,closed,False,3,2025-05-09T16:46:47+00:00,2025-05-09T17:11:23+00:00,2025-05-09T17:11:21+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3052644051,29904,[dg] Fold `dg init` into `dg scaffold project`,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",smackesey,1531373,open,False,1,2025-05-09T16:27:15+00:00,2025-05-09T16:27:34+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3052561931,29903,Remove changes introduced to Spark Pythonic config,"This reverts commit ad8131daa78d40fb4dcbccd2b1e94eb05a590643.
+
+## Summary & Motivation
+
+Seems they changed it back...?
+
+## How I Tested These Changes
+
+BK
+",deepyaman,14007150,closed,False,0,2025-05-09T15:46:48+00:00,2025-05-09T16:34:37+00:00,2025-05-09T16:34:34+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3052529411,29902,only show failed to materialize events in run logs reading failure events is enabled,"## Summary & Motivation
+only shows asset materialization failure events if the `read_asset_materialization_failures` feature is enabled. Does some lite refactoring to make this repeatable  
+
+## How I Tested These Changes
+manually tested, see https://github.com/dagster-io/internal/pull/15561 for before and after in the UI
+",jamiedemaria,19783112,open,False,1,2025-05-09T15:31:44+00:00,2025-05-09T21:27:09+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3052515267,29901,[dagster-ibis] Generate I/O manager implementation,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",deepyaman,14007150,open,False,1,2025-05-09T15:25:33+00:00,2025-05-12T16:06:17+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3052305749,29900,[gql] handle failed to materialize events in run logs,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",jamiedemaria,19783112,closed,False,2,2025-05-09T14:12:36+00:00,2025-05-09T14:41:35+00:00,2025-05-09T14:41:34+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3051824264,29899,Latest-Run Label does not display correct time,"### What's the issue?
+
+The latest run info does not display the correct time. If you hover over the label, it shows the correct time.
+
+![Image](https://github.com/user-attachments/assets/6dd8cc9f-827d-423b-8ab9-cf51386457ea)
+
+The same error is in this overview:
+
+![Image](https://github.com/user-attachments/assets/8ea9a6de-6541-46e1-bae8-63f9f9bec8ce)
+
+Here is an excerpt from the database:
+
+![Image](https://github.com/user-attachments/assets/503c9093-b832-499c-a3df-31dab8c0b343)
+
+### What did you expect to happen?
+
+The correct time should be displayed
+
+### How to reproduce?
+
+This could be an error between different timezone settings. This is from my msql-database:
+
+![Image](https://github.com/user-attachments/assets/ff76f612-a08d-458c-8c37-b9eccc56897e)
+
+And this from my Linux-Environment
+
+`
+13:08:01 c-1216 ~/dagster $ date +'%:z %Z'
++02:00 CEST
+`
+
+The assets are configured with explicit timezone settings:
+
+
+```
+ return ScheduleDefinition(
+        job=define_asset_job(
+            name=get_job_name(),
+            selection=AssetSelection.groups(GROUP_NAME_IMPORT_SHOPWARE_PRODUCT) | AssetSelection.assets('akeneo_assets_article'),
+            description=upsert__akeneo_products__in__shopware.__doc__,
+        ),
+        cron_schedule=""*/5 5-23 * * *"",
+        execution_timezone=""Europe/Berlin"",
+        default_status=DefaultScheduleStatus.STOPPED
+    )
+```
+
+
+
+### Dagster version
+
+dagster, version 1.10.11
+
+### Deployment type
+
+self-hosted
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",azngeek,213429,open,False,0,2025-05-09T11:09:21+00:00,2025-05-09T11:12:21+00:00,,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3051416590,29898,Allow loading assets from deps via IOManager,"### What's the use case?
+
+When working on asset factories (and Components @schrockn @smackesey @cmpadden ) we often want to have configurable deps via `@dg.asset(deps=...)`. 
+
+However, it's impossible to load such deps via the IOManager. 
+
+I think the IOManager should be exposed via `context`, especially since `Definitions.load_asset_value` already exists. For example:
+
+
+```py
+import dagster as dg
+from dagster.components import Component
+
+@dataclass
+class MyComponent(Component):
+    deps: list[str]
+
+    def build_defs(ctx):
+        @dg.asset
+        def my_dynamic_asset(context: dg.AssetExecutionContext):
+            asset_values = [context.load_asset_value(key for key in self.deps)]
+            ...
+
+        return dg.Definitions(assets=[my_dynamic_asset])
+
+```
+
+I feel like this is a must have feature in the era of Components. I am really missing it right now, I have to manually maintain function signatures and code for a dozen of inputs. 
+
+I suspect this probably can be achieved via Dagster's internals already, but it's not very accessible to the end user.  
+
+### Ideas of implementation
+
+_No response_
+
+### Additional information
+
+This method should fail if the asset attempted to be loaded is not a valid parent asset. 
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",danielgafni,49863538,open,False,1,2025-05-09T08:28:17+00:00,2025-05-09T21:58:42+00:00,,type: feature-request,0,0,0,0,0,0,0
+dagster-io/dagster,3051377233,29897,`AssetDef.with_attributes_for_all` is missing option to add tags,"### What's the issue?
+
+All other fields can be added at once, except the tags
+
+### What did you expect to happen?
+
+Be able to add tags for all keys in an AssetDefinition
+
+### How to reproduce?
+
+_No response_
+
+### Dagster version
+
+1.10.6
+
+### Deployment type
+
+None
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",ion-elgreco,15728914,open,False,0,2025-05-09T08:13:38+00:00,2025-05-09T08:13:38+00:00,,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3051185444,29896,Example code for Scheduling and monitoring asset checks does not work,"### What's the issue or suggestion?
+
+The example code given at https://docs.dagster.io/guides/test/asset-checks#scheduling-and-monitoring-asset-checks does not work as stated.
+
+Steps to reproduce:
+
+1. Add example code into a clean repo with the latest versions of dagster and dagster-webserver.
+2. Change asset check so it always fails.
+3. Optional - change cron schedule so check runs more often.
+4. Run dagster dev and enable all automations.
+
+The result, as implied in the documentation, would be that the sensor defined by `dg.make_email_on_run_failure_sensor` attempts to send an email to notify about the failed asset check. Instead, the sensor is never run (skipped with reason: Sensor function returned an empty result).
+
+I suppose this is related to the fact that a failed asset check does not cause the run itself to fail.  
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",Rothenhouser,7486450,open,False,0,2025-05-09T06:59:31+00:00,2025-05-09T06:59:31+00:00,,area: docs,0,0,0,0,0,0,0
+dagster-io/dagster,3050469512,29895,[dagster-airlift] Sensor changes for historical runs,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",dpeng817,17576880,open,False,1,2025-05-09T01:07:32+00:00,2025-05-12T00:22:45+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050422585,29894,"[ui] Update the behavior of ""view lineage"" on the runs view","## Summary & Motivation
+
+https://dagsterlabs.slack.com/archives/C03CCE471E0/p1746749043149529
+
+Previously, we would include the downstreams of each key on the run when you clicked the ""View lineage"" button.
+
+I found this unintuitive, as the ""view list"" button only shows the keys directly on the run. I also added parens to the wider expression to make it easier to add further clauses (e.g. (<big expression>) and status:degraded))
+
+## How I Tested These Changes
+
+
+
+",OwenKephart,22457492,closed,False,3,2025-05-09T00:19:30+00:00,2025-05-09T17:13:31+00:00,2025-05-09T17:13:29+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3050389286,29893,[dg list env] Show plus env var state when running dg list env,"## Summary
+
+When logged into Dagster Plus, makes `dg list env` output whether an env var is configured for each plus scope.
+This segment of the env demo never made it into a standalone PR.
+
+```sh
+$ dg list env
+
+┏━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━┳━━━━━━━━┳━━━━━━┓
+┃ Env Var ┃ Value ┃ Components       ┃ Dev ┃ Branch ┃ Full ┃
+┡━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━╇━━━━━━━━╇━━━━━━┩
+│ BAZ     │       │ subfolder/mydefs │ ✓   │        │      │
+│ FOO     │ ✓     │                  │ ✓   │        │ ✓    │
+└─────────┴───────┴──────────────────┴─────┴────────┴──────┘
+```
+
+## Test Plan
+
+New unit tests.
+
+## Changelog
+
+> [components] `dg list env` now displays whether env vars are configured in each Dagster Plus scope.",benpankow,10215173,open,False,1,2025-05-08T23:45:37+00:00,2025-05-09T02:17:44+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050365272,29892,delegate dynamic partitions id caching hash id to dynamic partitions store,"## Summary & Motivation
+We should have the flexibility to change the hashing scheme for dynamic partitions definitions to be less volatile.
+
+To do that we need to selectively change the hash when there are mutations to the dynamic partitions definition that affect the partitions cache (e.g. deletions)
+
+This enables us to start tracking partition deletions in the storage layer and invalidate the cache.
+
+The default implementation at the storage layer should match the implementation on the definition.
+
+## How I Tested These Changes
+BK
+
+",prha,1040172,open,False,1,2025-05-08T23:32:04+00:00,2025-05-09T19:23:42+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050163217,29891,[docs] dg docs for env var related commands,"## Summary
+
+dg & component docs for configuring env vars in component files and populating those env vars in the local and Dagster Plus contexts.
+
+## Test Plan
+
+Run docs locally, bk.",benpankow,10215173,open,False,2,2025-05-08T21:49:21+00:00,2025-05-09T16:33:22+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050124347,29890,Update mechanism for re-execute from asset failure,"## Summary & Motivation
+
+This changes the logic for determining which keys to execute to solve two issues:
+
+We did not handle non-subsettable multi assets at all, so this process could have resulted in errors when generating the execution plan
+When a blocking asset check fails, we should re-execute it (as this is the source of the run failure, we need to re-execute as part of the process), and we weren't doing that before
+Potentially controversially, I have this re-executing both the blocking asset check AND the asset that the check targets, with the logic being that the code of the asset itself is more likely to be the issue than the code of the check. So the workflow you'd want would be to update the code of the asset, then execute ""re-execute from asset failure"", and have your asset re-executed.
+
+Also moved some of the logic from using the event log scan to using the execution plan snapshot as suggest by Daniel, which might help perf somewhat.
+
+## How I Tested These Changes
+
+",OwenKephart,22457492,open,False,1,2025-05-08T21:23:16+00:00,2025-05-09T17:18:03+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050124309,29889,[ui] Add new re-execute from asset failure option,"## Summary & Motivation
+
+This is @prha's ui changes for adding a feature flag enabling re-execution from asset failure in the UI
+
+## How I Tested These Changes
+
+",OwenKephart,22457492,closed,False,3,2025-05-08T21:23:14+00:00,2025-05-09T17:16:41+00:00,2025-05-09T17:16:38+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3050103963,29888,RFC [dg] git reseting shared fixture,"Heres a take on moving to pytest fixtures and trying to avoid going through the scaffold process every time. 
+
+The improvements from the in place reseting is relatively marginal so we can cut that out and just move from direct context managers to fixtures. 
+
+
+## How I Tested These Changes
+for `test_scaffold_commands.py`
+```
+before in process: 45 passed in 144.53s (0:02:24)
+master:            45 passed in 77.64s (0:01:17)
+this PR:           45 passed in 73.88s (0:01:13)
+```
+",alangenfeld,202219,open,False,2,2025-05-08T21:14:07+00:00,2025-05-12T15:03:47+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3050088729,29887,Ignore glob patterns in crawl,"## Summary & Motivation
+per slack discussion
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",dpeng817,17576880,closed,False,1,2025-05-08T21:05:16+00:00,2025-05-08T23:59:44+00:00,2025-05-08T23:59:42+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3050034428,29886,[dagster-tableau] Update Tableau guide with refreshable data sources,"## Summary & Motivation
+
+Reflect changes made in https://github.com/dagster-io/dagster/pull/29682 in our docs
+
+## How I Tested These Changes
+
+Docs preview",maximearmstrong,46797220,closed,False,2,2025-05-08T20:34:18+00:00,2025-05-08T21:26:33+00:00,2025-05-08T21:26:31+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3050010168,29885,[da] validate cron string in `cron_tick_passed` condition,"## Summary & Motivation
+
+Make sure people don't make invalid conditions that will fail when evaluated
+
+## How I Tested These Changes
+
+",OwenKephart,22457492,closed,False,2,2025-05-08T20:22:28+00:00,2025-05-09T16:46:26+00:00,2025-05-09T16:46:23+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3050004102,29884,Add skip and mute step logic to dagster_oss_main.py,"Same logic and testing as committed in internal
+
+https://github.com/dagster-io/internal/pull/15497",mfiliba,10150468,closed,False,0,2025-05-08T20:19:53+00:00,2025-05-12T16:06:06+00:00,2025-05-12T16:06:04+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049964799,29883,Wipe asset check evaluations when wiping assets,"## Summary
+
+Wipes asset check evaluations when an asset is wiped in the SQL event log storage.
+
+## Test Plan
+
+Update asset checks storage unit test.
+
+## Changelog
+
+> Wiping an asset will now wipe associated asset check evaluations.
+",benpankow,10215173,closed,False,1,2025-05-08T19:59:44+00:00,2025-05-08T20:48:48+00:00,2025-05-08T20:48:46+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049909428,29882,[dagster-fivetran] Clean unused fixtures in Fivetran tests,"## Summary & Motivation
+
+As title, unused fixture parameters in conftest.
+
+## How I Tested These Changes
+
+BK
+
+",maximearmstrong,46797220,open,False,1,2025-05-08T19:30:30+00:00,2025-05-08T22:36:20+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3049909378,29881,[dagster-fivetran] Handle unavailable schema configs in fetch_fivetran_workspace_data,"## Summary & Motivation
+
+Fixes AD-1290.
+
+In some cases, the schema config doesn't exist, even if the connector is connected and the schema status is ready. The Fivetran API request fails with a 404 error in that case.
+
+## How I Tested These Changes
+
+New tests with BK.
+
+## Changelog
+
+[dagster-fivetran] An issue causing the Fivetran integration to fail when the schema config does not exist for a connector has been fixed.
+",maximearmstrong,46797220,open,False,1,2025-05-08T19:30:29+00:00,2025-05-08T22:39:25+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3049767046,29880,changelog 1.10.14,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",benpankow,10215173,closed,False,1,2025-05-08T18:25:23+00:00,2025-05-08T18:34:13+00:00,2025-05-08T18:34:12+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049752374,29879,[1/2] Update link to code location in asset search to go to catalog with code location asset selection syntax filter,"## Summary & Motivation
+
+as titled.
+
+
+## How I Tested These Changes
+Click the link and saw it went to the catalog.
+<img width=""1168"" alt=""Screenshot 2025-05-08 at 2 17 29 PM"" src=""https://github.com/user-attachments/assets/8222aa56-76b9-4eaa-942d-31605e434300"" />
+",salazarm,2286579,closed,False,1,2025-05-08T18:17:43+00:00,2025-05-08T18:37:50+00:00,2025-05-08T18:37:49+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049533965,29878,[dagster-sling][components] Use translation pattern for SlingReplicationCollectionComponent,"## Summary
+
+Use the translation pattern for the `SlingReplicationCollectionComponent`, modeled after our DBT component.
+
+## How I Tested These Changes
+
+Updated unit tests.
+
+## Changelog
+
+> [dagster-sling] When using the SlingReplicationCollectionComponent, the `asset_attributes` parameter has been updated to `translation` to match our other integration components.
+",benpankow,10215173,closed,False,1,2025-05-08T16:32:01+00:00,2025-05-08T16:44:36+00:00,2025-05-08T16:44:35+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049516020,29877,temp,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",jamiedemaria,19783112,open,False,1,2025-05-08T16:24:31+00:00,2025-05-08T16:24:47+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3049515806,29876,[ui] update useRecentEvents to use the asset events history resolver,"Updated the spots in the FE where we were fetching an asset's materialization history  and observation history and combining the two results to use the new resolver that returns the combined list. This ended up being the `useRecentAssetEvents` and `usePaginatedAssetEvents` functions. I did my best to convert all of the components that call those methods to work with a combined list of events, rather than a list of materializations and a list of observations
+
+I built and UI and was able to click around the places where i know these events are fetched (see screenshots), but there are other uses where i don't know where they live in the UI so i wasn't able to manually test. 
+
+Leaving some notes in the PR of things i did that i'm not sure are correct and would appreciate a close look at. In general, it's probably a good idea to give this PR a thorough review since my JS is still pretty shakey
+
+Events tab showing successful and failed materializations and observations
+<img width=""725"" alt=""Screenshot 2025-05-09 at 4 21 33 PM"" src=""https://github.com/user-attachments/assets/6f067ba5-b73f-4b84-9bc7-1de8a75a8370"" />
+
+recent events timeline showing successful and failed materialization and observations
+<img width=""1329"" alt=""Screenshot 2025-05-09 at 4 21 41 PM"" src=""https://github.com/user-attachments/assets/100f1465-b0d1-4ccf-9c39-4de9815aec50"" />
+",jamiedemaria,19783112,open,False,2,2025-05-08T16:24:24+00:00,2025-05-12T15:02:21+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3049501065,29875,[Catalog] Allow sorting by most recent materialization,"## Summary & Motivation
+
+Allow sorting by most recent materialization.
+
+## How I Tested These Changes
+Used the sorting
+<img width=""606"" alt=""Screenshot 2025-05-08 at 12 17 31 PM"" src=""https://github.com/user-attachments/assets/2e33d122-2769-481e-af80-f9f6a5476b2a"" />",salazarm,2286579,open,False,1,2025-05-08T16:18:11+00:00,2025-05-12T14:54:03+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3049471553,29874,[dagster tests] add missing tox entry,"not sure when this got accidentally removed
+
+## How I Tested These Changes
+
+bk",alangenfeld,202219,closed,False,2,2025-05-08T16:06:13+00:00,2025-05-09T18:02:54+00:00,2025-05-09T18:02:52+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049457983,29873,[Loadable] add context type generic,"Add the ability to narrow the specific `LoadingContext` type a `LoadableBy` can work with
+
+## How I Tested These Changes
+
+updated test ",alangenfeld,202219,closed,False,1,2025-05-08T16:01:32+00:00,2025-05-08T16:33:38+00:00,2025-05-08T16:33:35+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049456535,29872,Restore auto-generation and `diff` of Spark config,"## Summary & Motivation
+
+Add back Spark config automation
+
+## How I Tested These Changes
+
+BK
+",deepyaman,14007150,closed,False,1,2025-05-08T16:01:02+00:00,2025-05-09T15:17:13+00:00,2025-05-09T15:17:12+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049299369,29871,Temporarily skip make dataproc/spark_docs diff,"These unfortunately live outside of pytest so they can't be muted directly in Buildkite.
+
+I'm disabling them for now and we can figure out what caused them to regress:
+
+https://buildkite.com/dagster/dagster-dagster/builds/121995#0196b03d-62f1-4328-bcac-a2e19bdbb2d3/300-1156",jmsanders,10291790,closed,False,0,2025-05-08T15:06:12+00:00,2025-05-08T15:38:41+00:00,2025-05-08T15:38:39+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049286080,29870,dagster-dbt project prepare-and-package failing in latest version,"### What's the issue?
+
+## Issue 
+
+The latest dagster-dbt version is breaking when running command `dagster-dbt project prepare-and-package` as part of our github actions cicd pipeline. This issue appeared after updating to versions `dagster=1.10.12` and `dagster-dbt=0.26.12`. 
+
+The version of `dbt-core=1.8.5`
+
+## Potential cause
+It seems dagster-dbt is running into an issue when interacting with dbt-core
+
+
+## Traceback
+```
+Running with dagster-dbt version: 0.26.12.
+An error was encountered when creating a handle to the dbt adapter in Dagster.
+Traceback (most recent call last):
+  File ""<string>"", line 10, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 679, in cli
+    adapter = self._initialize_adapter(cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 372, in _initialize_adapter
+    project = load_project(self.project_dir, False, profile, cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/runtime.py"", line 51, in load_project
+    project = Project.from_project_root(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 766, in from_project_root
+    return partial.render(renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 335, in render
+    return self.create_project(rendered)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 388, in create_project
+    cfg = ProjectContract.from_dict(rendered.project_dict)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""<string>"", line 4, in __mashumaro_from_dict__
+  File ""<string>"", line 12, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+Running with dbt=1.8.5
+Registered adapter: athena=1.8.3
+Unable to do partial parsing because saved manifest not found. Starting full parse.
+An error was encountered when creating a handle to the dbt adapter in Dagster.
+Traceback (most recent call last):
+  File ""<string>"", line 10, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 679, in cli
+    adapter = self._initialize_adapter(cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 372, in _initialize_adapter
+    project = load_project(self.project_dir, False, profile, cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/runtime.py"", line 51, in load_project
+    project = Project.from_project_root(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 766, in from_project_root
+    return partial.render(renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 335, in render
+    return self.create_project(rendered)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 388, in create_project
+    cfg = ProjectContract.from_dict(rendered.project_dict)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""<string>"", line 12, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+Running with dbt=1.8.5
+Registered adapter: athena=1.8.3
+Unable to do partial parsing because saved manifest not found. Starting full parse.
+Performance info: /home/runner/work/mdagster/mdbtmdbt/target/723ca07/perf_info.json
+Preparing project mdbt for deployment with 
+DagsterDbtProjectPreparer.prepare.
+An error was encountered when creating a handle to the dbt adapter in Dagster.
+Traceback (most recent call last):
+  File ""<string>"", line 10, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 679, in cli
+    adapter = self._initialize_adapter(cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dagster_dbt/core/resource.py"", line 372, in _initialize_adapter
+    project = load_project(self.project_dir, False, profile, cli_vars)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/runtime.py"", line 51, in load_project
+    project = Project.from_project_root(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 766, in from_project_root
+    return partial.render(renderer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 335, in render
+    return self.create_project(rendered)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/runner/.local/lib/python3.12/site-packages/dbt/config/project.py"", line 388, in create_project
+    cfg = ProjectContract.from_dict(rendered.project_dict)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""<string>"", line 12, in __mashumaro_from_dict__
+AttributeError: module 'dbt' has no attribute 'contracts'
+Project preparation complete.
+```
+
+### What did you expect to happen?
+
+Successful execution of dagster-dbt project prepare-and-package 
+
+### How to reproduce?
+
+dagster-cloud-deploy.yml:
+- name: Prepare DBT project for deployment
+        run: |
+          set -a; source ./.github/ci-mock.env; set +a;
+          python -m pip install pip --upgrade
+          pip install "".[dev]"" --upgrade --upgrade-strategy eager
+          export PROJ_PATH=./mdbt
+          dagster-dbt project prepare-and-package --file mdagster/utils/dbt.py
+          
+
+### Dagster version
+
+1.10.12
+
+### Deployment type
+
+Docker Compose
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",ReneP92,40995280,open,False,0,2025-05-08T15:02:23+00:00,2025-05-08T15:02:23+00:00,,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3049284623,29869,Retry docker daemon exit code 125,"We're seeing intermittent failures with:
+
+https://docs.docker.com/engine/containers/run/#125
+
+For example:
+
+https://buildkite.com/dagster/dagster-dagster/builds/121996#0196b037-f82b-486d-a2dc-047d4315615b/306-312
+
+I think the exit code is sufficiently narrowly scoped that we can retry on it for now.",jmsanders,10291790,closed,False,0,2025-05-08T15:02:00+00:00,2025-05-08T15:09:40+00:00,2025-05-08T15:09:38+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3049073771,29867,Add async loaders for RemoteJob and RemoteExecutionPlan,"## Summary & Motivation
+To unblock parallelizing IO/bound grpc/agent calls in DA.
+
+One new thing about these is that I think they are our first loader that depends on something other than the instance.
+
+## How I Tested These Changes
+New unit test cases, used for real in downstream PR
+",gibsondan,8451211,open,False,1,2025-05-08T13:50:28+00:00,2025-05-08T14:37:31+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3048510220,29866,feat: support seperation of SA in user_deployment chart,"## Summary & Motivation
+
+Currently the subchart `dagster-user-deployments` support a single serviceAccount shared amongst all deployments referenced by it. This is done via values: `.Values.serviceAccountName` or `.Values.serviceAccount.name`.
+
+While this is fine for a single domain where the bounded context of permission on this serviceAccount is shared amongst the deployments of dagster, then for segregation of responsiblity it would be nice to allow a deployment to specify its own serviceAccount.
+
+The changes does not include any changes to allow the serviceAccount a custom role through this helm chart, but it allows the creation of the serviceAccount outside of the chart, which then can have a custom role and rolebinding, plus in relation to identity management through fx. AKS or EKS it can be used to work with a [workload managed identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview?tabs=dotnet).
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workload-identity-service-a
+  annotations:
+    azure.workload.identity/client-id: ""someid""
+```
+
+```yaml
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dagster
+spec:
+  ...
+  values:
+    ...
+    dagster-user-deployments:
+      deployments:
+        - name: ""workload-example"" # set to the name of your deployment
+          image:
+            repository: ""something""
+            tag: ""latest""
+            pullPolicy: Always
+          dagsterApiGrpcArgs:
+            - -m
+            - quickstart
+          port: 5000
+        - name: ""serviceA""
+          image:
+            repository: ""serviceA""
+            tag: ""latest""
+            pullPolicy: Always
+          dagsterApiGrpcArgs:
+            - m
+            - quickstart
+          port: 5000
+          labels:
+            azure.workload.identity/use: ""true""
+          serviceAccount:
+            create: false
+            name: workload-identity-service-a
+```
+
+With the proposed feature the above configuration is possible, making the `serviceA` allowed to access what the Azure `client-id` have access to through the ServiceAccount `workload-identity-service-a`.
+
+## How I Tested These Changes
+
+I added schema unit tests for the resources:
+
+chore: added test cases for SA
+chore: added test cases for deployment
+chore: added test case for rolebinding
+
+I added a localized run of the templated resource of a dagster deployment:
+
+```yaml
+serviceAccount:
+  create: true
+  name: """"
+  annotations: {}
+
+postgresql:
+  enabled: false
+  secretName: ""test""
+
+deployments:
+  - name: deployment-one
+    image:
+      repository: ""test""
+      tag: ""latest""
+      pullPolicy: ""IfNotPresent""
+    port: 80
+    serviceAccount:
+      create: true
+      name: ""deployment-one-sa""
+      annotations: {}
+  - name: deployment-two
+    image:
+      repository: ""test""
+      tag: ""latest""
+      pullPolicy: ""IfNotPresent""
+    port: 80
+```
+
+## Changelog
+
+feat: allowed support for seperation of serviceAccounts in user_deployment chart for each deployment by `.Values.deployments.serviceAccount`
+
+## Improvements
+
+I wanted to make `serviceaccount.yaml` dynamic by creating a list of serviceAccounts to create by implementation through helpers.tpl,  but I did not manage to do it without breaking implementation. So I settled on a new template `serviceaccount_deployments.yaml` that iterates deployments for serviceAccounts to create.
+
+Let me know if you have input on how I can achieve the removal of `serviceaccount_deployments.yaml`.
+",EmilMunksoe,49140810,open,False,0,2025-05-08T10:10:33+00:00,2025-05-08T10:11:49+00:00,,,2,2,0,0,0,0,0
+dagster-io/dagster,3048287295,29865,[dg] Fix type hints in scaffolding,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",schrockn,28738937,closed,False,1,2025-05-08T08:53:58+00:00,2025-05-08T13:36:33+00:00,2025-05-08T13:36:33+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3048240073,29864,"[dg] Change Scaffolder.scaffold to ScaffoldRequest with non-optional params_model property instead of the untyped, separate params parameter.","## Summary & Motivation
+
+I found the semantics of the way that scaffolder were handled to be very confusing, and proposing changing the way we are handling them.
+
+Prior to this change, `Scaffolder.scaffolder` only used its base model to define the json schema, as opposed to creating the base model itself. Furthermore it obscured this by typing it as `Any`, leading to confusion as to how it worked. Already in our own usage there were inconsistencies. I believe this is a long-term liability for the system.
+
+Instead this proposes to focus on type safety. The way we accomplish by changing ScaffoldRequest to have a params property generically typed as the model. The code is fairly tight so just including it here:
+
+```python
+@public
+@preview(emit_runtime_warning=False)
+class Scaffolder(Generic[TModel]):
+    """"""Handles scaffolding its associated scaffold target.""""""
+
+    @classmethod
+    def get_scaffold_params(cls) -> type[TModel]:
+        return NoParams  # type: ignore
+
+    @abstractmethod
+    def scaffold(self, request: ScaffoldRequest[TModel]) -> None:
+        """"""Scaffold the target with the given request.
+
+        Args:
+            request: The scaffold request containing type name, target path, format, project root and params
+        """"""
+        ...
+```
+
+If you wish to redefine the scaffold method without adding parameters just override `scaffold`:
+
+```python
+class MyScaffolder(Scaffolder):
+   def scaffold(self, request: ScaffoldRequest): ...
+```
+
+However, if you do define a scaffold param, override using generic params for `Scaffolder` and `ScaffolderRequest`:
+
+```python
+# Same schema used for file generation and defs generation
+class SimplePipesScriptScaffoldParams(BaseModel):
+    asset_key: str
+    filename: str
+
+class SimplePipesScriptScaffolder(Scaffolder[SimplePipesScriptScaffoldParams]):
+    @classmethod
+    def get_scaffold_params(cls) -> type[SimplePipesScriptScaffoldParams]:
+        return SimplePipesScriptScaffoldParams
+
+    def scaffold(self, request: ScaffoldRequest[SimplePipesScriptScaffoldParams]) -> None:
+        scaffold_component(request, request.params.model_dump())
+        Path(request.target_path, request.params.filename).write_text(
+            _SCRIPT_TEMPLATE.format(asset_key=request.params.asset_key)
+        )
+```
+
+This changes the types from `Any` to the proper model type with no runtime checking required.
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+* Changed `Scaffolder.scaffold` to take a BaseModel instead of a validated json dictionary.",schrockn,28738937,open,False,7,2025-05-08T08:35:19+00:00,2025-05-12T15:59:32+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3048124132,29863,[components] Boolean resolution from a jinja expression,"### What's the issue?
+
+On a component, if you have an attribute which is a `bool` and you want to infer it from a jinja expression, you get the following:
+
+```
+/path/to/component.yaml:33 - dagster_ptoj.lib.MyCompopnent attributes.my_bool ""{{ env('ENVIRONMENT') == 'prod' }}"" is not of type 'boolean'
+     | 
+  23 | 
+  24 | attributes:
+  25 |   name: name
+  26 |   description: a description
+  27 |   group_name: group name
+  28 |   schedule:
+  29 |     cron: ""30 5 * * *""
+  30 |     timezone: ""UTC""
+  31 |   my_bool: ""{{ env('ENVIRONMENT') == 'prod' }}""
+     |   ^ ""{{ env('ENVIRONMENT') == 'prod' }}"" is not of type 'boolean'
+  32 |   base_url: ""{{ env('BASE_URL') }}""
+     | 
+```
+
+### What did you expect to happen?
+
+I'd expect resolution to happen before type validation, and possibly a built-in filter such as `{{ 1 == 2 | as_bool }}` to be made available in the rendering scope for components by default.
+
+### How to reproduce?
+
+_No response_
+
+### Dagster version
+
+1.10.13/0.26.13
+
+### Deployment type
+
+None
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",stevenayers,16361214,closed,False,2,2025-05-08T07:45:45+00:00,2025-05-11T07:17:27+00:00,2025-05-11T07:17:27+00:00,type: bug;area: dagster-components,0,0,0,0,0,0,0
+dagster-io/dagster,3047462018,29862,[dg] Change asset_check scaffolder to require an asset key so that it always creates a valid asset check,"## Summary & Motivation
+
+This PR proposes changes the pattern of scaffolding our core decorators so that it always creates a valid definition viewable with `dg list defs` after scaffolding. I believe this is important to a smooth DX. However this is a product discussion so worthy of discussion.
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+* Will write if we decide to do this.",schrockn,28738937,open,False,1,2025-05-08T00:14:26+00:00,2025-05-10T10:17:27+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3047446003,29861,RFC: remove cache invalidation for dynamic partitions definitions,"## Summary & Motivation
+For dynamic partitions definitions with a large partition key count, recalculating partition status can be very expensive, and is  usually unnecessary.
+
+I think by allowing cached values for additions/removals, we could wind up in a scenario where we get inconsistent values (depending on cached state) for the following:
+
+1. add partition A
+2. materialize asset with partition A
+3. remove partition A
+4. materialize asset with partition not-A
+5. add partition A
+
+If the partition status was cached after (2), we would return A as materialized after (5).
+If the partition status was not cached until after (3), we would return A as not materialized after (5).
+
+One strategy to avoid this would be to delete cached status values for assets that match the partition def id on the asset record.  This would be easiest to do if we had a column in the asset record that identified which assets would be affected by a particular dynamic partitions definition (without reaching into the serialized cache value).
+
+We should consider the following strategies:
+1) land this PR as is and ignore the cache inconsistency issue outlined above
+2) pull out the partitions def name into the asset records, so that we can blow away the asset cache on dynamic partition deletions
+3) add a `deleted` / `deleted_timestamp` column to the dynamic partitions table and change the reads to filter by `deleted` status.  This allows us to get the max deleted timestamp and put that into the serializable hash, instead of just using the partitions def name.
+
+## How I Tested These Changes
+BK
+
+",prha,1040172,closed,False,1,2025-05-08T00:01:43+00:00,2025-05-08T23:28:47+00:00,2025-05-08T23:28:47+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047442432,29860,[dg] Add tests for existing scaffolders,"## Summary & Motivation
+
+Add tests for all shim scaffolders such as they are. I think we should always produce a valid definition for a scaffold command but will do that in a followup.
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",schrockn,28738937,closed,False,2,2025-05-07T23:58:59+00:00,2025-05-09T21:41:08+00:00,2025-05-09T21:41:06+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047379020,29859,[dg] Add test for asset shim and extract common function,"## Summary & Motivation
+
+This adds a test for the asset scaffolder and also extracts out the common functionality to a shared utility
+
+## How I Tested These Changes
+
+BK
+
+## Changelog
+
+NOCHANGELOG",schrockn,28738937,closed,False,2,2025-05-07T23:21:28+00:00,2025-05-09T21:38:36+00:00,2025-05-09T21:38:33+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047258969,29858,remove yields/generators from asset daemon and backfill daemon,"Summary:
+The goal here is to pave the way for using asyncio more naturally in our daemons - this unusual generator setup makes that very difficult and provides minimal benefits in return. Lots of weird code is removed here as part of this, particularly in the backfill daemons.
+
+",gibsondan,8451211,open,False,2,2025-05-07T22:02:06+00:00,2025-05-08T15:19:39+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3047195867,29857,ruff,"tsia
+",sbquinlan,1011062,closed,False,2,2025-05-07T21:19:50+00:00,2025-05-07T21:27:58+00:00,2025-05-07T21:27:56+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047131534,29856,[docs] Remove beta flag in Fivetran guide,"## Summary & Motivation
+
+As title.
+",maximearmstrong,46797220,closed,False,2,2025-05-07T20:45:10+00:00,2025-05-08T19:37:16+00:00,2025-05-08T19:37:14+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047131480,29855,[dagster-fivetran] reorganize Fivetran test suite,"## Summary & Motivation
+
+As title, after marking `FivetranWorkspace` as GA and `FivetranResource` as deprecated. The tests for the deprecated resource will be removed as the same time as the resource.",maximearmstrong,46797220,closed,False,1,2025-05-07T20:45:08+00:00,2025-05-08T19:05:36+00:00,2025-05-08T19:05:33+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047131427,29854,[dagster-fivetran] mark legacy Fivetran integration as deprecated,"## Summary & Motivation
+
+Now that the new Fivetran resource is GA, the legacy resource should be deprecated.
+
+## Changelog
+
+[dagster-fivetran] the `FivetranResource` resource is now deprecated.
+",maximearmstrong,46797220,closed,False,1,2025-05-07T20:45:07+00:00,2025-05-08T18:19:53+00:00,2025-05-08T18:19:51+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047131378,29853,[dagster-fivetran] mark new Fivetran integration as GA,"## Summary & Motivation
+
+The integration has been stable for some time now and is used by several users. Removing the beta marked to move to GA.
+
+## Changelog
+
+[dagster-fivetran] the `FivetranWorkspace` resource is now marked as generally available (GA)",maximearmstrong,46797220,closed,False,2,2025-05-07T20:45:05+00:00,2025-05-08T17:57:58+00:00,2025-05-08T17:57:56+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047017333,29852,Remove hot path tag fetching,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",dpeng817,17576880,closed,False,3,2025-05-07T19:53:30+00:00,2025-05-07T20:08:44+00:00,2025-05-07T20:07:10+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3047003144,29851,Renaming `FreshnessPolicy` to `LegacyFreshnessPolicy`,"## Summary & Motivation
+Step 1 of migration plan to introduce the new `FreshnessPolicy` api (currently named `InternalFreshnessPolicy`) and properly deprecate existing `FreshnessPolicy` api
+
+## How I Tested These Changes
+bk
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",anuthebananu,25062350,open,False,1,2025-05-07T19:47:48+00:00,2025-05-07T19:49:19+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3046980092,29850,[prototype/PoC] support subset loading in load_defs,"## Summary
+
+Proof-of-concept of subset loading for runs, enabling us to only load a subset of components necessary for the assets or jobs we are using in the run.
+
+",benpankow,10215173,open,False,1,2025-05-07T19:36:23+00:00,2025-05-07T19:50:31+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3046864770,29849,"[ui] New list items, flagged Jobs list implementation","## Summary & Motivation
+
+Introduce a handful of new components, intended to support new list designs for Observe UI changes and beyond. Open to renaming and API discussion.
+
+- `ListItem`, which is a pretty simple list item abstraction intended to show:
+  - A linked main piece of content, `left`
+  - A horizontal list of interactive controls or non-interactive content, `right`
+  - Hover states, focus states, borders, etc. for the individual list items
+- `HorizontalControls`, which renders the provided children in a horizontal list with vertical keylines between them
+- `HoverButton`, a button style intended more for hover states (plus tooltips or popovers) instead of actual button clicks. Still implemented as a button because it's an interactive element.
+
+The intent is that this list item will generally be used in virtualized lists, since we should be virtualizing pretty much all of our lists at this point.
+
+Additionally, I have implemented the Jobs list page with the new components, behind the Observe UI feature flag.
+
+## How I Tested These Changes
+
+With flag disabled, verify that the existing Jobs list renders correctly, including virtualization windowing.
+
+With flag enabled, verify virtualization rendering and windowing, plus link behavior, hover and focus states, and interactivity with `right` items.
+",hellendag,2823852,closed,False,4,2025-05-07T18:39:50+00:00,2025-05-08T18:56:46+00:00,2025-05-08T18:56:44+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3046784071,29848,[bk] dont force-reinstall uv,"random guess at what is causing sporadic hash mismatches when installing this
+
+## How I Tested These Changes
+
+bk
+",alangenfeld,202219,closed,False,2,2025-05-07T18:07:02+00:00,2025-05-07T18:30:32+00:00,2025-05-07T18:30:30+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3046768617,29847,Use asyncio/ loaders to speed up code server access parallelism in DA,"Add asyncio callsites to the DA daemon when it fetches remote jobs and execution plans. This ended up being much more involved than I had been imagining, particularly when the daemon is already using threadpools.
+
+Test Plan: BK, run DA locally with and without submit threadpool enabled",gibsondan,8451211,open,False,1,2025-05-07T17:59:56+00:00,2025-05-09T18:04:08+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3046681881,29846,Cannot add Metadata to partitioned MultiAsset with BackfillPolicy.single_run(),"### What's the issue?
+
+When using a `@multi_asset` where each asset is _partitioned_, metadata returned by
+
+```
+yield AssetMaterialization(asset_key=""a"", partition=""20250403"", metadata={""value"": 3})
+```
+
+during a `BackfillPolicy.single_run()` is not stored by Dagster and is not visible in the Dagster UI for this asset. 
+
+One hypothesis is that this is due to the additional `Output` events that Dagster implicitly creates for this function invocation that do not have associated metadata, e.g. when calling my asset, one `AssetMaterialization` is produced by _my code_ for each partition for each asset, but Dagster also implicitly yields an `Output` for each partition for each asset. 
+
+
+### What did you expect to happen?
+
+That metadata passed to the `AssetMaterialization` event is associated with the asset in the Dagster UI. 
+
+### How to reproduce?
+
+```
+@multi_asset(
+    specs=[
+        AssetSpec(
+            ""a"",
+            partitions_def=partitions,
+            group_name=group,
+        ),
+        AssetSpec(
+            ""b"",
+            partitions_def=partitions,
+        ),
+    ],
+    partitions_def=partitions,
+    backfill_policy=BackfillPolicy.single_run(),
+)
+def asset(
+    context: AssetExecutionContext,
+) -> None:
+  
+    dates = context.partition_keys
+
+    for date in dates:
+            for asset in [""a"", ""b""]:
+                yield AssetMaterialization(
+                        asset_key=asset,
+                        partition=date,
+                        metadata={""meta"": 3},
+                    )
+```
+
+### Dagster version
+
+dagster, version 1.9.5
+
+### Deployment type
+
+Local
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",rprechelt,10441161,closed,False,1,2025-05-07T17:26:23+00:00,2025-05-08T04:05:18+00:00,2025-05-08T04:05:17+00:00,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3046658487,29845,[gql] assetEventHistory resolver,"## Summary & Motivation
+Adds a new resolver to `GrapheneAsset` to get a sorted list of all Materialization, Failed to materialize, and Observation events, so that we can display them in the correct order without doing multiple queries. The endpoint allows you to pass a list of event types you want to receive, so we can filter down to any subset of these events and still have them in the correct order. 
+
+I think we can replace the `materializationHistory` endpoint with this endpoint, but will do that in later once we migrate the UI over so that it's all push safe. That would allow us to remove some of the GrapheneTypes that are used only by the materializationHistory resolver too.
+
+more tests in https://github.com/dagster-io/internal/pull/15524 (with failure events)
+
+",jamiedemaria,19783112,open,False,3,2025-05-07T17:16:53+00:00,2025-05-12T15:01:17+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3046522927,29844,[ui] Move switch fragments out of component files,"## Summary & Motivation
+
+I was running into what looked like a circular dependency issue related to `ScheduleSwitchFragment` and `SensorSwitchFragment` in another branch, so I'm breaking these out into their own files. I'm a little surprised we hadn't done this sooner.
+
+## How I Tested These Changes
+
+TS, lint, jest.",hellendag,2823852,closed,False,3,2025-05-07T16:20:21+00:00,2025-05-08T14:38:32+00:00,2025-05-08T14:38:30+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3046468038,29843,[components][dagster-dlt] Add code references to dlt pipeline/soruce,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",benpankow,10215173,open,False,1,2025-05-07T15:57:35+00:00,2025-05-08T21:02:18+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3046460436,29842,[dbt component] path resolution fix,"another resolution self own. I missed that the tutorial integration test was overwriting the scaffolded value before check defs.
+
+## How I Tested These Changes
+
+added and updated tests
+
+
+",alangenfeld,202219,closed,False,2,2025-05-07T15:54:26+00:00,2025-05-07T17:35:43+00:00,2025-05-07T17:35:42+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3046280280,29841,solution for debugging RunFailureSensor,"### What's the use case?
+
+I love the PDB functionality in Dagster, it makes things easier than I had hoped for debugging. I tried seeing if I could debug a `RunFailureSensor` but it doesn't look like setting a breakpoint there will work (I think the `RunFailureSensorContext` doesn't have a `pdb` property).
+
+It would be great if it were possible to debug this situation as well for local development of sensor functionality, since it can be a bit complex. I can't really just debug the function, because a lot of it depends on the context of the failure. (Though if there's a way to somehow mock that effectively, I'd be curious.)
+
+So bottom line, bringing PDB goodness to these sensors would be great!
+
+### Ideas of implementation
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",eliot1785,3478888,open,False,0,2025-05-07T14:59:46+00:00,2025-05-07T14:59:46+00:00,,type: feature-request,0,0,0,0,0,0,0
+dagster-io/dagster,3045806787,29840,TypeError: @asset got an unexpected keyword argument 'out' on Dagster 1.10.13 with Python 3.11.9 (macOS aarch64) despite correct source file,"### What's the issue?
+
+On Dagster version 1.10.13 (Python 3.11.9, macOS aarch64), using the `@asset` decorator with the `out=DynamicOut()` parameter for dynamic outputs consistently raises a `TypeError: asset got an unexpected keyword argument 'out'`.
+
+This error occurs even with a minimal reproducible example and after complete virtual environment recreations (using `uv`). Debugging has confirmed:
+*   The correct Dagster version (1.10.13) is reported by `dagster --version` and `dagster.__version__` within the loaded code.
+*   The `__module__` attribute of the imported `dagster.asset` decorator points to the correct source file path within the 1.10.13 installation (`.../site-packages/dagster/_core/definitions/decorators/asset_decorator.py`).
+*   The content of this `asset_decorator.py` file matches the expected source code for Dagster 1.10.13, which defines the `@asset` decorator to handle parameters like `out`.
+
+Despite this, Python's `inspect.getfullargspec()` when called on the `asset` decorator (both normally imported and loaded directly from its file path) reports a generic signature `(*args, **kwargs)`. This generic signature appears to be what causes Dagster's internal `only_allow_hidden_params_in_kwargs` check to incorrectly flag `out` as an unexpected keyword argument. The `PYTHONPATH` environment variable is confirmed to be empty.
+
+
+### What did you expect to happen?
+
+`dagster dev` (and general code loading) should successfully parse the `@asset(out=DynamicOut())` syntax without a `TypeError`. The `inspect.getfullargspec()` for the `asset` decorator (especially when loaded directly from its `.py` file in the correct `site-packages` location) should reflect the actual named parameters defined in the Dagster 1.10.13 source code, not a generic `(*args, **kwargs)`.
+
+
+### How to reproduce?
+
+
+1.  **Environment Setup:**
+    *   OS: macOS (aarch64, specifically Darwin 24.4.0 based on user info)
+    *   Python: 3.11.9
+    *   Package Manager: `uv`
+    *   Ensure `PYTHONPATH` is unset or empty.
+
+2.  **Project Files:**
+
+    *   `dagster-poc/pyproject.toml`:
+        ```toml
+        [project]
+        name = ""dagster_poc""
+        version = ""0.1.0""
+        requires-python = "">=3.11,<3.13"" # Ensure matches user's Python
+        dependencies = [
+            ""dagster==1.10.13"",
+            ""dagster-webserver==1.10.13""
+        ]
+
+        [tool.dagster]
+        module_name = ""dagster_poc.definitions""
+        ```
+
+    *   `dagster-poc/dagster_poc/definitions.py`:
+        ```python
+        import dagster
+        print(f""DAGSTER_VERSION_IN_DEFINITIONS_LOAD: {dagster.__version__}"")
+
+        from dagster import Definitions, load_assets_from_modules
+        from dagster_poc.fluvius import assets as fluvius_assets_module
+
+        loaded_assets = load_assets_from_modules([fluvius_assets_module])
+
+        defs = Definitions(
+            assets=loaded_assets,
+        )
+        ```
+
+    *   `dagster-poc/dagster_poc/fluvius/assets.py` (with debug prints):
+        ```python
+        from dagster import asset as normally_imported_asset, DynamicOut, DynamicOutput, AssetExecutionContext
+        from typing import Iterator
+        import inspect
+        import importlib.util
+        import os
+        import site
+
+        print(""---- NORMALLY IMPORTED ASSET ----"")
+        print(f""DEBUG_ASSET_DECORATOR: {normally_imported_asset}"")
+        print(f""DEBUG_ASSET_MODULE: {normally_imported_asset.__module__}"")
+        try:
+            print(f""DEBUG_ASSET_FILE: {normally_imported_asset.__file__}"")
+        except AttributeError:
+            print(""DEBUG_ASSET_FILE: No __file__ attribute for normally imported asset"")
+        try:
+            print(f""DEBUG_ASSET_SIGNATURE: {inspect.getfullargspec(normally_imported_asset)}"")
+        except Exception as e:
+            print(f""DEBUG_ASSET_SIGNATURE: ERROR inspecting normally imported asset - {e}"")
+        print(""------------------------------------"")
+
+        print(""---- DIRECTLY LOADED ASSET FROM FILE ----"")
+        site_packages_dirs = site.getsitepackages()
+        # Fallback to sys.path if getsitepackages is empty or doesn't contain dagster
+        if not site_packages_dirs or not any(""dagster"" in os.listdir(sp_dir) for sp_dir in site_packages_dirs if os.path.isdir(sp_dir)):
+            import sys
+            site_packages_dirs = [p for p in sys.path if p.endswith(""site-packages"") and os.path.isdir(p)]
+        
+        dagster_package_path = None
+        for sp_dir in site_packages_dirs:
+            potential_path = os.path.join(sp_dir, 'dagster')
+            if os.path.isdir(potential_path):
+                dagster_package_path = potential_path
+                print(f""DEBUG_INTERMEDIATE_FOUND_DAGSTER_PACKAGE_PATH: {dagster_package_path} from {sp_dir}"")
+                break
+        
+        if dagster_package_path:
+            print(f""DEBUG_FINAL_FOUND_DAGSTER_PACKAGE_PATH: {dagster_package_path}"")
+            asset_decorator_module_path = os.path.join(
+                dagster_package_path, ""_core"", ""definitions"", ""decorators"", ""asset_decorator.py""
+            )
+            print(f""DEBUG_EXPECTED_ASSET_DECORATOR_MODULE_FILE_PATH: {asset_decorator_module_path}"")
+            if os.path.exists(asset_decorator_module_path):
+                spec = importlib.util.spec_from_file_location(
+                    ""directly_loaded_asset_decorator_module_unique_name"", asset_decorator_module_path
+                )
+                if spec and spec.loader:
+                    directly_loaded_module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(directly_loaded_module)
+                    if hasattr(directly_loaded_module, 'asset'):
+                        directly_loaded_asset_obj = getattr(directly_loaded_module, 'asset')
+                        print(f""DEBUG_DIRECTLY_LOADED_ASSET_OBJECT: {directly_loaded_asset_obj}"")
+                        print(f""DEBUG_DIRECTLY_LOADED_ASSET_MODULE_NAME: {directly_loaded_asset_obj.__module__}"")
+                        try:
+                            print(f""DEBUG_DIRECTLY_LOADED_ASSET_SIGNATURE: {inspect.getfullargspec(directly_loaded_asset_obj)}"")
+                        except Exception as e_inspect_direct:
+                            print(f""DEBUG_DIRECTLY_LOADED_ASSET_SIGNATURE: ERROR - {e_inspect_direct}"")
+                    else:
+                        print(""DEBUG_DIRECTLY_LOADED_ERROR: 'asset' attribute not found in directly loaded module."")
+                else:
+                    print(""DEBUG_DIRECTLY_LOADED_ERROR: Could not create module spec or loader."")
+            else:
+                print(f""DEBUG_DIRECTLY_LOADED_ERROR: Expected module file does not exist: {asset_decorator_module_path}"")
+        else:
+            print(""DEBUG_DIRECTLY_LOADED_ERROR: Could not find dagster package path."")
+        print(""------------------------------------"")
+
+        @normally_imported_asset(name=""minimal_dynamic_test_asset"", out=DynamicOut())
+        def minimal_dynamic_test_asset_fn(context: AssetExecutionContext) -> Iterator[DynamicOutput[int]]:
+            for i in range(3):
+                yield DynamicOutput(value=i, mapping_key=f""key_{i}"")
+        ```
+
+3.  **Commands to Reproduce:**
+    ```bash
+    cd dagster-poc
+    # Ensure no old .venv exists (e.g., rm -rf .venv)
+    uv venv
+    source .venv/bin/activate
+    uv sync # Or your preferred uv command to install from pyproject.toml/uv.lock
+    dagster dev
+    ```
+
+4.  **Observe Error:**
+    The `dagster dev` command will output the debug prints and then fail with the `TypeError`. Key debug output to note:
+    *   `DAGSTER_VERSION_IN_DEFINITIONS_LOAD: 1.10.13`
+    *   The `DEBUG_ASSET_SIGNATURE` for both normally imported and directly loaded `asset` objects shows:
+        `FullArgSpec(args=[], varargs='args', varkw='kwargs', ...)`
+    *   The traceback points to the `@asset` line:
+        ```
+        TypeError: asset got an unexpected keyword argument 'out'
+        ...
+        File ""/path/to/dagster-poc/dagster_poc/fluvius/assets.py"", line [line_number_of_asset_decorator], in <module>
+          @normally_imported_
+
+### Dagster version
+
+1.10.13
+
+### Deployment type
+
+Local
+
+### Deployment details
+
+*   OS: macOS aarch64 (Darwin 24.4.0)
+*   Python: 3.11.9 (installed via system/pyenv, virtual env managed by `uv`)
+*   Dagster Installation: Via `uv sync` using `pyproject.toml` into a fresh virtual environment.
+*   Shell: zsh
+
+### Additional information
+
+The content of the file at `.../.venv/lib/python3.11/site-packages/dagster/_core/definitions/decorators/asset_decorator.py` has been programmatically read and confirmed to match the expected source code for Dagster 1.10.13, which defines the `@asset` decorator with explicit keyword arguments (where `out` is handled via `**kwargs` in the decorator factory pattern, but the internal `only_allow_hidden_params_in_kwargs` check should correctly process it).
+
+The core mystery is why `inspect.getfullargspec` reports a generic signature for this `asset` function object *even when loaded directly from its correct file path*, and why Dagster's internal parameter checking consequently fails. This suggests a very subtle issue with how the function object for the decorator is being created or interpreted in this specific environment.
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",erikvdp,203481,closed,False,2,2025-05-07T12:30:00+00:00,2025-05-09T06:55:37+00:00,2025-05-09T06:55:05+00:00,type: bug,0,0,0,0,0,0,0
+dagster-io/dagster,3045711250,29839,[dg] Resource Scaffolding,"## Summary & Motivation
+
+Enables the command `dg scaffold dagster.resources path/to/resources.py`
+
+This generates a file:
+
+```python
+import dagster as dg
+from dagster.components import definitions
+
+
+@definitions
+def resources() -> dg.Definitions:
+    return dg.Definitions(resources={})
+```
+
+If you do require the `ComponentLoadContext` for this invocation, you can add it:
+
+```python
+import dagster as dg
+from dagster.components import definitions, ComponentLoadContext
+
+
+@definitions(has_context_arg=True)
+def resources(context: ComponentLoadContext) -> dg.Definitions:
+    return dg.Definitions(resources={})
+```
+
+No matter where you are in the component hierarchy, these resource keys apply globally to the entire location, something we may have to improve at a later date.
+
+## How I Tested These Changes
+
+Unit tests and manual testing in a standalone project
+
+## Changelog
+
+* Add support for scaffolding resources via `dg scaffold dagster.resources path/to/resources.py`",schrockn,28738937,closed,False,3,2025-05-07T11:53:11+00:00,2025-05-09T21:41:40+00:00,2025-05-09T21:36:05+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3045710560,29838,[dg] Support @definitions in the defs hierarchy,"## Summary & Motivation
+
+This adds support for `@definitions` in the `defs` hierarchy. Current we support it at code location entry points, and this mirrors that support in the defs module component. I believe we should default all scaffolding to use this mechanism in order to avoid import-based side effects.
+
+So instead of 
+
+```python
+import dagster as dg
+
+defs = dg.Definitions(resources={'some_resource': 'value'})
+```
+
+you can write
+
+```python
+from dagster.components import definitions
+
+@definitions
+def resources():
+   return dg.Definitions({'some_resource': 'value'})
+```
+
+## How I Tested These Changes
+
+BK. Also manual tests in standalone projects.
+
+## Changelog
+
+* Support the usage of `@definitions` in the `defs` hierarchy.",schrockn,28738937,closed,False,5,2025-05-07T11:52:54+00:00,2025-05-09T21:33:47+00:00,2025-05-09T21:33:44+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3044975615,29837,[Dagster UI] asset events partition filter does not work,"### What's the issue?
+
+![Image](https://github.com/user-attachments/assets/3aa522bf-377d-4aa3-8389-9999c0ded470)
+
+### What did you expect to happen?
+
+_No response_
+
+### How to reproduce?
+
+_No response_
+
+### Dagster version
+
+dagster, version 1.10.11
+
+### Deployment type
+
+Dagster Cloud
+
+### Deployment details
+
+_No response_
+
+### Additional information
+
+_No response_
+
+### Message from the maintainers
+
+Impacted by this issue? Give it a 👍! We factor engagement into prioritization.",danielgafni,49863538,open,False,0,2025-05-07T07:25:17+00:00,2025-05-07T20:42:51+00:00,,type: bug;area: UI/UX,0,0,0,0,0,0,0
+dagster-io/dagster,3044156080,29836,DOC-1111 Update product lifecycle language and admonition styling,"## Summary & Motivation
+
+See https://linear.app/dagster-labs/issue/DOC-1111/update-previewbetasupersededdeprecated-language
+
+## How I Tested These Changes
+
+Local build.
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",neverett,417209,open,False,1,2025-05-06T22:24:05+00:00,2025-05-07T20:53:48+00:00,,area: docs,0,0,0,0,0,0,0
+dagster-io/dagster,3044052180,29835,Attempt to handle `SourceAssets` in `map_asset_specs`,"## Summary & Motivation
+
+
+To allow using `map_asset_specs` over lists of assets, `Definitions` or `AssetSelection`s within a `Definitions` that contain a mix of `AssetSpec`, `AssetsDefinition` and `SourceAssets`.
+
+We use `create_external_asset_from_source_asset` to go from `SourceAsset` to an `AssetsDefinition`, which lets us map over it with `map_asset_specs`.
+
+Just stuck on converting back to a `SourceAsset`
+
+## How I Tested These Changes
+unit tests
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",anuthebananu,25062350,open,False,1,2025-05-06T21:29:22+00:00,2025-05-06T21:34:49+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3044038180,29834,DOC-1132 Move missing branch deployments info from legacy to current docs,"## Summary & Motivation
+
+See https://linear.app/dagster-labs/issue/DOC-1132/move-missing-info-on-branch-deployments-from-legacy-docs-to-new-docs
+
+## How I Tested These Changes
+
+Local build.
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",neverett,417209,closed,False,1,2025-05-06T21:22:32+00:00,2025-05-08T14:04:41+00:00,2025-05-08T14:04:39+00:00,area: docs,0,0,0,0,0,0,0
+dagster-io/dagster,3043986860,29833,[dbt component] fix project args resolution,"`context.resolve_value` currently does not implicitly handle model resolution so do it manually 
+
+## How I Tested These Changes
+
+added test
+
+## Changelog
+
+[bugfix][components][dbt] `DbtProjectComponent` fields now properly evaluate templates",alangenfeld,202219,closed,False,1,2025-05-06T20:56:39+00:00,2025-05-06T21:14:49+00:00,2025-05-06T21:14:47+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3043859052,29832,DOC-1104 update CONTRIBUTING for llms-txt plugin,"## Summary & Motivation
+
+See https://linear.app/dagster-labs/issue/DOC-1104/update-readme-and-contributing
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",neverett,417209,closed,False,0,2025-05-06T19:57:44+00:00,2025-05-06T20:27:34+00:00,2025-05-06T20:27:32+00:00,area: docs,0,0,0,0,0,0,0
+dagster-io/dagster,3043805038,29831,New freshness policies - docs for private preview,"## Summary & Motivation
+Unlisted docs for new freshness policies, intended to ship to design partners for a private preview. 
+
+## How I Tested These Changes
+Ran docs site on local
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",anuthebananu,25062350,closed,False,4,2025-05-06T19:29:11+00:00,2025-05-08T18:38:45+00:00,2025-05-08T18:38:43+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3043762203,29830,Add back materialize button + padding + perf,"## Summary & Motivation
+
+1. Add back the materialize button but remove the one on the section headers
+2. Add some padding
+3. Batch the update on the initial render so that we're not doing `{...current}` for every update but still process the updates immediately to avoid an empty render.
+
+## How I Tested These Changes
+
+app-proxy",salazarm,2286579,closed,False,1,2025-05-06T19:09:37+00:00,2025-05-06T19:28:27+00:00,2025-05-06T19:28:25+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3043674674,29829,"[ui] Add Cursor, Windsurf editor URL protocols to code link settings","## Summary
+
+Add cursor and windsurf URL formats to code link settings.
+
+## How I Tested These Changes
+
+Tested locally w/ cursor, windsurf.
+
+
+",benpankow,10215173,closed,False,2,2025-05-06T18:31:07+00:00,2025-05-06T19:42:03+00:00,2025-05-06T19:42:02+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3043629914,29828,[components][dagster-sling] Add code refs to sling files,"## Summary
+
+Enables code references to replication file for Sling components.
+
+
+## Test Plan
+
+Unit test.",benpankow,10215173,open,False,1,2025-05-06T18:11:55+00:00,2025-05-08T21:02:17+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3043590577,29827,[components] Automatically enable code references for dbt component,"## Summary
+
+Enables code references to underlying SQL files, by default, for the DBT component.
+
+## Test Plan
+
+Unit test.",benpankow,10215173,closed,False,1,2025-05-06T17:54:41+00:00,2025-05-08T17:51:25+00:00,2025-05-08T17:51:23+00:00,,1,0,0,0,0,0,1
+dagster-io/dagster,3043532967,29826,just to test the logs,"## Summary & Motivation
+
+## How I Tested These Changes
+
+## Changelog
+
+> Insert changelog entry or delete this section.
+",prha,1040172,closed,False,0,2025-05-06T17:28:43+00:00,2025-05-06T21:15:24+00:00,2025-05-06T21:15:24+00:00,,0,0,0,0,0,0,0
+dagster-io/dagster,3043396334,29825,[dg] Fix scaffold test cache dir passing,"## Summary & Motivation
+
+Make sure that only dynamic `scaffold` subcommands get the special global options passing behavior in tests, since static `scaffold` subcommands are defined like every other command (with global options settable on the final subcommand).
+
+## How I Tested These Changes
+
+Manually.",smackesey,1531373,open,False,1,2025-05-06T16:30:11+00:00,2025-05-07T14:09:50+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3043267113,29824,[dagster-databricks] Skip tests reliant on external infrastructure,"## Summary & Motivation
+
+Addresses https://github.com/dagster-io/dagster/issues/29526, by adding a pytest `skipif` condition on the presence of the `DATABRICKS_HOST` environment variable. It appears these tests were built assuming AWS infrastructure, so some basic parsing of the URL was done to set the `node_type_id` to Azure equivalents, with a fallback to the previous default.
+
+Some basic cleaning for typos and unused code was done elsewhere in the module.
+
+## How I Tested These Changes
+
+Locally targeting the `dagster-databricks` library path. 
+",jmccartin,4125881,open,False,0,2025-05-06T15:45:59+00:00,2025-05-06T15:46:30+00:00,,,0,0,0,0,0,0,0
+dagster-io/dagster,3043092076,29823,Update asset breadcrumb links for new observe UI,"## Summary & Motivation
+
+With the new observe UI we no longer have ""folders"" and so the folder linking doesn't work. Update the links to instead use the asset selection syntax to scope the catalog to the ""folder"".
+
+## How I Tested These Changes
+
+
+https://github.com/user-attachments/assets/1222cfc9-79a2-42bd-a2f8-e3cad6267bfa
+
+
+",salazarm,2286579,closed,False,0,2025-05-06T14:44:27+00:00,2025-05-06T16:12:03+00:00,2025-05-06T16:12:01+00:00,,0,0,0,0,0,0,0

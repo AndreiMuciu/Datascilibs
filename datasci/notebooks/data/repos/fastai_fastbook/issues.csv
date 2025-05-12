@@ -1,0 +1,1027 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+fastai/fastbook,3038567411,675,Fix set_categories deprecation in 09_tabular.ipynb and clean/09_tabul…,"original: df['ProductSize'].cat.set_categories(sizes, ordered=True, inplace=True)
+
+after:
+df['ProductSize'] = df['ProductSize'].cat.set_categories(sizes, ordered=True)
+",OmarElghamry1,85800688,open,False,1,2025-05-05T04:24:09+00:00,2025-05-05T04:24:16+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,3038541926,674,Inplace = True is no longer supported in set_categories in pandas in chapter 9: tabular,"Original: df['ProductSize'].cat.set_categories(sizes, ordered=True, inplace=True) 
+
+should be replaced with
+
+df['ProductSize'] = df['ProductSize'].cat.set_categories(sizes, ordered=True)",OmarElghamry1,85800688,closed,False,0,2025-05-05T03:59:32+00:00,2025-05-05T04:24:25+00:00,2025-05-05T04:24:25+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2958051660,673,Missing ipywidgets package in 02_production.ipynb,Install ipywidgets in order to import fastai.vision.widgets because  Widgets were split in a distinct package since IPython 4,JB314,10923317,open,False,1,2025-03-29T14:27:54+00:00,2025-03-29T14:27:59+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2922621651,672,Bing Search API is no longer available,"When attempting to create a bing search api resource in azure as a part of [lesson 2](https://github.com/fastai/fastbook/blob/master/02_production.ipynb), I get the following error:
+
+```
+{
+  ""code"": ""ApiSetDisabledForCreation"",
+  ""message"": ""Deployment of new Bing resources is unavailable. If you want to leverage search results with LLMs, refer to the new Grounding with Bing Search product. You can learn more at aka.ms/AgentsBingDoc. For additional questions, please contact BingAPIMS@Microsoft.com.""
+}
+```
+
+It seems that bing search api resources can no longer be created. Microsoft is [directing folks](https://learn.microsoft.com/en-us/answers/questions/2201920/bing-news-search) to this new _Grounding with Bing Search product_. I'll probably just use duckduckgo_search instead, but wanted to flag it. 
+
+Happy to create a PR and update this section with duckduckgo_search, if that would be helpful. ",clpatterson,28932596,open,False,1,2025-03-15T23:09:50+00:00,2025-04-08T09:34:39+00:00,,,3,3,0,0,0,0,0
+fastai/fastbook,2877857707,671,`RuntimeError: The MPS backend is supported on MacOS 12.3+.Current OS version can be queried using sw_vers`,"When running the dataloaders I am getting the following error: `RuntimeError: The MPS backend is supported on MacOS 12.3+.Current OS version can be queried using `sw_vers``, even though my MacOs is `12.7.6`.
+
+The error seems related to torch library. Any idea how it could be fixed from fastai level?",PanGan21,50522617,closed,False,1,2025-02-25T10:06:31+00:00,2025-02-25T10:59:14+00:00,2025-02-25T10:59:13+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2863791558,670,Obsolete `jupyter serverextension` command in book chapter 2,"This is shown in two places in 02_production.ipynb:
+
+```
+!jupyter serverextension enable --sys-prefix voila
+```
+
+That gives an error. Replace with:
+
+```
+!jupyter server extension enable --sys-prefix voila
+```
+",slinkp,98610,open,False,0,2025-02-19T16:08:03+00:00,2025-02-19T16:08:03+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2841447070,669,Update 04_mnist_basics.ipynb,typo,KimiaTahvildari,130475904,open,False,1,2025-02-10T06:18:47+00:00,2025-02-10T06:18:52+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2826996970,668,fixed paragraph in 04_mnist_basics.ipynb,"The paragraph had two incorrect statements, fixed it and made it concise
+
+Fixed #655 ",prajwal-38,176428450,open,False,1,2025-02-03T09:48:44+00:00,2025-02-03T09:48:51+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2823281614,667,Issues with ipywidgets dependency causing Javascript errors,"This issue is related to the `fastbook` package, not to this repository. But I don't know where else to raise the issue.
+
+Using Jupyter Labs v4.3.4 I am having issues using `fastbook==0.0.29` with the dependency of `ipywidgets<8`. If I use any version below 8, I get Javascript errors trying to render widgets. This happens both locally and on cloud hosted labs.
+
+I can reproduce this as follows. Create a new Jupyter Notebook with the following cells.
+
+```
+%pip install ipyfilechooser
+```
+
+```python
+from ipyfilechooser import FileChooser
+from pathlib import Path
+path = Path.cwd()
+fc = FileChooser(path)
+display(fc)
+
+```
+
+Run the cells and this is the output I receive:
+
+```
+Open Browser Console for more detailed log - Double click to close this message]
+Failed to load model class 'VBoxModel' from module '@jupyter-widgets/controls'
+loadClass@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/446.bf169bd3821a9ba1aa62.js?v=bf169bd3821a9ba1aa62:1:75484
+loadModelClass@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.8166aeb81cf1531ca240.js?v=8166aeb81cf1531ca240:1:10579
+_make_model@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.8166aeb81cf1531ca240.js?v=8166aeb81cf1531ca240:1:7367
+new_model@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.8166aeb81cf1531ca240.js?v=8166aeb81cf1531ca240:1:5136
+handle_comm_open@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/327.8166aeb81cf1531ca240.js?v=8166aeb81cf1531ca240:1:3893
+1446/v/this._handleCommOpen@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/lab/extensions/@jupyter-widgets/jupyterlab-manager/static/446.bf169bd3821a9ba1aa62.js?v=bf169bd3821a9ba1aa62:1:73900
+_handleCommOpen@https://jupyterlab-01jjbz4k0g5xkb8q9ssshm0eks.studio.lightning.ai/static/lab/jlab_core.b207cc5f30e679038452.js?v=b207cc5f30e679038452:1:1369272
+```
+
+The browser console outputs this error:
+```
+Error: Module @jupyter-widgets/controls, version ^1.5.0 is not registered, however, 2.0.0 is
+```
+
+I managed to solve it by downloading the source code of `fastbook==0.0.29`, and in the file `settings.ini`, setting the requirements line to have `ipywidgets>=8` instead of `ipywidgets<8`.
+
+Is there any place where this package is maintained so I can make this fix permanent?
+
+
+",jameskentdev,107423859,open,False,0,2025-01-31T12:20:32+00:00,2025-01-31T12:20:32+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2795922657,666,dependency conflicts,"When trying to work with the first notebook in the book in colab, [Introduction to Jupyter](https://colab.research.google.com/github/fastai/fastbook/blob/master/app_jupyter.ipynb), the first cell fails with error message:
+
+```
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+gcsfs 2024.10.0 requires fsspec==2024.10.0, but you have fsspec 2024.9.0 which is incompatible.
+```
+
+",mbirgi,13731067,open,False,2,2025-01-17T17:04:00+00:00,2025-05-11T09:42:41+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,2763692961,665,Add a jargon section to Chapter 13 : Convolutional Neural Networks,"Previous chapters have sections named `jargon` that summarize the key terms that are introduced in the chapter. 
+
+Currently,  Chapter 13 [Convolutional Neural Networks](https://github.com/fastai/fastbook/blob/master/13_convolutions.ipynb) does not have a section that summarizes all the new vocab or `jargon` that are mentioned in the chapter. ",nalediym,67169576,open,False,0,2024-12-30T21:02:25+00:00,2024-12-30T21:02:25+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2731620555,664,Chapter 1 Upload Button Not Working Locally,"Attempting to do the following:
+
+```
+#hide_output
+uploader = widgets.FileUpload()
+uploader
+```
+
+Doesn't actually upload anything when running locally. Can the proper steps be shared?",anthonyalayo,17555572,open,False,1,2024-12-11T01:52:57+00:00,2024-12-23T07:35:52+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2731493395,663,asciidoc regions are not rendered,"Is there a trick to making the `asciidoc` regions rendered properly? I have tried to search the internet on this, but no luck. Mine looks very weird:
+
+<img width=""829"" alt=""image"" src=""https://github.com/user-attachments/assets/1d66eb0b-158c-4985-986c-0ef9a4fd2980"">
+",anthonyalayo,17555572,open,False,0,2024-12-11T00:01:46+00:00,2024-12-11T00:01:46+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,2679682913,662,Possible typo in 01_intro.ipynb,"seems like a typo from the context to use ""fit"" rather than ""fine_tune""",Esther-Guo,32406031,open,False,1,2024-11-21T14:32:47+00:00,2024-11-21T14:32:54+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2657308367,661,fix: correct typos across multiple chapters,"I found several typos while reading through the book. All changes are minor corrections to improve readability and do not alter the content or meaning of the text.
+
+Changes made:
+
+- Fixed spelling errors in chapter 5, 7, 8, 9 and 11.
+- Corrected grammatical issues in chapter 3 and 17.",buidai123,140616004,open,False,1,2024-11-14T02:06:34+00:00,2024-11-14T02:20:55+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2655356005,660, ImageClassifierCleaner,"It was all fine untill I reached clearner = ImageClassifierCleaner(learn).  When I run the code it displayed images but doesn't show predicted labels,confidence level and filter Option can anyone help me out 
+To rid get of the issue
+",Sohailahmad308,188337130,open,False,0,2024-11-13T12:43:25+00:00,2024-11-13T12:43:25+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2652816462,659,Prepare to work locally on m2,,ghiret,461035,closed,False,2,2024-11-12T17:09:50+00:00,2024-11-12T17:10:37+00:00,2024-11-12T17:10:15+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2509756009,658,"Typo in requirements.txt line # 7, ""scikit_learn"" should be ""scikit-learn"" ","In line # 7, of requirements.txt file, 
+scikit-learn is misspelled, 
+there is an ""_"" instead of ""-""
+
+Solution : a dash instead of an underscore
+
+""scikit_learn"" ==>> ""scikit-learn"" 
+
+",zafar-hussain,7498674,open,False,0,2024-09-06T07:45:46+00:00,2024-09-06T08:22:51+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2470407089,657,Adding the link to Arabic translation in README.md ,"## Changes Done
+Added the link to Arabic translation in README.md 
+
+## Before
+[English](./README.md) / [Spanish](./README_es.md) / [Korean](./README_ko.md) / [Chinese](./README_zh.md) / [Bengali](./README_bn.md) / [Indonesian](./README_id.md) / [Italian](./README_it.md) / [Portuguese](./README_pt.md) / [Vietnamese](./README_vn.md) / [Japanese](./README_ja.md)
+
+## After
+[English](./README.md) / [Spanish](./README_es.md) / **[Arabic](./README_ar.md)** / [Korean](./README_ko.md) / [Chinese](./README_zh.md) / [Bengali](./README_bn.md) / [Indonesian](./README_id.md) / [Italian](./README_it.md) / [Portuguese](./README_pt.md) / [Vietnamese](./README_vn.md) / [Japanese](./README_ja.md)",ssakkout,145016316,open,False,0,2024-08-16T14:38:23+00:00,2024-08-16T14:38:23+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2469336422,656,Update the README_ar.md,"## **An update to the README_ar.md**
+to fix the typos in the file and improve the syntax according to Arabic Grammer
+## Some of the Changes Made
+
+**1. Spelling**
+
+| Wrong words          | Corrections |
+|---------------|-------------------------------|
+| غوججر  | غوجر        |
+| ريسنيت | ريسنت |
+| ارفاق | إرفاق | 
+| الصيفة | الصيغة |
+
+**2. Fixing non Arabic punctuation**
+         |  , |  ، |
+
+**1. Adding missing spaces**
+**2. Improving the syntax in the contributions section**
+
+",ssakkout,145016316,open,False,0,2024-08-16T02:59:37+00:00,2024-08-16T02:59:37+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2399777472,655,"Typo in ""Stepping With a Learning Rate"" section 04_MNIST #654 PR","> adjust our parameters in the opposite direction of the slope.
+
+Because when a line has a positive slope it goes up left to right and vice versa pointing away from the minimal point.",KareimGazer,49312818,open,False,0,2024-07-10T05:21:07+00:00,2024-07-10T05:21:07+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2399774663,654,"Typo in ""Stepping With a Learning Rate"" section","> adjust our parameters in the _opposite_ direction of the slope
+
+. because when a line has a positive slope it goes up left to right and vice versa pointing away from the minimal point.",KareimGazer,49312818,open,False,1,2024-07-10T05:18:50+00:00,2024-07-10T05:19:27+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2384886993,653,fixed a typo in chp1,"changed ""a radiology practice"" to ""a radiology practitioner"" in ""Limitations Inherent To Machine Learning """,KareimGazer,49312818,closed,False,2,2024-07-01T23:10:20+00:00,2024-07-07T22:48:17+00:00,2024-07-07T22:48:16+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2366362507,652,My branch,,shaunzlim0123,145950768,closed,False,0,2024-06-21T11:39:06+00:00,2024-06-21T11:44:06+00:00,2024-06-21T11:44:06+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2366337678,651,minor change,I have updated the markdown file,shaunzlim0123,145950768,closed,False,0,2024-06-21T11:25:59+00:00,2024-06-21T11:30:25+00:00,2024-06-21T11:30:25+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2332195713,650,Minor Update in Readme.md,A small change in Readme.md text. A lowercase after a fullstop has been changed to uppercase.,M-S-KHAN,51326962,open,False,0,2024-06-03T22:48:57+00:00,2024-06-03T22:48:57+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2299173278,649,Convert Chapter 2 to use DDGo to smooth learning experience?,"## Synopsis
+Setting up a Microsoft Azure account for learning purposes is distracting, especially for Chapter 2. There has to be a keyless way to get some image URL's...I was just talking about this in #648 so I wanted to share my result.
+
+## Problem
+I followed all the instructions (in Fastbook and elsewhere), but I was still having trouble creating the Azure cloud resource to do the Bing Image search (deployment failure, BadRequest, Internal Server Error). 
+
+### Expected Behavior
+Do Chapter 2 without signing up for more things, and to minimize the distractions so the attention can be paid to learning PyTorch.
+
+### Observed Behavior
+I spent more time trying to figure out Azure portal, than simply adjusting the Chapter 2 to use `DDGS` and submitting this PR! Now I can complete Chapter 2 and continue on with the book confidently.
+
+## Proposed Solution 
+Use a [`DDGS` library](https://pypi.org/project/duckduckgo-search/) which requires no key, with the trade off of being limited by query volume.
+
+### Content of this PR
+Attached to this PR is a tested notebook which installs the referenced `DDGS` library. Then, any instances of `search_images_bing` is replaced with `ddgs.images(**query_parameters)`, I was specific with the query parameters (small, public domain, etc.)
+
+### TODO
+**The literature in the Notebook itself may need more updating, but the code should work and the notebook should run.**",sunlambda,106617963,open,False,2,2024-05-16T02:06:49+00:00,2024-07-24T22:59:00+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2298707632,648,Chapter 2 and Cloud Services,"## Synopsis
+I'm a new user, trying to follow the book. I was unable to procure the `AZURE_SEARCH_KEY` in Chapter 2, despite spending a few hours setting up the account and troubleshooting the problem in Azure portal. **Suddenly I remembered I'm supposed to be doing a tutorial about PyTorch.**
+
+## Problem
+- I am unable to procure the `AZURE_SEARCH_KEY`, despite having followed the sign up procedure and everything.
+- The first sentence of Chapter 4
+  - _Having seen what it looks like to actually train a variety of models in Chapter 2, let’s now look under the hood and see exactly what is going on. We’ll start by using computer vision to introduce fundamental tools and concepts for deep learning._
+
+As a new learner, it feels inappropriate to skip Chapter 2.
+
+### Problem (Observed Behavior)
+Can't complete Chapter 2 as written, unable to create Bing Image Search API resources as a free trial user.
+* The resource deployment fails, `Bad Request (Internal Server Error)`
+* Creating the new Azure Web Free account did not entitle me to creating a Bing Image API resource
+
+### Expected Behavior
+Complete the `Chapter 2` without being harassed by Corporate America.
+
+## Possible Remedies
+- Somebody posted a package [to query DuckDuckGO for images without an API key](https://pypi.org/project/duckduckgo-search/), for **Educational Use Only**
+- Not sure what else in Chapter 2 uses Bing.
+
+I'm just trying to do the tutorial, so I'll probably have a new notebook to contribute back after I find an alternative to Bing. *What a distraction!*",sunlambda,106617963,closed,False,2,2024-05-15T19:40:59+00:00,2024-05-16T02:08:26+00:00,2024-05-16T02:08:25+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2245024928,647,Small correction to 06_multicat,"I believe the first sentence of this is not worded correctly:
+
+> Note that because we have a one-hot-encoded dependent variable, we can't directly use nll_loss or softmax (and therefore we can't use cross_entropy):
+> 
+> - softmax, as we saw, requires that all predictions sum to 1, and tends to push one activation to be much larger than the others (due to the use of exp); however, we may well have multiple objects that we're confident appear in an image, so restricting the maximum sum of activations to 1 is not a good idea. By the same reasoning, we may want the sum to be less than 1, if we don't think any of the categories appear in an image.
+> - nll_loss, as we saw, returns the value of just one activation: the single activation corresponding with the single label for an item. This doesn't make sense when we have multiple labels.
+
+One-hot encoding does not disallow the use of softmax. The reason should be that the objective is multi-label, right? As the bullet points explain.",andrewkchan,8591901,open,False,1,2024-04-16T03:38:09+00:00,2025-03-09T16:24:52+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2242228569,646,fix search_img_ddg,"## Fixes and Improvements to the  `search_images_ddg` Function in `utils.py`
+
+Changes include:
+
+- **Token Parsing**: now exits early and returns an empty collection if the search token cannot be parsed, preventing further execution with invalid parameters.
+- **Loop Condition**: adjusted the loop to explicitly check `max_n` as a stopping condition, safer against infinite loops.
+- **Minor Error Handling**: generic exception handler to catch and log errors during execution, allowing the function to return any results collected prior to the error.
+
+*`core functionality of the func remains unchanged, ensuring that it continues to operate as expected.`*",arman-hk,95980011,open,False,0,2024-04-14T15:45:27+00:00,2024-04-14T15:45:27+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2231673148,645,Typo: `relfects` -> `reflects`,"https://github.com/fastai/fastbook/blob/2c5db23a34c5089b96c948ef7e52fad651d3148e/05_pet_breeds.ipynb#L1306
+
+i believe there's a typo: since the result **relfects** the predicted",guoger,3359136,open,False,0,2024-04-08T16:47:20+00:00,2024-04-08T16:47:20+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2229615691,644,fastStart,Few might find it hard to get started with the fastbook and this fast start method will help them ,labKnowledge,32406787,open,False,0,2024-04-07T07:50:56+00:00,2024-04-07T23:44:30+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2221874014,643,add CN translations,,wizardforcel,5080126,closed,False,1,2024-04-03T04:37:59+00:00,2024-07-07T22:59:15+00:00,2024-07-07T22:59:03+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2204342836,642,chapter4: compared standard SGD with Adam Optimizer,"Made a little graph to compare plain SGD (lr=2e-5) with plain Adam optimizer, on a very simple quaddratic function with 3 parameters. It's like a ""guess the 3 numbers I'm thinking of"" game.
+
+Adam was a good improvement, but I wonder if there isn't some way to do much better.",slatteryjim,514782,closed,False,2,2024-03-24T13:08:13+00:00,2024-03-24T13:25:40+00:00,2024-03-24T13:08:35+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2190618967,641,Update 04_mnist_basics.ipynb,Fixed the mistyped 'nil' to 'null' on line 3940.,madalintat,73785144,open,False,1,2024-03-17T11:36:15+00:00,2024-03-17T11:36:20+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2190550509,640,Fixing a couple of statements,I hope that helps,f8upd8,25223886,open,False,1,2024-03-17T08:41:31+00:00,2024-03-17T08:41:37+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2187558616,639,security updates,,SaraSSC,83277661,closed,False,0,2024-03-15T01:40:30+00:00,2024-10-25T01:36:44+00:00,2024-10-25T01:36:44+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2140605216,638,Python 3.12 incompatibilites with fastbook,"I've assigned student to install jupyter lab and run the fastbook notebooks. We have now noticed failures for importing fastai features when students are running the latest Python 3.12, on Windows and Mac alike. 
+
+On downgrading to Python 3.11.8, installations complete successfully and we're able to run the notebook cells so far. 
+
+May be related to https://github.com/fastai/fastai/issues/3974 ?",ebeshero,4014518,open,False,0,2024-02-17T20:51:52+00:00,2024-02-17T20:51:52+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2136165913,637,ZH translation of this book,"<https://github.com/OpenDocCN/ibooker-dl-zh/tree/master/docs/dl-cdr-fai-pt>
+
+This is ZH translation of this book that I finished recently.
+
+I hope it can be merged to this repo through a new branch if possible.",wizardforcel,5080126,open,False,0,2024-02-15T10:32:51+00:00,2024-02-15T10:33:58+00:00,,,2,2,0,0,0,0,0
+fastai/fastbook,2134589587,636,README Turkish Translation .,"I thought it would be a great idea to add a Turkish README , so Turkish people can **keep in touch** with this high-quality educational material.
+
+",AhmedZeer,152083791,closed,False,1,2024-02-14T15:16:56+00:00,2024-07-07T22:59:44+00:00,2024-07-07T22:59:44+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2129025146,635,general variable naming,"hey
+first of all - thank you very much for this course. I'm slowly going through it and I feel like a student again. Which has both good and bad sides, but it's great ;)
+The videos associated with the course are really helpful, I just have some small feedback about the code itself
+
+one thing I noticed throughout all the examples is the lack of good naming practices, which could be very simply alleviated to make the course a lot more readable. My main two concerns are:
+1. redefining the same variable in multiple places
+```
+path = something
+(...)
+# a few sections down
+path = something else
+```
+
+sometimes the same variable is reused over examples spanning multiple code blocks, sometimes it's simply overwritten in subsequent blocks. I'm no python specialist, but in any other language I used that would be deemed a bad practice
+
+we could name them ""bears_path"", or ""downloads_path"" or whatever else makes sense in a given context
+
+2. short variable names. for example
+```
+trgts  = tensor([1,0,1])
+prds   = tensor([0.9, 0.4, 0.2])
+```
+instead of 
+```
+expected_targets  = tensor([1,0,1])
+example_predictions   = tensor([0.9, 0.4, 0.2])
+```
+it really doesn't hurt to add those few characters more, but it makes it sooooo much easier if we don't have to decipher what the author meant. again - in any production grade project and in any company - short names like those would be considered bad practice. I think it's especially important here, because we're learning something new and we often don't yet have the experience required to decipher those short names correctly or efficiently.
+
+some others are simply confusing without even giving us a fighting chance. example:
+```
+dset = list(zip(train_x,train_y))
+x,y = dset[0]
+x.shape,y
+```
+One would assume that x and y is a point on a 2d graph / in a matrix.
+Well, no. X is an image, and y is a label. Why not just call it that?
+
+btw. some other examples
+- `dls`. Whenever I look at it I think ""downloads"", but ""data loaders""
+- `fns`. This is ""functions"" more often than not. Here it's ""file names""
+
+I don't know if there is anyone checking those issues out, but hopefully this could make this course even better
+
+cheers!",radekapreel,156109997,open,False,0,2024-02-11T15:05:51+00:00,2024-02-11T19:49:58+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2128472497,634,use dtreeviz 1.4.1,"The dtreeviz call in this book only works with dtreeviz 1.x. I tried to update the method call to use version 2, but I don't know enough about the library to do that. At least this gets the book so it works again.",mattsgarlata,1598200,closed,False,2,2024-02-10T14:02:31+00:00,2024-07-07T23:00:23+00:00,2024-07-07T23:00:22+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2127893107,633,Update 01_intro.ipynb - IMDb reviews sentiment analysis prediction output change,I think output in the markdown cell does not match the description below it.,ShubhamThakkar,20641150,closed,False,5,2024-02-09T21:48:31+00:00,2024-06-08T23:00:43+00:00,2024-06-08T23:00:43+00:00,,1,1,0,0,0,0,0
+fastai/fastbook,2087463429,632,Honest impression on 04_mnist_basics,"Want to start by saying I understand why the author chose to use pyTorch for the code samples in MINST. As this is currently the industry standard and bleeping edge for training neural networks, it makes sense to use this to familiarize students with the library while teaching the basics of this subject.
+
+However, as someone new to the use of neural nets, but vary familiar with programming in general, I have to admit it made understanding the underlying methodology a bit more cumbersome that it could have been.
+
+The problem is these highly abstracted, high-level functions do not give a clear impression of what's happening, and require significant explanation in English, and effort to ""imagine"" what the functions are doing to add up to the whole algorithm. I understand they want to teach the use of PyTorch/FastAI, however, in a document related to teaching the ""foundation"" of a particular algorithm, I think it would be worth it to also include a version of the script in code that is less abstract, and more direct. For example, instead of saying ""Because using Python loops are slow, we use such-and-such Tensor function"" and stopping there, it would be very beneficial to additionally add how it could be done using a loop with more foundational, C-like coding elements to really display what's happening, or even something more pseudo-code (if you don't want to program a function in the doc to calculate derivatives, for example).
+
+High-level abstractions are great for making less code and doing complicated tasks with little effort. But, also remembers that this action obscures the underlying process. As the goal of this document is to teach the underlying process, only using the high-level abstraction to do it is a little counter productive.",JonRurka,1930060,open,False,0,2024-01-18T04:20:25+00:00,2024-01-18T04:20:25+00:00,,,3,3,0,0,0,0,0
+fastai/fastbook,2067045388,631,Cannot add in loss function when creating learner,"**Issue**
+# loss function added in when creating learner
+learn = vision_learner(dls, resnet18, metrics=error_rate, loss_func = nn.CrossEntropyLoss(weight=tensor(2.,1.)))
+
+# learn.summary reveals no modified loss function in use
+
+learn.summary()
+
+Optimizer used: <function Adam at 0x79df4959c790>
+Loss function: CrossEntropyLoss()
+
+
+**The workaround**
+
+# loss function added in when creating learner
+learn = vision_learner(dls, resnet18, metrics=error_rate, loss_func = nn.CrossEntropyLoss(weight=tensor(2.,1.)))
+
+# After learner is created I add in the loss function
+learn.loss_func.func = nn.CrossEntropyLoss(weight=tensor(2.,1.))
+
+# summary reveals the function actually updated this time
+learn.summary()
+
+Optimizer used: <function Adam at 0x79df4959c790>
+Loss function: CrossEntropyLoss(
+  (func): CrossEntropyLoss()
+)
+
+# forum posts that reveal the same issue
+https://forums.fast.ai/t/changing-default-loss-functions/28981
+",MilesTidmarsh,127801082,open,False,0,2024-01-05T09:52:28+00:00,2024-01-05T09:52:28+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,2030071824,630,Fix broken link in ch1 to fast.ai datasets,"The link in chapter 1 to the datasets provided by fast.ai was broken. This pull request fixes the broken link.
+
+Previously: https://course.fast.ai/datasets
+
+Now: https://docs.fast.ai/data.external.html#datasets",knjk04,11173328,closed,False,3,2023-12-07T07:25:57+00:00,2024-04-11T04:25:35+00:00,2024-04-11T04:25:35+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,2010962468,629,Outdated sklearn.inspection.plot_partial_dependence,"The function `sklearn.inspection.plot_partial_dependence` is not implemented in newer scikit-learn versions.
+For example, when trying to execute the partial dependence example from chapter 09_tabular.ipynb in ""Model Interpretation -> Partial Dependence"" I will get the following error:
+
+```python
+from sklearn.inspection import plot_partial_dependence
+
+fig,ax = plt.subplots(figsize=(12, 4))
+plot_partial_dependence(m, valid_xs_final, ['YearMade','ProductSize'],
+                        grid_resolution=20, ax=ax);
+
+
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+Cell In[331], line 1
+----> 1 from sklearn.inspection import plot_partial_dependence
+      3 fig,ax = plt.subplots(figsize=(12, 4))
+      4 plot_partial_dependence(m, valid_xs_final, ['YearMade','ProductSize'],
+      5                         grid_resolution=20, ax=ax);
+
+ImportError: cannot import name 'plot_partial_dependence' from 'sklearn.inspection'
+
+```
+Tested with scikit-learn version:
+```
+!pip freeze | grep scikit-learn
+scikit-learn==1.3.1
+```
+In the documetation of scikit-learn I can't find `sklearn.inspection.plot_partial_dependence` after version 1.1.
+
+In the newer scikit versions (1.2 or 1.3) we can use `sklearn.inspection.PartialDependenceDisplay.from_estimator` instead
+
+For example:
+```python
+from sklearn.inspection import PartialDependenceDisplay
+
+fig,ax = plt.subplots(figsize=(12, 4))
+PartialDependenceDisplay.from_estimator(m, valid_xs_final, ['YearMade', 'ProductSize'], 
+                                        grid_resolution=20, ax=ax)
+
+```
+
+References:
+* [docs new version](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.PartialDependenceDisplay.html#sklearn.inspection.PartialDependenceDisplay.from_estimator)
+* [docs old version](https://scikit-learn.org/1.1/modules/generated/sklearn.inspection.plot_partial_dependence.html?highlight=plot_partial#sklearn.inspection.plot_partial_dependence)
+
+
+",st0fm,99617394,open,False,1,2023-11-26T09:10:25+00:00,2024-02-10T20:43:44+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1966787014,628,"Windows 10/11 Setup Guide without Docker, WSL, Ubuntu, or Cloud Hosting","## Prelude
+
+I did exactly what the first chapter of the book says _not_ to do, getting my new Win 11 machine to run the Jupyter notebooks locally. It was quite a journey, but, in retrospect, I can summarize what I did in a few simple steps. It all comes down to finding the right installers up-front and updating the `environment.yml` file, as needed. I wanted to share it here to perhaps motivate some minor improvements to the repo, so cloud-hosting and Ubuntu through WSL aren't deemed absolutely necessary, and local setup isn't seen as super scary or a waste of effort.
+
+> My original motivation: the reason I took an interest in the fastai course was that I bought a new laptop - it has a beefy NVIDIA GPU, 20-core Intel 13th gen processor, and an NPU (I don't even know if anything utilizes this yet). With all these cool gizmos, one of the only ways to take advantage of _all of them_ is machine learning. So, of course I'm going to spend hours getting my fancy new machine to run stuff! Also, if you ever run the examples using the CPU version of Pytorch, you'll never want to run them without a GPU ever again!
+
+> Other motivations: ML comes up a lot at work (clinical stuff), and with all the buzz on LinkedIn, etc. you can't tell what's real and what's hype. More often than not, I hear about ML projects failing, so I feel like I should take a deep dive, start using this stuff myself, know what sorts of technologies are available for what problem domains, and hopefully help develop a successful ML culture at work. My background is programming, so trudging through GitHub issues and StackOverflow answers to piece together a solution to cryptic failures is right up my alley! I haven't touched ML since learning about linear regression models from Andrew Ng's course, so a lot has changed!
+
+After all that, I will say I was debating how to share this information. I don't really do blogs anymore, so hopefully this is the right medium and someone else will stumble on this and find it helpful.
+
+## Prerequisites
+Here's are some things you will need in order to be successful setting up a Windows 10/11 machine:
+* A semi-modern NVIDIA GPU (without this, I would say rely on a cloud-hosted solution)
+* VS Code and/or Windows Terminal
+* Git for Windows
+* Anaconda or miniconda
+* NVIDIA's CUDA software (more on this later)
+
+### VS Code & Git for Windows
+Start by installing VS Code. Google it, follow the installation instructions. Easy. If it prompts you to install Git for Windows, allow it to guide you through the steps; otherwise, you can install Git for Windows from their website: https://gitforwindows.org/.
+
+### Cloning the repository
+On this repository's home page, find the green `Code` button and click it. It will show you a URL for the repository. In the directory you want to create the repository, run `git clone <url>`. For example, `git clone https://github.com/fastai/fastbook.git`. I actually recommend first creating a fork of the repository and then clone your fork instead. Also Star the repository while you're at it. ;)
+
+`cd` into the directory that gets created and run `code .`. VS Code should open and you should see a directory full of `.ipynb` files. These are the Jupyter notebooks - the rest of this documentation is describing how to get these working locally.
+
+> NOTE: VS Code will suggest installing some Python extensions, including extensions for rendering Jupyter notebooks. That said, I found some things don't work correctly when running directly from VS Code and it's better to just run Jupyter from the terminal and work through your browser. But... before we get too far ahead of ourselves...
+
+### NVIDIA CUDA
+You'll learn from reading the book that fastai utilizes Pytorch under the hood. In order for Pytorch to utilize your NVIDIA GPU, you need to install some software called CUDA. Getting the project to run locally isn't even worth it if you can't get this working.
+
+Unfortunately, there are a lot of versions of CUDA, and specific versions of Pytorch only work with specific versions of CUDA. While researching this, I found this super useful webpage provided by Pytorch that guides you through finding compatible versions: https://pytorch.org/get-started/locally/
+
+For example, on my local machine, my version of Pytorch was 2.1.0. If you open the `environment.yml` file in the repository, you'll see the only expectation is `pytorch>=1.6`, so it could be something completely different in the future.
+
+> One way to figure out which version of Pytorch will be installed is to follow through the instructions below for setting up an environment once. Once set up, you can run `conda activate fastbook`. Once activated, you can run `python` to bring up the interactive REPL. Once running, you can run `import torch` and then `torch.__version__`. You will also use this command after completing this tutorial to verify your install.
+
+> An even easier route would be to run the following command to see which versions of pytorch are available: `conda search pytorch>=3.6 -c pytorch`. Conda is probably going to install whatever version is the highest.
+
+You can install NVIDIA's CUDA software by Googling for `NVIDIA CUDA <version>`. You need to make sure it's one of the versions of CUDA that Pytorch's guide told you to use. The installation involves a hefty 3GB download and takes several minutes. It also wants you to install a bunch of extra crap, like Physx, nsight, drivers, blah, blah, blah. I opted to do a custom install and un-selected everything but the CUDA stuff. After a very long install, you can confirm CUDA is installed by running `nvcc --version`. You might need to close and reopen your terminal for it to find the executable. Make sure the version matches what you need.
+
+### Anaconda or miniconda
+I recommend installing [miniconda](https://bjansen.github.io/scoop-apps/extras/miniconda3/) via scoop (or perhaps chocolatey). The setup for scoop is super simple. Visit the website for more details: https://scoop.sh/ 
+
+## Creating your environment
+The guide on pytorch's website told me I needed to use CUDA 11.8 or 12.1. It even provided the following command line:
+
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+We're not actually going to run this. Instead, we're going to translate this, adding these dependencies to our `environment.yml` file. For example, this is what my `environment.yml` looked like afterward:
+
+```yml
+name: fastbook
+channels:
+    - fastai
+    - pytorch
+    - defaults
+    - nvidia
+    - conda-forge
+dependencies:
+  - nb_conda_kernels
+  - nodejs
+  - python>=3.10
+  - pytorch=2.1.0
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+  - pip
+  - pip:
+    - -r requirements.txt
+```
+
+You will see I changed pytorch to be version 2.1.0 explicitly. I also added the dependencies listed in the command line above: 
+* torchvision
+* torchaudio (probably not necessary)
+* pytorch-cuda (this is what says to use the GPU)
+
+The `-c` arguments were translated into additional ""channels"".
+
+> *Important*: You'll also see I added `nb_conda_kernels`, found in the `conda-forge` channel. Essentially, when running Jupyter notebooks locally, you have to tell Jupyter which environment to run with. By default, it just tries to run with your global/base ipython engine. I realized this was happening because my conda environment was using Python 3.11 but the python engine in Jupyter was 3.10, which is my system default Python.
+
+You will want to make similar changes to your `environment.yml` file before proceeding.
+
+Conda makes it easy to create ""environments"". An environment lets you install versions of python and libraries that are independent of other environments. Otherwise, you are installing everything globally and any time a dependency were updated, it would impact every other environment on your machine.
+
+> Usually you want to make your dependency versions explicit - that way your environment works the same in 6 months as it does today. Otherwise, conda is just going to grab whatever is latest. Conda also supports version *ranges* if , for example, you are okay accepting patches, but not major/minor version updates.
+
+From inside your source directory for this project (or its fork), you should be able to run `conda env create --file .\environment.yml`.
+
+This command takes a while to run, but it will install of your dependencies and then `pip install` even more dependencies. Once complete, it will give you the command line to run to activate and deactivate the environment. For example:
+
+```
+conda activate fastbook
+```
+
+## Testing your environment
+Activate your environment. Once the environment in running, you will see the terminal message changes. 
+
+Something like:
+
+```
+(fastbook) PS C:\Source\ML\fastbook>
+```
+
+Open the Python REPL. Take note of the Python version. On my machine, the environment is using 3.11.5. We'll use this information later to make sure Jupyter notebooks is running the correct engine.
+
+Then run `import torch` to make sure it is finding pytorch (this can take several seconds to initialize).
+
+Then run `torch.__version__`. This should match the version you used on the Pytorch guide to figure out which version of CUDA to install.
+
+Next, run `torch.cuda.is_available()`. If everything was installed correctly, this should eventually return `True`.
+
+If not, there's probably an incompatibility between your Pytorch and CUDA version, you missed something in your `environment.yml`, or your environment isn't activated correctly.
+
+## Verifying Jupyter Notebooks
+The last step is to make sure Jupyter Notebooks uses your environment correctly. Earlier I mentioned needing to add `nb_conda_kernels` to the `environment.yml`. This dependency makes sure Jupyter picks up your dependencies.
+
+Exit Python (type `exit()`) or open a separate terminal inside your repository directory. Type `jupyter notebook .\01_intro.ipynb`. After a few seconds, your browser should open and jupyter notebooks will load.
+
+Inside the first code cell (or just insert a new code cell above it), add this code:
+
+```python
+import platform
+import torch
+print(platform.python_version())
+print(torch.__version__)
+print(torch.cuda.is_available())
+```
+
+Run the cell by typing `SHIFT+ENTER`. You should see the same information printed out that you saw from the Python REPL.
+
+## Wrapping up
+So hopefully this guide worked flawlessly for you on the first try. Otherwise, I hope it gives you some more places to continue debugging your issues.
+
+Overall, there's a lot to learn if your new to Python or coding in general. This exercise helped me to become comfortable with conda and jupyter, that's for sure. Getting CUDA working locally is a huge improvement over the CPU implementation. Afterward, I saw operations completing in seconds that were taking over 10 minutes to complete before. I also saw fewer glitches in the code cells, which makes reading the book more enjoyable and interactive.
+
+As mentioned in the book, if you still can't get the book to run locally on your machine, find an alternative and don't get hung up on it. It's easy to lose focus on what's important, and as these technologies become more familiar and part of your toolbox some of these issues will be easier for you to address in the future.",jehugaleahsa,1368126,open,False,6,2023-10-29T00:39:24+00:00,2025-04-26T04:18:49+00:00,,,3,3,0,0,0,0,0
+fastai/fastbook,1964510147,627,Chapter 6: TypeError in Binary Cross Entropy calculation using both nn.BCEWithLogitsLoss() and F.binary_cross_entropy_with_logits(),"In the Chapter 6 notebook: **06_multicat.ipynb**,
+The binary cross entropy calculation using either the nn module or F function gives ""TypeError""
+
+Executing this cell,
+
+```
+loss_func = nn.BCEWithLogitsLoss()     
+loss = loss_func(activs, y)     
+loss
+```
+
+Gives,
+`TypeError: no implementation found for 'torch.nn.functional.binary_cross_entropy_with_logits' on types that implement __torch_function__: [<class 'fastai.torch_core.TensorImage'>, <class 'fastai.torch_core.TensorMultiCategory'>]`
+
+Furthermore, trying to calculate the same loss using function seems to run into the same problem too.
+
+```
+loss = F.binary_cross_entropy_with_logits(activs, y)
+loss
+```
+
+`TypeError: no implementation found for 'torch.nn.functional.binary_cross_entropy_with_logits' on types that implement __torch_function__: [<class 'fastai.torch_core.TensorImage'>, <class 'fastai.torch_core.TensorMultiCategory'>]`
+
+The issue persisted in both CPU and GPU runtime.
+",abidhasan03,141522889,open,False,2,2023-10-26T23:20:05+00:00,2024-09-15T06:08:01+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1963624073,626,Update README.md,changed how links to open the chapters in README are presented.,dhotrey,85390033,closed,False,0,2023-10-26T13:48:38+00:00,2024-02-18T06:10:52+00:00,2024-02-18T06:10:51+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1962733686,625,Kaggle Notebook | 01_intro | Version 2,,bdegannes,11340965,open,False,1,2023-10-26T05:30:10+00:00,2023-10-26T05:30:15+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1955078258,624,"Update 01_intro.ipynb - broken link to ""A Mathematician's Lament"" replaced with functional one","Updated from the old broken link: 
+
+https://maa.org/external_archive/devlin/LockhartsLament.pdf
+
+of the ""A Mathematician's Lament"" essay to a functional one:
+
+https://maa.org/sites/default/files/pdf/devlin/LockhartsLament.pdf
+
+solve the issue #618 .",menamerai,62800649,closed,False,1,2023-10-20T22:21:56+00:00,2024-02-26T19:54:42+00:00,2024-02-26T19:54:42+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1952995687,623,Unable to download images in Chapter 2 Production,"For some reason I am unable to download images.  I get the following error...
+![image](https://github.com/fastai/fastbook/assets/11239466/25df481b-ae9c-44b8-b4b4-3d7db5ae4d89)
+",markingle,11239466,closed,False,1,2023-10-19T20:21:09+00:00,2023-10-19T20:25:04+00:00,2023-10-19T20:25:04+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1946609106,622,Added_Arabic_Description,"First contribution:  Arabic course description file has been added ""README_ar.md""",IbrahimZamit,16292655,closed,False,1,2023-10-17T06:02:25+00:00,2024-07-07T23:01:05+00:00,2024-07-07T23:01:05+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1931723578,621,Update 02_production.ipynb,"Microsoft updated '_Bing Image Search API_' which made the previouse 'key: ```contentUrl```' incompatible.
+Correctly updated the 'key: ```thumbnailUrl```' for accessing the image's URL.
+
+This completely solves the issue #587 together with the pull request **fastai/fastbook** #620.",DarshitSolanki04,104897968,open,False,1,2023-10-08T09:17:18+00:00,2023-10-08T09:17:22+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1931713179,620,Update utils.py,"Microsoft updated '_Bing Image Search API_' which created incompatibility with the ```search_images_bing()``` function. The function is updated and the issue is now resolved. Also added one more parameter ```imageType``` to get good results.
+
+This solves issue #587. ",DarshitSolanki04,104897968,closed,False,2,2023-10-08T08:45:30+00:00,2024-07-07T22:56:19+00:00,2024-07-07T22:56:14+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1903104248,619,Update utils.py,print error when hitting exception to aid debugging infinite looping,sidsarasvati,2634859,open,False,0,2023-09-19T14:19:01+00:00,2023-09-19T14:19:01+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1897490404,618,"Link to ""A Mathematician's Lament"" short story is broken","Super minor issue, in the second paragraph of the ""How to Learn Deep Learning"" section of 01_intro.ipynb, the link to the short story is broken, but a quick search turns it up both from the original MAA site as well as from the Internet Archive.
+
+Old broken link in notebook: https://maa.org/external_archive/devlin/LockhartsLament.pdf
+
+New MAA link: https://maa.org/sites/default/files/pdf/devlin/LockhartsLament.pdf
+Internet Archive option: https://archive.org/details/pdfy-yhvz8YJgZp2hkjv3",SynapticRewrite,31230870,open,False,0,2023-09-14T23:45:58+00:00,2023-09-14T23:45:58+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1868588421,617,Update 02_production.ipynb,Small fix to the chapter 2 notebook.,baldesco,10538776,open,False,1,2023-08-27T18:28:31+00:00,2023-08-27T18:28:35+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1862140892,616,Update 03_ethics.ipynb,Fixed broken links,davisjs,1610380,open,False,1,2023-08-22T20:17:16+00:00,2023-08-22T20:17:21+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1857945798,615,Update README.md,,AdamGoyer,1908555,closed,False,1,2023-08-20T04:11:54+00:00,2023-08-20T04:15:04+00:00,2023-08-20T04:14:48+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1857053582,614,2 update chapter headings,,AdamGoyer,1908555,closed,False,2,2023-08-18T17:29:27+00:00,2023-08-18T17:31:15+00:00,2023-08-18T17:30:22+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1852101929,613,Update 10_nlp.ipynbto say 'spaces',In the videos it is quite clear spaces is what in meant here.,cjon256,3659487,open,False,2,2023-08-15T20:43:09+00:00,2023-08-24T22:23:42+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1846542680,612,Update 01_intro.ipynb - inconsistent spelling of recognizer,,eladrkatz,24245965,open,False,1,2023-08-11T09:58:24+00:00,2023-08-11T09:58:28+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1845748923,611,Merge changes,,jfblanchard,38008149,closed,False,1,2023-08-10T19:13:23+00:00,2023-08-10T19:20:07+00:00,2023-08-10T19:14:36+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1838299707,610,Replace Bing search with Duck Duck Go,,cadizm,1328712,closed,False,2,2023-08-06T18:26:05+00:00,2023-08-06T21:45:02+00:00,2023-08-06T21:39:39+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1830741113,609,Update 04_mnist_basics.ipynb,"removing unused code, for better understanding",mehnaazmohiuddin,5837302,open,False,1,2023-08-01T08:31:47+00:00,2023-08-01T08:31:51+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1828096977,608,Superfluous prose in clean version of 01_intro.ipynb,There seems to be some prose left where it shouldn't,michalparkola,7370156,open,False,1,2023-07-30T21:44:57+00:00,2023-07-30T21:45:01+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1827334058,607,Update README_zh.md,Update the content of README_zh.md and fix small translation issue.,ShaoLinMonk,434730,open,False,0,2023-07-29T05:54:09+00:00,2023-07-29T05:55:02+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1826989090,606,ImageClassifierCleaner throws KeyError,"I was doing everything fine, in 02_production.ipynb, until I reach this cell: 
+
+cleaner = ImageClassifierCleaner(learn)
+cleaner
+
+```
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~/miniconda3/envs/fastbook/lib/python3.10/site-packages/PIL/JpegImagePlugin.py:639, in _save(im, fp, filename)
+    638 try:
+--> 639     rawmode = RAWMODE[im.mode]
+    640 except KeyError as e:
+```
+    
+The only thing I changed was using DuckDuckGo Image Search instead of Microsoft Azure,
+any help would be appreciated!",couzhei,34382355,open,False,6,2023-07-28T19:28:20+00:00,2023-10-03T02:52:17+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1826112292,605,Update 04_mnist_basics.ipynb,"Changing ""with all of the rows **stacked up** end to end"" to ""with all of the rows **arranged** end to end"". Because Stacked up means one on top of the other. It confused me.",mehnaazmohiuddin,5837302,closed,False,1,2023-07-28T09:50:30+00:00,2023-07-28T09:54:23+00:00,2023-07-28T09:54:23+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1815809362,604,Fakhar iqbal patch 4,,fakhar-iqbal,80758276,open,False,1,2023-07-21T13:26:16+00:00,2023-07-21T13:26:20+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1815761730,603,update upgrading command for scikit learnFakhar iqbal patch 2,,fakhar-iqbal,80758276,open,False,1,2023-07-21T12:53:58+00:00,2023-07-21T12:54:03+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1815730814,602,Update 09_tabular.ipynb,,fakhar-iqbal,80758276,open,False,1,2023-07-21T12:32:28+00:00,2023-07-21T12:32:32+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1815699250,601,Changing TensorImage to TensorBase -> Update 06_multicat.ipynb,"We need to convert TensorImage to TensorBase, in activs, to run BCELossWithLogits. ",fakhar-iqbal,80758276,open,False,1,2023-07-21T12:09:02+00:00,2023-07-25T20:07:10+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1815637122,600,Import treeinterpreter and waterfall_charts before plotting #chap_09,"Before running 
+`predictions,bias,contributions = treeinterpreter.predict(m,row.values)`
+they were not imported.
+`from treeinterpreter import treeinterpreter`
+
+And before running 
+`waterfall(valid_xs_final.columns, contributions[0],threshold=0.08,rotation_value=45,formatting='{:,.3f}');`
+it was not imported, 
+`from waterfall_chart import plot as waterfall
+`",fakhar-iqbal,80758276,open,False,0,2023-07-21T11:20:33+00:00,2023-07-21T11:20:33+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1809392504,599,Fix spelling in 01_intro.ipynb,"Proposal to fix the spelling of Ron Kohavi. 
+
+P.S. Thank you for making fastbook free and accessible via notebooks! The book, course, and recordings are all wonderful resources for learning about deep learning.",aaronyan,4505888,open,False,1,2023-07-18T08:08:12+00:00,2023-07-18T08:08:17+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1806068144,598,Update 06_multicat.ipynb,"This activs previously gave TensorImage but we can not run BSELossWithLogits on TensorImage implementation. In this repo, the output of your cell is in TensorBase, which is correct, but in actual it was throwing output as TensorImage",fakhar-iqbal,80758276,closed,False,2,2023-07-15T13:08:54+00:00,2023-07-21T11:59:14+00:00,2023-07-21T11:59:14+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1799426362,595,`n_workers` has to be changed to 0 to avoid getting stuck,"When I try to run the following code
+```
+from fastai.text.all import *
+
+dls = TextDataLoaders.from_folder(untar_data(URLs.IMDB), valid='test', bs=32)
+learn = text_classifier_learner(dls, AWD_LSTM, drop_mult=0.5, metrics=accuracy)
+learn.fine_tune(4, 1e-2)
+
+```
+I get this message:
+Due to IPython and Windows limitation, python multiprocessing isn't available now.
+So `n_workers` has to be changed to 0 to avoid getting stuck
+
+I'm currently running on Windows, and tried to pass 'n_workers=0' as a parameter to `TextDataLoaders.from_folder()` and also `text_classifier_learner()`, but I keep getting the same message. Can you please help me to solve it?",GabriellCabrall,98562652,open,False,0,2023-07-11T17:34:02+00:00,2023-07-11T17:34:02+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1797110261,594,Notebook files are not loaded.,"I have installed JupyterLab version 4.0.2. When loading the notebook files, I get the following error:Unreadable Notebook: 
+```
+/Users/mine/Downloads/01_intro.ipynb <ValidationError: ""Notebook could not be converted from version 1 to version 2 because it's missing a key: cells"">
+```
+I tried to convert it with nbconvert:
+```
+jupyter nbconvert --to notebook 01_intro.ipynb --output test.ipynb
+```
+This provides the following output:
+```
+jsonschema.exceptions.ValidationError: Notebook could not be converted from version 1 to version 2 because it's missing a key: cells
+```
+",MiNeDevelop,120735000,open,False,0,2023-07-10T16:23:55+00:00,2023-07-10T16:23:55+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1794695417,593,Fix spelling error in 05_pet_breeds.ipynb,"spelling error. referencing ""subsequence characters"" when I believe it is supposed to read ""subsequent characters""",ocasta181,2112873,open,False,1,2023-07-08T03:58:54+00:00,2023-07-08T03:58:59+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1785137443,592,Fix 02_production.ipynb,"Replaced Bing Image Search with DuckDuckGo Image Search, which is also free, recommended instead by Jeremy Howard in his recorded lecture, and which doesn't require any advanced setup or creation of an Azure trial to use.
+
+Fixes such issues as #587 ",DeanMauro,8672064,open,False,2,2023-07-03T02:01:26+00:00,2023-10-20T09:48:14+00:00,,,1,0,0,0,0,0,1
+fastai/fastbook,1768922989,591,09_tabular: Add note about bug when splitting data,"As reported in #325, there's a mistake in the predicate that splits the data into the training and validation sets. Jeremy commented that it won't be fixed in this edition: https://github.com/fastai/fastbook/pull/337#issuecomment-735401046
+
+This PR adds an errata comment to the notebook so that readers are aware of the mistake. This can save them time if they run into the bug on their own.",rigdern,199935,open,False,1,2023-06-22T04:53:02+00:00,2023-06-22T04:53:06+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1768885548,590,09_tabular: ProductSize histogram's y-axis is mislabeled,"## Problem
+
+The book's histogram of ProductSizes in the ""Partial Dependence"" section has a mislabeled y-axis. Consequently, the histogram communicates the wrong counts for some of the ProductSizes. Here are some ProductSizes it mislabeled:
+
+| ProductSize | Correct Count | Book's Incorrect Count |
+|-------------|---------------|------------------------|
+| Large       | 280           | ~500                   |
+| Mini        | 627           | ~100                   |
+
+See below for details.
+
+## Book's incorrect histogram
+
+The ""Partial Dependence"" section has a ProductSize histogram that is produced by this code:
+
+```python
+p = valid_xs_final['ProductSize'].value_counts(sort=False).plot.barh()
+c = to.classes['ProductSize']
+plt.yticks(range(len(c)), c);
+```
+
+and renders like this:
+<img width=""519"" alt=""image"" src=""https://github.com/fastai/fastbook/assets/199935/1fdfb43c-17ff-4a3d-a5c2-092e26756538"">
+
+## Corrected histogram
+
+We can reveal the mistake in the book's histogram by inspecting a textual histogram from the dataframe:
+
+```python
+cond = (df.saleYear<2011) | (df.saleMonth<10)
+df_valid = df[~cond]
+df_valid.ProductSize.value_counts(dropna=False)
+```
+
+That code produces this textual histogram:
+```
+NaN               3930
+Medium            1331
+Large / Medium    1223
+Mini               627
+Small              484
+Large              280
+Compact            113
+Name: ProductSize, dtype: int64
+```
+
+See the table at the top of this issue for a comparison between the counts of these ProductSizes and the ones from the book's histogram.
+
+## Cause
+
+The problem is that the code that labels the y-axis assumes that the bottom bar is ProductSize 0, the next bar is ProductSize 1, etc. but this isn't the case. The bars do not appear to be ordered by ProductSize.
+
+## Example fix
+
+Here's some code that properly labels the y-axis by sorting the y-axis labels to match the order of the bars:
+
+```python
+counts = valid_xs_final['ProductSize'].value_counts(sort=False)
+p = counts.plot.barh()
+c = [to.classes['ProductSize'][i] for i in counts.index.values]
+plt.yticks(range(len(c)), c)
+```
+
+<img width=""685"" alt=""image"" src=""https://github.com/fastai/fastbook/assets/199935/08b3780c-f863-4978-9a3a-ed3781d062a1"">",rigdern,199935,open,False,2,2023-06-22T03:59:45+00:00,2024-04-23T07:52:59+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1742163836,589,Akhil raj/issue588,"Temporary solution, as mentioned in the issue.",Akhil-Raj,20275632,open,False,3,2023-06-05T16:51:56+00:00,2023-06-05T17:16:16+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1741989947,588,Error in the The operator 'aten::_linalg_solve_ex.result' in the aug_transforms function in the Data Augmentation,"https://github.com/fastai/fastbook/blob/823b69e00aa1e1c1a45fe88bd346f11e8f89c1ff/02_production.ipynb#LL929C5-L931C58
+
+In the lines highlighted above(See the 'Code' tab of .ipynb), I was getting this error :
+
+> NotImplementedError: The operator 'aten::_linalg_solve_ex.result' is not currently implemented for the MPS device. If you want this op to be added in priority during the prototype phase of this feature, please comment on https://github.com/pytorch/pytorch/issues/77764. As a temporary fix, you can set the environment variable `PYTORCH_ENABLE_MPS_FALLBACK=1` to use the CPU as a fallback for this op. WARNING: this will be slower than running natively on MPS.
+
+A temporary solution is also mentioned in the issue : https://forums.fast.ai/t/lesson-2-troubleshoot-macbook-m1-issue/105584
+
+Is there any permanent solution to it?",Akhil-Raj,20275632,open,False,1,2023-06-05T15:09:11+00:00,2024-06-05T10:05:07+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1735928682,587,Bing Image Search - API issue,"Hi! I am trying to set up my Azure account to use Bing Search API. I have already created a Bing Search v7 resource, a Bing Custom Search resource and even a Bing Cognitive Search resource, though API keys from every one of those return the same error:
+
+```
+HTTPError: 401 Client Error: PermissionDenied for url: https://api.bing.microsoft.com/v7.0/images/search?q=khachapuri&count=150&min_height=128&min_width=128
+```
+
+How do I run this example?
+
+UPD. This code works on my local machine, but not from within the Kaggle notebook. It's basically the same:
+
+```
+def search_images_bing(key, term, min_sz=128, max_images=150):
+    search_url = ""https://api.bing.microsoft.com/v7.0/images/search""
+    headers = {""Ocp-Apim-Subscription-Key"" : key}
+
+    params  = {""q"": term, ""license"": ""public"", ""imageType"": ""photo"", ""count"": max_images, ""min_height"":min_sz, ""min_width"":min_sz}
+    response = requests.get(search_url, headers=headers, params=params)
+    response.raise_for_status()
+    return (response.json()['value'])
+```",DariaSka,115110923,open,False,1,2023-06-01T09:57:29+00:00,2023-10-07T20:00:14+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1735916319,586,Eh,,skg19972805,131232170,closed,False,0,2023-06-01T09:50:36+00:00,2023-06-01T09:50:47+00:00,2023-06-01T09:50:47+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1718306763,585,TypeError: 'NoneType' object is not iterable,"lesson 2, getting this error, how to fix this? 
+
+
+dls = bears.dataloaders(path)
+
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+[<ipython-input-26-add9d3ce560a>](https://localhost:8080/#) in <cell line: 1>()
+----> 1 dls = bears.dataloaders(path)
+
+6 frames
+[/usr/local/lib/python3.10/dist-packages/fastai/data/core.py](https://localhost:8080/#) in setup(self, train_setup)
+    395                 x = f(x)
+    396             self.types.append(type(x))
+--> 397         types = L(t if is_listy(t) else [t] for t in self.types).concat().unique()
+    398         self.pretty_types = '\n'.join([f'  - {t}' for t in types])
+    399 
+
+TypeError: 'NoneType' object is not iterable",jez120,47069869,open,False,4,2023-05-20T22:19:18+00:00,2025-04-21T11:33:32+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1718102922,584,Confusing sentence in chapter 10,"Hi,
+with the sentence
+' Let's say we want a batch size of 6.'
+I had the expectation that each batch would be of the length of 6.
+but the code creates 6 batches.
+
+Later the text says it as it is:
+'Going back to our previous example with 6 batches of length 15'
+
+Martin",netzzwergeGithub,574992,open,False,0,2023-05-20T08:44:13+00:00,2023-05-20T08:44:13+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1717033752,583,Refactor image download loop in 10th cell,"Code which download images in the cell will only run if directory don`t exist, which won`t be true if you run this cell or the whole notebook multiple times, thus it can be confusing for those who are not very proficient with Python. ",Niilsa,45327518,open,False,2,2023-05-19T10:40:58+00:00,2023-06-01T13:25:26+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1713853102,582,BCEWithLogitsLossFlat and BCEWithLogitsLoss,"I tried to understand the difference, but they are almost identical in term of behaviour.
+In the documentation https://docs.fast.ai/losses.html#bcewithlogitslossflat, `nn.BCEWithLogitsLoss` suppose to fail but it doesn't.
+
+```
+tst = BCEWithLogitsLossFlat()
+output = torch.randn(32, 5, 10)
+target = torch.randn(32, 5, 10)
+#nn.BCEWithLogitsLoss would fail with those two tensors, but not our flattened version.
+_ = tst(output, target)
+test_fail(lambda x: nn.BCEWithLogitsLoss()(output,target))
+```
+
+The correct test should be:
+```
+test_fail(lambda: nn.BCEWithLogitsLoss()(output,target))
+```
+instead of
+```
+test_fail(lambda x: nn.BCEWithLogitsLoss()(output,target))
+```
+
+
+In contrast to https://docs.fast.ai/losses.html#crossentropylossflat, the `nn.CrossEntropyLoss` fail but the test is misleading.
+",kfkelvinng,1923847,open,False,0,2023-05-17T12:58:07+00:00,2023-05-17T13:01:39+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1709390804,581,Calls to fine_tune() in Chapter 1 & 2 give warnings and Kernel needs to restart,"Code:
+learn = vision_learner(dls, resnet18, metrics=error_rate)
+learn.fine_tune(4)
+
+Warnings:
+/home/brian/miniconda3/envs/jupyter/lib/python3.11/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/brian/miniconda3/envs/jupyter/lib/python3.11/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings. Warn(msg)
+
+Image Showing where it crashes.
+![image](https://github.com/fastai/fastbook/assets/13653756/36a96fbf-2c96-407f-8823-f1d20e505760)
+
+This is where the kernel crashes every time I run the code. Any help would be very much appreciated. This running on a local Jupyter in WSL2.",makestuff4fun,13653756,closed,False,2,2023-05-15T06:15:37+00:00,2025-02-08T08:09:53+00:00,2023-05-15T13:49:41+00:00,,0,0,0,0,0,0,0
+fastai/fastbook,1706676766,580,Chapter 1 first training fails with PyTorch 2,"By default, PyTorch 2.x is now getting pulled in by pip install of fastbook and its dependencies.
+
+This results in an error in the first training exercise:
+```
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+[<ipython-input-8-94c80e27586d>](https://vf2u0v4yexl-496ff2e9c6d22116-0-colab.googleusercontent.com/outputframe.html?vrz=colab-20230509-060147-RC00_530563781#) in <cell line: 12>()
+     10     label_func=is_cat, item_tfms=Resize(224))
+     11 
+---> 12 learn = vision_learner(dls, resnet34, metrics=error_rate)
+     13 learn.fine_tune(1)
+
+10 frames
+[/usr/local/lib/python3.10/dist-packages/torch/serialization.py](https://vf2u0v4yexl-496ff2e9c6d22116-0-colab.googleusercontent.com/outputframe.html?vrz=colab-20230509-060147-RC00_530563781#) in persistent_load(saved_id)
+   1139             typed_storage = loaded_storages[key]
+   1140         else:
+-> 1141             nbytes = numel * torch._utils._element_size(dtype)
+   1142             typed_storage = load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+   1143 
+
+AttributeError: module 'torch' has no attribute '_utils'
+```
+
+This can be resolved by forcing a downgrade back to PyTorch 1.x in the notebook e.g.:
+
+`pip install torch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1`
+
+Would be good to include a quick troubleshooting note.  New users just getting started will be frustrated.",MattTW,748754,open,False,0,2023-05-11T22:59:12+00:00,2023-05-11T22:59:12+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1705543708,579,Internal and external links missing,"In chapters 01 and 02 when reading in colab all links show up as `<>` no text or hyperlink.
+Some seem like they are refs to tables, images in the notebook others may be external links.
+![image](https://github.com/fastai/fastbook/assets/6618854/9ca2be56-3563-457c-bb1f-51f952f24c40)
+",rolyhudson,6618854,open,False,1,2023-05-11T10:37:28+00:00,2023-06-29T23:26:42+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1675722141,578,Can't find dataset on https://course.fast.ai/datasets,The link is broken and return 404 when accessed. Is anyone else seeing the same problem?,rick111111,19742297,open,False,3,2023-04-19T22:22:06+00:00,2023-12-07T14:58:30+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1669654112,577,add background color to neuron diagram,"The diagram in [Neural Networks: A Brief History](https://console.paperspace.com/jgyaniv/notebook/r3ekcq8m2fc37nj?file=%2F01_intro.ipynb#Neural-Networks:-A-Brief-History) is transparent so the black text is not readable when the notebook is in dark mode. The solution is to just add a background color to the diagram using css.
+
+Before:
+<img width=""941"" alt=""Screen Shot 2023-04-15 at 11 38 30 PM"" src=""https://user-images.githubusercontent.com/36972296/232265120-ab3347bc-3243-4bb4-b9ad-a1eace3d13de.png"">
+
+After:
+<img width=""932"" alt=""Screen Shot 2023-04-15 at 11 38 41 PM"" src=""https://user-images.githubusercontent.com/36972296/232265129-afd48555-9c97-403e-894b-8982e57c6dd4.png"">
+
+",JGYaniv,36972296,open,False,1,2023-04-16T03:39:33+00:00,2023-04-16T03:39:39+00:00,,,1,0,0,0,0,0,0
+fastai/fastbook,1660004395,576,Running untar_data(URLs.PETS)/'images' fails,"Trying to load the images from this url with `untar_data` and getting the following exception:
+
+```
+gaierror                                  Traceback (most recent call last)
+/opt/conda/lib/python3.7/urllib/request.py in do_open(self, http_class, req, **http_conn_args)
+   1349                 h.request(req.get_method(), req.selector, req.data, headers,
+-> 1350                           encode_chunked=req.has_header('Transfer-encoding'))
+   1351             except OSError as err: # timeout error
+
+/opt/conda/lib/python3.7/http/client.py in request(self, method, url, body, headers, encode_chunked)
+   1280         """"""Send a complete request to the server.""""""
+-> 1281         self._send_request(method, url, body, headers, encode_chunked)
+   1282 
+
+/opt/conda/lib/python3.7/http/client.py in _send_request(self, method, url, body, headers, encode_chunked)
+   1326             body = _encode(body, 'body')
+-> 1327         self.endheaders(body, encode_chunked=encode_chunked)
+   1328 
+
+/opt/conda/lib/python3.7/http/client.py in endheaders(self, message_body, encode_chunked)
+   1275             raise CannotSendHeader()
+-> 1276         self._send_output(message_body, encode_chunked=encode_chunked)
+   1277 
+
+/opt/conda/lib/python3.7/http/client.py in _send_output(self, message_body, encode_chunked)
+   1035         del self._buffer[:]
+-> 1036         self.send(msg)
+   1037 
+
+/opt/conda/lib/python3.7/http/client.py in send(self, data)
+    975             if self.auto_open:
+--> 976                 self.connect()
+    977             else:
+
+/opt/conda/lib/python3.7/http/client.py in connect(self)
+   1442 
+-> 1443             super().connect()
+   1444 
+
+/opt/conda/lib/python3.7/http/client.py in connect(self)
+    947         self.sock = self._create_connection(
+--> 948             (self.host,self.port), self.timeout, self.source_address)
+    949         self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+
+/opt/conda/lib/python3.7/socket.py in create_connection(address, timeout, source_address)
+    706     err = None
+--> 707     for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+    708         af, socktype, proto, canonname, sa = res
+
+/opt/conda/lib/python3.7/socket.py in getaddrinfo(host, port, family, type, proto, flags)
+    751     addrlist = []
+--> 752     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+    753         af, socktype, proto, canonname, sa = res
+
+gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+URLError                                  Traceback (most recent call last)
+/tmp/ipykernel_27/4049553439.py in <module>
+      1 from fastai.vision.all import *
+----> 2 path = untar_data(URLs.PETS)/'images'
+
+/opt/conda/lib/python3.7/site-packages/fastai/data/external.py in untar_data(url, archive, data, c_key, force_download, base)
+    134     ""Download `url` using `FastDownload.get`""
+    135     d = FastDownload(fastai_cfg(), module=fastai.data, archive=archive, data=data, base=base)
+--> 136     return d.get(url, force=force_download, extract_key=c_key)
+
+/opt/conda/lib/python3.7/site-packages/fastdownload/core.py in get(self, url, extract_key, force)
+    115             data = self.data_path(extract_key, urldest(url, self.arch_path()))
+    116             if data.exists(): return data
+--> 117         self.download(url, force=force)
+    118         return self.extract(url, extract_key=extract_key, force=force)
+
+/opt/conda/lib/python3.7/site-packages/fastdownload/core.py in download(self, url, force)
+     90         ""Download `url` to archive path, unless exists and `self.check` fails and not `force`""
+     91         self.arch_path().mkdir(exist_ok=True, parents=True)
+---> 92         return download_and_check(url, urldest(url, self.arch_path()), self.module, force)
+     93 
+     94     def rm(self, url, rm_arch=True, rm_data=True, extract_key='data'):
+
+/opt/conda/lib/python3.7/site-packages/fastdownload/core.py in download_and_check(url, fpath, fmod, force)
+     59         if check(fmod, url, fpath): return fpath
+     60         else: print(""Downloading a new version of this dataset..."")
+---> 61     res = download_url(url, fpath)
+     62     if not check(fmod, url, fpath): raise Exception(""Downloaded file is corrupt or not latest version"")
+     63     return res
+
+/opt/conda/lib/python3.7/site-packages/fastdownload/core.py in download_url(url, dest, timeout, show_progress)
+     17         pbar.total = tsize
+     18         pbar.update(count*bsize)
+---> 19     return urlsave(url, dest, reporthook=progress if show_progress else None, timeout=timeout)
+     20 
+     21 # Cell
+
+/opt/conda/lib/python3.7/site-packages/fastcore/net.py in urlsave(url, dest, reporthook, headers, timeout)
+    182     dest = urldest(url, dest)
+    183     dest.parent.mkdir(parents=True, exist_ok=True)
+--> 184     nm,msg = urlretrieve(url, dest, reporthook, headers=headers, timeout=timeout)
+    185     return nm
+    186 
+
+/opt/conda/lib/python3.7/site-packages/fastcore/net.py in urlretrieve(url, filename, reporthook, data, headers, timeout)
+    147 def urlretrieve(url, filename=None, reporthook=None, data=None, headers=None, timeout=None):
+    148     ""Same as `urllib.request.urlretrieve` but also works with `Request` objects""
+--> 149     with contextlib.closing(urlopen(url, data, headers=headers, timeout=timeout)) as fp:
+    150         headers = fp.info()
+    151         if filename: tfp = open(filename, 'wb')
+
+/opt/conda/lib/python3.7/site-packages/fastcore/net.py in urlopen(url, data, headers, timeout, **kwargs)
+    106         if not isinstance(data, (str,bytes)): data = urlencode(data)
+    107         if not isinstance(data, bytes): data = data.encode('ascii')
+--> 108     try: return urlopener().open(urlwrap(url, data=data, headers=headers), timeout=timeout)
+    109     except HTTPError as e:
+    110         e.msg += f""\n====Error Body====\n{e.read().decode(errors='ignore')}""
+
+/opt/conda/lib/python3.7/urllib/request.py in open(self, fullurl, data, timeout)
+    523             req = meth(req)
+    524 
+--> 525         response = self._open(req, data)
+    526 
+    527         # post-process response
+
+/opt/conda/lib/python3.7/urllib/request.py in _open(self, req, data)
+    541         protocol = req.type
+    542         result = self._call_chain(self.handle_open, protocol, protocol +
+--> 543                                   '_open', req)
+    544         if result:
+    545             return result
+
+/opt/conda/lib/python3.7/urllib/request.py in _call_chain(self, chain, kind, meth_name, *args)
+    501         for handler in handlers:
+    502             func = getattr(handler, meth_name)
+--> 503             result = func(*args)
+    504             if result is not None:
+    505                 return result
+
+/opt/conda/lib/python3.7/urllib/request.py in https_open(self, req)
+   1391         def https_open(self, req):
+   1392             return self.do_open(http.client.HTTPSConnection, req,
+-> 1393                 context=self._context, check_hostname=self._check_hostname)
+   1394 
+   1395         https_request = AbstractHTTPHandler.do_request_
+
+/opt/conda/lib/python3.7/urllib/request.py in do_open(self, http_class, req, **http_conn_args)
+   1350                           encode_chunked=req.has_header('Transfer-encoding'))
+   1351             except OSError as err: # timeout error
+-> 1352                 raise URLError(err)
+   1353             r = h.getresponse()
+   1354         except:
+
+URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+```
+
+Any ideas what's happening?",r-wells,33986985,open,False,1,2023-04-09T21:09:04+00:00,2023-05-23T15:41:04+00:00,,,0,0,0,0,0,0,0
+fastai/fastbook,1653035858,575,Code Updates and fixes on Chapter 9,"While running the code from chapter 9, I encountered some errors related to missing updates of libraries/methods. So in this PR I updated the mentioned libraries/methods.",jessica-amaral-alencar,39702842,open,False,1,2023-04-04T01:58:54+00:00,2023-04-24T22:54:06+00:00,,,1,1,0,0,0,0,0
+fastai/fastbook,1647975292,574,Chapter 4: Unable to render rich display.,"I have tried everything to get past this issue but no luck so far.
+
+I tried all the troubleshooting tips mentioned in this https://github.com/orgs/community/discussions/42258",skyrinu,108900820,open,False,0,2023-03-30T16:51:12+00:00,2023-03-30T16:52:53+00:00,,,0,0,0,0,0,0,0

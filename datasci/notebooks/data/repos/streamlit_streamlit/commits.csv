@@ -1,0 +1,2542 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+streamlit/streamlit,3c99f2051644fd942844d0014540911afeea36bc,https://github.com/streamlit/streamlit/commit/3c99f2051644fd942844d0014540911afeea36bc,dependabot[bot],49699333,Bot,2025-05-12T11:22:05+00:00,web-flow,2025-05-12T11:22:05+00:00,"Bump urlpattern-polyfill from 10.0.0 to 10.1.0 in /frontend (#11328)
+
+Bumps
+[urlpattern-polyfill](https://github.com/kenchris/urlpattern-polyfill)
+from 10.0.0 to 10.1.0.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a
+href=""https://github.com/kenchris/urlpattern-polyfill/commits"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=urlpattern-polyfill&package-manager=npm_and_yarn&previous-version=10.0.0&new-version=10.1.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,dce706c6c3c727f094a622e2e724854f5e7b257e
+streamlit/streamlit,dce706c6c3c727f094a622e2e724854f5e7b257e,https://github.com/streamlit/streamlit/commit/dce706c6c3c727f094a622e2e724854f5e7b257e,dependabot[bot],49699333,Bot,2025-05-12T11:21:59+00:00,web-flow,2025-05-12T11:21:59+00:00,"Bump query-string from 9.1.1 to 9.1.2 in /frontend (#11329)
+
+Bumps [query-string](https://github.com/sindresorhus/query-string) from
+9.1.1 to 9.1.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/sindresorhus/query-string/releases"">query-string's
+releases</a>.</em></p>
+<blockquote>
+<h2>v9.1.2</h2>
+<ul>
+<li>Fix <code>types</code> option with <code>arrayFormat: comma</code>
+and one item in array (<a
+href=""https://redirect.github.com/sindresorhus/query-string/issues/406"">#406</a>)
+3e61882</li>
+</ul>
+<hr />
+<p><a
+href=""https://github.com/sindresorhus/query-string/compare/v9.1.1...v9.1.2"">https://github.com/sindresorhus/query-string/compare/v9.1.1...v9.1.2</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/sindresorhus/query-string/commit/ad9fe2fed20f4c4f18076d17d5275a83a93ed006""><code>ad9fe2f</code></a>
+9.1.2</li>
+<li><a
+href=""https://github.com/sindresorhus/query-string/commit/3e6188231268dca3bb514451839b263a70538e7b""><code>3e61882</code></a>
+Fix <code>types</code> option with <code>arrayFormat: comma</code> and
+one item in array (<a
+href=""https://redirect.github.com/sindresorhus/query-string/issues/406"">#406</a>)</li>
+<li><a
+href=""https://github.com/sindresorhus/query-string/commit/88e1e36dd3bccf178dfaf54f44293e790d8bbd9d""><code>88e1e36</code></a>
+Add failing test for <a
+href=""https://redirect.github.com/sindresorhus/query-string/issues/404"">#404</a></li>
+<li><a
+href=""https://github.com/sindresorhus/query-string/commit/fbeefd60bcac56262d7f425477dd16df9ed7780c""><code>fbeefd6</code></a>
+Meta tweaks</li>
+<li><a
+href=""https://github.com/sindresorhus/query-string/commit/4b925475a842eb3c951fcc1cd1d6aa7f82c98c16""><code>4b92547</code></a>
+Fix readme typos (<a
+href=""https://redirect.github.com/sindresorhus/query-string/issues/397"">#397</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/sindresorhus/query-string/compare/v9.1.1...v9.1.2"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=query-string&package-manager=npm_and_yarn&previous-version=9.1.1&new-version=9.1.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,18b10a260c6cd0810c9d5ea6b95bbfa6955037bf
+streamlit/streamlit,18b10a260c6cd0810c9d5ea6b95bbfa6955037bf,https://github.com/streamlit/streamlit/commit/18b10a260c6cd0810c9d5ea6b95bbfa6955037bf,mayagbarnes,63436329,User,2025-05-11T07:03:03+00:00,web-flow,2025-05-11T07:03:03+00:00,"Remove `set_page_config` restrictions (#11286)
+
+This PR remove the two `st.set_page_config` restrictions:
+- It can only be called as the first `st` command (with some exceptions)
+- It can only be called once per script run
+The properties are additive (if the first call sets a `page_title` and the second call sets a `page_icon`, the page now has both the provided title & icon). This also applies for `menu_items`.",166,127,293,9,48250df4f5206e3670f351ff28b53759097d9eef
+streamlit/streamlit,48250df4f5206e3670f351ff28b53759097d9eef,https://github.com/streamlit/streamlit/commit/48250df4f5206e3670f351ff28b53759097d9eef,co63oc,4617245,User,2025-05-11T05:04:35+00:00,web-flow,2025-05-11T05:04:35+00:00,"Fix typos in multiple files (#11311)
+
+Fix typos in multiple files found by codespell",68,68,136,52,cc040df25dfaeb7888f60b76490770ee781c7f37
+streamlit/streamlit,cc040df25dfaeb7888f60b76490770ee781c7f37,https://github.com/streamlit/streamlit/commit/cc040df25dfaeb7888f60b76490770ee781c7f37,lukasmasuch,2852129,User,2025-05-09T23:38:00+00:00,web-flow,2025-05-09T23:38:00+00:00,"Add mega tester app to e2e tests to check for console and CSP errors (#10882)
+
+## Describe your changes
+
+This adds the mega tester app from
+https://github.com/streamlit/mega-tester to our e2e tests. This allows
+us to run the mega tester app and check for web console errors and
+potential CSP errors using a CSP policy similar to SiS.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Lukas Masuch <103002573+sfc-gh-lmasuch@users.noreply.github.com>",827,327,1154,11,581609db8359c3302d182fd991e06ee334344b47
+streamlit/streamlit,581609db8359c3302d182fd991e06ee334344b47,https://github.com/streamlit/streamlit/commit/581609db8359c3302d182fd991e06ee334344b47,lukasmasuch,2852129,User,2025-05-09T20:05:41+00:00,web-flow,2025-05-09T20:05:41+00:00,"Enforce python typing annotations (#11289)
+
+## Describe your changes
+
+Enforces the correct usage of python typing annotations by:
+- Activating the [flake8-annotations
+(ANN)](https://docs.astral.sh/ruff/rules/#flake8-annotations-ann)
+linting rule set.
+- Activating `disallow_incomplete_defs` in mypy
+
+This PR also adds typing annotations wherever it was missing. The next
+step is to prevent fully untyped methods by setting
+`ignore-fully-untyped = false` in the Ruff config and to activate type
+checking via mypy in the `e2e_playwright` folder.
+
+There are **no logical changes** in this PR.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",866,763,1629,137,9a84d7a29f2c38547d2d4b7aa05e48803ec69035
+streamlit/streamlit,9a84d7a29f2c38547d2d4b7aa05e48803ec69035,https://github.com/streamlit/streamlit/commit/9a84d7a29f2c38547d2d4b7aa05e48803ec69035,sfc-gh-bnisco,178842601,User,2025-05-09T19:54:24+00:00,web-flow,2025-05-09T19:54:24+00:00,"[refactor] Activate import/no-named-as-default-member eslint rule (#11285)
+
+## Describe your changes
+
+- Activates the `import/no-named-as-default-member` rule and fixes most
+existing breakages of the rule
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+- This is an eslint change, which is checked at build time
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",280,265,545,58,bd298842496843302551685642acf09a50186697
+streamlit/streamlit,bd298842496843302551685642acf09a50186697,https://github.com/streamlit/streamlit/commit/bd298842496843302551685642acf09a50186697,lukasmasuch,2852129,User,2025-05-09T19:33:25+00:00,web-flow,2025-05-09T19:33:25+00:00,"Add safeguard for cached messages cleanup (#11302)
+
+## Describe your changes
+
+There seems to be an error case with the new forward message cache,
+resulting in a cache miss. One theory why this might happen:
+
+1. User triggers rerun (with cache message A)
+2. Frontend receives finished message from the previous rerun ->
+cleaning up cached message A
+3. Frontend receives new session message from new rerun
+4. Frontend receives reference message for message A -> crash
+
+This PR would prevent this issue by ignoring the finished message from
+the previous script run.
+
+There is another potential error scenario:
+ 1. User triggers rerun 1 (with cache message A) 
+ 2. User triggers rerun 2 (with cache message A)
+ 3. Frontend receives new session message for rerun 1
+ 4. Frontend receives finished message for rerun 1
+ 5. Frontend receives new session message for rerun 2
+ 6. Frontend receives finished message for rerun 2
+
+However, I'm not sure if this scenario is feasible. It would require
+very fast user interactions paired with very fast script executions.
+
+## GitHub Issue Link (if applicable)
+
+- Closes https://github.com/streamlit/streamlit/issues/11299
+- Closes https://github.com/streamlit/streamlit/issues/11300
+
+## Testing Plan
+
+- Added unit test
+- Very hard to e2e test this.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",118,4,122,2,741f5fb2c48faf078ec3da672a934e7e4af96f6f
+streamlit/streamlit,741f5fb2c48faf078ec3da672a934e7e4af96f6f,https://github.com/streamlit/streamlit/commit/741f5fb2c48faf078ec3da672a934e7e4af96f6f,sfc-gh-lwilby,103002751,User,2025-05-09T17:35:53+00:00,web-flow,2025-05-09T17:35:53+00:00,"Consolidate vertical and horizontal containers (#10960)
+
+## Describe your changes
+
+As part of the Advanced Layouts project, we are extending `st.container`
+to be configurable as a flex container. This PR does some refactoring in
+preparation for these changes.
+
+Key Changes:
+
+- Create a general `FlexBoxContainer` component that may be vertical or
+horizontal. When the flex container changes are rolled out, this will be
+configurable by the user, but currently it is just configured in
+`layouts.py` to replace the existing vertical container and the
+horizontal wrapper for a set of columns.
+- Create a general `ContainerContentsWrapper` component that will be
+used as a wrapper for the contents of other container types (e.g.
+popover, expander) and also in AppView to wrap the contents of the main
+app view.
+
+Underneath, both of these components use the same
+`StyledFlexContainerBlock` underneath, but the
+`ContainerContentsWrapper` is simpler because it doesn't need to handle
+the configuration from the user.
+
+These changes should make it easier to reason about the more complex
+changes that are going to be added by the advanced layouts project.
+
+This also simplifies the protos required when we rollout the flex
+container.
+
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+- Explanation of why no additional tests are needed
+- Unit Tests (JS and/or Python)
+- E2E Tests
+- Any manual testing needed?
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",999,306,1305,20,b7650795b365aaed270b0304d7a398baae442b03
+streamlit/streamlit,b7650795b365aaed270b0304d7a398baae442b03,https://github.com/streamlit/streamlit/commit/b7650795b365aaed270b0304d7a398baae442b03,sfc-gh-bnisco,178842601,User,2025-05-09T16:37:15+00:00,web-flow,2025-05-09T16:37:15+00:00,"[refactor] Activate no-prototype-builtins eslint rule (#11310)
+
+## Describe your changes
+
+- Activates the `no-prototype-builtins` rule and fixes all existing
+breakages of the rule
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+- This is an eslint change, which is checked at build time
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",9,11,20,6,985d1101181725d844b03f26c0d8c9887c11000c
+streamlit/streamlit,985d1101181725d844b03f26c0d8c9887c11000c,https://github.com/streamlit/streamlit/commit/985d1101181725d844b03f26c0d8c9887c11000c,sfc-gh-bnisco,178842601,User,2025-05-09T16:37:00+00:00,web-flow,2025-05-09T16:37:00+00:00,"[refactor] Activate @typescript-eslint/no-shadow eslint rule (#11284)
+
+## Describe your changes
+
+- Activates the `@typescript-eslint/no-shadow` eslint rule and fixes all
+existing breakages of the rule
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+- This is an eslint change, which is checked at build time
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",170,162,332,31,ca90df54b3f10179d5e0f7cf50de2c80dc496170
+streamlit/streamlit,ca90df54b3f10179d5e0f7cf50de2c80dc496170,https://github.com/streamlit/streamlit/commit/ca90df54b3f10179d5e0f7cf50de2c80dc496170,jrieke,5103165,User,2025-05-09T16:16:24+00:00,web-flow,2025-05-09T16:16:24+00:00,"Scroll long latex formulas horizontally (#10071)
+
+## Describe your changes
+
+Today, long Latex formulas overflow the page width, which looks weird
+and can make the entire app scroll:
+![CleanShot 2024-12-23 at 18 40
+56@2x](https://github.com/user-attachments/assets/fdcc1e48-f3b2-4f2e-97e3-5a5c8ce2896d)
+
+With this change, we get the following behavior instead:
+![CleanShot 2024-12-23 at 18 40
+14](https://github.com/user-attachments/assets/e229940a-01af-433c-bc52-25e477fcf815)
+
+Specifically:
+- Latex formulas that are in their own paragraph in `st.markdown` scroll
+horizontally.
+- Latex formulas created with `st.latex` scroll horizontally. 
+- This doesn't touch Latex formulas that are inline with other text
+(e.g. `""foo $formula$ bar""`). I.e. these can still overflow and cause
+the entire app to scroll. I didn't touch this because it was a bit
+harder to fix nicely. I also think more and more we shouldn't fix that
+by controlling the overflow of the Latex formula but just preventing the
+entire app from scrolling horizontally. Anyway, I think this shouldn't
+happen very often anyway because inline Latex formulas are usually
+short.
+
+## GitHub Issue Link (if applicable)
+
+Closes #4304
+
+Should also update this forum post:
+https://discuss.streamlit.io/t/streamlit-latex-auto-wrapping-responsive-layout/7975/3
+
+## Testing Plan
+
+Added e2e tests for the two cases above.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Johannes Rieke <johannes.rieke@snowflake.com>
+Co-authored-by: Laura Wilby <laura.wilby@snowflake.com>",37,2,39,39,febcf6b24933ffd07f52228333f6e73abf4dd607
+streamlit/streamlit,febcf6b24933ffd07f52228333f6e73abf4dd607,https://github.com/streamlit/streamlit/commit/febcf6b24933ffd07f52228333f6e73abf4dd607,kmcgrady,69432,User,2025-05-09T14:58:00+00:00,web-flow,2025-05-09T14:58:00+00:00,"Provide more predictable fuzzy matching (#11309)
+
+## Describe your changes
+
+This change migrates away from fzy.js to vendored code with small
+modifications/improvements including types, and handling case
+sensitivity (It's MIT licensed).
+
+Also minor, but the sorting for the options is using the negative filter
+rather than reversing the list. This keeps the sorting more stable and
+not move options completely around (minor perf benefit).
+
+## GitHub Issue Link (if applicable)
+
+closes #11218
+
+## Testing Plan
+
+- JS unit tests added for the predictable searching as well as the
+fzy.js including case sensitivity logic
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",558,47,605,11,8d18d604111058c0893d11f0a3ab4a91eb836410
+streamlit/streamlit,8d18d604111058c0893d11f0a3ab4a91eb836410,https://github.com/streamlit/streamlit/commit/8d18d604111058c0893d11f0a3ab4a91eb836410,dependabot[bot],49699333,Bot,2025-05-09T12:27:45+00:00,web-flow,2025-05-09T12:27:45+00:00,"Bump eslint-config-prettier from 10.1.3 to 10.1.5 in /frontend in the eslint group (#11313)
+
+Bumps the eslint group in /frontend with 1 update:
+[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier).
+
+Updates `eslint-config-prettier` from 10.1.3 to 10.1.5
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/prettier/eslint-config-prettier/releases"">eslint-config-prettier's
+releases</a>.</em></p>
+<blockquote>
+<h2>v10.1.5</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/332"">#332</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/60fef02574467d31d10ff47ecb567d378483c9d4""><code>60fef02</code></a>
+Thanks <a href=""https://github.com/JounQin""><code>@​JounQin</code></a>!
+- chore: add <code>funding</code> field into
+<code>package.json</code></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/prettier/eslint-config-prettier/compare/v10.1.4...v10.1.5"">https://github.com/prettier/eslint-config-prettier/compare/v10.1.4...v10.1.5</a></p>
+<h2>v10.1.4</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/328"">#328</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/94b47999e7eb13b703835729331376cef598b850""><code>94b4799</code></a>
+Thanks <a
+href=""https://github.com/silvenon""><code>@​silvenon</code></a>! -
+fix(cli): do not crash on no rules configured</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/prettier/eslint-config-prettier/compare/v10.1.3...v10.1.4"">https://github.com/prettier/eslint-config-prettier/compare/v10.1.3...v10.1.4</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md"">eslint-config-prettier's
+changelog</a>.</em></p>
+<blockquote>
+<h2>10.1.5</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/332"">#332</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/60fef02574467d31d10ff47ecb567d378483c9d4""><code>60fef02</code></a>
+Thanks <a href=""https://github.com/JounQin""><code>@​JounQin</code></a>!
+- chore: add <code>funding</code> field into
+<code>package.json</code></li>
+</ul>
+<h2>10.1.4</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/328"">#328</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/94b47999e7eb13b703835729331376cef598b850""><code>94b4799</code></a>
+Thanks <a
+href=""https://github.com/silvenon""><code>@​silvenon</code></a>! -
+fix(cli): do not crash on no rules configured</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/4c9489339d37bf96d31e0596e64bb8d4cb4308ef""><code>4c94893</code></a>
+chore: release eslint-config-prettier (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/333"">#333</a>)</li>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/60fef02574467d31d10ff47ecb567d378483c9d4""><code>60fef02</code></a>
+chore: add <code>funding</code> field into <code>package.json</code> (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/332"">#332</a>)</li>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/f55501ffe9be65fc9a8ec7d788459fd3a9cb6095""><code>f55501f</code></a>
+chore: release eslint-config-prettier (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/329"">#329</a>)</li>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/50a8a22b0468e3469b7a177e6c81e843bd5cb73e""><code>50a8a22</code></a>
+chore(deps): update all dependencies (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/330"">#330</a>)</li>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/94b47999e7eb13b703835729331376cef598b850""><code>94b4799</code></a>
+fix(cli): do not crash on no rules configured (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/328"">#328</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/prettier/eslint-config-prettier/compare/v10.1.3...v10.1.5"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=eslint-config-prettier&package-manager=npm_and_yarn&previous-version=10.1.3&new-version=10.1.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,090c2f5b419cd32c651821af2236bcb2f2e2c868
+streamlit/streamlit,090c2f5b419cd32c651821af2236bcb2f2e2c868,https://github.com/streamlit/streamlit/commit/090c2f5b419cd32c651821af2236bcb2f2e2c868,dependabot[bot],49699333,Bot,2025-05-09T11:26:10+00:00,web-flow,2025-05-09T11:26:10+00:00,"Bump @types/node from 22.15.3 to 22.15.17 in /frontend (#11314)
+
+Bumps
+[@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node)
+from 22.15.3 to 22.15.17.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a
+href=""https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/node"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=@types/node&package-manager=npm_and_yarn&previous-version=22.15.3&new-version=22.15.17)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,1fa90a82dc1ad74026812d914f9cb92576c09611
+streamlit/streamlit,1fa90a82dc1ad74026812d914f9cb92576c09611,https://github.com/streamlit/streamlit/commit/1fa90a82dc1ad74026812d914f9cb92576c09611,kmcgrady,69432,User,2025-05-09T04:27:55+00:00,web-flow,2025-05-09T04:27:55+00:00,"Handle visual glitch for duplicated options (#11306)
+
+## Describe your changes
+
+Adds an id to the select options, which is passed to the baseweb
+component and supplied to the key to include the value AND the original
+index of the options. This makes the keys unique and therefore prevents
+this glitch
+
+## GitHub Issue Link (if applicable)
+
+closes #11215
+
+## Testing Plan
+
+- We _could_ add a screenshot test here, but it seems a little heavy
+handed for this type of fix (let me know if you disagree)
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",26,12,38,3,72ef3d7082e6a1b7acec4029c9169a3234fa044f
+streamlit/streamlit,72ef3d7082e6a1b7acec4029c9169a3234fa044f,https://github.com/streamlit/streamlit/commit/72ef3d7082e6a1b7acec4029c9169a3234fa044f,mayagbarnes,63436329,User,2025-05-09T00:44:17+00:00,web-flow,2025-05-09T00:44:17+00:00,"Move `formsData` to new `FormsContext` (#11278)
+
+Moved the `formsData` information into a separate context, `FormsContext`, so components subscribed to `LibContext` that have nothing to do with forms do not re-render unnecessarily.",178,104,282,15,7d5bff7ecb9bc493fce33b479096d76a448f4f56
+streamlit/streamlit,7d5bff7ecb9bc493fce33b479096d76a448f4f56,https://github.com/streamlit/streamlit/commit/7d5bff7ecb9bc493fce33b479096d76a448f4f56,kmcgrady,69432,User,2025-05-08T22:37:01+00:00,web-flow,2025-05-08T22:37:01+00:00,"Allow the ability to add case sensitive options to select and multiselect (#11307)
+
+## Describe your changes
+
+Allow case sensitive options to be added to select and multiselect
+
+## GitHub Issue Link (if applicable)
+
+closes #11217
+
+## Testing Plan
+
+- JS unit tests updated
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",30,0,30,4,568192731c2214c0256fe38c40d966b08d88a862
+streamlit/streamlit,568192731c2214c0256fe38c40d966b08d88a862,https://github.com/streamlit/streamlit/commit/568192731c2214c0256fe38c40d966b08d88a862,dependabot[bot],49699333,Bot,2025-05-08T14:20:34+00:00,web-flow,2025-05-08T14:20:34+00:00,"Bump wavesurfer.js from 7.9.4 to 7.9.5 in /frontend (#11294)
+
+Bumps [wavesurfer.js](https://github.com/katspaugh/wavesurfer.js) from
+7.9.4 to 7.9.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/katspaugh/wavesurfer.js/releases"">wavesurfer.js's
+releases</a>.</em></p>
+<blockquote>
+<h2>7.9.5</h2>
+<ul>
+<li>7.9.5</li>
+<li>Feat(Regions): Add a <code>region-initialized</code> event that
+triggers early (<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4085"">#4085</a>)
+by <a href=""https://github.com/DefV""><code>@​DefV</code></a></li>
+<li>feat(Regions): getContent method and region-content-changed event
+(<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4082"">#4082</a>)
+by <a href=""https://github.com/adahox""><code>@​adahox</code></a></li>
+<li>Feat(Record): accept MediaTrackConstraints when starting mic (<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4074"">#4074</a>)
+by <a href=""https://github.com/kegesch""><code>@​kegesch</code></a></li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/katspaugh/wavesurfer.js/commit/2ff2a7afd3e48f8032af8dc3cee85c503f48069c""><code>2ff2a7a</code></a>
+7.9.5</li>
+<li><a
+href=""https://github.com/katspaugh/wavesurfer.js/commit/c2532d86ea107c694a7ae6a02c2c2c2824eb3295""><code>c2532d8</code></a>
+Feat(Regions): Add a <code>region-initialized</code> event that triggers
+early (<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4085"">#4085</a>)</li>
+<li><a
+href=""https://github.com/katspaugh/wavesurfer.js/commit/603876fe91bf1e1360e7d6420acb861e2725f985""><code>603876f</code></a>
+feat(Regions): getContent method and region-content-changed event (<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4082"">#4082</a>)</li>
+<li><a
+href=""https://github.com/katspaugh/wavesurfer.js/commit/2e001ea865701c74ef67b5c7d4925b92dcf97412""><code>2e001ea</code></a>
+Feat(Record): accept MediaTrackConstraints when starting mic (<a
+href=""https://redirect.github.com/katspaugh/wavesurfer.js/issues/4074"">#4074</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/katspaugh/wavesurfer.js/compare/7.9.4...7.9.5"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=wavesurfer.js&package-manager=npm_and_yarn&previous-version=7.9.4&new-version=7.9.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Lukas Masuch <Lukas.Masuch@gmail.com>",6,6,12,2,bab3f9925de2423d297e3399ab381911699e0b79
+streamlit/streamlit,bab3f9925de2423d297e3399ab381911699e0b79,https://github.com/streamlit/streamlit/commit/bab3f9925de2423d297e3399ab381911699e0b79,kajarenc,6664805,User,2025-05-08T13:51:54+00:00,web-flow,2025-05-08T13:51:54+00:00,"Add logging if cookie content is too large (#11290)
+
+## Describe your changes
+Add log error if the Auth cookie content is too large
+
+## GitHub Issue Link (if applicable)
+Related to #11168
+## Testing Plan
+
+- Explanation of why no additional tests are needed: **Just logging
+added.**
+- Unit Tests (JS and/or Python)
+- E2E Tests
+- Any manual testing needed?
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",7,0,7,1,317a6c74fad56df2e6da6e7c95a3895f0b3d0baa
+streamlit/streamlit,317a6c74fad56df2e6da6e7c95a3895f0b3d0baa,https://github.com/streamlit/streamlit/commit/317a6c74fad56df2e6da6e7c95a3895f0b3d0baa,sfc-gh-tteixeira,103002884,User,2025-05-08T11:51:47+00:00,web-flow,2025-05-08T11:51:47+00:00,"Make Carto the default map provider (like in PyDeck) (#11231)
+
+## Describe your changes
+
+**Background:**
+
+st.pydeck_chart and st.map currently use Mapbox as their default map
+provider. However, Mapbox requires users to pass an API key first. In
+the past, we provided a default API key for users, but the whole thing
+always had a funny smell.
+
+Somewhat recently, Pydeck changed their default map provider from Mapbox
+to Carto -- which _does not_ require an API key. But this didn't apply
+to Streamlit users because we had overridden the default with Mapbox.
+
+This PR addresses this.
+
+**What this PR does:**
+1. Makes Streamlit follow Pydeck's behavior by using Carto by default.
+2. No longer fetches our Mapbox API key from the cloud.
+3. Deprecates the `mapbox.token` config option. We now refer users to
+Pydeck's `api_keys` arg or `MAPBOX_API_KEY` env var. The old config
+option is still supported, though.
+4. Totally unrelated, but this also cleans up the docs for some config
+options, so they print better with `streamlit config show`.
+
+NOTE: For this to work in locked-down hosts (like Snowflake) they'll
+have to add this to their CSP allow list:
+```
+connect-src: https://basemaps.cartocdn.com/ https://*.basemaps.cartocdn.com/
+```
+
+Or, if you want to be really picky...
+```
+connect-src: https://basemaps.cartocdn.com/ https://tiles.basemaps.cartocdn.com/ https://tiles-b.basemaps.cartocdn.com/  https://tiles-c.basemaps.cartocdn.com/  https://tiles-d.basemaps.cartocdn.com/
+```
+...but I worry Carto may add mote tile servers in the future and this
+will be a forever game.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+- ~~Explanation of why no additional tests are needed~~
+- ✅ Unit Tests (JS and/or Python)
+- ✅ E2E Tests
+- ~~Any manual testing needed?~~
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",648,746,1394,75,259e1e3f6540a93174fe2bce9b4c8900def3d32f
+streamlit/streamlit,259e1e3f6540a93174fe2bce9b4c8900def3d32f,https://github.com/streamlit/streamlit/commit/259e1e3f6540a93174fe2bce9b4c8900def3d32f,dependabot[bot],49699333,Bot,2025-05-08T11:23:22+00:00,web-flow,2025-05-08T11:23:22+00:00,"Bump tsc-alias from 1.8.15 to 1.8.16 in /frontend (#11301)
+
+Bumps [tsc-alias](https://github.com/justkey007/tsc-alias) from 1.8.15
+to 1.8.16.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/justkey007/tsc-alias/releases"">tsc-alias's
+releases</a>.</em></p>
+<blockquote>
+<h2>v1.8.16 (2025-05-05)</h2>
+<h2>What's Changed</h2>
+<ul>
+<li>fix: update import from get-tsconfig to use parseTsconfig by <a
+href=""https://github.com/ediaz2""><code>@​ediaz2</code></a> in <a
+href=""https://redirect.github.com/justkey007/tsc-alias/pull/245"">justkey007/tsc-alias#245</a></li>
+</ul>
+<h2>New Contributors</h2>
+<ul>
+<li><a href=""https://github.com/ediaz2""><code>@​ediaz2</code></a> made
+their first contribution in <a
+href=""https://redirect.github.com/justkey007/tsc-alias/pull/245"">justkey007/tsc-alias#245</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/justkey007/tsc-alias/compare/v1.8.15...v1.8.16"">https://github.com/justkey007/tsc-alias/compare/v1.8.15...v1.8.16</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/justkey007/tsc-alias/commit/4c90cf6b6ed3313d4b85fb171b256457ebe5454c""><code>4c90cf6</code></a>
+1.8.16</li>
+<li><a
+href=""https://github.com/justkey007/tsc-alias/commit/3b143cda489adf85353052c977cfd776da8044df""><code>3b143cd</code></a>
+fix: update import from get-tsconfig to use parseTsconfig (<a
+href=""https://redirect.github.com/justkey007/tsc-alias/issues/245"">#245</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/justkey007/tsc-alias/compare/v1.8.15...v1.8.16"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tsc-alias&package-manager=npm_and_yarn&previous-version=1.8.15&new-version=1.8.16)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,7cd5286aac41baa47ce95a5d15e7abae344e266f
+streamlit/streamlit,7cd5286aac41baa47ce95a5d15e7abae344e266f,https://github.com/streamlit/streamlit/commit/7cd5286aac41baa47ce95a5d15e7abae344e266f,dependabot[bot],49699333,Bot,2025-05-07T17:33:00+00:00,web-flow,2025-05-07T17:33:00+00:00,"Bump eslint-config-prettier from 10.1.2 to 10.1.3 in /frontend in the eslint group (#11293)
+
+Bumps the eslint group in /frontend with 1 update:
+[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier).
+
+Updates `eslint-config-prettier` from 10.1.2 to 10.1.3
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/prettier/eslint-config-prettier/releases"">eslint-config-prettier's
+releases</a>.</em></p>
+<blockquote>
+<h2>v10.1.3</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/325"">#325</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/4e95a1d50073f1a24f004239ad6e1a4ffa8476df""><code>4e95a1d</code></a>
+Thanks <a href=""https://github.com/pilikan""><code>@​pilikan</code></a>!
+- fix: this package is <code>commonjs</code>, align its types
+correctly</li>
+</ul>
+<h3>New Contributors</h3>
+<ul>
+<li><a href=""https://github.com/pilikan""><code>@​pilikan</code></a> made
+their first contribution in <a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/325"">prettier/eslint-config-prettier#325</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/prettier/eslint-config-prettier/compare/v10.1.2...v10.1.3"">https://github.com/prettier/eslint-config-prettier/compare/v10.1.2...v10.1.3</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md"">eslint-config-prettier's
+changelog</a>.</em></p>
+<blockquote>
+<h2>10.1.3</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li><a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/pull/325"">#325</a>
+<a
+href=""https://github.com/prettier/eslint-config-prettier/commit/4e95a1d50073f1a24f004239ad6e1a4ffa8476df""><code>4e95a1d</code></a>
+Thanks <a href=""https://github.com/pilikan""><code>@​pilikan</code></a>!
+- fix: this package is <code>commonjs</code>, align its types
+correctly</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/cdc4a5c7e39e7f2d5760c60ea39cecb028fb34dc""><code>cdc4a5c</code></a>
+chore: release eslint-config-prettier (<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/326"">#326</a>)</li>
+<li><a
+href=""https://github.com/prettier/eslint-config-prettier/commit/4e95a1d50073f1a24f004239ad6e1a4ffa8476df""><code>4e95a1d</code></a>
+fix: this package is <code>commonjs</code>, align its types correctly
+(<a
+href=""https://redirect.github.com/prettier/eslint-config-prettier/issues/325"">#325</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/prettier/eslint-config-prettier/compare/v10.1.2...v10.1.3"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=eslint-config-prettier&package-manager=npm_and_yarn&previous-version=10.1.2&new-version=10.1.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,5427eb18c3cbdd1db640ee86d6715b892c88846a
+streamlit/streamlit,5427eb18c3cbdd1db640ee86d6715b892c88846a,https://github.com/streamlit/streamlit/commit/5427eb18c3cbdd1db640ee86d6715b892c88846a,Zane-dev16,76446380,User,2025-05-06T21:09:54+00:00,web-flow,2025-05-06T21:09:54+00:00,"Fix #10475: Warn when modifying elements inside fragment callback (#10942)
+
+## Describe your changes
+
+Added a new warning mechanism to detect and alert developers when
+modifying Streamlit elements inside a fragment widget's callback. This
+addresses potential unexpected UI behaviors and improves developer
+guidance for proper fragment usage.
+
+Key modifications:
+- Implemented `_maybe_print_fragment_callback_warning()` function
+- Checks if code is running inside a fragment callback
+- Raises a warning when elements are modified during fragment callbacks
+- Provides clear guidance to developers on proper callback structure
+
+## GitHub Issue Link
+[Issue #10475](https://github.com/streamlit/streamlit/issues/10475)
+
+## Testing Plan
+
+### Unit Tests Added
+1. Test warning appears when modifying elements inside a fragment
+callback
+2. Verify no warning is raised for callbacks outside of fragments
+3. Confirm no warning when callback does not interact with elements
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Debbie Matthews <debbie.matthews@snowflake.com>
+Co-authored-by: Bob Nisco <bob.nisco@snowflake.com>",120,1,121,4,85544b5fef33ccf6fbe9659d459a0fb1434be52a
+streamlit/streamlit,85544b5fef33ccf6fbe9659d459a0fb1434be52a,https://github.com/streamlit/streamlit/commit/85544b5fef33ccf6fbe9659d459a0fb1434be52a,lukasmasuch,2852129,User,2025-05-06T18:09:50+00:00,web-flow,2025-05-06T18:09:50+00:00,"Allow nesting expander, columns, popover and chat_message (#11272)
+
+## Describe your changes
+
+Removes the limitations to nest `st.expander`, `st.columns`,
+`st.popover` and `st.chat_message` inside the same layout container
+type.
+
+## GitHub Issue Link (if applicable)
+
+- Closes #3861 
+
+## Testing Plan
+
+- Updated tests.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",60,139,199,24,f168c97901015dad1c3971c42d41a240b241f1b3
+streamlit/streamlit,f168c97901015dad1c3971c42d41a240b241f1b3,https://github.com/streamlit/streamlit/commit/f168c97901015dad1c3971c42d41a240b241f1b3,lukasmasuch,2852129,User,2025-05-06T17:17:15+00:00,web-flow,2025-05-06T17:17:15+00:00,"Enforce a maximum line length via ruff (#11271)
+
+## Describe your changes
+
+Activates the `E501 `linting rule in ruff to enforce a maximum line
+length configured in the ruff config (120 chars). Note: our code
+formatter is configured with 88 chars, the 120 chars mainly applies to
+long strings and comments.
+
+There are quite a few more cases that should be updated within our unit
+tests. But to keep this change manageable, we are deactivating this for
+our unit tests for now.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",347,161,508,55,b409db7ad92d9c2eb4cf9450ebcaa94243a743ae
+streamlit/streamlit,b409db7ad92d9c2eb4cf9450ebcaa94243a743ae,https://github.com/streamlit/streamlit/commit/b409db7ad92d9c2eb4cf9450ebcaa94243a743ae,lukasmasuch,2852129,User,2025-05-06T16:23:07+00:00,web-flow,2025-05-06T16:23:07+00:00,"Activate rules to prevent exception handling anti-patterns (#11282)
+
+## Describe your changes
+
+Activates linting rules to prevent exception handling anti-patterns in
+Python:
+- [tryceratops
+(TRY)](https://docs.astral.sh/ruff/rules/#tryceratops-try)
+-
+[N818](https://docs.astral.sh/ruff/rules/error-suffix-on-exception-name/)
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Lukas Masuch <103002573+sfc-gh-lmasuch@users.noreply.github.com>
+Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>",96,102,198,29,e6e13df5416f2e41451b521ae4d24cc8cd20de5a
+streamlit/streamlit,e6e13df5416f2e41451b521ae4d24cc8cd20de5a,https://github.com/streamlit/streamlit/commit/e6e13df5416f2e41451b521ae4d24cc8cd20de5a,dependabot[bot],49699333,Bot,2025-05-06T11:21:19+00:00,web-flow,2025-05-06T11:21:19+00:00,"Bump vite from 6.3.4 to 6.3.5 in /frontend in the vite group (#11280)
+
+Bumps the vite group in /frontend with 1 update:
+[vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite).
+
+Updates `vite` from 6.3.4 to 6.3.5
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/releases"">vite's
+releases</a>.</em></p>
+<blockquote>
+<h2>v6.3.5</h2>
+<p>Please refer to <a
+href=""https://github.com/vitejs/vite/blob/v6.3.5/packages/vite/CHANGELOG.md"">CHANGELOG.md</a>
+for details.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md"">vite's
+changelog</a>.</em></p>
+<blockquote>
+<h2><!-- raw HTML omitted -->6.3.5 (2025-05-05)<!-- raw HTML omitted
+--></h2>
+<ul>
+<li>fix(ssr): handle uninitialized export access as undefined (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19959"">#19959</a>)
+(<a
+href=""https://github.com/vitejs/vite/commit/fd38d076fe2455aac1e00a7b15cd51159bf12bb5"">fd38d07</a>),
+closes <a
+href=""https://redirect.github.com/vitejs/vite/issues/19959"">#19959</a></li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/vitejs/vite/commit/84e4647efac01efafcef95fb1c7ec9336fe0a94c""><code>84e4647</code></a>
+release: v6.3.5</li>
+<li><a
+href=""https://github.com/vitejs/vite/commit/fd38d076fe2455aac1e00a7b15cd51159bf12bb5""><code>fd38d07</code></a>
+fix(ssr): handle uninitialized export access as undefined (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19959"">#19959</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/vitejs/vite/commits/v6.3.5/packages/vite"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=vite&package-manager=npm_and_yarn&previous-version=6.3.4&new-version=6.3.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,84b10157d1ddf626392cd6d85d1423b8e9c1c3d6
+streamlit/streamlit,84b10157d1ddf626392cd6d85d1423b8e9c1c3d6,https://github.com/streamlit/streamlit/commit/84b10157d1ddf626392cd6d85d1423b8e9c1c3d6,dependabot[bot],49699333,Bot,2025-05-06T10:59:16+00:00,web-flow,2025-05-06T10:59:16+00:00,"Bump the vitest group in /frontend with 2 updates (#11279)
+
+Bumps the vitest group in /frontend with 2 updates:
+[@vitest/coverage-v8](https://github.com/vitest-dev/vitest/tree/HEAD/packages/coverage-v8)
+and
+[vitest](https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest).
+
+Updates `@vitest/coverage-v8` from 3.1.2 to 3.1.3
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitest-dev/vitest/releases""><code>@​vitest/coverage-v8</code>'s
+releases</a>.</em></p>
+<blockquote>
+<h2>v3.1.3</h2>
+<h3>   🐞 Bug Fixes</h3>
+<ul>
+<li>Correctly resolve vitest import if <code>inline: true</code> is set
+ -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7856"">vitest-dev/vitest#7856</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/a83f3bf6""><!-- raw
+HTML omitted -->(a83f3)<!-- raw HTML omitted --></a></li>
+<li>Fix fixture parsing with lowered async with esbuild 0.25.3  -  by <a
+href=""https://github.com/hi-ogawa""><code>@​hi-ogawa</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7921"">vitest-dev/vitest#7921</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/c5c8502b""><!-- raw
+HTML omitted -->(c5c85)<!-- raw HTML omitted --></a></li>
+<li>Remove event-catcher code  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7898"">vitest-dev/vitest#7898</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/deb1bc27""><!-- raw
+HTML omitted -->(deb1b)<!-- raw HTML omitted --></a></li>
+<li>Reset mocks on test retry/repeat  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7897"">vitest-dev/vitest#7897</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/2fa763a6""><!-- raw
+HTML omitted -->(2fa76)<!-- raw HTML omitted --></a></li>
+<li>Ignore failures on writeToCache  -  by <a
+href=""https://github.com/orgads""><code>@​orgads</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7893"">vitest-dev/vitest#7893</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/8c7f75a6""><!-- raw
+HTML omitted -->(8c7f7)<!-- raw HTML omitted --></a></li>
+<li><strong>browser</strong>: Correctly inherit CLI options  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7858"">vitest-dev/vitest#7858</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/03660f9d""><!-- raw
+HTML omitted -->(03660)<!-- raw HTML omitted --></a></li>
+<li><strong>deps</strong>: Update all non-major dependencies  -  in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7867"">vitest-dev/vitest#7867</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/67ef74a0""><!-- raw
+HTML omitted -->(67ef7)<!-- raw HTML omitted --></a></li>
+<li><strong>reporters</strong>: <code>--merge-reports</code> to show
+each total run times  -  by <a
+href=""https://github.com/AriPerkkio""><code>@​AriPerkkio</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7877"">vitest-dev/vitest#7877</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/d613b813""><!-- raw
+HTML omitted -->(d613b)<!-- raw HTML omitted --></a></li>
+</ul>
+<h5>    <a
+href=""https://github.com/vitest-dev/vitest/compare/v3.1.2...v3.1.3"">View
+changes on GitHub</a></h5>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/6e8d9377949b78957a2a617b922925250c80fbcb""><code>6e8d937</code></a>
+chore: release v3.1.3</li>
+<li>See full diff in <a
+href=""https://github.com/vitest-dev/vitest/commits/v3.1.3/packages/coverage-v8"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `vitest` from 3.1.2 to 3.1.3
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitest-dev/vitest/releases"">vitest's
+releases</a>.</em></p>
+<blockquote>
+<h2>v3.1.3</h2>
+<h3>   🐞 Bug Fixes</h3>
+<ul>
+<li>Correctly resolve vitest import if <code>inline: true</code> is set
+ -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7856"">vitest-dev/vitest#7856</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/a83f3bf6""><!-- raw
+HTML omitted -->(a83f3)<!-- raw HTML omitted --></a></li>
+<li>Fix fixture parsing with lowered async with esbuild 0.25.3  -  by <a
+href=""https://github.com/hi-ogawa""><code>@​hi-ogawa</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7921"">vitest-dev/vitest#7921</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/c5c8502b""><!-- raw
+HTML omitted -->(c5c85)<!-- raw HTML omitted --></a></li>
+<li>Remove event-catcher code  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7898"">vitest-dev/vitest#7898</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/deb1bc27""><!-- raw
+HTML omitted -->(deb1b)<!-- raw HTML omitted --></a></li>
+<li>Reset mocks on test retry/repeat  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7897"">vitest-dev/vitest#7897</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/2fa763a6""><!-- raw
+HTML omitted -->(2fa76)<!-- raw HTML omitted --></a></li>
+<li>Ignore failures on writeToCache  -  by <a
+href=""https://github.com/orgads""><code>@​orgads</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7893"">vitest-dev/vitest#7893</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/8c7f75a6""><!-- raw
+HTML omitted -->(8c7f7)<!-- raw HTML omitted --></a></li>
+<li><strong>browser</strong>: Correctly inherit CLI options  -  by <a
+href=""https://github.com/sheremet-va""><code>@​sheremet-va</code></a> in
+<a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7858"">vitest-dev/vitest#7858</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/03660f9d""><!-- raw
+HTML omitted -->(03660)<!-- raw HTML omitted --></a></li>
+<li><strong>deps</strong>: Update all non-major dependencies  -  in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7867"">vitest-dev/vitest#7867</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/67ef74a0""><!-- raw
+HTML omitted -->(67ef7)<!-- raw HTML omitted --></a></li>
+<li><strong>reporters</strong>: <code>--merge-reports</code> to show
+each total run times  -  by <a
+href=""https://github.com/AriPerkkio""><code>@​AriPerkkio</code></a> in <a
+href=""https://redirect.github.com/vitest-dev/vitest/issues/7877"">vitest-dev/vitest#7877</a>
+<a href=""https://github.com/vitest-dev/vitest/commit/d613b813""><!-- raw
+HTML omitted -->(d613b)<!-- raw HTML omitted --></a></li>
+</ul>
+<h5>    <a
+href=""https://github.com/vitest-dev/vitest/compare/v3.1.2...v3.1.3"">View
+changes on GitHub</a></h5>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/6e8d9377949b78957a2a617b922925250c80fbcb""><code>6e8d937</code></a>
+chore: release v3.1.3</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/8c7f75a6deaa91ce80a42601eadab936194af6ea""><code>8c7f75a</code></a>
+fix: ignore failures on writeToCache (<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7893"">#7893</a>)</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/d613b81305c950ac666641487c44466c9d21f145""><code>d613b81</code></a>
+fix(reporters): <code>--merge-reports</code> to show each total run
+times (<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7877"">#7877</a>)</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/2fa763a622dc1b6981ba4a64efa1bea6c3405c0c""><code>2fa763a</code></a>
+fix: reset mocks on test retry/repeat (<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7897"">#7897</a>)</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/573cb1689688a6704581b90a30b44bab6bb0a943""><code>573cb16</code></a>
+ci: fix flaky browser tests (<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7887"">#7887</a>)</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/03660f9d57b8966645e065cf338051e8b59cfbd6""><code>03660f9</code></a>
+fix(browser): correctly inherit CLI options (<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7858"">#7858</a>)</li>
+<li><a
+href=""https://github.com/vitest-dev/vitest/commit/a83f3bf6f0f3fa22a961d50ab41bf54aea27dcdb""><code>a83f3bf</code></a>
+fix: correctly resolve vitest import if <code>inline: true</code> is set
+(<a
+href=""https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest/issues/7856"">#7856</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/vitest-dev/vitest/commits/v3.1.3/packages/vitest"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",76,76,152,6,c9ec961a28620f97fc2516be161d2fcec9f66e71
+streamlit/streamlit,c9ec961a28620f97fc2516be161d2fcec9f66e71,https://github.com/streamlit/streamlit/commit/c9ec961a28620f97fc2516be161d2fcec9f66e71,sfc-gh-lwilby,103002751,User,2025-05-05T17:54:10+00:00,web-flow,2025-05-05T17:54:10+00:00,"[AdvancedLayouts] Adds a width parameter to st.date_input and st.time_input (#11260)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to time widgets.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",151,4,155,33,26f1b8f7901f82565434411d0dcf9284cc067bd1
+streamlit/streamlit,26f1b8f7901f82565434411d0dcf9284cc067bd1,https://github.com/streamlit/streamlit/commit/26f1b8f7901f82565434411d0dcf9284cc067bd1,kmcgrady,69432,User,2025-05-05T17:38:58+00:00,web-flow,2025-05-05T17:38:58+00:00,"Ensure filename extension check is normalized (#11261)
+
+## Describe your changes
+
+We have a bug where the filename has an uppercase extension that did not
+pass the file extension enforcement and caused issues. This ensures we
+are checking the lowercase filename.
+
+## GitHub Issue Link (if applicable)
+closes #11259
+
+## Testing Plan
+
+- Python unit tests updated
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",9,2,11,2,171d208bafd4ab6dd7f82672b4ab94e3ae825dfb
+streamlit/streamlit,171d208bafd4ab6dd7f82672b4ab94e3ae825dfb,https://github.com/streamlit/streamlit/commit/171d208bafd4ab6dd7f82672b4ab94e3ae825dfb,kmcgrady,69432,User,2025-05-05T17:20:37+00:00,web-flow,2025-05-05T17:20:37+00:00,"Ensure script lifecycle occurs for MPAv1 use case (#11258)
+
+## Describe your changes
+
+Changes in the MPA v1 handling inadvertently caused issues in clearing
+widget state. This is a result of the script lifecycle ending
+prematurely. This change forces all pages to run completely and exec in
+the case of MPAv0/2
+
+## GitHub Issue Link (if applicable)
+
+closes #11202
+
+## Testing Plan
+
+- E2E Tests adds this test case
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",92,18,110,5,60f3abe5d74b73ca7e7f69cd11d851fda8475f71
+streamlit/streamlit,60f3abe5d74b73ca7e7f69cd11d851fda8475f71,https://github.com/streamlit/streamlit/commit/60f3abe5d74b73ca7e7f69cd11d851fda8475f71,dependabot[bot],49699333,Bot,2025-05-05T12:38:40+00:00,web-flow,2025-05-05T12:38:40+00:00,"Bump vite from 6.3.4 to 6.3.5 in /frontend in the vite group (#11269)
+
+Bumps the vite group in /frontend with 1 update:
+[vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite).
+
+Updates `vite` from 6.3.4 to 6.3.5
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/releases"">vite's
+releases</a>.</em></p>
+<blockquote>
+<h2>v6.3.5</h2>
+<p>Please refer to <a
+href=""https://github.com/vitejs/vite/blob/v6.3.5/packages/vite/CHANGELOG.md"">CHANGELOG.md</a>
+for details.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md"">vite's
+changelog</a>.</em></p>
+<blockquote>
+<h2><!-- raw HTML omitted -->6.3.5 (2025-05-05)<!-- raw HTML omitted
+--></h2>
+<ul>
+<li>fix(ssr): handle uninitialized export access as undefined (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19959"">#19959</a>)
+(<a
+href=""https://github.com/vitejs/vite/commit/fd38d076fe2455aac1e00a7b15cd51159bf12bb5"">fd38d07</a>),
+closes <a
+href=""https://redirect.github.com/vitejs/vite/issues/19959"">#19959</a></li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/vitejs/vite/commit/84e4647efac01efafcef95fb1c7ec9336fe0a94c""><code>84e4647</code></a>
+release: v6.3.5</li>
+<li><a
+href=""https://github.com/vitejs/vite/commit/fd38d076fe2455aac1e00a7b15cd51159bf12bb5""><code>fd38d07</code></a>
+fix(ssr): handle uninitialized export access as undefined (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19959"">#19959</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/vitejs/vite/commits/v6.3.5/packages/vite"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=vite&package-manager=npm_and_yarn&previous-version=6.3.4&new-version=6.3.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",8,8,16,5,6675aa98f71e4b4a0fd2809af9b8eefb75abb207
+streamlit/streamlit,6675aa98f71e4b4a0fd2809af9b8eefb75abb207,https://github.com/streamlit/streamlit/commit/6675aa98f71e4b4a0fd2809af9b8eefb75abb207,dependabot[bot],49699333,Bot,2025-05-05T12:38:28+00:00,web-flow,2025-05-05T12:38:28+00:00,"Bump @eslint-react/eslint-plugin from 1.48.5 to 1.49.0 in /frontend in the eslint group (#11270)
+
+Bumps the eslint group in /frontend with 1 update:
+[@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin).
+
+Updates `@eslint-react/eslint-plugin` from 1.48.5 to 1.49.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/Rel1cx/eslint-react/releases""><code>@​eslint-react/eslint-plugin</code>'s
+releases</a>.</em></p>
+<blockquote>
+<h2>v1.49.0 (2025-05-05)</h2>
+<h2>What's Changed</h2>
+<h3>✨ New</h3>
+<ul>
+<li>feat: add <code>jsx-key-before-spread</code>, closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1093"">#1093</a>,
+closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1087"">#1087</a>
+by <a href=""https://github.com/Rel1cx""><code>@​Rel1cx</code></a> in <a
+href=""https://redirect.github.com/Rel1cx/eslint-react/pull/1105"">Rel1cx/eslint-react#1105</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/Rel1cx/eslint-react/compare/v1.48.5...v1.49.0"">https://github.com/Rel1cx/eslint-react/compare/v1.48.5...v1.49.0</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/Rel1cx/eslint-react/blob/main/CHANGELOG.md""><code>@​eslint-react/eslint-plugin</code>'s
+changelog</a>.</em></p>
+<blockquote>
+<h2>v1.49.0 (2025-05-05)</h2>
+<h3>✨ New</h3>
+<ul>
+<li>feat: add <code>jsx-key-before-spread</code>, closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1093"">#1093</a>,
+closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1087"">#1087</a>
+by <a href=""https://github.com/Rel1cx""><code>@​Rel1cx</code></a> in <a
+href=""https://redirect.github.com/Rel1cx/eslint-react/pull/1105"">Rel1cx/eslint-react#1105</a></li>
+</ul>
+<p><strong>Full Changelog</strong>: <a
+href=""https://github.com/Rel1cx/eslint-react/compare/v1.48.5...v1.49.0"">https://github.com/Rel1cx/eslint-react/compare/v1.48.5...v1.49.0</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/8a6ab74a37c928da3f7ad6c3167371f468715178""><code>8a6ab74</code></a>
+release: 1.49.0</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/792e04a4e786e08749d21375d0d20d3989cebb8a""><code>792e04a</code></a>
+release: 1.49.0-beta.1</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/16ae00829564d818043925be8cc38b03e20ecce0""><code>16ae008</code></a>
+release: 1.49.0-next.1</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/58c6f2849efa7a7f7cade3e2bef84b6ee0f37126""><code>58c6f28</code></a>
+release: 1.49.0-beta.0</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/fd27dbf0862d62d0cec2a1a849727cbf7b7caf73""><code>fd27dbf</code></a>
+release: 1.49.0-next.0</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/5894c57404bca4522c6b56e8328b5eeb64144f4f""><code>5894c57</code></a>
+feat: add <code>jsx-key-before-spread</code>, closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1093"">#1093</a>,
+closes <a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1087"">#1087</a>
+(<a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1105"">#1105</a>)</li>
+<li><a
+href=""https://github.com/Rel1cx/eslint-react/commit/ffbe57925b5f6d58f6b701fda2642324cae98873""><code>ffbe579</code></a>
+feat(website): backport next website into main (<a
+href=""https://github.com/Rel1cx/eslint-react/tree/HEAD/packages/plugins/eslint-plugin/issues/1103"">#1103</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/Rel1cx/eslint-react/commits/v1.49.0/packages/plugins/eslint-plugin"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=@eslint-react/eslint-plugin&package-manager=npm_and_yarn&previous-version=1.48.5&new-version=1.49.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's major version (unless you unignore this specific
+dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this
+group update PR and stop Dependabot creating any more for the specific
+dependency's minor version (unless you unignore this specific
+dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR
+and stop Dependabot creating any more for the specific dependency
+(unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore
+conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will
+remove the ignore condition of the specified dependency and ignore
+conditions
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",194,194,388,2,996a0941619f36396b67b8c85400adbf52a1d880
+streamlit/streamlit,996a0941619f36396b67b8c85400adbf52a1d880,https://github.com/streamlit/streamlit/commit/996a0941619f36396b67b8c85400adbf52a1d880,lukasmasuch,2852129,User,2025-05-05T10:24:19+00:00,web-flow,2025-05-05T10:24:19+00:00,"Activate ruff-specific linting rules (#11229)
+
+## Describe your changes
+
+Activate the [Ruff-specific rules
+(RUF)](https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf). This
+contains various types of useful linting rules.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Lukas Masuch <103002573+sfc-gh-lmasuch@users.noreply.github.com>",160,150,310,39,45f142154f6d61f47fed3c3b0d44d28f3af6d51a
+streamlit/streamlit,45f142154f6d61f47fed3c3b0d44d28f3af6d51a,https://github.com/streamlit/streamlit/commit/45f142154f6d61f47fed3c3b0d44d28f3af6d51a,sfc-gh-lwilby,103002751,User,2025-05-04T10:40:48+00:00,web-flow,2025-05-04T10:40:48+00:00,"[AdvancedLayouts] Adds a width parameter to st.number_input and st.selectbox (#11257)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to the selectbox and number input elements.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",168,10,178,34,cc8b965c36482cfe2e0e43fcdaad66591e53f0df
+streamlit/streamlit,cc8b965c36482cfe2e0e43fcdaad66591e53f0df,https://github.com/streamlit/streamlit/commit/cc8b965c36482cfe2e0e43fcdaad66591e53f0df,sfc-gh-lwilby,103002751,User,2025-05-03T12:10:18+00:00,web-flow,2025-05-03T12:10:18+00:00,"[AdvancedLayouts] Adds a width parameter to st.text_input and st.text_area (#11255)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to text widgets.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",147,5,152,33,8e9973ee6bc6c7b74e45aa60002e9d57aff32343
+streamlit/streamlit,8e9973ee6bc6c7b74e45aa60002e9d57aff32343,https://github.com/streamlit/streamlit/commit/8e9973ee6bc6c7b74e45aa60002e9d57aff32343,sfc-gh-lwilby,103002751,User,2025-05-03T11:13:58+00:00,web-flow,2025-05-03T11:13:58+00:00,"[AdvancedLayouts] Adds a width parameter to st.camera_input and st.file_uploader (#11246)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to file uploader and camera input elements.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",205,12,217,20,0ecedbdc4bc611a427c1739fc5c012b53e327250
+streamlit/streamlit,0ecedbdc4bc611a427c1739fc5c012b53e327250,https://github.com/streamlit/streamlit/commit/0ecedbdc4bc611a427c1739fc5c012b53e327250,sfc-gh-lwilby,103002751,User,2025-05-03T10:30:09+00:00,web-flow,2025-05-03T10:30:09+00:00," Use descriptive names for snapshot tests. (#11251)
+
+## Describe your changes
+
+This is following up on the feedback in [this
+PR](https://github.com/streamlit/streamlit/pull/11182#discussion_r2069244831).
+Instead of using indices for snapshot test names, we now use descriptive
+names.
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Test only changes. 
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",33,8,41,76,171f0d152d362df07b54dc447931c10f98c3f44c
+streamlit/streamlit,171f0d152d362df07b54dc447931c10f98c3f44c,https://github.com/streamlit/streamlit/commit/171f0d152d362df07b54dc447931c10f98c3f44c,sfc-gh-lwilby,103002751,User,2025-05-02T10:53:19+00:00,web-flow,2025-05-02T10:53:19+00:00,"[AdvancedLayouts] Adds a width parameter to st.slider, st.select_slider (#11233)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to sliders.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",158,3,161,33,fdfae3c0e7df76b590fbf9692a6c9f5fec99bd87
+streamlit/streamlit,fdfae3c0e7df76b590fbf9692a6c9f5fec99bd87,https://github.com/streamlit/streamlit/commit/fdfae3c0e7df76b590fbf9692a6c9f5fec99bd87,kajarenc,6664805,User,2025-05-01T16:28:08+00:00,web-flow,2025-05-01T16:28:08+00:00,"Add logging if an error happened during auth flow (#11220)
+
+## Describe your changes
+
+Add logging for errors during the auth flow
+
+## GitHub Issue Link (if applicable)
+To help debug situations like this:
+https://github.com/streamlit/streamlit/issues/11168
+
+## Testing Plan
+
+Just logging added, nothing changes from the business logic perspective
+
+- Explanation of why no additional tests are needed
+- Unit Tests (JS and/or Python)
+- E2E Tests
+- Any manual testing needed?
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.
+
+---------
+
+Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>",29,1,30,2,dad9f9e0dc9f8ac57f1732875bb92e7302f5b53f
+streamlit/streamlit,dad9f9e0dc9f8ac57f1732875bb92e7302f5b53f,https://github.com/streamlit/streamlit/commit/dad9f9e0dc9f8ac57f1732875bb92e7302f5b53f,dependabot[bot],49699333,Bot,2025-04-30T20:49:48+00:00,web-flow,2025-04-30T20:49:48+00:00,"Bump vite from 6.3.3 to 6.3.4 in /frontend (#11245)
+
+Bumps [vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite)
+from 6.3.3 to 6.3.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/releases"">vite's
+releases</a>.</em></p>
+<blockquote>
+<h2>v6.3.4</h2>
+<p>Please refer to <a
+href=""https://github.com/vitejs/vite/blob/v6.3.4/packages/vite/CHANGELOG.md"">CHANGELOG.md</a>
+for details.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md"">vite's
+changelog</a>.</em></p>
+<blockquote>
+<h2><!-- raw HTML omitted -->6.3.4 (2025-04-30)<!-- raw HTML omitted
+--></h2>
+<ul>
+<li>fix: check static serve file inside sirv (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19965"">#19965</a>)
+(<a
+href=""https://github.com/vitejs/vite/commit/c22c43de612eebb6c182dd67850c24e4fab8cacb"">c22c43d</a>),
+closes <a
+href=""https://redirect.github.com/vitejs/vite/issues/19965"">#19965</a></li>
+<li>fix(optimizer): return plain object when using <code>require</code>
+to import externals in optimized dependenci (<a
+href=""https://github.com/vitejs/vite/commit/efc5eab253419fde0a6a48b8d2f233063d6a9643"">efc5eab</a>),
+closes <a
+href=""https://redirect.github.com/vitejs/vite/issues/19940"">#19940</a></li>
+<li>refactor: remove duplicate plugin context type (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19935"">#19935</a>)
+(<a
+href=""https://github.com/vitejs/vite/commit/d6d01c2292fa4f9603e05b95d81c8724314c20e0"">d6d01c2</a>),
+closes <a
+href=""https://redirect.github.com/vitejs/vite/issues/19935"">#19935</a></li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/vitejs/vite/commit/b040d547a17c4bfe8aba44534228667a50612318""><code>b040d54</code></a>
+release: v6.3.4</li>
+<li><a
+href=""https://github.com/vitejs/vite/commit/c22c43de612eebb6c182dd67850c24e4fab8cacb""><code>c22c43d</code></a>
+fix: check static serve file inside sirv (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19965"">#19965</a>)</li>
+<li><a
+href=""https://github.com/vitejs/vite/commit/efc5eab253419fde0a6a48b8d2f233063d6a9643""><code>efc5eab</code></a>
+fix(optimizer): return plain object when using <code>require</code> to
+import externals ...</li>
+<li><a
+href=""https://github.com/vitejs/vite/commit/d6d01c2292fa4f9603e05b95d81c8724314c20e0""><code>d6d01c2</code></a>
+refactor: remove duplicate plugin context type (<a
+href=""https://github.com/vitejs/vite/tree/HEAD/packages/vite/issues/19935"">#19935</a>)</li>
+<li>See full diff in <a
+href=""https://github.com/vitejs/vite/commits/v6.3.4/packages/vite"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=vite&package-manager=npm_and_yarn&previous-version=6.3.3&new-version=6.3.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+You can disable automated security fix PRs for this repo from the
+[Security Alerts
+page](https://github.com/streamlit/streamlit/network/alerts).
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,7b11b879adfee6603057e2d33db3460246528fc9
+streamlit/streamlit,7b11b879adfee6603057e2d33db3460246528fc9,https://github.com/streamlit/streamlit/commit/7b11b879adfee6603057e2d33db3460246528fc9,sfc-gh-lwilby,103002751,User,2025-04-30T18:52:33+00:00,web-flow,2025-04-30T18:52:33+00:00,"[AdvancedLayouts] Adds a width parameter to st.audio_input (#11243)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to audio input elements.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",87,3,90,11,005ab1d0db65859793c85c30a22c91b5669bc8a9
+streamlit/streamlit,005ab1d0db65859793c85c30a22c91b5669bc8a9,https://github.com/streamlit/streamlit/commit/005ab1d0db65859793c85c30a22c91b5669bc8a9,sfc-gh-lwilby,103002751,User,2025-04-30T18:52:19+00:00,web-flow,2025-04-30T18:52:19+00:00,"[AdvancedLayouts] Adds a width parameter to st.progress (#11182)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to progress elements.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",75,1,76,16,b6752f1e1a1ddb37321975619c75a3d10b1abf48
+streamlit/streamlit,b6752f1e1a1ddb37321975619c75a3d10b1abf48,https://github.com/streamlit/streamlit/commit/b6752f1e1a1ddb37321975619c75a3d10b1abf48,sfc-gh-lwilby,103002751,User,2025-04-30T18:43:25+00:00,web-flow,2025-04-30T18:43:25+00:00,"[AdvancedLayouts] Adds a width parameter to st.help (#11181)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to help elements.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",114,4,118,11,690123ad47bc28d8a2568fa6cb648d8469ea7be6
+streamlit/streamlit,690123ad47bc28d8a2568fa6cb648d8469ea7be6,https://github.com/streamlit/streamlit/commit/690123ad47bc28d8a2568fa6cb648d8469ea7be6,sfc-gh-lwilby,103002751,User,2025-04-30T18:43:12+00:00,web-flow,2025-04-30T18:43:12+00:00,"[AdvancedLayouts] Adds a width parameter to st.json (#11177)
+
+## Describe your changes
+
+This PR is part of the [AdvancedLayouts] project and introduces a new
+width parameter to json blocks.
+
+## GitHub Issue Link (if applicable)
+
+## Testing Plan
+
+Unit Tests (JS and/or Python) ✅
+E2E Tests ✅
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",114,1,115,12,d0825f4617ff82f5c2c8090f862fb58f3b5c89ea
+streamlit/streamlit,d0825f4617ff82f5c2c8090f862fb58f3b5c89ea,https://github.com/streamlit/streamlit/commit/d0825f4617ff82f5c2c8090f862fb58f3b5c89ea,jokester,802130,User,2025-04-30T16:38:00+00:00,web-flow,2025-04-30T16:38:00+00:00,"fix incorrect comment in `_make_function_key` used by cache_* APIs (#11169)
+
+## Describe your changes`
+
+## GitHub Issue Link (if applicable)
+
+https://github.com/streamlit/streamlit/issues/11157 (which cannot be
+fixed by this PR, or be fixed easily)
+
+## Testing Plan
+
+no: only comment is changed
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",3,2,5,1,572dbcf6e5fc6a5f99d1737e15b91989a49e2b28
+streamlit/streamlit,572dbcf6e5fc6a5f99d1737e15b91989a49e2b28,https://github.com/streamlit/streamlit/commit/572dbcf6e5fc6a5f99d1737e15b91989a49e2b28,dependabot[bot],49699333,Bot,2025-04-30T15:10:45+00:00,web-flow,2025-04-30T15:10:45+00:00,"Bump lighthouse from 12.5.1 to 12.6.0 in /frontend (#11241)
+
+Bumps [lighthouse](https://github.com/GoogleChrome/lighthouse) from
+12.5.1 to 12.6.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a
+href=""https://github.com/GoogleChrome/lighthouse/releases"">lighthouse's
+releases</a>.</em></p>
+<blockquote>
+<h2>v12.6.0</h2>
+<p><a
+href=""https://github.com/GoogleChrome/lighthouse/compare/v12.5.1...v12.6.0"">Full
+Changelog</a></p>
+<p>We expect this release to ship in the DevTools of <a
+href=""https://chromiumdash.appspot.com/schedule"">Chrome 137</a>, and to
+PageSpeed Insights within a few days.</p>
+<h2>New contributors</h2>
+<p>Thanks to our new contributors 👽🐷🐰🐯🐻!</p>
+<p>Jack Franklin <a
+href=""https://github.com/jackfranklin""><code>@​jackfranklin</code></a>
+Rob Kodey <a href=""https://github.com/rkodey""><code>@​rkodey</code></a>
+Clément Barbaza <a
+href=""https://github.com/cba85""><code>@​cba85</code></a></p>
+<h2>Notable Changes</h2>
+<p>The Performance category in the Lighthouse report now has an option
+to toggle &quot;insights&quot; - read more <a
+href=""https://developer.chrome.com/blog/moving-lighthouse-to-insights"">here</a>.</p>
+<h2>Core</h2>
+<ul>
+<li>disable invalidationTracking trace event to prevent crash (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16451"">#16451</a>)</li>
+<li>migrate audits from devtoolsLogs/traces to DevtoolsLog/Trace (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16448"">#16448</a>)</li>
+<li>modify scoreDisplayMode for insight audits to match Perf panel (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16432"">#16432</a>)</li>
+<li>use <code>with</code> import attributes for legacy-javascript, bump
+to node 18.20 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16415"">#16415</a>)</li>
+<li>image-size-responsive: use real mimeType to exclude svg (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16443"">#16443</a>)</li>
+<li>insights: drop slow-css-selector-insight for now (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16457"">#16457</a>)</li>
+<li>insights: implement <code>duplicated-javascript-insight</code> (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16456"">#16456</a>)</li>
+<li>insights: add prominent toggle banner to report (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16461"">#16461</a>)</li>
+<li>insights: implement <code>network-dependency-tree</code> insight (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16407"">#16407</a>)</li>
+<li>optimized-images: ignore internal encoding errors (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16444"">#16444</a>)</li>
+<li>preload-fonts: add Stylesheets to required artifacts (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16421"">#16421</a>)</li>
+<li>stacks: correctly identify angular (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16439"">#16439</a>)</li>
+<li>third-party-cookies: update description (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16464"">#16464</a>)</li>
+<li>tracehouse: fixup parent tasks when fudging endTime (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16420"">#16420</a>)</li>
+</ul>
+<h2>Report</h2>
+<ul>
+<li>add analytics hook for insights state (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16466"">#16466</a>)</li>
+<li>adjust insights notice banner, localize strings (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16463"">#16463</a>)</li>
+<li>add insights group description (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16455"">#16455</a>)</li>
+<li>associate insight audits with stack packs (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16440"">#16440</a>)</li>
+<li>tweak style of insight tables; use system font (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16434"">#16434</a>)</li>
+<li>support node inside list detail, use in insight audits (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16433"">#16433</a>)</li>
+<li>display insights when using toggle, even if hidden (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16431"">#16431</a>)</li>
+</ul>
+<h2>Deps</h2>
+<ul>
+<li>upgrade trace_engine to 0.0.52 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16465"">#16465</a>)</li>
+<li>upgrade trace_engine to 0.0.51 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16447"">#16447</a>)</li>
+<li>upgrade deps (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16438"">#16438</a>)</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a
+href=""https://github.com/GoogleChrome/lighthouse/blob/main/changelog.md"">lighthouse's
+changelog</a>.</em></p>
+<blockquote>
+<h1>12.6.0 (2025-04-28)</h1>
+<p><a
+href=""https://github.com/GoogleChrome/lighthouse/compare/v12.5.1...v12.6.0"">Full
+Changelog</a></p>
+<p>We expect this release to ship in the DevTools of <a
+href=""https://chromiumdash.appspot.com/schedule"">Chrome 137</a>, and to
+PageSpeed Insights within a few days.</p>
+<h2>New contributors</h2>
+<p>Thanks to our new contributors 👽🐷🐰🐯🐻!</p>
+<p>Jack Franklin <a
+href=""https://github.com/jackfranklin""><code>@​jackfranklin</code></a>
+Rob Kodey <a href=""https://github.com/rkodey""><code>@​rkodey</code></a>
+Clément Barbaza <a
+href=""https://github.com/cba85""><code>@​cba85</code></a></p>
+<h2>Notable Changes</h2>
+<p>The Performance category in the Lighthouse report now has an option
+to toggle &quot;insights&quot; - read more <a
+href=""https://github.com/GoogleChrome/lighthouse/discussions/16462"">here</a>.</p>
+<h2>Core</h2>
+<ul>
+<li>disable invalidationTracking trace event to prevent crash (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16451"">#16451</a>)</li>
+<li>migrate audits from devtoolsLogs/traces to DevtoolsLog/Trace (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16448"">#16448</a>)</li>
+<li>modify scoreDisplayMode for insight audits to match Perf panel (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16432"">#16432</a>)</li>
+<li>use <code>with</code> import attributes for legacy-javascript, bump
+to node 18.20 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16415"">#16415</a>)</li>
+<li>image-size-responsive: use real mimeType to exclude svg (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16443"">#16443</a>)</li>
+<li>insights: drop slow-css-selector-insight for now (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16457"">#16457</a>)</li>
+<li>insights: implement <code>duplicated-javascript-insight</code> (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16456"">#16456</a>)</li>
+<li>insights: add prominent toggle banner to report (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16461"">#16461</a>)</li>
+<li>insights: implement <code>network-dependency-tree</code> insight (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16407"">#16407</a>)</li>
+<li>optimized-images: ignore internal encoding errors (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16444"">#16444</a>)</li>
+<li>preload-fonts: add Stylesheets to required artifacts (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16421"">#16421</a>)</li>
+<li>stacks: correctly identify angular (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16439"">#16439</a>)</li>
+<li>third-party-cookies: update description (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16464"">#16464</a>)</li>
+<li>tracehouse: fixup parent tasks when fudging endTime (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16420"">#16420</a>)</li>
+</ul>
+<h2>Report</h2>
+<ul>
+<li>add analytics hook for insights state (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16466"">#16466</a>)</li>
+<li>adjust insights notice banner, localize strings (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16463"">#16463</a>)</li>
+<li>add insights group description (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16455"">#16455</a>)</li>
+<li>associate insight audits with stack packs (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16440"">#16440</a>)</li>
+<li>tweak style of insight tables; use system font (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16434"">#16434</a>)</li>
+<li>support node inside list detail, use in insight audits (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16433"">#16433</a>)</li>
+<li>display insights when using toggle, even if hidden (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16431"">#16431</a>)</li>
+</ul>
+<h2>Deps</h2>
+<ul>
+<li>upgrade trace_engine to 0.0.52 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16465"">#16465</a>)</li>
+<li>upgrade trace_engine to 0.0.51 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16447"">#16447</a>)</li>
+<li>upgrade deps (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/pull/16438"">#16438</a>)</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/1395a860b14dbdb6b85bc46fcbdf6c8ee1c8dcbe""><code>1395a86</code></a>
+v12.6.0 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16467"">#16467</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/25041ae67a62dfb5ca3f0f6d510b2c5d354cb1b3""><code>25041ae</code></a>
+clients(devtools): remove insight audits config hack (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16468"">#16468</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/aa401d3fec8a89a27188bfb0eca94b20dd110703""><code>aa401d3</code></a>
+report: add analytics hook for insights state (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16466"">#16466</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/f549c5349ed2567e0770bb1817db8cd218e58855""><code>f549c53</code></a>
+deps: upgrade trace_engine to 0.0.52 (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16465"">#16465</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/27228d9b25fddae917f68e87671040852fb650c5""><code>27228d9</code></a>
+core(insights): drop slow-css-selector-insight for now (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16457"">#16457</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/1e0862872d561e6e45624f5d736c783065f84d92""><code>1e08628</code></a>
+core(insights): implement <code>duplicated-javascript-insight</code> (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16456"">#16456</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/c54a637d25b0d64ae5e645f7cb812faf3f1e1435""><code>c54a637</code></a>
+core(third-party-cookies): update description (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16464"">#16464</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/54eb2215c4228951d43b197219caa6679b19175c""><code>54eb221</code></a>
+report: adjust insights notice banner, localize strings (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16463"">#16463</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/671988d6e42fe453b69ea420c0945740b2580958""><code>671988d</code></a>
+core(insights): add prominent toggle banner to report (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16461"">#16461</a>)</li>
+<li><a
+href=""https://github.com/GoogleChrome/lighthouse/commit/87fc576949b7ecf3110c13688ac03f22dc856dd8""><code>87fc576</code></a>
+misc(treemap): represent sizes using transfer size (<a
+href=""https://redirect.github.com/GoogleChrome/lighthouse/issues/16460"">#16460</a>)</li>
+<li>Additional commits viewable in <a
+href=""https://github.com/GoogleChrome/lighthouse/compare/v12.5.1...v12.6.0"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=lighthouse&package-manager=npm_and_yarn&previous-version=12.5.1&new-version=12.6.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",53,38,91,2,de2305c65430d4f45eb276f268312a36ba9e8fde
+streamlit/streamlit,de2305c65430d4f45eb276f268312a36ba9e8fde,https://github.com/streamlit/streamlit/commit/de2305c65430d4f45eb276f268312a36ba9e8fde,dependabot[bot],49699333,Bot,2025-04-30T15:09:45+00:00,web-flow,2025-04-30T15:09:45+00:00,"Bump @types/plotly.js from 2.35.4 to 2.35.5 in /frontend (#11242)
+
+Bumps
+[@types/plotly.js](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/plotly.js)
+from 2.35.4 to 2.35.5.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a
+href=""https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/plotly.js"">compare
+view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility
+score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=@types/plotly.js&package-manager=npm_and_yarn&previous-version=2.35.4&new-version=2.35.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,6,12,2,b25d3e00ab7fd02887488e15fefe4aa91f96621d
+streamlit/streamlit,b25d3e00ab7fd02887488e15fefe4aa91f96621d,https://github.com/streamlit/streamlit/commit/b25d3e00ab7fd02887488e15fefe4aa91f96621d,lukasmasuch,2852129,User,2025-04-30T14:41:01+00:00,web-flow,2025-04-30T14:41:01+00:00,"Activate bandit security linting rules (#11227)
+
+## Describe your changes
+
+Activate [flake8-bandit
+(S)](https://docs.astral.sh/ruff/rules/#flake8-bandit-s) security
+linting rule set in ruff. This checks for various security related code
+patterns.
+
+---
+
+**Contribution License Agreement**
+
+By submitting this pull request you agree that all contributions to this
+project are made under the Apache 2.0 license.",20,19,39,11,189c699f4f52e105b7ffc132f2508332fbb83cbe

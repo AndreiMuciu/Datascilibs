@@ -1,0 +1,266 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+mwaskom/seaborn,86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef,https://github.com/mwaskom/seaborn/commit/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef,mwaskom,315810,User,2025-01-26T16:55:13+00:00,web-flow,2025-01-26T16:55:13+00:00,"Fix mock __array__ interface (#3821)
+
+Addresses a backwards compatibility bug introduced in #3803",2,2,4,1,eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1
+mwaskom/seaborn,eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1,https://github.com/mwaskom/seaborn/commit/eb0b5cc1c331d8ef7358caeb5c85df2781f69bb1,mariosasko,47462742,User,2025-01-26T15:24:34+00:00,web-flow,2025-01-26T15:24:34+00:00,"Support array-like mask in heatmaps (#3803)
+
+* Support array-like mask in heatmaps
+
+* Nit",26,8,34,2,e0c2431789384559050cc81b8cd97dfbf7738bdc
+mwaskom/seaborn,e0c2431789384559050cc81b8cd97dfbf7738bdc,https://github.com/mwaskom/seaborn/commit/e0c2431789384559050cc81b8cd97dfbf7738bdc,brownsarahm,10656079,User,2025-01-26T15:18:53+00:00,web-flow,2025-01-26T15:18:53+00:00,Fix typo (#3757),1,1,2,1,5023f2ee885a45200f5b63156a158ddf7272c29e
+mwaskom/seaborn,5023f2ee885a45200f5b63156a158ddf7272c29e,https://github.com/mwaskom/seaborn/commit/5023f2ee885a45200f5b63156a158ddf7272c29e,mwaskom,315810,User,2025-01-26T15:17:21+00:00,web-flow,2025-01-26T15:17:21+00:00,"Address some upcoming deprecations (#3820)
+
+* Address matplotlib bxp vert= deprecation
+
+* Address np.in1d deprecation
+
+* Address converter attribute deprecation
+
+* Address parameterized fixture deprecation
+
+* Address false-positive internal deprecation warning
+
+* Fix boxplot backcompat",23,10,33,4,385e54676ca16d0132434bc9df6bc41ea8b2a0d4
+mwaskom/seaborn,385e54676ca16d0132434bc9df6bc41ea8b2a0d4,https://github.com/mwaskom/seaborn/commit/385e54676ca16d0132434bc9df6bc41ea8b2a0d4,mwaskom,315810,User,2024-12-16T12:54:02+00:00,web-flow,2024-12-16T12:54:02+00:00,Fix tick visibility introspection on 3.10 (#3802),13,12,25,1,b4e5f8d261d6d5524a00b7dd35e00a40e4855872
+mwaskom/seaborn,b4e5f8d261d6d5524a00b7dd35e00a40e4855872,https://github.com/mwaskom/seaborn/commit/b4e5f8d261d6d5524a00b7dd35e00a40e4855872,mwaskom,315810,User,2024-07-22T11:32:48+00:00,web-flow,2024-07-22T11:32:48+00:00,Pin mypy (#3732),1,1,2,1,2f5ea60930b96b461107a564ee706aca9d00a6d3
+mwaskom/seaborn,2f5ea60930b96b461107a564ee706aca9d00a6d3,https://github.com/mwaskom/seaborn/commit/2f5ea60930b96b461107a564ee706aca9d00a6d3,mwaskom,315810,User,2024-07-11T11:23:32+00:00,web-flow,2024-07-11T11:23:32+00:00,Try pinning pillow to fix ci (#3727),1,0,1,1,09195d4c314d9477866ba4bd5cb650c3a7c01e41
+mwaskom/seaborn,09195d4c314d9477866ba4bd5cb650c3a7c01e41,https://github.com/mwaskom/seaborn/commit/09195d4c314d9477866ba4bd5cb650c3a7c01e41,staeiou,4693439,User,2024-06-16T15:43:29+00:00,web-flow,2024-06-16T15:43:29+00:00,Fix typo in docstring: trusthworthy->trustworthy (#3712),1,1,2,1,f0b48e891a1bb573b7a46cfc9936dcd35d7d4f24
+mwaskom/seaborn,f0b48e891a1bb573b7a46cfc9936dcd35d7d4f24,https://github.com/mwaskom/seaborn/commit/f0b48e891a1bb573b7a46cfc9936dcd35d7d4f24,MaozGelbart,13831112,User,2024-04-25T14:36:49+00:00,web-flow,2024-04-25T14:36:49+00:00,Fix docstrings (#3678),22,5,27,2,d767578eceafe5feb84817fcdc56296bf2731a6d
+mwaskom/seaborn,d767578eceafe5feb84817fcdc56296bf2731a6d,https://github.com/mwaskom/seaborn/commit/d767578eceafe5feb84817fcdc56296bf2731a6d,michaelquinn32,3473921,User,2024-04-25T11:02:23+00:00,web-flow,2024-04-25T11:02:23+00:00,Relax typing strictness for Plot.theme (#3684),2,2,4,1,58f170fe799ef496adae19925d7d4f0f14f8da95
+mwaskom/seaborn,58f170fe799ef496adae19925d7d4f0f14f8da95,https://github.com/mwaskom/seaborn/commit/58f170fe799ef496adae19925d7d4f0f14f8da95,mwaskom,315810,User,2024-04-25T11:02:02+00:00,web-flow,2024-04-25T11:02:02+00:00,Remove reference to deprecated numpy error class in tests (#3685),0,3,3,1,ae7acf0ce6e30ae773f513e0ccadbb7341cf5e90
+mwaskom/seaborn,ae7acf0ce6e30ae773f513e0ccadbb7341cf5e90,https://github.com/mwaskom/seaborn/commit/ae7acf0ce6e30ae773f513e0ccadbb7341cf5e90,yvonnefroehlich,94163266,User,2024-03-30T18:50:26+00:00,web-flow,2024-03-30T18:50:26+00:00,Fix typo (#3665),1,1,2,1,9bdfc7484c15894dd35d58d3f16475389dfe4fe5
+mwaskom/seaborn,9bdfc7484c15894dd35d58d3f16475389dfe4fe5,https://github.com/mwaskom/seaborn/commit/9bdfc7484c15894dd35d58d3f16475389dfe4fe5,mmore500,10763333,User,2024-02-25T16:31:25+00:00,web-flow,2024-02-25T16:31:25+00:00,Fix minor boxenplot docs misspelling (#3637),1,1,2,1,b95d6d1ce9dfed6970015d8bdad9068b5749868a
+mwaskom/seaborn,b95d6d1ce9dfed6970015d8bdad9068b5749868a,https://github.com/mwaskom/seaborn/commit/b95d6d1ce9dfed6970015d8bdad9068b5749868a,mwaskom,315810,User,2024-01-25T13:04:48+00:00,mwaskom,2024-01-25T13:04:48+00:00,Tweak language,1,1,2,1,5ef7c27aac9f96e97fa1aac0ba106bac7d3febf0
+mwaskom/seaborn,5ef7c27aac9f96e97fa1aac0ba106bac7d3febf0,https://github.com/mwaskom/seaborn/commit/5ef7c27aac9f96e97fa1aac0ba106bac7d3febf0,mwaskom,315810,User,2024-01-25T13:02:45+00:00,mwaskom,2024-01-25T13:02:45+00:00,Add v0.13.2 release notes,5,0,5,2,7aed2a044ce2754a53729251184d65b723ada892
+mwaskom/seaborn,7aed2a044ce2754a53729251184d65b723ada892,https://github.com/mwaskom/seaborn/commit/7aed2a044ce2754a53729251184d65b723ada892,mwaskom,315810,User,2024-01-21T01:46:00+00:00,web-flow,2024-01-21T01:46:00+00:00,"Adapt to deprecations in pandas 2.2.0 (#3620)
+
+* Adapt to deprecations in pandas 2.2.0
+
+* Backcompat for bug where the fix was deprecated?
+
+* More multi-version support",42,14,56,8,a3cb0f1b33551eb25fed1907d0abdd0237fac215
+mwaskom/seaborn,a3cb0f1b33551eb25fed1907d0abdd0237fac215,https://github.com/mwaskom/seaborn/commit/a3cb0f1b33551eb25fed1907d0abdd0237fac215,aalok-sathe,10784697,User,2024-01-13T15:46:08+00:00,web-flow,2024-01-13T15:46:08+00:00,"microscopic typofix: ""swaarms"" (#3611)
+
+appears here: https://seaborn.pydata.org/generated/seaborn.swarmplot.html",1,1,2,1,6890b315d00b74f372bc91f3929c803837b2ddf1
+mwaskom/seaborn,6890b315d00b74f372bc91f3929c803837b2ddf1,https://github.com/mwaskom/seaborn/commit/6890b315d00b74f372bc91f3929c803837b2ddf1,mwaskom,315810,User,2023-12-31T21:35:22+00:00,mwaskom,2023-12-31T21:35:22+00:00,Finalize v0.13.1 release notes,6,4,10,1,1771d8e2c903847d4274963638fbae32c52bd2d8
+mwaskom/seaborn,1771d8e2c903847d4274963638fbae32c52bd2d8,https://github.com/mwaskom/seaborn/commit/1771d8e2c903847d4274963638fbae32c52bd2d8,mwaskom,315810,User,2023-12-31T12:59:05+00:00,mwaskom,2023-12-31T12:59:05+00:00,Update release notes,7,2,9,3,785708f4a4b5a4497958fa611df78da96b311879
+mwaskom/seaborn,785708f4a4b5a4497958fa611df78da96b311879,https://github.com/mwaskom/seaborn/commit/785708f4a4b5a4497958fa611df78da96b311879,hamdanal,93259987,User,2023-12-30T23:55:56+00:00,web-flow,2023-12-30T23:55:56+00:00,Cleanup compat code for obsolete versions of dependencies (#3607),44,115,159,12,45a098fd254b6b7385e708b29a556017808ecd40
+mwaskom/seaborn,45a098fd254b6b7385e708b29a556017808ecd40,https://github.com/mwaskom/seaborn/commit/45a098fd254b6b7385e708b29a556017808ecd40,MaozGelbart,13831112,User,2023-12-28T18:04:16+00:00,web-flow,2023-12-28T18:04:16+00:00,"FIX: Enable xticklabels for all bottom axes (#3600)
+
+* Test for xticklabels presence in bottom axes
+
+* Enable xticklabels for bottom axes
+
+* Correctly generalize ticklabel presence
+
+* satisfy linter",14,0,14,2,2c115ed7626a236c772ee8a4eacdfa300c570e68
+mwaskom/seaborn,2c115ed7626a236c772ee8a4eacdfa300c570e68,https://github.com/mwaskom/seaborn/commit/2c115ed7626a236c772ee8a4eacdfa300c570e68,mwaskom,315810,User,2023-12-27T19:57:11+00:00,web-flow,2023-12-27T19:57:11+00:00,"Avoid error when dodge=True, hue=None (#3605)
+
+Fixes #3553",15,0,15,2,1617be03dc8f6c2977dbb31714e3ea9029ea3c9a
+mwaskom/seaborn,1617be03dc8f6c2977dbb31714e3ea9029ea3c9a,https://github.com/mwaskom/seaborn/commit/1617be03dc8f6c2977dbb31714e3ea9029ea3c9a,mwaskom,315810,User,2023-12-27T19:34:04+00:00,mwaskom,2023-12-27T19:34:04+00:00,Add v0.13.1 release notes,16,0,16,1,9a0842d3a8449bc4d034792789495bd16a0f1615
+mwaskom/seaborn,9a0842d3a8449bc4d034792789495bd16a0f1615,https://github.com/mwaskom/seaborn/commit/9a0842d3a8449bc4d034792789495bd16a0f1615,mwaskom,315810,User,2023-12-25T14:19:00+00:00,web-flow,2023-12-25T14:19:00+00:00,"Change how pandoc gets installed in CI (#3604)
+
+* Change how pandoc gets installed in CI
+
+* Set env var to silence warning",3,1,4,1,cfa74b4c1ab0e17b074c21604073d3152a4a0018
+mwaskom/seaborn,cfa74b4c1ab0e17b074c21604073d3152a4a0018,https://github.com/mwaskom/seaborn/commit/cfa74b4c1ab0e17b074c21604073d3152a4a0018,hamdanal,93259987,User,2023-12-23T13:10:45+00:00,web-flow,2023-12-23T13:10:45+00:00,"Add a missing raise in kdeplot and slightly improve lmplot signature (#3602)
+
+I noticed these while working on the stubs at typeshed.
+They felt small enough to include in a single PR.
+
+1. There is a missing `raise ` before `TypeError(msg)` in `kde_plot`
+2. The `data` parameter of `lmplot` is required but it has a default of `None`. 20 lines later
+   there is a check that raises a `TypeError` if `data is None`. Removing the default makes
+   sense here to signal to the user that they must pass this argument. It also has two more
+   advantages. The first is that your IDE will now helpfully yell at you if you don't pass the
+   argument. The second is minor but it will allow us to keep running the stub tests for this
+   function at typeshed where we removed the default which made the stub go out of sync with
+   the runtime implementation so we had to skip its tests to pass CI. Note that there is no
+   user facing change here as calling the function without passing `data` still raises a
+   `TypeError` with a clear message.",6,2,8,3,5051ede2ee9715f41fbbf04323b900eb74ced41c
+mwaskom/seaborn,5051ede2ee9715f41fbbf04323b900eb74ced41c,https://github.com/mwaskom/seaborn/commit/5051ede2ee9715f41fbbf04323b900eb74ced41c,mwaskom,315810,User,2023-12-22T22:36:12+00:00,web-flow,2023-12-22T22:36:12+00:00,"Crosslink to aesthetics tutorial from set_context/plotting_context (#3599)
+
+* Crosslink to aesthetics tutorial from set_context/plotting_context
+
+* Rephrasing",5,6,11,1,b49e595360ae8c065410691f9f507b7464157ad5
+mwaskom/seaborn,b49e595360ae8c065410691f9f507b7464157ad5,https://github.com/mwaskom/seaborn/commit/b49e595360ae8c065410691f9f507b7464157ad5,dependabot[bot],49699333,Bot,2023-12-21T01:12:12+00:00,web-flow,2023-12-21T01:12:12+00:00,"Bump actions/setup-python from 4.7.1 to 5.0.0 (#3590)
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4.7.1 to 5.0.0.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236...0a5c61591373683505ea898e09a3ea4f39ef2b9c)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,bd784ca5cfb144610626f9c3ada2c7565fbee7dd
+mwaskom/seaborn,bd784ca5cfb144610626f9c3ada2c7565fbee7dd,https://github.com/mwaskom/seaborn/commit/bd784ca5cfb144610626f9c3ada2c7565fbee7dd,mwaskom,315810,User,2023-12-20T12:56:31+00:00,mwaskom,2023-12-20T12:56:31+00:00,Fix typo in docs,1,1,2,1,d8476676a066c137ac43d50ad49b3ee586ea580f
+mwaskom/seaborn,d8476676a066c137ac43d50ad49b3ee586ea580f,https://github.com/mwaskom/seaborn/commit/d8476676a066c137ac43d50ad49b3ee586ea580f,mwaskom,315810,User,2023-12-17T22:43:32+00:00,web-flow,2023-12-17T22:43:32+00:00,Link to error bar tutorial from parameter documentation (#3595),4,2,6,2,865618d4f786d02eeedfef578ab2cd96e7351c30
+mwaskom/seaborn,865618d4f786d02eeedfef578ab2cd96e7351c30,https://github.com/mwaskom/seaborn/commit/865618d4f786d02eeedfef578ab2cd96e7351c30,mwaskom,315810,User,2023-12-12T12:21:00+00:00,web-flow,2023-12-12T12:21:00+00:00,Update LICENSE.md,1,1,2,1,056413d7393e3daec597d430c076e45938d53376
+mwaskom/seaborn,056413d7393e3daec597d430c076e45938d53376,https://github.com/mwaskom/seaborn/commit/056413d7393e3daec597d430c076e45938d53376,mwaskom,315810,User,2023-12-09T23:28:13+00:00,web-flow,2023-12-09T23:28:13+00:00,"Add extent to Plot.layout configuration (#3552)
+
+* Add corners to Plot.layout configuration
+
+* Rename corners -> extent
+
+* Backcompat for get_layout_engine
+
+* Improve documentation",99,11,110,5,03d703b80f0fcc20a037d476af0d1fb25b5f3870
+mwaskom/seaborn,03d703b80f0fcc20a037d476af0d1fb25b5f3870,https://github.com/mwaskom/seaborn/commit/03d703b80f0fcc20a037d476af0d1fb25b5f3870,mwaskom,315810,User,2023-12-09T23:03:13+00:00,web-flow,2023-12-09T23:03:13+00:00,"Add weighted estimation in function interface (#3586)
+
+* Add weighted estimation in function interface
+
+* Add weights to relplot and catplot
+
+* Fix relpot weights
+
+* Matplotlib backcompat in tests",127,51,178,7,2bb945c01ad0c18f4c9faa516f0a75e7b89043ec
+mwaskom/seaborn,2bb945c01ad0c18f4c9faa516f0a75e7b89043ec,https://github.com/mwaskom/seaborn/commit/2bb945c01ad0c18f4c9faa516f0a75e7b89043ec,mwaskom,315810,User,2023-12-06T02:38:16+00:00,web-flow,2023-12-06T02:38:16+00:00,"Add support for weights in objects.Est (#3580)
+
+* Add support for weights in objects.Est
+
+* Fix garbled docstring text",135,4,139,5,f0136337211854b2e63e5d26bee8b12ab60e0f42
+mwaskom/seaborn,f0136337211854b2e63e5d26bee8b12ab60e0f42,https://github.com/mwaskom/seaborn/commit/f0136337211854b2e63e5d26bee8b12ab60e0f42,neuronflow,7048826,User,2023-12-04T11:51:56+00:00,web-flow,2023-12-04T11:51:56+00:00,"Update README.md (#3582)
+
+fixes hyperlink to license :)",1,1,2,1,908ca95137c0e73bb6ac9ce9a8051577b6453138
+mwaskom/seaborn,908ca95137c0e73bb6ac9ce9a8051577b6453138,https://github.com/mwaskom/seaborn/commit/908ca95137c0e73bb6ac9ce9a8051577b6453138,eliotfinch,63300275,User,2023-12-01T23:31:01+00:00,web-flow,2023-12-01T23:31:01+00:00,Fix typo (#3578),1,1,2,1,e9b5baa9e7e09665207efaf24405f0d417ef5649
+mwaskom/seaborn,e9b5baa9e7e09665207efaf24405f0d417ef5649,https://github.com/mwaskom/seaborn/commit/e9b5baa9e7e09665207efaf24405f0d417ef5649,yvonnefroehlich,94163266,User,2023-11-30T12:06:05+00:00,web-flow,2023-11-30T12:06:05+00:00,Fix typo 'varaible' to 'variable' (#3574),1,1,2,1,7e3da70b6b332673aa5f74cc8e03658d0ff990b0
+mwaskom/seaborn,7e3da70b6b332673aa5f74cc8e03658d0ff990b0,https://github.com/mwaskom/seaborn/commit/7e3da70b6b332673aa5f74cc8e03658d0ff990b0,MaozGelbart,13831112,User,2023-11-30T12:05:42+00:00,web-flow,2023-11-30T12:05:42+00:00,"MAINT: remove obsolete matplotlib version compatibility (#3577)
+
+* Remove code related to unsupported mpl versions
+
+* Remove unused imports
+
+* Remove unnecesarry code blocks
+
+* Update matplotlib dependency version",16,123,139,10,9a2196d42a53272e135809f1b042130d0875739a
+mwaskom/seaborn,9a2196d42a53272e135809f1b042130d0875739a,https://github.com/mwaskom/seaborn/commit/9a2196d42a53272e135809f1b042130d0875739a,nokoshu,36436105,User,2023-11-28T00:29:18+00:00,web-flow,2023-11-28T00:29:18+00:00,"[Fix issue][#3511]lineplot of empty dataframe with hue in seaborn 0.13.0 (#3569)
+
+* Update _base.py
+
+Corresponds to the case where grouping_var has None object.
+
+* Add a test case
+
+Add a test case to test_relational.py and a fixture empty dataframe.
+
+* Fix error
+
+To avoid the error 'The truth value of an array with more than one element is ambiguous.', we don't use walrus operator.
+
+* Incorporate feedbacks.
+
+- Remove unnecessary fixture.
+- Refactoring.",5,1,6,2,d4b8de81f74a153bb3c15af760d956d32aad980b
+mwaskom/seaborn,d4b8de81f74a153bb3c15af760d956d32aad980b,https://github.com/mwaskom/seaborn/commit/d4b8de81f74a153bb3c15af760d956d32aad980b,mwaskom,315810,User,2023-11-18T16:05:22+00:00,web-flow,2023-11-18T16:05:22+00:00,"Update CONTRIBUTING.md
+
+GitHub allows direct upload of files with a `.csv` suffix now.",1,1,2,1,aa3da42a006e11a858ffc841a02b183b588730dc
+mwaskom/seaborn,aa3da42a006e11a858ffc841a02b183b588730dc,https://github.com/mwaskom/seaborn/commit/aa3da42a006e11a858ffc841a02b183b588730dc,utkarshp,3275858,User,2023-11-18T13:09:26+00:00,web-flow,2023-11-18T13:09:26+00:00,"Pass bootstrap option to boxplot stat computation  (#3562)
+
+* Update categorical.py
+
+Fixing bootstrap issue in boxplot
+
+* Update categorical.py
+
+line too long fixed
+
+* Passing bootstrap to matplotlib's stats computation.
+
+Fixed trailing whitespace issue.",3,2,5,1,01fb7bb1bf20d7bd0335721ab9f5c733baac2fe4
+mwaskom/seaborn,01fb7bb1bf20d7bd0335721ab9f5c733baac2fe4,https://github.com/mwaskom/seaborn/commit/01fb7bb1bf20d7bd0335721ab9f5c733baac2fe4,gil2rok,36947659,User,2023-11-18T12:54:06+00:00,web-flow,2023-11-18T12:54:06+00:00,"doc typo fix in data structures tutorial (#3560)
+
+* typo fix
+
+* Update doc/_tutorial/data_structure.ipynb
+
+---------
+
+Co-authored-by: Michael Waskom <mwaskom@users.noreply.github.com>",1,1,2,1,e00cae60fefd8be271f43d151948eff412b0dd15
+mwaskom/seaborn,e00cae60fefd8be271f43d151948eff412b0dd15,https://github.com/mwaskom/seaborn/commit/e00cae60fefd8be271f43d151948eff412b0dd15,cjlovering,14171897,User,2023-11-18T12:53:07+00:00,web-flow,2023-11-18T12:53:07+00:00,Fix typo. (#3564),1,1,2,1,132440b1dae70a381136e99de93698303379a05f
+mwaskom/seaborn,132440b1dae70a381136e99de93698303379a05f,https://github.com/mwaskom/seaborn/commit/132440b1dae70a381136e99de93698303379a05f,yvonnefroehlich,94163266,User,2023-11-18T12:52:50+00:00,web-flow,2023-11-18T12:52:50+00:00,Fix typos in 'pointplot.ipynb' (#3557),3,3,6,1,63d91bf0298009effc9de889f7f419f59deb3960
+mwaskom/seaborn,63d91bf0298009effc9de889f7f419f59deb3960,https://github.com/mwaskom/seaborn/commit/63d91bf0298009effc9de889f7f419f59deb3960,mwaskom,315810,User,2023-11-07T12:02:40+00:00,mwaskom,2023-11-07T12:02:40+00:00,Fix incorrect statement in the pointsize documentation,1,1,2,1,ea51c41b51e3cd7da2d431688fce36f329c5b84d
+mwaskom/seaborn,ea51c41b51e3cd7da2d431688fce36f329c5b84d,https://github.com/mwaskom/seaborn/commit/ea51c41b51e3cd7da2d431688fce36f329c5b84d,theOehrly,23384863,User,2023-11-04T17:40:50+00:00,web-flow,2023-11-04T17:40:50+00:00,"FIX: handle potential TypeError when determining variable type (#3516)
+
+* FIX: handle potential TypeError when determining variable type
+
+* Handle edge case in duplicated _core code
+
+* Add tests
+
+---------
+
+Co-authored-by: Michael Waskom <mwaskom@gmail.com>",26,3,29,4,8ed641f767abf4017f86b61660bb3f84f765c37a
+mwaskom/seaborn,8ed641f767abf4017f86b61660bb3f84f765c37a,https://github.com/mwaskom/seaborn/commit/8ed641f767abf4017f86b61660bb3f84f765c37a,dependabot[bot],49699333,Bot,2023-11-04T16:03:30+00:00,web-flow,2023-11-04T16:03:30+00:00,"Bump actions/checkout from 4.1.0 to 4.1.1 (#3539)
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 4.1.0 to 4.1.1.
+- [Release notes](https://github.com/actions/checkout/releases)
+- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/actions/checkout/compare/8ade135a41bc03ea155e62e844d188df1ea18608...b4ffde65f46336ab88eb53be808477a3936bae11)
+
+---
+updated-dependencies:
+- dependency-name: actions/checkout
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,2a469a2f5f3b7884536a7acca4c02a61e28628c3
+mwaskom/seaborn,2a469a2f5f3b7884536a7acca4c02a61e28628c3,https://github.com/mwaskom/seaborn/commit/2a469a2f5f3b7884536a7acca4c02a61e28628c3,abdulwaheedsoudagar,20552376,User,2023-11-04T16:03:12+00:00,web-flow,2023-11-04T16:03:12+00:00,"FIX #3537 Disabling the legend based on the x-axis and hue values (#3540)
+
+* FIX #3537 Disabling the legend based on the x-axis and hue values
+
+* FIX #3537 Disabling the legend based on the x-axis and hue values
+
+* FIX: catplot with redundant hue assignment creates empty legend with title #3537
+
+* FIX: catplot with redundant hue assignment creates empty legend with title #3537
+
+* FIX: catplot with redundant hue assignment creates empty legend with title #3537
+
+* FIX: catplot with redundant hue assignment creates empty legend with title #3537
+
+* FIX: catplot with redundant hue assignment creates empty legend with title #3537",13,3,16,2,acbb9cf8d447266021d873e06b6c119dae966a9b
+mwaskom/seaborn,acbb9cf8d447266021d873e06b6c119dae966a9b,https://github.com/mwaskom/seaborn/commit/acbb9cf8d447266021d873e06b6c119dae966a9b,mwaskom,315810,User,2023-11-04T16:02:27+00:00,web-flow,2023-11-04T16:02:27+00:00,"Fix edgecolor in catplot with kind='bar' (#3547)
+
+* Fix edgecolor in catplot with kind='bar'
+
+Fixes #3542
+
+* Use rule-based default edgecolor closer to where it is defined",6,4,10,2,863539d71e281d88a93de64581827b166d9e2f22
+mwaskom/seaborn,863539d71e281d88a93de64581827b166d9e2f22,https://github.com/mwaskom/seaborn/commit/863539d71e281d88a93de64581827b166d9e2f22,dependabot[bot],49699333,Bot,2023-10-22T21:29:01+00:00,web-flow,2023-10-22T21:29:01+00:00,"Bump actions/setup-python from 4.7.0 to 4.7.1 (#3517)
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4.7.0 to 4.7.1.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/61a6322f88396a6271a6ee3565807d608ecaddd1...65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,7e98bb899508b2a0db5015bb48dd3fdf890d5d98
+mwaskom/seaborn,7e98bb899508b2a0db5015bb48dd3fdf890d5d98,https://github.com/mwaskom/seaborn/commit/7e98bb899508b2a0db5015bb48dd3fdf890d5d98,dependabot[bot],49699333,Bot,2023-10-22T21:28:47+00:00,web-flow,2023-10-22T21:28:47+00:00,"Bump actions/checkout from 3.6.0 to 4.1.0 (#3495)
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 3.6.0 to 4.1.0.
+- [Release notes](https://github.com/actions/checkout/releases)
+- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/actions/checkout/compare/f43a0e5ff2bd294095638e18286ca9a3d1956744...8ade135a41bc03ea155e62e844d188df1ea18608)
+
+---
+updated-dependencies:
+- dependency-name: actions/checkout
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3,3,6,1,1c0f4a24ade50f278a04e8b4131357488253fa6c

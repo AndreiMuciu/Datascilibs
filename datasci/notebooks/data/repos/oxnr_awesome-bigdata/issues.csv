@@ -1,0 +1,199 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+oxnr/awesome-bigdata,2852121321,360,Add Comet and Opik to README.md,"Add Comet and Opik to Applications in README.md
+
+Signed-off-by: Abby Morgan abigailm@comet.com",anmorgan24,86856445,closed,False,0,2025-02-13T21:14:48+00:00,2025-02-14T02:58:02+00:00,2025-02-14T02:58:02+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2828063064,359,Added ilum data lakehehouse,"I'm adding ilum, which is a platform consolidating many tools existing on this list.
+
+Here is the link to the platform - https://ilum.cloud/
+
+I've also added an interesting blog article showing how to start with spark on k8s - https://ilum.cloud/blog/spark-on-kubernetes/",thijs-s,86207103,open,False,1,2025-02-03T17:03:42+00:00,2025-02-10T07:43:51+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2681433523,357,Added isolation forest library to README.md.,"A distributed Spark/Scala implementation of the isolation forest algorithm for unsupervised outlier detection, featuring support for scalable training and ONNX export for easy cross-platform inference.",jverbus,1706506,open,False,0,2024-11-22T00:45:06+00:00,2024-11-22T00:45:06+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2283991411,355,Update README.md,"Added DataKitchen Open Source Data Observability (Apache 2.0, release April 2024)",cbergh,5359337,open,False,1,2024-05-07T18:39:03+00:00,2024-07-24T15:17:41+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2253076500,354,Add MindsDB,This PR includes [MindsDB](https://github.com/mindsdb/mindsdb) to the ML section,ZoranPandovski,7192539,closed,False,2,2024-04-19T13:49:37+00:00,2024-08-05T14:19:01+00:00,2024-08-05T14:18:28+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2147957931,353,Adding Real-time Data section and Streamdal,"I've added the _Real-time_ data section and _Streamdal_ in it since it handles real-time data, but doesn't ingest.",Dosplatos,109988024,closed,False,2,2024-02-22T00:46:37+00:00,2024-07-19T06:55:56+00:00,2024-07-19T06:55:12+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2078185551,352,Added Infinity to vector databases,,writinwaters,93570324,open,False,1,2024-01-12T06:53:00+00:00,2024-10-18T12:03:55+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2048691246,351,Graph Data Model: Outdated Project Links,"Some of the links in the *Graph Data Model* Section are dead or the project have been retired/changed.
+
+Here are the specific project links that might have to be updated:
+* AgentsGraph - The link points to a domain that is now up for sale. The domain is not pointing to the project anymore. I have found the GithubLink to the project [here](https://github.com/bitnine-oss/agensgraph). Not sure if this is the correct project.
+* Apache Giraph - The project has been retired since September 2023 according to the project page.
+* Facebook TAO - The links points to a Facebook Page that is not accessible anymore (at least I was not able to access it)
+* GraphLab PowerGraph - The link point to Apple's Turi Create Framework, a framework to simplify the creation of custom machine learning models.
+* Intel GraphBuilder - The links does not point to the project anymore. It redirects to [here](https://www.intel.com/content/www/us/en/developer/topic-technology/open/overview.html) (Intel's Open Project Page)
+* MapGraph - The link is dead.
+* Twitter FlockDB - The projects has been archived since 18th September 2021
+* NodeXL - The project page does not exist anymore.
+
+The state of these links is as of 19th December 2023, at 14:42 
+
+",alexmandt,9798095,open,False,2,2023-12-19T13:43:53+00:00,2023-12-24T10:18:56+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,2022648611,350,-,,cijagani,3807730,closed,False,0,2023-12-03T18:05:47+00:00,2023-12-19T04:57:44+00:00,2023-12-19T04:57:44+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1972175405,345,Add Tabula to BI section,"A new free tool for Snowflake and Postgres to handle big data with AI
+
+[Tabula](tabula.io) - GPT-powered big data analytics and visualization platform for modern data stack",Anastasia-Antonova-retable,78915890,open,False,1,2023-11-01T11:18:31+00:00,2023-11-01T11:19:54+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1925368290,344,Add Numaflow,Numaflow is a K8s native stream processing platform,syayi,12657234,open,False,1,2023-10-04T04:09:36+00:00,2024-10-18T12:04:42+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1850476098,343,Update README.md,Added Synthical (https://synthical.com),mixeden,12625557,open,False,1,2023-08-14T20:17:30+00:00,2023-08-14T20:18:48+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1806117692,342,Update README.md,Add nebula graph database,aminmaghsodi,13237080,open,False,2,2023-07-15T14:13:01+00:00,2023-07-26T11:03:01+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1766562395,341,Add Aim,"It would be great to have [Aim](https://github.com/aimhubio/aim) in the awesome list.
+
+Aim is an open-source, self-hosted AI Metadata tracking tool designed to handle 100,000s of tracked metadata sequences.
+
+Aim provides a performant and beautiful UI for exploring and comparing metadata such as training runs or agents executions. Additionally, its SDK enables programmatic access to tracked metadata — perfect for automations and Jupyter Notebook analysis.
+
+🖇 https://aimstack.io/ ",tatyusha,109785306,open,False,0,2023-06-21T02:29:38+00:00,2024-07-25T07:45:19+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1759914964,340,Add data integration tool Apache SeaTunnel.,,liugddx,48236177,open,False,0,2023-06-16T04:48:54+00:00,2023-06-16T04:48:54+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1732821469,339,New Maintainer?,Is this repo still being maintained?,vordimous,3012311,closed,False,4,2023-05-30T19:07:45+00:00,2023-06-02T19:50:47+00:00,2023-06-02T19:50:47+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1727795453,338,Add Zilla,,vordimous,3012311,closed,False,1,2023-05-26T15:02:14+00:00,2023-05-30T19:32:21+00:00,2023-05-30T19:32:20+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1699148196,337,docs: Add Substation to Applications,,jshlbrd,5711448,closed,False,1,2023-05-07T16:58:29+00:00,2023-05-30T19:42:22+00:00,2023-05-30T19:42:12+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1625852621,336,Graph Data Model: add Copernic.,,amirouche,7444897,closed,False,1,2023-03-15T16:23:35+00:00,2025-02-16T12:38:14+00:00,2025-02-16T12:38:14+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1590936951,334,tool made for developers,,shah743,6793449,open,False,0,2023-02-20T00:47:12+00:00,2023-02-20T00:47:12+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1513732265,332,Add Gigasheet,,IrynaMazaieva,31721830,open,False,0,2022-12-29T13:23:12+00:00,2024-11-07T11:44:28+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1512130028,331,Add UCSB,,ashvardanian,1983160,closed,False,3,2022-12-27T20:13:14+00:00,2023-05-31T14:30:53+00:00,2023-05-30T19:46:14+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1512128207,330,Add UKV,,ashvardanian,1983160,closed,False,3,2022-12-27T20:10:33+00:00,2023-08-30T19:03:26+00:00,2023-08-30T19:03:05+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1481179292,329,added Query.me,,kenuxi,16137978,open,False,0,2022-12-07T07:09:22+00:00,2022-12-07T07:09:37+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1341606970,328,Add Hevo in list,,Mahendra0001,106741741,open,False,0,2022-08-17T11:17:02+00:00,2024-10-18T16:04:01+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1283245745,326,Add a No-code Data Engineering tool QuickTable to the awesome list,I add QuickTable into the new category Data Engineering.,randbear,6022112,open,False,1,2022-06-24T04:29:06+00:00,2022-06-24T08:08:38+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1268211376,325,Add list of data annotation tools,,strickvl,3348134,open,False,0,2022-06-11T08:54:43+00:00,2024-11-07T11:43:34+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1225632204,323,Add FrostDB,https://github.com/polarsignals/frostdb,kakkoyun,536449,open,False,0,2022-05-04T16:53:23+00:00,2023-07-12T09:51:41+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1214613241,322,feat: update description of TDengine,,ericyangpan,212329,open,False,1,2022-04-25T14:39:56+00:00,2022-04-25T14:41:05+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1198775914,321,add Kestra,,tchiotludo,2064609,open,False,2,2022-04-09T21:25:24+00:00,2023-11-07T07:59:05+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1162569130,320,Add Chaos Genius to Awesome Big Data,,suranah,948291,open,False,0,2022-03-08T11:58:15+00:00,2022-03-08T11:58:15+00:00,,,1,1,0,0,0,0,0
+oxnr/awesome-bigdata,1148571124,319,added rtdl,"Hi,
+
+I added rtdl. It's an open source, real-time data lake building tool.
+
+- Gavin
+
+Signed-off-by: Gavin Johnson <gavinj1984@gmail.com>",thtmnisamnstr,57272374,closed,False,1,2022-02-23T21:00:56+00:00,2023-02-01T20:58:40+00:00,2023-02-01T20:57:33+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1123005532,318,Y,,ghost,10137,closed,False,0,2022-02-03T12:05:32+00:00,2022-02-03T12:05:43+00:00,2022-02-03T12:05:43+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1101986151,317,Added some products to Data Visualization,,YuliiaNikitina,66951194,open,False,1,2022-01-13T16:10:07+00:00,2022-01-14T09:18:51+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1059853466,316,Thanks,,ghost,10137,closed,False,0,2021-11-22T08:38:27+00:00,2022-01-22T20:24:55+00:00,2022-01-22T20:24:55+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1056435953,315,Add Lightdash to Business Intelligence tools,,hamzahc1,14341285,closed,False,0,2021-11-17T18:08:51+00:00,2025-02-14T02:57:32+00:00,2025-02-14T02:57:32+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1039990929,314,Add LunaSec to Key-value Data Model,"I wasn't sure if this should go into the Security section or the Key-value Data Model section. Technically, it's a key-value store with security as a focus. None of the other tools in the ""security"" section seemed very relevant.
+
+If you'd prefer I move it, just let me know. Thank you!",freeqaz,4573221,open,False,0,2021-10-29T23:39:53+00:00,2021-10-29T23:39:53+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1039988616,313,Add JuiceFS to Distributed Filesystems,"This project is growing pretty quickly and is awesome. It is an obvious entry that is missing from this list!
+
+I inserted it in alphabetical format, but the entries at the end are not in alphabetical order. Would you like me to fix that?",freeqaz,4573221,open,False,0,2021-10-29T23:31:32+00:00,2021-10-29T23:31:32+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1035067159,312,Update README.md,"Removed and fixed a number of dead resources, also suggested a new tool, thank you",Ebennetteng,60264726,open,False,0,2021-10-25T12:18:27+00:00,2021-10-25T12:18:27+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1027516221,311,Adding BerylDB,,benjasohns,83378786,open,False,0,2021-10-15T14:44:10+00:00,2021-10-15T14:44:10+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1015622020,310,Fix merge for adding Ably,,hslatman,1219780,closed,False,0,2021-10-04T20:51:06+00:00,2021-10-04T20:51:19+00:00,2021-10-04T20:51:19+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,1013115357,309,fix urls for QuestDB and Influx,,ideoma,2159629,closed,False,1,2021-10-01T09:23:17+00:00,2021-10-04T20:42:25+00:00,2021-10-04T20:42:00+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,979527397,308,Added Data Analysis with Python and PySpark,"Hi, 
+
+Stjepan from Manning here. I thought this title might be a good match to your list. Thank you for considering it.
+
+Best,",stjepanjurekovic,54952497,open,False,0,2021-08-25T18:53:39+00:00,2023-02-01T11:41:09+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,978029679,307,Update README.md – added Neptune.ai,,PawNep,89253870,open,False,0,2021-08-24T12:11:23+00:00,2021-08-24T12:11:23+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,963118694,306,added Hightouch to Data Ingestion section,Added https://hightouch.io/ to Data Ingestion section,zackkhan,22209322,open,False,0,2021-08-07T00:39:51+00:00,2021-08-07T00:39:51+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,961554291,305,Infrastructure as Code Section,I think Infrastructure as Code items such as [Terraform](https://www.terraform.io/) might count as big data since it helps to deploy large scale infrastructure on most cloud systems.,Nick0412,8966938,open,False,0,2021-08-05T08:01:34+00:00,2021-08-05T08:01:34+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,961551679,304,Apache JMeter,Can we add [Apache JMeter](https://jmeter.apache.org/?r=qal-ltt) to the list for load testing?,Nick0412,8966938,open,False,0,2021-08-05T07:58:26+00:00,2021-08-05T07:58:26+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,961550403,303,Metricbeat,Can we add [Metricbeat](https://www.elastic.co/beats/metricbeat) to the list for monitoring system metrics?,Nick0412,8966938,open,False,0,2021-08-05T07:56:40+00:00,2021-08-05T07:56:40+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,952062943,302,Add Awacs behavior analysis app,,anonrig,1935246,closed,False,1,2021-07-24T12:09:29+00:00,2023-02-18T04:56:36+00:00,2023-02-18T04:55:30+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,922957776,301,Update link to Lambdo,Lambdo link was pointing to wrong project. The link is updated so that the project corresponds to its description.,asavinov,1926849,open,False,0,2021-06-16T18:36:46+00:00,2021-06-16T18:41:54+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,916271536,300,Apache HUDI,[Apache HUDI](https://hudi.apache.org/) can be one of the classification in this project,HannanKan,24515494,open,False,0,2021-06-09T14:28:22+00:00,2021-06-09T14:28:22+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,892512139,299,add apache iceberg to the list,,meetchandan,8505196,closed,False,0,2021-05-15T18:39:17+00:00,2025-02-14T02:57:10+00:00,2025-02-14T02:57:10+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,891308494,298,Added entry for Graylog.,"Quite well known, probably deserves to be in here.",digdilem,4052275,open,False,0,2021-05-13T19:26:33+00:00,2021-05-13T19:26:33+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,862551013,297,Add Orchest,"* GitHub: https://github.com/orchest/orchest
+* Website: https://www.orchest.io/",yannickperrenet,26223174,open,False,0,2021-04-20T08:15:47+00:00,2021-04-20T08:15:47+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,844191077,296,Use more specific term in Smooks description,,cjmamo,823038,closed,False,0,2021-03-30T07:52:21+00:00,2025-01-04T07:22:10+00:00,2025-01-04T07:22:06+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,843170611,295,Add Flyte,,samhita-alla,27777173,closed,False,1,2021-03-29T09:24:12+00:00,2023-05-01T12:34:29+00:00,2023-05-01T12:33:24+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,839831496,294,Added Ably (Internet of things) and corrected URLs for influxdb and questdb,"Added Ably under Internet of things
+Corrected URLs and descriptions for QuestDB and InfluxDB (there was a mismatch)",tris0laris,57298792,closed,False,1,2021-03-24T15:14:10+00:00,2021-10-04T20:51:55+00:00,2021-10-04T20:51:21+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,831554282,293,Update README.md,added QuestDB,Ugbot,2143631,closed,False,0,2021-03-15T08:23:23+00:00,2021-03-19T15:08:09+00:00,2021-03-19T15:08:09+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,829621791,292,Added Census to the list,"Added Census to the list of data ingestion tools. But really should be in a new category ""Reverse-ETL""",sylg,1723187,closed,False,0,2021-03-11T23:44:44+00:00,2021-03-19T15:07:51+00:00,2021-03-19T15:07:51+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,828829553,291,Add Dekart,,delfrrr,495642,closed,False,0,2021-03-11T06:49:19+00:00,2021-03-19T15:07:41+00:00,2021-03-19T15:07:41+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,818568789,290,Add Smooks,,cjmamo,823038,closed,False,0,2021-03-01T07:30:02+00:00,2021-03-30T07:50:16+00:00,2021-03-19T15:07:34+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,806257965,289,Adding dash(visualisation) and cronicle(scheduler),Adding two repos.,meteoDaniel,27021858,closed,False,0,2021-02-11T10:26:58+00:00,2021-02-25T10:44:35+00:00,2021-02-25T10:44:35+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,806253850,288,Add another scheduler,"Here is another good and easy to install task scheduler
+https://github.com/jhuckaby/Cronicle
+",meteoDaniel,27021858,closed,False,0,2021-02-11T10:21:19+00:00,2021-02-11T10:21:45+00:00,2021-02-11T10:21:45+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,804441131,287,Add The Analytics Setup Guidebook,,doanhthong,8786758,closed,False,2,2021-02-09T10:56:35+00:00,2021-02-25T10:50:30+00:00,2021-02-25T10:44:23+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,802800180,286,"Add ""Awesome Google Bigtable""",,zrosenbauer,3486461,closed,False,1,2021-02-06T21:57:23+00:00,2021-02-25T10:43:05+00:00,2021-02-25T10:43:05+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,799374247,285,Add Count,,jasmcole,7839700,closed,False,0,2021-02-02T15:17:30+00:00,2021-02-25T10:43:19+00:00,2021-02-25T10:43:19+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,795874663,284,Add Nebula Graph to the Graph Data Model section,"Hi there, thanks for collecting these awesome big data tools! I'd like to share with you Nebula Graph, an open-source distributed graph database, so that you may want to list it under the Graph Data Model section.
+
+Here's a list of references for you:
+1. The GitHub repo: https://github.com/vesoft-inc/nebula
+2. The official website: https://nebula-graph.io
+
+Please let me know if you need any further information. Thanks!",jamieliu1023,57335825,open,False,1,2021-01-28T10:28:20+00:00,2021-02-25T10:53:09+00:00,,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,791955099,283,A typo in the repo description," A curated list of awesome big data frameworks, >> **ressources** << and other awesomeness. ",y-vasyunin,18553297,closed,False,0,2021-01-22T12:10:05+00:00,2021-01-25T11:32:25+00:00,2021-01-25T11:32:25+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,777316788,282,Added the Shapley framework,"Shapley is a Python library for evaluating binary classifiers in a machine learning ensemble.
+
+The library consists of various methods to compute (approximate) the Shapley value of players (models) in weighted voting games (ensemble games). We covered widely know approximation methods from well known economics and computer science research papers. There are also functionalities to identify the heterogeneity of the player pool. In addition, the framework comes with a detailed documentation, 100% test coverage and illustrative toy examples.",benedekrozemberczki,17380887,closed,False,0,2021-01-01T17:03:05+00:00,2021-01-25T11:32:08+00:00,2021-01-25T11:32:08+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,770396615,281,added HASH simulation platform,I like the list you've compiled! I added a platform I'm working on which seemed appropriate in the applications category. Thanks for maintaining this resource.,ghabs,3542567,closed,False,0,2020-12-17T21:51:05+00:00,2021-01-25T11:32:46+00:00,2021-01-25T11:32:45+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,744636331,280,Added PyTorch Geometric Temporal,"PyTorch Geometric Temporal is a temporal (dynamic) extension library for PyTorch Geometric.
+
+The library consists of various dynamic and temporal geometric deep learning, embedding, and spatio-temporal regression methods from a variety of published research papers. In addition, it consists of an easy-to-use dataset loader and iterator for dynamic and temporal graphs, gpu-support. It also comes with a number of benchmark datasets with temporal and dynamic graphs (you can also create your own datasets).",benedekrozemberczki,17380887,closed,False,0,2020-11-17T11:07:07+00:00,2021-01-25T11:31:40+00:00,2021-01-25T11:31:40+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,742441541,279,How-to article about AWS Timestream - The new Time Series database from AWS.,"Hi, let me know if this addition makes sense for you:
+https://itnext.io/how-to-begin-with-the-amazon-timestream-in-5-simple-steps-19c129040d9c
+
+This time series is awesome and help a lot who is new in this field, I wrote an article to help who is starting on this world, also who would like to test this new AWS managed time-series database",RichardSilveira,1668930,closed,False,1,2020-11-13T13:15:09+00:00,2021-01-25T11:31:07+00:00,2021-01-25T11:31:07+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,737712770,278,Remove dead link,"Hey @onurakpolat 
+
+just removing a dead link.
+
+Cheers!",spekulatius,8433587,closed,False,1,2020-11-06T12:13:26+00:00,2020-11-09T10:42:13+00:00,2020-11-09T10:42:13+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,737263731,277,added Azure Data Engineering,"Hi,
+I am Branko from Manning Publications and I thought this new book of ours could be a good resource for the list on big data.
+What do you think, is it a good match?
+Thanks for considering it!",ipcenas,47504178,closed,False,0,2020-11-05T21:01:02+00:00,2021-01-25T11:33:59+00:00,2021-01-25T11:33:59+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,714598013,276,Removing some broken links,"Hey @onurakpolat 
+
+removing a few broken links from the list!
+
+Cheers!",spekulatius,8433587,closed,False,0,2020-10-05T07:35:58+00:00,2020-10-14T07:51:33+00:00,2020-10-14T07:51:32+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,713521071,275,Add Graviton,,hslatman,1219780,closed,False,0,2020-10-02T10:34:03+00:00,2020-10-14T07:51:52+00:00,2020-10-14T07:51:51+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,703654406,274,Added Elasticsearch 7 and Elastic Stack,"Hi,
+I am Branko from Manning. I thought this liveVideo course of ours could be a good contribution for this list.
+Thanks for considering it!",ipcenas,47504178,closed,False,0,2020-09-17T14:42:22+00:00,2020-10-01T11:26:13+00:00,2020-10-01T11:26:13+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,702912893,273,Add Dagster to scheduling section,,sryza,654855,closed,False,0,2020-09-16T16:38:13+00:00,2020-09-23T11:33:19+00:00,2020-09-23T11:33:19+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,685012059,272,Add a talk for star schema design of data warehouse,,snird,2139589,closed,False,0,2020-08-24T22:06:48+00:00,2020-10-01T11:27:41+00:00,2020-10-01T11:27:41+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,681730505,271,Update README.md by SQL engine.,Add Invantive SQL engine to real-time receive and analyze/replicate data from over 70 (cloud)platforms.,monty241,7579444,closed,False,0,2020-08-19T10:30:48+00:00,2020-10-01T11:28:09+00:00,2020-10-01T11:28:09+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,675187944,270,Add Materialize,,hslatman,1219780,closed,False,0,2020-08-07T18:18:18+00:00,2020-10-01T11:29:19+00:00,2020-10-01T11:29:19+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,660421948,269,Updates July 2020 #1,,hslatman,1219780,closed,False,0,2020-07-18T22:32:42+00:00,2020-07-24T03:38:00+00:00,2020-07-24T03:38:00+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,654752521,268,Add Weaviate,"Added Weaviate.
+
+Cheers",bobvanluijt,5509162,closed,False,2,2020-07-10T12:39:35+00:00,2020-07-18T21:44:35+00:00,2020-07-18T21:41:52+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,637661639,267,Update README.md,"Hi, I thought this title might be a great addition to your list of books. Thank you for your consideration.",joshfischer1108,5785700,closed,False,0,2020-06-12T10:44:15+00:00,2020-07-24T03:38:16+00:00,2020-07-24T03:38:16+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,622710766,266,readme.md: add redpanda streaming,,emaxerrno,175206,closed,False,0,2020-05-21T18:59:45+00:00,2020-10-01T11:29:45+00:00,2020-10-01T11:29:45+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,620193424,265,Added Little Ball of Fur,"Little Ball of Fur consists of methods that can sample from graph structured data. To put it simply it is a Swiss Army knife for graph sampling tasks. First, it includes a large variety of vertex, edge, and exploration sampling techniques. Second, it provides a unified application public interface which makes the application of sampling algorithms trivial for end-users. Implemented methods cover a wide range of networking (Networking, INFOCOM, SIGCOMM) and data mining (KDD, TKDD, ICDE) conferences, workshops, and pieces from prominent journals.",benedekrozemberczki,17380887,closed,False,0,2020-05-18T13:05:07+00:00,2020-07-24T03:39:33+00:00,2020-07-24T03:39:33+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,613747485,264,README.md,,soumyadebm,52487451,closed,False,0,2020-05-07T03:29:22+00:00,2020-07-24T03:41:33+00:00,2020-07-24T03:41:33+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,609375300,263,Update to include Gazette,Updating this to include Gazette which is a OSS for streaming,dyaffe,8095717,closed,False,1,2020-04-29T21:35:10+00:00,2020-07-18T21:52:09+00:00,2020-07-18T21:51:57+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,577462015,262,Cleaning Broken Links,"Links Removed (I believe don't add value):
+- Apache Kiji
+- Google Colossus
+- Facebook Unicorn
+- TeraGoogle",sifex,2058557,closed,False,1,2020-03-08T07:59:51+00:00,2020-03-24T23:01:25+00:00,2020-03-22T23:16:15+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,555142045,259,Added Karate Club an unsupervised machine learning for graphs,"Karate Club consists of state-of-the-art methods to do unsupervised learning on graph structured data. To put it simply it is a Swiss Army knife for small-scale graph mining research. First, it provides network embedding techniques at the node and graph level. Second, it includes a variety of overlapping and non-overlapping community detection methods. Implemented methods cover a wide range of network science (NetSci, Complenet), data mining (ICDM, CIKM, KDD), artificial intelligence (AAAI, IJCAI) and machine learning (NeurIPS, ICML, ICLR) conferences, workshops, and pieces from prominent journals.",benedekrozemberczki,17380887,closed,False,0,2020-01-25T21:38:31+00:00,2020-02-04T12:55:27+00:00,2020-02-04T12:55:27+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,548970596,258,It is recommended to increase computing middleware linkis and data application development portal DataSphere Studio,"* [Linkis](https://github.com/WeBankFinTech/Linkis)  - helps easily connect to various back-end computation/storage engines(Spark, Python, TiDB...), exposes various interfaces(REST, JDBC, Java ...), with multi-tenancy, high performance, and resource control.
+
+* [DataSphere Studio](https://github.com/WeBankFinTech/DataSphereStudio)  - DataSphereStudio is a one stop data application development& management portal, covering scenarios including data exchange, desensitization/cleansing, analysis/mining, quality measurement, visualization, and task scheduling.
+
+",peacewong,11496700,closed,False,0,2020-01-13T14:34:27+00:00,2020-10-01T11:30:12+00:00,2020-10-01T11:30:12+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,547831085,257,update latest link for spark streaming,update latest link for spark streaming,lipengyuan1994,38465952,closed,False,0,2020-01-10T02:36:22+00:00,2020-02-04T12:51:47+00:00,2020-02-04T12:51:47+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,541075608,256,yugabyteDB,,verglor,652463,closed,False,0,2019-12-20T16:20:18+00:00,2020-02-04T12:52:16+00:00,2020-02-04T12:52:16+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,537797977,255,Added monte carlo tree search.,,benedekrozemberczki,17380887,closed,False,0,2019-12-13T22:04:25+00:00,2019-12-25T06:26:36+00:00,2019-12-25T06:26:36+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,532852060,254,Update Saiku name to Saiku Analytics,,brenopolanski,1894191,closed,False,0,2019-12-04T18:14:44+00:00,2019-12-25T06:26:53+00:00,2019-12-25T06:26:53+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,532518964,253,Update README.md with TDengine - time series database,,StoneT2000,35373228,closed,False,0,2019-12-04T08:15:53+00:00,2019-12-25T06:27:20+00:00,2019-12-25T06:27:20+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,530860605,252,Add Yugabyte DB,"I see TiDB and Cockroach listed as NewSQL, and I think that yugabyte has a lot of promise 
+
+https://www.yugabyte.com/
+https://github.com/YugaByte/yugabyte-db
+
+> The high-performance distributed SQL database for global, internet-scale apps.",camerondavison,165381,closed,False,1,2019-12-02T03:08:08+00:00,2019-12-04T08:10:16+00:00,2019-12-04T08:10:16+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,516054425,251,"Add TileDB, SciDB and SciDFS","Hello.
+
+There are other databases aimed to work with very large databases for fast scientific computation:
+
+TileDB
+https://tiledb.io/
+
+SciDB
+https://www.paradigm4.com/scidb-database-for-21st-century/
+
+SciDFS
+https://www.researchgate.net/publication/325420010_SciDFS_An_In-Situ_Processing_System_for_Scientific_Array_Data_Based_on_Distributed_File_System",skanskan,4120283,closed,False,1,2019-11-01T11:18:55+00:00,2020-10-01T11:30:59+00:00,2020-10-01T11:30:59+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,503840681,250,Add KarelDB,,hslatman,1219780,closed,False,0,2019-10-08T05:47:33+00:00,2020-02-04T12:56:17+00:00,2020-02-04T12:55:58+00:00,,0,0,0,0,0,0,0
+oxnr/awesome-bigdata,503141875,249,Update link for SpagoBi project,updated SpagoBI to Knowage  (they changed naming),kortov,6348215,closed,False,0,2019-10-06T18:39:09+00:00,2019-11-26T22:48:33+00:00,2019-11-26T22:48:33+00:00,,0,0,0,0,0,0,0

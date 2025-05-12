@@ -1,0 +1,308 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+donnemartin/data-science-ipython-notebooks,2661326545,112,Enhancement: Complete AlexNet Architecture with Additional Convolutional Layers (Issue 64),"This pull request enhances the `alexnet.ipynb` notebook by aligning its architecture with the standard AlexNet model. The following changes have been made:
+
+- **Added `conv4` and `conv5` layers** to extend the convolutional section, including pooling, normalization, and dropout for each.
+- **Updated the `weights` and `biases` dictionaries** to include parameters for the new layers.
+- **Adjusted the input to the fully connected layers** to match the output of the added `conv5` layer.
+",T-Ezzoury,176526807,open,False,0,2024-11-15T09:10:31+00:00,2024-12-09T15:34:04+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,2523290607,110,Create SECURITY.md,برای استفاده از نرم‌افزارهای داخل سایت نمیدونم دارم درست پیش میروم یا خیر,ghlamhsn,181410878,open,False,0,2024-09-12T20:25:53+00:00,2024-12-10T05:47:02+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,2424631170,109,Data science ,,yacoubadiomande,126488777,open,False,1,2024-07-23T08:49:29+00:00,2025-01-11T04:53:21+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,2412674650,108,Data science,,rjagathe,34297538,open,False,0,2024-07-17T05:22:04+00:00,2024-07-17T05:22:04+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,2197592517,107,my  contribution,"Hi. Please ignore this PR. 
+I used it to practice how to raise a PR.",joyphys,100954207,open,False,0,2024-03-20T13:52:33+00:00,2024-12-10T10:50:37+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,2133667114,106,Create devcontainer.json,,rashpalbits,159992106,closed,False,0,2024-02-14T06:51:34+00:00,2024-02-14T06:51:47+00:00,2024-02-14T06:51:47+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1936421873,104,Make links working,"The links at https://nbviewer.ipython.org is no longer working because it redirects you too many times, but the link at https://nbviewer.org works.",lulunac27a,100660343,open,False,0,2023-10-10T23:01:07+00:00,2023-10-10T23:01:07+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1780243452,103,my os contribution,"hey, you can ignore this PR.
+I did this just to observe how PR works.",Shan-108,127072426,closed,False,2,2023-06-29T06:56:10+00:00,2023-11-09T23:39:44+00:00,2023-07-08T18:19:31+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1697879800,102,updated,"Python is a programming language widely used by Data Scientists.
+
+Python has in-built mathematical libraries and functions, making it easier to calculate mathematical problems and to perform data analysis.",Nainaparbhakar,122917016,open,False,0,2023-05-05T16:25:25+00:00,2024-12-10T10:47:41+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1650334457,101,New File Added,21bcad05_file is added,AkashKrBanik,123230363,closed,False,1,2023-04-01T06:59:20+00:00,2023-05-06T08:47:04+00:00,2023-05-06T08:47:04+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1650279623,100,sddd,fifofoof,hamzu1234,123230677,open,False,0,2023-04-01T03:58:32+00:00,2023-04-01T03:58:32+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1649925031,99,test1,,Martin-20122001,123230181,open,False,0,2023-03-31T19:44:04+00:00,2024-12-10T05:49:20+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1649460494,97,solve issue,data science learning is difficult.,AJennifer0308,123053813,open,False,1,2023-03-31T14:29:28+00:00,2023-06-04T18:07:55+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1649460345,96,solving issue,data-science-ipython-notebooks,Sandyah06,123230397,open,False,0,2023-03-31T14:29:24+00:00,2023-03-31T14:29:24+00:00,,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1606536617,95,Data preprocessing ,I'm trying to clean my data and do some preprocessing but i don't have much understanding of the Columns if the zero in them are normal or missing values i'm using the dataset cic-collection on kaggle if any expert would help i'd be much thankful ,amira-yahlali,113689830,open,False,7,2023-03-02T10:27:01+00:00,2024-08-13T19:29:09+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1580942100,94,Topic Modelling _unsupervised and supervised,,Balogunhabeeb14,47089144,closed,False,0,2023-02-11T17:30:14+00:00,2023-02-11T17:44:10+00:00,2023-02-11T17:44:10+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1504366942,92,.,,Alihadi919,120698851,closed,False,1,2022-12-20T10:56:58+00:00,2022-12-21T14:53:19+00:00,2022-12-20T11:02:26+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1489434245,91,Machine learning models,Machine learning models with solved datasets and solutions,nmgnandi,120293290,open,False,1,2022-12-11T04:46:44+00:00,2024-01-31T21:56:43+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1405699481,90,Update README.md,,cskaust,112656069,open,False,0,2022-10-12T07:18:26+00:00,2023-03-16T10:41:43+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1396499200,89,Add files via upload,,SahilJatoi744,89636837,open,False,0,2022-10-04T15:48:19+00:00,2023-03-16T10:41:42+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1291881299,88,Data Science,,SibiyaS,108527784,open,False,1,2022-07-01T22:25:03+00:00,2023-03-16T10:41:22+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1181577107,87,fchsfhshfsfjh,,DaminiAnfat,95866295,open,False,0,2022-03-26T07:43:09+00:00,2023-03-16T10:41:41+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1045163230,86,Iris-Species,,imamahasane,57554932,open,False,0,2021-11-04T20:19:09+00:00,2023-03-16T10:41:40+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,1039623705,85,Update README.md,,mdismailmd44,51703440,open,False,0,2021-10-29T14:24:21+00:00,2023-03-16T10:41:40+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,891357738,84,Add Open in Kaggle Badge,Add Kaggle Badge that allows for opening the .ipynb as a Kaggle Notebook as seen here https://www.kaggle.com/product-feedback/152480.,pizzaz93,10904763,closed,False,0,2021-05-13T20:42:35+00:00,2021-06-02T16:46:48+00:00,2021-06-02T16:46:44+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,867246187,83,Update the CNN notebook using the latest TensorFlow version,"I want to update [this](https://github.com/donnemartin/data-science-ipython-notebooks/blob/master/deep-learning/tensor-flow-examples/notebooks/3_neural_networks/convolutional_network.ipynb) notebook using the latest TensorFlow version 2.4.1.
+
+Please assign this issue to me.",vi-hna-ja,74998474,open,False,0,2021-04-26T04:37:35+00:00,2023-03-16T10:41:21+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,823925651,82,Ipython notebook ,,alfa0977,58905345,open,False,0,2021-03-07T14:02:35+00:00,2023-03-16T10:41:21+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,810984790,81,QA-1770,,inesbenamor-qa,79215405,open,False,1,2021-02-18T10:51:00+00:00,2023-03-16T10:41:39+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,806988807,80,Python,,saketh0000,49646080,open,False,1,2021-02-12T06:36:25+00:00,2023-03-16T10:41:20+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,795333225,79,Add files via upload,,skjha1,47923680,open,False,0,2021-01-27T18:15:22+00:00,2023-03-16T10:41:38+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,772450711,78,"docs: fix simple typo, neighboars -> neighbours","There is a small typo in README.md.
+
+Should read `neighbours` rather than `neighboars`.
+
+
+Semi-automated pull request generated by
+https://github.com/timgates42/meticulous/blob/master/docs/NOTE.md",timgates42,47873678,open,False,0,2020-12-21T20:44:46+00:00,2023-03-16T10:41:37+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,721086725,77,Trax Tutorials,"Hey, 
+
+I see that there are no tutorial notebooks for **[Trax](https://github.com/google/trax)** implementations in this repository yet. Trax is an _end-to-end_ library for deep learning that focuses on clear code and speed. It is actively used and maintained in the **Google Brain team**.
+
+I would like to add such tutorial notebooks in Trax
+",SauravMaheshkar,61241031,closed,False,0,2020-10-14T02:38:51+00:00,2020-11-19T04:33:26+00:00,2020-11-19T04:33:26+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,712628787,76,Update 03.04-Missing-Values.ipynb,Explained how we can add mean and median value to missing contents of data to reduce errors and skewness.,abhi9249,37344387,open,False,0,2020-10-01T08:40:00+00:00,2023-03-16T10:41:36+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,712487459,75,I have added a Data Science Interview Questions and answers PDF... Please merge it into your Repo,,PNSuchismita,66131472,open,False,0,2020-10-01T05:10:07+00:00,2023-03-16T10:41:36+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,712481741,74,I have added a Data Science Interview Questions and answers PDF... Please merge it into your Repo,,Nitish-McQueen,54181907,open,False,0,2020-10-01T05:01:16+00:00,2023-03-16T10:41:35+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,665421378,73,GitHub Action to lint Python code,"Output: https://github.com/cclauss/data-science-ipython-notebooks/actions
+
+https://flake8.pycqa.org/en/latest/user/error-codes.html
+
+On the flake8 test selection, this PR does _not_ focus on ""_style violations_"" (the majority of flake8 error codes that [__psf/black__](https://github.com/psf/black) can autocorrect).  Instead, these tests are focus on runtime safety and correctness:
+* E9 tests are about Python syntax errors usually raised because flake8 can not build an Abstract Syntax Tree (AST).  Often these issues are a sign of unused code or code that has not been ported to Python 3.  These would be compile-time errors in a compiled language but in a dynamic language like Python, they result in the script halting/crashing on the user.
+* F63 tests are usually about the confusion between identity and equality in Python.  Use ==/!= to compare str, bytes, and int literals is the classic case.  These are areas where __a == b__ is True but __a is b__ is False (or vice versa).  Python >= 3.8 will raise SyntaxWarnings on these instances.
+* F7 tests logic errors and syntax errors in type hints
+* F82 tests are almost always _undefined names_ which are usually a sign of a typo, missing imports, or code that has not been ported to Python 3.  These also would be compile-time errors in a compiled language but in Python, a __NameError__ is raised which will halt/crash the script on the user.",cclauss,3709715,closed,False,0,2020-07-24T21:14:20+00:00,2021-08-03T21:52:37+00:00,2021-08-03T21:52:34+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,646962889,72,capitalize function will not break on missing values,,romy421kumari,44578093,open,False,0,2020-06-28T16:48:35+00:00,2023-03-16T10:41:33+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,632415464,71,Data science ,,Amine-OMRI,15818166,closed,False,0,2020-06-06T12:05:25+00:00,2020-06-06T12:06:27+00:00,2020-06-06T12:05:50+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,596826494,69,Churn1,,swamypedapati,63238304,closed,False,0,2020-04-08T20:02:39+00:00,2020-04-08T20:04:25+00:00,2020-04-08T20:04:25+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,512432382,67,Fixed typo,,monujee,11229212,open,False,1,2019-10-25T10:21:38+00:00,2023-08-05T13:02:05+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,511093070,66,Update README.md,,SREELAKSHMI-NAYATH,40224472,open,False,1,2019-10-23T05:58:17+00:00,2023-03-16T10:41:31+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,490628173,65,Run continuous integration tests on Travis CI,,cclauss,3709715,closed,False,1,2019-09-07T12:03:51+00:00,2020-07-24T22:24:58+00:00,2020-07-24T22:24:54+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,431104450,64,alexnet.ipynb contains incomplete architecture of alexnet(2 cnn layers missing),"Alexnet implementation in tensorflow has incomplete architecture where 2 convolution neural layers are missing. This issue is in reference to the python notebook mentioned below.
+
+https://github.com/donnemartin/data-science-ipython-notebooks/blob/master/deep-learning/tensor-flow-examples/notebooks/3_neural_networks/alexnet.ipynb 
+",harshitsaini,11329749,open,False,5,2019-04-09T18:08:10+00:00,2020-09-27T16:39:19+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,405313303,63,Add missing images in numpy notebook,,KaihuaHuang,31960960,closed,False,2,2019-01-31T15:57:54+00:00,2023-09-15T11:13:24+00:00,2019-02-11T10:51:46+00:00,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,380503345,62,Make some changes for reviewnb,,weijianneo,16357300,closed,False,2,2018-11-14T02:02:29+00:00,2019-02-15T13:05:06+00:00,2019-02-15T13:05:06+00:00,response-needed,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,375502059,61,PyTorch tutorials,"Hey, I see that there are no tutorial notebooks for implementing machine learning algorithms and neural networks in PyTorch in this repo yet. PyTorch is gaining a lot of traction lately and is really going to be one of the most popular frameworks due to its dynamic computational graph & eager execution.
+
+I would like to add such tutorial notebooks in PyTorch.",gokriznastic,14166854,open,False,4,2018-10-30T13:56:07+00:00,2024-04-28T13:01:09+00:00,,help wanted;feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,372241248,60,pandas - Working with Strings,"In the code cell 3:
+data = ['peter', 'Paul', None, 'MARY', 'gUIDO']
+data.map(lambda s: s.capitalize())
+was changed to 
+[s.capitalize() for s in data if s!= None ]
+and now the code woks fine.
+
+",ruchigarg-DS,40676053,open,False,2,2018-10-20T18:49:08+00:00,2019-10-05T19:52:01+00:00,,bug;help wanted,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,360619878,59,Python 3 compatibly issues,"flake8 testing of https://github.com/donnemartin/data-science-ipython-notebooks on Python 3.7.0
+
+$ __flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics__
+```
+./scipy/thinkplot.py:475:14: F821 undefined name 'xp'
+        xs = xp.delete(xs, 0)
+             ^
+./data/titanic/myfirstforest.py:84:19: E999 SyntaxError: invalid syntax
+print 'Training...'
+                  ^
+./data/titanic/gendermodel.py:47:46: E999 SyntaxError: invalid syntax
+print 'Proportion of women who survived is %s' % proportion_women_survived
+                                             ^
+./data/titanic/genderclassmodel.py:42:10: F821 undefined name 'xrange'
+for i in xrange(number_of_classes):
+         ^
+./data/titanic/genderclassmodel.py:43:14: F821 undefined name 'xrange'
+    for j in xrange(number_of_price_brackets):
+             ^
+./data/titanic/genderclassmodel.py:84:14: F821 undefined name 'xrange'
+    for j in xrange(number_of_price_brackets):
+             ^
+./deep-learning/keras-tutorial/deep_learning_models/vgg19.py:163:9: F821 undefined name 'preprocess_input'
+    x = preprocess_input(x)
+        ^
+./deep-learning/keras-tutorial/deep_learning_models/vgg19.py:167:25: F821 undefined name 'decode_predictions'
+    print('Predicted:', decode_predictions(preds))
+                        ^
+./deep-learning/keras-tutorial/deep_learning_models/resnet50.py:242:9: F821 undefined name 'preprocess_input'
+    x = preprocess_input(x)
+        ^
+./deep-learning/keras-tutorial/deep_learning_models/resnet50.py:246:25: F821 undefined name 'decode_predictions'
+    print('Predicted:', decode_predictions(preds))
+                        ^
+./deep-learning/keras-tutorial/deep_learning_models/vgg16.py:161:9: F821 undefined name 'preprocess_input'
+    x = preprocess_input(x)
+        ^
+./deep-learning/keras-tutorial/deep_learning_models/vgg16.py:165:25: F821 undefined name 'decode_predictions'
+    print('Predicted:', decode_predictions(preds))
+                        ^
+./deep-learning/keras-tutorial/solutions/sol_112.py:2:1: E999 SyntaxError: invalid syntax
+%timeit -n 1 -r 1 ann.train(zip(X,y), iterations=100)
+^
+./deep-learning/keras-tutorial/solutions/sol_111.py:2:1: E999 SyntaxError: invalid syntax
+%timeit -n 1 -r 1 ann.train(zip(X,y), iterations=2)
+^
+./deep-learning/theano-tutorial/rnn_tutorial/lstm_text.py:255:22: E999 SyntaxError: invalid syntax
+        print 'epoch:', epoch
+                     ^
+./deep-learning/tensor-flow-examples/multigpu_basics.py:84:37: E999 SyntaxError: invalid syntax
+print ""Single GPU computation time: "" + str(t2_1-t1_1)
+                                    ^
+./deep-learning/tensor-flow-examples/input_data.py:95:34: F821 undefined name 'xrange'
+      fake_image = [1.0 for _ in xrange(784)]
+                                 ^
+./deep-learning/tensor-flow-examples/input_data.py:97:35: F821 undefined name 'xrange'
+      return [fake_image for _ in xrange(batch_size)], [
+                                  ^
+./deep-learning/tensor-flow-examples/input_data.py:98:31: F821 undefined name 'xrange'
+          fake_label for _ in xrange(batch_size)]
+                              ^
+6     E999 SyntaxError: invalid syntax
+13    F821 undefined name 'xrange'
+19
+```",cclauss,3709715,open,False,3,2018-09-16T09:05:29+00:00,2020-12-06T20:22:52+00:00,,bug;help wanted,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,359454615,58,Fix incorrect return type comment for dict.values(),i think you meant values() not keys(),incessantmeraki,12898180,closed,False,1,2018-09-12T12:21:10+00:00,2018-09-14T21:33:03+00:00,2018-09-14T21:32:57+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,329999890,57,Merge pull request #1 from donnemartin/master,,fenzwu,16641991,closed,False,0,2018-06-06T19:23:39+00:00,2021-01-05T08:52:00+00:00,2018-06-06T19:23:57+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,305706373,56,Add tuanavu/tensorflow-basic-tutorials,"Hi @donnemartin,
+
+This Pull Request is created following your comment on a previous PR: https://github.com/donnemartin/data-science-ipython-notebooks/pull/35
+
+- Hosting notebooks on a new repo
+- Add credit to README",tuanavu,6547031,closed,False,1,2018-03-15T20:23:22+00:00,2018-03-25T00:06:50+00:00,2018-03-25T00:06:38+00:00,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,288314875,55,Add one more `du` usage case,"I'm not really expect you to merge this dirty PR. I just want to show you, what i'm faced, i spent 15 mins googling, but can't fix this metadata issues. It would be great if you add a little guide how to make clean commits to contributing section of readme.",imbolc,747996,open,False,4,2018-01-13T09:11:38+00:00,2021-03-31T06:36:01+00:00,,needs-review,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,277963517,54,Remove and ignore .DS_Store,,donnemartin,5458997,closed,False,0,2017-11-30T01:06:23+00:00,2018-01-15T02:11:37+00:00,2018-01-15T02:11:37+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,260397421,53,Merge pull request #1 from donnemartin/master,updating fork,freddygv,3460583,closed,False,0,2017-09-25T20:01:59+00:00,2017-09-25T20:02:26+00:00,2017-09-25T20:02:26+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,253090026,52,Fix #49: Keras tutorial links,,donnemartin,5458997,closed,False,0,2017-08-26T12:47:11+00:00,2017-08-26T12:47:28+00:00,2017-08-26T12:47:28+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,253088699,51,Add Keras tutorials resources #49,,donnemartin,5458997,closed,False,0,2017-08-26T12:24:46+00:00,2017-08-26T12:25:13+00:00,2017-08-26T12:25:13+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,243994242,50,code,"sir ,plz send me code along with churn dataset
+",sabamehwish,30245136,closed,False,1,2017-07-19T10:28:06+00:00,2017-11-30T01:08:52+00:00,2017-11-30T01:08:52+00:00,,1,0,0,0,0,1,0
+donnemartin/data-science-ipython-notebooks,238030982,49,Some of the links are giving 404 error,"I tried rnn-lstm in Keras, the link seems to be expired.
+![image](https://user-images.githubusercontent.com/13533873/27465536-cc658728-57f1-11e7-81bf-9faf3cd0e246.jpg)
+
+There are other many links too showing 404 error. Please fix them.",Lplenka,13533873,closed,False,2,2017-06-23T03:26:56+00:00,2021-04-24T16:07:39+00:00,2017-08-26T12:47:29+00:00,bug,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,236754620,48,Merge pull request #1 from donnemartin/master,update my code,midasc,25103329,closed,False,0,2017-06-19T00:10:24+00:00,2017-07-25T00:07:45+00:00,2017-07-25T00:07:45+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,228186227,47,Fix LICENSE line wrapping,,donnemartin,5458997,closed,False,0,2017-05-12T04:39:58+00:00,2017-05-12T04:41:24+00:00,2017-05-12T04:41:24+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,228184858,46,Add license disclaimer,"Clearly denote the repository license is from me, not my employer (Facebook).",donnemartin,5458997,closed,False,0,2017-05-12T04:26:46+00:00,2017-05-12T04:27:14+00:00,2017-05-12T04:27:14+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,222056999,45,Notice: Maintainer Temporarily Unavailable,"Hi Everyone,
+
+I'll be temporarily unavailable starting April 17 and won't be able to respond to issues or pull requests.  I'm hoping I'll be available in a couple of weeks, but I might not be responsive for several weeks.
+
+Sorry for the inconvenience.
+
+-Donne",donnemartin,5458997,closed,True,1,2017-04-17T03:18:15+00:00,2017-05-16T02:36:46+00:00,2017-05-16T02:36:46+00:00,announcement,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,218734237,44,Update running-notebooks section,,donnemartin,5458997,closed,False,0,2017-04-02T01:16:38+00:00,2017-04-10T02:09:02+00:00,2017-04-10T02:09:02+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,215604651,43,Update index with deep learning topics,,donnemartin,5458997,closed,False,0,2017-03-21T01:40:33+00:00,2017-03-21T01:40:45+00:00,2017-03-21T01:40:45+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,213705955,42,"Add notebooks for Keras, NumPy, Matplotlib, and Pandas",,donnemartin,5458997,closed,False,0,2017-03-13T08:57:33+00:00,2017-03-13T08:58:55+00:00,2017-03-13T08:58:55+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,205327629,41,Replacing deprecated initializer function with the correct one.,tf.initialize_all_variables() is deprecated and will be removed soon. Hence replacing it with tf.global_variables_initializer().,greninja,13918201,closed,False,1,2017-02-04T06:30:39+00:00,2017-02-05T17:13:29+00:00,2017-02-05T17:13:25+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,196272618,40,Add link to BinRoot/TensorFlow-Book,,donnemartin,5458997,closed,False,0,2016-12-18T12:17:06+00:00,2016-12-18T12:18:14+00:00,2016-12-18T12:18:14+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,194766724,39,Add Keras notebooks,,donnemartin,5458997,closed,False,2,2016-12-10T13:13:58+00:00,2017-03-19T01:12:45+00:00,2017-03-19T01:12:45+00:00,feature-request,1,1,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,180264649,38,Add link to alrojo/tensorflow-tutorial,,donnemartin,5458997,closed,False,0,2016-09-30T09:52:36+00:00,2016-09-30T09:52:49+00:00,2016-09-30T09:52:49+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,175718961,37,Update run instructions for Jupyter Notebook 4+,,donnemartin,5458997,closed,False,0,2016-09-08T10:28:06+00:00,2016-09-08T10:28:47+00:00,2016-09-08T10:28:47+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,156479940,36,Add reference to nlintz/TensorFlow-Tutorials,,donnemartin,5458997,closed,False,0,2016-05-24T11:06:08+00:00,2016-05-24T11:06:20+00:00,2016-05-24T11:06:20+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,154889258,35,Add tensor-flow-basic-tutorials,,tuanavu,6547031,closed,False,8,2016-05-15T04:12:16+00:00,2018-03-15T20:19:55+00:00,2018-03-15T20:19:55+00:00,incorporating-feedback,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,154888895,34,Develop,,tuanavu,6547031,closed,False,0,2016-05-15T03:57:16+00:00,2016-05-15T03:59:25+00:00,2016-05-15T03:59:25+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,153763655,33,"""Error 503 No healthy backends"" ","Hello, 
+
+When I try to open the hyperlinks which should direct me to the correct ipython notebook, it returns me ""Error 503 No healthy backends"" 
+""No healthy backends
+Guru Mediation:
+Details: cache-fra1236-FRA 1462794681 3780339426
+Varnish cache server""
+
+<img width=""833"" alt=""capture"" src=""https://cloud.githubusercontent.com/assets/14320144/15112809/3e3a020c-15f9-11e6-9440-bfed7debac08.PNG"">
+<img width=""350"" alt=""capture2"" src=""https://cloud.githubusercontent.com/assets/14320144/15112808/3e391b62-15f9-11e6-86b0-cf57a5d2e16e.PNG"">
+
+Thanks
+Jiahong Wang
+",wangjiahong,14320144,closed,False,1,2016-05-09T12:19:03+00:00,2016-05-10T09:55:50+00:00,2016-05-10T09:55:34+00:00,question,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,149224637,32,Update README URLs based on HTTP redirects,"Created with https://github.com/dkhamsing/frankenstein
+### GitHub Corrected URLs
+
+| Was | Now |
+| --- | --- |
+| https://github.com/mitsuhiko/flask | https://github.com/pallets/flask |
+### Other Corrected URLs
+
+| Was | Now |
+| --- | --- |
+| http://blog.yhathq.com/ | http://blog.yhat.com/ |
+| http://docs.continuum.io/anaconda/install.html | https://docs.continuum.io/anaconda/install |
+",ReadmeCritic,15367484,closed,False,1,2016-04-18T17:55:09+00:00,2016-04-29T09:51:41+00:00,2016-04-29T09:51:35+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,138633716,31,Fixed ambiguous output and replaced deprecated functions,"1. Slice of rows from a specific column of a DataFrame shows df_6 instead of the slice output. 
+2. Replaced order() and sort_index(by= which are deprecated with sort_values() 
+",poornas,791968,closed,False,3,2016-03-05T02:04:56+00:00,2016-05-15T16:11:59+00:00,2016-03-24T22:04:39+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,136397363,30,Replaced `sort` with `sorted`,"`sort` throws an error, so replaced with `sorted` which solves the same purpose
+",Dawny33,4637008,closed,False,1,2016-02-25T14:12:24+00:00,2016-02-28T07:06:57+00:00,2016-02-26T12:00:16+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,135110044,29,Updated Spark notebook with DataFrames,"It appears that in pyspark they still have to add Datasets, so for now I just added some examples with DataFrames
+",amarrella,1425877,closed,False,1,2016-02-20T18:52:08+00:00,2016-02-21T11:24:57+00:00,2016-02-21T11:23:51+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,133531114,28,Add TensorFlow tutorials by Parag K Mital.,,donnemartin,5458997,closed,False,0,2016-02-14T11:17:06+00:00,2016-02-14T11:17:22+00:00,2016-02-14T11:17:22+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,132013906,27,Add github-data-wrangling notebook to pandas section.,"Demonstrates loading, cleaning, merging, and feature engineering of GitHub data from the Viz repo.
+",donnemartin,5458997,closed,False,0,2016-02-07T21:19:37+00:00,2016-02-07T21:20:03+00:00,2016-02-07T21:20:03+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,130122178,26,Add Pelican commands.,,donnemartin,5458997,closed,False,1,2016-01-31T12:32:10+00:00,2016-02-01T06:04:32+00:00,2016-01-31T12:33:06+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,126225590,25,Request for sage references,"Title says it all.
+
+Is it possible to include a section for Sage related notebooks?
+",AdamGreenhill,6324515,open,False,2,2016-01-12T17:05:36+00:00,2016-05-18T01:55:16+00:00,,help wanted;customer-feedback-wanted;feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,125472726,24,Add Algorithmia IPython Notebook example,"Hey Donne,
+
+Really liked the collection of notebooks. I thought it would be cool to also add Algorithmia to the index.
+
+There's a lot of interesting algorithms on the platform. But I only showcased 4 of them as a simple introduction:
+- Face Detection
+- Content Summarizer
+- Latent Dirichlet Allocation
+- Optical Character Recognition
+
+Tried to format the notebook according to your writing style as seen in the other notebooks.
+
+Also, the logo won't show up properly on my fork because I've added the absolute path of your repo. Should render without a problem after you merge it.
+
+Full disclosure: I work @Algorithmiaio
+
+Cheers,
+Besir
+",besirkurtulmus,5170389,closed,False,4,2016-01-07T19:56:04+00:00,2016-01-24T11:47:23+00:00,2016-01-24T11:47:21+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,124653954,23,Change tf.types.int16 to tf.int16,"I was learning Tensorflow using this notebook and got AttributeError while running
+
+```
+a = tf.placeholder(tf.types.int16)
+```
+
+In [docs](https://www.tensorflow.org/versions/master/api_docs/python/framework.html#DType), it is written as `tf.int16` instead of `tf.types.int16` and it works on my machine too. 
+Let me know if I'm missing something?
+",AnishShah,3175743,closed,False,3,2016-01-03T15:39:49+00:00,2016-01-04T23:52:14+00:00,2016-01-04T23:52:12+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,124333466,22,Add slides to Theano intro notebook.,"- Add associated slides
+- Fix typo
+",donnemartin,5458997,closed,False,0,2015-12-30T10:59:36+00:00,2015-12-30T11:04:32+00:00,2015-12-30T10:59:56+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,124252482,21,Update Spark notebook to use DataFrames,"Spark 1.3 introduced DataFrames:
+
+> A DataFrame is a distributed collection of data organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases, or existing RDDs.
+
+https://spark.apache.org/docs/1.3.0/sql-programming-guide.html#dataframes
+
+Spark 1.6 introduces DataSets:
+
+> A new Dataset API. This API is an extension of Spark’s DataFrame API that supports static typing and user functions that run directly on existing JVM types (such as user classes, Avro schemas, etc). Dataset’s use the same runtime optimizer as DataFrames, but support compile-time type checking and offer better performance. More details on Datasets can be found on the SPARK-9999 JIRA.
+
+https://databricks.com/blog/2015/11/20/announcing-spark-1-6-preview-in-databricks.html
+
+Note: PySpark will included DataSets in the upcoming Spark 2.0.
+",donnemartin,5458997,closed,False,2,2015-12-29T18:48:34+00:00,2016-02-21T11:26:04+00:00,2016-02-21T11:26:04+00:00,enhancement;help wanted,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,124065208,20,Add TensorFlow tutorials notebooks.,,donnemartin,5458997,closed,False,0,2015-12-28T13:05:44+00:00,2015-12-28T13:05:57+00:00,2015-12-28T13:05:57+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,123981588,19,Add Theano notebooks.,,donnemartin,5458997,closed,False,0,2015-12-27T14:34:38+00:00,2015-12-27T14:34:47+00:00,2015-12-27T14:34:47+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,123975390,18,Add TensorFlow and DeepDream notebooks,,donnemartin,5458997,closed,False,0,2015-12-27T12:27:55+00:00,2015-12-27T15:14:08+00:00,2015-12-27T12:28:10+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,123972191,17,Add deep learning notebooks,,donnemartin,5458997,closed,False,2,2015-12-27T10:44:44+00:00,2016-05-18T02:07:08+00:00,2016-01-13T02:44:06+00:00,feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,109674405,16,Add SAWS: A Supercharged AWS Command Line Interface (CLI) to AWS Section.,,donnemartin,5458997,closed,False,1,2015-10-04T10:40:50+00:00,2016-05-18T02:09:55+00:00,2015-10-04T10:41:13+00:00,feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,104277970,15,Remove *.py~,,38elements,2399132,closed,False,2,2015-09-01T14:24:16+00:00,2015-09-10T11:01:14+00:00,2015-09-10T11:00:56+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,98539813,14,Fixed a misleading comment in the numpy notebook,,AmaanC,1172631,closed,False,1,2015-08-01T14:10:14+00:00,2015-08-21T09:33:26+00:00,2015-08-21T09:33:24+00:00,,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,98484701,13,Command to run mrjob s3 log parser is incorrect,"Current:
+
+```
+python mr-mr_s3_log_parser.py -r emr s3://bucket-source/ --output-dir=s3://bucket-dest/""
+```
+
+Should be:
+
+```
+python mr_s3_log_parser.py -r emr s3://bucket-source/ --output-dir=s3://bucket-dest/""
+```
+",donnemartin,5458997,closed,False,1,2015-07-31T22:52:18+00:00,2015-12-28T13:14:13+00:00,2015-07-31T22:52:39+00:00,bug,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,96543837,12,Migrate notebook references from the now deprecated EMR CLI to the recommended AWS CLI,,donnemartin,5458997,open,False,3,2015-07-22T11:29:02+00:00,2019-09-09T01:55:09+00:00,,enhancement;help wanted,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,96295718,11,Add simplified Spark installation instructions from the repo: https://github.com/donnemartin/dev-setup,"Mac users can benefit from a much simplified installation method thanks to Homebrew.
+",donnemartin,5458997,closed,False,1,2015-07-21T11:39:23+00:00,2015-08-20T10:47:44+00:00,2015-08-20T10:47:35+00:00,enhancement,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,96295381,10,Add notebook for AWS CLI setup and common commands,,donnemartin,5458997,closed,False,1,2015-07-21T11:38:07+00:00,2016-05-18T02:07:52+00:00,2015-10-04T10:44:41+00:00,feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,95645145,9,"Add notebook info for Boto, the official AWS SDK for Python.",,donnemartin,5458997,closed,False,0,2015-07-17T12:11:48+00:00,2016-05-18T02:07:57+00:00,2015-07-17T12:12:26+00:00,feature-request,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,94557677,8,Add requirements file to help with installation for users who prefer not to use Anaconda,,donnemartin,5458997,closed,False,0,2015-07-12T11:35:04+00:00,2015-07-14T11:47:19+00:00,2015-07-14T11:46:03+00:00,enhancement,0,0,0,0,0,0,0
+donnemartin/data-science-ipython-notebooks,94118407,7,09/07/2015,,JBDien,10913014,closed,False,0,2015-07-09T18:25:34+00:00,2015-07-09T18:28:12+00:00,2015-07-09T18:28:12+00:00,,0,0,0,0,0,0,0

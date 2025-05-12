@@ -1,0 +1,506 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ossu/data-science,3037979659,138,My os contribution,"Hey you can ignore this PR
+i did this just to teach my students how to raise PR",ghost,10137,closed,False,1,2025-05-04T12:29:18+00:00,2025-05-04T14:18:38+00:00,2025-05-04T14:18:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,3027792742,137,fix: Updated broken link for Statistical Learning with Python,Fix: Update broken link for Statistical Learning with Python EdX course,sugaulee,86834637,closed,False,0,2025-04-29T10:15:17+00:00,2025-04-30T05:07:39+00:00,2025-04-30T05:07:39+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2991783831,136,Replace link to FAQ with Pre-College Math,Update resource for High School Math prerequisites.,Flomza,83545712,open,False,0,2025-04-14T03:33:40+00:00,2025-04-14T03:33:40+00:00,,,0,0,0,0,0,0,0
+ossu/data-science,2600808404,135,"Correction the link of the course ""MongoDB for Developers Learning Path""","Correct the link of the course **MongoDB for Developers Learning Path**
+Link: https://learn.mongodb.com/pages/mongodb-developer-learning-paths
+",TinhToQuang,12286785,closed,False,0,2024-10-20T19:27:01+00:00,2024-10-21T05:54:34+00:00,2024-10-21T05:54:34+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2600794225,134,RFC: Replace the hyperlink of the course MongoDB for Developers Learning Path,"**Problem:**
+Need to replace the hyperlink of the course **MongoDB for Developers Learning Path**
+
+**Duration:**
+November 21st, 2024
+
+**Background:**
+The link to the course [MongoDB for Developers Learning Path](https://university.mongodb.com/learning_paths/developer) is already obsoleted as it has the new link access for this learning path with various programming languages as below:
+https://learn.mongodb.com/pages/mongodb-developer-learning-paths
+
+**Proposal:**
+
+- We need to replace the link of the course **MongoDB for Developers Learning Path** as Pull Request #135 
+- Besides that, please separate this learning path with many programming languages.
+
+**Alternatives:**
+N/A
+",TinhToQuang,12286785,closed,False,1,2024-10-20T19:05:26+00:00,2024-10-21T07:09:00+00:00,2024-10-21T05:54:35+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2469621873,132,Fix link to Statistics & Probability,,FantasqueX,46747123,closed,False,0,2024-08-16T06:50:56+00:00,2024-08-25T10:36:29+00:00,2024-08-25T10:36:29+00:00,,1,1,0,0,0,0,0
+ossu/data-science,2462042522,131,RFC: Update Math Course Links from OpenLearningLibrary to MITx Online,"**Problem:**
+OSSU currently lists math courses on OpenLearningLibrary, but the same courses are available on MITx Online, which includes problem sets that enhance the learning experience. This issue means the current links do not fully leverage the available resources that better align with OSSU's curricular guidelines, especially in providing rigorous and comprehensive course material.
+
+It is important to note that the problem sets on MITx Online are not graded since the due date for the courses has passed. However, they still serve as valuable practice for students looking to deepen their understanding of the material.
+
+**Proposal:**
+- Update the link for **Calculus 1A: Differentiation** to [MITx Online](https://mitxonline.mit.edu/courses/course-v1:MITxT+18.01.1x/).
+- Update the link for **Calculus 1B: Integration** to [MITx Online](https://courses.mitxonline.mit.edu/learn/course/course-v1:MITxT+18.01.2x+3T2023/home).
+- Update the link for **Calculus 1C: Coordinate Systems & Infinite Series** to [MITx Online](https://mitxonline.mit.edu/courses/course-v1:MITxT+18.01.3x/).
+- The necessary changes have been proposed in [Pull Request #130](https://github.com/ossu/data-science/pull/130).
+
+**Alternatives:**
+- Continue using the OpenLearningLibrary links without the problem sets.
+- Offer both links and allow students to choose between the OpenLearningLibrary and MITx Online versions.",Ad7amstein,102502789,closed,False,2,2024-08-12T23:12:52+00:00,2024-09-30T09:20:21+00:00,2024-09-30T09:20:21+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2462039376,130,Update Math Course Links from OpenLearningLibrary to MITx Online,"OSSU currently lists math courses on OpenLearningLibrary, but the same courses are available on MITx Online, which includes problem sets that enhance the learning experience. This issue means the current links do not fully leverage the available resources that better align with OSSU's curricular guidelines, especially in providing rigorous and comprehensive course material.",Ad7amstein,102502789,closed,False,1,2024-08-12T23:09:24+00:00,2024-09-30T09:20:20+00:00,2024-09-30T09:20:20+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2382404559,129,Added one useful resource,"Added the Career Transition to Data Science: A Complete Guide  URL to the Introduction to Data Science section, providing useful insights to aspiring tech professionals.
+
+Please let me know if further changes are required.
+
+Thank you",Paras-96,169983983,closed,False,2,2024-06-30T19:54:53+00:00,2024-08-11T17:32:21+00:00,2024-08-11T17:32:21+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2369081394,128,Add links to other courses from DeepLearning.AI specialization,"According to discussion here https://discord.com/channels/744385009028431943/744388942635204610/1254522570661822504, all three courses of the DeepLearning.AI specialization on Coursera are part of the curriculum, but only link to the first course was given in this repo. This PR adds the links of the rest of the courses.",pulkitkrishna00,72264063,closed,False,2,2024-06-24T02:49:25+00:00,2024-07-06T09:10:29+00:00,2024-07-06T09:10:24+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2311910028,127,"Bring recent changes from CS repo, improve organization and add info about Final Project","- Remove outdated materials like Trello board and add warning about them
+- Remove newsletter link
+-  Mark the Py4E course link as link and fix CS50P discord link
+- Add Intro CS coursepage
+- Remove PROJECTS.md file (which was not linked in the README in this repo)
+- Add information about final project and what to do after completing this curriculum (taken from CS repo)
+- Improve the organization of the README, modelling it after the CS curriculum README.",pulkitkrishna00,72264063,closed,False,2,2024-05-23T04:27:02+00:00,2024-05-28T19:54:30+00:00,2024-05-28T19:54:30+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2304334396,126,RFC: ,"Created Pull Request in 125 as a complement to 116, added alternative free download of textbook and notebook files for Stat Learning.
+",Smcgb,6243581,closed,False,1,2024-05-18T22:47:04+00:00,2024-08-11T17:31:28+00:00,2024-08-11T17:31:27+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2304334018,125,Chore: Added free web book alt to StatLearning,"In RFC 118, the alternate link mentioned for the free textbook course version was left off.",Smcgb,6243581,closed,False,3,2024-05-18T22:45:37+00:00,2024-08-11T17:29:37+00:00,2024-08-11T17:29:37+00:00,,1,1,0,0,0,0,0
+ossu/data-science,2284893152,124,"Bring recent changes from CS repo, improve organization and add info about Final Project","This PR does the following things:
+
+- Remove outdated materials like Trello board and add warning about them
+- Remove newsletter link
+-  Mark the Py4E course link as link and fix CS50P discord link
+- Add Intro CS coursepage
+- Remove PROJECTS.md file (which was not linked in the README in this repo)
+- Add information about final project and what to do after completing this curriculum (taken from CS repo)
+- Improve the organization of the README, modelling it after the CS curriculum README.",pulkitkrishna00,72264063,closed,False,4,2024-05-08T07:31:01+00:00,2024-05-21T04:19:04+00:00,2024-05-21T04:19:04+00:00,,1,1,0,0,0,0,0
+ossu/data-science,2281480370,123,"RFC: Add ""The Essential Machine Learning Foundations: Math, Probability, Statistics, and Computer Science"" by Jon Krohn","**Description:**
+The video collection ""The Essential Machine Learning Foundations: Math, Probability, Statistics, and Computer Science"" by Jon Krohn, released in March 2022, presents a comprehensive set of courses aimed at solidifying the foundational knowledge required for successful engagement in machine learning (ML) and data science. This issue addresses the potential integration of this resource into our curriculum and highlights its alignment with our curricular guidelines.
+
+**Course Link:** [https://www.oreilly.com/library/view/the-essential-machine/9780137903245/](url)
+**Github Repository:** [https://github.com/jonkrohn/ML-foundations](url)
+
+**Steps to Reproduce:**
+
+Review the content of each course within ""The Essential Machine Learning Foundations"" video collection.
+Assess the alignment of the topics covered in these courses with our curricular guidelines for data science education.
+Evaluate the quality and depth of instruction provided by Jon Krohn in each course.
+Determine the suitability of integrating this video collection into our curriculum to enhance the foundational knowledge of our learners.
+
+",madhavi-peddireddy,98088562,closed,False,1,2024-05-06T18:28:19+00:00,2024-09-08T18:54:07+00:00,2024-09-08T18:54:07+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2272067116,122,Replacing Princeton’s DSA with GT’s!,,tuskydev,52723004,closed,False,2,2024-04-30T17:04:49+00:00,2024-05-02T01:31:34+00:00,2024-05-02T00:59:44+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2212347414,121,RFC: Proposal to Replace Princeton's DSA with Georgia Tech's CS 1332 Series in Data Science Curriculum,"**Problem:**
+- Proposing the 4-course CS 1332 Data Structures and Algorithms course from Georgia Tech over the current 2-part Princeton's DSA in the **Data Science Curriculum**: https://www.edx.org/certificates/professional-certificate/gtx-data-structures-and-algorithms 
+
+**Duration:**
+- 2024 April 28
+
+**Background:**
+- It includes a great **visual tool** to visualize all the data structures it covers: https://csvistool.com/
+- The TA's for the Princeton courses have **announced they will not** keep supporting students who ask questions on the forums
+- Georgia Tech's CS 1332 not only has active TA's in the edX forums but **has a discord server** where one can lean on for help from actual students at GT
+- The instructor for all 4 courses, Mary H-B, has great 8-10min videos, and **doesn't read off the slides** (unlike Princeton)
+- Princeton _forces_ the student to use the school's **proprietary libraries and download specific IDE's** for their course; OSSU students have complained about this but the people I've heard state their opinions on this are few
+
+**Proposal:**
+- The 4 courses are equal to one semester total at Georgia Tech
+- CS1332x I-IV on the edX platform:
+  - [CS 1332x I](https://www.edx.org/learn/data-structures/the-georgia-institute-of-technology-data-structures-algorithms-i-arraylists-linkedlists-stacks-and-queues)
+  - [CS 1332x II](https://www.edx.org/learn/data-structures/the-georgia-institute-of-technology-data-structures-algorithms-ii-binary-trees-heaps-skiplists-and-hashmaps)
+  - [CS 1332x III](https://www.edx.org/learn/data-structures/the-georgia-institute-of-technology-data-structures-algorithms-iii-avl-and-2-4-trees-divide-and-conquer-algorithms)
+  - [CS 1332x IV](https://www.edx.org/learn/data-structures/the-georgia-institute-of-technology-data-structures-algorithms-iv-pattern-matching-dijkstras-mst-and-dynamic-programming-algorithms)
+
+**Alternatives:**
+1. Stick with the status quo
+2. Replace the Princeton course with an alternative
+3. Look for a Python course alternative; though hasn't been done in years (looking at previous RFC's)
+
+_Thoughts are highly appreciated, don't hold back! Thank you 🙏🏼_
+",tuskydev,52723004,closed,False,2,2024-03-28T04:53:24+00:00,2024-05-02T00:59:53+00:00,2024-05-02T00:59:53+00:00,,3,3,0,0,0,0,0
+ossu/data-science,2143683221,119,Add Intro-programming coursepage,"Added the intro-programming course page highlighting both Py4E and CS50P and inviting volunteers to do both courses and provide their analysis.
+
+Similar to ossu/computer-science#1177
+Related RFC: ossu/computer-science#1164",pulkitkrishna00,72264063,closed,False,0,2024-02-20T07:09:26+00:00,2024-02-26T06:52:06+00:00,2024-02-26T06:52:06+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2143491864,118,RFC: Request for Comment - Proposed Additions to Data Science Curriculum,"●Problem:
+The current OSSU Data Science Curriculum lacks updated and relevant courses, deviating from the curricular guidelines.
+
+●Duration:
+1 month
+
+●Background:
+The issue lies in the omission of recent, valuable courses that align with the curricular guidelines. 
+To address this, I've updated the curriculum README, incorporating essential courses such as:
+**[CS50’s Introduction to Programming with Python]** (https://cs50.harvard.edu/python/2022/)
+**[CS50’s Introduction to Databases with SQL]**
+(https://cs50.harvard.edu/sql/2024/)
+**[Learn Linear Algebra]** (https://www.khanacademy.org/math/linear-algebra) from Khan Academy. 
+
+These additions aim to bridge the gap between the current curriculum and the outlined guidelines, providing learners with more comprehensive and up-to-date resources.
+
+●Solution:
+- Add [CS50’s Introduction to Programming with Python](https://cs50.harvard.edu/python/2022/).
+- Include [CS50’s Introduction to Databases with SQL](https://cs50.harvard.edu/sql/2024/).
+- Integrate [Learn Linear Algebra](https://www.khanacademy.org/math/linear-algebra) from Khan Academy.
+
+●Advantages:
+- Aligns the curriculum with the latest curricular guidelines.
+- Enhances the learning experience with current and relevant content.
+
+●Disadvantages:
+- Potential resistance to change.
+- Initial confusion for users accustomed to the previous curriculum.
+
+●Alternatives:
+- Conduct a comprehensive review of all courses to identify further gaps.
+- Establish a periodic review process to ensure ongoing alignment with curricular guidelines.",Bassamejlaoui,130122304,closed,False,7,2024-02-20T03:54:31+00:00,2024-05-06T04:37:27+00:00,2024-05-06T04:37:27+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2143365396,117,Update README.md,"Updated Data Science curriculum README
+
+Added new courses to the Data Science curriculum, including: 1 - CS50’s Introduction to Programming with Python (https://cs50.harvard.edu/python/2022/)
+
+2 - CS50’s Introduction to Databases with SQL
+(https://cs50.harvard.edu/sql/2024/)
+
+3 - Learn Linear Algebra
+(https://www.khanacademy.org/math/linear-algebra)
+
+Keeping the curriculum up-to-date and enhancing user experience.
+
+Special thanks to the OSSU community for their valuable contributions.",Bassamejlaoui,130122304,closed,False,2,2024-02-20T01:26:12+00:00,2024-08-11T17:33:08+00:00,2024-08-11T17:33:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,2091003548,116,RFC Add ISL as the cap of the statistics section of OSSU Data Science: ,"**Problem:**
+OSSU DS curricula does not currently have a comprehensive course that takes the learned on-paper methods to programmatic assessment using well known programming languages and frameworks. 
+
+**Background:**
+
+The absence of focused statistical learning courses in the OSSU Data Science curriculum results in an incomplete educational journey for students. Future courses are either highly specialized (Andrew Ng) or do not reintroduce learned statistical concepts into programmatic assessment.
+
+The advantages include a more well-rounded curriculum, bridging critical gaps between basic and advanced concepts. However, potential disadvantages might include the need for curriculum restructuring and the additional time commitment for students as well as some overlap with highly specialized courses in the Data Mining section.
+
+**Proposal:**
+
+I'd like to recommend two courses for candidates in our Data Science Statistics program to either end the Statistics section or a new section created called Advanced Statistics with the current set being renamed to core statistics:
+
+[Statistical Learning with Python by Stanford University on EdX](https://www.edx.org/learn/data-analysis-statistics/stanford-university-statistical-learning-with-python)
+[Statistical Learning by Stanford University on EdX](https://www.edx.org/learn/statistics/stanford-university-statistical-learning)
+
+Both courses are based on the same content, differing only in the programming language used. They're aligned with a free book available at www.statlearning.com.
+
+These courses offer an extensive introduction to statistical learning methods, crucial for anyone pursuing a career in data science. The authors are renowned figures in the data science community, and this book is frequently recommended on various Data Science, Machine Learning, and AI subreddits.
+
+Why These Courses Are Beneficial:
+
+    Relevance to Data Science: These courses emphasize statistical learning, an essential skill for data analysis and interpretation. They serve as an excellent bridge from basic programming and statistics to advanced model building.
+
+    Curriculum Integration: They address gaps in the current curriculum with a focused approach to statistical learning techniques. It also bridges the gap from Statistics into data mining by building more of the fundamental approaches, programmatically, before specialized attention is given to it later with Andrew Ng's courses.
+
+    Expert Instruction: Taught by leading experts, these courses are acclaimed for their clarity and depth. Larry Wasserman, a respected Professor in Statistics and Machine Learning, endorses the course book.
+
+    Accessibility: Both courses are available for free on the EdX platform, and the book can be downloaded from the course website. Python labs can be found at this GitHub repository, and the course website provides direct files for both R and Python.
+
+    Framework Flexibility: The program offers a choice of frameworks including PyTorch, TensorFlow, Keras, etc.
+
+    Practical Application: The courses include hands-on exercises and real-world examples, ensuring practical understanding and application.
+
+These courses are an invaluable resource for anyone aspiring to deeply understand and apply data science principles.
+
+**Alternatives:**
+This set of courses could be an alternative to the Supervised Learning courses by Andrew Ng as well.
+
+**Pull Request**
+https://github.com/ossu/data-science/pull/115/commits
+",Smcgb,6243581,closed,False,1,2024-01-19T17:42:35+00:00,2024-02-25T22:49:56+00:00,2024-02-25T22:49:56+00:00,,3,2,0,0,0,0,1
+ossu/data-science,2010809185,115,Added ISL course recommendation,"This pull request proposes the addition of the ""Introduction to Statistical Learning"" course to the Open Source Society University (OSSU) Data Science curriculum. This course provides a comprehensive introduction to statistical learning methods and is essential for students pursuing a career in data science.
+
+Rationale:
+
+Relevance to Data Science: Statistical learning is a fundamental aspect of data science, providing the necessary tools for data analysis and interpretation.
+
+Complement Existing Curriculum: This course fills gaps in the current curriculum by offering a focused study on statistical learning techniques.
+
+Quality of Instruction: The course is taught by renowned experts in the field and is well-received by learners for its clarity and depth. Anyone who wants to intelligently analyze complex data should own this book.” Larry Wasserman, Professor, Department of Statistics and Department of Machine Learning, CMU and author of All of Statistics
+
+Accessibility: It's freely available online in EdX Mooc (R) or PDF download for Python or R
+
+Practicality: The course includes hands-on exercises and real-world examples, enhancing practical understanding.",Smcgb,6243581,closed,False,1,2023-11-25T22:00:10+00:00,2024-02-25T22:50:08+00:00,2024-02-25T22:50:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1964305520,114,removed unnecessary separation line in README,,tuskydev,52723004,closed,False,0,2023-10-26T20:15:55+00:00,2023-11-13T06:42:46+00:00,2023-11-13T06:42:46+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1932083107,113,Add Kaggle ML courses,"Kaggle has a lot of different ML and AI courses. Definitely worth a listing
+https://www.kaggle.com/learn",TypicallyThomas,47659055,closed,False,1,2023-10-08T22:03:40+00:00,2023-10-29T19:39:10+00:00,2023-10-29T19:39:10+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1899218763,112,RFC: Overhaul Statistics,"## Summary
+OSSU should undertake a search for a number of new courses in statistics.
+## Background
+OSSU currently recommends 2 courses on statistics:
+- [Intro to Descriptive Statistics](https://www.udacity.com/course/intro-to-descriptive-statistics--ud827)
+- [Intro to Inferential Statistics](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)
+
+The first of these is no longer offered.
+## Guidelines
+OSSU Data Science uses the report [Curriculum Guidelines for Undergraduate Programs in Data Science](https://www.amstat.org/asa/files/pdfs/EDU-DataScienceGuidelines.pdf) as our guide for course recommendation.
+
+Section 6 ""Transitioning To A Data Science Major Using Typical Existing Courses"" states:
+> ...The courses shown in bold are the ten courses that cover the bare minimum of the basic skills needed for data science...
+
+Subsection 6.3 ""Courses in Statistics"" states:
+>Content in the Introduction to Statistics course should follow the revised [Guidelines for Assessment and Instruction in Statistics Education (GAISE)](https://www.amstat.org/education/guidelines-for-assessment-and-instruction-in-statistics-education-(gaise)-reports) for college courses
+>- **Introduction to Statistics**
+>- **Statistical Modeling/Regression**
+>- **Machine Learning/Data Mining**
+>- Theory of Statistics (requires Probability Theory)
+### Gaise
+For reference, the [K-12 GAISE](https://www.amstat.org/docs/default-source/amstat-documents/gaiseiiprek-12_full.pdf) report uses a framework of 3 levels of sophistication with stats expected of K-12 students. This can be found on [page 24](https://www.amstat.org/docs/default-source/amstat-documents/gaiseiiprek-12_full.pdf#page=24).
+
+The GAISE [College Report](https://www.amstat.org/docs/default-source/amstat-documents/gaisecollege_full.pdf)  includes both goals, recommendations and suggestions for topics that might be omitted.
+#### [Goals (summarized)](https://www.amstat.org/docs/default-source/amstat-documents/gaisecollege_full.pdf#page=8)
+1. Critique stats based results/conclusions.
+2. Recognize when statistics would be useful and carry out investigations using stats.
+3. Produce graphical displays and numerical summaries. Interpret them.
+4. Explain the role of variability in statistics.
+5. Explain the central role of randomness in designing studies and drawing conclusions.
+6. Use statistical models, including multivariable models.
+7. Understand and use hypothesis tests and interval estimation in a multiple of settings.
+8. Interpret and draw conclusions from output of statistical software packages.
+9. Demonstrate an awareness of ethical issues associated with sound statistical practice.
+#### [Recommendations](https://www.amstat.org/docs/default-source/amstat-documents/gaisecollege_full.pdf#page=12)
+These are largely recommendations for _how_ statistics courses should be taught.
+1. Teach statistical thinking
+2. Focus on conceptual understanding
+3. Integrate real data with a context and a purpose
+4. Foster active learning
+5. Use technology to explore concepts and analyze data
+6. Use assessments to improve and evaluate student learning
+
+#### [Suggestions for Topics that Might be Omitted from Introductory Statistics Courses](https://www.amstat.org/docs/default-source/amstat-documents/gaisecollege_full.pdf#page=23)
+- Probability theory
+- Constructing plots by hand
+- Basic statistics
+- Drills with z-, t-, χ 2 , and F-tables
+- Advanced training on a statistical software program
+
+Of note, the basic statistics section reads:
+> Histograms, pie charts, scatterplots, means, and medians are now taught in middle and high school and are a prominent part of the Common Core State Standards in Mathematics. Classes taught to adults continuing their education or to students with a different high school background may need to spend a bit more time on basic statistics. No matter the audience, instructors will want to be sure that students truly understand these concepts, but should not dwell on them more than is necessary. Instructors may want to briefly review them to be sure terminology and notation are consistent, but this should take little time.
+## Assertions
+- OSSU Data Science curriculum should not recommend a descriptive stats course. This is prerequisite material; OSSU's focus is requisite material for undergraduate learners.
+- OSSU should identify a suitable Introduction to Statistics course, replacing the two current recommendations
+- After identifying the appropriate Introduction to Statistics course, OSSU should determine if a Statistical Modeling/Regression course is necessary. I would be unsurprised if a suitably rigorous Intro Course, paired with our existing ML courses prove sufficient.
+- OSSU should identify an optional Theory of Statistics course.
+## Request for Comments
+This RFC is asking specifically for comments on the assertions above. Are these the right steps? Are there other implications for OSSU's curriculum that are not identified?
+
+There will be other RFCs for carrying out the individual steps (e.g. there will be a separate RFC for Identify an Introduction to Statistics course).",waciumawanjohi,18407643,open,False,8,2023-09-16T00:05:08+00:00,2024-01-10T04:49:10+00:00,,,0,0,0,0,0,0,0
+ossu/data-science,1868168042,111,I can't enroll in the Udacity course on Descriptive Statistics I have checked using multiple accounts.,Every time I try to enroll I will be redirected into the My Programs page.,reallyyy,39750041,closed,False,7,2023-08-26T16:38:05+00:00,2023-09-16T00:07:53+00:00,2023-08-26T18:14:40+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1795509371,109,My os contribution,hey you can ignore this pr. just learning,shreyathakurst,139054952,closed,False,0,2023-07-09T18:21:13+00:00,2024-01-04T16:44:38+00:00,2024-01-04T16:44:38+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1705285643,108,replace MIT edx calaculas links with MIT open library,,Zayd-R,90765041,closed,False,0,2023-05-11T08:03:34+00:00,2023-05-12T17:07:09+00:00,2023-05-12T17:07:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1704761842,107,Fix #106 Update README.md,"Fix faulty calculus link #106
+Changed link to a working calculus course link. ",yoavami,92380289,closed,False,1,2023-05-10T23:50:54+00:00,2023-05-11T23:41:56+00:00,2023-05-11T23:41:56+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1704757437,106,All Single Variable Calculus section links lead to 404,"All the links in the ""Single Variable Calculus"" section lead to 404. The right links need to be found and the README.md needs to be updated accordingly.",yoavami,92380289,closed,False,1,2023-05-10T23:43:08+00:00,2023-05-12T17:07:14+00:00,2023-05-12T17:07:14+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1697935156,105,dfgf,slk,reevdonatusben789,106050175,closed,False,0,2023-05-05T17:11:13+00:00,2023-05-05T20:43:13+00:00,2023-05-05T20:43:13+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1640569875,103,RFC: Unable to see image topic_progression_graph.jpg,"**Problem:**
+
+I am unable to access or download the image [topic_progression_graph.jpg](https://github.com/ossu/data-science/blob/master/topic_progression_graph.jpg).
+
+**Proposal:**
+Request you to update the image or share it in this tread so we can follow the curriculum.
+",navoditjain-cricinfo,120168860,closed,False,1,2023-03-25T16:12:37+00:00,2023-03-25T16:30:58+00:00,2023-03-25T16:30:58+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1429267733,100,change made by Deep,,Deep838,94040857,closed,False,1,2022-10-31T05:14:26+00:00,2022-10-31T05:58:31+00:00,2022-10-31T05:56:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1294669549,94,solves #92,,daniel-web-developer,107224353,closed,False,0,2022-07-05T19:12:34+00:00,2022-08-02T18:51:43+00:00,2022-08-02T18:51:43+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1291935394,92,Some URLs link to courses that are only free for a limited time.,"The current links to MIT courses numbers 6.0001 and 6.0002 are to the courses on eDX, and you can only have them for free for a limited time. I suggest changing
+
+I propose to change them to the courses on the MIT OCW website, which are, respectively, [6.0001](https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/) and [6.0002](https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/).",daniel-web-developer,107224353,closed,False,7,2022-07-02T01:46:54+00:00,2022-08-02T18:53:30+00:00,2022-08-02T18:53:30+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1277003661,91,The link to the course on Multivariable Calculus is broken.,The URL appears to be broken. ,AustinCaudill,31804903,closed,False,1,2022-06-20T14:17:38+00:00,2022-06-20T16:52:00+00:00,2022-06-20T16:52:00+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1268632726,90,Add a specialization section on AI,,SamiulHasnatTaseen,67122999,closed,False,1,2022-06-12T16:18:51+00:00,2022-06-20T17:01:43+00:00,2022-06-20T17:01:42+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1077954124,87,Create LICENSE.md,"Adding license per issue 67
+
+https://github.com/ossu/data-science/issues/67
+
+https://creativecommons.org/licenses/by-sa/4.0/",jromani-ds,26752255,closed,False,2,2021-12-13T00:27:27+00:00,2021-12-13T03:08:08+00:00,2021-12-13T03:08:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1070978571,86,Enhanced layout," changed the `Data Structures and Algorithms` section to be the same as CS OSSU.
+Added duration, effort, prerequisites, discussion(only for the ones that are available in CS OSSU) to each course, and organized them into tables.
+also added `Topics covered` to each section.",ghost,10137,closed,False,2,2021-12-03T21:22:27+00:00,2022-03-02T06:04:18+00:00,2022-03-02T06:04:17+00:00,,3,2,0,0,0,0,1
+ossu/data-science,1034195114,84,RFC: Remove Patreon Link,"**Problem:**
+The OSSU Patreon link at the top of the curriculum does not navigate to an active contribution page on Patreon and may be Eric's individual page. (The same link is listed on the bioinformatics curriculum).
+
+**Duration:**
+Until 11/23/2021
+
+**Proposal:**
+Propose removing the Patreon link or replacing with an updated OSSU Patreon account.
+",MattRieke,75626231,closed,False,1,2021-10-23T15:44:59+00:00,2021-10-23T19:40:04+00:00,2021-10-23T19:40:04+00:00,,0,0,0,0,0,0,0
+ossu/data-science,1030672448,83,RFC: ,"**Problem:**
+From what I can see there is no way to track the progress, unless the user tracks it all by themself. Could we create a README.md that the user can enter a command and that class is checked off as ""completed"" by the program when rendered.
+
+There are more things I would like to add to this like specific courses for specialties but I didn't know how active or dynamic the project is.
+
+ [our curricular guidelines](https://github.com/ossu/data-science#curricular-guideline). Examples are:
+
+* OSSU lists course X as required when the course's topics are elective in our curricular guidelines.
+* OSSU does not having a course to cover required topic X from our curricular guidelines.
+* OSSU lists courses X, Y and Z that cover the same topics when fewer courses could suffice.
+* OSSU recommends course X to teach a topic, but there exists a higher quality course that covers the same material.
+
+**Duration:**
+This should most often be 1 month from the date of posting.
+
+**Background:**
+Give an in depth description of the problem. Describe a solution to the problem. Describe the advantages and disadvantages of this solution. This section should be a few paragraphs.
+
+**Proposal:**
+Give a bullet point list of changes that are being proposed. These can link to a Pull Request.
+
+**Alternatives:**
+Give a bullet point list of alternative ways to address the problem.
+",datatalking,11813209,closed,False,1,2021-10-19T19:33:06+00:00,2021-10-20T02:01:11+00:00,2021-10-20T02:01:10+00:00,,0,0,0,0,0,0,0
+ossu/data-science,981054731,82,vikas,viksa,motabhai-144,37713758,closed,False,0,2021-08-27T09:27:32+00:00,2021-08-27T16:42:31+00:00,2021-08-27T16:42:31+00:00,,0,0,0,0,0,0,0
+ossu/data-science,941389323,81,RFC: Add python alternative for algorithms course,"**Problem:**
+Our curricular guidelines do not require learning multiple languages, but our curriculum asks students to learn a language just to take the algorithms classes.
+
+**Duration:**
+2021 Aug 15
+
+**Background:**
+Our [curricular guidelines](https://www.amstat.org/asa/files/pdfs/EDU-DataScienceGuidelines.pdf) makes only a few references to programming languages. Students are expected to know SQL, the ""language"" of math, and ""**_a_** suitable high-level language"". (emphasis mine) The introductory courses, and most courses, use Python as this high level language.
+But students are directed to Robert Sedgewick's Algorithms course, which is taught in Java.
+
+Students have asked for a python alternative in [issues](https://github.com/ossu/data-science/issues/80) and in the discord ([example](https://discord.com/channels/744385009028431943/744388942635204610/847771614712168498)).
+
+A possible option is the free interactive textbook _[Problem Solving with Algorithms and Data Structures using Python](https://runestone.academy/runestone/books/published/pythonds3/index.html)_. The book links to [a set of supporting lectures](https://www.youtube.com/c/GerryJenkins/playlists?view=50&sort=dd&shelf_id=2). It also has some exercises in the text, which are paired with youtube video solutions. Each chapter ends with a set of exercises; it does not seem that there is an official solution set but some student solutions can be found on github.
+
+This free textbook is used by [dozens of college courses](https://www.google.com/search?hl=en&q=Problem%20Solving%20with%20Algorithms%20and%20Data%20Structures%20using%20Python%20site%3Aedu). It is well rated by [goodreads](https://www.goodreads.com/search?utf8=%E2%9C%93&query=PROBLEM+SOLVING+WITH+ALGORITHMS+AND+DATA+STRUCTURES+USING+PYTHON) and by [pythonbooks](https://pythonbooks.org/topical-books/algorithm-and-data-structure/) (which is really [a measure of popularity on Amazon](https://pythonbooks.org/about/)).
+
+It is not clear that the book is of the same quality as the Sedgwick course. For one, the Sedgewick course provides an autograder. For another, [user ratings of the Sedgewick Algorithms book](https://www.goodreads.com/book/show/10803540-algorithms?from_search=true&from_srp=true&qid=f3Os932ejV&rank=1) are notably higher.
+
+**Proposal:**
+Offer _Problem Solving with Algorithms and Data Structures using Python_ as an alternative Algorithms course for students who want to study in Python.
+
+**Alternatives:**
+1. Stick with the status quo.
+2. Replace the Sedgewick course rather than offer an alternative.
+",waciumawanjohi,18407643,open,False,15,2021-07-11T07:06:18+00:00,2025-01-25T17:13:56+00:00,,,6,6,0,0,0,0,0
+ossu/data-science,923219038,80,Programming languages ,"As data scientist python is your native language it's a bit annoying  to learn an other programming language just for data structure and algorithms , So I think you may need to find alternative courses for data structure and algorithms using python",ahmed-cyber,55057549,closed,False,10,2021-06-16T23:37:44+00:00,2021-11-05T16:38:33+00:00,2021-11-05T16:38:33+00:00,,1,1,0,0,0,0,0
+ossu/data-science,856784440,79,Interested to join the organization,Hi I'm interested to contribute and join the organization. Please guide me,LoopGlitch26,53336715,closed,False,1,2021-04-13T09:41:19+00:00,2021-04-23T00:31:08+00:00,2021-04-23T00:31:08+00:00,,0,0,0,0,0,0,0
+ossu/data-science,841136649,78,Not all courses listed here are free,The majority of courses that link to Coursera from the **Databases** and **Data Science Tools & Methods** section are not free because they belong to some specializations. Is there any way to access them for free or alternatives to them?,KaiwalPanchal,38000481,closed,False,1,2021-03-25T17:08:29+00:00,2021-03-26T09:33:40+00:00,2021-03-26T09:33:40+00:00,,0,0,0,0,0,0,0
+ossu/data-science,828548123,77,Trello Board ,"When accessing the Data Science Trello Board, and you click on the menu.. we are unable to copy the board. ",BenjaminTrainorJS,60359147,closed,False,1,2021-03-11T01:01:44+00:00,2021-03-12T01:16:14+00:00,2021-03-12T01:16:14+00:00,,0,0,0,0,0,0,0
+ossu/data-science,815400043,76,Add HS math pre-requisite from guidelines,"The [Curriculum Guidelines](https://www.amstat.org/asa/files/pdfs/EDU-DataScienceGuidelines.pdf) state the following:
+
+> To be prepared for the data science curriculum, students should
+>  * Be calculus ready (i.e., have a good precalculus course)
+>  * Have an understanding of basic matrix algebra (solving systems of linear equations)
+>  * Understand the basics of a relationship between variables, including scatterplots, the idea of correlation, and the line of best fit
+>  * Have experience with descriptive statistics: notions of center, spread, and skew
+
+I have found that the current curriculum, starting at MIT 6.000.1x, certainly reflects those prerequisites. Moreover, the previous Readme file included an unused ""Prerequisite"" link in its index, which has now been fixed.
+
+I have also fixed a typo in the ""Community"" section.",Elahi-cs,67738959,closed,False,1,2021-02-24T11:43:40+00:00,2021-03-06T06:03:48+00:00,2021-03-06T06:03:48+00:00,,0,0,0,0,0,0,0
+ossu/data-science,782933967,75,Qesstion,**Should I take computer science curriculum? or I can start with that?**,ghost,10137,closed,False,1,2021-01-10T23:32:11+00:00,2021-01-12T02:53:56+00:00,2021-01-12T02:53:56+00:00,,0,0,0,0,0,0,0
+ossu/data-science,770266250,74,Trello to Data Science Ossu program,I adapted the CS Ossu Trello for Data Science Curriculum https://trello.com/b/JpvLwQfr/ossu-data-science,ficast,61601716,closed,False,1,2020-12-17T18:18:33+00:00,2020-12-20T16:17:00+00:00,2020-12-20T16:17:00+00:00,,0,0,0,0,0,0,0
+ossu/data-science,713087207,72,"change the ""###"" with numbers.md",,nikhiljain123,40821710,closed,False,0,2020-10-01T18:31:19+00:00,2020-10-02T02:34:17+00:00,2020-10-02T02:34:17+00:00,,0,0,0,0,0,0,0
+ossu/data-science,712592048,71,Update Readme.md,Added some free courses and paid courses links in machine learning and added deep learning courses link,AjaySinghPanwar,64411148,closed,False,1,2020-10-01T07:51:39+00:00,2020-10-02T03:48:13+00:00,2020-10-02T03:48:13+00:00,,0,0,0,0,0,0,0
+ossu/data-science,712589546,70,Update README.md,Added some free courses and paid courses links.,AjaySinghPanwar,64411148,closed,False,0,2020-10-01T07:48:23+00:00,2020-10-01T07:49:45+00:00,2020-10-01T07:49:45+00:00,,0,0,0,0,0,0,0
+ossu/data-science,712487527,69,I have added a Data Science Interview Questions and answers PDF... Please merge it into your Repo,,PNSuchismita,66131472,closed,False,1,2020-10-01T05:10:13+00:00,2020-10-02T03:35:02+00:00,2020-10-02T03:35:01+00:00,,0,0,0,0,0,0,0
+ossu/data-science,712147854,68,Update README.md,,sehdevkumar,55868273,closed,False,0,2020-09-30T17:46:10+00:00,2020-09-30T19:08:48+00:00,2020-09-30T19:08:48+00:00,,0,0,0,0,0,0,0
+ossu/data-science,694104372,67,LICENSE,"The repository is missing a LICENSE, propose to add MIT license consistent with the ossu/computer-science repository.
+
+",jromani-ds,26752255,closed,False,9,2020-09-05T15:08:09+00:00,2021-12-13T03:08:11+00:00,2021-12-13T03:08:11+00:00,,0,0,0,0,0,0,0
+ossu/data-science,693216366,66,Update courses.md,Add in Amazon Web Service Course Material,jromani-ds,26752255,closed,False,1,2020-09-04T14:16:09+00:00,2021-11-15T01:38:07+00:00,2021-11-15T01:38:07+00:00,,0,0,0,0,0,0,0
+ossu/data-science,689851642,65,Ossu ,,Shubhamxxx,60534061,closed,False,0,2020-09-01T06:21:42+00:00,2020-09-01T22:44:18+00:00,2020-09-01T22:44:18+00:00,,1,0,0,0,0,0,1
+ossu/data-science,688468153,64,"Data science roadmap
+",,finmech,48720224,closed,False,0,2020-08-29T06:00:05+00:00,2020-08-29T06:00:29+00:00,2020-08-29T06:00:29+00:00,,0,0,0,0,0,0,0
+ossu/data-science,683312682,63,Data science,,kumarnitish0038,42117748,closed,False,0,2020-08-21T05:59:01+00:00,2020-08-21T06:20:57+00:00,2020-08-21T06:20:57+00:00,,0,0,0,0,0,0,0
+ossu/data-science,676610460,62,Data Science,,ismael-araujo,49823702,closed,False,0,2020-08-11T06:08:44+00:00,2020-08-11T06:47:12+00:00,2020-08-11T06:47:12+00:00,,0,0,0,0,0,0,0
+ossu/data-science,675922484,61,Request for Comments: Data Science Curriculum v2,"**Problem**:
+The curriculum has not been maintained and does not represent best practice.
+
+**Duration**:
+2020-08-31
+
+**Background**:
+OSSU recommends courses that would constitute an undergraduate major in Data Science. It is our responsibility to ensure that we follow best practice. To do so, we must bring the curriculum into alignment with external guidelines. A candidate set of guidelines has been identified and [previously proposed](https://github.com/ossu/data-science/issues/54#issuecomment-612680475).
+
+In 2017, the _Annual Review of Statistics and Its Application_ published the report ""Curriculum guidelines for undergraduate programs in data science."" The report was authored by “25 undergraduate faculty from a variety of institutions in the United States, primarily from the disciplines of mathematics, statistics, and computer science.” It had a goal of providing “structure for institutions planning for or revising a major in data science.”
+
+The current state of OSSU Data Science is one of disrepair. The curriculum has had 1 change in 3 years. That change deleted a link to a broken application. But there remained many links to courses that are no longer offered. A list of these can be found [here](https://github.com/ossu/data-science/issues/59). Prospective students have [posted in the issues](https://github.com/ossu/data-science/issues/54) asking if the Data Science curriculum is still maintained. Updating the curriculum must ensure that all courses are available for students.
+
+**Proposal**:
+OSSU Data Science should adopt “Curriculum guidelines for undergraduate programs in data science” (CGUPDS) as our guidelines. The curriculum should be updated to match. The exact changes can be reviewed [in this pull request](https://github.com/ossu/data-science/pull/60).
+",waciumawanjohi,18407643,closed,False,18,2020-08-10T07:13:26+00:00,2020-09-03T06:40:18+00:00,2020-09-03T06:40:18+00:00,,0,0,0,0,0,0,0
+ossu/data-science,675922168,60,V2,,waciumawanjohi,18407643,closed,False,1,2020-08-10T07:12:44+00:00,2020-09-03T06:40:17+00:00,2020-09-03T06:40:17+00:00,,0,0,0,0,0,0,0
+ossu/data-science,675768974,59,Some wrongs I found in the courses' links,"I made a ""report"" with all the courses that have any kind of problem in terms of availability, wrong URL or course change.
+
+
+[Problematic Courses.xlsx](https://github.com/ossu/data-science/files/5048363/Problematic.Courses.xlsx)
+
+There are some course at Coursera, but Coursera is free only for a 7-day period, right?
+
+I hope that this is worth it someway.",EWCunha,69436215,closed,False,3,2020-08-09T20:44:31+00:00,2020-08-10T07:17:11+00:00,2020-08-10T07:17:11+00:00,,0,0,0,0,0,0,0
+ossu/data-science,674724601,58,No,,ghost,10137,closed,False,0,2020-08-07T03:12:38+00:00,2020-08-07T03:14:36+00:00,2020-08-07T03:14:36+00:00,,0,0,0,0,0,0,0
+ossu/data-science,670885459,57,Data Science,,zelalemMK,48842338,closed,False,0,2020-08-01T13:45:44+00:00,2020-08-07T18:31:58+00:00,2020-08-07T18:31:58+00:00,,0,0,0,0,0,0,0
+ossu/data-science,650996816,56,Data Science,,amir761,43217146,closed,False,1,2020-07-05T04:02:55+00:00,2020-07-06T05:47:40+00:00,2020-07-06T05:47:40+00:00,,0,0,0,0,0,0,0
+ossu/data-science,588057047,55,Learn,,mnxxx15,58899287,closed,False,0,2020-03-25T23:42:02+00:00,2020-04-12T21:21:22+00:00,2020-04-12T21:21:22+00:00,,0,0,0,0,0,0,0
+ossu/data-science,583161632,54,Is this course still relevant?,Last update on this course is made 3 years ago so is it still relevant? Like are there better free courses out there than the ones listed here? I am planning on starting this. Anything I need to know?,twisp007,28303082,closed,False,5,2020-03-17T17:01:39+00:00,2020-08-10T07:18:56+00:00,2020-08-10T07:18:56+00:00,,1,1,0,0,0,0,0
+ossu/data-science,562932030,53,Q: How long does this program typically take?,"Hi, sorry if this is the wrong place to post this question but I can’t seem to find an answer. What is the typical duration for the ossu data science course (assuming a full-time study load)? Thanks!",wanageeska,17569679,closed,False,1,2020-02-11T01:53:07+00:00,2020-08-18T07:24:01+00:00,2020-08-18T07:24:01+00:00,,0,0,0,0,0,0,0
+ossu/data-science,555018273,52,Update books.md,add a new books in linear algebra and machine learning,Alymostafa,34445689,closed,False,2,2020-01-25T00:48:35+00:00,2021-03-06T06:06:58+00:00,2021-03-06T06:06:57+00:00,,0,0,0,0,0,0,0
+ossu/data-science,458936987,51,Grammar correction - ps: to P.S.,,dalbhat,30812429,closed,False,0,2019-06-20T23:42:08+00:00,2020-08-18T07:12:47+00:00,2020-08-18T07:12:47+00:00,,0,0,0,0,0,0,0
+ossu/data-science,441241153,50,Login whit github,"{
+        ""error"": {
+                ""code"":""SERVICE_UNAVAILABLE"",
+                ""statusCode"":410,
+                ""message"":""SDK Update Required: See https://goo.gl/2cKQWm."",
+                ""details"":""SDK Update Required: See https://goo.gl/2cKQWm.""
+        }
+}",qselmer,44510819,closed,False,7,2019-05-07T13:44:23+00:00,2020-07-16T05:32:19+00:00,2020-07-16T05:32:19+00:00,,4,4,0,0,0,0,0
+ossu/data-science,394005812,49,computer vision course cs231n,,chernyshof,20403588,closed,False,0,2018-12-25T10:53:06+00:00,2018-12-27T13:55:22+00:00,2018-12-27T13:55:00+00:00,,0,0,0,0,0,0,0
+ossu/data-science,393646534,48,SDK update required to sign up via Web App,"Steps to reproduce
+Navigate to https://ossu.firebaseapp.com/#/
+Click Login with Github
+Error Message encountered: {""code"":""SERVICE_UNAVAILABLE"",""statusCode"":410,""message"":""SDK Update Required: See https://goo.gl/2cKQWm."",""details"":""SDK Update Required: https://goo.gl/2cKQWm. ""}
+More details on updating the SDK as of December 2018 is given in below google doc.
+https://docs.google.com/document/d/1vpQV8DBQLkIZci7Vh8N4LUHyTkBOsuW5eXE1x8IAqvw/edit?usp=sharing
+
+Would like to know if we can update the SDK as per above instructions. Thanks",VidyaPriyadarshini,45090133,closed,False,2,2018-12-22T06:02:33+00:00,2020-07-16T05:33:45+00:00,2020-07-16T05:33:45+00:00,,13,13,0,0,0,0,0
+ossu/data-science,369809682,47,"Added the text ""My Changes""",,pk231594,44117634,closed,False,0,2018-10-13T14:57:49+00:00,2020-08-18T07:13:09+00:00,2020-08-18T07:13:09+00:00,,0,0,0,0,0,0,0
+ossu/data-science,339233121,46,Probability and Statistics Courses not available,"The 3 last courses in this section aren't available: 
+
+ https://www.edx.org/course/introduction-statistics-descriptive-uc-berkeleyx-stat2-1x
+https://www.edx.org/course/introduction-statistics-probability-uc-berkeleyx-stat2-2x
+https://www.edx.org/course/introduction-statistics-inference-uc-berkeleyx-stat2-3x
+",odarotto,40160237,closed,False,4,2018-07-08T15:08:23+00:00,2020-08-10T07:19:21+00:00,2020-08-10T07:19:21+00:00,,0,0,0,0,0,0,0
+ossu/data-science,310402624,45,Who is working on the data science coursework,"How can I help, this is so close to the existing project I'm working on that I would like to volunteer to take this over unless someone else is actively working on this.",datatalking,11813209,closed,False,7,2018-04-02T05:56:22+00:00,2020-08-10T07:19:55+00:00,2020-08-10T07:19:55+00:00,,1,1,0,0,0,0,0
+ossu/data-science,306156190,44,Linear Algebra,Is there not a better Linear Algebra course? This LAFF course is painfully obtuse and dull.,ZRupp,33986455,closed,False,2,2018-03-17T13:23:10+00:00,2020-08-10T07:21:31+00:00,2020-08-10T07:21:31+00:00,,0,0,0,0,0,0,0
+ossu/data-science,306130235,43,Delete reference to application that is no longer maintained,"The firebase app currently reflects version 6 of the Computer Science curriculum. The current CS curriculum is version 8.0.0.
+
+Furthermore, the firebase app does not reflect the data science curriculum at all.
+
+Reference to the app should be removed until it is adequately updated.",waciumawanjohi,18407643,closed,False,0,2018-03-17T05:34:53+00:00,2020-08-18T07:14:20+00:00,2020-08-18T07:14:20+00:00,,1,1,0,0,0,0,0
+ossu/data-science,286592747,42,5 years duration !,i just calculated the duration for all courses and it was 5 years ! :smile:,maboulfotouh,35197335,closed,False,2,2018-01-07T19:31:28+00:00,2019-01-10T17:17:09+00:00,2019-01-10T17:17:08+00:00,,2,0,0,2,0,0,0
+ossu/data-science,263981695,41,Add new forum and code of conduct,,ericdouglas,4119931,closed,False,0,2017-10-09T18:12:12+00:00,2017-10-09T18:21:48+00:00,2017-10-09T18:21:45+00:00,,0,0,0,0,0,0,0
+ossu/data-science,262253295,40,Add link to newsletter,,ericdouglas,4119931,closed,False,0,2017-10-02T22:51:57+00:00,2017-10-09T09:40:33+00:00,2017-10-09T09:40:30+00:00,,0,0,0,0,0,0,0
+ossu/data-science,261579632,39,Add patreon badge,,ericdouglas,4119931,closed,False,0,2017-09-29T09:15:16+00:00,2017-09-29T09:16:07+00:00,2017-09-29T09:15:57+00:00,,0,0,0,0,0,0,0
+ossu/data-science,258572935,38,Fixed probability link,Section and link had different names so the link didn't work. Fixed them.,meboler,3528094,closed,False,1,2017-09-18T18:15:52+00:00,2017-09-29T08:02:26+00:00,2017-09-29T08:02:09+00:00,,0,0,0,0,0,0,0
+ossu/data-science,256415326,37,probability courses not available,"Love the curriculum so far! Only complaint is that the edX offerings of the following courses are not currently available:
+- [Introduction to Statistics: Descriptive Statistics](https://www.edx.org/course/introduction-statistics-descriptive-uc-berkeleyx-stat2-1x)
+- [Introduction to Statistics: Probability](https://www.edx.org/course/introduction-statistics-probability-uc-berkeleyx-stat2-2x)
+- [Introduction to Statistics: Inference](https://www.edx.org/course/introduction-statistics-inference-uc-berkeleyx-stat2-3x)
+
+Any suggestions for similar courses?",tjefferies,24706343,closed,False,1,2017-09-09T05:06:08+00:00,2020-08-10T07:21:58+00:00,2020-08-10T07:21:58+00:00,,0,0,0,0,0,0,0
+ossu/data-science,256283501,36,Applications of Linear Algebra pt1: In-class activities inaccessible ,The web apps used for activities give server errors. The matlab activities built into the class fail as well.,meboler,3528094,closed,False,2,2017-09-08T15:06:32+00:00,2020-08-10T07:22:16+00:00,2020-08-10T07:22:16+00:00,,0,0,0,0,0,0,0
+ossu/data-science,249523067,35,how about fast.ai ?,anyone looked into fast.ai?,ghost,10137,closed,False,2,2017-08-11T02:07:39+00:00,2020-08-10T07:22:38+00:00,2020-08-10T07:22:38+00:00,,0,0,0,0,0,0,0
+ossu/data-science,239330297,34,Create knn_clustering_hadoop,,eyuptkknt,29763960,closed,False,0,2017-06-28T23:56:17+00:00,2020-08-18T07:14:39+00:00,2020-08-18T07:14:39+00:00,,0,0,0,0,0,0,0
+ossu/data-science,238760617,33,Added books and new courses,,PramodShenoy,14936214,closed,False,6,2017-06-27T07:30:42+00:00,2021-03-06T06:08:40+00:00,2021-03-06T06:08:40+00:00,,0,0,0,0,0,0,0
+ossu/data-science,224081822,32,Fix grammar,,hirejohnsalcedo,17956698,closed,False,0,2017-04-25T09:49:32+00:00,2018-12-25T22:15:55+00:00,2018-12-25T22:15:55+00:00,,0,0,0,0,0,0,0
+ossu/data-science,221948160,31,a lot of Python Courses,"There is 4 courses for Python, it's more than enough
+2 Courses 4 probability
+and more duplicated courses
+Please refactor the content like Computer Science track ",MohammedAttya2,12786505,closed,False,3,2017-04-15T13:25:29+00:00,2020-08-10T07:23:24+00:00,2020-08-10T07:23:24+00:00,,0,0,0,0,0,0,0
+ossu/data-science,220412626,30,fixes open-source-society/data-science#29,,abhinav1592,2583022,closed,False,1,2017-04-08T17:00:26+00:00,2019-01-10T17:11:20+00:00,2019-01-10T17:11:20+00:00,,1,1,0,0,0,0,0
+ossu/data-science,220389311,29,Fixing the link of Probability and Statistics,"The link ""Probability and Statistics with R"" currently points to 
+https://github.com/open-source-society/data-science#probability-and-statistics-with-r
+
+But the section ""Probability and Statistics with R""  has href ""#probability-and-statistics"".
+Either of them need to be changed.
+===================================================================
+I am learning to contribute. Please help me out in creating a pull request because I want to fix the issue myself. I want this to be my first contribution towards open-source.
+",abhinav1592,2583022,closed,False,3,2017-04-08T09:52:36+00:00,2020-08-10T07:23:49+00:00,2020-08-10T07:23:49+00:00,,0,0,0,0,0,0,0
+ossu/data-science,215777276,28,Proof courses completed,What sort of proof is required that a course has been completed? ,mbabaian,24599816,closed,False,1,2017-03-21T15:22:57+00:00,2020-08-10T07:24:09+00:00,2020-08-10T07:24:09+00:00,,0,0,0,0,0,0,0
+ossu/data-science,203699877,27,Trello board just like the one in Computer Science,"Did anyone make a trello board for themselves and can share it?  Or can someone make it? 
+I'm also making it, slowly though. Will share when I finish it.",saip009,10311692,closed,False,4,2017-01-27T17:57:58+00:00,2020-08-10T07:24:26+00:00,2020-08-10T07:24:26+00:00,,0,0,0,0,0,0,0
+ossu/data-science,203641446,26,Capstone in Coursera and Nanodegree of Udacity are not free.,"As far as I know inn Coursera however all courses from the specialization except for the capstone project can be found and enrolled separately. And to access the capstone project, you need to get certification from all other courses from the specialization.
+Also on Udacity the nano degree programs are not free.
+
+I think you should add these points in the introduction as many people may think all those specializations are free. Unless I'm wrong in which case I would like to know what's the procedure of accessing them for free.
+
+Thanks",saip009,10311692,closed,False,1,2017-01-27T13:57:03+00:00,2020-08-10T07:24:38+00:00,2020-08-10T07:24:38+00:00,,1,1,0,0,0,0,0
+ossu/data-science,202461128,25,update readme with data wrangling course,updated readme with data wrangling course,akshat02,9974065,closed,False,1,2017-01-23T07:14:13+00:00,2017-01-24T08:21:48+00:00,2017-01-24T08:21:40+00:00,,0,0,0,0,0,0,0
+ossu/data-science,202378983,24,Use CS224D for Natural Language Processing,,mdibaiee,2807772,closed,False,1,2017-01-22T12:06:42+00:00,2017-01-24T08:21:28+00:00,2017-01-24T08:21:21+00:00,,0,0,0,0,0,0,0
+ossu/data-science,202375867,23,Natural Language Processing,"Hi, it seems the Natural Language Processing course linked does not exist anymore.
+
+I recommend [this course](http://cs224d.stanford.edu/index.html) to be used in place.
+
+If you agree, I can make a pull-request.",mdibaiee,2807772,closed,False,2,2017-01-22T10:55:17+00:00,2017-01-24T08:26:04+00:00,2017-01-24T08:26:04+00:00,,0,0,0,0,0,0,0

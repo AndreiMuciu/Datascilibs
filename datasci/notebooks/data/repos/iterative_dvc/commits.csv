@@ -1,0 +1,406 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+iterative/dvc,9908ca7f8e9166506bbd7fa85cead8194fba9aa0,https://github.com/iterative/dvc/commit/9908ca7f8e9166506bbd7fa85cead8194fba9aa0,skshetry,18718008,User,2025-05-07T08:49:27+00:00,web-flow,2025-05-07T08:49:27+00:00,"drop inputs passed to codecov-action (#10740)
+
+It can already search and find these coverage files.",0,3,3,1,0eebeb9900eea9117c78922b04b4e46cb7df3009
+iterative/dvc,0eebeb9900eea9117c78922b04b4e46cb7df3009,https://github.com/iterative/dvc/commit/0eebeb9900eea9117c78922b04b4e46cb7df3009,skshetry,18718008,User,2025-05-07T06:55:51+00:00,web-flow,2025-05-07T06:55:51+00:00,"tests: fix flaky test in test_get_used_objs (#10739)
+
+Clear logs before assertions so that logs from other tests do not interfere with the test.
+Some destructors may also run in between due to GC, so hopefully this will fix that issue too,
+or reduce the chances of it happening.
+
+See
+https://github.com/iterative/dvc/actions/runs/14873217814/job/41775314725#step:6:97.
+
+```console
+>       assert first(caplog.messages) == expected_message
+E       assert 'RC: discarding all clients' == ""Output 'path... 'stage.dvc'.""
+E
+E         + RC: discarding all clients
+E         - Output 'path'(stage: 'stage.dvc') is missing version info. Cache for it will not be collected. Use `dvc repro` to get your pipeline up to date.
+E         - You can also use `dvc commit stage.dvc` to associate existing 'path' with stage: 'stage.dvc'.
+```",1,0,1,1,415d4bc9804400e6e8c4e9976db65b2df85dad49
+iterative/dvc,415d4bc9804400e6e8c4e9976db65b2df85dad49,https://github.com/iterative/dvc/commit/415d4bc9804400e6e8c4e9976db65b2df85dad49,skshetry,18718008,User,2025-05-06T08:39:23+00:00,web-flow,2025-05-06T08:39:23+00:00,"repo: try to support opening uninitialized/broken repositories (#10736)
+
+This `_get_remote_config()` should use `uninitialized=True` so that it supports
+more broader kinds of broken/partially-initialized repositories, including some that have
+`.dvc` directory missing, or `.git` directory missing.
+
+This partially reverts #10719. #10608 is also fixed, and no longer requires `core.no_scm` to be passed.
+This was already supported by `dvc.api.get_url` as it uses `uninitialized=True`, but this was not respected
+in `_get_remote_config()` where it would fail before.
+
+That said, this whole `open_repo`/`_get_remote_config` is terribly broken. For one, it is opening
+a local repository, and forcing it's remote config to a repository opened with `Repo(rev=...)`,
+where the config may be different.",15,29,44,2,f3be7d761fbecc6a6fc9a7f536edfa7bba37e062
+iterative/dvc,f3be7d761fbecc6a6fc9a7f536edfa7bba37e062,https://github.com/iterative/dvc/commit/f3be7d761fbecc6a6fc9a7f536edfa7bba37e062,pre-commit-ci[bot],66853113,Bot,2025-05-06T01:20:11+00:00,web-flow,2025-05-06T01:20:11+00:00,"[pre-commit.ci] pre-commit autoupdate (#10735)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.11.7 → v0.11.8](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.7...v0.11.8)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,4bde0e754e1720f5e516fa96f4313af056745517
+iterative/dvc,4bde0e754e1720f5e516fa96f4313af056745517,https://github.com/iterative/dvc/commit/4bde0e754e1720f5e516fa96f4313af056745517,rgoya,5192495,User,2025-04-30T06:35:09+00:00,web-flow,2025-04-30T06:35:09+00:00,"Forward args to _get_remote_config() and honour core/no_scm if present (#10719)
+
+* Forward args to _get_remote_config and honour core/no_scm if present
+
+* Pass full config, except cache, to Repo()
+
+* Avoid modifying original kwargs contents
+
+* Simplify if config
+
+* Add test
+
+* Relax error matching.. .. Avoid windows vs unix paths
+
+* Update dvc/repo/open_repo.py
+
+---------
+
+Co-authored-by: skshetry <18718008+skshetry@users.noreply.github.com>",56,3,59,3,88f1ada4bf82bb07873d701e3a98cb10f4a76fd4
+iterative/dvc,88f1ada4bf82bb07873d701e3a98cb10f4a76fd4,https://github.com/iterative/dvc/commit/88f1ada4bf82bb07873d701e3a98cb10f4a76fd4,skshetry,18718008,User,2025-04-29T07:40:28+00:00,web-flow,2025-04-29T07:40:28+00:00,"tests: func test for #4344 (#10732)
+
+See https://github.com/iterative/dvc-data/pull/601 that fixed the issue.
+The test is based on reproduction steps from:
+https://github.com/iterative/dvc/issues/4344#issuecomment-2822000925",9,0,9,1,bd65c205dfa51fe0337eb45df3e2673d7648526f
+iterative/dvc,bd65c205dfa51fe0337eb45df3e2673d7648526f,https://github.com/iterative/dvc/commit/bd65c205dfa51fe0337eb45df3e2673d7648526f,pre-commit-ci[bot],66853113,Bot,2025-04-28T23:07:42+00:00,web-flow,2025-04-28T23:07:42+00:00,"[pre-commit.ci] pre-commit autoupdate (#10731)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.11.4 → v0.11.7](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.4...v0.11.7)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,e6ce5f825dd69cd6470cac01ce66cf6e5acec9ca
+iterative/dvc,e6ce5f825dd69cd6470cac01ce66cf6e5acec9ca,https://github.com/iterative/dvc/commit/e6ce5f825dd69cd6470cac01ce66cf6e5acec9ca,skshetry,18718008,User,2025-04-28T12:38:08+00:00,web-flow,2025-04-28T12:38:08+00:00,"Revert ""pre-commit: set autoupdate schedule to monthly"" (#10730)
+
+Revert ""pre-commit: set autoupdate schedule to monthly (#10685)""
+
+This reverts commit 25d2638a57b84e65191a423ecd8374c8e3c379bc.",0,1,1,1,d30d66c1d397919f9a475074f4a3945e0ce2efcd
+iterative/dvc,d30d66c1d397919f9a475074f4a3945e0ce2efcd,https://github.com/iterative/dvc/commit/d30d66c1d397919f9a475074f4a3945e0ce2efcd,dependabot[bot],49699333,Bot,2025-04-28T09:10:14+00:00,web-flow,2025-04-28T09:10:14+00:00,"build(deps): bump astral-sh/setup-uv from 5 to 6 (#10729)
+
+Bumps [astral-sh/setup-uv](https://github.com/astral-sh/setup-uv) from 5 to 6.
+- [Release notes](https://github.com/astral-sh/setup-uv/releases)
+- [Commits](https://github.com/astral-sh/setup-uv/compare/v5...v6)
+
+---
+updated-dependencies:
+- dependency-name: astral-sh/setup-uv
+  dependency-version: '6'
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,4,19f31d7cace974873bb9b0f26a646de5e3581d96
+iterative/dvc,19f31d7cace974873bb9b0f26a646de5e3581d96,https://github.com/iterative/dvc/commit/19f31d7cace974873bb9b0f26a646de5e3581d96,PythonFZ,46721498,User,2025-04-24T00:34:28+00:00,web-flow,2025-04-24T00:34:28+00:00,"Bring the banner back (#10728)
+
+Update README.rst",2,0,2,1,99d9ca714de61518bd672ff647ed1ad7fb56f1d1
+iterative/dvc,99d9ca714de61518bd672ff647ed1ad7fb56f1d1,https://github.com/iterative/dvc/commit/99d9ca714de61518bd672ff647ed1ad7fb56f1d1,shcheklein,3659196,User,2025-04-22T04:36:16+00:00,web-flow,2025-04-22T04:36:16+00:00,remove banner in README (#10726),0,4,4,1,a3b6722523c17784bf735b63ec3d294aff70ca85
+iterative/dvc,a3b6722523c17784bf735b63ec3d294aff70ca85,https://github.com/iterative/dvc/commit/a3b6722523c17784bf735b63ec3d294aff70ca85,dependabot[bot],49699333,Bot,2025-04-10T07:17:20+00:00,web-flow,2025-04-10T07:17:20+00:00,"build(deps): bump rtCamp/action-slack-notify from 2.3.2 to 2.3.3 (#10718)
+
+Bumps [rtCamp/action-slack-notify](https://github.com/rtcamp/action-slack-notify) from 2.3.2 to 2.3.3.
+- [Release notes](https://github.com/rtcamp/action-slack-notify/releases)
+- [Commits](https://github.com/rtcamp/action-slack-notify/compare/v2.3.2...v2.3.3)
+
+---
+updated-dependencies:
+- dependency-name: rtCamp/action-slack-notify
+  dependency-version: 2.3.3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,b824bc4db7a91224d5589e941742a9444c080ece
+iterative/dvc,b824bc4db7a91224d5589e941742a9444c080ece,https://github.com/iterative/dvc/commit/b824bc4db7a91224d5589e941742a9444c080ece,skshetry,18718008,User,2025-04-10T07:14:32+00:00,web-flow,2025-04-10T07:14:32+00:00,"ci(build): use envvar override to omit local version for Test PyPI upload (#10720)
+
+Uses `SETUPTOOLS_SCM_OVERRIDES_FOR_DVC` to omit the local version
+when uploading to Test PyPI. This is needed because (Test) PyPI
+does not support local version.
+
+This requires bumping minimum version of `setuptools_scm` to `8.0.0`.
+
+The envvar is documented here: https://setuptools-scm.readthedocs.io/en/latest/overrides/.
+
+Also see:
+https://github.com/pypa/setuptools-scm/issues/455#issuecomment-2791301186.",12,10,22,2,6cc349edb4ecdee43c6020cf2c76d904593e3c7d
+iterative/dvc,6cc349edb4ecdee43c6020cf2c76d904593e3c7d,https://github.com/iterative/dvc/commit/6cc349edb4ecdee43c6020cf2c76d904593e3c7d,pre-commit-ci[bot],66853113,Bot,2025-04-08T03:15:09+00:00,web-flow,2025-04-08T03:15:09+00:00,"[pre-commit.ci] pre-commit autoupdate (#10717)
+
+* [pre-commit.ci] pre-commit autoupdate
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.9.9 → v0.11.4](https://github.com/astral-sh/ruff-pre-commit/compare/v0.9.9...v0.11.4)
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* fix ruff errors
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Saugat Pachhai (सौगात) <suagatchhetri@outlook.com>",22,23,45,11,e455ee69aa94769329cb763ae489d2cf67248da4
+iterative/dvc,e455ee69aa94769329cb763ae489d2cf67248da4,https://github.com/iterative/dvc/commit/e455ee69aa94769329cb763ae489d2cf67248da4,RMCrean,49672044,User,2025-04-07T03:17:09+00:00,web-flow,2025-04-07T03:17:09+00:00,"remote: show default when run ""dvc remote list"" (#10711)
+
+* remote: show default when run ""dvc remote list""
+
+Fixes #10708
+
+* Indent other remotes if there is a default remote
+
+Now regardless of whether there is a default remote or not, all remotes are equally indented
+
+* stricter test for listing remotes shows default
+
+* Rewrite dvc remote list implemetation
+
+- Default remote is indicated at end of the output and colored green
+- Remotes no longer reordered to show default first
+- Test updated to reflect changes and remove need for function escape_ansi.
+
+---------
+
+Co-authored-by: RMCrean <RMCrean@users.noreply.github.com>",23,1,24,2,31270c14e30901ae5b178f72c67a83efe070768c
+iterative/dvc,31270c14e30901ae5b178f72c67a83efe070768c,https://github.com/iterative/dvc/commit/31270c14e30901ae5b178f72c67a83efe070768c,skshetry,18718008,User,2025-03-25T04:03:50+00:00,web-flow,2025-03-25T04:03:50+00:00,"pyproject: update license to PEP 639 format (#10709)
+
+Requires bumping `setuptools` to 77.0.0 or later.
+
+See:
+- [PEP 639](https://peps.python.org/pep-0639)
+- [Writing pyproject.toml - license](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license)",3,5,8,1,28b7c8b7236c4e2e0451557e505f2b50aa8fc6a2
+iterative/dvc,28b7c8b7236c4e2e0451557e505f2b50aa8fc6a2,https://github.com/iterative/dvc/commit/28b7c8b7236c4e2e0451557e505f2b50aa8fc6a2,pre-commit-ci[bot],66853113,Bot,2025-03-07T02:21:14+00:00,web-flow,2025-03-07T02:21:14+00:00,"[pre-commit.ci] pre-commit autoupdate (#10699)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.9.4 → v0.9.9](https://github.com/astral-sh/ruff-pre-commit/compare/v0.9.4...v0.9.9)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,1d6ea68133289ceab2637ce7095772678af792c6
+iterative/dvc,1d6ea68133289ceab2637ce7095772678af792c6,https://github.com/iterative/dvc/commit/1d6ea68133289ceab2637ce7095772678af792c6,skshetry,18718008,User,2025-02-09T06:31:53+00:00,web-flow,2025-02-09T06:31:53+00:00,"ls/ls-url: do not show entry with size<=0 for a directory (#10687)
+
+ls/ls-url: do not show size=0 when the entry is a directory",1,1,2,1,25d2638a57b84e65191a423ecd8374c8e3c379bc
+iterative/dvc,25d2638a57b84e65191a423ecd8374c8e3c379bc,https://github.com/iterative/dvc/commit/25d2638a57b84e65191a423ecd8374c8e3c379bc,skshetry,18718008,User,2025-02-06T03:48:04+00:00,web-flow,2025-02-06T03:48:04+00:00,"pre-commit: set autoupdate schedule to monthly (#10685)
+
+Update .pre-commit-config.yaml",1,0,1,1,0b03714097072b67e3efb6676620c53a4dd81208
+iterative/dvc,0b03714097072b67e3efb6676620c53a4dd81208,https://github.com/iterative/dvc/commit/0b03714097072b67e3efb6676620c53a4dd81208,dependabot[bot],49699333,Bot,2025-02-06T03:45:37+00:00,web-flow,2025-02-06T03:45:37+00:00,"build(deps): bump mypy from 1.14.1 to 1.15.0 (#10684)
+
+Bumps [mypy](https://github.com/python/mypy) from 1.14.1 to 1.15.0.
+- [Changelog](https://github.com/python/mypy/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python/mypy/compare/v1.14.1...v1.15.0)
+
+---
+updated-dependencies:
+- dependency-name: mypy
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,9392bbdd4b7c708c32a9898aa80e26b0926c7b71
+iterative/dvc,9392bbdd4b7c708c32a9898aa80e26b0926c7b71,https://github.com/iterative/dvc/commit/9392bbdd4b7c708c32a9898aa80e26b0926c7b71,pre-commit-ci[bot],66853113,Bot,2025-02-04T05:15:36+00:00,web-flow,2025-02-04T05:15:36+00:00,"[pre-commit.ci] pre-commit autoupdate (#10682)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",2,2,4,1,c4b18b710ae0f8e3f058eebbd50a00dc60a614b2
+iterative/dvc,c4b18b710ae0f8e3f058eebbd50a00dc60a614b2,https://github.com/iterative/dvc/commit/c4b18b710ae0f8e3f058eebbd50a00dc60a614b2,pre-commit-ci[bot],66853113,Bot,2025-01-31T14:19:56+00:00,web-flow,2025-01-31T14:19:56+00:00,"[pre-commit.ci] pre-commit autoupdate (#10676)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: skshetry <18718008+skshetry@users.noreply.github.com>",3,3,6,2,da1e0b57b8b5d89d8c4a983d20ce5e6905060fb1
+iterative/dvc,da1e0b57b8b5d89d8c4a983d20ce5e6905060fb1,https://github.com/iterative/dvc/commit/da1e0b57b8b5d89d8c4a983d20ce5e6905060fb1,petrchmelar,13875092,User,2025-01-31T13:56:27+00:00,web-flow,2025-01-31T13:56:27+00:00,"import: fix broken progressbar when importing folder (#10678)
+
+Co-authored-by: Petr Chmelar <petr.chmelar@innovatrics.com>
+Co-authored-by: skshetry <18718008+skshetry@users.noreply.github.com>",4,3,7,1,b2a873d13bd45335a2b201eb235db94cc037628a
+iterative/dvc,b2a873d13bd45335a2b201eb235db94cc037628a,https://github.com/iterative/dvc/commit/b2a873d13bd45335a2b201eb235db94cc037628a,pre-commit-ci[bot],66853113,Bot,2025-01-21T09:49:13+00:00,web-flow,2025-01-21T09:49:13+00:00,"[pre-commit.ci] pre-commit autoupdate (#10674)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,89ef3463dca1879811d757af1eb670c5af4bfc88
+iterative/dvc,89ef3463dca1879811d757af1eb670c5af4bfc88,https://github.com/iterative/dvc/commit/89ef3463dca1879811d757af1eb670c5af4bfc88,pre-commit-ci[bot],66853113,Bot,2025-01-13T21:37:31+00:00,web-flow,2025-01-13T21:37:31+00:00,"[pre-commit.ci] pre-commit autoupdate (#10671)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.9.0 → v0.9.1](https://github.com/astral-sh/ruff-pre-commit/compare/v0.9.0...v0.9.1)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,7d14acb5a7fc4b6d4378ae83367f26cf07fe4213
+iterative/dvc,7d14acb5a7fc4b6d4378ae83367f26cf07fe4213,https://github.com/iterative/dvc/commit/7d14acb5a7fc4b6d4378ae83367f26cf07fe4213,skshetry,18718008,User,2025-01-10T12:54:38+00:00,web-flow,2025-01-10T12:54:38+00:00,"3.13 support for Windows (#10667)
+
+python/cpython#113829 changed `os.path.isabs` on Windows to not consider a path starting a single backslash to be an absolute path.
+
+We do a lot of naive `posixpath` to `ntpath` conversions, and it broke DVC in multiple places. DVC is likely broken in many other places, and these bugs are difficult to identify.
+
+In this commit, I have tried to fix in the places where the tests failed. And mostly by trying to imitate pre-3.13 behaviour.
+Some of the changes may not be correct but keeps the old behaviour in place.
+
+Also re-enabled the CI for all Python versions supported for Windows.",51,3,54,4,dd501554fe26406a896b41fc79585554d0e33eae
+iterative/dvc,dd501554fe26406a896b41fc79585554d0e33eae,https://github.com/iterative/dvc/commit/dd501554fe26406a896b41fc79585554d0e33eae,skshetry,18718008,User,2025-01-09T16:51:35+00:00,web-flow,2025-01-09T16:51:35+00:00,tests: try to make tests pass on Python 3.13 on unix platforms (#10665),15,14,29,7,54acfda687d28fb2b288c589eb5e4838bfb640cc
+iterative/dvc,54acfda687d28fb2b288c589eb5e4838bfb640cc,https://github.com/iterative/dvc/commit/54acfda687d28fb2b288c589eb5e4838bfb640cc,skshetry,18718008,User,2025-01-09T16:20:33+00:00,web-flow,2025-01-09T16:20:33+00:00,fix implicit concatenated strings (#10666),4,2,6,2,e70a1e9bfca512c07ea78eef171adceb9744cb2b
+iterative/dvc,e70a1e9bfca512c07ea78eef171adceb9744cb2b,https://github.com/iterative/dvc/commit/e70a1e9bfca512c07ea78eef171adceb9744cb2b,pre-commit-ci[bot],66853113,Bot,2025-01-09T16:04:48+00:00,web-flow,2025-01-09T16:04:48+00:00,"[pre-commit.ci] pre-commit autoupdate (#10663)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",26,40,66,14,aea0e6b6cca4487e2423044eeff96fb5db7180b7
+iterative/dvc,aea0e6b6cca4487e2423044eeff96fb5db7180b7,https://github.com/iterative/dvc/commit/aea0e6b6cca4487e2423044eeff96fb5db7180b7,dependabot[bot],49699333,Bot,2025-01-09T15:29:40+00:00,web-flow,2025-01-09T15:29:40+00:00,"build(deps): bump mypy from 1.14.0 to 1.14.1 (#10662)
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,2c6b917fc53ef2cba2000349458160e3d2c87706
+iterative/dvc,2c6b917fc53ef2cba2000349458160e3d2c87706,https://github.com/iterative/dvc/commit/2c6b917fc53ef2cba2000349458160e3d2c87706,skshetry,18718008,User,2025-01-09T15:27:34+00:00,web-flow,2025-01-09T15:27:34+00:00,ls-url: add support for `--tree`/`--level` (#10664),188,28,216,7,a43c1b31f7fa561a92f9660d9670095f8ba85dfb
+iterative/dvc,a43c1b31f7fa561a92f9660d9670095f8ba85dfb,https://github.com/iterative/dvc/commit/a43c1b31f7fa561a92f9660d9670095f8ba85dfb,mjasion,5058132,User,2024-12-31T01:51:20+00:00,web-flow,2024-12-31T01:51:20+00:00,"chore(studio): Update Studio URL to new domain (#10538)
+
+* chore(studio): Update Studio URL to new domain
+
+The https://studio.dvc.ai is deprecated, and we switched to the new domain https://studio.datachain.ai.
+
+The domain change is backwards compatible. The **older versions** of the `dvc` will still work. 🎉
+
+Related PR: https://github.com/iterative/dvc-studio-client/pull/181
+
+* Apply suggestions from code review
+
+---------
+
+Co-authored-by: Marcin Jasion <mjasion@users.noreply.github.com>
+Co-authored-by: Helio Machado <0x2b3bfa0+git@googlemail.com>",1,1,2,1,683a9f09bdd6aa943ea0b89fdfb36d88a9fc57a5
+iterative/dvc,683a9f09bdd6aa943ea0b89fdfb36d88a9fc57a5,https://github.com/iterative/dvc/commit/683a9f09bdd6aa943ea0b89fdfb36d88a9fc57a5,pre-commit-ci[bot],66853113,Bot,2024-12-26T09:00:00+00:00,web-flow,2024-12-26T09:00:00+00:00,"[pre-commit.ci] pre-commit autoupdate (#10661)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,53a7230da095ecb930179e8d206a66dd8914909d
+iterative/dvc,53a7230da095ecb930179e8d206a66dd8914909d,https://github.com/iterative/dvc/commit/53a7230da095ecb930179e8d206a66dd8914909d,dependabot[bot],49699333,Bot,2024-12-23T02:55:56+00:00,web-flow,2024-12-23T02:55:56+00:00,"build(deps): bump astral-sh/setup-uv from 4 to 5 (#10660)
+
+Bumps [astral-sh/setup-uv](https://github.com/astral-sh/setup-uv) from 4 to 5.
+- [Release notes](https://github.com/astral-sh/setup-uv/releases)
+- [Commits](https://github.com/astral-sh/setup-uv/compare/v4...v5)
+
+---
+updated-dependencies:
+- dependency-name: astral-sh/setup-uv
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,4,f078a572dd129668315e3b53c5a72bca855ef3d2
+iterative/dvc,f078a572dd129668315e3b53c5a72bca855ef3d2,https://github.com/iterative/dvc/commit/f078a572dd129668315e3b53c5a72bca855ef3d2,dependabot[bot],49699333,Bot,2024-12-23T02:16:06+00:00,web-flow,2024-12-23T02:16:06+00:00,"build(deps): bump mypy from 1.13.0 to 1.14.0 (#10659)
+
+Bumps [mypy](https://github.com/python/mypy) from 1.13.0 to 1.14.0.
+- [Changelog](https://github.com/python/mypy/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python/mypy/compare/v1.13.0...v1.14.0)
+
+---
+updated-dependencies:
+- dependency-name: mypy
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,007041bfe953db08b832ddea2d3adeaeb74eec95
+iterative/dvc,007041bfe953db08b832ddea2d3adeaeb74eec95,https://github.com/iterative/dvc/commit/007041bfe953db08b832ddea2d3adeaeb74eec95,pre-commit-ci[bot],66853113,Bot,2024-12-17T12:00:15+00:00,web-flow,2024-12-17T12:00:15+00:00,"[pre-commit.ci] pre-commit autoupdate (#10651)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.8.2 → v0.8.3](https://github.com/astral-sh/ruff-pre-commit/compare/v0.8.2...v0.8.3)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,965dbea75e21968ce488e7b69e909b4a71714782
+iterative/dvc,965dbea75e21968ce488e7b69e909b4a71714782,https://github.com/iterative/dvc/commit/965dbea75e21968ce488e7b69e909b4a71714782,pre-commit-ci[bot],66853113,Bot,2024-12-10T08:08:15+00:00,web-flow,2024-12-10T08:08:15+00:00,"[pre-commit.ci] pre-commit autoupdate (#10646)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,f5cbf97eea69663f3ead3afe58d0c0a8f1dc10ff
+iterative/dvc,f5cbf97eea69663f3ead3afe58d0c0a8f1dc10ff,https://github.com/iterative/dvc/commit/f5cbf97eea69663f3ead3afe58d0c0a8f1dc10ff,pre-commit-ci[bot],66853113,Bot,2024-12-07T02:22:50+00:00,web-flow,2024-12-07T02:22:50+00:00,"[pre-commit.ci] pre-commit autoupdate (#10642)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.8.0 → v0.8.1](https://github.com/astral-sh/ruff-pre-commit/compare/v0.8.0...v0.8.1)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,198c8f2ffd8ad63d7009e5468f99755a571829c9
+iterative/dvc,198c8f2ffd8ad63d7009e5468f99755a571829c9,https://github.com/iterative/dvc/commit/198c8f2ffd8ad63d7009e5468f99755a571829c9,rmic,1642534,User,2024-12-01T16:21:46+00:00,web-flow,2024-12-01T16:21:46+00:00,"Fix #10638 : makes remove return correct list when used with both `--queue` and `-A`  (#10641)
+
+* fixed a bug where using both `--queue` and `-A` would yield a ""removed"" list without the queued experiments
+
+* added a test to validate the fix
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* clearer name for test
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",21,1,22,2,368c785410451288da4326d6c3701bfa1665ccae
+iterative/dvc,368c785410451288da4326d6c3701bfa1665ccae,https://github.com/iterative/dvc/commit/368c785410451288da4326d6c3701bfa1665ccae,rmic,1642534,User,2024-11-30T18:43:13+00:00,web-flow,2024-11-30T18:43:13+00:00,"Fix #10593 -- add --keep option for dvc experiments remove (#10633)
+
+* Add keep_selected parameter, and corresponding code to keep only the selected exps (and remove all the other ones)
+
+* test keep_selected_by_name
+
+* test keep_selected_by_rev
+
+* test keep_selected multiple, by name
+
+* test keep all by name
+
+* test keep by rev, with num=2
+
+* added option to cli
+
+* refactoring to meet pr needs
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* fixed test_experiments to add keep_selected=False to remove tests
+
+* rename parameter to match cli option
+
+* follow the normal path, then invert the selection before removing
+
+* fixed tests for list ordering + fixed test with non existent name, it didn't make sense to delete everything if an exp name did not exist
+
+* changed cli option comment
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* fixed typing issue
+
+* updated parameter name
+
+* removed handling queued experiments (since --queue would remove them all)
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* code simplification, added __eq__ and __hash__ to be able to compare ExpRefs, updated and parametrized tests.
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* fixed linting issues
+
+* - --keep and --queue together raise an InvalidArgumentError
+    - added a test to check if the error is raised
+    - fixed CLI message
+
+* [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+for more information, see https://pre-commit.ci
+
+* re-run gh tests. Some tests which did not involve my changes started failing while they were passing fine before.
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",118,2,120,6,64ccd9cfdbb754d3303eb74f3c5906a9f5a37c1c
+iterative/dvc,64ccd9cfdbb754d3303eb74f3c5906a9f5a37c1c,https://github.com/iterative/dvc/commit/64ccd9cfdbb754d3303eb74f3c5906a9f5a37c1c,skshetry,18718008,User,2024-11-29T13:03:01+00:00,web-flow,2024-11-29T13:03:01+00:00,set DVC_NO_ANALYTICS on lint (#10640),2,0,2,1,d38b2dbcb873b5112976c5ad40c5574b5d2a41f3
+iterative/dvc,d38b2dbcb873b5112976c5ad40c5574b5d2a41f3,https://github.com/iterative/dvc/commit/d38b2dbcb873b5112976c5ad40c5574b5d2a41f3,skshetry,18718008,User,2024-11-26T05:14:28+00:00,web-flow,2024-11-26T05:14:28+00:00,deps: bump configobj minver to 5.0.9 (#10636),5,5,10,3,8cb0f02bf92d64c3dfb9ebcc90348bcd78bdbadb
+iterative/dvc,8cb0f02bf92d64c3dfb9ebcc90348bcd78bdbadb,https://github.com/iterative/dvc/commit/8cb0f02bf92d64c3dfb9ebcc90348bcd78bdbadb,dependabot[bot],49699333,Bot,2024-11-26T01:49:58+00:00,web-flow,2024-11-26T01:49:58+00:00,"build(deps): bump astral-sh/setup-uv from 3 to 4 (#10634)
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,4,7e75b0616fe26d3176688c2213d0aa0adb1735c0
+iterative/dvc,7e75b0616fe26d3176688c2213d0aa0adb1735c0,https://github.com/iterative/dvc/commit/7e75b0616fe26d3176688c2213d0aa0adb1735c0,pre-commit-ci[bot],66853113,Bot,2024-11-26T01:49:46+00:00,web-flow,2024-11-26T01:49:46+00:00,"[pre-commit.ci] pre-commit autoupdate (#10635)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",17,17,34,12,fb24775bc09b19559eaae4f0ba23b1bb1ec569a3
+iterative/dvc,fb24775bc09b19559eaae4f0ba23b1bb1ec569a3,https://github.com/iterative/dvc/commit/fb24775bc09b19559eaae4f0ba23b1bb1ec569a3,pre-commit-ci[bot],66853113,Bot,2024-11-19T19:36:20+00:00,web-flow,2024-11-19T19:36:20+00:00,"[pre-commit.ci] pre-commit autoupdate (#10626)
+
+updates:
+- [github.com/astral-sh/ruff-pre-commit: v0.7.3 → v0.7.4](https://github.com/astral-sh/ruff-pre-commit/compare/v0.7.3...v0.7.4)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,82e2446eb48b11e36cde6d5369c5f8658ca5cdbb
+iterative/dvc,82e2446eb48b11e36cde6d5369c5f8658ca5cdbb,https://github.com/iterative/dvc/commit/82e2446eb48b11e36cde6d5369c5f8658ca5cdbb,mkdjr,61061178,User,2024-11-18T02:37:11+00:00,web-flow,2024-11-18T02:37:11+00:00,"Update `pre-commit` to use pinned version of `dvc` and correct stage names (#10621)
+
+Co-authored-by: skshetry <18718008+skshetry@users.noreply.github.com>
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",7,6,13,2,1e08cc5da3ded5ca6d67fc1941ceb46181d1ec8b
+iterative/dvc,1e08cc5da3ded5ca6d67fc1941ceb46181d1ec8b,https://github.com/iterative/dvc/commit/1e08cc5da3ded5ca6d67fc1941ceb46181d1ec8b,dependabot[bot],49699333,Bot,2024-11-15T03:46:06+00:00,web-flow,2024-11-15T03:46:06+00:00,"build(deps): bump codecov/codecov-action from 3 to 5 (#10622)
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,e56a729e3b98ae6d958b0126fee5d9a31bf61565
+iterative/dvc,e56a729e3b98ae6d958b0126fee5d9a31bf61565,https://github.com/iterative/dvc/commit/e56a729e3b98ae6d958b0126fee5d9a31bf61565,pre-commit-ci[bot],66853113,Bot,2024-11-12T04:07:05+00:00,web-flow,2024-11-12T04:07:05+00:00,"[pre-commit.ci] pre-commit autoupdate (#10619)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>",1,1,2,1,9a050684f7384ca1ba0efe969e9fa67a6ad4980a
+iterative/dvc,9a050684f7384ca1ba0efe969e9fa67a6ad4980a,https://github.com/iterative/dvc/commit/9a050684f7384ca1ba0efe969e9fa67a6ad4980a,skshetry,18718008,User,2024-11-11T12:09:08+00:00,web-flow,2024-11-11T12:09:08+00:00,fix issue with pytest-benchmark==5 (#10618),5,4,9,3,2431ec6189753e0c6a5ddffd03c10f4cdc4b1abb
+iterative/dvc,2431ec6189753e0c6a5ddffd03c10f4cdc4b1abb,https://github.com/iterative/dvc/commit/2431ec6189753e0c6a5ddffd03c10f4cdc4b1abb,shcheklein,3659196,User,2024-11-05T06:42:45+00:00,web-flow,2024-11-05T06:42:45+00:00,Rename dvcx to DataChain in DVC <> DataChain integration (#10611),79,76,155,7,70fc4e6cda0ede2c0fa92db9392cbd55e10aea38

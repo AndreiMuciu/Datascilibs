@@ -1,0 +1,201 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+ipython/ipython,5a3bf345ed7c78e5fab84faa81285e5fd9dfa3da,https://github.com/ipython/ipython/commit/5a3bf345ed7c78e5fab84faa81285e5fd9dfa3da,krassowski,5832902,User,2025-04-25T17:54:47+00:00,krassowski,2025-04-25T17:54:47+00:00,back to dev,2,2,4,1,40eaac2d447ce53db4e7948c354940d919a3fbda
+ipython/ipython,40eaac2d447ce53db4e7948c354940d919a3fbda,https://github.com/ipython/ipython/commit/40eaac2d447ce53db4e7948c354940d919a3fbda,krassowski,5832902,User,2025-04-25T17:53:07+00:00,krassowski,2025-04-25T17:53:07+00:00,release 9.2.0,1,1,2,1,71f82dc61c58d84433321607637876c814f4270f
+ipython/ipython,71f82dc61c58d84433321607637876c814f4270f,https://github.com/ipython/ipython/commit/71f82dc61c58d84433321607637876c814f4270f,krassowski,5832902,User,2025-04-25T17:43:25+00:00,web-flow,2025-04-25T17:43:25+00:00,"Add what's new for IPython 9.2 and 8.36 (#14892)
+
+Add what's new for IPython 9.2 and 8.36",24,0,24,2,"9cee7d85366466c35f4776b1569213a080967b01,d9cdfcdbcc1c26058540d202e2d022d4b5ac8152"
+ipython/ipython,d9cdfcdbcc1c26058540d202e2d022d4b5ac8152,https://github.com/ipython/ipython/commit/d9cdfcdbcc1c26058540d202e2d022d4b5ac8152,krassowski,5832902,User,2025-04-25T17:29:24+00:00,krassowski,2025-04-25T17:29:24+00:00,Add what's new for 9.2 and 8.36,24,0,24,2,9cee7d85366466c35f4776b1569213a080967b01
+ipython/ipython,9cee7d85366466c35f4776b1569213a080967b01,https://github.com/ipython/ipython/commit/9cee7d85366466c35f4776b1569213a080967b01,krassowski,5832902,User,2025-04-25T17:14:54+00:00,web-flow,2025-04-25T17:14:54+00:00,"docs: Recommend `ipykernel.embed.embed_kernel()` (#14887)
+
+Followup to #14734, cc @Carreau 
+
+Following the current doc prints warning:
+
+https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/__init__.py#L96-L98
+
+(which BTW sounded to me like it was deprecated since 2013 — I assume
+the meaning is that `ipykernel.embed` works since 2013?)
+
+----
+
+P.S. Mild argument against the deprecation: IMHO, it's convenient to
+remember one place to import both `embed` and `embed_kernel` from. These
+are most useful if memorized, so one can type them without thinking,
+similar to how we all used to memorize `import pdb; pdb.set_trace()`
+— but became easier to teach with py3.7 `breakpoint()`.
+
+There is no `ipykernel.embed.embed`, and I assume won't be, as it starts
+an in-process shell which is _not really a kernel_? But both are
+legitimate under `IPython`.
+
+----
+
+There is also a question which package(s) one must install to use these
+forms — _and does this need documenting_?
+
+* I see that a clean env `uvx --with ipykernel python` also drags in
+IPython as a dependency, so both forms work.
+* OTOH `uvx --with IPython python` allows importing IPython but not
+ipykernel. In such env, `IPython.embed_kernel()` is **importable but
+broken**:
+  ```
+File
+""/home/beni/.cache/uv/archive-v0/_NUp3oIPKrkvaYJk8f7Nm/lib64/python3.13/site-packages/IPython/__init__.py"",
+line 110, in embed_kernel
+    from ipykernel.embed import embed_kernel as real_embed_kernel
+  ModuleNotFoundError: No module named 'ipykernel'
+  ```
+  This was counter-intuitive, and the deprecation avoids that!  
+I guess ""install what you import"" is a better quality then my above
+concern with ""easy to remember"" :+1:
+
+- [x] Should the API doc
+https://ipython.readthedocs.io/en/stable/api/generated/IPython.html#IPython.embed_kernel
+also mention it's deprecated?
+- [x] Should the API doc also mention it will not work without optional
+`ipykernel` dependency?",13,3,16,2,"c01ed4aaa73fa4c6a554b3cd7d98a871986117cf,b8a661ac14de67bf7d1a7c207e07f3d87f9eeb47"
+ipython/ipython,b8a661ac14de67bf7d1a7c207e07f3d87f9eeb47,https://github.com/ipython/ipython/commit/b8a661ac14de67bf7d1a7c207e07f3d87f9eeb47,krassowski,5832902,User,2025-04-25T14:04:48+00:00,web-flow,2025-04-25T14:04:48+00:00,Grammar,2,2,4,1,229b4f40f1ea39401139cb5c1d26886742e5a329
+ipython/ipython,c01ed4aaa73fa4c6a554b3cd7d98a871986117cf,https://github.com/ipython/ipython/commit/c01ed4aaa73fa4c6a554b3cd7d98a871986117cf,krassowski,5832902,User,2025-04-25T10:56:47+00:00,web-flow,2025-04-25T10:56:47+00:00,"Fix interruption of `%%time` and `%%debug` magics (#14890)
+
+- [x] Add a tests interruption of `%%time` and `%%timeit` magics (the
+former should fail)
+- [x] Fix `%%time` magic exception capture
+Note that this fix is fully backward compatible since users would not
+get timing information if there was an exception anyways due to an early
+return in line 1379:
+
+https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/core/magics/execution.py#L1377-L1379
+- [x] Fix `%%debug` magic exception capture",47,23,70,2,"1907cbe816c1f6af639b159f13f0b22e3e355116,5575d9bd3373f7d4337265252f027ab81a08de60"
+ipython/ipython,1907cbe816c1f6af639b159f13f0b22e3e355116,https://github.com/ipython/ipython/commit/1907cbe816c1f6af639b159f13f0b22e3e355116,krassowski,5832902,User,2025-04-25T09:28:39+00:00,web-flow,2025-04-25T09:28:39+00:00,"Fix syntax warning in Python 3.14 (remove `return` from `finally` block) (#14876)
+
+SyntaxWarning: 'return' in a 'finally' block",11,8,19,1,"aa25535d3765641e31f1d218537540e41b6f1a74,87dbf2dcc3ecf9f4db8f9d2f390b1f43f7c7958b"
+ipython/ipython,5575d9bd3373f7d4337265252f027ab81a08de60,https://github.com/ipython/ipython/commit/5575d9bd3373f7d4337265252f027ab81a08de60,krassowski,5832902,User,2025-04-25T09:22:03+00:00,krassowski,2025-04-25T09:22:03+00:00,Lint,0,1,1,1,9a906b907d0c1bfd55f4203f9ac83d47fe6c691b
+ipython/ipython,9a906b907d0c1bfd55f4203f9ac83d47fe6c691b,https://github.com/ipython/ipython/commit/9a906b907d0c1bfd55f4203f9ac83d47fe6c691b,krassowski,5832902,User,2025-04-25T09:12:36+00:00,krassowski,2025-04-25T09:12:36+00:00,"Fix exception handling in `%%time` and `%%debug` magics
+
+We should not use bare `except:` in magics as it prevents
+catching `KeyboardException` and other system-exiting exceptions.",27,20,47,1,2ca1ff58c049223aff4d7377dea2d5c0c5e10466
+ipython/ipython,2ca1ff58c049223aff4d7377dea2d5c0c5e10466,https://github.com/ipython/ipython/commit/2ca1ff58c049223aff4d7377dea2d5c0c5e10466,krassowski,5832902,User,2025-04-25T09:12:28+00:00,krassowski,2025-04-25T09:12:28+00:00,Darker,2,6,8,1,763f142ffc3911940a334d72c424969cec087176
+ipython/ipython,763f142ffc3911940a334d72c424969cec087176,https://github.com/ipython/ipython/commit/763f142ffc3911940a334d72c424969cec087176,krassowski,5832902,User,2025-04-25T08:58:48+00:00,krassowski,2025-04-25T08:58:48+00:00,Tests interruption of `%%time` and `%%timeit` magics,24,2,26,1,aa25535d3765641e31f1d218537540e41b6f1a74
+ipython/ipython,229b4f40f1ea39401139cb5c1d26886742e5a329,https://github.com/ipython/ipython/commit/229b4f40f1ea39401139cb5c1d26886742e5a329,cben,273688,User,2025-04-24T17:28:15+00:00,cben,2025-04-24T17:28:15+00:00,docs: mention deprecation in `embed_kernel` docstring,5,0,5,1,9cf3d0163656777c117141f40e060a0d02994155
+ipython/ipython,9cf3d0163656777c117141f40e060a0d02994155,https://github.com/ipython/ipython/commit/9cf3d0163656777c117141f40e060a0d02994155,cben,273688,User,2025-04-24T15:20:39+00:00,cben,2025-04-24T15:31:56+00:00,"docs: Recommend `ipykernel.embed.embed_kernel()`
+
+Using `IPython.embed_kernel()` as now documented works but
+prints warning that it's deprecated since 2013:
+https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/__init__.py#L96-L98",8,3,11,1,aa25535d3765641e31f1d218537540e41b6f1a74
+ipython/ipython,aa25535d3765641e31f1d218537540e41b6f1a74,https://github.com/ipython/ipython/commit/aa25535d3765641e31f1d218537540e41b6f1a74,krassowski,5832902,User,2025-04-22T09:11:34+00:00,web-flow,2025-04-22T09:11:34+00:00,"Unpin `langchain-core` now that 0.3.54 fixed `__getattr__` issue (#14885)
+
+
+[`langchain-core==0.3.54`](https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D0.3.54)
+includes https://github.com/langchain-ai/langchain/pull/30905 which
+closes #14878.",0,2,2,1,"f240204acca7815620a14e1fce1a4c4418b6aa41,e2156b094b4b567af0e4fb9931c1303f90ba8dd3"
+ipython/ipython,e2156b094b4b567af0e4fb9931c1303f90ba8dd3,https://github.com/ipython/ipython/commit/e2156b094b4b567af0e4fb9931c1303f90ba8dd3,krassowski,5832902,User,2025-04-19T18:56:35+00:00,krassowski,2025-04-19T18:56:35+00:00,Unpin `langchain-core` now that 0.3.54 fixed getattr issue,0,2,2,1,f240204acca7815620a14e1fce1a4c4418b6aa41
+ipython/ipython,f240204acca7815620a14e1fce1a4c4418b6aa41,https://github.com/ipython/ipython/commit/f240204acca7815620a14e1fce1a4c4418b6aa41,Carreau,335567,User,2025-04-19T10:38:35+00:00,web-flow,2025-04-19T10:38:35+00:00,Fix `maybe_edit()` function in release helper (#14882),2,2,4,1,"90414abb5203a34e3e35225b4897db7720f8ed98,e6c2a4a45e0f1f2f01fe9b86bec0b7a35ccbf797"
+ipython/ipython,87dbf2dcc3ecf9f4db8f9d2f390b1f43f7c7958b,https://github.com/ipython/ipython/commit/87dbf2dcc3ecf9f4db8f9d2f390b1f43f7c7958b,ellert,1931206,User,2025-04-17T12:42:11+00:00,ellert,2025-04-17T12:42:11+00:00,"Fix syntax warning in Python 3.14 (remove return from finally block)
+
+SyntaxWarning: 'return' in a 'finally' block",11,8,19,1,90414abb5203a34e3e35225b4897db7720f8ed98
+ipython/ipython,e6c2a4a45e0f1f2f01fe9b86bec0b7a35ccbf797,https://github.com/ipython/ipython/commit/e6c2a4a45e0f1f2f01fe9b86bec0b7a35ccbf797,krassowski,5832902,User,2025-04-17T12:25:19+00:00,krassowski,2025-04-17T12:25:19+00:00,Fix `maybe_edit()` function in release helper,2,2,4,1,90414abb5203a34e3e35225b4897db7720f8ed98
+ipython/ipython,90414abb5203a34e3e35225b4897db7720f8ed98,https://github.com/ipython/ipython/commit/90414abb5203a34e3e35225b4897db7720f8ed98,krassowski,5832902,User,2025-04-17T09:16:21+00:00,web-flow,2025-04-17T09:16:21+00:00,"Fix LLM prefix including the new lines which are used as spaces (#14877)
+
+- [x] Make the test fail if there are spurious new lines at the end
+- [x] Fix the issue by using `text_before_cursor` instead of `text` in
+prefix",22,14,36,3,"72c9bf917ac82b75b0b5e30d1fe31b90a4d871fc,46bd87bf1279b0a7387395392b4371a67d92d0da"
+ipython/ipython,46bd87bf1279b0a7387395392b4371a67d92d0da,https://github.com/ipython/ipython/commit/46bd87bf1279b0a7387395392b4371a67d92d0da,krassowski,5832902,User,2025-04-17T09:03:34+00:00,krassowski,2025-04-17T09:03:34+00:00,Pass `text_after_cursor` as suffix,1,1,2,1,a1ac6b639e65fe0c670ca56322679a56f15bd87e
+ipython/ipython,a1ac6b639e65fe0c670ca56322679a56f15bd87e,https://github.com/ipython/ipython/commit/a1ac6b639e65fe0c670ca56322679a56f15bd87e,krassowski,5832902,User,2025-04-15T21:25:25+00:00,krassowski,2025-04-15T21:26:12+00:00,Darker,2,4,6,2,3646798171ae3eb45fca7addadf0773c1ffa4a62
+ipython/ipython,3646798171ae3eb45fca7addadf0773c1ffa4a62,https://github.com/ipython/ipython/commit/3646798171ae3eb45fca7addadf0773c1ffa4a62,krassowski,5832902,User,2025-04-15T21:01:56+00:00,krassowski,2025-04-15T21:25:03+00:00,"Use `text_before_cursor` over `text`; fix typos and spurious imports
+
+Also, do not fire events when adding empty placeholder lines.",12,7,19,1,404e72f723cfcbf039974d23bdaaedb2a9ba984e
+ipython/ipython,404e72f723cfcbf039974d23bdaaedb2a9ba984e,https://github.com/ipython/ipython/commit/404e72f723cfcbf039974d23bdaaedb2a9ba984e,krassowski,5832902,User,2025-04-15T21:24:31+00:00,web-flow,2025-04-15T21:24:31+00:00,Merge branch 'main' into fix-llm-prefix,2,0,2,1,"62943a74753d5b3b1e66d031cf233c8f35896362,72c9bf917ac82b75b0b5e30d1fe31b90a4d871fc"
+ipython/ipython,72c9bf917ac82b75b0b5e30d1fe31b90a4d871fc,https://github.com/ipython/ipython/commit/72c9bf917ac82b75b0b5e30d1fe31b90a4d871fc,krassowski,5832902,User,2025-04-15T21:24:14+00:00,web-flow,2025-04-15T21:24:14+00:00,"Mask issue caused by `langchain-core` release `0.3.52` (#14879)
+
+Workaround for #14878 until langchain-core is fixed (or we find a better
+workaround).",2,0,2,1,"f3e796c8e82595990870218c2e25d7cd1fdfac8f,1dcf40e32b6b0d1d05f72ed5e1c177b8a5431ca5"
+ipython/ipython,1dcf40e32b6b0d1d05f72ed5e1c177b8a5431ca5,https://github.com/ipython/ipython/commit/1dcf40e32b6b0d1d05f72ed5e1c177b8a5431ca5,krassowski,5832902,User,2025-04-15T21:12:04+00:00,krassowski,2025-04-15T21:12:04+00:00,Mask issue cause by new langchain-core,2,0,2,1,f3e796c8e82595990870218c2e25d7cd1fdfac8f
+ipython/ipython,62943a74753d5b3b1e66d031cf233c8f35896362,https://github.com/ipython/ipython/commit/62943a74753d5b3b1e66d031cf233c8f35896362,krassowski,5832902,User,2025-04-15T20:14:53+00:00,krassowski,2025-04-15T20:14:53+00:00,Make the test work with actual buffer,8,3,11,1,0eac64cfd5a65b9a93c8d8d3471d7fa865c5bd77
+ipython/ipython,0eac64cfd5a65b9a93c8d8d3471d7fa865c5bd77,https://github.com/ipython/ipython/commit/0eac64cfd5a65b9a93c8d8d3471d7fa865c5bd77,krassowski,5832902,User,2025-04-15T20:14:43+00:00,krassowski,2025-04-15T20:14:43+00:00,Make the test fail if there are spurious new lines at the end,1,1,2,1,f3e796c8e82595990870218c2e25d7cd1fdfac8f
+ipython/ipython,f3e796c8e82595990870218c2e25d7cd1fdfac8f,https://github.com/ipython/ipython/commit/f3e796c8e82595990870218c2e25d7cd1fdfac8f,krassowski,5832902,User,2025-04-07T11:43:33+00:00,web-flow,2025-04-07T11:43:33+00:00,Add changelog for 8.35 and before (#14868),37,0,37,1,"37b41f5eb1578673560f6e85ebb23d9229204b8c,ae05af76e9e52b4224d49bbaeacea29398535ab7"
+ipython/ipython,ae05af76e9e52b4224d49bbaeacea29398535ab7,https://github.com/ipython/ipython/commit/ae05af76e9e52b4224d49bbaeacea29398535ab7,krassowski,5832902,User,2025-04-07T11:32:30+00:00,web-flow,2025-04-07T11:32:30+00:00,Grammar,5,5,10,1,58079e0b232d1fa15aab32b0f96ccdc5f813c564
+ipython/ipython,58079e0b232d1fa15aab32b0f96ccdc5f813c564,https://github.com/ipython/ipython/commit/58079e0b232d1fa15aab32b0f96ccdc5f813c564,krassowski,5832902,User,2025-04-07T11:02:54+00:00,krassowski,2025-04-07T11:02:54+00:00,Add changelog for 8.35 and before,37,0,37,1,37b41f5eb1578673560f6e85ebb23d9229204b8c
+ipython/ipython,37b41f5eb1578673560f6e85ebb23d9229204b8c,https://github.com/ipython/ipython/commit/37b41f5eb1578673560f6e85ebb23d9229204b8c,krassowski,5832902,User,2025-04-07T10:12:43+00:00,krassowski,2025-04-07T10:12:43+00:00,back to dev,2,2,4,1,f9097f68acf90ceb7dc7250b25466693e02b7902
+ipython/ipython,f9097f68acf90ceb7dc7250b25466693e02b7902,https://github.com/ipython/ipython/commit/f9097f68acf90ceb7dc7250b25466693e02b7902,krassowski,5832902,User,2025-04-07T10:08:13+00:00,krassowski,2025-04-07T10:08:13+00:00,release 9.1.0,1,1,2,1,d1d12413a6a1a338b66febdf9976ad039bcacb06
+ipython/ipython,d1d12413a6a1a338b66febdf9976ad039bcacb06,https://github.com/ipython/ipython/commit/d1d12413a6a1a338b66febdf9976ad039bcacb06,krassowski,5832902,User,2025-04-07T09:24:18+00:00,web-flow,2025-04-07T09:24:18+00:00,IPython 9.1 release notes (#14862),63,1,64,1,"d66c45696991ef9c65c14c2d7df65e4233c8a1db,035b18eb978d0d039fac7d413164aceff483bb99"
+ipython/ipython,035b18eb978d0d039fac7d413164aceff483bb99,https://github.com/ipython/ipython/commit/035b18eb978d0d039fac7d413164aceff483bb99,krassowski,5832902,User,2025-04-03T15:36:26+00:00,krassowski,2025-04-03T15:36:26+00:00,"Grammar, wording",11,11,22,1,c680afe878a427710e506b2512434c9b29aaf5a3
+ipython/ipython,c680afe878a427710e506b2512434c9b29aaf5a3,https://github.com/ipython/ipython/commit/c680afe878a427710e506b2512434c9b29aaf5a3,krassowski,5832902,User,2025-04-03T15:29:23+00:00,krassowski,2025-04-03T15:29:23+00:00,No need for bullet with two points,7,6,13,1,9d983628206779f1cf4a360de1586196b415975d
+ipython/ipython,9d983628206779f1cf4a360de1586196b415975d,https://github.com/ipython/ipython/commit/9d983628206779f1cf4a360de1586196b415975d,krassowski,5832902,User,2025-04-03T15:13:39+00:00,krassowski,2025-04-03T15:13:39+00:00,IPython 9.1 release notes,62,1,63,1,d66c45696991ef9c65c14c2d7df65e4233c8a1db
+ipython/ipython,d66c45696991ef9c65c14c2d7df65e4233c8a1db,https://github.com/ipython/ipython/commit/d66c45696991ef9c65c14c2d7df65e4233c8a1db,krassowski,5832902,User,2025-04-02T14:19:57+00:00,web-flow,2025-04-02T14:19:57+00:00,"Fix typos in tips (#14859)
+
+There were some typos, grammatical slips, and inconsistent styling in
+the tips.
+
+(Thank you for this project, I am using it right now to teach some new
+Pythonistas,
+and happened to notice the ""view it's source"" typo.)",13,13,26,1,"b554fdea25124364d3877caa80661bd45edba498,48df9a3c725a4ef01e32d0cd30c602efad828185"
+ipython/ipython,48df9a3c725a4ef01e32d0cd30c602efad828185,https://github.com/ipython/ipython/commit/48df9a3c725a4ef01e32d0cd30c602efad828185,kwinkunks,1692372,User,2025-04-02T09:05:31+00:00,web-flow,2025-04-02T09:05:31+00:00,Fix typos,13,13,26,1,b554fdea25124364d3877caa80661bd45edba498
+ipython/ipython,b554fdea25124364d3877caa80661bd45edba498,https://github.com/ipython/ipython/commit/b554fdea25124364d3877caa80661bd45edba498,krassowski,5832902,User,2025-04-01T16:17:10+00:00,web-flow,2025-04-01T16:17:10+00:00,"Enhance `%notebook` to save outputs, including MIME types and exceptions (#14780)
+
+### Description:
+This PR implements an enhancement to the `%notebook` magic command,
+enabling it to optionally save the output, including the MIME types and
+exceptions.
+
+### Changes:
+Introduced two new dictionaries, `output_mime_bundles` and `exceptions`
+in history manager, to store output MIME types and exceptions
+separately. This prevents inflating the history.
+
+When the `%notebook` command is invoked, the code extracts MIME types
+and exceptions from the `history_manager` and appends them to the
+respective output cells in the generated notebook.
+
+### Feedback Request:
+Currently, we are using `mime_obj.get_figure()` to retrieve the MIME
+data for Matplotlib objects. However, this approach only works for the
+figure object. Are there any other approaches to capture MIME data ?
+
+I am using `VerboseTB` to get a structured traceback. While this works
+for most errors, it doesn't handle syntax errors and some other edge
+cases very well. In `interactiveshell.py`, different types of errors are
+handled by using different traceback formats. Should we take the same
+approach here to handle different types of exceptions? It might result
+in some repetition, but it could improve error reporting for edge cases.",293,34,327,9,"116ee9e50b5d4546f6bb90d39114bb9e313aec19,71862afd721cb9beb1871e4b31de6b40c7643ba5"
+ipython/ipython,71862afd721cb9beb1871e4b31de6b40c7643ba5,https://github.com/ipython/ipython/commit/71862afd721cb9beb1871e4b31de6b40c7643ba5,krassowski,5832902,User,2025-03-31T11:50:23+00:00,krassowski,2025-03-31T19:02:27+00:00,Patch the `write` method instead to fix downstream tests,56,81,137,1,eb6a602e191e879ab4eb2119bd408862621c5bbe
+ipython/ipython,116ee9e50b5d4546f6bb90d39114bb9e313aec19,https://github.com/ipython/ipython/commit/116ee9e50b5d4546f6bb90d39114bb9e313aec19,krassowski,5832902,User,2025-03-31T10:25:23+00:00,web-flow,2025-03-31T10:25:23+00:00,Fix typo in `tips.py` (#14856),1,1,2,1,"0c9949c31e85b7c40e88ee5f2a94951c502e2c9a,ea34a1a82395b557642cb9837f22809f79feffd7"
+ipython/ipython,ea34a1a82395b557642cb9837f22809f79feffd7,https://github.com/ipython/ipython/commit/ea34a1a82395b557642cb9837f22809f79feffd7,carschandler,92899389,User,2025-03-29T20:26:21+00:00,web-flow,2025-03-29T20:26:21+00:00,Typo in `tips.py`,1,1,2,1,0c9949c31e85b7c40e88ee5f2a94951c502e2c9a
+ipython/ipython,eb6a602e191e879ab4eb2119bd408862621c5bbe,https://github.com/ipython/ipython/commit/eb6a602e191e879ab4eb2119bd408862621c5bbe,Darshan808,127468609,User,2025-03-29T18:30:16+00:00,Darshan808,2025-03-29T18:30:16+00:00,reset-execution-count-to-1,1,0,1,1,0587325ef96718e8b318bea3d6ff2680da08da4c
+ipython/ipython,0587325ef96718e8b318bea3d6ff2680da08da4c,https://github.com/ipython/ipython/commit/0587325ef96718e8b318bea3d6ff2680da08da4c,Darshan808,127468609,User,2025-03-29T17:45:12+00:00,Darshan808,2025-03-29T17:45:12+00:00,reset-color-to-nocolor,48,43,91,1,a29eefb22c9dc7b28dafbbf195bb39586ea01727
+ipython/ipython,0c9949c31e85b7c40e88ee5f2a94951c502e2c9a,https://github.com/ipython/ipython/commit/0c9949c31e85b7c40e88ee5f2a94951c502e2c9a,krassowski,5832902,User,2025-03-28T18:02:05+00:00,web-flow,2025-03-28T18:02:05+00:00,"Add request number and logging (do not use `print`) (#14846)
+
+- fixes #14844 
+- fixes #14847",125,7,132,5,"538432779ff561ac40dfc9e5077963a89aa1114a,18cd73a32820443db81b89d9e439d32c0176b919"
+ipython/ipython,18cd73a32820443db81b89d9e439d32c0176b919,https://github.com/ipython/ipython/commit/18cd73a32820443db81b89d9e439d32c0176b919,krassowski,5832902,User,2025-03-28T14:34:47+00:00,krassowski,2025-03-28T14:34:47+00:00,"Use percent format, remove another orphan print",2,3,5,2,4f8ce6f2493023c91d757839bd911f2109427111
+ipython/ipython,538432779ff561ac40dfc9e5077963a89aa1114a,https://github.com/ipython/ipython/commit/538432779ff561ac40dfc9e5077963a89aa1114a,Carreau,335567,User,2025-03-28T12:14:43+00:00,web-flow,2025-03-28T12:14:43+00:00,"Add variable saving to timeit magic (#14798)
+
+closes #12530 by alternative:
+
+```
+%%timeit -v elapsed_time_
+```",28,10,38,2,"a5ad1263c9d6089bec5f5866fd8495bc69d1e361,131ea419114321f4da27cf25cfc76233197c2ba7"
+ipython/ipython,a5ad1263c9d6089bec5f5866fd8495bc69d1e361,https://github.com/ipython/ipython/commit/a5ad1263c9d6089bec5f5866fd8495bc69d1e361,krassowski,5832902,User,2025-03-27T16:56:16+00:00,web-flow,2025-03-27T16:56:16+00:00,"Remove unused variables from `auto_suggest` and examples, fix typos (#14845)
+
+- `auto_suggest.py`:
+  - `AutoSuggest` is imported but unused
+- `suggestions_longer_than_buffer` is unused and there is other logic
+checking the line count
+- `extra` is unused and `suggestion` in following line contains a very
+similar string
+- `auto_suggest_llm.py`
+  - remove unused imports
+- fix typos",7,13,20,2,"46b09de968521d08a2903316090557da547007ee,2f5cc6cbbc6107df9450f921a39b995b8f45bdb8"
+ipython/ipython,46b09de968521d08a2903316090557da547007ee,https://github.com/ipython/ipython/commit/46b09de968521d08a2903316090557da547007ee,krassowski,5832902,User,2025-03-26T12:30:15+00:00,web-flow,2025-03-26T12:30:15+00:00,"Fix Tab Completion Context Detection (#14838)
+
+### Fixes #14836 
+
+This PR resolves the issue with IPython tab completion incorrectly
+triggering attribute completion when a dot (`.`) appears in the line.
+Instead of just checking for '.', I've added a new function,
+`_determine_completion_context`, to accurately determine whether the
+cursor is in an attribute or global completion context.
+
+The solution has been tested against multiple edge cases (e.g., nested
+expressions, strings, comments) and handles them all correctly. Please
+review the changes and let me know if you have any feedback or
+suggestions!",274,4,278,2,"801c9adb94b213fc5e8cacb0d9920a0ff7727c2e,a31f837723d6379a912c5f409db891cd6dab29b0"

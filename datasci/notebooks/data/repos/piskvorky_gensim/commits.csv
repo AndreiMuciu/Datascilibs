@@ -1,0 +1,260 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+piskvorky/gensim,6591e008f065017adce9d25113a036864e3a9dc6,https://github.com/piskvorky/gensim/commit/6591e008f065017adce9d25113a036864e3a9dc6,mpenkov,1101396,User,2025-02-14T14:36:27+00:00,mpenkov,2025-02-14T14:36:27+00:00,"update cibuildwheel to 2.22.0, test under Py3.13 on all platforms",4,2,6,1,8b6b69c29fd58a93136e8f591ea9379ac2c8290c
+piskvorky/gensim,8b6b69c29fd58a93136e8f591ea9379ac2c8290c,https://github.com/piskvorky/gensim/commit/8b6b69c29fd58a93136e8f591ea9379ac2c8290c,mpenkov,1101396,User,2024-12-05T00:45:19+00:00,mpenkov,2024-12-05T00:45:19+00:00,use macos-latest for wheel builds,6,6,12,1,24684175a8b49a55ced4a6bb24ef096c3d2fdc3e
+piskvorky/gensim,24684175a8b49a55ced4a6bb24ef096c3d2fdc3e,https://github.com/piskvorky/gensim/commit/24684175a8b49a55ced4a6bb24ef096c3d2fdc3e,mpenkov,1101396,User,2024-08-10T11:58:54+00:00,web-flow,2024-08-10T11:58:54+00:00,"add route4me.com as bronze sponsor (#3558)
+
+* add route4me.com as bronze sponsor
+
+* git add docs/src/_static/images/route4me-logo.png",5,0,5,2,bff9abc529825883fc7112b10569a8642244ec60
+piskvorky/gensim,bff9abc529825883fc7112b10569a8642244ec60,https://github.com/piskvorky/gensim/commit/bff9abc529825883fc7112b10569a8642244ec60,mpenkov,1101396,User,2024-08-09T22:29:06+00:00,mpenkov,2024-08-09T22:29:06+00:00,adjust update_index.py,7,1,8,1,54dfec9909041817371ed96a4a53e36dc1b398d9
+piskvorky/gensim,54dfec9909041817371ed96a4a53e36dc1b398d9,https://github.com/piskvorky/gensim/commit/54dfec9909041817371ed96a4a53e36dc1b398d9,mpenkov,1101396,User,2024-07-19T13:32:39+00:00,mpenkov,2024-07-19T13:32:39+00:00,Merge branch 'master' into develop,25,4,29,4,"79f982b25be815310bc4410758ac6ee83a095e9e,e9ee434ca88faa593dab5c05c02faca96b772aa1"
+piskvorky/gensim,e9ee434ca88faa593dab5c05c02faca96b772aa1,https://github.com/piskvorky/gensim/commit/e9ee434ca88faa593dab5c05c02faca96b772aa1,mpenkov,1101396,User,2024-07-19T13:32:36+00:00,mpenkov,2024-07-19T13:32:36+00:00,Merge branch 'release-4.3.3',157,83,240,20,"30179c88a666f7b9cb978b174659bb72fa587ead,ea7b162e3c2d93b02f2793cfc6ff5b558ef5dfee"
+piskvorky/gensim,ea7b162e3c2d93b02f2793cfc6ff5b558ef5dfee,https://github.com/piskvorky/gensim/commit/ea7b162e3c2d93b02f2793cfc6ff5b558ef5dfee,mpenkov,1101396,User,2024-07-19T13:31:49+00:00,mpenkov,2024-07-19T13:31:49+00:00,updated CHANGELOG.md for version 4.3.3,21,0,21,1,7321346a7043b51dfa3883e2a224cd78c07703ab
+piskvorky/gensim,7321346a7043b51dfa3883e2a224cd78c07703ab,https://github.com/piskvorky/gensim/commit/7321346a7043b51dfa3883e2a224cd78c07703ab,mpenkov,1101396,User,2024-07-19T13:28:30+00:00,mpenkov,2024-07-19T13:28:30+00:00,bumped version to 4.3.3,4,4,8,3,79f982b25be815310bc4410758ac6ee83a095e9e
+piskvorky/gensim,79f982b25be815310bc4410758ac6ee83a095e9e,https://github.com/piskvorky/gensim/commit/79f982b25be815310bc4410758ac6ee83a095e9e,filip-komarzyniec,39336739,User,2024-07-18T12:03:07+00:00,web-flow,2024-07-18T12:03:07+00:00,"removed scipy from build-only dependencies (#3538)
+
+* removed scipy from build-only dependencies; updated README accordingly
+
+* fixed conditions regarding oldest numpy installation on arm64 Windows machines
+
+* README rephrased regarding NumPy installation
+
+* Revert ""fixed conditions regarding oldest numpy installation on arm64 Windows machines""
+
+This reverts commit 68197fb9beb65cf3abdb03f71d7c7a4b8ae36473.
+
+* pin scipy, need old sparsetools for wheel testing
+
+* make scipy pin more strict
+
+* use macos-latest instead of deprecated macos-11
+
+* pin scipy in setup.py
+
+* remove redundant scipy pin from build-wheels.yml
+
+* get rid of remaining macos-11 traces in CI workflow
+
+* use macos-12 instead of macos-latest
+
+---------
+
+Co-authored-by: Michael Penkov <m@penkov.dev>",21,20,41,4,afbb82ea3446b5462a6ae1f5b02d338ff0170e5a
+piskvorky/gensim,afbb82ea3446b5462a6ae1f5b02d338ff0170e5a,https://github.com/piskvorky/gensim/commit/afbb82ea3446b5462a6ae1f5b02d338ff0170e5a,mpenkov,1101396,User,2024-07-18T02:46:07+00:00,mpenkov,2024-07-18T02:46:07+00:00,"pin scipy, need deprecated sparsetools",4,1,5,1,dc5b5c48e7454fe22cf98ddac60ff85107226f6a
+piskvorky/gensim,dc5b5c48e7454fe22cf98ddac60ff85107226f6a,https://github.com/piskvorky/gensim/commit/dc5b5c48e7454fe22cf98ddac60ff85107226f6a,mpenkov,1101396,User,2024-06-12T02:09:06+00:00,mpenkov,2024-06-12T02:09:54+00:00,pin numpy < 2.0,4,1,5,1,bea670a5d807b8b0c6201e184dc048999f276f7a
+piskvorky/gensim,bea670a5d807b8b0c6201e184dc048999f276f7a,https://github.com/piskvorky/gensim/commit/bea670a5d807b8b0c6201e184dc048999f276f7a,dependabot[bot],49699333,Bot,2024-06-11T15:40:03+00:00,web-flow,2024-06-11T15:40:03+00:00,"Bump codecov/codecov-action from 3 to 4 (#3514)
+
+Bumps [codecov/codecov-action](https://github.com/codecov/codecov-action) from 3 to 4.
+- [Release notes](https://github.com/codecov/codecov-action/releases)
+- [Changelog](https://github.com/codecov/codecov-action/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/codecov/codecov-action/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: codecov/codecov-action
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,c95bdb48493ff35e4781b313454dfdabbe9f6ad9
+piskvorky/gensim,c95bdb48493ff35e4781b313454dfdabbe9f6ad9,https://github.com/piskvorky/gensim/commit/c95bdb48493ff35e4781b313454dfdabbe9f6ad9,nk-fouque,46605602,User,2024-06-11T14:25:20+00:00,web-flow,2024-06-11T14:25:20+00:00,"Handle optional parameters without implicit bool cast (#3502)
+
+* Handle optional parameters without implicit bool cast
+
+* dummy commit to trigger CI
+
+---------
+
+Co-authored-by: Michael Penkov <m@penkov.dev>",7,6,13,2,caeca0cc6010140aca2bc2b7e8a3ea6063a935d5
+piskvorky/gensim,caeca0cc6010140aca2bc2b7e8a3ea6063a935d5,https://github.com/piskvorky/gensim/commit/caeca0cc6010140aca2bc2b7e8a3ea6063a935d5,piskvorky,610412,User,2024-06-11T12:24:20+00:00,web-flow,2024-06-11T12:24:20+00:00,"Merge pull request #3532 from hammad7/feature/doc_update_issue_3528
+
+Issue-3528: Corrected file argument name in KeyedVectors.save",1,1,2,1,"795c7e02c73eeb50fb9c1d0181ad7d2368198609,35a3a941e11c5af1bc899eab20455290a5d73dd3"
+piskvorky/gensim,795c7e02c73eeb50fb9c1d0181ad7d2368198609,https://github.com/piskvorky/gensim/commit/795c7e02c73eeb50fb9c1d0181ad7d2368198609,piskvorky,610412,User,2024-06-11T12:11:10+00:00,web-flow,2024-06-11T12:11:10+00:00,"Merge pull request #3373 from Utopiah/patch-1
+
+dynamic number of features for tf-idf",2,2,4,1,"26a4a8d7e71a35d3a0f5b56b29ef9a8186c4daf2,a2c43ab4a0dd9b20992f47021412e7bbef5e9914"
+piskvorky/gensim,26a4a8d7e71a35d3a0f5b56b29ef9a8186c4daf2,https://github.com/piskvorky/gensim/commit/26a4a8d7e71a35d3a0f5b56b29ef9a8186c4daf2,a-detiste,7994192,User,2024-06-11T11:47:35+00:00,web-flow,2024-06-11T11:47:35+00:00,use newer unittest.mock everwhere (#3529),2,9,11,5,281146e17a77e117738aa3eda2508a2290cab650
+piskvorky/gensim,281146e17a77e117738aa3eda2508a2290cab650,https://github.com/piskvorky/gensim/commit/281146e17a77e117738aa3eda2508a2290cab650,dependabot[bot],49699333,Bot,2024-06-02T23:16:09+00:00,web-flow,2024-06-02T23:16:09+00:00,"Bump pypa/cibuildwheel from 2.17.0 to 2.18.1 (#3533)
+
+Bumps [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel) from 2.17.0 to 2.18.1.
+- [Release notes](https://github.com/pypa/cibuildwheel/releases)
+- [Changelog](https://github.com/pypa/cibuildwheel/blob/main/docs/changelog.md)
+- [Commits](https://github.com/pypa/cibuildwheel/compare/v2.17.0...v2.18.1)
+
+---
+updated-dependencies:
+- dependency-name: pypa/cibuildwheel
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,da2f38861ff097d2f9054db273b880b0ec98acdd
+piskvorky/gensim,35a3a941e11c5af1bc899eab20455290a5d73dd3,https://github.com/piskvorky/gensim/commit/35a3a941e11c5af1bc899eab20455290a5d73dd3,hammad7,12879848,User,2024-05-27T13:31:31+00:00,hammad7,2024-05-27T13:31:31+00:00,Issue-3528: Corrected file argument name in KeyedVectors.save,1,1,2,1,da2f38861ff097d2f9054db273b880b0ec98acdd
+piskvorky/gensim,da2f38861ff097d2f9054db273b880b0ec98acdd,https://github.com/piskvorky/gensim/commit/da2f38861ff097d2f9054db273b880b0ec98acdd,YoungMind1,25361597,User,2024-05-18T12:34:14+00:00,web-flow,2024-05-18T12:34:14+00:00,Add support for python3.12 wheels (#3531),6,0,6,3,645c2d191b7076331c9b0f160f027cb9b3400b15
+piskvorky/gensim,645c2d191b7076331c9b0f160f027cb9b3400b15,https://github.com/piskvorky/gensim/commit/645c2d191b7076331c9b0f160f027cb9b3400b15,wittyicon29,99320225,User,2024-04-08T03:19:54+00:00,web-flow,2024-04-08T03:19:54+00:00,Updated the broken Documentation Link of the PyPI page (#3505),1,1,2,1,d20ca87e05bf6734573ee92cf60323600374a630
+piskvorky/gensim,d20ca87e05bf6734573ee92cf60323600374a630,https://github.com/piskvorky/gensim/commit/d20ca87e05bf6734573ee92cf60323600374a630,dependabot[bot],49699333,Bot,2024-04-06T13:47:12+00:00,web-flow,2024-04-06T13:47:12+00:00,"Bump pypa/cibuildwheel from 2.16.1 to 2.17.0 (#3523)
+
+Bumps [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel) from 2.16.1 to 2.17.0.
+- [Release notes](https://github.com/pypa/cibuildwheel/releases)
+- [Changelog](https://github.com/pypa/cibuildwheel/blob/main/docs/changelog.md)
+- [Commits](https://github.com/pypa/cibuildwheel/compare/v2.16.1...v2.17.0)
+
+---
+updated-dependencies:
+- dependency-name: pypa/cibuildwheel
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,ad68ee3f105fc37cf8db333bfb837fe889ff74ac
+piskvorky/gensim,ad68ee3f105fc37cf8db333bfb837fe889ff74ac,https://github.com/piskvorky/gensim/commit/ad68ee3f105fc37cf8db333bfb837fe889ff74ac,Luffy610,149938362,User,2024-04-05T08:24:51+00:00,web-flow,2024-04-05T08:24:51+00:00,"Import deprecated scipy.linalg.triu from numpy.triu instead (#3524)
+
+* Removing Import of depecrated triu function imported from scipy lib
+
+* Importing triu from numpy if failed falling back to scipy",5,1,6,1,e7b441b87a967e22668a2365bcb60a13e9496215
+piskvorky/gensim,e7b441b87a967e22668a2365bcb60a13e9496215,https://github.com/piskvorky/gensim/commit/e7b441b87a967e22668a2365bcb60a13e9496215,dependabot[bot],49699333,Bot,2024-02-08T02:27:50+00:00,web-flow,2024-02-08T02:27:50+00:00,"Bump actions/download-artifact from 3 to 4 (#3506)
+
+Bumps [actions/download-artifact](https://github.com/actions/download-artifact) from 3 to 4.
+- [Release notes](https://github.com/actions/download-artifact/releases)
+- [Commits](https://github.com/actions/download-artifact/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/download-artifact
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,1,0b8a63267ff2963a60a3b8aa358bdb0e73686d73
+piskvorky/gensim,0b8a63267ff2963a60a3b8aa358bdb0e73686d73,https://github.com/piskvorky/gensim/commit/0b8a63267ff2963a60a3b8aa358bdb0e73686d73,dependabot[bot],49699333,Bot,2024-02-08T02:27:36+00:00,web-flow,2024-02-08T02:27:36+00:00,"Bump actions/upload-artifact from 3 to 4 (#3507)
+
+Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 3 to 4.
+- [Release notes](https://github.com/actions/upload-artifact/releases)
+- [Commits](https://github.com/actions/upload-artifact/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/upload-artifact
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",2,2,4,2,b59cd8fa1e0b0c92db5a842605e7a50ec2421288
+piskvorky/gensim,b59cd8fa1e0b0c92db5a842605e7a50ec2421288,https://github.com/piskvorky/gensim/commit/b59cd8fa1e0b0c92db5a842605e7a50ec2421288,dependabot[bot],49699333,Bot,2024-02-08T02:27:24+00:00,web-flow,2024-02-08T02:27:24+00:00,"Bump actions/setup-python from 4 to 5 (#3508)
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4 to 5.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/v4...v5)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,4,6e7ec6a4d8801095dd6084b18da72db2f2b8ac78
+piskvorky/gensim,6e7ec6a4d8801095dd6084b18da72db2f2b8ac78,https://github.com/piskvorky/gensim/commit/6e7ec6a4d8801095dd6084b18da72db2f2b8ac78,dependabot[bot],49699333,Bot,2023-10-01T14:51:00+00:00,web-flow,2023-10-01T14:51:00+00:00,"Bump docker/setup-qemu-action from 2 to 3 (#3499)
+
+Bumps [docker/setup-qemu-action](https://github.com/docker/setup-qemu-action) from 2 to 3.
+- [Release notes](https://github.com/docker/setup-qemu-action/releases)
+- [Commits](https://github.com/docker/setup-qemu-action/compare/v2...v3)
+
+---
+updated-dependencies:
+- dependency-name: docker/setup-qemu-action
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,ba788bd383d7cd9a67fe78234c779243a45d1d8d
+piskvorky/gensim,ba788bd383d7cd9a67fe78234c779243a45d1d8d,https://github.com/piskvorky/gensim/commit/ba788bd383d7cd9a67fe78234c779243a45d1d8d,dependabot[bot],49699333,Bot,2023-10-01T14:50:46+00:00,web-flow,2023-10-01T14:50:46+00:00,"Bump actions/checkout from 3 to 4 (#3498)
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 3 to 4.
+- [Release notes](https://github.com/actions/checkout/releases)
+- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/actions/checkout/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/checkout
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,4,cd29332137810d6846bd7165330414a1e0a60348
+piskvorky/gensim,cd29332137810d6846bd7165330414a1e0a60348,https://github.com/piskvorky/gensim/commit/cd29332137810d6846bd7165330414a1e0a60348,dependabot[bot],49699333,Bot,2023-10-01T14:50:32+00:00,web-flow,2023-10-01T14:50:32+00:00,"Bump pypa/cibuildwheel from 2.13.1 to 2.16.1 (#3497)
+
+Bumps [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel) from 2.13.1 to 2.16.1.
+- [Release notes](https://github.com/pypa/cibuildwheel/releases)
+- [Changelog](https://github.com/pypa/cibuildwheel/blob/main/docs/changelog.md)
+- [Commits](https://github.com/pypa/cibuildwheel/compare/v2.13.1...v2.16.1)
+
+---
+updated-dependencies:
+- dependency-name: pypa/cibuildwheel
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,bc1de6dc76fe76f6daec6f3525e011a1c197f4c1
+piskvorky/gensim,bc1de6dc76fe76f6daec6f3525e011a1c197f4c1,https://github.com/piskvorky/gensim/commit/bc1de6dc76fe76f6daec6f3525e011a1c197f4c1,mpenkov,1101396,User,2023-08-27T14:14:44+00:00,mpenkov,2023-08-27T14:14:44+00:00,install the most recent numpy for win py3.10 tests,1,1,2,1,86015e01683b07b1578f9031f9354b620e67371e
+piskvorky/gensim,86015e01683b07b1578f9031f9354b620e67371e,https://github.com/piskvorky/gensim/commit/86015e01683b07b1578f9031f9354b620e67371e,mpenkov,1101396,User,2023-08-27T09:05:57+00:00,mpenkov,2023-08-27T09:05:57+00:00,silence pip prompt,1,1,2,1,1a05f9fdf5c518de9ebe87d1b2a81497880ca28c
+piskvorky/gensim,1a05f9fdf5c518de9ebe87d1b2a81497880ca28c,https://github.com/piskvorky/gensim/commit/1a05f9fdf5c518de9ebe87d1b2a81497880ca28c,mpenkov,1101396,User,2023-08-25T05:28:34+00:00,mpenkov,2023-08-25T05:28:34+00:00,"use single quotes in YAML
+
+it makes no difference to the YAML parser, but the Github Actions
+expression parser wants single quotes.",2,2,4,1,87577879c76dc855b670af50772ae28b49910259
+piskvorky/gensim,87577879c76dc855b670af50772ae28b49910259,https://github.com/piskvorky/gensim/commit/87577879c76dc855b670af50772ae28b49910259,mpenkov,1101396,User,2023-08-24T21:11:48+00:00,mpenkov,2023-08-24T21:11:48+00:00,fix yaml,1,1,2,1,9dc56563b1d2afe40bb25b1cea45206415388ae6
+piskvorky/gensim,9dc56563b1d2afe40bb25b1cea45206415388ae6,https://github.com/piskvorky/gensim/commit/9dc56563b1d2afe40bb25b1cea45206415388ae6,mpenkov,1101396,User,2023-08-24T13:43:08+00:00,mpenkov,2023-08-24T13:43:08+00:00,fix yaml,1,1,2,1,52b77d17c6106e74591921fe18dc0269e6bb244d
+piskvorky/gensim,52b77d17c6106e74591921fe18dc0269e6bb244d,https://github.com/piskvorky/gensim/commit/52b77d17c6106e74591921fe18dc0269e6bb244d,mpenkov,1101396,User,2023-08-24T12:20:04+00:00,mpenkov,2023-08-24T12:20:04+00:00,update build-wheels.yml to test win py310 wheel,16,9,25,1,ffc37b21e21e7175d68fef792ca60afdb9f0b827
+piskvorky/gensim,ffc37b21e21e7175d68fef792ca60afdb9f0b827,https://github.com/piskvorky/gensim/commit/ffc37b21e21e7175d68fef792ca60afdb9f0b827,mpenkov,1101396,User,2023-08-24T09:08:43+00:00,mpenkov,2023-08-24T09:08:43+00:00,specify correct python-version in linters.yml,1,1,2,1,68decf63148a6963056a42e76e75ae3cd370f575
+piskvorky/gensim,68decf63148a6963056a42e76e75ae3cd370f575,https://github.com/piskvorky/gensim/commit/68decf63148a6963056a42e76e75ae3cd370f575,mpenkov,1101396,User,2023-08-24T09:07:41+00:00,mpenkov,2023-08-24T09:07:41+00:00,update doco building workflow and instructions,7,2,9,2,58f5890c98d003350e80a33ed0e7cd975bdfffa3
+piskvorky/gensim,58f5890c98d003350e80a33ed0e7cd975bdfffa3,https://github.com/piskvorky/gensim/commit/58f5890c98d003350e80a33ed0e7cd975bdfffa3,mpenkov,1101396,User,2023-08-24T08:55:34+00:00,mpenkov,2023-08-24T08:55:44+00:00,get rid of analytics link in setup.py,0,4,4,1,ee8c8b91651b486a8b9284a78828ce4c056a3e34
+piskvorky/gensim,ee8c8b91651b486a8b9284a78828ce4c056a3e34,https://github.com/piskvorky/gensim/commit/ee8c8b91651b486a8b9284a78828ce4c056a3e34,mpenkov,1101396,User,2023-08-24T07:02:41+00:00,mpenkov,2023-08-24T07:02:41+00:00,update build-wheels.yml to flatten directory structure,2,2,4,1,78e6a5ddd7fb2d851ec4937274874b1bb1d7e507
+piskvorky/gensim,78e6a5ddd7fb2d851ec4937274874b1bb1d7e507,https://github.com/piskvorky/gensim/commit/78e6a5ddd7fb2d851ec4937274874b1bb1d7e507,mpenkov,1101396,User,2023-08-24T05:20:54+00:00,mpenkov,2023-08-24T05:20:54+00:00,git add .github/workflows/update_index.py,40,2,42,2,8e12c9591d8a2c048fa183aa9104d65c288482b5
+piskvorky/gensim,8e12c9591d8a2c048fa183aa9104d65c288482b5,https://github.com/piskvorky/gensim/commit/8e12c9591d8a2c048fa183aa9104d65c288482b5,mpenkov,1101396,User,2023-08-23T18:54:26+00:00,mpenkov,2023-08-23T18:54:26+00:00,bump version to 4.3.2.dev0,3,3,6,3,be8c6e47a6d55ca431f54f887c397bfda696f8cd
+piskvorky/gensim,be8c6e47a6d55ca431f54f887c397bfda696f8cd,https://github.com/piskvorky/gensim/commit/be8c6e47a6d55ca431f54f887c397bfda696f8cd,mpenkov,1101396,User,2023-08-23T17:50:34+00:00,mpenkov,2023-08-23T17:50:34+00:00,"use awscli instead of wheelhouse_uploader
+
+the latter takes an hour to upload wheels, that's far too long",6,10,16,1,46dabd4843784349bdfbc2c8af5407b572f06f0d
+piskvorky/gensim,46dabd4843784349bdfbc2c8af5407b572f06f0d,https://github.com/piskvorky/gensim/commit/46dabd4843784349bdfbc2c8af5407b572f06f0d,mpenkov,1101396,User,2023-08-23T15:27:33+00:00,mpenkov,2023-08-23T15:27:33+00:00,Merge branch 'master' into develop,32,5,37,4,"c4a7acdfd3478faa79853e556c9ec6062bafa819,30179c88a666f7b9cb978b174659bb72fa587ead"
+piskvorky/gensim,30179c88a666f7b9cb978b174659bb72fa587ead,https://github.com/piskvorky/gensim/commit/30179c88a666f7b9cb978b174659bb72fa587ead,mpenkov,1101396,User,2023-08-23T15:27:31+00:00,mpenkov,2023-08-23T15:27:31+00:00,Merge branch 'release-4.3.2',3981,5170,9151,189,"a60edb371def385e267faa48a4036fa25bb1697c,2e5f3d2403da47e20af9947f3e5efa32abe581de"
+piskvorky/gensim,2e5f3d2403da47e20af9947f3e5efa32abe581de,https://github.com/piskvorky/gensim/commit/2e5f3d2403da47e20af9947f3e5efa32abe581de,mpenkov,1101396,User,2023-08-23T15:27:18+00:00,mpenkov,2023-08-23T15:27:18+00:00,git add docs/src/conf.py,2,2,4,1,b6d35e6eab64672606ae6a94f18a3566ca1c03da
+piskvorky/gensim,b6d35e6eab64672606ae6a94f18a3566ca1c03da,https://github.com/piskvorky/gensim/commit/b6d35e6eab64672606ae6a94f18a3566ca1c03da,mpenkov,1101396,User,2023-08-23T15:17:45+00:00,mpenkov,2023-08-23T15:18:15+00:00,updated CHANGELOG.md for version 4.3.2,27,0,27,1,fa1f817ab4b26979917e30f7d42973c246c48ace
+piskvorky/gensim,fa1f817ab4b26979917e30f7d42973c246c48ace,https://github.com/piskvorky/gensim/commit/fa1f817ab4b26979917e30f7d42973c246c48ace,mpenkov,1101396,User,2023-08-23T15:10:47+00:00,mpenkov,2023-08-23T15:10:47+00:00,bumped version to 4.3.2,3,3,6,3,c4a7acdfd3478faa79853e556c9ec6062bafa819
+piskvorky/gensim,c4a7acdfd3478faa79853e556c9ec6062bafa819,https://github.com/piskvorky/gensim/commit/c4a7acdfd3478faa79853e556c9ec6062bafa819,timgates42,47873678,User,2023-08-23T14:33:12+00:00,web-flow,2023-08-23T14:33:12+00:00,"docs: Fix a few typos (#3366)
+
+* docs: Fix a few typos
+
+There are small typos in:
+- docs/src/auto_examples/howtos/run_doc2vec_imdb.py
+- docs/src/auto_examples/howtos/run_doc2vec_imdb.rst
+- docs/src/gallery/howtos/run_doc2vec_imdb.py
+- gensim/test/test_corpora.py
+
+Fixes:
+- Should read `output` rather than `ouput`.
+- Should read `count` rather than `counnt`.
+
+Signed-off-by: Tim Gates <tim.gates@iress.com>
+
+* make -C docs/src html
+
+rebuilt docs that were updated by this PR with Sphinx 5.1.1
+
+* updated documentation
+
+---------
+
+Signed-off-by: Tim Gates <tim.gates@iress.com>
+Co-authored-by: Michael Penkov <m@penkov.dev>",3265,2994,6259,9,431bd4a46e533b484fecae657c0e7c1fbfd0877f
+piskvorky/gensim,431bd4a46e533b484fecae657c0e7c1fbfd0877f,https://github.com/piskvorky/gensim/commit/431bd4a46e533b484fecae657c0e7c1fbfd0877f,mpenkov,1101396,User,2023-08-23T12:09:34+00:00,mpenkov,2023-08-23T12:09:34+00:00,point curl to develop branch,1,1,2,1,84a53c065a1763b2b0f53caa1766350baac81f6f
+piskvorky/gensim,84a53c065a1763b2b0f53caa1766350baac81f6f,https://github.com/piskvorky/gensim/commit/84a53c065a1763b2b0f53caa1766350baac81f6f,mpenkov,1101396,User,2023-08-23T11:20:07+00:00,mpenkov,2023-08-23T11:20:51+00:00,disable wheel tests for py3.10 on windows,22,2,24,1,c401ca32c7decbc8ba40542550d94ee896ecb823
+piskvorky/gensim,c401ca32c7decbc8ba40542550d94ee896ecb823,https://github.com/piskvorky/gensim/commit/c401ca32c7decbc8ba40542550d94ee896ecb823,Witiko,603082,User,2023-08-23T11:00:39+00:00,web-flow,2023-08-23T11:00:39+00:00,Omit NumPy deprecation warnings from SCM autoexample (#3305),0,30,30,1,0a601ca860d4d4e2f7c52fb1b8dc0e4c983bb924

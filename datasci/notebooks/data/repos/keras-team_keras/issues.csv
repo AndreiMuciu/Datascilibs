@@ -1,0 +1,1780 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+keras-team/keras,3056084901,21277,Fixed RandomGrayscall.call for single unbatched image.,Fixes [#21276](https://github.com/keras-team/keras/issues/21276).,pctablet505,55033230,open,False,1,2025-05-12T08:26:41+00:00,2025-05-12T10:58:17+00:00,,size:S;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3056081948,21276,RandomGrayscale fails for unbatched images.,"When we try to pass unbatched single rgb image to RandomGrayscale it fails.
+
+Code to reproduce
+
+```
+import keras
+from keras import layers
+import matplotlib.pyplot as plt
+import numpy as np
+img=np.random.uniform(size=(224,224,3))
+# plt.imshow(img)
+# plt.show()
+out=layers.RandomGrayscale(1)(np.array(img))
+# plt.imshow(out)
+# plt.show()
+```
+
+I get the following error
+
+```
+/usr/local/bin/python3 /Users/hellorahul/PyCharmMiscProject/script.py 
+Traceback (most recent call last):
+  File ""/Users/hellorahul/PyCharmMiscProject/script.py"", line 8, in <module>
+    out=layers.RandomGrayscale(1)(np.array(img))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/keras/src/layers/preprocessing/tf_data_layer.py"", line 49, in __call__
+    return super().__call__(inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/keras/src/utils/traceback_utils.py"", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File ""/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/keras/src/backend/tensorflow/numpy.py"", line 2616, in squeeze
+    raise ValueError(
+ValueError: Exception encountered when calling RandomGrayscale.call().
+
+Cannot squeeze axis=0, because the dimension is not 1.
+
+Arguments received by RandomGrayscale.call():
+  • data=tf.Tensor(shape=(224, 224, 3), dtype=float32)
+  • training=True
+
+```
+",pctablet505,55033230,open,False,0,2025-05-12T08:25:47+00:00,2025-05-12T08:56:49+00:00,,type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3055164449,21275,Fix for issue #21118: inconsistent behavior across callbacks,https://github.com/keras-team/keras/issues/21118,adar21a,91832168,open,False,1,2025-05-11T19:17:10+00:00,2025-05-12T01:24:47+00:00,,size:M,0,0,0,0,0,0,0
+keras-team/keras,3054908427,21274,Hierarchical classification,Are there examples or extensions of Keras for hierarchical classification?,zzzrbx,23218883,open,False,0,2025-05-11T10:58:20+00:00,2025-05-11T17:13:57+00:00,,type:support,0,0,0,0,0,0,0
+keras-team/keras,3054904060,21273,Implement hamming function in keras.ops,"Adds keras.ops.hamming, which computes the Hamming window. Supported across NumPy, TensorFlow, PyTorch, and JAX backends, but not supported on OpenVINO.",shashaka,37043543,closed,False,1,2025-05-11T10:52:35+00:00,2025-05-12T01:53:27+00:00,2025-05-12T01:50:05+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3054141549,21272,_int8_build() bug from keras-nightly,"you can found this bug at https://github.com/keras-team/keras-hub/actions/runs/14945179346/job/41987578280?pr=2244 and https://github.com/keras-team/keras-hub/pull/2244
+
+This is the error I encountered when submitting keras_hub. It contains a lot of implementations that don't belong to me. This is definitely not my mistake, it should be caused by keras-nightly.",pass-lin,62837036,open,False,0,2025-05-10T13:25:43+00:00,2025-05-12T07:17:38+00:00,,keras-team-review-pending;type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3053257111,21271,"[OpenVINO backend] support 4 opeartions (moveaxis, where, split and reciprocal), modify stack function and modify convert_to_numpy in core for gsoc project","Hi @rkazants ,
+
+Could you please review these operations?
+This is the first batch of operations I’m submitting as part of my GSoC project. I’ll be opening additional PRs for the remaining operations in upcoming batches.
+
+Thank you!",Mohamed-Ashraf273,117025882,open,False,2,2025-05-09T21:43:50+00:00,2025-05-12T10:26:42+00:00,,size:M,0,0,0,0,0,0,0
+keras-team/keras,3052250695,21270,Implementation np.outer function,"issue:  #30211
+
+Follows the same pattern as other similar functions in the file
+Passes all tests
+I've removed the test from the excluded tests list, which allows for proper validation of the functionality.
+
+@rkazants for review
+All tests are passing:",sanleo-wq,176691253,open,False,3,2025-05-09T13:51:40+00:00,2025-05-12T15:14:08+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3051748516,21269,Implementation np.moveaxis function ,"issue: #30118
+
+Follows the same pattern as other similar functions in the file
+Passes all tests
+I've removed the test from the excluded tests list, which allows for proper validation of the functionality.
+
+@rkazants for review
+All tests are passing: ",sanleo-wq,176691253,open,False,1,2025-05-09T10:35:13+00:00,2025-05-09T15:27:58+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3050494020,21268,keras.layers.RandomGrayscale can't be put in as part of image augmentation layer,"Hi all, 
+When I build the model with RandomGrayscale in my image augmentation layers it gives the following error:
+
+```python
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[35], line 8
+      5 x = keras.layers.Dropout(0.2)(x)
+      6 output = keras.layers.Dense(1, activation=None)(x)
+----> 8 model = keras.Model(inputs=input, outputs=output)
+     10 model.compile(
+     11     optimizer='adam',
+     12     loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+     13     metrics=['accuracy'],
+     14 )
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/utils/tracking.py:26, in no_automatic_dependency_tracking.<locals>.wrapper(*args, **kwargs)
+     23 @wraps(fn)
+     24 def wrapper(*args, **kwargs):
+     25     with DotNotTrackScope():
+---> 26         return fn(*args, **kwargs)
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/models/functional.py:135, in Functional.__init__(self, inputs, outputs, name, **kwargs)
+    132 if not all(is_input_keras_tensor(t) for t in flat_inputs):
+    133     inputs, outputs = clone_graph_nodes(inputs, outputs)
+--> 135 Function.__init__(self, inputs, outputs, name=name)
+    137 if trainable is not None:
+    138     self.trainable = trainable
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:77, in Function.__init__(self, inputs, outputs, name)
+     74 if backend() == ""tensorflow"":
+     75     self._self_setattr_tracking = _self_setattr_tracking
+---> 77 (nodes, nodes_by_depth, operations, operations_by_depth) = map_graph(
+     78     self._inputs, self._outputs
+     79 )
+     80 self._nodes = nodes
+     81 self._nodes_by_depth = nodes_by_depth
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:232, in map_graph(inputs, outputs)
+    216 """"""Validates a graph's topology and gather its operations and nodes.
+    217 
+    218 Args:
+   (...)
+    228         instances.
+    229 """"""
+    230 # ""depth"" is number of operations between output Node and the Node.
+    231 # Nodes are ordered from inputs -> outputs.
+--> 232 nodes_in_decreasing_depth, operation_indices = _build_map(inputs, outputs)
+    233 network_nodes = {
+    234     make_node_key(node.operation, node.operation._inbound_nodes.index(node))
+    235     for node in nodes_in_decreasing_depth
+    236 }
+    238 nodes_depths = {}  # dict {node: depth value}
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:363, in _build_map(inputs, outputs)
+    361 operation_indices = {}  # operation -> in traversal order.
+    362 for output in tree.flatten(outputs):
+--> 363     _build_map_helper(
+    364         inputs,
+    365         output,
+    366         finished_nodes,
+    367         nodes_in_progress,
+    368         nodes_in_decreasing_depth,
+    369         operation_indices,
+    370     )
+    371 return nodes_in_decreasing_depth, operation_indices
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:412, in _build_map_helper(inputs, tensor, finished_nodes, nodes_in_progress, nodes_in_decreasing_depth, operation_indices)
+    410 if not node.is_input and tensor not in tree.flatten(inputs):
+    411     for tensor in node.input_tensors:
+--> 412         _build_map_helper(
+    413             inputs,
+    414             tensor,
+    415             finished_nodes,
+    416             nodes_in_progress,
+    417             nodes_in_decreasing_depth,
+    418             operation_indices,
+    419         )
+    421 finished_nodes.add(node)
+    422 nodes_in_progress.remove(node)
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:412, in _build_map_helper(inputs, tensor, finished_nodes, nodes_in_progress, nodes_in_decreasing_depth, operation_indices)
+    410 if not node.is_input and tensor not in tree.flatten(inputs):
+    411     for tensor in node.input_tensors:
+--> 412         _build_map_helper(
+    413             inputs,
+    414             tensor,
+    415             finished_nodes,
+    416             nodes_in_progress,
+    417             nodes_in_decreasing_depth,
+    418             operation_indices,
+    419         )
+    421 finished_nodes.add(node)
+    422 nodes_in_progress.remove(node)
+
+    [... skipping similar frames: _build_map_helper at line 412 (1 times)]
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:412, in _build_map_helper(inputs, tensor, finished_nodes, nodes_in_progress, nodes_in_decreasing_depth, operation_indices)
+    410 if not node.is_input and tensor not in tree.flatten(inputs):
+    411     for tensor in node.input_tensors:
+--> 412         _build_map_helper(
+    413             inputs,
+    414             tensor,
+    415             finished_nodes,
+    416             nodes_in_progress,
+    417             nodes_in_decreasing_depth,
+    418             operation_indices,
+    419         )
+    421 finished_nodes.add(node)
+    422 nodes_in_progress.remove(node)
+
+File ~/Work/Research/.venv-metal/lib/python3.12/site-packages/keras/src/ops/function.py:399, in _build_map_helper(inputs, tensor, finished_nodes, nodes_in_progress, nodes_in_decreasing_depth, operation_indices)
+    397 # Prevent cycles.
+    398 if node in nodes_in_progress:
+--> 399     raise ValueError(
+    400         f""Tensor {tensor} from operation '{operation.name}' is part of a ""
+    401         ""cycle.""
+    402     )
+    404 # Store the traversal order for operation sorting.
+    405 if operation not in operation_indices:
+
+ValueError: Tensor <KerasTensor shape=(None, 224, 224, 3), dtype=float32, sparse=False, name=keras_tensor_1089> from operation 'random_grayscale_4' is part of a cycle.
+```
+
+
+The code I use to build the model:
+
+```python
+data_augmentation_layers = [
+    layers.RandomFlip(""horizontal""),
+    layers.RandomRotation(0.02),
+    layers.RandomShear(x_factor=0.1, y_factor=0.1),
+    layers.RandomTranslation(0.1, 0.1),
+    layers.RandomGrayscale(0.2)
+]
+
+
+def data_augmentation(images):
+    for layer in data_augmentation_layers:
+        images = layer(images)
+    return images
+
+
+IMG_SHAPE = (224, 224, 3)
+
+base_model = keras.applications.MobileNetV3Large(
+    include_top=False,
+    weights=""imagenet"",
+    input_shape=IMG_SHAPE,
+    pooling=""avg"",
+    classifier_activation=None
+)
+
+preprocess_input = keras.applications.mobilenet_v3.preprocess_input
+
+input = keras.Input(IMG_SHAPE)
+x = data_augmentation(input)
+x = preprocess_input(x)
+x = base_model(x)
+x = keras.layers.Dropout(0.2)(x)
+output = keras.layers.Dense(1, activation=None)(x)
+
+model = keras.Model(inputs=input, outputs=output)
+
+model.compile(
+    optimizer='adam',
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    metrics=['accuracy'],
+)
+```
+
+Best,",AlundorZhu,113949754,open,False,1,2025-05-09T01:31:39+00:00,2025-05-12T08:57:59+00:00,,stat:awaiting response from contributor;keras-team-review-pending;type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3049425684,21267,Implemented linspace and logspace functionality,"I have completed the linspace and logspace functionality as specified in the following issues:
+
+[openvino#30114](https://github.com/openvinotoolkit/openvino/issues/30114)
+
+[openvino#29485](https://github.com/openvinotoolkit/openvino/issues/29485)
+
+Note:
+I was already working on this, but it seems like [@sanleo-wq](https://github.com/sanleo-wq) implemented the logspace.
+So I have slightly refactored their code so that it solves both the linspace and the logspace issues.
+Credit should go to them for this.
+
+[@rkazants](https://github.com/rkazants), would appreciate a review on this.",hridaya14,53822171,closed,False,1,2025-05-08T15:49:13+00:00,2025-05-12T07:53:06+00:00,2025-05-12T07:53:06+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3048426884,21266,This PR implements the numpy.logspace function for the OpenVINO backend as requested in issue #30114.,"- Follows the same pattern as other similar functions in the file
+- Passes all tests (63 test cases)
+
+I've removed the test from the excluded tests list, which allows for proper validation of the functionality.
+
+@rkazants for review
+All tests are passing:",sanleo-wq,176691253,open,False,2,2025-05-08T09:44:31+00:00,2025-05-12T09:54:25+00:00,,size:M;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3048348508,21265,Update core.py,"updated function based decorator `openvino.core.custom_gradient()`  with a class based decorator
+Fixes [#20953](https://github.com/keras-team/keras/issues/20953)",sonali-kumari1,180251223,open,False,1,2025-05-08T09:16:18+00:00,2025-05-09T09:20:24+00:00,,size:XS;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3047422328,21264,Allow variable layout to be set on construction.,"If a variable has a particular layout (e.g. is sharded across multiple devices/hosts), then any corresponding auxiliary variables, like optimizer gradient accumulators, need to have the same layout. This requires use to set the variable layout prior to initialization so that it is initialized correctly and efficiently across devices.
+
+Added optional `kwargs` to the base `Variable` class so they can handle (and ignore) any backend-specific options.  Modified `JaxVariable` to allow setting the layout parameter on construction. Modified `add_variable_from_reference` to copy the layout from the reference variable.",cantonios,2538739,closed,False,1,2025-05-07T23:43:46+00:00,2025-05-08T20:27:05+00:00,2025-05-08T20:27:05+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3047385908,21263,Add support for jax.experimental.layout layouts.,"In some cases we need to explicitly specify the layout in JAX (e.g. for sparse-core tables).  The previous distribution lib was hard-coded to expect `jax.sharding.Sharding`.  Generalized to support explicit Layouts.
+
+The previous `distribute_variable`/`distribute_tensor` code also used explicit device placement calls.  JAX should be able to handle all this automatically.  See [Making process-spanning arrays from external data](https://docs.jax.dev/en/latest/multi_process.html#making-process-spanning-arrays-from-external-data).",cantonios,2538739,closed,False,1,2025-05-07T23:27:36+00:00,2025-05-08T20:26:21+00:00,2025-05-08T20:26:21+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3047354030,21262,Increment optimizer._iterations in apply(...).,"Previously the iterations count was incremented in `backend_apply_gradients(...)`. However, this meant that if all variables had `overwrite_with_gradient`, or any other special handling within a custom optimizer, the iteration count would never be increased.  The iteration isn't updated via ""applying gradients"" anyways, so it seems to make more sense to increment it directly in `apply`.",cantonios,2538739,closed,False,1,2025-05-07T23:05:54+00:00,2025-05-08T20:24:35+00:00,2025-05-08T20:24:35+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3047342829,21261,Initialize random seed for distributed models.,"Keep track of a `global_random_seed`, and ensure it is set when initializing `keras.distribution.initialize(...)`.
+
+In multi-host processes in JAX, all processes require consistent random number generation.  Otherwise, initializers on different hosts would produce inconsistent values, resulting in both compilation and runtime failures.",cantonios,2538739,closed,False,1,2025-05-07T22:58:18+00:00,2025-05-08T17:38:00+00:00,2025-05-08T17:38:00+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3046964813,21260,Several linalg functions support,"As part of mlx backend support (#19571), this PR adds support for the following functions in linalg.py:
+
+- lu_factor (supported no in mlx)
+- solve_triangular (currently supported in mlx)
+- lstsq (implemented the same way as TensorFlow's one was implemented)
+- eig (used numpy's implementation until it is supported on mlx) ",fbadine,29404124,closed,False,1,2025-05-07T19:28:42+00:00,2025-05-11T09:38:31+00:00,2025-05-08T17:35:56+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3046243062,21259,Issue to set metrics with multiple outputs Model,"Hi,
+
+I’m using the following setup:
+```py
+import numpy as np  
+import tensorflow as tf  
+print(f""NumPy version: {np.__version__}"")  # 1.26.4  
+print(f""TensorFlow version: {tf.__version__}"")  # 2.18.0  
+print(f""Keras version: {tf.keras.__version__}"")  # 3.9.2  
+
+from tensorflow.keras import Input, Model  
+from tensorflow.keras.layers import Dense  
+
+a = Input(shape=(3,), name='a')
+b = Dense(3, activation='relu')(a)  
+c = Dense(3, activation='relu')(b)  
+model = Model(inputs={'a': a}, outputs={'b': b, 'c': c})  
+model.summary()  
+model.compile(optimizer='adam', loss={'b': 'mse', 'c': 'mae'}, metrics={'b': 'accuracy', 'c': 'accuracy'})  
+model.fit({'a': np.random.rand(100, 3)}, {'b': np.random.rand(100, 3), 'c': np.random.rand(100, 3)}, epochs=10)
+```
+
+But I’m getting this error:
+
+`ValueError: In the dict argument 'metrics', key 'b' does not correspond to any model output.`
+
+Do you know why the model doesn’t recognize 'b' and 'c' as valid output names even though I used them in the outputs dictionary?
+
+Also, when I try using this instead:
+```py
+model.compile(optimizer='adam', loss={'b': 'mse', 'c': 'mae'}, metrics=[['accuracy'], ['accuracy']])
+```
+I get another error:
+`ValueError: For a model with multiple outputs, when providing the 'metrics' argument as a list, it should have as many entries as the model has outputs. Received: metrics=[['accuracy'], ['accuracy']] of length 2 whereas the model has 0 outputs.`
+
+Any idea what’s going on here?",RPlumey-asulab,208592843,open,False,6,2025-05-07T14:50:37+00:00,2025-05-12T13:44:00+00:00,,type:support,0,0,0,0,0,0,0
+keras-team/keras,3045394570,21258,Error exporting model with multiple outputs using model.export when specifying input_signature,"### Bug description
+When exporting a keras model in tf_saved_model format to use it in tensorflow-serving server
+I've encountered the following error:
+
+```
+Traceback (most recent call last):
+  File ""/home/tom/kml/repos/various/tf_serving_client/tf_serving_client/min_example.py"", line 17, in <module>
+    model.export('/home/tom/tmp/test_export', format='tf_saved_model',
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/models/model.py"", line 544, in export
+    export_saved_model(
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/export/saved_model.py"", line 656, in export_saved_model
+    export_archive.write_out(filepath, verbose=verbose)
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/export/saved_model.py"", line 510, in write_out
+    self._filter_and_track_resources()
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/export/saved_model.py"", line 574, in _filter_and_track_resources
+    tvs, ntvs = _list_variables_used_by_fns(fns)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/export/saved_model.py"", line 677, in _list_variables_used_by_fns
+    concrete_functions = [fn.get_concrete_function()]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py"", line 1256, in get_concrete_function
+    concrete = self._get_concrete_function_garbage_collected(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py"", line 1226, in _get_concrete_function_garbage_collected
+    self._initialize(args, kwargs, add_initializers_to=initializers)
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py"", line 696, in _initialize
+    self._concrete_variable_creation_fn = tracing_compilation.trace_function(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py"", line 178, in trace_function
+    concrete_function = _maybe_define_function(
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py"", line 283, in _maybe_define_function
+    concrete_function = _create_concrete_function(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py"", line 310, in _create_concrete_function
+    traced_func_graph = func_graph_module.func_graph_from_py_func(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/framework/func_graph.py"", line 1060, in func_graph_from_py_func
+    func_outputs = python_func(*func_args, **func_kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py"", line 599, in wrapped_fn
+    out = weak_wrapped_fn().__wrapped__(*args, **kwds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/utils/traceback_utils.py"", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File ""/home/tom/.virtualenvs/tf_serving_client/lib/python3.12/site-packages/keras/src/layers/input_spec.py"", line 160, in assert_input_compatibility
+    raise ValueError(
+ValueError: Layer ""functional"" expects 2 input(s), but it received 1 input tensors. Inputs received: [<tf.Tensor 'input_A:0' shape=(1,) dtype=float32>]
+```
+
+### Code to reproduce the issue
+```
+import tensorflow as tf
+import keras
+
+from keras import layers
+
+
+
+if __name__ == ""__main__"":
+    input_0 = layers.Input(name='input_0', shape=(1,))
+    input_1 = layers.Input(name='input_1', shape=(1,))
+
+    output = input_0 + input_1
+
+    model = keras.Model(inputs=(input_0, input_1), outputs=(output,))
+
+
+    model.export('/home/tom/tmp/test_export', format='tf_saved_model',
+                 input_signature=[tf.TensorSpec((1,), dtype=input_0.dtype, name=f'input_A'),
+                                  tf.TensorSpec((1,), dtype=input_0.dtype, name=f'input_B')]
+                 )
+
+```
+
+When skipping input_signature parameter, everything works as expected.
+However, the background why I'm providing input_signature is that I want to give the inputs different names.
+
+### Environment:
+python 3.12
+requirements.txt to reproduce the issue
+```
+absl-py==2.2.2
+astunparse==1.6.3
+build==0.8.0
+certifi==2025.4.26
+charset-normalizer==3.4.1
+click==8.1.8
+flatbuffers==25.2.10
+gast==0.6.0
+google-pasta==0.2.0
+grpcio==1.71.0
+h5py==3.13.0
+idna==3.10
+keras==3.9.2
+libclang==18.1.1
+Markdown==3.8
+markdown-it-py==3.0.0
+MarkupSafe==3.0.2
+mdurl==0.1.2
+ml_dtypes==0.5.1
+namex==0.0.9
+numpy==2.1.3
+opt_einsum==3.4.0
+optree==0.15.0
+packaging==25.0
+pep517==0.13.0
+pip-tools==6.9.0
+protobuf==5.29.4
+pydot==4.0.0
+Pygments==2.19.1
+pyparsing==3.2.3
+requests==2.32.3
+rich==14.0.0
+setuptools==80.3.1
+six==1.17.0
+tensorboard==2.19.0
+tensorboard-data-server==0.7.2
+tensorflow==2.19.0
+termcolor==3.0.1
+typing_extensions==4.13.2
+urllib3==2.4.0
+Werkzeug==3.1.3
+wheel==0.45.1
+wrapt==1.17.2
+```",ebnertom,43202888,open,False,1,2025-05-07T09:47:03+00:00,2025-05-08T10:12:54+00:00,,type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3044832484,21257,Add openvino backend support for numpy.hstack,"please review @rkazants
+",Imokutmfon,204155772,closed,False,3,2025-05-07T06:23:42+00:00,2025-05-08T20:13:36+00:00,2025-05-08T20:13:33+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3044493279,21256,Fix `take_along_axis` with TensorFlow with non-int32 indices.,"Change https://github.com/keras-team/keras/pull/21239 broke one use case when the axis dimension is dynamic, the type of the indices is not int32, and the op is run in graph mode.
+
+Note that the additional unit tests don't actually cover this.",hertschuh,1091026,closed,False,1,2025-05-07T02:31:32+00:00,2025-05-07T15:26:31+00:00,2025-05-07T04:51:33+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3042086629,21255,StringLookup does not work on torch.Tensor,"keras.layers.StringLookup throws an error when calling on a torch.Tensor or a numpy array (although, both are supposed to be valid backends?)
+
+Colab example:
+https://colab.research.google.com/drive/1MYcIsJJuiPcvykC8ifOyE4vQk6aAo2UQ
+
+Am I missing something here, or torch support didn't reach here yet? ",DLumi,69116001,open,False,1,2025-05-06T09:07:57+00:00,2025-05-09T06:54:52+00:00,,type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3041663646,21254,Fixed issue with dot_product_attention when using TPU. ,,pctablet505,55033230,closed,False,1,2025-05-06T06:34:02+00:00,2025-05-07T20:03:24+00:00,2025-05-07T20:03:20+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3041627724,21253,[Keras 3 OpenVINO Backend]: Support numpy.logspace operation #30114,,vi-shruti,41509646,open,False,1,2025-05-06T06:14:55+00:00,2025-05-12T11:56:27+00:00,,size:L;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3041034119,21252,Keras <> NNX integration,,divyashreepathihalli,78194266,open,False,1,2025-05-05T23:04:56+00:00,2025-05-10T22:46:02+00:00,,size:M,0,0,0,0,0,0,0
+keras-team/keras,3040007307,21251,Add support numpy.hstack,@rkazants review pr,Imokutmfon,204155772,closed,False,2,2025-05-05T15:16:45+00:00,2025-05-06T11:10:27+00:00,2025-05-06T05:59:19+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3039262511,21250,Update nn.py,"Added support for flash attention with sharding, fixed issue when using flash attention on tpu.",pctablet505,55033230,closed,False,2,2025-05-05T10:36:52+00:00,2025-05-06T07:59:48+00:00,2025-05-06T04:37:23+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3038158854,21249,Fix stateful RNN to raise ValueError on batch size mismatch,"This PR fixes a silent failure when calling stateful RNN layers (SimpleRNN, GRU, LSTM) with an input that doesn't match the fixed batch size.
+
+Previously:
+- `SimpleRNN` would silently broadcast the input across all internal states.
+- `GRU` and `LSTM` would crash in CuDNN but still mutate internal state before failing.
+
+Now:
+- A `ValueError` is raised early in `RNN.call()` if the batch size of the input doesn't match the expected value from the internal state.
+- This avoids state corruption and aligns the behavior across all RNN variants.
+
+Fixes #21183
+
+Manually tested by calling a stateful model with incorrect batch sizes
+and verifying that the new `ValueError` is raised as expected.
+",El3ssar,71988329,open,False,3,2025-05-04T18:14:23+00:00,2025-05-05T23:23:37+00:00,,size:S;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3038033346,21248,Simplify the logic of `quantize` and float8 build.,"I'm working on bringing QAT in Keras and want to clean up the current quantization impl.
+
+This PR simplifies the logic of `quantize` in `Dense`, `Einsum`, and `Embedding` by utilizing `quantized_build`.
+It also adds `overwrite_with_gradient` to `Layer.add_weight` to avoid manually assigning the property to variables.
+",james77777778,20734616,closed,False,4,2025-05-04T14:11:54+00:00,2025-05-10T09:36:09+00:00,2025-05-08T17:36:19+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3038023585,21247,Interleave optimizer variable creation to restore backward-compatibility,"Added optimizer variables were orginally interleaved during `build` prior to #21232, e.g. `{momentum0, velocity0, momentum1, velocity1, ...}`.  In #21232, the order was changed to non-interleaved for some optimizers, e.g. `{momentum0, momentum1, ..., velocity0, velocity1, ...}`.  This broke some custom checkpoint serialization compatibility that relied on the order of variables remaining consistent.
+
+Here we modify the base function `add_optimizer_variables(...)` to support creating multiple optimizer variables per training variable, and interleaves creation to restore backward compatibility.",cantonios,2538739,closed,False,2,2025-05-04T13:54:36+00:00,2025-05-05T04:30:19+00:00,2025-05-05T04:30:19+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3037920053,21246,Add NotImplementedError for angle & bartlett on openvino,"Raise NotImplementedError in the OpenVINO implementation for:
+- angle
+- bartlett
+",shashaka,37043543,closed,False,1,2025-05-04T10:33:15+00:00,2025-05-05T04:40:21+00:00,2025-05-05T04:20:27+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3037585600,21245,Add memory usage monitor callback,"We made the memory monitor callback(CPU/GPU monitoring) according to devs instructions (Issue No:#21150-->Tensorboard integration, support for all backends).We are looking forward to receiving your informative feedback!",DimiChatzipavlis,165230559,open,False,3,2025-05-03T19:54:19+00:00,2025-05-05T23:27:40+00:00,,size:L;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3037470067,21244,`mlx` - remat and continued test updates,"This continues #19571
+
+This includes the following:
+- `remat`
+- adjusted tests
+- thread safety set to `False` following https://github.com/ml-explore/mlx/issues/2067 (in all tests this only caused an issue with the progress bar)
+
+With this PR, all that remains are the final linalg ops to pass all tests on Apple silicon. Next steps are to do one more merge with master, continue to work on passing automated GitHub tests, and test Keras Hub.
+
+Outstanding tracked issues are:
+- thread safety (noted above) https://github.com/ml-explore/mlx/issues/2067
+- conv issues on cpu https://github.com/ml-explore/mlx/issues/2038
+
+Last local test results: `6 failed, 10830 passed, 1977 skipped, 3 xfailed, 7 xpassed in 167.21s (0:02:47)`",acsweet,52804044,closed,False,1,2025-05-03T15:34:17+00:00,2025-05-04T05:08:19+00:00,2025-05-04T05:08:19+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3036954098,21243,Bug fixes in `plot_model` with nested models.,"There were several issues with `keras.utils.plot_model()` / `keras.utils.model_to_dot()` when rendering nested models with `expand_nested=True`:
+- Sequential models were not expanded
+- Edges going into nested models would always connect to the first box in the subgraph, which is incorrect because:
+  - Functional models can have multiple inputs and the edge needs to point to the correct input
+  - The destination of the edge can be further nested sub-models like Sequential sub-models
+- Edges going out of nested models would always connect from the last box in the subgraph, which is incorrect because:
+  - Functional models can have multiple outputs and the edge needs to come from the correct layer
+  - The source of the edge can be further nested in sub-models since there is no ""output"" box
+
+This adds unit tests, which check that the graph has the expected topology (correct nodes and edges).
+
+Visual tests: https://colab.research.google.com/gist/hertschuh/fb7dfdbf4fb31139e33e750ab10aaad4/plot_model-testing.ipynb
+
+Fixes https://github.com/keras-team/keras/issues/21119",hertschuh,1091026,closed,False,7,2025-05-02T22:58:41+00:00,2025-05-07T22:02:23+00:00,2025-05-07T22:02:11+00:00,kokoro:force-run;ready to pull;size:L,0,0,0,0,0,0,0
+keras-team/keras,3036340858,21242,qwen3 tokenizer convert fail,"I'm adding Qwen3's implementation to Keras_hub, and now I'm encountering a problem.
+
+The tokenizer of [qwen3](https://hf-mirror.com/Qwen/Qwen3-0.6B/blob/main/tokenizer_config.json) and [qwen2](https://hf-mirror.com/Qwen/Qwen2.5-0.5B/blob/main/tokenizer_config.json) is the same. But we can't convert it directly with keras_hub. What's the reason for this? How can we solve it?
+```python
+from keras_hub.tokenizers import Qwen2Tokenizer
+Qwen2Tokenizer.from_preset(""hf://Qwen/Qwen2.5-0.5B"")
+’‘’
+<QwenTokenizer name=qwen_tokenizer_5, built=False>
+‘’‘
+Qwen2Tokenizer.from_preset(""hf://Qwen/Qwen2.5-0.6B"")
+'''
+InvalidArgumentError: {{function_node __wrapped__LookupTableImportV2_device_/job:localhost/replica:0/task:0/device:CPU:0}} Expected shape [151387,2] for value, got [151387] [Op:LookupTableImportV2] name:
+'''
+```
+We can't achieve qwen3 without solving this problem.",pass-lin,62837036,closed,False,0,2025-05-02T15:55:38+00:00,2025-05-02T15:58:52+00:00,2025-05-02T15:58:52+00:00,,0,0,0,0,0,0,0
+keras-team/keras,3035750698,21241,Fix message formatting,"# PR Summary
+This small PR updates message strings by adding missing f-strings to properly evaluate variable values. I initially noticed one missing f-string and then reviewed the codebase for similar cases. Hopefully, I’ve caught them all.",emmanuel-ferdman,35470921,closed,False,1,2025-05-02T11:02:24+00:00,2025-05-03T03:46:36+00:00,2025-05-03T03:46:36+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3035131835,21240,cannot find keras.model.layers definition anywhere on the keras doc,"i cannot find the layers method used in this [guide](https://www.tensorflow.org/guide/keras/functional_api#extract_and_reuse_nodes_in_the_graph_of_layers) on the keras model class [refrence](https://keras.io/api/models/) 
+
+    vgg19 = keras.applications.VGG19()
+    features_list = [layer.output for layer in vgg19.layers]
+
+vgg19.layers?",habib-source,179967683,open,False,1,2025-05-02T04:02:46+00:00,2025-05-02T05:18:54+00:00,,type:support;stat:awaiting response from contributor,0,0,0,0,0,0,0
+keras-team/keras,3035094776,21239,Make `take_along_axis` with TF backend compilable.,"When there are dynamic dimensions, like typically the batch size, `tf.broadcast_dynamic_shape` is not always compilable.
+
+Replace with an adhoc implementation for dynamic dimensions where we rely on the broadcast itself to fail when the shapes are not broadcastable.
+
+Tested with https://github.com/keras-team/keras-rs/blob/main/examples/listwise_ranking.py on GPU as I was not able to distill a simple reproduction of this.",hertschuh,1091026,closed,False,1,2025-05-02T03:17:09+00:00,2025-05-04T20:56:17+00:00,2025-05-04T05:08:45+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3034372599,21238,fix lamb bug,"This PR is for the case of using BF16 in backward propagation.
+The default parameter beta_2_power =0.999, which will be rounded to 1 in bf16.
+```python
+In [1]: ops.cast(0.999,""bfloat16"")
+Out[1]: <tf.Tensor: shape=(), dtype=bfloat16, numpy=1>
+```
+Therefore, in this PR, we will set beta_2 to a maximum of 0.996 under BF16, to avoid causing NAN due to rounding to 1.",pass-lin,62837036,closed,False,1,2025-05-01T17:55:53+00:00,2025-05-01T18:21:24+00:00,2025-05-01T18:06:19+00:00,size:XS,0,0,0,0,0,0,0
+keras-team/keras,3033709524,21237,Bump github/codeql-action from 3.28.13 to 3.28.16 in the github-actions group,"Bumps the github-actions group with 1 update: [github/codeql-action](https://github.com/github/codeql-action).
+
+Updates `github/codeql-action` from 3.28.13 to 3.28.16
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/github/codeql-action/releases"">github/codeql-action's releases</a>.</em></p>
+<blockquote>
+<h2>v3.28.16</h2>
+<h1>CodeQL Action Changelog</h1>
+<p>See the <a href=""https://github.com/github/codeql-action/releases"">releases page</a> for the relevant changes to the CodeQL CLI and language packs.</p>
+<h2>3.28.16 - 23 Apr 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.21.1. <a href=""https://redirect.github.com/github/codeql-action/pull/2863"">#2863</a></li>
+</ul>
+<p>See the full <a href=""https://github.com/github/codeql-action/blob/v3.28.16/CHANGELOG.md"">CHANGELOG.md</a> for more information.</p>
+<h2>v3.28.15</h2>
+<h1>CodeQL Action Changelog</h1>
+<p>See the <a href=""https://github.com/github/codeql-action/releases"">releases page</a> for the relevant changes to the CodeQL CLI and language packs.</p>
+<h2>3.28.15 - 07 Apr 2025</h2>
+<ul>
+<li>Fix bug where the action would fail if it tried to produce a debug artifact with more than 65535 files. <a href=""https://redirect.github.com/github/codeql-action/pull/2842"">#2842</a></li>
+</ul>
+<p>See the full <a href=""https://github.com/github/codeql-action/blob/v3.28.15/CHANGELOG.md"">CHANGELOG.md</a> for more information.</p>
+<h2>v3.28.14</h2>
+<h1>CodeQL Action Changelog</h1>
+<p>See the <a href=""https://github.com/github/codeql-action/releases"">releases page</a> for the relevant changes to the CodeQL CLI and language packs.</p>
+<h2>3.28.14 - 07 Apr 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.21.0. <a href=""https://redirect.github.com/github/codeql-action/pull/2838"">#2838</a></li>
+</ul>
+<p>See the full <a href=""https://github.com/github/codeql-action/blob/v3.28.14/CHANGELOG.md"">CHANGELOG.md</a> for more information.</p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/github/codeql-action/blob/main/CHANGELOG.md"">github/codeql-action's changelog</a>.</em></p>
+<blockquote>
+<h1>CodeQL Action Changelog</h1>
+<p>See the <a href=""https://github.com/github/codeql-action/releases"">releases page</a> for the relevant changes to the CodeQL CLI and language packs.</p>
+<h2>[UNRELEASED]</h2>
+<p>No user facing changes.</p>
+<h2>3.28.16 - 23 Apr 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.21.1. <a href=""https://redirect.github.com/github/codeql-action/pull/2863"">#2863</a></li>
+</ul>
+<h2>3.28.15 - 07 Apr 2025</h2>
+<ul>
+<li>Fix bug where the action would fail if it tried to produce a debug artifact with more than 65535 files. <a href=""https://redirect.github.com/github/codeql-action/pull/2842"">#2842</a></li>
+</ul>
+<h2>3.28.14 - 07 Apr 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.21.0. <a href=""https://redirect.github.com/github/codeql-action/pull/2838"">#2838</a></li>
+</ul>
+<h2>3.28.13 - 24 Mar 2025</h2>
+<p>No user facing changes.</p>
+<h2>3.28.12 - 19 Mar 2025</h2>
+<ul>
+<li>Dependency caching should now cache more dependencies for Java <code>build-mode: none</code> extractions. This should speed up workflows and avoid inconsistent alerts in some cases.</li>
+<li>Update default CodeQL bundle version to 2.20.7. <a href=""https://redirect.github.com/github/codeql-action/pull/2810"">#2810</a></li>
+</ul>
+<h2>3.28.11 - 07 Mar 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.20.6. <a href=""https://redirect.github.com/github/codeql-action/pull/2793"">#2793</a></li>
+</ul>
+<h2>3.28.10 - 21 Feb 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.20.5. <a href=""https://redirect.github.com/github/codeql-action/pull/2772"">#2772</a></li>
+<li>Address an issue where the CodeQL Bundle would occasionally fail to decompress on macOS. <a href=""https://redirect.github.com/github/codeql-action/pull/2768"">#2768</a></li>
+</ul>
+<h2>3.28.9 - 07 Feb 2025</h2>
+<ul>
+<li>Update default CodeQL bundle version to 2.20.4. <a href=""https://redirect.github.com/github/codeql-action/pull/2753"">#2753</a></li>
+</ul>
+<h2>3.28.8 - 29 Jan 2025</h2>
+<ul>
+<li>Enable support for Kotlin 2.1.10 when running with CodeQL CLI v2.20.3. <a href=""https://redirect.github.com/github/codeql-action/pull/2744"">#2744</a></li>
+</ul>
+<h2>3.28.7 - 29 Jan 2025</h2>
+<p>No user facing changes.</p>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/github/codeql-action/commit/28deaeda66b76a05916b6923827895f2b14ab387""><code>28deaed</code></a> Merge pull request <a href=""https://redirect.github.com/github/codeql-action/issues/2865"">#2865</a> from github/update-v3.28.16-2a8cbadc0</li>
+<li><a href=""https://github.com/github/codeql-action/commit/03c5d71c11f6cb2c5ba7eef371219a862be30193""><code>03c5d71</code></a> Update changelog for v3.28.16</li>
+<li><a href=""https://github.com/github/codeql-action/commit/2a8cbadc02bb64a7fd15d37c977acbad02496c80""><code>2a8cbad</code></a> Merge pull request <a href=""https://redirect.github.com/github/codeql-action/issues/2863"">#2863</a> from github/update-bundle/codeql-bundle-v2.21.1</li>
+<li><a href=""https://github.com/github/codeql-action/commit/f76eaf51a636a5c1d927998267d92d6475363ace""><code>f76eaf5</code></a> Add changelog note</li>
+<li><a href=""https://github.com/github/codeql-action/commit/e63b3f5166c15fda4eb17886f01abe9445dd13f5""><code>e63b3f5</code></a> Update default bundle to codeql-bundle-v2.21.1</li>
+<li><a href=""https://github.com/github/codeql-action/commit/4c3e5362829f0b0bb62ff5f6c938d7f95574c306""><code>4c3e536</code></a> Merge pull request <a href=""https://redirect.github.com/github/codeql-action/issues/2853"">#2853</a> from github/dependabot/npm_and_yarn/npm-7d84c66b66</li>
+<li><a href=""https://github.com/github/codeql-action/commit/56dd02f26d99811d607284494ff84b7d862fe837""><code>56dd02f</code></a> Merge pull request <a href=""https://redirect.github.com/github/codeql-action/issues/2852"">#2852</a> from github/dependabot/github_actions/actions-457587...</li>
+<li><a href=""https://github.com/github/codeql-action/commit/192406dd845fb2228fcea74898b98df2a6cdcef6""><code>192406d</code></a> Merge branch 'main' into dependabot/github_actions/actions-4575878e06</li>
+<li><a href=""https://github.com/github/codeql-action/commit/c7dbb2084ed1bb623fbbb3976cd6dbae6daaf1fe""><code>c7dbb20</code></a> Merge pull request <a href=""https://redirect.github.com/github/codeql-action/issues/2857"">#2857</a> from github/nickfyson/address-vulns</li>
+<li><a href=""https://github.com/github/codeql-action/commit/9a45cd8c5025281c30bbb652197ace083c291e49""><code>9a45cd8</code></a> move use of input variables into env vars</li>
+<li>Additional commits viewable in <a href=""https://github.com/github/codeql-action/compare/1b549b9259bda1cb5ddde3b41741a82a2d15a841...28deaeda66b76a05916b6923827895f2b14ab387"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=github/codeql-action&package-manager=github_actions&previous-version=3.28.13&new-version=3.28.16)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions
+
+
+</details>",dependabot[bot],49699333,closed,False,0,2025-05-01T12:01:15+00:00,2025-05-01T15:47:08+00:00,2025-05-01T15:47:01+00:00,kokoro:force-run;ready to pull;size:XS;dependencies;github_actions,0,0,0,0,0,0,0
+keras-team/keras,3033646678,21236,Bump the python group with 2 updates,"Bumps the python group with 2 updates: [torch](https://github.com/pytorch/pytorch) and [torch-xla](https://github.com/pytorch/xla).
+
+Updates `torch` from 2.6.0 to 2.7.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pytorch/pytorch/releases"">torch's releases</a>.</em></p>
+<blockquote>
+<h1>PyTorch 2.7.0 Release Notes</h1>
+<ul>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#highlights"">Highlights</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#tracked-regressions"">Tracked Regressions</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#backwards-incompatible-changes"">Backwards Incompatible Changes</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#deprecations"">Deprecations</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#new-features"">New Features</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#improvements"">Improvements</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#bug-fixes"">Bug fixes</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#performance"">Performance</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#documentation"">Documentation</a></li>
+<li><a href=""https://github.com/pytorch/pytorch/blob/HEAD/#developers"">Developers</a></li>
+</ul>
+<h1>Highlights</h1>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/pytorch/pytorch/commit/134179474539648ba7dee1317959529fbd0e7f89""><code>1341794</code></a> Gracefully handle optree less than minimum version, part 2 (<a href=""https://redirect.github.com/pytorch/pytorch/issues/151323"">#151323</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/073912749d667fcfb2de1c15e1e664dc0ccd3460""><code>0739127</code></a> Gracefully handle optree less than minimum version (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150977"">#150977</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/0c236f3c722abc8e76fc16fae90946af9a895ce5""><code>0c236f3</code></a> Update triton wheel build, setuptools pin (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150953"">#150953</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/c7ff78dfc0c38847bf5daa78ab8b3669e1734246""><code>c7ff78d</code></a> Fix inplacing with multiple, fused uses (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150892"">#150892</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/894909a6139ff38d056d3ca5cfa33a020c7602c1""><code>894909a</code></a> Revert &quot;[CUDA] Only use vec128 if CUDA version is newer than 12.8&quot; (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150855"">#150855</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/ef2b1390ed5fda1f50843bf5977e5f8cf5e40493""><code>ef2b139</code></a> [Manylinux 2.28] Correct Linux aarch64 cuda binaries wheel name (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150820"">#150820</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/3f236f19032ff6424160018c024478c83b6ad6b9""><code>3f236f1</code></a> [CUDA] Only use vec128 if CUDA version is newer than 12.8 (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150818"">#150818</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/35f1e7621254da1dcc8b24797059e9d010d49196""><code>35f1e76</code></a> Reland of &quot;[ROCm] change preferred blas lib defaults (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150249"">#150249</a>)&quot;&quot; (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150707"">#150707</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/a6321d62273dd281a08b1c4ec87ce3edd5b330dc""><code>a6321d6</code></a> Revert &quot;Dont exclude constant_pad_nd in prologue fusion&quot; (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150699"">#150699</a>)</li>
+<li><a href=""https://github.com/pytorch/pytorch/commit/1cc51c640a717335b7bc48c11e28a1f5391b99e1""><code>1cc51c6</code></a> [CUDA][avgpool2d] Fix backward launch bounds again for <code>sm100</code>, <code>sm120</code> (<a href=""https://redirect.github.com/pytorch/pytorch/issues/150"">#150</a>...</li>
+<li>Additional commits viewable in <a href=""https://github.com/pytorch/pytorch/compare/v2.6.0...v2.7.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+Updates `torch-xla` from 2.6.0 to 2.7.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pytorch/xla/releases"">torch-xla's releases</a>.</em></p>
+<blockquote>
+<h2>PyTorch/XLA 2.7 release</h2>
+<h1>Highlights</h1>
+<ul>
+<li>Easier training on Cloud TPUs with <a href=""https://github.com/AI-Hypercomputer/torchprime"">TorchPrime</a></li>
+<li>A new Pallas-based kernel for ragged paged attention, enabling further optimizations on <a href=""https://docs.vllm.ai/en/v0.5.5/getting_started/tpu-installation.html"">vLLM TPU</a> (<a href=""https://redirect.github.com/pytorch/xla/pull/8791"">#8791</a>)</li>
+<li>Usability improvements</li>
+<li>Experimental JAX interoperability with JAX operations (<a href=""https://redirect.github.com/pytorch/xla/pull/8781"">#8781</a>,  <a href=""https://redirect.github.com/pytorch/xla/pull/8789"">#8789</a>, <a href=""https://redirect.github.com/pytorch/xla/pull/8830"">#8830</a>, <a href=""https://redirect.github.com/pytorch/xla/pull/8878"">#8878</a>)</li>
+<li>re-enabled GPU CI build [<a href=""https://redirect.github.com/pytorch/xla/pull/8593"">#8593</a>]</li>
+</ul>
+<h1>Stable Features</h1>
+<ul>
+<li>Operator Lowering
+<ul>
+<li>Lower <code>as_strided_copy</code> to use fast path with <code>slice</code> (<a href=""https://redirect.github.com/pytorch/xla/pull/8734"">#8374</a>)</li>
+<li>Lower <code>_conj_copy</code>. (<a href=""https://redirect.github.com/pytorch/xla/pull/8686"">#8686</a>)</li>
+</ul>
+</li>
+<li>Support splitting physical axis in SPMD mesh (<a href=""https://redirect.github.com/pytorch/xla/pull/8698"">#8698</a>)</li>
+<li>Support of placeholder tensor (<a href=""https://redirect.github.com/pytorch/xla/pull/8785"">#8785</a>).</li>
+<li>Dynamo/AOTAutograd traceable flash attention(<a href=""https://redirect.github.com/pytorch/xla/pull/8654"">#8654</a>)</li>
+<li>C++11 ABI build is the default</li>
+</ul>
+<h1>Experimental Features</h1>
+<ul>
+<li>Gated Recurrent Unit (GRU) implemented with scan (<a href=""https://redirect.github.com/pytorch/xla/pull/8777"">#8777</a>)</li>
+<li>Introduce <code>apply_xla_patch_to_nn_linear</code> to improve <code>einsum</code> performance (<a href=""https://redirect.github.com/pytorch/xla/pull/8739"">#8793</a>)</li>
+<li>Enable default buffer donation for step barriers (<a href=""https://redirect.github.com/pytorch/xla/pull/8982"">#8721</a>, <a href=""https://redirect.github.com/pytorch/xla/pull/8982"">#8982</a>)</li>
+</ul>
+<h1>Usability</h1>
+<ul>
+<li>Better profiling control: the start and the end of the profiling session can be controlled by the new profiler API (<a href=""https://redirect.github.com/pytorch/xla/pull/8743"">#8743</a>)</li>
+<li>API to query number of cached compilation graphs (<a href=""https://redirect.github.com/pytorch/xla/pull/8822"">#8822</a>)</li>
+<li>Enhancement on host-to-device transfer (<a href=""https://redirect.github.com/pytorch/xla/pull/8849"">#8849</a>)</li>
+</ul>
+<h1>Bug fixes</h1>
+<ul>
+<li>fix a bug in tensor.flatten (<a href=""https://redirect.github.com/pytorch/xla/pull/8680"">#8680</a>)</li>
+<li>cummax: fix 0-sized dimension reduction. (<a href=""https://redirect.github.com/pytorch/xla/pull/8653"">#8653</a>)</li>
+<li>Fix dk/dv autograd error on TPU flash attention (<a href=""https://redirect.github.com/pytorch/xla/pull/8685"">#8685</a>)</li>
+<li>Fix a bug in flash attention where kv_seq_len should divide block_k_major. (<a href=""https://redirect.github.com/pytorch/xla/pull/8671"">#8671</a>)</li>
+<li>[scan] Make sure inputs into fn are not device_data IR nodes(<a href=""https://redirect.github.com/pytorch/xla/pull/8769"">#8769</a>)</li>
+</ul>
+<h1>Libtpu stable version</h1>
+<ul>
+<li>Pin 2.7 release to stable libtpu version '0.0.11.1'</li>
+</ul>
+<h1>Deprecations</h1>
+<ul>
+<li>Deprecate <code>torch.export</code> and instead, use torchax to export graph to StableHLO for full dynamism support</li>
+<li>Remove <code>torch_xla.core.xla_model.xrt_world_size</code>, replace with <code>torch_xla.runtime.world_size</code></li>
+<li>Remove <code>torch_xla.core.xla_model.get_ordinal</code>, replace with <code>torch_xla.runtime.global_ordinal</code></li>
+<li>Remove <code>torch_xla.core.xla_model.parse_xla_device</code>, replace with <code>_utils.parse_xla_device</code></li>
+<li>Remove <code>torch_xla.experimental.compile</code>, replace with <code>torch_xla.compile</code></li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/pytorch/xla/commit/d5871fc442222a96fbdf45229c4408c63740b782""><code>d5871fc</code></a> support manylinux build (<a href=""https://redirect.github.com/pytorch/xla/issues/9035"">#9035</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/839ac4c5b8a2d710086fcd900e0f6dbdffae3b92""><code>839ac4c</code></a> Fix 3.9 Python syntax (<a href=""https://redirect.github.com/pytorch/xla/issues/9018"">#9018</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/5d3c70ed9c129887a9370c7ef475a9f4bbe5969a""><code>5d3c70e</code></a> Remove unnecessary registries for 2.7 install instructions (<a href=""https://redirect.github.com/pytorch/xla/issues/9012"">#9012</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/ab93be825c6f177bd24621ecbcee527172f08cb9""><code>ab93be8</code></a> Remove config warning log from GradAcc API (<a href=""https://redirect.github.com/pytorch/xla/issues/9007"">#9007</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/ee35d132c51f815fb63cc89f11829c5c8c770bac""><code>ee35d13</code></a> Default explicit donation for step barriers (<a href=""https://redirect.github.com/pytorch/xla/issues/9005"">#9005</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/124075e422188182468dd7c55518c9ac51ffaa4d""><code>124075e</code></a> Update libtpu release path (<a href=""https://redirect.github.com/pytorch/xla/issues/9009"">#9009</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/94820064afc4054d788b77fde5e8e324f709d28f""><code>9482006</code></a> Fix the source param sharding for GradAcc API (<a href=""https://redirect.github.com/pytorch/xla/issues/8999"">#8999</a>) (<a href=""https://redirect.github.com/pytorch/xla/issues/9000"">#9000</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/5d3ecd80125b7042cb452777532a5efc7650e908""><code>5d3ecd8</code></a> Set scoped vmem for paged attention (<a href=""https://redirect.github.com/pytorch/xla/issues/8988"">#8988</a>) (<a href=""https://redirect.github.com/pytorch/xla/issues/8994"">#8994</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/4a482db303b6460447dc6b8640ac630fd3852d5f""><code>4a482db</code></a> cherry pick a37a5852808861a6b274cfbd1a98653fd1bc6a9a (<a href=""https://redirect.github.com/pytorch/xla/issues/8995"">#8995</a>)</li>
+<li><a href=""https://github.com/pytorch/xla/commit/65fc7797ae88ee84bfe825f06e792edc866ffe33""><code>65fc779</code></a> Avoid re-computing computation hashes (<a href=""https://redirect.github.com/pytorch/xla/issues/8976"">#8976</a>) (<a href=""https://redirect.github.com/pytorch/xla/issues/8977"">#8977</a>)</li>
+<li>Additional commits viewable in <a href=""https://github.com/pytorch/xla/compare/v2.6.0...v2.7.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)
+- `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)
+- `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)
+- `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency
+- `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions
+
+
+</details>",dependabot[bot],49699333,open,False,0,2025-05-01T11:08:30+00:00,2025-05-02T06:11:28+00:00,,size:S;awaiting review;dependencies;python,0,0,0,0,0,0,0
+keras-team/keras,3033578895,21235,Implement blackman function in keras.ops,"Adds keras.ops.blackman, which computes the Blackman window. Supported across NumPy, TensorFlow, PyTorch, and JAX backends, but not supported on OpenVINO.
+
+",shashaka,37043543,closed,False,1,2025-05-01T10:13:06+00:00,2025-05-04T05:21:14+00:00,2025-05-04T05:09:41+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3032676290,21234,LayerNormalization with rms_scaling documentation is different from implementation,"The documentation mentions that 
+> rms_scaling: If True, center and scale are ignored, and the **inputs are scaled by gamma and the inverse square root of the square of all inputs. This is an approximate and faster approach that avoids ever computing the mean of the input**.
+
+However, in the [implementation](https://github.com/keras-team/keras/blob/master/keras/src/layers/normalization/layer_normalization.py#L207), it actually does the following:
+```
+        if self.rms_scaling:
+            # Calculate outputs with only variance and gamma if rms scaling
+            # is enabled
+            # Calculate the variance along self.axis (layer activations).
+            variance = ops.var(inputs, axis=self.axis, keepdims=True)
+            inv = ops.rsqrt(variance + self.epsilon)
+
+            outputs = (
+                inputs * inv * ops.cast(_broadcast(self.gamma), inputs.dtype)
+            )
+```
+So the mean is indeed used, as variance is computed here rather than RMS norm.
+
+There was also a discussion during the addition of RMS Normalization (https://github.com/keras-team/keras/pull/20911#issuecomment-2687658774) that confirms this behavior.
+
+I think the docs could use an update to clarify this behavior. Right now, it sounds like the mean isn't used when `rms_scaling` is on, but the code suggests otherwise.
+",mzhukova,45076837,open,False,1,2025-04-30T22:18:34+00:00,2025-05-02T04:14:35+00:00,,type:docs,0,0,0,0,0,0,0
+keras-team/keras,3032118797,21233,Clear static loss-scale for inner optimizer in LossScaleOptimizer.,"The outer `LossScaleOptimizer` ignores the inner's loss-scale factor when scaling the loss.  When computing unscaled gradients, we therefore need to eliminate the inner's loss scale factor, otherwise the gradients get incorrectly scaled.",cantonios,2538739,closed,False,2,2025-04-30T18:21:03+00:00,2025-04-30T22:05:27+00:00,2025-04-30T22:05:27+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3032084136,21232,Don't create unused optimizer variables.,"If `variable.overwrite_with_gradient == True`, then the only optimizer variable ever used for that variable is `base_optimizer._accumulated_gradients`. All other optimizer variables are unused.  This can be extremely wasteful if the training variables are large, for example in the case of large embedding tables that span multiple hosts/devices.
+
+Added a convenience function in the base optimizer `add_optimizer_variables(...)` that loops through the variable list and automatically adds a variable only if appropriate.  If a variable would otherwise be unused, a `None` is inserted into the list.  This is needed to keep `optimizer._get_variable_index()` consistent. Updated all built-in optimizers to use this.
+
+NOTE: if a custom optimizer that exists out in the wild still does create unused optimizer variables, the optimizer should still work - it will just be wasteful.  IOW this should not be a breaking change.",cantonios,2538739,closed,False,2,2025-04-30T18:06:32+00:00,2025-04-30T23:29:02+00:00,2025-04-30T23:29:02+00:00,ready to pull;size:L,0,0,0,0,0,0,0
+keras-team/keras,3031418141,21231,Openvino numpy ravel,"Added numpy.ravel 
+
+@rkazants can you please review it",SiddharthV147,113883699,closed,False,1,2025-04-30T14:11:36+00:00,2025-05-02T03:08:21+00:00,2025-05-01T21:41:12+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3031266954,21230,[OpenVINO Backend] Support for numpy.flip,"This change resolves #29359. @rkazants  please review this PR.
+My bad for spamming PRs, had some problems with CLA.  ",chuinzer,64257785,open,False,3,2025-04-30T13:20:24+00:00,2025-05-02T12:05:49+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3031254126,21229,Add numpy.flip support for Openvino Backend ,This change resolves #29359. @rkazants please review this PR. ,chuinzer,64257785,closed,False,2,2025-04-30T13:15:33+00:00,2025-04-30T13:43:29+00:00,2025-04-30T13:18:22+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3030766316,21228,Keras 3 may not work with PyTorch DirectML,"I think this might be a tech issue so I opened issue from [disscutions](https://github.com/keras-team/keras/discussions/21218) to here.
+
+Issue description: 
+My test on Keras 3 may cannot set selected device correctly with DirectML based PyTorch backend. I looked #21190 and still can't find some useful anwers.
+
+Backgrounds:
+I have a Windows 11 Machine, contains 2 cards with NVIDIA GeForce RTX 4070ti Super and AMD Radeon RX 7800XT respectively.
+Then I deployed a Python 3.11.9 env installed `torch-directml`, by using DirectML backend to use PyTorch. In PyTorch we can manually use `.to(device)` to set GPU device, and can do check like this:
+```
+import torch_directml
+
+# List all available DML devices
+device_count = torch_directml.device_count()
+print(f""Available DirectML devices: {device_count}"")
+
+# Loop over devices and print info
+for i in range(device_count):
+    dml_device = torch_directml.device(i)
+    print(f""Device {i}: {dml_device}"")
+
+# Select device 1 (example)
+dml = torch_directml.device(1)
+```
+```
+Available DirectML devices: 2
+Device 0: privateuseone:0
+Device 1: privateuseone:1
+```
+From the above codes and the result, we can know that device 1 is the AMD card.
+How can I manage/add preprocess ""on DirectML device select"" in Keras? If we just do nothing, the model will be run on CPU only.
+
+Hardware and Software/Environ:
+```
+Intel Xeon W-3175X
+NVIDIA GeForce RTX 4070ti Super
+AMD Radeon RX 7800XT
+
+Windows 11 24H2
+Python 3.13.2 ---> PyTorch 2.6.0+cu126, Keras 3            # The NVIDIA CUDA one
+Python 3.11.9 ---> PyTorch-DirectML, Keras 3                 # The DirectML for AMD card environment
+```",TaiXeflar,81042947,open,False,6,2025-04-30T09:53:56+00:00,2025-05-12T15:47:53+00:00,,stat:contributions welcome;type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3030402168,21227,Updated confusion_metrics.py,Modified compile() API Code.,Kayyuri,180251040,closed,False,1,2025-04-30T07:30:29+00:00,2025-04-30T22:25:04+00:00,2025-04-30T22:25:04+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3030127085,21226,"updated embedding.py, cannot have hardcoded value True for trainable.","Can't hardcode trainable to be true.
+#21201
+
+",pctablet505,55033230,closed,False,2,2025-04-30T04:49:36+00:00,2025-04-30T05:53:47+00:00,2025-04-30T05:52:47+00:00,size:XS,0,0,0,0,0,0,0
+keras-team/keras,3029052899,21225,DRAFT: Add custom variable updater.,"Allows customization for how variables are updated by the optimizer. The base optimizer simply defers to the update handler to do the update, allowing full customization.
+
+Can replace the existing `overwrite_with_gradient` attribute on variables, which currently is very application-specific.
+
+Eliminates creation of optimizer variables that have custom updaters (including `overwrite_with_gradient`), since those variables are never used and may be wasteful.
+
+This is an alternative to #21196.  It would allow us to add special-handling for large embedding tables, where we do not want to pass around large gradients for tables that might span multiple devices.  Instead the tables are updated in-place using a custom update rule.",cantonios,2538739,open,False,2,2025-04-29T17:27:34+00:00,2025-04-30T22:40:01+00:00,,size:L,0,0,0,0,0,0,0
+keras-team/keras,3028676665,21224,Fix stacked RNN with mask in JAX & Numpy backends,"There is currently a bug specific to JAX backend when using a stacked RNN with a mask (due to the fact that stacked RNN states are **nested** lists):
+
+```python
+import numpy as np
+from keras import layers
+
+sequence = np.ones((2, 3, 4))
+mask = np.array([[True, True, True], [True, True, False]])  # shape (2, 3)
+
+cell_kwargs = dict(
+    units=5,
+    kernel_initializer=""ones"",  # just to check consistency between backends
+    recurrent_initializer=""ones""  # just to check consistency between backends
+)
+rnn_cells = [layers.LSTMCell(**cell_kwargs) for _ in range(4)]  # 4 cells
+lstm_layer = layers.RNN(rnn_cells)  # stacked RNN
+
+output = lstm_layer(sequence, mask=mask)  # <--- raises error on JAX when mask used!
+```
+
+This PR fixes this bug (I also double-checked that the output is consistent across JAX/TF/Torch backends, even when changing the values for `unroll` and `zero_output_for_mask` RNN arguments).
+
+**Note:** I didn't add a specific test case related to the code above since [rnn_test](https://github.com/keras-team/keras/blob/master/keras/src/layers/rnn/rnn_test.py) is fairly complex and I wasn't sure where/how to add it without polluting the original file - but feel free to do it if you think it is necessary.",neo-alex,26087829,closed,False,4,2025-04-29T15:01:05+00:00,2025-05-01T03:03:04+00:00,2025-05-01T03:03:04+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3028506812,21223,Openvino ravel op,"Implemented support for numpy.ravel operation in the Keras OpenVINO backend.
+
+This PR adds a decomposition for numpy.ravel using the OpenVINO reshape op with a shape of [-1], which flattens the input tensor to 1D—equivalent to NumPy’s ravel() behavior.
+
+✅ Changes made:
+Implemented ravel using ov_opset.reshape with [-1] as the target shape.
+
+Ensured special_zero=False to avoid OpenVINO preserving dimensions unintentionally.
+
+Wrapped the result using OpenVINOKerasTensor.
+
+Removed test_ravel from excluded_concrete_tests.txt to enable testing.
+
+Added a local pytest.ini to run tests with KERAS_BACKEND=openvino.
+
+🔬 Testing:
+All tests pass locally using:
+
+bash
+Copy
+Edit
+pytest -c ./pytest.ini ./keras/src/ops/numpy_test.py
+Please let me know if any changes are needed.
+
+@rkazants Kindly review this PR. Thanks!",SiddharthV147,113883699,closed,False,3,2025-04-29T14:09:12+00:00,2025-04-30T13:54:56+00:00,2025-04-30T13:54:55+00:00,size:XS,0,0,0,0,0,0,0
+keras-team/keras,3028444069,21222,Adds `_register_call_context_args` to declare and use call-context arguments.,"# Summary
+Previously model authors were required to define call-context args in the entry-point layer to tell keras that these arguments should be propagated down. This was slightly awkward.
+
+This also means that in case the entry-point layer is a pre-defined layer (eg. `Dense`), we need to subclass it to tell it to propagate these arguments in its context. This is bad UX.
+
+### Existing approach
+```py
+class Inner(layers.Layer):
+    call_context_args = (""foo_mode"",)
+
+    def call(self, x, foo_mode=False):
+        add_val = ops.where(foo_mode, 1.0, 0.0)
+        return x + add_val
+
+class Outer(layers.Layer):
+    # This is an awkward requirement to have.
+    call_context_args = (""foo_mode"",)
+
+    def __init__(self):
+        super().__init__()
+        self.inner = Inner()
+
+    def call(self, x):
+        return self.inner(x)
+
+sample_input = np.array([[1.0], [2.0]])
+
+# Functional model
+inp = Input(shape=(1,))
+out = Outer()(inp)
+model = models.Model(inp, out)
+
+# foo_mode=True -> input + 1
+y1 = model(sample_input, foo_mode=True)
+self.assertAllClose(y1, sample_input + 1.0)
+
+# foo_mode omitted -> foo_mode defaults to False -> no change
+y2 = model(sample_input)
+self.assertAllClose(y2, sample_input)
+```
+
+However, with the new `register_call_context_args` API, we can simply register call context arguments at the top-level layers or models (before they're called) without having to define the call_context_args inside the class definition. In fact this can remove the need for the `call_context_args` attribute, and each layer can simply use the registration API instead.
+
+This also means we no longer need to subclass existing layers to make them propagate these arguments down.
+
+### New Approach
+```py
+class Inner(layers.Layer):
+    def __init__(self):
+        super().__init__()
+        self._register_call_context_args(""foo_mode"")
+
+    def call(self, x, foo_mode=False):
+        add_val = ops.where(foo_mode, 1.0, 0.0)
+        return x + add_val
+
+class Outer(layers.Layer):
+    def __init__(self):
+        super().__init__()
+        self.inner = Inner()
+
+    def call(self, x):
+        return self.inner(x)
+
+sample_input = np.array([[1.0], [2.0]])
+
+# Functional model
+inp = Input(shape=(1,))
+out = Outer()(inp)
+model = models.Model(inp, out)
+# Tell the model instance to propagate this argument down.
+model._register_call_context_args(""foo_mode"")
+
+# foo_mode=True -> input + 1
+y1 = model(sample_input, foo_mode=True)
+self.assertAllClose(y1, sample_input + 1.0)
+
+# foo_mode omitted -> foo_mode defaults to False -> no change
+y2 = model(sample_input)
+self.assertAllClose(y2, sample_input)
+```
+
+# API
+## `register_call_context_args(self, *names)`
+* `*names`: string arguments, defining the names of the context-arguments to be passed down.",JyotinderSingh,33001894,closed,False,3,2025-04-29T13:51:40+00:00,2025-05-01T00:32:53+00:00,2025-04-30T22:24:37+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3027797183,21221,[Keras Ops] view_as_complex() and view_as_real(),"Convenience operation, used to convert between complex and real tensors.
+Useful for doing operations in architectures like DeepSeek V3/R1 (https://github.com/keras-team/keras-hub/pull/2171).
+
+Equivalent to PyTorch's:
+- https://pytorch.org/docs/stable/generated/torch.view_as_complex.html
+- https://pytorch.org/docs/stable/generated/torch.view_as_real.html
+
+
+Usage:
+
+`view_as_real()` converts a complex-type tensor into a real tensor:
+
+```
+>>> from keras import ops
+>>> import torch
+>>> x=torch.randn(4, dtype=torch.cfloat)
+>>> ops.view_as_real(x)
+>>> ops.view_as_real(x).numpy()
+array([[-0.6658956 , -1.199816  ],
+       [ 0.6203052 , -0.647082  ],
+       [ 0.6746265 , -0.75243765],
+       [ 0.02358519, -0.8950158 ]], dtype=float32)
+```
+
+`view_as_complex()` does the opposite:
+
+```
+>>> x=torch.randn(4, 2)
+>>> x
+tensor([[-0.6625, -1.4961],
+        [-0.0678, -0.6881],
+        [ 0.1599,  0.1223],
+        [ 1.8277,  0.1058]])
+>>> ops.view_as_complex(x).numpy()
+array([-0.6624739 -1.496139j  , -0.06781768-0.6881176j ,
+        0.15992023+0.12225848j,  1.8276887 +0.10576057j], dtype=complex64)
+```
+
+/cc @fchollet for review",DavidLandup0,60978046,closed,False,6,2025-04-29T10:17:06+00:00,2025-05-05T17:26:45+00:00,2025-05-05T17:26:45+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3027741146,21220,Update conftest.py,"updated the `requires_trainable_backend` to use `in` operator for checking backend values.
+fixes [#21005](https://github.com/keras-team/keras/issues/21005)",sonali-kumari1,180251223,closed,False,1,2025-04-29T09:54:26+00:00,2025-04-30T22:17:03+00:00,2025-04-30T22:17:03+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3024506781,21219,How does Keras MultiHeadAttention handle input feature dimension vs heads and reshape the output?,"Hi everyone,  
+
+I am trying to better understand how the **Keras `MultiHeadAttention`** layer handles the dimensions internally.
+
+Suppose I input a tensor of shape **(32, 24, 21)** meaning (batch_size, time_steps, features) into the `MultiHeadAttention` layer, and I set the number of heads to 8.  
+Keras correctly outputs a tensor of shape **(32, 24, 21)**, matching my input dimensions, but I'm confused about the internal dimension handling.
+
+**My understanding is:**  
+- If the input is (batch_size=2, time_steps=3, features=4) and we use `num_heads=2`,  
+- Then after the linear projection, the queries (Q) will be shaped into (2, 3, 4),
+- Then separated into heads: (2, 2, 3, 2),
+- After transpose: (2, 2, 3, 2) → (2, 2, 3, 2),
+- Then attention scores (QKᵀ) will be (2, 2, 3, 3),
+- After applying softmax and multiplying by V, the output per head is (2, 2, 3, 2),
+- After merging heads, we get back to (2, 3, 4) by concatenating heads.
+
+**My confusion:**  
+In my case, features=21, and heads=8.  
+Since 21 is **not divisible by 8**, how is Keras handling this? Normally, the feature dimension must be divisible by the number of heads (i.e., `key_dim * num_heads = features`).  
+So how does Keras map the 21 features into multiple heads internally, and how does it correctly recover the (32, 24, 21) output shape?
+
+Would love a clarification on this!
+
+",SyedHasnat,81588359,open,False,0,2025-04-28T10:38:11+00:00,2025-04-28T10:54:48+00:00,,type:support,0,0,0,0,0,0,0
+keras-team/keras,3023586416,21217,Add an easy way to run a script for a few steps only,"I've wanted this tool for a while, figured I should just propose it. Often I need to test out a script or colab I did not write, and just want to run a few train steps without for every fit call without finding every call to fit in the script. This adds a debugging tool to do just that.
+
+```
+KERAS_MAX_EPOCHS=1 KERAS_MAX_STEPS_PER_EPOCH=5 python train.py
+```",mattdangerw,1389937,open,False,1,2025-04-28T03:17:51+00:00,2025-05-09T07:38:18+00:00,,size:M;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3023306162,21216,implementation of logaddexp in openvino backend (issue #29489),"I implemented the numpy logaddexp function in openvino backend using functions already coded in this file. The tests seem to pass, but maybe implementing logaddexp from zero without using the openvino numpy functions would be more effective. @rkazants could you review the PR ?",mathys-mt,203654242,open,False,3,2025-04-27T20:30:11+00:00,2025-04-28T06:45:37+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3023057053,21215,[OpenVINO Backend] Support numpy.flip ,"This PR adds `numpy.flip` support to OpenVINO backend 
+
+@rkazants Please review the PR ",chuinzer,64257785,closed,False,2,2025-04-27T12:39:52+00:00,2025-04-27T15:14:16+00:00,2025-04-27T12:42:52+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3022979758,21214,Implement bartlett function in keras.ops,"Adds keras.ops.bartlett, which computes the Bartlett window. Supported across NumPy, TensorFlow, PyTorch, and JAX backends, but not supported on OpenVINO.",shashaka,37043543,closed,False,1,2025-04-27T10:09:36+00:00,2025-05-01T09:21:42+00:00,2025-04-30T23:32:55+00:00,ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3022373357,21213,Added numpy.outer function using opset14,"Modified import statement for opset14 in numpy.py (original one commented out)
+Added numpy.outer function using opset14
+Deleted test_outer and test_outer_ lines from excluded_concrete_tests.txt
+Implementation of numpy.outer assumes that the given tensors are 1-dimensional arrays, and will likely produce bad results",blue-dreaming-jay,138028785,open,False,4,2025-04-26T22:26:41+00:00,2025-05-10T13:43:54+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3020819969,21212,Fix Trainer.get_compile_config base case (empty dict),"It is unexpected for `Trainer.get_compile_config` to return `None` when calling it from subclasses. This change breaks backward-compatibility, but should not significantly impact any real use-cases.",LarsKue,37488165,closed,False,1,2025-04-25T19:05:41+00:00,2025-04-25T21:13:28+00:00,2025-04-25T21:13:28+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3020728898,21211,Recognize /tfhub as a remote location.,Recognize /tfhub as a remote location. ,nicolas-aagnes,34720493,closed,False,1,2025-04-25T18:20:12+00:00,2025-04-25T21:08:50+00:00,2025-04-25T21:08:49+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3019622100,21210,Alias `KerasTensor` as `Tensor`,"Can we please introduce an alias from `KerasTensor` to `Tensor` in `keras`  by changing the import statement in the autogenerated stubs:
+
+`from keras.src.backend.common.keras_tensor import KerasTensor as KerasTensor`
+
+to:
+
+`from keras.src.backend.common.keras_tensor import KerasTensor as Tensor`
+
+This change aims to simplify the API, improve usability, and align naming convention across other critical building blocks such as `keras.Model` and `keras.Layer`
+
+For example :
+`from keras import Variable, Model, Layer, Tensor, ops`
+
+This would be a trivial change downstream too but just think for the sake of alignment, we refactor in `keras` main repo
+
+",rivershah,5272654,open,False,2,2025-04-25T10:13:41+00:00,2025-05-01T08:21:12+00:00,,type:feature;keras-team-review-pending,2,2,0,0,0,0,0
+keras-team/keras,3018948777,21209,OpenVINO: linspace,@rkazants for review of linspace Implementations for OpenVINO.,vi-shruti,41509646,open,False,2,2025-04-25T04:23:54+00:00,2025-05-08T07:22:55+00:00,,size:M;awaiting review,1,0,0,0,1,0,0
+keras-team/keras,3017998945,21208,"""Computation Time Analysis for TimeDistributed Layer – Issue #21179""","Inference using TimeDistributed(Dense(1, activation=""sigmoid"")) in Keras 3 is significantly slower than in Keras 2 (tf.keras). Profiling indicates that the TimeDistributed layer is the primary bottleneck.
+
+Model Architecture:
+Conv1D → LSTM → Conv1DTranspose → TimeDistributed(Dense(1))
+Input Shape: (None, None, 1)
+
+What I've Tried:
+
+run_eagerly=False
+
+Wrapping in @tf.function
+
+Switching between TensorFlow, JAX, and PyTorch backends
+
+None of these attempts led to meaningful performance improvements.
+
+Question:
+Is there a way to resolve the TimeDistributed slowdown in Keras 3 without altering the model architecture?
+(Current workaround: reverting to tf.keras.)
+
+Environment:
+
+Keras Version: 3.9.0",gorden-del,208812002,closed,False,2,2025-04-24T17:39:45+00:00,2025-04-27T04:13:21+00:00,2025-04-27T04:13:21+00:00,type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3017689755,21207,remat : The custom_gradient decorator currently supports keywords arguments only when eager execution is enabled.,"It happens while using `remat`.
+
+```python
+import keras
+from keras import layers
+import tensorflow as tf
+import numpy as np
+
+from keras import RematScope
+
+
+def with_remat(mode):
+    with RematScope(mode=mode):
+
+        base_model = keras.applications.DenseNet121(
+            weights='imagenet',  
+            input_shape=(224,224,3),
+            include_top=False
+        )  
+        inputs = keras.Input(shape=(224,224,3))
+        x = base_model(inputs)
+        x = keras.layers.GlobalAveragePooling2D()(x)
+        outputs = keras.layers.Dense(10, activation='softmax')(x)
+        custom_model = keras.Model(inputs, outputs)
+
+    # bind all
+    custom_model.compile(
+        optimizer=keras.optimizers.Adam(),
+        loss=keras.losses.CategoricalCrossentropy(),
+        metrics=[
+            keras.metrics.TopKCategoricalAccuracy(k=3, name='acc_top3'),
+            keras.metrics.TopKCategoricalAccuracy(k=1, name='acc_top1')
+            ]
+        )
+
+
+
+    # data 
+    (x_train, y_train), (_, _) = keras.datasets.mnist.load_data()
+    x_train, y_train = x_train[:5000], y_train[:5000]
+
+    x_train = np.expand_dims(x_train, axis=-1)
+    x_train = np.repeat(x_train, 3, axis=-1)
+    x_train = x_train.astype('float32') / 255
+    x_train = tf.image.resize(x_train, [224,224])
+    y_train = tf.one_hot(y_train , depth=10) 
+    custom_model.fit(x_train, y_train, batch_size=6, epochs=10, verbose = 1)
+
+
+with_remat(mode='full')
+```
+```bash
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+[<ipython-input-10-839581e84b79>](https://localhost:8080/#) in <cell line: 0>()
+----> 1 with_remat(mode='full')
+
+4 frames
+[/usr/local/lib/python3.11/dist-packages/keras/src/utils/traceback_utils.py](https://localhost:8080/#) in error_handler(*args, **kwargs)
+    122             raise e.with_traceback(filtered_tb) from None
+    123         finally:
+--> 124             del filtered_tb
+    125 
+    126     return error_handler
+
+ValueError: Exception encountered when calling Functional.call().
+
+The custom_gradient decorator currently supports keywords arguments only when eager execution is enabled.
+
+Arguments received by Functional.call():
+  • inputs=tf.Tensor(shape=(None, 224, 224, 3), dtype=float32)
+  • training=True
+  • mask=None
+```
+
+2. What is the future of keras.application API?
+3. Does remat scope also work on data parallel or model parallel set up?",innat,17668390,open,False,5,2025-04-24T15:38:15+00:00,2025-04-30T23:48:29+00:00,,type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3017278936,21206,Surpress pre-commit error,"Added F811 to the ignore list in tool.ruff.lint.
+Since F811 only checks standard import statements and not from ... import ... statements, it raises a false positive when classes with the same name are imported from different modules, as shown below:
+
+```
+from keras.src.layers.regularization.alpha_dropout import AlphaDropout  
+from keras.src.legacy.layers import AlphaDropout
+```
+
+To avoid this error, I suppressed the F811 check in the linter configuration.
+
+
+
+- The error occured locally
+```
+ruff.....................................................................Failed
+- hook id: ruff
+- exit code: 1
+
+keras/api/_tf_keras/keras/__init__.py:36:35: F811 Redefinition of unused `backend` from line 10
+   |
+34 | from keras import visualization
+35 | from keras import wrappers
+36 | from keras._tf_keras.keras import backend
+   |                                   ^^^^^^^ F811
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+   |
+   = help: Remove definition: `backend`
+
+keras/api/_tf_keras/keras/__init__.py:36:35: F811 Redefinition of unused `backend` from line 10
+   |
+34 | from keras import visualization
+35 | from keras import wrappers
+36 | from keras._tf_keras.keras import backend
+   |                                   ^^^^^^^ F811
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+   |
+   = help: Remove definition: `backend`
+
+keras/api/_tf_keras/keras/__init__.py:37:35: F811 Redefinition of unused `layers` from line 19
+   |
+35 | from keras import wrappers
+36 | from keras._tf_keras.keras import backend
+37 | from keras._tf_keras.keras import layers
+   |                                   ^^^^^^ F811
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+   |
+   = help: Remove definition: `layers`
+
+keras/api/_tf_keras/keras/__init__.py:37:35: F811 Redefinition of unused `layers` from line 19
+   |
+35 | from keras import wrappers
+36 | from keras._tf_keras.keras import backend
+37 | from keras._tf_keras.keras import layers
+   |                                   ^^^^^^ F811
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+   |
+   = help: Remove definition: `layers`
+
+keras/api/_tf_keras/keras/__init__.py:38:35: F811 Redefinition of unused `losses` from line 21
+   |
+36 | from keras._tf_keras.keras import backend
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+   |                                   ^^^^^^ F811
+39 | from keras._tf_keras.keras import metrics
+40 | from keras._tf_keras.keras import preprocessing
+   |
+   = help: Remove definition: `losses`
+
+keras/api/_tf_keras/keras/__init__.py:38:35: F811 Redefinition of unused `losses` from line 21
+   |
+36 | from keras._tf_keras.keras import backend
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+   |                                   ^^^^^^ F811
+39 | from keras._tf_keras.keras import metrics
+40 | from keras._tf_keras.keras import preprocessing
+   |
+   = help: Remove definition: `losses`
+
+keras/api/_tf_keras/keras/__init__.py:39:35: F811 Redefinition of unused `metrics` from line 22
+   |
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+   |                                   ^^^^^^^ F811
+40 | from keras._tf_keras.keras import preprocessing
+41 | from keras.src.backend import Variable
+   |
+   = help: Remove definition: `metrics`
+
+keras/api/_tf_keras/keras/__init__.py:39:35: F811 Redefinition of unused `metrics` from line 22
+   |
+37 | from keras._tf_keras.keras import layers
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+   |                                   ^^^^^^^ F811
+40 | from keras._tf_keras.keras import preprocessing
+41 | from keras.src.backend import Variable
+   |
+   = help: Remove definition: `metrics`
+
+keras/api/_tf_keras/keras/__init__.py:40:35: F811 Redefinition of unused `preprocessing` from line 27
+   |
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+40 | from keras._tf_keras.keras import preprocessing
+   |                                   ^^^^^^^^^^^^^ F811
+41 | from keras.src.backend import Variable
+42 | from keras.src.backend import device
+   |
+   = help: Remove definition: `preprocessing`
+
+keras/api/_tf_keras/keras/__init__.py:40:35: F811 Redefinition of unused `preprocessing` from line 27
+   |
+38 | from keras._tf_keras.keras import losses
+39 | from keras._tf_keras.keras import metrics
+40 | from keras._tf_keras.keras import preprocessing
+   |                                   ^^^^^^^^^^^^^ F811
+41 | from keras.src.backend import Variable
+42 | from keras.src.backend import device
+   |
+   = help: Remove definition: `preprocessing`
+
+keras/api/_tf_keras/keras/layers/__init__.py:269:37: F811 Redefinition of unused `AlphaDropout` from line 236
+    |
+267 | from keras.src.layers.rnn.stacked_rnn_cells import StackedRNNCells
+268 | from keras.src.layers.rnn.time_distributed import TimeDistributed
+269 | from keras.src.legacy.layers import AlphaDropout
+    |                                     ^^^^^^^^^^^^ F811
+270 | from keras.src.legacy.layers import RandomHeight
+271 | from keras.src.legacy.layers import RandomWidth
+    |
+    = help: Remove definition: `AlphaDropout`
+
+keras/api/_tf_keras/keras/layers/__init__.py:269:37: F811 Redefinition of unused `AlphaDropout` from line 236
+    |
+267 | from keras.src.layers.rnn.stacked_rnn_cells import StackedRNNCells
+268 | from keras.src.layers.rnn.time_distributed import TimeDistributed
+269 | from keras.src.legacy.layers import AlphaDropout
+    |                                     ^^^^^^^^^^^^ F811
+270 | from keras.src.legacy.layers import RandomHeight
+271 | from keras.src.legacy.layers import RandomWidth
+    |
+    = help: Remove definition: `AlphaDropout`
+
+Found 12 errors.
+
+```",shashaka,37043543,closed,False,0,2025-04-24T13:21:37+00:00,2025-04-24T13:32:05+00:00,2025-04-24T13:29:19+00:00,size:XL,0,0,0,0,0,0,0
+keras-team/keras,3013543383,21205,Missing equivalent of layer.inbound_nodes followed by node.iterate_inbound(),"Hello,
+
+I would like to get the inputs of a given layer linked to a previous layer.
+
+My code with Keras 2.x was the following
+
+```python
+def get_inputs(layer):
+    """"""Get the inputs of a layer.""""""
+    inputs = []
+    for node in layer.inbound_nodes:
+        for inbound_layer, _, tensor_index, _ in node.iterate_inbound():
+            try:
+                activation = inbound_layer.activation.__name__
+            except AttributeError:
+                activation = None
+            inputs.append((inbound_layer.name, activation, tensor_index))
+
+    return inputs
+```
+
+For the following model, I had this result:
+```python
+from tensorflow import keras
+
+input1 = keras.Input(shape=(5,2,), name='input1')
+x1 = keras.layers.LSTM(3, name='LSTM1')(input1)
+x2 = keras.layers.LSTM(3, name='LSTM2', go_backwards=True)(input1)
+input2 = keras.Input(shape=(10,7,), name='input2')
+x3 = keras.layers.LSTM(3, name='LSTM3', return_state=True, return_sequences=True)(input2, initial_state=[x1, x2])
+x4 = keras.layers.LSTM(7, name='LSTM4', activation='exponential', recurrent_activation='relu')(x3[0])
+model = keras.Model(inputs=[input1, input2], outputs=[x4], name='model_lstm')
+
+print(""INPUTS OF EACH LAYER"")
+for layer in model.layers:
+    print(f""{layer.name} => {get_inputs(layer)}"")
+
+# INPUTS OF EACH LAYER
+# input1 => []
+# input2 => []
+# LSTM1 => [('input1', None, 0)]
+# LSTM2 => [('input1', None, 0)]
+# LSTM3 => [('input2', None, 0), ('LSTM1', 'tanh', 0), ('LSTM2', 'tanh', 0)]
+# LSTM4 => [('LSTM3', 'tanh', 0)]
+```
+
+![Image](https://github.com/user-attachments/assets/c7141da3-e9e2-4dbd-bfa0-98a605369fdd)
+
+
+In Keras 3.x, I have the following error: `AttributeError: 'InputLayer' object has no attribute 'inbound_nodes'`.
+
+I tried to change as follows, but it detects all the inputs of the last layer (LSTM4) and not the connected ones only:
+```python
+def get_inputs_k3(layer):
+    """"""Get the inputs of a layer.""""""
+    inputs = []
+    # layer.inbound_nodes has been removed in Keras 3.0
+    # an equivalent is `layer._inbound_nodes`, but it may return many nodes with same name
+    unique_nodes = {n.operation.name: n for n in layer._inbound_nodes}
+    for node in unique_nodes.values():
+        for inbound_layer in node.parent_nodes:
+            for tensor in inbound_layer.output_tensors:
+                tensor_index = tensor._keras_history.tensor_index
+                try:
+                    activation = inbound_layer.operation.activation.__name__
+                except AttributeError:
+                    activation = None
+                inputs.append((inbound_layer.operation.name, activation, tensor_index))
+
+    return inputs
+
+# INPUTS OF EACH LAYER
+# input1 => []
+# input2 => []
+# LSTM1 => [('input1', None, 0)]
+# LSTM2 => [('input1', None, 0)]
+# LSTM3 => [('input2', None, 0), ('LSTM1', 'tanh', 0), ('LSTM2', 'tanh', 0)]
+# LSTM4 => [('LSTM3', 'tanh', 0), ('LSTM3', 'tanh', 1), ('LSTM3', 'tanh', 2)]
+```
+
+What is the equivalent of these lines in Keras 3?
+```python
+for node in layer.inbound_nodes:
+        for inbound_layer, _, tensor_index, _ in node.iterate_inbound():
+           ...
+```
+
+Thanks
+",jfthuong,1401809,closed,False,4,2025-04-23T10:31:31+00:00,2025-05-02T04:08:07+00:00,2025-04-28T14:58:25+00:00,type:support;stat:awaiting response from contributor,0,0,0,0,0,0,0
+keras-team/keras,3012718027,21204,Adds Support For Custom Call-Context Arguments,"This PR introduces a framework for supporting custom call-context arguments in Keras layers, allowing for more flexible context-aware logic within custom layers.
+
+Currently, Keras layers have special handling for the `training` argument in `Layer.__call__`, which allows its value to be propagated through nested layers. This PR generalizes this mechanism.
+
+## API
+1. `Layer.call_context_args`: Custom layers can now define a class attribute `call_context_args` (a set of strings) to declare argument names they expect to be propagated across the model. The `training` argument is implicitly included and does not need to be added to this collection.
+2. The call methods in `Functional` and `Sequential` models are updated to accept `**kwargs`.
+3. `CallContext`: The `CallContext` object is updated to generically store and retrieve values for any registered call-context arguments using `get_value(arg_name)` and `set_value(arg_name, value)`
+4. `CallSpec`: The `CallSpec` class is modified to be aware of `call_context_args` to correctly bind arguments, especially when args are passed that are not part of the immediate layer's call signature but are intended for nested layers.
+
+## Example
+```py
+import keras
+from keras import layers
+import numpy as np
+
+# 1. Define a custom layer that uses a new call-context arg `foo_mode`
+class MyCustomLayer(layers.Layer):
+    # Declare 'foo_mode' as a call-context argument
+    call_context_args = (""foo_mode"",)
+
+    def call(self, inputs, foo_mode=None): # Default to None or a specific value
+        if foo_mode:
+            return inputs * 2
+        return inputs
+
+# 2. Create an outer layer that contains an instance of MyCustomLayer
+class OuterLayer(layers.Layer):
+    # The outer layer also declares 'foo_mode' to enable propagation
+    call_context_args = (""foo_mode"",)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.inner_layer = MyCustomLayer()
+
+    def call(self, inputs): # not mandatory to include `foo_mode` here.
+        # 'foo_mode' will be automatically propagated to self.inner_layer
+        # if passed to OuterLayer or set in its context.
+        return self.inner_layer(inputs)
+
+
+layer = OuterLayer()
+data = np.array([1, 2, 3])
+
+# Call without `foo_mode` (it will be None or its default in `MyCustomLayer.call`)
+output_default = layer(data)
+print(f""Output (default foo_mode): {output_default}"") # [1, 2, 3]
+
+# Call with `foo_mode=True` at the `OuterLayer` level
+# This value will be propagated to `MyCustomLayer`
+output_foo_true = layer(data, foo_mode=True)
+print(f""Output (foo_mode=True): {output_foo_true}"") # [2, 4, 6]
+```",JyotinderSingh,33001894,closed,False,1,2025-04-23T05:16:15+00:00,2025-04-28T05:03:21+00:00,2025-04-25T15:59:29+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3012445442,21203,Fix nightly releases,They have been broken for a month,mattdangerw,1389937,closed,False,1,2025-04-23T01:09:32+00:00,2025-04-23T01:51:48+00:00,2025-04-23T01:51:45+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3012185029,21202,`mlx` - new image ops implemented,"This continues work on #19571
+
+This PR includes the following:
+- implemented `image` ops: `compute_homography_matrix`, `perspective_transform`, `gaussian_blur`, and `elastic_transform` (very similar to jax implementations)
+- adjust `random.normal` to use `loc` and `mean` directly in `mlx` method",acsweet,52804044,closed,False,1,2025-04-22T21:37:29+00:00,2025-04-23T00:42:27+00:00,2025-04-23T00:42:27+00:00,kokoro:force-run;ready to pull;size:L,0,0,0,0,0,0,0
+keras-team/keras,3012057308,21201,Embedding Layer trainable bug?,"In the class `Embedding(Layer)` [keras/src/layers/core/embedding.py](https://github.com/keras-team/keras/blob/master/keras/src/layers/core/embedding.py)
+
+``` python
+    def build(self, input_shape=None):
+        if self.built:
+            return
+        if self.quantization_mode is not None:
+            self.quantized_build(input_shape, mode=self.quantization_mode)
+        if self.quantization_mode != ""int8"":
+            self._embeddings = self.add_weight(
+                shape=(self.input_dim, self.output_dim),
+                initializer=self.embeddings_initializer,
+                name=""embeddings"",
+                regularizer=self.embeddings_regularizer,
+                constraint=self.embeddings_constraint,
+                trainable=True,
+            )
+        self.built = True
+        if self.lora_rank:
+            self.enable_lora(self.lora_rank)
+```
+
+Here the embeddings weight is built using `trainable=True`, this doesn't reflect the `keras.layers.Layer` parent class attribute `_trainable`. Therefore if we build the `Embedding` class using `trainable=False` as a parameter the underlying `self._embeddings` weight will still be trainable.
+
+Is this set to true for a specific reason or is it simply a bug?
+Thought I would point this out.",Fricker95,54084264,closed,False,2,2025-04-22T20:28:46+00:00,2025-04-30T11:36:12+00:00,2025-04-30T05:56:24+00:00,keras-team-review-pending;type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3010649492,21200,Implement angle function in keras.ops,"Adds keras.ops.angle to compute the element-wise angle of complex numbers. Supported across NumPy, TensorFlow, PyTorch, and JAX backends,  except for OpenVINO. ",shashaka,37043543,closed,False,5,2025-04-22T10:26:41+00:00,2025-04-27T07:53:27+00:00,2025-04-26T22:02:33+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3009797061,21199,Add pre-commit to the common requirements file,We also want it for cuda installations.,mattdangerw,1389937,closed,False,1,2025-04-22T04:06:45+00:00,2025-04-22T19:32:01+00:00,2025-04-22T19:32:01+00:00,kokoro:force-run;ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3009792653,21198,Add openvino to the basic requirements file,"Unlike jax/torch/tensorflow which all vie for a certain cuda, I don't think openvino has trouble co-installing.
+
+And without this the basic requirements.txt will not give a working dev environment. You can't run our pre-commit without openvino installed due to import errors.",mattdangerw,1389937,closed,False,1,2025-04-22T04:02:47+00:00,2025-04-22T19:30:37+00:00,2025-04-22T19:30:37+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3009769804,21197,"Add back shell/format.sh, but it just runs pre-commit","For folks who are used to the old format, this will print instructions. And for people like me, saves needing to remember
+`SKIP=api-gen pre-commit run --all-files`
+When I just want the formatter. api_gen.py is too slow to run every time.",mattdangerw,1389937,closed,False,1,2025-04-22T03:41:05+00:00,2025-04-22T19:29:44+00:00,2025-04-22T19:29:44+00:00,kokoro:force-run;ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3009471211,21196,"Allow per-variable optimizer, add DispatchOptimizer.","- Adds a property `variable.optimizer` that defaults to `None`
+- Adds a `DispatchOptimizer` that scans the list of trainable variables during build, collects all unique per-variable optimizers, then dispatches the apply/stateless_apply function to the correct optimizer if applicable.
+- Modifies `trainer` so that during the optimizer build stage, checks if any variables have a custom optimizer attached, and if so inserts a `DispatchOptimizer` to properly handle them.  This allows usage to be hidden from the user.
+
+Context: for large embedding tables, we need special optimizers to be used so that the tables can be updated in-place, rather than returning large gradients.  The layer will handle setting of the custom optimizers, but we need the trainer to be aware of them and dispatch the embedding tables to different optimizers appropriately.",cantonios,2538739,open,False,9,2025-04-21T23:13:52+00:00,2025-04-24T20:49:48+00:00,,size:L,0,0,0,0,0,0,0
+keras-team/keras,3009284659,21195,Allow `Embedding` subclasses to only override `compute_output_shape`.,Without the need to also override `compute_output_spec`.,hertschuh,1091026,closed,False,1,2025-04-21T20:52:06+00:00,2025-04-21T22:33:01+00:00,2025-04-21T22:32:58+00:00,size:XS,0,0,0,0,0,0,0
+keras-team/keras,3009149541,21194,Return explicitly layout if already set on variable.,"If explicitly overwriting a variable._layout, we want to keep this layout in any future calls.  This allows auxiliary variables (e.g. gradients, optimizer momentums) to use the same explicit layout.",cantonios,2538739,closed,False,2,2025-04-21T19:36:42+00:00,2025-04-21T23:27:33+00:00,2025-04-21T23:27:33+00:00,ready to pull;size:S,0,0,0,0,0,0,0
+keras-team/keras,3009018676,21193, Don't scale gradients if overwriting variable with gradient.," If `variable.overwrite_with_gradient`, the gradient represents the desired final value of the variable.  If we did scale it, we're changing that final value.",cantonios,2538739,closed,False,2,2025-04-21T18:23:36+00:00,2025-04-22T16:40:10+00:00,2025-04-22T16:40:10+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3008995595,21192,Fix `Embedding.compute_output_spec` with a non-`KerasTensor` input.,"The `ragged` attribute exists only with `KerasTensor`s.
+
+Minor fix of a unit tests that was using the same local variable for two nested loops.",hertschuh,1091026,closed,False,1,2025-04-21T18:11:40+00:00,2025-04-21T19:29:20+00:00,2025-04-21T19:24:10+00:00,size:XS,0,0,0,0,0,0,0
+keras-team/keras,3008053500,21191,OpenVINO: linspace and logspace,@rkazants for review of linspace and logspace Implementations for OpenVINO,vi-shruti,41509646,closed,False,1,2025-04-21T09:57:04+00:00,2025-04-25T04:24:31+00:00,2025-04-25T04:14:46+00:00,size:M,0,0,0,0,0,0,0
+keras-team/keras,3007215344,21190,Running ops in specific device-(id) with global distribution setting (multi-gpu/tpu),"1. For a specific reason, I need to run some operations into specific device while keeping other operations runable with global distribution. In torch, we can do `.to(device_id)` to place operations to specific device. Is it possible in keras yet? Maybe using `keras.distribution.initialize`, no?
+
+2. Also, current distribution api only support `jax`. Any update on supporting `tensorflow` and `torch`?
+
+3. Is there any known bug or limitation in the Keras distributed API when using the JAX backend? I realize this might sound a bit vague, but in one of my setups, training works fine with a single GPU. However, when I switch to multi-GPU or TPU training with jax, things go wrong. Interestingly, using TensorFlow's distribution strategy for multi-GPU training runs without issues. **In short**, training with JAX across multiple devices seems to corrupt the model weights. While reproducing the issue would take some time, I wanted to check if there are any known issues related to this.
+
+```python
+
+devices = jax.devices(""tpu"")
+devices
+[TpuDevice(id=0, process_index=0, coords=(0,0,0), core_on_chip=0),
+ TpuDevice(id=1, process_index=0, coords=(0,0,0), core_on_chip=1),
+ TpuDevice(id=2, process_index=0, coords=(1,0,0), core_on_chip=0),
+ TpuDevice(id=3, process_index=0, coords=(1,0,0), core_on_chip=1),
+ TpuDevice(id=4, process_index=0, coords=(0,1,0), core_on_chip=0),
+ TpuDevice(id=5, process_index=0, coords=(0,1,0), core_on_chip=1),
+ TpuDevice(id=6, process_index=0, coords=(1,1,0), core_on_chip=0),
+ TpuDevice(id=7, process_index=0, coords=(1,1,0), core_on_chip=1)]
+
+data_parallel = keras.distribution.DataParallel(devices=devices)
+keras.distribution.set_distribution(data_parallel)
+```",innat,17668390,open,False,9,2025-04-20T20:34:05+00:00,2025-05-07T22:34:56+00:00,,type:feature;keras-team-review-pending,0,0,0,0,0,0,0
+keras-team/keras,3007189343,21189,Support numpy.moveaxis operation,"### Details
+
+- fixes openvinotoolkit/openvino#30118
+
+cc , @rkazants plz review ",Prabha14039,138896016,open,False,2,2025-04-20T19:33:12+00:00,2025-04-28T17:34:17+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3006601736,21188,Support numpy.prod operation ,"### Details
+fixes openvinotoolkit/openvino#30212
+
+- Implements `reduce_prod` using OpenVINO opset
+- Handles `dtype`, `axis`, and `keepdims` parameters
+- Adds necessary conversion and reduction logic
+
+cc, @rkazants please review 🙏
+",Prabha14039,138896016,open,False,9,2025-04-19T18:45:10+00:00,2025-04-28T06:49:18+00:00,,size:S,0,0,0,0,0,0,0
+keras-team/keras,3005494618,21187,Redundant api imports; no path hacking in package,"This makes two changes to our package structure.
+
+1. Export all API with *redundant imports*. E.g. `from keras.src.layers import Dense as Dense`. This is a hint to type checkers that this is an exported symbol, not a module that is just used directly by code in the init file. https://typing.python.org/en/latest/spec/distributing.html#library-interface-public-and-private-symbols
+2. Remaps the `api/` directory to the toplevel directory in the package, so no more `__path__` hacking for our installed package.
+
+```python
+keras
+└── __init__.py
+├── activations
+│   └── __init__.py
+....  # Public init files with redundant imports.
+├── src
+....  # Private stuff subject to changes at any release.
+```
+
+For the latter, the main change is setting `package-dirs` in the pyproject.toml. Which lets us remap the github structure to package structure without needing our own custom build process.
+
+I pushed a package to a [keras-test](https://pypi.org/project/keras-test/) name on pypi. Try any of these (probably all good to check):
+```
+pip install keras-test
+pip install git+https://github.com/mattdangerw/keras@fix-package
+git clone https://github.com/mattdangerw/keras -b fix-package && pip install -e keras
+```
+
+Fixes #19779",mattdangerw,1389937,closed,False,2,2025-04-18T18:13:10+00:00,2025-04-22T19:29:00+00:00,2025-04-22T19:29:00+00:00,kokoro:force-run;ready to pull;size:XL,0,0,0,0,0,0,0
+keras-team/keras,3005465684,21186,[OpenVINO Backend] : add support for numpy.nan_to_num,"**Overview:**
+- fixes https://github.com/openvinotoolkit/openvino/issues/30119
+
+**Testing:**
+- Currently passsing all tests with this approach but having issues with isinf approach . I have mentioned in detail in comments below.
+
+**CC:**
+- @rkazants ",11happy,76656712,closed,False,8,2025-04-18T17:57:55+00:00,2025-04-28T17:33:51+00:00,2025-04-28T17:33:51+00:00,kokoro:force-run;ready to pull;size:M,1,0,0,0,1,0,0
+keras-team/keras,3005448652,21185,WIP: fix RandAugment behavior in tf graph mode,"fix for #21169
+
+`RandAugment` changes:
+* samples random execution order
+* samples transform params for all sub layers
+* uses `fori` and `switch` to execute the sub layers according to the sampled order
+
+this is passing the tests in all three backends. However for the `test_rand_augment_model` test, jax runs very slowly, way slower than the other backends, by a factor of 10 - 50. I have no experience with jax, can you suggest anything that might help?
+
+thanks",gregstarr,6515693,open,False,6,2025-04-18T17:49:39+00:00,2025-04-24T23:48:03+00:00,,size:L;awaiting review,1,1,0,0,0,0,0
+keras-team/keras,3005224149,21184,Fix dtype detection for JAX types.,"The jax types like `jax.float32` have a string representation of
+```
+<class 'jax.numpy.float32'>
+```
+so with the previous code, would be ""standardized"" as `float32'>` (trailing quote and angle bracket), which is an invalid type.  But, the JAX dtypes _do_ have a `__name__` property, so should be properly detected if we switch the order around.
+
+Kept the old `jax.numpy` string version in place in case that worked with older versions of JAX.",cantonios,2538739,closed,False,2,2025-04-18T15:54:12+00:00,2025-04-18T18:49:47+00:00,2025-04-18T18:49:47+00:00,ready to pull;size:XS,0,0,0,0,0,0,0
+keras-team/keras,3004786580,21183,stateful=True RNN silently broadcasts input when batch_size mismatch occurs,"When using a Keras `SimpleRNN` layer with `stateful=True`, the documentation states that a fixed batch size is required. However, when a model is built with `batch_size=N` (e.g. 4), and later called with an input of `batch_size=1`, no error is raised. Instead, the RNN broadcasts the single input trajectory across all internal state slots, silently overwriting the state for all batches.
+
+This violates the expected behavior of `stateful=True`, where the batch size must remain fixed, and state slot `i` must map to input sample `i`.
+
+The issue is not documented, leads to incorrect behavior, and can silently corrupt stateful models like ESNs or any RNN with memory across batches.
+
+### Standalone code to reproduce:
+
+```python
+import tensorflow as tf
+from tensorflow.keras import layers, Input, Model
+
+# Build stateful RNN with batch_size=4
+inputs = Input(shape=(5, 3), batch_size=4)
+rnn = layers.SimpleRNN(10, stateful=True, return_sequences=False, name=""rnn"")
+x = rnn(inputs)
+model = Model(inputs, x)
+
+# Manually set initial state to distinguishable values
+state = rnn.states[0]
+for i in range(4):
+    state[i].assign(tf.ones_like(state[i]) * i)
+
+print(""Initial state:"")
+print(state.numpy())
+
+# Call model with a different batch size (1)
+print(""\nCalling model with input of batch size 1..."")
+_ = model(tf.random.normal((1, 5, 3)))
+
+# Print new state
+print(""\nState after call:"")
+print(state.numpy())
+```
+
+### Expected behaviour
+
+An exception should be raised when the input batch size does not match the model's fixed `batch_size`, particularly when `stateful=True`.
+
+### Additional Info
+
+- Tensorflow version: 2.19.0
+- Keras version: 3.9.2
+- OS: Kde-Neon 6.3 (Ubuntu 24.04 based)
+- GPU: NVIDIA GeForce RTX 3060
+
+
+",El3ssar,71988329,open,False,3,2025-04-18T11:50:45+00:00,2025-05-04T17:20:01+00:00,,stat:contributions welcome;type:Bug,0,0,0,0,0,0,0
+keras-team/keras,3004388861,21182,[OpenVINO BACKEND] - feat: implement numpy.median for openvino backend,"- Fixes : [[Good First Issue][Keras 3 OpenVINO Backend]: Support numpy.median operation](https://github.com/openvinotoolkit/openvino/issues/30115)
+
+- Testing:  Currently passsing all tests
+
+CC : @rkazants ",sudonull-1,159532451,open,False,5,2025-04-18T08:27:04+00:00,2025-05-08T18:51:08+00:00,,size:M;awaiting review,0,0,0,0,0,0,0
+keras-team/keras,3003608275,21181,Add sparse support to `ops.ones_like` and `ops.zeros_like`.,`ops.zeros_like` is in particular useful for creating a mask of the populated values in the sparse tensor.,hertschuh,1091026,closed,False,1,2025-04-17T23:13:22+00:00,2025-04-18T04:15:14+00:00,2025-04-18T02:08:21+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3003561713,21180,`mlx` - test updates and signbit implementation,"This addresses #19571
+
+Include the following:
+- more tests updated as needed by `mlx`
+- `signbit` implementation
+- align `left_shift`, `right_shift`, and `top_k` to match other backends
+    - `top_k` default to sorted adds a bit of overhead, could set this to `False` and adjust tests
+- `convert_to_numpy` more correct handling of `bfloat16`
+- added placeholders for some unimplemented ops",acsweet,52804044,closed,False,1,2025-04-17T22:28:42+00:00,2025-04-18T18:52:37+00:00,2025-04-18T18:52:37+00:00,kokoro:force-run;ready to pull;size:M,0,0,0,0,0,0,0
+keras-team/keras,3003410264,21179,TimeDistributed layer computational time,"
+
+Inference with TimeDistributed(Dense(1, activation=""sigmoid"")) in Keras 3 is a lot slower than in Keras 2 (tf.keras) Profiling shows TimeDistributed is the bottleneck.
+
+
+Model: Conv1D → LSTM → Conv1DTranspose → TimeDistributed(Dense(1)).
+
+
+input shape (none,none,1)
+
+Tried: run_eagerly=False, tf.function, TensorFlow/JAX/PyTorch backends—no significant improvement.
+
+Question
+
+Is there a solution to fix the TimeDistributed slowdown in Keras 3 without changing the model architecture? Currently using tf_keras as a workaround.
+
+Details
+
+Keras Version: 3.9.0",Moublrs,109616817,open,False,2,2025-04-17T20:43:34+00:00,2025-04-30T21:35:14+00:00,,type:performance,0,0,0,0,0,0,0
+keras-team/keras,3001059395,21177,Fix Embedding test with ragged tensors on GPU.,The loss needs to not have any non-compilable op.,hertschuh,1091026,closed,False,1,2025-04-17T00:22:52+00:00,2025-04-17T16:24:19+00:00,2025-04-17T03:19:27+00:00,size:S,0,0,0,0,0,0,0
+keras-team/keras,3000114398,21176,[OpenVINO Backend]: support numpy.ndim,"**Overview:**
+- fixes https://github.com/openvinotoolkit/openvino/issues/30120
+
+**Testing:**
+- Passing all tests 
+![Screenshot from 2025-04-16 21-35-30](https://github.com/user-attachments/assets/41e8fdc2-7667-401e-ba53-a35df4ce8962)
+
+
+**CC:**
+- @rkazants ",11happy,76656712,closed,False,1,2025-04-16T16:10:36+00:00,2025-04-17T17:28:23+00:00,2025-04-16T19:17:58+00:00,size:XS,0,0,0,0,0,0,0

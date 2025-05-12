@@ -1,0 +1,2952 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ray-project/ray,3057455766,52939,[Data] Improve error handling in `_align_struct_fields`,"### Description
+
+(not sure of the right tag for this, put as enhancement for now since combining two different schemas is mentioned to have undefined behavior)
+
+When using [Dataset.union()](https://docs.ray.io/en/latest/data/api/doc/ray.data.Dataset.union.html#ray.data.Dataset.union), joining two datasets with different schemas (e.g. one has less columns than another) and no struct columns backfills missing columns with None. 
+
+However, when either dataset contains a struct, an AsssertionError is raised in [`_align_struct_fields`](https://github.com/ray-project/ray/blob/66b19d390d156635c32403226d6d6c6e82fb079d/python/ray/data/_internal/arrow_ops/transform_pyarrow.py#L476). (trace given at bottom)
+
+The root issue seems to be that all columns of schema.names is checked against the block (as opposed to checking all columns of `block.schema`). The missing columns are not in `aligned_columns` since they are not structs. The assertion then raises the error instead of backfilling the column.
+
+I think it would be helpful for the code to be updated to either:
+- Backfill the non struct columns
+- or include more information about what columns were missing instead of raising AssertionErrors
+
+```python
+        new_columns = []
+        for column_name in schema.names:
+            if column_name in aligned_columns:
+                # Use the aligned column if available
+                new_columns.append(aligned_columns[column_name])
+            else:
+                # Use the original column if not aligned
+                assert column_name in block.schema.names # <----- raised error
+                new_columns.append(block[column_name])
+```
+
+Example script:
+```python
+import functools
+
+import pandas as pd
+import pyarrow as pa
+import ray
+from ray.data import DataContext
+
+struct_type = pa.struct([
+    (""field"", pa.string())
+])
+
+def append_struct(table: pa.Table) -> pa.Table:
+    return table.append_column(""struct_col"", pa.StructArray.from_arrays([
+        pa.array([""0""] for _ in range(table.shape[0]))
+    ], [""field""]))
+
+
+def batch_fn(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    df[col] = 0
+    return df
+
+if __name__ == ""__main__"":
+    ray.init()
+
+    ray_data_context = DataContext.get_current()
+    ray_data_context.enable_progress_bars = False
+
+    ds = ray.data.range(10)
+
+    # This script works when this is commented out since _align_struct_fields isn't called.
+    ds = ds.map_batches(append_struct, batch_format=""pyarrow"")
+
+    ds2 = ds.add_column(""non_struct"", functools.partial(batch_fn, col=""non_struct""), batch_format=""pandas"")
+
+    # Prevent AssertionError: (<BlockType.PANDAS: 'pandas'>, <BlockType.ARROW: 'arrow'>)
+    ds2 = ds2.map_batches(lambda x: x, batch_format=""pyarrow"")
+
+    ds = ds.union(ds2)
+    ds = ds.map_batches(lambda x: x, batch_format=""pyarrow"", batch_size=20)
+
+    for row in ds.iter_rows():
+        print(row)
+```
+
+Example error:
+```
+ray.exceptions.RayTaskError(AssertionError): ray::MapBatches(<lambda>)() (pid=4523, ip=127.0.0.1)
+    for b_out in map_transformer.apply_transform(iter(blocks), ctx):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/execution/operators/map_transformer.py"", line 238, in apply_transform
+    iter = transform_fn(iter, ctx)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/execution/operators/map_transformer.py"", line 465, in __call__
+    first = next(formatted_batch_iter, None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/block_batching/block_batching.py"", line 57, in batch_blocks
+    for formatted_batch in batch_iter:
+                           ^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/block_batching/block_batching.py"", line 53, in _iterator_fn
+    yield from batch_iter
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/block_batching/util.py"", line 211, in extract_data_from_batch
+    for batch in batch_iter:
+                 ^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/block_batching/util.py"", line 159, in format_batches
+    for batch in block_iter:
+                 ^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/block_batching/util.py"", line 122, in blocks_to_batches
+    batch = batcher.next_batch()
+            ^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/batcher.py"", line 152, in next_batch
+    batch = output.build()
+            ^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/delegating_block_builder.py"", line 68, in build
+    return self._builder.build()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/table_block.py"", line 149, in build
+    return self._concat_tables(tables)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/arrow_block.py"", line 147, in _concat_tables
+    return transform_pyarrow.concat(tables, promote_types=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/arrow_ops/transform_pyarrow.py"", line 470, in concat
+    blocks = _align_struct_fields(blocks, schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/xieo/ray_example/.venv/lib/python3.12/site-packages/ray/data/_internal/arrow_ops/transform_pyarrow.py"", line 416, in _align_struct_fields
+    assert column_name in block.schema.names
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+```
+
+### Use case
+
+This issue came up when I was trying to use Data's vLLM integration (since the LLM pipeline returns many non struct columns).",oxiez,15828145,open,False,0,2025-05-12T16:03:13+00:00,2025-05-12T16:03:13+00:00,,enhancement;triage,0,0,0,0,0,0,0
+ray-project/ray,3056016014,52938,[WIP] Gpu objects poc python,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",kevin85421,20109646,open,False,0,2025-05-12T08:02:32+00:00,2025-05-12T08:02:32+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3055590501,52937,Ray Data Enhancement: Percentiles and Statistical Aggregations (PR #52588),"# Ray Data Percentiles Feature Implementation
+
+## Overview
+
+This document describes the implementation of percentile and statistics aggregations in Ray Data (Issue #52588). The implementation adds the ability to compute percentiles for columns in a dataset and get comprehensive statistical summaries similar to pandas' `describe()` method.
+
+## Implementation Details
+
+### 1. Percentile Class
+
+A new `Percentile` class has been added to `aggregate.py` that extends `AggregateFnV2`. This class:
+
+- Computes single or multiple percentiles in one operation
+- Supports various interpolation methods (linear, lower, higher, nearest, midpoint)
+- Allows customizing the handling of null values
+
+```python
+@PublicAPI
+class Percentile(AggregateFnV2):
+    """"""Defines Percentile aggregation.
+    
+    Percentile is similar to Quantile but accepts values from 0-100 instead of 0-1,
+    and supports different interpolation methods.
+    """"""
+
+    def __init__(
+        self,
+        on: Optional[str] = None,
+        q: Union[float, List[float]] = 50.0,
+        interpolation: str = ""linear"",
+        ignore_nulls: bool = True,
+        alias_name: Optional[str] = None,
+    ):
+        """"""Initialize a Percentile aggregation.
+
+        Args:
+            on: The column to compute percentiles on.
+            q: The percentile(s) to compute, between 0 and 100.
+            interpolation: The interpolation method to use when the desired
+                percentile is between two values. Options are:
+                - 'linear': Linear interpolation between values.
+                - 'lower': Return the lower value.
+                - 'higher': Return the higher value.
+                - 'nearest': Return the nearest value.
+                - 'midpoint': Return the average of the lower and higher values.
+            ignore_nulls: Whether to ignore null values.
+            alias_name: An optional display name for the aggregator.
+        """"""
+        self._qs = [q] if isinstance(q, (int, float)) else q
+        # Convert percentiles (0-100) to quantiles (0-1)
+        self._qs = [q / 100.0 for q in self._qs]
+        self._interpolation = interpolation
+
+        # Set the name for the aggregation
+        name = f""percentile({str(on)}, {q})""
+        if alias_name:
+            name = alias_name
+
+        super().__init__(
+            name,
+            on=on,
+            ignore_nulls=ignore_nulls,
+            zero_factory=list,
+        )
+```
+
+The core logic for percentile calculation is in the `_finalize` method, which processes the accumulated values:
+
+```python
+def _finalize(self, accumulator: List[Any]) -> Optional[Union[Any, List[Any]]]:
+    if self._ignore_nulls:
+        accumulator = [v for v in accumulator if not is_null(v)]
+    else:
+        nulls = [v for v in accumulator if is_null(v)]
+        if len(nulls) > 0:
+            # Return null if any values are null and ignore_nulls=False
+            return nulls[0]
+
+    if not accumulator:
+        return None
+
+    input_values = sorted(accumulator)
+    n = len(input_values)
+
+    # If there's only one element, return it for all percentiles
+    if n == 1:
+        if len(self._qs) == 1:
+            return input_values[0]
+        return [input_values[0]] * len(self._qs)
+
+    # Calculate percentiles
+    results = []
+    for q in self._qs:
+        # Array index for the percentile
+        idx = (n - 1) * q
+        idx_floor = math.floor(idx)
+        idx_ceil = math.ceil(idx)
+
+        # Get the values for interpolation
+        v0 = input_values[int(idx_floor)]
+        v1 = input_values[int(idx_ceil)]
+
+        # Exact match
+        if idx_floor == idx_ceil:
+            result = v0
+        else:
+            # Apply different interpolation methods
+            if self._interpolation == ""lower"":
+                result = v0
+            elif self._interpolation == ""higher"":
+                result = v1
+            elif self._interpolation == ""nearest"":
+                result = v0 if (idx - idx_floor) < 0.5 else v1
+            elif self._interpolation == ""midpoint"":
+                result = (v0 + v1) / 2
+            else:  # default is ""linear""
+                # Linear interpolation
+                fraction = idx - idx_floor
+                result = v0 * (1 - fraction) + v1 * fraction
+
+        results.append(result)
+
+    # If only one percentile was requested, return a scalar
+    if len(self._qs) == 1:
+        return results[0]
+    
+    return results
+```
+
+### 2. Dataset.percentile() Method
+
+A new `percentile()` method was added to the `Dataset` class:
+
+```python
+@AllToAllAPI
+@ConsumptionAPI
+@PublicAPI(api_group=GGA_API_GROUP)
+def percentile(
+    self,
+    q: Union[float, List[float]],
+    on: Optional[Union[str, List[str]]] = None,
+    interpolation: str = ""linear"",
+    ignore_nulls: bool = True,
+) -> Union[Any, Dict[str, Any]]:
+    """"""Compute the q-th percentile of one or more columns.""""""
+    from ray.data.aggregate import Percentile
+    
+    ret = self._aggregate_on(
+        Percentile,
+        on,
+        ignore_nulls=ignore_nulls,
+        q=q,
+        interpolation=interpolation,
+    )
+    return self._aggregate_result(ret)
+```
+
+This method:
+- Accepts a single percentile or a list of percentiles (`q`)
+- Can compute percentiles for a single column or multiple columns (`on`)
+- Supports different interpolation methods
+- Allows customizing null value handling
+
+### 3. Dataset.describe() Method
+
+A new `describe()` method was added to provide comprehensive statistics:
+
+```python
+@AllToAllAPI
+@ConsumptionAPI
+@PublicAPI(api_group=GGA_API_GROUP)
+def describe(
+    self,
+    on: Optional[Union[str, List[str]]] = None,
+    percentiles: Optional[List[float]] = None,
+    interpolation: str = ""linear"",
+    ignore_nulls: bool = True,
+) -> Dict[str, Dict[str, Any]]:
+    """"""Generate descriptive statistics for the dataset.""""""
+    if percentiles is None:
+        percentiles = [25, 50, 75]
+        
+    # Ensure percentiles are within valid range
+    for p in percentiles:
+        if p < 0 or p > 100:
+            raise ValueError(f""Percentile {p} is out of range [0, 100]"")
+    
+    # Convert column to list if it's a string
+    if isinstance(on, str):
+        columns = [on]
+    elif on is None:
+        # Default to all columns if none specified
+        schema = self.schema(fetch_if_missing=True)
+        if schema is None:
+            raise ValueError(""Could not determine schema. Try specifying columns explicitly."")
+        columns = list(schema.names)
+    else:
+        columns = on
+        
+    # Prepare result container
+    result = {}
+    
+    # For each column, compute statistics
+    for col in columns:
+        # Count - we can use count() directly
+        count_result = self.count(col)
+        
+        # If column has no data, skip further calculations
+        if count_result == 0:
+            result[col] = {""count"": 0}
+            continue
+            
+        # Mean
+        mean_result = self.mean(col, ignore_nulls=ignore_nulls)
+        
+        # Std
+        std_result = self.std(col, ignore_nulls=ignore_nulls)
+        
+        # Min and Max
+        min_result = self.min(col, ignore_nulls=ignore_nulls)
+        max_result = self.max(col, ignore_nulls=ignore_nulls)
+        
+        # Percentiles
+        percentile_results = self.percentile(
+            percentiles, 
+            col, 
+            interpolation=interpolation,
+            ignore_nulls=ignore_nulls
+        )
+        
+        # Format percentile results
+        if not isinstance(percentile_results, list):
+            percentile_results = [percentile_results]
+            
+        # Collect all statistics for this column
+        col_stats = {
+            ""count"": count_result,
+            ""mean"": mean_result,
+            ""std"": std_result,
+            ""min"": min_result,
+            ""max"": max_result,
+        }
+        
+        # Add percentiles to the statistics
+        for i, p in enumerate(percentiles):
+            col_stats[f""{p}%""] = percentile_results[i] if i < len(percentile_results) else None
+            
+        result[col] = col_stats
+        
+    return result
+```
+
+This method:
+- Calculates count, mean, std, min, max, and percentiles
+- Works with a single column or multiple columns
+- Allows customizing the percentiles (defaults to [25, 50, 75])
+- Returns a nested dictionary with statistics organized by column
+
+## Testing
+
+A comprehensive test file `test_percentile.py` has been added that includes tests for:
+
+1. Basic percentile calculations
+2. Different interpolation methods
+3. Edge cases (empty datasets, null values)
+4. Single and multiple percentiles
+5. Basic describe functionality
+6. Describe with custom percentiles
+7. Multi-column support
+
+### Validation Testing
+
+Beyond the unit tests, validation testing was performed to ensure:
+
+1. The percentile calculations match expected mathematical results
+2. The describe functionality produces results consistent with pandas
+3. Edge cases are handled correctly
+4. Different interpolation methods work as expected
+
+## Usage Examples
+
+### Percentile Method
+
+```python
+import ray
+
+# Create a dataset
+ds = ray.data.range(100)
+
+# Compute a single percentile
+median = ds.percentile(50, ""id"")
+# Result: 49.5
+
+# Compute multiple percentiles
+quartiles = ds.percentile([25, 50, 75], ""id"")
+# Result: [24.75, 49.5, 74.25]
+
+# Use different interpolation methods
+median_lower = ds.percentile(50, ""id"", interpolation=""lower"")
+# Result: 49
+
+# Multiple columns
+ds = ray.data.from_items([{""A"": i, ""B"": i**2} for i in range(100)])
+percentiles = ds.percentile(50, [""A"", ""B""])
+# Result: {'percentile(A, 50.0)': 49.5, 'percentile(B, 50.0)': 2450.0}
+```
+
+### Describe Method
+
+```python
+import ray
+
+# Create a dataset
+ds = ray.data.range(100)
+
+# Get stats for all columns
+stats = ds.describe()
+# Result: {'id': {'count': 100, 'mean': 49.5, 'std': 28.87, 'min': 0, 'max': 99, 
+#                '25%': 24.75, '50%': 49.5, '75%': 74.25}}
+
+# Get stats for specific column
+stats_a = ds.describe(""id"")
+
+# Custom percentiles
+custom_stats = ds.describe(""id"", percentiles=[10, 90])
+# Result: {'id': {'count': 100, 'mean': 49.5, 'std': 28.87, 'min': 0, 'max': 99, 
+#                '10%': 9.9, '90%': 89.1}}
+
+# Multiple columns
+ds = ray.data.from_items([{""A"": i, ""B"": i**2} for i in range(100)])
+multi_stats = ds.describe([""A"", ""B""])
+```
+
+## Future Improvements
+
+Potential future improvements could include:
+
+1. Support for weighted percentiles
+2. Additional statistics in the describe method (e.g., skewness, kurtosis)
+3. More interpolation methods
+4. Options to customize the format of the describe output
+
+## Conclusion
+
+This implementation adds valuable statistical capabilities to Ray Data, making it easier for users to analyze their data without having to convert to pandas first. The design follows Ray's conventions and provides a familiar API for users who are accustomed to pandas.
+
+@akyang-anyscale",dipampaul17,40596409,open,False,0,2025-05-12T04:26:03+00:00,2025-05-12T04:28:57+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3055460857,52936,[core][refactor] Remove `GetSequenceNumber`,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+https://github.com/ray-project/ray/pull/52292#discussion_r2041392963
+
+See https://github.com/ray-project/ray/pull/51904#discussion_r2029996454 for more context.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",kevin85421,20109646,open,False,0,2025-05-12T02:32:45+00:00,2025-05-12T06:58:06+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3055262045,52935,Support pyiceberg >= 0.9.0,"### Description
+
+The current Iceberg Datasource uses the now completely removed `project_table` API under the hood.
+
+> https://github.com/apache/iceberg-python/releases/tag/pyiceberg-0.9.0
+> 
+> **Table API Changes**
+> - `project_table` is deprecated
+>   - Use `ArrowScan.to_table()` instead
+>   - Use `ArrowScan.to_record_batches()` instead
+
+### Use case
+
+_No response_",BitPhinix,13185548,open,False,1,2025-05-11T22:31:09+00:00,2025-05-12T15:20:20+00:00,,enhancement;triage,0,0,0,0,0,0,0
+ray-project/ray,3055257684,52934,Ray build_openai_app Vs Vllm Serve,"Hi,
+
+This is more a question, I got started using Ray and Vllm. My client is using pydantic-ai library.
+
+I am trying to understand the difference between runing the Llm inference using Ray vs Vllm. 
+So far the client is working well when Vllm but not when Ray serve
+
+
+Eg:
+
+## Using Ray
+
+
+```python
+from ray import serve
+from ray.serve.llm import LLMConfig, build_openai_app, ModelLoadingConfig
+
+
+llm_config = LLMConfig(
+    model_loading_config=ModelLoadingConfig(
+        model_id=""Qwen/Qwen3-0.6B"",
+        model_source=""Qwen/Qwen3-0.6B""
+    ),
+    deployment_config={
+        ""autoscaling_config"": {
+            ""min_replicas"": 1,
+            ""max_replicas"": 1,
+        }
+    },
+
+    runtime_env={
+        ""env_vars"": {
+            ""VLLM_USE_V1"": ""1"",
+            # ""chat_template_content_format"": ""openai""
+        }
+    },
+    # Customize engine arguments as needed (e.g. vLLM engine kwargs)
+    engine_kwargs={
+        ""gpu_memory_utilization"": 0.92,
+        ""dtype"": ""auto"",
+        ""max_num_seqs"": 40,
+        ""max_model_len"": 16384,
+        ""enable_chunked_prefill"": True,
+        ""enable_prefix_caching"": True,
+        ""trust_remote_code"": True,
+    }
+)
+
+llm_app = build_openai_app({""llm_configs"": [llm_config]})
+serve.run(llm_app, blocking=True)
+```
+
+
+## Using Vllm
+```shell
+vllm serve Qwen/Qwen3-0.6B
+```
+
+
+## Client.py using pydantic-ai
+```python
+from pydantic import BaseModel, Field
+from pydantic_ai import Agent, ModelRetry, RunContext, Tool
+from pydantic_ai.models.openai import OpenAIModel
+
+
+model = OpenAIModel(
+    ""Qwen/Qwen3-0.6B"",
+    base_url='http://0.0.0.0:8000/v1',
+)
+
+
+class ResponseModel(BaseModel):
+    """"""Automatic Structured response with """"""
+    continent_name: str
+    country_name: str
+    capital_name: str
+    has_river: bool
+    has_sea: bool
+    weather: str = Field(description=""Weather over the year"")
+
+
+agent = Agent(
+    model=model,
+    result_type=ResponseModel,
+    system_prompt=(
+        ""You are an intelligent research agent. ""
+        ""Analyze user request carefully and provide structured responses.""
+    ),
+)
+
+response = agent.run_sync(""tell me about Egypt"")
+print(response.data.model_dump_json(indent=1))
+
+response = agent.run_sync(""tell me about France"")
+print(response.data.model_dump_json(indent=2))
+
+response = agent.run_sync(""tell me about China"")
+print(response.data.model_dump_json(indent=3))
+
+response = agent.run_sync(""tell me about Australia"")
+print(response.data.model_dump_json(indent=4))
+```
+
+
+## Response when Vllm Serve
+```json
+{
+ ""continent_name"": ""Africa"",
+ ""country_name"": ""Egypt"",
+ ""capital_name"": ""Cairo"",
+ ""has_river"": true,
+ ""has_sea"": false,
+ ""weather"": ""Dawn""
+}
+
+```
+
+
+
+## Response when Ray OpenAi
+```shell
+raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Invalid request format: Input should be \'none\' at (\'body\', \'tool_choice\', ""literal[\'none\']"")', 'type': 'literal_error', 'param': 'required', 'code': 'invalid_parameter'}}
+```
+
+
+Is there any setup vllm serve does that I am missing when trying with Ray?
+
+Thank you for the help
+
+
+
+",pierre-sigwalt,164085219,open,False,0,2025-05-11T22:20:57+00:00,2025-05-11T22:20:57+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3054942505,52933,[Core]  Redis health check lacks timeout detection.,"### What happened + What you expected to happen
+
+Redis health check lacks timeout detection. In the event of a network interface failure, it may not be identified promptly.
+
+like: `ifconfig eth0 down`
+
+ray 2.34.0
+
+```
+src\ray\gcs\gcs_server\gcs_redis_failure_detector.cc
+
+void GcsRedisFailureDetector::DetectRedis() {
+  auto redis_callback = [this](const std::shared_ptr<CallbackReply> &reply) {
+    if (reply->IsNil()) {
+      RAY_LOG(ERROR) << ""Redis is inactive."";
+      callback_();
+    }
+  };
+  auto cxt = redis_client_->GetPrimaryContext();
+  cxt->RunArgvAsync({""PING""}, redis_callback);
+}
+```
+",infzo,43532055,open,False,0,2025-05-11T11:53:07+00:00,2025-05-11T11:59:44+00:00,,bug;triage,0,0,0,0,0,0,0
+ray-project/ray,3054770161,52932,[data] data tfx docker build fix,do not use `-U`,aslonnie,95255098,open,False,0,2025-05-11T06:34:28+00:00,2025-05-12T08:25:03+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3054524310,52931,"DO NOT REVIEW, debugging #52896","<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+only to sweep failure tests
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",lk-chen,5988771,open,False,0,2025-05-10T21:14:20+00:00,2025-05-11T23:17:06+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3054440816,52930,[All] An offical timeline to drop python 3.9,"### Description
+
+Python 3.9, which was released in 2020, is going to be EOL on October 2025.
+
+* https://numpy.org/neps/nep-0029-deprecation_policy.html (42 months)
+* https://scientific-python.org/specs/spec-0000/ (36 months)
+
+Pandas dropped it last year and moved on: https://github.com/pandas-dev/pandas/pull/58238
+
+It will be good to have an official timeline from Ray team (e.g., some release for final support in the future)
+
+### Use case
+
+* avoid disruption due to other libraries
+* be able to use python 3.10 in Ray internal code, e.g., pattern matching, simpler Union type hint (`X | Y`) etc etc",wingkitlee0,7000003,open,False,0,2025-05-10T18:15:06+00:00,2025-05-10T18:15:06+00:00,,enhancement;triage,0,0,0,0,0,0,0
+ray-project/ray,3053812672,52929,[Serve] Prioritize stopping most recently scaled-up replicas during downscaling,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+This PR improves the downscaling behavior in Ray Serve by modifying the logic in `_get_replicas_to_stop()` within Default `DeploymentScheduler`.
+
+Previously, the scheduler selected replicas to stop by traversing the least loaded nodes in ascending order. This often resulted in stopping replicas that had been scheduled earlier and placed optimally using the `_best_fit_node()` strategy.
+
+This led to several drawbacks:
+- Long-lived replicas, which were scheduled on best-fit nodes, were removed first — leading to inefficient reuse of resources.
+- Recently scaled-up replicas, which were placed on less utilized nodes, were kept longer despite being suboptimal.
+- Cold-start overhead increased, as newer replicas were removed before fully warming up.
+
+This PR reverses the node traversal order during downscaling so that **more recently added replicas are prioritized for termination**, *in cases where other conditions (e.g., running state and number of replicas per node) are equal*. These newer replicas are typically less optimal in placement and not yet fully warmed up.
+
+Preserving long-lived replicas improves performance stability and reduces unnecessary resource fragmentation.
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+N/A
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",ktyxx,96807428,open,False,0,2025-05-10T06:51:17+00:00,2025-05-10T06:51:17+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053596699,52928,[core] Add sync get node info to NodeInfoAccessor,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+Renaming the Get to GetCached, and adding a GetSync to actually make the req to get info for that node.
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,open,False,0,2025-05-10T03:02:51+00:00,2025-05-10T03:03:25+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053585493,52927,[LLM] bump vLLM to 0.8.5post1,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+0.8.5post1 has some security fix.
+
+ran `ci/compile_llm_requirements.sh`
+
+`cachetools` are upgraded following up #51744 
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [x] Release tests
+   - [ ] This PR is not tested :(
+",lk-chen,5988771,open,False,0,2025-05-10T02:48:43+00:00,2025-05-10T07:48:48+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053566640,52926,[Core] Add node labels to runtime context,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This PR adds node labels to the Ray runtime context. This change will make it easier to verify that a task/actor is scheduled on a node with matching label requirements.
+
+## Related issue number
+
+#51564
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [x] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",ryanaoleary,113500783,open,False,0,2025-05-10T02:32:49+00:00,2025-05-12T08:36:44+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053439293,52925,[release] support using any dir in the repo as working dir,"to support testing from docs dir
+",aslonnie,95255098,closed,False,0,2025-05-10T00:19:57+00:00,2025-05-10T01:33:55+00:00,2025-05-10T01:33:53+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3053435754,52924,[train][doc] Add torch dataloader multiprocessing forkserver note,,TimothySeah,5440944,open,False,0,2025-05-10T00:15:31+00:00,2025-05-10T00:15:31+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053384732,52923,[ray.data.llm] Update release test: enforce pp_backend and mp_method,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+PP backend argument is defaulted to ""mp"", but as of vLLM 0.8.5, vLLM V1 does not accept ""mp"" and [requires ""ray""](https://github.com/vllm-project/vllm/blob/v0.8.5/vllm/engine/arg_utils.py#L1345), otherwise it will fall back to V0.
+
+There's recent https://github.com/vllm-project/vllm/pull/14219 to come up in next release, to support ""mp"" in V1.
+
+Our release test should catch ""ray"" backend only, hence this PR.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [x] Release tests
+   - [ ] This PR is not tested :(
+",lk-chen,5988771,open,False,0,2025-05-09T23:28:20+00:00,2025-05-09T23:41:11+00:00,,data;release-test;llm;go,0,0,0,0,0,0,0
+ray-project/ray,3053379588,52922,[tune] [docs] remove graphic cards,"The graphic cards are identical, didn't seem to add much value, and degraded the usability of the index page. Replaced with a simple listing of the guides. cc: @matthewdeng 
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,open,False,0,2025-05-09T23:23:18+00:00,2025-05-10T00:16:18+00:00,,tune;docs,0,0,0,0,0,0,0
+ray-project/ray,3053332934,52921,[Core] Add Event Aggregator GRPC Server Definition,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This PR added the `EventAggregatorService` GPRC service definition for the event aggregator agent. 
+
+The build files are updated and the protobuf compile build error for the task events are fixed
+
+An GRPC client for the service is added as well. 
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",MengjinYan,8065093,open,False,0,2025-05-09T22:52:21+00:00,2025-05-09T22:52:44+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3053323413,52920,[core] Synchronize locations with pinned_at_raylet_id,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+We should add to locations whenever we set pinned_at_raylet_id instead of having it update through UpdateObjectLocationBatch.
+
+We also don't need to add pinned_at_raylet_id separately when sending over locality data, because locations should always contain pinned_at_raylet_id.
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,open,False,3,2025-05-09T22:45:22+00:00,2025-05-11T06:36:55+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3053321777,52919,Train Tests: Fix custom collate fn; include warmup time,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Train Tests: Fix custom collate fn; include warmup time
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,open,False,0,2025-05-09T22:44:08+00:00,2025-05-09T22:46:13+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053269350,52918,[data] log execution of map tasks,,raulchen,2883335,open,False,0,2025-05-09T21:55:28+00:00,2025-05-09T22:23:38+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3053268196,52917,[train] bump test_torch_device_manager timeout,Test started flakily timing out. Bumping to verify if it's around the threshold.,matthewdeng,3967392,open,False,0,2025-05-09T21:54:20+00:00,2025-05-09T21:54:21+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3053265520,52916,Fix uv run when use with vllm's Ray backend,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+If vllm's Ray backend is used in the vllm V1 architecture, it will start a subprocess and then call ray.init in that subprocess to launch the actual vllm replicas. This PR makes it so the uv environment still gets propagated correctly in that case.
+
+This change is consistent with the behavior of how uv environments propagate to subprocesses with just vanilla `uv run` without Ray:
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat pyproject.toml 
+[project]
+name = ""test""
+version = ""0.1""
+dependencies = [
+   ""ray"",
+]
+```
+```
+(base) (base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % cat test.py 
+import sys
+
+import ray
+import subprocess
+import psutil
+
+print(sys.executable)
+print(ray.__path__)
+
+# avoid fork bomb
+if len(psutil.Process().parents()) > 10:
+    sys.exit(0)
+
+subprocess.check_call([sys.executable, ""test.py""])
+```
+
+```
+(base) pcmoritz@pcmoritz-DQ44HV60WX vllm-repro % uv run test.py
+warning: No `requires-python` value found in the workspace. Defaulting to `>=3.12`.
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+/private/tmp/vllm-repro/.venv/bin/python3
+['/private/tmp/vllm-repro/.venv/lib/python3.12/site-packages/ray']
+```
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",pcmoritz,113316,closed,False,0,2025-05-09T21:51:55+00:00,2025-05-10T05:31:52+00:00,2025-05-10T05:31:50+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3053257139,52915,[Core] Ray schedules 2 actors requesting 1.25 GPUs total on the same single GPU,"### What happened + What you expected to happen
+
+We have an application that 1) runs multiple models in different actors and 2) periodically scales up & down the number of actors running different models.
+
+The problem we hit is that we see 2 actors scheduled on the same GPU, one requesting 1.0 GPU and the other requesting 0.25 GPU; this caused a cuda-OOM and crash. 
+
+The sequence of key events are:
+- Actor 1 requesting 1.0 GPU first gets scheduled on GPU X on node Y. 
+- After roughly 4 hours, Actor 2 requesting 0.25 GPU somehow gets scheduled on the same GPU X on node Y.
+  - on actor startup, I call `pynvml.nvmlDeviceGetComputeRunningProcesses` to list what else is running on my assigned GPU; and I do see Actor 1 is running on the GPU when actor 2 starts up. 
+- Then, as we can expect, when Actor 2 is loading model weights to GPU, it cuda-OOMs, because Actor 1 takes up the whole GPU as it intends to.
+
+Initially we thought Actor 1 was killed and maybe the ray.kill was not clean, but our log shows there was no ray.kill attempt for Actor 1.
+
+### Versions / Dependencies
+
+Ray: 2.40.0
+Python: 3.10.14
+Platform: 2 H100_x8 nodes
+Environment: Kubernetes cluster, but without KubeRay 
+
+### Reproduction script
+
+It is extremely rare. 
+We have been running the same workload for ~4 months, this is the second time I've seen this problem.
+
+### Issue Severity
+
+Medium: It is a significant difficulty but I can work around it.",pkuwangh,6912256,open,False,0,2025-05-09T21:43:52+00:00,2025-05-09T21:43:52+00:00,,bug;triage,0,0,0,0,0,0,0
+ray-project/ray,3053236357,52914,[data] ResourceManager: always reserve min resource requirement ,"Signed-off-by: Hao Chen <chenh1024@gmail.com><!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",raulchen,2883335,open,False,0,2025-05-09T21:32:52+00:00,2025-05-09T21:35:32+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3053234069,52913,[DNR] remove ensure_liveness,"Signed-off-by: Hao Chen <chenh1024@gmail.com><!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",raulchen,2883335,open,False,0,2025-05-09T21:31:40+00:00,2025-05-09T21:56:22+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3053154534,52912,[train][doc] Remove unused configuration-overview page,See title,TimothySeah,5440944,closed,False,0,2025-05-09T20:48:40+00:00,2025-05-10T00:13:51+00:00,2025-05-10T00:13:51+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3053140471,52911,[Data] Improve AggregateFnV2 docstrings and examples,"## Why are these changes needed?
+
+The existing documentation for AggregateFnV2 is minimal and deosn't provide clear guidance for users looking to implement  custom aggregators. This PR
+
+1) beefs up the main docstring for AggregateFnV2 to explain the high-level aggregation lifecycle
+2) makes the built-in aggregatiosn self-documenting so that users can follow them to create their own subclasses. these comments are more verbose than is typical for the codebase, but I think it makes sense since these classes are likely to be read by users.
+
+## Related issue number
+
+NA
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [x] This PR is not tested :(
+",crypdick,5415776,open,False,0,2025-05-09T20:40:34+00:00,2025-05-09T23:30:15+00:00,,usability;data,0,0,0,0,0,0,0
+ray-project/ray,3052977411,52910,[Data] Remove metadata line causing OOM with IterableDataset,"## Why are these changes needed?
+
+See issue.
+Note that this PR targets #52804 to prevent conflicts
+
+## Related issue number
+
+Closes #52908 
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",crypdick,5415776,closed,False,0,2025-05-09T19:07:06+00:00,2025-05-09T20:06:56+00:00,2025-05-09T20:06:55+00:00,data;go,0,0,0,0,0,0,0
+ray-project/ray,3052963080,52909,Train Tests: Disable cgroup isolation on head node for benchmarking,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Train Tests: Disable cgroup isolation on head node for benchmarking
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,open,False,0,2025-05-09T19:00:03+00:00,2025-05-09T19:00:41+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3052916652,52908,[data] from_torch support for IterableDataset without __len__,"### Description
+
+pytorch IterableDatasets do not strictly require a __len__ property, but ray data's `from_torch` requires one by implemented due to [this line](https://github.com/ray-project/ray/blob/e7facb24e3dda4556e9c59ca0619b88cd4861f7a/python/ray/data/_internal/datasource/torch_datasource.py#L30). we should be able to iterate over batches of an indefinitely-sized IterableDataset.
+
+PR coming shortly.
+
+### Use case
+
+A [user](https://github.com/ray-project/ray/issues/49072#issuecomment-2852994438) was complaining about IterableDatasets getting eagerly consumed, leading to OOMs.",crypdick,5415776,open,False,0,2025-05-09T18:36:26+00:00,2025-05-09T18:36:26+00:00,,enhancement;triage,0,0,0,0,0,0,0
+ray-project/ray,3052909181,52907,remove anyscale navbar on docs.ray.io,"Tested change locally
+<img width=""1726"" alt=""Screenshot 2025-05-09 at 10 57 04 AM"" src=""https://github.com/user-attachments/assets/8b72cb8b-eaf1-498d-8fd9-5379f90203c4"" />
+
+<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",chris-ray-zhang,10645555,closed,False,0,2025-05-09T18:31:57+00:00,2025-05-10T00:30:35+00:00,2025-05-10T00:30:35+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3052872255,52906,Release test sort_autoscaling failed,"Release test **sort_autoscaling** failed. See https://buildkite.com/ray-project/release/builds/41101#0196b3e1-fc8d-4092-8942-bac6621f974f for more details.
+
+Managed by OSS Test Policy",can-anyscale,128072568,open,False,2,2025-05-09T18:14:31+00:00,2025-05-12T08:10:35+00:00,,bug;P0;triage;data;release-test;jailed-test;unstable-release-test;ray-test-bot;stability,0,0,0,0,0,0,0
+ray-project/ray,3052866676,52905,[Core] Ensure Ray vendored libraries only be visible and used by Ray internal,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+fix issue https://github.com/ray-project/ray/issues/52763
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",Bye-legumes,121425509,open,False,0,2025-05-09T18:11:12+00:00,2025-05-12T14:22:55+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3052807772,52904,[core] Move on HandleAddTaskEventData,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,open,False,0,2025-05-09T17:41:01+00:00,2025-05-12T02:49:41+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3052768610,52903,[data][llm] fix: remove-no-longer needed guided decoding vllm v0 constraint,"## Why are these changes needed?
+vLLM v1 supports xgrammar and [guidance](https://github.com/vllm-project/vllm/pull/14779) since [v0.8.2](https://github.com/vllm-project/vllm/releases/tag/v0.8.2)
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [x] This PR is not tested :(
+",ArthurBook,49250723,closed,False,3,2025-05-09T17:27:07+00:00,2025-05-09T21:19:39+00:00,2025-05-09T20:15:03+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3052751449,52902,[data] don't run aggregate output metadata twice,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+on line 373-374, we run `aggregate_output_metadata` 2x. we can store the value once so we don't have to recompute it twice
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",iamjustinhsu,140442892,open,False,0,2025-05-09T17:18:38+00:00,2025-05-09T17:20:44+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3052736112,52901,Update refresh behavior to refresh on page load only,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+When refreshing by time range, it can be annoying if one of the dropdown items disappears and then changing the time range clears out the selected dropdown item.
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",alanwguo,711935,open,False,0,2025-05-09T17:09:56+00:00,2025-05-09T21:58:49+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3052658793,52900,[Data] Add save modes to file data sinks,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+In write_parquet, we want to be able to support
+- `OVERWRITE`: (If dir present, delete then write, otherwise, just create dir, then write)
+
+A more detailed description can be found in https://spark.apache.org/docs/latest/sql-data-sources-load-save-functions.html#save-modes
+
+This PR was meant to address https://anyscale1.atlassian.net/browse/DATA-946, but since the other save modes weren't that much work, I added the additional following 3 from apache spark too
+- `IGNORE`: (if dir present, silently pass)
+- `ERROR`: (if dir present, throw error)
+- `APPEND` (this is the current behavior we have, if dir present, we append files. Any conflicting file names are overwritten)
+
+## Related issue number
+attentive requesting this
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",iamjustinhsu,140442892,open,False,0,2025-05-09T16:34:33+00:00,2025-05-09T22:02:54+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3052613891,52899,[Autoscaler] `ray up` does not produce a reasonable error message when attempting to create key-pairs past AWS limit,"### What happened + What you expected to happen
+
+When attempting to use `ray up` with the `auth` un-set (aka the default of creating key pairs automatically), there is a pretty confusing error message when attempting to run:
+
+```
+Private key file <some file name here>_599.pem not found
+```
+
+I think this is a little confusing, because it implies that the user is supposed to know why this key does not exist. In reality, the key does not exist because the account is at the max limit of 600 for AWS.
+
+See the following code: https://github.com/ray-project/ray/blob/master/python/ray/autoscaler/_private/aws/config.py#L391
+
+I propose adding a `throw` or similar in this method with a more helpful reason behind the failure. Honestly, I'm surprised we even figured it out, since the max is hardcoded in a very awkward place for discoverability.
+
+### Versions / Dependencies
+
+Ray 2.44.1
+Python 3.11
+
+### Reproduction script
+
+Just do a ray up after having over 600 SSH keys created by ray previously.
+
+### Issue Severity
+
+None",AnthonyAtSigma2,137316145,open,False,0,2025-05-09T16:12:20+00:00,2025-05-09T16:58:39+00:00,,usability;core,1,1,0,0,0,0,0
+ray-project/ray,3052394818,52898,ray worker steals my SIGINT handler,"### What happened + What you expected to happen
+
+I'm using a library that has a SIGINT handler. But `ray._private.worker` steals the SIGINT handler.
+
+I'd like the original SIGINT handler to not be clobbered. Perhaps the original SIGINT handler can be wrapped? Or at least a warning that the SIGINT handler is replaced. It was time consuming to track this issue down. I created a watcher thread to tell me the function name & searched through my dependencies...but took some time to arrive at the solution.
+
+I don't know if this is from Ray...but I'm observing the SIGINT handler going from my handler, to the `ray._private.worker` handler, to `_sighandler_noop`. I'm not sure yet what dependency is setting `_sighandler_noop`. uvloop is a likely culprit.
+
+### Versions / Dependencies
+
+ray 2.45.0
+
+### Reproduction script
+
+```
+import ray
+import signal
+
+def print_signal(signum, frame):
+    print(""my signal"")
+
+signal.signal(signal.SIGINT, print_signal)
+
+ray.init()
+
+# Ctrl + C
+```
+
+### Issue Severity
+
+None",btakita,3664,open,False,1,2025-05-09T14:42:30+00:00,2025-05-09T23:32:51+00:00,,usability;core,0,0,0,0,0,0,0
+ray-project/ray,3052093594,52897,[RLlib] Enable merging of Stats per index of values,"## Why are these changes needed?
+
+Today, when merging stats in parallel, when reducing `n` Stats, the first `n` merged values will be  the reduced values of all incoming values at index `0`, the next `n` merged values will be the reduced values of all incoming values at index `1`, etc.
+
+This is fine most of the time, but alternatively, we can reduce incoming values per index such that the new value at index `n` will be the reduced value of all incoming values at index `n`.",ArturNiederfahrenhorst,9356806,open,False,0,2025-05-09T12:57:44+00:00,2025-05-09T12:58:54+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3051257159,52896,Release test llm_batch_vllm failed,"Release test **llm_batch_vllm** failed. See https://buildkite.com/ray-project/release/builds/41101#0196b3dd-3277-4fac-a4d1-6c953b8148f2 for more details.
+
+Managed by OSS Test Policy",can-anyscale,128072568,open,False,3,2025-05-09T07:23:46+00:00,2025-05-12T02:28:44+00:00,,bug;P0;triage;release-test;jailed-test;llm;ray-test-bot;weekly-release-blocker;stability,0,0,0,0,0,0,0
+ray-project/ray,3051122835,52895,CI test linux://rllib:examples/evaluation/custom_evaluation_parallel_to_training_10_episodes is flaky,"CI test **linux://rllib:examples/evaluation/custom_evaluation_parallel_to_training_10_episodes** is flaky. Recent failures: 
+	- https://buildkite.com/ray-project/postmerge/builds/10042#0196b370-35b9-4d1f-b12d-e58d614590ca
+	- https://buildkite.com/ray-project/postmerge/builds/9968#0196a742-9b94-4271-90ca-b6b7fbac0dee
+	- https://buildkite.com/ray-project/postmerge/builds/9935#0196a2ec-49d0-45e5-a888-a2810bb0e72c
+
+DataCaseName-linux://rllib:examples/evaluation/custom_evaluation_parallel_to_training_10_episodes-END
+Managed by OSS Test Policy",can-anyscale,128072568,closed,False,1,2025-05-09T06:40:04+00:00,2025-05-09T17:43:31+00:00,2025-05-09T17:43:31+00:00,bug;triage;rllib;flaky-tracker;ray-test-bot;ci-test;weekly-release-blocker;stability,0,0,0,0,0,0,0
+ray-project/ray,3050953202,52894,llm-ner clone,clone of https://github.com/ray-project/ray/pull/52342,aslonnie,95255098,closed,False,0,2025-05-09T05:45:19+00:00,2025-05-11T05:11:27+00:00,2025-05-11T05:11:27+00:00,,0,0,0,0,0,0,0
+ray-project/ray,3050943191,52893,Train Benchmark: Use multiprocessing_context=fork with TorchDataloader,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Train Benchmark: Use multiprocessing_context=fork with TorchDataloader
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,closed,False,2,2025-05-09T05:41:29+00:00,2025-05-09T17:31:13+00:00,2025-05-09T17:31:13+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3050864243,52892,ASGI ingress api can be passed a builder function,"This PR enhances Ray Serve's ingress API to accept builder functions that return ASGI applications, providing more flexibility in application initialization:
+
+1. Added support for passing builder functions to serve.ingress() that are evaluated when replicas initialize
+2. Modified ASGIAppReplicaWrapper to handle both direct ASGI apps and builder functions
+3. Updated type hints to include function callables as valid inputs
+4. Added tests for all new usage patterns
+5. Expanded documentation with examples of the new functionality
+6. These changes allow lazy initialization of ASGI applications, enabling more complex startup patterns",abrarsheikh,5113943,open,False,0,2025-05-09T05:13:14+00:00,2025-05-10T00:19:14+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3050458483,52891,CI test linux://doc/source/data/examples:pytorch_resnet_batch_prediction is consistently_failing,"CI test **linux://doc/source/data/examples:pytorch_resnet_batch_prediction** is consistently_failing. Recent failures: 
+	- https://buildkite.com/ray-project/postmerge/builds/10038#0196b276-3a81-4eb6-88aa-f1911d9f636c
+	- https://buildkite.com/ray-project/postmerge/builds/10038#0196b25c-7bba-4a6f-bcfc-2a9d0e4c9185
+
+DataCaseName-linux://doc/source/data/examples:pytorch_resnet_batch_prediction-END
+Managed by OSS Test Policy",can-anyscale,128072568,open,False,2,2025-05-09T00:58:03+00:00,2025-05-09T11:03:17+00:00,,bug;triage;data;flaky-tracker;ray-test-bot;ci-test;weekly-release-blocker;stability,0,0,0,0,0,0,0
+ray-project/ray,3050456801,52890,[Doc] Update configure-manage-dashboard.md,"Typo
+
+<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",eicherseiji,58963096,closed,False,1,2025-05-09T00:56:00+00:00,2025-05-09T21:16:43+00:00,2025-05-09T21:16:42+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3050394585,52889,[data] Add Task Duration Stats to Dashboard,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Currently there is no easy way to view how long it takes for a task to complete
+<img width=""984"" alt=""image"" src=""https://github.com/user-attachments/assets/a287b057-a440-4db0-931c-579f6c5c178e"" />
+
+
+
+## Related issue number
+https://anyscale1.atlassian.net/jira/software/c/projects/DATA/boards/36?assignee=712020%3A5f228055-95a2-4ac4-8d0e-aaf98850830e&selectedIssue=DATA-332
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",iamjustinhsu,140442892,open,False,1,2025-05-08T23:51:22+00:00,2025-05-09T23:08:31+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3050315904,52888,WIP: Adjust buffer_size for file_based_datasource,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,open,False,0,2025-05-08T23:12:16+00:00,2025-05-08T23:12:21+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3050236610,52887,[core] [docs] Dynamic generator deprecation,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+Deprecating the dynamic ref generator.
+
+It was supposed to be deprecated a long time ago in favor of streaming generators but found that the deprecation warning on the docs page was actually never showing https://docs.ray.io/en/releases-2.46.0/ray-core/tasks/generators.html because the warning is above the title of the page.
+
+Moved the dynamic ref generator page under deprecated at the bottom of the ray generators page and outside the tasks subsection.
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,closed,False,0,2025-05-08T22:42:33+00:00,2025-05-09T16:26:13+00:00,2025-05-09T16:25:36+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3050219575,52886,[data] Add map transformer wrapper,"## Why are these changes needed?
+We are seeing some issues with the current implementation of storing map actor context through `ray.data._map_actor_context`. It seems like this stems from the use of the module level assignment, so we move to an implementation where we use a simple wrapper to share context between the `init_fn` and the `fn` without having to use the module level variable. 
+
+An example of the errors is as follows:
+```
+ 2025-05-05 15:32:53,092    ERROR worker.py:421 -- Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::Map(LoadImage).submit() (pid=3164, ip=10.0.109.31, actor_id=6cd178863b61c1f8c6d275da03000000, repr=MapWorker(Map(LoadImage)))locks: 616; Resources: 0.0 CPU, 90.0 GPU, 474.2MB object store (in=474.2MB,out=0    yield from _map_task(u=inf,obj_store=33.9GB,out=68.4GB); [142/1066 objects local]:  29%|██▉       | 744k/2.53M [08:10<58:56, 504 row/s]
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/execution/operators/map_operator.py"", line 543, in _map_task4.4GB,out=68.8GB):  29%|██▉       | 669/2.    for b_out in map_transformer.apply_transform(iter(blocks), ctx):
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/execution/operators/map_transformer.py"", line 532, in __call__
+    for data in iter:
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/execution/operators/map_transformer.py"", line 211, in _udf_timed_iter
+    output = next(input)
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/execution/operators/map_transformer.py"", line 297, in __call__
+    yield from self._row_fn(input, ctx)
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/planner/plan_udf_map_op.py"", line 514, in transform_fn
+    out_row = fn(row)
+  File ""/home/ray/anaconda3/lib/python3.9/site-packages/ray/data/_internal/planner/plan_udf_map_op.py"", line 298, in fn
+    assert ray.data._map_actor_context is not None
+AssertionError
+```
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",omatthew98,22609193,open,False,0,2025-05-08T22:29:09+00:00,2025-05-09T00:35:38+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3050188744,52885,ImageDatasource::_read_stream Avoid unnecessary resize and convert,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+ImageDatasource::_read_stream Avoid unnecessary resize and convert
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,closed,False,3,2025-05-08T22:02:50+00:00,2025-05-09T19:03:36+00:00,2025-05-09T19:03:35+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3050053325,52884,[core] Label selector enum as class to fix windows build,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+It will break msvc windows build without this because IN is used for something else in windows builds. Maybe there's an IN macro or something. And enum class is the standard in the rest of the codebase anyways. From https://github.com/ray-project/ray/pull/51901/files
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,closed,False,1,2025-05-08T20:43:48+00:00,2025-05-09T04:40:24+00:00,2025-05-09T04:34:53+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3050040577,52883,[pydoclint] data docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+## Related issue number
+
+Extends https://github.com/ray-project/ray/pull/52874 w/ a few more
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T20:38:05+00:00,2025-05-08T22:01:49+00:00,2025-05-08T22:01:49+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049976644,52882,[tune][train] update test_train_v2_integration to use correct RunConfig,"Fixes an issue in which the wrong `RunConfig` was being used.
+
+```
+  File ""/Users/matt/workspace/ray/python/ray/train/v2/_internal/execution/worker_group/worker_group.py"", line 133, in create
+    worker_group._start()
+  File ""/Users/matt/workspace/ray/python/ray/train/v2/_internal/execution/worker_group/worker_group.py"", line 212, in _start
+    raise e
+  File ""/Users/matt/workspace/ray/python/ray/train/v2/_internal/execution/worker_group/worker_group.py"", line 205, in _start
+    self._start_impl(
+  File ""/Users/matt/workspace/ray/python/ray/train/v2/_internal/execution/worker_group/worker_group.py"", line 281, in _start_impl
+    workers = self._create_workers(
+  File ""/Users/matt/workspace/ray/python/ray/train/v2/_internal/execution/worker_group/worker_group.py"", line 354, in _create_workers
+    custom_runtime_env=self._train_run_context.run_config.worker_runtime_env
+AttributeError: 'RunConfig' object has no attribute 'worker_runtime_env'
+```",matthewdeng,3967392,closed,False,0,2025-05-08T20:06:13+00:00,2025-05-08T22:20:35+00:00,2025-05-08T22:20:35+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049953009,52881,[pydoclint] workflow docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:53:21+00:00,2025-05-08T21:01:55+00:00,2025-05-08T21:01:55+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049940394,52880,[pydoclint] util docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:47:02+00:00,2025-05-08T22:48:24+00:00,2025-05-08T22:48:24+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049910948,52879,[pydoclint] tune docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:31:21+00:00,2025-05-08T20:56:58+00:00,2025-05-08T20:56:58+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049902534,52878,[pydoclint] train docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:27:13+00:00,2025-05-08T20:50:20+00:00,2025-05-08T20:50:20+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049894966,52877,[pydoclint] serve docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:24:02+00:00,2025-05-08T20:56:36+00:00,2025-05-08T20:56:36+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049868933,52876,[pydoclint] llm docstring minimal format errors,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:12:24+00:00,2025-05-08T20:55:32+00:00,2025-05-08T20:55:32+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049858118,52875,[pydoclint] dashboard docstring minimal format errors,"## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T19:06:57+00:00,2025-05-08T20:26:56+00:00,2025-05-08T20:26:55+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049833346,52874,[docstring][data] fix indentation errors,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+
+",angelinalg,122562471,open,False,0,2025-05-08T18:55:21+00:00,2025-05-08T20:57:09+00:00,,docs;data;go,0,0,0,0,0,0,0
+ray-project/ray,3049832174,52873,[pydoclint] core/autoscaler docstring minimal format errors,"## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T18:54:53+00:00,2025-05-08T21:28:04+00:00,2025-05-08T21:28:03+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049778783,52872,[pydoclint] core/_private docstring minimal format fixes,"## Why are these changes needed?
+
+This changes are part a batch effort to rewrite Ray's docstrings to be minimally pydoclint compliant. This PR focuses on making them at least pass basic formatting checks
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",thomasdesr,681004,closed,False,0,2025-05-08T18:29:39+00:00,2025-05-08T23:19:20+00:00,2025-05-08T23:19:20+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3049538130,52871,[Serve] Make replica scheduler backoff configurable,"### Description
+
+The backoff time when the replica scheduler fails to choose a replica is [hardcoded](https://github.com/ray-project/ray/blob/master/python/ray/serve/_private/replica_scheduler/pow_2_scheduler.py#L77). We should make this configurable by the user.
+
+We should also lower the defaults.
+
+### Use case
+
+_No response_",akyang-anyscale,185143253,open,False,0,2025-05-08T16:34:07+00:00,2025-05-08T16:34:37+00:00,,enhancement;triage;serve,0,0,0,0,0,0,0
+ray-project/ray,3049255214,52870,[Do not merge] [RLlib] MetricsLogger + Stats overhaul,Duplicate of https://github.com/ray-project/ray/pull/51639 to test let CI run on changes from earlier commits again.,ArturNiederfahrenhorst,9356806,closed,False,0,2025-05-08T14:53:24+00:00,2025-05-08T17:04:50+00:00,2025-05-08T17:04:50+00:00,do-not-merge,0,0,0,0,0,0,0
+ray-project/ray,3048842214,52869,[CI] Convert isort config to ruff config,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Convert `isort` config in `.isort.cfg` to `ruff` config in `pyproject.toml`.
+
+Conversion strategy:
+- `known_local_folder` -> `known-local-folder`
+- `known_third_party` -> `known-third-party`
+- `known_afterray` -> Created a new section `afterray`
+- `sections` -> `section_order`
+- `skip_glob` -> If already exists in `tool.ruff.extend-exclude` then do nothing. Otherwise add a rule to `per-file-ignores` to ignore the `I` rule.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+N/A
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",MortalHappiness,47914085,open,False,0,2025-05-08T12:22:28+00:00,2025-05-08T13:35:15+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3048832022,52868,Replica Recovering State,"Hello, can you provide more information on Replica Recovering State?
+
+I'm running a load test on a Ray Serve system. The system is resource constrained (by design), when Ray attempts to scale out, some replicas get into a ""recovering"" state and I see messages of type:
+
+RECOVERING: The replica is recovering its state.
+
+The docs don't cover this state at all. When/Why would a replica get into this state? ",ankur6ue,6232547,open,False,0,2025-05-08T12:18:17+00:00,2025-05-08T12:18:17+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3048479035,52867,[Serve] Different Downscale Delay for Scale to Zero,"### Description
+
+In Serve, it is possible to provide a custom configuration for autoscaling. And for a while now, it is also possible to downscale to zero. It would be nice to define a custom downscaling delay for scaling down to zero decisions, as it can take a long time to scale up from zero.
+
+I can implement this myself as well. I think we just need to change `autoscaling_policy.py` file to have a custom check for current running instance == 1 decision.
+
+### Use case
+
+In a deployment, where we expect more traffic on weekdays and almost zero traffic on weekends, we would like to setup the cluster in a way that scales up and down faster during the weekdays, between 1 to n instances, but scales down to zero a bit later. For example, downscaling decisions can be done every 10 minutes, but just because people went to lunch break, it should not scale down to zero. But an hour or two hours of no use probably means we can scale down to zero safely.",UgurKap,13339433,open,False,3,2025-05-08T10:00:37+00:00,2025-05-10T00:15:45+00:00,,serve;usability,0,0,0,0,0,0,0
+ray-project/ray,3048386487,52866,[data] read_json with schema to count() error,"### What happened + What you expected to happen
+
+when i try to run ray.data.read_json with a jsonl dir and take a count calculation: an *ray.exceptions.ObjectRefStreamEndOfStreamError* occured
+
+
+### Versions / Dependencies
+
+ray: 2.40.0
+python: 3.10.12
+pyarrow: 18.1.0
+os:
+VERSION=""18.04.6 LTS (Bionic Beaver)""
+Linux host1 5.15.0-72-generic #79-Ubuntu SMP Wed Apr 19 08:22:18 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+
+
+### Reproduction script
+
+codes:
+```python
+import ray
+from pyarrow import json as pajson
+import pyarrow as pa
+ray.init()
+
+import pyarrow as pa
+
+schema = pa.schema([
+    pa.field(""id"", pa.string()),
+    pa.field(""images"", pa.list_(pa.string())),
+    pa.field(""conversations"", pa.list_(
+        pa.struct([
+            pa.field(""from"", pa.string()),
+            pa.field(""value"", pa.string()),
+        ])
+    )),
+])
+
+ds= ray.data.read_json('/home/jsonl/', 
+    parse_options=pajson.ParseOptions(
+        explicit_schema=schema,
+        unexpected_field_behavior=""ignore"",
+    )
+)
+print(""cnt:"", ds.count())
+
+print('schema', ds.schema())
+```
+
+full stack:
+```
+2025-05-08 16:43:07,020	INFO worker.py:1496 -- Using address 127.0.0.1:6379 set in the environment variable RAY_ADDRESS
+2025-05-08 16:43:07,020	INFO worker.py:1636 -- Connecting to existing Ray cluster at address: 10.168.16.184:6379...
+2025-05-08 16:43:07,034	INFO worker.py:1812 -- Connected to Ray cluster. View the dashboard at 10.168.16.184:8265
+2025-05-08 16:43:07,625	INFO streaming_executor.py:108 -- Starting execution of Dataset. Full logs are in /tmp/ray/session_2025-04-20_17-38-32_601789_10/logs/ray-data
+2025-05-08 16:43:07,625	INFO streaming_executor.py:109 -- Execution plan of Dataset: InputDataBuffer[Input] -> TaskPoolMapOperator[ReadJSON] -> AggregateNumRows[AggregateNumRows]
+Running Dataset. Active & requested resources: 1/272 CPU, 240.1MB/167.2GB object store: : 0.00 row [01:39, ? row/s]2025-05-08 16:44:54,696	ERROR serialization.py:462 -- Error parsing message with type 'ray.rpc.RayException'
+Traceback (most recent call last):s: 0; Resources: 1.0 CPU, 240.1MB object store:  91%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋             | 220M/243M [01:39<00:02, 8.35M row/s]
+  File ""python/ray/_raylet.pyx"", line 476, in ray._raylet.ObjectRefGenerator._next_sync: 0.00 row [01:39, ? row/s]
+  File ""python/ray/_raylet.pyx"", line 5146, in ray._raylet.CoreWorker.try_read_next_object_ref_stream
+  File ""python/ray/includes/common.pxi"", line 77, in ray._raylet.check_status
+ray.exceptions.ObjectRefStreamEndOfStreamError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/physical_operator.py"", line 92, in on_data_ready
+    meta = ray.get(next(self._streaming_gen))
+  File ""python/ray/_raylet.pyx"", line 325, in ray._raylet.ObjectRefGenerator.__next__
+  File ""python/ray/_raylet.pyx"", line 494, in ray._raylet.ObjectRefGenerator._next_sync
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 460, in deserialize_objects
+    obj = self._deserialize_object(data, metadata, object_ref)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 342, in _deserialize_object
+    return RayError.from_bytes(obj)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/exceptions.py"", line 44, in from_bytes
+    ray_exception.ParseFromString(b)
+google.protobuf.message.DecodeError: Error parsing message with type 'ray.rpc.RayException'
+2025-05-08 16:44:54,698	ERROR streaming_executor_state.py:485 -- An exception was raised from a task of operator ""ReadJSON"". Dataset execution will now abort. To ignore this exception and continue, set DataContext.max_errored_blocks.
+⚠️  Dataset execution failed: : 0.00 row [01:47, ? row/s]
+- ReadJSON: Tasks: 1; Queued blocks: 0; Resources: 1.0 CPU, 240.1MB object store: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 220M/220M [01:47<00:00, 2.06M row/s]
+- AggregateNumRows: Tasks: 0; Queued blocks: 0; Resources: 0.0 CPU, 0.0B object store: : 0.00 row [01:47, ? row/s]
+2025-05-08 16:44:54,717 ERROR exceptions.py:73 -- Exception occurred in Ray Data or Ray Core internal code. If you continue to see this error, please open an issue on the Ray project GitHub page with the full stack trace below: https://github.com/ray-project/ray/issues/new/choose
+2025-05-08 16:44:54,717	ERROR exceptions.py:81 -- Full stack trace:
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/exceptions.py"", line 49, in handle_trace
+    return fn(*args, **kwargs)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/plan.py"", line 429, in execute_to_iterator
+    bundle_iter = itertools.chain([next(gen)], gen)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/executor.py"", line 37, in __next__
+    return self.get_next()
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/legacy_compat.py"", line 76, in get_next
+    bundle = self._base_iterator.get_next(output_split_idx)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor.py"", line 153, in get_next
+    item = self._outer._output_node.get_output_blocking(
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor_state.py"", line 312, in get_output_blocking
+    raise self._exception
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor.py"", line 230, in run
+    continue_sched = self._scheduling_loop_step(self._topology)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor.py"", line 285, in _scheduling_loop_step
+    num_errored_blocks = process_completed_tasks(
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor_state.py"", line 486, in process_completed_tasks
+    raise e from None
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/streaming_executor_state.py"", line 453, in process_completed_tasks
+    bytes_read = task.on_data_ready(
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/physical_operator.py"", line 105, in on_data_ready
+    raise ex from None
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/physical_operator.py"", line 101, in on_data_ready
+    ray.get(block_ref)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/auto_init_hook.py"", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/client_mode_hook.py"", line 103, in wrapper
+    return func(*args, **kwargs)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/worker.py"", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/worker.py"", line 908, in get_objects
+    raise value
+ray.exceptions.RaySystemError: System error: Error parsing message with type 'ray.rpc.RayException'
+traceback: Traceback (most recent call last):
+  File ""python/ray/_raylet.pyx"", line 476, in ray._raylet.ObjectRefGenerator._next_sync
+  File ""python/ray/_raylet.pyx"", line 5146, in ray._raylet.CoreWorker.try_read_next_object_ref_stream
+  File ""python/ray/includes/common.pxi"", line 77, in ray._raylet.check_status
+ray.exceptions.ObjectRefStreamEndOfStreamError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/physical_operator.py"", line 92, in on_data_ready
+    meta = ray.get(next(self._streaming_gen))
+  File ""python/ray/_raylet.pyx"", line 325, in ray._raylet.ObjectRefGenerator.__next__
+  File ""python/ray/_raylet.pyx"", line 494, in ray._raylet.ObjectRefGenerator._next_sync
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 460, in deserialize_objects
+    obj = self._deserialize_object(data, metadata, object_ref)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 342, in _deserialize_object
+    return RayError.from_bytes(obj)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/exceptions.py"", line 44, in from_bytes
+    ray_exception.ParseFromString(b)
+google.protobuf.message.DecodeError: Error parsing message with type 'ray.rpc.RayException'
+
+ray.data.exceptions.SystemException
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""/mnt/cfs_bj/zhonghanjun/multimodal/2-zhan/ray_data_t.py"", line 26, in <module>
+    print(""cnt:"", ds.count())
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/dataset.py"", line 2756, in count
+    for batch in count_ds.iter_batches(batch_size=None):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/iterator.py"", line 154, in _create_iterator
+    ) = self._to_ref_bundle_iterator()
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/iterator/iterator_impl.py"", line 28, in _to_ref_bundle_iterator
+    ref_bundles_iterator, stats, executor = ds._plan.execute_to_iterator()
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/exceptions.py"", line 89, in handle_trace
+    raise e.with_traceback(None) from SystemException()
+ray.exceptions.RaySystemError: System error: Error parsing message with type 'ray.rpc.RayException'
+traceback: Traceback (most recent call last):
+  File ""python/ray/_raylet.pyx"", line 476, in ray._raylet.ObjectRefGenerator._next_sync
+  File ""python/ray/_raylet.pyx"", line 5146, in ray._raylet.CoreWorker.try_read_next_object_ref_stream
+  File ""python/ray/includes/common.pxi"", line 77, in ray._raylet.check_status
+ray.exceptions.ObjectRefStreamEndOfStreamError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/data/_internal/execution/interfaces/physical_operator.py"", line 92, in on_data_ready
+    meta = ray.get(next(self._streaming_gen))
+  File ""python/ray/_raylet.pyx"", line 325, in ray._raylet.ObjectRefGenerator.__next__
+  File ""python/ray/_raylet.pyx"", line 494, in ray._raylet.ObjectRefGenerator._next_sync
+StopIteration
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 460, in deserialize_objects
+    obj = self._deserialize_object(data, metadata, object_ref)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/_private/serialization.py"", line 342, in _deserialize_object
+    return RayError.from_bytes(obj)
+  File ""/opt/conda/lib/python3.10/site-packages/ray/exceptions.py"", line 44, in from_bytes
+    ray_exception.ParseFromString(b)
+google.protobuf.message.DecodeError: Error parsing message with type 'ray.rpc.RayException'
+
+```
+
+### Issue Severity
+
+None",danielhjz,5894042,closed,False,0,2025-05-08T09:29:57+00:00,2025-05-08T09:38:37+00:00,2025-05-08T09:38:37+00:00,bug;triage,0,0,0,0,0,0,0
+ray-project/ray,3048356274,52865,[Ray Core] Support setting different priorities for ray tasks,"### Description
+
+As title, and ray tasks with higher priority will be scheduled earlier.
+
+### Use case
+
+The ray tasks in a ray job are distributed in a long-tail distribution, that is, a large number of tasks have a short running time, and a small number of tasks have a long running time. If the tasks with a long running time are placed at the end, the execution time of the entire job will be prolonged. If the priority of different tasks can be set, these tasks with a long running time can be given a higher priority.",Moonquakes,38858895,open,False,0,2025-05-08T09:19:36+00:00,2025-05-12T04:57:01+00:00,,triage;usability;core,0,0,0,0,0,0,0
+ray-project/ray,3047895020,52864,[Autoscaler][v1] Autoscaler launches extra nodes despite fulfilled resource demand,"### What happened + What you expected to happen
+
+### Summary:
+
+We have set up Ray with a custom external node provider and are running the autoscaler as a separate process. The goal is for the autoscaler to detect resource demands from a Ray Serve deployment and request a specific node type from the external node provider accordingly.
+
+### Configuration:
+- The cluster config defines multiple node types, including ray.worker.4090.standard, ray.worker.4090.highmem, and ray.worker.4090.ultra.
+	- A Ray Serve deployment requests the following resources:
+
+#### autoscaler-config.yaml
+```yaml
+available_node_types:
+  ray.worker.4090.standard:
+    min_workers: 0
+    max_workers: 5
+    resources: {""CPU"": 16, ""GPU"": 1, ""memory"": 30107260928 , ""gram"": 24 }
+    node_config: {}
+
+  ray.worker.4090.highmem:
+    min_workers: 0
+    max_workers: 5
+    resources: {""CPU"": 16, ""GPU"": 1, ""memory"": 62277025792 , ""gram"": 24}
+    node_config: {}
+
+  ray.worker.4090.ultra:
+    min_workers: 0
+    max_workers: 5
+    resources: {""CPU"": 32, ""GPU"": 1, ""memory"": 130997290496 , ""gram"": 24 }
+    node_config: {}
+```
+#### serve code
+```python
+# for ray.worker.4090.standard
+@serve.deployment(ray_actor_options={""num_cpus"": 16, ""num_gpus"": 1, ""memory"": 30107260928 ,""resources"": {""gram"": 24}})
+def CustomResourceTask(*args):
+    return ""ray.worker.4090.standard""
+
+
+serve.run(CustomResourceTask.bind())
+
+print(""Requested additional resources..."")
+```
+
+
+## Expected Behavior:
+- When the Python code is executed, the autoscaler detects the demand and requests a single node of type ray.worker.4090.standard({""num_cpus"": 16, ""num_gpus"": 1, ""memory"": 30107260928 ,""resources"": {""gram"": 24}}) from the node provider.
+- Only that node type should be launched, as it satisfies the resource requirements.
+
+## Actual Behavior:
+- The autoscaler does initially request a ray.worker.4090.standard node as expected.
+- However, immediately after, it also sends a launch request for a higher-spec node type (ray.worker.4090.highmem), even though the demand was already satisfied by the standard node.
+  - When the deployment directly requests the highest-spec node type (e.g., ultra), two nodes are requested by the autoscaler.
+
+## Observation:
+- This issue does not occur if the appropriate node (ray.worker.4090.standard) already exists in the cluster before the actor is scheduled.
+- In that case, the actor gets scheduled correctly, and no additional autoscaling occurs.
+
+
+Could this be a race condition between the autoscaler and the node provider, where the updated resource availability has not yet propagated before the scheduler makes a decision?
+Or is it a scheduling policy issue, where the autoscaler aggressively launches additional nodes before confirming that the demand has been fulfilled?
+
+Any insights on how to avoid this type of over-provisioning (e.g., through autoscaler delay settings, demand evaluation thresholds, or conservative scheduling options) would be greatly appreciated.
+
+### Versions / Dependencies
+
+ray 2.45.0
+
+### Reproduction script
+
+## Actor list (After Serve Deployment)
+```
+Stats:
+------------------------------
+Total: 4
+
+Table:
+------------------------------
+    ACTOR_ID                          CLASS_NAME                               STATE      JOB_ID  NAME                                                                                               NODE_ID                                                     PID  RAY_NAMESPACE
+ 0  1cb2b2b79fbc11225b59313d01000000  ServeController                          ALIVE    01000000  SERVE_CONTROLLER_ACTOR                                                                             8e07ab05c55f81ea3e84d30f12da275848e10d958c8100787eb9e317   1148  serve
+ 1  5130f9e62717ca880d64c62701000000  ProxyActor                               ALIVE    01000000  SERVE_CONTROLLER_ACTOR:SERVE_PROXY_ACTOR-7fd36d41eb420d38e6bf122401df4fe88d4c29f2a4fd52d6d8783f0b  7fd36d41eb420d38e6bf122401df4fe88d4c29f2a4fd52d6d8783f0b    430  serve
+ 2  816b5cd4454e58298016f3b501000000  ServeReplica:default:CustomResourceTask  ALIVE    01000000  SERVE_REPLICA::default#CustomResourceTask#nBaiFX                                                   7fd36d41eb420d38e6bf122401df4fe88d4c29f2a4fd52d6d8783f0b    253  serve
+ 3  dd8062a92fd4d7eeca1757c701000000  ProxyActor                               ALIVE    01000000  SERVE_CONTROLLER_ACTOR:SERVE_PROXY_ACTOR-8e07ab05c55f81ea3e84d30f12da275848e10d958c8100787eb9e317  8e07ab05c55f81ea3e84d30f12da275848e10d958c8100787eb9e317   1199  serve
+
+```
+
+## Node list (After Serve Deployment)
+```
+Stats:
+------------------------------
+Total: 2
+
+Table:
+------------------------------
+    NODE_ID                                                   NODE_IP      IS_HEAD_NODE    STATE    NODE_NAME    RESOURCES_TOTAL                 LABELS
+ 0  7fd36d41eb420d38e6bf122401df4fe88d4c29f2a4fd52d6d8783f0b  172.28.0.16  False           ALIVE    172.28.0.16  CPU: 16.0                       ray.io/node_id: 7fd36d41eb420d38e6bf122401df4fe88d4c29f2a4fd52d6d8783f0b
+                                                                                                                 GPU: 1.0
+                                                                                                                 gram: 24.0
+                                                                                                                 memory: 28.040 GiB
+                                                                                                                 node:172.28.0.16: 1.0
+                                                                                                                 object_store_memory: 4.595 GiB
+ 1  8e07ab05c55f81ea3e84d30f12da275848e10d958c8100787eb9e317  172.28.0.10  True            ALIVE    172.28.0.10  CPU: 16.0                       ray.io/node_id: 8e07ab05c55f81ea3e84d30f12da275848e10d958c8100787eb9e317
+                                                                                                                 memory: 9.094 GiB
+                                                                                                                 node:172.28.0.10: 1.0
+                                                                                                                 node:__internal_head__: 1.0
+                                                                                                                 object_store_memory: 4.547 GiB
+```
+
+### Issue Severity
+
+High: It blocks me from completing my task.",nadongjun,40987943,open,False,1,2025-05-08T05:58:27+00:00,2025-05-09T16:59:48+00:00,,usability;core,0,0,0,0,0,0,0
+ray-project/ray,3047793436,52863,[docker] Update latest Docker dependencies for 2.46.0 release,"Created by release automation bot.
+
+Update with commit 52b43d0998f40d8aada0ffb89f41497fea4878b2",khluu,51931015,closed,False,0,2025-05-08T04:47:48+00:00,2025-05-08T05:26:48+00:00,2025-05-08T05:26:47+00:00,,0,0,0,0,0,0,0
+ray-project/ray,3047780193,52862,[docker] Update latest Docker dependencies for 2.46.0 release,"Created by release automation bot.
+
+Update with commit c3dd2ca0c2a24ddf327a213d2e936bd4eaa4ca0a",khluu,51931015,closed,False,0,2025-05-08T04:37:08+00:00,2025-05-08T05:27:02+00:00,2025-05-08T05:27:01+00:00,,0,0,0,0,0,0,0
+ray-project/ray,3047576252,52861,[Data] Re-enable Actor locality-based scheduling,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+Context
+---
+
+Currently locality-aware scheduling is disabled due to https://github.com/ray-project/ray/issues/43466
+
+However, since we're already using the new API, i've cleaned up the ranking and scheduling sequence and re-enabled locality aware scheduling.
+
+Changes
+---
+
+ - Added `RefBundle.get_preferred_object_locations` to compute a mapping of node-ids to total object bytes on the node
+ - Added tests
+ - Rebased `OutputSplitter` onto the new API
+ - Rebased `ActorPool` onto `get_preferred_locations`
+ - Re-enable locality hinting for actors by default
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",alexeykudinkin,428277,closed,False,0,2025-05-08T01:52:57+00:00,2025-05-08T12:12:56+00:00,2025-05-08T12:12:56+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047569219,52860,release test launching test,,aslonnie,95255098,closed,False,0,2025-05-08T01:46:55+00:00,2025-05-10T01:36:13+00:00,2025-05-10T01:36:13+00:00,,0,0,0,0,0,0,0
+ray-project/ray,3047487063,52859,[core][cgraph] Fix scalar tensor serialization edge case,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+Current channel serialization does not work for scalar tensors. This PR fixes it.
+
+Will add GPU tests.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+Closes #52830
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",ruisearch42,161574667,open,False,0,2025-05-08T00:37:20+00:00,2025-05-08T15:56:20+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3047450242,52858,"`pyproject.toml` is using the `[project]` table, but the required `project.name` field is not set","### What happened + What you expected to happen
+
+A git commit from a pr in this repo can't be installed by uv because of missing standard pyproject.toml metadata
+
+https://github.com/astral-sh/uv/issues/11050#issuecomment-2620737119
+
+this fails
+
+```
+uv add git+https://github.com/ray-project/ray --rev 0947309c8a1b665e61ca2663d00077eb8fccaba5
+```
+
+or
+
+```
+uv pip install ""git+https://github.com/ray-project/ray@0947309c8a1b665e61ca2663d00077eb8fccaba5""
+```
+
+
+I get a similar error if I don't use uv and use regular pip instead. `configuration error: `project` must contain ['version'] properties`
+
+```
+→ pip install ""git+https://github.com/ray-project/ray@0947309c8a1b665e61ca2663d00077eb8fccaba5"" 
+Collecting git+https://github.com/ray-project/ray@0947309c8a1b665e61ca2663d00077eb8fccaba5
+  Cloning https://github.com/ray-project/ray (to revision 0947309c8a1b665e61ca2663d00077eb8fccaba5) to /tmp/pip-req-build-4934v6q2
+  Running command git clone --filter=blob:none --quiet https://github.com/ray-project/ray /tmp/pip-req-build-4934v6q2
+  Running command git rev-parse -q --verify 'sha^0947309c8a1b665e61ca2663d00077eb8fccaba5'
+  Running command git fetch -q https://github.com/ray-project/ray 0947309c8a1b665e61ca2663d00077eb8fccaba5
+  Running command git checkout -q 0947309c8a1b665e61ca2663d00077eb8fccaba5
+  Resolved https://github.com/ray-project/ray to commit 0947309c8a1b665e61ca2663d00077eb8fccaba5
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... error
+  error: subprocess-exited-with-error
+  
+  × Getting requirements to build wheel did not run successfully.
+  │ exit code: 1
+  ╰─> [35 lines of output]
+      Traceback (most recent call last):
+        File ""/home/rave/miniforge3/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py"", line 389, in <module>
+          main()
+        File ""/home/rave/miniforge3/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py"", line 373, in main
+          json_out[""return_val""] = hook(**hook_input[""kwargs""])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File ""/home/rave/miniforge3/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py"", line 143, in get_requires_for_build_wheel
+          return hook(config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/build_meta.py"", line 331, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/build_meta.py"", line 301, in _get_build_requires
+          self.run_setup()
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/build_meta.py"", line 512, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/build_meta.py"", line 317, in run_setup
+          exec(code, locals())
+        File ""<string>"", line 1, in <module>
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/__init__.py"", line 117, in setup
+          return distutils.core.setup(**attrs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/_distutils/core.py"", line 160, in setup
+          dist.parse_config_files()
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/dist.py"", line 758, in parse_config_files
+          pyprojecttoml.apply_configuration(self, filename, ignore_option_errors)
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py"", line 72, in apply_configuration
+          config = read_configuration(filepath, True, ignore_option_errors, dist)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py"", line 140, in read_configuration
+          validate(subset, filepath)
+        File ""/tmp/pip-build-env-djtencd3/overlay/lib/python3.12/site-packages/setuptools/config/pyprojecttoml.py"", line 61, in validate
+          raise ValueError(f""{error}\n{summary}"") from None
+      ValueError: invalid pyproject.toml config: `project`.
+      configuration error: `project` must contain ['version'] properties
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: subprocess-exited-with-error
+
+× Getting requirements to build wheel did not run successfully.
+│ exit code: 1
+╰─> See above for output.
+
+note: This error originates from a subprocess, and is likely not a problem with pip.
+```
+
+### Versions / Dependencies
+
+I'm using uv 0.7.3 and pip 25.0.1 for python 3.12
+
+### Reproduction script
+
+`uv add git+https://github.com/ray-project/ray --rev 0947309c8a1b665e61ca2663d00077eb8fccaba5`
+
+### Issue Severity
+
+Low: It annoys or frustrates me.",rbavery,22258697,open,False,1,2025-05-08T00:05:30+00:00,2025-05-09T17:00:06+00:00,,usability;core,0,0,0,0,0,0,0
+ray-project/ray,3047426144,52857,[core][chore] Correct `num_retries_left` and `num_oom_retries_left` in the log,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+Correct `num_retries_left` and `num_oom_retries_left` in the log.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",kevin85421,20109646,closed,False,0,2025-05-07T23:45:56+00:00,2025-05-08T04:22:10+00:00,2025-05-08T04:22:10+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047366192,52856,[core][refactor] Remove skip_execution,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+This is a follow up of #52833. After #52883, `skip_execution` is no longer used.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",kevin85421,20109646,closed,False,0,2025-05-07T23:13:10+00:00,2025-05-08T04:07:33+00:00,2025-05-08T04:07:32+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047362520,52855,[docstring][train] fix indentation errors in docstrings,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T23:11:13+00:00,2025-05-08T04:09:36+00:00,2025-05-08T04:09:21+00:00,docs;train;go,0,0,0,0,0,0,0
+ray-project/ray,3047232090,52854,[docs] adding vocab to vale,"## Related issue number
+
+Breaking up #52383 into more manageable chunks
+
+",crypdick,5415776,open,False,0,2025-05-07T21:42:58+00:00,2025-05-07T21:42:58+00:00,,,0,0,0,0,0,0,0
+ray-project/ray,3047208916,52853,[Serve.llm] Bugfix for duplication of `<bos>` token,"Fixes a bug where the chat_template already adds the bos token and on top of that the tokenizer within the engine also prepends the special token. 
+
+The solution (compatible with vllm serve flow) is to handle tokenization inside the VLLMEngine and not delegate it to the engine since it will double do it. This is also what happens in [vllm openai server](https://github.com/vllm-project/vllm/blob/main/vllm/entrypoints/openai/serving_engine.py#L451-L457).
+
+Fixes #https://github.com/ray-project/ray/issues/52835
+
+Pre-requisite: 
+- https://github.com/ray-project/ray/pull/52848",kouroshHakha,31483498,closed,False,1,2025-05-07T21:27:01+00:00,2025-05-08T03:23:38+00:00,2025-05-08T03:23:38+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047191833,52852,[data] Fix backpressure for FileBasedDatasource,"Currently there is no backpressure for FileBasedDatasource, because the `buffer_size` is incorrectly set to the total number of files. 
+This issue can lead to OOMs for jobs using `read_images`, `read_video`, `read_audio`, `read_binary`, etc. ",raulchen,2883335,closed,False,0,2025-05-07T21:17:09+00:00,2025-05-08T20:02:32+00:00,2025-05-07T23:46:08+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047179410,52851,[data] replace np.array to np.asarray,"replace some np.array to np.asarray to avoid unnecessary copies
+",raulchen,2883335,closed,False,0,2025-05-07T21:11:22+00:00,2025-05-08T20:02:40+00:00,2025-05-07T23:49:39+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047133148,52850,Minor enhancements to Databricks Unity Datasource,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+- Move imports around in `read_databricks_tables`. Now, installing `pyspark` is optional if desired.
+- Print a reason if the query fails
+- Expose the `is_truncated` field to the user, so they can intervene if needed.
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [x] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [x] Release tests
+   - [ ] This PR is not tested :(
+",dev-goyal,126589393,open,False,0,2025-05-07T20:46:07+00:00,2025-05-09T17:58:53+00:00,,data;community-contribution,0,0,0,0,0,0,0
+ray-project/ray,3047115777,52849,[docstring][rllib] fix indentation errors in docstrings,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T20:37:31+00:00,2025-05-08T11:54:20+00:00,2025-05-08T11:54:20+00:00,rllib;docs;go,0,0,0,0,0,0,0
+ray-project/ray,3047101306,52848,"[Serve.llm][Bugfix] in stream batching, first part of the stream was always consumed and not streamed back from the router","This PR addresses a bug in stream batching where extra tokens in the first batch were being discarded and adds comprehensive unit tests to verify both chat and completion behaviors under different batching and streaming configurations.
+
+- Fixes token loss in stream batching by peeking at the first generator element and correctly handling batched responses.
+- Adds new fixtures and tests to cover various scenarios (chat/completion, stream true/false, and multiple batching intervals).
+- Removes redundant configuration in the LLM server test to align with the new streaming batching behavior.",kouroshHakha,31483498,closed,False,0,2025-05-07T20:29:53+00:00,2025-05-08T01:08:49+00:00,2025-05-08T01:08:49+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3047049701,52847,[docstring][core] fixed indentation errors in docstrings,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T20:05:18+00:00,2025-05-07T23:37:17+00:00,2025-05-07T23:37:17+00:00,docs;core;go,0,0,0,0,0,0,0
+ray-project/ray,3046996599,52846,[core][obs/1] aggregate ray tasks + actors at node level,"This PR addresses https://github.com/ray-project/ray/issues/47289. The context is that there are metrics such as `ray_tasks` and `ray_actors` produce a high volume of time series on prometheus. Our inspection indicates that  this is because the high cardinality of the `WorkerId` field in these metrics in a high scale cluster.
+
+This PR introduces a new environment variable one can set to drop the `WorkerId` field for a certain set of metrics.
+
+Test:
+- CI (test cases)
+- e2e test in production as well",can-anyscale,128072568,open,False,0,2025-05-07T19:44:17+00:00,2025-05-09T21:02:54+00:00,,go,0,0,0,0,0,0,0
+ray-project/ray,3046996397,52845,Train Tests: Update Image classification map fn,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+
+<!-- Please give a short summary of the change and the problem this solves. -->
+Train Tests: Update Image classification map fn.
+
+- Current Image processing does np->tensor conversion with transpose to CHW and normalization.
+```
+
+ 'train/epoch-avg': 37.75413007199859,
+ 'train/epoch-max': 37.75413007199859,
+ 'train/epoch-min': 37.75413007199859,
+ 'train/epoch-total': 37.75413007199859,
+ 'train/global_throughput': 3495.5491702359923,
+ 'train/iter_batch-avg': 0.03661318445453074,
+ 'train/iter_batch-max': 0.6135890130008193,
+ 'train/iter_batch-min': 1.593200067873113e-05,
+ 'train/iter_batch-total': 18.526271333992554,
+ 'train/iter_first_batch-avg': 19.143331854998905,
+ 'train/iter_first_batch-max': 19.143331854998905,
+ 'train/iter_first_batch-min': 19.143331854998905,
+ 'train/iter_first_batch-total': 19.143331854998905,
+ 'train/iter_skip_batch-avg': inf,
+ 'train/iter_skip_batch-max': 0,
+ 'train/iter_skip_batch-min': inf,
+ 'train/iter_skip_batch-total': 0,
+ 'train/local_throughput': 873.8872925589981,
+ 'train/rows_processed-avg': 32.0,
+ 'train/rows_processed-max': 32,
+ 'train/rows_processed-min': 32,
+ 'train/rows_processed-total': 16192,
+ 'train/step-avg': 4.809962454802502e-06,
+ 'train/step-max': 2.1455998648889363e-05,
+ 'train/step-min': 5.109995981911197e-07,
+ 'train/step-total': 0.002433841002130066,
+ 'validation/iter_batch-avg': inf,
+ 'validation/iter_batch-max': 0,
+ 'validation/iter_batch-min': inf,
+ 'validation/iter_batch-total': 0,
+ 'validation/step-avg': inf,
+ 'validation/step-max': 0,
+ 'validation/step-min': inf,
+ 'validation/step-total': 0}
+--------------------------------------------------------------------------------
+2025-05-07 12:12:11,659 INFO test_utils.py:1953 -- Wrote results to /tmp/release_test_output.json
+2025-05-07 12:12:11,660 INFO test_utils.py:1954 -- {""train/epoch-avg"": 37.75413007199859, ""train/epoch-min"": 37.75413007199859, ""train/epoch-max"": 37.75413007199859, ""train/epoch-total"": 37.75413007199859, ""train/iter_first_batch-avg"": 19.143331854998905, ""train/iter_first_batch-min"": 19.143331854998905, ""train/iter_first_batch-max"": 19.143331854998905, ""train/iter_first_batch-total"": 19.143331854998905, ""train/step-avg"": 4.809962454802502e-06, ""train/step-min"": 5.109995981911197e-07, ""train/step-max"": 2.1455998648889363e-05, ""train/step-total"": 0.002433841002130066, ""train/rows_processed-avg"": 32.0, ""train/rows_processed-min"": 32, ""train/rows_processed-max"": 32, ""train/rows_processed-total"": 16192, ""train/iter_batch-avg"": 0.03661318445453074, ""train/iter_batch-min"": 1.593200067873113e-05, ""train/iter_batch-max"": 0.6135890130008193, ""train/iter_batch-total"": 18.526271333992554, ""validation/step-avg"": Infinity, ""validation/step-min"": Infinity, ""validation/step-max"": 0, ""validation/step-total"": 0, ""validation/iter_batch-avg"": Infinity, ""validation/iter_batch-min"": Infinity, ""validation/iter_batch-max"": 0, ""validation/iter_batch-total"": 0, ""checkpoint/download-avg"": Infinity, ""checkpoint/download-min"": Infinity, ""checkpoint/download-max"": 0, ""checkpoint/download-total"": 0, ""checkpoint/load-avg"": Infinity, ""checkpoint/load-min"": Infinity, ""checkpoint/load-max"": 0, ""checkpoint/load-total"": 0, ""train/iter_skip_batch-avg"": Infinity, ""train/iter_skip_batch-min"": Infinity, ""train/iter_skip_batch-max"": 0, ""train/iter_skip_batch-total"": 0, ""train/local_throughput"": 873.8872925589981, ""train/global_throughput"": 3495.5491702359923, ""dataloader/train"": {""producer_throughput"": 1946.112621486268, ""iter_stats"": {""prefetch_block-avg"": Infinity, ""prefetch_block-min"": Infinity, ""prefetch_block-max"": 0, ""prefetch_block-total"": 0, ""fetch_block-avg"": 0.0027022377159291976, ""fetch_block-min"": 0.0005052189990237821, ""fetch_block-max"": 0.0197697479998169, ""fetch_block-total"": 0.218881254990265, ""block_to_batch-avg"": 0.001253903843829141, ""block_to_batch-min"": 1.9893001081072725e-05, ""block_to_batch-max"": 0.01351481799974863, ""block_to_batch-total"": 0.6344753449775453, ""format_batch-avg"": 3.4910411080130395e-05, ""format_batch-min"": 9.00899976841174e-06, ""format_batch-max"": 0.0005209999999351567, ""format_batch-total"": 0.01766466800654598, ""collate-avg"": 0.0019578944209519855, ""collate-min"": 0.00021700100114685483, ""collate-max"": 0.013516342000002624, ""collate-total"": 0.9906945770017046, ""finalize-avg"": 0.011252377077071, ""finalize-min"": 0.004483607999645756, ""finalize-max"": 0.03162657899883925, ""finalize-total"": 5.693702800997926, ""time_spent_blocked-avg"": 0.0742146621321331, ""time_spent_blocked-min"": 6.807998943259008e-06, ""time_spent_blocked-max"": 19.143022770000243, ""time_spent_blocked-total"": 37.62683370099148, ""time_spent_training-avg"": 0.00021408673321073962, ""time_spent_training-min"": 9.916999260894954e-06, ""time_spent_training-max"": 0.009087054999326938, ""time_spent_training-total"": 0.10832788700463425}}}
+```
+
+- Updated Image processing does np->PIL->Tensor.
+
+```
+ 'train/epoch-avg': 30.73613611499968,
+ 'train/epoch-max': 30.73613611499968,
+ 'train/epoch-min': 30.73613611499968,
+ 'train/epoch-total': 30.73613611499968,
+ 'train/global_throughput': 5434.769027373354,
+ 'train/iter_batch-avg': 0.023547696209505146,
+ 'train/iter_batch-max': 0.3791560619993106,
+ 'train/iter_batch-min': 1.732300006551668e-05,
+ 'train/iter_batch-total': 11.915134282009603,
+ 'train/iter_first_batch-avg': 18.71798381300141,
+ 'train/iter_first_batch-max': 18.71798381300141,
+ 'train/iter_first_batch-min': 18.71798381300141,
+ 'train/iter_first_batch-total': 18.71798381300141,
+ 'train/iter_skip_batch-avg': inf,
+ 'train/iter_skip_batch-max': 0,
+ 'train/iter_skip_batch-min': inf,
+ 'train/iter_skip_batch-total': 0,
+ 'train/local_throughput': 1358.6922568433386,
+ 'train/rows_processed-avg': 32.0,
+ 'train/rows_processed-max': 32,
+ 'train/rows_processed-min': 32,
+ 'train/rows_processed-total': 16192,
+ 'train/step-avg': 4.362646225640153e-06,
+ 'train/step-max': 2.6562000130070373e-05,
+ 'train/step-min': 4.579997039400041e-07,
+ 'train/step-total': 0.0022074989901739173,
+ 'validation/iter_batch-avg': inf,
+ 'validation/iter_batch-max': 0,
+ 'validation/iter_batch-min': inf,
+ 'validation/iter_batch-total': 0,
+ 'validation/step-avg': inf,
+ 'validation/step-max': 0,
+ 'validation/step-min': inf,
+ 'validation/step-total': 0}
+--------------------------------------------------------------------------------
+2025-05-07 12:32:57,439 INFO test_utils.py:1953 -- Wrote results to /tmp/release_test_output.json
+2025-05-07 12:32:57,439 INFO test_utils.py:1954 -- {""train/epoch-avg"": 30.73613611499968, ""train/epoch-min"": 30.73613611499968, ""train/epoch-max"": 30.73613611499968, ""train/epoch-total"": 30.73613611499968, ""train/iter_first_batch-avg"": 18.71798381300141, ""train/iter_first_batch-min"": 18.71798381300141, ""train/iter_first_batch-max"": 18.71798381300141, ""train/iter_first_batch-total"": 18.71798381300141, ""train/step-avg"": 4.362646225640153e-06, ""train/step-min"": 4.579997039400041e-07, ""train/step-max"": 2.6562000130070373e-05, ""train/step-total"": 0.0022074989901739173, ""train/rows_processed-avg"": 32.0, ""train/rows_processed-min"": 32, ""train/rows_processed-max"": 32, ""train/rows_processed-total"": 16192, ""train/iter_batch-avg"": 0.023547696209505146, ""train/iter_batch-min"": 1.732300006551668e-05, ""train/iter_batch-max"": 0.3791560619993106, ""train/iter_batch-total"": 11.915134282009603, ""validation/step-avg"": Infinity, ""validation/step-min"": Infinity, ""validation/step-max"": 0, ""validation/step-total"": 0, ""validation/iter_batch-avg"": Infinity, ""validation/iter_batch-min"": Infinity, ""validation/iter_batch-max"": 0, ""validation/iter_batch-total"": 0, ""checkpoint/download-avg"": Infinity, ""checkpoint/download-min"": Infinity, ""checkpoint/download-max"": 0, ""checkpoint/download-total"": 0, ""checkpoint/load-avg"": Infinity, ""checkpoint/load-min"": Infinity, ""checkpoint/load-max"": 0, ""checkpoint/load-total"": 0, ""train/iter_skip_batch-avg"": Infinity, ""train/iter_skip_batch-min"": Infinity, ""train/iter_skip_batch-max"": 0, ""train/iter_skip_batch-total"": 0, ""train/local_throughput"": 1358.6922568433386, ""train/global_throughput"": 5434.769027373354, ""dataloader/train"": {""producer_throughput"": 2485.456671547162, ""iter_stats"": {""prefetch_block-avg"": Infinity, ""prefetch_block-min"": Infinity, ""prefetch_block-max"": 0, ""prefetch_block-total"": 0, ""fetch_block-avg"": 0.0023951276418054837, ""fetch_block-min"": 0.0004556420008157147, ""fetch_block-max"": 0.009860608999588294, ""fetch_block-total"": 0.19400533898624417, ""block_to_batch-avg"": 0.0011380414249187495, ""block_to_batch-min"": 1.991700082726311e-05, ""block_to_batch-max"": 0.02047159200083115, ""block_to_batch-total"": 0.5758489610088873, ""format_batch-avg"": 2.7870620556763306e-05, ""format_batch-min"": 9.097000656765886e-06, ""format_batch-max"": 0.00015905799955362454, ""format_batch-total"": 0.014102534001722233, ""collate-avg"": 0.0019216830711812067, ""collate-min"": 0.00023257399880094454, ""collate-max"": 0.021248375000141095, ""collate-total"": 0.9723716340176907, ""finalize-avg"": 0.008927913114603718, ""finalize-min"": 0.0044454970011429396, ""finalize-max"": 0.020735431000503013, ""finalize-total"": 4.5175240359894815, ""time_spent_blocked-avg"": 0.0603644016410606, ""time_spent_blocked-min"": 7.908000043244101e-06, ""time_spent_blocked-max"": 18.717657721999785, ""time_spent_blocked-total"": 30.604751632017724, ""time_spent_training-avg"": 0.00022997682214121696, ""time_spent_training-min"": 1.0375999409006909e-05, ""time_spent_training-max"": 0.013436835000902647, ""time_spent_training-total"": 0.11636827200345579}}}
+```
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",srinathk10,68668616,closed,False,0,2025-05-07T19:44:10+00:00,2025-05-08T00:05:35+00:00,2025-05-08T00:05:34+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3046963283,52844,[docstring][data] fix indentation errors in docstrings,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T19:27:51+00:00,2025-05-08T02:08:21+00:00,2025-05-08T02:08:21+00:00,docs;data;go,0,0,0,0,0,0,0
+ray-project/ray,3046931096,52843,[core] Correctly release dynamic generator refs,"<!-- Thank you for your contribution! Please review https://github.com/ray-project/ray/blob/master/CONTRIBUTING.rst before opening a pull request. -->
+
+<!-- Please add a reviewer to the assignee section when you create a PR. If you don't have the access to it, we will shortly find a reviewer and assign them to your PR. -->
+
+## Why are these changes needed?
+In https://github.com/ray-project/ray/pull/52095, the while loop in DynamicObjectRefGenerator that pops the ref was just changed to a for loop that iterates through the refs. This results in the refs sticking around and using up memory when they can be destroyed.
+
+Also changing the list to a deque for efficiency on popping from the front.
+<!-- Please give a short summary of the change and the problem this solves. -->
+
+## Related issue number
+
+<!-- For example: ""Closes #1234"" -->
+
+## Checks
+
+- [ ] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [ ] I've run `scripts/format.sh` to lint the changes in this PR.
+- [ ] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [ ] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",dayshah,85444498,closed,False,0,2025-05-07T19:11:53+00:00,2025-05-07T21:21:46+00:00,2025-05-07T21:14:54+00:00,go,0,0,0,0,0,0,0
+ray-project/ray,3046927197,52842,[docstring][llm] fixing indent errors in docstrings,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T19:09:56+00:00,2025-05-08T00:31:47+00:00,2025-05-08T00:31:47+00:00,docs;llm;go,0,0,0,0,0,0,0
+ray-project/ray,3046905477,52841,[docstring][serve] Fix indentation in doc strings. ,"Public-facing ones weren't rendering correctly and cleaned up internal ones in case of cargo culting.
+
+## Related issue number
+https://anyscale1.atlassian.net/browse/MLDX-686
+
+## Checks
+
+- [x] I've signed off every commit(by using the -s flag, i.e., `git commit -s`) in this PR.
+- [x] I've run `scripts/format.sh` to lint the changes in this PR.
+- [x] I've included any doc changes needed for https://docs.ray.io/en/master/.
+    - [ ] I've added any new APIs to the API Reference. For example, if I added a
+           method in Tune, I've added it in `doc/source/tune/api/` under the
+           corresponding `.rst` file.
+- [x] I've made sure the tests are passing. Note that there might be a few flaky tests, see the recent failures at https://flakey-tests.ray.io/
+- Testing Strategy
+   - [ ] Unit tests
+   - [ ] Release tests
+   - [ ] This PR is not tested :(
+",angelinalg,122562471,closed,False,0,2025-05-07T18:58:45+00:00,2025-05-08T01:36:54+00:00,2025-05-08T01:36:54+00:00,serve;docs;go,0,0,0,0,0,0,0
+ray-project/ray,3046845728,52840,[Core] [Observability] Add PID to structured logs,"### Description
+
+When using structured logging within a ray task or actor, it would be nice to include the worker process id to as one of the labels.
+
+This will match the behavior of ""send to driver"" where user are used to seeing PIDs next to the log entries.
+
+### Use case
+
+_No response_",alanwguo,711935,open,False,0,2025-05-07T18:31:43+00:00,2025-05-07T18:33:10+00:00,,enhancement;triage;core;observability,0,0,0,0,0,0,0

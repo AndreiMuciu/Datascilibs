@@ -1,0 +1,402 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+ydataai/ydata-profiling,c3ce66ca4cc9564e013f71cbb96ed7b3d8fa5c72,https://github.com/ydataai/ydata-profiling/commit/c3ce66ca4cc9564e013f71cbb96ed7b3d8fa5c72,fabclmnt,30911746,User,2025-03-26T00:32:10+00:00,web-flow,2025-03-26T00:32:10+00:00,"chore: add more unit tests for better code coverage (#1745)
+
+* chore: add more unit tests for better code coverage
+
+* chore: remove unused code from tests
+
+* fix(linting): code formatting
+
+* chore: fix whitespaces
+
+* chore: test no longer valid
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",178,64,242,3,15494ddab4240f3fa560a9d8ccb07cff0753c0d2
+ydataai/ydata-profiling,15494ddab4240f3fa560a9d8ccb07cff0753c0d2,https://github.com/ydataai/ydata-profiling/commit/15494ddab4240f3fa560a9d8ccb07cff0753c0d2,fabclmnt,30911746,User,2025-03-25T23:15:33+00:00,web-flow,2025-03-25T23:15:33+00:00,"fix: add html metrics support for compare (#1744)
+
+* fix: add html metrics support for compare
+
+* fix: add html metrics support for compare
+
+* fix(linting): code formatting
+
+* chore: fix test to include request header
+
+* fix(linting): code formatting
+
+* chore: add unit tests for the compat file
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",110,21,131,4,45c47c7d514ebc58930ec9b7c3de81185ee9ba1e
+ydataai/ydata-profiling,45c47c7d514ebc58930ec9b7c3de81185ee9ba1e,https://github.com/ydataai/ydata-profiling/commit/45c47c7d514ebc58930ec9b7c3de81185ee9ba1e,ssiegel,5278489,User,2025-03-25T16:44:09+00:00,web-flow,2025-03-25T16:44:09+00:00,"fix: Support Pandas future.infer_string=True in report generation (#1674)
+
+* fix: Support Pandas future.infer_string=True in report generation
+
+Previously, report generation encountered issues when
+`future.infer_string=True` was set. This resulted in multiple warnings
+(""FutureWarning: Dtype inference on a pandas object is deprecated"") and
+failures when string columns contained only empty strings
+(""AttributeError: 'StringDtype' object has no attribute
+'pyarrow_dtype'"").
+This change resolves the issue by explicitly setting the dtype to
+""object"" for the relevant operations.
+
+* refactor: Refactor pandas option usage for backward compatibility
+
+- Introduce the `optional_option_context` helper to replace the direct
+  use of `pd.option_context(""future.no_silent_downcasting"", True)`,
+  ensuring compatibility with older pandas versions that lack this
+  option.
+- Update the `future.infer_string` test to run only on pandas >= 2.1,
+  where it is applicable.
+
+* Add type annotations for optional_option_context
+
+* Make the silent downcasting explicit",49,5,54,4,81d7deb5bc1e080080ba4913baf1188fc54156eb
+ydataai/ydata-profiling,81d7deb5bc1e080080ba4913baf1188fc54156eb,https://github.com/ydataai/ydata-profiling/commit/81d7deb5bc1e080080ba4913baf1188fc54156eb,fabclmnt,30911746,User,2025-03-24T21:47:14+00:00,web-flow,2025-03-24T21:47:14+00:00,"feat: refactor code to render HTML and widget flavours (#1740)
+
+* feat: refactor code to render HTML and widget flavours
+
+* fix: code linter issues
+
+* fix: issues related with the banner link
+
+* fix: linter errors with imports from flavour_widget
+
+* fix: remove unused import
+
+* fix: typing fixes
+
+* fix: linting types
+
+* fix: rm circular import
+
+* fix: linting
+
+* fix: linter and typing errors
+
+* feat: update report rendering to show overview
+
+* fix: remove unused import
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",302,144,446,16,58c28d1d218291d6ea46af643178b44c291d790d
+ydataai/ydata-profiling,58c28d1d218291d6ea46af643178b44c291d790d,https://github.com/ydataai/ydata-profiling/commit/58c28d1d218291d6ea46af643178b44c291d790d,portellaa,1502403,User,2025-03-21T10:20:53+00:00,portellaa,2025-03-21T10:22:46+00:00,chore(renovate): disable automatic actions for develop branch,11,1,12,1,7e6202f2a5df02ea7102311597a8abfa5e9080b9
+ydataai/ydata-profiling,7e6202f2a5df02ea7102311597a8abfa5e9080b9,https://github.com/ydataai/ydata-profiling/commit/7e6202f2a5df02ea7102311597a8abfa5e9080b9,portellaa,1502403,User,2025-03-21T09:25:43+00:00,web-flow,2025-03-21T09:25:43+00:00,chore(actions): revert to python 3.11 (#1736),4,4,8,3,5fea5776cefede9f190feb9aa8bed40ab51092a8
+ydataai/ydata-profiling,5fea5776cefede9f190feb9aa8bed40ab51092a8,https://github.com/ydataai/ydata-profiling/commit/5fea5776cefede9f190feb9aa8bed40ab51092a8,renovate[bot],29139614,Bot,2025-03-21T02:04:16+00:00,web-flow,2025-03-21T02:04:16+00:00,chore(actions): update dependency ubuntu to v24,9,9,18,4,49cbd07f3e1d4d1b8d672b6b89d621abc0402e5c
+ydataai/ydata-profiling,49cbd07f3e1d4d1b8d672b6b89d621abc0402e5c,https://github.com/ydataai/ydata-profiling/commit/49cbd07f3e1d4d1b8d672b6b89d621abc0402e5c,renovate[bot],29139614,Bot,2025-03-21T02:03:59+00:00,web-flow,2025-03-21T02:03:59+00:00,chore(actions): update dependency python to 3.13,2,2,4,1,bee0f40c2ad979d56e8188f4b90d741d3045ba59
+ydataai/ydata-profiling,bee0f40c2ad979d56e8188f4b90d741d3045ba59,https://github.com/ydataai/ydata-profiling/commit/bee0f40c2ad979d56e8188f4b90d741d3045ba59,fabclmnt,30911746,User,2025-03-21T02:03:27+00:00,fabclmnt,2025-03-21T02:03:27+00:00,chore: remove renovate automated merges,13,12,25,5,dbc481820e3eab198258846520de25b7ecae1815
+ydataai/ydata-profiling,dbc481820e3eab198258846520de25b7ecae1815,https://github.com/ydataai/ydata-profiling/commit/dbc481820e3eab198258846520de25b7ecae1815,renovate[bot],29139614,Bot,2025-03-21T01:58:54+00:00,web-flow,2025-03-21T01:58:54+00:00,chore(actions): update dependency ubuntu to v24,11,11,22,5,f96a6ada65a7284e0a9e41be8a42ea24305c0afa
+ydataai/ydata-profiling,f96a6ada65a7284e0a9e41be8a42ea24305c0afa,https://github.com/ydataai/ydata-profiling/commit/f96a6ada65a7284e0a9e41be8a42ea24305c0afa,renovate[bot],29139614,Bot,2025-03-21T01:58:38+00:00,web-flow,2025-03-21T01:58:38+00:00,chore(actions): update dependency python to 3.13,4,4,8,3,92b2de6ac6fa0cfbf1a03b450f1a6a3cf16482fc
+ydataai/ydata-profiling,92b2de6ac6fa0cfbf1a03b450f1a6a3cf16482fc,https://github.com/ydataai/ydata-profiling/commit/92b2de6ac6fa0cfbf1a03b450f1a6a3cf16482fc,fabclmnt,30911746,User,2025-03-21T01:58:09+00:00,fabclmnt,2025-03-21T01:58:09+00:00,chore: updt wk to a previous python version in ubuntu,15,15,30,5,3792353e11cdd3e46a6143a0a4925e2336f5c345
+ydataai/ydata-profiling,3792353e11cdd3e46a6143a0a4925e2336f5c345,https://github.com/ydataai/ydata-profiling/commit/3792353e11cdd3e46a6143a0a4925e2336f5c345,renovate[bot],29139614,Bot,2025-03-21T01:25:10+00:00,web-flow,2025-03-21T01:25:10+00:00,chore(actions): update dependency ubuntu to v24,2,2,4,1,ff9099c074270f8769011f2cc2e4f0839cdb1030
+ydataai/ydata-profiling,ff9099c074270f8769011f2cc2e4f0839cdb1030,https://github.com/ydataai/ydata-profiling/commit/ff9099c074270f8769011f2cc2e4f0839cdb1030,renovate[bot],29139614,Bot,2025-03-21T01:24:57+00:00,web-flow,2025-03-21T01:24:57+00:00,chore(actions): update dependency python to 3.13,2,2,4,1,3fa4441f962a1a7b7560187f1730dcc81886b924
+ydataai/ydata-profiling,3fa4441f962a1a7b7560187f1730dcc81886b924,https://github.com/ydataai/ydata-profiling/commit/3fa4441f962a1a7b7560187f1730dcc81886b924,fabclmnt,30911746,User,2025-03-20T18:38:41+00:00,web-flow,2025-03-20T18:38:41+00:00,"fix: add a new env variable for banner (#1735)
+
+* fix: add a new env variable for banner
+
+* fix: fix wk to validate docs
+
+* chore: fix wk for code linter
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",10,10,20,2,ad5df60196ba894b18b72055c09b80d94350f218
+ydataai/ydata-profiling,ad5df60196ba894b18b72055c09b80d94350f218,https://github.com/ydataai/ydata-profiling/commit/ad5df60196ba894b18b72055c09b80d94350f218,renovate[bot],29139614,Bot,2025-03-19T01:11:34+00:00,web-flow,2025-03-19T01:11:34+00:00,chore(actions): update dependency ubuntu to v24,9,9,18,4,806fa35259835cd1b7ae8e4dd4e6cec6578d8b53
+ydataai/ydata-profiling,806fa35259835cd1b7ae8e4dd4e6cec6578d8b53,https://github.com/ydataai/ydata-profiling/commit/806fa35259835cd1b7ae8e4dd4e6cec6578d8b53,renovate[bot],29139614,Bot,2025-03-19T01:11:14+00:00,web-flow,2025-03-19T01:11:14+00:00,chore(actions): update dependency python to 3.13,4,4,8,3,d82ff791c37e9caaf9b36692dc5288627477630b
+ydataai/ydata-profiling,d82ff791c37e9caaf9b36692dc5288627477630b,https://github.com/ydataai/ydata-profiling/commit/d82ff791c37e9caaf9b36692dc5288627477630b,fabclmnt,30911746,User,2025-03-18T21:48:39+00:00,web-flow,2025-03-18T21:48:39+00:00,chore: add permissions to the release file (#1734),3,3,6,1,5f930e3fbcd7038b10168b87600c628f9ca2ccdf
+ydataai/ydata-profiling,5f930e3fbcd7038b10168b87600c628f9ca2ccdf,https://github.com/ydataai/ydata-profiling/commit/5f930e3fbcd7038b10168b87600c628f9ca2ccdf,fabclmnt,30911746,User,2025-03-18T20:40:36+00:00,fabclmnt,2025-03-18T20:40:36+00:00,chore: update release file,3,74,77,2,e601172697bf05f89e2746eb19dc7187b6c296b1
+ydataai/ydata-profiling,e601172697bf05f89e2746eb19dc7187b6c296b1,https://github.com/ydataai/ydata-profiling/commit/e601172697bf05f89e2746eb19dc7187b6c296b1,portellaa,1502403,User,2025-03-18T20:10:29+00:00,web-flow,2025-03-18T20:10:29+00:00,chore: fix release action (#1733),5,4,9,1,8fcc4174298eb06f7bfc5ff375b0b655cc6558e3
+ydataai/ydata-profiling,8fcc4174298eb06f7bfc5ff375b0b655cc6558e3,https://github.com/ydataai/ydata-profiling/commit/8fcc4174298eb06f7bfc5ff375b0b655cc6558e3,portellaa,1502403,User,2025-03-18T20:10:19+00:00,web-flow,2025-03-18T20:10:19+00:00,chore: fix linting errors (#1732),3,2,5,2,e3c840485b322ca067127bcb327c5f1702e69589
+ydataai/ydata-profiling,e3c840485b322ca067127bcb327c5f1702e69589,https://github.com/ydataai/ydata-profiling/commit/e3c840485b322ca067127bcb327c5f1702e69589,fabclmnt,30911746,User,2025-03-18T18:52:11+00:00,fabclmnt,2025-03-18T18:52:11+00:00,chore: update docs workflow,3,3,6,1,bb9debc8079695ecb7211e2b15605a1a5147a310
+ydataai/ydata-profiling,bb9debc8079695ecb7211e2b15605a1a5147a310,https://github.com/ydataai/ydata-profiling/commit/bb9debc8079695ecb7211e2b15605a1a5147a310,fabclmnt,30911746,User,2025-03-18T18:30:14+00:00,web-flow,2025-03-18T18:30:14+00:00,"feat: update spark version for ydata-profiling (#1730)
+
+* chore: update test pipeline to run higher spark version
+
+* chore: update spark test CI/CD pipeline.
+
+* chore: fix spark CI/CD
+
+* chore: remove make spark-ci
+
+* chore: add pytest to the dependencies
+
+* fix: fixing numba version due to visions
+
+* feat: update pyspark install
+
+* fix: pyproject
+
+* chore: fix makefile to run the tests
+
+* chore: tests for pyspark versions bigger than 3.4
+
+* fix: add other pyspark versions to the tests
+
+* chore: use ubuntu-22.04
+
+* chore: update test pipeline to run higher spark version
+
+* chore: update spark test CI/CD pipeline.
+
+* chore: fix spark CI/CD
+
+* chore: remove make spark-ci
+
+* chore: add pytest to the dependencies
+
+* fix: fixing numba version due to visions
+
+* feat: update pyspark install
+
+* fix: pyproject
+
+* chore: fix makefile to run the tests
+
+* chore: tests for pyspark versions bigger than 3.4
+
+* fix: add other pyspark versions to the tests
+
+* chore: use ubuntu-22.04
+
+* chore: remove unused timestamp",56,68,124,5,ae0e2e360f00e0686659c1aaf83efd8f4e5ae2ab
+ydataai/ydata-profiling,ae0e2e360f00e0686659c1aaf83efd8f4e5ae2ab,https://github.com/ydataai/ydata-profiling/commit/ae0e2e360f00e0686659c1aaf83efd8f4e5ae2ab,portellaa,1502403,User,2025-03-18T17:55:34+00:00,web-flow,2025-03-18T17:55:34+00:00,"chore(setup): comply build process with latest changes to pypi (#1731)
+
+* chore(actions): update dependency python to 3.13
+
+* chore: fix linting errors
+
+* fix: typing annotations
+
+* fix: fix import linting error
+
+* fix: ignore linter
+
+* chore: ignore mypy linter for some cases
+
+* fix(linting): code formatting
+
+* chore: create basesummarizer as a variable
+
+* chore: mypy type aliases
+
+* chore: fix typealias for older python versions
+
+* fix(linting): code formatting
+
+* chore: ignore F821
+
+---------
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+Co-authored-by: Fabiana <30911746+fabclmnt@users.noreply.github.com>
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",118,94,212,26,3d5301d986ea3b7c8e6646c394ea112835b6100a
+ydataai/ydata-profiling,3d5301d986ea3b7c8e6646c394ea112835b6100a,https://github.com/ydataai/ydata-profiling/commit/3d5301d986ea3b7c8e6646c394ea112835b6100a,renovate[bot],29139614,Bot,2025-03-18T00:09:44+00:00,web-flow,2025-03-18T00:09:44+00:00,chore(actions): update dependency python to 3.13,2,2,4,1,415616c76d2d0cb53f43426fe74e69583cf1b1ac
+ydataai/ydata-profiling,415616c76d2d0cb53f43426fe74e69583cf1b1ac,https://github.com/ydataai/ydata-profiling/commit/415616c76d2d0cb53f43426fe74e69583cf1b1ac,fabclmnt,30911746,User,2025-03-17T16:12:38+00:00,web-flow,2025-03-17T16:12:38+00:00,"fix: improve profiling code logic (#1728)
+
+* fix: refactor logic for ydata-profiling (pandas, spark summarizer)
+
+* fix: update correlations and missing data logic
+
+update tests to match the new flows
+
+* fix: refactor logic for ydata-profiling (pandas, spark summarizer)
+
+* fix: update correlations and missing data logic
+
+update tests to match the new flows
+
+* chore: update python version for linter
+
+Use python 3.12 to validate the linter and docs
+
+* fix(linting): code formatting
+
+* fix: linter suggested fixes
+
+* fix(linting): code formatting
+
+* fix: fix linter message to improve if else with exception
+
+* fix(linting): code formatting
+
+* fix: linter improvements
+
+* fix(linting): code formatting
+
+* fix: linter fixing tc301
+
+* fix: rm unecessary unit tes
+
+* fix(linting): code formatting
+
+* fix: spark correlations code
+
+* fix(linting): code formatting
+
+* fix: spark register for missing_heatmat
+
+* fix(linting): code formatting
+
+* fix: avoid circular imports
+
+* fix(linting): code formatting
+
+* fix: correct import
+
+* fix: rm import
+
+* fix: fix typing and import type
+
+* fix: linter fix related with imports
+
+* chore: fix typing for certain classes
+
+* fix(linting): code formatting
+
+* fix(linting): code formatting
+
+* fix: fix spark tests to align with the most up-to-date code
+
+* fix(linting): code formatting
+
+* chore: reverse to python 3.11
+
+* fix: removed wrong import
+
+* fix: spark implementation
+
+* fix: spark describe implementation to support more recent spark version
+
+update spark tests and improve spark implementation
+
+* chore: ignore linting errors that are not correct
+
+* chore: ignore typing check
+
+* chore: ignore unecessary type checks
+
+* chore: linting ignore of imports
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",706,596,1302,45,ed566d53e9382da73d425acc8867fc9ee20a5f06
+ydataai/ydata-profiling,ed566d53e9382da73d425acc8867fc9ee20a5f06,https://github.com/ydataai/ydata-profiling/commit/ed566d53e9382da73d425acc8867fc9ee20a5f06,renovate[bot],29139614,Bot,2025-03-12T00:39:11+00:00,web-flow,2025-03-12T00:39:11+00:00,chore(actions): update dependency python to 3.13,5,5,10,4,d2141a1696e6e5d2d2e9ed8142caf3dc606eb21b
+ydataai/ydata-profiling,d2141a1696e6e5d2d2e9ed8142caf3dc606eb21b,https://github.com/ydataai/ydata-profiling/commit/d2141a1696e6e5d2d2e9ed8142caf3dc606eb21b,ssiegel,5278489,User,2025-03-11T14:41:30+00:00,web-flow,2025-03-11T14:41:30+00:00,fix: Convert MultiIndex columns to string representation (#1672),21,1,22,2,7e41dde55e12cc03fb8eec45933074adce6c5a18
+ydataai/ydata-profiling,7e41dde55e12cc03fb8eec45933074adce6c5a18,https://github.com/ydataai/ydata-profiling/commit/7e41dde55e12cc03fb8eec45933074adce6c5a18,fabclmnt,30911746,User,2025-03-11T04:46:38+00:00,web-flow,2025-03-11T04:46:38+00:00,chore: update visions dependencies for spark and pandas (#1720),2,2,4,1,fc8dfe92fa52f1404450e068c455901e36ed2cf6
+ydataai/ydata-profiling,fc8dfe92fa52f1404450e068c455901e36ed2cf6,https://github.com/ydataai/ydata-profiling/commit/fc8dfe92fa52f1404450e068c455901e36ed2cf6,fabclmnt,30911746,User,2025-03-11T03:25:43+00:00,web-flow,2025-03-11T03:25:43+00:00,"feat: add new alert description (#1724)
+
+* fix: add new alert description
+
+* fix(linting): code formatting
+
+* feat: add new dirty categories config
+
+* feat: informative banner for end-users
+
+* fix(linting): code formatting
+
+* fix: rename the alert for Dirty category
+
+* fix(linting): code formatting
+
+* fix: linter fixes
+
+* fix(linting): code formatting
+
+* chore: set dirty categories config to False
+
+* chore: disable linter for expected code design
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",112,17,129,6,79c1c9d0acc7681e563cfc7314fb01e21f0be33e
+ydataai/ydata-profiling,79c1c9d0acc7681e563cfc7314fb01e21f0be33e,https://github.com/ydataai/ydata-profiling/commit/79c1c9d0acc7681e563cfc7314fb01e21f0be33e,fabclmnt,30911746,User,2025-03-10T23:38:53+00:00,web-flow,2025-03-10T23:38:53+00:00,"fix: fix import for environments with no IPython installed (#1725)
+
+* fix: fix import for environments with no IPython installed
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>",8,3,11,1,908305327cd8f85bd9c6ef0a43d45e1ba4e3a139
+ydataai/ydata-profiling,908305327cd8f85bd9c6ef0a43d45e1ba4e3a139,https://github.com/ydataai/ydata-profiling/commit/908305327cd8f85bd9c6ef0a43d45e1ba4e3a139,fabclmnt,30911746,User,2025-03-07T23:45:46+00:00,web-flow,2025-03-07T23:45:46+00:00,fix: updt scipy version (#1721),1,1,2,1,b74a5de9020d26b98a9f6c97cf0f70ad62a33a67
+ydataai/ydata-profiling,b74a5de9020d26b98a9f6c97cf0f70ad62a33a67,https://github.com/ydataai/ydata-profiling/commit/b74a5de9020d26b98a9f6c97cf0f70ad62a33a67,fabclmnt,30911746,User,2025-03-05T05:51:38+00:00,web-flow,2025-03-05T05:51:38+00:00,fix: add information to ydataprofiling (#1716),40,0,40,2,8910e1980d153f2a805b7c4ac47596738f399aaa
+ydataai/ydata-profiling,8910e1980d153f2a805b7c4ac47596738f399aaa,https://github.com/ydataai/ydata-profiling/commit/8910e1980d153f2a805b7c4ac47596738f399aaa,rugk,11966684,User,2025-03-05T00:23:24+00:00,web-flow,2025-03-05T00:23:24+00:00,"docs: fix broken link for doc for great_expectations.md (#1664)
+
+* docs: fix broken link for doc for great_expectations
+
+* docs: Fix broken link for doc for great_expectations.md
+
+I know it's deprecated (which is also a little bit too
+subtle to be documented IMHO), but the link should work, at least.
+
+---------
+
+Co-authored-by: Fabiana <30911746+fabclmnt@users.noreply.github.com>",1,1,2,2,cf853bd2845ba4c8ea4860c8859396a45b933b54
+ydataai/ydata-profiling,cf853bd2845ba4c8ea4860c8859396a45b933b54,https://github.com/ydataai/ydata-profiling/commit/cf853bd2845ba4c8ea4860c8859396a45b933b54,ssiegel,5278489,User,2025-03-04T23:47:11+00:00,web-flow,2025-03-04T23:47:11+00:00,"fix: avoid failure when index level shares name with a column (#1673)
+
+removes index names to avoid errors",21,0,21,2,6d36c8a673a2e6033dcdc960f5a3843bba0cf552
+ydataai/ydata-profiling,6d36c8a673a2e6033dcdc960f5a3843bba0cf552,https://github.com/ydataai/ydata-profiling/commit/6d36c8a673a2e6033dcdc960f5a3843bba0cf552,fabclmnt,30911746,User,2025-03-04T22:02:55+00:00,web-flow,2025-03-04T22:02:55+00:00,"chore: fix python version (#1713)
+
+* chore: fix python version
+
+* chore: fix python version to accomodate 3.7",1,1,2,1,951b78767a370390e010d907bfaf5e5774940260
+ydataai/ydata-profiling,951b78767a370390e010d907bfaf5e5774940260,https://github.com/ydataai/ydata-profiling/commit/951b78767a370390e010d907bfaf5e5774940260,fabclmnt,30911746,User,2025-03-04T21:25:06+00:00,fabclmnt,2025-03-04T21:25:06+00:00,"Merge branch 'vorel99-add-pyproject-toml' into develop
+chore: merge pyproject.toml changes",148,155,303,13,"b13b0c8e9175f9c2442577c82cb57b7caf24d39b,8d8de62bbec949b59e3d4111b90d94dbb0681edd"
+ydataai/ydata-profiling,8d8de62bbec949b59e3d4111b90d94dbb0681edd,https://github.com/ydataai/ydata-profiling/commit/8d8de62bbec949b59e3d4111b90d94dbb0681edd,fabclmnt,30911746,User,2025-03-04T21:24:48+00:00,fabclmnt,2025-03-04T21:24:48+00:00,chore: merge dev for .toml file changes,1,33,34,2,11d27dd6d4e9bbda80e1d0634c564b83b3fd2e91
+ydataai/ydata-profiling,11d27dd6d4e9bbda80e1d0634c564b83b3fd2e91,https://github.com/ydataai/ydata-profiling/commit/11d27dd6d4e9bbda80e1d0634c564b83b3fd2e91,fabclmnt,30911746,User,2025-03-04T21:17:58+00:00,fabclmnt,2025-03-04T21:17:58+00:00,Merge branch 'add-pyproject-toml' of https://github.com/vorel99/supervised-pandas-profiling into vorel99-add-pyproject-toml,148,123,271,13,"b13b0c8e9175f9c2442577c82cb57b7caf24d39b,53c8d36cbc788eed00d5b45b2c367d087fb258c2"
+ydataai/ydata-profiling,b13b0c8e9175f9c2442577c82cb57b7caf24d39b,https://github.com/ydataai/ydata-profiling/commit/b13b0c8e9175f9c2442577c82cb57b7caf24d39b,fabclmnt,30911746,User,2025-03-04T20:39:48+00:00,web-flow,2025-03-04T20:39:48+00:00,chore: revert notebook tests (#1712),3,3,6,2,f593bb7bde8866a06e2a5332c29dfb5c042a42c9
+ydataai/ydata-profiling,f593bb7bde8866a06e2a5332c29dfb5c042a42c9,https://github.com/ydataai/ydata-profiling/commit/f593bb7bde8866a06e2a5332c29dfb5c042a42c9,walterdiaza,55962971,User,2025-03-04T19:23:26+00:00,web-flow,2025-03-04T19:23:26+00:00,"fix(display): Update display import (#1709)
+
+* fix: improve type checking logic in _is_cast_type_defined function
+
+* fix: update IPython import paths to use the correct module
+
+* Revert ""fix: improve type checking logic in _is_cast_type_defined function""
+
+This reverts commit 65e424c777ecd3b74924a847825a84d0c26252dc.
+
+---------
+
+Co-authored-by: Fabiana <fabiana.clemente@ydata.ai>",19,12,31,8,0ed32b7a85936510450e279e42374cef00b95b78
+ydataai/ydata-profiling,0ed32b7a85936510450e279e42374cef00b95b78,https://github.com/ydataai/ydata-profiling/commit/0ed32b7a85936510450e279e42374cef00b95b78,gmartinsribeiro,3663070,User,2025-03-04T17:47:40+00:00,web-flow,2025-03-04T17:47:40+00:00,"docs: fix report titles (#1710)
+
+* docs: fix report titles
+
+change pandas to ydata
+
+* fix(linting): code formatting
+
+* docs: fix typo
+
+remove extra word
+
+* fix(linting): code formatting
+
+---------
+
+Co-authored-by: Azory YData Bot <azory@ydata.ai>
+Co-authored-by: Fabiana <30911746+fabclmnt@users.noreply.github.com>",31,31,62,19,7438fffda9801e18db9a8d0e0b05497d966491e1
+ydataai/ydata-profiling,7438fffda9801e18db9a8d0e0b05497d966491e1,https://github.com/ydataai/ydata-profiling/commit/7438fffda9801e18db9a8d0e0b05497d966491e1,fabclmnt,30911746,User,2025-03-04T16:43:25+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: temp ipython version smaller than 9,3,1,4,1,8b9f80008d8ca53dd8eb177b29beada1cfc57865
+ydataai/ydata-profiling,8b9f80008d8ca53dd8eb177b29beada1cfc57865,https://github.com/ydataai/ydata-profiling/commit/8b9f80008d8ca53dd8eb177b29beada1cfc57865,fabclmnt,30911746,User,2025-03-04T16:24:23+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: fix coverage flow,5,3,8,1,dc90878178034f5a87e24c807c9415678ee80db6
+ydataai/ydata-profiling,dc90878178034f5a87e24c807c9415678ee80db6,https://github.com/ydataai/ydata-profiling/commit/dc90878178034f5a87e24c807c9415678ee80db6,fabclmnt,30911746,User,2025-03-04T16:19:51+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: update coverage,3,4,7,1,6376612a744d7e80c835721c29ca7e01974881eb
+ydataai/ydata-profiling,6376612a744d7e80c835721c29ca7e01974881eb,https://github.com/ydataai/ydata-profiling/commit/6376612a744d7e80c835721c29ca7e01974881eb,fabclmnt,30911746,User,2025-03-04T16:17:45+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: identation,4,4,8,1,019ce1ba0e6aeb0737e0d301155769589b9c2c6a
+ydataai/ydata-profiling,019ce1ba0e6aeb0737e0d301155769589b9c2c6a,https://github.com/ydataai/ydata-profiling/commit/019ce1ba0e6aeb0737e0d301155769589b9c2c6a,fabclmnt,30911746,User,2025-03-04T16:16:50+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: fix yml file,2,2,4,1,3d63b11db9cffb7b4c58b164b662a055a7a57326
+ydataai/ydata-profiling,3d63b11db9cffb7b4c58b164b662a055a7a57326,https://github.com/ydataai/ydata-profiling/commit/3d63b11db9cffb7b4c58b164b662a055a7a57326,fabclmnt,30911746,User,2025-03-04T16:13:38+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: fix identation,5,5,10,1,9e7eec1199207beca3eaf74851f47272fb443390
+ydataai/ydata-profiling,9e7eec1199207beca3eaf74851f47272fb443390,https://github.com/ydataai/ydata-profiling/commit/9e7eec1199207beca3eaf74851f47272fb443390,fabclmnt,30911746,User,2025-03-04T16:10:34+00:00,fabclmnt,2025-03-04T17:17:19+00:00,chore: update github workflows,6,36,42,1,df663202efd56e28bd3ea96970c02be00bb0e1fd
+ydataai/ydata-profiling,df663202efd56e28bd3ea96970c02be00bb0e1fd,https://github.com/ydataai/ydata-profiling/commit/df663202efd56e28bd3ea96970c02be00bb0e1fd,ssiegel,5278489,User,2025-02-28T17:06:11+00:00,fabclmnt,2025-03-04T16:44:29+00:00,fix: fix CI pipeline,8,8,16,6,64ddc0dc2286daac3a34054feb2476dca12f2fc5

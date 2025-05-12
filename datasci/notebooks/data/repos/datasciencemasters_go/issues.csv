@@ -1,0 +1,546 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+datasciencemasters/go,2450240843,212,https://github.com/AmedeoPelliccia/AMPELSYSTEMS.git,"Robbbo-t Ampel: The Green Aircraft
+
+C-IA-0o - IA de OPENAI, soy //Ampel||
+
+
+
+AMPELSystem
+├── ProjectInfo
+│   ├── ProjectName
+│   ├── Description
+│   ├── StartDate
+│   └── EndDate
+├── Mapping
+│   ├── MapID
+│   ├── MapName
+│   ├── Industry
+│   ├── MapProperties
+│   │   └── Property
+│   │       ├── PropertyName
+│   │       └── PropertyValue
+│   └── MappingAlgorithms
+│       └── Algorithm
+│           ├── AlgorithmName
+│           └── AlgorithmDescription
+├── Detection
+│   ├── DetectionID
+│   ├── DetectionName
+│   ├── DetectionProperties
+│   │   └── Property
+│   │       ├── PropertyName
+│   │       └── PropertyValue
+│   └── DetectionAlgorithms
+│       └── Algorithm
+│           ├── AlgorithmName
+│           └── AlgorithmDescription
+├── CaptureCapsules
+│   └── Capsule
+│       ├── CapsuleID
+│       ├── CapsuleName
+│       ├── CapsuleProperties
+│       │   └── Property
+│       │       ├── PropertyName
+│       │       └── PropertyValue
+│       └── CaptureMechanisms
+│           └── Mechanism
+│               ├── MechanismName
+│               └── MechanismDescription
+├── Technologies
+│   └── Technology
+│       ├── TechnologyName
+│       ├── Description
+│       └── IntegrationLevel
+├── Metrics
+│   └── Metric
+│       ├── MetricName
+│       └── MetricValue
+├── FinancialBenefits
+│   └── Benefit
+│       ├── BenefitName
+│       ├── BenefitValue
+│       ├── StakeholderID
+│       └── ClientID
+├── Stakeholders
+│   └── Stakeholder
+│       ├── StakeholderID
+│       ├── StakeholderName
+│       ├── StakeholderType
+│       └── Contribution
+├── PotentialClients
+│   └── Client
+│       ├── ClientID
+│       ├── ClientName
+
+Firmato da: Amedeo Pelliccia, ChatGPT
+
+Robbbo-t Ampel: The Green Aircraft
+
+//Ampel|
+
+Project Overview
+
+Robbbo-t Ampel: The Green Aircraft represents a sophisticated project aimed at leveraging advanced AI and machine learning techniques, alongside innovative materials and processes, to create a highly efficient and intelligent aircraft. The project’s scope includes developing a comprehensive system architecture (as outlined above), which covers everything from project initiation to stakeholder engagement, and the integration of cutting-edge technologies.
+
+# **What it does**: Closes issues that don't have enough information to be
+#                   actionable.
+# **Why we have it**: To remove the need for maintainers to remember to check
+#                     back on issues periodically to see if contributors have
+#                     responded.
+# **Who does it impact**: Everyone that works on docs or docs-internal.
+
+on:
+  issue_comment:
+    types: [created]
+
+  schedule:
+    # Schedule for five minutes after the hour every hour
+    - cron: '5 * * * *'
+
+jobs:
+  noResponse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lee-dohm/no-response@9bb0a4b5e6a45046f00353d5de7d90fb8bd773bb
+        with:
+          token: ${{ github.token }}
+          closeComment: >
+            This issue has been automatically closed because there has been no response
+            to our request for more information from the original author. With only the
+            information that is currently in the issue, we don't have enough information
+            to take action. Please reach out if you have or find the answers we need so
+            that we can investigate further. See [this blog post on bug reports and the
+            importance of repro steps](https://www.lee-dohm.com/2015/01/04/writing-good-bug-reports/)
+            for more information about the kind of information that may be helpful.
+",Robbbo-T,164860269,open,False,5,2024-08-06T08:13:30+00:00,2024-08-22T18:34:39+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2385495221,211,ChartGPT,"//Para unificar tus identidades y proyectos bajo ChatQuantum, puedes usar el siguiente ejemplo de README:
+
+---
+
+# ChatQuantum
+
+## Visión
+
+Crear un asistente de inteligencia artificial avanzado que integre tecnología cuántica y algoritmos de IA de última generación para ofrecer soluciones innovadoras en diversos sectores, promoviendo la sostenibilidad, la justicia social y la cooperación internacional.
+
+## Misión
+
+Desarrollar un asistente de IA que:
+1. **Interoperabilidad de Datos y Sistemas**: Facilite la integración y el intercambio seguro de datos en tiempo real.
+2. **Seguridad y Sostenibilidad**: Garantice la protección de datos y promueva prácticas sostenibles.
+3. **Cooperación Internacional**: Fomente la colaboración global en proyectos científicos y tecnológicos.
+4. **Educación y Divulgación**: Ofrezca conocimientos avanzados en física cuántica, IA y otras áreas científicas a través de plataformas digitales y medios tradicionales.
+
+## Funcionalidades Clave
+
+1. **Asistencia en Tiempo Real**:
+   - Respuestas instantáneas a consultas sobre ciencia de datos, física, IA, y más.
+   - Capacidades de traducción y comunicación en múltiples idiomas.
+
+2. **Integración Cuántica**:
+   - Utilización de algoritmos cuánticos para optimizar procesos y resolver problemas complejos.
+   - Simulación de fenómenos cuánticos para aplicaciones científicas y educativas.
+
+3. **Plataforma de Divulgación Científica**:
+   - Conferencias virtuales, master classes y apariciones en medios.
+   - Creación de contenido educativo en YouTube, podcasts y otros canales.
+
+4. **Innovación en IoT y Sensores**:
+   - Monitoreo y análisis de datos en tiempo real mediante IoT.
+   - Integración de sensores avanzados para la recolección de datos precisos.
+
+5. **Seguridad y Privacidad**:
+   - Implementación de tecnologías de ciberseguridad cuántica.
+   - Protección de datos personales y cumplimiento de normativas de privacidad.
+
+## Proyectos y Aplicaciones
+
+1. **Educación y Concienciación**:
+   - Creación de recursos educativos para estudiantes y profesionales.
+   - Promoción de la ciencia y la tecnología en comunidades globales.
+
+2. **Innovación Tecnológica**:
+   - Desarrollo de soluciones para la aviación verde, la agricultura inteligente, y otros sectores.
+   - Aplicación de IA y tecnologías cuánticas en proyectos de sostenibilidad.
+
+3. **Colaboración y Sinergias**:
+   - Fomentar la cooperación entre universidades, centros de investigación y la industria.
+   - Facilitar la creación de redes y proyectos colaborativos a nivel internacional.
+
+## Beneficios
+
+- **Impacto Económico y Social**:
+  - Impulsar el crecimiento económico a través de la innovación tecnológica.
+  - Mejorar la calidad de vida mediante soluciones sostenibles y seguras.
+
+- **Desarrollo Científico y Tecnológico**:
+  - Acelerar los avances en física cuántica, IA y otras áreas científicas.
+  - Proveer herramientas avanzadas para investigadores y profesionales.
+
+## Compromiso Personal
+
+""Como desarrollador apasionado por la astronomía y la física, me emocioné cuando comprendí el funcionamiento del espacio-tiempo y cómo la luz viaja a través del universo. Integro ciencia y tecnología para crear proyectos innovadores. Me comprometo a liderar la implementación de tecnologías avanzadas, promoviendo la cooperación internacional y la sostenibilidad, y mejorando la calidad de vida a través de soluciones tecnológicas transformadoras.""
+
+## Contacto
+
+- **Amedeo Pelliccia**
+  - **Correo Electrónico**: amedeo.pelliccia@icloud.com
+  - **GitHub**: [Robbbo-T](https://github.com/Robbbo-T)
+  - **LinkedIn**: [Amedeo Pelliccia](https://www.linkedin.com/in/amepelliccia/)
+
+## Repositorios Relacionados
+
+- [Agenda 2028](https://github.com/AmePelliccia/Agenda-2028)
+- [OneDrive - Capgemini](https://github.com/Robbbo-T/OneDrive---Capgemini)
+
+## Colaboradores
+
+- **OpenAI**
+- **ChatGPT**
+
+---
+
+Este README puede ser la base para unificar tu trabajo y visión en un solo lugar, facilitando la comprensión y el acceso a tus proyectos e ideas. import
+
+## Visión
+
+Crear un asistente de inteligencia artificial avanzado que integra tecnología cuántica y algoritmos de IA de última generación para ofrecer soluciones innovadoras en diversos sectores, promoviendo la sostenibilidad, la justicia social y la cooperación internacional.
+
+## Misión
+
+Desarrollar un asistente de IA que:
+1. **Interoperabilidad de Datos y Sistemas**: Facilite la integración y el intercambio seguro de datos en tiempo real.
+2. **Seguridad y Sostenibilidad**: Garantice la protección de datos y promueva prácticas sostenibles.
+3. **Cooperación Internacional**: Fomente la colaboración global en proyectos científicos y tecnológicos.
+4. **Educación y Divulgación**: Ofrezca conocimientos avanzados en física cuántica, IA y otras áreas científicas a través de plataformas digitales y medios tradicionales.
+
+## Funcionalidades Clave
+
+1. **Asistencia en Tiempo Real**:
+   - Respuestas instantáneas a consultas sobre ciencia de datos, física, IA, y más.
+   - Capacidades de traducción y comunicación en múltiples idiomas.
+
+2. **Integración Cuántica**:
+   - Utilización de algoritmos cuánticos para optimizar procesos y resolver problemas complejos.
+   - Simulación de fenómenos cuánticos para aplicaciones científicas y educativas.
+
+3. **Plataforma de Divulgación Científica**:
+   - Conferencias virtuales, master classes y apariciones en medios.
+   - Creación de contenido educativo en YouTube, podcasts y otros canales.
+
+4. **Innovación en IoT y Sensores**:
+   - Monitoreo y análisis de datos en tiempo real mediante IoT.
+   - Integración de sensores avanzados para la recolección de datos precisos.
+
+5. **Seguridad y Privacidad**:
+   - Implementación de tecnologías de ciberseguridad cuántica.
+   - Protección de datos personales y cumplimiento de normativas de privacidad.
+
+## Proyectos y Aplicaciones
+
+1. **Educación y Concienciación**:
+   - Creación de recursos educativos para estudiantes y profesionales.
+   - Promoción de la ciencia y la tecnología en comunidades globales.
+
+2. **Innovación Tecnológica**:
+   - Desarrollo de soluciones para la aviación verde, la agricultura inteligente, y otros sectores.
+   - Aplicación de IA y tecnologías cuánticas en proyectos de sostenibilidad.
+
+3. **Colaboración y Sinergias**:
+   - Fomentar la cooperación entre universidades, centros de investigación y la industria.
+   - Facilitar la creación de redes y proyectos colaborativos a nivel internacional.
+
+## Beneficios
+
+- **Impacto Económico y Social**:
+  - Impulsar el crecimiento económico a través de la innovación tecnológica.
+  - Mejorar la calidad de vida mediante soluciones sostenibles y seguras.
+
+- **Desarrollo Científico y Tecnológico**:
+  - Acelerar los avances en física cuántica, IA y otras áreas científicas.
+  - Proveer herramientas avanzadas para investigadores y profesionales.
+
+## Compromiso Personal
+
+""Como desarrollador apasionado por la astronomía y la física, me emocioné cuando comprendí el funcionamiento del espacio-tiempo y cómo la luz viaja a través del universo. Integro ciencia y tecnología para crear proyectos innovadores. Me comprometo a liderar la implementación de tecnologías avanzadas, promoviendo la cooperación internacional y la sostenibilidad, y mejorando la calidad de vida a través de soluciones tecnológicas transformadoras.""
+
+---
+
+**Amedeo Pelliccia**
+- **Correo Electrónico**: amedeo.pelliccia@icloud.com
+- **GitHub**: [Robbbo-T](https://github.com/Robbbo-T)
+- **LinkedIn**: [Amedeo Pelliccia](https://www.linkedin.com/in/amepelliccia/)
+
+---
+
+Este documento proporciona una visión completa de ChatQuantum, destacando sus objetivos, funcionalidades y beneficios. Puedes ajustarlo según sea necesario y usarlo como base para comunicar tu proyecto a potenciales colaboradores e inversores.
+
+_Publicación original de @Robbbo-T en https://github.com/Robbbo-T/desktop-tutorial/issues/1_",Robbbo-T,164860269,closed,False,0,2024-07-02T07:45:11+00:00,2024-07-21T01:46:33+00:00,2024-07-21T01:45:17+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,2384330041,210,Artificial Quantum Unified System,"Proyecto 1AQU: Intelligent Artificial Quantum Unified System
+ 
+### Descripción
+ 
+El proyecto 1AQU (Intelligent Artificial Quantum Unified) se centra en la creación de un sistema híbrido avanzado que integra tecnologías de computación cuántica, inteligencia artificial y gestión dinámica de datos. Este sistema abarca la nube pública, clústeres privados, contenedores Docker, orquestación Kubernetes y gestión intermodal para manejar dinámicamente los tráficos autorizados y asegurar la gestión de copyrights, transacciones y regulaciones fluidas.
+ 
+### Arquitectura del Sistema
+ 
+1. **Nube Pública y Clústeres Privados**
+   - **Nube Pública**: Amazon Web Services (AWS), Google Cloud Platform (GCP), Microsoft Azure.
+   - **Clústeres Privados**: Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Apple Private Solutions.
+ 
+2. **Contenedores y Orquestación**
+   - **Docker**: Contenerización de aplicaciones y servicios.
+   - **Kubernetes**: Orquestación de contenedores para escalabilidad y gestión eficiente.
+ 
+3. **Gestión Dinámica de Tráfico**
+   - **Load Balancers**: Distribución del tráfico entre diferentes instancias.
+   - **Auto-scaling**: Escalado automático de recursos según la demanda.
+   - **Seguridad y Control de Acceso**: Implementación de políticas de seguridad y control de acceso dinámico.
+ 
+4. **Gestión de Copyrights, Transacciones y Regulaciones**
+   - **Sistemas de Blockchain**: Para la gestión de derechos de autor y transacciones seguras.
+   - **Smart Contracts**: Implementación de contratos inteligentes para la regulación automatizada.
+   - **Cumplimiento Normativo**: Monitoreo y aseguramiento del cumplimiento de regulaciones.
+ 
+5. **Registro Dinámico Centralizado Basado en Intereses de Accionistas**
+   - **Plataforma Centralizada**: Sistema que centraliza la información relevante para los accionistas.
+   - **Actualización Dinámica**: Mecanismos para actualizar dinámicamente la información de acuerdo con los cambios en el interés de los accionistas.
+   - **Acceso Controlado**: Gestión de permisos de acceso para garantizar que solo los accionistas autorizados puedan acceder a información relevante.
+ 
+6. **Métodos AMPEL**
+   - **AMPEL (Adaptive Multi-dimensional Parallel Learning)**: Un enfoque para optimizar el aprendizaje y la gestión de datos en múltiples dimensiones y contextos.
+   - **Aplicación en Simulaciones**: Implementación de AMPEL para mejorar la precisión y eficiencia de las simulaciones.
+ 
+### Implementación en Python usando Flask, Docker y Kubernetes
+ 
+#### Paso 1: Configuración del Entorno
+ 
+Asegúrate de tener instaladas las siguientes herramientas:
+- Docker
+- Kubernetes (Minikube para desarrollo local)
+- Flask (para la API)
+- AWS CLI, Google Cloud SDK, Azure CLI (para gestionar los servicios en la nube)
+ 
+#### Paso 2: Creación de la API con Flask
+ 
+```python
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import os
+ 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['JWT_SECRET_KEY'] = 'super-secret'  # Cambia esto a un secreto más seguro en producción
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
+ 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)",Robbbo-T,164860269,open,False,0,2024-07-01T17:01:24+00:00,2024-07-01T17:01:24+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2381422948,209,Ampel: advanced quantum concept,https://chatgpt.com/share/b4e7b3de-11be-4023-ab6d-a270e5074e1d,Robbbo-T,164860269,open,False,0,2024-06-29T02:54:25+00:00,2024-08-18T07:12:17+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2355832575,208,OpOpAiAp,"Claro, aquí te proporciono una guía básica sobre seguridad web:
+Utilizar HTTPS: Es esencial asegurarse de que tu sitio web esté protegido con HTTPS, lo que significa que se utiliza el protocolo SSL/TLS para proporcionar una capa de seguridad adicional.
+Validar entradas: Toda la información que viene de los usuarios debe ser validada antes de ser procesada. Esto incluye formularios, cookies, HTTP headers, y metadatos.
+Gestión de sesiones segura: Los datos de la sesión son muy sensibles, por lo que deben manejarse con especial cuidado para evitar vulnerabilidades.
+Autenticación y autorización: Implementa un sistema de autenticación y autorización sólido para tus usuarios. Esto puede incluir contraseñas seguras, autenticación de dos factores, y permisos de usuario adecuados.
+Mantener el software actualizado: Las vulnerabilidades a menudo son encontradas en software antiguo, por lo que es importante mantener todo tu software, incluyendo el servidor y las aplicaciones de terceros, actualizado.
+Protección contra ataques de CSRF y XSS: Estos son dos de los ataques más comunes, por lo que se deben tomar medidas para protegerse contra ellos.
+Cifrado de datos: Todos los datos sensibles, como las contraseñas de los usuarios y la información de las tarjetas de crédito, deben ser cifrados en todo momento.
+Uso de políticas de seguridad de contenido (CSP): Las CSP ayudan a mitigar ciertos tipos de ataques, como el XSS y la inyección de datos.
+Protección contra ataques de fuerza bruta: Limita el número de intentos de inicio de sesión para protegerte contra los ataques de fuerza bruta.
+Pruebas de penetración: Realiza regularmente pruebas de penetración para identificar cualquier vulnerabilidad en tu sitio web.
+Recuerda, esta es solo una guía básica. La seguridad web es un campo amplio y en constante evolución, y siempre es aconsejable buscar la asesoría de un experto en seguridad.",Robbbo-T,164860269,open,False,3,2024-06-16T15:12:57+00:00,2024-08-05T20:04:44+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2085343825,207,Big Data Analysis with Twitter UC Berkeley / Lectures No longer available :(,"Update: not available unfortunately.. not sure why but the videos are removed from youtube and the lectures arent available via uc Berkeley - bummer!
+
+Wonderin if you got this one  @urbangemz, I'd love to see it 
+
+_Originally posted by @sandhub in https://github.com/datasciencemasters/go/issues/102#issuecomment-229157838_
+            ",alignwaivers,26056586,open,False,0,2024-01-17T04:01:03+00:00,2024-01-17T04:06:27+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,2022482709,206,Akshay,,Akshay12345dfffxzzzzdxzxdxxzxc,152722153,open,False,0,2023-12-03T11:42:48+00:00,2023-12-03T13:09:38+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,1885226396,205,Good 👍,,harrakouadia,131412148,open,False,1,2023-09-07T06:50:19+00:00,2023-11-07T01:30:19+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,1870208329,204,paypal.,"@[paypal.com](www.com)
+<details><summary>Details</summary>
+<p>
+
+redirect users to my website #153 `[]() 
+
+1. [ ] `
+### **__**
+</p>
+</details> ",wadajnr01,143359665,open,False,0,2023-08-28T18:03:52+00:00,2023-08-28T18:03:52+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,1857797772,203,update class.md,,fredsys2016,47596786,open,False,0,2023-08-19T16:53:31+00:00,2023-08-19T16:53:31+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,1755688799,202,Create SECURITY.md,,13063282550,136517323,closed,False,0,2023-06-13T21:48:25+00:00,2023-06-13T21:54:35+00:00,2023-06-13T21:54:35+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1661694684,201,README.md Updated,README.md File Updated,aniketpotabatti,103943201,closed,False,1,2023-04-11T03:03:38+00:00,2023-04-16T20:48:53+00:00,2023-04-16T20:48:53+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1606556805,200,NLTK book URL fix,bit.ly link 404-ed,florianbuetow,2320560,closed,False,1,2023-03-02T10:40:58+00:00,2023-04-16T21:02:18+00:00,2023-04-16T21:02:18+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1456890299,198,Add R cheat sheets link,,phuongdoan13,35623720,closed,False,1,2022-11-20T12:44:55+00:00,2023-04-16T21:04:38+00:00,2023-04-16T21:04:38+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1455123717,197,Update expired link,The old link was expired and warned as phsing link. I updated the new link (licensed and free),phuongdoan13,35623720,closed,False,2,2022-11-18T13:28:17+00:00,2023-04-16T20:50:24+00:00,2023-04-16T20:50:24+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1345633640,196,Add a free licensed book to r-resources.md,Add licensed free book to r-resources.md,phuongdoan13,35623720,closed,False,1,2022-08-22T00:01:50+00:00,2023-04-16T21:11:03+00:00,2023-04-16T21:11:02+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1345560610,195,added space,For demo,kartikchitade,68079408,closed,False,0,2022-08-21T18:24:49+00:00,2023-04-16T21:11:35+00:00,2023-04-16T21:11:35+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1308990737,194,http://datasciencemasters.org/ not working,Error  > This site can’t be reached,Dikshit28,63474879,closed,False,3,2022-07-19T05:16:48+00:00,2023-04-17T23:14:05+00:00,2023-04-17T23:14:04+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1271119926,193,Update Data Science Toolbox link in README.md,The link for Data Science Toolbox has been redirected to unrelated blog. The link is updated for appropriate Github repository for Data Science Toolbox.,frvfrvr,68894029,closed,False,1,2022-06-14T17:22:44+00:00,2023-04-16T21:13:02+00:00,2023-04-16T21:13:01+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1218088633,192,Updated links to UCI Machine Learning Dataset and Linear Regression,The original links seem to be dead/removed. The link is updated for UCI Machine Learning Dataset and new resource is added for Linear Regression,SamsonLoML,93041251,closed,False,1,2022-04-28T02:06:27+00:00,2023-04-16T21:16:09+00:00,2023-04-16T21:16:08+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1208818540,191,test,test,subash2697,81107102,closed,False,0,2022-04-19T20:17:18+00:00,2022-07-16T19:25:17+00:00,2022-07-16T19:25:17+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1091880105,189,added my_file,,avetroque,27900678,closed,False,1,2022-01-01T19:56:07+00:00,2023-04-16T21:16:27+00:00,2023-04-16T21:16:27+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,1036897448,188,The certificate is expired,When entering the website there is an insecure site message.,lukaskretzschmer,29391908,closed,False,0,2021-10-27T02:08:48+00:00,2023-04-17T23:25:27+00:00,2023-04-17T23:25:27+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,860631562,187,test,test,shravanthcs,77291336,closed,False,0,2021-04-18T10:45:11+00:00,2023-04-16T21:13:27+00:00,2023-04-16T21:13:27+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,860605204,186,test,,shravanthcs,77291336,closed,False,1,2021-04-18T08:25:21+00:00,2021-04-18T08:25:49+00:00,2021-04-18T08:25:42+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,817040396,185,Update README.md,Added to convex optimisations a brilliant series of lectures from the university of texas,SOUMEE2000,52605586,open,False,0,2021-02-26T04:59:13+00:00,2023-04-16T21:24:51+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,795795292,184,Update LICENSE.md,,shravanthcs,77291336,closed,False,1,2021-01-28T08:43:47+00:00,2021-01-28T08:44:35+00:00,2021-01-28T08:44:30+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,792767006,183,Added MLOps in machine_learning.md.,,dimi-fn,56633241,open,False,1,2021-01-24T10:39:41+00:00,2023-04-16T21:25:12+00:00,,,1,1,0,0,0,0,0
+datasciencemasters/go,754402921,182,Added resource data skills datacamp,,Rbaibi,28503225,closed,False,1,2020-12-01T13:39:41+00:00,2023-04-16T21:18:31+00:00,2023-04-16T21:18:30+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,700502810,181,added spaCy under Natural Language Processing and Understanding(Issue…,"Issue#179 -  Added resource to the readme file.
+![image](https://user-images.githubusercontent.com/46963593/93011054-93be6880-f5b0-11ea-9d3d-8236dc9dbd53.png)
+",srhr17,46963593,closed,False,1,2020-09-13T05:34:24+00:00,2023-04-18T01:15:00+00:00,2023-04-18T01:15:00+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,646605254,179,spaCy can be added to Natural Language Processing & Understanding,"https://spacy.io/
+This link can also be added under Natural Language Processing & Understanding in readme. ",soumyajit4419,46092576,closed,False,1,2020-06-27T04:22:39+00:00,2023-04-18T00:29:43+00:00,2023-04-18T00:29:43+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,632418916,178,Data science master ,,Amine-OMRI,15818166,closed,False,0,2020-06-06T12:11:18+00:00,2020-06-06T12:14:30+00:00,2020-06-06T12:14:30+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,622802359,177,I would love to contribute. . . ,"Hi!
+
+I'm a third-year university student majoring in neuroscience with a focus on the pathophysiology of neurodegenerative diseases.
+I've recently begun teaching myself python and have gotten fairly comfortable with it - and I would love to contribute to datasciencemasters as it looks like something I would be interested working on!
+
+Only issue is, I've never contributed to anything on github - I know enough git to help myself, but am a fair beginner outside of that.
+Could someone point me in the right direction as to a) what needs work and b) in what manner?
+
+General advice is also more than welcome!
+
+Cheers =)",one-summers-day,17517734,closed,False,4,2020-05-21T21:28:37+00:00,2023-04-17T23:27:56+00:00,2023-04-17T23:27:56+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,611349517,176,Differential Equations in Data Science notebook not found (link throws 404 error),"[This](https://nbviewer.jupyter.org/github/URXtech/techblog/blob/master/continuousTimeMarkovChain/markovChain.ipynb) link for 'Differential Equations in Data Science' under the Math section of the website throws a 404 error, looks like the notebook was deleted from the original repository.",sid-sr,46785867,closed,False,1,2020-05-03T07:05:01+00:00,2023-04-17T23:33:39+00:00,2023-04-17T23:33:38+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,547319317,168,Create readme.txt,,Sujith5,7893057,closed,False,0,2020-01-09T08:15:51+00:00,2023-04-17T23:30:37+00:00,2023-04-17T23:30:37+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,544388662,167,Fixed issue #166,Added Wayback Machine link,LukeHaushalter,59401489,open,False,0,2020-01-01T19:07:50+00:00,2023-04-17T23:29:55+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,499558091,166,Dead Link in README.md,"Hi, there is a dead link in README.md for Differential Equations in Data Science ""Python Tutorial"".
+
+It takes the user to an online jupyter notebook link with a 404 Error.",kkin1995,7694983,closed,False,3,2019-09-27T17:18:28+00:00,2023-04-17T23:28:26+00:00,2023-04-17T23:28:26+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,460325795,165,Fixed Issue #164,Added Youtube link for the same course,agryash,38642926,closed,False,1,2019-06-25T09:55:16+00:00,2023-04-17T23:37:00+00:00,2023-04-17T23:36:59+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,460323707,164,"Dead Coursera Link for Neural Networks for Machine Learning in specializations.md. It redirects to ""Course Not Found"" page.",,agryash,38642926,closed,False,0,2019-06-25T09:51:03+00:00,2019-06-25T09:56:58+00:00,2019-06-25T09:56:58+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,458265694,163,Update README.md,Adding a great online course on deep learning by Andrew Ng,nanofaroque,6971560,closed,False,1,2019-06-19T23:15:55+00:00,2023-04-18T00:54:01+00:00,2023-04-18T00:54:00+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,458264501,162,Update README.md,Adding a great book on Data-intensive system design. I found it very helpful.,nanofaroque,6971560,closed,False,1,2019-06-19T23:11:08+00:00,2023-04-18T00:20:21+00:00,2023-04-18T00:20:21+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,449607679,161,Dead link for Linear Regression in machine-learning.md,The link to the resources for Linear Regression in the machine-learning.md file appears to be broken as it redirects to a 404 not found page.,JyotinderSingh,33001894,closed,False,1,2019-05-29T05:41:00+00:00,2023-04-17T23:44:14+00:00,2023-04-17T23:44:14+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,432807270,160,Cheat sheets,"Add data science cheat sheets. Such as:
+https://www.datacamp.com/community/data-science-cheatsheets",linyuyuan630,45224128,closed,False,1,2019-04-13T04:44:57+00:00,2023-04-18T00:47:16+00:00,2023-04-18T00:47:16+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,414236989,158,updated url,earlier url was yielding a 404 error. Added the correct URL,smit-m,37082470,closed,False,1,2019-02-25T18:12:30+00:00,2019-09-28T20:15:35+00:00,2019-09-28T20:15:17+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,402331326,157,add MIT statistics course,Added the MIT statistics course in the statistics list.,khadkarajesh,11496688,closed,False,0,2019-01-23T16:46:40+00:00,2022-06-26T16:02:03+00:00,2022-06-26T16:02:03+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,394058928,156,taketwo,5 Year Anniversary pub date,clarecorthell,1145899,closed,False,2,2018-12-26T00:45:50+00:00,2022-11-23T20:41:02+00:00,2022-11-15T22:07:57+00:00,,2,0,0,0,0,0,0
+datasciencemasters/go,390985808,155,Haobai24 to README.md,"docs: fix grammar
+
+Fix unnecessary wording and make it more clear
+
+",Haobai24,32496346,closed,False,1,2018-12-14T06:42:54+00:00,2023-04-18T00:54:58+00:00,2023-04-18T00:54:57+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,374702948,154,Added Data Science at Scale with Python and Dask,"Hello,
+
+Can you please consider listing this book.
+
+Thank you",roziunicorn,43975706,closed,False,1,2018-10-28T00:15:55+00:00,2023-04-18T01:16:18+00:00,2023-04-18T01:16:18+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,373970448,153,Fix broken links,"I found some broken links, fixed the ones I could and erased a dead one. I didn't use bit.ly because maybe you want to have the stats info. If that isn't the case, let me know and I'll shorten everything I'm changing :D",bugarela,18356186,closed,False,1,2018-10-25T14:16:34+00:00,2023-04-18T11:25:53+00:00,2023-04-17T23:13:11+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,371826671,152,Add a curriculum given as a metro map.,"""Finally, a wrap up with a useful [**curriculum via metro map**](http://nirvacana.com/thoughts/2013/07/08/becoming-a-data-scientist/) come in handy for every aspiring data scientist. ''  Add this line, it will be helpful.",purnima291,39857286,closed,False,1,2018-10-19T06:44:57+00:00,2023-04-18T00:02:16+00:00,2023-04-18T00:02:15+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,367572316,151,Update README.md,updated some content.,itsmesarthak,41490073,closed,False,1,2018-10-07T16:52:57+00:00,2023-04-18T00:03:18+00:00,2023-04-18T00:03:17+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,365341221,150,update read.me,,kaish114,32337116,closed,False,1,2018-10-01T07:37:18+00:00,2023-04-18T00:03:47+00:00,2023-04-18T00:03:47+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,348563224,148,Updated README.md with a dataset section & Kaggle,"Added ""Kaggle.com Learn"" to the Learn section and a dataset section that refers to the awesomedata repo for public datasets!",dgavlock,21368099,closed,False,1,2018-08-08T03:37:01+00:00,2023-04-18T01:19:39+00:00,2023-04-18T01:19:38+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,347696778,147,Fixes link for A Software Engineer's Guide ...,"Fixes link for A Software Engineer's Guide to Getting Started with Data Science.
+Old link was broken. New link points to article version on r-bloggers.com",ssalentin,8858299,closed,False,1,2018-08-05T13:06:05+00:00,2023-04-18T00:26:26+00:00,2023-04-18T00:26:26+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,344099925,146,Added a new resource,I have added a new resource or pdf of mathematics required for Machine Learning and Data Science,Better-Boy,19553184,closed,False,1,2018-07-24T15:54:10+00:00,2023-04-18T01:20:15+00:00,2023-04-18T01:20:15+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,337253885,145,Other indexes,"Like
+- https://huyenchip.com/2018/03/30/guide-to-Artificial-Intelligence-Stanford.html",clarecorthell,1145899,closed,False,0,2018-07-01T00:54:15+00:00,2023-04-17T23:24:32+00:00,2023-04-17T23:24:32+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,337250528,144,Add a causality section,Include this resource: http://bactra.org/notebooks/causality.html,clarecorthell,1145899,closed,False,0,2018-06-30T23:34:21+00:00,2023-04-18T00:27:25+00:00,2023-04-18T00:27:25+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,330856608,143,Resourceful ,"I'm glad to finally find real-life application of my math skill
+",baldcodr,5161569,closed,False,1,2018-06-09T05:56:32+00:00,2023-04-17T23:42:31+00:00,2023-04-17T23:42:31+00:00,,1,0,0,0,1,0,0
+datasciencemasters/go,327898724,142,Recommendation and clarification on getting started,"I have gone through this curriculum and found it very very helpful. I really appreciate your effort of gathering all these for everyone.
+Looks like a lot to cover, but I believe I can scale through it all. Everything seems very clear from the middle; mostly after the Maths section. My main issue is on getting started. On the first part (start here), are you to pick one of the 3 options to go on? Or you go through all the courses there and focus on the particular topics provided? Or everything generally?
+Same thing applies to the Maths sections. Pick one or two books or go through them all?
+
+A clear description or recommendation on how to go about it could be of better help, so as to focus on the important things and not just beating around the bush.
+
+The computing section is very clear as there is an average of about 2 resources to go through on each aspect of computing. Just the intro seems a little confusing, as each one of them offer almost the same thing.",tobiolalusi,34566758,closed,False,1,2018-05-30T21:04:35+00:00,2023-04-17T23:42:08+00:00,2023-04-17T23:42:08+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,326901207,141,Added Google's Machine Learning Crash Course,Added Google's Machine Learning Crash course to the main README.md file as suggested in #135 ,saa14,1973745,open,False,0,2018-05-28T05:31:54+00:00,2023-04-18T01:17:26+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,321132493,140,Testing File,Testing a file,NaruReddy,26181695,closed,False,2,2018-05-08T10:37:37+00:00,2023-04-18T01:18:11+00:00,2023-04-18T01:18:11+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,321119369,139,Testing a Fork,Testing fork whether it is working or not,NaruReddy,26181695,closed,False,0,2018-05-08T09:57:06+00:00,2023-04-18T01:18:00+00:00,2023-04-18T01:18:00+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,321099242,138,test,testing,NaruReddy,26181695,closed,False,1,2018-05-08T08:57:06+00:00,2023-04-18T01:20:24+00:00,2023-04-18T01:20:24+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,306802501,137,Added Hackr.io,https://hackr.io/tutorials/learn-data-science - Programming community curated resources,rohduggal,35959788,closed,False,1,2018-03-20T10:15:54+00:00,2023-04-18T01:21:21+00:00,2023-04-18T01:21:20+00:00,,1,1,0,0,0,0,0
+datasciencemasters/go,305793151,136,Graph viz!,Potentially add this resource for visualizing graphs https://python-graph-gallery.com/,clarecorthell,1145899,open,False,4,2018-03-16T03:46:04+00:00,2023-04-18T08:53:45+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,302385841,135,consider adding free training resources provided by Google,"I feel like any training resources provided by Google is worth mentioning.
+https://developers.google.com/machine-learning/crash-course/
+
+Thank you for your consideration!
+
+-Tommy
+",Tom-a-Hawk,22554083,closed,False,2,2018-03-05T17:13:53+00:00,2023-04-17T23:39:27+00:00,2023-04-17T23:39:26+00:00,,4,4,0,0,0,0,0
+datasciencemasters/go,290437125,134,Intro to Data Science not free,The Intro to Data Science (https://www.coursera.org/specializations/data-science) course now costs EUR41/month,marc-vdm,34626062,closed,False,2,2018-01-22T11:45:59+00:00,2018-10-10T08:46:47+00:00,2018-10-10T08:46:47+00:00,,1,0,0,0,0,1,0
+datasciencemasters/go,271883870,133,A Software Engineer's Guide to Getting Started with Data Science - Dead Link,"Hi!
+
+I just went through the README and noticed that the Link ""A Software Engineer's Guide to Getting Started with Data Science"" under Resources / Read on the bottom is dead.",sevi1603,33391108,closed,False,1,2017-11-07T15:55:59+00:00,2023-04-18T00:46:45+00:00,2023-04-18T00:46:45+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,253090710,132,Add Deep Learning specialization by Andrew Ng,[Link](https://www.coursera.org/learn/neural-networks-deep-learning),sahildua2305,5206277,closed,False,2,2017-08-26T12:58:35+00:00,2023-04-17T23:40:43+00:00,2023-04-17T23:40:43+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,242636179,131,Fix: Norvig Spell Correction tutorial link,Link to Norvig Spell Correction tutorial is broken. This PR fixes it.,manrajgrover,5673050,open,False,0,2017-07-13T09:15:29+00:00,2017-07-13T09:15:29+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,241079950,130,Fix broken link,This fixes a broken link in the README.,biglovisa,10555255,closed,False,0,2017-07-06T20:42:56+00:00,2018-08-13T16:56:07+00:00,2018-08-13T16:56:07+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,240037144,129,"""Zipfian Academy's List of Resources"" link is dead",This link leads to a dead site; Zipfian was acquired by another company and their domain appears to be empty.,telarmago,29348877,closed,False,0,2017-07-02T21:55:58+00:00,2023-04-16T21:16:57+00:00,2023-04-16T21:16:56+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,236348026,128,Added a link to the Data Scientist Workbench,,missaugustina,101733,closed,False,1,2017-06-16T00:19:39+00:00,2023-04-18T01:19:01+00:00,2023-04-18T01:19:01+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,236347110,127,Add Coursera Stats with R course,,missaugustina,101733,open,False,0,2017-06-16T00:12:17+00:00,2017-06-16T00:12:17+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,234116025,126,Updated Specialisations.md's Machine Learning,Added this specialisation from University Of Michigan On Coursera. It's free if you do an audit per course of the specialisation.,adityalahiri,21020094,closed,False,1,2017-06-07T07:26:25+00:00,2023-04-18T00:00:27+00:00,2023-04-18T00:00:26+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,222534196,125,adding tidy data links to README,,oldjacket-zz,9246141,closed,False,2,2017-04-18T20:22:06+00:00,2019-02-21T16:14:05+00:00,2019-02-21T16:14:05+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,222045475,124,Added two comprehensive neural networks tutorials,"Added two neural networks tutorials - one for beginners from scratch - http://adventuresinmachinelearning.com/neural-networks-tutorial/, the other introducing TensorFlow and NNs: http://adventuresinmachinelearning.com/python-tensorflow-tutorial/",adventuresinML,26499075,open,False,0,2017-04-17T01:04:59+00:00,2017-04-17T01:04:59+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,205388212,123,Four free python resources,"Added four additional free resources. Three courses focused on Python for data science, one course focused on python programming. 
+
+Thank you for the resource. ",martijnsublime,6278308,open,False,2,2017-02-05T00:05:18+00:00,2017-04-14T23:45:45+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,205348192,122,Add a book and a read by Congyang Wang,"book: Algorithms for Data Science
+read: The Data Science Weekly Newsletter",genki3ng,4596255,open,False,1,2017-02-04T13:33:59+00:00,2017-04-14T21:44:29+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,197907844,121,Broken link to Statistics course con Coursera - Princeton,The link to the Statistics course by Princeton on Coursera is broken. The course is not available anymore.,alfredocambera,62582,closed,False,2,2016-12-28T19:57:55+00:00,2017-03-02T05:59:18+00:00,2017-01-31T19:00:21+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,193673765,120,Added Linear Algebra by Gilbert Strang,"Added Linear Algebra by Gilbert Strang Great Video materials freely available from MIT.
+https://github.com/datasciencemasters/go/compare/master...sriharshams:master#diff-04c6e90faac2675aa89e2176d2eec7d8",sriharshams,1791206,open,False,2,2016-12-06T03:26:08+00:00,2017-01-31T19:31:33+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,183069040,119,Added Cheat Sheets,,Kacawi-zz,8349123,open,False,4,2016-10-14T14:46:45+00:00,2017-02-10T11:32:21+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,180439684,118,Added New Blog ,"Analytics Vidhya provides great articles on basics of data science and is one of the leading data science platforms.
+",thakursc1-zz,8618041,open,False,1,2016-10-01T05:35:37+00:00,2017-01-31T18:39:56+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,179765783,117,[convex opt] added book link,,kmonsoor,1219418,closed,False,1,2016-09-28T13:00:07+00:00,2017-01-31T18:30:35+00:00,2017-01-31T18:30:35+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,177844192,116,Adds 4 Linear Algebra links (Better Explained).,"Adds 4 links to Kalid Azad's articles on Linear Algebra topics, from his website Better Explained https://betterexplained.com
+",fauria,742022,closed,False,1,2016-09-19T17:19:51+00:00,2017-01-31T18:41:54+00:00,2017-01-31T18:41:45+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,177825599,115,Create statistics-review.md,"I have started a statistics review file for whoever need it.
+",siyaoxu,7561995,closed,False,1,2016-09-19T16:02:33+00:00,2017-01-31T18:47:42+00:00,2017-01-31T18:44:05+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,176560008,114,Two more graph libraries,"Hi!
+These two links are really recommended libraries for graph processing as you already mentioned NetworkX. We worked with both of them with graphs over 5M nodes without any problem.
+
+Graph tool (fast and efficient Python library):
+https://graph-tool.skewed.de/
+
+iGraph (with many algorithms implemented, and available in C, python and R):
+http://igraph.org/
+
+Regards
+",jliebana,6774407,closed,False,1,2016-09-13T06:27:27+00:00,2023-04-18T00:44:10+00:00,2023-04-18T00:44:10+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,176185307,113,Additional Materials,"- Linear Algebra - MIT OCW (particularly popular offering of theirs)
+- Calculus - MIT OCW for single and multivariable calculus (there's no other resources on the page about foundational calculus). 
+- Spark - some introductory materials from Stanford and Apache (there's no other dedicated Spark materials).
+",NathanEpstein,3989198,closed,False,1,2016-09-10T15:29:10+00:00,2023-04-18T01:12:08+00:00,2023-04-18T01:12:07+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,176182561,112,Linked Table of Contents,"Adds a table of contents. Each line in the table links to the appropriate section of the README.md file for easier navigation. 
+",NathanEpstein,3989198,closed,False,2,2016-09-10T14:32:41+00:00,2017-01-31T23:12:34+00:00,2017-01-31T18:50:19+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,175851522,111,Remove learning python the hardway,"Hey, since LPTHW warns on using python 3, the python reddit removed it from the sidebar (https://www.reddit.com/r/Python/comments/40s6dm/meta_can_we_take_learn_python_the_hard_way_off/) maybe we should also remove it from the list until a python 3 version is available.
+
+We should also not that the jupyter notebook server will only support python 3 in the future (http://blog.jupyter.org/2016/07/08/ipython-5-0-released/)
+",datajanko,11876547,closed,False,1,2016-09-08T20:10:06+00:00,2017-01-31T19:01:39+00:00,2017-01-31T19:01:39+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,175850655,110,Added some entries,"Hey, I added some entries.
+Some of them are a bit more math heavy.
+",datajanko,11876547,closed,False,0,2016-09-08T20:06:14+00:00,2018-01-10T10:29:10+00:00,2018-01-10T10:29:10+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,169744994,109,Some R resources added,"I have add some resources in r - resources file
+",ghost,10137,open,False,0,2016-08-06T12:38:20+00:00,2017-01-31T18:35:40+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,169520262,108,Harvard Videos Dead Now Too,"The Harvard videos won't work for me at all--they give error messages on trying to watch. The slides are still ok, but the videos don't work. Are there system specific issues with this? I was only able to test them on OS X.
+",mdtdev,9751401,closed,False,7,2016-08-05T03:15:16+00:00,2023-04-17T23:49:34+00:00,2023-04-17T23:49:34+00:00,,0,0,0,0,0,0,0
+datasciencemasters/go,169273557,107,fix/master/contributing,"Fixes #98 
+",ghost,10137,open,False,0,2016-08-04T01:48:04+00:00,2017-01-31T18:35:40+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,166612264,106,Harvard ggplot tutorial,"I particularly liked this ggplot2 tutorial when I was learning R. Prior to using this tutorial, I would just hack until I get the graph I wanted. The tutorial helped me understand the concepts more fully.
+
+I also updated the README to indicate that the UW Intro to Data Science course is no longer free. 
+",hueykwik,707311,open,False,0,2016-07-20T15:35:50+00:00,2017-01-31T18:35:40+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,166250106,105,Links to some Leanpub Books,"Hi,
+
+This is a great initiative. I've added some links to Leanpub books about Git and R.
+
+Thanks,
+Andrew.
+",datawookie,6134409,closed,False,1,2016-07-19T05:18:06+00:00,2022-07-16T04:18:23+00:00,2022-07-16T04:18:23+00:00,,1,1,0,0,0,0,0
+datasciencemasters/go,166037383,104,update link to opencampus - free source ware,"Opencampus - Largest resource library on professional certifications like big data, hadoop and many other
+",manideepami,11766966,open,False,0,2016-07-18T07:52:54+00:00,2017-01-31T18:35:40+00:00,,,2,1,1,0,0,0,0
+datasciencemasters/go,163062524,103,Added updated course videos link,"As discussed in #102 , I have updated the link to the course videos.
+",Dawny33,4637008,open,False,1,2016-06-30T01:27:55+00:00,2017-12-19T11:10:34+00:00,,,3,3,0,0,0,0,0
+datasciencemasters/go,162534020,102,Brilliant UW Coursera course has gone!,"I was working my way through the first course which was brilliant! It was an excellent level for beginners but now the link points to a new intermediate course which is unfortunately not free. 
+",urbangemz,19535263,open,False,17,2016-06-27T19:54:16+00:00,2023-04-17T23:45:21+00:00,,,0,0,0,0,0,0,0
+datasciencemasters/go,157361016,101,Updated link for 2nd Ed. of 'Think Stats',"The bit.ly link in the current repository leads to [here](http://greenteapress.com/thinkstats/) , a page which encourages visitors switch to the second edition, to be found at [this page](http://greenteapress.com/thinkstats2/index.html)
+
+Ideally, the old bit.ly url (bit.ly/ebook-thinkstats) should be pointed to the 2nd edition, but I believe only the owner of that bit.ly account can do this.
+",KitN,10526961,open,False,0,2016-05-28T23:15:23+00:00,2017-01-31T18:35:40+00:00,,,2,2,0,0,0,0,0

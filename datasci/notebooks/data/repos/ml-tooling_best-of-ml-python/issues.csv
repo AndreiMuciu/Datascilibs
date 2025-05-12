@@ -1,0 +1,579 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ml-tooling/best-of-ml-python,3049323899,379,Best-of update: 2025.05.08,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-05-08T15:13:13+00:00,2025-05-08T15:46:14+00:00,2025-05-08T15:46:12+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,3034070385,377,Best-of update: 2025.05.01,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,open,False,0,2025-05-01T15:10:05+00:00,2025-05-01T15:10:05+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,3027687378,376,Add project: skrub,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+Adding [skrub](https://github.com/skrub-data/skrub), a package that eases preprocessing and feature engineering for tabular machine learning. 
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",rcap107,7548232,closed,False,0,2025-04-29T09:36:49+00:00,2025-04-29T18:41:42+00:00,2025-04-29T18:41:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,3017625875,375,Best-of update: 2025.04.24,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-04-24T15:14:50+00:00,2025-04-24T18:00:59+00:00,2025-04-24T18:00:57+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,3002802674,374,Best-of update: 2025.04.17,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-04-17T15:18:31+00:00,2025-04-18T14:39:47+00:00,2025-04-18T14:39:46+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2986038523,373,Best-of update: 2025.04.10,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-04-10T15:16:04+00:00,2025-04-10T19:48:35+00:00,2025-04-10T19:48:34+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2969945109,372,Best-of update: 2025.04.03,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-04-03T15:13:11+00:00,2025-04-03T15:24:22+00:00,2025-04-03T15:24:20+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2953391190,371,Best-of update: 2025.03.27,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-03-27T15:14:47+00:00,2025-03-27T15:40:03+00:00,2025-03-27T15:40:01+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2935849195,370,Best-of update: 2025.03.20,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-03-20T15:19:51+00:00,2025-03-20T15:23:55+00:00,2025-03-20T15:23:53+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2934246835,369,Added Dynamo,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [x] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+- Added new category ""inference""
+- Added new project Dynamo
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",dmitrytokarev,7370035,open,False,0,2025-03-20T06:26:13+00:00,2025-03-20T06:26:13+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2917557797,368,Best-of update: 2025.03.13,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-03-13T15:22:22+00:00,2025-03-13T18:39:15+00:00,2025-03-13T18:39:13+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2904893955,367,Add project: effector,"Add project: effector
+
+**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+add project: effector.
+effector is a python package that explains black box models that are trained on tabular data, using global and regional effect plots
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+-  I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",givasile,20007837,closed,False,0,2025-03-08T16:34:10+00:00,2025-03-08T19:38:20+00:00,2025-03-08T19:38:20+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2900674279,366,Best-of update: 2025.03.06,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-03-06T15:07:19+00:00,2025-03-06T15:26:29+00:00,2025-03-06T15:26:27+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2884827787,365,Best-of update: 2025.02.27,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-02-27T15:16:24+00:00,2025-02-27T15:19:24+00:00,2025-02-27T15:19:22+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2866447404,364,Best-of update: 2025.02.20,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-02-20T15:08:17+00:00,2025-02-20T15:38:47+00:00,2025-02-20T15:38:45+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2851351513,363,Best-of update: 2025.02.13,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-02-13T15:15:44+00:00,2025-02-13T15:51:50+00:00,2025-02-13T15:51:48+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2835814743,362,Best-of update: 2025.02.06,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-02-06T15:15:19+00:00,2025-02-06T16:03:17+00:00,2025-02-06T16:03:15+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2833975054,361,Update projects.yaml,"add .
+
+**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [ ] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [ ] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",amirsam4398,172322980,open,False,0,2025-02-05T21:14:54+00:00,2025-02-05T21:14:54+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2830916201,360,Add project: pyclugen,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+Add the pyclugen project, a Python implementation of the clugen algorithm for generating multidimensional clusters with arbitrary distributions described in <https://doi.org/10.1016/j.knosys.2023.110836>.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",nunofachada,3018963,closed,False,0,2025-02-04T17:49:42+00:00,2025-02-04T17:50:34+00:00,2025-02-04T17:50:33+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2821109842,359,Best-of update: 2025.01.30,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-01-30T15:19:28+00:00,2025-01-30T20:08:46+00:00,2025-01-30T20:08:44+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2807167964,358,Best-of update: 2025.01.23,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-01-23T15:11:42+00:00,2025-01-23T15:24:22+00:00,2025-01-23T15:24:19+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2793035457,357,Best-of update: 2025.01.16,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-01-16T15:07:52+00:00,2025-01-16T16:10:00+00:00,2025-01-16T16:09:59+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2778109363,356,Best-of update: 2025.01.09,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-01-09T15:18:51+00:00,2025-01-09T15:36:33+00:00,2025-01-09T15:36:31+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2769003413,355, Machine learning,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [x] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",teacherbabur,160105254,closed,False,0,2025-01-04T21:11:08+00:00,2025-01-04T21:59:58+00:00,2025-01-04T21:59:58+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2766206846,354,Best-of update: 2025.01.02,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2025-01-02T15:19:37+00:00,2025-01-02T19:07:06+00:00,2025-01-02T19:07:04+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2759911210,353,ML,,ML-Opeyemi,189500754,open,False,0,2024-12-26T15:54:36+00:00,2024-12-26T15:54:36+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2759880267,352,Best-of update: 2024.12.26,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-12-26T15:17:48+00:00,2024-12-27T00:51:40+00:00,2024-12-27T00:51:38+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2750666112,351,Best-of update: 2024.12.19,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-12-19T15:19:06+00:00,2024-12-19T15:54:08+00:00,2024-12-19T15:54:06+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2736196208,350,Best-of update: 2024.12.12,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-12-12T15:15:55+00:00,2024-12-13T10:50:15+00:00,2024-12-13T10:50:14+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2720787969,349,Best-of update: 2024.12.05,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-12-05T15:56:05+00:00,2024-12-06T09:26:24+00:00,2024-12-06T09:26:22+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2709425690,348,Add project: ridgeplot,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+
+Add the [ridgeplot](https://github.com/tpvasconcelos/ridgeplot) project under the ""Data Visualisation"" category.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [X] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",tpvasconcelos,17701527,closed,False,0,2024-12-01T16:04:24+00:00,2024-12-02T11:09:23+00:00,2024-12-02T11:09:22+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2702484381,347,Best-of update: 2024.11.28,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-11-28T15:14:16+00:00,2024-11-28T15:37:44+00:00,2024-11-28T15:37:41+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2679854821,346,Best-of update: 2024.11.21,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-11-21T15:11:14+00:00,2024-11-21T15:29:06+00:00,2024-11-21T15:29:03+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2659119109,345,Best-of update: 2024.11.14,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-11-14T15:08:05+00:00,2024-11-14T16:02:02+00:00,2024-11-14T16:02:01+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2641310236,344,Best-of update: 2024.11.07,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-11-07T15:07:08+00:00,2024-11-07T17:19:35+00:00,2024-11-07T17:19:33+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2634931151,343,Add project: TorchUncertainty,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+This PR adds TorchUncertainty to the project list. TorchUncertainty is a package designed to help users leverage uncertainty quantification techniques and make their deep neural networks more reliable.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",o-laurent,62881275,closed,False,0,2024-11-05T09:38:13+00:00,2024-11-05T17:20:46+00:00,2024-11-05T17:20:45+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2627126665,342,Best-of update: 2024.10.31,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-10-31T15:18:50+00:00,2024-11-01T06:41:22+00:00,2024-11-01T06:41:20+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2611887609,341,Best-of update: 2024.10.24,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-10-24T15:06:25+00:00,2024-10-24T16:27:44+00:00,2024-10-24T16:27:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2605083320,340,Add project: RePlay,"**Project details:**
+
+Project Name: RePlay
+Github URL: https://github.com/sb-ai-lab/RePlay
+Category: Recommender Systems
+License: Apache-2
+Package Managers: pypi:replay-rec
+Additional context:
+
+**The article about the library was accepted for the 18th ACM Conference on Recommender Systems (RecSys '24).**
+
+* **Video guides**:
+	- [Replay for offline recommendations, AI Journey 2021](https://www.youtube.com/watch?v=ejQZKGAG0xs)
+
+* **Research papers**:
+    - [RePlay: a Recommendation Framework for Experimentation and Production Use](https://arxiv.org/abs/2409.07272) Alexey Vasilev, Anna Volodkevich, Denis Kulandin, Tatiana Bysheva, Anton Klenitskiy. In The 18th ACM Conference on Recommender Systems (RecSys '24)
+	- [Turning Dross Into Gold Loss: is BERT4Rec really better than SASRec?](https://doi.org/10.1145/3604915.3610644) Anton Klenitskiy, Alexey Vasilev. In The 17th ACM Conference on Recommender Systems (RecSys '23)
+    - [The Long Tail of Context: Does it Exist and Matter?](https://arxiv.org/abs/2210.01023). Konstantin Bauman, Alexey Vasilev, Alexander Tuzhilin. In Workshop on Context-Aware Recommender Systems (CARS) (RecSys '22)
+    - [Multiobjective Evaluation of Reinforcement Learning Based Recommender Systems](https://doi.org/10.1145/3523227.3551485). Alexey Grishanov, Anastasia Ianina, Konstantin Vorontsov. In The 16th ACM Conference on Recommender Systems (RecSys '22)
+    - [Quality Metrics in Recommender Systems: Do We Calculate Metrics Consistently?](https://doi.org/10.1145/3460231.3478848) Yan-Martin Tamm, Rinchin Damdinov, Alexey Vasilev. In The 15th ACM Conference on Recommender Systems (RecSys '21)",OnlyDeniko,50081838,open,False,0,2024-10-22T10:53:25+00:00,2024-10-22T10:53:25+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2595062074,339,Best-of update: 2024.10.17,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-10-17T15:24:01+00:00,2024-10-31T00:43:01+00:00,2024-10-31T00:43:01+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2579190956,338,Best-of update: 2024.10.10,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-10-10T15:29:08+00:00,2024-10-10T16:10:02+00:00,2024-10-10T16:10:01+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2564485732,337,Best-of update: 2024.10.03,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-10-03T16:37:27+00:00,2024-10-03T18:53:57+00:00,2024-10-03T18:53:55+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2551118351,336,Add project: Opik,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [ ] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [ ] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",anmorgan24,86856445,closed,False,0,2024-09-26T17:03:33+00:00,2024-09-26T17:12:20+00:00,2024-09-26T17:12:20+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2550974874,335,Best-of update: 2024.09.26,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-09-26T15:50:42+00:00,2024-09-26T15:53:51+00:00,2024-09-26T15:53:49+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2536745785,334,Best-of update: 2024.09.19,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-09-19T15:50:53+00:00,2024-09-19T16:13:38+00:00,2024-09-19T16:13:35+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2522745153,333,Best-of update: 2024.09.12,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-09-12T15:38:32+00:00,2024-09-12T15:50:43+00:00,2024-09-12T15:50:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2508171793,332,Best-of update: 2024.09.05,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-09-05T15:53:38+00:00,2024-09-06T07:29:51+00:00,2024-09-06T07:29:49+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2497539287,331,Add project: Gymnasium,"**Project details:**
+
+- Project Name: Gymnasium
+- Github URL: https://github.com/Farama-Foundation/Gymnasium
+- Category:  Reinforcement Learning
+- License:
+- Package Managers: pypi:gymnasium
+
+**Additional context:**
+
+Fork of OpenAI/Gym by its maintainers, now servers as the ""official"" replacement.",DupuisB,68610598,open,False,0,2024-08-30T15:31:18+00:00,2024-08-30T15:31:18+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2476629452,330,[BUG] Repo No Longer Updating Weekly,"Hello. The repo appears to have stopped automatically updating weekly for around the past 2-3 months.
+
+Perhaps some recurring script was accidentally disabled?
+",Innixma,16392542,open,False,0,2024-08-20T22:21:31+00:00,2024-08-20T22:21:31+00:00,,question,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2473473793,329,Update Actions Versions,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [x] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+Thanks for the great list.
+I've found that the updates have been failing for a while now. I think that it is the same as reported at https://github.com/best-of-lists/best-of/issues/216. I have confirmed that the fix is working on my fork https://github.com/not522/best-of-ml-python/actions/runs/10454068457.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",not522,1255726,closed,False,1,2024-08-19T14:14:09+00:00,2024-09-02T07:37:40+00:00,2024-08-31T14:59:41+00:00,,1,1,0,0,0,0,0
+ml-tooling/best-of-ml-python,2423010044,328,Add Runhouse to projects.yaml,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x ] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+Runhouse - Apache 2.0 licensed open source project to be a universal runtime for ML jobs - use Runhouse to send and execute ML training/inference tasks written in regular Python on any infra (GPU / CPU), region, or cloud without the need for costly packaging or pipelining. Use Runhouse from local (IDE/notebook) for research, and call it from orchestrators in production. 
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [ x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [ x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",py-rh,175171784,closed,False,0,2024-07-22T14:22:29+00:00,2024-07-22T15:36:22+00:00,2024-07-22T15:36:22+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2339318903,327,Update project: AutoGluon,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [x] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+Add AutoGluon's `conda_id` to `projects.yaml`.
+
+Source: I am a developer of AutoGluon ([commits](https://github.com/autogluon/autogluon/commits?author=Innixma))
+
+Thanks for the awesome and informative repo!
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",Innixma,16392542,closed,False,0,2024-06-06T23:48:31+00:00,2024-06-07T08:50:58+00:00,2024-06-07T08:50:58+00:00,,1,1,0,0,0,0,0
+ml-tooling/best-of-ml-python,2338527781,326,Best-of update: 2024.06.06,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-06-06T15:24:35+00:00,2024-06-06T15:57:03+00:00,2024-06-06T15:57:03+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2325956695,325,Best-of update: 2024.05.30,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-05-30T15:27:16+00:00,2024-05-30T16:31:03+00:00,2024-05-30T16:31:03+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2313217756,324,Best-of update: 2024.05.23,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-05-23T15:28:15+00:00,2024-05-23T15:49:06+00:00,2024-05-23T15:49:05+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2300752396,323,Best-of update: 2024.05.16,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-05-16T15:44:33+00:00,2024-05-16T17:17:17+00:00,2024-05-16T17:17:16+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2287937767,322,Best-of update: 2024.05.09,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-05-09T15:32:29+00:00,2024-05-09T15:37:44+00:00,2024-05-09T15:37:43+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2275893707,321,Best-of update: 2024.05.02,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-05-02T15:56:25+00:00,2024-05-02T21:21:43+00:00,2024-05-02T21:21:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2263977874,320,Best-of update: 2024.04.25,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,open,False,0,2024-04-25T16:06:20+00:00,2024-04-25T16:06:20+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2251036550,319,Best-of update: 2024.04.18,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-04-18T15:53:16+00:00,2024-04-18T15:55:36+00:00,2024-04-18T15:55:35+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2238044842,318,Best-of update: 2024.04.11,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-04-11T15:44:18+00:00,2024-04-11T18:08:54+00:00,2024-04-11T18:08:53+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2225744285,317,Best-of update: 2024.04.04,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-04-04T14:55:24+00:00,2024-04-04T14:57:41+00:00,2024-04-04T14:57:40+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2215751261,316,Update projects.yaml,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [x] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",edwinnglabs,43593379,closed,False,0,2024-03-29T17:34:52+00:00,2024-11-11T23:52:30+00:00,2024-11-11T23:52:30+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2215747308,315,Update README.md,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [ ] Add a project
+- [x] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [ ] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",edwinnglabs,43593379,closed,False,0,2024-03-29T17:31:58+00:00,2024-03-29T17:32:42+00:00,2024-03-29T17:32:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2213753871,314,Best-of update: 2024.03.28,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-03-28T17:24:29+00:00,2024-03-29T10:48:37+00:00,2024-03-29T10:48:36+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2200404987,313,Best-of update: 2024.03.21,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-03-21T14:50:41+00:00,2024-03-21T23:48:54+00:00,2024-03-21T23:48:53+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2186674735,312,Best-of update: 2024.03.14,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-03-14T15:32:52+00:00,2024-03-14T16:04:54+00:00,2024-03-14T16:04:53+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2174072876,311,Best-of update: 2024.03.07,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-03-07T15:03:33+00:00,2024-03-07T16:24:43+00:00,2024-03-07T16:24:43+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2161460681,310,Best-of update: 2024.02.29,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-02-29T14:58:49+00:00,2024-02-29T15:08:41+00:00,2024-02-29T15:08:41+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2152537600,309,Add project: feature-engine - Automates feature engineering/selection and is compatible with scikit-learn,"<!--
+Please make sure that the project was not already added or suggested to this best-of list. You can ensure this by searching the projects.yaml, the README.md, and the issue list. Has ~1.7 GitHub stars, which is greater than a few of the other top ""ML Frameworks"" packages.
+-->
+
+**Project details:**
+Feature-engine is a Python library with multiple transformers to engineer and select features for use in machine learning models. Feature-engine's transformers follow Scikit-learn's functionality with fit() and transform() methods to learn the transforming parameters from the data and then transform it.
+
+- Project Name: feature-engine
+- Github URL: https://github.com/feature-engine/feature_engine
+- Category: Machine Learning Framework
+- License: BSD-3-Clause
+- Package Managers: pypi:feature-engine conda:conda-forge/feature-engine
+
+**Additional context:**
+
+We all love well-maintained documentation - https://feature-engine.trainindata.com/en/latest/
+
+",Morgan-Sell,5661386,open,False,0,2024-02-25T00:31:50+00:00,2024-02-25T00:33:53+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2149274358,308,Best-of update: 2024.02.22,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-02-22T15:00:30+00:00,2024-02-23T05:31:45+00:00,2024-02-23T05:31:44+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2136785481,307,Best-of update: 2024.02.15,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-02-15T15:13:29+00:00,2024-02-15T15:37:46+00:00,2024-02-15T15:37:46+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2125350544,306,Best-of update: 2024.02.08,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-02-08T14:47:29+00:00,2024-02-08T16:14:36+00:00,2024-02-08T16:14:35+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2112742851,305,Best-of update: 2024.02.01,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,open,False,0,2024-02-01T15:03:30+00:00,2024-02-01T15:03:30+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2112093540,304,Added NanoDL to projects.yaml,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+Added NanoDL, a Jax-based library for building custom transformer models from scratch.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",HMUNACHI,26547576,closed,False,0,2024-02-01T10:11:46+00:00,2024-02-01T10:26:43+00:00,2024-02-01T10:26:42+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2112077095,303,NanoDL,"<!--
+Please make sure that the project was not already added or suggested to this best-of list. You can ensure this by searching the projects.yaml, the README.md, and the issue list.
+-->
+
+**Project details:**
+<!-- Please fill out as much of the following information as possible. -->
+
+- Project Name: NanoDL
+- Github URL: https://github.com/HMUNACHI/nanodl
+- Category:  Machine Learning Frameworks
+- License: MIT
+- Package Managers: pypi:nanodl
+
+**Additional context:**
+A Jax-based library for designing and training custom transformer models from scratch.
+",HMUNACHI,26547576,closed,False,1,2024-02-01T10:03:40+00:00,2024-02-01T10:12:28+00:00,2024-02-01T10:12:05+00:00,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2100567132,302,Best-of update: 2024.01.25,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-01-25T14:54:28+00:00,2024-01-25T18:36:29+00:00,2024-01-25T18:36:28+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2088519262,301,Best-of update: 2024.01.18,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-01-18T15:23:42+00:00,2024-01-18T15:41:01+00:00,2024-01-18T15:41:00+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2077002628,300,Best-of update: 2024.01.11,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-01-11T15:45:12+00:00,2024-01-11T18:27:34+00:00,2024-01-11T18:27:33+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2065786382,299,Best-of update: 2024.01.04,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2024-01-04T14:44:41+00:00,2024-01-04T16:38:16+00:00,2024-01-04T16:38:16+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2058517635,298,Best-of update: 2023.12.28,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-12-28T14:42:11+00:00,2023-12-28T17:08:51+00:00,2023-12-28T17:08:50+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2052571747,297,Best-of update: 2023.12.21,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-12-21T14:52:01+00:00,2023-12-21T15:57:57+00:00,2023-12-21T15:57:56+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2041910566,296,Add project: Kinho,"<!--
+Please make sure that the project was not already added or suggested to this best-of list. You can ensure this by searching the projects.yaml, the README.md, and the issue list.
+-->
+
+**Project details:**
+Class for a feedforward neural network with an input layer, hidden layers, and an output layer. Better to identify images & transfer Learning. Using GPU/CPU with less dependencies.
+
+- Project Name: Kinho
+- Github URL: [github.com/kinhosz/Neural](https://github.com/kinhosz/neural)
+- Category:  gpu-utilities; ml-frameworks; Image Data;
+- License: MIT
+- Package Managers: pypi:kinho
+
+**Additional context:**
+
+<!-- Optional. Add any other context or additional information about the project. -->
+From Scracth
+",kinhosz,39632709,open,False,0,2023-12-14T15:13:40+00:00,2023-12-14T15:13:40+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2041858112,295,Best-of update: 2023.12.14,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-12-14T14:48:59+00:00,2023-12-16T10:44:22+00:00,2023-12-16T10:44:22+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2030987504,294,Best-of update: 2023.12.07,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-12-07T15:23:21+00:00,2023-12-07T16:30:00+00:00,2023-12-07T16:29:59+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2018820405,293,Best-of update: 2023.11.30,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-11-30T14:44:27+00:00,2023-11-30T16:05:11+00:00,2023-11-30T16:05:10+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,2008370313,292,Best-of update: 2023.11.23,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-11-23T14:46:15+00:00,2023-11-23T16:10:26+00:00,2023-11-23T16:10:25+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1997058014,291,Best-of update: 2023.11.16,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-11-16T14:57:48+00:00,2023-11-16T18:07:40+00:00,2023-11-16T18:07:39+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1996013149,290,Add project:,"<!--
+Please make sure that the project was not already added or suggested to this best-of list. You can ensure this by searching the projects.yaml, the README.md, and the issue list.
+-->
+
+**Project details:**
+<!-- Please fill out as much of the following information as possible. -->
+
+- Project Name:
+- Github URL:
+- Category:  <!-- Choose one of the existing categories from the README.md or projects.yaml file -->
+- License:
+- Package Managers: <!-- Add the IDs for every package manager that the project is available on (e.g. npm, pypi, conda, dockerhub, maven, apt, ...). For example: pypi:tensorflow conda:conda-forge/tensorflow dockerhub:tensorflow/tensorflow -->
+
+**Additional context:**
+
+<!-- Optional. Add any other context or additional information about the project. -->",agiza1,89607892,open,False,0,2023-11-16T04:05:57+00:00,2023-11-16T04:05:57+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1985804590,289,Best-of update: 2023.11.09,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-11-09T14:57:37+00:00,2023-11-09T18:02:22+00:00,2023-11-09T18:02:21+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1974439847,288,Best-of update: 2023.11.02,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,open,False,0,2023-11-02T14:56:19+00:00,2023-11-02T14:56:19+00:00,,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1963815644,287,Best-of update: 2023.10.26,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-10-26T15:21:30+00:00,2023-10-26T16:35:55+00:00,2023-10-26T16:35:54+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1963261287,286,Add project: mlup ,"<!--
+Please make sure that the project was not already added or suggested to this best-of list. You can ensure this by searching the projects.yaml, the README.md, and the issue list.
+-->
+
+**Project details:**
+<!-- Please fill out as much of the following information as possible. -->
+
+- Project Name: MLup
+- Github URL: https://github.com/nxexox/pymlup
+- Category: Model Serialization & Deployment
+- License: MIT
+- Package Managers: pypi:pymlup
+
+**Additional context:**
+
+MLup is framework for easy and fast run ML in production.",nxexox,14827971,open,False,0,2023-10-26T11:01:30+00:00,2023-10-27T11:55:42+00:00,,add-project,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1952580229,285,Best-of update: 2023.10.19,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-10-19T15:48:30+00:00,2023-10-19T17:35:09+00:00,2023-10-19T17:35:08+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1940185065,284,Best-of update: 2023.10.12,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-10-12T14:58:43+00:00,2023-10-13T13:36:55+00:00,2023-10-13T13:36:54+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1928595403,283,Best-of update: 2023.10.05,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-10-05T15:48:58+00:00,2023-10-05T17:09:25+00:00,2023-10-05T17:09:24+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1917733314,282,Best-of update: 2023.09.28,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-09-28T14:58:14+00:00,2023-09-28T15:56:16+00:00,2023-09-28T15:56:15+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1907208057,281,Best-of update: 2023.09.21,"To finish this update: Select <code>Merge pull request</code> below and <code>Confirm merge</code>. Also, make sure to publish the created draft release in the [releases section](../releases) as well.",github-actions[bot],41898282,closed,False,0,2023-09-21T15:07:33+00:00,2023-09-21T18:55:26+00:00,2023-09-21T18:55:26+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1903886265,280,Add project: CometML,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+This PR added CometML to projects list. CometML is an MLOps platform that supports experiment tracking, a model registry, model production management, and data lineage.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",anmorgan24,86856445,closed,False,0,2023-09-20T00:19:08+00:00,2023-09-21T08:59:12+00:00,2023-09-21T08:59:12+00:00,,0,0,0,0,0,0,0
+ml-tooling/best-of-ml-python,1903882473,279,Add project: Comet-LLM,"**What kind of change does this PR introduce?**
+<!-- (Update ""[ ]"" to ""[x]"" to check a box) -->
+
+- [x] Add a project
+- [ ] Update a project
+- [ ] Remove a project
+- [ ] Add or update a category
+- [ ] Change configuration
+- [ ] Documentation
+- [ ] Other, please describe:
+
+**Description:**
+<!--- Use this section to describe your changes. We recommend only to add, update, or remove one project per pull request. If your PR adds a new project, just put the project name and a short description of the project here.-->
+
+This PR adds CometLLM to the project list. CometLLM is an open source tool to log, manage, visualize, and search LLM prompts, prompt templates, prompt variables, and chains.
+
+**Checklist:**
+<!--- Before you submit the PR, go over this checklist and make sure you can
+tick off all the boxes. [] -> [x] -->
+
+- [x] I have read the [CONTRIBUTING](https://github.com/ml-tooling/best-of-ml-python/blob/main/CONTRIBUTING.md) guidelines.
+- [x] I have not modified the `README.md` file. Projects are only supposed to be added or updated within the `projects.yaml` file since the `README.md` file is automatically generated.
+",anmorgan24,86856445,open,False,0,2023-09-20T00:13:32+00:00,2023-09-20T00:13:32+00:00,,,0,0,0,0,0,0,0

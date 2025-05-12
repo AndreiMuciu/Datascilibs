@@ -1,0 +1,76 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+afshinea/stanford-cs-229-machine-learning,2618236916,29,"Error in p-norm definition, Algebra & Calculus refresher","Hi, thanks for putting together & sharing this information source.
+
+I believe there is an error in the p-norm formula, in the [Algebra and Calculus refresher](https://stanford.edu/~shervine/teaching/cs-229/refresher-algebra-calculus#properties):
+![image](https://github.com/user-attachments/assets/5cff602b-e48e-47c3-adff-7be1dd9af6df)
+I think $x_i^p$ should be replaced with $|x_i|^p$. This way, we end up with the L1 norm (Manhattan distance) when p = 1.
+",AhmetZamanis,56347957,open,False,0,2024-10-28T12:08:27+00:00,2024-10-28T12:08:27+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,2394209306,28,Math notation,"I appreciate your work, however there are some major drawbacks. Notation is not clear.  You did not explain the mathematical notation ( like %99 of the teachers ) in your cheat sheets, it looks like a textbook  therefore they are not useful for the beginners.  It is possible that a beginner does not heard anything about transpose of a matrix, gradient, Laplacian, or even what conditional probability is. At least you should note the requirements for the learners.
+
+Thanks",O-Memis,62514392,open,False,0,2024-07-07T20:38:21+00:00,2024-07-07T20:38:21+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,2245986631,27,ML,,Irshad200,141544424,open,False,0,2024-04-16T12:56:43+00:00,2024-04-16T12:56:43+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,1883650778,26,Missing description of a variable used in CNN,The letter S(which is usually stride) hasn't been defined. A description would be useful for many.,Rajarshi-Misra,72802594,open,False,0,2023-09-06T09:48:10+00:00,2023-09-06T17:07:28+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,1765175648,25,DL CS,,prageshRai,118735266,open,False,0,2023-06-20T11:07:38+00:00,2023-06-20T11:07:38+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,1599853812,24,Stamford cs machine learning ,,iskburcin,88871250,open,False,0,2023-02-25T21:56:57+00:00,2023-02-25T21:56:57+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,1201046323,23,Translate problem in footer,"Fall 2018 should be translated to ""Mùa Thu 2018"" not ""NGÃ 2018"" in cheatsheet-supervised-learning.pdf",ToanICV,95214887,open,False,0,2022-04-12T04:50:12+00:00,2022-04-12T04:50:12+00:00,,,1,1,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,898657714,22,"In Matrix Properties, the desciprtion of SVD mentions unitary matrices, but the cheatsheet does not provide the definition of a unitary matrix",,ddejohn,35853209,open,False,0,2021-05-21T23:13:51+00:00,2021-05-21T23:13:51+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,533186888,21,Reporting a mistake in Linear Algebra and Calculus,,yc-li20,15671418,open,False,1,2019-12-05T08:00:52+00:00,2019-12-05T08:06:21+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,492167653,20,Model selection : what is the development set?,"4.2 Model selection. Is the ""development set"" the ""validation set""?",tra6sdc,34243297,open,False,0,2019-09-11T11:04:06+00:00,2019-09-11T11:04:06+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,481901576,19,Matrix-matrix multiplication,"The following:
+
+""Matrix-matrix multiplication – The product of matrices A ∈ Rm×n and B ∈ Rn×p is a
+matrix of size **Rn×p**""
+
+Should say:
+
+""Matrix-matrix multiplication – The product of matrices A ∈ Rm×n and B ∈ Rn×p is a
+matrix of size **Rm×p**""",clevo4040,39634251,open,False,0,2019-08-17T16:12:26+00:00,2019-08-17T16:12:26+00:00,,,4,4,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,441063854,18,Hessian definition makes unstated assumptions,"Hi!
+
+Thanks for putting together this helpful refresher on linear algebra and calculus ([link](https://stanford.edu/~shervine/teaching/cs-229/refresher-algebra-calculus#calculus) for context)! At the risk of being overly pedantic, I noticed that your definition of the Hessian says:
+
+> The hessian of `f` with respect to `x` is a `n×n` symmetric matrix
+
+This is true if `f` has continuous second partial derivatives, but is not guaranteed in general. ([Source](https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives))",teoh,10181537,open,False,0,2019-05-07T06:38:24+00:00,2019-05-07T06:39:11+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,427298701,17,Update README.md,Update my homepage.,tigerneil,5799436,closed,False,0,2019-03-30T16:13:27+00:00,2019-04-04T08:49:29+00:00,2019-04-04T08:49:12+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,424109050,16,The Traditional Chinese version are finished. How to update these to official website?,"Hi @shervinea , since the Traditional Chinese version of all cheatsheets are finished. How to make the official website shown the Traditional Chinese version？
+
+![image](https://i.imgur.com/OyfaRaf.png)
+
+By the way, the word you can use for ""Traditional Chinese"" is ""繁體中文"".
+
+Thanks.",kevingo,1113954,open,False,4,2019-03-22T09:08:06+00:00,2019-10-08T14:10:40+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,409902537,15,What tools are used to make it？,Can you tell me what tool was used to create the cheatsheets? I really like the style and would like to use the tool for my lectures. Thanks in advance.,ethan-funny,2676138,open,False,2,2019-02-13T16:53:41+00:00,2021-07-17T08:51:21+00:00,,,5,5,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,399701516,14,Broken link in repo description,The link in the repo description (the one just under the repo title) is broken. It should point to https://stanford.edu/~shervine/teaching/cs-229/ instead of https://stanford.edu/~shervine/teaching/cs-229.html which 404s at the time of opening this issue. Would save a quick Google search in the future.,AB1908,14124383,closed,False,4,2019-01-16T08:41:29+00:00,2019-01-17T13:58:59+00:00,2019-01-17T04:57:58+00:00,,1,1,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,398654675,13,Format for priting,"I wanted to print the Super VIP Cheatsheet to read and make annotations.
+Can you provide the pdf in a more printer-friendly format?
+Thanks
+
+",hochB,46260864,open,False,0,2019-01-13T12:53:10+00:00,2019-01-13T12:53:10+00:00,,,1,1,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,392261305,12,One note on the definition of Determinant,"In the definition of Determinant in the VIP Refresher on Linear Algebra and Calculus, it would be much clearer if you add a short expression such as: _for a fixed i_ ",raminmh,20689408,open,False,0,2018-12-18T17:32:42+00:00,2018-12-18T17:33:20+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,391768968,11,Logistic vs cross-entropy,"I don't think it makes sense to plot different functions for logistic loss and cross-entropy loss as they are essentially two names for the same thing. Sometimes these names are used to differentiate between an overparametrized (softmax) version vs a non-overparametrized version but that's independent of the loss used. In particular the two formulas that are shown are equivalent (one assumed y is +1, -1 the other assumes y is 0, 1). Showing different graphs for the same formula seems confusing.",amueller,449558,open,False,0,2018-12-17T15:41:14+00:00,2018-12-17T15:41:14+00:00,,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,385126618,10,Can you share the latex template,"Really cool cheatsheets, I presume you have done using LaTex. 
+
+Do you mind sharing LaTex template? It would be great. Thank you",nrupatunga,980580,open,False,1,2018-11-28T06:52:53+00:00,2018-11-30T14:39:38+00:00,,,14,12,0,1,0,0,1
+afshinea/stanford-cs-229-machine-learning,383893628,9,Linear dependence,"In refreshers, ""linearly dependence"" should be corrected to ""linear dependence""",osolmaz,2453968,open,False,0,2018-11-23T17:25:15+00:00,2018-11-23T17:25:15+00:00,,,1,1,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,374106918,8,update redame,removed cheatsheet,shivam2601,30159990,closed,False,0,2018-10-25T19:55:32+00:00,2018-10-26T05:20:43+00:00,2018-10-26T05:20:43+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,365863590,7,Error in Linear Algebra Matrix Vector multiplication,"First, thanks for these resources!
+
+In VIP Refresher: Linear Algebra and Calculus, it says
+
+> Matrix-vector multiplication – The product of matrix A \in R^{m×n} and vector x \in R^{n} is a vector of size **R^n**, such that:
+
+Shouldn't it be instead:
+
+> of size **R^m**, such that:
+
+The same for Matrix-Matrix multiplication.",joaoamcarvalho,7430031,closed,False,2,2018-10-02T11:58:25+00:00,2019-04-19T11:50:52+00:00,2018-10-02T19:07:03+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,360741629,6,Chinese version link,"can you add a link to https://github.com/MLEveryday/Machine-Learning-Cheatsheets?
+we already finished the first three parts.",zhyongquan,11530247,closed,False,1,2018-09-17T06:50:25+00:00,2018-09-19T04:28:24+00:00,2018-09-19T04:28:24+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,360529433,5,"state s, not state a",Remark: we say that we execute a given policy π if given a state **a** we take the action a =π(s).,zhyongquan,11530247,closed,False,1,2018-09-15T10:48:57+00:00,2018-09-15T19:15:05+00:00,2018-09-15T19:15:05+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,357476243,4,"miss ""Tree-based and ensemble methods"" in pdf","there is ""Tree-based and ensemble methods"" in https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-supervised-learning, but  no in pdf",zhyongquan,11530247,closed,False,1,2018-09-06T02:47:46+00:00,2018-09-09T21:59:28+00:00,2018-09-09T21:59:28+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,353432150,3,real data z,"the first page, prediction value is y, real data should be z",zhyongquan,11530247,closed,False,1,2018-08-23T15:20:47+00:00,2018-08-24T07:04:09+00:00,2018-08-24T07:04:09+00:00,,0,0,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,353180545,2,Chinese version,i think your cheatsheets is very useful and want translate your cheatsheets to Chinese. is it ok?,zhyongquan,11530247,closed,False,2,2018-08-23T01:09:46+00:00,2018-08-23T03:44:56+00:00,2018-08-23T03:35:58+00:00,,1,1,0,0,0,0,0
+afshinea/stanford-cs-229-machine-learning,352441591,1,"LSTM, input gate forget gate","Hello,
+
+I guess the description of the forget gate and the input gate should be swapped in the RNN section.",alper111,12106566,closed,False,2,2018-08-21T08:44:44+00:00,2018-08-23T03:35:35+00:00,2018-08-23T03:35:35+00:00,,1,1,0,0,0,0,0

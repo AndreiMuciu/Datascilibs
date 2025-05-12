@@ -1,0 +1,814 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+gradio-app/gradio,d5ddd85d4d5088cce154b1cd50a4a2db179ac227,https://github.com/gradio-app/gradio/commit/d5ddd85d4d5088cce154b1cd50a4a2db179ac227,aliabid94,7870876,User,2025-05-05T11:53:26+00:00,web-flow,2025-05-05T11:53:26+00:00,"Ocean theme quickfix (#11129)
+
+* changes
+
+* add changeset
+
+---------
+
+Co-authored-by: Ali Abid <aliabid94@gmail.com>
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>",6,1,7,2,479fc28f804c674e3705763be199dacb0f5dca79
+gradio-app/gradio,479fc28f804c674e3705763be199dacb0f5dca79,https://github.com/gradio-app/gradio/commit/479fc28f804c674e3705763be199dacb0f5dca79,gradio-pr-bot,121576822,User,2025-05-02T01:22:16+00:00,web-flow,2025-05-02T01:22:16+00:00,"chore: update versions (#11107)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",261,78,339,67,bb2c7443c25b12241ab218195251520e953f7e32
+gradio-app/gradio,bb2c7443c25b12241ab218195251520e953f7e32,https://github.com/gradio-app/gradio/commit/bb2c7443c25b12241ab218195251520e953f7e32,abidlabs,1778297,User,2025-05-02T01:09:49+00:00,web-flow,2025-05-02T01:09:49+00:00,"Replace invalid characters in MCP tool name (#11119)
+
+* test
+
+* add changeset
+
+* typefix
+
+* openapi note
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",41,5,46,4,c32f8de99a6ab3a82da2f8d5f9f3176a04129f77
+gradio-app/gradio,c32f8de99a6ab3a82da2f8d5f9f3176a04129f77,https://github.com/gradio-app/gradio/commit/c32f8de99a6ab3a82da2f8d5f9f3176a04129f77,freddyaboulton,41651716,User,2025-05-02T01:07:26+00:00,web-flow,2025-05-02T01:07:26+00:00,"Fix markdown change event (#11113)
+
+* Fix markdown change event
+
+* Fix html change event too
+
+* add changeset
+
+* Fix
+
+* docstring
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>",8,6,14,4,b2118d4b613f93b34e02c809e7d0faaa7545b875
+gradio-app/gradio,b2118d4b613f93b34e02c809e7d0faaa7545b875,https://github.com/gradio-app/gradio/commit/b2118d4b613f93b34e02c809e7d0faaa7545b875,aliabd,9021060,User,2025-05-01T20:51:49+00:00,web-flow,2025-05-01T20:51:49+00:00,"Docs mcp server  (#11120)
+
+* add guide
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",96,0,96,5,49e7a0dd18174196b262d32e6c59d93ca40b1c73
+gradio-app/gradio,49e7a0dd18174196b262d32e6c59d93ca40b1c73,https://github.com/gradio-app/gradio/commit/49e7a0dd18174196b262d32e6c59d93ca40b1c73,evalstate,1936278,User,2025-05-01T17:08:59+00:00,web-flow,2025-05-01T17:08:59+00:00,"update STDIO instructions to specify sse-only transport (#11115)
+
+* update STDIO instructions to specify sse-only transport
+
+* formatter
+
+* fix
+
+* add changeset
+
+---------
+
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Freddy Boulton <41651716+freddyaboulton@users.noreply.github.com>",18,2,20,2,0e5a75e263dfd0557431e33771dd8cd49196b28e
+gradio-app/gradio,0e5a75e263dfd0557431e33771dd8cd49196b28e,https://github.com/gradio-app/gradio/commit/0e5a75e263dfd0557431e33771dd8cd49196b28e,freddyaboulton,41651716,User,2025-05-01T14:32:18+00:00,web-flow,2025-05-01T14:32:18+00:00,"Fix passing datetime.datetime instance to gr.Datetime (#11112)
+
+* Fix datetime
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",26,15,41,3,15d6297261bfca97a2df30b9df358c7751386958
+gradio-app/gradio,15d6297261bfca97a2df30b9df358c7751386958,https://github.com/gradio-app/gradio/commit/15d6297261bfca97a2df30b9df358c7751386958,freddyaboulton,41651716,User,2025-05-01T14:32:01+00:00,web-flow,2025-05-01T14:32:01+00:00,"Fix gradio cc environment (#11111)
+
+* Add code
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",9,9,18,2,098fb29d384ddf2c8a09efd9746bc788d74e2a17
+gradio-app/gradio,098fb29d384ddf2c8a09efd9746bc788d74e2a17,https://github.com/gradio-app/gradio/commit/098fb29d384ddf2c8a09efd9746bc788d74e2a17,abidlabs,1778297,User,2025-05-01T02:39:31+00:00,web-flow,2025-05-01T02:39:31+00:00,"Add `openapi.json` route for Gradio apps as well as docs on the ""view API"" page (#11103)
+
+* add route
+
+* add changeset
+
+* add changeset
+
+* add test
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* add more images/videos
+
+* Update guides/04_additional-features/07_sharing-your-app.md
+
+Co-authored-by: Ali Abdalla <ali.si3luwa@gmail.com>
+
+* Update guides/04_additional-features/14_view-api-page.md
+
+Co-authored-by: Ali Abdalla <ali.si3luwa@gmail.com>
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Ali Abdalla <ali.si3luwa@gmail.com>",169,2,171,5,8cd4e53a839d86ac69ea2d2eabfcb73e9ff4926c
+gradio-app/gradio,8cd4e53a839d86ac69ea2d2eabfcb73e9ff4926c,https://github.com/gradio-app/gradio/commit/8cd4e53a839d86ac69ea2d2eabfcb73e9ff4926c,freddyaboulton,41651716,User,2025-04-30T19:23:43+00:00,web-flow,2025-04-30T19:23:43+00:00,"Fix file upload progress (#11102)
+
+* Fix
+
+* ready
+
+* add changeset
+
+* Fix
+
+* add changeset
+
+* Update gradio/routes.py
+
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>",25,8,33,5,044baff384a9bb826a16e2a2e6c3a570170b3bb1
+gradio-app/gradio,044baff384a9bb826a16e2a2e6c3a570170b3bb1,https://github.com/gradio-app/gradio/commit/044baff384a9bb826a16e2a2e6c3a570170b3bb1,abidlabs,1778297,User,2025-04-30T17:19:20+00:00,web-flow,2025-04-30T17:19:20+00:00,"Update MCP docs (#11106)
+
+* update docs
+
+* change
+
+* add schema url",98,28,126,3,49ad5943eeab96b153f0b56fe8d42d755fe1e0f8
+gradio-app/gradio,49ad5943eeab96b153f0b56fe8d42d755fe1e0f8,https://github.com/gradio-app/gradio/commit/49ad5943eeab96b153f0b56fe8d42d755fe1e0f8,Martim-Rito,134000281,User,2025-04-30T14:48:49+00:00,web-flow,2025-04-30T14:48:49+00:00,"Fix #10281: Dragging image replaces existing instead of opening new tab (#11098)
+
+* Fix #10281: Dragging image replaces existing instead of opening new tab
+I updated the drag and drop event handlers in the imageUploader
+component (on_drag_over and on_drop) to clear the
+existing image before processing the newly dropped file.
+
+Additionally, I modified an end-to-end test to verify that the number
+of browser tabs remains the same after dropping a new file.
+
+* add changeset
+
+* Apply code review suggestions: rename to snake_case and reuse is_valid_file
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Freddy Boulton <41651716+freddyaboulton@users.noreply.github.com>",60,1,61,4,1efc9c9bb94da599fc35241f5df21298cf02eecb
+gradio-app/gradio,1efc9c9bb94da599fc35241f5df21298cf02eecb,https://github.com/gradio-app/gradio/commit/1efc9c9bb94da599fc35241f5df21298cf02eecb,aliabd,9021060,User,2025-04-30T04:10:40+00:00,web-flow,2025-04-30T04:10:40+00:00,switch to correct link (#11104),1,1,2,1,d638e1d988cd44bfad13c19f4c96210c2600c663
+gradio-app/gradio,d638e1d988cd44bfad13c19f4c96210c2600c663,https://github.com/gradio-app/gradio/commit/d638e1d988cd44bfad13c19f4c96210c2600c663,gradio-pr-bot,121576822,User,2025-04-29T22:31:08+00:00,web-flow,2025-04-29T22:31:08+00:00,"chore: update versions (#11100)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",69,20,89,18,8dab5771c7d952c76f325681dbf364119c91b0b1
+gradio-app/gradio,8dab5771c7d952c76f325681dbf364119c91b0b1,https://github.com/gradio-app/gradio/commit/8dab5771c7d952c76f325681dbf364119c91b0b1,abidlabs,1778297,User,2025-04-29T22:00:21+00:00,web-flow,2025-04-29T22:00:21+00:00,"Let Gradio apps also be MCP Servers (#10984)
+
+* changes
+
+* testing
+
+* add changeset
+
+* changes
+
+* changes
+
+* changes
+
+* add changeset
+
+* changes
+
+* changes
+
+* revert demo
+
+* changes
+
+* fixes
+
+* changes
+
+* format
+
+* changes
+
+* changes
+
+* format
+
+* notebook
+
+* lcean
+
+* format
+
+* format
+
+* add changeset
+
+* add changeset
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* format
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* add changeset
+
+* Changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* add changeset
+
+* hygiene
+
+* next
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* add demo
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* revert demos
+
+* changes
+
+* changes
+
+* format
+
+* fix utils
+
+* changes
+
+* format
+
+* changes
+
+* more tests
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* pydantic
+
+* changes
+
+* change
+
+* mcp
+
+* calculator
+
+* remove base64
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* add changeset
+
+* changes
+
+* add changeset
+
+* guide
+
+* changes
+
+* changes
+
+* guides
+
+* change
+
+* changes
+
+* changes
+
+* guide
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* tests
+
+* reqs
+
+* fix
+
+* change
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* fixes
+
+* fixes
+
+* changes
+
+* format
+
+* guide
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",2072,133,2205,26,bb5a3c5b6b4459fb4d491bcc5a625e7fee7e502c
+gradio-app/gradio,bb5a3c5b6b4459fb4d491bcc5a625e7fee7e502c,https://github.com/gradio-app/gradio/commit/bb5a3c5b6b4459fb4d491bcc5a625e7fee7e502c,eduardopalricas33,134000231,User,2025-04-29T19:54:52+00:00,web-flow,2025-04-29T19:54:52+00:00,"Fix #10320: Chatbot - Ensure all messages in a group are editable (#11097)
+
+* Fix #10320: Chatbot - Ensure all messages in a group are editable
+Previously, only the first message in a group from the same sender
+was editable. This happened because message.svelte rendered a
+single textarea for the group, and ChatBot.svelte only updated
+the first message.
+
+Now, edit_message is a list (edit_messages), storing edits for all
+messages in the group. Each message gets its own textarea, and on
+submit, handle_action is executed for each message in the group,
+ensuring all are updated correctly.
+
+Also, added an end-to-end test to verify this behavior, modifying
+the demo to allow adding messages only for the user.
+
+* add changeset
+
+* format + notebooks
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Dawood <dawoodkhan82@gmail.com>",74,18,92,6,f6c1698b2bd04994468ec8a05b79dcbfe4af8168
+gradio-app/gradio,f6c1698b2bd04994468ec8a05b79dcbfe4af8168,https://github.com/gradio-app/gradio/commit/f6c1698b2bd04994468ec8a05b79dcbfe4af8168,abidlabs,1778297,User,2025-04-29T08:22:51+00:00,abidlabs,2025-04-29T08:22:51+00:00,changes,1,0,1,1,4272421c3e7f2c45b6304f945587c7aaaaade2bb
+gradio-app/gradio,4272421c3e7f2c45b6304f945587c7aaaaade2bb,https://github.com/gradio-app/gradio/commit/4272421c3e7f2c45b6304f945587c7aaaaade2bb,abidlabs,1778297,User,2025-04-29T07:44:19+00:00,web-flow,2025-04-29T07:44:19+00:00,"Adding requirements for mcp (#11096)
+
+* changes
+
+* changes
+
+* changes",3,1,4,3,56a46c216f39ae6d59e95b70e1e2a01e25e7d42e
+gradio-app/gradio,56a46c216f39ae6d59e95b70e1e2a01e25e7d42e,https://github.com/gradio-app/gradio/commit/56a46c216f39ae6d59e95b70e1e2a01e25e7d42e,gradio-pr-bot,121576822,User,2025-04-28T18:33:57+00:00,web-flow,2025-04-28T18:33:57+00:00,"chore: update versions (#11089)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",153,36,189,41,cb322df1f4df858590e760a82f6410f3b6db899b
+gradio-app/gradio,cb322df1f4df858590e760a82f6410f3b6db899b,https://github.com/gradio-app/gradio/commit/cb322df1f4df858590e760a82f6410f3b6db899b,edmcman,1017189,User,2025-04-28T18:14:10+00:00,web-flow,2025-04-28T18:14:10+00:00,"Update client.py to always send file data, even for files without extensions (#11093)
+
+* Update client.py to always send file data, even for files without extensions
+
+Fixes #10775
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",7,1,8,2,e3d80e3c5c305ce84771ec78e5e25c705d4eff44
+gradio-app/gradio,e3d80e3c5c305ce84771ec78e5e25c705d4eff44,https://github.com/gradio-app/gradio/commit/e3d80e3c5c305ce84771ec78e5e25c705d4eff44,freddyaboulton,41651716,User,2025-04-28T16:05:52+00:00,web-flow,2025-04-28T16:05:52+00:00,"Fix scaling issue when setting height in Image component (#11091)
+
+* Fix scaling issue when setting height in Image component
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",20,0,20,3,a5105cccd6ca0682bd206608a080e24d69dad136
+gradio-app/gradio,a5105cccd6ca0682bd206608a080e24d69dad136,https://github.com/gradio-app/gradio/commit/a5105cccd6ca0682bd206608a080e24d69dad136,Col0ring,47329987,User,2025-04-27T22:01:49+00:00,web-flow,2025-04-27T22:01:49+00:00,"fix: ensure all translation files work as expected (#11088)
+
+* fix: ensure all translation files work as expected
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",18,5,23,2,89132843cae337db9f1cd52aaa9afaae2ef17efb
+gradio-app/gradio,89132843cae337db9f1cd52aaa9afaae2ef17efb,https://github.com/gradio-app/gradio/commit/89132843cae337db9f1cd52aaa9afaae2ef17efb,gradio-pr-bot,121576822,User,2025-04-25T18:35:44+00:00,web-flow,2025-04-25T18:35:44+00:00,"chore: update versions (#11077)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",555,71,626,119,c24210b129291de99b3602ecac808564b32369b5
+gradio-app/gradio,c24210b129291de99b3602ecac808564b32369b5,https://github.com/gradio-app/gradio/commit/c24210b129291de99b3602ecac808564b32369b5,aliabd,9021060,User,2025-04-25T18:22:53+00:00,web-flow,2025-04-25T18:22:53+00:00,change to github url (#11083),3,3,6,1,eff532b913a3c8f06f10a4f9471d3177e3744053
+gradio-app/gradio,eff532b913a3c8f06f10a4f9471d3177e3744053,https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053,pngwn,12937446,User,2025-04-25T12:32:29+00:00,web-flow,2025-04-25T12:32:29+00:00,"Add new `ImageSlider` component (#11027)
+
+* start
+
+* imageslider
+
+* add changeset
+
+* fix
+
+* add changeset
+
+* fix
+
+* update dependencies
+
+* add changeset
+
+* fix build
+
+* add changeset
+
+* fix build
+
+* fix build
+
+* add changeset
+
+* fix
+
+* fix
+
+* tweak handle
+
+* fix
+
+* add changeset
+
+* modernise the python class
+
+* cleanup
+
+* fix type
+
+* fix types
+
+* add docs
+
+* fix types in docs
+
+* add changeset
+
+* work with lite
+
+* fix
+
+* fix
+
+* fix build issue
+
+* fix
+
+* fix
+
+* fix example data
+
+* hopefully fix website issues
+
+* formatting
+
+* fix
+
+* working fullscreen
+
+* reset zoom button
+
+* refactor processing for image and imageslider
+
+* fix
+
+* docgen is a pedant
+
+* fix panning
+
+* add clear button for unified mode
+
+* add imageslider to __all__
+
+* fix kwarg
+
+* docs
+
+* notebooks
+
+* md
+
+* fix images
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: aliabd <ali.si3luwa@gmail.com>",3492,89,3581,33,8d2aa3e99e165413bae1d8f5f3b4630e870308f5
+gradio-app/gradio,8d2aa3e99e165413bae1d8f5f3b4630e870308f5,https://github.com/gradio-app/gradio/commit/8d2aa3e99e165413bae1d8f5f3b4630e870308f5,hannahblair,15165908,User,2025-04-24T16:13:59+00:00,web-flow,2025-04-24T16:13:59+00:00,"Ensure translations work as expected (#11049)
+
+* add locale normalisation to work with browser locale
+
+* add changeset
+
+* tweak type
+
+* add changeset
+
+* add common key mapping to allow translating common backend values
+
+* type fixes
+
+* add changeset
+
+* tweak
+
+* tweak
+
+* whitespace
+
+* whitespace
+
+* add i18n story
+
+* add changeset
+
+* add changeset
+
+* add run for testing
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",281,9,290,10,b42f35e3a46b183d1a98d5c4c8b706e685d83f9e
+gradio-app/gradio,b42f35e3a46b183d1a98d5c4c8b706e685d83f9e,https://github.com/gradio-app/gradio/commit/b42f35e3a46b183d1a98d5c4c8b706e685d83f9e,reneleonhardt,65483435,User,2025-04-23T18:49:40+00:00,web-flow,2025-04-23T18:49:40+00:00,"chore: log tested Python version (#11062)
+
+* chore: test with Python 3.10 - 3.13
+
+* Reduce the test matrix to 3.10 again because tests are too slow, but keep logging the actual version in preparation of the next bump
+
+* Upon request remove all test improvements
+
+---------
+
+Co-authored-by: Abubakar Abid <abubakar@huggingface.co>",2,3,5,1,0c1a9c73689de954130ba7565e0499837af1853a
+gradio-app/gradio,0c1a9c73689de954130ba7565e0499837af1853a,https://github.com/gradio-app/gradio/commit/0c1a9c73689de954130ba7565e0499837af1853a,gradio-pr-bot,121576822,User,2025-04-23T16:37:17+00:00,web-flow,2025-04-23T16:37:17+00:00,"chore: update versions (#11032)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",89,53,142,26,0355ef644577791749499c64840bad5947764dc8
+gradio-app/gradio,0355ef644577791749499c64840bad5947764dc8,https://github.com/gradio-app/gradio/commit/0355ef644577791749499c64840bad5947764dc8,pngwn,12937446,User,2025-04-23T16:05:38+00:00,web-flow,2025-04-23T16:05:38+00:00,Ensure it is possible to draw after uploading an image to the ImageEditor (#11070),11,0,11,2,bb1b74cb62208f1cc05b91902cd541f36a1f9b01
+gradio-app/gradio,bb1b74cb62208f1cc05b91902cd541f36a1f9b01,https://github.com/gradio-app/gradio/commit/bb1b74cb62208f1cc05b91902cd541f36a1f9b01,freddyaboulton,41651716,User,2025-04-22T19:42:08+00:00,web-flow,2025-04-22T19:42:08+00:00,"Image Editor Clear Event (#11057)
+
+* Add code
+
+* Fic
+
+* add changeset
+
+* Code'
+?
+
+* Update using-flagging.md (#11060)
+
+* lint
+
+* Fix
+
+* revert
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>
+Co-authored-by: Howard Huang <howardhuang96@gmail.com>",7,0,7,2,be68f53f3730b0f51c06c0dc4d1e008001e8bdcf
+gradio-app/gradio,be68f53f3730b0f51c06c0dc4d1e008001e8bdcf,https://github.com/gradio-app/gradio/commit/be68f53f3730b0f51c06c0dc4d1e008001e8bdcf,H-Huang,14858254,User,2025-04-21T19:05:23+00:00,web-flow,2025-04-21T19:05:23+00:00,Update using-flagging.md (#11060),1,1,2,1,2750d485450f7de9b8d01144b939893e39c8397e
+gradio-app/gradio,2750d485450f7de9b8d01144b939893e39c8397e,https://github.com/gradio-app/gradio/commit/2750d485450f7de9b8d01144b939893e39c8397e,freddyaboulton,41651716,User,2025-04-18T14:37:46+00:00,web-flow,2025-04-18T14:37:46+00:00,"Fix duplicate id issue in spaces when creating an interface inside blocks (#11052)
+
+* Add code
+
+* add changeset
+
+* Fix
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",8,3,11,2,aaba2c6358692c9e25a193f92f02069179052837
+gradio-app/gradio,aaba2c6358692c9e25a193f92f02069179052837,https://github.com/gradio-app/gradio/commit/aaba2c6358692c9e25a193f92f02069179052837,freddyaboulton,41651716,User,2025-04-18T14:27:35+00:00,web-flow,2025-04-18T14:27:35+00:00,"Fix chatinterface icons bug (#11039)
+
+* Add icons event if not multimodal
+
+* Code
+
+* Add code
+
+* add changeset
+
+* Add code
+
+* Add code
+
+* code
+
+* empty
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",38,2,40,3,62a00806e198c4c76bc132255d4b78c7aa329157
+gradio-app/gradio,62a00806e198c4c76bc132255d4b78c7aa329157,https://github.com/gradio-app/gradio/commit/62a00806e198c4c76bc132255d4b78c7aa329157,abidlabs,1778297,User,2025-04-17T19:34:07+00:00,web-flow,2025-04-17T19:34:07+00:00,"Pass any visible error modals from a Gradio app downstream to the app that has `gr.load`-ed it (#11043)
+
+* changes
+
+* add changeset
+
+* changes
+
+* changes
+
+* changes
+
+* changes
+
+* format
+
+* add changeset
+
+* add changeset
+
+* unit tests
+
+* changes
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",73,14,87,7,fd46e48f516a2907c469c7a6d3e67ae9f7068b29
+gradio-app/gradio,fd46e48f516a2907c469c7a6d3e67ae9f7068b29,https://github.com/gradio-app/gradio/commit/fd46e48f516a2907c469c7a6d3e67ae9f7068b29,freddyaboulton,41651716,User,2025-04-16T20:43:28+00:00,web-flow,2025-04-16T20:43:28+00:00,"Be able to dispatch Info messages from a component (#11038)
+
+* Add code
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",8,0,8,2,3d3c701c46628898dee939629f57fcd3bc6c04c8
+gradio-app/gradio,3d3c701c46628898dee939629f57fcd3bc6c04c8,https://github.com/gradio-app/gradio/commit/3d3c701c46628898dee939629f57fcd3bc6c04c8,abidlabs,1778297,User,2025-04-16T14:59:07+00:00,web-flow,2025-04-16T14:59:07+00:00,"Show stop button in `gr.ChatInterface` even for non-streaming chat functions (#11040)
+
+* fix
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",34,30,64,2,d95672a862fda4f72346212f262ec1001a0fe4dc
+gradio-app/gradio,d95672a862fda4f72346212f262ec1001a0fe4dc,https://github.com/gradio-app/gradio/commit/d95672a862fda4f72346212f262ec1001a0fe4dc,abidlabs,1778297,User,2025-04-16T14:42:14+00:00,abidlabs,2025-04-16T14:42:14+00:00,"Revert ""changes""
+
+This reverts commit 0cb6c5f0ea115f52a2eceb70c219b3018694f629.",0,9,9,1,0cb6c5f0ea115f52a2eceb70c219b3018694f629
+gradio-app/gradio,0cb6c5f0ea115f52a2eceb70c219b3018694f629,https://github.com/gradio-app/gradio/commit/0cb6c5f0ea115f52a2eceb70c219b3018694f629,abidlabs,1778297,User,2025-04-16T14:41:18+00:00,abidlabs,2025-04-16T14:41:18+00:00,changes,9,0,9,1,0dbc14fa867ef57a2f810e0b869b7d13d98f2544
+gradio-app/gradio,0dbc14fa867ef57a2f810e0b869b7d13d98f2544,https://github.com/gradio-app/gradio/commit/0dbc14fa867ef57a2f810e0b869b7d13d98f2544,abidlabs,1778297,User,2025-04-16T13:59:42+00:00,web-flow,2025-04-16T13:59:42+00:00,"Allow setting an empty value in `display_value` of `gr.Dataframe` (#11033)
+
+* changes
+
+* Format
+
+* add changeset
+
+* changes
+
+* changes
+
+* add test
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",35,16,51,4,f330cd90446865aeb5a515e9149581cbfc7c7796
+gradio-app/gradio,f330cd90446865aeb5a515e9149581cbfc7c7796,https://github.com/gradio-app/gradio/commit/f330cd90446865aeb5a515e9149581cbfc7c7796,abidlabs,1778297,User,2025-04-16T02:40:57+00:00,abidlabs,2025-04-16T02:40:57+00:00,changes,22,25,47,1,877b213ff804e2a9132bb5e90334e536f3137019
+gradio-app/gradio,877b213ff804e2a9132bb5e90334e536f3137019,https://github.com/gradio-app/gradio/commit/877b213ff804e2a9132bb5e90334e536f3137019,abidlabs,1778297,User,2025-04-16T02:33:55+00:00,abidlabs,2025-04-16T02:33:55+00:00,"Revert ""changes""
+
+This reverts commit eabc4747bc416de61f5bfa3d983b3f99351966d3.",7,6,13,2,eba0e989caa3f23b0a4026e91020e1052a22a80f
+gradio-app/gradio,eba0e989caa3f23b0a4026e91020e1052a22a80f,https://github.com/gradio-app/gradio/commit/eba0e989caa3f23b0a4026e91020e1052a22a80f,abidlabs,1778297,User,2025-04-16T02:33:40+00:00,abidlabs,2025-04-16T02:33:40+00:00,"Revert ""Merge branch 'main' of github.com:gradio-app/gradio""
+
+This reverts commit f845be6069d40fed1aace164e4f9f4015dcc39db, reversing
+changes made to eabc4747bc416de61f5bfa3d983b3f99351966d3.",25,27,52,2,7b8072b7159c04aaca60b1517281c2e0ad22a5d0
+gradio-app/gradio,7b8072b7159c04aaca60b1517281c2e0ad22a5d0,https://github.com/gradio-app/gradio/commit/7b8072b7159c04aaca60b1517281c2e0ad22a5d0,abidlabs,1778297,User,2025-04-16T02:33:04+00:00,abidlabs,2025-04-16T02:33:04+00:00,"Revert ""Revert ""Speed up `gr.Dataframe.__extract_metadata` (#11031)""""
+
+This reverts commit 5a5dc98a716a0bd750e6e9c47ccb6a59e74dc87a.",27,25,52,2,5a5dc98a716a0bd750e6e9c47ccb6a59e74dc87a
+gradio-app/gradio,5a5dc98a716a0bd750e6e9c47ccb6a59e74dc87a,https://github.com/gradio-app/gradio/commit/5a5dc98a716a0bd750e6e9c47ccb6a59e74dc87a,abidlabs,1778297,User,2025-04-16T02:32:37+00:00,abidlabs,2025-04-16T02:32:37+00:00,"Revert ""Speed up `gr.Dataframe.__extract_metadata` (#11031)""
+
+This reverts commit d55ce85dfed7356ac6027a63fb79c64a5437ad37.",25,27,52,2,f845be6069d40fed1aace164e4f9f4015dcc39db
+gradio-app/gradio,f845be6069d40fed1aace164e4f9f4015dcc39db,https://github.com/gradio-app/gradio/commit/f845be6069d40fed1aace164e4f9f4015dcc39db,abidlabs,1778297,User,2025-04-16T02:27:29+00:00,abidlabs,2025-04-16T02:27:29+00:00,Merge branch 'main' of github.com:gradio-app/gradio,27,25,52,2,"eabc4747bc416de61f5bfa3d983b3f99351966d3,d55ce85dfed7356ac6027a63fb79c64a5437ad37"
+gradio-app/gradio,eabc4747bc416de61f5bfa3d983b3f99351966d3,https://github.com/gradio-app/gradio/commit/eabc4747bc416de61f5bfa3d983b3f99351966d3,abidlabs,1778297,User,2025-04-16T02:27:23+00:00,abidlabs,2025-04-16T02:27:23+00:00,changes,6,7,13,2,73188fb5ddb934fff10339f3c08fcbed291f2133
+gradio-app/gradio,d55ce85dfed7356ac6027a63fb79c64a5437ad37,https://github.com/gradio-app/gradio/commit/d55ce85dfed7356ac6027a63fb79c64a5437ad37,abidlabs,1778297,User,2025-04-16T00:57:12+00:00,web-flow,2025-04-16T00:57:12+00:00,"Speed up `gr.Dataframe.__extract_metadata` (#11031)
+
+* changes
+
+* add changeset
+
+* changes
+
+* changes
+
+* fix
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",27,25,52,2,73188fb5ddb934fff10339f3c08fcbed291f2133
+gradio-app/gradio,73188fb5ddb934fff10339f3c08fcbed291f2133,https://github.com/gradio-app/gradio/commit/73188fb5ddb934fff10339f3c08fcbed291f2133,gradio-pr-bot,121576822,User,2025-04-15T21:29:37+00:00,web-flow,2025-04-15T21:29:37+00:00,"chore: update versions (#11028)
+
+Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>",17,16,33,6,a4a3a03d513c3df8a85c2742be34b80bcf406496
+gradio-app/gradio,a4a3a03d513c3df8a85c2742be34b80bcf406496,https://github.com/gradio-app/gradio/commit/a4a3a03d513c3df8a85c2742be34b80bcf406496,abidlabs,1778297,User,2025-04-15T21:08:12+00:00,web-flow,2025-04-15T21:08:12+00:00,"Fix streaming / stopping button when examples are clicked in `gr.ChatInterface` (#11020)
+
+* changes
+
+* changes
+
+* add changeset
+
+* ignore
+
+* fix tests
+
+* unrelated fix
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",24,9,33,3,d24f8fdc9da889e94f094f8bedbc7b8475e3acb7
+gradio-app/gradio,d24f8fdc9da889e94f094f8bedbc7b8475e3acb7,https://github.com/gradio-app/gradio/commit/d24f8fdc9da889e94f094f8bedbc7b8475e3acb7,oxkitsune,14833076,User,2025-04-15T17:32:56+00:00,web-flow,2025-04-15T17:32:56+00:00,"Fix `ssr_mode` parameter name in notice message (#11025)
+
+* Align notice message with argument name
+
+* add changeset
+
+* add changeset
+
+---------
+
+Co-authored-by: gradio-pr-bot <gradio-pr-bot@users.noreply.github.com>",6,1,7,2,0eef0eca10acebffad9a7443728b30cff2548fb6

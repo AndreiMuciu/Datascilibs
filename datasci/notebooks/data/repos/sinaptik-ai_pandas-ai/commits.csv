@@ -1,0 +1,444 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+sinaptik-ai/pandas-ai,85b31665e2b6cb6adcf040a7a77f77201b8cfb86,https://github.com/sinaptik-ai/pandas-ai/commit/85b31665e2b6cb6adcf040a7a77f77201b8cfb86,ArslanSaleem,11032815,User,2025-04-14T08:01:54+00:00,ArslanSaleem,2025-04-14T08:01:54+00:00,release/b17,1,1,2,1,9b579452f2d9d59db7a61cafe1c7b28815b62848
+sinaptik-ai/pandas-ai,9b579452f2d9d59db7a61cafe1c7b28815b62848,https://github.com/sinaptik-ai/pandas-ai/commit/9b579452f2d9d59db7a61cafe1c7b28815b62848,ArslanSaleem,11032815,User,2025-04-11T09:38:33+00:00,web-flow,2025-04-11T09:38:33+00:00,"fix(duckdbConnection): make duckdb connection manager non singleton (#1710)
+
+* fix(duckdbConnection): shared connection space between duckdb
+
+* fix(dataset): add test case",24,19,43,2,455dfdbf688ba79db527029f51e6d216354d88aa
+sinaptik-ai/pandas-ai,455dfdbf688ba79db527029f51e6d216354d88aa,https://github.com/sinaptik-ai/pandas-ai/commit/455dfdbf688ba79db527029f51e6d216354d88aa,ArslanSaleem,11032815,User,2025-04-09T13:06:40+00:00,web-flow,2025-04-09T13:06:40+00:00,"fix(view_loader): avoid lower casing the column name (#1703)
+
+* fix(view_loader): avoid lower casing the column name
+
+* fix: remove print statements",159,149,308,4,ccdf77f170f8577a0ef6fdf52ba295f833ec9956
+sinaptik-ai/pandas-ai,ccdf77f170f8577a0ef6fdf52ba295f833ec9956,https://github.com/sinaptik-ai/pandas-ai/commit/ccdf77f170f8577a0ef6fdf52ba295f833ec9956,ArslanSaleem,11032815,User,2025-04-09T12:20:46+00:00,web-flow,2025-04-09T12:20:46+00:00,fix(serializer): user apply instead of applymap (#1704),1,1,2,1,98bfafab9d2b4b5d1ed42aa8ee15c05de9899a2a
+sinaptik-ai/pandas-ai,98bfafab9d2b4b5d1ed42aa8ee15c05de9899a2a,https://github.com/sinaptik-ai/pandas-ai/commit/98bfafab9d2b4b5d1ed42aa8ee15c05de9899a2a,ArslanSaleem,11032815,User,2025-04-09T09:09:48+00:00,web-flow,2025-04-09T09:09:48+00:00,"Merge pull request #1705 from krakken190/main
+
+Fix: Resolve Python 3.8 Compatibility Issue in semantic_layer_schema.py",1,1,2,1,"cd68a1d00f5def2e1adb855aa343d0a1b9cc55f9,3208351945dea9c71e0a36725ba73a480e2ce02c"
+sinaptik-ai/pandas-ai,3208351945dea9c71e0a36725ba73a480e2ce02c,https://github.com/sinaptik-ai/pandas-ai/commit/3208351945dea9c71e0a36725ba73a480e2ce02c,krakken190,72223902,User,2025-04-09T05:26:47+00:00,web-flow,2025-04-09T05:26:47+00:00,Update semantic_layer_schema.py,1,1,2,1,30dd94f3fddec90409cfabd50e69e55ca5ecc914
+sinaptik-ai/pandas-ai,cd68a1d00f5def2e1adb855aa343d0a1b9cc55f9,https://github.com/sinaptik-ai/pandas-ai/commit/cd68a1d00f5def2e1adb855aa343d0a1b9cc55f9,ArslanSaleem,11032815,User,2025-04-07T19:56:24+00:00,web-flow,2025-04-07T19:56:24+00:00,"fix(sql): pagination remove extra conversions (#1702)
+
+* fix(sql): pagination remove extra conversions
+
+* update comment",21,26,47,2,dab41c2caa7f82ad0872c44e8d52068e470d7318
+sinaptik-ai/pandas-ai,dab41c2caa7f82ad0872c44e8d52068e470d7318,https://github.com/sinaptik-ai/pandas-ai/commit/dab41c2caa7f82ad0872c44e8d52068e470d7318,ArslanSaleem,11032815,User,2025-03-21T11:23:16+00:00,ArslanSaleem,2025-03-21T11:23:16+00:00,release 3.0.0-beta.16,1,1,2,1,30dd94f3fddec90409cfabd50e69e55ca5ecc914
+sinaptik-ai/pandas-ai,30dd94f3fddec90409cfabd50e69e55ca5ecc914,https://github.com/sinaptik-ai/pandas-ai/commit/30dd94f3fddec90409cfabd50e69e55ca5ecc914,ArslanSaleem,11032815,User,2025-03-20T19:55:50+00:00,web-flow,2025-03-20T19:55:50+00:00,"fix(dataframe_serialize): truncate content of dataframe columns (#1691)
+
+* fix(dataframe_serialize): truncate content of dataframe columns
+
+* fix(dataframe): clean dataframe serialization code
+
+* Update pandasai/helpers/dataframe_serializer.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",58,10,68,2,890fbba9e9ea548828ee947e15553c56ff5246ba
+sinaptik-ai/pandas-ai,890fbba9e9ea548828ee947e15553c56ff5246ba,https://github.com/sinaptik-ai/pandas-ai/commit/890fbba9e9ea548828ee947e15553c56ff5246ba,ArslanSaleem,11032815,User,2025-03-19T18:39:40+00:00,web-flow,2025-03-19T18:39:40+00:00,fix(df_redeclaration): remove dataframe redeclaration checks (#1688),1,93,94,2,bb84840946fb19b306b0b71e76fac80cd2737081
+sinaptik-ai/pandas-ai,bb84840946fb19b306b0b71e76fac80cd2737081,https://github.com/sinaptik-ai/pandas-ai/commit/bb84840946fb19b306b0b71e76fac80cd2737081,ArslanSaleem,11032815,User,2025-03-19T17:43:13+00:00,web-flow,2025-03-19T17:43:13+00:00,fix(error_correction): error correction for code generation (#1687),57,5,62,2,f01d136b27fa0b81d87b38a69039d3fdb3270cda
+sinaptik-ai/pandas-ai,f01d136b27fa0b81d87b38a69039d3fdb3270cda,https://github.com/sinaptik-ai/pandas-ai/commit/f01d136b27fa0b81d87b38a69039d3fdb3270cda,scaliseraoul,36519284,User,2025-03-19T16:39:12+00:00,web-flow,2025-03-19T16:39:12+00:00,"fix: dataset path error message and fixing tests (#1686)
+
+* fix(read_csv): lower file name
+
+* fix: dataset path error message and fixing tests",9,12,21,4,140098cf5b6de288102bce8f50096a63e3f8951b
+sinaptik-ai/pandas-ai,140098cf5b6de288102bce8f50096a63e3f8951b,https://github.com/sinaptik-ai/pandas-ai/commit/140098cf5b6de288102bce8f50096a63e3f8951b,scaliseraoul,36519284,User,2025-03-19T08:34:27+00:00,web-flow,2025-03-19T08:34:27+00:00,fix(read_csv): lower file name (#1681),1,1,2,1,fdd2487707b55030b42060d5288b4a6b3b2405a6
+sinaptik-ai/pandas-ai,fdd2487707b55030b42060d5288b4a6b3b2405a6,https://github.com/sinaptik-ai/pandas-ai/commit/fdd2487707b55030b42060d5288b4a6b3b2405a6,ArslanSaleem,11032815,User,2025-03-19T08:22:32+00:00,web-flow,2025-03-19T08:22:32+00:00,"fix(docs): sandbox documentation and example corrected (#1682)
+
+* fix(sandbox_docs): update documentation of sandbox
+
+* fix(sandbox_docs): update documentation of sandbox
+
+* fix: message of exception in tests",108,43,151,6,e6e2deeb66fe8032fa702bc069c1da0a48a0ac7b
+sinaptik-ai/pandas-ai,e6e2deeb66fe8032fa702bc069c1da0a48a0ac7b,https://github.com/sinaptik-ai/pandas-ai/commit/e6e2deeb66fe8032fa702bc069c1da0a48a0ac7b,scaliseraoul-sinaptik,195100904,User,2025-03-18T09:17:13+00:00,web-flow,2025-03-18T09:17:13+00:00,"Merge pull request #1678 from sinaptik-ai/fix/extract_read_schema_call
+
+fix(loaders): avoid extra initialization of loader",2,2,4,2,"0f60714b6bdb9acb9edf57066220bfb8bd719f0b,6a17c2b5c12bad1d6d1eaf69c53fec100c0ab559"
+sinaptik-ai/pandas-ai,6a17c2b5c12bad1d6d1eaf69c53fec100c0ab559,https://github.com/sinaptik-ai/pandas-ai/commit/6a17c2b5c12bad1d6d1eaf69c53fec100c0ab559,ArslanSaleem,11032815,User,2025-03-17T16:07:05+00:00,ArslanSaleem,2025-03-17T16:07:05+00:00,fix(loaders): avoid extra initialization of loader,2,2,4,2,0f60714b6bdb9acb9edf57066220bfb8bd719f0b
+sinaptik-ai/pandas-ai,0f60714b6bdb9acb9edf57066220bfb8bd719f0b,https://github.com/sinaptik-ai/pandas-ai/commit/0f60714b6bdb9acb9edf57066220bfb8bd719f0b,scaliseraoul,36519284,User,2025-03-14T17:42:34+00:00,web-flow,2025-03-14T17:42:34+00:00,fix(loader): optimization (#1676),0,5,5,1,3d17c1a968457fa8854fcb0adf1a7e27f01665c5
+sinaptik-ai/pandas-ai,3d17c1a968457fa8854fcb0adf1a7e27f01665c5,https://github.com/sinaptik-ai/pandas-ai/commit/3d17c1a968457fa8854fcb0adf1a7e27f01665c5,ArslanSaleem,11032815,User,2025-03-13T14:13:15+00:00,web-flow,2025-03-13T14:13:15+00:00,"Merge pull request #1674 from sinaptik-ai/fix/path_double_dash_issue
+
+fix(sql_query): resolve double dash issue in url path",46,1,47,2,"3540d1f0416b5cd8487ecc958048383881466cef,5ad945ff2123bc0dfd19b405b62ca56df6cee5f2"
+sinaptik-ai/pandas-ai,5ad945ff2123bc0dfd19b405b62ca56df6cee5f2,https://github.com/sinaptik-ai/pandas-ai/commit/5ad945ff2123bc0dfd19b405b62ca56df6cee5f2,ArslanSaleem,11032815,User,2025-03-13T13:41:19+00:00,ArslanSaleem,2025-03-13T13:41:19+00:00,fix(sql_query): resolve double dash issue in url path,46,1,47,2,3540d1f0416b5cd8487ecc958048383881466cef
+sinaptik-ai/pandas-ai,3540d1f0416b5cd8487ecc958048383881466cef,https://github.com/sinaptik-ai/pandas-ai/commit/3540d1f0416b5cd8487ecc958048383881466cef,gventuri,15671184,User,2025-03-11T11:16:08+00:00,gventuri,2025-03-11T11:16:08+00:00,Release v3.0.0-beta.15,1,1,2,1,5ec87310b9b550fc0965f3bddf24f40445a2ce48
+sinaptik-ai/pandas-ai,5ec87310b9b550fc0965f3bddf24f40445a2ce48,https://github.com/sinaptik-ai/pandas-ai/commit/5ec87310b9b550fc0965f3bddf24f40445a2ce48,scaliseraoul,36519284,User,2025-03-11T11:13:35+00:00,web-flow,2025-03-11T11:13:35+00:00,"fix(core): img path in windows (#1668)
+
+* fix(core): img path in windows
+
+* fix(core): img path in windows
+
+* fix(core): img path in windows
+
+* fix(core): img path in windows
+
+* fix(core): img path in windows
+
+* fix(core): img path in windows",45,2,47,2,556e978fe89deda479cb2597906ad2beec8b7773
+sinaptik-ai/pandas-ai,556e978fe89deda479cb2597906ad2beec8b7773,https://github.com/sinaptik-ai/pandas-ai/commit/556e978fe89deda479cb2597906ad2beec8b7773,scaliseraoul,36519284,User,2025-03-10T17:54:03+00:00,web-flow,2025-03-10T17:54:03+00:00,"fix(agent): chat with view and other dataset (#1660)
+
+* fix(agent): remove wrong double validation
+
+* fix(agent): chat with view and other dataset",20,34,54,2,d589b5ba0bb4ce4facf5904cb427c574b92dac6d
+sinaptik-ai/pandas-ai,d589b5ba0bb4ce4facf5904cb427c574b92dac6d,https://github.com/sinaptik-ai/pandas-ai/commit/d589b5ba0bb4ce4facf5904cb427c574b92dac6d,scaliseraoul,36519284,User,2025-03-10T17:53:32+00:00,web-flow,2025-03-10T17:53:32+00:00,"fix: correct column parsing (#1667)
+
+* fix: correct column parsing
+
+* Update pandasai/query_builders/view_query_builder.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",5,3,8,1,911244ec7e6894df51c23c44d7db4d8ac007867d
+sinaptik-ai/pandas-ai,911244ec7e6894df51c23c44d7db4d8ac007867d,https://github.com/sinaptik-ai/pandas-ai/commit/911244ec7e6894df51c23c44d7db4d8ac007867d,maidacundo,43886585,User,2025-03-10T17:53:10+00:00,web-flow,2025-03-10T17:53:10+00:00,"fix(view_loader): add optional parameters to execute_local_query method (#1663)
+
+* fix(view_loader): add optional parameters to execute_local_query method
+
+* Update pandasai/data_loader/view_loader.py
+
+typing
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* refactor(view_loader): improve type hints and formatting in ViewDatasetLoader
+
+* fix: ruff errors
+
+* Add tests for ViewDatasetLoader
+
+* refactor(tests): remove unused imports in test_view_loader
+
+* refactor(tests): reorder imports in test_view_loader for clarity
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+Co-authored-by: ArslanSaleem <khan.arslan38@gmail.com>",409,4,413,2,869f048b60976c1fc5be313922368c626308a44d
+sinaptik-ai/pandas-ai,869f048b60976c1fc5be313922368c626308a44d,https://github.com/sinaptik-ai/pandas-ai/commit/869f048b60976c1fc5be313922368c626308a44d,scaliseraoul,36519284,User,2025-03-05T11:05:36+00:00,web-flow,2025-03-05T11:05:36+00:00,fix(query builders): quoting identifiers by default (#1658),402,415,817,7,6265b01b8796eebd5d5723e2dfd58aa550ce4fe7
+sinaptik-ai/pandas-ai,6265b01b8796eebd5d5723e2dfd58aa550ce4fe7,https://github.com/sinaptik-ai/pandas-ai/commit/6265b01b8796eebd5d5723e2dfd58aa550ce4fe7,scaliseraoul,36519284,User,2025-03-05T11:05:07+00:00,web-flow,2025-03-05T11:05:07+00:00,fix(agent): remove wrong double validation (#1659),0,11,11,1,b67caf82470d8f86e37ac63f66ded7773d8f4c12
+sinaptik-ai/pandas-ai,b67caf82470d8f86e37ac63f66ded7773d8f4c12,https://github.com/sinaptik-ai/pandas-ai/commit/b67caf82470d8f86e37ac63f66ded7773d8f4c12,scaliseraoul,36519284,User,2025-02-28T17:46:19+00:00,web-flow,2025-02-28T17:46:19+00:00,"feature(litellm): pandasai litellm wrapper (#1648)
+
+* feature(litellm): pandasai litellm wrapper
+
+* feature(litellm): remove other wrappers, add documentation
+
+* feature(litellm): remove other wrappers, add documentation
+
+* fix(litellm): docstring, correct patching
+
+* Update extensions/llms/litellm/pyproject.toml
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",626,15299,15925,46,0c0deff7311d68baa83a0d4beadb2021ac7af1ed
+sinaptik-ai/pandas-ai,0c0deff7311d68baa83a0d4beadb2021ac7af1ed,https://github.com/sinaptik-ai/pandas-ai/commit/0c0deff7311d68baa83a0d4beadb2021ac7af1ed,scaliseraoul,36519284,User,2025-02-28T10:36:02+00:00,web-flow,2025-02-28T10:36:02+00:00,fix(localloader): adding parameters (#1647),13,5,18,4,fda3b2f42c75bde16200e0614a645b1356b21cf9
+sinaptik-ai/pandas-ai,fda3b2f42c75bde16200e0614a645b1356b21cf9,https://github.com/sinaptik-ai/pandas-ai/commit/fda3b2f42c75bde16200e0614a645b1356b21cf9,gventuri,15671184,User,2025-02-28T09:04:09+00:00,gventuri,2025-02-28T09:04:09+00:00,Release v3.0.0-beta.14,1,1,2,1,357c97cc4c421189502f79fa3df3ae04e1087d5b
+sinaptik-ai/pandas-ai,357c97cc4c421189502f79fa3df3ae04e1087d5b,https://github.com/sinaptik-ai/pandas-ai/commit/357c97cc4c421189502f79fa3df3ae04e1087d5b,scaliseraoul,36519284,User,2025-02-27T18:22:56+00:00,web-flow,2025-02-27T18:22:56+00:00,"feature(paginator): adding paginator functionality (#1644)
+
+* feature(paginator): adding paginator functionality
+
+* Update pandasai/helpers/sql_sanitizer.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* Update pandasai/query_builders/sql_parser.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* feature(paginator): docstring
+
+* feature(paginator): format issues
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",518,3,521,6,fc1fefc771d1bd47f33398cdbf0f038860770130
+sinaptik-ai/pandas-ai,fc1fefc771d1bd47f33398cdbf0f038860770130,https://github.com/sinaptik-ai/pandas-ai/commit/fc1fefc771d1bd47f33398cdbf0f038860770130,scaliseraoul,36519284,User,2025-02-27T18:20:54+00:00,web-flow,2025-02-27T18:20:54+00:00,"fix(chart): fixed path fow Windows (#1643)
+
+* fix(chart): fixed path fow Windows
+
+* Update tests/unit_tests/core/code_generation/test_code_cleaning.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",27,4,31,4,73a0fa9cc9be05f257cdd59c516f47608da97daa
+sinaptik-ai/pandas-ai,73a0fa9cc9be05f257cdd59c516f47608da97daa,https://github.com/sinaptik-ai/pandas-ai/commit/73a0fa9cc9be05f257cdd59c516f47608da97daa,ArslanSaleem,11032815,User,2025-02-27T17:47:07+00:00,web-flow,2025-02-27T17:47:07+00:00,fix(sandbox): ignore non string constants for finding query string (#1645),50,11,61,3,ae431f816c42463bb76047325c0377e7191e33b9
+sinaptik-ai/pandas-ai,ae431f816c42463bb76047325c0377e7191e33b9,https://github.com/sinaptik-ai/pandas-ai/commit/ae431f816c42463bb76047325c0377e7191e33b9,scaliseraoul,36519284,User,2025-02-27T09:26:57+00:00,web-flow,2025-02-27T09:26:57+00:00,"fix(coverage): adding unit tests (#1641)
+
+* fix(coverage): adding unit tests
+
+* fix(coverage): format
+
+* chore: fix typo
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* chore: rename to test_get_group_by_columns
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* chore: rename to test_column_must_be_defined_for_view
+
+* Update tests/unit_tests/data_loader/test_loader.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* fix(coverage): assertion missing
+
+* fix(coverage): useless optional str
+
+---------
+
+Co-authored-by: Gabriele Venturi <lele.venturi@gmail.com>
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",134,11,145,8,82a5c8ae47264d3ba056198f35d5b4c9aa6da798
+sinaptik-ai/pandas-ai,82a5c8ae47264d3ba056198f35d5b4c9aa6da798,https://github.com/sinaptik-ai/pandas-ai/commit/82a5c8ae47264d3ba056198f35d5b4c9aa6da798,czakop,61651954,User,2025-02-26T18:39:04+00:00,web-flow,2025-02-26T18:39:04+00:00,docs: update ee license url in readme (#1642),1,1,2,1,7e1edb87def242791da04e61ab8b1c420d02593b
+sinaptik-ai/pandas-ai,7e1edb87def242791da04e61ab8b1c420d02593b,https://github.com/sinaptik-ai/pandas-ai/commit/7e1edb87def242791da04e61ab8b1c420d02593b,scaliseraoul,36519284,User,2025-02-26T16:18:02+00:00,web-flow,2025-02-26T16:18:02+00:00,"feature(IntegrationTests): add integration tests (#1640)
+
+* feature(IntegrationTests): integration tests on load, pull, create, chat, push for parquet, sql and view, including grouped and transformed one
+
+* feature(IntegrationTests): codespell
+
+* Update tests/integration_tests/parquet/test_parquet_transformed.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>",1121,5,1126,16,319747605187d033d569caf3c267c8f6d9428ca3
+sinaptik-ai/pandas-ai,319747605187d033d569caf3c267c8f6d9428ca3,https://github.com/sinaptik-ai/pandas-ai/commit/319747605187d033d569caf3c267c8f6d9428ca3,scaliseraoul,36519284,User,2025-02-26T15:02:36+00:00,web-flow,2025-02-26T15:02:36+00:00,fix(expression): modulo operation issues (#1637),4,0,4,2,3cb04f1ccfa9dd60a014609fc86529fb1c10be8b
+sinaptik-ai/pandas-ai,3cb04f1ccfa9dd60a014609fc86529fb1c10be8b,https://github.com/sinaptik-ai/pandas-ai/commit/3cb04f1ccfa9dd60a014609fc86529fb1c10be8b,scaliseraoul,36519284,User,2025-02-25T13:45:58+00:00,web-flow,2025-02-25T13:45:58+00:00,"feature(SQLTransformation): SQL transformation (#1636)
+
+* fix(cache): removes cache
+
+* feature(SQLTransformation): SQL transformation for csv and sql
+
+* feature(SQLTransformation): SQL transformation for view
+
+* feature(SQLTransformation): SQL transformation for view, fixing old tests
+
+* feature(SQLTransformation): SQL transformation, tests, validation at creation time
+
+* feature(SQLTransformation): quoting params and validate numbers
+
+* Update pandasai/query_builders/sql_transformation_manager.py
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+
+* fix(SQLTransformation): formatting issues
+
+* fix(SQLTransformation): missing validation
+
+* fix(SQLTransformation): typo
+
+---------
+
+Co-authored-by: ellipsis-dev[bot] <65095814+ellipsis-dev[bot]@users.noreply.github.com>
+Co-authored-by: Gabriele Venturi <lele.venturi@gmail.com>",794,1485,2279,17,b7a94c8aacc7c54450317187371cf6b14e1e50e5
+sinaptik-ai/pandas-ai,b7a94c8aacc7c54450317187371cf6b14e1e50e5,https://github.com/sinaptik-ai/pandas-ai/commit/b7a94c8aacc7c54450317187371cf6b14e1e50e5,scaliseraoul,36519284,User,2025-02-24T17:15:30+00:00,web-flow,2025-02-24T17:15:30+00:00,fix(cache): removes cache (#1635),7,314,321,16,7c4fb5d9f4eac3b87d1981cd03bf3e0e2e96681c
+sinaptik-ai/pandas-ai,7c4fb5d9f4eac3b87d1981cd03bf3e0e2e96681c,https://github.com/sinaptik-ai/pandas-ai/commit/7c4fb5d9f4eac3b87d1981cd03bf3e0e2e96681c,ArslanSaleem,11032815,User,2025-02-24T17:02:49+00:00,web-flow,2025-02-24T17:02:49+00:00,"fix(license): pypi license not displayed for the ee extensions (#1634)
+
+* fix: licenses of extensions and project link
+
+* update pyproject version",176,18,194,27,a4b1afe74732f276496d9188c5442dd8fa37f380
+sinaptik-ai/pandas-ai,a4b1afe74732f276496d9188c5442dd8fa37f380,https://github.com/sinaptik-ai/pandas-ai/commit/a4b1afe74732f276496d9188c5442dd8fa37f380,gventuri,15671184,User,2025-02-24T10:55:04+00:00,gventuri,2025-02-24T10:55:04+00:00,Release v3.0.0-beta.12,1,1,2,1,3a2d5c89b1e37f0b9d713bdc69729befe3335089
+sinaptik-ai/pandas-ai,3a2d5c89b1e37f0b9d713bdc69729befe3335089,https://github.com/sinaptik-ai/pandas-ai/commit/3a2d5c89b1e37f0b9d713bdc69729befe3335089,scaliseraoul,36519284,User,2025-02-21T09:12:41+00:00,web-flow,2025-02-21T09:12:41+00:00,"fix: passing correct dialect and error to llm (#1625)
+
+* fix: passing correct dialect and error to llm
+
+* fix: formatting issues
+
+* fix: fixing tests
+
+* fix: remove redountant logic",18,4,22,4,0306d017fc19b47627c4ea577d6984241c84b137
+sinaptik-ai/pandas-ai,0306d017fc19b47627c4ea577d6984241c84b137,https://github.com/sinaptik-ai/pandas-ai/commit/0306d017fc19b47627c4ea577d6984241c84b137,scaliseraoul,36519284,User,2025-02-18T21:06:48+00:00,web-flow,2025-02-18T21:06:48+00:00,fix: fixing datasets naming convention (#1623),79,24,103,10,ef8388f9d0e235083d5351f9e924077e0c3974ec
+sinaptik-ai/pandas-ai,ef8388f9d0e235083d5351f9e924077e0c3974ec,https://github.com/sinaptik-ai/pandas-ai/commit/ef8388f9d0e235083d5351f9e924077e0c3974ec,scaliseraoul,36519284,User,2025-02-17T16:41:42+00:00,web-flow,2025-02-17T16:41:42+00:00,"feature(LocalLoader): enabling local loader to use duckdb loader (#1620)
+
+* fix(views): transformation using raw sql
+
+* fix(Views): multiple joins
+
+* fix(View): correct error message for missing dependencies in view
+
+* fix(View): correct error message for missing dependencies in view
+
+* fix(View): redoundant code
+
+* feature(LocalLoader): enabling local loader to use duckdb loader
+
+* fix(LocalLoader): fixing test for duckdb loader",109,212,321,5,4e0f6ec7034f8db9a2b4e379bac5df5b2dd6e7d9
+sinaptik-ai/pandas-ai,4e0f6ec7034f8db9a2b4e379bac5df5b2dd6e7d9,https://github.com/sinaptik-ai/pandas-ai/commit/4e0f6ec7034f8db9a2b4e379bac5df5b2dd6e7d9,SaroAntonelloLovito,91974562,User,2025-02-17T15:10:16+00:00,web-flow,2025-02-17T15:10:16+00:00,"docs: docstring improvements (#1597)
+
+Modified files:
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/huggingface/tests/test_huggingface_text_gen.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/huggingface/pandasai_huggingface/huggingface_text_gen.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/ibm/tests/test_ibm_watsonx.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/ibm/pandasai_ibm/ibm_watsonx.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/openai/tests/test_azure_openai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/openai/tests/test_openai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/openai/pandasai_openai/azure_openai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/openai/pandasai_openai/openai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/bedrock/tests/test_bedrock_claude.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/bedrock/pandasai_bedrock/claude.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/langchain/tests/test_langchain_llm.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/langchain/pandasai_langchain/langchain.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/google/tests/test_google_vertexai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/google/pandasai_google/google_gemini.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/google/pandasai_google/google_vertexai.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/local/pandasai_local/local_llm.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/llms/local/tests/test_local_llm.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/sandbox/docker/tests/test_serializer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/sandbox/docker/tests/test_sandbox.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/sandbox/docker/pandasai_docker/serializer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/sandbox/docker/pandasai_docker/docker_sandbox.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/lancedb/tests/test_lancedb.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/lancedb/pandasai_lancedb/lancedb.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/qdrant/pandasai_qdrant/qdrant.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/qdrant/tests/test_qdrant.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/milvus/tests/test_milvus.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/milvus/pandasai_milvus/milvus.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/pinecone/tests/test_pinecone.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/pinecone/pandasai_pinecone/pinecone.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/chromadb/tests/test_chromadb.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/vectorstores/chromadb/pandasai_chromadb/chroma.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/bigquery/tests/test_bigquery.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/bigquery/pandasai_bigquery/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/databricks/tests/test_databricks.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/oracle/tests/test_oracle.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/oracle/pandasai_oracle/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/snowflake/pandasai_snowflake/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/ee/connectors/snowflake/tests/test_snowflake.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/connectors/sql/tests/test_sql.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/connectors/sql/pandasai_sql/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/connectors/yfinance/tests/test_yahoo_finance.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/extensions/connectors/yfinance/pandasai_yfinance/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/test_memory.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/test_cli.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/conftest.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/test_config.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/test_api_key_manager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/test_pandasai_init.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/code_generation/test_code_cleaning.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/code_generation/test_code_validation.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/prompts/test_base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/prompts/test_correct_execute_sql_query_usage_error_prompt.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/prompts/test_prompts.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/prompts/test_correct_output_type_error_prompt.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/prompts/test_generate_python_code_with_sql_prompt.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/code_execution/test_code_execution.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/core/code_execution/test_environment.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/agent/test_agent.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/agent/test_agent_llm_judge.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/agent/test_agent_chat.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/llms/test_base_llm.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/llms/test_bamboo_llm.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/response/test_error_response.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/response/test_number_response.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/response/test_string_response.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/response/test_dataframe_response.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/response/test_chart_response.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/smart_datalake/test_smart_datalake.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/data_loader/test_transformation_manager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/data_loader/test_loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/data_loader/test_sql_loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/data_loader/test_duckdbmanager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_cache.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_json_encoder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_dataframe_serializer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_logger.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_sql_sanitizer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_optional_dependency.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/helpers/test_responses.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/sandbox/test_sandbox.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/query_builders/test_view_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/query_builders/test_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/query_builders/test_sql_parser.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/smart_dataframe/test_smart_dataframe.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/dataframe/test_pull.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/dataframe/test_semantic_layer_schema.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/tests/unit_tests/dataframe/test_dataframe.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/config.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/user_query.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/cache.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/code_generation/base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/code_generation/code_cleaning.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/response/parser.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/response/dataframe.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/response/chart.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/prompts/base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/prompts/correct_output_type_error_prompt.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/prompts/correct_execute_sql_query_usage_error_prompt.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/prompts/generate_python_code_with_sql.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/prompts/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/core/code_execution/code_executor.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/agent/base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/llm/fake.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/llm/bamboo_llm/base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/smart_datalake/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/transformation_manager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/view_loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/sql_loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/duck_db_connection_manager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/semantic_layer_schema.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/data_loader/local_loader.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/folder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/json_encoder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/memory.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/path.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/sql.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/dataframe_serializer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/session.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/telemetry.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/filemanager.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/helpers/sql_sanitizer.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/sandbox/sandbox.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/query_builders/sql_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/query_builders/base_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/query_builders/sql_parser.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/query_builders/local_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/query_builders/view_query_builder.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/smart_dataframe/__init__.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/dataframe/base.py
+- /mount/src/ambrogio-platform/repositories/pandas-ai/pandasai/dataframe/virtual_dataframe.py
+
+Co-authored-by: appuser <appuser@localhost>",114,0,114,3,78105f5c9f47500fa7771d3de6eeb5efba752487
+sinaptik-ai/pandas-ai,78105f5c9f47500fa7771d3de6eeb5efba752487,https://github.com/sinaptik-ai/pandas-ai/commit/78105f5c9f47500fa7771d3de6eeb5efba752487,gventuri,15671184,User,2025-02-14T17:49:24+00:00,gventuri,2025-02-14T17:49:24+00:00,Release v3.0.0-beta.11,1,1,2,1,c0933a2e50290f3c7c51302d9f0ae01dbb6c5de3
+sinaptik-ai/pandas-ai,c0933a2e50290f3c7c51302d9f0ae01dbb6c5de3,https://github.com/sinaptik-ai/pandas-ai/commit/c0933a2e50290f3c7c51302d9f0ae01dbb6c5de3,scaliseraoul,36519284,User,2025-02-14T15:26:20+00:00,web-flow,2025-02-14T15:26:20+00:00,"fix(View): fixing aliases in view (#1614)
+
+* fix(views): transformation using raw sql
+
+* fix(Views): multiple joins
+
+* fix(View): correct error message for missing dependencies in view
+
+* fix(View): correct error message for missing dependencies in view
+
+* fix(View): redoundant code",307,186,493,3,a1b36f4cf47f97adc756a90f27b679a1c112855d
+sinaptik-ai/pandas-ai,a1b36f4cf47f97adc756a90f27b679a1c112855d,https://github.com/sinaptik-ai/pandas-ai/commit/a1b36f4cf47f97adc756a90f27b679a1c112855d,scaliseraoul,36519284,User,2025-02-13T18:04:04+00:00,web-flow,2025-02-13T18:04:04+00:00,"fix(Views): multiple joins (#1611)
+
+* fix(views): transformation using raw sql
+
+* fix(Views): multiple joins",134,1,135,2,61ba3530794fbe2b5739a04c26dc35e704ce69c9
+sinaptik-ai/pandas-ai,61ba3530794fbe2b5739a04c26dc35e704ce69c9,https://github.com/sinaptik-ai/pandas-ai/commit/61ba3530794fbe2b5739a04c26dc35e704ce69c9,ArslanSaleem,11032815,User,2025-02-13T15:49:44+00:00,web-flow,2025-02-13T15:49:44+00:00,"fix(dataset): slug format validation on load (#1609)
+
+* chore: remove leftover sqlite export from sql conector
+
+* fix(dataset_slug): failed to validate dataset_slug format before sending request
+
+* remove extras
+
+* fix: extra file
+
+* validate slug name on load
+
+* fix: test cases for _ issue
+
+* fix: remove redundant condition
+
+---------
+
+Co-authored-by: Gabriele Venturi <lele.venturi@gmail.com>",38,12,50,4,42a5ba3e286d320e013c34351843c262571a6876
+sinaptik-ai/pandas-ai,42a5ba3e286d320e013c34351843c262571a6876,https://github.com/sinaptik-ai/pandas-ai/commit/42a5ba3e286d320e013c34351843c262571a6876,scaliseraoul,36519284,User,2025-02-13T15:47:07+00:00,web-flow,2025-02-13T15:47:07+00:00,fix(views): transformation using raw sql (#1608),42,33,75,5,b746056067f9e5fdcbfe0efa0ac526ecd16edc2f
+sinaptik-ai/pandas-ai,b746056067f9e5fdcbfe0efa0ac526ecd16edc2f,https://github.com/sinaptik-ai/pandas-ai/commit/b746056067f9e5fdcbfe0efa0ac526ecd16edc2f,gventuri,15671184,User,2025-02-13T12:38:43+00:00,gventuri,2025-02-13T12:38:43+00:00,Release v3.0.0-beta.10,1,1,2,1,dc5b6cf6966772807dc3fd20097c795668e75ce9

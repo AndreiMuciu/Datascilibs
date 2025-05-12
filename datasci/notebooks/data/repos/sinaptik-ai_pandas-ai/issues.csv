@@ -1,0 +1,2763 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+sinaptik-ai/pandas-ai,3048274810,1730,Why not make `pandas-ai` a MCP?,"### 🚀 The feature
+
+Make pandas-ai a MCP! Carry on!
+
+### Motivation, pitch
+
+By now cannot find out any MCP of pandas data dealing! 
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",forhonourlx,16576219,open,False,0,2025-05-08T08:48:48+00:00,2025-05-08T08:48:48+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,3045013084,1729,Sqlglot parse error due to LLM Code Response (tested with GPT-4),"### System Info
+
+PandasAI Version: 3.0.0b16
+
+### 🐛 Describe the bug
+
+<h2>Main Problem</h2>
+I was trying to get DataFrame response from LLM using openai model gpt4, but was facing following errors:
+
+```
+sqlglot.errors.ParseError: Invalid expression / Unexpected token. Line 2, Col: 17.
+```
+
+After I traced the code through verbose mode as well as printing extracted codes after every step, I observed that SQL query is being truncated as following:
+
+<b>LLM Generated code:</b>
+
+```
+sql_query = """"""
+SELECT `COL 1`, SUM(`COL 2`) AS `COL 2 Name`
+FROM table_adocmud
+GROUP BY `COL 1`
+ORDER BY `COL 2 Name` DESC
+""""""
+```
+
+<b>Parsed Code: </b>
+
+```
+SELECT `COL 1`, SUM(`COL 2`) AS `COL 2 Name`
+FROM table_adocmud
+GROUP B
+```
+
+This issue was not for all prompts but for few prompts which was one of the reasons for reduced accuracy.
+
+
+<h2>Solution</h2>
+
+Main issue that I found was sqlglot was unable to parse the SQL query with columns names written within ` (cross quotes) quotes, and temporary solution that I found was to replace ` (cross quotes) quotes with "" (double quotes).
+
+<b>1. In file path: pandasai/query_builders/sql_parser.py added following code at line number 77<b>
+
+```
+sql_query = re.sub('`', '""', sql_query)
+```
+
+<b>2. In file path: pandasai/core/code_execution/code_executor.py added following code before line number 29<b>
+
+```
+code = re.sub('`', '""', code)
+```
+
+and after these changes things were running smoothly, if you guys have better solution please share here.
+
+Thankyou",SumithRaj05,121344533,open,False,0,2025-05-07T07:41:14+00:00,2025-05-07T10:24:42+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,3018871227,1725,LiteLLM can't  use ollama,"### System Info
+
+LiteLLM can't  use ollama 
+
+### 🐛 Describe the bug
+
+
+from pandasai_litellm import LiteLLM
+import pandasai as pai
+
+df = pai.read_csv(r""C:\Users\ROG\Desktop\892600917690.csv"")
+llm = LiteLLM(model=""deepseek-r1:latest"",api_base='http://192.168.11.70:11434')
+# Set your LLM configuration
+pai.config.set({""llm"": llm})
+# pai.config.set(""temperature"", 0)
+# pai.config.set(""seed"", 26)
+response = df.chat(""What is the average revenue by payAmt_total?"")
+print(response)
+
+Error message:litellm.exceptions.BadRequestError: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=deepseek-r1:latest
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+
+HOW  can i  use  ollama ",qianjia-boop,122078283,closed,False,0,2025-04-25T03:04:39+00:00,2025-04-25T03:07:15+00:00,2025-04-25T03:07:15+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,3016205441,1724,Fix python.lang.security.audit.exec-detected.exec-detected--tmp-92822dc1-c1d4-4d13-b3b6-328397eac28a-pandasai-core-code_execution-code_executor.py,"This PR fixes python.lang.security.audit.exec-detected.exec-detected--tmp-92822dc1-c1d4-4d13-b3b6-328397eac28a-pandasai-core-code_execution-code_executor.py.
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Enhances security in `CodeExecutor` by restricting execution environment and improving error handling.
+> 
+>   - **Security**:
+>     - Restricts execution environment in `CodeExecutor` by removing `eval`, `exec`, `compile`, and `__import__` from built-ins.
+>     - Uses `ast.parse()` to validate code before execution.
+>   - **Functionality**:
+>     - Replaces global environment with `restricted_globals` and `local_namespace` for safer execution.
+>     - Returns `CodeExecutionResult` with detailed error information on failure.
+>   - **Misc**:
+>     - Removes `add_to_env`, `execute_and_return_result`, and `environment` methods from `CodeExecutor`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 4d9ac9167d6da5f31db127759c7e32135172e70e. You can [customize](https://app.ellipsis.dev/sinaptik-ai/settings/summaries) this summary. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",kira-offgrid,203060957,open,False,0,2025-04-24T06:53:08+00:00,2025-04-24T06:55:15+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,3001174831,1722,upgrading libraries,"- [X] Closes #1719.
+- [ ] Tests added and passed if fixing a bug or adding a new feature.
+- [X] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Update library dependencies in `pyproject.toml` to newer versions for compatibility and improvements.
+> 
+>   - **Dependencies Updated**:
+>     - `python` version updated to "">=3.10,<3.12"".
+>     - `python-dotenv` updated to ""^1.1.0"".
+>     - `pandas` updated to ""^2.2.3"".
+>     - `scipy` updated to ""1.15.2"".
+>     - `matplotlib` updated to ""^3.10.1"".
+>     - `pydantic` updated to ""^2.11.3"".
+>     - `duckdb` updated to ""^1.2.2"".
+>     - `pillow` updated to ""^11.2.1"".
+>     - `jinja2` updated to ""^3.1.6"".
+>     - `seaborn` updated to ""^0.13.2"".
+>     - `pyarrow` updated to ""^19.0.1"".
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for b5b0f349d0427a9e78b65412786aed3c4752defc. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",matteocacciola,28953594,open,False,1,2025-04-17T02:01:06+00:00,2025-05-06T22:02:22+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2999290301,1721,"Support Doris DataBase,please!","### 🚀 The feature
+
+i need pandas-ai to support Doris DataBase
+
+### Motivation, pitch
+
+cause MySQL database supports distributed systems.So ,i need pandas-ai to support Doris DataBase
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",LuWei6896,32614962,open,False,1,2025-04-16T11:04:45+00:00,2025-05-05T09:36:25+00:00,,enhancement,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2996850166,1720,chore: updating versions of libraries,"- [x] Closes #1719.
+- [ ] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Update library versions in `pyproject.toml` to ensure compatibility and leverage new features.
+> 
+>   - **Dependencies**:
+>     - Update `python` version to "">=3.10,<3.12"".
+>     - Update `python-dotenv` to `^1.1.0`, `pandas` to `^2.2.3`, `scipy` to `1.15.2`.
+>     - Update `matplotlib` to `^3.10.1`, `pydantic` to `^2.11.3`, `duckdb` to `^1.2.2`.
+>     - Update `pillow` to `^11.2.1`, `jinja2` to `^3.1.6`, `numpy` to `^2.2.4`.
+>     - Update `seaborn` to `^0.13.2`, `sqlglot` to `^26.13.2`, `pyarrow` to `^19.0.1`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 70d1ab17bd2f7d8fea70ed0988b8cbf79839a772. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",matteocacciola,28953594,closed,False,0,2025-04-15T15:34:36+00:00,2025-04-17T01:18:22+00:00,2025-04-17T01:18:22+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2996848990,1719,Updating the versions of libraries,"Some libraries are using (very) old versions and should be updated, even in case of usage of PandasAI together with other more recent Python packages",matteocacciola,28953594,open,False,0,2025-04-15T15:34:08+00:00,2025-04-15T15:34:08+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2995734396,1718,Not able to Install Pandas-ai in Microsoft Surface Pro 11th Edition,"I have a Microsoft Surface Pro 11th edition laptop with Snapdragon(R) X 10-core X1P64100 @ 3.40 GHz   3.42 GHz ARM based processor. While installing PandasAI, I am getting below error:
+  ERROR: Failed building wheel for sqlglotrs
+Failed to build pandas sqlglotrs
+ERROR: Failed to build installable wheels for some pyproject.toml based projects (pandas, sqlglotrs)
+
+I believe this error could be due to the warning ""LNK4272: library machine type 'x64' conflicts with target machine type 'ARM64'â\x90\x8d"".
+
+Is there a way for those with ARM64 laptops to install PandasAI?
+
+Thanks ",Rishi181988,124787348,closed,False,1,2025-04-15T09:10:44+00:00,2025-04-17T07:55:08+00:00,2025-04-17T07:55:05+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2994464848,1717,Add support for new GPT models from OpenAI,"Add support for gpt-4.1, gpt-4.1-mini, gpt-4.1-nano.
+Let gpt-4.1-mini replace gpt-4o-mini as the default model.
+
+- [Not applicable] Closes #xxxx (Replace xxxx with the GitHub issue number).
+- [Not applicable ] Tests added and passed if fixing a bug or adding a new feature.
+- [Done] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add support for new OpenAI GPT-4.1 models and set `gpt-4.1-mini` as the default model, updating tests accordingly.
+> 
+>   - **Model support and defaults**:
+>     - Add support for `gpt-4.1`, `gpt-4.1-mini`, and `gpt-4.1-nano` (and dated variants) to `_supported_chat_models` in `openai.py`.
+>     - Change default model in `OpenAI` class from `gpt-4o-mini` to `gpt-4.1-mini`.
+>   - **Tests**:
+>     - Update all `model` arguments in `test_agent_llm_judge.py` and `.ipynb_checkpoints/test_agent_llm_judge-checkpoint.py` from `gpt-4o-mini` to `gpt-4.1-mini`.
+>   - **Docs**:
+>     - Update docstring in `OpenAI` to list new supported models.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 65333f44eb7f8121f842cbed6193912b8ea6e5ed. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",nehcneb,24757675,open,False,0,2025-04-14T23:00:16+00:00,2025-04-14T23:06:17+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2994408484,1716,Add support for new GPT models from OpenAI,"Add support for gpt-4.1, gpt-4.1-mini, gpt-4.1-nano. 
+Let gpt-4.1-mini perform the role previously performed by gpt-4o-mini.
+
+- [Not applicable] Closes #xxxx (Replace xxxx with the GitHub issue number).
+- [Not applicable] Tests added and passed if fixing a bug or adding a new feature.
+- [Done] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add support for OpenAI GPT-4.1, GPT-4.1-mini, and GPT-4.1-nano models and set GPT-4.1-mini as the new default.
+> 
+>   - **Model support**:
+>     - Add `gpt-4.1`, `gpt-4.1-mini`, and `gpt-4.1-nano` to `_supported_chat_models` in `openai.py`.
+>     - Update docstring in `OpenAI` to list new models.
+>     - Change default model from `gpt-4o-mini` to `gpt-4.1-mini` in `openai.py`.
+>   - **Tests**:
+>     - Update all test invocations in `test_agent_llm_judge.py` (and its checkpoint) to use `gpt-4.1-mini` instead of `gpt-4o-mini`.
+>   - **Misc**:
+>     - Add `.ipynb_checkpoints/openai-checkpoint.py` (duplicate of `openai.py`).
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for eacd1ca525e96c97aab78762433d2e899ab73e34. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",nehcneb,24757675,closed,False,1,2025-04-14T22:27:35+00:00,2025-04-14T22:42:40+00:00,2025-04-14T22:42:40+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2990083245,1715,serialization of columns added into the definition of the table,"- [x] Closes #1714.
+- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Adds column serialization to `DataframeSerializer.serialize()` and updates tests and documentation accordingly.
+> 
+>   - **Behavior**:
+>     - `DataframeSerializer.serialize()` in `dataframe_serializer.py` now includes column serialization in the table definition.
+>     - `is_expression_valid()` in `semantic_layer_schema.py` now returns `Optional[str]` to handle `None` values.
+>   - **Testing**:
+>     - Updates `test_dataframe_serializer.py` to test new column serialization format.
+>     - Adds new test commands `make test_core`, `make test_extensions`, and `make test-coverage` in `CONTRIBUTING.md`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 2d978868cc766dd01c1b6b19214202a8dac097b5. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",matteocacciola,28953594,open,False,1,2025-04-12T01:50:13+00:00,2025-05-06T22:01:58+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2990082993,1714,Columns not added during the serialization of the DataFrame,"### System Info
+
+Distributor ID:	Ubuntu
+Description:	Ubuntu 24.04.2 LTS
+Release:	24.04
+Codename:	noble
+
+Python 3.11.0rc1
+
+### 🐛 Describe the bug
+
+According to what is described at https://discordapp.com/channels/1102146545580785686/1356165040335749154, it looks like the columns of a DataFrame are not added during its serialization.",matteocacciola,28953594,open,False,2,2025-04-12T01:49:43+00:00,2025-04-14T09:20:05+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2989556585,1713,Support for clickhouse as data source,"### 🚀 The feature
+
+Support connect to Clickhouse as a Data Source.
+
+### Motivation, pitch
+
+We store lots of data in Clickhouse which is a good database for statistics, analyze. We want to use pandas-ai to response user question with clickhouse.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",jskcnsl,8856450,open,False,1,2025-04-11T19:17:58+00:00,2025-04-14T08:52:31+00:00,,enhancement,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2989176958,1712,33,,Jackluna12,126129236,closed,False,1,2025-04-11T16:41:03+00:00,2025-04-14T08:53:02+00:00,2025-04-14T08:53:01+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2987321993,1711,I want to output both the file and the LLM response simultaneously.,"my prompts is  'Use pandas to analyze what kind of data this is and please explain the use of the data.'
+
+I want to output both the file and the LLM response simultaneously.
+Besides, I don't want him to handle data with SQL. How should I adjust it?
+
+![Image](https://github.com/user-attachments/assets/81966c73-7a51-429d-80ab-691d7021e807)",via007,62124698,closed,False,1,2025-04-11T01:30:12+00:00,2025-04-11T08:04:32+00:00,2025-04-11T08:04:31+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2986272823,1710,fix(duckdbConnection): make duckdb connection manager non singleton,"memory issues in production where parallel request is happening same dataset name can override the already registered from other user
+<!-- ELLIPSIS_HIDDEN -->
+
+
+----
+
+> [!IMPORTANT]
+> `DuckDBConnectionManager` is refactored to be non-singleton, adding `unregister()` and ensuring proper connection closure.
+> 
+>   - **Behavior**:
+>     - `DuckDBConnectionManager` is no longer a singleton; each instance manages its own connection.
+>     - Removes `__new__` method and singleton pattern; adds `__del__` to close connections.
+>     - Introduces `unregister()` method to remove tables from `_registered_tables`.
+>   - **Tests**:
+>     - Adds `test_unregister` in `test_duckdbmanager.py` to verify `unregister()` functionality.
+>     - Ensures `close()` does not throw errors when called multiple times.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 80007c00ecf479546d1079cc7847bb03fc9370af. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-04-10T16:41:07+00:00,2025-04-11T09:39:15+00:00,2025-04-11T09:38:33+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2984308820,1709,no more client and server in source tree for self-host ?,"### 🚀 The feature
+
+Hi noticed since v3, client and source dir is removed from source tree, means can not do docker build and compose. does that mean even for open source version ,there is no way to self-host run the platform, or it will come back?
+
+### Motivation, pitch
+
+ask question
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",dukewang322,32010552,closed,False,3,2025-04-10T02:50:37+00:00,2025-04-11T08:02:56+00:00,2025-04-10T08:08:59+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2982747134,1708,pandasai' has no attribute 'api_key,"### System Info
+
+Following latest Doc Example & Python 3.10
+
+https://docs.getpanda.ai/v3/getting-started
+
+```
+import pandasai as pai
+
+# Get your API key from https://app.pandabi.ai
+pai.api_key.set(""YOUR_PANDABI_API_KEY"")
+
+line 7, in <module>
+    pai.api_key.set(""your key"")
+
+AttributeError: module '**pandasai' has no attribute 'api_key'**
+```
+
+```
+pip show pandasai
+
+Name: pandasai
+**Version: 3.0.0a1**
+
+```
+
+
+
+### 🐛 Describe the bug
+
+```
+import pandasai as pai
+
+# Get your API key from https://app.pandabi.ai
+pai.api_key.set(""YOUR_PANDABI_API_KEY"")
+```
+
+line 7, in <module>
+    pai.api_key.set(""your key"")
+
+AttributeError: module '**pandasai' has no attribute 'api_key'**",mritsurgeon,59644778,open,False,4,2025-04-09T12:57:05+00:00,2025-04-11T08:05:11+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2982409235,1707,RROR:pandasai.helpers.logger:Pipeline failed on step 3: Error code: 400,"import os
+from langchain_groq.chat_models import ChatGroq
+
+llm = ChatGroq(
+    model_name=""mixtral-8x7b-32768"",
+    api_key = os.environ[""GROQ_API_KEY""])
+from pandasai import SmartDataframe
+df = SmartDataframe(data, config={""llm"": llm,  ""verbose"": True})
+df.chat('data size?')
+
+
+
+
+
+
+
+
+ERROR:pandasai.helpers.logger:Pipeline failed on step 2: 'Index' object has no attribute '_format_native_types'
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/pipelines/chat/generate_chat_pipeline.py"", line 335, in run
+    ).run(input)
+      ^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/pipelines/pipeline.py"", line 137, in run
+    raise e
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/pipelines/pipeline.py"", line 101, in run
+    step_output = logic.execute(
+                  ^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/pipelines/chat/prompt_generation.py"", line 37, in execute
+    self.logger.log(f""Using prompt: {prompt}"")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/prompts/base.py"", line 55, in __str__
+    return self.to_string()
+           ^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/prompts/base.py"", line 50, in to_string
+    self._resolved_prompt = self.prompt.render(**self.props)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/jinja2/environment.py"", line 1295, in render
+    self.environment.handle_exception()
+  File ""/usr/local/lib/python3.11/dist-packages/jinja2/environment.py"", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/prompts/templates/generate_python_code.tmpl"", line 1, in top-level template code
+    {% for df in context.dfs %}{% set index = loop.index %}{% include 'shared/dataframe.tmpl' with context %}{% endfor %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/prompts/templates/shared/dataframe.tmpl"", line 1, in top-level template code
+    {{ df.to_string(index-1, context.config.direct_sql, context.config.dataframe_serializer, context.config.enforce_privacy) }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/connectors/base.py"", line 284, in to_string
+    return DataframeSerializer().serialize(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/helpers/dataframe_serializer.py"", line 31, in serialize
+    return self.convert_df_to_csv(df, extras)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/helpers/dataframe_serializer.py"", line 56, in convert_df_to_csv
+    dataframe_info += f""\ndfs[{extras['index']}]:{df.rows_count}x{df.columns_count}\n{df.to_csv()}""
+                                                                                      ^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandasai/connectors/base.py"", line 265, in to_csv
+    return self.get_head().to_csv(index=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/util/_decorators.py"", line 333, in wrapper
+    # error: ""Callable[[VarArg(Any), KwArg(Any)], Any]"" has no
+               ^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py"", line 3967, in to_csv
+    class  animal  locomotion
+           ^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/io/formats/format.py"", line 995, in to_csv
+    if self.header:
+                    
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/io/formats/csvs.py"", line 89, in __init__
+    self.cols = self._initialize_columns(cols)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/io/formats/csvs.py"", line 161, in _initialize_columns
+    return new_cols._format_native_types(**self._number_format)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Index' object has no attribute '_format_native_types'
+Unfortunately, I was not able to answer your question, because of the following error:\n\n'Index' object has no attribute '_format_native_types'\n",iamvnetVMART,200217510,open,False,1,2025-04-09T10:44:14+00:00,2025-04-10T08:10:56+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2982198942,1706,pandasai api key,"### System Info
+
+i need  pandasapi key the url provided on github is not responding from where i can get ,open api key is not genrating response  
+
+### 🐛 Describe the bug
+
+pandasai.exceptions.PandasAIApiCallError: Unauthorized
+Exception in APILogger: {""message"":""Invalid API Key!"",""data"":null}
+Unfortunately, I was not able to answer your question, because of the following error:
+
+Unauthorized the code is import pandas as pd
+import os
+from pandasai import SmartDataframe
+
+# Set the PandasAI API key as an environment variable
+os.environ[""PANDASAI_API_KEY""] = ""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""
+
+# Employees and Salary Data
+employees_data = {
+    'EmployeeID': [1, 2, 3, 4, 5],
+    'Name': ['Ali', 'Ahmed', 'Nayab', 'Owais', 'Junaid'],
+    'Department': ['HR', 'Sales', 'IT', 'Marketing', 'Finance']
+}
+
+salaries_data = {
+    'EmployeeID': [1, 2, 3, 4, 5],
+    'Salary': [5000, 6000, 4500, 7000, 5500]
+}
+
+# Creating DataFrames
+employees_df = pd.DataFrame(employees_data)
+salaries_df = pd.DataFrame(salaries_data)
+
+# Merging the employees and salaries data
+merged_df = pd.merge(employees_df, salaries_df, on='EmployeeID')
+
+# Create a SmartDataFrame with the merged data
+sdf = SmartDataframe(merged_df)
+
+# Use the chat method of SmartDataframe
+response = sdf.chat(""Who gets paid the most?"")
+
+# Output the response
+print(response)
+
+",Areeba274,182501259,closed,False,2,2025-04-09T09:33:46+00:00,2025-04-10T08:46:30+00:00,2025-04-10T08:46:29+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2981588859,1705,Fix: Resolve Python 3.8 Compatibility Issue in semantic_layer_schema.py,"- [ ] Closes #1690  
+
+This pull request addresses a `TypeError: 'type' object is not subscriptable` error encountered when using PandasAI with Python 3.8. The error originates from the `to_dict` method in `pandasai/data_loader/semantic_layer_schema.py`, where the type hint `dict[str, Any]` is used. This syntax is only valid in Python 3.9 and later, contradicting the project's stated support for Python 3.8+.
+
+As reported in issue #1690 , the documentation states Python 3.8+ compatibility, which is not currently the case.
+
+**Solution:**
+
+The solution is to replace `dict[str, Any]` with `Dict[str, Any]` from the `typing` module. This ensures compatibility with Python 3.8 and aligns with the project's documentation.
+
+**Changes:**
+
+- Modified `pandasai/data_loader/semantic_layer_schema.py` to use `Dict[str, Any]` in the `to_dict` method's type hint.
+
+**Test Cases (Conceptual - Adaptable to GitHub Editor):**
+
+**Test Case 1: Basic Dictionary Output**
+
+- **Objective:** Verify that `to_dict` returns a dictionary.
+- **Steps:**
+  1. Create a `SemanticLayerSchema` instance.
+  2. Call the `to_dict` method on the instance.
+  3. Assert that the return value is a dictionary.
+
+**Test Case 2: Dictionary Structure Validation**
+
+- **Objective:** Verify that the dictionary returned by `to_dict` has the correct keys and structure.
+- **Steps:**
+  1. Create a `SemanticLayerSchema` instance with sample data.
+  2. Call `to_dict`.
+  3. Assert that the returned dictionary has the expected keys (e.g., 'name', 'source', 'columns').
+  4. Assert that the values within the dictionary have the expected types.
+
+**Key Considerations:**
+
+- The essential change is the replacement of `dict[str, Any]` with `Dict[str, Any]` within the `to_dict` method's type hint.
+- This adjustment specifically addresses a `TypeError` that arises in Python 3.8 environments due to the incompatibility of the original type hinting syntax.
+- I have only focused on the code correction and a clearly articulated description.
+- you can check the test cases and ensure if they verify the function's dictionary return rather than directly testing the type hinting.
+- This fix brings the code into alignment with the project's documentation, which indicates Python 3.8+ compatibility.
+
+This fix ensures that PandasAI remains compatible with Python 3.8, as stated in the project's documentation. This prevents users on Python 3.8 from encountering the `TypeError` and maintains a consistent user experience across supported Python versions.
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fixes Python 3.8 compatibility issue in `semantic_layer_schema.py` by replacing `dict[str, Any]` with `Dict[str, Any]` in `to_dict()` method.
+> 
+>   - **Compatibility Fix**:
+>     - Replaces `dict[str, Any]` with `Dict[str, Any]` in `to_dict()` method in `semantic_layer_schema.py` to ensure Python 3.8 compatibility.
+>   - **Issue Addressed**:
+>     - Fixes `TypeError: 'type' object is not subscriptable` in Python 3.8 environments.
+>   - **Documentation Alignment**:
+>     - Aligns code with documentation stating support for Python 3.8+.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 3208351945dea9c71e0a36725ba73a480e2ce02c. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",krakken190,72223902,closed,False,0,2025-04-09T05:37:57+00:00,2025-04-09T09:09:49+00:00,2025-04-09T09:09:49+00:00,,2,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2980370696,1704,fix(serializer): user apply instead of applymap,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Replace `applymap` with `apply` in `DataframeSerializer._truncate_dataframe` to apply truncation row-wise.
+> 
+>   - **Behavior**:
+>     - In `DataframeSerializer._truncate_dataframe`, replace `applymap(truncate_value)` with `apply(lambda row: row.apply(truncate_value), axis=1)` to apply truncation row-wise.
+>   - **Functions**:
+>     - Modify `_truncate_dataframe` in `dataframe_serializer.py` to use `apply` instead of `applymap` for truncating values.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 748722b1c9595242a2ec661310f650921efc1a29. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-04-08T16:43:48+00:00,2025-04-09T12:21:16+00:00,2025-04-09T12:20:47+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2980208213,1703,fix(view_loader): avoid lower casing the column name,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+> [!IMPORTANT]
+> Avoid lowercasing column names in SQL queries by using `quote_identifiers` in `sanitize_view_column_name`.
+> 
+>   - **Behavior**:
+>     - `sanitize_view_column_name` in `sql_sanitizer.py` now uses `quote_identifiers` to avoid lowercasing column names.
+>     - `normalize_view_column_name` and `normalize_view_column_alias` in `ViewQueryBuilder` updated to use `sanitize_view_column_name` directly.
+>   - **Tests**:
+>     - Updated expected results in `test_sql_sanitizer.py` and `test_view_query_builder.py` to reflect quoted column names.
+>     - Added tests for SQL injection scenarios in `test_view_query_builder.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 38bdf969d1cb89bcf4e09fba9ecc206fb185fd06. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-04-08T15:42:52+00:00,2025-04-09T13:07:04+00:00,2025-04-09T13:06:40+00:00,,2,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2976985835,1702,fix(sql): pagination remove extra conversions,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Simplifies SQL pagination logic by removing extra conversions and ensuring column names are quoted in `paginator.py`.
+> 
+>   - **Behavior**:
+>     - Removed extra SQL query conversion steps in `apply_pagination()` in `paginator.py`.
+>     - Ensures column names are quoted in SQL queries for consistency and correctness.
+>   - **Testing**:
+>     - Updated tests in `test_paginator.py` to reflect changes in query formatting.
+>     - Tests cover string, numeric, datetime, boolean, and UUID searches, as well as sorting and filtering.
+>     - Ensures that pagination logic works without unnecessary conversions.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 5676ca5b60ced4af90b808f1a79709e3f3e1bdf8. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-04-07T14:02:37+00:00,2025-04-07T19:56:34+00:00,2025-04-07T19:56:24+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2976256715,1701,Encapsulate the functionality of Pandas-ai and invoke it using the magic commands in Jupyter's IPython.,"### 🚀 The feature
+
+version:(MacOS)
+Pandasai：2.4.2
+jupyterlab: 4.2.5
+ipython: 8.34.0
+code:
+from IPython.core.magic import Magics, magics_class, cell_magic, line_magic
+from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
+from pandasai import SmartDataframe
+from pandasai.llm.local_llm import LocalLLM
+import pandas as pd
+from IPython.display import display
+import matplotlib
+import matplotlib.pyplot as plt
+from typing import Union, Optional
+import warnings
+from IPython import get_ipython
+import numpy as np
+
+
+@magics_class
+class PandasAIMagics(Magics):
+    def __init__(self, shell):
+        super().__init__(shell)
+        self._init_environment()
+
+    def _init_environment(self) -> None:
+        self._verify_ipython()
+        self._configure_matplotlib()
+
+    def _verify_ipython(self) -> None:
+        if not hasattr(self, 'shell'):
+            raise EnvironmentError()
+
+        if not hasattr(get_ipython(), 'run_cell'):
+            raise EnvironmentError("")
+
+    def _configure_matplotlib(self) -> None:
+        try:
+            self.shell.run_line_magic('matplotlib', 'inline')
+            plt.ioff()  
+        except Exception as e:
+            warnings.warn(f""Matplotlib error: {str(e)}"")
+
+    def _display_result(self, result: object) -> object:
+        try:
+            if isinstance(result, (int, float, np.number)):
+                display(f""result: {result}"")
+                return result
+            elif isinstance(result, (plt.Figure, matplotlib.figure.Figure)):
+                plt.close('all')  
+                display(result)
+                return result
+            elif isinstance(result, (pd.DataFrame, pd.Series)):
+                with pd.option_context('display.max_rows', 10,
+                                       'display.max_columns', None,
+                                       'display.width', None):
+                    display(result)
+                return result
+            elif isinstance(result, str):
+                display(result)
+                return result
+            else:
+                self._last_result = result
+                return result
+        except Exception as e:
+            print(""result error-------------"")
+    @magic_arguments()
+    @argument('df', help='Name of the pandas DataFrame to use')
+    @argument('-m', '--model', help='Model Name', default=""qwen2-custom:latest"")
+    @argument('-a', '--api_base', help='Model API base URL', default=""http://localhost:11434/v1"")
+    # ""number"", ""dataframe"", ""plot"", ""string""
+    @argument('-o', '--output_type', help='Assist the large model in determining the output type', default=""string"")
+    @cell_magic
+    def pandas_ai(self, line: str, cell: str) -> object:
+        """"""
+        %%pandas_ai df
+        """"""
+        try:
+            args = parse_argstring(self.pandas_ai, line)
+            print(""args******"", args)
+            df = self.shell.user_ns.get(args.df)
+            if df is None:
+                raise NameError(f""DataFrame '{args.df}' not found in namespace"")
+            if not isinstance(df, pd.DataFrame):
+                raise TypeError(f""'{df}' not DataFrame"")
+
+            llm = LocalLLM(api_base=args.api_base, model=args.model)
+            smart_df = SmartDataframe(df, config={""llm"": llm})
+            # result = smart_df.chat(cell.strip(), output_type=args.output_type)
+            result = smart_df.chat(cell.strip())
+            return result
+        except Exception as e:
+            self._last_result = e
+            error_msg = f""error: {str(e)}""
+            raise type(e)(error_msg) from None
+
+
+def load_ipython_extension(ipython):
+    try:
+        ipython.register_magics(PandasAIMagics)
+    except Exception as e:
+        warnings.warn(f""faile: {str(e)}"")
+		
+from pandasai import SmartDataframe
+from pandasai.llm.local_llm import LocalLLM
+
+Jupyterlab Cell code：
+sales_by_country = pd.DataFrame({
+    ""country"": [""United States"", ""United Kingdom"", ""France"", ""Germany"", ""Italy"", ""Spain"", ""Canada"", ""Australia"", ""Japan"", ""China""],
+    ""sales"": [5000, 3200, 2900, 4100, 2300, 2100, 2500, 2600, 4500, 7000]
+})
+
+%%pandas_ai sales_by_country
+""Which are the top 5 countries by sales?""
+
+### Motivation, pitch
+
+Hello,I would like to encapsulate the functionality of Pandas-ai so that it can be invoked using""%%Pandas-ai""in JupyterLab or any IPython tool.I have already implemented part of the functionality,but there are still issues when processing the returned results,mainly focusing on the following aspects(see the image):
+
+![Image](https://github.com/user-attachments/assets/c2077fa8-cf89-48b6-8c5d-eb00312ab1c0)
+
+### Alternatives
+
+Are there any similar functions,or solutions to similar problems? Thanks！
+
+### Additional context
+
+_No response_",msyJY,95612623,closed,False,1,2025-04-07T09:39:05+00:00,2025-04-11T08:06:55+00:00,2025-04-11T08:06:54+00:00,enhancement,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2957918577,1700,feat add concurrency support for DuckDBConnectionManager,"Pandas-ai is a very amazing project！ But when we used it in http server, we've met some concurrency problems. And then we found that the problem is about the connections of DuckDB. So we modified this class to support concurrency and add unit tests for it. 
+
+Hope that it's helpful :） 
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Adds concurrency support to `DuckDBConnectionManager` with connection pooling and thread-safe operations, including comprehensive unit tests.
+> 
+>   - **Concurrency Support**:
+>     - Introduces connection pooling in `DuckDBConnectionManager` with `_init_connection_pool()`, `_get_connection()`, and `_release_connection()` methods.
+>     - Implements thread-safe table registration in `register()` with retry logic for concurrent scenarios.
+>     - Ensures SQL operations are thread-safe in `sql()`.
+>   - **Resource Management**:
+>     - Temporary database file created and deleted in `_init_connection_pool()` and `_close_connections()`.
+>     - Connection pool size and max wait time set with `_pool_size` and `_max_wait_time`.
+>   - **Testing**:
+>     - Adds unit tests in `test_duckdbmanager.py` for connection pool exhaustion, concurrent access, and table registration thread safety.
+>     - Tests ensure temporary file management and correct closing of connections.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 0ef7b5a67cc0c1506fa2e243291c2f63f9e00d46. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",AmazeQiu,71081647,open,False,0,2025-03-29T10:21:16+00:00,2025-03-31T12:44:24+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2955195859,1699,Issues with Importing pandasai.core and pandasai.connectors Modules,"### System Info
+
+macos 
+
+### 🐛 Describe the bug
+
+I'm facing an issue with the pandasai package, where depending on the version I install, I encounter one of the following errors:
+
+ModuleNotFoundError: No module named 'pandasai.core'
+
+ModuleNotFoundError: No module named 'pandasai.connectors'
+
+No matter which version I use, I can't avoid running into one of these errors, but I only encounter one error at a time (not both). I'm unsure which version of pandasai should be used to avoid these errors and ensure that both the core and connectors modules are accessible.
+
+Could you please clarify which version I should install to avoid these issues or provide guidance on how to properly set up pandasai to ensure both modules are available?",Weitong0513,122733696,closed,False,1,2025-03-28T06:52:01+00:00,2025-03-31T07:31:48+00:00,2025-03-31T07:31:47+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2952058311,1696,How to use a locally deployed LLM with the latest version of pandasAI?,"I am trying to integrate a locally deployed large model (such as DeepSeek-R1) with the latest version of pandasAI for data analysis and automation tasks. I have already configured the model API and can interact with the model via curl commands, but I encounter some issues when trying to interact with it through pandasAI.
+
+Can you give me a simple example to show how to connect?",Weitong0513,122733696,closed,False,3,2025-03-27T08:25:18+00:00,2025-03-28T05:18:07+00:00,2025-03-27T14:27:39+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2948292322,1695,read excel error,"### System Info
+
+/usr/bin/python3.10 /home/quiana/work/python-toturial/Pandas-AI/create_data.py 
+Traceback (most recent call last):
+  File ""/home/quiana/work/python-toturial/Pandas-AI/create_data.py"", line 4, in <module>
+    df = pai.read_csv(""/home/quiana/work/python-toturial/Pandas-AI/datasets/example/data/20250220-产数人力资源部-售前签约人效.xlsx"")
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandasai/__init__.py"", line 311, in read_csv
+    data = pd.read_csv(filepath)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/c_parser_wrapper.py"", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File ""parsers.pyx"", line 574, in pandas._libs.parsers.TextReader.__cinit__
+  File ""parsers.pyx"", line 663, in pandas._libs.parsers.TextReader._get_header
+  File ""parsers.pyx"", line 874, in pandas._libs.parsers.TextReader._tokenize_rows
+  File ""parsers.pyx"", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File ""parsers.pyx"", line 2053, in pandas._libs.parsers.raise_parser_error
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 10-11: invalid continuation byte
+
+
+
+### 🐛 Describe the bug
+
+import pandasai as pai
+
+# Load your data
+df = pai.read_csv(""/home/quiana/work/python-toturial/Pandas-AI/datasets/example/data/20250220-产数人力资源部-售前签约人效.xlsx"")
+# Create the data layer
+companies = pai.create(
+  path=""Ict/companies"",
+  df=df,
+  description=""Customer companies dataset""
+)
+
+/usr/bin/python3.10 /home/quiana/work/python-toturial/Pandas-AI/create_data.py 
+Traceback (most recent call last):
+  File ""/home/quiana/work/python-toturial/Pandas-AI/create_data.py"", line 4, in <module>
+    df = pai.read_csv(""/home/quiana/work/python-toturial/Pandas-AI/datasets/example/data/20250220-产数人力资源部-售前签约人效.xlsx"")
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandasai/__init__.py"", line 311, in read_csv
+    data = pd.read_csv(filepath)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py"", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+  File ""/home/quiana/.local/lib/python3.10/site-packages/pandas/io/parsers/c_parser_wrapper.py"", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File ""parsers.pyx"", line 574, in pandas._libs.parsers.TextReader.__cinit__
+  File ""parsers.pyx"", line 663, in pandas._libs.parsers.TextReader._get_header
+  File ""parsers.pyx"", line 874, in pandas._libs.parsers.TextReader._tokenize_rows
+  File ""parsers.pyx"", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File ""parsers.pyx"", line 2053, in pandas._libs.parsers.raise_parser_error
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 10-11: invalid continuation byte",lucheng07082221,3146209,closed,False,1,2025-03-26T03:24:41+00:00,2025-03-31T08:24:14+00:00,2025-03-31T08:24:14+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2944241550,1694,LiteLLM does not work with Mixtral 8x 7B model from HuggingFace via LiteLLM extension,"### System Info
+
+python 3.11, linux, pandasai ""^3.0.0b4"" version
+
+### 🐛 Describe the bug
+
+Hi, I tried the below:
+llm = LiteLLM(model=""mistralai/Mixtral-8x7B-Instruct-v0.1"", api_base=""https://api-inference.huggingface.co"")
+
+by following the docs: https://docs.getpanda.ai/v3/large-language-models#litellm
+
+But I am unable to use Mixtral model with PandasAI. Please let me know the corrected code for the same so it would work semalessly just how BambooLLM works.",SimranAnand1,67438489,closed,False,1,2025-03-24T19:19:10+00:00,2025-03-31T11:49:44+00:00,2025-03-31T11:49:13+00:00,,1,1,0,0,0,0,0
+sinaptik-ai/pandas-ai,2941778780,1693,"Can both text and images, or text and tables, be output simultaneously?","I will upload a table for data analysis, and can the results include both images and text?",via007,62124698,closed,True,1,2025-03-24T02:10:56+00:00,2025-03-27T14:31:47+00:00,2025-03-27T14:31:47+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2940550641,1692,trouble install pandasai in conda venv,"### System Info
+
+pandasai, vs code conda venv, python
+
+### 🐛 Describe the bug
+
+(f:\work\Miscellaneous\Invoice-Reader-LLM\venv) F:\work\Miscellaneous\Invoice-Reader-LLM>conda install pandasai 
+
+```Channels:
+ - defaults
+Platform: win-64
+Collecting package metadata (repodata.json): done
+Solving environment: failed
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - pandasai
+
+Current channels:
+
+  - defaults
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+  - https://repo.anaconda.com/pkgs/msys2
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+```
+
+### when I use pip:
+```
+Collecting sqlglotrs==0.3.0 (from sqlglot[rs]<26.0.0,>=25.0.3->pandasai)
+  Using cached sqlglotrs-0.3.0.tar.gz (9.4 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... error
+  error: subprocess-exited-with-error
+
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [6 lines of output]
+
+      Cargo, the Rust package manager, is not installed or is not on PATH.
+      This package requires Rust and Cargo to compile extensions. Install it through
+      the system's package manager or via https://rustup.rs/
+
+      Checking for Rust toolchain....
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> See above for output.
+
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+```",HiteshAroraCool,76745725,closed,True,0,2025-03-22T18:34:37+00:00,2025-03-27T14:29:31+00:00,2025-03-27T14:29:31+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2936360420,1691,fix(dataframe_serialize): truncate content of dataframe columns,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> `DataframeSerializer` now truncates DataFrame text values exceeding 200 characters during serialization, with new tests verifying this behavior.
+> 
+>   - **Behavior**:
+>     - `DataframeSerializer.serialize()` now truncates text values exceeding 200 characters with an ellipsis.
+>     - Handles JSON-like objects by converting them to strings before truncation.
+>   - **Implementation**:
+>     - Added `MAX_COLUMN_TEXT_LENGTH` constant to `DataframeSerializer`.
+>     - Introduced `_truncate_dataframe()` method to handle truncation logic.
+>   - **Testing**:
+>     - Added `test_serialize_with_dataframe_long_strings()` in `test_dataframe_serializer.py` to verify truncation behavior.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for ebd422e40769fa07551e48bdc613133495b0853d. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-20T18:45:03+00:00,2025-03-20T19:56:26+00:00,2025-03-20T19:55:51+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2935496780,1690,Typing issue with python 3.8,"### System Info
+
+pandasai version==3.00b15 (i have tried almost any 3.0.0)
+python version = 3.8.20
+platform: Windows 11
+
+### 🐛 Describe the bug
+
+Hi,
+when trying to run a simple example (from pandasai_openai import OpenAI) I get the following error:
+
+```
+pandasai\data_loader\semantic_layer_schema.py in SemanticLayerSchema()
+    221         return self
+    222 
+--> 223     def to_dict(self) -> dict[str, Any]:
+    224         return self.model_dump(exclude_none=True)
+    225 
+
+TypeError: 'type' object is not subscriptable
+```
+
+I think the error has to do with  the fact that this syntax dict[str, Any] is only valid starting with python 3.9.
+However the project offers support for python >= 3.8
+
+Maybe add from __future__ import annotations ? ",D-MindVec,196120143,closed,False,0,2025-03-20T13:25:55+00:00,2025-04-09T09:09:50+00:00,2025-04-09T09:09:50+00:00,bug,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2933800683,1689,"Based on this project, I developed a visualization interface that focuses on Excel","At present, the targeted users are Chinese people because there are free interfaces available for use.
+
+https://github.com/via007/pandas-ai-excel
+
+Online Experience:
+https://huggingface.co/spaces/viaho/pandas-ai-excel",via007,62124698,closed,False,1,2025-03-20T02:29:31+00:00,2025-03-20T07:52:07+00:00,2025-03-20T07:52:06+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2932657045,1688,fix(df_redeclaration): remove dataframe redeclaration checks,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Remove dataframe redeclaration checks from `CodeCleaner` and associated tests.
+> 
+>   - **Code Changes**:
+>     - Remove `extract_fix_dataframe_redeclarations` method from `code_cleaning.py`.
+>     - Simplify `clean_code` method by removing dataframe redeclaration checks.
+>   - **Tests**:
+>     - Remove `test_extract_fix_dataframe_redeclarations` from `test_code_cleaning.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for f78284c906685a5f620d5588093c4be53fec8990. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-19T17:46:35+00:00,2025-03-19T19:19:59+00:00,2025-03-19T18:39:41+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2932448124,1687,fix(error_correction): error correction for code generation,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+> [!IMPORTANT]
+> Adds retry logic for code generation in `Agent` class with tests for error handling and retry attempts.
+> 
+>   - **Behavior**:
+>     - Adds `generate_code_with_retries()` in `Agent` class in `base.py` to retry code generation on failure, up to `max_retries`.
+>     - Modifies `_process_query()` to use `generate_code_with_retries()` instead of `generate_code()`.
+>   - **Tests**:
+>     - Adds `test_code_generation_with_retries()` and `test_code_generation_with_retries_three_times()` in `test_agent.py` to test retry logic.
+>     - Verifies retry attempts and exception handling in code generation.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for fc18610e31927a897241e695fef91edf64c11916. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-19T16:32:35+00:00,2025-03-19T18:15:52+00:00,2025-03-19T17:43:13+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2931401355,1686,fix: dataset path error message and fixing tests,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fix dataset path error message and update tests to reflect changes, including test file renames for better organization.
+> 
+>   - **Error Message Update**:
+>     - Update error message in `get_validated_dataset_path` in `path.py` to ""Dataset path name must be lowercase and use hyphens instead of spaces"".
+>     - Update corresponding test cases in `test_cli.py` and `test_pandasai_init.py` to match the new error message.
+>   - **Test Updates**:
+>     - Modify `mock_dataset_loader` in `test_cli.py` to patch `create_loader_from_path` instead of `DatasetLoader`.
+>     - Remove argument from `mock_dataset_loader.return_value.load.assert_called_once()` in `test_cli.py`.
+>   - **File Renames**:
+>     - Rename `tests/test_cli.py` to `tests/unit_tests/test_cli.py`.
+>     - Rename `tests/test_memory.py` to `tests/unit_tests/test_memory.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 96be1e4763b440256d196c66737490f093da4863. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-19T11:13:21+00:00,2025-03-19T16:39:12+00:00,2025-03-19T16:39:12+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2931189264,1685,"docs:Add Chinese, French, Japanese version of README","Added a navigation bar in the README for jumping to different language versions, and added README_CN, README_FR, README_JA, etc., in the docs directory.
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add multilingual support to README with Chinese, French, and Japanese versions and a navigation bar for language selection.
+> 
+>   - **README Updates**:
+>     - Added navigation bar in `README.md` for language selection: English, Chinese, French, Japanese.
+>   - **New Language Files**:
+>     - Added `README_CN.md` for Chinese documentation.
+>     - Added `README_FR.md` for French documentation.
+>     - Added `README_JA.md` for Japanese documentation.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 9bb5591fa80414691d2cb836df8e2ae9b9e50a93. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",eagle666,54578698,open,False,0,2025-03-19T10:04:10+00:00,2025-03-19T18:31:21+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2930442950,1684,Error : Pipeline failed on step 3: Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead using Azureopenai O3-mini model,"### System Info
+
+pandasai == 2.4.0
+Ubuntu == 20.04.6
+python == 3.9.18
+
+### 🐛 Describe the bug
+
+Pandasai agent.chat not working for **O3-mini** using **AzureOpenAI**.
+**Error** : **Pipeline failed on step 3: Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.**
+
+```
+python
+
+from pandasai import SmartDataframe
+from pandasai.llm import AzureOpenAI
+from pandasai.connectors import PandasConnector
+from pandasai import Agent
+
+LLM = AzureOpenAI(
+    api_token= os.environ['OPENAI_API_KEY'],
+    api_base =os.environ['OPENAI_API_BASE'],
+    api_version= ""2025-01-01-preview""
+    deployment_name=""o3-mini""
+    azure_endpoint = os.environ['OPENAI_API_ENDPOINT'],
+)
+
+# Sample DataFrame
+df = pd.DataFrame({
+    ""country"": [""United States"", ""United Kingdom"", ""France"", ""Germany"", ""Italy"", ""Spain"", ""Canada"", ""Australia"", ""Japan"", ""China""],
+    ""gdp"": [19294482071552, 2891615567872, 2411255037952, 3435817336832, 1745433788416, 1181205135360, 1607402389504, 1490967855104, 4380756541440, 14631844184064],
+    ""happiness_index"": [6.94, 7.16, 6.66, 7.07, 6.38, 6.4, 7.23, 7.22, 5.87, 5.12]
+})
+
+connector = PandasConnector({""original_df"": df})
+
+sdf =SmartDataframe(connector, config={""llm"": LLM},  )
+    
+agent = Agent(sdf, config={""llm"": LLM }, )    
+
+agent.chat(""show top 5 rows"")    
+```
+
+
+```
+### QUERY
+ show top 5 rows
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare ""result"" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use ""matplotlib"" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-03-19 04:25:16 [INFO] Executing Step 3: CodeGenerator
+2025-03-19 04:25:16 [INFO] error_code=unsupported_parameter error_message=""Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead."" error_param=max_tokens error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-03-19 04:25:16 [ERROR] Pipeline failed on step 3: Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.
+Traceback (most recent call last):
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/pipelines/chat/generate_chat_pipeline.py"", line 307, in run
+    output = (self.code_generation_pipeline | self.code_execution_pipeline).run(
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/pipelines/pipeline.py"", line 137, in run
+    raise e
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/pipelines/pipeline.py"", line 101, in run
+    step_output = logic.execute(
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/pipelines/chat/code_generator.py"", line 33, in execute
+    code = pipeline_context.config.llm.generate_code(input, pipeline_context)
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/llm/base.py"", line 200, in generate_code
+    response = self.call(instruction, context)
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/llm/base.py"", line 390, in call
+    self.chat_completion(self.last_prompt, memory)
+  File ""/opt/conda/lib/python3.9/site-packages/pandasai/llm/base.py"", line 364, in chat_completion
+    response = self.client.create(**params)
+  File ""/home/ubuntu/.local/lib/python3.9/site-packages/openai/api_resources/chat_completion.py"", line 25, in create
+    return super().create(*args, **kwargs)
+  File ""/home/ubuntu/.local/lib/python3.9/site-packages/openai/api_resources/abstract/engine_api_resource.py"", line 155, in create
+    response, _, api_key = requestor.request(
+  File ""/home/ubuntu/.local/lib/python3.9/site-packages/openai/api_requestor.py"", line 299, in request
+    resp, got_stream = self._interpret_response(result, stream)
+  File ""/home/ubuntu/.local/lib/python3.9/site-packages/openai/api_requestor.py"", line 710, in _interpret_response
+    self._interpret_response_line(
+  File ""/home/ubuntu/.local/lib/python3.9/site-packages/openai/api_requestor.py"", line 775, in _interpret_response_line
+    raise self.handle_error_response(
+openai.error.InvalidRequestError: Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.
+```
+
+```
+### QUERY
+Shape of the data
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare ""result"" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use ""matplotlib"" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-03-19 04:26:06 [INFO] Executing Step 3: CodeGenerator
+2025-03-19 04:26:07 [INFO] error_code=unsupported_parameter error_message=""Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead."" error_param=max_tokens error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-03-19 04:26:07 [ERROR] Pipeline failed on step 3: Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.
+```",rajathada,43640049,open,False,6,2025-03-19T04:49:59+00:00,2025-04-14T05:02:54+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2930293380,1683,"docs:Add Chinese, French, Japanese version of README","Add Chinese, French, Japanese version of README.
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add Chinese, French, and Japanese translations of the README to the documentation.
+> 
+>   - **Documentation**:
+>     - Adds `README_CN.md`, `README_FR.md`, and `README_JA.md` for Chinese, French, and Japanese translations of the README.
+>     - Updates `README.md` to include links to the new translated versions.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 2bfbc53f54f9ce6325ced7611cbb54b8eff721f9. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",eagle666,54578698,closed,False,0,2025-03-19T02:41:38+00:00,2025-03-19T02:46:29+00:00,2025-03-19T02:46:29+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2928185265,1682,fix(docs): sandbox documentation and example corrected,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+> [!IMPORTANT]
+> This PR updates sandbox usage documentation and corrects API key setting instructions in code and tests.
+> 
+>   - **Documentation Updates**:
+>     - Added detailed instructions for using the sandbox environment in `agent.mdx`, `large-language-models.mdx`, and `privacy-security.mdx`.
+>     - Corrected API key setting instructions in `exceptions.py` and `test_session.py`.
+>   - **Code Changes**:
+>     - Updated `PandaAIApiKeyError` message in `exceptions.py` to use `PandaAI.api_key.set()`.
+>     - Adjusted tests in `test_session.py` to reflect the updated API key setting method.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for ea53254aa450171c442f3e7d5870e3de4b385bb8. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-18T11:32:39+00:00,2025-03-19T08:23:28+00:00,2025-03-19T08:22:32+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2928155866,1681,fix(read_csv): lower file name,"- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Convert sanitized file names to lowercase in `sanitize_file_name` function in `sql_sanitizer.py`.
+> 
+>   - **Behavior**:
+>     - Modify `sanitize_file_name` in `sql_sanitizer.py` to return the file name in lowercase after sanitization.
+>   - **Misc**:
+>     - All code checks passed as per contribution guidelines.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 38d4ff72700437a2ffc85de0a370274860385081. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-18T11:22:44+00:00,2025-03-19T08:34:28+00:00,2025-03-19T08:34:27+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2927233892,1679,Fix python.lang.security.audit.exec-detected.exec-detected,"This PR fixes python.lang.security.audit.exec-detected.exec-detected.
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Refactor `execute` method in `code_executor.py` to remove `exec` usage and add `context` parameter for improved security.
+> 
+>   - **Security**:
+>     - Refactor `execute` method in `code_executor.py` to remove `exec` usage, addressing security audit issue `exec-detected`.
+>     - Add `context` parameter to `execute` method for safer code execution.
+>   - **Exceptions**:
+>     - Remove `CodeExecutionError` and `NoResultFoundError` handling related to `exec`.
+>   - **Documentation**:
+>     - Update docstring for `execute` method to reflect new parameters and return type.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 587cc6bce54a3e288dad999b1fefc5da033da62f. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",kira-offgrid,203060957,open,False,0,2025-03-18T05:48:51+00:00,2025-03-18T05:51:22+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2925642470,1678,fix(loaders): avoid extra initialization of loader,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Optimize `load()` methods in `SQLDatasetLoader` and `ViewDatasetLoader` to use existing loader instances, reducing unnecessary initialization.
+> 
+>   - **Optimization**:
+>     - In `sql_loader.py`, `SQLDatasetLoader.load()` now uses `self` as `data_loader` instead of creating a new `SQLDatasetLoader` instance.
+>     - In `view_loader.py`, `ViewDatasetLoader.load()` now uses `self` as `data_loader` instead of creating a new `ViewDatasetLoader` instance.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 6a17c2b5c12bad1d6d1eaf69c53fec100c0ab559. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-17T16:07:50+00:00,2025-03-18T09:17:25+00:00,2025-03-18T09:17:13+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2922069531,1677,API request failed in app.pandabi.ai,"### System Info
+
+Error generating plan
+Failed to execute analysis: API request failed: Failed to execute analysis step!
+ 
+add dataset from web by csv 
+
+### 🐛 Describe the bug
+
+Error generating plan
+Failed to execute analysis: API request failed: Failed to execute analysis step!
+ 
+add dataset from web by csv ",attid,93135385,closed,False,2,2025-03-15T12:44:34+00:00,2025-03-27T14:33:12+00:00,2025-03-27T14:33:11+00:00,bug,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2920894296,1676,fix(loader): optimization,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Optimizes `execute_local_query` in `view_loader.py` by removing unnecessary table registration logic.
+> 
+>   - **Optimization**:
+>     - Removed unnecessary table registration logic in `execute_local_query` in `view_loader.py`.
+>     - Simplifies the function by eliminating redundant operations.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for deae9cf5d1b17eae47b60978b96ce29f99cf172d. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-14T17:39:48+00:00,2025-03-14T17:42:34+00:00,2025-03-14T17:42:34+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2917209463,1674,fix(sql_query): resolve double dash issue in url path,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Add method to replace `READ_PARQUET` blocks with a dummy table for SQL validation in `LocalDatasetLoader` and update tests accordingly.
+> 
+>   - **Behavior**:
+>     - Add `_replace_readparquet_block_with_table()` in `LocalDatasetLoader` to replace `READ_PARQUET` blocks with `dummy_table` for SQL validation.
+>     - Modify `execute_query()` in `LocalDatasetLoader` to use the new method for query validation.
+>   - **Tests**:
+>     - Add `test_read_parquet_file` and `test_read_parquet_file_with_mock_query_validator` in `test_loader.py` to test `READ_PARQUET` block replacement and query validation.
+>     - Ensure `mock_is_query_safe` is called with the modified query in `test_read_parquet_file_with_mock_query_validator`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 5ad945ff2123bc0dfd19b405b62ca56df6cee5f2. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-03-13T13:41:57+00:00,2025-03-13T14:13:28+00:00,2025-03-13T14:13:16+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2916592535,1673,JSONDecodeError in PandasAI Sandbox When Running inside Docker Container,"### System Info
+
+## System Information
+
+| Component              | Version       |
+|------------------------|--------------|
+| **Operating System**   | Windows 10 Pro |
+| **Python Version**     | 3.11.7       |
+| **pandasai**          | 3.0.0b12     |
+| **pandasai-docker**   | 0.1.2        |
+| **pandasai-langchain** | 0.1.5        |
+| **pandasai-local**    | 0.1.5        |
+
+### 🐛 Describe the bug
+
+### Description
+When attempting to run PandasAI inside a Docker container using the `DockerSandbox()`, I encountered a `JSONDecodeError`. The error occurs during the serialization of the response, which suggests that the issue might be related to `parser.serialize(result)` not properly formatting the JSON output.
+### Error Logs
+raise JSONDecodeError(""Expecting value"", s, err.value) from None JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+### code 
+
+```python
+#Define a sample DataFrame
+import pandas as pd 
+import duckdb
+import pandasai as pai
+from pandasai_local import LocalLLM
+import matplotlib.pyplot as plt
+from pandasai_docker import DockerSandbox
+
+   data = {
+       ""Country"": [
+           ""China"", ""India"", ""United States"", ""Indonesia"", ""Pakistan"", 
+           ""Brazil"", ""Nigeria"", ""Bangladesh"", ""Russia"", ""Mexico""
+       ],
+       ""Population"": [
+           1412000000, 1408000000, 332000000, 276000000, 231000000,
+           216000000, 223000000, 172000000, 144000000, 128000000
+       ]
+   }
+   df_c = pd.DataFrame(data)
+
+conn = duckdb.connect(database="":memory:"", read_only=False)
+conn.register(""population_table"", df_c)
+
+#Configure PandasAI:
+
+smart_df_c = pai.DataFrame(df_c, config={
+    ""llm"": ollama_llm,
+    ""enforce_privacy"": False,
+    ""sql_engine"": ""duckdb"",
+    ""custom_sql_connection"": conn,
+    ""verbose"": True
+})
+
+sandbox = DockerSandbox()
+sandbox.start()
+
+agent = Agent(smart_df_c, sandbox=sandbox)
+response_agent = agent.chat('What is the average population of the countries?')
+
+sandbox.stop()
+```
+### Extra Logs
+````
+2025-03-13 09:40:44 [INFO] Starting a Docker container from the image 'pandasai-sandbox'
+2025-03-13 09:40:44 [INFO] Started a Docker container with id '1f5a5b916f4d1f76fda474bdaa370c09d21c280c9290a7c60b129860a329ddfc' from the image 'pandasai-sandbox'
+2025-03-13 09:40:44 [INFO] Question: what is the avarege  population of the countries ?
+2025-03-13 09:40:44 [INFO] Running PandaAI with local LLM...
+2025-03-13 09:40:44 [INFO] Prompt ID: 39bcf560-e880-4c34-bfde-88084b30eb1c
+2025-03-13 09:40:44 [INFO] Using cached code.
+2025-03-13 09:40:44 [INFO] Validating code requirements...
+2025-03-13 09:40:44 [INFO] Code validation successful.
+2025-03-13 09:40:44 [INFO] Cleaning the generated code...
+2025-03-13 09:40:44 [INFO] Executing code: import pandas as pd
+sql_query = 'SELECT AVG(Population) AS Average_Population FROM table_7c56860481e3e0b3d58897210300db7b'
+result_df = execute_sql_query(sql_query)
+average_population = result_df['Average_Population'].values[0]
+result = {'type': 'number', 'value': average_population}
+print(result)
+2025-03-13 09:40:45 [INFO] Submitting code to docker container import base64
+import datetime
+import json
+import os
+import tarfile
+from json import JSONEncoder
+
+import numpy as np
+import pandas as pd
+
+
+class ResponseSerializer:
+    @staticmethod
+    def serialize_dataframe(df: pd.DataFrame) -> dict:
+        if df.empty:
+            return {\""columns\"": [], \""data\"": [], \""index\"": []}
+        return df.to_dict(orient=\""split\"")
+
+    @staticmethod
+    def serialize(result: dict) -> str:
+        if \""type\"" not in result or \""value\"" not in result:
+            raise ValueError(\""Invalid result format: Missing 'type' or 'value'.\"")
+
+        if result[\""type\""] == \""dataframe\"":
+            if isinstance(result[\""value\""], pd.Series):
+                result[\""value\""] = result[\""value\""].to_frame()
+            result[\""value\""] = ResponseSerializer.serialize_dataframe(result[\""value\""])
+
+        elif result[\""type\""] == \""plot\"" and isinstance(result[\""value\""], str):
+            if os.path.exists(result[\""value\""]):
+                with open(result[\""value\""], \""rb\"") as image_file:
+                    image_data = image_file.read()
+                result[\""value\""] = base64.b64encode(image_data).decode()
+            else:
+                raise FileNotFoundError(f\""Plot file not found: {result['value']}\"")
+
+        return json.dumps(result, cls=CustomEncoder, ensure_ascii=False, indent=None)
+
+    @staticmethod
+    def deserialize(response: str, chart_path: str = None) -> dict:
+        try:
+            result = json.loads(response)
+        except json.JSONDecodeError as e:
+            raise ValueError(f\""Failed to decode JSON response: {e}\"")
+
+        if result.get(\""type\"", \""\"") == \""dataframe\"":
+            json_data = result[\""value\""]
+            result[\""value\""] = pd.DataFrame(
+                data=json_data[\""data\""],
+                index=json_data[\""index\""],
+                columns=json_data[\""columns\""],
+            )
+
+        elif result.get(\""type\"", \""\"") == \""plot\"" and chart_path:
+            try:
+                image_data = base64.b64decode(result[\""value\""])
+                with open(chart_path, \""wb\"") as image_file:
+                    image_file.write(image_data)
+                result[\""value\""] = chart_path
+            except Exception as e:
+                raise ValueError(f\""Failed to decode plot image: {e}\"")
+
+        return result
+
+
+class CustomEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (np.integer, np.int64, np.int32, np.generic)):
+            return int(obj)
+
+        if isinstance(obj, (np.floating, np.float64, np.float32)):
+            return float(obj)
+
+        if isinstance(obj, (pd.Timestamp, datetime.datetime, datetime.date)):
+            return obj.isoformat()
+
+        if isinstance(obj, pd.DataFrame):
+            return ResponseSerializer.serialize_dataframe(obj)
+
+        return super().default(obj)
+
+
+parser = ResponseSerializer()
+
+datasets_map = {'SELECT AVG(Population) AS Average_Population FROM table_7c56860481e3e0b3d58897210300db7b': '11ee571b19d94109afa7f33356583a21.csv'}
+
+def execute_sql_query(sql_query):
+    filename = datasets_map[sql_query]
+    filepath = os.path.join(\""/tmp\"", filename)
+    return pd.read_csv(filepath)
+
+import pandas as pd
+sql_query = 'SELECT AVG(Population) AS Average_Population FROM table_7c56860481e3e0b3d58897210300db7b'
+result_df = execute_sql_query(sql_query)
+average_population = result_df['Average_Population'].values[0]
+result = {'type': 'number', 'value': average_population}
+print(result)
+print(parser.serialize(result))
+
+(b'{\'type\': \'number\', \'value\': np.float64(454200000.0)}\n{""type"": ""number"", ""value"": 454200000.0}\n', None)
+````
+PS. The Docker container have an old version of python: 3.9
+",alimajed92,26009514,closed,False,2,2025-03-13T10:11:59+00:00,2025-04-10T08:34:16+00:00,2025-04-10T08:34:16+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2916130056,1672,Chinese cannot be displayed on the output graphics.,"### System Info
+
+Chinese cannot be displayed on the output graphics.
+
+### 🐛 Describe the bug
+
+Chinese cannot be displayed on the output graphics.",via007,62124698,closed,False,2,2025-03-13T07:30:17+00:00,2025-03-20T14:21:48+00:00,2025-03-20T14:21:47+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2915140292,1671,fix: accept open ai compatible local llm,"To accept the local open AI compatible LLM service.
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Adds support for local OpenAI-compatible LLM services by checking available models via API call in `openai.py`.
+> 
+>   - **Behavior**:
+>     - Adds support for local OpenAI-compatible LLM services in `openai.py`.
+>     - Checks available models via API call to `self.api_base` and sets `self.client` based on model availability.
+>     - Uses `requests` to fetch model list and determine if `self.model` is supported.
+>   - **Error Handling**:
+>     - Raises `UnsupportedModelError` if `self.model` is not found in the fetched model list.
+>   - **Misc**:
+>     - Adds `requests` import to `openai.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for ff96499d5c634d6c9e204eac5d7fdef9b2d47bfd. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",mohaoran93,22479444,open,False,2,2025-03-12T20:53:26+00:00,2025-04-18T09:11:28+00:00,,,2,1,0,0,0,0,0
+sinaptik-ai/pandas-ai,2912355897,1670,Regarding semantic definition information,"### 🚀 The feature
+
+Isn't the semantic definition information, such as column descriptions, aliases, and types, supposed to be included in the prompt? 
+The system-generated prompt only includes information about the tables：
+2025-03-11 00:58:40 [INFO] Using Prompt: <tables>
+```
+<table dialect=""mysql"" table_name=""mysql_store"" description=""store table"" dimensions=""3x0"">
+store_id,store_name
+1,Santa Cruz Bikes
+2,Baldwin Bikes
+3,Rowlett Bikes
+</table>
+```
+
+### Motivation, pitch
+
+It is hoped that the semantic definition information can be included in the prompt to enable the large model to generate SQL more accurately.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",tom1978,8872463,closed,False,1,2025-03-12T01:51:16+00:00,2025-03-14T16:44:21+00:00,2025-03-14T16:44:20+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2911051016,1669,Addition of LLM base models,"### 🚀 The feature
+
+Instead of calling a LLM via API, I want the library to be capable of leveraging base models(Llama, Deepseek etc.) installed in the local machine. 
+
+### Motivation, pitch
+
+Hi! I was trying out the library but found myself running out of tokens pretty quickly. I believe that adding an option to add the base models can be really effective for users who want to leverage their computational resources for the task and build their applications. 
+
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",SnehalBhartiya,20558726,closed,False,3,2025-03-11T15:47:56+00:00,2025-03-14T16:47:12+00:00,2025-03-14T16:47:11+00:00,,1,0,0,0,0,0,1
+sinaptik-ai/pandas-ai,2909999695,1668,fix(core): img path in windows,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+",scaliseraoul,36519284,closed,False,0,2025-03-11T10:32:04+00:00,2025-03-11T11:13:36+00:00,2025-03-11T11:13:35+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2907354178,1667,fix: correct column parsing,"- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fixes column parsing in `view_query_builder.py` by updating regex patterns to handle numeric and underscore characters in expressions.
+> 
+>   - **Behavior**:
+>     - Fixes column parsing in `_get_columns()` in `view_query_builder.py` by updating regex patterns to handle numeric and underscore characters in expressions.
+>     - Ensures correct parsing of column expressions with hyphens and dots.
+>   - **Regex Changes**:
+>     - Updates regex in `_get_columns()` to `r""([a-zA-Z0-9_]+)-([a-zA-Z0-9_]+)""` and `r""([a-zA-Z0-9_]+)\\.([a-zA-Z0-9_]+)""` for better handling of column names.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for f1ea22b5f97b0fbcfeb9fd5bc3e0a35215c2aeb8. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-10T13:55:11+00:00,2025-03-10T17:53:32+00:00,2025-03-10T17:53:32+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2906631159,1665,MySQL columns type and result type problems,"# Issue Title: pandasai Chat Function Returns Non-numeric Value for Expected Numeric Result
+
+## Description
+When using the `pai.chat` function to query data, the function expects a numeric value but returns a non-numeric value, resulting in an `InvalidOutputValueMismatch` exception. Additionally, I would like to know if the column type definitions in pandasai can be consistent with MySQL types such as `varchar(32)` and `datetime`.
+
+## Code Example
+`import pandasai as pai
+from pandasai_local import LocalLLM
+import matplotlib
+import matplotlib.pyplot as plt
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('app.log', encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+
+lm_studio_llm = LocalLLM(api_base=""http://localhost:11434/v1"", model=""deepseek-coder-v2:16b"", api_key=""ollama"")
+
+pai.config.set({""llm"": lm_studio_llm })
+
+ndtzeqk = pai.load(""example/sys-mkt-tender-count"")
+yggrxx = pai.load(""example/hr-employee-personal"")
+zbxxdjd = pai.load(""example/sys-mkt-bidding-wf"")
+gcxmxx = pai.load(""example/sys-mkt-project"")
+
+respose = pai.chat(""业主合同管理中拓展额是多少"", ndtzeqk, yggrxx, zbxxdjd, gcxmxx)
+print(respose)
+`
+
+## Error Message
+/home/alan/anaconda3/envs/d_a2/bin/python /home/alan/DataE_v3/api_sql_v3.py
+Dataset loaded successfully.
+Dataset loaded successfully.
+Dataset loaded successfully.
+Dataset loaded successfully.
+Dataset loaded successfully.
+Traceback (most recent call last):
+  File ""/home/alan/DataE_v3/api_sql_v3.py"", line 27, in <module>
+    respose = pai.chat(""豪方东园燃气工程业主合同的建安拓展额是多少？结果以数值类型输出"", ndtzeqk, yggrxx, zbxxdjd, gcxmxx, yzhtgl)
+    ...
+  File ""/home/alan/anaconda3/envs/d_a2/lib/python3.11/site-packages/pandasai/core/response/parser.py"", line 43, in _validate_response
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Invalid output: Expected a numeric value for result type 'number', but received a non-numeric value.
+
+## Additional Questions
+Can the type definition of columns in pandasai be consistent with MySQL types such as varchar(32) and datetime?
+
+## Expected Behavior
+The pai.chat function should return a numeric value when a numeric result is expected, and column type definitions should be compatible with MySQL types.
+
+## Possible Solution
+I’m not sure whether the issue is with pandasai or the llm.",Alan-zhong,92133351,open,False,3,2025-03-10T09:35:00+00:00,2025-04-09T08:21:23+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2905868028,1664,"Hello, can the description in the database and table be in Chinese? Also, can the description of multiple tables be established at one time?",![Image](https://github.com/user-attachments/assets/d27287b2-ec34-49b5-87f8-772a363b3f88),Alan-zhong,92133351,closed,True,1,2025-03-10T01:48:35+00:00,2025-03-10T11:31:42+00:00,2025-03-10T11:31:42+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2902823197,1663,fix(view_loader): add optional parameters to execute_local_query method,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+
+----
+
+> [!IMPORTANT]
+> Add optional parameters to `execute_local_query` in `view_loader.py` and update tests in `test_view_loader.py`.
+> 
+>   - **Behavior**:
+>     - `execute_local_query` in `view_loader.py` now accepts optional `params` argument.
+>     - Updates `execute_query` to pass `params` to `execute_local_query`.
+>   - **Tests**:
+>     - Adds `test_view_loader.py` to test `execute_local_query` with and without parameters.
+>     - Tests cover error handling and query execution with `DuckDB`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 21799f06709ea30305167e1e47789beb315a292c. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",maidacundo,43886585,closed,False,2,2025-03-07T12:02:46+00:00,2025-03-10T18:07:14+00:00,2025-03-10T17:53:11+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2900766995,1662,TypeError: LangchainLLM.__init__() got an unexpected keyword argument 'openai_api_key',"### System Info
+
+The current example seems not working: https://docs.getpanda.ai/v3/large-language-models#langchain-models.
+
+Here is the error:
+```
+TypeError: LangchainLLM.__init__() got an unexpected keyword argument 'openai_api_key'
+```
+
+### 🐛 Describe the bug
+
+The example at https://docs.getpanda.ai/v3/large-language-models#langchain-models produces the error: `TypeError: LangchainLLM.__init__() got an unexpected keyword argument 'openai_api_key'`",matteocacciola,28953594,closed,False,2,2025-03-06T15:43:20+00:00,2025-03-14T17:03:12+00:00,2025-03-14T16:48:33+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2899929942,1661,ImportError: cannot import name 'TypeIs' from 'typing_extensions' (/usr/local/lib/python3.10/dist-packages/typing_extensions.py),"### System Info
+
+Hi, I am trying to use pandas ai in databricks, but it gives me the error in the description. How could I solve?
+
+
+
+
+### 🐛 Describe the bug
+
+ImportError: cannot import name 'TypeIs' from 'typing_extensions' (/usr/local/lib/python3.10/dist-packages/typing_extensions.py)
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+~/.ipykernel/2978/command-8882855477994044-1555846469 in <module>
+----> 1 import pandasai as pai
+      2 from pandasai.llm.openai import OpenAI
+      3 import pandas as pd
+      4 
+      5 
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pandasai/__init__.py in <module>
+     11 import pandas as pd
+     12 
+---> 13 from pandasai.config import APIKeyManager, ConfigManager
+     14 from pandasai.constants import DEFAULT_API_URL
+     15 from pandasai.data_loader.semantic_layer_schema import (
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pandasai/config.py in <module>
+      3 from typing import Any, Dict, Optional
+      4 
+----> 5 from pydantic import BaseModel, ConfigDict
+      6 
+      7 from pandasai.helpers.filemanager import DefaultFileManager, FileManager
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/__init__.py in __getattr__(attr_name)
+    419         return result
+    420     else:
+--> 421         module = import_module(module_name, package=package)
+    422         result = getattr(module, attr_name)
+    423         g = globals()
+
+/usr/lib/python3.10/importlib/__init__.py in import_module(name, package)
+    124                 break
+    125             level += 1
+--> 126     return _bootstrap._gcd_import(name[level:], package, level)
+    127 
+    128 
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/main.py in <module>
+     32 from typing_extensions import Self, TypeAlias, Unpack
+     33 
+---> 34 from ._internal import (
+     35     _config,
+     36     _decorators,
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/_internal/_decorators.py in <module>
+     14 
+     15 from ..errors import PydanticUserError
+---> 16 from ._core_utils import get_type_ref
+     17 from ._internal_dataclass import slots_true
+     18 from ._namespace_utils import GlobalsNamespace, MappingNamespace
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/_internal/_core_utils.py in <module>
+     10 
+     11 from ..errors import PydanticUserError
+---> 12 from . import _repr
+     13 from ._core_metadata import CoreMetadata
+     14 from ._typing_extra import is_generic_alias, is_type_alias_type
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/_internal/_repr.py in <module>
+      9 import typing_extensions
+     10 
+---> 11 from . import _typing_extra
+     12 
+     13 if typing.TYPE_CHECKING:
+
+/local_disk0/.ephemeral_nfs/envs/pythonEnv-213c1480-9412-4d6d-8fc3-f5ef6c505659/lib/python3.10/site-packages/pydantic/_internal/_typing_extra.py in <module>
+     13 
+     14 import typing_extensions
+---> 15 from typing_extensions import TypeIs, deprecated, get_args, get_origin
+     16 
+     17 from ._namespace_utils import GlobalsNamespace, MappingNamespace, NsResolver, get_module_ns_of
+
+ImportError: cannot import name 'TypeIs' from 'typing_extensions' (/usr/local/lib/python3.10/dist-packages/typing_extensions.py)",FrancescoRettondini,92798799,open,False,1,2025-03-06T09:59:26+00:00,2025-03-14T16:54:15+00:00,,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2897414879,1660,fix(agent): chat with view and other dataset,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Refactor SQL query execution in `Agent` class by removing redundant methods and updating tests accordingly.
+> 
+>   - **Behavior**:
+>     - Refactor `_execute_sql_query` in `base.py` to handle both local and virtual dataframes, removing `_execute_local_sql_query`.
+>     - Remove `_parse_correct_table_name` and `_execute_local_sql_query` from `base.py`.
+>     - Update `AgentState` in `state.py` to remove `_validate_input` method.
+>   - **Tests**:
+>     - Remove tests for `_execute_local_sql_query` in `test_agent.py`.
+>     - Update `test_execute_sql_query_success_local` and `test_execute_sql_query_success_virtual_dataframe` to reflect new `_execute_sql_query` logic.
+>   - **Misc**:
+>     - Add import for `Source` in `base.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 7b8a9e3f561c68e2c29ba91899e143f89830ee28. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-05T13:59:25+00:00,2025-03-10T17:54:03+00:00,2025-03-10T17:54:03+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2896999864,1659,fix(agent): remove wrong double validation,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Removes redundant `_validate_input()` method from `AgentState` in `state.py`, simplifying dataframe initialization.
+> 
+>   - **Behavior**:
+>     - Removes `_validate_input()` from `AgentState` in `state.py`, eliminating redundant schema validation for dataframes during initialization.
+>   - **Misc**:
+>     - Adjusts `initialize()` in `state.py` to no longer call `_validate_input()`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 669b33f0bf9fcc7ec0e850d8d0d73801cc69f1fe. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-05T11:02:55+00:00,2025-03-05T11:05:08+00:00,2025-03-05T11:05:08+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2896863660,1658,fix(query builders): quoting identifiers by default,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Default quoting of SQL identifiers added to `BaseQueryBuilder` and `ViewQueryBuilder`, with tests updated to reflect this change.
+> 
+>   - **Behavior**:
+>     - Default quoting of SQL identifiers using `quote_identifiers` in `BaseQueryBuilder` and `ViewQueryBuilder`.
+>     - Affects `build_query()` and `get_head_query()` methods in both classes.
+>   - **Tests**:
+>     - Updated expected SQL strings in `test_sql_loader.py`, `test_group_by.py`, `test_query_builder.py`, `test_sql_transformation_manager.py`, and `test_view_query_builder.py` to include quoted identifiers.
+>     - Ensures that all SQL queries are correctly formatted with quotes around identifiers.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for c461eaa510cbac12f8f5c14e810902dd8dc1daa5. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-03-05T10:07:52+00:00,2025-03-05T11:05:36+00:00,2025-03-05T11:05:36+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2894652636,1657,Replace raise with proper handling once the retries failed,"### System Info
+
+pandasai 12b
+
+### 🐛 Describe the bug
+
+Currently, once the retries fail, we reach to raise statement. Such behaviour results in clearing the memory and start as if its the first time! 
+
+Cant we modify the logic to handle such behavior and return a static messages indicating inability to generate a code? with this, we will keep the history running (better than just a raise) ",faresmalik,78650377,open,False,1,2025-03-04T15:28:22+00:00,2025-03-05T09:56:10+00:00,,enhancement,1,0,1,0,0,0,0
+sinaptik-ai/pandas-ai,2894642235,1656,Chat history is not passed to the prompt,"### System Info
+
+Pandasai Version 12b 
+
+### 🐛 Describe the bug
+
+Hi team, 
+
+The last user query is only passed to the llm during the code generation. However, passing a full chat history will boost the performance and help in generating better responses.  ",faresmalik,78650377,closed,False,2,2025-03-04T15:25:25+00:00,2025-04-11T08:07:35+00:00,2025-04-11T08:07:34+00:00,enhancement,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2892871328,1655,AttributeError: 'LangchainLLM' object has no attribute '_llm_type',"### System Info
+
+pandasai==3.0.0b14
+system in windows10 and ubuntu22.04
+python3.11
+
+### 🐛 Describe the bug
+
+from langchain.chat_models import ChatOpenAI
+import pandasai as pai
+from pandasai_langchain import LangchainLLM
+
+dataset_path = ""qshop/log-data""
+try:
+    sql_table = pai.create(
+        path=dataset_path,
+        description=""XXXXXXXXXXXXXX"",
+        source={
+            ""type"": ""mysql"",
+            ""connection"": {
+                ""host"": ""192.168.0.4"",
+                ""port"": 8096,
+                ""user"": ""qshop_rw"",
+                ""password"": ""Hd43eN+DkNaR"",
+                ""database"": ""qshop""
+            },
+            ""table"": ""tb_log""
+        },        
+        columns=[
+            {
+                ""name"": ""Id"",
+                ""type"": ""string"",
+                ""description"": ""每条数据的唯一标识符""
+            },
+            {
+                ""name"": ""UserID"",
+                ""type"": ""string"",
+                ""description"": ""此条操作记录的用户，无就代表用户没登录""
+            },
+            {
+                ""name"": ""CreateTime"",
+                ""type"": ""datetime"",
+                ""description"": ""此条操作记录的产生的时间""
+            },
+            {
+                ""name"": ""PageName"",
+                ""type"": ""string"",
+                ""description"": ""此条操作记录访问的页面名称""
+            },
+            {
+                ""name"": ""GoodsName"",
+                ""type"": ""string"",
+                ""description"": ""此条操作记录访问的产品的名称，或者需求的名称，或者视频资讯的名称""
+            },
+            {
+                ""name"": ""Col1"",
+                ""type"": ""string"",
+                ""description"": ""辅助判断列，如果值为小模型发布则说明GoodsName对应的是产品，如果值为小模型需求则说明GoodsName对应的是需求，如果值为小模型视频说明GoodsName对应的是视频资讯""
+            }
+        ]
+    )
+    print(f""成功创建新数据集: {dataset_path}"")
+except Exception as e:
+    print(f""创建数据集时出错: {e}"")
+
+
+llm = ChatOpenAI(base_url='https://XXXX.XXX.XX.XX:XXX/v1/',
+                 api_key='sk-proj-1234567890',
+                 model='deepseek-r1-distill-qwen',
+                 request_timeout=300)
+llm1 = LangchainLLM(langchain_llm=llm)
+pai.config.set({
+    ""llm"": llm1,
+    ""timeout"": 300,
+    ""enable_cache"": False,
+})
+# 从连接器获取数据
+agent = pai.load('qshop/log-data')
+# 示例查询
+ans = agent.chat(""请根据这个表格生成一份访问分析报告，并根据报告给出后续的运营建议。"")
+print(ans)
+Exception has occurred: AttributeError
+'LangchainLLM' object has no attribute '_llm_type'
+  File ""E:\develop\aiagent\pandasaitest.py"", line 84, in <module>
+    ans = agent.chat(""请根据这个表格生成一份访问分析报告，并根据报告给出后续的运营建议。"")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LangchainLLM' object has no attribute '_llm_type'
+",ban0228,201371458,closed,False,1,2025-03-04T04:09:26+00:00,2025-03-14T17:03:38+00:00,2025-03-14T16:57:20+00:00,,1,1,0,0,0,0,0
+sinaptik-ai/pandas-ai,2892604476,1654,pandasai in streamlit (invalid api key),"Hello - my streamlit app (which leveraged pandasai under the hood was working just three weeks ago) is now throwing an error ""invalid api key"".... I have updated pandasai as well as my script, but still receive the error. My key is stored in streamlit secrets and should still be valid.
+
+[logs-ciccolo22-poc-main-rfm_demo.py-2025-03-03T23_10_10.768Z.txt](https://github.com/user-attachments/files/19062038/logs-ciccolo22-poc-main-rfm_demo.py-2025-03-03T23_10_10.768Z.txt)
+
+Running with python 3.11
+pandas==2.0.3
+pandasai==3.0.0b2
+streamlit==1.42.0
+#python-dotenv
+rfm==1.0.9
+matplotlib==3.7.2
+altair==5.0.1
+seaborn==0.12.2
+pyyaml
+
+import time
+import pandas as pd
+import altair as alt 
+import streamlit as st
+from dotenv import load_dotenv
+import matplotlib.pyplot as plt
+from pandasai import Agent
+import pandasai as pai
+from rfm import RFM
+import os
+
+dataframe = pd.read_csv('updated_synthetic_consumer_data.csv', parse_dates=['invoice_date'])
+
+#PANDASAI_API_KEY = st.secrets[""PANDASAI_API_KEY""]
+
+pai.api_key.set(st.secrets[""PANDASAI_API_KEY""])
+
+
+st.title(""Segmentation ❄️ App"")
+
+st.write('Upload your .csv file of consumers!!!')
+uploaded_file = st.file_uploader(""Upload your CSV file"", type=[""csv""])
+
+if uploaded_file is not None:
+    dataframe = pd.read_csv(uploaded_file, parse_dates=['invoice_date'])
+    dataframe = dataframe.dropna()
+    
+    if uploaded_file is None:
+        dataframe
+    
+    
+rfm=st.checkbox(label=""Run RFM Analysis"")
+
+           
+if rfm:
+            
+        with st.spinner('We are not programs, Gerty. We are people'):
+            time.sleep(5)
+            st.success(""Done!"")
+             
+        r = RFM(dataframe, customer_id='cust_id', transaction_date='invoice_date', amount='amount')
+        fig=r.rfm_table
+        chart= alt.Chart(fig).mark_bar().encode(
+        y=alt.Y('segment:N', title='Segment'),
+        x=alt.X('count()', title='Count'),
+        color=alt.Color('segment:N', scale=alt.Scale(scheme='tableau10'), legend=None)
+    ).properties(
+        title='Counts by Segment'
+    ).configure_axis(grid=False)
+
+        st.altair_chart(chart, use_container_width=True)
+    
+    
+st.write(""Create a table and generate a downloadable table of your results... then ask some questions"")
+table=st.checkbox(label=""Create Table"", key='button2')
+
+if table:
+
+    r = RFM(dataframe, customer_id='cust_id', transaction_date='invoice_date', amount='amount')
+    st.dataframe(r.rfm_table)
+
+    csv=r.rfm_table.to_csv(index=False).encode('utf-8')
+
+
+    st.download_button(
+        ""Press to Download"",
+        csv,
+        ""file.csv"",
+        ""text/csv"",
+        key='download-csv'
+            )
+                
+            
+prompt = st.text_area(""Ask some questions about your data???"")
+if prompt:
+       with st.spinner(""the world has turned and left me here... generating a response..""):
+        df = pai.DataFrame(r.rfm_table)
+        agent=Agent(df)
+        response=agent.chat(prompt)
+        st.write(response)
+         
+Appreciate any insight you may have here. Thank you!
+      
+
+
+",Ciccolo22,66913102,closed,False,1,2025-03-04T00:15:08+00:00,2025-03-04T14:35:31+00:00,2025-03-04T14:35:30+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2889733297,1652,Feature/ollama extension,"### Pull Request Description
+
+**Overview**
+
+This pull request introduces an extension for PandaAI that integrates with Ollama. The extension (pandasai-ollama) allows users to set a custom base URL and model when using Ollama as their LLM backend. It provides a similar interface to our existing OpenAI integration but uses a dummy API key (since Ollama does not require one) and forwards additional parameters (e.g., model, temperature, max_tokens) to the underlying client.
+
+**Key Changes**
+
+- **Custom Base URL Support:**  
+  The extension now accepts an `ollama_base_url` parameter. The URL is normalized to always end with `/v1` so that users can point to custom deployments of Ollama.
+
+- **Model and Parameter Configuration:**  
+  Users can configure the model (e.g., `""llama3.2:latest""`) and other parameters such as `temperature` and `max_tokens` through the extension. The code extracts these parameters and forwards them to the underlying OpenAI client (used as a shim) so that the request is built correctly.
+
+- **Global Configuration Override:**  
+  The extension can be set as the active LLM in PandaAI’s global configuration using `pai.config.set(...)`, so that calls to `df.chat(...)` will use Ollama.
+
+- **Unit Tests:**  
+  Comprehensive tests under `extensions/llms/ollama/tests/test_ollama.py` have been implemented. They verify that:
+  - The default base URL is correctly set when no environment variable is provided.
+  - A custom base URL is applied properly.
+  - The parameters (model, temperature, max_tokens) are correctly set.
+  - Both chat and non-chat modes behave as expected.
+  - The `type` property correctly returns `""ollama""`.
+
+**Known Issue**
+
+There is a known issue regarding code extraction and validation. Sometimes, the generated response from the model does not include the expected Python code snippet for SQL execution. In such cases:
+  
+- The response parser may raise a `NoCodeFoundError` when it fails to find any code in the output.
+- Alternatively, if the code is generated but does not include the required call to `execute_sql_query`, the validator raises an `ExecuteSQLQueryNotUsed` error.
+
+This issue appears to be due to the inherent variability in model output. We plan to address this further in subsequent updates. For now, users are advised that if they encounter these errors, the issue is known and relates to how the model formats its response—not to the extension’s functionality per se.
+
+- **Example Usage in the Readme file**
+
+**Conclusion**
+
+This extension adds support for Ollama as an LLM backend within PandasAI, allowing for a flexible base URL and configurable parameters. While the extension generally works well (as confirmed by our unit tests), the code extraction from model responses may sometimes fail to return the expected Python snippet. We have documented this as a known issue and will continue to improve the robustness of the code extraction process in future updates.
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Introduces Ollama extension for PandaAI, allowing custom base URL and model parameters, with comprehensive tests and documentation.
+> 
+>   - **Ollama Extension**:
+>     - Adds `OllamaLLM` class in `ollama.py` for integrating Ollama LLMs with PandaAI.
+>     - Supports custom base URL and model parameters (e.g., `temperature`, `max_tokens`).
+>     - Uses a dummy API key as Ollama does not require one.
+>     - Default base URL is `http://localhost:11434/v1`.
+>   - **Configuration**:
+>     - Environment variables `OLLAMA_API_KEY` and `OLLAMA_BASE_URL` for configuration.
+>     - Code-based configuration example provided in `README.md`.
+>   - **Testing**:
+>     - Unit tests in `test_ollama.py` verify base URL setting, parameter configuration, and chat/non-chat modes.
+>     - Example test in `test_1.py` demonstrates usage with a sample DataFrame.
+>   - **Misc**:
+>     - Adds `pandasai-ollama` to `pyproject.toml` dependencies.
+>     - Documentation added in `README.md` for installation and usage.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for b21da05d0b8faa5cc91c948d421d2b20ac096c26. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",Amiche02,96678377,open,False,0,2025-03-02T19:14:07+00:00,2025-03-16T01:29:44+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2888688775,1651,using local llm with openai error,"here is my code：
+`import pandas as pd
+from pandasai import SmartDataframe
+from pandasai.llm.local_llm import LocalLLM
+
+ollama_llm = LocalLLM(api_base=""http://192.168.10.170:11434"", model=""codeqwen"", api_key=""codeqwen"")
+df = pd.DataFrame({
+    ""country"": [""United States"", ""United Kingdom"", ""France"", ""Germany"", ""Italy"", ""Spain"", ""Canada"", ""Australia"",
+                ""Japan"", ""China""],
+    ""gdp"": [19294482071552, 2891615567872, 2411255037952, 3435817336832, 1745433788416, 1181205135360, 1607402389504,
+            1490967855104, 4380756541440, 14631844184064],
+    ""happiness_index"": [6.94, 7.16, 6.66, 7.07, 6.38, 6.4, 7.23, 7.22, 5.87, 5.12]
+})
+df = SmartDataframe(df, config={""llm"": ollama_llm,""enable_cache"": False})
+print(df)
+res = df.chat('Which are the top 5 countries by sales?')
+print(res)`
+i try local LLM model，but it return openai error：
+`Traceback (most recent call last):
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\pipelines\chat\generate_chat_pipeline.py"", line 335, in run
+    ).run(input)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\pipelines\pipeline.py"", line 137, in run
+    raise e
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\pipelines\pipeline.py"", line 101, in run
+    step_output = logic.execute(
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\pipelines\chat\code_generator.py"", line 33, in execute
+    code = pipeline_context.config.llm.generate_code(input, pipeline_context)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\llm\base.py"", line 201, in generate_code
+    response = self.call(instruction, context)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\llm\local_llm.py"", line 47, in call
+    return self.chat_completion(self.last_prompt, memory)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\pandasai\llm\local_llm.py"", line 37, in chat_completion
+    response = self.client.create(**params)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\openai\_utils\_utils.py"", line 279, in wrapper
+    return func(*args, **kwargs)
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\openai\resources\chat\completions\completions.py"", line 879, in create
+    return self._post(
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\openai\_base_client.py"", line 1296, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\openai\_base_client.py"", line 973, in request
+    return self._request(
+  File ""D:\anaconda\envs\pai_2\lib\site-packages\openai\_base_client.py"", line 1077, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.NotFoundError: 404 page not found
+Unfortunately, I was not able to answer your question, because of the following error:
+
+404 page not found
+`
+how can i fix it？ ",SoulProficiency,71921740,closed,False,2,2025-03-01T07:23:00+00:00,2025-03-14T16:56:03+00:00,2025-03-14T16:56:02+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2887510327,1650,Adding more bedrock Claude models with Cross-Region Inference,"Adding the following models:
+**Claude 3.5 Sonnet v2:**
+- us.anthropic.claude-3-5-sonnet-20241022-v2:0
+- apac.anthropic.claude-3-5-sonnet-20241022-v2:0
+
+**Claude 3.5 Haiku v1 :**
+- us.anthropic.claude-3-5-haiku-20241022-v1:0
+
+**Claude 3.7 Sonnet v1:**
+- us.anthropic.claude-3-7-sonnet-20250219-v1:0
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add new Claude models for cross-region inference to `_supported__models` in `claude.py`.
+> 
+>   - **Models**:
+>     - Add `us.anthropic.claude-3-5-sonnet-20241022-v2:0`, `apac.anthropic.claude-3-5-sonnet-20241022-v2:0`, `us.anthropic.claude-3-5-haiku-20241022-v1:0`, and `us.anthropic.claude-3-7-sonnet-20250219-v1:0` to `_supported__models` in `claude.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 75b3f8a32a5b5d36074e9c90973c767ea2ea193a. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",brunobpr,25926987,open,False,0,2025-02-28T15:50:00+00:00,2025-03-16T01:29:44+00:00,,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2887460808,1649,Adding more bedrock Claude models with inference profile,"Adding the following models:
+Claude 3.5 Sonnet v2:
+-  us.anthropic.claude-3-5-sonnet-20241022-v2:0
+-  apac.anthropic.claude-3-5-sonnet-20241022-v2:0
+
+Claude 3.5 Haiku v1 :
+- us.anthropic.claude-3-5-haiku-20241022-v1:0
+
+Claude 3.7 Sonnet v1:
+- us.anthropic.claude-3-7-sonnet-20250219-v1:0
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add new Claude models to `_supported__models` in `BedrockClaude` class for text generation.
+> 
+>   - **Models**:
+>     - Add `us.anthropic.claude-3-5-sonnet-20241022-v2:0`, `us.anthropic.claude-3-5-haiku-20241022-v1:0`, `us.anthropic.claude-3-7-sonnet-20250219-v1:0`, and `apac.anthropic.claude-3-5-sonnet-20241022-v2:0` to `_supported__models` in `BedrockClaude` class.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 6c8ee8f5691263a2e9bf67669baec037d77950c2. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",brunobpr,25926987,closed,False,0,2025-02-28T15:28:25+00:00,2025-02-28T15:40:00+00:00,2025-02-28T15:37:37+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2887281465,1648,feature(litellm): pandasai litellm wrapper,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Introduces `LiteLLM` wrapper for unified LLM interaction in PandaAI, replacing multiple existing LLM integrations.
+> 
+>   - **New Feature**:
+>     - Introduces `LiteLLM` wrapper in `litellm.py` for unified LLM interaction across multiple providers.
+>     - Supports models from OpenAI, Anthropic, Google, Azure, AWS, and more.
+>   - **Documentation**:
+>     - Updates `large-language-models.mdx` to include `LiteLLM` setup instructions.
+>     - Adds `README.md` for `litellm` extension.
+>   - **Testing**:
+>     - Adds `test_litellm.py` for unit testing `LiteLLM` functionality.
+>   - **Removals**:
+>     - Deletes old LLM extensions for Google, Bedrock, HuggingFace, IBM, LangChain, and Local models.
+>   - **Miscellaneous**:
+>     - Updates `pyproject.toml` for `litellm` extension.
+>     - Removes LangChain LLM handling from `state.py` and `config.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for b5e87ee0057de14e12df2bde0f4b026c2e4a8b44. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-28T14:21:14+00:00,2025-02-28T17:46:20+00:00,2025-02-28T17:46:19+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2886620180,1647,fix(localloader): adding parameters,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add support for parameterized SQL queries in `DuckDBConnectionManager` and related classes.
+> 
+>   - **Behavior**:
+>     - `DuckDBConnectionManager.sql()` now accepts `params` for parameterized queries.
+>     - `LocalDatasetLoader.execute_query()` and `DatasetLoader.execute_query()` updated to pass `params` to `sql()`.
+>     - `SQLParser.transpile_sql_dialect()` replaces placeholders with `?` for DuckDB.
+>   - **Type Annotations**:
+>     - Added `Optional[list]` type for `params` in `sql()` and `execute_query()` methods.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for f87c213dbca576d3130ba6775f588842c670e320. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-28T09:14:18+00:00,2025-02-28T10:36:03+00:00,2025-02-28T10:36:03+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2886319430,1646,pandasai-v3   LangchainLLM.__init__() got an unexpected keyword argument 'model',"### System Info
+
+pandasai==v3.0.0a11
+python==3.11
+
+### 🐛 Describe the bug
+
+```python
+import pandasai as pai
+from pandasai_langchain import LangchainLLM
+
+model = ""xx""
+api_key = ""xx""
+api_base = ""xx""
+
+llm = LangchainLLM(model=model, openai_api_key=api_key, openai_api_base=api_base)
+
+pai.config.set({""llm"": llm})
+```
+
+error info:
+^[Traceback (most recent call last):
+  File ""xx"", line 21, in <module>
+    llm = LangchainLLM(model=model, openai_api_key=api_key, openai_api_base=api_base)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: LangchainLLM.__init__() got an unexpected keyword argument 'model'",332123342,120700204,closed,False,1,2025-02-28T06:25:48+00:00,2025-03-14T17:03:55+00:00,2025-03-14T16:57:39+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2885164770,1645,fix(sandbox): ignore non string constants for finding query string,"- [ Yes ] Closes #1624(Replace 1624 with the GitHub issue number).
+- [ Yes ] Tests added and passed if fixing a bug or adding a new feature.
+- [ Yes ] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fixes SQL query extraction to ignore non-string constants in `sandbox.py` and adds tests in `test_sandbox.py`.
+> 
+>   - **Behavior**:
+>     - `_extract_sql_queries_from_code` in `sandbox.py` now ignores non-string constants when extracting SQL queries.
+>     - Handles SQL queries with `SELECT` and `WITH` keywords.
+>   - **Tests**:
+>     - Added `test_extract_sql_queries_from_code_with_bool_constant`, `test_extract_sql_queries_from_code_with_cte`, and `test_extract_sql_queries_from_code_with_malicious_query` in `test_sandbox.py` to verify behavior.
+>   - **Misc**:
+>     - Bump version in `pyproject.toml` from `0.1.3` to `0.1.4`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for db8aab87cd544655014c04f8df372da58ee15403. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-02-27T17:31:49+00:00,2025-02-27T17:48:35+00:00,2025-02-27T17:47:07+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2884897201,1644,feature(paginator): adding paginator functionality,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Introduces `DatasetPaginator` for SQL query pagination with search, sort, and filter capabilities, including SQL injection prevention.
+> 
+>   - **New Functionality**:
+>     - Added `DatasetPaginator` class in `paginator.py` for SQL query pagination with search, sort, and filter capabilities.
+>     - Introduced `PaginationParams` model to define pagination parameters with validation to prevent SQL injection.
+>   - **SQL Handling**:
+>     - Added `is_sql_query()` in `sql_sanitizer.py` to identify SQL queries.
+>     - Modified `transpile_sql_dialect()` in `sql_parser.py` to handle placeholders.
+>   - **Testing**:
+>     - Added unit tests for `DatasetPaginator` and `PaginationParams` in `test_paginator.py`.
+>     - Extended tests for SQL query detection in `test_sql_sanitizer.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 3862f7e7f99ae1ea26bac7e56044d59f69d09287. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-27T15:42:17+00:00,2025-02-27T18:22:57+00:00,2025-02-27T18:22:56+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2884252311,1643,fix(chart): fixed path fow Windows,"- [x] Closes #1593 and #1618
+- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fixes path handling for chart exports on Windows by using `os.path.join` for cross-platform compatibility and updates tests accordingly.
+> 
+>   - **Behavior**:
+>     - Fixes path handling for `DEFAULT_CHART_DIRECTORY` in `constants.py` using `os.path.join` for cross-platform compatibility.
+>     - Updates `_replace_output_filenames_with_temp_chart` in `code_cleaning.py` to use `os.path.join` for constructing file paths.
+>   - **Tests**:
+>     - Modifies `test_replace_output_filenames_with_temp_chart` in `test_code_cleaning.py` to use regex for path validation.
+>     - Adds `test_create_chart_directory` in `test_folder.py` to verify directory creation with the new path handling.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for dffad079b47a451fea7dcd46283666b29200f8ee. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-27T11:35:44+00:00,2025-02-27T18:20:54+00:00,2025-02-27T18:20:54+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2882445177,1642,docs: update ee license url in readme,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+
+> [!IMPORTANT]
+> Update license URL in `README.md` to correct location for `pandasai/ee` license.
+> 
+>   - **Documentation**:
+>     - Update license URL in `README.md` to point to `https://github.com/sinaptik-ai/pandas-ai/blob/main/ee/LICENSE` instead of the previous incorrect URL.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 49f9d47ad404b24828fa28aed41c732d06b8035c. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",czakop,61651954,closed,False,1,2025-02-26T18:14:04+00:00,2025-02-26T18:39:05+00:00,2025-02-26T18:39:04+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2882363152,1641,fix(coverage): adding unit tests,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add unit tests for various components to improve coverage and remove unreachable code.
+> 
+>   - **Tests**:
+>     - Added unit tests for `LocalDatasetLoader` in `test_loader.py` to handle malicious queries and runtime errors.
+>     - Added tests for `SemanticLayerSchema` in `test_transformation_schema.py` to validate transformation parameters and source compatibility.
+>     - Added tests for `BaseQueryBuilder` and `ViewQueryBuilder` in `test_query_builder.py` and `test_view_query_builder.py` to handle SQL injection and query building.
+>     - Added tests for `pandasai` initialization and dataset creation in `test_pandasai_init.py` to handle various dataset creation scenarios and errors.
+>   - **Code Cleanup**:
+>     - Removed unreachable code in `create()` in `pandasai/__init__.py`.
+>     - Removed redundant checks in `is_expression_valid()` in `semantic_layer_schema.py` and `_get_group_by_columns()` in `view_query_builder.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 9600dcba1083f4e8de27d3255c6df2860cbc54a1. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-26T17:41:10+00:00,2025-02-27T09:26:58+00:00,2025-02-27T09:26:57+00:00,,2,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2882043148,1640,feature(IntegrationTests): add integration tests,"integration tests on load, pull, create, chat, push for parquet, sql and view, including grouped and transformed one
+
+- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add integration tests for data operations on parquet, SQL, and view formats, and update Makefile to include these tests.
+> 
+>   - **Integration Tests**:
+>     - Added integration tests for `load`, `pull`, `create`, `chat`, `push` operations in `tests/integration_tests/`.
+>     - Tests cover `parquet`, `sql`, and `view` data formats, including grouped and transformed datasets.
+>     - Utilizes fixtures like `mock_pandasai_push`, `mock_dataset_pull`, and `mock_sql_load_function` for mocking external dependencies.
+>   - **Makefile**:
+>     - Added `INTEGRATION_TESTS_DIR` variable.
+>     - Updated `test_core` and `tests-coverage` targets to include integration tests.
+>   - **FakeLLM**:
+>     - Modified `FakeLLM` in `fake.py` to use `_output` instead of `response` for returning mocked responses.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 3b261083b070f44f4e27873d51444ed4518c6238. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-26T15:42:49+00:00,2025-02-26T16:18:02+00:00,2025-02-26T16:18:02+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2879108711,1637,fix(expression): modulo operation issues,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fix modulo operation in `execute_query()` in `sql_loader.py` and `view_loader.py` by replacing `%` with `%%` when parameters are present.
+> 
+>   - **Bug Fix**:
+>     - Fix modulo operation in `execute_query()` in `sql_loader.py` and `view_loader.py` by replacing `%` with `%%` when `params` are present.
+>   - **Files Affected**:
+>     - `sql_loader.py`
+>     - `view_loader.py`
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for de0af9179b40b109e184d4aa0e811a5b3dd7901d. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-25T17:29:54+00:00,2025-02-26T15:02:36+00:00,2025-02-26T15:02:36+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2877989982,1636,feature(SQLTransformation): SQL transformation,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+- feature(SQLTransformation): SQL transformation for csv and sql
+- feature(SQLTransformation): SQL transformation for view
+- feature(SQLTransformation): SQL transformation, tests, validation at creation time
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Add SQL transformation support and remove caching functionality in the codebase, updating relevant tests.
+> 
+>   - **SQL Transformation**:
+>     - Added `Transformation` and `TransformationParams` to `pandasai/__init__.py` and `semantic_layer_schema.py`.
+>     - Updated `create()` in `pandasai/__init__.py` to accept `transformations` parameter.
+>     - Implemented `SQLTransformationManager` in `sql_transformation_manager.py` to handle SQL transformations.
+>     - Updated `BaseQueryBuilder`, `SqlQueryBuilder`, and `ViewQueryBuilder` to apply transformations.
+>   - **Caching Removal**:
+>     - Removed caching functionality from `agent/base.py`, `agent/state.py`, and `config.py`.
+>     - Deleted `core/cache.py` and related tests.
+>   - **Testing**:
+>     - Updated tests in `test_loader.py`, `test_sql_loader.py`, and `test_query_builder.py` to include transformation scenarios.
+>     - Removed cache-related tests from `test_agent.py` and `test_agent_chat.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 7240ba54e9df7a7ff76e2b86c4783a707d34779f. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-25T10:53:05+00:00,2025-02-25T13:45:58+00:00,2025-02-25T13:45:58+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2875648695,1635,fix(cache): removes cache,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Remove caching functionality from the codebase, including related configurations, methods, and tests.
+> 
+>   - **Behavior**:
+>     - Removes caching functionality from `Agent` class in `base.py`, including cache initialization and usage in `_process_query()`.
+>     - Deletes `clear_cache()` function in `__init__.py`.
+>     - Removes `enable_cache` from `Config` in `config.py`.
+>   - **Files Removed**:
+>     - Deletes `core/cache.py`.
+>     - Removes `test_cache.py`.
+>   - **Tests**:
+>     - Removes tests related to caching in `test_agent.py` and `test_pandasai_init.py`.
+>     - Updates tests to reflect removal of caching in `test_agent_chat.py` and `test_agent_llm_judge.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 7e546441aead1f1fd0c3baed33426c6d0d3cda4a. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-24T17:08:31+00:00,2025-02-24T17:15:30+00:00,2025-02-24T17:15:30+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2875029923,1634,fix(license): pypi license not displayed for the ee extensions,"
+<!-- ELLIPSIS_HIDDEN -->
+
+
+> [!IMPORTANT]
+> Added license information and updated version numbers for multiple extensions, along with adding documentation and repository URLs in `pyproject.toml`.
+> 
+>   - **License Information**:
+>     - Added license details to `README.md` for `bigquery`, `databricks`, `oracle`, `snowflake`, `chromadb`, `lancedb`, `milvus`, `pinecone`, `qdrant` extensions.
+>     - Updated `pyproject.toml` to include `license` field and `license-files` for the same extensions.
+>   - **Version Updates**:
+>     - Incremented version numbers in `pyproject.toml` for `bigquery`, `databricks`, `oracle`, `snowflake`, `chromadb`, `lancedb`, `milvus`, `pinecone`, `qdrant`, `bedrock`, `google`, `huggingface`, `ibm`, `langchain`, `local`, `openai`, `docker` extensions.
+>   - **URLs Addition**:
+>     - Added `Documentation` and `Repository` URLs in `pyproject.toml` for all mentioned extensions.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 327bccee821cf53742018b2e53f9adfce7dba57c. It will automatically update as commits are pushed.</sup>
+
+
+<!-- ELLIPSIS_HIDDEN -->",ArslanSaleem,11032815,closed,False,1,2025-02-24T13:49:08+00:00,2025-02-24T17:03:00+00:00,2025-02-24T17:02:49+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2874591419,1633,💡 Add this project to awesome-italia-opensource,"I founded Italia Open-Source, a community that aims to share and grow the Italian open-source world and, more generally, to highlight Italian tech excellence.
+
+Our website [italiaopensource.com](https://italiaopensource.com/) is based on open data that reside on the [awesome-italia-opensource](https://github.com/italia-opensource/awesome-italia-opensource) repository, you can add your own open-source project, community tech(s), and much more. You can add your data through a simple pull request.",FabrizioCafolla,13237032,closed,False,2,2025-02-24T11:06:22+00:00,2025-03-11T17:06:47+00:00,2025-03-05T09:59:39+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2874357374,1632,fix(cache): removes cache,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> This pull request removes caching functionality from the codebase, including related configurations, methods, and tests.
+> 
+>   - **Behavior**:
+>     - Removes caching functionality from the codebase, including the `Cache` class in `core/cache.py`.
+>     - Deletes `clear_cache()` function in `__init__.py`.
+>     - Removes cache-related logic from `AgentState` in `state.py` and `Agent` in `base.py`.
+>     - Eliminates `enable_cache` configuration from `Config` in `config.py`.
+>   - **Tests**:
+>     - Removes tests related to caching from `test_agent.py`, `test_agent_chat.py`, `test_agent_llm_judge.py`, `test_cache.py`, and `test_smart_datalake.py`.
+>     - Updates remaining tests to remove cache-related assertions and setup.
+>   - **Misc**:
+>     - Removes `DEFAULT_CACHE_DIRECTORY` and `CACHE_TOKEN` from `constants.py`.
+>     - Updates `Folder.create()` in `folder.py` to remove cache directory logic.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 7e546441aead1f1fd0c3baed33426c6d0d3cda4a. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-24T09:40:05+00:00,2025-02-24T17:07:39+00:00,2025-02-24T17:07:39+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2873983027,1631,yaml dump with other language,"### 🚀 The feature
+
+pandasai : 3.0.0
+When your description or columns are written in another language, i.e. Chinese, the generated yaml file has unicode characters. You need tell pai to dump the yaml file by changing the following code.
+
+/pandasai/data_loader/semantic_layer_schema.py
+line 388
+
+ return yaml.dump(self.to_dict(), sort_keys=False, allow_unicode=True)
+
+
+### Motivation, pitch
+
+My main LLM users are Chinese. So the description and the column description need to be Chinese for the LLM to understand better.
+
+### Alternatives
+
+_No response_
+
+### Additional context
+
+_No response_",ttkrpink,2522889,closed,False,0,2025-02-24T06:36:21+00:00,2025-02-24T06:36:34+00:00,2025-02-24T06:36:34+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2873523911,1630,Pandasai,,Mitchel8890,119726463,closed,False,0,2025-02-23T22:42:20+00:00,2025-02-25T09:23:38+00:00,2025-02-25T09:23:38+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2873266251,1629,LLM相关问题交流,"欢迎大家共同讨论使用大模型完成生成类任务时遇到的问题，多多交流沟通
+
+![Image](https://github.com/user-attachments/assets/7a1fc30c-b819-4046-b8c0-ee19a549432c)",rjc7011855,39355300,closed,False,0,2025-02-23T15:23:37+00:00,2025-02-25T09:23:47+00:00,2025-02-25T09:23:47+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2873120923,1627,🚀 Code. Deploy. Repeat. 🌐,"At ctrlaltstyle.com, we believe your wardrobe should be as agile as your DevOps pipeline. That’s why we’ve crafted t-shirts and hoodies that speak the language of developers and Ops engineers. From pull requests to production, our gear is built for the relentless pace of tech.
+
+What’s in our stack?
+
+Comfort: Soft fabrics for those long coding sprints (no bugs here).
+Style: Designs that echo your passion for automation, continuous integration, and cloud-native vibes.
+Durability: Apparel as tough as your deployment scripts.
+Whether you’re scaling infrastructure or squashing bugs, CtrlAltStyle has the perfect fit for your DevOps lifestyle. It’s not just a t-shirt; it’s a badge of honor.
+
+Deploy your new favorite gear today and level up your look! 🎯
+
+#DevOps #ContinuousDelivery #CodeLife #TechApparel",elfarsaouiomar,31247741,closed,False,0,2025-02-23T11:36:55+00:00,2025-02-23T11:40:34+00:00,2025-02-23T11:40:34+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2865269437,1626,Does PandasAI currently support OpenAI's reasoning models?,Does PandasAI currently support OpenAI's reasoning model?,Yekai97,80301368,closed,False,1,2025-02-20T07:05:50+00:00,2025-03-14T16:59:09+00:00,2025-03-14T16:59:07+00:00,,2,2,0,0,0,0,0
+sinaptik-ai/pandas-ai,2863713769,1625,fix: passing correct dialect and error to llm,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Fixes SQL dialect determination and error inclusion in prompts for LLM in `pandasai`.
+> 
+>   - **Behavior**:
+>     - Updates `correct_execute_sql_query_usage_error_prompt.tmpl` and `correct_output_type_error_prompt.tmpl` to include error details in the prompt.
+>     - Modifies `serialize_dataframe()` in `base.py` to determine SQL dialect based on `source.type`, using `duckdb` for local sources and `postgres` otherwise.
+>   - **Imports**:
+>     - Adds `LOCAL_SOURCE_TYPES` import in `base.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for b52c11efa0c6bc740d8dc4b89a3d10fbb89e325c. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-19T15:37:22+00:00,2025-02-21T09:12:41+00:00,2025-02-21T09:12:41+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2860981516,1624,sandbox: AttributeError: 'bool' object has no attribute 'upper',"### System Info
+
+❯ python --version
+Python 3.11.9
+❯ pip freeze | grep pandasai
+pandasai==3.0.0b11
+pandasai-docker==0.1.2
+pandasai-openai==0.1.4
+
+### 🐛 Describe the bug
+
+Sometimes, when using the sandbox, the following failure happens.
+
+Here is what I did:
+
+```python
+class PandasAIAnalyzer:
+    def __init__(self):
+        # Initialize PandasAI with Azure LLM
+        llm = PandasOpenAI(
+            azure_endpoint=azure_endpoint,
+            api_token=api_key,
+            api_version=api_version,
+            deployment_name=azure_deployment,
+        )
+        pandasai.config.set({""llm"": llm})
+        # Start the Docker sandbox
+        self.sandbox = DockerSandbox()
+        self.sandbox.start()
+    
+    def analyze(self, df: pd.DataFrame, question: str) -> pandasai.dataframe.base.BaseResponse:
+        try:
+            pai_df = pandasai.DataFrame(df)
+            agent = pandasai.Agent(pai_df, sandbox=self.sandbox)
+            result = agent.chat(question)
+            return result
+        except Exception as e:
+            # Display full trace
+            traceback.print_exc()
+            return f""Error in PandasAI analysis: {str(e)}""
+```
+
+`df` is a simple dataframe with Timestamp/Value. The question was ""Does the time series show any unusual trends?"".
+
+And the error:
+
+```
+Traceback (most recent call last):
+  File ""/var/folders/fy/2zls_q7526d7rk8xmp_kkcjh0000gn/T/ipykernel_29184/1296646968.py"", line 29, in analyze
+    result = agent.chat(question)
+             ^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/agent/base.py"", line 92, in chat
+    return self._process_query(query, output_type)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/agent/base.py"", line 262, in _process_query
+    result = self.execute_with_retries(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/agent/base.py"", line 177, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/agent/base.py"", line 127, in execute_code
+    return self._sandbox.execute(code, code_executor.environment)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/sandbox/sandbox.py"", line 19, in execute
+    return self._exec_code(code, environment)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai_docker/docker_sandbox.py"", line 119, in _exec_code
+    sql_queries = self._extract_sql_queries_from_code(code)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/sandbox/sandbox.py"", line 63, in _extract_sql_queries_from_code
+    SQLQueryExtractor().visit(tree)
+  File ""/Users/tconte/.pyenv/versions/3.11.9/lib/python3.11/ast.py"", line 418, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File ""/Users/tconte/.pyenv/versions/3.11.9/lib/python3.11/ast.py"", line 426, in generic_visit
+    self.visit(item)
+  File ""/Users/tconte/.pyenv/versions/3.11.9/lib/python3.11/ast.py"", line 418, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File ""/Users/tconte/.pyenv/versions/3.11.9/lib/python3.11/ast.py"", line 428, in generic_visit
+    self.visit(value)
+  File ""/Users/tconte/.pyenv/versions/3.11.9/lib/python3.11/ast.py"", line 418, in visit
+    return visitor(node)
+           ^^^^^^^^^^^^^
+  File ""/Users/tconte/src/Cognite/cog-ai/.venv-notebooks/lib/python3.11/site-packages/pandasai/sandbox/sandbox.py"", line 57, in visit_Call
+    if ""SELECT"" in arg.s.upper():
+                   ^^^^^^^^^^^
+AttributeError: 'bool' object has no attribute 'upper'
+```",tomconte,199027,closed,False,0,2025-02-18T16:27:10+00:00,2025-02-27T17:47:09+00:00,2025-02-27T17:47:08+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2860649110,1623,fix: fixing datasets naming convention,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Standardizes dataset naming conventions to use underscores instead of dashes and ensures lowercase usage, with updates to code and tests for validation and transformation.
+> 
+>   - **Behavior**:
+>     - Enforces dataset names to be lowercase and use underscores instead of dashes in `create()` in `pandasai/__init__.py`.
+>     - Updates `push()` in `base.py` to use transformed dataset names.
+>     - Adds validation for underscore format in `SemanticLayerSchema` in `semantic_layer_schema.py`.
+>   - **Helpers**:
+>     - Adds `transform_dash_to_underscore()` and `transform_underscore_to_dash()` in `path.py`.
+>     - Adds `validate_underscore_name_format()` in `path.py`.
+>   - **Tests**:
+>     - Updates tests in `test_loader.py`, `test_semantic_layer_schema.py`, and `test_pandasai_init.py` to reflect new naming conventions.
+>     - Adds tests for invalid dataset names in `test_loader.py` and `test_semantic_layer_schema.py`.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 614a9ca5b224d129514aa968c5d741127c26e80f. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-18T14:36:43+00:00,2025-02-18T21:06:49+00:00,2025-02-18T21:06:49+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2858215368,1622,Removing cache initialization during post_init as it is going to be d…,"…one in initialize() with the correct value from config.enable_cache
+
+- [ ] Closes #xxxx (Replace xxxx with the GitHub issue number).
+- [ ] Tests added and passed if fixing a bug or adding a new feature.
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Removes cache initialization from `__post_init__` and moves it to `initialize()` in `state.py`, using `config.enable_cache`.
+> 
+>   - **Behavior**:
+>     - Removes cache initialization from `__post_init__` in `state.py`.
+>     - Moves cache initialization to `initialize()` in `state.py`, using `config.enable_cache` to determine if cache should be created.
+>   - **Misc**:
+>     - Simplifies cache setup by centralizing it in `initialize()` function.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for b387f10ee1808e34c7c6914fdd68ec9971ca37f4. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",Andromeda227799,78228462,closed,False,9,2025-02-17T15:49:11+00:00,2025-02-28T11:11:15+00:00,2025-02-28T11:11:14+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2858159880,1621,Cache is getting initialised even when we pass enable_cache as false to pai.config,"### System Info
+
+Name: pandasai
+Version: 3.0.0b11
+
+
+Python 3.11
+
+Mac OS 15.1 64GB
+
+### 🐛 Describe the bug
+
+While trying to use pandasai chat I was initializing the config with 
+
+       ```
+        import pandasai as pai
+        from pandasai_openai import OpenAI
+        import pandas as pd
+        import os
+
+        llm = AzureOpenAI(
+            api_key=OPENAI_API_KEY,
+            deployment_name=DEPLOYMENT_NAME_GPT4_OMNI,
+            azure_endpoint=AZURE_OPENAI_BASE_URL,
+            api_version=AZURE_OPENAI_API_VERSION,
+        )
+        pai.config.set({""llm"": llm, ""enable_cache"": False})
+      ```
+
+It is still creating the cache file. ",shamith-atomicwork,194786277,closed,False,2,2025-02-17T15:25:35+00:00,2025-03-05T10:00:47+00:00,2025-03-05T10:00:46+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2858011350,1620,feature(LocalLoader): enabling local loader to use duckdb loader,"- [x] Tests added and passed if fixing a bug or adding a new feature.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai/blob/main/CONTRIBUTING.md#-testing).
+
+<!-- ELLIPSIS_HIDDEN -->
+
+----
+
+> [!IMPORTANT]
+> Refactor `LocalDatasetLoader` to use `DuckDB` for query execution, updating `LocalQueryBuilder` and tests accordingly.
+> 
+>   - **Behavior**:
+>     - `LocalDatasetLoader` in `local_loader.py` now uses `DuckDB` for executing queries instead of loading files directly.
+>     - `LocalQueryBuilder` in `local_query_builder.py` constructs queries for `DuckDB` using `read_csv` and `read_parquet`.
+>   - **Tests**:
+>     - Updated tests in `test_loader.py` to mock `execute_query` instead of file reading methods.
+>     - Added tests in `test_query_builder.py` for `LocalQueryBuilder` to verify query construction for CSV and Parquet.
+>     - Modified `test_group_by.py` to reflect changes in query building for local sources.
+> 
+> <sup>This description was created by </sup>[<img alt=""Ellipsis"" src=""https://img.shields.io/badge/Ellipsis-blue?color=175173"">](https://www.ellipsis.dev?ref=sinaptik-ai%2Fpandas-ai&utm_source=github&utm_medium=referral)<sup> for 87d12c5c45f53eb3e9c52d17812fe0ffe1520326. It will automatically update as commits are pushed.</sup>
+
+<!-- ELLIPSIS_HIDDEN -->",scaliseraoul,36519284,closed,False,0,2025-02-17T14:25:07+00:00,2025-02-17T16:41:43+00:00,2025-02-17T16:41:43+00:00,,1,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2857150498,1619,Can the local model support Xinference?,Can the local model support Xinference?,Alan-zhong,92133351,closed,True,1,2025-02-17T08:36:40+00:00,2025-03-14T17:00:00+00:00,2025-03-14T17:00:00+00:00,,0,0,0,0,0,0,0
+sinaptik-ai/pandas-ai,2857032887,1618,Save charts in Agent - Pandasai 3.0.0b11,"### System Info
+
+I'm using agent in pandasai 3.0.0b11 beta version with custom llm to generate SQL query and then pandas code to plot.
+
+I tried both with Windows 11 and WSL2
+
+But not sure where to send the path and I was get error saying expected plot path. 
+
+Config is no longer valid parameter for agent in beta version.. Here is the sample code as well
+
+
+
+### 🐛 Describe the bug
+
+I'm using agent in pandasai 3.0.0b11 beta version with custom llm to generate SQL query and then pandas code to plot.
+
+I tried both with Windows 11 and WSL2.
+
+But not sure where to send the path and I was get error saying expected plot path. 
+
+Config is no longer valid parameter for agent in beta version.. Here is the sample code as well
+
+```python code
+
+    custom_llm = testllm(model=selected_llm)
+    smart_df = SmartDataframe(df)
+	smart_df.save_charts = r'/home/test/work/projects/Projects/Integrations/plot.png'
+    agent = Agent(smart_df)
+    agent._state.config.llm = custom_llm
+    try:
+        response = agent.chat(question)
+    except NoResultFoundError as e:
+        logging.error(""No result returned. Generated code was: %s"", agent._state.last_code_generated)
+        raise e
+    return response)
+
+````
+```Error
+
+plt.grid(True)
+result = {'type': 'plot', 'value': None}
+ERROR:root:Error during agent.chat: Invalid output: Expected a plot save path str but received an incompatible type.
+
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Invalid output: Expected a plot save path str but received an incompatible type.
+",ananhari,15002070,closed,False,1,2025-02-17T07:41:55+00:00,2025-02-28T10:44:06+00:00,2025-02-28T10:44:05+00:00,,0,0,0,0,0,0,0

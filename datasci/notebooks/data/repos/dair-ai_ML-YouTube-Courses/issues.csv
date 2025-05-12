@@ -1,0 +1,128 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+dair-ai/ML-YouTube-Courses,2989326532,48,Add Pollinations.AI as a generative AI resource for students,"## Description
+This PR adds Pollinations.AI as a free generative AI resource for students learning machine learning. It introduces a new section ""Generative AI Tools and Resources"" to complement the existing course content.
+
+### Added Components:
+1. New section in the table of contents for ""Generative AI Tools and Resources""
+2. Detailed description of Pollinations.AI with its key features for students:
+   - No signup required
+   - No API key needed
+   - Free to use
+   - Multiple modalities (text, image, audio)
+   - OpenAI-compatible API
+   - Educational focus
+
+### Why Pollinations.AI is valuable for ML students:
+- **Hands-on learning**: Students can immediately experiment with generative AI models without setup barriers
+- **Practical application**: Complements theoretical course content with practical tools
+- **Accessibility**: Free access makes it ideal for educational settings
+- **API experience**: Students can learn industry-standard API patterns
+- **Prompt engineering practice**: Provides a platform to test and refine prompts
+
+This addition enhances the repository by providing students with a practical tool to experiment with the generative AI concepts they learn about in the courses listed in this repository.
+
+## Checklist
+- [x] Added new section to the table of contents
+- [x] Created detailed description of Pollinations.AI with educational benefits
+- [x] Maintained consistent formatting with the rest of the README
+- [x] Added relevant links to the platform and documentation",voodoohop,5099901,open,False,0,2025-04-11T17:43:23+00:00,2025-04-11T17:43:23+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2911870569,47,Add DGM courses,"Created a section for courses on **Deep Generative Models**.
+Moved the _Deep Unsupervised Learning_  course to this section as it is a better fit (it previously belonged to the deep learning courses).
+I also added 3 new courses on DGM from Cornell, Stanford, and MIT.",RamtinMoslemi,76493699,open,False,0,2025-03-11T20:56:32+00:00,2025-03-11T20:56:32+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2554069654,46,Update CS229: link for 2022 version,,shivamchhuneja,112275066,open,False,0,2024-09-28T07:07:57+00:00,2024-09-28T07:07:57+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2539515968,45,Adding Generative AI Resources,"- [Gen AI from Basic to Advanced](https://www.youtube.com/watch?v=V9tJCQoBakA&list=PLQxDHpeGU14AIu52l2OlIJs9z94yTFR_t)
+- [Generative AI Foundation Course](https://www.youtube.com/watch?v=ajWheP8ZD70&list=PLQxDHpeGU14D7NiPgqxC9qhKkx4jMQcDk)
+- [Free Code Camp Generative AI Course](https://www.youtube.com/watch?v=mEsleV16qdo&list=PLQxDHpeGU14C6lH1lbX3jrNru8M-NaAod)
+- [RAG Pipeline complete playlist](https://www.youtube.com/watch?v=wTVTkOb3SZc&list=PLQxDHpeGU14Blorx3Ps1eZJ4XvKET1_vx)
+- [Advanced RAG pipeline Playlist](https://www.youtube.com/watch?v=Wwuz1l-PCgQ&list=PLQxDHpeGU14DBq-yZYrr4B2rz0mJ--Ljs)
+- [Finetuning and Quantization of LLMs full playlist](https://www.youtube.com/watch?v=6S59Y0ckTm4&list=PLZoTAELRMXVN9VbAx5I2VvloTtYmlApe3)
+- [Llama-Index playlist](https://www.youtube.com/watch?v=1eym7BTnuNg&list=PLZoTAELRMXVNOWh1SDXt5NFujQMOt-CWy)
+- [Langgraph playlist](https://www.youtube.com/watch?v=b2iM9bPdAEs&list=PLZoTAELRMXVNAprLfaHq64tBeCGvWSVpv)
+- [AI End to End Projects youtube channel](https://www.youtube.com/@AyushShauryaJha)
+- [Hugging Face Course](https://www.youtube.com/watch?v=00GKzGyWFEs&list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o)
+
+
+[**Realted PR**](https://github.com/dair-ai/ML-YouTube-Courses/pull/44)",jhaayush2004,164651751,open,False,0,2024-09-20T19:22:50+00:00,2024-09-20T19:28:51+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2539510555,44,Update README.md,Added with End to End   **Generative AI (Including RAG systems)**   free Resources to visit.,jhaayush2004,164651751,open,False,0,2024-09-20T19:20:31+00:00,2024-09-20T19:20:31+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2537646080,43,add Machine Learning Research Paper Writing Tutorial,"@omarsar, not sure where this sits in the repo: [Machine Learning Research Paper Writing Tutorial](https://www.youtube.com/playlist?list=PLs_LQqhGAXZy5OG6Fu5R140BnyXmX_lPQ). Can send a PR if you think it fits here.
+",hasibzunair,33185386,open,False,0,2024-09-20T01:35:36+00:00,2024-09-20T01:35:36+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2535757176,42,Tl;dr,polylog and the show the modern genius of everyday life...,judyfong,6866656,open,False,0,2024-09-19T09:11:31+00:00,2024-09-19T09:11:31+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2381987818,41,ML-YouTube-Courses,,MaziarMarzban,64812007,open,False,0,2024-06-29T21:58:03+00:00,2024-06-29T21:58:03+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2275008878,40,ML course,,Roboninja250405,164064786,open,False,0,2024-05-02T09:13:52+00:00,2024-05-02T09:13:52+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2216621118,39,Mm,,hossam1710,89258267,open,False,0,2024-03-30T18:42:33+00:00,2024-03-30T18:42:33+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2140845638,38,Machine learning ,,KodaliSuchitraKamala,160387162,open,False,0,2024-02-18T08:45:52+00:00,2024-02-18T08:45:52+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2139863168,37,ML,,Irshad200,141544424,open,False,0,2024-02-17T06:47:17+00:00,2024-02-17T06:47:17+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2119930182,36,머신러닝,,Dragon-gineer,107251393,open,False,0,2024-02-06T04:18:00+00:00,2024-02-06T04:18:00+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2068699057,35,Update README.md,To help the people of PS!,mwalid207,128548239,closed,False,0,2024-01-06T16:01:50+00:00,2024-01-22T15:05:33+00:00,2024-01-22T15:05:33+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,2021886755,34,ML courses,,synthraxg,29768049,open,False,0,2023-12-02T06:43:25+00:00,2023-12-02T06:43:25+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1966137404,33,"Add ""Deep Learning for Computer Vision (neuralearn.ai)""",,Imanm02,82255293,closed,False,0,2023-10-27T20:14:40+00:00,2023-10-31T14:13:54+00:00,2023-10-31T14:13:54+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1777299930,32,Probabilistic Machine Learning course link was missing,,sohamtalukdar,103217802,closed,False,0,2023-06-27T16:02:05+00:00,2023-08-08T13:38:35+00:00,2023-08-08T13:38:34+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1679643302,31,Add New CS330 course,https://www.youtube.com/playlist?list=PLoROMvodv4rNjRoawgt72BBNwL2V7doGI,omarsar,7049564,open,False,0,2023-04-22T18:13:32+00:00,2023-04-22T18:13:32+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1679413885,30,Add Caltech CS156,,pitmonticone,38562595,closed,False,0,2023-04-22T08:21:51+00:00,2023-04-22T18:12:57+00:00,2023-04-22T18:12:57+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1628298921,29,Machine learning videos,,SubramanyamSahoo,114707275,open,False,0,2023-03-16T21:16:32+00:00,2023-03-16T21:16:32+00:00,,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1595439174,28,Add Introduction to Data-Centric AI,,anishathalye,3526486,closed,False,0,2023-02-22T16:40:47+00:00,2023-02-22T21:36:11+00:00,2023-02-22T21:36:11+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1576855192,27,AI and ML,,premjeet999,119817508,closed,False,0,2023-02-08T22:00:02+00:00,2023-02-09T00:18:47+00:00,2023-02-09T00:18:47+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1574505444,26,Add MIT 6.S897: Machine Learning for Healthcare (2019),,pitmonticone,38562595,closed,False,1,2023-02-07T15:08:29+00:00,2023-02-07T19:39:55+00:00,2023-02-07T19:39:54+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1564839751,25,Add MIT course 18.337J/6.338J,"I've added the MIT course 18.337J/6.338J entitled ""Parallel Computing and Scientific Machine Learning"".",pitmonticone,38562595,closed,False,0,2023-01-31T18:56:13+00:00,2023-01-31T22:37:04+00:00,2023-01-31T22:37:04+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1514481889,24,Update README.md,,vg11072001,67424390,closed,False,0,2022-12-30T12:14:17+00:00,2023-01-31T22:36:54+00:00,2023-01-31T22:36:53+00:00,,1,1,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1465183552,23,Add CMUs Intro to DL Course,Add CMU's Introduction to Deep Learning Course (Fall 2022),bharatr21,13381361,closed,False,0,2022-11-26T15:27:34+00:00,2022-11-27T15:00:05+00:00,2022-11-27T15:00:05+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1437075121,22,Fix a few typos,,pitmonticone,38562595,closed,False,0,2022-11-05T15:40:30+00:00,2022-11-05T16:17:26+00:00,2022-11-05T16:17:26+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1431125402,21,Typos,"Hey @omarsar,
+
+I've noticed a typo (twice). Here is a fix for it.
+
+Cheers,
+Peter",spekulatius,8433587,closed,False,0,2022-11-01T09:26:02+00:00,2022-11-01T09:49:58+00:00,2022-11-01T09:49:58+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1394503238,20,Deep learning,,samaritarian,95980469,closed,False,0,2022-10-03T10:29:40+00:00,2022-10-29T14:29:00+00:00,2022-10-29T14:29:00+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1353543033,19,Add CS231n: Convolutional Neural Networks for Visual Recognition,"Add Stanford's famous CS231n course.
+
+https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv
+http://cs231n.stanford.edu/2017/",titansarus,22544859,closed,False,0,2022-08-29T01:13:24+00:00,2022-09-01T17:03:28+00:00,2022-09-01T17:03:28+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1330219709,18,Tutorial ,,mehran1373,109405342,closed,False,0,2022-08-05T18:03:19+00:00,2022-10-29T14:29:08+00:00,2022-10-29T14:29:08+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1315675144,17,Update README.md,Fixed a typo.,pitmonticone,38562595,closed,False,0,2022-07-23T14:45:27+00:00,2022-07-23T16:36:43+00:00,2022-07-23T16:36:43+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1306160024,16,Add new courses,"added three courses:
+
+- Deep multi-task and meta-learning Stanford
+- Reinforcement learning Stanford
+- Advanced robotics Berkely",parhamsaremi,45370204,closed,False,1,2022-07-15T15:18:11+00:00,2022-07-16T07:24:02+00:00,2022-07-15T22:10:10+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1236230917,15,Add other platforms that one can learn.,"I bet there are other platforms with certification courses that can be of so much help.
+Wish you could add links to the best courses in these platforms to avoid resource overload.",gateremark,91592218,closed,False,1,2022-05-15T09:11:49+00:00,2022-11-05T13:32:25+00:00,2022-11-05T13:32:25+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1206470631,14,Added two new RL courses,plus some typo fixes and minor style changes,hamedonline,24595790,closed,False,0,2022-04-17T19:47:10+00:00,2022-04-17T20:24:30+00:00,2022-04-17T19:59:27+00:00,,1,0,0,0,0,0,1
+dair-ai/ML-YouTube-Courses,1202006660,13,Added Stanford CS230: Deep Learning,I found this was a great course to be on the list. All [lectures](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb) are available on YouTube and there are other [additional materials](https://cs230.stanford.edu/syllabus/) that are publicly accessible.,Nyandwi,52796597,closed,False,0,2022-04-12T15:19:18+00:00,2022-04-12T19:30:46+00:00,2022-04-12T19:30:45+00:00,,1,1,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1188195513,12,Add new course,Adding the course [https://introduction-to-machine-learning.netlify.app/](https://introduction-to-machine-learning.netlify.app/).,maxmargraf,44392812,closed,False,1,2022-03-31T14:40:37+00:00,2022-03-31T19:22:15+00:00,2022-03-31T19:22:15+00:00,,1,1,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1186361667,11,Fixed german spelling,,schnells,16492154,closed,False,0,2022-03-30T12:07:39+00:00,2022-03-30T19:58:30+00:00,2022-03-30T19:58:30+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1186290954,10,add CS 329S: Machine Learning Systems Design,,lauritowal,3471924,closed,False,1,2022-03-30T11:05:49+00:00,2022-04-16T13:23:43+00:00,2022-04-16T13:23:43+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1181985977,9,Added Applied Language Technology to the list,I've added my introductory course on [Applied Language Technology](https://www.youtube.com/c/AppliedLanguageTechnology/) to the list. Feel free to remove if it does not fit the scope of the list (most seem to be fairly advanced level courses).,thiippal,12389814,closed,False,2,2022-03-26T18:56:54+00:00,2022-03-27T13:33:17+00:00,2022-03-27T13:33:17+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1181477302,8,Added 5 new courses,"Introduction to Machine Learning (Tubingen)
+Statistical Machine Learning (Tubingen)
+Deep Learning (Tubingen)
+Reinforcement Learning Lecture Series (DeepMind)
+Self-Driving Cars (Tubingen)",mtoddx,52994476,closed,False,1,2022-03-26T02:44:20+00:00,2022-03-27T13:24:41+00:00,2022-03-27T13:24:41+00:00,,1,1,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1173498220,7,Create LICENSE,,omarsar,7049564,closed,False,0,2022-03-18T11:47:41+00:00,2022-03-18T11:47:47+00:00,2022-03-18T11:47:47+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1128414340,6,add Deep Learning for Coders by Fast.AI,"**Fast.AI Practical Deep Learning for Coders**
+To learn applied DL from 0 to hero. After finishing this course you will know:
+
+- Computer vision, including image classification
+- Natural language processing (NLP), including document classification
+- Collaborative filtering
+- How to turn your models into web applications
+- Why and how deep learning models work
+- How to implement stochastic gradient descent and a complete training loop from scratch
+- How to think about the ethical implications of your work
+- 
+🔗 [Link to Course](https://www.youtube.com/playlist?list=PLfYUBJiXbdtRL3FMB3GoWHRI8ieU6FhfM)",apolmig,15841147,closed,False,1,2022-02-09T11:26:37+00:00,2022-02-09T23:07:11+00:00,2022-02-09T23:07:11+00:00,,1,1,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1096919506,5,Add separate note sheets for each of the sections/lectures,,omarsar,7049564,closed,False,1,2022-01-08T12:50:36+00:00,2022-11-05T13:32:35+00:00,2022-11-05T13:32:35+00:00,good first issue;help wanted,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1068388221,4,Add prerequisites and level,,omarsar,7049564,closed,False,0,2021-12-01T13:09:06+00:00,2022-11-05T13:32:44+00:00,2022-11-05T13:32:44+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,1051859561,3,Columbia University : Natural Language Processing ADDED,,BinodAryal,7038742,closed,False,1,2021-11-12T11:20:20+00:00,2021-12-14T15:45:51+00:00,2021-12-14T15:45:51+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,997307679,2,Course: Introduction to Machine Learning with scikit-learn,"Hello! Before I submit a PR, I wanted to ask if you would be interested in adding my ML course?
+
+Playlist: [Introduction to Machine Learning with scikit-learn](https://www.youtube.com/playlist?list=PL5-da3qGB5ICeMbQuqbbCOQWcS6OYBr5A)
+
+It has 2.1 million views across the 11 videos. If you'd like to read some of the comments people have left about the course, please scroll to the ""Comments from my students"" section on [this page](https://courses.dataschool.io/introduction-to-machine-learning-with-scikit-learn). (That page also lists all of the topics that are covered in the course.)
+
+It is not a recent course, since I posted it in 2015 and 2016. However, very little has changed in the scikit-learn API since 2015 that is relevant to the course, and all of the ML principles I teach in the course are still up-to-date and relevant. As well, I updated all of the code (and fixed any outdated links) in the course's [GitHub repository](https://github.com/justmarkham/scikit-learn-videos) earlier this year.
+
+If you'd like me to add the course, I'm happy to submit a PR. But if this doesn't match what you are looking for, no worries at all!
+
+Thanks!",justmarkham,6509492,closed,False,3,2021-09-15T16:55:09+00:00,2023-03-18T22:47:29+00:00,2021-12-09T00:07:05+00:00,,0,0,0,0,0,0,0
+dair-ai/ML-YouTube-Courses,965200570,1,Add intro to DL and generative modeling course,Added one more course to the list,rasbt,5618407,closed,False,1,2021-08-10T17:52:42+00:00,2021-08-15T11:16:13+00:00,2021-08-15T11:16:13+00:00,,0,0,0,0,0,0,0

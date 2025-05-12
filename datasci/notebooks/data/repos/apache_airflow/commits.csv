@@ -1,0 +1,447 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+apache/airflow,30f5c681bd0aa28b4e32330195f0c47be07e51b0,https://github.com/apache/airflow/commit/30f5c681bd0aa28b4e32330195f0c47be07e51b0,sjyangkevin,85313829,User,2025-05-12T14:39:47+00:00,web-flow,2025-05-12T14:39:47+00:00,change CohereHook.get_conn type to method (#50470),15,12,27,2,21c1e1c3e6623983d11f04400a47c12f001a67d7
+apache/airflow,21c1e1c3e6623983d11f04400a47c12f001a67d7,https://github.com/apache/airflow/commit/21c1e1c3e6623983d11f04400a47c12f001a67d7,Dukastlik,49510873,User,2025-05-12T13:59:29+00:00,web-flow,2025-05-12T13:59:29+00:00,"Add Key to default meta keys in S3KeySensor (#50122)
+
+Co-authored-by: Dmitry Dandykin <dmitry.dandykin@axenix.pro>",16,24,40,2,51a5a57a03f1ad1f629c1696e46a086b14ea1682
+apache/airflow,51a5a57a03f1ad1f629c1696e46a086b14ea1682,https://github.com/apache/airflow/commit/51a5a57a03f1ad1f629c1696e46a086b14ea1682,potiuk,595491,User,2025-05-12T13:41:41+00:00,web-flow,2025-05-12T13:41:41+00:00,"Actually, that should be linked to contributing guide (#50488)",2,2,4,2,f7e350d28c569632d421cff869ead86fa2df014f
+apache/airflow,f7e350d28c569632d421cff869ead86fa2df014f,https://github.com/apache/airflow/commit/f7e350d28c569632d421cff869ead86fa2df014f,kacpermuda,98873404,User,2025-05-12T13:28:11+00:00,web-flow,2025-05-12T13:28:11+00:00,feat: Add OpenLineage support for DatabricksSqlHook (#50392),1154,11,1165,10,1c2237ca1a6a60146dd75da5d38f336462604531
+apache/airflow,1c2237ca1a6a60146dd75da5d38f336462604531,https://github.com/apache/airflow/commit/1c2237ca1a6a60146dd75da5d38f336462604531,dependabot[bot],49699333,Bot,2025-05-12T13:08:01+00:00,web-flow,2025-05-12T13:08:01+00:00,"Bump the core-ui-package-updates group across 1 directory with 14 updates (#50364)
+
+Bumps the core-ui-package-updates group with 14 updates in the /airflow-core/src/airflow/api_fastapi/auth/managers/simple/ui directory:
+
+| Package | From | To |
+| --- | --- | --- |
+| [@chakra-ui/react](https://github.com/chakra-ui/chakra-ui/tree/HEAD/packages/react) | `3.16.1` | `3.17.0` |
+| [@tanstack/react-query](https://github.com/TanStack/query/tree/HEAD/packages/react-query) | `5.74.11` | `5.75.5` |
+| [react-hook-form](https://github.com/react-hook-form/react-hook-form) | `7.56.1` | `7.56.3` |
+| [react-router-dom](https://github.com/remix-run/react-router/tree/HEAD/packages/react-router-dom) | `7.5.3` | `7.6.0` |
+| [@eslint/compat](https://github.com/eslint/rewrite) | `1.2.8` | `1.2.9` |
+| [@eslint/js](https://github.com/eslint/eslint/tree/HEAD/packages/js) | `9.25.1` | `9.26.0` |
+| [@types/react](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/react) | `19.1.2` | `19.1.3` |
+| [eslint](https://github.com/eslint/eslint) | `9.25.1` | `9.26.0` |
+| [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) | `10.1.2` | `10.1.3` |
+| [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) | `5.2.6` | `5.4.0` |
+| [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn) | `59.0.0` | `59.0.1` |
+| [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/typescript-eslint) | `8.31.1` | `8.32.0` |
+| [vite](https://github.com/vitejs/vite/tree/HEAD/packages/vite) | `6.3.4` | `6.3.5` |
+| [vitest](https://github.com/vitest-dev/vitest/tree/HEAD/packages/vitest) | `3.1.2` | `3.1.3` |
+
+
+
+Updates `@chakra-ui/react` from 3.16.1 to 3.17.0
+- [Release notes](https://github.com/chakra-ui/chakra-ui/releases)
+- [Changelog](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/CHANGELOG.md)
+- [Commits](https://github.com/chakra-ui/chakra-ui/commits/@chakra-ui/react@3.17.0/packages/react)
+
+Updates `@tanstack/react-query` from 5.74.11 to 5.75.5
+- [Release notes](https://github.com/TanStack/query/releases)
+- [Commits](https://github.com/TanStack/query/commits/v5.75.5/packages/react-query)
+
+Updates `react-hook-form` from 7.56.1 to 7.56.3
+- [Release notes](https://github.com/react-hook-form/react-hook-form/releases)
+- [Changelog](https://github.com/react-hook-form/react-hook-form/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/react-hook-form/react-hook-form/compare/v7.56.1...v7.56.3)
+
+Updates `react-router-dom` from 7.5.3 to 7.6.0
+- [Release notes](https://github.com/remix-run/react-router/releases)
+- [Changelog](https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/CHANGELOG.md)
+- [Commits](https://github.com/remix-run/react-router/commits/react-router-dom@7.6.0/packages/react-router-dom)
+
+Updates `@eslint/compat` from 1.2.8 to 1.2.9
+- [Release notes](https://github.com/eslint/rewrite/releases)
+- [Changelog](https://github.com/eslint/rewrite/blob/main/release-please-config.json)
+- [Commits](https://github.com/eslint/rewrite/compare/compat-v1.2.8...compat-v1.2.9)
+
+Updates `@eslint/js` from 9.25.1 to 9.26.0
+- [Release notes](https://github.com/eslint/eslint/releases)
+- [Changelog](https://github.com/eslint/eslint/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/eslint/eslint/commits/v9.26.0/packages/js)
+
+Updates `@types/react` from 19.1.2 to 19.1.3
+- [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+- [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/react)
+
+Updates `eslint` from 9.25.1 to 9.26.0
+- [Release notes](https://github.com/eslint/eslint/releases)
+- [Changelog](https://github.com/eslint/eslint/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/eslint/eslint/compare/v9.25.1...v9.26.0)
+
+Updates `eslint-config-prettier` from 10.1.2 to 10.1.3
+- [Release notes](https://github.com/prettier/eslint-config-prettier/releases)
+- [Changelog](https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/prettier/eslint-config-prettier/compare/v10.1.2...v10.1.3)
+
+Updates `eslint-plugin-prettier` from 5.2.6 to 5.4.0
+- [Release notes](https://github.com/prettier/eslint-plugin-prettier/releases)
+- [Changelog](https://github.com/prettier/eslint-plugin-prettier/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/prettier/eslint-plugin-prettier/compare/v5.2.6...v5.4.0)
+
+Updates `eslint-plugin-unicorn` from 59.0.0 to 59.0.1
+- [Release notes](https://github.com/sindresorhus/eslint-plugin-unicorn/releases)
+- [Commits](https://github.com/sindresorhus/eslint-plugin-unicorn/compare/v59.0.0...v59.0.1)
+
+Updates `typescript-eslint` from 8.31.1 to 8.32.0
+- [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)
+- [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/typescript-eslint/CHANGELOG.md)
+- [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v8.32.0/packages/typescript-eslint)
+
+Updates `vite` from 6.3.4 to 6.3.5
+- [Release notes](https://github.com/vitejs/vite/releases)
+- [Changelog](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
+- [Commits](https://github.com/vitejs/vite/commits/v6.3.5/packages/vite)
+
+Updates `vitest` from 3.1.2 to 3.1.3
+- [Release notes](https://github.com/vitest-dev/vitest/releases)
+- [Commits](https://github.com/vitest-dev/vitest/commits/v3.1.3/packages/vitest)
+
+---
+updated-dependencies:
+- dependency-name: ""@chakra-ui/react""
+  dependency-version: 3.17.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: ""@tanstack/react-query""
+  dependency-version: 5.75.5
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: react-hook-form
+  dependency-version: 7.56.3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: react-router-dom
+  dependency-version: 7.6.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: ""@eslint/compat""
+  dependency-version: 1.2.9
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: ""@eslint/js""
+  dependency-version: 9.26.0
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: ""@types/react""
+  dependency-version: 19.1.3
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: eslint
+  dependency-version: 9.26.0
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: eslint-config-prettier
+  dependency-version: 10.1.3
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: eslint-plugin-prettier
+  dependency-version: 5.4.0
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: eslint-plugin-unicorn
+  dependency-version: 59.0.1
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: typescript-eslint
+  dependency-version: 8.32.0
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+  dependency-group: core-ui-package-updates
+- dependency-name: vite
+  dependency-version: 6.3.5
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+- dependency-name: vitest
+  dependency-version: 3.1.3
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: core-ui-package-updates
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",3038,1743,4781,3,c0a2d69fa1ac30b8dfa551afb6d45cf92093a591
+apache/airflow,c0a2d69fa1ac30b8dfa551afb6d45cf92093a591,https://github.com/apache/airflow/commit/c0a2d69fa1ac30b8dfa551afb6d45cf92093a591,dependabot[bot],49699333,Bot,2025-05-12T13:06:01+00:00,web-flow,2025-05-12T13:06:01+00:00,"Bump the fab-ui-package-updates group across 1 directory with 4 updates (#50312)
+
+Bumps the fab-ui-package-updates group with 4 updates in the /providers/fab/src/airflow/providers/fab/www directory: [@babel/preset-env](https://github.com/babel/babel/tree/HEAD/packages/babel-preset-env), [eslint](https://github.com/eslint/eslint), [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) and [webpack](https://github.com/webpack/webpack).
+
+
+Updates `@babel/preset-env` from 7.27.1 to 7.27.2
+- [Release notes](https://github.com/babel/babel/releases)
+- [Changelog](https://github.com/babel/babel/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/babel/babel/commits/v7.27.2/packages/babel-preset-env)
+
+Updates `eslint` from 9.25.1 to 9.26.0
+- [Release notes](https://github.com/eslint/eslint/releases)
+- [Changelog](https://github.com/eslint/eslint/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/eslint/eslint/compare/v9.25.1...v9.26.0)
+
+Updates `eslint-config-prettier` from 10.1.2 to 10.1.3
+- [Release notes](https://github.com/prettier/eslint-config-prettier/releases)
+- [Changelog](https://github.com/prettier/eslint-config-prettier/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/prettier/eslint-config-prettier/compare/v10.1.2...v10.1.3)
+
+Updates `webpack` from 5.99.7 to 5.99.8
+- [Release notes](https://github.com/webpack/webpack/releases)
+- [Commits](https://github.com/webpack/webpack/compare/v5.99.7...v5.99.8)
+
+---
+updated-dependencies:
+- dependency-name: ""@babel/preset-env""
+  dependency-version: 7.27.2
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: fab-ui-package-updates
+- dependency-name: eslint
+  dependency-version: 9.26.0
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+  dependency-group: fab-ui-package-updates
+- dependency-name: eslint-config-prettier
+  dependency-version: 10.1.3
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: fab-ui-package-updates
+- dependency-name: webpack
+  dependency-version: 5.99.8
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+  dependency-group: fab-ui-package-updates
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",729,39,768,2,264242f16517963f0cb861d63f8282bfd68c0f5f
+apache/airflow,264242f16517963f0cb861d63f8282bfd68c0f5f,https://github.com/apache/airflow/commit/264242f16517963f0cb861d63f8282bfd68c0f5f,AutomationDev85,96178949,User,2025-05-12T13:05:14+00:00,web-flow,2025-05-12T13:05:14+00:00,"Add fast fail for ErrImagePull and InvalidImageName for KubernetesPodOperator (#49867)
+
+Co-authored-by: AutomationDev85 <AutomationDev85>",35,0,35,2,18b7b16dae84189234cf12a9d51d2c247492beaf
+apache/airflow,18b7b16dae84189234cf12a9d51d2c247492beaf,https://github.com/apache/airflow/commit/18b7b16dae84189234cf12a9d51d2c247492beaf,potiuk,595491,User,2025-05-12T12:51:03+00:00,web-flow,2025-05-12T12:51:03+00:00,"Fix link to container images in README (#50484)
+
+In PyPI's readme relative links do not work and we anyhow shoudl
+link to airflow's official docs from here.",2,2,4,2,11376a7159fb420b3c50fce7693bae34f1c79e60
+apache/airflow,11376a7159fb420b3c50fce7693bae34f1c79e60,https://github.com/apache/airflow/commit/11376a7159fb420b3c50fce7693bae34f1c79e60,jason810496,68415893,User,2025-05-12T12:22:29+00:00,web-flow,2025-05-12T12:22:29+00:00,"AIP-82: Add KafkaMessageQueueProvider (#49938)
+
+* AIP-82: Add KafkaMessageQueueProvider
+
+- Add Apache kafka to index.rst
+
+- Fix mypy static check
+
+* Add TestKafkaMessageQueueProvider unittest
+
+* Fix kafka_message_queue_trigger system test
+
+* Refine docstring of KafkaMessageQueueProvider
+
+* Fix common-messaging docs
+
+* Move Kafka message queue to Apache Kafka provider
+
+* Fix common messaging dev dependency-group
+
+* Fix kafka queue test
+
+* Fix compact test
+
+* Refine doc for KafkaMessageQueueProvider
+
+* Move system test to provider-specific directory",391,4,395,13,9d4bca1449dc1bedd3d73b724d6a908f477a4ff3
+apache/airflow,9d4bca1449dc1bedd3d73b724d6a908f477a4ff3,https://github.com/apache/airflow/commit/9d4bca1449dc1bedd3d73b724d6a908f477a4ff3,james5418,64295913,User,2025-05-12T12:18:28+00:00,web-flow,2025-05-12T12:18:28+00:00,"Add in-memory buffer and gzip support in SqlToS3Operator (#50287)
+
+* replace NamedTemporaryFile with in-memory buffer for S3 uploads and add gzip support
+
+* add UTF-8 encoding to TextIOWrapper
+
+* update mock method from get_pandas_df to get_df in SqlToS3Operator tests",133,93,226,2,9723e5f7759d785673eae0a4e979133d151ec129
+apache/airflow,9723e5f7759d785673eae0a4e979133d151ec129,https://github.com/apache/airflow/commit/9723e5f7759d785673eae0a4e979133d151ec129,GrumpyCat51,192223556,User,2025-05-12T12:02:17+00:00,web-flow,2025-05-12T12:02:17+00:00,"docs: Update oauth keycloak example with new security manager (#50284)
+
+* update oauth example with new security manager
+
+* Update webserver-authentication.rst
+
+---------
+
+Co-authored-by: Yannick Suter <yannick.suter@reprisk.com>",8,8,16,1,651a6dc2500756fd61f1d235406e3ec364f6774b
+apache/airflow,651a6dc2500756fd61f1d235406e3ec364f6774b,https://github.com/apache/airflow/commit/651a6dc2500756fd61f1d235406e3ec364f6774b,AutomationDev85,96178949,User,2025-05-12T11:57:43+00:00,web-flow,2025-05-12T11:57:43+00:00,"KubernetesPodOperator uses different timeouts to check for schedule timeout and startup timeout (#49784)
+
+Co-authored-by: AutomationDev85 <AutomationDev85>",85,22,107,3,8bf7986db4c8db81bc26374e56d5fa11b2793bdf
+apache/airflow,8bf7986db4c8db81bc26374e56d5fa11b2793bdf,https://github.com/apache/airflow/commit/8bf7986db4c8db81bc26374e56d5fa11b2793bdf,amoghrajesh,35884252,User,2025-05-12T10:21:28+00:00,web-flow,2025-05-12T10:21:28+00:00,"Set Automatic Notice for providers CHANGELOG when there's a min airflow bump (#50476)
+
+* Set automatic notice for providers changelog for airflow min version bump
+
+* fixing tests",34,11,45,3,3b49f9d99e8967cf3f21f6ad58789380beaac83e
+apache/airflow,3b49f9d99e8967cf3f21f6ad58789380beaac83e,https://github.com/apache/airflow/commit/3b49f9d99e8967cf3f21f6ad58789380beaac83e,kaxil,8811558,User,2025-05-12T09:25:06+00:00,web-flow,2025-05-12T09:25:06+00:00,"Ensure singleton use of `DagBag` across all API requests (#50447)
+
+Previously, DagBag was injected via onlyFastAPI dependency as part of the refactor in https://github.com/apache/airflow/pull/50372 ,
+but a new instance was created for each request. This change updates the dependency to resolve
+DagBag from `app.state`, ensuring it is only instantiated once at startup while keeping benefits of FastAPI dependency.",127,31,158,19,24d041d036900ac5b595be119e0e79e0eeed0609
+apache/airflow,24d041d036900ac5b595be119e0e79e0eeed0609,https://github.com/apache/airflow/commit/24d041d036900ac5b595be119e0e79e0eeed0609,ellisms,114107920,User,2025-05-12T08:11:44+00:00,web-flow,2025-05-12T08:11:44+00:00,"Update Sagemaker Operators and Sensors to inherit Base AWS classes (#50321)
+
+* Update SageMaker operators to inherit AwsBaseOperator
+
+* Update SageMaker sensors to inherit AwsBaseSensor
+
+* Update docs
+
+* Fixed sensor tests",217,125,342,8,fc688afc14623f519af26d1c4f5fff8628ca722d
+apache/airflow,fc688afc14623f519af26d1c4f5fff8628ca722d,https://github.com/apache/airflow/commit/fc688afc14623f519af26d1c4f5fff8628ca722d,guan404ming,105915352,User,2025-05-12T08:00:20+00:00,web-flow,2025-05-12T08:00:20+00:00,"Migrate `BigQueryHook` to use `get_df` (#50341)
+
+* Migrate `BigQueryHook` to use `get_df`
+
+* Update test and deprecated
+
+Co-authored-by: maks.yermakou@gmail.com
+
+Co-authored-by: Elad Kalif <45845474+eladkal@users.noreply.github.com>
+
+* Remove unused mock
+
+* Update synchronous func and test
+
+* Update type overload
+
+---------
+
+Co-authored-by: Elad Kalif <45845474+eladkal@users.noreply.github.com>",122,32,154,5,c48dd2c736508798c699a398c1de7171a1517efc
+apache/airflow,c48dd2c736508798c699a398c1de7171a1517efc,https://github.com/apache/airflow/commit/c48dd2c736508798c699a398c1de7171a1517efc,potiuk,595491,User,2025-05-12T07:05:31+00:00,web-flow,2025-05-12T07:05:31+00:00,"Set ""all-providers"" as default publishing ""target"" (#50467)
+
+Since providers are most frequently released, all-providers should
+be the default target for publishing workflow.",1,1,2,1,323cfb6e95fa52149b1cd804b7454e19019048f4
+apache/airflow,323cfb6e95fa52149b1cd804b7454e19019048f4,https://github.com/apache/airflow/commit/323cfb6e95fa52149b1cd804b7454e19019048f4,nailo2c,11390254,User,2025-05-11T22:43:13+00:00,web-flow,2025-05-11T22:43:13+00:00,updated obsolete links in contribution workflow doc (#50471),7,7,14,1,1938488b82ab7537da7d91ce9372c163ef0fd663
+apache/airflow,1938488b82ab7537da7d91ce9372c163ef0fd663,https://github.com/apache/airflow/commit/1938488b82ab7537da7d91ce9372c163ef0fd663,AzisK,18266480,User,2025-05-11T22:40:49+00:00,web-flow,2025-05-11T22:40:49+00:00,Correct PythonOperator reference from the first tutorial to BashOperator in taskflow.rst (#50404),1,1,2,1,85d3ad85079871bc3a4e698ff00484374b5b8467
+apache/airflow,85d3ad85079871bc3a4e698ff00484374b5b8467,https://github.com/apache/airflow/commit/85d3ad85079871bc3a4e698ff00484374b5b8467,Miretpl,17602603,User,2025-05-11T22:37:49+00:00,web-flow,2025-05-11T22:37:49+00:00,Remove cross-test dependencies (#50462),10,10,20,1,b73bc4e8cb49ca904baefb125795c0a5ca2c4b4d
+apache/airflow,b73bc4e8cb49ca904baefb125795c0a5ca2c4b4d,https://github.com/apache/airflow/commit/b73bc4e8cb49ca904baefb125795c0a5ca2c4b4d,guan404ming,105915352,User,2025-05-11T20:51:23+00:00,web-flow,2025-05-11T20:51:23+00:00,"Use `pytest.param.id` in connection, pool, and variable bulk tests (#50455)",82,82,164,3,e00ae50b38176b017f70114fe8b17c9a8852b784
+apache/airflow,e00ae50b38176b017f70114fe8b17c9a8852b784,https://github.com/apache/airflow/commit/e00ae50b38176b017f70114fe8b17c9a8852b784,potiuk,595491,User,2025-05-11T19:55:29+00:00,web-flow,2025-05-11T19:55:29+00:00,"Fix failing compatibility tests after ""@"" specification added for docs (#50468)
+
+The #50459 added installing airflow-sphinx-theme from remote
+URL, but it broke compatibility tests ""unistallation"".",2,2,4,2,eb194c9e5568bc1c42dfd122ccb9984858ea5333
+apache/airflow,eb194c9e5568bc1c42dfd122ccb9984858ea5333,https://github.com/apache/airflow/commit/eb194c9e5568bc1c42dfd122ccb9984858ea5333,potiuk,595491,User,2025-05-11T18:58:54+00:00,web-flow,2025-05-11T18:58:54+00:00,"Install sphinx-airflow-theme package from GitHub release not `pypi` (#50459)
+
+We do not need to publish sphinx-airflow-theme in PyPI - we can
+simply install the package directly from the wheel file published
+during `main` build of the `airflow-site` - this way we will always
+use the latest ""main"" version of the theme and we have no need
+to publish such newer versions of packages to PyPI.
+
+This means that any committer can modify site theme and build it in
+sites and after merging to main, the theme will be used automatically
+from there.",1,1,2,1,40216efa4ddd0c271b9dc2b437c6b731db6f51c8
+apache/airflow,40216efa4ddd0c271b9dc2b437c6b731db6f51c8,https://github.com/apache/airflow/commit/40216efa4ddd0c271b9dc2b437c6b731db6f51c8,DjVinnii,14043916,User,2025-05-11T17:32:11+00:00,web-flow,2025-05-11T17:32:11+00:00,"Add configurable automountServiceAccountToken for the KubernetesPodOperator (#50223)
+
+* Add configurable automountServiceAccountToken
+
+* fix spell check
+
+* Update Kubernetes Tests with automountServiceAccountToken
+
+---------
+
+Co-authored-by: Elad Kalif <45845474+eladkal@users.noreply.github.com>",19,0,19,3,9e3a934b534f7bed4f148957d1d9822b88036679
+apache/airflow,9e3a934b534f7bed4f148957d1d9822b88036679,https://github.com/apache/airflow/commit/9e3a934b534f7bed4f148957d1d9822b88036679,dheerajturaga,181291292,User,2025-05-11T15:57:07+00:00,web-flow,2025-05-11T15:57:07+00:00,"Support For Edge Worker in Daemon Mode (#50425)
+
+* Support Edge Worker in Daemon Mode
+
+* Default daemon to false in EdgeWorkerCli
+
+* Update docs and add umask to worker command
+
+* cleaner umask selection
+
+Co-authored-by: Jens Scheffler <95105677+jscheffl@users.noreply.github.com>
+
+* Add worker_umask to provider.yaml
+
+* Better help message for log files
+
+Co-authored-by: Jens Scheffler <95105677+jscheffl@users.noreply.github.com>
+
+---------
+
+Co-authored-by: Jens Scheffler <95105677+jscheffl@users.noreply.github.com>",72,6,78,4,4106809d5a2e4a5fbc6bf2f22c05cfe6898e0aa3
+apache/airflow,4106809d5a2e4a5fbc6bf2f22c05cfe6898e0aa3,https://github.com/apache/airflow/commit/4106809d5a2e4a5fbc6bf2f22c05cfe6898e0aa3,AzisK,18266480,User,2025-05-11T15:18:42+00:00,web-flow,2025-05-11T15:18:42+00:00,Fix typo in fundamentals.rst (#50402),1,1,2,1,5cc14d1fc401f0c269d55c9001d03909d4f78a91
+apache/airflow,5cc14d1fc401f0c269d55c9001d03909d4f78a91,https://github.com/apache/airflow/commit/5cc14d1fc401f0c269d55c9001d03909d4f78a91,guan404ming,105915352,User,2025-05-11T13:17:32+00:00,web-flow,2025-05-11T13:17:32+00:00,"Migrate `ElasticsearchSQLHook` to use `get_df` (#50454)
+
+* Migrate `ElasticsearchSQLHook` to use `get_df`
+
+* Add todo comment",17,2,19,4,da3a8c9b08f5febc33e36fe37f229d76bcbe9415
+apache/airflow,da3a8c9b08f5febc33e36fe37f229d76bcbe9415,https://github.com/apache/airflow/commit/da3a8c9b08f5febc33e36fe37f229d76bcbe9415,nailo2c,11390254,User,2025-05-11T13:00:31+00:00,web-flow,2025-05-11T13:00:31+00:00,Replace `converted_rows[0].keys()` with `fields` (#50442),1,1,2,1,8747131adb54089e54ca662c218724fe7721eb1f
+apache/airflow,8747131adb54089e54ca662c218724fe7721eb1f,https://github.com/apache/airflow/commit/8747131adb54089e54ca662c218724fe7721eb1f,guan404ming,105915352,User,2025-05-11T12:56:36+00:00,web-flow,2025-05-11T12:56:36+00:00,Remove deprecated `automl` link (#50456),0,204,204,3,570af78960711ebe4c4328893c23ae4108a929dc
+apache/airflow,570af78960711ebe4c4328893c23ae4108a929dc,https://github.com/apache/airflow/commit/570af78960711ebe4c4328893c23ae4108a929dc,kacpermuda,98873404,User,2025-05-11T12:53:05+00:00,web-flow,2025-05-11T12:53:05+00:00,nit: Switch to emitting OL events with adapter and not client directly (#50398),29,32,61,4,0dd933ef7fa3b89db25e8f9e7021837c82e011c8
+apache/airflow,0dd933ef7fa3b89db25e8f9e7021837c82e011c8,https://github.com/apache/airflow/commit/0dd933ef7fa3b89db25e8f9e7021837c82e011c8,fritz-astronomer,80706212,User,2025-05-11T12:35:53+00:00,web-flow,2025-05-11T12:35:53+00:00,"Add `test_connection` method to `KubernetesHook` (#47881)
+
+* feat: add test_connection method to k8s hook
+
+* fix: update KubeHook to use kubernetes_conn_id
+
+* linting",11,2,13,1,da392e6537e197013c6f312a333064b6d6047530
+apache/airflow,da392e6537e197013c6f312a333064b6d6047530,https://github.com/apache/airflow/commit/da392e6537e197013c6f312a333064b6d6047530,aritra24,24430013,User,2025-05-11T11:37:01+00:00,web-flow,2025-05-11T11:37:01+00:00,Fixes border overlaps in events page (#50453),1,1,2,1,7f344f214c2a71da8084ed35d9a7884d505a5220
+apache/airflow,7f344f214c2a71da8084ed35d9a7884d505a5220,https://github.com/apache/airflow/commit/7f344f214c2a71da8084ed35d9a7884d505a5220,potiuk,595491,User,2025-05-11T10:17:11+00:00,web-flow,2025-05-11T10:17:11+00:00,"Fix selective checks when only pyproject.toml or provider.yaml modified (#50451)
+
+The tests for providers were not triggered when only provider.yaml or
+pyproject.toml of provider has been modified. This PR fixes it.",97,2,99,2,6019e151f17d9874660ab1a7809db96d1cb97282
+apache/airflow,6019e151f17d9874660ab1a7809db96d1cb97282,https://github.com/apache/airflow/commit/6019e151f17d9874660ab1a7809db96d1cb97282,potiuk,595491,User,2025-05-11T10:07:06+00:00,web-flow,2025-05-11T10:07:06+00:00,"Limit click to < 8.2.0 for breeze (#50452)
+
+Breeze can be installed with a different python version than minimum
+and it can self-upgrade to 8.2.0 of click which is Python 3.10+
+(released today). That version of click is not compatible with breezes
+custom choices and we need to limit it for now until we can set 8.2.0
+of click as minimum (when we move to Python 3.10+)",397,345,742,4,7fbebb4908f3d9b8b7a8c6b8697120c29b445a95
+apache/airflow,7fbebb4908f3d9b8b7a8c6b8697120c29b445a95,https://github.com/apache/airflow/commit/7fbebb4908f3d9b8b7a8c6b8697120c29b445a95,eladkal,45845474,User,2025-05-11T09:49:24+00:00,web-flow,2025-05-11T09:49:24+00:00,docs: remove stale warning about SnowflakeOperator (#50450),2,5,7,1,ce995ed06d3adac7f2098c0365faef20cd28b67f
+apache/airflow,ce995ed06d3adac7f2098c0365faef20cd28b67f,https://github.com/apache/airflow/commit/ce995ed06d3adac7f2098c0365faef20cd28b67f,MaksYermak,12415200,User,2025-05-11T06:46:33+00:00,web-flow,2025-05-11T06:46:33+00:00,Update system tests for Translate and Dataproc services (#49785),2,2,4,2,96a81f1a8d843ddfbf29655b107c04cb82de4261
+apache/airflow,96a81f1a8d843ddfbf29655b107c04cb82de4261,https://github.com/apache/airflow/commit/96a81f1a8d843ddfbf29655b107c04cb82de4261,gopidesupavan,31437079,User,2025-05-11T03:13:13+00:00,web-flow,2025-05-11T03:13:13+00:00,Fix dev/README_AIRFLOW3_DEV.md white spaces (#50445),9,10,19,1,6059b7361560befd69aa0229c4a0bedaf976f32d
+apache/airflow,6059b7361560befd69aa0229c4a0bedaf976f32d,https://github.com/apache/airflow/commit/6059b7361560befd69aa0229c4a0bedaf976f32d,shahar1,60007259,User,2025-05-10T19:13:29+00:00,web-flow,2025-05-10T19:13:29+00:00,Update README_AIRFLOW3_DEV.md (#50444),37,43,80,1,0d6cf84a9ff79ec0e148bbcabf2d883d447e4fab
+apache/airflow,0d6cf84a9ff79ec0e148bbcabf2d883d447e4fab,https://github.com/apache/airflow/commit/0d6cf84a9ff79ec0e148bbcabf2d883d447e4fab,eladkal,45845474,User,2025-05-10T16:14:08+00:00,web-flow,2025-05-10T16:14:08+00:00,Bump min version of facebook-business>=22.0 (#50439),1,1,2,1,149d1d61f82a79d5fd2da9005a2e0f6154fc0b97
+apache/airflow,149d1d61f82a79d5fd2da9005a2e0f6154fc0b97,https://github.com/apache/airflow/commit/149d1d61f82a79d5fd2da9005a2e0f6154fc0b97,eladkal,45845474,User,2025-05-10T16:07:40+00:00,web-flow,2025-05-10T16:07:40+00:00,Update providers metadata 2025-05-10 (#50438),8,0,8,1,dc715304bc8c78f97457104fc6d5b391929e75c7
+apache/airflow,dc715304bc8c78f97457104fc6d5b391929e75c7,https://github.com/apache/airflow/commit/dc715304bc8c78f97457104fc6d5b391929e75c7,amoghrajesh,35884252,User,2025-05-10T16:07:05+00:00,web-flow,2025-05-10T16:07:05+00:00,Improve docstring with usage for add_deprecated_classes (#50436),9,0,9,1,59d41de7970c039c48096d485c59c19aecbec194
+apache/airflow,59d41de7970c039c48096d485c59c19aecbec194,https://github.com/apache/airflow/commit/59d41de7970c039c48096d485c59c19aecbec194,amoghrajesh,35884252,User,2025-05-10T16:06:26+00:00,web-flow,2025-05-10T16:06:26+00:00,Removing extra line added in license (#50434),0,1,1,1,dfe0018f9431f7a4141f785e3ea4488133e6223c
+apache/airflow,dfe0018f9431f7a4141f785e3ea4488133e6223c,https://github.com/apache/airflow/commit/dfe0018f9431f7a4141f785e3ea4488133e6223c,guan404ming,105915352,User,2025-05-10T15:12:20+00:00,web-flow,2025-05-10T15:12:20+00:00,Alias dag_display_name for QueuedEvent (#50426),36,7,43,8,e1a57a8eeb9a28eb7c98296f94039867656100bb
+apache/airflow,e1a57a8eeb9a28eb7c98296f94039867656100bb,https://github.com/apache/airflow/commit/e1a57a8eeb9a28eb7c98296f94039867656100bb,gopidesupavan,31437079,User,2025-05-10T13:32:35+00:00,web-flow,2025-05-10T13:32:35+00:00,"Fix echo statements in publish-docs-to-s3 (#50440)
+
+* fix echo statements in publish-docs-to-s3
+
+* fix echo statements in publish-docs-to-s3",2,2,4,1,f070095970c1471989ac6432e1c83ebeab5fb1aa
+apache/airflow,f070095970c1471989ac6432e1c83ebeab5fb1aa,https://github.com/apache/airflow/commit/f070095970c1471989ac6432e1c83ebeab5fb1aa,guan404ming,105915352,User,2025-05-10T13:10:51+00:00,web-flow,2025-05-10T13:10:51+00:00,Fix alignment of PoolSummary and Health (#50430),1,1,2,1,7b0063b71bb2d6cfbe3a47aca8aa1a72ede36a63
+apache/airflow,7b0063b71bb2d6cfbe3a47aca8aa1a72ede36a63,https://github.com/apache/airflow/commit/7b0063b71bb2d6cfbe3a47aca8aa1a72ede36a63,kaxil,8811558,User,2025-05-10T13:01:32+00:00,web-flow,2025-05-10T13:01:32+00:00,"Support running `airflow dags test` from local files (#50420)
+
+Currently, we can't run `airflow dags test` in isolation with a local dag file. We need to first run `airflow dags reserialize`, so DAGs are parsed and stored in DB, because the `airflow dags test` currently loads it from DB.
+
+The change in this PR/commit allows testing DAGs from different sources:
+- Using bundle configuration (`--bundle-name`)
+- Using direct file path (`--dagfile-path`/`-f`)
+- Using default behavior (from DB)
+
+This speeds up the process too since we don't have to load the entire DagBag to run a single file.",134,55,189,5,1ab2474aeeba23be3248cb5101e2fe7740647182
+apache/airflow,1ab2474aeeba23be3248cb5101e2fe7740647182,https://github.com/apache/airflow/commit/1ab2474aeeba23be3248cb5101e2fe7740647182,kaxil,8811558,User,2025-05-10T05:50:18+00:00,web-flow,2025-05-10T05:50:18+00:00,Fix bug with in-process request handling for `dag.test` (#50419),103,6,109,2,c5ed10010a5a5a7b34d5fb0d8d70a6d70b35ddb3
+apache/airflow,c5ed10010a5a5a7b34d5fb0d8d70a6d70b35ddb3,https://github.com/apache/airflow/commit/c5ed10010a5a5a7b34d5fb0d8d70a6d70b35ddb3,potiuk,595491,User,2025-05-10T04:18:14+00:00,web-flow,2025-05-10T04:18:14+00:00,"Handle exception when building amazon documentation (#50417)
+
+There was an exception thrown when importing example dags when
+generating amazon documentation, which prevented the documentation
+build to generate link to sources of embedded examples.
+
+The exception was caused by raising an exception while trying to
+handle another exeception.",2,2,4,1,ce6e31bb5e75c31e6ff1d5f39d6cbf1d8aadf479
+apache/airflow,ce6e31bb5e75c31e6ff1d5f39d6cbf1d8aadf479,https://github.com/apache/airflow/commit/ce6e31bb5e75c31e6ff1d5f39d6cbf1d8aadf479,kevinhongzl,7898793,User,2025-05-09T20:24:21+00:00,web-flow,2025-05-09T20:24:21+00:00,fix: wrap overflowing dag names in dag trigger modal (#50414),17,4,21,3,023d505c76ba0c0633b00f3bb7a0f52db460e233
+apache/airflow,023d505c76ba0c0633b00f3bb7a0f52db460e233,https://github.com/apache/airflow/commit/023d505c76ba0c0633b00f3bb7a0f52db460e233,dependabot[bot],49699333,Bot,2025-05-09T17:22:45+00:00,web-flow,2025-05-09T17:22:45+00:00,"Bump trove-classifiers from 2025.5.8.15 to 2025.5.9.12 (#50406)
+
+Bumps [trove-classifiers](https://github.com/pypa/trove-classifiers) from 2025.5.8.15 to 2025.5.9.12.
+- [Release notes](https://github.com/pypa/trove-classifiers/releases)
+- [Commits](https://github.com/pypa/trove-classifiers/compare/2025.5.8.15...2025.5.9.12)
+
+---
+updated-dependencies:
+- dependency-name: trove-classifiers
+  dependency-version: 2025.5.9.12
+  dependency-type: direct:development
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,db1ec97ec22434331bea21bdfe6af6ea32b384e7

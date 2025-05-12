@@ -1,0 +1,1722 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+jakevdp/PythonDataScienceHandbook,3040788442,424,Update README.md,"docs: adicionar badge “Launch Binder” apontando para meu fork
+",Theitzmann,175157520,open,False,0,2025-05-05T20:47:11+00:00,2025-05-05T20:47:11+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,3040480839,423,docs: add Binder launch badge,This PR adds a Binder badge to the top of the README so that readers can launch the notebooks interactively,Theitzmann,175157520,open,False,0,2025-05-05T18:33:29+00:00,2025-05-05T18:33:29+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2921723034,421,Update 02.08-Sorting.ipynb,corrected syntax.,taurus05,41040631,open,False,0,2025-03-15T04:41:19+00:00,2025-03-15T04:41:19+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2840061860,420,Please Add an Index.ipynb File with updated Links for effecient learninng,,afzalasar7,111232340,open,False,0,2025-02-08T15:05:02+00:00,2025-02-08T15:05:02+00:00,,,2,2,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2840061502,419,Please Add an Index.ipynb File with updated Links for effecient learninng,,afzalasar7,111232340,closed,False,0,2025-02-08T15:04:53+00:00,2025-02-08T15:05:42+00:00,2025-02-08T15:05:41+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2825150633,418,Environment Setup Fails Due to Python 3.5 Deprecation and Library Dependencies,"While setting up the environment using the provided ``` environment.yml ``` file, the installation fails due to Python 3.5 being deprecated. Additionally, some libraries in ``` requirements.txt ``` have outdated dependencies, causing compatibility issues
+
+### Current Environment File (``` environment.yml ```)
+```
+name: data-science-handbook
+channels:
+  - conda-forge
+dependencies:
+  - python=3.5
+  - pip:
+    - -r requirements.txt
+```
+
+### Current Dependencies (  ``` requirements.txt ```)
+```
+numpy==1.11.1
+pandas==0.18.1
+scipy==0.17.1
+scikit-learn==0.17.1
+scikit-image==0.12.3
+pillow==3.4.2
+matplotlib==1.5.1
+seaborn==0.7.0
+jupyter
+notebook
+line_profiler
+memory_profiler
+numexpr
+pandas-datareader
+netcdf4
+```
+
+### Proposed Fix
+
+- Upgrade Python version: Modify environment.yml to use Python 3.8 or higher.
+
+- Update outdated dependencies: Use newer versions of numpy, pandas, scipy, etc., to resolve conflicts
+
+### Expected Outcome
+
+- A functional environment setup with updated dependencies.
+
+",muhammadalmaskhan,89722109,open,False,0,2025-02-01T11:14:40+00:00,2025-02-01T11:14:40+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2797760435,417,pythonBasic,,Vivekmagar1665,175552448,open,False,0,2025-01-19T18:16:41+00:00,2025-01-19T18:16:41+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2791662604,416,Colaboração,"Olá, pessoal!
+
+Gostaria de sugerir algumas melhorias para otimizar a performance das consultas SQL no banco de dados do projeto. Com o aumento do volume de dados, algumas consultas estão apresentando lentidão. Aqui estão algumas sugestões que acredito que podem ajudar:
+
+Criação de índices: Adicionar índices em colunas frequentemente consultadas pode melhorar significativamente o tempo de resposta nas buscas.
+Melhorias no uso de joins: Algumas consultas podem ser otimizadas, substituindo joins complexos por versões mais eficientes, ou até usando subconsultas quando necessário.
+Divisão de tabelas: Considerar a normalização ou a divisão de tabelas muito grandes pode melhorar o desempenho, além de facilitar a manutenção do banco de dados.
+Essas são algumas ideias que podem ajudar a melhorar a performance das consultas. Fico à disposição para fornecer mais detalhes ou até colaborar com a implementação dessas mudanças.
+
+Aguardo feedback de vocês!",Teteeu,195258013,open,False,0,2025-01-16T04:27:31+00:00,2025-01-16T04:27:31+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2656200255,414,Missing data file: california cities,"Notebook 04.06 doesn't run because the file
+
+https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/master/notebooks/data/california_cities.csv
+
+isn't in the repository.",PeterDrake,889193,closed,False,2,2024-11-13T17:12:47+00:00,2024-11-13T19:02:01+00:00,2024-11-13T17:47:29+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2609103833,413,Hhjjh,,dmitrijiks,178684166,open,False,0,2024-10-23T15:55:38+00:00,2024-10-23T15:55:38+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2555054348,412,solved the error at line 04.14 - Visualization-With-Seaborn,,Meetsisodiya50,156202375,open,False,0,2024-09-29T18:08:08+00:00,2024-09-29T18:08:08+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2526012954,411,Add v2 CN translations,,wizardforcel,5080126,open,False,0,2024-09-14T05:53:50+00:00,2024-09-14T05:53:50+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2376095252,410,kriti..,Adding my name to contributor list,kri6521,143487969,closed,False,0,2024-06-26T19:17:32+00:00,2024-07-14T13:07:39+00:00,2024-07-14T13:07:39+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2307454268,409,핸드북,,ttochigo,147351628,open,False,0,2024-05-21T06:43:33+00:00,2024-05-21T06:43:33+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2257829557,408,my 7th os commit,you can ignore this ,prashantroll27,90165853,open,False,0,2024-04-23T02:47:59+00:00,2024-04-23T02:47:59+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2246481100,407,Update 03.05-Hierarchical-Indexing.ipynb,"I think I discovered a small bug when running cell 17. The MultiIndex constructor takes ""codes"" not ""labels"" as its input when doing the internal encoding. Tested on pandas 2.2.2. 
+
+The original error was: TypeError: __new__() got an unexpected keyword argument 'labels'",Revanchist317,116514311,open,False,0,2024-04-16T16:40:11+00:00,2024-04-16T16:40:11+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2243768062,406,Star,,Aris0123,167088035,open,False,0,2024-04-15T13:59:33+00:00,2024-04-15T13:59:33+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2216619114,405,my contribution,you can ignore this PR.,anshgupta6031,118970301,closed,False,0,2024-03-30T18:38:02+00:00,2024-04-13T17:06:21+00:00,2024-04-13T17:06:21+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2204882183,404,"Notebooks use ""images/"" instead of ""figures/"" for Markdown images","Static images are in the `notebooks/figures` folder (and referenced with this path in the website) - but the Notebooks themselves use `images/` as the folder prefix in Markdown cells referencing the figures. I am assuming `figures/` is the right name and the notebooks need to be updated.
+
+I made the fixes in my local fork to verify they worked (happy to submit a PR) but wanted to check if that was the preferred fix or if you wanted to just rename the `figures/` folder instead.",nitya,279083,open,False,1,2024-03-25T04:49:01+00:00,2024-04-06T21:45:50+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155704404,403,Update births.csv,hi,dipanshurajpal,156052279,open,False,0,2024-02-27T05:36:49+00:00,2024-02-27T05:36:49+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155701784,402,error,Made an error,AMANPREET575KAUR,157604160,open,False,0,2024-02-27T05:34:13+00:00,2024-04-20T11:14:02+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155700824,401,Update LICENSE-TEXT,hello sir,Akshit462005,86590762,closed,False,0,2024-02-27T05:33:19+00:00,2024-04-30T06:20:25+00:00,2024-04-30T06:20:25+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155699273,400,Update LICENSE-TEXT,We are also suffering from this git pandemic.,Arjit20,156052374,open,False,0,2024-02-27T05:31:49+00:00,2024-02-27T05:31:49+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155699270,399,Update LICENSE-TEXT,wassup bro,Armaan25thind,156052280,open,False,0,2024-02-27T05:31:49+00:00,2024-02-27T05:31:49+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155699206,398,Update LICENSE-TEXT,I have modified this ,JollyAnsh,106730982,closed,False,0,2024-02-27T05:31:44+00:00,2024-02-27T05:36:37+00:00,2024-02-27T05:36:37+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2155697333,397,LICENSE-TEXT,I have modified this file please accept my pull request,KrishnaSaxena108,152802376,closed,False,0,2024-02-27T05:30:05+00:00,2024-07-12T15:45:45+00:00,2024-07-12T15:45:45+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2153589471,396,Update LICENSE-TEXT,,gagneets1,159617188,open,False,0,2024-02-26T08:42:25+00:00,2024-02-26T08:42:25+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2153216285,395,Update 01.00-IPython-Beyond-Normal-Python.ipynb,gucci,AthrvSharma,156046568,open,False,0,2024-02-26T04:14:45+00:00,2024-02-26T04:14:45+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2120179205,394,Added some text for this project,"Ignore this message, i'm just training with GitHub, thanks)",lolchelick,159111863,open,False,0,2024-02-06T08:00:14+00:00,2024-02-06T08:00:14+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2103128090,393,PythonDataScience,,Berni0306,114695861,closed,False,0,2024-01-27T01:44:21+00:00,2024-01-27T01:45:35+00:00,2024-01-27T01:45:35+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,2102996182,392,not_100_about_how_pull_requests_work_yet,,DamianGacic,84860151,closed,False,1,2024-01-26T22:31:25+00:00,2024-01-26T22:35:50+00:00,2024-01-26T22:35:50+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1981134632,391,Adding test.txt,,filterkaapicodes,149882330,closed,False,0,2023-11-07T11:26:43+00:00,2023-11-07T11:27:02+00:00,2023-11-07T11:27:02+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1977768047,390,changed text just for test,testing,andregustavoxs,125318522,closed,False,0,2023-11-05T12:31:51+00:00,2024-06-02T22:05:08+00:00,2024-06-02T22:05:08+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1975612078,389,Ok,,harrakouadia,131412148,open,False,1,2023-11-03T07:48:59+00:00,2024-07-13T05:21:03+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1954801242,388,gdgndgdn,,Parvezkhan0,137421089,open,False,0,2023-10-20T18:07:56+00:00,2023-10-20T18:07:56+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1954801045,387,gdgdsngnd,,Parvezkhan0,137421089,open,False,0,2023-10-20T18:07:48+00:00,2023-10-20T18:07:48+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1954800798,386,gdgdgd,,Parvezkhan0,137421089,open,False,0,2023-10-20T18:07:41+00:00,2023-10-20T18:07:41+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1924931472,385,Bump pillow from 3.4.2 to 10.0.1,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 3.4.2 to 10.0.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>10.0.1</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/10.0.1.html"">https://pillow.readthedocs.io/en/stable/releasenotes/10.0.1.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Updated libwebp to 1.3.2 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7395"">#7395</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Updated zlib to 1.3 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7344"">#7344</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+</ul>
+<h2>10.0.0</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/10.0.0.html"">https://pillow.readthedocs.io/en/stable/releasenotes/10.0.0.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Fixed deallocating mask images <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7246"">#7246</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added ImageFont.MAX_STRING_LENGTH <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7244"">#7244</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fix Windows build with pyproject.toml <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7230"">#7230</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Do not close provided file handles with libtiff <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7199"">#7199</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Convert to HSV if mode is HSV in getcolor() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7226"">#7226</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added alpha_only argument to getbbox() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7123"">#7123</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Prioritise speed in <em>repr_png</em> <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7242"">#7242</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Limit size even if one dimension is zero in decompression bomb check <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7235"">#7235</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Restored 32-bit support <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7234"">#7234</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed deleted file from codecov.yml and increased coverage threshold <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7232"">#7232</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed support for 32-bit <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7228"">#7228</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Use --config-settings instead of deprecated --global-option <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7171"">#7171</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Better C integer definitions <a href=""https://redirect.github.com/python-pillow/Pillow/issues/6645"">#6645</a> [<a href=""https://github.com/Yay295""><code>@​Yay295</code></a>]</li>
+<li>Fixed finding dependencies on Cygwin <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7175"">#7175</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved checks in font_render <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7218"">#7218</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Change <code>grabclipboard()</code> to use PNG compression on macOS <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7219"">#7219</a> [<a href=""https://github.com/abey79""><code>@​abey79</code></a>]</li>
+<li>Added PyPy 3.10 and removed PyPy 3.8 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7216"">#7216</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added in_place argument to ImageOps.exif_transpose() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7092"">#7092</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Corrected error code <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7177"">#7177</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Use &quot;not in&quot; <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7174"">#7174</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Only call text_layout once in getmask2 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7206"">#7206</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed calling putpalette() on L and LA images before load() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7187"">#7187</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed unused INT64 definition <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7180"">#7180</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Updated xz to 5.4.3 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7136"">#7136</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed saving TIFF multiframe images with LONG8 tag types <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7078"">#7078</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not set size unnecessarily if image fails to open <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7056"">#7056</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed unused code <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7210"">#7210</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed unused variables <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7205"">#7205</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed signedness comparison warning <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7203"">#7203</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed combining single duration across duplicate APNG frames <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7146"">#7146</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Remove temporary file when error is raised <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7148"">#7148</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not use temporary file when grabbing clipboard on Linux <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7200"">#7200</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>If the clipboard fails to open on Windows, wait and try again <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7141"">#7141</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed saving multiple 1 mode frames to GIF <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7181"">#7181</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Replaced absolute PIL import with relative import <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7173"">#7173</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed files and types override <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7194"">#7194</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst"">pillow's changelog</a>.</em></p>
+<blockquote>
+<h2>10.0.1 (2023-09-15)</h2>
+<ul>
+<li>
+<p>Updated libwebp to 1.3.2 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7395"">#7395</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Updated zlib to 1.3 <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7344"">#7344</a>
+[radarhere]</p>
+</li>
+</ul>
+<h2>10.0.0 (2023-07-01)</h2>
+<ul>
+<li>
+<p>Fixed deallocating mask images <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7246"">#7246</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added ImageFont.MAX_STRING_LENGTH <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7244"">#7244</a>
+[radarhere, hugovk]</p>
+</li>
+<li>
+<p>Fix Windows build with pyproject.toml <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7230"">#7230</a>
+[hugovk, nulano, radarhere]</p>
+</li>
+<li>
+<p>Do not close provided file handles with libtiff <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7199"">#7199</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Convert to HSV if mode is HSV in getcolor() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7226"">#7226</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added alpha_only argument to getbbox() <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7123"">#7123</a>
+[radarhere. hugovk]</p>
+</li>
+<li>
+<p>Prioritise speed in <em>repr_png</em> <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7242"">#7242</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Do not use CFFI access by default on PyPy <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7236"">#7236</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Limit size even if one dimension is zero in decompression bomb check <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7235"">#7235</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Use --config-settings instead of deprecated --global-option <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7171"">#7171</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Better C integer definitions <a href=""https://redirect.github.com/python-pillow/Pillow/issues/6645"">#6645</a>
+[Yay295, hugovk]</p>
+</li>
+<li>
+<p>Fixed finding dependencies on Cygwin <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7175"">#7175</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Changed grabclipboard() to use PNG instead of JPG compression on macOS <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7219"">#7219</a>
+[abey79, radarhere]</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/e34d346f10c0b1c814661e662a3e0c1ef084cf1c""><code>e34d346</code></a> Updated order</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/a62f2402a6bcf11a0a1670542216725a3f9190e0""><code>a62f240</code></a> 10.0.1 version bump</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/d50250d9eab741ae3ddd592d8910cfd7973b9d35""><code>d50250d</code></a> Added release notes for 10.0.1</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/b4c7d4b8b2710b7af6cc944a804902eb75fd9056""><code>b4c7d4b</code></a> Update CHANGES.rst [ci skip]</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/730f74600e8215ab510f71bb1fbb49d906c4356b""><code>730f746</code></a> Updated libwebp to 1.3.2</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/b0e28048d692effadfe7a4268a03e1d20e0198bb""><code>b0e2804</code></a> Updated zlib to 1.3</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/6e28ed1f36d0eb74053af54e1eddc9c29db698cd""><code>6e28ed1</code></a> 10.0.0 version bump</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/c827f3b30f50bf04fd65daeeba6bbfd56fc7b50e""><code>c827f3b</code></a> Merge pull request <a href=""https://redirect.github.com/python-pillow/Pillow/issues/7246"">#7246</a> from radarhere/deallocate</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/39a3b1d83edcf826c3864e26bedff5b4e4dd331b""><code>39a3b1d</code></a> Fixed deallocating mask images</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/8c1dc819fd91471825da01976ac0e0bc8789590f""><code>8c1dc81</code></a> Update CHANGES.rst [ci skip]</li>
+<li>Additional commits viewable in <a href=""https://github.com/python-pillow/Pillow/compare/3.4.2...10.0.1"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=pillow&package-manager=pip&previous-version=3.4.2&new-version=10.0.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,open,False,0,2023-10-03T20:54:54+00:00,2023-10-03T20:54:55+00:00,,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1909927408,384,Fixes #136,To resolve the issue you need to install seaborn on your device. For this you have to enter a command line in your command prompt.,th-shristi,119031272,open,False,0,2023-09-23T16:31:05+00:00,2023-09-23T16:32:47+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1909817557,383,Branch1,"Fixes TypeError #214 
+Unpacking numpy float.46 is not possible as they are non-iterable but you can still access it's values
+",th-shristi,119031272,closed,False,0,2023-09-23T10:22:50+00:00,2023-09-23T10:24:09+00:00,2023-09-23T10:24:08+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1899422974,382,inconsistencies between tables and commands in 3.8 line [18],"there are some inconsistencies in 3.8 on line [18].
+
+I think the final  .unstack() method should be removed from line [18] to produce the correct table.
+
+the line I am talking about has this code:
+
+[18] planets.groupby(""method"")[""year""].describe().unstack()
+
+The second edition is consistent between the command and the table produced, but I think what the author wanted was the table obtained in the first edition (page 164 of the printed ed), which is generated without using .unstack().
+
+",maxvolpi,51016385,open,False,0,2023-09-16T12:34:30+00:00,2023-09-16T12:34:30+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1892596615,381,check on 03.05 in notebooks_v1,"I think that in the paragraph on Explicit MultiIndex constructors che code:
+
+
+
+
+pd.MultiIndex(levels=[['a', 'b'], [1, 2]],
+              labels=[[0, 0, 1, 1], [0, 1, 0, 1]])
+
+
+should be replaced with:
+
+
+
+pd.MultiIndex(levels=[['a', 'b'], [1, 2]],
+              codes=[[0, 0, 1, 1], [0, 1, 0, 1]])
+
+Could you please check. It worked on my computer with codes, but I got the error message: 
+
+pd.MultiIndes.__new__() got an unexpected keywor argument for ""labels""
+
+",maxvolpi,51016385,open,False,1,2023-09-12T14:02:32+00:00,2023-09-13T09:41:27+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1886233183,380,indexes as ordered set - issue in code,"I am trying to reproduce the code on page 107 of the first edition (and it is the same on Github). 
+When I do indA & indB I get a strange result: [0,3,5, 7,9] while if I use the code set(indA) & set(indB) I get the expected result 
+{3,5,7}. I also get the same correct result if I use the method indA.intersection(indB).
+
+Likewise, I get funny results with |  and ^. while the equivalent set operations and the methods all work. 
+
+It is not clear why this is happening, as I have tried it from scratch a few times, to avoid typos",maxvolpi,51016385,open,False,1,2023-09-07T16:37:49+00:00,2024-08-26T14:47:01+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1841977899,379,Purpose of Suppressing Out in python,"Hi I have been learning the shortcuts of ipython, it was so helpful.
+
+However, I couldn't understand the purpose of Suppressing the output in IPython, If it's neither print output nor stores that output, what's the point?
+
+I just got curious over this?",SudhanAnnamalai,11582067,open,False,1,2023-08-08T19:49:20+00:00,2023-08-29T06:23:40+00:00,,,2,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1816987268,378,Update .gitignore,,Aquib711,90975824,open,False,0,2023-07-23T04:52:00+00:00,2023-07-23T04:52:00+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1812384675,377,my open source contribution,"hey, you can ignore this PR.
+I did this just to teach my students how to raise a pull request",niteshgiri-7,139582690,closed,False,0,2023-07-19T17:24:09+00:00,2023-07-21T07:57:19+00:00,2023-07-21T07:57:19+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1792242313,376,Bump scipy from 0.17.1 to 1.10.0,"Bumps [scipy](https://github.com/scipy/scipy) from 0.17.1 to 1.10.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/scipy/scipy/releases"">scipy's releases</a>.</em></p>
+<blockquote>
+<h1>SciPy 1.10.0 Release Notes</h1>
+<p>SciPy <code>1.10.0</code> is the culmination of <code>6</code> months of hard work. It contains
+many new features, numerous bug-fixes, improved test coverage and better
+documentation. There have been a number of deprecations and API changes
+in this release, which are documented below. All users are encouraged to
+upgrade to this release, as there are a large number of bug-fixes and
+optimizations. Before upgrading, we recommend that users check that
+their own code does not use deprecated SciPy functionality (to do so,
+run your code with <code>python -Wd</code> and check for <code>DeprecationWarning</code> s).
+Our development attention will now shift to bug-fix releases on the
+1.10.x branch, and on adding new features on the main branch.</p>
+<p>This release requires Python <code>3.8+</code> and NumPy <code>1.19.5</code> or greater.</p>
+<p>For running on PyPy, PyPy3 <code>6.0+</code> is required.</p>
+<h1>Highlights of this release</h1>
+<ul>
+<li>A new dedicated datasets submodule (<code>scipy.datasets</code>) has been added, and is
+now preferred over usage of <code>scipy.misc</code> for dataset retrieval.</li>
+<li>A new <code>scipy.interpolate.make_smoothing_spline</code> function was added. This
+function constructs a smoothing cubic spline from noisy data, using the
+generalized cross-validation (GCV) criterion to find the tradeoff between
+smoothness and proximity to data points.</li>
+<li><code>scipy.stats</code> has three new distributions, two new hypothesis tests, three
+new sample statistics, a class for greater control over calculations
+involving covariance matrices, and many other enhancements.</li>
+</ul>
+<h1>New features</h1>
+<h1><code>scipy.datasets</code> introduction</h1>
+<ul>
+<li>A new dedicated <code>datasets</code> submodule has been added. The submodules
+is meant for datasets that are relevant to other SciPy submodules ands
+content (tutorials, examples, tests), as well as contain a curated
+set of datasets that are of wider interest. As of this release, all
+the datasets from <code>scipy.misc</code> have been added to <code>scipy.datasets</code>
+(and deprecated in <code>scipy.misc</code>).</li>
+<li>The submodule is based on <a href=""https://www.fatiando.org/pooch/latest/"">Pooch</a>
+(a new optional dependency for SciPy), a Python package to simplify fetching
+data files. This move will, in a subsequent release, facilitate SciPy
+to trim down the sdist/wheel sizes, by decoupling the data files and
+moving them out of the SciPy repository, hosting them externally and</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/scipy/scipy/commit/dde50595862a4f9cede24b5d1c86935c30f1f88a""><code>dde5059</code></a> REL: 1.10.0 final [wheel build]</li>
+<li><a href=""https://github.com/scipy/scipy/commit/7856f281b016c585b82d03723c4494bcdbdcd4a5""><code>7856f28</code></a> Merge pull request <a href=""https://redirect.github.com/scipy/scipy/issues/17696"">#17696</a> from tylerjereddy/treddy_110_final_prep</li>
+<li><a href=""https://github.com/scipy/scipy/commit/205b6243c6d075d05695e7ac6d007e0f03bfbf42""><code>205b624</code></a> DOC: add missing author</li>
+<li><a href=""https://github.com/scipy/scipy/commit/1ab9f1b10145f0a974d5531700e72d1fb4229b76""><code>1ab9f1b</code></a> DOC: update 1.10.0 relnotes</li>
+<li><a href=""https://github.com/scipy/scipy/commit/ac2f45fbe1e39a8f52c1ea2e68764009f02973c0""><code>ac2f45f</code></a> MAINT: integrate._qmc_quad: mark as private with preceding underscore</li>
+<li><a href=""https://github.com/scipy/scipy/commit/3e0ae1a21f51ebee3a77733c42700d87a0c35d7d""><code>3e0ae1a</code></a> REV: integrate.qmc_quad: delay release to SciPy 1.11.0</li>
+<li><a href=""https://github.com/scipy/scipy/commit/34cdf05c86548de1c4ca1b2798cdc23885af807b""><code>34cdf05</code></a> MAINT: FFT pybind11 fixups</li>
+<li><a href=""https://github.com/scipy/scipy/commit/843500aabde17aaf1eec65c589d50bd12ee35039""><code>843500a</code></a> Merge pull request <a href=""https://redirect.github.com/scipy/scipy/issues/17689"">#17689</a> from mdhaber/gh17686</li>
+<li><a href=""https://github.com/scipy/scipy/commit/089924b61012a106ffa4f58939b0180124051a0b""><code>089924b</code></a> REL: integrate.qmc_quad: remove from release notes</li>
+<li><a href=""https://github.com/scipy/scipy/commit/3e47110f10e3267d228e9da84174f3cee325e7c3""><code>3e47110</code></a> REL: 1.10.0rc3 unreleased</li>
+<li>Additional commits viewable in <a href=""https://github.com/scipy/scipy/compare/v0.17.1...v1.10.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=scipy&package-manager=pip&previous-version=0.17.1&new-version=1.10.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,open,False,0,2023-07-06T21:08:05+00:00,2023-07-06T21:08:06+00:00,,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1774311852,375,`join_axes` keyword and `append` method deprecated,"The `join_axes` argument from `pandas.concat()` has been deprecated: [See here](https://pandas.pydata.org/docs/whatsnew/v1.0.0.html?highlight=join_axes#deprecations) for more details.
+
+The `pandas.DataFrame.append` method is also deprecated and is no longer in use: [More details](https://pandas.pydata.org/docs/whatsnew/v1.4.0.html?highlight=append#deprecated-dataframe-append-and-series-append)
+
+These methods are still in the book and might be misleading to beginners who are not aware of the deprecation.",albas99,53338885,open,False,2,2023-06-26T09:13:58+00:00,2023-10-24T06:36:52+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1725327593,374,my changes,hi,varma1357,110662184,closed,False,0,2023-05-25T08:20:35+00:00,2023-05-25T17:24:27+00:00,2023-05-25T17:24:27+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1722997201,373,Links to open in Google Colab are no longer working,"I see the following error:
+
+Notebook not found
+There was an error loading this notebook. Ensure that the file is accessible and try again.
+https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/Index.ipynb
+
+Could not find Index.ipynb in https://api.github.com/repos/jakevdp/PythonDataScienceHandbook/contents/notebooks?per_page=100&ref=master
+tb@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:89:522
+PI@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:2174:73
+@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:2161:448
+xa@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:21:65
+@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:19:197
+@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:22:53
+b@https://ssl.gstatic.com/colaboratory-static/common/5d71429ee6657823934f508bf7362902/external_polymer_binary.js:22:313",USDSOM,80034235,open,False,0,2023-05-24T00:56:27+00:00,2023-05-24T00:56:27+00:00,,,3,3,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1711853659,372,Figure 2-4. Visualization of NumPy broadcasting,"Hi, there is a mistake in the 3rd example in the figure 2-4 (s. 65) -> np.ones resulted in array [0,1,2]",radzio-ui,105719456,open,False,0,2023-05-16T11:43:57+00:00,2023-05-16T11:44:29+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1711286277,371,committed,,D-2002,86377119,closed,False,0,2023-05-16T05:51:11+00:00,2023-05-16T08:04:52+00:00,2023-05-16T08:04:51+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1699199899,370,Minor refactor,Minor Refactor made by Sourcery.ai,KevinArce,83199462,open,False,0,2023-05-07T19:19:39+00:00,2023-05-07T19:19:39+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1650276289,368,data failed,data is not transferred,Manikumar2113,122763168,open,False,1,2023-04-01T03:50:37+00:00,2023-04-17T03:55:25+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1649464091,367,"5.3.4 grid.fit(X,y)  ；A ValueErrorValueError error occurred","`from sklearn.model_selection import GridSearchCV
+param_grid = {'polynomialfeatures__degree': np.arange(21),
+              'linearregression__fit_intercept': [True, False],
+              'linearregression__normalize': [True, False]}
+
+grid = GridSearchCV(PolynomialRegression(), param_grid, cv=7)
+**grid.fit(X,y)**`
+-------------------------------------------------
+Sorry to bother you. I had a small issue in section 5.3.4 of this book. Jupyter prompts me with the following error。
+I also ran the code you gave, but this kind of problem also occurs. (I ran the code for 5.3 through until grid.fit(X,y))
+My English is not very good, sorry again.
+------------------------------------------------
+ValueError: Invalid parameter 'normalize' for estimator LinearRegression(). Valid parameters are: ['copy_X', 'fit_intercept', 'n_jobs', 'positive'].",YoungBooker,50761898,open,False,1,2023-03-31T14:31:23+00:00,2023-05-07T14:35:19+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1642149269,366,Python for Data Science,"Hello there!
+I'm trying to scrap data from the web for an analysis but the code is having error and I'm not able to fix, pls I will paste the code and the error below, can anyone help pls.
+
+base_url = ""https://www.airlinequality.com/airline-reviews/british-airways""
+pages = 10
+page_size = 100
+
+reviews = []
+
+# for i in range(1, pages + 1):
+for i in range(1, pages + 1):
+
+    print(f""Scraping page {i}"")
+
+    # Create URL to collect links from paginated data
+    url = f""{base_url}/page/{i}/?sortby=post_date%3ADesc&pagesize={page_size}""
+
+    # Collect HTML data from this page
+    response = requests.get(url)
+
+    # Parse content
+    content = response.content
+    parsed_content = BeautifulSoup(content, 'html.parser')
+    for para in parsed_content.find_all(""div"", {""class"": ""text_content""}):
+        reviews.append(para.get_text())
+    
+    print(f""   ---> {len(reviews)} total reviews"")
+
+
+TimeoutError                              Traceback (most recent call last)
+~\anaconda3\lib\site-packages\urllib3\connection.py in _new_conn(self)
+    173         try:
+--> 174             conn = connection.create_connection(
+    175                 (self._dns_host, self.port), self.timeout, **extra_kw
+
+~\anaconda3\lib\site-packages\urllib3\util\connection.py in create_connection(address, timeout, source_address, socket_options)
+     94     if err is not None:
+---> 95         raise err
+     96 
+
+~\anaconda3\lib\site-packages\urllib3\util\connection.py in create_connection(address, timeout, source_address, socket_options)
+     84                 sock.bind(source_address)
+---> 85             sock.connect(sa)
+     86             return sock
+
+TimeoutError: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+NewConnectionError                        Traceback (most recent call last)
+~\anaconda3\lib\site-packages\urllib3\connectionpool.py in urlopen(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)
+    702             # Make the request on the httplib connection object.
+--> 703             httplib_response = self._make_request(
+    704                 conn,
+
+~\anaconda3\lib\site-packages\urllib3\connectionpool.py in _make_request(self, conn, method, url, timeout, chunked, **httplib_request_kw)
+    385         try:
+--> 386             self._validate_conn(conn)
+    387         except (SocketTimeout, BaseSSLError) as e:
+
+~\anaconda3\lib\site-packages\urllib3\connectionpool.py in _validate_conn(self, conn)
+   1041         if not getattr(conn, ""sock"", None):  # AppEngine might not have  `.sock`
+-> 1042             conn.connect()
+   1043 
+
+~\anaconda3\lib\site-packages\urllib3\connection.py in connect(self)
+    357         # Add certificate verification
+--> 358         self.sock = conn = self._new_conn()
+    359         hostname = self.host
+
+~\anaconda3\lib\site-packages\urllib3\connection.py in _new_conn(self)
+    185         except SocketError as e:
+--> 186             raise NewConnectionError(
+    187                 self, ""Failed to establish a new connection: %s"" % e
+
+NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x000002095A7CD550>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+MaxRetryError                             Traceback (most recent call last)
+~\anaconda3\lib\site-packages\requests\adapters.py in send(self, request, stream, timeout, verify, cert, proxies)
+    488             if not chunked:
+--> 489                 resp = conn.urlopen(
+    490                     method=request.method,
+
+~\anaconda3\lib\site-packages\urllib3\connectionpool.py in urlopen(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)
+    786 
+--> 787             retries = retries.increment(
+    788                 method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+
+~\anaconda3\lib\site-packages\urllib3\util\retry.py in increment(self, method, url, response, error, _pool, _stacktrace)
+    591         if new_retry.is_exhausted():
+--> 592             raise MaxRetryError(_pool, url, error or ResponseError(cause))
+    593 
+
+MaxRetryError: HTTPSConnectionPool(host='www.airlinequality.com', port=443): Max retries exceeded with url: /airline-reviews/british-airways/page/1/?sortby=post_date%3ADesc&pagesize=100 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002095A7CD550>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'))
+
+During handling of the above exception, another exception occurred:
+
+ConnectionError                           Traceback (most recent call last)
+~\AppData\Local\Temp\ipykernel_7652\3242930068.py in <module>
+     14 
+     15     # Collect HTML data from this page
+---> 16     response = requests.get(url)
+     17 
+     18     # Parse content
+
+~\anaconda3\lib\site-packages\requests\api.py in get(url, params, **kwargs)
+     71     """"""
+     72 
+---> 73     return request(""get"", url, params=params, **kwargs)
+     74 
+     75 
+
+~\anaconda3\lib\site-packages\requests\api.py in request(method, url, **kwargs)
+     57     # cases, and look like a memory leak in others.
+     58     with sessions.Session() as session:
+---> 59         return session.request(method=method, url=url, **kwargs)
+     60 
+     61 
+
+~\anaconda3\lib\site-packages\requests\sessions.py in request(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)
+    585         }
+    586         send_kwargs.update(settings)
+--> 587         resp = self.send(prep, **send_kwargs)
+    588 
+    589         return resp
+
+~\anaconda3\lib\site-packages\requests\sessions.py in send(self, request, **kwargs)
+    699 
+    700         # Send the request
+--> 701         r = adapter.send(request, **kwargs)
+    702 
+    703         # Total elapsed time of the request (approximately)
+
+~\anaconda3\lib\site-packages\requests\adapters.py in send(self, request, stream, timeout, verify, cert, proxies)
+    563                 raise SSLError(e, request=request)
+    564 
+--> 565             raise ConnectionError(e, request=request)
+    566 
+    567         except ClosedPoolError as e:
+
+ConnectionError: HTTPSConnectionPool(host='www.airlinequality.com', port=443): Max retries exceeded with url: /airline-reviews/british-airways/page/1/?sortby=post_date%3ADesc&pagesize=100 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002095A7CD550>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond'))
+",Diamond-Ruby,129057601,open,False,4,2023-03-27T14:02:57+00:00,2023-08-13T04:55:52+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1588198739,365,Updated a link,"Updated the link to ""A gallery of interesting Jupyter Notebooks""
+Previously it is https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks/
+Current working link: https://github.com/jupyter/jupyter/wiki#a-gallery-of-interesting-jupyter-notebooks/
+
+This fixes the issue [01.08 link changed #331](https://github.com/jakevdp/PythonDataScienceHandbook/issues/331)",bvvnmanikanta,25924707,open,False,0,2023-02-16T18:48:12+00:00,2023-02-16T18:48:12+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1580771980,364,Warning on 04.11 Customizing Matplotlib - Configurations and Stylesheets,"When I want to run the codes below 
+```
+# reset rcParams
+plt.rcParams.update(IPython_default);
+```
+I got those warning
+D:\Anaconda3\lib\_collections_abc.py:841: MatplotlibDeprecationWarning: 
+The examples.directory rcparam was deprecated in Matplotlib 3.0 and will be removed in 3.2. In the future, examples will be found relative to the 'datapath' directory.
+  self[key] = other[key]
+D:\Anaconda3\lib\_collections_abc.py:841: MatplotlibDeprecationWarning: 
+The savefig.frameon rcparam was deprecated in Matplotlib 3.1 and will be removed in 3.3.
+  self[key] = other[key]
+D:\Anaconda3\lib\_collections_abc.py:841: MatplotlibDeprecationWarning: 
+The text.latex.unicode rcparam was deprecated in Matplotlib 3.0 and will be removed in 3.2.
+  self[key] = other[key]
+D:\Anaconda3\lib\_collections_abc.py:841: MatplotlibDeprecationWarning: 
+The verbose.fileo rcparam was deprecated in Matplotlib 3.1 and will be removed in 3.3.
+  self[key] = other[key]
+D:\Anaconda3\lib\_collections_abc.py:841: MatplotlibDeprecationWarning: 
+The verbose.level rcparam was deprecated in Matplotlib 3.1 and will be removed in 3.3.
+  self[key] = other[key]
+
+How should I fix this problem?",LeonLrz,59362482,open,False,0,2023-02-11T10:10:44+00:00,2023-02-11T10:10:44+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1578681070,363,Python,,rcruzjs,1739965,open,False,2,2023-02-09T22:03:23+00:00,2023-08-09T15:32:22+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1505526502,361,New in version 0.20: SimpleImputer replaces the previous sklearn.prep…,…rocessing.Imputer estimator which is now removed. The import statement and three instances of Imputer --> SimpleImputer are changed in this commit.,kernelrich,16345819,open,False,0,2022-12-21T00:35:31+00:00,2022-12-21T00:35:31+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1504631145,360,PDSH,,geosigmat,25963555,closed,False,0,2022-12-20T14:15:05+00:00,2022-12-20T14:16:21+00:00,2022-12-20T14:16:21+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1458840502,359,Bump pillow from 3.4.2 to 9.3.0,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 3.4.2 to 9.3.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>9.3.0</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/9.3.0.html"">https://pillow.readthedocs.io/en/stable/releasenotes/9.3.0.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Initialize libtiff buffer when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6699"">#6699</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Limit SAMPLESPERPIXEL to avoid runtime DOS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6700"">#6700</a> [<a href=""https://github.com/wiredfool""><code>@​wiredfool</code></a>]</li>
+<li>Inline fname2char to fix memory leak <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6329"">#6329</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Fix memory leaks related to text features <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6330"">#6330</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Use double quotes for version check on old CPython on Windows <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6695"">#6695</a> [<a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+<li>GHA: replace deprecated set-output command with GITHUB_OUTPUT file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6697"">#6697</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Remove backup implementation of Round for Windows platforms <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6693"">#6693</a> [<a href=""https://github.com/cgohlke""><code>@​cgohlke</code></a>]</li>
+<li>Upload fribidi.dll to GitHub Actions <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6532"">#6532</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Fixed set_variation_by_name offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6445"">#6445</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Windows build improvements <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6562"">#6562</a> [<a href=""https://github.com/nulano""><code>@​nulano</code></a>]</li>
+<li>Fix malloc in _imagingft.c:font_setvaraxes <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6690"">#6690</a> [<a href=""https://github.com/cgohlke""><code>@​cgohlke</code></a>]</li>
+<li>Only use ASCII characters in C source file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6691"">#6691</a> [<a href=""https://github.com/cgohlke""><code>@​cgohlke</code></a>]</li>
+<li>Release Python GIL when converting images using matrix operations <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6418"">#6418</a> [<a href=""https://github.com/hmaarrfk""><code>@​hmaarrfk</code></a>]</li>
+<li>Added ExifTags enums <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6630"">#6630</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not modify previous frame when calculating delta in PNG <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6683"">#6683</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added support for reading BMP images with RLE4 compression <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6674"">#6674</a> [<a href=""https://github.com/npjg""><code>@​npjg</code></a>]</li>
+<li>Decode JPEG compressed BLP1 data in original mode <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6678"">#6678</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>pylint warnings <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6659"">#6659</a> [<a href=""https://github.com/marksmayo""><code>@​marksmayo</code></a>]</li>
+<li>Added GPS TIFF tag info <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6661"">#6661</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added conversion between RGB/RGBA/RGBX and LAB <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6647"">#6647</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not attempt normalization if mode is already normal <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6644"">#6644</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed seeking to an L frame in a GIF <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6576"">#6576</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Consider all frames when selecting mode for PNG save_all <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6610"">#6610</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Don't reassign crc on ChunkStream close <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6627"">#6627</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Raise a warning if NumPy failed to raise an error during conversion <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6594"">#6594</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Only read a maximum of 100 bytes at a time in IMT header <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6623"">#6623</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Show all frames in ImageShow <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6611"">#6611</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Allow FLI palette chunk to not be first <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6626"">#6626</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>If first GIF frame has transparency for RGB_ALWAYS loading strategy, use RGBA mode <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6592"">#6592</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Round box position to integer when pasting embedded color <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6517"">#6517</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed EXIF prefix when saving WebP <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6582"">#6582</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Pad IM palette to 768 bytes when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6579"">#6579</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added DDS BC6H reading <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6449"">#6449</a> [<a href=""https://github.com/ShadelessFox""><code>@​ShadelessFox</code></a>]</li>
+<li>Added support for opening WhiteIsZero 16-bit integer TIFF images <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6642"">#6642</a> [<a href=""https://github.com/JayWiz""><code>@​JayWiz</code></a>]</li>
+<li>Raise an error when allocating translucent color to RGB palette <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6654"">#6654</a> [<a href=""https://github.com/jsbueno""><code>@​jsbueno</code></a>]</li>
+<li>Moved mode check outside of loops <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6650"">#6650</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added reading of TIFF child images <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6569"">#6569</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved ImageOps palette handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6596"">#6596</a> [<a href=""https://github.com/PososikTeam""><code>@​PososikTeam</code></a>]</li>
+<li>Defer parsing of palette into colors <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6567"">#6567</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Apply transparency to P images in ImageTk.PhotoImage <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6559"">#6559</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Use rounding in ImageOps contain() and pad() <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6522"">#6522</a> [<a href=""https://github.com/bibinhashley""><code>@​bibinhashley</code></a>]</li>
+<li>Fixed GIF remapping to palette with duplicate entries <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6548"">#6548</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Allow remap_palette() to return an image with less than 256 palette entries <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6543"">#6543</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Corrected BMP and TGA palette size when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6500"">#6500</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst"">pillow's changelog</a>.</em></p>
+<blockquote>
+<h2>9.3.0 (2022-10-29)</h2>
+<ul>
+<li>
+<p>Limit SAMPLESPERPIXEL to avoid runtime DOS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6700"">#6700</a>
+[wiredfool]</p>
+</li>
+<li>
+<p>Initialize libtiff buffer when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6699"">#6699</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Inline fname2char to fix memory leak <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6329"">#6329</a>
+[nulano]</p>
+</li>
+<li>
+<p>Fix memory leaks related to text features <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6330"">#6330</a>
+[nulano]</p>
+</li>
+<li>
+<p>Use double quotes for version check on old CPython on Windows <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6695"">#6695</a>
+[hugovk]</p>
+</li>
+<li>
+<p>Remove backup implementation of Round for Windows platforms <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6693"">#6693</a>
+[cgohlke]</p>
+</li>
+<li>
+<p>Fixed set_variation_by_name offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6445"">#6445</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Fix malloc in _imagingft.c:font_setvaraxes <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6690"">#6690</a>
+[cgohlke]</p>
+</li>
+<li>
+<p>Release Python GIL when converting images using matrix operations <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6418"">#6418</a>
+[hmaarrfk]</p>
+</li>
+<li>
+<p>Added ExifTags enums <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6630"">#6630</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Do not modify previous frame when calculating delta in PNG <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6683"">#6683</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added support for reading BMP images with RLE4 compression <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6674"">#6674</a>
+[npjg, radarhere]</p>
+</li>
+<li>
+<p>Decode JPEG compressed BLP1 data in original mode <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6678"">#6678</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added GPS TIFF tag info <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6661"">#6661</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added conversion between RGB/RGBA/RGBX and LAB <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6647"">#6647</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Do not attempt normalization if mode is already normal <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6644"">#6644</a>
+[radarhere]</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/d594f4cb8dc47fb0c69ae58d9fff86faae4515bd""><code>d594f4c</code></a> Update CHANGES.rst [ci skip]</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/909dc64ed5f676169aa3d9b0c26f132a06321b83""><code>909dc64</code></a> 9.3.0 version bump</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/1a51ce7b955c65c8f2c6bc7772735b197b8a6aa3""><code>1a51ce7</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6699"">#6699</a> from hugovk/security-libtiff_buffer</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/2444cddab2f83f28687c7c20871574acbb6dbcf3""><code>2444cdd</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6700"">#6700</a> from hugovk/security-samples_per_pixel-sec</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/744f455830871d61a8de0a5e629d4c2e33817cbb""><code>744f455</code></a> Added release notes</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/0846bfae48513f2f51ca8547ed3b8954fa501fda""><code>0846bfa</code></a> Add to release notes</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/799a6a01052cea3f417a571d7c64cd14acc18c64""><code>799a6a0</code></a> Fix linting</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/00b25fd3ac3648bc28eff5d4c4d816e605e3f05f""><code>00b25fd</code></a> Hide UserWarning in logs</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/05b175ef88c22f5c416bc9b8d5b897dea1abbf2c""><code>05b175e</code></a> Tighter test case</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/13f2c5ae14901c89c38f898496102afd9daeaf6d""><code>13f2c5a</code></a> Prevent DOS with large SAMPLESPERPIXEL in Tiff IFD</li>
+<li>Additional commits viewable in <a href=""https://github.com/python-pillow/Pillow/compare/3.4.2...9.3.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=pillow&package-manager=pip&previous-version=3.4.2&new-version=9.3.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,1,2022-11-22T01:19:12+00:00,2023-10-03T20:55:22+00:00,2023-10-03T20:54:59+00:00,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1441901447,358,Data science and Business Process Management(BPM),"Hello Team,
+
+I am an IT student specialising in data science career, recently being interested in BPM(Business Process Management). If I am here is to have a help from you on: what are the different ways by which we can apply data science with BPM(Business Process Management)?
+
+In the expectation of a positive response please receive my deepest greetings.
+
+Best regards.",christbryan,58194263,open,False,1,2022-11-09T11:13:02+00:00,2022-12-23T08:00:41+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1429331940,357,JupyterHub Error: 403 Forbidden.,"We are unable to save, upload or delete files on JupyterHub.  We have performed all the troubleshooting i.e. verifying config files and we have even tried to reinstall nginx server. However the issue is not resolved and no solution can be found. ",urmi1203,65810828,closed,False,1,2022-10-31T06:32:42+00:00,2022-10-31T14:57:43+00:00,2022-10-31T14:57:43+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1419724017,356,For me,,NuhaKamal,76655580,closed,False,0,2022-10-23T09:34:22+00:00,2022-10-23T15:53:15+00:00,2022-10-23T15:53:15+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1396481363,355,Add files via upload,,SahilJatoi744,89636837,closed,False,1,2022-10-04T15:34:33+00:00,2022-10-04T16:48:50+00:00,2022-10-04T16:48:50+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1394056951,354,Appendix : Covariance Type,"The code is found in the a/m.
+
+Encountering error: 
+cannot unpack non-iterable numpy.float64 object
+Error in callback <function install_repl_displayhook.<locals>.post_execute at 0x0000028D8639F9D0> (for post_execute):
+
+It is related to 
+draw_ellipse(model.means_[0], model.covariances_[0], ax[i],
+                 alpha=0.2)
+
+When model.covariance passed data to 
+width, height = 2 * np.sqrt(covariance)
+
+I think that the reason is height is blank or no value causing the problem.
+
+What is the fix?  
+
+Thank you. 
+",FluffyG88,112603611,open,False,0,2022-10-03T03:04:59+00:00,2022-10-03T03:04:59+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1386143873,353,Updated deprecated df.ix[] to df.loc[] in '03.11-working-with-time-se…,,codeWinger22,55325844,closed,False,3,2022-09-26T14:04:24+00:00,2022-09-26T17:58:16+00:00,2022-09-26T15:27:17+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1385687119,352,Updated deprecated df.ix[] to df.loc[] in '03.11-working-with-time-se…,,codeWinger22,55325844,closed,False,1,2022-09-26T08:55:13+00:00,2022-09-26T15:28:46+00:00,2022-09-26T14:01:43+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1379324974,351,Python data science ,,Altruist4u,43975436,closed,False,0,2022-09-20T12:16:49+00:00,2022-09-20T13:31:38+00:00,2022-09-20T13:31:38+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1379246467,350,Update deprecated `df.ix[]` to `df.loc[]` in '03.11-working-with-time-series.html',"`pandas.DataFrame.ix` is deprecated as of version `0.20.0`, and consequently the following code from https://jakevdp.github.io/PythonDataScienceHandbook/03.11-working-with-time-series.html generates error if alternative is not used (described in second code block).
+
+_incorrect (uses deprecated indexer):_
+
+```python
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(1, 2, figsize=(14, 5))
+by_time.ix['Weekday'].plot(ax=ax[0], title='Weekdays',
+                           xticks=hourly_ticks, style=[':', '--', '-'])
+by_time.ix['Weekend'].plot(ax=ax[1], title='Weekends',
+                           xticks=hourly_ticks, style=[':', '--', '-']);
+```
+
+_correct (uses `loc`):_
+
+```python
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(1, 2, figsize=(14, 5))
+by_time.loc['Weekday'].plot(ax=ax[0], title='Weekdays',
+                           xticks=hourly_ticks, style=[':', '--', '-'])
+by_time.loc['Weekend'].plot(ax=ax[1], title='Weekends',
+                           xticks=hourly_ticks, style=[':', '--', '-']);
+```
+
+Kindly, _N.B._, `loc` should be used in place of `ix`. Using the code prefixed by '_correct_' will generate the appropriate plot as described in the chapter.
+
+Regards,
+Milo
+",milodubois,103326724,closed,False,1,2022-09-20T11:16:53+00:00,2022-09-26T15:28:10+00:00,2022-09-26T15:28:10+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1376732918,349,Change deprecated Set operations on pd.Index,"Future versions of Pandas will not support `pd.Index` operations like this:
+
+```py
+first | second
+```
+
+but must be used like this
+
+```py
+first.union(second)
+```
+
+This is similar for `&` and `^`.
+
+See merged [PR #37374](https://github.com/pandas-dev/pandas/pull/37374) in pandas-dev/pandas.
+
+Thus, all references, including the introductory reference in chapter 03.01 should be updated in PDSH or perhaps users should be made aware of this change when going through PDSH.
+
+Thank you.",milodubois,103326724,closed,False,1,2022-09-17T10:24:40+00:00,2022-09-26T15:28:25+00:00,2022-09-26T15:28:25+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1371356285,348,Ольга,.,Elite-Roman,111511330,closed,False,0,2022-09-13T12:14:26+00:00,2022-09-13T12:18:10+00:00,2022-09-13T12:18:10+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1365444893,347,remove it,,riefkyiqbal,113079298,open,False,0,2022-09-08T02:55:11+00:00,2022-09-08T02:55:39+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1359216593,346,Fixed some typos and ensured that some words are consistently spelled,Thank you!,ngdeleito,2805923,closed,False,1,2022-09-01T18:03:06+00:00,2022-09-26T15:27:43+00:00,2022-09-26T15:27:43+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1353144031,345,Python ,,amirinamdar,106389826,closed,False,0,2022-08-27T21:02:45+00:00,2022-08-28T20:32:43+00:00,2022-08-28T20:32:43+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1335065320,344,Alternative Documentation with Mkdocs,"Hi everyone. I have developed an alternative documentation with mkdocs, google colab and github actions. This repository lives at [fralfaro/PythonDataScienceHandbook](https://github.com/fralfaro/PythonDataScienceHandbook) (documentation: [link](https://fralfaro.github.io/PythonDataScienceHandbook/)). In each chapter there is a jupyter notebook connected with google colab.  This documentation solve **pandas output**:
+
+* Original Documentation:
+![1](https://user-images.githubusercontent.com/18752583/183999701-3df2f2fc-b9e6-4ba4-875c-65976fe44064.png)
+
+* Alternative Documentation:
+![2](https://user-images.githubusercontent.com/18752583/183999909-4ef4c3fc-a5bd-4c9f-bd59-0d1e20d0c6e3.png)
+
+Another interesting point is that all the documentation is generated in a single branch (**master**), and it is not necessary to use **website** branch. With this, the costs of maintaining both branches will be reduced.
+
+I hope this is a good alternative. If you have any questions, happy to answer them!",fralfaro,18752583,open,False,0,2022-08-10T19:07:22+00:00,2022-08-10T19:24:48+00:00,,,1,1,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1330805899,343,Y,,Moussayoussoufimam,57353849,closed,False,0,2022-08-06T17:32:31+00:00,2022-08-06T18:27:42+00:00,2022-08-06T18:27:42+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1315884508,342,promjena,,panama99,83357434,closed,False,0,2022-07-24T11:45:14+00:00,2022-07-24T15:08:28+00:00,2022-07-24T12:45:18+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1306890605,341,Update train_test_split import,,danparizher,105245560,closed,False,0,2022-07-16T19:58:15+00:00,2022-07-27T03:23:57+00:00,2022-07-27T03:23:57+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1298546130,340,When are the codes of python data science handbook 2rd version available?,"Dear Mr. Vanderplas,
+
+I have noted your book entitled as 'Python Data Science Handbook 2nd edition' was online. I am interested in when the jupter codes of this book are available?
+
+Thanks a lot for your kind support
+
+Best regards,
+Song Yang
+",yangsong2020,61103026,open,False,3,2022-07-08T06:18:53+00:00,2022-12-23T08:02:15+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1279097354,339,Bump numpy from 1.11.1 to 1.22.0,"Bumps [numpy](https://github.com/numpy/numpy) from 1.11.1 to 1.22.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/numpy/numpy/releases"">numpy's releases</a>.</em></p>
+<blockquote>
+<h2>v1.22.0</h2>
+<h1>NumPy 1.22.0 Release Notes</h1>
+<p>NumPy 1.22.0 is a big release featuring the work of 153 contributors
+spread over 609 pull requests. There have been many improvements,
+highlights are:</p>
+<ul>
+<li>Annotations of the main namespace are essentially complete. Upstream
+is a moving target, so there will likely be further improvements,
+but the major work is done. This is probably the most user visible
+enhancement in this release.</li>
+<li>A preliminary version of the proposed Array-API is provided. This is
+a step in creating a standard collection of functions that can be
+used across application such as CuPy and JAX.</li>
+<li>NumPy now has a DLPack backend. DLPack provides a common interchange
+format for array (tensor) data.</li>
+<li>New methods for <code>quantile</code>, <code>percentile</code>, and related functions. The
+new methods provide a complete set of the methods commonly found in
+the literature.</li>
+<li>A new configurable allocator for use by downstream projects.</li>
+</ul>
+<p>These are in addition to the ongoing work to provide SIMD support for
+commonly used functions, improvements to F2PY, and better documentation.</p>
+<p>The Python versions supported in this release are 3.8-3.10, Python 3.7
+has been dropped. Note that 32 bit wheels are only provided for Python
+3.8 and 3.9 on Windows, all other wheels are 64 bits on account of
+Ubuntu, Fedora, and other Linux distributions dropping 32 bit support.
+All 64 bit wheels are also linked with 64 bit integer OpenBLAS, which should fix
+the occasional problems encountered by folks using truly huge arrays.</p>
+<h2>Expired deprecations</h2>
+<h3>Deprecated numeric style dtype strings have been removed</h3>
+<p>Using the strings <code>&quot;Bytes0&quot;</code>, <code>&quot;Datetime64&quot;</code>, <code>&quot;Str0&quot;</code>, <code>&quot;Uint32&quot;</code>,
+and <code>&quot;Uint64&quot;</code> as a dtype will now raise a <code>TypeError</code>.</p>
+<p>(<a href=""https://github-redirect.dependabot.com/numpy/numpy/pull/19539"">gh-19539</a>)</p>
+<h3>Expired deprecations for <code>loads</code>, <code>ndfromtxt</code>, and <code>mafromtxt</code> in npyio</h3>
+<p><code>numpy.loads</code> was deprecated in v1.15, with the recommendation that
+users use <code>pickle.loads</code> instead. <code>ndfromtxt</code> and <code>mafromtxt</code> were both
+deprecated in v1.17 - users should use <code>numpy.genfromtxt</code> instead with
+the appropriate value for the <code>usemask</code> parameter.</p>
+<p>(<a href=""https://github-redirect.dependabot.com/numpy/numpy/pull/19615"">gh-19615</a>)</p>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/numpy/numpy/commit/4adc87dff15a247e417d50f10cc4def8e1c17a03""><code>4adc87d</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/20685"">#20685</a> from charris/prepare-for-1.22.0-release</li>
+<li><a href=""https://github.com/numpy/numpy/commit/fd66547557f57c430d41be2fc0764f74a62e8ccf""><code>fd66547</code></a> REL: Prepare for the NumPy 1.22.0 release.</li>
+<li><a href=""https://github.com/numpy/numpy/commit/125304b035effcd82e366e601b102e7347eaa9ba""><code>125304b</code></a> wip</li>
+<li><a href=""https://github.com/numpy/numpy/commit/c283859128b1a4b57014581570a23ed7950a24ea""><code>c283859</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/20682"">#20682</a> from charris/backport-20416</li>
+<li><a href=""https://github.com/numpy/numpy/commit/5399c03d4a069fe81a1616be0184c9749d7271ee""><code>5399c03</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/20681"">#20681</a> from charris/backport-20954</li>
+<li><a href=""https://github.com/numpy/numpy/commit/f9c45f8ebf31340b1a5a0371bfca25afcfc4794e""><code>f9c45f8</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/20680"">#20680</a> from charris/backport-20663</li>
+<li><a href=""https://github.com/numpy/numpy/commit/794b36f7e1bf2a8c42774ab0db86a74bd32f674b""><code>794b36f</code></a> Update armccompiler.py</li>
+<li><a href=""https://github.com/numpy/numpy/commit/d93b14e3d7abaa1d837825e51671f817788e120f""><code>d93b14e</code></a> Update test_public_api.py</li>
+<li><a href=""https://github.com/numpy/numpy/commit/7662c0789cc6a70d5ad4d950ee2e95f3afef7df6""><code>7662c07</code></a> Update <strong>init</strong>.py</li>
+<li><a href=""https://github.com/numpy/numpy/commit/311ab52488a7d096ac3bc4c2de0fdae17ecd13ef""><code>311ab52</code></a> Update armccompiler.py</li>
+<li>Additional commits viewable in <a href=""https://github.com/numpy/numpy/compare/v1.11.1...v1.22.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=numpy&package-manager=pip&previous-version=1.11.1&new-version=1.22.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,1,2022-06-21T21:11:27+00:00,2022-09-26T15:28:35+00:00,2022-09-26T15:27:56+00:00,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1276370273,338,fixed typo,"This change resolves #334, changing sciece to science",Siddharth114,90757474,open,False,0,2022-06-20T05:05:59+00:00,2023-04-15T18:27:22+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1275477815,337,Bump numpy from 1.11.1 to 1.21.0,"Bumps [numpy](https://github.com/numpy/numpy) from 1.11.1 to 1.21.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/numpy/numpy/releases"">numpy's releases</a>.</em></p>
+<blockquote>
+<h2>v1.21.0</h2>
+<h1>NumPy 1.21.0 Release Notes</h1>
+<p>The NumPy 1.21.0 release highlights are</p>
+<ul>
+<li>continued SIMD work covering more functions and platforms,</li>
+<li>initial work on the new dtype infrastructure and casting,</li>
+<li>universal2 wheels for Python 3.8 and Python 3.9 on Mac,</li>
+<li>improved documentation,</li>
+<li>improved annotations,</li>
+<li>new <code>PCG64DXSM</code> bitgenerator for random numbers.</li>
+</ul>
+<p>In addition there are the usual large number of bug fixes and other
+improvements.</p>
+<p>The Python versions supported for this release are 3.7-3.9. Official
+support for Python 3.10 will be added when it is released.</p>
+<p>:warning:  Warning: there are unresolved problems compiling NumPy 1.21.0 with gcc-11.1 .</p>
+<ul>
+<li>Optimization level <code>-O3</code> results in many wrong warnings when running the tests.</li>
+<li>On some hardware NumPy will hang in an infinite loop.</li>
+</ul>
+<h2>New functions</h2>
+<h3>Add PCG64DXSM BitGenerator</h3>
+<p>Uses of the PCG64 BitGenerator in a massively-parallel context have
+been shown to have statistical weaknesses that were not apparent at the
+first release in numpy 1.17. Most users will never observe this weakness
+and are safe to continue to use PCG64. We have introduced a new
+PCG64DXSM BitGenerator that will eventually become the new default
+BitGenerator implementation used by <code>default_rng</code> in future releases.
+PCG64DXSM solves the statistical weakness while preserving the
+performance and the features of PCG64.</p>
+<p>See <code>upgrading-pcg64</code> for more details.</p>
+<p>(<a href=""https://github-redirect.dependabot.com/numpy/numpy/pull/18906"">gh-18906</a>)</p>
+<h2>Expired deprecations</h2>
+<ul>
+<li>The <code>shape</code> argument <code>numpy.unravel_index</code> cannot be
+passed as <code>dims</code> keyword argument anymore. (Was deprecated in NumPy
+1.16.)</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/numpy/numpy/commit/b235f9e701e14ed6f6f6dcba885f7986a833743f""><code>b235f9e</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/19283"">#19283</a> from charris/prepare-1.21.0-release</li>
+<li><a href=""https://github.com/numpy/numpy/commit/34aebc2824cf8c2bdbe19040b82f98f18557c8ba""><code>34aebc2</code></a> MAINT: Update 1.21.0-notes.rst</li>
+<li><a href=""https://github.com/numpy/numpy/commit/493b64bfe9c5396498325b87e5e80e1917555c41""><code>493b64b</code></a> MAINT: Update 1.21.0-changelog.rst</li>
+<li><a href=""https://github.com/numpy/numpy/commit/07d7e72ab6880c05b5fdd98482cf88982e778393""><code>07d7e72</code></a> MAINT: Remove accidentally created directory.</li>
+<li><a href=""https://github.com/numpy/numpy/commit/032fca5e2e9749b152ec56153f476e05efdff287""><code>032fca5</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/19280"">#19280</a> from charris/backport-19277</li>
+<li><a href=""https://github.com/numpy/numpy/commit/7d25b81025a50cc0368f5727c65e875ca769469a""><code>7d25b81</code></a> BUG: Fix refcount leak in ResultType</li>
+<li><a href=""https://github.com/numpy/numpy/commit/fa5754e8c159a37fcd9345df261cf82821088ea0""><code>fa5754e</code></a> BUG: Add missing DECREF in new path</li>
+<li><a href=""https://github.com/numpy/numpy/commit/61127bb4d46d523b699da1b63abaa5035670da27""><code>61127bb</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/19268"">#19268</a> from charris/backport-19264</li>
+<li><a href=""https://github.com/numpy/numpy/commit/143d45fff3ed9e051bdeef7bdb4df38025ea7d1c""><code>143d45f</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/numpy/numpy/issues/19269"">#19269</a> from charris/backport-19228</li>
+<li><a href=""https://github.com/numpy/numpy/commit/d80e4738f781a1d206bbc04a2e863299e5f2e104""><code>d80e473</code></a> BUG: Removed typing for == and != in dtypes</li>
+<li>Additional commits viewable in <a href=""https://github.com/numpy/numpy/compare/v1.11.1...v1.21.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=numpy&package-manager=pip&previous-version=1.11.1&new-version=1.21.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,1,2022-06-17T21:09:35+00:00,2022-06-17T21:47:09+00:00,2022-06-17T21:46:54+00:00,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1215896557,336,"04.14 Seaborn - Error ""If using all scalar values, you must pass an index"" in kdeplot","This line at 04.14-Visualization-With-Seaborn :
+
+> If we pass the full two-dimensional dataset to kdeplot, we will get a two-dimensional visualization of the data:
+> `sns.kdeplot(data)`
+
+Gives an error:
+
+> _If using all scalar values, you must pass an index_
+
+To fix the error, more parameters should be added:
+
+> `sns.kdeplot(data=data, x='x', y='y')`
+
+or
+
+> `sns.kdeplot(data.x, data.y)`",ivlmag,104437147,open,False,0,2022-04-26T12:38:22+00:00,2022-04-26T12:38:22+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1204308235,335,https://github.com/sedromathro/https---downloads.o-pitblast.com-files…,"
+[ETL_geology.xlsx](https://github.com/jakevdp/PythonDataScienceHandbook/files/8488179/ETL_geology.xlsx)
+…-manual-O-Pitblast-20--20Drill-20Log.pdf.git
+
+https://github.com/sedromathro/https---downloads.o-pitblast.com-files-manual-O-Pitblast-20--20Drill-20Log.pdf.git",sedromathro,100479560,closed,False,1,2022-04-14T09:49:52+00:00,2022-04-14T09:50:22+00:00,2022-04-14T09:50:09+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1196715937,334,Science spelled Sciece,"https://github.com/jakevdp/PythonDataScienceHandbook/blob/8a34a4f653bdbdc01415a94dc20d4e9b97438965/notebooks/00.00-Preface.ipynb?short_path=7d635a8#L115
+
+",ZachB123,81196202,open,False,0,2022-04-08T01:20:28+00:00,2022-04-08T01:20:28+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1178797032,332,Python,,PatrickKish1,98470284,open,False,0,2022-03-24T00:16:44+00:00,2022-03-24T00:16:44+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1174093004,331,01.08 link changed,"In 01.08 - Web ressources section 
+Link to ""A gallery of interesting Jupyter Notebooks"" changed.
+Old link still propose to redirect to the new one.",ghost,10137,open,False,0,2022-03-18T22:53:30+00:00,2022-03-18T22:53:30+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1173246868,330,Python,,ybraju3,101859747,open,False,0,2022-03-18T06:57:56+00:00,2022-03-18T06:57:56+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1170761029,329,Graphing the Binning Example in 02.07,"In 02.07, graphing the histogram using [plt.plot(bins, counts, linestyle='steps')] pops up an error. It says that 'steps' is not a valid value for linestyles. ",andrewxu99,91357678,open,False,2,2022-03-16T09:33:04+00:00,2022-06-27T20:39:00+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1169042467,328,Squashed commit of the following:,"commit 75dcbb798681718426d565bab0866e187be66f8e
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Fri Mar 11 23:14:31 2022 +0000
+
+    Bump pillow from 3.4.2 to 9.0.1
+
+    Bumps [pillow](https://github.com/python-pillow/Pillow) from 3.4.2 to 9.0.1.
+    - [Release notes](https://github.com/python-pillow/Pillow/releases)
+    - [Changelog](https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst)
+    - [Commits](https://github.com/python-pillow/Pillow/compare/3.4.2...9.0.1)
+
+    ---
+    updated-dependencies:
+    - dependency-name: pillow
+      dependency-type: direct:production
+    ...
+
+    Signed-off-by: dependabot[bot] <support@github.com>",AlxKrispy,101602487,closed,False,0,2022-03-15T00:17:07+00:00,2022-03-25T07:33:17+00:00,2022-03-25T07:33:17+00:00,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1166970751,327,Bump pillow from 3.4.2 to 9.0.1,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 3.4.2 to 9.0.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>9.0.1</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html"">https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>In show_file, use os.remove to remove temporary images. CVE-2022-24303 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6010"">#6010</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>, <a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+<li>Restrict builtins within lambdas for ImageMath.eval. CVE-2022-22817 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6009"">#6009</a> [radarhere]</li>
+</ul>
+<h2>9.0.0</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html"">https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Restrict builtins for ImageMath.eval() <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5923"">#5923</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Ensure JpegImagePlugin stops at the end of a truncated file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed ImagePath.Path array handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5920"">#5920</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Remove consecutive duplicate tiles that only differ by their offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5919"">#5919</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed redundant part of condition <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5915"">#5915</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Explicitly enable strip chopping for large uncompressed TIFFs <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5517"">#5517</a> [<a href=""https://github.com/kmilos""><code>@​kmilos</code></a>]</li>
+<li>Use the Windows method to get TCL functions on Cygwin <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5807"">#5807</a> [<a href=""https://github.com/DWesl""><code>@​DWesl</code></a>]</li>
+<li>Changed error type to allow for incremental WebP parsing <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5404"">#5404</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved I;16 operations on big endian <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5901"">#5901</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Ensure that BMP pixel data offset does not ignore palette <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5899"">#5899</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Limit quantized palette to number of colors <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5879"">#5879</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Use latin1 encoding to decode bytes <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5870"">#5870</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed palette index for zeroed color in FASTOCTREE quantize <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5869"">#5869</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>When saving RGBA to GIF, make use of first transparent palette entry <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5859"">#5859</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Pass SAMPLEFORMAT to libtiff <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5848"">#5848</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added rounding when converting P and PA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5824"">#5824</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved putdata() documentation and data handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5910"">#5910</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Exclude carriage return in PDF regex to help prevent ReDoS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5912"">#5912</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Image.NONE is only used for resampling and dithers <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5908"">#5908</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed freeing pointer in ImageDraw.Outline.transform <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5909"">#5909</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Add Tidelift alignment action and badge <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5763"">#5763</a> [<a href=""https://github.com/aclark4life""><code>@​aclark4life</code></a>]</li>
+<li>Replaced further direct invocations of setup.py <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5906"">#5906</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added ImageShow support for xdg-open <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5897"">#5897</a> [<a href=""https://github.com/m-shinder""><code>@​m-shinder</code></a>]</li>
+<li>Fixed typo <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5902"">#5902</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Switched from deprecated &quot;setup.py install&quot; to &quot;pip install .&quot; <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5896"">#5896</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Support 16-bit grayscale ImageQt conversion <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5856"">#5856</a> [<a href=""https://github.com/cmbruns""><code>@​cmbruns</code></a>]</li>
+<li>Fixed raising OSError in _safe_read when size is greater than SAFEBLOCK <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5872"">#5872</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Convert subsequent GIF frames to RGB or RGBA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5857"">#5857</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>WebP: Fix memory leak during decoding on failure <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5798"">#5798</a> [<a href=""https://github.com/ilai-deutel""><code>@​ilai-deutel</code></a>]</li>
+<li>Do not prematurely return in ImageFile when saving to stdout <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5665"">#5665</a> [<a href=""https://github.com/infmagic2047""><code>@​infmagic2047</code></a>]</li>
+<li>Added support for top right and bottom right TGA orientations <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5829"">#5829</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Corrected ICNS file length in header <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5845"">#5845</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Block tile TIFF tags when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5839"">#5839</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added line width argument to ImageDraw polygon <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5694"">#5694</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not redeclare class each time when converting to NumPy <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5844"">#5844</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Only prevent repeated polygon pixels when drawing with transparency <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5835"">#5835</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst"">pillow's changelog</a>.</em></p>
+<blockquote>
+<h2>9.0.1 (2022-02-03)</h2>
+<ul>
+<li>
+<p>In show_file, use os.remove to remove temporary images. CVE-2022-24303 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6010"">#6010</a>
+[radarhere, hugovk]</p>
+</li>
+<li>
+<p>Restrict builtins within lambdas for ImageMath.eval. CVE-2022-22817 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/6009"">#6009</a>
+[radarhere]</p>
+</li>
+</ul>
+<h2>9.0.0 (2022-01-02)</h2>
+<ul>
+<li>
+<p>Restrict builtins for ImageMath.eval(). CVE-2022-22817 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5923"">#5923</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Ensure JpegImagePlugin stops at the end of a truncated file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Fixed ImagePath.Path array handling. CVE-2022-22815, CVE-2022-22816 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5920"">#5920</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Remove consecutive duplicate tiles that only differ by their offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5919"">#5919</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Improved I;16 operations on big endian <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5901"">#5901</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Limit quantized palette to number of colors <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5879"">#5879</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Fixed palette index for zeroed color in FASTOCTREE quantize <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5869"">#5869</a>
+[radarhere]</p>
+</li>
+<li>
+<p>When saving RGBA to GIF, make use of first transparent palette entry <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5859"">#5859</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Pass SAMPLEFORMAT to libtiff <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5848"">#5848</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added rounding when converting P and PA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5824"">#5824</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Improved putdata() documentation and data handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5910"">#5910</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Exclude carriage return in PDF regex to help prevent ReDoS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5912"">#5912</a>
+[hugovk]</p>
+</li>
+<li>
+<p>Fixed freeing pointer in ImageDraw.Outline.transform <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5909"">#5909</a>
+[radarhere]</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/6deac9e3a23caffbfdd75c00d3f0a1cd36cdbd5d""><code>6deac9e</code></a> 9.0.1 version bump</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/c04d812b902356b8c20ee2ab881e1d96f7d66b4b""><code>c04d812</code></a> Update CHANGES.rst [ci skip]</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/4fabec36197735438c80c174d018498be606c46c""><code>4fabec3</code></a> Added release notes for 9.0.1</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/02affaa491df37117a7562e6ba6ac52c4c871195""><code>02affaa</code></a> Added delay after opening image with xdg-open</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/ca0b58521881b95e47ea49d960d13d1c3dac823d""><code>ca0b585</code></a> Updated formatting</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/427221ef5f19157001bf8b1ad7cfe0b905ca8c26""><code>427221e</code></a> In show_file, use os.remove to remove temporary images</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/c930be0758ac02cf15a2b8d5409d50d443550581""><code>c930be0</code></a> Restrict builtins within lambdas for ImageMath.eval</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/75b69dd239a4647032f67a80d9b444228af2b736""><code>75b69dd</code></a> Dont need to pin for GHA</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/cd938a7744cb46e2ea525a0c3dd79aa08f98c150""><code>cd938a7</code></a> Autolink CWE numbers with sphinx-issues</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/2e9c461ca417083c43145a991bf9e1ec93237d89""><code>2e9c461</code></a> Add CVE IDs</li>
+<li>Additional commits viewable in <a href=""https://github.com/python-pillow/Pillow/compare/3.4.2...9.0.1"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=pillow&package-manager=pip&previous-version=3.4.2&new-version=9.0.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,1,2022-03-11T23:14:31+00:00,2022-11-22T01:19:36+00:00,2022-11-22T01:19:18+00:00,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1160252435,326,error in 4.5.2 Continuous Errors,"from sklearn.gaussian_process import GaussianProcess
+
+model = lambda x: x * np.sin(x)
+xdata = np.array([1, 3, 5, 6, 8])
+ydata = model(xdata)
+
+**gp = GaussianProcess(corr='cubic', theta0=1e-2, thetaL=1e-4, thetaU=1E-1,
+                     random_start=100)**
+gp.fit(xdata[:, np.newaxis], ydata)
+
+xfit = np.linspace(0, 10, 1000)
+**yfit, MSE = gp.predict(xfit[:, np.newaxis], eval_MSE=True)**
+dyfit = 2 * np.sqrt(MSE)  # 2*sigma ~ 95% confidence region",Mr-Z-W-J,61624743,open,False,2,2022-03-05T05:52:46+00:00,2022-03-31T01:40:07+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1139785996,325,how to read asc file in python,"hello sir
+I have couple of asc files
+in each file there is a some meteorological data (temperature,humidity)
+
+previous, I  worked with  netcdf ,grib data
+now my data extension is asc
+format plain text
+how can  i read this .asc format file
+",haritha1022,97615200,open,False,2,2022-02-16T09:51:39+00:00,2022-11-11T06:18:02+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1127581937,324,Update in light of Pandas -> v1.0.0?,Curious if there are any plans to update the pandas content to use Pandas v1.0.0?,scottfleming,11773823,open,False,1,2022-02-08T17:55:46+00:00,2022-02-08T18:44:47+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1110353691,323,(please help) having problem in my code,"### Description of the Bug
+
+1.Hi Developers im new to coding. i tried to make this video uploading app to my firebase storage but im not that good at coding so im stuck at this problem. when upload button is pressed the filechooser is opened and if i select a file it gets uploaded to the firebase But if i cancel and close the filechooser it gives an error.
+2. i am unaware if this file chooser works on android or nor...if it does not please help me with this code too. im stuck on this since 6 January ,thats how poor i am. 
+
+
+### Code
+
+```python
+from kivy.app import App
+from kivy.lang import Builder
+
+kv = '''
+<MainScreen>:
+    name: 'mainscreen'
+    MDLabel:
+        id:username_info
+        text:'Hello Main'
+        font_style:'H1'
+        halign:'center'
+
+    MDFloatLayout:
+        id:floate
+        Video:
+            id:vid
+
+        MDToolbar:
+            title: 'Bottom navigation'
+            md_bg_color: .2, .2, .2, 1
+            specific_text_color: 1, 1, 1, 1
+        MDBottomNavigation:
+            panel_color: 1,1,1,1
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Home'
+                icon: 'home-outline'
+                MDRaisedButton:
+                    id:upload
+                    text:'Upload'
+                    pos_hint:{'center_x':.5, 'center_y':.4}
+                    on_release:
+                        app.file_chooser()
+                        upload.disabled=False
+'''
+
+
+class goodApp(MDApp):
+
+    def build(self):
+        self.strng = Builder.load_string(help_str)
+        self.url  = ""link.json""
+        return self.strng
+
+    def file_chooser(self):
+        filechooser.open_file(on_selection=self.selected)        
+    def selected(self,selection):
+        config={
+              'Api keys of firebase'
+        }
+
+        firebase=pyrebase.initialize_app(config)
+        storage=firebase.storage()            
+        Directory=selection[0]
+        Name=re.findall('[ \w-]+\..*',Directory)
+        loginEmail = self.strng.get_screen('loginscreen').ids.login_email.text
+        storage.child(str(f""{loginEmail}"")).child(str(f""{Name}"")).put(str(f""{Name[0]}""))
+
+        if selection==True:
+            self.root.ids.vid.source=firebase
+            self.strng.get_screen('mainscreen').ids.upload.disabled=True
+            self.strng.get_screen('mainscreen').manager.current ='uploadscreen'
+            self.strng.get_screen('mainscreen').manager.transition.direction='left'            
+
+        if selection==False:
+            self.strng.get_screen('mainscreen').ids.upload.disabled=False
+
+
+
+if __name__ == '__main__':
+    goodApp().run()
+```
+
+
+### Logs
+
+[INFO   ] [Logger      ] Record log in C:\Users\Dheeraj\.kivy\logs\kivy_22-01-19_1.txt
+[INFO   ] [deps        ] Successfully imported ""kivy_deps.angle"" 0.3.0
+[INFO   ] [deps        ] Successfully imported ""kivy_deps.glew"" 0.3.0
+[INFO   ] [deps        ] Successfully imported ""kivy_deps.sdl2"" 0.3.1
+[INFO   ] [Kivy        ] v2.0.0
+[INFO   ] [Kivy        ] Installed at ""C:\Users\Dheeraj\AppData\Roaming\Python\Python38\site-packages\kivy\__init__.py""
+[INFO   ] [Python      ] v3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)]
+[INFO   ] [Python      ] Interpreter at ""C:\Users\Dheeraj\AppData\Local\Programs\Python\Python38\pythonw.exe""
+[INFO   ] [Factory     ] 186 symbols loaded
+[INFO   ] [KivyMD      ] 0.104.2, git-bc7d1f5, 2021-06-06 (installed at ""C:\Users\Dheeraj\AppData\Local\Programs\Python\Python38\lib\site-packages\kivymd\__init__.py"")
+[INFO   ] [Image       ] Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[INFO   ] [Text        ] Provider: sdl2
+[INFO   ] [Window      ] Provider: sdl2
+[INFO   ] [GL          ] Using the ""OpenGL"" graphics system
+[INFO   ] [GL          ] GLEW initialization succeeded
+[INFO   ] [GL          ] Backend used <glew>
+[INFO   ] [GL          ] OpenGL version <b'2.1 Mesa 10.0.2 (git-675cd84)'>
+[INFO   ] [GL          ] OpenGL vendor <b'VMware, Inc.'>
+[INFO   ] [GL          ] OpenGL renderer <b'Gallium 0.4 on llvmpipe (LLVM 3.4, 128 bits)'>
+[INFO   ] [GL          ] OpenGL parsed version: 2, 1
+[INFO   ] [GL          ] Shading version <b'1.30'>
+[INFO   ] [GL          ] Texture max size <8192>
+[INFO   ] [GL          ] Texture max units <16>
+[INFO   ] [Window      ] auto add sdl2 input provider
+[INFO   ] [Window      ] virtual keyboard not allowed, single mode, not docked
+[INFO   ] [KivMob      ] __init__ called.
+[WARNING] [KivMob      ] Ads will not be shown.
+[INFO   ] [GL          ] NPOT texture support is available
+[INFO   ] [Video       ] Provider: null(['video_ffmpeg', 'video_ffpyplayer'] ignored)
+[INFO   ] [Base        ] Start application main loop
+ Traceback (most recent call last):
+   File ""C:\Users\Dheeraj\AppData\Roaming\Python\Python38\site-packages\plyer\platforms\win\filechooser.py"", line 102, in run
+     self.fname, _, _ = win32gui.GetOpenFileNameW(**args)
+ pywintypes.error: (0, 'GetOpenFileNameW', 'No error message is available')
+ 
+ During handling of the above exception, another exception occurred:
+ 
+ Traceback (most recent call last):
+   File ""C:\Users\Dheeraj\AppData\Roaming\Python\Python38\site-packages\plyer\platforms\win\filechooser.py"", line 108, in run
+     self._handle_selection(self.selection)
+   File ""C:\Users\Dheeraj\Desktop\kivy codes\priyanshu doraming\Magenta.py"", line 949, in selected
+     Directory=selection[0]
+ IndexError: list index out of range
+[INFO   ] [Base        ] Leaving application in progress...
+
+
+### Screenshots
+
+Add images to explain us this bug. Paste urls here.
+
+Remove this section if no images here
+
+
+### Versions
+
+* OS: win 7 pro
+* Python: 3.7
+* Kivy: latest
+* KivyMD: latest (update everyweek)",boyintheroom,97958343,open,False,0,2022-01-21T11:17:06+00:00,2022-01-21T11:17:06+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1106594241,322,Series output,"Under Ch 3: Introducing Pandas Objects, the output shown is different than the output I get when I run the same line of code:
+
+As written in the book:
+> pd.Series({2:'a', 1:'b', 3:'c'})
+1    b
+2    a
+3    c
+dtype: object
+
+Whereas when I run the code:
+> pd.Series({2:'a', 1:'b', 3:'c'})
+2    a
+1    b
+3    c
+dtype: object
+
+Is there something weird going on with my system or is there an error in the text?",ameliameyer,52171886,open,False,2,2022-01-18T08:09:54+00:00,2022-09-05T16:34:18+00:00,,,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1100958461,321,Bump pillow from 3.4.2 to 9.0.0,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 3.4.2 to 9.0.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>9.0.0</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html"">https://pillow.readthedocs.io/en/stable/releasenotes/9.0.0.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Restrict builtins for ImageMath.eval() <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5923"">#5923</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Ensure JpegImagePlugin stops at the end of a truncated file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed ImagePath.Path array handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5920"">#5920</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Remove consecutive duplicate tiles that only differ by their offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5919"">#5919</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Removed redundant part of condition <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5915"">#5915</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Explicitly enable strip chopping for large uncompressed TIFFs <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5517"">#5517</a> [<a href=""https://github.com/kmilos""><code>@​kmilos</code></a>]</li>
+<li>Use the Windows method to get TCL functions on Cygwin <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5807"">#5807</a> [<a href=""https://github.com/DWesl""><code>@​DWesl</code></a>]</li>
+<li>Changed error type to allow for incremental WebP parsing <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5404"">#5404</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved I;16 operations on big endian <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5901"">#5901</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Ensure that BMP pixel data offset does not ignore palette <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5899"">#5899</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Limit quantized palette to number of colors <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5879"">#5879</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Use latin1 encoding to decode bytes <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5870"">#5870</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed palette index for zeroed color in FASTOCTREE quantize <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5869"">#5869</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>When saving RGBA to GIF, make use of first transparent palette entry <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5859"">#5859</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Pass SAMPLEFORMAT to libtiff <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5848"">#5848</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added rounding when converting P and PA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5824"">#5824</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Improved putdata() documentation and data handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5910"">#5910</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Exclude carriage return in PDF regex to help prevent ReDoS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5912"">#5912</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Image.NONE is only used for resampling and dithers <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5908"">#5908</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fixed freeing pointer in ImageDraw.Outline.transform <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5909"">#5909</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Add Tidelift alignment action and badge <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5763"">#5763</a> [<a href=""https://github.com/aclark4life""><code>@​aclark4life</code></a>]</li>
+<li>Replaced further direct invocations of setup.py <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5906"">#5906</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added ImageShow support for xdg-open <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5897"">#5897</a> [<a href=""https://github.com/m-shinder""><code>@​m-shinder</code></a>]</li>
+<li>Fixed typo <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5902"">#5902</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Switched from deprecated &quot;setup.py install&quot; to &quot;pip install .&quot; <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5896"">#5896</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Support 16-bit grayscale ImageQt conversion <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5856"">#5856</a> [<a href=""https://github.com/cmbruns""><code>@​cmbruns</code></a>]</li>
+<li>Fixed raising OSError in _safe_read when size is greater than SAFEBLOCK <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5872"">#5872</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Convert subsequent GIF frames to RGB or RGBA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5857"">#5857</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>WebP: Fix memory leak during decoding on failure <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5798"">#5798</a> [<a href=""https://github.com/ilai-deutel""><code>@​ilai-deutel</code></a>]</li>
+<li>Do not prematurely return in ImageFile when saving to stdout <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5665"">#5665</a> [<a href=""https://github.com/infmagic2047""><code>@​infmagic2047</code></a>]</li>
+<li>Added support for top right and bottom right TGA orientations <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5829"">#5829</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Corrected ICNS file length in header <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5845"">#5845</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Block tile TIFF tags when saving <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5839"">#5839</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Added line width argument to ImageDraw polygon <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5694"">#5694</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Do not redeclare class each time when converting to NumPy <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5844"">#5844</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Only prevent repeated polygon pixels when drawing with transparency <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5835"">#5835</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fix pushes_fd method signature <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5833"">#5833</a> [<a href=""https://github.com/hoodmane""><code>@​hoodmane</code></a>]</li>
+<li>Add support for pickling TrueType fonts <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5826"">#5826</a> [<a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+<li>Only prefer command line tools SDK on macOS over default MacOSX SDK <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5828"">#5828</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fix compilation on 64-bit Termux <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5793"">#5793</a> [<a href=""https://github.com/landfillbaby""><code>@​landfillbaby</code></a>]</li>
+<li>Replace 'setup.py sdist' with '-m build --sdist' <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5785"">#5785</a> [<a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+<li>Use declarative package configuration <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5784"">#5784</a> [<a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+<li>Use title for display in ImageShow <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5788"">#5788</a> [<a href=""https://github.com/radarhere""><code>@​radarhere</code></a>]</li>
+<li>Fix for PyQt6 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5775"">#5775</a> [<a href=""https://github.com/hugovk""><code>@​hugovk</code></a>]</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/blob/main/CHANGES.rst"">pillow's changelog</a>.</em></p>
+<blockquote>
+<h2>9.0.0 (2022-01-02)</h2>
+<ul>
+<li>
+<p>Restrict builtins for ImageMath.eval(). CVE-2022-22817 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5923"">#5923</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Ensure JpegImagePlugin stops at the end of a truncated file <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Fixed ImagePath.Path array handling. CVE-2022-22815, CVE-2022-22816 <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5920"">#5920</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Remove consecutive duplicate tiles that only differ by their offset <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5919"">#5919</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Improved I;16 operations on big endian <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5901"">#5901</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Limit quantized palette to number of colors <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5879"">#5879</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Fixed palette index for zeroed color in FASTOCTREE quantize <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5869"">#5869</a>
+[radarhere]</p>
+</li>
+<li>
+<p>When saving RGBA to GIF, make use of first transparent palette entry <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5859"">#5859</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Pass SAMPLEFORMAT to libtiff <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5848"">#5848</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added rounding when converting P and PA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5824"">#5824</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Improved putdata() documentation and data handling <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5910"">#5910</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Exclude carriage return in PDF regex to help prevent ReDoS <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5912"">#5912</a>
+[hugovk]</p>
+</li>
+<li>
+<p>Fixed freeing pointer in ImageDraw.Outline.transform <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5909"">#5909</a>
+[radarhere]</p>
+</li>
+<li>
+<p>Added ImageShow support for xdg-open <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5897"">#5897</a>
+[m-shinder, radarhere]</p>
+</li>
+<li>
+<p>Support 16-bit grayscale ImageQt conversion <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5856"">#5856</a>
+[cmbruns, radarhere]</p>
+</li>
+<li>
+<p>Convert subsequent GIF frames to RGB or RGBA <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5857"">#5857</a>
+[radarhere]</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/82541b6dec8452cb612067fcebba1c5a1a2bfdc8""><code>82541b6</code></a> 9.0.0 version bump</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/cae5ac495badd7c7ecfad8223a08f55f5d2eaacb""><code>cae5ac4</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5924"">#5924</a> from radarhere/cves</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/ed4cf7813777ad8478cac46f448bc45416a2a99e""><code>ed4cf78</code></a> CVEs TBD</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/d7f60d1d5a746eb01d4cb3c7fb05b6593f46b0f5""><code>d7f60d1</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5923"">#5923</a> from radarhere/imagemath_eval</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/8531b01d6cdf0b70f256f93092caa2a5d91afc11""><code>8531b01</code></a> Restrict builtins for ImageMath.eval</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/1efb1d9fabd1dfdbf7982035eca0dae7306abef1""><code>1efb1d9</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5922"">#5922</a> from radarhere/releasenotes</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/f6c78713a491764dfac576f6c42127755f2c62b3""><code>f6c7871</code></a> Added release notes for <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5919"">#5919</a>, <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5920"">#5920</a> and <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a></li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/032d2dc3658f94718109068ac70799313e440754""><code>032d2dc</code></a> Update CHANGES.rst [ci skip]</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/baae9ec4b67c68e3adaf1208cf54e8de5e38a6fd""><code>baae9ec</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/python-pillow/Pillow/issues/5921"">#5921</a> from radarhere/jpeg_eoi</li>
+<li><a href=""https://github.com/python-pillow/Pillow/commit/1059eb537639925c96d3245dcd73c106d4266c83""><code>1059eb5</code></a> If appended EOI did not work, do not keep trying</li>
+<li>Additional commits viewable in <a href=""https://github.com/python-pillow/Pillow/compare/3.4.2...9.0.0"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=pillow&package-manager=pip&previous-version=3.4.2&new-version=9.0.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/jakevdp/PythonDataScienceHandbook/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,1,2022-01-13T00:38:35+00:00,2022-03-11T23:14:50+00:00,2022-03-11T23:14:36+00:00,dependencies,0,0,0,0,0,0,0
+jakevdp/PythonDataScienceHandbook,1099846198,320,Data science,,reflectormensah,92153088,closed,False,1,2022-01-12T03:50:43+00:00,2022-01-28T02:21:53+00:00,2022-01-28T02:21:53+00:00,,0,0,0,0,0,0,0

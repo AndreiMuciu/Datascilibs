@@ -1,0 +1,97 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+eugeneyan/applied-ml,d58606b6ec039e9cc242f43fd64d16af71cd1297,https://github.com/eugeneyan/applied-ml/commit/d58606b6ec039e9cc242f43fd64d16af71cd1297,eugeneyan,6831355.0,User,2024-05-02T14:44:23+00:00,web-flow,2024-05-02T14:44:23+00:00,"Merge pull request #257 from queirozfcom/main
+
+Add new post: 'Building and Maintaining Internal Tools for DS/ML team…",1,1,2,1,"cb5505e4e90d5934cd358c054891c7d4a81a5ea4,9a7733fb54660e984194b4131a46544e18397442"
+eugeneyan/applied-ml,9a7733fb54660e984194b4131a46544e18397442,https://github.com/eugeneyan/applied-ml/commit/9a7733fb54660e984194b4131a46544e18397442,queirozfcom,1554354.0,User,2024-04-30T19:34:54+00:00,queirozfcom,2024-04-30T19:34:54+00:00,fix backticks,1,1,2,1,3b1a0903d4b677a3f2c050dca2d5fefc586b4083
+eugeneyan/applied-ml,3b1a0903d4b677a3f2c050dca2d5fefc586b4083,https://github.com/eugeneyan/applied-ml/commit/3b1a0903d4b677a3f2c050dca2d5fefc586b4083,queirozfcom,1554354.0,User,2024-04-30T16:56:47+00:00,queirozfcom,2024-04-30T16:56:47+00:00,add new post: 'Building and Maintaining Internal Tools for DS/ML teams: Lessons Learned' by Nubank,1,1,2,1,cb5505e4e90d5934cd358c054891c7d4a81a5ea4
+eugeneyan/applied-ml,cb5505e4e90d5934cd358c054891c7d4a81a5ea4,https://github.com/eugeneyan/applied-ml/commit/cb5505e4e90d5934cd358c054891c7d4a81a5ea4,eugeneyan,6831355.0,User,2023-10-18T01:12:59+00:00,web-flow,2023-10-18T01:12:59+00:00,"Merge pull request #255 from ddanieltan/fix-unicode
+
+Removed unicode char in title",1,1,2,1,"0b452083cb553764fdf1d50b7abb0c7209fd743e,61b9ac867ee10584f6b389266d2a9fbac7bed2a2"
+eugeneyan/applied-ml,61b9ac867ee10584f6b389266d2a9fbac7bed2a2,https://github.com/eugeneyan/applied-ml/commit/61b9ac867ee10584f6b389266d2a9fbac7bed2a2,ddanieltan,16997867.0,User,2023-10-17T15:22:10+00:00,ddanieltan,2023-10-17T15:22:10+00:00,Removed unicode char in title,1,1,2,1,0b452083cb553764fdf1d50b7abb0c7209fd743e
+eugeneyan/applied-ml,0b452083cb553764fdf1d50b7abb0c7209fd743e,https://github.com/eugeneyan/applied-ml/commit/0b452083cb553764fdf1d50b7abb0c7209fd743e,eugeneyan,6831355.0,User,2023-09-09T07:29:20+00:00,web-flow,2023-09-09T07:29:20+00:00,"Merge pull request #254 from mbar0/patch-1
+
+Fix for Databricks session links",6,6,12,1,"ffbc2d02c10771bdd8a76fb8fe43068847e9b642,fd3794f76d0db7eef6e27204375b7f3ec8dd8e96"
+eugeneyan/applied-ml,fd3794f76d0db7eef6e27204375b7f3ec8dd8e96,https://github.com/eugeneyan/applied-ml/commit/fd3794f76d0db7eef6e27204375b7f3ec8dd8e96,mbar0,5559296.0,User,2023-09-08T15:24:58+00:00,web-flow,2023-09-08T15:24:58+00:00,"Fix for Databricks session links
+
+Databricks session links were forwarding to the Databricks YT channel. Replaced all links with matching video results with the correct YT video.
+
+No matching video found for the Deep Anomaly Detection with Spark and Tensorflow session.",6,6,12,1,ffbc2d02c10771bdd8a76fb8fe43068847e9b642
+eugeneyan/applied-ml,ffbc2d02c10771bdd8a76fb8fe43068847e9b642,https://github.com/eugeneyan/applied-ml/commit/ffbc2d02c10771bdd8a76fb8fe43068847e9b642,eugeneyan,6831355.0,User,2023-06-29T02:40:32+00:00,web-flow,2023-06-29T02:40:32+00:00,"Merge pull request #251 from queirozfcom/main
+
+Add new post on train-serve skew by nubank",1,0,1,1,"412b962708c06ed2fff156ef79b0dc81069a7efe,8b9cd1ef3b6761ee545bcd26e2ea3402ad9f9331"
+eugeneyan/applied-ml,8b9cd1ef3b6761ee545bcd26e2ea3402ad9f9331,https://github.com/eugeneyan/applied-ml/commit/8b9cd1ef3b6761ee545bcd26e2ea3402ad9f9331,queirozfcom,1554354.0,User,2023-06-28T03:24:55+00:00,queirozfcom,2023-06-28T03:24:55+00:00,add hyphen in real-time,1,1,2,1,5f4e09296c830d29383871d81714b96da9d61c06
+eugeneyan/applied-ml,5f4e09296c830d29383871d81714b96da9d61c06,https://github.com/eugeneyan/applied-ml/commit/5f4e09296c830d29383871d81714b96da9d61c06,queirozfcom,1554354.0,User,2023-06-28T03:20:50+00:00,queirozfcom,2023-06-28T03:20:50+00:00,add new post on train-serve skew by nubank,1,0,1,1,412b962708c06ed2fff156ef79b0dc81069a7efe
+eugeneyan/applied-ml,412b962708c06ed2fff156ef79b0dc81069a7efe,https://github.com/eugeneyan/applied-ml/commit/412b962708c06ed2fff156ef79b0dc81069a7efe,eugeneyan,6831355.0,User,2023-05-26T01:41:10+00:00,web-flow,2023-05-26T01:41:10+00:00,"Merge pull request #250 from PubliusAu/patch-1
+
+Adding presentations by Spotify, BazaarVoice",2,0,2,1,"a0ccfc86a6e8b23e36a3d375f5a84eea938f8ea7,f934fa0bbc8c921273db86aa599d6fe62c105f42"
+eugeneyan/applied-ml,f934fa0bbc8c921273db86aa599d6fe62c105f42,https://github.com/eugeneyan/applied-ml/commit/f934fa0bbc8c921273db86aa599d6fe62c105f42,PubliusAu,119470903.0,User,2023-05-25T22:00:51+00:00,web-flow,2023-05-25T22:00:51+00:00,"Adding presentations by Spotify, BazaarVoice
+
+covering embeddings at scale and using CV for search ranking, respectively",2,0,2,1,a0ccfc86a6e8b23e36a3d375f5a84eea938f8ea7
+eugeneyan/applied-ml,a0ccfc86a6e8b23e36a3d375f5a84eea938f8ea7,https://github.com/eugeneyan/applied-ml/commit/a0ccfc86a6e8b23e36a3d375f5a84eea938f8ea7,eugeneyan,6831355.0,User,2023-05-19T14:21:12+00:00,web-flow,2023-05-19T14:21:12+00:00,"Merge pull request #249 from Phrrancis/main
+
+Fixed a url link!",1,1,2,1,"a7c66dc641f238d7cdc4bdb6446686054e2a70d3,80d8fafde5d3439267a4399d288434f4cb977944"
+eugeneyan/applied-ml,80d8fafde5d3439267a4399d288434f4cb977944,https://github.com/eugeneyan/applied-ml/commit/80d8fafde5d3439267a4399d288434f4cb977944,eugeneyan,6831355.0,User,2023-05-19T14:20:52+00:00,web-flow,2023-05-19T14:20:52+00:00,Merge branch 'main' into main,37,31,68,1,"7966b850416c7555b761c92496e665c9d5db3b40,a7c66dc641f238d7cdc4bdb6446686054e2a70d3"
+eugeneyan/applied-ml,a7c66dc641f238d7cdc4bdb6446686054e2a70d3,https://github.com/eugeneyan/applied-ml/commit/a7c66dc641f238d7cdc4bdb6446686054e2a70d3,eugeneyan,6831355.0,User,2023-05-19T14:19:09+00:00,web-flow,2023-05-19T14:19:09+00:00,"Merge pull request #248 from chongshenng/main
+
+Add differential privacy refs",16,9,25,1,"ecf89641462bc9170f6e1a75ee439536ff73c921,0830250a4bc05ce5b2b27cfc9ebbe5e285260b86"
+eugeneyan/applied-ml,7966b850416c7555b761c92496e665c9d5db3b40,https://github.com/eugeneyan/applied-ml/commit/7966b850416c7555b761c92496e665c9d5db3b40,Phrrancis,60043467.0,User,2023-04-26T08:56:50+00:00,Phrrancis,2023-04-26T08:56:50+00:00,Update README.md,1,1,2,1,f8c29d0f9f42e4b4b1f252ed81eefe3ecfde8fae
+eugeneyan/applied-ml,f8c29d0f9f42e4b4b1f252ed81eefe3ecfde8fae,https://github.com/eugeneyan/applied-ml/commit/f8c29d0f9f42e4b4b1f252ed81eefe3ecfde8fae,Phrrancis,60043467.0,User,2023-04-26T08:55:16+00:00,Phrrancis,2023-04-26T08:55:16+00:00,Update README.md,31,31,62,1,f20349d9fe89452ceb22fd81d0185daa35acedaa
+eugeneyan/applied-ml,f20349d9fe89452ceb22fd81d0185daa35acedaa,https://github.com/eugeneyan/applied-ml/commit/f20349d9fe89452ceb22fd81d0185daa35acedaa,Phrrancis,60043467.0,User,2023-04-07T06:37:38+00:00,Phrrancis,2023-04-07T06:37:38+00:00,"Update README.md
+
+Fixed the url link!",32,31,63,1,ecf89641462bc9170f6e1a75ee439536ff73c921
+eugeneyan/applied-ml,0830250a4bc05ce5b2b27cfc9ebbe5e285260b86,https://github.com/eugeneyan/applied-ml/commit/0830250a4bc05ce5b2b27cfc9ebbe5e285260b86,,,,2023-03-23T15:42:20+00:00,,2023-03-23T15:42:20+00:00,Add differential privacy refs,16,9,25,1,ecf89641462bc9170f6e1a75ee439536ff73c921
+eugeneyan/applied-ml,ecf89641462bc9170f6e1a75ee439536ff73c921,https://github.com/eugeneyan/applied-ml/commit/ecf89641462bc9170f6e1a75ee439536ff73c921,eugeneyan,6831355.0,User,2023-02-21T03:12:32+00:00,web-flow,2023-02-21T03:12:32+00:00,"Merge pull request #242 from alexcombessie/main
+
+Added some resources (articles and code) on ML Testing and Failures",3,2,5,1,"3b7ad2a2903fd3ece6de09391a30f94ff9b3d6c8,b5c1e5505e591d10e1c7f6055ef0e36993872118"
+eugeneyan/applied-ml,b5c1e5505e591d10e1c7f6055ef0e36993872118,https://github.com/eugeneyan/applied-ml/commit/b5c1e5505e591d10e1c7f6055ef0e36993872118,alexcombessie,4739848.0,User,2023-02-20T21:07:15+00:00,web-flow,2023-02-20T21:07:15+00:00,rm fairness test,0,1,1,1,e393178ad1c99e49087d3536e2fae73f3627a2f0
+eugeneyan/applied-ml,e393178ad1c99e49087d3536e2fae73f3627a2f0,https://github.com/eugeneyan/applied-ml/commit/e393178ad1c99e49087d3536e2fae73f3627a2f0,alexcombessie,4739848.0,User,2023-02-20T21:05:57+00:00,web-flow,2023-02-20T21:05:57+00:00,rm metamorphic testing,0,1,1,1,74b7974387c86095228b5a8d74a87070936f748a
+eugeneyan/applied-ml,74b7974387c86095228b5a8d74a87070936f748a,https://github.com/eugeneyan/applied-ml/commit/74b7974387c86095228b5a8d74a87070936f748a,alexcombessie,4739848.0,User,2023-02-20T21:04:02+00:00,web-flow,2023-02-20T21:04:02+00:00,remove categorical data drift,0,1,1,1,fbdd63288683b0c9af46e202701df42dcb7ede2f
+eugeneyan/applied-ml,3b7ad2a2903fd3ece6de09391a30f94ff9b3d6c8,https://github.com/eugeneyan/applied-ml/commit/3b7ad2a2903fd3ece6de09391a30f94ff9b3d6c8,eugeneyan,6831355.0,User,2023-02-19T16:03:31+00:00,web-flow,2023-02-19T16:03:31+00:00,"Merge pull request #244 from jimdowling/main
+
+Add article from the first open-source feature store, Hopsworks",19,18,37,1,"b2206ad48de81a5432ae882e1e2c2ae8aee03c54,b78ab10d0d3259481be36d6b9f409e363c29aa88"
+eugeneyan/applied-ml,b78ab10d0d3259481be36d6b9f409e363c29aa88,https://github.com/eugeneyan/applied-ml/commit/b78ab10d0d3259481be36d6b9f409e363c29aa88,jimdowling,1904928.0,User,2023-02-12T07:09:12+00:00,jimdowling,2023-02-12T07:09:12+00:00,"Add article on the first open-source feature store, Hopsworks",19,18,37,1,b2206ad48de81a5432ae882e1e2c2ae8aee03c54
+eugeneyan/applied-ml,b2206ad48de81a5432ae882e1e2c2ae8aee03c54,https://github.com/eugeneyan/applied-ml/commit/b2206ad48de81a5432ae882e1e2c2ae8aee03c54,eugeneyan,6831355.0,User,2023-02-12T02:08:42+00:00,web-flow,2023-02-12T02:08:42+00:00,"Merge pull request #243 from eugeneyan/dev
+
+Clean up readme",3,6,9,1,"99c7091db0bd50f6f72e591d058521295c73581e,a065b31ba41e762205dbdf717b17869c7d86e295"
+eugeneyan/applied-ml,a065b31ba41e762205dbdf717b17869c7d86e295,https://github.com/eugeneyan/applied-ml/commit/a065b31ba41e762205dbdf717b17869c7d86e295,eugeneyan,6831355.0,User,2023-02-12T02:07:41+00:00,eugeneyan,2023-02-12T02:07:41+00:00,Clean up readme,3,6,9,1,99c7091db0bd50f6f72e591d058521295c73581e
+eugeneyan/applied-ml,99c7091db0bd50f6f72e591d058521295c73581e,https://github.com/eugeneyan/applied-ml/commit/99c7091db0bd50f6f72e591d058521295c73581e,eugeneyan,6831355.0,User,2023-02-12T02:00:09+00:00,web-flow,2023-02-12T02:00:09+00:00,"Merge pull request #241 from R-Mahmoudi/main
+
+added few papers",6,1,7,1,"bdef884aea2ab8481daaa373f0a4d5ca94f1f56b,4128e9289446aef34a2a3b2a75fe695363fc931d"
+eugeneyan/applied-ml,bdef884aea2ab8481daaa373f0a4d5ca94f1f56b,https://github.com/eugeneyan/applied-ml/commit/bdef884aea2ab8481daaa373f0a4d5ca94f1f56b,eugeneyan,6831355.0,User,2023-02-12T01:59:25+00:00,web-flow,2023-02-12T01:59:25+00:00,"Merge pull request #237 from yevtu/patch-1
+
+Add an article on feature store",1,0,1,1,"8848d16c98aaeff46f57c808c6ad6c246c40219f,6ed51d20b135963409fcd4f3ee1ec47caafdb9ca"
+eugeneyan/applied-ml,fbdd63288683b0c9af46e202701df42dcb7ede2f,https://github.com/eugeneyan/applied-ml/commit/fbdd63288683b0c9af46e202701df42dcb7ede2f,alexcombessie,4739848.0,User,2023-02-11T12:53:42+00:00,web-flow,2023-02-11T12:53:42+00:00,add mention (article and code),1,1,2,1,a60a8ed4b2c81b0fcd0a7e9b4424964f7a55a111
+eugeneyan/applied-ml,a60a8ed4b2c81b0fcd0a7e9b4424964f7a55a111,https://github.com/eugeneyan/applied-ml/commit/a60a8ed4b2c81b0fcd0a7e9b4424964f7a55a111,alexcombessie,4739848.0,User,2023-02-11T12:49:30+00:00,web-flow,2023-02-11T12:49:30+00:00,Added disparate impact,3,2,5,1,cc02175f94343af943eb17e90dad3d5c8a88bd54
+eugeneyan/applied-ml,cc02175f94343af943eb17e90dad3d5c8a88bd54,https://github.com/eugeneyan/applied-ml/commit/cc02175f94343af943eb17e90dad3d5c8a88bd54,alexcombessie,4739848.0,User,2023-02-11T12:47:39+00:00,web-flow,2023-02-11T12:47:39+00:00,Adding categorical data drift,1,0,1,1,e470914bd97e301c8f1294e3f92f9304f55e9242
+eugeneyan/applied-ml,e470914bd97e301c8f1294e3f92f9304f55e9242,https://github.com/eugeneyan/applied-ml/commit/e470914bd97e301c8f1294e3f92f9304f55e9242,alexcombessie,4739848.0,User,2023-02-11T12:44:26+00:00,web-flow,2023-02-11T12:44:26+00:00,added date of Giskard metamorphic testing article,1,1,2,1,6d1f47593ece736804260be9843c5dffd30bd57f
+eugeneyan/applied-ml,6d1f47593ece736804260be9843c5dffd30bd57f,https://github.com/eugeneyan/applied-ml/commit/6d1f47593ece736804260be9843c5dffd30bd57f,alexcombessie,4739848.0,User,2023-02-11T12:42:38+00:00,web-flow,2023-02-11T12:42:38+00:00,Add AI Incident Database,1,0,1,1,600f9929248fd49e9fb5c763af07828951ac5f5d
+eugeneyan/applied-ml,600f9929248fd49e9fb5c763af07828951ac5f5d,https://github.com/eugeneyan/applied-ml/commit/600f9929248fd49e9fb5c763af07828951ac5f5d,alexcombessie,4739848.0,User,2023-02-11T12:39:22+00:00,web-flow,2023-02-11T12:39:22+00:00,Add metamorphic testing,1,0,1,1,8848d16c98aaeff46f57c808c6ad6c246c40219f
+eugeneyan/applied-ml,4128e9289446aef34a2a3b2a75fe695363fc931d,https://github.com/eugeneyan/applied-ml/commit/4128e9289446aef34a2a3b2a75fe695363fc931d,R-Mahmoudi,108347344.0,User,2023-02-10T18:55:24+00:00,web-flow,2023-02-10T18:55:24+00:00,Update README.md,6,1,7,1,8848d16c98aaeff46f57c808c6ad6c246c40219f
+eugeneyan/applied-ml,8848d16c98aaeff46f57c808c6ad6c246c40219f,https://github.com/eugeneyan/applied-ml/commit/8848d16c98aaeff46f57c808c6ad6c246c40219f,eugeneyan,6831355.0,User,2023-02-10T16:16:05+00:00,web-flow,2023-02-10T16:16:05+00:00,"Merge pull request #240 from jacopotagliabue/patch-2
+
+Added few papers",30,27,57,1,"a74bba43f31a46dd41b582b4712a817c63533c4a,6d6fae7ea41033b99c1891799ecc473187c0d943"
+eugeneyan/applied-ml,6d6fae7ea41033b99c1891799ecc473187c0d943,https://github.com/eugeneyan/applied-ml/commit/6d6fae7ea41033b99c1891799ecc473187c0d943,jacopotagliabue,3503170.0,User,2023-02-10T15:40:23+00:00,web-flow,2023-02-10T15:40:23+00:00,"Added few papers
+
+Great list: just added few papers",30,27,57,1,a74bba43f31a46dd41b582b4712a817c63533c4a
+eugeneyan/applied-ml,a74bba43f31a46dd41b582b4712a817c63533c4a,https://github.com/eugeneyan/applied-ml/commit/a74bba43f31a46dd41b582b4712a817c63533c4a,eugeneyan,6831355.0,User,2023-02-08T05:14:23+00:00,web-flow,2023-02-08T05:14:23+00:00,"Merge pull request #239 from eugeneyan/dev
+
+Add a couple of new papers",86,36,122,1,"8889747b55693b14d9a99d6e23b590f6695ee807,477c780e5342a022ac75d95ae2bc23aa7c0189c1"
+eugeneyan/applied-ml,477c780e5342a022ac75d95ae2bc23aa7c0189c1,https://github.com/eugeneyan/applied-ml/commit/477c780e5342a022ac75d95ae2bc23aa7c0189c1,eugeneyan,6831355.0,User,2023-02-08T05:13:25+00:00,eugeneyan,2023-02-08T05:13:25+00:00,Merge branch 'main' into dev,14,6,20,1,"3920279adc97850f274d1bb1784a91cd5893334b,8889747b55693b14d9a99d6e23b590f6695ee807"
+eugeneyan/applied-ml,3920279adc97850f274d1bb1784a91cd5893334b,https://github.com/eugeneyan/applied-ml/commit/3920279adc97850f274d1bb1784a91cd5893334b,eugeneyan,6831355.0,User,2023-02-08T05:05:11+00:00,eugeneyan,2023-02-08T05:05:11+00:00,Add some new papers and tech blogs,54,5,59,1,f3249400cac407f42a117c02eec9322699181ab4
+eugeneyan/applied-ml,6ed51d20b135963409fcd4f3ee1ec47caafdb9ca,https://github.com/eugeneyan/applied-ml/commit/6ed51d20b135963409fcd4f3ee1ec47caafdb9ca,yevtu,11173098.0,User,2023-01-24T07:07:10+00:00,web-flow,2023-01-24T07:07:10+00:00,"Add an article on feature store
+
+This article describes feature store design at ML-first product discovery startup Constructor.io",1,0,1,1,8889747b55693b14d9a99d6e23b590f6695ee807
+eugeneyan/applied-ml,8889747b55693b14d9a99d6e23b590f6695ee807,https://github.com/eugeneyan/applied-ml/commit/8889747b55693b14d9a99d6e23b590f6695ee807,eugeneyan,6831355.0,User,2022-12-23T01:32:55+00:00,web-flow,2022-12-23T01:32:55+00:00,"Merge pull request #235 from queirozfcom/main
+
+Add two new posts from Nubank",2,0,2,1,"f0594799714ec82b0a5defad27f18d4bad9f4c6f,bf53058cce584a649a37d2772e06adb956e9b7fc"
+eugeneyan/applied-ml,bf53058cce584a649a37d2772e06adb956e9b7fc,https://github.com/eugeneyan/applied-ml/commit/bf53058cce584a649a37d2772e06adb956e9b7fc,queirozfcom,1554354.0,User,2022-12-23T01:21:11+00:00,queirozfcom,2022-12-23T01:21:11+00:00,Merge branch 'main' of github.com:queirozfcom/applied-ml into main,3,1,4,1,"a846938079775c4c6afcb0816743dfdf9454eb64,0c599e0b3fdff353c4980c17c9371d96ceaf7a60"
+eugeneyan/applied-ml,a846938079775c4c6afcb0816743dfdf9454eb64,https://github.com/eugeneyan/applied-ml/commit/a846938079775c4c6afcb0816743dfdf9454eb64,queirozfcom,1554354.0,User,2022-12-23T01:21:01+00:00,queirozfcom,2022-12-23T01:21:01+00:00,update,2,3,5,1,b3434d4fa0c0c609a497906a8fd5a9d2aeb15d87
+eugeneyan/applied-ml,0c599e0b3fdff353c4980c17c9371d96ceaf7a60,https://github.com/eugeneyan/applied-ml/commit/0c599e0b3fdff353c4980c17c9371d96ceaf7a60,queirozfcom,1554354.0,User,2022-12-23T01:20:12+00:00,web-flow,2022-12-23T01:20:12+00:00,Merge branch 'eugeneyan:main' into main,3,1,4,1,"b3434d4fa0c0c609a497906a8fd5a9d2aeb15d87,f0594799714ec82b0a5defad27f18d4bad9f4c6f"
+eugeneyan/applied-ml,b3434d4fa0c0c609a497906a8fd5a9d2aeb15d87,https://github.com/eugeneyan/applied-ml/commit/b3434d4fa0c0c609a497906a8fd5a9d2aeb15d87,queirozfcom,1554354.0,User,2022-12-23T01:18:07+00:00,queirozfcom,2022-12-23T01:18:07+00:00,add two new posts from Nubank,2,0,2,1,55ed48d768193ce92c20d0aacf90dfe7789ad560
+eugeneyan/applied-ml,f0594799714ec82b0a5defad27f18d4bad9f4c6f,https://github.com/eugeneyan/applied-ml/commit/f0594799714ec82b0a5defad27f18d4bad9f4c6f,eugeneyan,6831355.0,User,2022-10-25T15:24:39+00:00,web-flow,2022-10-25T15:24:39+00:00,"Merge pull request #231 from tonghuikang/patch-1
+
+Add blogpost on model calibration from Pinterest",1,0,1,1,"7480ac85e9951d62323a426ce5df4f74b96b9c0b,4e0324916a0348f34b64dc33163b53b8fdda05bd"
+eugeneyan/applied-ml,7480ac85e9951d62323a426ce5df4f74b96b9c0b,https://github.com/eugeneyan/applied-ml/commit/7480ac85e9951d62323a426ce5df4f74b96b9c0b,eugeneyan,6831355.0,User,2022-10-25T15:24:08+00:00,web-flow,2022-10-25T15:24:08+00:00,"Merge pull request #232 from tonghuikang/patch-2
+
+Add DoorDash blog post",2,1,3,1,"0179b44b971730127cbb13fa1a00a2cd72787ccf,886149df345d59144ab32ecd39226aa2a9c0c46c"
+eugeneyan/applied-ml,55ed48d768193ce92c20d0aacf90dfe7789ad560,https://github.com/eugeneyan/applied-ml/commit/55ed48d768193ce92c20d0aacf90dfe7789ad560,queirozfcom,1554354.0,User,2022-10-23T05:17:32+00:00,queirozfcom,2022-10-23T05:17:32+00:00,add real-time machine learning post by nubank,1,0,1,1,0179b44b971730127cbb13fa1a00a2cd72787ccf

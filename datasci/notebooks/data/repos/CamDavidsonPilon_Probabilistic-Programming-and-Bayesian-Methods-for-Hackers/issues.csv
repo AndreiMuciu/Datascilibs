@@ -1,0 +1,810 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,3036957887,576,Gcash,,pahadismael,210096210,open,False,0,2025-05-02T23:03:30+00:00,2025-05-02T23:03:30+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2953244632,574,Chapter 4: error about sorting posteriors of reddit submissions,"this code doesn't produce the 5% quantile:
+
+`v = np.sort( posteriors[i] )[ int(0.05*N) ]`
+
+this would do it:
+
+`v = np.sort( posteriors[i] , axis=0)[ int(0.05*N) ]`",fralc,22327226,open,False,0,2025-03-27T14:38:07+00:00,2025-03-27T15:39:00+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2422064726,569,Clarification on Calculation of Interval in Chapter 2,"In Chapter 2, the author states:
+
+""With regards to the above plot, we are still pretty uncertain about what the true frequency of cheaters might be, but we have narrowed it down to a range between 0.05 to 0.35 (marked by the solid lines).""
+
+I am trying to understand how these values (0.05 to 0.35) are calculated. I initially thought they were derived from the Highest Density Interval (HDI), but the HDI is from 0 to 0.42.
+
+Can someone provide an explanation of how to calculate the 0.05 to 0.35 interval mentioned in the book? Any pointers or detailed steps would be greatly appreciated.
+
+Thank you!",OrtizNicola,130187770,open,False,1,2024-07-22T06:37:00+00:00,2024-08-15T07:10:57+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2373625449,568,python3.12,fixed deprecated syntax,hem9984,147702557,open,False,1,2024-06-25T20:42:58+00:00,2024-06-25T20:43:03+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2098626648,567,Chapter 2: model.initial_values AttributeError: 'Model' object has no attribute 'initial_values',"The third cell will not work, it gives me:
+```
+In [3]: model.initial_values
+AttributeError: 'Model' object has no attribute 'initial_values'
+```
+
+This is a conda installation of pymc 5.10.3. I had no problems running Chapter 1.",rwst,1146709,open,False,4,2024-01-24T16:20:59+00:00,2025-01-08T22:48:35+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2015968440,566,"PyMC, PyMc2のファイルを除去した",,shotaro-mkw,40831572,closed,False,1,2023-11-29T07:19:00+00:00,2023-11-29T07:23:05+00:00,2023-11-29T07:19:31+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2007144404,565,Fixed indexing of trace to avoid shape error,Wrong shape for plotting center_trace_after (30000 samples vs. 25000 indices),Kraego,71735135,closed,False,2,2023-11-22T21:31:09+00:00,2024-02-15T08:44:08+00:00,2024-02-15T08:44:08+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,2007140588,564,Step as keyword to avoid: type error,Fixing: TypeError: sample() takes from 0 to 1 positional arguments but 2 positional arguments (and 1 keyword-only argument) were given,Kraego,71735135,closed,False,1,2023-11-22T21:27:22+00:00,2024-02-15T08:44:08+00:00,2024-02-15T08:44:08+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1961128092,563,Correct lambda (plural) expansion in text,Correct showing of greek symbol (lambda) instead of `$\lambda$s`,Kraego,71735135,closed,False,1,2023-10-25T11:05:50+00:00,2024-02-15T08:44:07+00:00,2024-02-15T08:44:07+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1878206029,562,chapter 1 - running on mac metal m2 with tfp - run into error InvalidArgumentError: 730 nodes in a cycle,"Hi. I'm new to TensorFlow and TensorFlow Probability. I'm running the examples in chapter 1, and when specifying the posterior sampler I get this error when running graph_sample_chain in line 45: 
+
+InvalidArgumentError: 730 nodes in a cycle [Op:__inference_graph_sample_chain_5335]
+
+I'm running it on a Mac with M2 Pro, metal and all TF dependencies have already been installed. Any idea of how this could be fixed? ",salvador-vm1010,138150998,open,False,1,2023-09-02T00:30:57+00:00,2023-09-02T00:55:13+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1853526907,561,Recommend Turing.jl for tech stack,"According to Turing.jl documentation:
+
+> Turing is a probabilistic programming system written entirely in Julia. It has an intuitive modelling syntax and supports a wide range of sampling-based inference algorithms.
+
+Turing.jl is rapidly developing with a bright future become one of essential tool for probabilistic programming because the strong design. See more in [here](https://turinglang.org/dev/tutorials/00-introduction/)",hungpham3112,75968004,open,False,0,2023-08-16T16:01:41+00:00,2023-08-16T16:01:41+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1781154389,560,Chapter 1: Bug in plotting prior & posterior probabilities due to giving lw a string as an input,"Attempting to execute the following code in Ch 1 results in `TypeError: must be real number, not str`:
+```
+figsize(12.5, 4)
+colours = [""#348ABD"", ""#A60628""]
+
+prior = [0.20, 0.80]
+posterior = [1.0 / 3, 2.0 / 3]
+plt.bar(
+    [0, 0.7],
+    prior,
+    alpha=0.70,
+    width=0.25,
+    color=colours[0],
+    label=""prior distribution"",
+    lw=""3"",
+    edgecolor=colours[0],
+)
+```
+
+Changing the code to the following where lw=3 instead of '3' fixes the problem
+
+```
+figsize(12.5, 4)
+colours = [""#348ABD"", ""#A60628""]
+
+prior = [0.20, 0.80]
+posterior = [1.0 / 3, 2.0 / 3]
+plt.bar(
+    [0, 0.7],
+    prior,
+    alpha=0.70,
+    width=0.25,
+    color=colours[0],
+    label=""prior distribution"",
+    lw=3,
+    edgecolor=colours[0],
+)
+```
+
+Matplotlib's documentation for set_linewidth states the function only expects floats; strings this may have worked in previous versions, but the current version may have broken something
+
+```
+    def set_linewidth(self, w):
+        """"""
+        Set the patch linewidth in points.
+
+        Parameters
+        ----------
+        w : float or None
+        """"""
+```
+https://github.com/matplotlib/matplotlib/blob/v3.7.1/lib/matplotlib/patches.py#L384
+
+Advise to always use numbers when setting linewidth instead of strings
+
+Version of matplotlib: 3.7.1
+
+
+",mark-yong,38996452,open,False,1,2023-06-29T16:23:23+00:00,2023-07-01T18:10:04+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1708088672,559,Fix `linewidth` parameter: `str` → `float`.,"In the current stable **Matplotlib** version (3.7), `lw` (`linewidth`) should not be a string but float. [Reference](https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_linewidth).
+
+Fixed for Ch-1. Let me know if this format of PR is fine, then will fix in other chapters as well.",Fillll,636525,open,False,1,2023-05-12T19:15:20+00:00,2023-10-25T10:43:02+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1674666982,558,"Update Ch2_MorePyMC_PyMC_current.ipynb print initial values, in accordance with latest pymc version",model.initial_values.items is deprecated. I updated it to model.rvs_to_initial_values to print variables and initial values correctly.,sebastianduchene,6167278,open,False,4,2023-04-19T10:57:27+00:00,2023-04-21T09:27:19+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1665389331,557,fixing lw typo,"line widths are incorrectly specified in Ch1_Introduction_PyMC_current.ipynb
+
+Changing strings to ints",nicholas-miles,7267397,open,False,1,2023-04-12T23:11:00+00:00,2023-04-21T20:40:03+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1582243261,556,`pandas_datareader` error in chapter 6,"running the code for Stocks examples returns and error related to `pandas_datareader` as below:
+![image](https://user-images.githubusercontent.com/32581929/218455225-405b9275-47e6-42af-9a7b-cfde399e0a70.png)
+",Shayan-B,32581929,open,False,1,2023-02-13T12:16:06+00:00,2023-12-31T19:11:03+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1580664245,555,corrected the code `at` and changed to `pt` ,correcte a typing blip in code for pytensor.tensor import,Shayan-B,32581929,closed,False,12,2023-02-11T05:21:43+00:00,2023-02-14T00:18:44+00:00,2023-02-14T00:18:44+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1576977950,554,Move to PyMC 5.,"- Replace aesara with pytensor.
+- Update dependency.
+",twiecki,674200,closed,False,1,2023-02-09T00:00:39+00:00,2023-02-09T00:34:55+00:00,2023-02-09T00:34:54+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1428170231,552,Ch3.type error at Example: Unsupervised Clustering using a Mixture Model,"when i ran code bellow ~
+
+with model:
+    step1 = pm.Metropolis(vars=[p, sds, centers])
+    step2 = pm.ElemwiseCategorical(vars=[assignment])
+    trace = pm.sample(25000, step=[step1, step2])
+
+show error message:
+TypeError: Unknown parameter type: <class 'theano.tensor.var.TensorVariable'>
+
+Can anyone tell me what's happen? I had not change any code, just ran it。
+I used pymc3。
+Thanks!
+",hungyangtsai,32056426,open,False,2,2022-10-29T09:16:36+00:00,2023-01-04T02:02:46+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1427342941,551,Small formatting fix.,"Correct too small heading size for the ""### Example: Bayesian A/B testing\n"" chapter.",ursk,1203292,closed,False,1,2022-10-28T14:24:11+00:00,2022-10-28T14:28:13+00:00,2022-10-28T14:28:13+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1422311734,550,TypeError (cycler) when trying to update matplotlib 3.5.2 with the custom styles,"How to solve this issue so the book can be used interactively in Jupyter?
+Adding ""import cycler"" changes nothing, even though I have cycler 0.11.0. 
+Changing to ""colors = [""#348ABD"", ""#A60628"", ""#7A68A6"", ""#467821""]"" does not work as well (InvalidSyntax)
+
+```python
+import matplotlib
+
+matplotlib.rcParams.update(
+    {
+        ""lines.linewidth"": 2.0,
+        ""axes.edgecolor"": ""#bcbcbc"",
+        ""patch.linewidth"": 0.5,
+        ""legend.fancybox"": True,
+        ""axes.prop_cycle"": cycler('color', [
+            ""#348ABD"",
+            ""#A60628"",
+            ""#7A68A6"",
+            ""#467821"",
+            ""#CF4457"",
+            ""#188487"",
+            ""#E24A33""
+        ]),
+        ""axes.facecolor"": ""#eeeeee"",
+        ""axes.labelsize"": ""large"",
+        ""axes.grid"": True,
+        ""patch.edgecolor"": ""#eeeeee"",
+        ""axes.titlesize"": ""x-large"",
+        ""svg.fonttype"": ""path"",
+        ""examples.directory"": """"
+    }
+)
+<img width=""606"" alt=""Знімок екрана 2022-10-25 о 14 12 43"" src=""https://user-images.githubusercontent.com/116641631/197758488-65619f57-e054-4e4f-bd82-fde902ec976d.png"">
+
+```
+",andreosokil,116641631,open,False,2,2022-10-25T11:29:30+00:00,2024-02-06T13:23:06+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1411614920,549,Chapter 1 TF2: from __future__ imports must occur at the beginning of the file,"When accessing Chapter 1 of the Tensorflow port [here](https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_TFP.ipynb) and clicking on the [""Run in Google Colab""](https://colab.research.google.com/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_TFP.ipynb) button in the top right, when I execute the first code cell (with no changes) I get the following error:
+```
+File [""<ipython-input-3-c19fbaf2048a>""](https://localhost:8080/#), line 13
+    #@markdown This sets the warning status (default is `ignore`, since this notebook runs correctly)
+           ^
+SyntaxError: from __future__ imports must occur at the beginning of the file
+```
+Any suggestions?",Narglfrob,15078108,open,False,0,2022-10-17T13:46:14+00:00,2022-10-17T13:46:14+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1337976392,548,Shift to the pymc current version,Update to pymc current version and add some Arviz content,miemiekurisu,3900532,closed,False,48,2022-08-13T14:22:24+00:00,2023-02-08T14:23:14+00:00,2023-02-08T14:22:29+00:00,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1325012457,547,"Update link to Greenhill, Ward, Sacks paper","Addresses #530. Unfortunately, there does not appear to be a free, full-text version of the paper available. As a substitute/stop-gap, I have linked to the Wiley Online page, which provides the abstract and relevant identifying information (e.g., DOI number) for the paper.",jessica-writes-code,10662138,closed,False,1,2022-08-01T21:40:08+00:00,2022-08-02T23:12:38+00:00,2022-08-02T23:12:38+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1303701654,546,Chapter 6: Bayesian Multi-armed Bandits Code,"After carefully studying the example code for the multi-armed bandit on chapter six, I found a piece of code which I believe is missing a parameter:
+
+```
+def sample_bandits(self, n=1):
+
+        bb_score = np.zeros(n)
+        choices = np.zeros(n)
+        
+        for k in range(n):
+            #sample from the bandits's priors, and select the largest sample
+            choice = np.argmax(np.random.beta(1 + self.wins, 1 + self.trials - self.wins))
+            
+            #sample the chosen bandit
+            result = self.bandits.pull(choice)
+```
+
+Here, `np.random.beta(1 + self.wins, 1 + self.trials - self.wins)` is missing the `size` parameter, thus it returns a single value, not an array. That makes `np.argmax()` to pick a bandit useless, as that will always return 0.
+
+Shouldn't the code be `np.random.beta(1 + self.wins, 1 + self.trials - self.wins, len(self.n_bandits))` ?",Ander-MZ,3607017,open,False,0,2022-07-13T16:52:35+00:00,2022-07-13T16:53:07+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1301477763,545,Crack,![Uploading w{4e4493f} (0f2e9629-652b-4761-a952-d4f8454abdf9 id=0x7f0a019c # tag=CreateIssueFragment) …]()`~~~~`,jal214,108441575,closed,False,0,2022-07-12T03:13:44+00:00,2022-07-12T18:30:11+00:00,2022-07-12T18:30:11+00:00,,1,0,0,1,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1266081133,544,Change min to max on the explanation of the halo's radial profile fun…,"Solves #516
+Update Tim's decreasing function for euclidean distance from min to max as detailed in the code and https://arxiv.org/abs/1311.0704",jomavera,26580049,open,False,0,2022-06-09T12:48:20+00:00,2022-06-09T13:42:38+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1244429553,543,Chapter 3 minor question,"I have a minor question at Chapter 3.
+
+Why probability of belonging to cluster 1 was calculated as the following [Figure 1] rather than this?
+
+v = (1 - p_trace) * norm_pdf(x, loc=center_trace[:, 1], scale=std_trace[:, 1]) > \
+p_trace * norm_pdf(x, loc=center_trace[:, 0], scale=std_trace[:, 0])
+
+[Figure 1]
+![525755D7-DD5A-4701-9778-D1CB80FA69F4](https://user-images.githubusercontent.com/24985229/169724561-19f434ee-873f-4189-9dca-13b520ec1286.png)
+
+Thank you for your wonderful book!",missflash,24985229,open,False,0,2022-05-23T01:00:16+00:00,2022-05-23T01:00:16+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1238987230,542,Chapter 2: description regarding the separation plot for Fig. 2.3.2,"""The black vertical line is the expected number of defects we should observe, given this model. This allows the user to see how the total number of events predicted by the model compares to the actual number of events in the data.""
+The above ordinates form the paragraph under the first separation plot 
+https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter2_MorePyMC/Ch2_MorePyMC_PyMC2.ipynb
+However, I suppose there might be some misunderstandings:
+**the expected number of defects** should be computed by the approach explained in Appendix 2.5, i.e.  posterior_probability.sum()
+in my case, it's about 6.99753 which corresponds to the number of the realized defect 7.
+However, what you computed within separation_plot.py is N - \sum_i p_i , in my case, it about 16.0047.
+**In my opinion, this makes sense to show how far the blue bar the blue bars should distribute. As you explained in the text: Ideally, all the blue bars should be close to the right-hand side.** 
+
+But, the description at the beginning of this issue, as I mentioned above, is not exact anymore.
+Maybe, we could say:
+ The black vertical line is the expected number of defects (counting from right-hand side)
+
+Best wishes,
+
+Beinstein.
+",beinstein23,74159634,open,False,0,2022-05-17T18:03:33+00:00,2022-05-17T18:22:35+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1157252755,541,Chapter 2 -- tfp.bijectors.AffineScalar is deprecated,"Executing the code for the model in the Challenger Space Shuttle Disaster example, it returns an AttributeError, roughly ""tfp.bijectors has no attribute AffineScalar"". 
+After an unusually long search in the internet, I found that, as per this source (https://github.com/tensorflow/probability/releases), this attribute is indeed deprecated. The release said to use tfp.Shift(shift) or tfp.Scale(scale), instead. Since the code called for a multiplying factor, I substituted the line for tp.bijectors.Scale(100.). 
+It worked fine. 
+",joaoppadua,62708503,open,False,0,2022-03-02T14:13:03+00:00,2022-03-02T14:13:47+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1148017713,540,Chpt #6; Example stock returns: ystockquote is not working,"I could not make ystockquote to work no matter what I tried. Instead I used yahoo's yfinance package which has a straightforward api. 
+I'm recording the updated code here in case someone encounters the same problem. 
+
+import yfinance as yf
+import pandas as pd
+
+n_observations = 100 # we will truncate the the most recent 100 days.
+
+stocks = [""AAPL"", ""GOOG"", ""TSLA"", ""AMZN""]
+
+enddate = ""2022-02-19""
+startdate = ""2021-07-01""
+
+stock_closes = pd.DataFrame()
+
+for stock in stocks:
+    x = yf.download(stock, startdate, enddate)
+    stock_closes[stock] = x['Close']
+
+stock_closes
+stock_returns = stock_closes.pct_change().iloc[1:, :]
+stock_return = stock_returns.iloc[-n_observations:,:]",codeja3,52704142,open,False,0,2022-02-23T12:15:30+00:00,2022-02-23T12:16:05+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1143719738,539,Chapter2 -- error in plot_artificial_sms_dataset() function,"Hi, 
+In the TFP version of Chapter 2, the original code of the  plot_artificial_sms_dataset() function raises an error in evaluating a shape parameter. The error seems to be due to the use of the tau parameter in graph type, i.e., before it is evaluated. 
+Adding the following line after a similar one to evaluate lambdas solved the bug: [ tau_ ] = evaluate([ tau ])
+Hope this helps. 
+Warm wishes,
+Joao
+",joaoppadua,62708503,open,False,0,2022-02-18T20:28:07+00:00,2022-02-18T20:28:07+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1095304193,538,Fix typo,This notebook is about Pyro and it wrongly referred to TFP,ejarkm,20713251,open,False,0,2022-01-06T13:06:37+00:00,2022-01-06T13:06:37+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1081373483,537,Port book to PyMC 4.0,"With PyMC 4.0 almost ready, we should work on porting the examples here. Most models should continue to run just fine.",twiecki,674200,open,False,7,2021-12-15T18:48:46+00:00,2022-06-06T20:39:20+00:00,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1046838877,536,Prevent return inferencedata error + cheater/liar fix,"The default of `return_inferencedata` was `False` but in the future (v4.0) it will be `True`. However, the rest of the code is written for `False` case so I changed all `pm.sample` to have an explicit False.
+
+Currently it shows this warning:
+>FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning
+
+-> Also a small change in the text in Ch2 as we are actually modeling the cheaters and not liars.",toppare,6221127,open,False,0,2021-11-07T20:12:29+00:00,2021-11-07T20:12:29+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1035098701,535,Bug in Chapter 1 Pyro Version: Exponential Distribution Input,"In the Pyro Version of Chapter 1, the following code block has an issue:
+
+```
+lambda_ = [0.5, 1]
+d = dist.Exponential(torch.tensor(lambda_))
+
+x = torch.linspace(0, 4, 100).view(-1, 1)
+y = torch.exp(d.log_prob(x))
+```
+
+It raises the error:
+```
+ValueError: The value argument must be within the support
+```
+
+Problem:
+The underlying PyTorch code for the exponential distribution only allows inputs greater than zero, so as `x` includes zero, this block fails. I think the underlying issue is with PyTorch, so I've opened a [PR](https://github.com/pytorch/pytorch/pull/67184) to change the constraints for the exponential function from positive (>0) to non-negative (>=0). If that change goes through, this issue is moot, but if they don't change it, then the block will need to be updated.
+
+",JAEarly,7620667,closed,False,2,2021-10-25T12:51:56+00:00,2021-11-03T14:52:20+00:00,2021-11-03T14:52:20+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1034516762,534,text change,"I think we want to find the posterior distr. of `cheaters`, not `liars`",toppare,6221127,open,False,0,2021-10-24T21:20:34+00:00,2021-10-24T21:20:34+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1031005623,533,all `normed` keywords changed to `density`,`normed=True` in matplotlib histogram is removed in 2.2 and it throws error. All of them in the repo are replaced with `density=True`,toppare,6221127,closed,False,0,2021-10-20T05:56:10+00:00,2021-10-20T12:52:12+00:00,2021-10-20T12:52:11+00:00,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1030684427,532,fix for broken link,,toppare,6221127,closed,False,0,2021-10-19T19:50:01+00:00,2021-10-20T05:41:28+00:00,2021-10-20T02:28:33+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1016557024,531,Create Probability,,Patrick-Munyao,86194016,closed,False,0,2021-10-05T16:57:29+00:00,2022-04-28T14:17:16+00:00,2022-04-28T14:17:16+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,990360876,530,Chapter 2 link to GreenhillWardSacks paper is broken.,"This link (in the challenger example)- http://mdwardlab.com/sites/default/files/GreenhillWardSacks.pdf seems to be dead.
+
+I did find a version on github but just fyi.",EffiFeld,29025368,open,False,1,2021-09-07T21:16:27+00:00,2021-09-07T21:34:50+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,987571496,529,Fix PyMC3 warnings in Chapter 1,There were a few deprecations and warnings that occurred when I ran through Chapter 1. This fixes them.,thomasaarholt,2721423,closed,False,0,2021-09-03T09:10:06+00:00,2021-09-04T10:47:01+00:00,2021-09-04T01:01:51+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,957256631,528,Change trace code due to update in PyMC library,,nhkhoi91,10096046,open,False,1,2021-07-31T14:34:51+00:00,2021-09-17T20:18:08+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,952642280,527,Bug in Ch6_priors_pymc3.ipynb ,"Section: A Proposed Solution
+
+The correction one should be:
+
+the posterior is a Beta(a=1+X, b=1+N-X)",lc82111,6269232,open,False,0,2021-07-26T08:25:44+00:00,2021-07-26T08:25:44+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,946918157,526,docs: Fix a few typos,"There are small typos in:
+- Chapter3_MCMC/github_pull.py
+- Chapter5_LossFunctions/DarkWorldsMetric.py
+- Chapter7_BayesianMachineLearning/auc.py
+- sandbox/Chapter10_/github_datapull.py
+
+Fixes:
+- Should read `matched` rather than `mathced`.
+- Should read `check` rather than `cehck`.
+- Should read `permutations` rather than `permutatiosn`.
+- Should read `operator` rather than `operater`.
+- Should read `languages` rather than `langagues`.
+- Should read `joining` rather than `joiing`.
+- Should read `indexes` rather than `idexes`.
+
+
+
+Semi-automated pull request generated by
+https://github.com/timgates42/meticulous/blob/master/docs/NOTE.md",timgates42,47873678,closed,False,1,2021-07-17T23:32:10+00:00,2021-07-19T13:58:35+00:00,2021-07-19T13:58:35+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,946607059,525,definition of a continuous distribution in chap 1,"So far I like this book. It is very well written.
+
+I don't want to sound pedantic here, but I don't like the description of the continuous distribution in chap 1. ""Z is continuous: Continuous random variable can take on arbitrarily exact values. ""
+
+This description sounds like discrete values are not exact, e.g., one apple and two apples. Both discrete and continuous values can be exact. I would say ""continuous random variable can take on an uncountable set of values"", which is more precise.
+
+I know most of the people who read this book are not for the math. Sorry for the rant.",HVoltBb,11577424,open,False,0,2021-07-16T21:27:45+00:00,2021-07-16T21:27:45+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,939521850,524,"Ch2, tensorflow import issue","Hi there, I was tryting to just run all cells on the tensorflow chapter 2 book, and it hits this error right at the start.
+
+```
+AttributeError                            Traceback (most recent call last)
+<ipython-input-2-e7f38f79c510> in <module>()
+     38 
+     39 import tensorflow as tf
+---> 40 tfe = tf.contrib.eager
+     41 
+     42 # Eager Execution
+
+AttributeError: module 'tensorflow' has no attribute 'contrib'
+```",worthy7,4762399,open,False,1,2021-07-08T06:36:27+00:00,2021-11-06T12:43:49+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,890517415,523,Add Kaggle Badge,Add Kaggle Badge that allows for opening the .ipynb as a Kaggle Notebook as seen here [https://www.kaggle.com/product-feedback/152480](https://www.kaggle.com/product-feedback/152480).,pizzaz93,10904763,closed,False,0,2021-05-12T21:54:31+00:00,2021-06-02T16:46:16+00:00,2021-06-02T16:46:13+00:00,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,855340742,522,Cannot compile: Key error `template_paths`,"Unable to compile using `to_latex_pdf.sh `
+
+```
+$ ./to_latex_pdf.sh 
+[TerminalIPythonApp] WARNING | Subcommand `ipython nbconvert` is deprecated and will be removed in future versions.
+[TerminalIPythonApp] WARNING | You likely want to use `jupyter nbconvert` in the future
+Traceback (most recent call last):
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/traitlets.py"", line 535, in get
+    value = obj._trait_values[self.name]
+KeyError: 'template_paths'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""/home/raffaele/.local/bin/ipython3"", line 8, in <module>
+    sys.exit(start_ipython())
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/IPython/__init__.py"", line 126, in start_ipython
+    return launch_new_instance(argv=argv, **kwargs)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/config/application.py"", line 845, in launch_instance
+    app.start()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/IPython/terminal/ipapp.py"", line 352, in start
+    return self.subapp.start()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/nbconvertapp.py"", line 350, in start
+    self.convert_notebooks()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/nbconvertapp.py"", line 519, in convert_notebooks
+    self.exporter = cls(config=self.config)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/templateexporter.py"", line 325, in __init__
+    super().__init__(config=config, **kw)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/exporter.py"", line 114, in __init__
+    self._init_preprocessors()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/templateexporter.py"", line 491, in _init_preprocessors
+    conf = self._get_conf()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/templateexporter.py"", line 507, in _get_conf
+    for path in map(Path, self.template_paths):
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/traitlets.py"", line 575, in __get__
+    return self.get(obj, cls)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/traitlets.py"", line 538, in get
+    default = obj.trait_defaults(self.name)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/traitlets.py"", line 1578, in trait_defaults
+    return self._get_trait_default_generator(names[0])(self)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/traitlets/traitlets.py"", line 975, in __call__
+    return self.func(*args, **kwargs)
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/templateexporter.py"", line 518, in _template_paths
+    template_names = self.get_template_names()
+  File ""/home/raffaele/.local/lib/python3.8/site-packages/nbconvert/exporters/templateexporter.py"", line 601, in get_template_names
+    raise ValueError('No template sub-directory with name %r found in the following paths:\n\t%s' % (base_template, paths))
+ValueError: No template sub-directory with name 'article' found in the following paths:
+	/home/raffaele/.local/share/jupyter
+	/usr/local/share/jupyter
+	/usr/share/jupyter
+
+If you suspect this is an IPython 7.21.0 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+or send an email to the mailing list at ipython-dev@python.org
+
+You can print a more detailed traceback right now with ""%tb"", or use ""%debug""
+to interactively debug it.
+
+Extra-detailed tracebacks for bug-reporting purposes can be enabled via:
+    c.Application.verbose_crash=True
+```",raffaem,54762742,open,False,0,2021-04-11T15:54:24+00:00,2021-04-11T15:54:24+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,842871573,521,"PyMC3 install, https://github.com/pymc-devs/pymc3/wiki/Installation-Guide-(Windows)","I have install my pymc3 as https://github.com/pymc-devs/pymc3/wiki/Installation-Guide-(Windows) on win10, it works well in pycharm, but it can't work normally in jupyter, I've searched in Internet, upgrade the numpy, but it still a problem.
+
+WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
+WARNING (theano.tensor.blas): Failed to import scipy.linalg.blas, and Theano flag blas__ldflags is empty. Falling back on slower implementations for dot(matrix, vector), dot(vector, matrix) and dot(vector, vector) (DLL load failed while importing _fblas: 找不到指定的模块。)
+ERROR:root:Internal Python error in the inspect module.
+Below is the traceback from this internal error.",lrlgogo,54427365,open,False,0,2021-03-29T00:27:51+00:00,2021-03-29T00:27:51+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,842721808,520,"Chap 1, Section: Introducing our first hammer: PyMC3, example error, PyMC3,","PyMC3, python 3.84, win10, Jupyter-lab
+code from Chap1 Sec: Introducing our first hammer: PyMC3,
+
+import pymc3 as pm
+import theano.tensor as tt
+
+with pm.Model() as model:
+    alpha = 1.0/count_data.mean()  # Recall count_data is the
+                                   # variable that holds our txt counts
+    lambda_1 = pm.Exponential(""lambda_1"", alpha)
+    lambda_2 = pm.Exponential(""lambda_2"", alpha)
+    
+    tau = pm.DiscreteUniform(""tau"", lower=0, upper=n_count_data - 1)
+
+Error:
+
+---------------------------------------------------------------------------
+Exception                                 Traceback (most recent call last)
+<ipython-input-5-00c709d55d04> in <module>
+      5     alpha = 1.0/count_data.mean()  # Recall count_data is the
+      6                                    # variable that holds our txt counts
+----> 7     lambda_1 = pm.Exponential(""lambda_1"", alpha)
+      8     lambda_2 = pm.Exponential(""lambda_2"", alpha)
+      9 
+
+d:\python\python384r1\lib\site-packages\pymc3\distributions\distribution.py in __new__(cls, name, *args, **kwargs)
+    119             dist = cls.dist(*args, **kwargs, shape=shape)
+    120         else:
+--> 121             dist = cls.dist(*args, **kwargs)
+    122         return model.Var(name, dist, data, total_size, dims=dims)
+    123 
+
+d:\python\python384r1\lib\site-packages\pymc3\distributions\distribution.py in dist(cls, *args, **kwargs)
+    128     def dist(cls, *args, **kwargs):
+    129         dist = object.__new__(cls)
+--> 130         dist.__init__(*args, **kwargs)
+    131         return dist
+    132 
+
+d:\python\python384r1\lib\site-packages\pymc3\distributions\continuous.py in __init__(self, lam, *args, **kwargs)
+   1485         super().__init__(*args, **kwargs)
+   1486         self.lam = lam = tt.as_tensor_variable(floatX(lam))
+-> 1487         self.mean = 1.0 / self.lam
+   1488         self.median = self.mean * tt.log(2)
+   1489         self.mode = tt.zeros_like(self.lam)
+
+d:\python\python384r1\lib\site-packages\theano\tensor\var.py in __rtruediv__(self, other)
+    174 
+    175     def __rtruediv__(self, other):
+--> 176         return theano.tensor.basic.true_div(other, self)
+    177 
+    178     def __rfloordiv__(self, other):
+
+d:\python\python384r1\lib\site-packages\theano\graph\op.py in __call__(self, *inputs, **kwargs)
+    251 
+    252         if config.compute_test_value != ""off"":
+--> 253             compute_test_value(node)
+    254 
+    255         if self.default_output is not None:
+
+d:\python\python384r1\lib\site-packages\theano\graph\op.py in compute_test_value(node)
+    124 
+    125     # Create a thunk that performs the computation
+--> 126     thunk = node.op.make_thunk(node, storage_map, compute_map, no_recycling=[])
+    127     thunk.inputs = [storage_map[v] for v in node.inputs]
+    128     thunk.outputs = [storage_map[v] for v in node.outputs]
+
+d:\python\python384r1\lib\site-packages\theano\graph\op.py in make_thunk(self, node, storage_map, compute_map, no_recycling, impl)
+    632             )
+    633             try:
+--> 634                 return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+    635             except (NotImplementedError, MethodNotDefined):
+    636                 # We requested the c code, so don't catch the error.
+
+d:\python\python384r1\lib\site-packages\theano\graph\op.py in make_c_thunk(self, node, storage_map, compute_map, no_recycling)
+    598                 print(f""Disabling C code for {self} due to unsupported float16"")
+    599                 raise NotImplementedError(""float16"")
+--> 600         outputs = cl.make_thunk(
+    601             input_storage=node_input_storage, output_storage=node_output_storage
+    602         )
+
+d:\python\python384r1\lib\site-packages\theano\link\c\basic.py in make_thunk(self, input_storage, output_storage, storage_map)
+   1201         """"""
+   1202         init_tasks, tasks = self.get_init_tasks()
+-> 1203         cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+   1204             input_storage, output_storage, storage_map
+   1205         )
+
+d:\python\python384r1\lib\site-packages\theano\link\c\basic.py in __compile__(self, input_storage, output_storage, storage_map)
+   1136         input_storage = tuple(input_storage)
+   1137         output_storage = tuple(output_storage)
+-> 1138         thunk, module = self.cthunk_factory(
+   1139             error_storage,
+   1140             input_storage,
+
+d:\python\python384r1\lib\site-packages\theano\link\c\basic.py in cthunk_factory(self, error_storage, in_storage, out_storage, storage_map)
+   1632             for node in self.node_order:
+   1633                 node.op.prepare_node(node, storage_map, None, ""c"")
+-> 1634             module = get_module_cache().module_from_key(key=key, lnk=self)
+   1635 
+   1636         vars = self.inputs + self.outputs + self.orphans
+
+d:\python\python384r1\lib\site-packages\theano\link\c\cmodule.py in module_from_key(self, key, lnk)
+   1189             try:
+   1190                 location = dlimport_workdir(self.dirname)
+-> 1191                 module = lnk.compile_cmodule(location)
+   1192                 name = module.__file__
+   1193                 assert name.startswith(location)
+
+d:\python\python384r1\lib\site-packages\theano\link\c\basic.py in compile_cmodule(self, location)
+   1541             try:
+   1542                 _logger.debug(f""LOCATION {location}"")
+-> 1543                 module = c_compiler.compile_str(
+   1544                     module_name=mod.code_hash,
+   1545                     src_code=src_code,
+
+d:\python\python384r1\lib\site-packages\theano\link\c\cmodule.py in compile_str(module_name, src_code, location, include_dirs, lib_dirs, libs, preargs, py_module, hide_symbols)
+   2544             # difficult to read.
+   2545             compile_stderr = compile_stderr.replace(""\n"", "". "")
+-> 2546             raise Exception(
+   2547                 f""Compilation failed (return status={status}): {compile_stderr}""
+   2548             )
+
+Exception: ('Compilation failed (return status=1): d:\\python\\python384r1\\libs/python38.lib: error adding symbols: File in wrong format\r. collect2.exe: error: ld returned 1 exit status\r. ', 'FunctionGraph(Elemwise{true_div,no_inplace}(TensorConstant{1.0}, TensorConstant{0.05065023956194388}))')",lrlgogo,54427365,open,False,2,2021-03-28T11:50:25+00:00,2021-08-25T02:38:44+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,833738814,519,Tensorflow probability notebook for the Chapter 7: Bayesian A/B Testing,I've written the notebook for the chapter 7 of the book. It was just as a personal exercise but I thought it might be useful to add it to the repo.,RonsenbergVI,14303619,closed,False,0,2021-03-17T12:54:12+00:00,2021-03-23T10:09:12+00:00,2021-03-23T10:09:12+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,815027420,518,fix: Subplot in Chapter 1 gives Matplotlib warning,"Fix a Matplotlib 3.3 deprecation warning in the beginning of the Chapter 1 notebooks.
+
+The exact warning is:
+
+> MatplotlibDeprecationWarning: Passing non-integers as three-element position specification is deprecated since 3.3 and will be removed two minor releases later.
+
+![image](https://user-images.githubusercontent.com/3322228/108939457-c076b180-761f-11eb-94a5-b66f835f2766.png)
+
+The simple fix is done by using floor division with `//` so that the type is `int` and not `float`. Since it's the first chapter it's particularly important to keep it clean.
+",kevinalh,3322228,open,False,0,2021-02-24T02:42:53+00:00,2021-07-16T20:42:42+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,793745290,517,[Feature Request] Add new TFP syntax: JointDistribution*{AutoBatched},"Hello,
+
+First of all, thank for writing a very great book, I'm really enjoying it :smile:
+
+Currently in the TFP version of this book, models are ""manually"" built. I took a look at TFP tutorial [here](https://www.tensorflow.org/probability/examples/Modeling_with_JointDistribution), found out that models could be intuitively built with `JointDistribution*{AutoBatched}`. For some simple models, this has some advantage of its own:
+
+- intuitive: can be read seamlessly between code and visualization graph, ""fast prototype Bayesian model"" to quote their words
+- handles `sample()` and `log_prob()` together, you don't need to write different functions
+
+So I suggest you could add this new syntax to your book to keep it up-to-date with new version of TFP
+
+Thank you",phineas-pta,37548991,closed,False,0,2021-01-25T21:39:34+00:00,2023-06-21T19:39:40+00:00,2023-06-21T19:39:40+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,788639335,516,"Ch 5 Dark World, Text equation uses min by code uses max","In the text discussing Tim's decreasing function for euclidean distance, the formula is displayed as:
+
+<img width=""182"" alt=""Screen Shot 2021-01-18 at 8 34 53 PM"" src=""https://user-images.githubusercontent.com/6923376/104977070-a583a280-59cc-11eb-9af0-3924d4fd475f.png"">
+
+
+This shows the minimum of the Euclidean distance and some value.
+
+--
+
+In the code (here shown as the PyMC3 version), the `T.maximum` is used:
+
+```
+def f_distance(gxy_pos, halo_pos, c):
+    return T.maximum(euclidean_distance(gxy_pos, halo_pos), c)[:, None]
+```
+
+Shouldn't these two be the same?
+
+Thanks!",ZachariahRosenberg,6923376,closed,False,1,2021-01-19T01:38:15+00:00,2023-09-22T14:33:52+00:00,2023-09-22T14:33:51+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,778409817,515,Fix interval computation in TFP sorting example,,btlorch,11959715,open,False,0,2021-01-04T22:15:56+00:00,2021-01-04T22:15:56+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,752960828,514,"In ""Ch2_MorePyMC_PyMC3"" under ""Including observations in the Model"" section","This fixes 'normed' (which is deprecated) to 'density'. PS: I am a complete nooooob. If this is incorrect, I apologize. It worked for me :)....Thanks, signed your loving son, Homer
+
+%matplotlib inline
+from IPython.core.pylabtools import figsize
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+figsize(12.5, 4)
+
+
+samples = lambda_1.random(size=20000)
+_**#plt.hist(samples, bins=70, normed=True, histtype=""stepfilled"") normed is deprecated (old #code)**_
+_**#density performs the same as normed (new code below)**_
+plt.hist(samples, bins=70, density=True, histtype=""stepfilled"")
+plt.title(""Prior distribution for $\lambda_1$"")
+plt.xlim(0, 8);",doh-wrong-button,75216585,open,False,0,2020-11-29T17:06:23+00:00,2020-11-29T17:08:21+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,742813488,513,Trying to run code on the pymc/pymc3 Docker image,"After having installs of Theano kill my Windows 10 machine repeatedly, I decided to use the Docker image (pymc/pymc3) to go through the book. I had no issues (after a couple of false starts) sharing my Windows scripts with the running image), but when I try to run first (!) Jupyter script in Chapter 1 that uses pymc, I get message after message about missing components - fastprogress, h5py, typing_extensions, dill,, arviz. Even after using conda to add all those packages, I get errors about ""no model on the context stack""
+
+I've used dozens of packages, including Tensorflow / Keras, and never seen issues like this. I'm pretty much ready to give up - I'd like to learn this, but I have only so many days to burn up on this stuff. Is there some simple change to what I'm doing that would make this stuff work better? Are there any instructions somewhere about using the book with a Docker image?",RWilsker,50881933,open,False,0,2020-11-13T21:56:37+00:00,2020-11-13T21:56:37+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,712438488,512,Update README.md,grammatical errors,vikashchand,72156896,closed,False,0,2020-10-01T03:15:51+00:00,2023-02-13T14:34:07+00:00,2023-02-13T14:34:07+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,703656667,511,Fix showcase_loss text definition,"The text definition shows
+```python
+return np.abs(true_price - guess - 250)
+```
+yet when the function is actually defined, below, it says
+```python
+loss[~ix] = np.abs(guess - true_price[~ix])
+```",MarcoGorelli,33491632,closed,False,2,2020-09-17T14:45:09+00:00,2021-03-21T13:00:53+00:00,2021-03-21T13:00:53+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,703624107,510,Fix frequentist's guess,"First, thanks for your amazing book!
+
+Here, mu_1 is 3000, and mu_2 is 12000. So a frequentist's guess would be 3000 + 12000 = 15000.
+
+35000 is the _prior_ for the distribution of the true price, which the frequentist would typically not use :) ",MarcoGorelli,33491632,closed,False,1,2020-09-17T14:06:41+00:00,2021-03-21T13:01:01+00:00,2021-03-21T13:01:01+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,700681975,509,Fixed #395,Fixed property axes.prop_cycle incompatibility.,maycownd,43197624,closed,False,1,2020-09-14T00:35:33+00:00,2020-09-14T16:48:32+00:00,2020-09-14T16:48:32+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,700083506,508,My project,,king-005,71113839,closed,False,0,2020-09-12T05:47:19+00:00,2020-09-12T11:18:24+00:00,2020-09-12T11:18:24+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,698996527,507,Hi,Hello,king-005,71113839,closed,False,0,2020-09-11T08:08:36+00:00,2020-09-12T11:18:24+00:00,2020-09-12T11:18:24+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,676939799,506,Adding port to Pyro - Chapter 1,"First of all, congrats for the book: great reading! This PR ports Chapter 1 to [Pyro](http://pyro.ai/), another great probabilistic programming language (PPL) supported by PyTorch on the backend.",ucals,19690196,closed,False,1,2020-08-11T14:47:49+00:00,2020-08-12T18:32:10+00:00,2020-08-12T18:32:10+00:00,,1,0,0,0,0,0,1
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,644066044,505,AttributeError: module 'tensorflow' has no attribute 'contrib',"tensorflow.contrib.eager is no longer in TensorFlow, but it's used in the jupyter notebooks and  in google colab.
+```python
+import tensorflow as tf
+tfe = tf.contrib.eager
+
+# Eager Execution
+#@markdown Check the box below if you want to use [Eager Execution](https://www.tensorflow.org/guide/eager)
+#@markdown Eager execution provides An intuitive interface, Easier debugging, and a control flow comparable to Numpy. You can read more about it on the [Google AI Blog](https://ai.googleblog.com/2017/10/eager-execution-imperative-define-by.html)
+use_tf_eager = False #@param {type:""boolean""}
+
+# Use try/except so we can easily re-execute the whole notebook.
+if use_tf_eager:
+    try:
+        tf.enable_eager_execution()
+    except:
+        pass
+```",natefrisch01,44580969,open,False,8,2020-06-23T18:48:57+00:00,2021-09-21T06:36:13+00:00,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,643004137,504,"ValueError: num must be 1 <= num <= 20, not 21","Hi, 
+What's wrong with this code?
+I have an error like this??
+****
+for i, image in enumerate(images):
+    plt.subplot(4,5, i + 1)
+    plt.imshow(image)",tehreemnaqvi,38427571,open,False,8,2020-06-22T11:51:55+00:00,2020-06-22T12:14:42+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,633754769,503,Ch1 TFP: Specify the posterior sampler,"Hi there,
+
+This section:
+
+```
+], kernel_results = graph_sample_chain(
+    num_results=num_results,
+    num_burnin_steps=num_burnin_steps,
+    current_state=initial_chain_state,
+    kernel = kernel)
+```
+
+Is giving the following error:
+
+TypeError: Tensor is unhashable. Instead, use tensor.ref() as the key.",Bazman76,9517425,open,False,0,2020-06-07T20:54:34+00:00,2020-06-07T20:54:34+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,620209602,502,Ch2 TFP - AttributeError: module 'tensorflow' has no attribute 'contrib',"https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter2_MorePyMC/Ch2_MorePyMC_TFP.ipynb
+
+In the Tensorflow port of Chapter 2, there is an error when the first cell in run: 
+
+```
+AttributeError                            Traceback (most recent call last)
+<ipython-input-1-103d57c84299> in <module>()
+     38 
+     39 import tensorflow as tf
+---> 40 tfe = tf.contrib.eager
+     41 
+     42 # Eager Execution
+
+AttributeError: module 'tensorflow' has no attribute 'contrib'
+```",RyanMarten,18333503,closed,False,1,2020-05-18T13:27:54+00:00,2020-05-31T18:43:55+00:00,2020-05-31T18:43:55+00:00,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,611566358,501,pymc doesn't work for 3.7; I think we need pymc3,"Attempting to install the requirements in the `requirements.txt` file fails at the pymc requirement for those of us on Python 3.7. I believe this is because we need pymc3.
+
+```
+UnsatisfiableError: The following specifications were found
+to be incompatible with the existing python installation in your environment:
+
+Specifications:
+
+  - pymc -> python[version='2.7.*|3.4.*|>=3.6,<3.7.0a0|>=2.7,<2.8.0a0']
+
+Your python: python=3.7
+
+If python is on the left-most side of the chain, that's the version you've asked for.
+When python appears to the right, that indicates that the thing on the left is somehow
+not available for the python version you are constrained to. Note that conda will not
+change your python version to a different minor version unless you explicitly specify
+that.
+```",dleybz,7946482,open,False,0,2020-05-04T02:19:38+00:00,2020-05-04T02:19:38+00:00,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,604118421,500,Incorrect or ambiguous sentence in Ch. 1,"The sentence 
+
+> An individual who assigns a belief of 0 to an event has no confidence that the event will occur;
+
+in `Ch1_Introduction_PyMC2.ipynb` does not seem to be correct or it is ambiguous. When belief is interpreted as probability, then an individual who assigns a belief of 0 to an event has *full* confidence that the event will *not* occur. If an individual assigns a belief of 0 to an event when (s)he has no confidence that the event will occur (that is, the individual is completely uncertain whether the event will occur or not) then, belief is interpreted as ""necessity"", not as probability. See also https://en.wikipedia.org/wiki/Possibility_theory#Necessity",cmencar,6205430,open,False,0,2020-04-21T16:35:39+00:00,2020-04-21T16:35:39+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,603662491,499,switch point with different distribution,"Hi, 
+I have a problem to find parameters in a piecewise function.
+Here is my function
+
+![equation](https://user-images.githubusercontent.com/20876282/79819978-62e95700-83b5-11ea-9eac-e254618fd796.png)
+
+I'm still confuse how to build the code to find parameters of R1, R2, and alpha.
+
+Can you give me a reference?
+Thanks",rizman18,20876282,open,False,0,2020-04-21T02:41:17+00:00,2020-04-21T02:50:39+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,602800618,498,Probabilistic programming and Bayesian methods for hackers,,binyaz,56168522,closed,False,0,2020-04-19T19:29:53+00:00,2020-04-19T19:30:35+00:00,2020-04-19T19:30:35+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,598482189,497,'normed' property replaced with 'density' in plt.hist,"'normed' property returns Attribute Error!
+new implementation of matplotlib.pyplot uses 'density' property instead of 'normed' in plt.hist",sevgiozturk,17386229,open,False,0,2020-04-12T13:15:24+00:00,2020-04-12T13:15:24+00:00,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,597778649,496,Update Ch1_Introduction_PyMC3.ipynb,"new matplotlib style has deprecated 'normed' and replaced it with density. It returns AttributeError: Unknown property density
+'normed' property changed to 'density' in plt.hist",sevgiozturk,17386229,closed,False,2,2020-04-10T08:51:22+00:00,2020-04-10T11:25:56+00:00,2020-04-10T11:25:56+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,594910131,495,Chapter 2 using default random() makes error,"While excecuting follow code:
+`samples = [lambda_1.random()[0] for i in range(20000)]`
+it shows:
+```
+Traceback (most recent call last):
+  File ""C:/Users/13910/PycharmProjects/untitled/rist.py"", line 15, in <module>
+    samples = [lambda_1.random()[0] for i in range(20000)]
+  File ""C:/Users/13910/PycharmProjects/untitled/rist.py"", line 15, in <listcomp>
+    samples = [lambda_1.random()[0] for i in range(20000)]
+IndexError: too many indices for array
+```",utt54321,20319237,open,False,0,2020-04-06T08:30:49+00:00,2020-04-06T08:30:49+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,594106654,494,Autocorrelation shown for differing lags is not statistical correlation?,"In section 3.2.1 on autocorrelation, it is stated that
+> one way of thinking about autocorrelation is ""If I know the position of the series at time *s*, can it help me know where I am at time *t*?"" In the series *x_t*, the answer is no.
+
+Then an autocorrelation plot of *x_t* is given as evidence for this (top plot, below). However, by just adding the constant 1 to every *x_t* (making all *x_t >= 0*), we get a similar graph as for *y_t* (bottom plot, below) giving the impression that there is some correlation when there is none.
+
+In this sense, I think using `np.correlate` for autocorrelation in this kind of statistical setting is potentially confusing (at least it was for me).
+
+![autocorrelation](https://user-images.githubusercontent.com/56049/78460908-41098800-76c5-11ea-85c6-279c94c0e92a.png)
+
+Perhaps a better example is the plot of `autocorr(np.ones(200))` which also shows diminishing correlation by increased lag (see below). Given how autocorrelation is described in this section, I think the reader would probably rather expect a high constant correlation in this case?
+
+![autocorrelation](https://user-images.githubusercontent.com/56049/78461528-0f46f000-76ca-11ea-9f58-f8d42b5972e0.png)
+",lemonad,56049,open,False,0,2020-04-04T21:24:12+00:00,2020-04-04T21:24:12+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,593987514,493,normed option in plt.hist is deprecated,"I just started going through the jupyter notebooks (great stuff, by the way), and when running the cells the first time I would always get some error like `Polygon has no attribute normed`. It turns out that the `normed` option in `plt.hist` has been deprecated (in `matplotlib` version 3.1.1 and later as far as I can tell), and should instead be replaced with `density` (they appear to operate similarly).
+
+Should this be changed? I wouldn't mind going through and making the modifications myself as I work through the notebooks.",ecotner,10482181,open,False,0,2020-04-04T18:27:03+00:00,2020-04-04T18:27:03+00:00,,,9,9,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,591484883,492,[Typo fix] Replace tau with t,"In the autocorrelation section of Chapter 3 for PyMC3, the series x is referred to as `x_tau` in one spot instead of `x_t`
+
+![image](https://user-images.githubusercontent.com/11096727/78081933-c3214600-737f-11ea-9857-055947deccfe.png)
+",ian-whitestone,11096727,closed,False,1,2020-03-31T22:46:34+00:00,2020-04-01T00:07:16+00:00,2020-04-01T00:07:16+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,582488392,491,do you have code for Bayesian classifier for categorical data?,"do you have code for Bayesian classifier for categorical data?
+It is ridiculous, but nobody have such a practical code
+even scikit learn added recently one but   , 
+this code crashes, when there is new observation in test data, which was not seen in train data
+https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.CategoricalNB.html#sklearn.naive_bayes.CategoricalNB
+
+and if you have , is it plain python code or PyMC code?
+    ",Sandy4321,11426119,open,False,0,2020-03-16T17:46:33+00:00,2020-03-16T17:46:33+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,580583471,490,Updated 'normed' to 'density',Normed has been deprecated and now throws an error - https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.hist.html,azdaly,11139509,open,False,1,2020-03-13T12:55:23+00:00,2020-03-31T22:49:04+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,575977766,489,"Update to TF2, plus other refactorings",,mikeshwe,4237498,closed,False,3,2020-03-05T04:04:47+00:00,2020-05-12T11:10:22+00:00,2020-03-05T12:40:38+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,566470096,488,Chapter 4 indicator function - fix probability calculation,"Currently there is an error here because the `len` function returns `1` for any `N` - change `N` to see how the ""Probability Estimate"" changes as `1/N`.
+
+Running my corrected version gives a much closer estimate of the true probability (~0.08208).
+
+Also just to point out this TFP code is anyway different from the PyMC3 version because numpy use the scale rather than rate parameterisation of the exponential distribution. Thus the equivalent is shown below too.
+```
+N = 10000
+
+print(""Probability Estimate: "", len(np.where(evaluate(tfd.Exponential(rate=0.5).sample(sample_shape=N)) > 5))/N )
+
+print(""Corrected Probability Estimate: "", np.shape(np.where(evaluate(tfd.Exponential(rate=0.5).sample(sample_shape=N)) > 5))[1]/N )
+
+print(""From Pymc3 Probability Estimate: "",  np.mean( [ np.random.exponential(scale=2, size=N) > 5 ] ) )
+```",nstjhp,5261752,closed,False,1,2020-02-17T18:57:04+00:00,2020-02-20T22:52:21+00:00,2020-02-20T22:52:21+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,562203702,487,"Chap2, Poisson from data rate issue","# Build graph
+data = tf.constant([10., 5.], dtype=tf.float32)
+rv_poisson = tfd.Poisson(rate=tf.reduce_mean(data))## instead of -->>rv_poisson = tfd.Poisson(rate=1./tf.reduce_mean(data)) in Poisson rate is mean and in Exponential it should be 1/mean 
+poisson = rv_poisson.sample()",AliMoallemi,6491489,open,False,0,2020-02-09T16:38:08+00:00,2020-02-09T16:38:08+00:00,,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,560611714,486,Chapter 2: deterministic variable name fixed,,a-n-ermakov,4629847,open,False,1,2020-02-05T20:30:36+00:00,2021-05-01T14:11:33+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,550543499,485,update stock quote example,"and other code updates. The D3 app isn't working, but left it in there anyway.",mikeshwe,4237498,closed,False,0,2020-01-16T02:56:24+00:00,2020-01-22T00:27:50+00:00,2020-01-22T00:27:50+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,548949474,484,bibtex citation for this repo,"Id like to cite the book mantained in this repo with bibtex.  There's of course [Google Scholar's version](https://scholar.googleusercontent.com/scholar.bib?q=info:cC2CFdK6F_cJ:scholar.google.com/&output=citation&scisdr=CgVQr4UFEPvlr-xzK-0:AAGBfm0AAAAAXhx2M-2SEkoBfztul5OqKQnOJWPXnqJI&scisig=AAGBfm0AAAAAXhx2M5KdAJsuw0WCQ_3IceBYHdG-_ckA&scisf=4&ct=citation&cd=-1&hl=en). But it refers to amazon's version of the book, it indicates 2015 as the year of publishing (but this repo is regularly updated so it shoud read 2020), there is no link to github. 
+
+I suggest adding a bibtex entry in the README.",sebalander,7595088,open,False,0,2020-01-13T14:00:48+00:00,2020-01-13T14:01:11+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,545376616,483,Bug fix: Ch2 Example: Cheating among students,"True answer testval shouldn't be set with random binomial distribution, or it will lead observed_proportion.tag.test_value later ( true value should be around 0.25) to equal the testval(around 0.5). And this made some confusion.  ",FangyangJz,19723117,open,False,0,2020-01-05T06:06:51+00:00,2020-01-05T06:06:51+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,545343743,482,Global refactoring,"Remove code that deleted burn-in iterations, vectorized showdown loss, removed code that sampled from mean and variance of samples and replaced with the samples themselves, improved RWM performance.",mikeshwe,4237498,closed,False,2,2020-01-04T23:12:13+00:00,2020-01-04T23:39:57+00:00,2020-01-04T23:39:49+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,543736118,481,global re-factoring,"Remove code that deleted burn-in iterations, vectorized showdown loss, removed code that sampled from mean and variance of samples and replaced with the samples themselves, improved RWM performance.",mikeshwe,4237498,closed,False,0,2019-12-30T05:02:34+00:00,2019-12-30T18:16:34+00:00,2019-12-30T18:16:34+00:00,,1,1,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,521920782,480,installation in python 3,"I'm having a real time trying to get this thing to install in python 3. I'm just installing from requirements.txt into my virtualenv.  Is there some secret sauce I'm missing? Thanks for the help!
+
+",lscarmic,3492486,open,False,0,2019-11-13T02:38:30+00:00,2019-11-13T02:38:30+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,499833420,479,Minor code cleanup,"Added some comments to log prob function, deleted some extraneous code",mikeshwe,4237498,closed,False,1,2019-09-28T23:51:34+00:00,2019-09-29T18:02:45+00:00,2019-09-29T18:02:45+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,484996762,478,Fix Typo in Code,"Fixed Line 1280, the parenthesis was in the incorrect location. Fixed line 1211, no need for the tf.float32 at the end.",d84-n1nj4,7608070,open,False,1,2019-08-26T00:44:20+00:00,2019-09-15T05:26:54+00:00,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,466572924,476,"Upgrades to exponential landscape,...","Upgrades to exponential landscape, Cluster Investigation",mikeshwe,4237498,closed,False,1,2019-07-10T23:25:12+00:00,2019-07-12T19:10:11+00:00,2019-07-12T19:10:11+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,465557177,475,Syntax for tensorflow probability 0.70,"Thanks very much for putting this book together. It is perhaps one of the very limited resources available online. 
+
+In tensorflow probability 0.7.0, the use of step size adaption for HMC and the use of trace_fn has been changed. Could you update your book accordingly?
+",cc20002002,9080479,open,False,0,2019-07-09T04:01:43+00:00,2019-07-09T04:01:43+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,465014410,474,"update for deprecation msg, cleanup prediction","update for deprecation msg, cleanup cluster prediction",mikeshwe,4237498,closed,False,0,2019-07-08T01:06:20+00:00,2019-07-08T02:12:45+00:00,2019-07-08T02:12:45+00:00,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,464999186,473,"Fix Poisson landscape, gaussian mixture plots","Fix error w/ Poisson landscape example, improve gaussian mixture plot",mikeshwe,4237498,closed,False,1,2019-07-07T22:18:58+00:00,2019-07-07T23:15:31+00:00,2019-07-07T23:15:31+00:00,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,463988155,472,Chapter 3 (TFP) joint log probability calculation issue,"I'm a bit confused about `joint_log_prob` function used in Chapter 3 (Tensorflow Probability). 
+
+I can see that `rv_prob` is a Uniform random variable from in the range [0, 1]. We don't really do anything with that variable but we use it to calculate how likely `sample_prob_1` and `sample_prob_2` are to be from that distribution.
+
+I assume that:
+1) we can remove the two lines of code that use `rv_prob` in the calculation of joint log probability OR
+2) sample `rv_prob` (as p) and use that as probability of sampling from first distribution and use `1 - p` as probability of sampling from the second distribution. Something like:
+
+```python
+p = rv_prob.sample()
+rv_assignments=tfd.Categorical(probs=tf.stack([p, 1-p]))
+rv_observations = tfd.MixtureSameFamily(
+  mixture_distribution=rv_assignments,
+  component_distribution=tdf.Normal(loc=sample_centers, scale=sample_sds))
+```
+
+And then we could include `rv_assignments.log_prob(sample_prob_1) + rv_assignments.log_prob(sample_prob_2)` in `joint_log_probability` calculation.",mvuksano,52777,open,False,0,2019-07-03T23:03:40+00:00,2019-07-03T23:03:40+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,460534863,471,"Chapter 1: ""Debugging tests""","As a developer, I have no idea what the term ""debugging tests"" means.
+
+There's _debugging_, there are _tests_, but I know not of _debugging tests_
+
+- **Debugging** - launching a process in debug mode so you can pause on start/breakpoints and debug statement by statement.
+- **Tests** - a tests is a process that asserts the defined behaviour of the system or its subs.
+
+Normally you just run tests and hope they pass. These may be called *unit tests*, *integration tests*, *e2e tests*, etc.. If they pass - all good. If they fail, you may start debugging the test that have failed.
+
+Should just say *tests*.",Izhaki,880132,open,False,0,2019-06-25T16:54:44+00:00,2019-06-25T16:56:05+00:00,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,453955353,470,fix broken cell,"Code was broken before, this enables the cell to be run. Fixed some typos and added ""None"" to the  function ""make_simple_step_size_update_policy()"" for the argument ""num_adaption_steps"", which otherwise returned the error:
+
+make_simple_step_size_update_policy() missing 1 required positional argument: 'num_adaptation_steps'.
+
+As per documentation, None may not be the best choice.",phosgene89,34409398,open,False,0,2019-06-10T00:15:10+00:00,2019-06-10T00:15:10+00:00,,,0,0,0,0,0,0,0

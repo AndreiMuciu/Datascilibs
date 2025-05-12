@@ -1,0 +1,2969 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ipython/ipython,3049206975,14896,`%%time` does not stop execution on exceptions,"- https://github.com/ipython/ipython/issues/14889 reported that interruption does not stop execution of `%%time`,
+- which was fixed by https://github.com/ipython/ipython/pull/14890
+
+However, non-system exceptions also allow the execution to continue although it should not. Instead, we should probably call `sys.exit(SIGINT)` after any exception gets caught.",krassowski,5832902,open,False,1,2025-05-08T14:36:24+00:00,2025-05-08T14:54:23+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,3045233000,14895,SyntaxError raised too early when typing code,"Consider this valid Python code:
+```py
+def foo():
+    def bar():
+        return val
+    def bax():
+        nonlocal val
+        return val
+
+    val = 42
+    return bar, bax
+
+
+a, b = foo()
+print(a())
+print(b())
+```
+
+I'm trying to type it line by line:
+
+```py
+In [1]: def foo():
+   ...:     def bar():
+   ...:         return val
+   ...:     def bax():
+   ...:         nonlocal val
+  Cell In[1], line 5
+    nonlocal val
+    ^
+SyntaxError: no binding for nonlocal 'val' found
+```
+
+",dimaqq,662249,open,False,1,2025-05-07T08:54:25+00:00,2025-05-10T11:42:15+00:00,,,1,0,0,0,0,0,0
+ipython/ipython,3020676587,14894,Documentation build fails locally,"Not sure what is wrong here:
+
+```
+WARNING: ources... [ 83%] sphinxext
+>>>-------------------------------------------------------------------------
+Exception in /home/krassowski/ipython/docs/source/sphinxext.rst at block ending on line None
+Specify :okexcept: as an option in the ipython:: block to suppress this message
+---------------------------------------------------------------------------
+NotImplementedError                       Traceback (most recent call last)
+Cell In[16], line 1
+----> 1 ion()
+
+File ~/.pyenv/versions/3.12.2/envs/ipython-3.12/lib/python3.12/site-packages/matplotlib/pyplot.py:731, in ion()
+    729 stack.callback(ion if isinteractive() else ioff)
+    730 matplotlib.interactive(True)
+--> 731 install_repl_displayhook()
+    732 return stack
+
+File ~/.pyenv/versions/3.12.2/envs/ipython-3.12/lib/python3.12/site-packages/matplotlib/pyplot.py:323, in install_repl_displayhook()
+    321 # trigger IPython's eventloop integration, if available
+    322 if ipython_gui_name:
+--> 323     ip.enable_gui(ipython_gui_name)
+
+File ~/ipython/IPython/core/interactiveshell.py:3727, in InteractiveShell.enable_gui(self, gui)
+   3726 def enable_gui(self, gui=None):
+-> 3727     raise NotImplementedError('Implement enable_gui in a subclass')
+
+NotImplementedError: Implement enable_gui in a subclass
+
+<<<-------------------------------------------------------------------------
+
+
+Versions
+========
+
+* Platform:         linux; (Linux-6.8.0-58-generic-x86_64-with-glibc2.39)
+* Python version:   3.12.2 (CPython)
+* Sphinx version:   8.2.3
+* Docutils version: 0.21.2
+* Jinja2 version:   3.1.6
+* Pygments version: 2.19.1
+
+Last Messages
+=============
+
+    overview
+
+
+    reading sources... [ 83%]
+    parallel/index
+
+
+    reading sources... [ 83%]
+    sphinxext
+
+Loaded Extensions
+=================
+
+* sphinx.ext.mathjax (8.2.3)
+* alabaster (1.0.0)
+* sphinxcontrib.applehelp (2.0.0)
+* sphinxcontrib.devhelp (2.0.0)
+* sphinxcontrib.htmlhelp (2.1.0)
+* sphinxcontrib.serializinghtml (2.0.0)
+* sphinxcontrib.qthelp (2.0.0)
+* sphinx.ext.autodoc.preserve_defaults (8.2.3)
+* sphinx.ext.autodoc.type_comment (8.2.3)
+* sphinx.ext.autodoc.typehints (8.2.3)
+* sphinx.ext.autodoc (8.2.3)
+* sphinx.ext.autosummary (8.2.3)
+* sphinx.ext.doctest (8.2.3)
+* sphinx.ext.graphviz (8.2.3)
+* sphinx.ext.inheritance_diagram (8.2.3)
+* sphinx.ext.intersphinx (8.2.3)
+* sphinxcontrib.jquery (4.1)
+* IPython.sphinxext.ipython_console_highlighting (unknown version)
+* IPython.sphinxext.ipython_directive (unknown version)
+* sphinx.ext.napoleon (8.2.3)
+* github (unknown version)
+* magics (unknown version)
+* configtraits (unknown version)
+* sphinx_rtd_theme (unknown version)
+```",krassowski,5832902,open,False,1,2025-04-25T17:52:56+00:00,2025-04-29T16:28:34+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,3020641826,14893,Add what's new for IPython 8.36,Backport of the 8.x part of https://github.com/ipython/ipython/pull/14892,krassowski,5832902,closed,False,0,2025-04-25T17:32:41+00:00,2025-04-25T17:43:46+00:00,2025-04-25T17:43:40+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3020639356,14892,Add what's new for IPython 9.2 and 8.36,Add what's new for IPython 9.2 and 8.36,krassowski,5832902,closed,False,0,2025-04-25T17:31:10+00:00,2025-04-25T17:43:31+00:00,2025-04-25T17:43:25+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3019715374,14891,Backport PR #14890 on branch 8.x (Fix interruption of `%%time` and `%%debug` magics),Backport PR #14890: Fix interruption of `%%time` and `%%debug` magics,meeseeksmachine,39504233,closed,False,0,2025-04-25T10:56:57+00:00,2025-04-25T14:03:23+00:00,2025-04-25T14:03:23+00:00,bug,0,0,0,0,0,0,0
+ipython/ipython,3019461689,14890,Fix interruption of `%%time` and `%%debug` magics,"- [x] Add a tests interruption of `%%time` and `%%timeit` magics (the former should fail)
+- [x] Fix `%%time` magic exception capture
+    Note that this fix is fully backward compatible since users would not get timing information if there was an exception anyways due to an early return in line 1379:
+   https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/core/magics/execution.py#L1377-L1379
+- [x] Fix `%%debug` magic exception capture
+",krassowski,5832902,closed,False,1,2025-04-25T09:08:38+00:00,2025-04-25T18:06:24+00:00,2025-04-25T10:56:48+00:00,bug,0,0,0,0,0,0,0
+ipython/ipython,3019354579,14889,`%%time` does not raise on interruption,"When a cell with a `%%time` magic gets interrupted it does not cancel execution of following cells. This can lead to inadvertent execution of following cells which may lead to data loss (e.g. if following cells overwrite a file and user intended to cancel that action).
+
+https://github.com/user-attachments/assets/0959583f-c9f8-4882-b7fd-4e2414c3c69d
+
+
+### Context
+- Originally reported in https://github.com/jupyterlab/jupyterlab/issues/17504
+- Similar to https://github.com/ipython/ipython/issues/14649 which concerned `script` magics, not `time`
+
+Edit: it's `%%time` which is problematic, `%%timeit` works fine",krassowski,5832902,closed,False,1,2025-04-25T08:24:39+00:00,2025-04-25T10:56:49+00:00,2025-04-25T10:56:49+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3018638352,14888,After running `InteractiveShell.enable_matplotlib` changes to `rcParams` in `%run` Python scripts are undone.,"Consider this confusing behavior:
+```Python
+$ bin/ipython
+Python 3.12.7 (main, Jan 31 2025, 18:19:02) [GCC 13.3.0]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.1.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import matplotlib
+
+In [2]: !echo 'matplotlib.rcParams[""figure.figsize""] = (10, 10)' > /tmp/my_file.ipy
+
+In [3]: !echo 'matplotlib.rcParams[""figure.figsize""] = (10, 10)' > /tmp/my_file.py
+
+In [4]: %matplotlib inline
+No event loop hook running.
+
+In [5]: %run -i /tmp/my_file.py
+
+In [6]: matplotlib.rcParams[""figure.figsize""]
+Out[6]: [6.4, 4.8]
+
+In [7]: %run -i /tmp/my_file.ipy
+
+In [8]: matplotlib.rcParams[""figure.figsize""]
+Out[8]: [10.0, 10.0]
+```
+Changes to `matplotlib.rcParams` in `/tmp/my_file.py` are undone, whereas changes to `matplotlib.rcParams` in `/tmp/my_file.ipy` are kept.
+
+Furthering the example:
+```Python
+$ bin/ipython
+Python 3.12.7 (main, Jan 31 2025, 18:19:02) [GCC 13.3.0]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.1.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import matplotlib
+
+In [2]: !echo 'matplotlib.rcParams[""figure.figsize""] = (10, 10)' > /tmp/my_file.py
+
+In [3]: %run -i /tmp/my_file.py
+
+In [4]: matplotlib.rcParams[""figure.figsize""]
+Out[4]: [10.0, 10.0]
+```
+If a user doesn't implicitly call `InteractiveShell.enable_matplotlib`, any changes to `matplotlib.rcParams` in `/tmp/my_file.py` are kept. 
+
+This is because, in `InteractiveShell.enable_matplotlib` we overwrite the `ExecutionMagics.default_runner` to run in `matplotlib.rc_context` ([code here](https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/core/pylabtools.py#L229)). When `%run`ing a Python file we'll use the default runner, but if it's an `ipy` file we'll use `safe_execfile_ipy` (which doesn't run in an `rc_context`).
+
+I think resetting the `rcParams` in the default runner is tricky behavior and am happy to put up a PR to avoid this.",JBushagour,15280648,open,False,0,2025-04-24T23:15:02+00:00,2025-04-24T23:15:02+00:00,,,1,1,0,0,0,0,0
+ipython/ipython,3017930633,14887,docs: Recommend `ipykernel.embed.embed_kernel()`,"Followup to #14734, cc @Carreau 
+
+Following the current doc prints warning:
+https://github.com/ipython/ipython/blob/aa25535d3765641e31f1d218537540e41b6f1a74/IPython/__init__.py#L96-L98
+
+(which BTW sounded to me like it was deprecated since 2013 — I assume the meaning is that `ipykernel.embed` works since 2013?)
+
+----
+
+P.S. Mild argument against the deprecation: IMHO, it's convenient to remember one place to import both `embed` and `embed_kernel` from.  These are most useful if memorized, so one can type them without thinking, similar to how we all used to memorize `import pdb; pdb.set_trace()` — but became easier to teach with py3.7 `breakpoint()`.
+
+There is no `ipykernel.embed.embed`, and I assume won't be, as it starts an in-process shell which is _not really a kernel_?  But both are legitimate under `IPython`.
+
+----
+
+There is also a question which package(s) one must install to use these forms — _and does this need documenting_?
+
+* I see that a clean env `uvx --with ipykernel python` also drags in IPython as a dependency, so both forms work.
+* OTOH `uvx --with IPython python` allows importing IPython but not ipykernel.  In such env, `IPython.embed_kernel()` is **importable but broken**:
+  ```
+  File ""/home/beni/.cache/uv/archive-v0/_NUp3oIPKrkvaYJk8f7Nm/lib64/python3.13/site-packages/IPython/__init__.py"", line 110, in embed_kernel
+    from ipykernel.embed import embed_kernel as real_embed_kernel
+  ModuleNotFoundError: No module named 'ipykernel'
+  ```
+  This was counter-intuitive, and the deprecation avoids that!  
+  I guess ""install what you import"" is a better quality then my above concern with ""easy to remember"" :+1:  
+
+  - [x] Should the API doc https://ipython.readthedocs.io/en/stable/api/generated/IPython.html#IPython.embed_kernel also mention it's deprecated?
+  - [x] Should the API doc also mention it will not work without optional `ipykernel` dependency?",cben,273688,closed,False,0,2025-04-24T17:14:02+00:00,2025-04-25T17:14:55+00:00,2025-04-25T17:14:54+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3010458117,14886,Backport PR #14885 on branch 8.x (Unpin `langchain-core` now that 0.3.54 fixed `__getattr__` issue),Backport PR #14885: Unpin `langchain-core` now that 0.3.54 fixed `__getattr__` issue,meeseeksmachine,39504233,closed,False,0,2025-04-22T09:11:45+00:00,2025-04-22T09:55:42+00:00,2025-04-22T09:55:41+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3006607103,14885,Unpin `langchain-core` now that 0.3.54 fixed `__getattr__` issue,[`langchain-core==0.3.54`](https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D0.3.54) includes https://github.com/langchain-ai/langchain/pull/30905 which closes #14878. ,krassowski,5832902,closed,False,0,2025-04-19T18:59:08+00:00,2025-04-22T09:11:41+00:00,2025-04-22T09:11:35+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3005591596,14884,`set_trace()` in `IPython.core.debugger` is not colored,"Currently if I launch a `ipython` shell, I can
+
+* run `%pdb` (⟹ `Automatic pdb calling has been turned ON`)
+* run some error
+
+to be dropped to some `ipdb>` cell. On my machine the prompt is colored green.
+
+However, in an environment where `ipdb` is not installed, `import ipdb; ipdb.set_trace()` will not work.
+
+The following
+
+```
+from IPython.core.debugger import set_trace
+set_trace()
+```
+
+will work, but confusingly even though it shows `ipdb>`, it feels like a ""watered-down"" version where it doesn't have color.
+
+Suggestion: somehow make `set_trace()` in `IPython.core.debugger` behave the same way as the prompt spawned by `%pdb`.",user202729,25191436,closed,False,3,2025-04-18T19:11:45+00:00,2025-04-30T23:21:24+00:00,2025-04-30T23:21:24+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3002727888,14883,Test langchain fix,Related to #14876,krassowski,5832902,closed,False,0,2025-04-17T14:49:17+00:00,2025-04-19T18:55:30+00:00,2025-04-19T18:55:30+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3002346014,14882,Fix `maybe_edit()` function in release helper,Should solve points (2) and (4) in https://github.com/ipython/ipython/issues/14867,krassowski,5832902,closed,False,0,2025-04-17T12:26:29+00:00,2025-04-19T10:38:35+00:00,2025-04-19T10:38:35+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3002192939,14881,Backport PR #14879 on branch 8.x (Mask issue caused by `langchain-core` release `0.3.52`),Backport PR #14879: Mask issue caused by `langchain-core` release `0.3.52`,meeseeksmachine,39504233,closed,False,0,2025-04-17T11:17:55+00:00,2025-04-17T11:41:20+00:00,2025-04-17T11:41:20+00:00,,0,0,0,0,0,0,0
+ipython/ipython,3002063127,14880,Backport PR #14877 on branch 8.x (Fix LLM prefix including the new lines which are used as spaces),Backport PR https://github.com/ipython/ipython/pull/14877 on branch 8.x (Fix LLM prefix including the new lines which are used as spaces),krassowski,5832902,closed,False,0,2025-04-17T10:17:04+00:00,2025-04-17T12:06:01+00:00,2025-04-17T12:05:52+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2997645987,14879,Mask issue caused by `langchain-core` release `0.3.52`,Workaround for #14878 until langchain-core is fixed (or we find a better workaround).,krassowski,5832902,closed,False,1,2025-04-15T21:12:54+00:00,2025-04-17T11:17:46+00:00,2025-04-15T21:24:14+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2997547306,14878,Completer tests are failing: `ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'`,"Seen in both:
+- https://github.com/ipython/ipython/pull/14876
+- https://github.com/ipython/ipython/pull/14877
+but was passing in:
+- https://github.com/ipython/ipython/pull/14874
+
+```
+FAILED tests/test_completer.py::TestCompleter::test_abspath_file_completions - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_aimport_module_completer - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_all_completions_dups - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_back_latex_completion - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_back_unicode_completion - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_cell_magics - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_class_key_completion - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_completes_attributes_in_fstring_expressions - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_completes_globals_as_args_of_methods - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_completes_in_dict_expressions - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_completion_have_signature - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_completions_have_type - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_custom_completion_error - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_custom_completion_ordering - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+FAILED tests/test_completer.py::TestCompleter::test_dataframe_key_completion - ModuleNotFoundError: No module named 'langchain_core._api.__warningregistry__'
+```",krassowski,5832902,closed,False,1,2025-04-15T20:33:37+00:00,2025-04-22T09:11:36+00:00,2025-04-22T09:11:36+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2997510184,14877,Fix LLM prefix including the new lines which are used as spaces,"- [x] Make the test fail if there are spurious new lines at the end
+- [x] Fix the issue by using `text_before_cursor` instead of `text` in prefix",krassowski,5832902,closed,False,2,2025-04-15T20:16:43+00:00,2025-04-17T10:17:40+00:00,2025-04-17T09:16:21+00:00,bug;autosuggestions,0,0,0,0,0,0,0
+ipython/ipython,2997475803,14876,Fix syntax warning in Python 3.14 (remove `return` from `finally` block),SyntaxWarning: 'return' in a 'finally' block,ellert,1931206,closed,False,7,2025-04-15T20:00:20+00:00,2025-04-25T09:50:00+00:00,2025-04-25T09:28:39+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2996299751,14875,weird,"**weird**
+I wrote code correctly and it dint work
+",sultan1bougary,188475835,closed,False,3,2025-04-15T12:42:00+00:00,2025-04-19T19:08:04+00:00,2025-04-19T19:08:03+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2993148172,14874,Add Codecov Test Analytics,"This PR sets up Codecov [Test Analytics](https://docs.codecov.com/docs/test-analytics), which enhances this project's existing Codecov coverage PR notification with details about failing, flaky, and slow tests. More details can be found [here](https://about.codecov.io/blog/find-failing-and-flaky-tests-with-codecov-test-analytics/), and below is an example screenshot.
+
+![Test Results](https://private-user-images.githubusercontent.com/175655418/425226666-d74ba608-0cec-4e28-813d-38adb6b799a4.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDQ1ODQwNDksIm5iZiI6MTc0NDU4Mzc0OSwicGF0aCI6Ii8xNzU2NTU0MTgvNDI1MjI2NjY2LWQ3NGJhNjA4LTBjZWMtNGUyOC04MTNkLTM4YWRiNmI3OTlhNC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwNDEzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDQxM1QyMjM1NDlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1hYmZmZjY1MWRmMWM5ZDZiYzE3OGJmYzdhNmQ0NzgzYmVkZGEyYTYwYTgyNmQxOGUxNDJiMGY3YTUwNTVmNjMwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.s69mLiFMZ3PjeDctT2VPHqWA1N6bzfKZTViVs97HZI8)
+
+## Changes 
+- Add --junitxml=test-results.xml to the existing pytest command to export test results.
+- Add a new step using codecov/test-results-action@v1 to upload the test-results.xml file to Codecov.
+
+Looking forward to your feedback!",katia-sentry,129207373,open,False,2,2025-04-14T13:51:49+00:00,2025-04-15T20:37:45+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2992969336,14873,Using del _ removes the builtin _ as well,"Python allows `_` to be used as a variable. The `_` operator is also used to print the last output. More conversation here: https://github.com/python/cpython/issues/132505
+
+If the `_` is used as a variable, We can issue `del _` to delete the variable assignment and default back to the REPL behaviour. Refer to the image below:
+<img width=""1586"" alt=""Image"" src=""https://github.com/user-attachments/assets/07036ec9-c465-4f79-9922-0ec5657e4815"" />
+
+However, in IPython `NameError` is thrown.
+<img width=""1671"" alt=""Image"" src=""https://github.com/user-attachments/assets/f55ba5fd-20e4-4f36-9e07-3bfa370b7b58"" />",ngudbhav,31446376,closed,False,1,2025-04-14T12:46:36+00:00,2025-04-21T06:30:47+00:00,2025-04-21T06:30:47+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2991474264,14872,Do not always import * with autoreload3,"Fixes #14839 
+
+Previously, `%autoreload 3` always had the effect of `from module import *` on reloads. This PR fixes this functionality to the expected utility: if users specifically import some symbols from a module (for example `from X import Y` or `from X import Y as Z`), only those symbols are reloaded. 
+
+Unit tests are added to demonstrate the new behavior as well. ",jaysarva,52113751,open,False,0,2025-04-13T20:47:44+00:00,2025-04-26T20:44:48+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2991093070,14871,Function name in traceback is unreadable in dark theme,"
+# Problem
+When using terminal which has dark theme, the function name of traceback is unreadable because the background is yellow and text is white.
+
+Changing the color theme does not fix the problem, but changing [VerboseTB.tb_highlight](https://github.com/ipython/ipython/blob/f3e796c8e82595990870218c2e25d7cd1fdfac8f/IPython/core/ultratb.py#L449) changes the highlighted color.
+
+Is there any way to change this color via configuration? My current workaround is writing something like
+```python
+from IPython.core.ultratb import VerboseTB
+VerboseTB.tb_highlight = ""bg:#660000""
+```
+to `~/.ipython/profile_default/startup/99-change-color.py`, but I don't think this is a right way to do this.
+
+# How to reproduce
+1. run `ipython` in terminal which has dark theme
+2. run the following command
+
+```
+In [1]: def hoo():
+   ...:     raise Exception(""bar"")
+
+In [2]: hoo()
+```
+
+3. the `hoo()` in traceback not visible because it has yellow background and white text.
+
+# Environment
+Ubuntu 24.04 in Docker
+IPython 9.1.0
+Using a terminal which has color of:
+- background: `#1a1b26`
+- foreground: `#c0caf5`
+- yellow: `#e0af68`
+
+# Screenshot
+![Image](https://github.com/user-attachments/assets/d22792b7-0ae2-4583-a5e2-9ca074df3097)
+",pjmtdw,2149378,closed,False,1,2025-04-13T07:02:18+00:00,2025-04-13T07:18:25+00:00,2025-04-13T07:18:24+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2979614949,14870,Pdb chained exception decumentation issue,"Actually there's a bug in the documentation, it says you can use `exception <number>` but you actually need `exceptions <number>`. So for example `exception 0` gives `** SyntaxError: invalid syntax`, `exceptions 0` works.
+
+_Originally posted by @user202729 in https://github.com/python/cpython/pull/106676#issuecomment-2786216304_",Carreau,335567,open,False,3,2025-04-08T12:18:00+00:00,2025-04-08T13:19:46+00:00,,documentation;good first issue;debugger,0,0,0,0,0,0,0
+ipython/ipython,2976582223,14869,Backport PR #14868 on branch 8.x (Add changelog for 8.35 and before),Backport PR #14868: Add changelog for 8.35 and before,meeseeksmachine,39504233,closed,False,0,2025-04-07T11:43:43+00:00,2025-04-07T11:51:26+00:00,2025-04-07T11:51:26+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2976481069,14868,Add changelog for 8.35 and before,,krassowski,5832902,closed,False,0,2025-04-07T11:03:45+00:00,2025-04-07T11:43:37+00:00,2025-04-07T11:43:33+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2976349297,14867,Release script issues,"1. Sed flags?
+
+```
+please update version number in IPython/core/release.py , Do not commit yet – we'll do it later.
+I tried sed -i bkp -e '/Uncomment/s/^# //g' IPython/core/release.py
+sed: can't read bkp: No such file or directory
+rm: cannot remove 'IPython/core/release.pybkp': No such file or directory
+diff --git a/IPython/core/release.py b/IPython/core/release.py
+index fa7d7b730..fc8430499 100644
+--- a/IPython/core/release.py
++++ b/IPython/core/release.py
+@@ -20,7 +20,7 @@
+ _version_patch = 0
+ _version_extra = "".dev""
+ # _version_extra = ""b2""
+-# _version_extra = """"  # Uncomment this for full releases
++_version_extra = """"  # Uncomment this for full releases
+ 
+ # Construct full version string from these.
+ _ver = [_version_major, _version_minor, _version_patch]
+```
+
+2. EDITOR: command not found
+
+```
+Press e to Edit IPython/core/release.py, any other keys to skip: e
+$=EDITOR: command not found
+```
+
+Despite earlier:
+
+```
+Will use '/usr/bin/vim' to edit files when necessary
+```
+
+which is a correct path
+
+3. Releasing from a fork - no way to specify which origin to push
+
+4. `bash: [: =: unary operator expected`
+
+```
+IPython/core/release.py
+Press e to Edit IPython/core/release.py, any other keys to skip: 
+
+bash: [: =: unary operator expected
+Do not commit yet – we'll do it later.
+Press enter to continue
+```
+
+5. <s>`No module named build` - there is no check for `build`</s>
+
+6. Maybe `.python-version` should be git-ignored so that it is not removed and does not switch venv when git clean is run",krassowski,5832902,open,False,2,2025-04-07T10:11:27+00:00,2025-04-17T12:24:50+00:00,,,1,1,0,0,0,0,0
+ipython/ipython,2975228190,14865,Documentation for autoawait gives example that doesn't work,"The documentation for autoawait (ie. allowing automatic use of an event loop) at https://ipython.readthedocs.io/en/stable/interactive/autoawait.html gives some examples like:
+
+    In [1]: import aiohttp
+       ...: session = aiohttp.ClientSession()
+       ...: result = session.get('https://api.github.com')
+
+    In [2]: response = await result
+
+However, this doesn't actually work as written - the first block will raise `RuntimeError: no running event loop.`
+
+I think this is because no event loop is created unless the code being run actually contains an `await` instruction or similar, so code that requires the event loop to be running, but doesn't itself await will fail.
+Eg. modifying the above to include the `response = await result` in the same block as the setup logic **does** work.
+
+Ideally there'd be a way to handle code like this - I'm not sure if always running an event loop (possibly configurable) has problems.  If not, I think at least the examples should be amended to mention this.",brianm78,8531437,open,False,1,2025-04-06T20:56:14+00:00,2025-04-08T09:03:14+00:00,,documentation,0,0,0,0,0,0,0
+ipython/ipython,2970494152,14863,Error tracebacks highlight variable names with a yellow background causes poor contrast in dark terminal themes in IPython 8.x,"In IPython 8.x, error tracebacks highlight variable names with a yellow background, which causes poor contrast in dark terminal themes.
+
+![Image](https://github.com/user-attachments/assets/7ccd677b-9d64-4f7f-9b0f-40d19dadcc72)
+
+This doesn’t happen in iPython 7.x.
+
+![Image](https://github.com/user-attachments/assets/ea409b7f-3fff-4e17-9368-4cd84be9648c)
+
+I’ve tried:
+	•	c.InteractiveShell.use_stack_data = False (no effect)
+	•	highlighting_overrides (doesn’t apply)
+	•	Monkey-patching stack_data, but format_exc isn’t accessible anymore
+
+Please add a config option to disable this behavior — ideally something like:
+
+```
+c.InteractiveShell.highlight_traceback_variables = False
+```",rowoflo,2991726,closed,False,2,2025-04-03T19:31:33+00:00,2025-04-14T23:15:13+00:00,2025-04-05T08:53:48+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2969953703,14862,IPython 9.1 release notes,,krassowski,5832902,closed,False,0,2025-04-03T15:16:23+00:00,2025-04-07T09:24:19+00:00,2025-04-07T09:24:18+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2966477084,14861,Complete history of Python's builtins.quit using git bisect,"## Overview
+This issue tracks the effort to trace the complete history of Python's `builtins.quit` implementation using git bisect, to better understand how it has evolved and why it behaves differently in IPython.
+
+## Objectives
+- Determine when `builtins.quit` was first introduced in CPython
+- Trace significant changes to its implementation over time
+- Understand how IPython's handling of `quit`/`exit` diverged from CPython
+- Document the behavior differences between environments
+
+## Methodology
+We will use git bisect to systematically search the CPython repository history to find:
+1. The first introduction of the quit functionality
+2. Any significant changes to its implementation
+3. When the current behavior was established
+
+## Tasks
+- [ ] Set up a local clone of CPython repository
+- [ ] Create a script to test for the presence and behavior of `builtins.quit`
+- [ ] Run git bisect to find relevant commits
+- [ ] Document findings in a chronological history
+- [ ] Compare with IPython's implementation and handling
+
+## Expected Outcome
+A detailed document outlining the history of `builtins.quit` in Python, with key commits, changes, and how it relates to the current issue with Hy and IPython.
+
+## References
+- [Python Tutorial - Interpreter](https://docs.python.org/3/tutorial/interpreter.html)
+- [IPython vs Python Differences](https://ipython.readthedocs.io/en/stable/interactive/python-ipython-diff.html)
+- [CPython Issue #119856](https://github.com/python/cpython/issues/119856)",aygp-dr,186795128,closed,False,1,2025-04-02T13:56:19+00:00,2025-04-03T20:23:56+00:00,2025-04-03T20:23:20+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2966476045,14860,Reproduce and validate Hy IPython REPL issue,"## Overview
+This issue tracks the reproduction and validation of [Hy GitHub Issue #2646](https://github.com/hylang/hy/issues/2646) regarding IPython REPL compatibility problems.
+
+## Reproduction Steps
+1. Install specific versions of Python, IPython and Hy
+2. Start an IPython session
+3. Import Hy and try to launch the Hy REPL
+4. Document the error and confirm it matches the reported issue
+
+## Expected Results
+The Hy REPL should start correctly within IPython.
+
+## Actual Results
+An error occurs: `AttributeError: module 'builtins' has no attribute 'quit'`
+
+## Test Environment
+We will test with the following specific versions:
+- Python 3.10.x
+- IPython 8.x
+- Hy 0.26.0 (the latest release at time of issue)
+
+## Tasks
+- [ ] Set up isolated test environments with exact versions
+- [ ] Document exact steps to reproduce
+- [ ] Verify the issue still exists in latest versions
+- [ ] Analyze the error context in both environments
+
+## References
+- [Hy GitHub Issue #2646](https://github.com/hylang/hy/issues/2646)
+- [Python Interpreter Documentation](https://docs.python.org/3/tutorial/interpreter.html)
+- [IPython vs Python Differences](https://ipython.readthedocs.io/en/stable/interactive/python-ipython-diff.html)",aygp-dr,186795128,closed,False,1,2025-04-02T13:55:57+00:00,2025-04-03T20:23:44+00:00,2025-04-03T20:23:31+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2965730303,14859,Fix typos in tips,"There were some typos, grammatical slips, and inconsistent styling in the tips.
+
+(Thank you for this project, I am using it right now to teach some new Pythonistas, 
+and happened to notice the ""view it's source"" typo.)",kwinkunks,1692372,closed,False,0,2025-04-02T09:08:02+00:00,2025-04-02T14:19:57+00:00,2025-04-02T14:19:57+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2963619563,14858,Test failures with Python 3.14 alpha 6,"We've started building and testing ipython with Python 3.14 alpha 6 and there are some test failures:
+
+```
+
+_____________ ERROR at teardown of TestAstTransform2.test_run_cell _____________
+
+self = <IPython.core.tests.test_interactiveshell.TestAstTransform2 testMethod=test_run_cell>
+
+    def tearDown(self):
+>       ip.ast_transformers.remove(self.intwrapper)
+E       ValueError: list.remove(x): x not in list
+
+core/tests/test_interactiveshell.py:850: ValueError
+
+
+```
+```
+______________ ERROR at teardown of TestAstTransform2.test_timeit ______________
+
+self = <IPython.core.tests.test_interactiveshell.TestAstTransform2 testMethod=test_timeit>
+
+    def tearDown(self):
+>       ip.ast_transformers.remove(self.intwrapper)
+E       ValueError: list.remove(x): x not in list
+
+core/tests/test_interactiveshell.py:850: ValueError
+
+```
+--- 
+```
+_________________________ AsyncTest.test_memory_error __________________________
+
+self = <IPython.core.tests.test_async_helpers.AsyncTest testMethod=test_memory_error>
+
+    def test_memory_error(self):
+        """"""
+        The pgen parser in 3.8 or before use to raise MemoryError on too many
+        nested parens anymore""""""
+    
+>       iprc(""("" * 200 + "")"" * 200)
+
+core/tests/test_async_helpers.py:289: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+core/tests/test_async_helpers.py:23: in iprc
+    return ip.run_cell(dedent(x)).raise_error()
+core/interactiveshell.py:306: in raise_error
+    raise self.error_before_exec
+core/interactiveshell.py:3308: in run_cell_async
+    code_ast = compiler.ast_parse(cell, filename=cell_name)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <IPython.core.compilerop.CachingCompiler object at 0x7fa2687d1940>
+source = '(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((...))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))\n'
+filename = '<ipython-input-1-ab69bc0f135a>', symbol = 'exec'
+
+    def ast_parse(self, source, filename='<unknown>', symbol='exec'):
+        """"""Parse code to an AST with the current compiler flags active.
+    
+        Arguments are exactly the same as ast.parse (in the standard library),
+        and are passed to the built-in compile function.""""""
+>       return compile(source, filename, symbol, self.flags | PyCF_ONLY_AST, 1)
+E       MemoryError: Parser stack overflowed - Python source too complex to parse
+
+core/compilerop.py:86: MemoryError
+----------------------------- Captured stdout call -----------------------------
+MemoryError: Parser stack overflowed - Python source too complex to parse
+```
+```
+______________________________ test_unicode_range ______________________________
+
+    def test_unicode_range():
+        """"""
+        Test that the ranges we test for unicode names give the same number of
+        results than testing the full length.
+        """"""
+    
+        expected_list = _unicode_name_compute([(0, 0x110000)])
+        test = _unicode_name_compute(_UNICODE_RANGES)
+        len_exp = len(expected_list)
+        len_test = len(test)
+    
+        # do not inline the len() or on error pytest will try to print the 130 000 +
+        # elements.
+        message = None
+        if len_exp != len_test or len_exp > 131808:
+            size, start, stop, prct = recompute_unicode_ranges()
+            message = f""""""_UNICODE_RANGES likely wrong and need updating. This is
+            likely due to a new release of Python. We've find that the biggest gap
+            in unicode characters has reduces in size to be {size} characters
+            ({prct}), from {start}, to {stop}. In completer.py likely update to
+    
+                _UNICODE_RANGES = [(32, {start}), ({stop}, 0xe01f0)]
+    
+            And update the assertion below to use
+    
+                len_exp <= {len_exp}
+            """"""
+        assert len_exp == len_test, message
+    
+        # fail if new unicode symbols have been added.
+>       assert len_exp <= 143668, message
+E       AssertionError: _UNICODE_RANGES likely wrong and need updating. This is
+E                 likely due to a new release of Python. We've find that the biggest gap
+E                 in unicode characters has reduces in size to be 711762 characters
+E                 (78%), from 0x323b0, to 0xe0001. In completer.py likely update to
+E         
+E                     _UNICODE_RANGES = [(32, 0x323b0), (0xe0001, 0xe01f0)]
+E         
+E                 And update the assertion below to use
+E         
+E                     len_exp <= 148853
+E                 
+E       assert 148853 <= 143668
+
+core/tests/test_completer.py:129: AssertionError
+```
+```
+_______________________ test_interruptible_core_debugger _______________________
+
+self = <IPython.core.debugger.InterruptiblePdb object at 0x7fa2643c5550>
+context = 0
+
+    def print_stack_trace(self, context=None):
+        Colors = self.color_scheme_table.active_colors
+        ColorsNormal = Colors.Normal
+        if context is None:
+            context = self.context
+        try:
+            context = int(context)
+            if context <= 0:
+>               raise ValueError(""Context must be a positive integer"")
+E               ValueError: Context must be a positive integer
+
+core/debugger.py:496: ValueError
+
+The above exception was the direct cause of the following exception:
+
+    def test_interruptible_core_debugger():
+        """"""The debugger can be interrupted.
+    
+        The presumption is there is some mechanism that causes a KeyboardInterrupt
+        (this is implemented in ipykernel).  We want to ensure the
+        KeyboardInterrupt cause debugging to cease.
+        """"""
+        def raising_input(msg="""", called=[0]):
+            called[0] += 1
+            assert called[0] == 1, ""input() should only be called once!""
+            raise KeyboardInterrupt()
+    
+        tracer_orig = sys.gettrace()
+        try:
+            with patch.object(builtins, ""input"", raising_input):
+>               debugger.InterruptiblePdb().set_trace()
+
+core/tests/test_debugger.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib64/python3.14/bdb.py:118: in trace_dispatch
+    return self.dispatch_opcode(frame, arg)
+/usr/lib64/python3.14/bdb.py:223: in dispatch_opcode
+    self.user_opcode(frame)
+/usr/lib64/python3.14/pdb.py:460: in user_line
+    self.interaction(frame, None)
+core/debugger.py:466: in interaction
+    OldPdb.interaction(self, frame, tb_or_exc)
+/usr/lib64/python3.14/pdb.py:640: in interaction
+    self._cmdloop()
+core/debugger.py:1119: in _cmdloop
+    self.cmdloop()
+core/debugger.py:1105: in cmdloop
+    return OldPdb.cmdloop(self, intro=intro)
+/usr/lib64/python3.14/cmd.py:149: in cmdloop
+    stop = self.onecmd(line)
+/usr/lib64/python3.14/pdb.py:878: in onecmd
+    return getattr(self, command)(arg)
+/usr/lib64/python3.14/pdb.py:1035: in _pdbcmd_print_frame_status
+    self.print_stack_trace(0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <IPython.core.debugger.InterruptiblePdb object at 0x7fa2643c5550>
+context = 0
+
+    def print_stack_trace(self, context=None):
+        Colors = self.color_scheme_table.active_colors
+        ColorsNormal = Colors.Normal
+        if context is None:
+            context = self.context
+        try:
+            context = int(context)
+            if context <= 0:
+                raise ValueError(""Context must be a positive integer"")
+        except (TypeError, ValueError) as e:
+>               raise ValueError(""Context must be a positive integer"") from e
+E               ValueError: Context must be a positive integer
+
+core/debugger.py:498: ValueError
+```
+```
+_______________________________ test_xmode_skip ________________________________
+
+    @skip_win32
+    def test_xmode_skip():
+        """"""that xmode skip frames
+    
+        Not as a doctest as pytest does not run doctests.
+        """"""
+        import pexpect
+        env = os.environ.copy()
+        env[""IPY_TEST_SIMPLE_PROMPT""] = ""1""
+    
+        child = pexpect.spawn(
+            sys.executable, [""-m"", ""IPython"", ""--colors=nocolor""], env=env
+        )
+        child.timeout = 15 * IPYTHON_TESTING_TIMEOUT_SCALE
+    
+        child.expect(""IPython"")
+        child.expect(""\n"")
+        child.expect_exact(""In [1]"")
+    
+        block = dedent(
+            """"""
+        def f():
+            __tracebackhide__ = True
+            g()
+    
+        def g():
+            raise ValueError
+    
+        f()
+        """"""
+        )
+    
+        for line in block.splitlines():
+            child.sendline(line)
+            child.expect_exact(line)
+        child.expect_exact(""skipping"")
+    
+        block = dedent(
+            """"""
+        def f():
+            __tracebackhide__ = True
+            g()
+    
+        def g():
+            from IPython.core.debugger import set_trace
+            set_trace()
+    
+        f()
+        """"""
+        )
+    
+        for line in block.splitlines():
+            child.sendline(line)
+            child.expect_exact(line)
+    
+>       child.expect(""ipdb>"")
+
+core/tests/test_debugger.py:301: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:354: in expect
+    return self.expect_list(compiled_pattern_list,
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:383: in expect_list
+    return exp.expect_loop(timeout)
+/usr/lib/python3.14/site-packages/pexpect/expect.py:181: in expect_loop
+    return self.timeout(e)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pexpect.expect.Expecter object at 0x7fa266cd4850>
+err = TIMEOUT('Timeout exceeded.')
+
+    def timeout(self, err=None):
+        spawn = self.spawn
+    
+        spawn.before = spawn._before.getvalue()
+        spawn.after = TIMEOUT
+        index = self.searcher.timeout_index
+        if index >= 0:
+            spawn.match = TIMEOUT
+            spawn.match_index = index
+            return index
+        else:
+            spawn.match = None
+            spawn.match_index = None
+            msg = str(spawn)
+            msg += '\nsearcher: %s' % self.searcher
+            if err is not None:
+                msg = str(err) + '\n' + msg
+    
+            exc = TIMEOUT(msg)
+            exc.__cause__ = None    # in Python 3.x we can use ""raise exc from None""
+>           raise exc
+E           pexpect.exceptions.TIMEOUT: Timeout exceeded.
+E           <pexpect.pty_spawn.spawn object at 0x7fa2643c6a50>
+E           command: /usr/bin/python3
+E           args: ['/usr/bin/python3', '-m', 'IPython', '--colors=nocolor']
+E           buffer (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [7]: '
+E           before (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [7]: '
+E           after: <class 'pexpect.exceptions.TIMEOUT'>
+E           match: None
+E           match_index: None
+E           exitstatus: None
+E           flag_eof: False
+E           pid: 4339
+E           child_fd: 17
+E           closed: False
+E           timeout: 60.0
+E           delimiter: <class 'pexpect.exceptions.EOF'>
+E           logfile: None
+E           logfile_read: None
+E           logfile_send: None
+E           maxread: 2000
+E           ignorecase: False
+E           searchwindowsize: None
+E           delaybeforesend: 0.05
+E           delayafterclose: 0.1
+E           delayafterterminate: 0.1
+E           searcher: searcher_re:
+E               0: re.compile(b'ipdb>')
+
+/usr/lib/python3.14/site-packages/pexpect/expect.py:144: TIMEOUT
+```
+```
+____________________________ test_where_erase_value ____________________________
+
+    @skip_win32
+    def test_where_erase_value():
+        """"""Test that `where` does not access f_locals and erase values.""""""
+        import pexpect
+    
+        env = os.environ.copy()
+        env[""IPY_TEST_SIMPLE_PROMPT""] = ""1""
+    
+        child = pexpect.spawn(
+            sys.executable, [""-m"", ""IPython"", ""--colors=nocolor""], env=env
+        )
+        child.timeout = 15 * IPYTHON_TESTING_TIMEOUT_SCALE
+    
+        child.expect(""IPython"")
+        child.expect(""\n"")
+        child.expect_exact(""In [1]"")
+    
+        block = dedent(
+            """"""
+        def simple_f():
+             myvar = 1
+             print(myvar)
+             1/0
+             print(myvar)
+        simple_f()    """"""
+        )
+    
+        for line in block.splitlines():
+            child.sendline(line)
+            child.expect_exact(line)
+        child.expect_exact(""ZeroDivisionError"")
+        child.expect_exact(""In [2]:"")
+    
+        child.sendline(""%debug"")
+    
+        ##
+>       child.expect(""ipdb>"")
+
+core/tests/test_debugger.py:564: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:354: in expect
+    return self.expect_list(compiled_pattern_list,
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:383: in expect_list
+    return exp.expect_loop(timeout)
+/usr/lib/python3.14/site-packages/pexpect/expect.py:181: in expect_loop
+    return self.timeout(e)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pexpect.expect.Expecter object at 0x7fa26521d160>
+err = TIMEOUT('Timeout exceeded.')
+
+    def timeout(self, err=None):
+        spawn = self.spawn
+    
+        spawn.before = spawn._before.getvalue()
+        spawn.after = TIMEOUT
+        index = self.searcher.timeout_index
+        if index >= 0:
+            spawn.match = TIMEOUT
+            spawn.match_index = index
+            return index
+        else:
+            spawn.match = None
+            spawn.match_index = None
+            msg = str(spawn)
+            msg += '\nsearcher: %s' % self.searcher
+            if err is not None:
+                msg = str(err) + '\n' + msg
+    
+            exc = TIMEOUT(msg)
+            exc.__cause__ = None    # in Python 3.x we can use ""raise exc from None""
+>           raise exc
+E           pexpect.exceptions.TIMEOUT: Timeout exceeded.
+E           <pexpect.pty_spawn.spawn object at 0x7fa264e19450>
+E           command: /usr/bin/python3
+E           args: ['/usr/bin/python3', '-m', 'IPython', '--colors=nocolor']
+E           buffer (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [3]: '
+E           before (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [3]: '
+E           after: <class 'pexpect.exceptions.TIMEOUT'>
+E           match: None
+E           match_index: None
+E           exitstatus: None
+E           flag_eof: False
+E           pid: 4341
+E           child_fd: 18
+E           closed: False
+E           timeout: 60.0
+E           delimiter: <class 'pexpect.exceptions.EOF'>
+E           logfile: None
+E           logfile_read: None
+E           logfile_send: None
+E           maxread: 2000
+E           ignorecase: False
+E           searchwindowsize: None
+E           delaybeforesend: 0.05
+E           delayafterclose: 0.1
+E           delayafterterminate: 0.1
+E           searcher: searcher_re:
+E               0: re.compile(b'ipdb>')
+
+/usr/lib/python3.14/site-packages/pexpect/expect.py:144: TIMEOUT
+```
+```
+_______________________ TestAstTransform2.test_run_cell ________________________
+
+self = <IPython.core.tests.test_interactiveshell.TestAstTransform2 testMethod=test_run_cell>
+
+    def test_run_cell(self):
+        ip.run_cell(""n = 2"")
+>       self.assertEqual(self.calls, [(2,)])
+E       AssertionError: Lists differ: [] != [(2,)]
+E       
+E       Second list contains 1 additional elements.
+E       First extra element 0:
+E       (2,)
+E       
+E       - []
+E       + [(2,)]
+
+core/tests/test_interactiveshell.py:855: AssertionError
+```
+```
+________________________ TestAstTransform2.test_timeit _________________________
+
+self = <IPython.core.tests.test_interactiveshell.TestAstTransform2 testMethod=test_timeit>
+
+    def test_timeit(self):
+        called = set()
+        def f(x):
+            called.add(x)
+        ip.push({'f':f})
+    
+        with tt.AssertPrints(""std. dev. of""):
+            ip.run_line_magic(""timeit"", ""-n1 f(1)"")
+>       self.assertEqual(called, {(1,)})
+E       AssertionError: Items in the first set but not the second:
+E       1
+E       Items in the second set but not the first:
+E       (1,)
+
+core/tests/test_interactiveshell.py:873: AssertionError
+```
+```
+__________________________ test_render_signature_long __________________________
+
+    def test_render_signature_long():
+        from typing import Optional
+    
+        def long_function(
+            a_really_long_parameter: int,
+            and_another_long_one: bool = False,
+            let_us_make_sure_this_is_looong: Optional[str] = None,
+        ) -> bool: pass
+    
+        sig = oinspect._render_signature(
+            signature(long_function),
+            long_function.__name__,
+        )
+        expected = """"""\
+    long_function(
+        a_really_long_parameter: int,
+        and_another_long_one: bool = False,
+        let_us_make_sure_this_is_looong: Optional[str] = None,
+    ) -> bool\
+    """"""
+    
+>       assert sig == expected
+E       AssertionError: assert 'long_functio...e,\n) -> bool' == 'long_functio...e,\n) -> bool'
+E         
+E         Skipping 116 identical leading characters in diff, use -v to show
+E         - s_looong: Optional[str] = None,
+E         + s_looong: str | None = None,
+E           ) -> bool
+
+core/tests/test_oinspect.py:589: AssertionError
+```
+```
+__________________ test_debug_magic_passes_through_generators __________________
+
+    @skip_win32
+    def test_debug_magic_passes_through_generators():
+        """"""
+        This test that we can correctly pass through frames of a generator post-mortem.
+        """"""
+        import pexpect
+        import re
+        in_prompt = re.compile(br'In ?\[\d+\]:')
+        ipdb_prompt = 'ipdb>'
+        env = os.environ.copy()
+        child = pexpect.spawn(sys.executable, ['-m', 'IPython', '--colors=nocolor', '--simple-prompt'],
+                              env=env)
+        child.timeout = 15 * IPYTHON_TESTING_TIMEOUT_SCALE
+    
+        child.expect(in_prompt)
+    
+        child.timeout = 2 * IPYTHON_TESTING_TIMEOUT_SCALE
+    
+        child.sendline(""def f(x):"")
+        child.sendline(""    raise Exception"")
+        child.sendline("""")
+    
+        child.expect(in_prompt)
+        child.sendline(""gen = (f(x) for x in [0])"")
+        child.sendline("""")
+    
+        child.expect(in_prompt)
+        child.sendline(""for x in gen:"")
+        child.sendline(""    pass"")
+        child.sendline("""")
+    
+        child.timeout = 10 * IPYTHON_TESTING_TIMEOUT_SCALE
+    
+        child.expect('Exception:')
+    
+        child.expect(in_prompt)
+        child.sendline(r'%debug')
+>       child.expect('----> 2     raise Exception')
+
+terminal/tests/test_debug_magic.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:354: in expect
+    return self.expect_list(compiled_pattern_list,
+/usr/lib/python3.14/site-packages/pexpect/spawnbase.py:383: in expect_list
+    return exp.expect_loop(timeout)
+/usr/lib/python3.14/site-packages/pexpect/expect.py:181: in expect_loop
+    return self.timeout(e)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pexpect.expect.Expecter object at 0x7fa257d1be70>
+err = TIMEOUT('Timeout exceeded.')
+
+    def timeout(self, err=None):
+        spawn = self.spawn
+    
+        spawn.before = spawn._before.getvalue()
+        spawn.after = TIMEOUT
+        index = self.searcher.timeout_index
+        if index >= 0:
+            spawn.match = TIMEOUT
+            spawn.match_index = index
+            return index
+        else:
+            spawn.match = None
+            spawn.match_index = None
+            msg = str(spawn)
+            msg += '\nsearcher: %s' % self.searcher
+            if err is not None:
+                msg = str(err) + '\n' + msg
+    
+            exc = TIMEOUT(msg)
+            exc.__cause__ = None    # in Python 3.x we can use ""raise exc from None""
+>           raise exc
+E           pexpect.exceptions.TIMEOUT: Timeout exceeded.
+E           <pexpect.pty_spawn.spawn object at 0x7fa266f60a50>
+E           command: /usr/bin/python3
+E           args: ['/usr/bin/python3', '-m', 'IPython', '--colors=nocolor', '--simple-prompt']
+E           buffer (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [5]: '
+E           before (last 100 chars): b'\n    499 try:\r\n    500     skipped = 0\r\n\r\nValueError: Context must be a positive integer\r\n\r\nIn [5]: '
+E           after: <class 'pexpect.exceptions.TIMEOUT'>
+E           match: None
+E           match_index: None
+E           exitstatus: None
+E           flag_eof: False
+E           pid: 4413
+E           child_fd: 57
+E           closed: False
+E           timeout: 40.0
+E           delimiter: <class 'pexpect.exceptions.EOF'>
+E           logfile: None
+E           logfile_read: None
+E           logfile_send: None
+E           maxread: 2000
+E           ignorecase: False
+E           searchwindowsize: None
+E           delaybeforesend: 0.05
+E           delayafterclose: 0.1
+E           delayafterterminate: 0.1
+E           searcher: searcher_re:
+E               0: re.compile(b'----> 2     raise Exception')
+
+/usr/lib/python3.14/site-packages/pexpect/expect.py:144: TIMEOUT
+```
+```
+_____________________________ test_eval_formatter ______________________________
+
+    def test_eval_formatter():
+        f = text.EvalFormatter()
+>       eval_formatter_check(f)
+
+utils/tests/test_text.py:208: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+utils/tests/test_text.py:167: in eval_formatter_check
+    s = f.format(""{[n//i for i in range(1,8)]}"", **ns)
+/usr/lib64/python3.14/string.py:190: in format
+    return self.vformat(format_string, args, kwargs)
+/usr/lib64/python3.14/string.py:194: in vformat
+    result, _ = self._vformat(format_string, args, kwargs, used_args, 2)
+/usr/lib64/python3.14/string.py:235: in _vformat
+    obj, arg_used = self.get_field(field_name, args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <IPython.utils.text.EvalFormatter object at 0x7fa27fb096a0>
+name = '0[n//i for i in range(1,8)]', args = ()
+kwargs = {'__builtins__': {'ArithmeticError': <class 'ArithmeticError'>, 'AssertionError': <class 'AssertionError'>, 'Attribute...ributeError'>, 'BaseException': <class 'BaseException'>, ...}, 'b': 'café', 'n': 12, 'os': <module 'os' (frozen)>, ...}
+
+    def get_field(self, name: str, args: Any, kwargs: Any) -> Tuple[Any, str]:
+>       v = eval(name, kwargs)
+E         File ""<string>"", line 1
+E           0[n//i for i in range(1,8)]
+E                  ^^^
+E       SyntaxError: invalid syntax
+
+utils/text.py:547: SyntaxError
+```
+
+Some of them look easy to fix, but others will require deeper investigation.",frenzymadness,5688939,open,False,2,2025-04-01T14:21:59+00:00,2025-04-03T10:11:02+00:00,,help wanted,0,0,0,0,0,0,0
+ipython/ipython,2959469095,14857,Turn off tips/ads,"```
+Python 3.12.9 (main, Mar 18 2025, 01:37:06) [GCC 12.2.0]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.0.2 -- An enhanced Interactive Python. Type '?' for help.
+Tip: Happy trans day of visibility! You are valid. You matter. https://en.wikipedia.org/wiki/International_Transgender_Day_of_Visibility
+```
+
+Is there a way to turn off these tips?",ajwrigley,107979874,closed,False,1,2025-03-31T04:52:57+00:00,2025-03-31T10:28:41+00:00,2025-03-31T10:28:40+00:00,,1,0,1,0,0,0,0
+ipython/ipython,2958478494,14856,Fix typo in `tips.py`,,carschandler,92899389,closed,False,0,2025-03-29T20:26:25+00:00,2025-03-31T10:25:24+00:00,2025-03-31T10:25:23+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2956969842,14855,Backport PR #14838 on branch 8.x (Fix Tab Completion Context Detection),Backport PR https://github.com/ipython/ipython/pull/14838 on branch 8.x (Fix Tab Completion Context Detection),krassowski,5832902,closed,False,0,2025-03-28T19:09:25+00:00,2025-04-03T15:41:15+00:00,2025-03-28T19:25:22+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2956917250,14854,Backport PR #14846 on branch 8.x (Add request number and logging (do not use print)),Backport PR https://github.com/ipython/ipython/pull/14846 on branch 8.x (Add request number and logging (do not use print)),krassowski,5832902,closed,False,1,2025-03-28T18:43:56+00:00,2025-04-03T15:41:15+00:00,2025-03-28T19:05:43+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2956909835,14853,"Backport PR #14845 on branch 8.x (Remove unused variables from `auto_suggest` and examples, fix typos)","Backport PR #14845: Remove unused variables from `auto_suggest` and examples, fix typos",meeseeksmachine,39504233,closed,False,0,2025-03-28T18:40:15+00:00,2025-04-03T15:41:14+00:00,2025-03-28T18:51:01+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2956833994,14852,Make sure async tests are (a) run on CI (b) with both asyncio and trio,">  If you have time (or as a separate issue/PR), it would be awesome to:
+> 
+> 1. mark pytest.mark.anyio (to make sure we test on asyncio and trio)
+> 2. make it an error at least on CI to have an async test skipped.
+>
+> _Originally posted by @Carreau in https://github.com/ipython/ipython/pull/14846#discussion_r2016224166_
+            
+
+> I will do so in another PR
+> 
+> > mark pytest.mark.anyio (to make sure we test on asyncio and trio)
+> 
+> I guess also here?
+> 
+> https://github.com/ipython/ipython/blob/46b09de968521d08a2903316090557da547007ee/tests/test_magic.py#L1248-L1268
+> 
+> > make it an error at least on CI to have an async test skipped.
+> 
+> agree a good idea, I guess we could grep pytest output - or any other ideas?
+> 
+> _Originally posted by @krassowski in https://github.com/ipython/ipython/pull/14846#discussion_r2017162297_
+
+
+>  I was hopping there was a pytest option...
+> 
+> _Originally posted by @Carreau in https://github.com/ipython/ipython/pull/14846#discussion_r2017356851_",krassowski,5832902,open,False,0,2025-03-28T18:02:57+00:00,2025-03-28T18:03:45+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2955530806,14851,Backport PR #14755 on branch 8.x (By default pass current input history to LLMs.),Backport PR #14755: By default pass current input history to LLMs.,meeseeksmachine,39504233,closed,False,1,2025-03-28T09:31:47+00:00,2025-04-03T15:41:14+00:00,2025-03-28T18:39:13+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2948811793,14850,Incorrect arguments passed to structured_traceback when re-raising inside a custom exception handler,"The ultratb.AutoFormattedTB.structured_traceback method takes two positional args, `etype` and `evalue`, plus some kwargs. However in interactiveshell.py, ln 2011, the line is:
+ `stb = self.InteractiveTB.structured_traceback((etype, value, tb), tb_offset=tb_offset)`. 
+This leads to a TypeError.
+
+It can be reproduced with this snippet:
+```
+from IPython import get_ipython
+
+def handle_exception(*args, **kwargs):
+    raise RuntimeError('Any exception will do here')
+
+ipy = get_ipython()
+if ipy is not None:
+    ipy.set_custom_exc((Exception,), handle_exception)
+
+raise RuntimeError(""Trigger an exception handling scenario"")
+```",chaosmonkey86,17526707,closed,False,1,2025-03-26T08:48:01+00:00,2025-03-26T08:49:39+00:00,2025-03-26T08:49:28+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2948207807,14849,"Some error in %run ,when I use %run ""{path}"" if path has start with ""-m""","the code in execution.py line 688, has a bug. when the path has a string start wit ""-m"" , the path cannot be exe. for example path ""C:/test-main/test.py""
+
+if '-m' in parameter_s and '--' not in parameter_s:
+            argv = shlex.split(parameter_s, posix=(os.name == 'posix'))
+            for idx, arg in enumerate(argv):
+                if arg and arg.startswith('-') and arg != '-':
+                    if arg == '-m':
+                        argv.insert(idx + 2, '--')
+                        break
+                else:
+                    # Positional arg, break
+                    break
+            parameter_s = ' '.join(shlex.quote(arg) for arg in argv)",NjustWrunning,73689702,open,False,0,2025-03-26T02:13:03+00:00,2025-03-26T02:13:03+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2946716439,14848,Code coverage does not correctly ignore tets,"See the regex in:
+
+https://github.com/ipython/ipython/blob/801c9adb94b213fc5e8cacb0d9920a0ff7727c2e/codecov.yml#L6-L13
+
+This was not updated when moving tests out of tree in https://github.com/ipython/ipython/pull/14736",krassowski,5832902,closed,False,1,2025-03-25T14:21:58+00:00,2025-03-25T14:23:54+00:00,2025-03-25T14:23:53+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2946638026,14847,Async tests do not run on CI,"Here is an example:
+
+```
+tests/test_shortcuts.py s.............................................ss........                                 [ 91%]
+```
+
+The first test is an async test I am adding in https://github.com/ipython/ipython/pull/14846 but the other two are
+
+https://github.com/ipython/ipython/blob/e6f0d4243c6e4416f704ad7575851e65281396e1/tests/test_shortcuts.py#L222
+
+https://github.com/ipython/ipython/blob/e6f0d4243c6e4416f704ad7575851e65281396e1/tests/test_shortcuts.py#L274
+
+Three suggestions:
+- run tests on CI with `--verbose` so that the reason for skipping tests is displayed prominently
+- fix the issue by running with `--asyncio-mode=auto` (not sure if this is a good fix)
+- increase min coverage to avoid this",krassowski,5832902,closed,False,1,2025-03-25T13:57:14+00:00,2025-03-28T18:02:07+00:00,2025-03-28T18:02:07+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2946289152,14846,Add request number and logging (do not use `print`),"- fixes #14844 
+- fixes #14847 ",krassowski,5832902,closed,False,3,2025-03-25T11:58:50+00:00,2025-04-03T15:41:13+00:00,2025-03-28T18:02:05+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2946238718,14845,"Remove unused variables from `auto_suggest` and examples, fix typos","- `auto_suggest.py`:
+  - `AutoSuggest` is imported but unused
+  - `suggestions_longer_than_buffer` is unused and there is other logic checking the line count
+  - `extra` is unused and `suggestion` in following line contains a very similar string
+- `auto_suggest_llm.py`
+  - remove unused imports
+- fix typos",krassowski,5832902,closed,False,3,2025-03-25T11:40:56+00:00,2025-04-03T15:41:13+00:00,2025-03-27T16:56:16+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2946196329,14844,All inline completion LLM requests have the request number set to zero,"This is set to zero here:
+
+https://github.com/ipython/ipython/blob/c4fbfc2624800d1fab1a353f6ad1954e14328d23/IPython/terminal/shortcuts/auto_suggest.py#L389-L390
+
+and the docstring argues that:
+
+https://github.com/ipython/ipython/blob/c4fbfc2624800d1fab1a353f6ad1954e14328d23/IPython/terminal/shortcuts/auto_suggest.py#L367-L369
+
+However, this is incorrect, because the request ID is not meant to represent a cell number, but instead represents the number of the request. In jupyter-ai it is used to distinguish multiple replies when sent asynchronously over the websocket, but it can also be used by the model provider to track the requests internally.",krassowski,5832902,closed,False,0,2025-03-25T11:23:37+00:00,2025-03-28T18:02:06+00:00,2025-03-28T18:02:06+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2942741808,14843,Make it possible to get key completions for `object.get()`,"Hi all,
+
+In this library I am working on, [skore](https://github.com/probabl-ai/skore), we have an object that resembles a dict (`Project`), that has a `get` method. It would be nice if we could implement key completions for `Project.get()`. Is there a technical reason why IPython does not support key completions for `dict.get()`?
+
+---
+
+In case you're wondering, `Project` does not implement `__getitem__` because it doesn't support nested assignment, i.e. with a dict you can do
+```
+[ins] In [8]: a = {'a': {'b': 3}}
+
+[ins] In [9]: a[""a""][""b""] = 77
+
+[ins] In [10]: a
+Out[10]: {'a': {'b': 77}}
+```
+but with a Project, you have to reinsert the whole `{'b': 77}` value.
+
+",augustebaum,52001167,open,False,1,2025-03-24T10:19:14+00:00,2025-03-24T10:32:03+00:00,,tab-completion,0,0,0,0,0,0,0
+ipython/ipython,2938203004,14842,Font size in display(Latex()),"In VS Code I can enter something like 
+```
+from IPython.display import display, Latex
+display(Latex(""abcd""))
+```
+This displays the string `abcd` but in a rather small font, smaller than that used if I just enter text in a Markdown cell.  Is there some way to change this?  There does not seem to be anything in the documentation, and I have not succeeded in understanding the code.  It is not clear to me whether this is really a question about IPython or a question about VS Code.",NeilStrickland,1848163,open,False,0,2025-03-21T12:05:42+00:00,2025-03-21T12:05:42+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2925528609,14841,`autoreload 3` breaks with pydantic models,"```
+[autoreload of browser.library failed: Traceback (most recent call last):
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/IPython/extensions/autoreload.py"", line 278, in check
+    superreload(m, reload, self.old_objects, self.shell)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/IPython/extensions/autoreload.py"", line 508, in superreload
+    update_generic(old_obj, new_obj)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/IPython/extensions/autoreload.py"", line 405, in update_generic
+    update(a, b)
+    ~~~~~~^^^^^^
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/IPython/extensions/autoreload.py"", line 343, in update_class
+    if (old_obj == new_obj) is True:
+        ^^^^^^^^^^^^^^^^^^
+  File ""<frozen _collections_abc>"", line 838, in __eq__
+  File ""<frozen _collections_abc>"", line 898, in __iter__
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/pydantic/_internal/_mock_val_ser.py"", line 47, in __iter__
+    return self._get_built().__iter__()
+           ~~~~~~~~~~~~~~~^^
+  File ""/Users/mike/.cache/uv/archive-v0/kNbXlZ4I7_k672roqpeO9/lib/python3.13/site-packages/pydantic/_internal/_mock_val_ser.py"", line 58, in _get_built
+    raise PydanticUserError(self._error_message, code=self._code)
+pydantic.errors.PydanticUserError: Pydantic models should inherit from BaseModel, BaseModel cannot be instantiated directly
+
+For further information visit https://errors.pydantic.dev/2.10/u/base-model-instantiated
+]
+```
+
+however, `autoreload 2` works fine. Ideally, we could catch this specific case so it doesn't break the autoreload functionality and just throws a warning.
+
+I'm happy to help with this problem via a PR, I'm just not sure the best way to handle it.",iloveitaly,150855,open,False,0,2025-03-17T15:32:13+00:00,2025-03-17T15:32:13+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2925422807,14840,remove numfocus funding,,Carreau,335567,closed,False,0,2025-03-17T15:00:04+00:00,2025-03-19T17:55:38+00:00,2025-03-19T17:55:35+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2921329722,14839,autoreload 3 has the effect of import *,"The autoreload extension is almost magical, huge thanks to whoever's worked on it. There is one behavior that I find unexpected and I think may have been unintended.
+
+We have a file reload.py containing:
+```
+n = 5
+```
+Then in ipython we do:
+```
+%load_ext autoreload
+%autoreload 3
+from reload import n
+```
+now we edit and save reload.py to be:
+```
+n = 5
+m = 7
+```
+Now in the ipython repl, m is also defined, even though we just imported n. In the ipython test suite for this functionality in `test_autoload_newly_added_objects`, it demonstrates it with `from module import *`. But even if we didn't `import *` it will effectively always behave that way, as with `autoreload 3`, it sets `autoload_obj` to True, which causes it to pass shell into superreload, where it does `shell.user_ns[name] = new_obj` for every new variable, even if we didn't `import *`, but explicitly only wanted to import `n` as in this example. I'm not sure if this is intended or a bug, but it seems like it has the potential to dangerously clobber existing names in cases where users didn't `import *`",sczi,2192860,open,False,1,2025-03-14T21:32:50+00:00,2025-04-13T22:20:41+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2916981355,14838,Fix Tab Completion Context Detection,"### Fixes #14836 
+
+This PR resolves the issue with IPython tab completion incorrectly triggering attribute completion when a dot (`.`) appears in the line. Instead of just checking for '.', I've added a new function, `_determine_completion_context`, to accurately determine whether the cursor is in an attribute or global completion context. 
+
+The solution has been tested against multiple edge cases (e.g., nested expressions, strings, comments) and handles them all correctly. Please review the changes and let me know if you have any feedback or suggestions!",Darshan808,127468609,closed,False,13,2025-03-13T12:27:18+00:00,2025-04-03T15:41:13+00:00,2025-03-26T12:30:15+00:00,tab-completion,0,0,0,0,0,0,0
+ipython/ipython,2916539489,14837,Test for globals completion failing in methods,"- [x] Add a test for globals completions in methods
+- [ ] Fix the issue",krassowski,5832902,closed,False,2,2025-03-13T09:53:20+00:00,2025-04-04T17:43:25+00:00,2025-03-14T16:09:03+00:00,tab-completion,0,0,0,0,0,0,0
+ipython/ipython,2913547222,14836,Tab completion for globals does not work in lines with dots,"To reproduce:
+
+```python
+import numpy as np
+long_variable_name = 56
+
+%config Completer.use_jedi = False
+
+x = np.random(lo   # pressing <tab> here does not show `long_variable_name`
+```
+
+| Last working | Broken |
+|---|---|
+| ![8.26](https://github.com/user-attachments/assets/df84f4e8-e464-409c-9e64-abf968a3c1aa) | ![8.27](https://github.com/user-attachments/assets/44ef697b-e17f-412d-a7a0-b31775e04ce0) |
+
+https://github.com/ipython/ipython/compare/8.26.0...8.27.0
+
+The problem is a heuristic restored in https://github.com/ipython/ipython/pull/14474, which checks for `"".""` in the line to decide between using attribute and global matcher, which is confirmed by the following working correctly:
+
+![Image](https://github.com/user-attachments/assets/496023d2-6e3c-4e4b-b625-daeab64a47f6)
+",krassowski,5832902,closed,False,1,2025-03-12T10:54:41+00:00,2025-03-26T12:30:16+00:00,2025-03-26T12:30:16+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2908933819,14835,`IPython.display` does not show any image at all but `<IPython.core.display.Image object>`,"I am trying to show `LangChain` graph in my python module code. Not Jupiter notebook. However, the following code snippet:
+```
+from IPython.display import Image, display
+from langgraph.graph import StateGraph, MessagesState
+graph_builder = StateGraph(MessagesState)
+simple_graph = graph_builder.compile()
+display(Image(simple_graph.get_graph().draw_mermaid_png()))
+```
+shows:
+`<IPython.core.display.Image object>` instead of the graph. I am on Ubuntu.",khteh,3871483,closed,False,5,2025-03-11T03:05:48+00:00,2025-03-11T04:19:32+00:00,2025-03-11T04:19:32+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2906438218,14834,ignore highlighting style,closes #14832,Carreau,335567,closed,False,5,2025-03-10T08:19:05+00:00,2025-03-12T11:40:48+00:00,2025-03-12T11:40:46+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2906428930,14833,Fix slowness showing source.,"fixes #14831
+I was recreating a style for almost every line.",Carreau,335567,closed,False,1,2025-03-10T08:14:33+00:00,2025-03-12T12:16:53+00:00,2025-03-12T11:41:33+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2906058593,14832,ipython doesn't start when `c.TerminalInteractiveShell.highlighting_style` is set to a `pygments` theme string,"Potentially related to #14810.
+
+To reproduce, create a fresh ipython config, (`ipython profile create`), then uncomment `c.TerminalInteractiveShell.highlighting_style` and set it to `fruity` (or any pygments theme, or any string at all, really). Result:
+
+```sh
+***************************************************************************
+
+IPython post-mortem report
+
+{'commit_hash': '9970f5e4b',
+ 'commit_source': 'installation',
+ 'default_encoding': 'utf-8',
+ 'ipython_path': '/Users/rben01/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython',
+ 'ipython_version': '9.0.2',
+ 'os_name': 'posix',
+ 'platform': 'macOS-15.3.1-arm64-arm-64bit',
+ 'sys_executable': '/Users/rben01/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/bin/python',
+ 'sys_platform': 'darwin',
+ 'sys_version': '3.12.9 (main, Feb 12 2025, 15:09:19) [Clang 19.1.6 ]'}
+
+***************************************************************************
+
+Application name: ipython
+
+Current user configuration structure:
+
+{'BaseIPythonApplication': {'verbose_crash': True},
+ 'TerminalInteractiveShell': {'highlighting_style': 'fruity'}}
+
+***************************************************************************
+
+Crash traceback:
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+AssertionErrorPython 3.12.9: /Users/rben01/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/bin/python
+                                                   Mon Mar 10 00:31:06 2025
+A problem occurred executing Python code.  Here is the sequence of function
+calls leading up to the error, with the most recent (innermost) call last.
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/bin/ipython:12
+      1 #!/bin/sh
+      2 '''exec' ""$(dirname -- ""$(realpath -- ""$0"")"")""/'python' ""$0"" ""$@""
+      3 ' '''
+      4 # -*- coding: utf-8 -*-
+      5 import sys
+      6 from IPython import start_ipython
+      7 if __name__ == ""__main__"":
+      8     if sys.argv[0].endswith(""-script.pyw""):
+      9         sys.argv[0] = sys.argv[0][:-11]
+     10     elif sys.argv[0].endswith("".exe""):
+     11         sys.argv[0] = sys.argv[0][:-4]
+---> 12     sys.exit(start_ipython())
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/__init__.py:139, in start_ipython(argv=None, **kwargs={})
+    113 def start_ipython(argv=None, **kwargs):
+    114     """"""Launch a normal IPython instance (as opposed to embedded)
+    115 
+    116     `IPython.embed()` puts a shell in a particular calling scope,
+   (...)    136         allowing configuration of the instance (see :ref:`terminal_options`).
+    137     """"""
+    138     from IPython.terminal.ipapp import launch_new_instance
+--> 139     return launch_new_instance(argv=argv, **kwargs)
+        launch_new_instance = <bound method Application.launch_instance of <class 'IPython.terminal.ipapp.TerminalIPythonApp'>>
+        argv = None
+        kwargs = {}
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/traitlets/config/application.py:1074, in Application.launch_instance(cls=<class 'IPython.terminal.ipapp.TerminalIPythonApp'>, argv=None, **kwargs={})
+   1067 @classmethod
+   1068 def launch_instance(cls, argv: ArgvType = None, **kwargs: t.Any) -> None:
+   1069     """"""Launch a global instance of this Application
+   1070 
+   1071     If a global instance already exists, this reinitializes and starts it
+   1072     """"""
+   1073     app = cls.instance(**kwargs)
+-> 1074     app.initialize(argv)
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>
+        argv = None   1075     app.start()
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/traitlets/config/application.py:118, in catch_config_error.<locals>.inner(app=<IPython.terminal.ipapp.TerminalIPythonApp object>, *args=(None,), **kwargs={})
+    115 @functools.wraps(method)
+    116 def inner(app: Application, *args: t.Any, **kwargs: t.Any) -> t.Any:
+    117     try:
+--> 118         return method(app, *args, **kwargs)
+        method = <function TerminalIPythonApp.initialize at 0x104caaac0>
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>
+        args = (None,)
+        kwargs = {}    119     except (TraitError, ArgumentError) as e:
+    120         app.log.fatal(""Bad config encountered during initialization: %s"", e)
+    121         app.log.debug(""Config at the time: %s"", app.config)
+    122         app.exit(1)
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/terminal/ipapp.py:286, in TerminalIPythonApp.initialize(self=<IPython.terminal.ipapp.TerminalIPythonApp object>, argv=None)
+    274 @catch_config_error
+    275 def initialize(self, argv=None):
+    276     """"""Do actions after construct, but before starting the app.""""""
+    277     super(TerminalIPythonApp, self).initialize(argv)
+    278     if self.subapp is not None:
+    279         # don't bother initializing further, starting subapp
+    280         return
+    281     # print(self.extra_args)
+    282     if self.extra_args and not self.something_to_run:
+    283         self.file_to_run = self.extra_args[0]
+    284     self.init_path()
+    285     # create the shell
+--> 286     self.init_shell()
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>    287     # and draw the banner
+    288     self.init_banner()
+    289     # Now a variety of things that happen after the banner is printed.
+    290     self.init_gui_pylab()
+    291     self.init_extensions()
+    292     self.init_code()
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/terminal/ipapp.py:300, in TerminalIPythonApp.init_shell(self=<IPython.terminal.ipapp.TerminalIPythonApp object>)
+    294 def init_shell(self):
+    295     """"""initialize the InteractiveShell instance""""""
+    296     # Create an InteractiveShell instance.
+    297     # shell.display_banner should always be False for the terminal
+    298     # based app, because we call shell.show_banner() by hand below
+    299     # so the banner shows *before* all extension loading stuff.
+--> 300     self.shell = self.interactive_shell_class.instance(parent=self,
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>    301                     profile_dir=self.profile_dir,
+    302                     ipython_dir=self.ipython_dir, user_ns=self.user_ns)
+    303     self.shell.configurables.append(self)
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/traitlets/config/configurable.py:583, in SingletonConfigurable.instance(cls=<class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>, *args=(), **kwargs={'ipython_dir': '/Users/rben01/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    553 @classmethod
+    554 def instance(cls: type[CT], *args: t.Any, **kwargs: t.Any) -> CT:
+    555     """"""Returns a global instance of this class.
+    556 
+    557     This method create a new instance if none have previously been created
+   (...)    579         True
+    580     """"""
+    581     # Create and save the instance
+    582     if cls._instance is None:
+--> 583         inst = cls(*args, **kwargs)
+        cls = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0x104c974d0>, 'ipython_dir': '/Users/rben01/.ipython', 'user_ns': None}    584         # Now make sure that the instance will also be returned by
+    585         # parent classes' _instance attribute.
+    586         for subclass in cls._walk_mro():
+    587             subclass._instance = inst
+    589     if isinstance(cls._instance, cls):
+    590         return cls._instance
+    591     else:
+    592         raise MultipleInstanceError(
+    593             f""An incompatible sibling of '{cls.__name__}' is already instantiated""
+    594             f"" as singleton: {type(cls._instance).__name__}""
+    595         )
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/terminal/interactiveshell.py:977, in TerminalInteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, *args=(), **kwargs={'ipython_dir': '/Users/rben01/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    976 def __init__(self, *args, **kwargs) -> None:
+--> 977     super(TerminalInteractiveShell, self).__init__(*args, **kwargs)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0x104c30f80>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0x102448d10>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0x104c974d0>, 'ipython_dir': '/Users/rben01/.ipython', 'user_ns': None}
+        TerminalInteractiveShell = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>    978     self._set_autosuggestions(self.autosuggestions_provider)
+    979     self.init_prompt_toolkit_cli()
+    980     self.init_term_title()
+    981     self.keep_running = True
+    982     self._set_formatter(self.autoformatter)
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/core/interactiveshell.py:628, in InteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, ipython_dir='/Users/rben01/.ipython', profile_dir=<IPython.core.profiledir.ProfileDir object>, user_module=None, user_ns=None, custom_exceptions=((), None), **kwargs={'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>})
+    601 self.init_profile_dir(profile_dir)
+    602 self.init_instance_attrs()
+    603 self.init_environment()
+    605 # Check if we're in a virtualenv, and set up sys.path.
+    606 self.init_virtualenv()
+    608 # Create namespaces (user_ns, user_global_ns, etc.)
+    609 self.init_create_namespaces(user_module, user_ns)
+    610 # This has to be done after init_create_namespaces because it uses
+    611 # something in self.user_ns, but before init_sys_modules, which
+    612 # is the first thing to modify sys.
+    613 # TODO: When we override sys.stdout and sys.stderr before this class
+    614 # is created, we are saving the overridden ones here. Not sure if this
+    615 # is what we want to do.
+    616 self.save_sys_module_state()
+    617 self.init_sys_modules()
+    619 # While we're trying to have each part of the code directly access what
+    620 # it needs without keeping redundant references to objects, we have too
+    621 # much legacy code that expects ip.db to exist.
+    622 self.db = PickleShareDB(os.path.join(self.profile_dir.location, 'db'))
+    624 self.init_history()
+    625 self.init_encoding()
+    626 self.init_prefilter()
+--> 628 self.init_syntax_highlighting()
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0x104c30f80>    629 self.init_hooks()
+    630 self.init_events()
+    631 self.init_pushd_popd_magic()
+    632 self.init_user_ns()
+    633 self.init_logger()
+    634 self.init_builtins()
+    636 # The following was in post_config_initialization
+    637 self.raw_input_original = input
+    638 self.init_completer()
+    639 # TODO: init_io() needs to happen before init_traceback handlers
+    640 # because the traceback handlers hardcode the stdout/stderr streams.
+    641 # This logic in in debugger.Pdb and should eventually be changed.
+    642 self.init_io()
+    643 self.init_traceback_handlers(custom_exceptions)
+    644 self.init_prompts()
+    645 self.init_display_formatter()
+    646 self.init_display_pub()
+
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/core/interactiveshell.py:799, in InteractiveShell.init_syntax_highlighting(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, changes=None)
+    774 @observe(""colors"")
+    775 def init_syntax_highlighting(self, changes=None):
+    776     # Python source parser/formatter for syntax highlighting
+    777     pyformat = PyColorize.Parser(theme_name=self.colors).format
+    778     self.pycolorize = lambda src: pyformat(src, ""str"")
+    779     if not hasattr(self, ""inspector""):
+    780         self.inspector = self.inspector_class(
+    781             theme_name=self.colors,
+    782             str_detail_level=self.object_info_string_level,
+    783             parent=self,
+    784         )
+    786     try:
+    787         # Deprecation in 9.0, colors should always be lower
+    788         self.inspector.set_theme_name(self.colors.lower())
+    789     except Exception:
+    790         warn(
+    791             ""Error changing object inspector color schemes.\n%s""
+    792             % (sys.exc_info()[1]),
+    793             stacklevel=2,
+    794         )
+    795     if hasattr(self, ""InteractiveTB""):
+    796         self.InteractiveTB.set_theme_name(self.colors)
+    797     if hasattr(self, ""SyntaxTB""):
+    798         self.SyntaxTB.set_theme_name(self.colors)
+--> 799     self.refresh_style()
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0x104c30f80>
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/terminal/interactiveshell.py:358, in TerminalInteractiveShell.refresh_style(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>)
+    357 def refresh_style(self):
+--> 358     self._style = self._make_style_from_name_or_cls(self.highlighting_style)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0x104c30f80>
+File ~/.cache/uv/archive-v0/RUiK-9Ks_FFjrLHQhIAD-/lib/python3.12/site-packages/IPython/terminal/interactiveshell.py:822, in TerminalInteractiveShell._make_style_from_name_or_cls(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, name_or_cls='fruity')
+    816 def _make_style_from_name_or_cls(self, name_or_cls):
+    817     """"""
+    818     Small wrapper that make an IPython compatible style from a style name
+    819 
+    820     We need that to add style for prompt ... etc.
+    821     """"""
+--> 822     assert name_or_cls == ""legacy""
+        name_or_cls == ""legacy"" = False
+        name_or_cls = 'fruity'    823     legacy = self.colors.lower()
+    825     theme = theme_table.get(legacy, None)
+    826     assert theme is not None, legacy
+    828     if legacy == ""nocolor"":
+    829         style_overrides = {}
+    830         style_cls = _NoStyle
+    831     else:
+    832         style_overrides = {**theme.extra_style, **self.highlighting_style_overrides}
+    833         if theme.base is not None:
+    834             style_cls = get_style_by_name(theme.base)
+    835         else:
+    836             style_cls = _NoStyle
+    838     style = merge_styles(
+    839         [
+    840             style_from_pygments_cls(style_cls),
+    841             style_from_pygments_dict(style_overrides),
+    842         ]
+    843     )
+    845     return style
+
+AssertionError: 
+
+***************************************************************************
+
+History of session input:
+```",rben01,766670,closed,False,0,2025-03-10T04:35:43+00:00,2025-03-12T11:40:47+00:00,2025-03-12T11:40:47+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2905605670,14831,ipython is very slow to show the source code for anything,"After I upgraded to 9.x inspecting anything with `??` to get the source of that object takes a _very_ long time.
+
+For example:
+
+```py
+In [1]: import typing
+
+In [2]: typing??<Enter>
+```
+
+Takes 30 seconds until it shows the module source and in the meanwhile it keeps a CPU core at 100%.
+The problem seems correlated with the size of the module (for example the `dataclasses` module takes 15 seconds to show the source, while the `abc` module takes 2 seconds).
+
+This was not a problem in 8.x where showing the source was virtually instantaneous.
+",danpascu,4569572,closed,False,2,2025-03-09T18:47:53+00:00,2025-03-12T11:41:34+00:00,2025-03-12T11:41:34+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2905541161,14830,Allow to pass colors to IPython embed,Step toward https://github.com/Quansight/deshaw/issues/537,Carreau,335567,closed,False,0,2025-03-09T16:51:35+00:00,2025-03-12T11:41:44+00:00,2025-03-12T11:41:44+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2904794397,14829,Backport PR #14828 on branch 8.x (Explicitly create QEventLoop separately from QApplication),Backport PR #14828: Explicitly create QEventLoop separately from QApplication,meeseeksmachine,39504233,closed,False,0,2025-03-08T13:29:31+00:00,2025-03-08T13:35:39+00:00,2025-03-08T13:35:39+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2904786920,14828,Explicitly create QEventLoop separately from QApplication,Quick fix for https://github.com/ipython/ipython/issues/14815,Carreau,335567,closed,False,0,2025-03-08T13:14:51+00:00,2025-03-08T13:29:26+00:00,2025-03-08T13:29:26+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2904784233,14827,Backport PR #14823 on branch 8.x (Fix accept invisible completions),Backport PR #14823: Fix accept invisible completions,meeseeksmachine,39504233,closed,False,0,2025-03-08T13:09:11+00:00,2025-03-08T13:15:13+00:00,2025-03-08T13:15:13+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2903432272,14826,Fix logstart option.,This should fix issue #14825,Carreau,335567,closed,False,0,2025-03-07T16:25:55+00:00,2025-03-07T16:39:45+00:00,2025-03-07T16:39:45+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2901270626,14825,IPython 9 `logfile` causes crash,"Running `ipython` with `--logfile` or `--logappend` causes a crash in `ipython>=9`
+e.g. `ipython --logfile=log.txt`
+
+This is failing due to the following error:
+```py
+  File ""/usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py"", line 817, in init_logstart
+    self.magic('logstart %s' % self.logfile)
+    ^^^^^^^^^^
+AttributeError: 'TerminalInteractiveShell' object has no attribute 'magic'
+```
+
+---
+
+Using docker for reproducibility
+`docker pull python@sha256:385ccb8304f6330738a6d9e6fa0bd7608e006da7e15bc52b33b0398e1ba4a15b`
+(digest matches current `latest` tag)
+
+Installing `ipython==9.0.1` and running with `--logfile=log.txt` with verbose crash:
+```sh
+docker run --rm python@sha256:385ccb8304f6330738a6d9e6fa0bd7608e006da7e15bc52b33b0398e1ba4a15b \
+        sh -c \
+        'pip install -qq ipython
+        ipython --logfile=log.txt --BaseIPythonApplication.verbose_crash=True
+        cat /root/.ipython/Crash_report_ipython.txt'
+```
+
+<details>
+
+```
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+AttributeError                     Python 3.13.2: /usr/local/bin/python3.13
+                                                   Thu Mar  6 19:37:39 2025
+A problem occurred executing Python code.  Here is the sequence of function
+calls leading up to the error, with the most recent (innermost) call last.
+File /usr/local/bin/ipython:8
+      1 #!/usr/local/bin/python3.13
+      2 # -*- coding: utf-8 -*-
+      3 import re
+      4 import sys
+      5 from IPython import start_ipython
+      6 if __name__ == '__main__':
+      7     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+----> 8     sys.exit(start_ipython())
+
+File /usr/local/lib/python3.13/site-packages/IPython/__init__.py:139, in start_ipython(argv=None, **kwargs={})
+    113 def start_ipython(argv=None, **kwargs):
+    114     """"""Launch a normal IPython instance (as opposed to embedded)
+    115
+    116     `IPython.embed()` puts a shell in a particular calling scope,
+   (...)    136         allowing configuration of the instance (see :ref:`terminal_options`).
+    137     """"""
+    138     from IPython.terminal.ipapp import launch_new_instance
+--> 139     return launch_new_instance(argv=argv, **kwargs)
+        launch_new_instance = <bound method Application.launch_instance of <class 'IPython.terminal.ipapp.TerminalIPythonApp'>>
+        argv = None
+        kwargs = {}
+File /usr/local/lib/python3.13/site-packages/traitlets/config/application.py:1074, in Application.launch_instance(cls=<class 'IPython.terminal.ipapp.TerminalIPythonApp'>, argv=None, **kwargs={})
+   1067 @classmethod
+   1068 def launch_instance(cls, argv: ArgvType = None, **kwargs: t.Any) -> None:
+   1069     """"""Launch a global instance of this Application
+   1070
+   1071     If a global instance already exists, this reinitializes and starts it
+   1072     """"""
+   1073     app = cls.instance(**kwargs)
+-> 1074     app.initialize(argv)
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>
+        argv = None   1075     app.start()
+
+File /usr/local/lib/python3.13/site-packages/traitlets/config/application.py:118, in catch_config_error.<locals>.inner(app=<IPython.terminal.ipapp.TerminalIPythonApp object>, *args=(None,), **kwargs={})
+    115 @functools.wraps(method)
+    116 def inner(app: Application, *args: t.Any, **kwargs: t.Any) -> t.Any:
+    117     try:
+--> 118         return method(app, *args, **kwargs)
+        method = <function TerminalIPythonApp.initialize at 0xffffa318f1a0>
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>
+        args = (None,)
+        kwargs = {}    119     except (TraitError, ArgumentError) as e:
+    120         app.log.fatal(""Bad config encountered during initialization: %s"", e)
+    121         app.log.debug(""Config at the time: %s"", app.config)
+    122         app.exit(1)
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py:286, in TerminalIPythonApp.initialize(self=<IPython.terminal.ipapp.TerminalIPythonApp object>, argv=None)
+    274 @catch_config_error
+    275 def initialize(self, argv=None):
+    276     """"""Do actions after construct, but before starting the app.""""""
+    277     super(TerminalIPythonApp, self).initialize(argv)
+    278     if self.subapp is not None:
+    279         # don't bother initializing further, starting subapp
+    280         return
+    281     # print(self.extra_args)
+    282     if self.extra_args and not self.something_to_run:
+    283         self.file_to_run = self.extra_args[0]
+    284     self.init_path()
+    285     # create the shell
+--> 286     self.init_shell()
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>    287     # and draw the banner
+    288     self.init_banner()
+    289     # Now a variety of things that happen after the banner is printed.
+    290     self.init_gui_pylab()
+    291     self.init_extensions()
+    292     self.init_code()
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py:300, in TerminalIPythonApp.init_shell(self=<IPython.terminal.ipapp.TerminalIPythonApp object>)
+    294 def init_shell(self):
+    295     """"""initialize the InteractiveShell instance""""""
+    296     # Create an InteractiveShell instance.
+    297     # shell.display_banner should always be False for the terminal
+    298     # based app, because we call shell.show_banner() by hand below
+    299     # so the banner shows *before* all extension loading stuff.
+--> 300     self.shell = self.interactive_shell_class.instance(parent=self,
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>    301                     profile_dir=self.profile_dir,
+    302                     ipython_dir=self.ipython_dir, user_ns=self.user_ns)
+    303     self.shell.configurables.append(self)
+
+File /usr/local/lib/python3.13/site-packages/traitlets/config/configurable.py:583, in SingletonConfigurable.instance(cls=<class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>, *args=(), **kwargs={'ipython_dir': '/root/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    553 @classmethod
+    554 def instance(cls: type[CT], *args: t.Any, **kwargs: t.Any) -> CT:
+    555     """"""Returns a global instance of this class.
+    556
+    557     This method create a new instance if none have previously been created
+   (...)    579         True
+    580     """"""
+    581     # Create and save the instance
+    582     if cls._instance is None:
+--> 583         inst = cls(*args, **kwargs)
+        cls = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0xffffa354bcb0>, 'ipython_dir': '/root/.ipython', 'user_ns': None}    584         # Now make sure that the instance will also be returned by
+    585         # parent classes' _instance attribute.
+    586         for subclass in cls._walk_mro():
+    587             subclass._instance = inst
+    589     if isinstance(cls._instance, cls):
+    590         return cls._instance
+    591     else:
+    592         raise MultipleInstanceError(
+    593             f""An incompatible sibling of '{cls.__name__}' is already instantiated""
+    594             f"" as singleton: {type(cls._instance).__name__}""
+    595         )
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py:977, in TerminalInteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, *args=(), **kwargs={'ipython_dir': '/root/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    976 def __init__(self, *args, **kwargs) -> None:
+--> 977     super(TerminalInteractiveShell, self).__init__(*args, **kwargs)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0xffffa354bcb0>, 'ipython_dir': '/root/.ipython', 'user_ns': None}
+        TerminalInteractiveShell = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>    978     self._set_autosuggestions(self.autosuggestions_provider)
+    979     self.init_prompt_toolkit_cli()
+    980     self.init_term_title()
+    981     self.keep_running = True
+    982     self._set_formatter(self.autoformatter)
+
+File /usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py:650, in InteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, ipython_dir='/root/.ipython', profile_dir=<IPython.core.profiledir.ProfileDir object>, user_module=None, user_ns=None, custom_exceptions=((), None), **kwargs={'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>})
+    632 self.init_logger()
+    633 self.init_builtins()
+    635 # The following was in post_config_initialization
+    636 self.raw_input_original = input
+    637 self.init_completer()
+    638 # TODO: init_io() needs to happen before init_traceback handlers
+    639 # because the traceback handlers hardcode the stdout/stderr streams.
+    640 # This logic in in debugger.Pdb and should eventually be changed.
+    641 self.init_io()
+    642 self.init_traceback_handlers(custom_exceptions)
+    643 self.init_prompts()
+    644 self.init_display_formatter()
+    645 self.init_display_pub()
+    646 self.init_data_pub()
+    647 self.init_displayhook()
+    648 self.init_magics()
+    649 self.init_alias()
+--> 650 self.init_logstart()
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>    651 self.init_pdb()
+    652 self.init_extension_manager()
+    653 self.init_payload()
+    654 self.events.trigger('shell_initialized', self)
+    655 atexit.register(self.atexit_operations)
+    657 # The trio runner is used for running Trio in the foreground thread. It
+    658 # is different from `_trio_runner(async_fn)` in `async_helpers.py`
+    659 # which calls `trio.run()` for every cell. This runner runs all cells
+    660 # inside a single Trio event loop. If used, it is set from
+    661 # `ipykernel.kernelapp`.
+    662 self.trio_runner = None
+
+File /usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py:817, in InteractiveShell.init_logstart(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>)
+    811 def init_logstart(self):
+    812     """"""Initialize logging in case it was requested at the command line.
+    813     """"""
+    814     if self.logappend:
+    815         self.magic('logstart %s append' % self.logappend)
+    816     elif self.logfile:
+--> 817         self.magic('logstart %s' % self.logfile)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>    818     elif self.logstart:
+    819         self.magic('logstart')
+
+AttributeError: 'TerminalInteractiveShell' object has no attribute 'magic'
+
+**********************************************************************
+
+Oops, ipython crashed. We do our best to make it stable, but...
+
+A crash report was automatically generated with the following information:
+  - A verbatim copy of the crash traceback.
+  - A copy of your input history during this session.
+  - Data on your current ipython configuration.
+
+It was left in the file named:
+	'/root/.ipython/Crash_report_ipython.txt'
+If you can email this file to the developers, the information in it will help
+them in understanding and correcting the problem.
+
+You can mail it to: The IPython Development Team at ipython-dev@python.org
+with the subject 'ipython Crash Report'.
+
+If you want to do it now, the following command will work (under Unix):
+mail -s 'ipython Crash Report' ipython-dev@python.org < /root/.ipython/Crash_report_ipython.txt
+
+In your email, please also include information about:
+- The operating system under which the crash happened: Linux, macOS, Windows,
+  other, and which exact version (for example: Ubuntu 16.04.3, macOS 10.13.2,
+  Windows 10 Pro), and whether it is 32-bit or 64-bit;
+- How ipython was installed: using pip or conda, from GitHub, as part of
+  a Docker container, or other, providing more detail if possible;
+- How to reproduce the crash: what exact sequence of instructions can one
+  input to get the same crash? Ideally, find a minimal yet complete sequence
+  of instructions that yields the crash.
+
+To ensure accurate tracking of this issue, please file a report about it at:
+https://github.com/ipython/ipython/issues
+
+Hit <Enter> to quit (your terminal may close):Error in sys.excepthook:
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.13/site-packages/IPython/core/application.py"", line 288, in excepthook
+    return self.crash_handler(etype, evalue, tb)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.13/site-packages/IPython/core/crashhandler.py"", line 206, in __call__
+    builtin_mod.input(""Hit <Enter> to quit (your terminal may close):"")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
+
+Original exception was:
+Traceback (most recent call last):
+  File ""/usr/local/bin/ipython"", line 8, in <module>
+    sys.exit(start_ipython())
+             ~~~~~~~~~~~~~^^
+  File ""/usr/local/lib/python3.13/site-packages/IPython/__init__.py"", line 139, in start_ipython
+    return launch_new_instance(argv=argv, **kwargs)
+  File ""/usr/local/lib/python3.13/site-packages/traitlets/config/application.py"", line 1074, in launch_instance
+    app.initialize(argv)
+    ~~~~~~~~~~~~~~^^^^^^
+  File ""/usr/local/lib/python3.13/site-packages/traitlets/config/application.py"", line 118, in inner
+    return method(app, *args, **kwargs)
+  File ""/usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py"", line 286, in initialize
+    self.init_shell()
+    ~~~~~~~~~~~~~~~^^
+  File ""/usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py"", line 300, in init_shell
+    self.shell = self.interactive_shell_class.instance(parent=self,
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+                    profile_dir=self.profile_dir,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    ipython_dir=self.ipython_dir, user_ns=self.user_ns)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.13/site-packages/traitlets/config/configurable.py"", line 583, in instance
+    inst = cls(*args, **kwargs)
+  File ""/usr/local/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py"", line 977, in __init__
+    super(TerminalInteractiveShell, self).__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py"", line 650, in __init__
+    self.init_logstart()
+    ~~~~~~~~~~~~~~~~~~^^
+  File ""/usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py"", line 817, in init_logstart
+    self.magic('logstart %s' % self.logfile)
+    ^^^^^^^^^^
+AttributeError: 'TerminalInteractiveShell' object has no attribute 'magic'
+***************************************************************************
+
+IPython post-mortem report
+
+{'commit_hash': 'd64897cf0',
+ 'commit_source': 'installation',
+ 'default_encoding': 'utf-8',
+ 'ipython_path': '/usr/local/lib/python3.13/site-packages/IPython',
+ 'ipython_version': '9.0.1',
+ 'os_name': 'posix',
+ 'platform': 'Linux-6.10.14-linuxkit-aarch64-with-glibc2.36',
+ 'sys_executable': '/usr/local/bin/python3.13',
+ 'sys_platform': 'linux',
+ 'sys_version': '3.13.2 (main, Feb 25 2025, 21:31:02) [GCC 12.2.0]'}
+
+***************************************************************************
+
+Application name: ipython
+
+Current user configuration structure:
+
+{'BaseIPythonApplication': {'verbose_crash': True},
+ 'TerminalInteractiveShell': {'logfile': 'log.txt'}}
+
+***************************************************************************
+
+Crash traceback:
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+AttributeError                     Python 3.13.2: /usr/local/bin/python3.13
+                                                   Thu Mar  6 19:37:39 2025
+A problem occurred executing Python code.  Here is the sequence of function
+calls leading up to the error, with the most recent (innermost) call last.
+File /usr/local/bin/ipython:8
+      1 #!/usr/local/bin/python3.13
+      2 # -*- coding: utf-8 -*-
+      3 import re
+      4 import sys
+      5 from IPython import start_ipython
+      6 if __name__ == '__main__':
+      7     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+----> 8     sys.exit(start_ipython())
+
+File /usr/local/lib/python3.13/site-packages/IPython/__init__.py:139, in start_ipython(argv=None, **kwargs={})
+    113 def start_ipython(argv=None, **kwargs):
+    114     """"""Launch a normal IPython instance (as opposed to embedded)
+    115
+    116     `IPython.embed()` puts a shell in a particular calling scope,
+   (...)    136         allowing configuration of the instance (see :ref:`terminal_options`).
+    137     """"""
+    138     from IPython.terminal.ipapp import launch_new_instance
+--> 139     return launch_new_instance(argv=argv, **kwargs)
+        launch_new_instance = <bound method Application.launch_instance of <class 'IPython.terminal.ipapp.TerminalIPythonApp'>>
+        argv = None
+        kwargs = {}
+File /usr/local/lib/python3.13/site-packages/traitlets/config/application.py:1074, in Application.launch_instance(cls=<class 'IPython.terminal.ipapp.TerminalIPythonApp'>, argv=None, **kwargs={})
+   1067 @classmethod
+   1068 def launch_instance(cls, argv: ArgvType = None, **kwargs: t.Any) -> None:
+   1069     """"""Launch a global instance of this Application
+   1070
+   1071     If a global instance already exists, this reinitializes and starts it
+   1072     """"""
+   1073     app = cls.instance(**kwargs)
+-> 1074     app.initialize(argv)
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>
+        argv = None   1075     app.start()
+
+File /usr/local/lib/python3.13/site-packages/traitlets/config/application.py:118, in catch_config_error.<locals>.inner(app=<IPython.terminal.ipapp.TerminalIPythonApp object>, *args=(None,), **kwargs={})
+    115 @functools.wraps(method)
+    116 def inner(app: Application, *args: t.Any, **kwargs: t.Any) -> t.Any:
+    117     try:
+--> 118         return method(app, *args, **kwargs)
+        method = <function TerminalIPythonApp.initialize at 0xffffa318f1a0>
+        app = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>
+        args = (None,)
+        kwargs = {}    119     except (TraitError, ArgumentError) as e:
+    120         app.log.fatal(""Bad config encountered during initialization: %s"", e)
+    121         app.log.debug(""Config at the time: %s"", app.config)
+    122         app.exit(1)
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py:286, in TerminalIPythonApp.initialize(self=<IPython.terminal.ipapp.TerminalIPythonApp object>, argv=None)
+    274 @catch_config_error
+    275 def initialize(self, argv=None):
+    276     """"""Do actions after construct, but before starting the app.""""""
+    277     super(TerminalIPythonApp, self).initialize(argv)
+    278     if self.subapp is not None:
+    279         # don't bother initializing further, starting subapp
+    280         return
+    281     # print(self.extra_args)
+    282     if self.extra_args and not self.something_to_run:
+    283         self.file_to_run = self.extra_args[0]
+    284     self.init_path()
+    285     # create the shell
+--> 286     self.init_shell()
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>    287     # and draw the banner
+    288     self.init_banner()
+    289     # Now a variety of things that happen after the banner is printed.
+    290     self.init_gui_pylab()
+    291     self.init_extensions()
+    292     self.init_code()
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/ipapp.py:300, in TerminalIPythonApp.init_shell(self=<IPython.terminal.ipapp.TerminalIPythonApp object>)
+    294 def init_shell(self):
+    295     """"""initialize the InteractiveShell instance""""""
+    296     # Create an InteractiveShell instance.
+    297     # shell.display_banner should always be False for the terminal
+    298     # based app, because we call shell.show_banner() by hand below
+    299     # so the banner shows *before* all extension loading stuff.
+--> 300     self.shell = self.interactive_shell_class.instance(parent=self,
+        self = <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>    301                     profile_dir=self.profile_dir,
+    302                     ipython_dir=self.ipython_dir, user_ns=self.user_ns)
+    303     self.shell.configurables.append(self)
+
+File /usr/local/lib/python3.13/site-packages/traitlets/config/configurable.py:583, in SingletonConfigurable.instance(cls=<class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>, *args=(), **kwargs={'ipython_dir': '/root/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    553 @classmethod
+    554 def instance(cls: type[CT], *args: t.Any, **kwargs: t.Any) -> CT:
+    555     """"""Returns a global instance of this class.
+    556
+    557     This method create a new instance if none have previously been created
+   (...)    579         True
+    580     """"""
+    581     # Create and save the instance
+    582     if cls._instance is None:
+--> 583         inst = cls(*args, **kwargs)
+        cls = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0xffffa354bcb0>, 'ipython_dir': '/root/.ipython', 'user_ns': None}    584         # Now make sure that the instance will also be returned by
+    585         # parent classes' _instance attribute.
+    586         for subclass in cls._walk_mro():
+    587             subclass._instance = inst
+    589     if isinstance(cls._instance, cls):
+    590         return cls._instance
+    591     else:
+    592         raise MultipleInstanceError(
+    593             f""An incompatible sibling of '{cls.__name__}' is already instantiated""
+    594             f"" as singleton: {type(cls._instance).__name__}""
+    595         )
+
+File /usr/local/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py:977, in TerminalInteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, *args=(), **kwargs={'ipython_dir': '/root/.ipython', 'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>, 'profile_dir': <IPython.core.profiledir.ProfileDir object>, 'user_ns': None})
+    976 def __init__(self, *args, **kwargs) -> None:
+--> 977     super(TerminalInteractiveShell, self).__init__(*args, **kwargs)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>
+        args = ()
+        kwargs = {'parent': <IPython.terminal.ipapp.TerminalIPythonApp object at 0xffffa354b620>, 'profile_dir': <IPython.core.profiledir.ProfileDir object at 0xffffa354bcb0>, 'ipython_dir': '/root/.ipython', 'user_ns': None}
+        TerminalInteractiveShell = <class 'IPython.terminal.interactiveshell.TerminalInteractiveShell'>    978     self._set_autosuggestions(self.autosuggestions_provider)
+    979     self.init_prompt_toolkit_cli()
+    980     self.init_term_title()
+    981     self.keep_running = True
+    982     self._set_formatter(self.autoformatter)
+
+File /usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py:650, in InteractiveShell.__init__(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>, ipython_dir='/root/.ipython', profile_dir=<IPython.core.profiledir.ProfileDir object>, user_module=None, user_ns=None, custom_exceptions=((), None), **kwargs={'parent': <IPython.terminal.ipapp.TerminalIPythonApp object>})
+    632 self.init_logger()
+    633 self.init_builtins()
+    635 # The following was in post_config_initialization
+    636 self.raw_input_original = input
+    637 self.init_completer()
+    638 # TODO: init_io() needs to happen before init_traceback handlers
+    639 # because the traceback handlers hardcode the stdout/stderr streams.
+    640 # This logic in in debugger.Pdb and should eventually be changed.
+    641 self.init_io()
+    642 self.init_traceback_handlers(custom_exceptions)
+    643 self.init_prompts()
+    644 self.init_display_formatter()
+    645 self.init_display_pub()
+    646 self.init_data_pub()
+    647 self.init_displayhook()
+    648 self.init_magics()
+    649 self.init_alias()
+--> 650 self.init_logstart()
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>    651 self.init_pdb()
+    652 self.init_extension_manager()
+    653 self.init_payload()
+    654 self.events.trigger('shell_initialized', self)
+    655 atexit.register(self.atexit_operations)
+    657 # The trio runner is used for running Trio in the foreground thread. It
+    658 # is different from `_trio_runner(async_fn)` in `async_helpers.py`
+    659 # which calls `trio.run()` for every cell. This runner runs all cells
+    660 # inside a single Trio event loop. If used, it is set from
+    661 # `ipykernel.kernelapp`.
+    662 self.trio_runner = None
+
+File /usr/local/lib/python3.13/site-packages/IPython/core/interactiveshell.py:817, in InteractiveShell.init_logstart(self=<IPython.terminal.interactiveshell.TerminalInteractiveShell object>)
+    811 def init_logstart(self):
+    812     """"""Initialize logging in case it was requested at the command line.
+    813     """"""
+    814     if self.logappend:
+    815         self.magic('logstart %s append' % self.logappend)
+    816     elif self.logfile:
+--> 817         self.magic('logstart %s' % self.logfile)
+        self = <IPython.terminal.interactiveshell.TerminalInteractiveShell object at 0xffffa31bc590>    818     elif self.logstart:
+    819         self.magic('logstart')
+
+AttributeError: 'TerminalInteractiveShell' object has no attribute 'magic'
+
+***************************************************************************
+
+History of session input:
+```
+</details>",adavis444,11576729,closed,False,2,2025-03-06T19:42:50+00:00,2025-03-08T13:10:14+00:00,2025-03-08T13:10:13+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2900954765,14824,reaccept non lowercase colorscheme,"This otherwise break pycharm
+
+Plus a few other fixes.
+
+See #14810",Carreau,335567,closed,False,0,2025-03-06T17:01:46+00:00,2025-03-08T13:06:12+00:00,2025-03-08T13:06:12+00:00,,1,0,0,0,0,0,1
+ipython/ipython,2900752156,14823,Fix accept invisible completions,"See `#14137`, I think there are invisible completions and when the current line is a prefix of an existing history entry, we happend to have autocompletions but they are not shown.
+
+I need to check how this affects the multiline completions though, and we might need a more general solution.",Carreau,335567,closed,False,0,2025-03-06T15:37:20+00:00,2025-03-08T13:09:02+00:00,2025-03-08T13:09:01+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2897736771,14822,fix: transform inputs with dedent,"fixes: https://github.com/ipython/ipython/issues/14818
+
+The `leading_indent` function in IPython/core/inputtransformer2.py had an issue in that it checked to see if the first line had a comment anywhere in it, and if it did, then it just would ignore checking if the rest of the input could possibly need to have indentation removed.
+
+The main issue is that it looks like the function assumes you can just check the first line, but that is not the case. You need to check the indentation level of every line in the input and remove the minimum (in terms of length) indentation common to all lines. 
+
+I'm not sure why this function isn't just using `textwrap.dedent`, which seems like it does exactly what we want to be doing. I just switched the function to use this.
+
+For the tests, it turns out that there was a test cases that wasn't even being checked. I fixed that as well and added the sample I noted in #14818 as a 3rd test case.
+
+While working on this, I wrote a more involved test, which didn't really fit with the style of the other tests, but I'll put it here in case you want to include it.
+
+<details>
+
+```python
+def test_regression_14818():
+    from IPython.core import inputtransformer2 as ipt2
+    from textwrap import dedent
+
+    def indent(text, prefix='    '):
+        """"""Indents a block of text""""""
+        return prefix + text.replace('\n', '\n' + prefix)
+
+    targets = {}
+    targets['two_statements'] = dedent(
+        """"""
+        x = 1
+        print(x)
+        """"""
+    ).strip()
+    targets['aligned_comment_and_two_statements'] = dedent(
+        """"""
+        # This is a comment
+        x = 1
+        print(x)
+        """"""
+    ).strip()
+    targets['misaligned_comment_and_two_statements'] = dedent(
+        """"""
+            # This is a misaligned comment
+        x = 1
+        print(x)
+        """"""
+    ).strip()
+
+    # Check that all of the targets are valid python
+    for target_name, target_code in targets.items():
+        exec(target_code, {}, {})
+
+    # Modify the target text to test that ipt2.leading_indent can undo the
+    # modifications.
+    cases = []
+    for target_name, target_code in targets.items():
+        cases.append({
+            'name': target_name + '_space',
+            'sample': indent(target_code, prefix='    '),
+            'target': target_code,
+        })
+        cases.append({
+            'name': target_name + '_tab',
+            'sample': indent(target_code, prefix='\t'),
+            'target': target_code,
+        })
+
+    for case in cases:
+        case_name = case['name']
+        lines = case['sample'].splitlines(keepends=True)
+        recon_lines = ipt2.leading_indent(lines)
+        reconstructed = ''.join(recon_lines)
+        assert reconstructed == case['target'], f'failed case {case_name}'
+```
+
+</details>",Erotemic,3186211,closed,False,1,2025-03-05T15:58:26+00:00,2025-03-07T16:41:48+00:00,2025-03-07T16:41:48+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2897703792,14821,Try testing built wheels,"## elevator pitch
+
+Run CI tests against built distributions.
+
+## references
+- fixes #14817
+
+## changes
+- [x] add a `test.yml#jobs/build`, build the package once, and archive distributions
+- [x] in `test.yml#jobs/test`
+  - [x] download the artifacts
+  - [x] build up a `requirements.txt` with a PEP 508 spec for `ipython`
+  - [x] add `pip check`
+  - [x] run tests in `test` to avoid confusion
+
+## future work
+- going to a `src/`-style layout would fix _some_ of the issues, but still not `-e .` masking errors about files that aren't packaged due to settings in `pyproject.toml` ",bollwyvl,45380,open,False,1,2025-03-05T15:46:11+00:00,2025-03-06T14:25:31+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2897260712,14820,Cannot display a single dot character as Markdown,"```python
+from IPython import display
+display.display(display.Markdown('.'))
+```
+
+```
+---------------------------------------------------------------------------
+IsADirectoryError                         Traceback (most recent call last)
+<ipython-input-6-0a1e025990e8> in <cell line: 0>()
+      1 from IPython import display
+----> 2 display.display(display.Markdown('.'))
+
+/usr/local/lib/python3.11/dist-packages/IPython/core/display.py in __init__(self, data, url, filename, metadata)
+    635             self.metadata = {}
+    636 
+--> 637         self.reload()
+    638         self._check_data()
+    639 
+
+/usr/local/lib/python3.11/dist-packages/IPython/core/display.py in reload(self)
+    660         """"""Reload the raw data from file or URL.""""""
+    661         if self.filename is not None:
+--> 662             with open(self.filename, self._read_flags) as f:
+    663                 self.data = f.read()
+    664         elif self.url is not None:
+
+IsADirectoryError: [Errno 21] Is a directory: '.'
+```
+
+This is because [this code](https://github.com/ipython/ipython/blob/1a7363fb2b20691d68c0f8ebdb4b5760d24c3840/IPython/core/display.py#L326-L329) explicitly checks whether the `data` argument to `display.Markdown` is an existing path, and if so, reads that path instead of displaying the text itself.
+
+This also leads to a weird side effects, allowing to display the files one may not intend to display:
+
+<img width=""1027"" alt=""Image"" src=""https://github.com/user-attachments/assets/7eda18f5-d071-4192-88b1-fa3fb3da3802"" />
+
+Is it a good idea to decide whether to read a file or to display the text depending on whether the text resolves to an existing path? Perhaps this should be done with a flag instead, i.e. if the user explicitly passes `filename=`?",dniku,1315874,open,False,0,2025-03-05T12:56:32+00:00,2025-03-05T17:10:33+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2896214693,14819,Identifiers from dict-like references do not display correctly,"In ipython some identifiers do not display correctly from a dict-like reference such as a `value` in a `dict` or a `Series` from a `DataFrame`.
+
+If the example `DataFrame` is instantiated with 2 categorical `Series`:
+
+```python
+import random
+import string
+import numpy as np
+import pandas as pd
+random.seed(0)
+
+> np.__version__
+'2.2.3'
+
+> pd.__version__
+'2.2.3'
+
+df1 = pd.DataFrame({'grades1': random.choices(['a', 'b', 'c', 'd', 'e'], k=30),
+                    'grades2': random.choices(['a', 'b', 'c', 'd', 'e'], k=30)})
+
+df1['grades1'] = df1['grades1'].astype('category')
+df1['grades2'] = df1['grades2'].astype('category')
+```
+
+The `Series` can be accessed using `dict`-like or attribute-like access (attribute-like access only available when the `Series` name is a valid identifier). There is some issues with identifiers grouped together by the `cat` accessor. 
+
+Pressing tab from the following does not show the correct identifiers:
+
+```python
+> df1['grades1'].cat.
+```
+
+![Image](https://github.com/user-attachments/assets/8c726084-57c5-4475-996d-445e7cdb49ae)
+
+Pressing tab from the following displays the correct identifiers:
+
+```python
+> df1.grades1.cat.
+```
+
+![Image](https://github.com/user-attachments/assets/cd637d69-c698-45f8-b3a8-a7783085a3e1)
+
+These should be equivalent to:
+
+```python
+> pd.Series.cat.
+```
+
+![Image](https://github.com/user-attachments/assets/8e61135e-f3d3-4130-b409-53542a1d350d)
+
+Looking up a docstring by accessing a `Series`, using `dict`-like syntax also gives `Object not found.`:
+
+```python
+> df1['grades1'].cat.remove_categories?
+Object `cat.remove_categories` not found.
+```
+
+![Image](https://github.com/user-attachments/assets/13e6e464-8b37-442b-8941-4a6aefbde28a)
+
+Looking up a docstring by accessing a `Series`, using attribute-like syntax on the other hand works:
+
+```python
+> df1.grades.cat.remove_categories?
+```
+
+![Image](https://github.com/user-attachments/assets/f39a778e-0fe1-4ddb-bf33-954c7de67a60)
+
+These should be equivalent and should both give the documentation from:
+
+```python
+> pd.Series.cat.remove_categories?
+```
+
+![Image](https://github.com/user-attachments/assets/ffa727db-642d-4f29-b6db-edd1dee283b8)
+
+If a `dict` is used, which has similar syntax, pressing tab displays the correct identifiers:
+
+```python
+mapping = {'one': '1', 'two': '2'}
+
+> mapping['one']
+```
+
+![Image](https://github.com/user-attachments/assets/4ade18c7-4c5b-4f11-996e-cb14e025669d)
+
+However attempting to access the docstring for the `str` method `replace` from either:
+
+```python
+> mapping['one'].replace?
+
+> 'one'.replace?
+```
+
+Does not work properly but using:
+
+```python
+> str.replace?
+```
+
+Works correctly:
+
+![Image](https://github.com/user-attachments/assets/a008cc68-c8d4-4c67-956b-3b957b501bba)
+
+These should again be equivalent.
+
+Note that the identifiers from the `str` accessor work as expected when tab is pressed:
+
+```python
+> df1['grades1'].str.
+```
+
+![Image](https://github.com/user-attachments/assets/6c1bc593-7231-4a0a-86ca-d9228b633394)
+
+And the docstring displays correctly when the following is used:
+
+```python
+> df1['grades1'].str.replace?
+```
+
+![Image](https://github.com/user-attachments/assets/b9b721fb-fec6-444c-9620-f2c365945832)
+",PhilipYip1988,56493395,open,False,1,2025-03-05T05:25:46+00:00,2025-03-28T19:39:16+00:00,,tab-completion,0,0,0,0,0,0,0
+ipython/ipython,2895873789,14818,Regression in 9.0.1 from 8.33.0 - No longer dedents inputs.,"Running `ipython` in the terminal if I copy and paste this block of code:
+
+```python
+    # Comment
+    x = 1
+```
+
+with the leading indentation on both lines, in 8.33.0 it works fine. IPython recognizes the code has consistent leading whitespace, presumably dedents it under the hood, and executes it.
+
+```python
+In [1]:     # Comment
+   ...:     x = 1
+
+In [2]: 
+```
+
+However, in 9.0.1
+
+```python
+In [1]:     # Comment
+   ...:     x = 1
+   ...: 
+  Cell In[1], line 2
+    x = 1
+    ^
+IndentationError: unexpected indent
+
+```
+
+I'm not sure if this was intentional or not, but this is a major usability issue for me. My entire workflow is based around copy/pasting chunks of code. I've been working this way for 15 years. I've [written libraries](https://github.com/Erotemic/vimtk) around it. There is a [PR awaiting merge](https://github.com/python/cpython/pull/103998) in CPython to add this dedent feature to ""python -c"". 
+
+If this is intentional, I beg the maintainers to reconsider. Otherwise, this is a major bug.
+
+Tested on Ubuntu 24.04 on CPython 3.13.2 and 3.11.2",Erotemic,3186211,closed,False,2,2025-03-05T01:45:47+00:00,2025-03-07T16:41:49+00:00,2025-03-07T16:41:49+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2895365689,14817,Test the built assets,"In light of e.g. https://github.com/ipython/ipython/pull/14807 it may be worth changing the `test.yml` approach to:
+- build the sdist/wheels once a single job
+- download them in the matrix jobs
+- run the tests out-of-tree to avoid path confusion (e.g. in `tests` or `build`)
+
+Strawman PR incoming...",bollwyvl,45380,open,False,0,2025-03-04T20:42:03+00:00,2025-03-04T20:42:03+00:00,,,0,0,0,0,0,0,0
+ipython/ipython,2894730898,14816,tip typo,"this was bothering me on startup :)
+",iloveitaly,150855,closed,False,1,2025-03-04T15:53:23+00:00,2025-03-06T10:41:27+00:00,2025-03-06T10:41:11+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2890560015,14815,QT backend crashes IPython,"Specifically [334fabc](https://github.com/ipython/ipython/commit/334fabc8482a0838a0d1412bf4ad9061bd6440f5) introduced in #14700 causes `_exec(_event_loop)` to be called with `_event_loop = None`. Reverting it causes the problem to go away, but maybe someone with better understanding of qt would like to actually fix it.
+
+OS: Arch linux
+Known affected versions:
+- `8.33.0` (#14714)
+- `9.0.0`
+- `9.0.1`
+
+<details>
+
+<summary>Crash log</summary>
+
+```
+Python 3.13.2 (main, Feb  5 2025, 08:05:21) [GCC 14.2.1 20250128]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.0.0 -- An enhanced Interactive Python. Type '?' for help.
+Tip: You can change the edditing mode of IPython to behave more like vi, or emacs.
+
+In [1]: import matplotlib.pyplot as plt
+   ...:
+   ...: plt.plot([0], [0])
+Out[1]: [<matplotlib.lines.Line2D at 0x7cd42f7e9950>]
+
+In [2]: Traceback (most recent call last):
+  File ""/usr/bin/ipython"", line 8, in <module>
+    sys.exit(start_ipython())
+             ~~~~~~~~~~~~~^^
+  File ""/usr/lib/python3.13/site-packages/IPython/__init__.py"", line 139, in start_ipython
+    return launch_new_instance(argv=argv, **kwargs)
+  File ""/usr/lib/python3.13/site-packages/traitlets/config/application.py"", line 1075, in launch_instance
+    app.start()
+    ~~~~~~~~~^^
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/ipapp.py"", line 325, in start
+    self.shell.mainloop()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py"", line 1010, in mainloop
+    self.interact()
+    ~~~~~~~~~~~~~^^
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py"", line 995, in interact
+    code = self.prompt_for_code()
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/interactiveshell.py"", line 945, in prompt_for_code
+    text = self.pt_app.prompt(
+        default=default,
+        inputhook=self._inputhook,
+        **self._extra_prompt_options(),
+    )
+  File ""/usr/lib/python3.13/site-packages/prompt_toolkit/shortcuts/prompt.py"", line 1035, in prompt
+    return self.app.run(
+           ~~~~~~~~~~~~^
+        set_exception_handler=set_exception_handler,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        inputhook=inputhook,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""/usr/lib/python3.13/site-packages/prompt_toolkit/application/application.py"", line 978, in run
+    result = loop.run_until_complete(coro)
+  File ""/usr/lib/python3.13/asyncio/base_events.py"", line 712, in run_until_complete
+    self.run_forever()
+    ~~~~~~~~~~~~~~~~^^
+  File ""/usr/lib/python3.13/asyncio/base_events.py"", line 683, in run_forever
+    self._run_once()
+    ~~~~~~~~~~~~~~^^
+  File ""/usr/lib/python3.13/asyncio/base_events.py"", line 2002, in _run_once
+    event_list = self._selector.select(timeout)
+  File ""/usr/lib/python3.13/site-packages/prompt_toolkit/eventloop/inputhook.py"", line 150, in select
+    self.inputhook(InputHookContext(self._r, input_is_ready))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/pt_inputhooks/qt.py"", line 86, in inputhook
+    _exec(_eventloop)
+    ~~~~~^^^^^^^^^^^^
+  File ""/usr/lib/python3.13/site-packages/IPython/terminal/pt_inputhooks/qt.py"", line 16, in _exec
+    obj.exec() if hasattr(obj, ""exec"") else obj.exec_()
+                                            ^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'exec_'
+```
+
+</details>",gtsiam,7459196,closed,False,12,2025-03-03T08:48:20+00:00,2025-03-24T07:04:36+00:00,2025-03-24T07:04:35+00:00,,3,3,0,0,0,0,0
+ipython/ipython,2890449273,14814,Partial readd of termcolors to please ipyparallel.,See https://github.com/ipython/ipyparallel/pull/931 and https://github.com/ipython/ipyparallel/pull/924,Carreau,335567,closed,False,0,2025-03-03T07:54:10+00:00,2025-03-03T08:04:58+00:00,2025-03-03T08:04:58+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2890435682,14813,Try to fix #14811 (crash ipdb),Ideally we should try to go upstream and make sure context is passed as an int always and not a str.,Carreau,335567,closed,False,1,2025-03-03T07:46:44+00:00,2025-03-03T08:16:27+00:00,2025-03-03T08:04:42+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2890008120,14812,Strange files written to disk.,"I've been ignoring / unable to fix a problem I've had for years now. Today I've narrowed it down to an IPython issue. I don't know exactly what in IPython is causing the problem, but I'm hoping that raising an issue here might lead to more progress.
+
+### The Symptom
+
+Every so often I find a file with a weird name written to disk in a place I had been developing. Today it was ""'=3))'"". The content of that file can vary, but its often the docstring of a Python function. Very often the files are the name of some module I use. I have been archiving the files for months in order to try and find a pattern. It's very rare that it happens, so it has been hard to debug. The files I've archived are:
+
+```
+└── code
+    ├── geowatch
+    │   └── tests
+    │       ├── kwcoco
+    │       └── ub
+    ├── kwcoco
+    │   ├── auto
+    │   ├── =True, rng=0)
+    │   └── , we can specify compat=all to allow
+    └── shitspotter
+        └── _points = gpd.GeoSeries([
+```
+
+The content isn't always a docstr, sometimes it has been large json text, the header of less, the text of a pdf, probably other stuff too. 
+
+### The Analysis
+
+So it looks like it happens with lines of Python code I'm writing. My first thought was my vim config must be doing this. I have a lot of junk in my vim config, but I've never been able to find it. I also had the issue happen to me inside a docker container once, so I've been stumped as to what's going on for ages.
+
+### The Experiments
+
+In order to figure it out I setup auditd to log what processes were writing which files. I found out today that the program writing the file is ""less"", and that it's parent is an IPython process. I grepped the code and there are indeed places where less is used.
+
+I don't know exactly what I'm doing in my workflow that causes this to happen, but I think it might be some weird race condition in IPython. I'm going to keep looking into it.
+
+Lastly: I cannot put words to how good it feels to finally have a lead on this problem. It has been maddening.
+
+",Erotemic,3186211,closed,False,10,2025-03-03T02:32:33+00:00,2025-04-16T19:22:47+00:00,2025-04-16T18:43:53+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2889242801,14811,`ipdb.set_trace` fails with ipython 9.0.0,"I created a new virtual environment and installed `ipdb`, this is the corresponding output of `pip freeze`:
+
+```
+(test_ipdb) tigre@hilleman:~/sandbox$ pip freeze
+asttokens==3.0.0
+decorator==5.2.1
+executing==2.2.0
+ipdb==0.13.13
+ipython==9.0.0
+ipython_pygments_lexers==1.1.1
+jedi==0.19.2
+matplotlib-inline==0.1.7
+parso==0.8.4
+pexpect==4.9.0
+prompt_toolkit==3.0.50
+ptyprocess==0.7.0
+pure_eval==0.2.3
+Pygments==2.19.1
+stack-data==0.6.3
+traitlets==5.14.3
+typing_extensions==4.12.2
+wcwidth==0.2.13
+```
+
+I created a file named `test_ipdb.py` with these contents:
+
+``` python
+from ipdb import set_trace
+
+a = ""sdf""
+
+set_trace()
+```
+
+I ran this file with `python test_ipdb.py`, this is the result:
+
+```
+(test_ipdb) tigre@hilleman:~/sandbox$ python3 test_ipdb/test_ipdb.py 
+Traceback (most recent call last):
+  File ""/home/tigre/sandbox/test_ipdb/test_ipdb.py"", line 2, in <module>
+    set_trace()
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/ipdb/__main__.py"", line 77, in set_trace
+    p = _init_pdb(context).set_trace(frame)
+        ^^^^^^^^^^^^^^^^^^
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/ipdb/__main__.py"", line 56, in _init_pdb
+    p = debugger_cls(context=context)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/IPython/terminal/debugger.py"", line 29, in __init__
+    Pdb.__init__(self, *args, **kwargs)
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/IPython/core/debugger.py"", line 255, in __init__
+    self.context = context
+    ^^^^^^^^^^^^
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/IPython/core/debugger.py"", line 302, in context
+    assert isinstance(value, int)
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+If you suspect this is an IPython 9.0.0 bug, please report it at:
+    https://github.com/ipython/ipython/issues
+or send an email to the mailing list at ipython-dev@python.org
+
+You can print a more detailed traceback right now with ""%tb"", or use ""%debug""
+to interactively debug it.
+
+Extra-detailed tracebacks for bug-reporting purposes can be enabled via:
+    %config Application.verbose_crash=True
+```
+
+I have `IPDB_CONTEXT_SIZE` set to `20`:
+
+```
+(test_ipdb) tigre@hilleman:~/sandbox$ echo $IPDB_CONTEXT_SIZE 
+20
+```
+
+The error above happens because `context` is getting a `str` value of `'20'` instead of an `int` value of `20`. I can confirm because when I call `set_trace(context=20)` the error above does not happen. The error above happens in `9.0.0`, when I donwgrade `ipython` to `8.33.0`, `python test_ipdb.py` works:
+
+```
+(test_ipdb) tigre@hilleman:~/sandbox$ python3 test_ipdb/test_ipdb.py 
+--Return--
+None
+> /home/tigre/sandbox/test_ipdb/test_ipdb.py(2)<module>()
+      1 from ipdb import set_trace
+----> 2 set_trace()
+
+ipdb> c
+```
+
+Also, when using `ipython==9.0.0`, calling `set_trace(context=20)` and then trying to get the attributes of `a` by using `tab`, I get this error:
+
+```
+(test_ipdb) tigre@hilleman:~/sandbox$ python3 test_ipdb/test_ipdb.py 
+--Return--
+None
+> /home/tigre/sandbox/test_ipdb/test_ipdb.py(5)<module>()
+      1 from ipdb import set_trace
+      2 
+      3 a = ""sdf""
+      4 
+----> 5 set_trace(context=30)
+
+ipdb> a.Traceback (most recent call last):
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/IPython/terminal/ptutils.py"", line 127, in get_completions
+    yield from self._get_completions(body, offset, cursor_position, self.ipy_completer)
+  File ""/home/tigre/sandbox/test_ipdb/lib/python3.11/site-packages/IPython/terminal/ptutils.py"", line 179, in _get_completions
+    min_elide=self.shell.min_elide,
+              ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'min_elide'
+```",ocelotl,5069942,closed,False,2,2025-03-02T00:36:56+00:00,2025-03-03T08:16:39+00:00,2025-03-03T08:16:38+00:00,,1,1,0,0,0,0,0
+ipython/ipython,2889186887,14810,Assertion failure on theme colour,"The iPython could not run on my PyCharm with the following error prompt:
+
+```
+Traceback (most recent call last):
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/pydevconsole.py"", line 570, in <module>
+    pydevconsole.start_client(host, port)
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/pydevconsole.py"", line 484, in start_client
+    interpreter = InterpreterInterface(threading.current_thread(), rpc_client=client)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console.py"", line 19, in __init__
+    self.interpreter = get_pydev_ipython_frontend(rpc_client)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 472, in get_pydev_ipython_frontend
+    _PyDevFrontEndContainer._instance = _PyDevIPythonFrontEnd(is_jupyter_debugger)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 293, in __init__
+    self.ipython = self._init_ipy_app(PyDevTerminalInteractiveShell).shell
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 300, in _init_ipy_app
+    application.initialize(shell_cls)
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 258, in initialize
+    self.init_shell(shell_cls)
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 263, in init_shell
+    self.shell = shell_cls.instance()
+                 ^^^^^^^^^^^^^^^^^^^^
+  File ""***/.venv/lib/python3.12/site-packages/traitlets/config/configurable.py"", line 583, in instance
+    inst = cls(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File ""/Applications/PyCharm.app/Contents/plugins/python-ce/helpers/pydev/_pydev_bundle/pydev_ipython_console_011.py"", line 122, in __init__
+    super(PyDevTerminalInteractiveShell, self).__init__(*args, **kwargs)
+  File ""***/.venv/lib/python3.12/site-packages/IPython/terminal/interactiveshell.py"", line 977, in __init__
+    super(TerminalInteractiveShell, self).__init__(*args, **kwargs)
+  File ""***/.venv/lib/python3.12/site-packages/IPython/core/interactiveshell.py"", line 627, in __init__
+    self.init_syntax_highlighting()
+  File ""***/.venv/lib/python3.12/site-packages/IPython/core/interactiveshell.py"", line 774, in init_syntax_highlighting
+    pyformat = PyColorize.Parser(theme_name=self.colors).format
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""***/.venv/lib/python3.12/site-packages/IPython/utils/PyColorize.py"", line 364, in __init__
+    assert theme_name == theme_name.lower()
+AssertionError
+Couldn't connect to console process.
+Process finished with exit code 1
+```
+
+This only happens with version 9.0.0. It works fine with previous versions like 8.31.0.
+
+The reason it failed was the `theme_name` being `NoColor` which were not all lower cases. This assertion appears on multiple locations inside the package.",JinZida,184323993,closed,False,9,2025-03-01T22:19:27+00:00,2025-03-08T13:12:06+00:00,2025-03-08T13:11:12+00:00,,14,14,0,0,0,0,0
+ipython/ipython,2888361159,14809,What is the replacement for `highlighting_style`?,"From the IPython reference
+
+## `highlighting_style`
+
+Deprecated, and has not effect, use IPython themes  
+The name or class of a Pygments style to use for syntax highlighting. To see available styles, run `pygmentize -L styles`.
+
+What is the replacement configuration for this?
+
+I used to have
+
+```python
+c.TerminalInteractiveShell.highlighting_style = ""dracula""
+```",danielcs88,13838845,closed,False,9,2025-03-01T01:36:42+00:00,2025-03-09T17:44:36+00:00,2025-03-09T17:44:36+00:00,,1,1,0,0,0,0,0
+ipython/ipython,2887257902,14808,ModuleNotFoundError: No module named 'IPython.extensions.deduperreload',"One of my CI tests just failed with the exception:
+
+```python
+------------------
+%load_ext autoreload
+%autoreload 2
+------------------
+
+
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/extensions.py:62, in ExtensionManager.load_extension(self, module_str)
+     61 try:
+---> 62     return self._load_extension(module_str)
+     63 except ModuleNotFoundError:
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/extensions.py:77, in ExtensionManager._load_extension(self, module_str)
+     76 if module_str not in sys.modules:
+---> 77     mod = import_module(module_str)
+     78 mod = sys.modules[module_str]
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/importlib/__init__.py:126, in import_module(name, package)
+    125         level += 1
+--> 126 return _bootstrap._gcd_import(name[level:],package,level)
+
+File <frozen importlib._bootstrap>:1204, in _gcd_import(name, package, level)
+
+File <frozen importlib._bootstrap>:1176, in _find_and_load(name, import_)
+
+File <frozen importlib._bootstrap>:1140, in _find_and_load_unlocked(name, import_)
+
+ModuleNotFoundError: No module named 'autoreload'
+
+During handling of the above exception, another exception occurred:
+
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[3], line 1
+----> 1 get_ipython().run_line_magic('load_ext','autoreload')
+      2 get_ipython().run_line_magic('autoreload', '2')
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2478, in InteractiveShell.run_line_magic(self, magic_name, line, _stack_depth)
+   2476     kwargs['local_ns'] = self.get_local_scope(stack_depth)
+   2477 with self.builtin_trap:
+-> 2478     result = fn(*args,**kwargs)
+   2480 # The code below prevents the output from being displayed
+   2481 # when using magics with decorator @output_can_be_silenced
+   2482 # when the last Python token in the expression is a ';'.
+   2483 if getattr(fn, magic.MAGIC_OUTPUT_CAN_BE_SILENCED, False):
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/magics/extension.py:33, in ExtensionMagics.load_ext(self, module_str)
+     31 if not module_str:
+     32     raise UsageError('Missing module name.')
+---> 33 res = self.shell.extension_manager.load_extension(module_str)
+     35 if res == 'already loaded':
+     36     print(""The %s extension is already loaded. To reload it, use:"" % module_str)
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/extensions.py:66, in ExtensionManager.load_extension(self, module_str)
+     64 if module_str in BUILTINS_EXTS:
+     65     BUILTINS_EXTS[module_str] = True
+---> 66     return self._load_extension(""IPython.extensions.""+module_str)
+     67 raise
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/core/extensions.py:77, in ExtensionManager._load_extension(self, module_str)
+     75 with self.shell.builtin_trap:
+     76     if module_str not in sys.modules:
+---> 77         mod = import_module(module_str)
+     78     mod = sys.modules[module_str]
+     79     if self._call_load_ipython_extension(mod):
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/importlib/__init__.py:126, in import_module(name, package)
+    124             break
+    125         level += 1
+--> 126 return _bootstrap._gcd_import(name[level:],package,level)
+
+File <frozen importlib._bootstrap>:1204, in _gcd_import(name, package, level)
+
+File <frozen importlib._bootstrap>:1176, in _find_and_load(name, import_)
+
+File <frozen importlib._bootstrap>:1147, in _find_and_load_unlocked(name, import_)
+
+File <frozen importlib._bootstrap>:[690](https://github.com/quantumcircuits/aqusim/actions/runs/13588915093/job/37990012628#step:6:691), in _load_unlocked(spec)
+
+File <frozen importlib._bootstrap_external>:940, in exec_module(self, module)
+
+File <frozen importlib._bootstrap>:241, in _call_with_frames_removed(f, *args, **kwds)
+
+File /opt/hostedtoolcache/Python/3.11.11/x64/lib/python3.11/site-packages/IPython/extensions/autoreload.py:110
+    108 from IPython.core import magic_arguments
+    109 from IPython.core.magic import Magics, magics_class, line_magic
+--> 110 from IPython.extensions.deduperreload.deduperreload import DeduperReloader
+    112 __skip_doctest__ = True
+    114 # -----------------------------------------------------------------------------
+    115 #  Copyright (C) 2000 Thomas Heller
+    116 #  Copyright (C) 2008 Pauli Virtanen <pav@iki.fi>
+   (...)    127 # Imports
+    128 # -----------------------------------------------------------------------------
+
+```
+
+My test is using the newly released IPython 9.0.0 (released a few hours ago)
+
+",qci-amos,45039789,closed,False,8,2025-02-28T14:10:54+00:00,2025-03-03T18:22:52+00:00,2025-03-03T08:18:06+00:00,,13,13,0,0,0,0,0
+ipython/ipython,2886976222,14807,9.x autoreload fix,"This fixes the following error when attempting to use autoreload in 9.x
+
+
+```
+In [1]: %load_ext autoreload
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/extensions.py:62, in ExtensionManager.load_extension(self, module_str)
+     61 try:
+---> 62     return self._load_extension(module_str)
+     63 except ModuleNotFoundError:
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/extensions.py:77, in ExtensionManager._load_extension(self, module_str)
+     76 if module_str not in sys.modules:
+---> 77     mod = import_module(module_str)
+     78 mod = sys.modules[module_str]
+
+File ~/.local/share/mise/installs/python/3.13.2/lib/python3.13/importlib/__init__.py:88, in import_module(name, package)
+     87         level += 1
+---> 88 return _bootstrap._gcd_import(name[level:], package, level)
+
+File <frozen importlib._bootstrap>:1387, in _gcd_import(name, package, level)
+
+File <frozen importlib._bootstrap>:1360, in _find_and_load(name, import_)
+
+File <frozen importlib._bootstrap>:1324, in _find_and_load_unlocked(name, import_)
+
+ModuleNotFoundError: No module named 'autoreload'
+
+During handling of the above exception, another exception occurred:
+
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[1], line 1
+----> 1 get_ipython().run_line_magic('load_ext', 'autoreload')
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/interactiveshell.py:2478, in InteractiveShell.run_line_magic(self, magic_name, line, _stack_depth)
+   2476     kwargs['local_ns'] = self.get_local_scope(stack_depth)
+   2477 with self.builtin_trap:
+-> 2478     result = fn(*args, **kwargs)
+   2480 # The code below prevents the output from being displayed
+   2481 # when using magics with decorator @output_can_be_silenced
+   2482 # when the last Python token in the expression is a ';'.
+   2483 if getattr(fn, magic.MAGIC_OUTPUT_CAN_BE_SILENCED, False):
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/magics/extension.py:33, in ExtensionMagics.load_ext(self, module_str)
+     31 if not module_str:
+     32     raise UsageError('Missing module name.')
+---> 33 res = self.shell.extension_manager.load_extension(module_str)
+     35 if res == 'already loaded':
+     36     print(""The %s extension is already loaded. To reload it, use:"" % module_str)
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/extensions.py:66, in ExtensionManager.load_extension(self, module_str)
+     64 if module_str in BUILTINS_EXTS:
+     65     BUILTINS_EXTS[module_str] = True
+---> 66     return self._load_extension(""IPython.extensions."" + module_str)
+     67 raise
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/core/extensions.py:77, in ExtensionManager._load_extension(self, module_str)
+     75 with self.shell.builtin_trap:
+     76     if module_str not in sys.modules:
+---> 77         mod = import_module(module_str)
+     78     mod = sys.modules[module_str]
+     79     if self._call_load_ipython_extension(mod):
+
+File ~/.local/share/mise/installs/python/3.13.2/lib/python3.13/importlib/__init__.py:88, in import_module(name, package)
+     86             break
+     87         level += 1
+---> 88 return _bootstrap._gcd_import(name[level:], package, level)
+
+File <frozen importlib._bootstrap>:1387, in _gcd_import(name, package, level)
+
+File <frozen importlib._bootstrap>:1360, in _find_and_load(name, import_)
+
+File <frozen importlib._bootstrap>:1331, in _find_and_load_unlocked(name, import_)
+
+File <frozen importlib._bootstrap>:935, in _load_unlocked(spec)
+
+File <frozen importlib._bootstrap_external>:1026, in exec_module(self, module)
+
+File <frozen importlib._bootstrap>:488, in _call_with_frames_removed(f, *args, **kwds)
+
+File ~/Projects/python/python-starter-template/.venv/lib/python3.13/site-packages/IPython/extensions/autoreload.py:110
+    108 from IPython.core import magic_arguments
+    109 from IPython.core.magic import Magics, magics_class, line_magic
+--> 110 from IPython.extensions.deduperreload.deduperreload import DeduperReloader
+    112 __skip_doctest__ = True
+    114 # -----------------------------------------------------------------------------
+    115 #  Copyright (C) 2000 Thomas Heller
+    116 #  Copyright (C) 2008 Pauli Virtanen <pav@iki.fi>
+   (...)    127 # Imports
+    128 # -----------------------------------------------------------------------------
+
+ModuleNotFoundError: No module named 'IPython.extensions.deduperreload'
+```
+",iloveitaly,150855,closed,False,1,2025-02-28T12:03:40+00:00,2025-03-03T07:56:13+00:00,2025-03-03T07:56:13+00:00,,7,7,0,0,0,0,0
+ipython/ipython,2886658973,14806,TAB completion does not work for packages that use native namespaces.,"TAB completion does not work for packages that use native namespaces:
+https://packaging.python.org/en/latest/guides/packaging-namespace-packages/#native-namespace-packages
+
+Original bug report: 
+https://github.com/kylebarron/arro3/issues/290
+> Currently when installing the 3 arrow3 packages, the structure looks like this:
+> ```bash
+> $ ls /lib/python3.11/site-packages/arro3/
+> compute core  io     
+> ```
+> 
+> When importing the modules in ipython, tab completion is not working (to find the functions in each module
+> ```python
+> In [4]: import arro3.io
+> 
+> In [5]: import arro3.core
+> 
+> In [6]: import arro3.compute
+> 
+> In [7]: arro3.io.<TAB> ==> no list of functions.
+> ```
+> 
+> When importing them with an alias, tab completion works:
+> ```python
+> In [1]: import arro3.io as arro3_io
+> 
+> In [2]: import arro3.compute as arro3_compute
+> 
+> In [3]: import arro3.core as arro3_core
+> 
+> In [4]: arro3_io.<TAB>
+>  infer_csv_schema()   read_csv()           read_ipc_stream()    read_parquet()       store                write_ipc()          write_json()         write_parquet()     
+>  infer_json_schema()  read_ipc()           read_json()          read_parquet_async() write_csv()          write_ipc_stream()   write_ndjson()                           
+> ```
+> 
+> When adding just an empty `_init__.py` at `/lib/python3.11/site-packages/arro3/__init__.py`, tab completion works:
+> ```
+> In [1]: import arro3.io as arro3_io
+> 
+> In [2]: import arro3.compute as arro3_compute
+> 
+> In [3]: import arro3.core as arro3_core
+> 
+> In [4]: arro3.io.<TAB>
+>  infer_csv_schema()   read_csv()           read_ipc_stream()    read_parquet()       store                write_ipc()          write_json()         write_parquet()     
+>  infer_json_schema()  read_ipc()           read_json()          read_parquet_async() write_csv()          write_ipc_stream()   write_ndjson()           
+> ```
+
+
+Reply:
+>>    When adding just an empty _init__.py at /lib/python3.11/site-packages/arro3/__init__.py, tab completion works:
+>
+>In theory, that is supposed to break namespace packaging: https://packaging.python.org/en/latest/guides/packaging-namespace-packages/#native-namespace-packages
+>
+>>    All that is required to create a native namespace package is that you just omit __init__.py from the namespace package directory
+",ghuls,1299177,open,False,3,2025-02-28T09:32:23+00:00,2025-02-28T10:01:30+00:00,,tab-completion,0,0,0,0,0,0,0
+ipython/ipython,2886471675,14805,update what's new version 9 + windows fixes,,Carreau,335567,closed,False,0,2025-02-28T07:58:19+00:00,2025-02-28T09:24:40+00:00,2025-02-28T09:24:40+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2885745165,14804,Fix typo in IPython/core/magics/code.py,,sappjw,992873,closed,False,0,2025-02-27T22:32:41+00:00,2025-02-28T07:26:12+00:00,2025-02-28T07:26:12+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2885155088,14803,Remove extra space in magics UsageError,"Requires adding a space before long_opts when needed
+
+Example: `%%timeit -v pow_loop`
+
+Before: `UsageError: option -v not recognized ( allowed: ""n:r:tcp:qo"" )`
+
+After: `UsageError: option -v not recognized (allowed: ""n:r:tcp:qo"")`",wjandrea,22385371,closed,False,0,2025-02-27T17:27:31+00:00,2025-02-28T17:47:53+00:00,2025-02-28T07:25:58+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2884428052,14802,Pending deprecation warnigns for inputhook.,See #14646,Carreau,335567,closed,False,0,2025-02-27T12:48:01+00:00,2025-02-28T07:25:37+00:00,2025-02-28T07:25:37+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2883321640,14801,Fix typo in downstream.yml,"t > true
+
+I have almost no experience with YAML, but I keep getting an error on this workflow, and this is my best guess at fixing it.",wjandrea,22385371,closed,False,0,2025-02-27T03:35:35+00:00,2025-02-27T16:15:19+00:00,2025-02-27T08:00:13+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2883313793,14800,Fix grammar and spelling in whatsnew,,wjandrea,22385371,closed,False,2,2025-02-27T03:28:02+00:00,2025-02-27T16:35:21+00:00,2025-02-27T07:59:52+00:00,documentation,0,0,0,0,0,0,0
+ipython/ipython,2883155415,14799,Add typst to the display options,"[typst](https://typst.app/docs/reference) is gaining serious traction, and rightfully so. I am curios if adding this to the available display types is in the plan: IPython/core/display.py",aeslaughter,341333,closed,False,3,2025-02-27T01:17:12+00:00,2025-03-05T12:24:05+00:00,2025-03-03T15:17:13+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2883130513,14798,Add variable saving to timeit magic,"closes #12530 by alternative:
+
+```
+%%timeit -v elapsed_time_
+```",wjandrea,22385371,closed,False,6,2025-02-27T00:53:44+00:00,2025-03-28T12:14:49+00:00,2025-03-28T12:14:43+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2881169137,14797,Deprecate prefer_stream of getdefaultencoding,Closes #14622,Carreau,335567,closed,False,0,2025-02-26T11:02:09+00:00,2025-02-26T11:07:27+00:00,2025-02-26T11:07:27+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2881032764,14796,"Split tips on win/not-win, and add some tips.",,Carreau,335567,closed,False,0,2025-02-26T10:18:00+00:00,2025-02-26T10:44:46+00:00,2025-02-26T10:44:46+00:00,,0,0,0,0,0,0,0
+ipython/ipython,2880103437,14795,Add the doc string for missing cell_id on run_cell,"This PR adds documentation for the cell_id parameter in the run_cell method. 
+
+Fixes #14569 ",nsitapara,15826880,closed,False,1,2025-02-26T03:53:09+00:00,2025-02-26T10:18:27+00:00,2025-02-26T10:18:20+00:00,,0,0,0,0,0,0,0

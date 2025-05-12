@@ -1,0 +1,2456 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+mwaskom/seaborn,3054480230,3849,"`sns.scatterplot(...)` -> UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown","hi,
+came across the bug with scatterplot
+
+with:
+
+`sns.scatterplot(x=""x_axis_attr"", y=""y_axis_attr"", data=some_dataset)`
+
+`UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown`
+
+
+problem can be solved by installing [PyQt6](https://pypi.org/project/PyQt6/):
+
+```
+pip install PyQt6 / uv add pyqt6 / poetry add pyqt6
+```",janas-adam,48211033,closed,False,1,2025-05-10T19:22:12+00:00,2025-05-10T19:54:25+00:00,2025-05-10T19:54:23+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3048351412,3848,BUG: Vertical plots can't change line width,"I was doing a plot that needed some specific references, a horizontal and a vertical line. Did this by using 2 `lineplot`, if you try to increase the line width for the vertical one it produces no change at all (screenshot). However if the line is not exactly vertical the changes do get applied, meaning you have to add a small epsilon to the data so it interprets it as not vertical.
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+plt.figure(figsize=(12, 8))
+
+sns.set_theme(style=""whitegrid"")
+sns.lineplot(x=[0,6E11], y=[80,80], color='blue', linestyle='--', linewidth=2, zorder = 1000)
+sns.lineplot(x=[6E11,6E11], y=[0,80], color='red', linestyle='--', linewidth=2) # <--- Notice the line width
+
+plt.show()
+```
+Produces:
+
+![Image](https://github.com/user-attachments/assets/64dda74b-1a67-4f37-8433-a03524ccaa3b)
+
+And if we change the second `lineplot`'s `x` to `[6E11,6.005E11]` :
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(12, 8))
+
+sns.set_theme(style=""whitegrid"")
+sns.lineplot(x=[0,6E11], y=[80,80], color='blue', linestyle='--', linewidth=2, zorder = 1000)
+sns.lineplot(x=[6E11,6.005E11], y=[0,80], color='red', linestyle='--', linewidth=2)
+
+plt.show()
+```
+It produces:
+
+![Image](https://github.com/user-attachments/assets/52464d30-a6bd-451b-9d91-886cf00587f6)
+
+So, the expected behaviour is that we should not need to add that epsilon 😄
+
+**EDIT**: I tested it using plain `matplotlib` to validate it is not their bug and indeed it is not",Davidhervil,12719889,closed,False,1,2025-05-08T09:17:33+00:00,2025-05-08T11:12:16+00:00,2025-05-08T11:12:15+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3036983742,3847,Fixed histplot doesn't accept a column with mixed data types #3846,"Fixhistplot error with mixed data types
+- Automatically convert columns with mixed data types to strings
+- Add safety check to detect object-dtype columns with mixed types
+- Convert values to strings before numeric conversion is attempted
+- Update documentation to explain mixed data type handling
+- Preserve original behavior while adding auto-detection",Ronitsabhaya75,132860834,closed,False,0,2025-05-02T23:37:11+00:00,2025-05-05T22:04:56+00:00,2025-05-05T22:04:56+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3030131284,3846,`histplot` doesn't accept a column with mixed data types,"### Issue
+:x: `sns.histplot(df, x=col, hue=y)` throws an error when `df[col]` has mixed data types.
+:heavy_check_mark: `sns.histplot(df.astype(str), x=col, hue=y)` works fine.
+
+### Background
+- `pandas` converts all columns to an 'object'-dtyped column if they have mixed data types, such as `int` and `str`.
+- However, if such a column exists, that column cannot be drawn in a histogram due to the co-existence of seemingly `int` and `str`.
+- For example, my data has a column like `[0, 1, ""a"", ""b"" ... ""e""]`. 
+- Its column has `object` dtype, but values like `0` and `1` stay as `int` and it seems like the conflict between the dtypes is causing the error
+
+### Traceback
+
+```
+ValueError                                Traceback (most recent call last)
+File lib.pyx:2391, in pandas._libs.lib.maybe_convert_numeric()
+
+ValueError: Unable to parse string ""SGAFC590DP""
+
+During handling of the above exception, another exception occurred:
+
+ValueError                                Traceback (most recent call last)
+Cell In[717], [line 5](vscode-notebook-cell:?execution_count=717&line=5)
+      [3](vscode-notebook-cell:?execution_count=717&line=3) for col in df_spatter.columns:
+      [4](vscode-notebook-cell:?execution_count=717&line=4)     plt.figure(figsize=(10, 10))
+----> [5](vscode-notebook-cell:?execution_count=717&line=5)     sns.histplot(df_spatter, x=col, hue=y_spatter)
+      [6](vscode-notebook-cell:?execution_count=717&line=6)     plt.xticks(rotation=90)
+      [7](vscode-notebook-cell:?execution_count=717&line=7)     plt.show()
+
+File c:\Users\msi\Desktop\workspace\041_HM_platform\01_src\01_work\proj_hm_process_result\.venv_hm_result\lib\site-packages\seaborn\distributions.py:1416, in histplot(data, x, y, hue, weights, stat, bins, binwidth, binrange, discrete, cumulative, common_bins, common_norm, multiple, element, fill, shrink, kde, kde_kws, line_kws, thresh, pthresh, pmax, cbar, cbar_ax, cbar_kws, palette, hue_order, hue_norm, color, log_scale, legend, ax, **kwargs)
+   [1405](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1405) estimate_kws = dict(
+   [1406](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1406)     stat=stat,
+   [1407](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1407)     bins=bins,
+   (...)
+   [1411](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1411)     cumulative=cumulative,
+   [1412](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1412) )
+   [1414](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1414) if p.univariate:
+-> [1416](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1416)     p.plot_univariate_histogram(
+   [1417](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1417)         multiple=multiple,
+   [1418](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1418)         element=element,
+   [1419](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1419)         fill=fill,
+   [1420](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1420)         shrink=shrink,
+   [1421](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1421)         common_norm=common_norm,
+   [1422](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1422)         common_bins=common_bins,
+   [1423](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1423)         kde=kde,
+   [1424](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1424)         kde_kws=kde_kws,
+   [1425](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1425)         color=color,
+   [1426](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1426)         legend=legend,
+   [1427](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1427)         estimate_kws=estimate_kws,
+   [1428](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1428)         line_kws=line_kws,
+   [1429](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1429)         **kwargs,
+   [1430](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1430)     )
+   [1432](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1432) else:
+   [1434](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1434)     p.plot_bivariate_histogram(
+   [1435](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1435)         common_bins=common_bins,
+   [1436](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1436)         common_norm=common_norm,
+   (...)
+   [1446](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1446)         **kwargs,
+   [1447](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:1447)     )
+
+File c:\Users\msi\Desktop\workspace\041_HM_platform\01_src\01_work\proj_hm_process_result\.venv_hm_result\lib\site-packages\seaborn\distributions.py:427, in _DistributionPlotter.plot_univariate_histogram(self, multiple, element, fill, common_norm, common_bins, shrink, kde, kde_kws, color, legend, line_kws, estimate_kws, **plot_kws)
+    [424](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:424) histograms = {}
+    [426](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:426) # Do pre-compute housekeeping related to multiple groups
+--> [427](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:427) all_data = self.comp_data.dropna()
+    [428](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:428) all_weights = all_data.get(""weights"", None)
+    [430](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/distributions.py:430) multiple_histograms = set(self.variables) - {""x"", ""y""}
+
+File c:\Users\msi\Desktop\workspace\041_HM_platform\01_src\01_work\proj_hm_process_result\.venv_hm_result\lib\site-packages\seaborn\_base.py:1000, in VectorPlotter.comp_data(self)
+    [995](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:995) if var in self.var_levels:
+    [996](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:996)     # TODO this should happen in some centralized location
+    [997](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:997)     # it is similar to GH2419, but more complicated because
+    [998](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:998)     # supporting `order` in categorical plots is tricky
+    [999](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:999)     orig = orig[orig.isin(self.var_levels[var])]
+-> [1000](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:1000) comp = pd.to_numeric(converter.convert_units(orig)).astype(float)
+   [1001](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:1001) transform = converter.get_transform().transform
+   [1002](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/seaborn/_base.py:1002) parts.append(pd.Series(transform(comp), orig.index, name=orig.name))
+
+File c:\Users\msi\Desktop\workspace\041_HM_platform\01_src\01_work\proj_hm_process_result\.venv_hm_result\lib\site-packages\pandas\core\tools\numeric.py:232, in to_numeric(arg, errors, downcast, dtype_backend)
+    [230](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:230) coerce_numeric = errors not in (""ignore"", ""raise"")
+    [231](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:231) try:
+--> [232](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:232)     values, new_mask = lib.maybe_convert_numeric(  # type: ignore[call-overload]
+    [233](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:233)         values,
+    [234](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:234)         set(),
+    [235](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:235)         coerce_numeric=coerce_numeric,
+    [236](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:236)         convert_to_masked_nullable=dtype_backend is not lib.no_default
+    [237](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:237)         or isinstance(values_dtype, StringDtype)
+    [238](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:238)         and not values_dtype.storage == ""pyarrow_numpy"",
+    [239](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:239)     )
+    [240](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:240) except (ValueError, TypeError):
+    [241](file:///C:/Users/msi/Desktop/workspace/041_HM_platform/01_src/01_work/proj_hm_process_result/.venv_hm_result/lib/site-packages/pandas/core/tools/numeric.py:241)     if errors == ""raise"":
+
+File lib.pyx:2433, in pandas._libs.lib.maybe_convert_numeric()
+
+ValueError: Unable to parse string ""SGAFC590DP"" at position 8
+```",Foundsheep,92705171,open,False,2,2025-04-30T04:53:14+00:00,2025-05-07T06:09:59+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,3021788501,3845,BUG:FutureWarning for palette parameter without hue in faceted distributions,"When using faceted distributions with Seaborn and passing the palette parameter without assigning hue, a FutureWarning is raised. The warning suggests assigning hue and setting legend=False to avoid deprecation in future versions (v0.14.0). This behavior needs clarification or adjustment in Pandas' integration with Seaborn plotting functions.
+observed behavior:
+FutureWarning: Passing palette without assigning hue is deprecated and will be removed in v0.14.0. Assign the y variable to hue and set legend=False for the same effect.",lavaeagle2,93668831,closed,False,1,2025-04-26T12:08:06+00:00,2025-04-26T12:50:38+00:00,2025-04-26T12:50:37+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3019356590,3844,`ClusterGrid` is not documented,"`clustermap` returns a `ClusterGrid` object, but this object is not documented anywhere as far as I can tell:
+
+https://seaborn.pydata.org/generated/seaborn.clustermap.html",MLopez-Ibanez,2620021,closed,False,1,2025-04-25T08:25:35+00:00,2025-04-25T11:20:40+00:00,2025-04-25T11:20:39+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3015218159,3843,Different distributions on diagonal plots from pairplot and PairGrid,"Dear seaborn team,
+I tried to plot my data with pairplot and PairGrid but distributions of the two categories on the diagonal plots look different (depends on using pairplot or PairGrid). I wonder if there is anything I did not set correctly. Below is my codes
+```
+sns.pairplot(
+    all_evaluation,
+    x_vars=[""follow_ratio_this_trial"", ""travel_distance"",""turning_distance""],
+    y_vars=[""follow_ratio_this_trial"", ""travel_distance"",""turning_distance""],hue=""object"",corner=True)
+```
+
+![Image](https://github.com/user-attachments/assets/a1deb4f5-ca8a-4621-b246-4481c0d4f53f)
+
+```
+g = sns.PairGrid(all_evaluation,x_vars=[""follow_ratio_this_trial"", ""travel_distance"",""turning_distance""],y_vars=[""follow_ratio_this_trial"", ""travel_distance"",""turning_distance""],hue=""object"")
+g.map_diag(sns.histplot, multiple=""stack"", element=""step"")
+g.map_lower(sns.scatterplot)
+g.add_legend()
+```
+![Image](https://github.com/user-attachments/assets/89b18f28-d10f-4831-9f69-a37ccb632378)
+
+This is not just due to the plotting style difference. For example, if I used kdeplot instead, two of the diagonal plots still shrift.
+`g.map_diag(sns.kdeplot)`
+
+![Image](https://github.com/user-attachments/assets/1fd77444-634a-41b1-be93-ce0a60b0ef2d)
+
+Is this due to some issues with limits on the x- and y-axis? I searched for methods to change the x or y limits of each subplot, but failed to find anything. I was hoping to use PairGrid given its flexibility and did not find anything either. Does anyone have similar issue before?
+
+These are the packages I used 
+**seaborn 0.13.2 matplotlib 3.9.2 python 3.11.10**
+
+Please feel free to let me know if you have any thought or concern.
+Best,",chiyu1203,16696523,closed,False,2,2025-04-23T20:48:27+00:00,2025-04-25T15:40:41+00:00,2025-04-25T11:21:13+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3011395580,3842,Compatibility with Numpy 2.0,"I'm really sorry if this is a very dumb question. I'm using numpy2.0 a lot but every time I pip install seaborn will uninstall my 2+ version of numpy and install 1.26.4 instead. I thought [seaborn 0.13.2 already supports numpy 2.0 ](https://github.com/numpy/numpy/issues/26191)but couldn't get it work. Any help is greatly appreciated.
+
+Relevant installation output:
+
+Collecting numpy!=1.24.0,>=1.20 (from seaborn)
+  Using cached numpy-1.26.4-cp311-cp311-macosx_11_0_arm64.whl.metadata (114 kB)
+Requirement already satisfied: six in ./.pyenv/versions/3.11.5/lib/python3.11/site-packages (from cycler>=0.10->matplotlib!=3.6.1,>=3.4->seaborn) (1.16.0)
+Using cached seaborn-0.13.2-py3-none-any.whl (294 kB)
+Using cached numpy-1.26.4-cp311-cp311-macosx_11_0_arm64.whl (14.0 MB)
+Installing collected packages: numpy, seaborn
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.0.0
+    Uninstalling numpy-2.0.0:
+      Successfully uninstalled numpy-2.0.0
+Successfully installed numpy-1.26.4 seaborn-0.13.2",junxi-liu,55642604,closed,False,2,2025-04-22T15:14:32+00:00,2025-04-22T15:27:05+00:00,2025-04-22T15:27:05+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,3006643561,3841,"Bug: Incorrect `auto` Legend of a categorical, but numeric column/series, when used as hue for boxplot or violinplot.","## Overview
+When a numerical column (int64 in the example) is passed as the `hue` column in a boxplot or a violinplot in Seaborn, it considers it as a continuous variable, rather than a categorical one, and the `auto` or `brief` setting for the legend argument results in an evenly spread legend numbers, which may or may not align with the values in the dataset for that column.
+
+## Self-contained reproducible code
+```python
+import sys
+import numpy as np
+import pandas as pd
+import matplotlib
+import seaborn as sns
+from matplotlib import pyplot as plt
+
+print(""Python version: {}"". format(sys.version))
+print(""NumPy version: {}"". format(np.__version__))
+print(""pandas version: {}"". format(pd.__version__))
+print(""matplotlib version: {}"". format(matplotlib.__version__))
+print(""seaborn version: {}"". format(sns.__version__))
+print('-'*25)
+
+
+df = pd.DataFrame(
+    {
+        ""Make"": [
+            'KIA', 'TOYOTA', 'ROLLS-ROYCE', 'HONDA', 'CHEVROLET', 'INFINITI', 'TOYOTA',
+            'BUICK', 'KIA', 'BMW', 'TOYOTA', 'HONDA', 'ALFA ROMEO', 'JAGUAR', 'FORD', 'NISSAN',
+            'BUICK', 'PORSCHE', 'MAZDA', 'AUDI', 'JAGUAR', 'CHEVROLET', 'MERCEDES-BENZ', 'BMW',
+            'MAZDA', 'FORD', 'MINI', 'HYUNDAI', 'CHEVROLET', 'CHEVROLET'
+        ],
+        ""Cylinders"": [
+            5,  5,  8,  5, 16,  4,  8,  4, 10, 12,  4,  6,  4,  6,  8,  5,  8,
+            10, 10, 16, 12, 10,  5,  3,  6,  5,  5, 16,  5,  6
+        ],
+        ""Fuel Consumption City (L/100 km)"": [
+            11.6, 13.8, 17.7, 12.2, 7.9, 15.3, 12.4, 13.3, 12.3, 16.1, 13.5, 9.8, 8.9, 9.9, 8.9, 
+            13.0, 15.8, 11.3, 12.1, 7.8, 15.1, 15.1, 15.0, 11.2, 14.8, 13.5, 7.7, 8.5, 12.4, 13.4
+        ],
+    }
+)
+df[""Cylinders""] = df[""Cylinders""].astype(np.int64)
+df[""Fuel Consumption City (L/100 km)""] = df[""Fuel Consumption City (L/100 km)""].astype(np.float64)
+
+sns.violinplot(df, y=""Fuel Consumption City (L/100 km)"", hue=""Cylinders"", gap=0.2, palette=""viridis"")
+plt.show()
+```
+## Versions
+```log
+Python version: 3.12.9 | packaged by conda-forge | (main, Mar  4 2025, 22:44:42) [Clang 18.1.8 ]
+NumPy version: 2.1.3
+pandas version: 2.2.3
+matplotlib version: 3.10.1
+seaborn version: 0.13.2
+-------------------------
+```
+## Outputs
+![Violinplot with incorrect legend](https://github.com/user-attachments/assets/a763d3c8-ffcd-48ff-99d5-fccb5d742ba9)
+
+![Boxplot with incorrect legend](https://github.com/user-attachments/assets/045077c7-b216-4fd6-b174-8fcc7acc5bfe)
+
+Unique values of ""Cylinder"" column: `[3, 4, 5, 6, 8, 10, 12, 16]`
+
+## Temporary solution:
+Pass `legend=""full""` as argument to the `sns.violinplot` or `sns.boxplot` functions.
+
+![Violinplot with correct legend](https://github.com/user-attachments/assets/c5bdf2df-d511-4531-8d02-4e8c4aa2f732)",shenoy-anurag,19914954,closed,False,2,2025-04-19T20:30:54+00:00,2025-04-20T03:20:22+00:00,2025-04-20T03:20:22+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2975263134,3840,Fix unnecessary ValueError in PairPlot: Caused by unrelated duplicated columns not used in `vars`,"A simple demo:
+```
+import seaborn as sns
+import pandas as pd
+df = pd.DataFrame(dict(x=rs.normal(size=60),
+                           y=rs.randint(0, 4, size=(60)),
+                           z=rs.gamma(3, size=60),
+                           z2=rs.gamma(6, size=60),
+                           }
+df_with_dupe = df.copy()
+df_with_dupe.columns = [""x"", ""y"", ""z"", ""z""] #sometimes by mistake, or the z/z2 are not important
+sns.pairplot(df_with_dupe, vars=['x', 'y'])  # raise ValueError
+```
+
+The Traceback:
+```
+> Traceback (most recent call last):
+>   File ""/data1/home/----/plotReferenceMap.py"", line 153, in <module>
+>     sns.pairplot(df_merge,
+>   File ""/data1/home/--/lib/python3.9/site-packages/seaborn/axisgrid.py"", line 2119, in pairplot
+>     grid = PairGrid(data, vars=vars, x_vars=x_vars, y_vars=y_vars, hue=hue,
+>   File ""/data1/home/--/lib/python3.9/site-packages/seaborn/axisgrid.py"", line 1251, in __init__
+>     numeric_cols = self._find_numeric_cols(data)
+>   File ""/data1/home/--/lib/python3.9/site-packages/seaborn/axisgrid.py"", line 1674, in _find_numeric_cols
+>     if variable_type(data[col]) == ""numeric"":
+>   File ""/data1/home/--/lib/python3.9/site-packages/seaborn/_base.py"", line 1498, in variable_type
+>     vector = pd.Series(vector)
+>   File ""/data1/home/--/lib/python3.9/site-packages/pandas/core/series.py"", line 367, in __init__
+>     if is_empty_data(data) and dtype is None:
+>   File ""/data1/home/--/lib/python3.9/site-packages/pandas/core/construction.py"", line 818, in is_empty_data
+>     is_simple_empty = is_list_like_without_dtype and not data
+>   File ""/data1/home/--/lib/python3.9/site-packages/pandas/core/generic.py"", line 1527, in __nonzero__
+>     raise ValueError(
+> ValueError: The truth value of a DataFrame is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+```
+The error happens inside self._find_numeric_cols(data), which is unnecessary when `vars` is provided. So I skip it and extend to some other similar scenarios:
+
+
+1. no duplication in df.columns, but duplications in `vars`: Gives a simple warning. It just generates unexpected figures but does not crash.
+2. duplication in df.columns, and one of the duplicants is included in `vars`: raise ValueError in PairGrid Class, specify the related duplicants.
+3. duplication in df.columns, and `vars` is not provided: raise ValueError in PairGrid Class, specify the all duplicants.
+
+These tests are all included in the test_axisgrid.py
+
+Please let me know if any other modifications are needed.
+
+",leakyH,41351449,open,False,0,2025-04-06T21:57:48+00:00,2025-04-07T06:39:36+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2970062820,3839,Axis intepreted as categorical,"The following code with a DataFrame that has the following values gets the wrong outputs:
+
+> <pre>        ACC  Vessel Volume
+> 0  0.998467       0.078247
+> 1  0.999901       0.011365
+> 2  0.999987       0.009348
+> 3  0.999994       0.009945
+> 4  0.999973       0.026110</pre>
+
+
+```python
+# Ensure 'Vessel Volume' is numeric and drop rows with NaN values
+df['Vessel Volume'] = pd.to_numeric(df['Vessel Volume'], errors='coerce')
+df = df.dropna(subset=['Vessel Volume', 'ACC'])  # Drop rows with missing values
+
+# Sort the DataFrame by 'Vessel Volume' to ensure proper ordering
+df = df.sort_values(by='Vessel Volume')
+
+# Set Seaborn style for publication-quality plots
+sns.set_theme(style=""whitegrid"", palette=""muted"")
+
+# Create the point plot
+sns.pointplot(
+    data=df, 
+    x='Vessel Volume', 
+    y='ACC', 
+    markers='+', 
+    linestyles='', 
+)
+
+# Customize the plot
+plt.title('Point Plot of ACC vs Vessel Volume', fontsize=16, weight='bold')
+plt.xlabel('Vessel Volume', fontsize=14)
+plt.ylabel('ACC', fontsize=14)
+plt.yticks(ticks=np.linspace(0, 1, 5), fontsize=12)
+# plt.xscale('log')  # Log scale for x-axis
+# plt.xticks(ticks=np.linspace(0, 1, 5), fontsize=12)
+
+# Adjust layout for better spacing
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+``` 
+
+This yields:
+
+![Image](https://github.com/user-attachments/assets/563d46df-5f5c-48e7-aa34-a98d87396876)
+
+When activating the log scale:
+
+![Image](https://github.com/user-attachments/assets/b804c75f-0ede-40bd-95c5-5cf57b300674)
+
+This it seems the Vessel Volume column is identified as categories with their indices.",chourroutm,83714683,closed,False,3,2025-04-03T15:59:53+00:00,2025-04-03T20:50:56+00:00,2025-04-03T17:28:28+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2970034778,3838,[QUESTION] Do not understand fully the seaborn.object especially the .scale,"I am reaching out because I am having trouble fully understanding how to implement color gradients using Seaborn.object. Although Seaborn.object seems very powerful for plotting, I’m struggling to correctly map the color gradient to represent the depth values in my dataframe.
+
+With the following code (which produces the attached plot), I intend for each dot’s color to reflect its corresponding depth value. I know the actual minimum depth value in my data is 1 and the maximum is 424. However, the current plot shows a minimum color scale value of 100. Is there a way to explicitly define a continuous color gradient that accurately spans the true minimum (1) and maximum (424) depth values, even in cases where there may be many low values or only a single minimum point?
+
+```python
+p = (
+    so.Plot(depth_concat.filter(~pl.col(""Damage"").is_null()), x=""Breadth_reads"", y=""Breadth_contigs"", color=""Depth_avg_reads"")
+    .add(so.Dot())
+    # .add(so.Line(color=""grey""), data=pl.DataFrame({""x"": [0, 1], ""y"": [0, 1]}), x=""x"", y=""y"")
+    .scale(color=""crest"")
+    .theme(axes_style(""whitegrid"") | plotting_context(""talk"") | {""grid.linestyle"": "":"", ""pdf.fonttype"": 42})
+    .layout(size=(10, 10)) # width, height
+    .limit(x=(0, 1), y=(0, 1))
+)
+```
+
+I also wanted to add a grey line that represent x==y. But I don't know how to properly do it
+
+Thank you for your help
+
+![Image](https://github.com/user-attachments/assets/e33e672c-a7eb-4ac6-9282-a2c2d64cfc7d)",rdenise,18054204,closed,False,1,2025-04-03T15:47:49+00:00,2025-04-03T17:27:36+00:00,2025-04-03T17:27:35+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2958945259,3837,Inconsistent plotting behavior when setting y-axis scale before and after plotting,"I’ve encountered an issue where the order of setting the y-axis scale affect the final plot. It is not as expected that they should produce the same plot. Here’s a minimal example that demonstrates the issue:
+
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    'Iteration': [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
+    'Objective Function': [100, 10, 0.001, 200, 20, 2, 300, 30, 3, 400, 40, 4],
+    'Method': ['A', 'A', 'A', 'B', 'B', 'B', 'A', 'A', 'A', 'B', 'B', 'B']
+})
+
+# set yscale after plotting
+plt.figure()
+sns.lineplot(x='Iteration', y='Objective Function', hue='Method', data=df)
+plt.yscale('log')
+plt.savefig('plot1.png')
+
+# set yscale before plotting
+plt.figure()
+plt.yscale('log')
+sns.lineplot(x='Iteration', y='Objective Function', hue='Method', data=df)
+plt.savefig('plot2.png')
+```
+### plot1.png
+![Image](https://github.com/user-attachments/assets/cdca7b29-3864-49b9-ba47-432a5ac361a1)
+
+### plot2.png
+![Image](https://github.com/user-attachments/assets/c80c4a30-3330-472a-85a4-d1946bed7bff)
+
+Why will this happen? Which is the right way to set y scale?",hanqing-yu,47550864,closed,False,1,2025-03-30T15:44:58+00:00,2025-03-31T00:32:21+00:00,2025-03-31T00:32:21+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2937708259,3836,fix typo in boxplot documentation,Paramater should be Parameter.,korrawitp,19421740,open,False,0,2025-03-21T08:46:25+00:00,2025-03-21T08:46:25+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2934255865,3835,sns plot to pickle -> itertools deprecation warning for python 3.14,"For some of my apps, I cache figures in [as files via pickle](https://stackoverflow.com/a/12734723/9501624). This works both for ""pure matplotlib"" as well as seaborn figures.
+
+As of late, I am seeing an itertools depcreciation warning when storing sns plots this way:
+
+```
+import pickle
+import seaborn as sns
+
+tips = sns.load_dataset(""tips"")
+ax = sns.boxplot(x=""day"", y=""total_bill"", data=tips)
+
+pickle.dump(ax.get_figure(), open(""temp.pkl"", ""wb""))
+```
+
+_DeprecationWarning: Pickle, copy, and deepcopy support will be removed from itertools in Python 3.14._
+
+This warning does not occur when storing pure matplotlib plots. My guess is that this storing technique will fail for sns plots with python >= 3.14. Is there a way to avoid this?
+
+Versions:
+sns: 0.13.2
+plt: 3.10.1",ChrisOKay,22896985,open,False,1,2025-03-20T06:31:41+00:00,2025-03-20T12:10:50+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2930598881,3834,`scatterplot` assigns incorrect dot size when `size` has only two unique values (0 and another number),"#### **Description**
+
+When using `sns.scatterplot` with the `size` parameter, if the unique values in `size` are **only 0 and one other number**, the size assigned to 0 is unexpectedly large. This issue does not occur when the `size` list includes more than two unique nonzero values.
+
+#### **Steps to reproduce**
+
+```python
+import sys
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+print(f""Python: {sys.version}"")
+print(f""matplotlib: {plt.matplotlib.__version__}"")
+print(f""pandas: {pd.__version__}"")
+print(f""seaborn: {sns.__version__}"")
+
+
+def plot_dot(val: list):
+    _, ax = plt.subplots(figsize=(2, 2))
+    data = pd.DataFrame({""X"": [""x1"", ""x2"", ""x1"", ""x2""], ""Y"": [""y1"", ""y1"", ""y2"", ""y2""], ""size"": val})
+    g = sns.scatterplot(data=data, x=""X"", y=""Y"", size=""size"", ax=ax)
+    g.legend(loc=""upper left"", bbox_to_anchor=(1.05, 1.0))
+    g.title.set_text(f""size={val}"")
+
+
+plot_dot([0, 0, 1, 1])  # 0 appears abnormally large
+plot_dot([None, 0, 1, 1])  # 0 appears abnormally large
+plot_dot([0, 0, 1, 2])  # 0 appears correctly
+plot_dot([1, 1, 2, 2])  # non zero values appears correctly
+```
+
+#### **Observed behavior**
+
+```sh
+Python: 3.13.2 | packaged by conda-forge | (main, Feb 17 2025, 14:02:48) [Clang 18.1.8 ]
+matplotlib: 3.10.1
+numpy: 2.2.4
+pandas: 2.2.3
+seaborn: 0.13.2
+```
+
+![Image](https://github.com/user-attachments/assets/bcecf112-32e1-4af2-9fa1-08a6d6e248ec)
+![Image](https://github.com/user-attachments/assets/7c2dfa23-dc00-462c-804f-b3b76fd14d16)
+![Image](https://github.com/user-attachments/assets/c7205cd2-15cf-451d-86e6-cbd6bbb84dbe)
+![Image](https://github.com/user-attachments/assets/6148c016-e9b6-4c74-aa1a-5f87aa055da2)
+
+
+#### **Expected behavior**
+
+- The dots for `0` should appear small and not disproportionately large, regardless of whether `size` contains only two unique values.
+
+#### **Additional information**
+- This issue persists even when explicitly setting `sizes=(10, 200)`.
+- The problem does not occur when there are more than two unique values in `size`.
+- A workaround is to include additional unique values in `size`, but this should not be necessary.
+
+Would appreciate any insights on whether this is an intended behavior or a bug in `size` scaling. Thanks!",136s,47920723,open,False,0,2025-03-19T06:24:52+00:00,2025-03-19T07:01:14+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2928355871,3833,Update pip installation command with proper quoting for dev extra,"`pip install .[dev]` returns `zsh: no matches found: .[dev]` -> should be `pip install .""[dev]""`",komikat,41486636,open,False,0,2025-03-18T12:32:09+00:00,2025-03-18T12:39:50+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2922342817,3832,Why not plot directly in arrays?,"Why not plot directly in array as in concept implemetation done here: https://github.com/bedbad/justpyplot 
+
+And remove the heavy complex dependency on matplotlib, instead allow to render the visualization in any format requesting whilst also giving access to the plot tensors as well?",bedbad,21035980,closed,False,2,2025-03-15T17:35:28+00:00,2025-03-20T01:04:47+00:00,2025-03-15T22:37:52+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2911834386,3831,Fix ZeroDivisionError in pointplot when dodge=True and a single hue level exists,"This PR fixes a ZeroDivisionError in sns.pointplot that occurs when dodge=True and the dataset contains only a single hue level. The issue arises because step_size is calculated using (n_hue_levels - 1), which results in a division by zero when n_hue_levels == 1.
+
+Changes Made:
+Updated categorical.py to prevent division by zero in the dodge calculation by adding a conditional check:
+      if n_hue_levels > 1:
+          step_size = dodge / (n_hue_levels - 1)
+      else:
+          step_size = 0  # Prevents division by zero when only one hue level exists
+
+This ensures that when there is only one hue level, the dodge offset remains 0, preventing unnecessary adjustments.
+
+Issue Reference:
+Fixes #3825
+
+Testing:
+Verified that pointplot no longer raises an error when dodge=True with a single hue level.",notval98,72167440,open,False,0,2025-03-11T20:39:18+00:00,2025-03-11T20:39:18+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2903718646,3830,Controlling zorder per group in scatterplot,"I'm running into a situation where it would be nice to be able to set or override the zorder for different groups within a scatterplot, and it doesn't seem like there's an obvious way to do this (short of overlaying multiple scatterplots by hand and then adjusting all the elements after).
+
+For example, I have a scatterplot with three distinct groups (call them A, B, and C), which I'm currently mapping to hue.  It so happens that groups B and C are tightly clustered, while group A is both larger and more dispersed.  As a result, the A group tends to visually crowd out the B and C groups.  I can fudge this with transparency, but it's not a terribly satisfying solution.
+
+If it was possible to set the zorder for each group, it would be easy to have the B and C groups draw above the A group and prevent crowding without relying on transparency.  I tried to do this in a postprocessing step, but it appears that all scatterplot points are put into one collection object, so there's no direct way to update the zorder by group.
+
+For right now, I can hack around this by sorting the dataframe prior to calling `scatterplot()` to produce my preferred draw order.  I don't think this is guaranteed behavior though, so it doesn't strike me as a stable or recommended approach.
+
+I expect that exposing zorder here might entail quite a bit of complexity under the hood - it seems like matplotlib pathcollections only allow zorder at the collection level, not individual elements.  That probably means that the collection would need to be broken into multiple collections, and if zorder is mapped to a field with high cardinality (or continuous values) that could get unwieldy.
+
+Still, it seems like it could be useful to provide some way to influence the draw order, so I figured I'd raise the issue here.",bmcfee,1190540,open,False,2,2025-03-07T19:00:45+00:00,2025-03-10T15:40:02+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2888091523,3828,Boxplot options with points in it,"I work with a lot of boxplots, and I am asked a lot to show boxplots with points inside the box as well. Currently I address this in this way
+`sns.stripplot(x='column', y='value', hue='some_label', data=df_melted)`
+`sns.boxplot(x='column', y='value', data=df_melted, boxprops={'facecolor':'none'})`
+
+Would it be possible to add an arg to sns.boxplot() that does this in one line? 
+
+My current package version is 
+Name: seaborn
+Version: 0.13.2
+
+<img width=""347"" alt=""Image"" src=""https://github.com/user-attachments/assets/0591a582-dec8-4a3d-90f7-edea54a5e87d"" />
+
+",devangs3,14045070,closed,False,2,2025-02-28T21:29:40+00:00,2025-02-28T21:44:45+00:00,2025-02-28T21:44:21+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2873608019,3827,[FIX]: Add Support for the `jet` Colormap When Using `seaborn` Color Palettes,"# The Issue
+
+This PR resolves #3826.
+
+Running `sns.color_palette(palette=""jet"", as_cmap=True)` yields a `ValueError(""No."")` for seemingly no explainable reason.  [This section of code raises the error](https://github.com/mwaskom/seaborn/blob/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef/seaborn/palettes.py#L201-L203), and removing it resolves the problem.  While funny, `seaborn` has outgrown these kinds of Easter Eggs, and this behavior is no longer desirable.
+
+# Reproducing the Issue
+
+`seaborn` simply raises an error when a user tries to use the `jet` `matplotlib` colormap.  [All other `matplotlib` colormaps](https://matplotlib.org/stable/gallery/color/colormap_reference.html) are supported, but `jet` (which is a very popular colormap) is not.
+
+## Code That Raises Error
+
+### Lines of Code Raising the Error
+```python
+import seaborn as sns
+
+desired_color_palette = sns.color_palette(palette=""jet"", as_cmap=True)
+```
+
+### ""Real-World"" Example Where Using `jet` Raises an Error
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+data = pd.DataFrame(np.random.rand(10, 10), columns=[f'Var{i}' for i in range(1, 11)])
+corr = data.corr()
+
+desired_color_palette = sns.color_palette(palette=""jet"", as_cmap=True)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap=desired_color_palette, linewidths=0.5, fmt="".2f"")
+plt.title(""Correlation Matrix Heatmap with 'Jet' Colormap"")
+plt.show()
+```
+
+### ""Real-World"" Example That Works for [Any Other Matplolib Colormap](https://matplotlib.org/stable/gallery/color/colormap_reference.html)
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+data = pd.DataFrame(np.random.rand(10, 10), columns=[f'Var{i}' for i in range(1, 11)])
+corr = data.corr()
+
+desired_color_palette = sns.color_palette(palette=""viridis"", as_cmap=True)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap=desired_color_palette, linewidths=0.5, fmt="".2f"")
+plt.title(""Correlation Matrix Heatmap with 'Viridis' Colormap"")
+plt.show()
+```
+
+![viridis](https://github.com/user-attachments/assets/f4c620c2-9e68-4010-9c30-d7b5325490ce)
+
+
+# Fixing the Issue
+
+The [following lines in `seaborn/palettes.py`](https://github.com/mwaskom/seaborn/blob/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef/seaborn/palettes.py#L201-L203) have been removed.
+
+## Evidence That the Issue Is Resolved
+
+### This Line of Code No Longer Raises the `ValueError(""No."")`
+
+```python
+import seaborn as sns
+
+desired_color_palette = sns.color_palette(palette=""jet"", as_cmap=True)
+```
+
+### ""Real-World"" Example That Works with `jet`
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+data = pd.DataFrame(np.random.rand(10, 10), columns=[f'Var{i}' for i in range(1, 11)])
+corr = data.corr()
+
+desired_color_palette = sns.color_palette(palette=""jet"", as_cmap=True)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap=desired_color_palette, linewidths=0.5, fmt="".2f"")
+plt.title(""Correlation Matrix Heatmap with 'Jet' Colormap"")
+plt.show()
+```
+
+![jet](https://github.com/user-attachments/assets/31453909-f20e-4dbf-978e-3b61877ee01a)
+
+
+Resolves #3826.",HenryAsa,26352765,closed,False,1,2025-02-24T00:44:32+00:00,2025-02-24T03:38:52+00:00,2025-02-24T03:38:52+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2873590141,3826,"`sns.color_palette(palette=""jet"", as_cmap=True)` Does Not Support the Colormap `jet`","# The Issue
+
+Running `sns.color_palette(palette=""jet"", as_cmap=True)` yields a `ValueError(""No."")` for seemingly no explainable reason.  While funny, `seaborn` has outgrown these kinds of Easter Eggs, and this behavior is no longer desireable.
+
+# Reproducing the Issue
+
+```python
+import seaborn as sns
+
+desired_color_palette = sns.color_palette(palette=""jet"", as_cmap=True)
+```
+
+# Fixing the Issue
+
+The [following lines in `seaborn/palettes.py`](https://github.com/mwaskom/seaborn/blob/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef/seaborn/palettes.py#L201-L203) need to be removed.",HenryAsa,26352765,closed,False,0,2025-02-24T00:25:30+00:00,2025-02-24T03:38:58+00:00,2025-02-24T03:38:58+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2858877338,3825,`sns.pointplot` breaks when `dodge=True` and dataset has a single hue level,"Hi! The following code breaks:
+
+```py
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+def create_point_plot():
+    df = sns.load_dataset(""anscombe"")
+    # simulate a dataset with n_hue_levels == 1
+    df = df[df[""dataset""] == ""I""]
+
+    sns.pointplot(data=df, x=""x"", y=""y"", hue=""dataset"", dodge=True)
+    plt.show()
+
+
+create_point_plot()
+```
+This is the error message:
+```
+Traceback (most recent call last):
+  File ""/home/cdp58/Documents/repos/pasna_analysis/pasna_analysis/seaborn_zeroIndex.py"", line 14, in <module>
+    create_point_plot()
+  File ""/home/cdp58/Documents/repos/pasna_analysis/pasna_analysis/seaborn_zeroIndex.py"", line 10, in create_point_plot
+    sns.pointplot(data=df, x=""x"", y=""y"", hue=""dataset"", dodge=True)
+  File ""/home/cdp58/miniconda3/envs/pscope_analysis/lib/python3.11/site-packages/seaborn/categorical.py"", line 2516, in pointplot
+    p.plot_points(
+  File ""/home/cdp58/miniconda3/envs/pscope_analysis/lib/python3.11/site-packages/seaborn/categorical.py"", line 1218, in plot_points
+    step_size = dodge / (n_hue_levels - 1)
+                ~~~~~~^~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero
+```
+While it does not make strict sense to have `dodge=True` and a single categorical variable, it would be nice to be able to handle this case. At least this happens sometimes with the datasets I have... I usually have multiple groups, but sometimes only a single group. I understand this could be handled on my end.
+
+I believe flipping `dodge` to `False` inside  [plot_points](https://github.com/mwaskom/seaborn/blob/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef/seaborn/categorical.py#L1172) if `n_hue_levels <= 1` would be enough.
+
+I ran this using seaborn=0.13.2",cdpaiva,55894222,open,False,1,2025-02-17T22:06:19+00:00,2025-02-28T02:01:48+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2821183576,3824,Boxplot hue + palette misleading warning,"Hi, thanks for this great library.
+
+I wanted to flag that one of your warnings is misleading. When I make a boxplot using the following line:
+```python
+sns.boxplot(df, x=""share_type"", y=metric, ax=ax, palette=""tab10"")
+```
+
+I get a warning:
+```
+ Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.   
+  sns.boxplot(df, x=""share_type"", y=metric, ax=ax, palette=""tab10"")
+```
+
+So I follow this advice and replace the above line with:
+```python
+sns.boxplot(df, hue=""share_type"", y=metric, ax=ax, legend=False, palette=""tab10"")
+```
+However, this does not have the same effect. See comparison below, the second looks awful, there is one X tick, no X labels and all the boxes are bunched up:
+
+![Image](https://github.com/user-attachments/assets/ecb2d63c-ec1a-4808-9686-502145ad721e)
+
+![Image](https://github.com/user-attachments/assets/7d9ef733-6957-4e72-aa34-31c5def06408)
+
+Is there a way of achieving the better top result without an API that's being depricated?
+",tom-whitehead,99190557,closed,False,2,2025-01-30T15:48:16+00:00,2025-01-30T16:39:52+00:00,2025-01-30T16:39:50+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2819366558,3823,Feature request: Diverging stacked bar,"Hi, I'm currently analysing likerts data and it's common practice to analyse the response using diverging stacked bar.
+
+Seeing there are no implementation for it in the library I wanted to propose that as an enhancement.
+
+Expected problems: handling a even and odd number of bins makes handling the center data different (at least from my experience in Matlab and their bar charts).
+
+Here is an example of a diverging stacked bar I did for data analysis.
+<img alt=""Image"" src=""https://github.com/user-attachments/assets/9c9b7018-c497-46b1-beb5-5dfc442e6b40"" />",Ownezx,24583313,open,False,9,2025-01-29T21:28:57+00:00,2025-01-30T19:34:33+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2813848018,3822,Allowing a function as fmt argument for heatmap,"APA recommends using "".23"" instead of ""0.23"" for correlations. I turns out that it is not that easy to annotate heatmaps with seaborn in that format. To do that, I have to hack Seaborn to allow the `heatmap` function to accept functions as a type for the `fmt` argument. Something like this:
+
+```python
+import seaborn as sns
+from seaborn.matrix import _HeatMapper, relative_luminance
+from functools import partial
+import types
+
+def heatmap(
+    data, *,
+    vmin=None, vmax=None, cmap=None, center=None, robust=False,
+    annot=None, fmt="".2g"", annot_kws=None,
+    linewidths=0, linecolor=""white"",
+    cbar=True, cbar_kws=None, cbar_ax=None,
+    square=False, xticklabels=""auto"", yticklabels=""auto"",
+    mask=None, ax=None,
+    **kwargs): 
+      
+    def _annotate_heatmap(self, ax, mesh):
+            """"""Add textual labels with the value in each cell.""""""
+            mesh.update_scalarmappable()
+            height, width = self.annot_data.shape
+            xpos, ypos = np.meshgrid(np.arange(width) + .5, np.arange(height) + .5)
+            for x, y, m, color, val in zip(xpos.flat, ypos.flat,
+                                        mesh.get_array().flat, mesh.get_facecolors(),
+                                        self.annot_data.flat):
+                if m is not np.ma.masked:
+                    lum = relative_luminance(color)
+                    text_color = "".15"" if lum > .408 else ""w""
+                    if isinstance(fmt, types.FunctionType):
+                        annotation = fmt(val)
+                    else:
+                        annotation = (""{:"" + self.fmt + ""}"").format(val)
+                    text_kwargs = dict(color=text_color, ha=""center"", va=""center"")
+                    text_kwargs.update(self.annot_kws)
+                    ax.text(x, y, annotation, **text_kwargs)
+
+
+    plotter = _HeatMapper(data, vmin, vmax, cmap, center, robust, annot, fmt,
+                            annot_kws, cbar, cbar_kws, xticklabels,
+                            yticklabels, mask)
+
+    plotter._annotate_heatmap = partial(_annotate_heatmap, plotter)
+
+
+    # Add the pcolormesh kwargs here
+    kwargs[""linewidths""] = linewidths
+    kwargs[""edgecolor""] = linecolor
+
+    # Draw the plot and return the Axes
+    if ax is None:
+        ax = plt.gca()
+    if square:
+        ax.set_aspect(""equal"")
+    plotter.plot(ax, cbar_ax, kwargs)
+```
+
+Used with
+
+```python
+def to_str(x):
+    return f""{x:.2f}"".replace(""-0"", ""-"").lstrip(""0"")
+
+df = sns.load_dataset(""mpg"").corr(numeric_only=True)
+
+heatmap(df, annot=True, fmt=to_str)
+```
+
+Produces
+
+![Image](https://github.com/user-attachments/assets/2bed8059-291b-4592-a3fd-ed04b0ab0a60)
+
+I think this is something worth integrating into Seaborn to allow people to display correlations that way. It only requires replacing 
+
+https://github.com/mwaskom/seaborn/blob/86b5481ca47cb46d3b3e079a5ed9b9fb46e315ef/seaborn/matrix.py#L260
+
+by
+
+```python
+                    if isinstance(fmt, types.FunctionType):
+                        annotation = fmt(val)
+                    else:
+                        annotation = (""{:"" + self.fmt + ""}"").format(val)
+```
+
+adding `import types` and updating the doc accordingly.
+",christian-oreilly,5932954,closed,False,2,2025-01-27T19:12:33+00:00,2025-01-28T12:01:08+00:00,2025-01-28T12:01:06+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2811658088,3821,Fix mock __array__ interface,Addresses a backwards compatibility bug introduced in #3803,mwaskom,315810,closed,False,0,2025-01-26T16:40:08+00:00,2025-01-26T16:55:15+00:00,2025-01-26T16:55:13+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2811273187,3820,Address some upcoming deprecations,"- Address deprecation of `vert=` in `plt.bxp` (used in `sns.boxplot`; closes #3804, closes #3819)
+- Address deprecation of the `.converter` attribute on matplotlib `Axis` objects (only used in tests)
+- Address deprecation of `np.in1d` (only used in tests)
+- Address deprecation of `pytest.mark` + `pytest.parameterize` (only used in tests)
+- Prevent tests from tripping internal deprecation warning",mwaskom,315810,closed,False,0,2025-01-26T02:09:26+00:00,2025-01-26T15:17:22+00:00,2025-01-26T15:17:21+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2810878426,3819,Fix PendingDeprecationWarning in categorical plots,"Fixes #3804
+
+The full warning:
+
+```
+PendingDeprecationWarning: vert: bool will be deprecated in a future version. Use orientation: {'vertical', 'horizontal'} instead.
+```
+
+This is a pending deprecation in mpl since 3.10, will become deprecated in 3.11 ([matplotlib.axes.Axes.bxp](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.bxp.html)).
+
+I noticed the usage of `_version_predates` function, please let me know if this change should be also backwards compatible, since `orientation` was added in mpl 3.10.
+
+Edit: I see there's a merged PR to ignore the warning (https://github.com/microsoft/MLOS/pull/900), which could probably be removed by fixing the kwarg.",staticf0x,44530786,closed,False,0,2025-01-25T09:13:43+00:00,2025-01-26T15:17:22+00:00,2025-01-26T15:17:22+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2810681828,3818,Twin axis issue with bar plots.,"I am facing an issue with twinx (dual y-axis). It does very weird behavior. 
+
+
+```
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Sample data
+data = {
+    ""Category"": [""A"", ""B"", ""C"", ""D""],
+    ""Metric1"": [10, 15, 20, 25],
+    ""Metric2"": [100, 150, 200, 250],
+}
+df = pd.DataFrame(data)
+
+# Bar width and positions
+bar_width = 0.4
+x = np.arange(len(df[""Category""]))
+
+# Create a figure and axis objects
+fig, ax1 = plt.subplots(figsize=(8, 6))
+
+# Plot the first bar plot (Metric1) with Seaborn
+sns.barplot(
+    x=x - bar_width / 2, y=""Metric1"", data=df, color=""skyblue"", width=bar_width, ax=ax1
+)
+ax1.set_ylabel(""Metric1 (blue)"", color=""skyblue"")
+ax1.tick_params(axis=""y"", labelcolor=""skyblue"")
+
+# Create a twin axis for the second y-axis
+ax2 = ax1.twinx()
+
+# Plot the second bar plot (Metric2) with Seaborn
+sns.barplot(
+    x=x + bar_width / 2, y=""Metric2"", data=df, color=""orange"", width=bar_width, ax=ax2
+)
+ax2.set_ylabel(""Metric2 (orange)"", color=""orange"")
+ax2.tick_params(axis=""y"", labelcolor=""orange"")
+
+# Set category labels on the x-axis
+ax1.set_xticks(x)
+ax1.set_xticklabels(df[""Category""])
+
+# Add a title and improve layout
+plt.title(""Dual Axis Side-by-Side Bar Plot"")
+fig.tight_layout()
+
+# Show the plot
+plt.show()
+
+```",washraf,4272790,closed,False,6,2025-01-25T01:33:27+00:00,2025-01-31T17:35:22+00:00,2025-01-31T17:35:21+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2801852190,3817,ValueError: array must not contain infs or NaNs in seaborn.histplot(... kde=True),"```
+>>> import seaborn
+>>> seaborn.__version__
+'0.13.2'
+>>> seaborn.histplot(x=range(5), weights=[0,0,3,0,0], kde=False)
+<Axes: ylabel='Count'>
+>>> seaborn.histplot(x=range(5), weights=[0,0,3,0,0], kde=True)
+Traceback (most recent call last):
+  File ""<stdin>"", line 1, in <module>
+  File ""C:\Python311\Lib\site-packages\seaborn\distributions.py"", line 1416, in histplot
+    p.plot_univariate_histogram(
+  File ""C:\Python311\Lib\site-packages\seaborn\distributions.py"", line 447, in plot_univariate_histogram
+    densities = self._compute_univariate_density(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\seaborn\distributions.py"", line 345, in _compute_univariate_density
+    density, support = estimator(observations, weights=weights)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\seaborn\_statistics.py"", line 193, in __call__
+    return self._eval_univariate(x1, weights)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\seaborn\_statistics.py"", line 154, in _eval_univariate
+    kde = self._fit(x, weights)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\seaborn\_statistics.py"", line 143, in _fit
+    kde = gaussian_kde(fit_data, **fit_kws)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\scipy\stats\_kde.py"", line 226, in __init__
+    self.set_bandwidth(bw_method=bw_method)
+  File ""C:\Python311\Lib\site-packages\scipy\stats\_kde.py"", line 574, in set_bandwidth
+    self._compute_covariance()
+  File ""C:\Python311\Lib\site-packages\scipy\stats\_kde.py"", line 586, in _compute_covariance
+    self._data_cho_cov = linalg.cholesky(self._data_covariance,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\scipy\linalg\_decomp_cholesky.py"", line 101, in cholesky
+    c, lower = _cholesky(a, lower=lower, overwrite_a=overwrite_a, clean=True,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\scipy\linalg\_decomp_cholesky.py"", line 18, in _cholesky
+    a1 = asarray_chkfinite(a) if check_finite else asarray(a)
+         ^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Python311\Lib\site-packages\numpy\lib\function_base.py"", line 630, in asarray_chkfinite
+    raise ValueError(
+ValueError: array must not contain infs or NaNs
+```",petsuter,8830354,open,False,5,2025-01-21T13:25:30+00:00,2025-01-21T20:33:13+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2798932316,3815,Error when using the lineplot,"`
+import seaborn as sns 
+import pandas as pd 
+import matplotlib.pyplot as plt
+ 
+fig = plt.figure() 
+
+#--------------------------------------- f1 -----------
+df = pd.DataFrame({'x1': [0,0,1], 'y1': [0,1,1], 'x2':[0,0.001,1], 'x3':[0,0.3,1], 'y2':[0,0.8,1]}) 
+print(df)
+
+a1 = fig.add_subplot(221) 
+sns.lineplot(data=df, x='x1', y='y1', ax=a1) 
+a1 = plt.text(0.55,0.3, str(df[['x1', 'y1']])) 
+a1 = plt.text(0.55,0.1, 'sns.lineplot')
+plt.subplots_adjust(wspace=0.3,hspace=0.3) 
+
+a2 = fig.add_subplot(222) 
+sns.lineplot(data=df, x='x2', y='y1', ax=a2) 
+a2 = plt.text(0.55,0.3, str(df[['x2', 'y1']]))
+a2 = plt.text(0.55,0.1, 'sns.lineplot')
+plt.subplots_adjust(wspace=0.3,hspace=0.3) 
+
+a3 = fig.add_subplot(223) 
+sns.lineplot(data=df, x='x3', y='y2', ax=a3) 
+a3 = plt.text(0.55,0.3, str(df[['x3', 'y2']]))
+a3 = plt.text(0.55,0.1, 'sns.lineplot')
+plt.subplots_adjust(wspace=0.3,hspace=0.3) 
+
+a4 = fig.add_subplot(224)
+a4.plot(df['x1'], df['y1'])
+a4 = plt.text(0.55,0.3, str(df[['x1', 'y1']]))
+a4 = plt.text(0.55,0.1, 'matplotlib')
+
+plt.show()
+`
+
+![Image](https://github.com/user-attachments/assets/16b7fea6-7e12-4210-a8bb-3ec0a79e39b7)
+",whisper-to,94156738,closed,False,5,2025-01-20T10:58:49+00:00,2025-01-26T02:21:30+00:00,2025-01-26T02:11:34+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2795448880,3814,Feature request: add a `legend_kws` arg in sns.scatterplot in order to facilitate legend customization,"Hi!
+
+It would be great if we could pass arguments directly to `ax.legend()` from `sns.scatterplot` (and potentially many other Seaborn functions) using a parameter like `legend_kws` (or something similar).
+
+The idea would look like this:
+
+```python
+sns.scatterplot(
+    x=x,
+    y=y,
+    hue=hue,
+    legend_kws={
+        ""reverse"": True,
+        ""loc"": ""center left"",
+        ""labelcolor"": ""red""
+    }
+)
+```
+
+I’m not sure if this has been considered already, but if adding this feature interests you, I’d be happy to work on it. I haven’t contributed to Seaborn before, but this seems like a relatively straightforward enhancement (or not?)—I just took a quick look at `_ScatterPlotter`.",JosephBARBIERDARNAL,79746670,open,False,2,2025-01-17T13:10:43+00:00,2025-01-30T13:35:35+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2781518713,3813,Change Twitter icon to X in conf.py,Change Twitter icon to X in conf.py,star1327p,5897944,closed,False,1,2025-01-11T02:00:41+00:00,2025-01-26T15:17:38+00:00,2025-01-26T15:17:31+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2780150927,3812,Default color palette and saturation,"I'd like to know what the rationale is behind setting saturation to 0.75 by default in `barplot()`, maybe there is a good reason I cant think of?
+
+I have create lots of plots right now and was using matplotlib pyplot, but the plots didnt look as nice as I wouldve liked so I remembered that seaborn can fix this. I made some barplots using seaborn and it looked good but it was too much effort switching completely, so I went back to pyplot at some point. Now I wanted to make the colors consistent across plots and I couldn't for the life of me figure out why the colors in the seaborn plots looked different, even though I tried using the default palette returned from `sns.color_palette()` everywhere. Until I realized that `barplot()` simply sets saturation to 0.75.
+
+What the fuck is the logic behind that? I lost an hour on this.",cornzz,39997278,closed,False,0,2025-01-10T13:06:53+00:00,2025-01-10T13:41:59+00:00,2025-01-10T13:41:59+00:00,,1,0,0,1,0,0,0
+mwaskom/seaborn,2778214919,3811,"fix pointplot(native_scale=True, ...)","Just ran into this plotting something.
+
+Sorry if this should be done cleaner.
+I removed the backward compatible code because it failed with working native_scale.",v4hn,680358,closed,False,8,2025-01-09T16:02:13+00:00,2025-01-13T19:51:08+00:00,2025-01-13T19:51:08+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2770092826,3808,Plotting negative and positive contributions in stacked bar plot independently,"In the object interface API, I am struggling to find a good approach on plotting stacked bar plots from positive and negative values at the same time. As far as I see, all contributions  add on top of each other. This means that if a negative value follows a positive, it will start from the end point of the positive, resulting in automatic overlapping. 
+
+Is there a possible way to disable overlapping of contributions in stacked bar plots? Like this negative values would always stack on the negative side, positives values on the positive side.
+
+Many thanks for the great package! ",FabianHofmann,19226431,closed,True,0,2025-01-06T08:12:24+00:00,2025-01-06T12:35:54+00:00,2025-01-06T12:35:54+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2761694715,3807,Feature/test label capitalization,This Pull Request introduces a new test function (test_countplot_stat_label_capitalization) within the TestVectorPlotter class to ensure proper label capitalization in countplot visualizations.,aydinomer00,109145643,closed,False,1,2024-12-28T12:07:46+00:00,2025-01-26T15:46:33+00:00,2025-01-26T15:46:32+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2761685247,3806,Fix capitalization for countplot stat label and add test,"This PR fixes the capitalization issue for the `stat` label in the `countplot` function. 
+Additionally, a test (`test_countplot_stat_label_capitalization`) has been added to validate the fix.
+",aydinomer00,109145643,open,False,0,2024-12-28T11:37:24+00:00,2024-12-28T11:37:24+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2754303377,3805,seaborn.objects.Plot can't realize bivariate distribution,"```python
+fig = plt.figure()
+ax = fig.add_subplot(111)
+p = (
+    so.Plot(tips, x='tip', color='sex')
+    .add(so.Bar(alpha=1), so.Hist(), so.Stack())
+    .label(color='')
+    .on(ax)
+    .plot(pyplot=True)
+)
+p.show()
+```
+![image](https://github.com/user-attachments/assets/c235df11-91af-48c2-af64-142afbbbc42b)
+
+The y parameter passed in when Hist is called has no effect, it will have no effect on the graphing, it will simply generate a y-axis label and cannot generate a bivariate distribution.
+I'm looking forward to the implementation of this feature.",moonlighthalfwindow,75985693,closed,False,1,2024-12-21T18:23:45+00:00,2025-01-26T02:16:05+00:00,2025-01-26T02:16:04+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2745529986,3804,PendingDeprecationWarning: vert: bool will be deprecated in a future version with box plot,"Use of `boxplot` is producing the following warning when combined with `matplotlib==3.10.0`
+
+```
+PendingDeprecationWarning: vert: bool will be deprecated in a future version. Use orientation: {'vertical', 'horizontal'} instead.
+```",bpkroth,6413716,closed,False,1,2024-12-17T17:12:19+00:00,2025-01-26T15:17:22+00:00,2025-01-26T15:17:22+00:00,,2,2,0,0,0,0,0
+mwaskom/seaborn,2743380472,3803,Support array-like mask in heatmaps,"Besides `np.ndarray` and `pd.DataFrame` objects, I think it would also be nice to support [array-like objects](https://numpy.org/doc/stable/user/basics.interoperability.html#the-array-method) (PyTorch, Jax, PyArrow arrays, etc.) as the heatmap `mask`.",mariosasko,47462742,closed,False,1,2024-12-16T20:54:35+00:00,2025-01-26T18:23:01+00:00,2025-01-26T15:24:34+00:00,needs-release-note,0,0,0,0,0,0,0
+mwaskom/seaborn,2742248973,3802,Fix tick visibility introspection on matplotlib 3.10,Matplotlib fixed a weird inconsistency in the tick params dict that tests were relying on.,mwaskom,315810,closed,False,0,2024-12-16T12:24:00+00:00,2024-12-16T12:54:03+00:00,2024-12-16T12:54:02+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2738060859,3801,Error for `histplot` with weights and explicit bins as numpy array,"When I try to make a `histplot` with weights and explicitly provided bin edges *as a numpy array*, e.g.:
+```
+import numpy as np, seaborn as sns
+
+sns.histplot(x=np.random.rand(100), weights=np.ones(100), bins=np.linspace(0, 1, 11))
+```
+I get the error
+```
+ValueError: The truth value of an array with more than one element is ambiguous. ...
+```
+It arises in this line:
+https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/distributions.py#L404
+and should be easily solvable by wrapping it in `is True`:
+```
+and (estimate_kws[""bins""] == ""auto"") is True
+```",kosiokarchev,23421827,open,False,3,2024-12-13T10:30:34+00:00,2025-03-28T17:04:53+00:00,,,2,2,0,0,0,0,0
+mwaskom/seaborn,2735243301,3800,rcParams['lines.markeredgecolor']  is not working in seaborn,"Even if I set plt.rcParams['lines.markedgecolor'] = 'red', when I use lineplot or scatterplot, he still shows up as white.
+![image](https://github.com/user-attachments/assets/d08ab3a5-a1b1-4d43-80de-8d20f96b5e35)
+I had to pass in markeredgecolor='red' in lineplot for him to work properly.
+The same problem occurs in scatterplot and relplot",moonlighthalfwindow,75985693,closed,False,1,2024-12-12T08:45:00+00:00,2024-12-12T12:24:21+00:00,2024-12-12T12:24:21+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2732453257,3799,`density_norm` ignored when using `hue` in `sns.violinplot`,"When using the `hue` parameter in `sns.violinplot`, the specified `density_norm` option appears to be ignored. Instead, it defaults to `density_norm=""width""`, regardless of the value explicitly provided.
+
+### Steps to Reproduce
+To highlight this issue, the `iris` dataset was filtered to create noticeable differences in counts between species, making it easier to observe how `density_norm` should affect the plots. Specifically, 40 random observations were removed from the `setosa` species to break the natural balance between species counts in the dataset.
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load dataset and filter
+p = sns.load_dataset(""iris"")
+np.random.seed(123)
+setosa_to_drop = p[p[""species""] == ""setosa""].sample(40).index
+p.drop(index=setosa_to_drop, inplace=True)
+
+# Create violin plots
+fig, axes = plt.subplots(2, 3, figsize=(12, 8))
+axes = axes.flatten()
+
+# Plot 1: density_norm=""count"" without hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""count"", ax=axes[0])
+axes[0].set_title('density_norm=""count""')
+
+# Plot 2: density_norm=""area"" without hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""area"", ax=axes[1])
+axes[1].set_title('density_norm=""area""')
+
+# Plot 3: density_norm=""width"" without hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""width"", ax=axes[2])
+axes[2].set_title('density_norm=""width""')
+
+# Plot 4: density_norm=""count"" with hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""count"", hue=""species"", ax=axes[3])
+axes[3].set_title('density_norm=""count"" (hue)')
+
+# Plot 5: density_norm=""area"" with hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""area"", hue=""species"", ax=axes[4])
+axes[4].set_title('density_norm=""area"" (hue)')
+
+# Plot 6: density_norm=""width"" with hue
+sns.violinplot(data=p, x=""species"", y=""sepal_width"", density_norm=""width"", hue=""species"", ax=axes[5])
+axes[5].set_title('density_norm=""width"" (hue)')
+
+plt.tight_layout()
+plt.show()
+```
+![output](https://github.com/user-attachments/assets/14c3277f-f2c0-4e89-87ef-c07fcdfc26d3)
+
+### Observed Behavior
+- Without `hue`, the `density_norm` parameter behaves as expected (Plots 1–3).
+- When `hue` is applied (Plots 4–6), the normalization defaults to `density_norm=""width""`, ignoring the specified `density_norm` value.
+
+### Environment
+- **Seaborn version:** `0.13.2`
+- **Python version:** `3.13.0`
+- **Matplotlib version:** `3.9.2`",JuanTejedor,111349478,closed,False,2,2024-12-11T10:08:30+00:00,2024-12-11T14:31:41+00:00,2024-12-11T14:31:41+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2718742992,3798,Add stale issues workflow,"Fixes #3797 
+
+I have added the Stale workflow action.
+
+This will create a warning on issues and PRs that have been inactive for the last 30 days before closing them after a week.",adityaraute,43912470,closed,False,2,2024-12-04T20:39:23+00:00,2024-12-05T06:46:09+00:00,2024-12-04T22:40:39+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2718695610,3797,Add Stale bot to close stale issues and PRs,"Currently there are too many issues open that don't need to be.
+They haven't been updated in years even.
+
+GitHub offers a nice little Action to close such issues automatically.
+
+Will create a PR for the same.",adityaraute,43912470,closed,False,1,2024-12-04T20:11:33+00:00,2024-12-05T06:47:52+00:00,2024-12-05T06:47:52+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2718590883,3796,Import error,"Hi, when im trying to run “import seaborn” command i get an error called “DLL load failed while importing _multiarray_umath”. I have tried to do as much as i can. Uninstalled seaborn, install seaborn etc. but still get this error. Pls could you help?",safaksekin,92650030,closed,False,1,2024-12-04T19:12:13+00:00,2024-12-06T15:12:09+00:00,2024-12-06T15:12:09+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2714064956,3795,Non-mirrored violin plots with hue,"It would be great if an explicit option could be added to remove the mirroring on violin plots, so that each one is more similar to a standard KDE plot. Some people, including myself, find those easier to read.
+
+Currently you can do this by setting `split=True` without specifying `hue` (example from #3353):
+
+```python
+sns.violinplot(tips, x=""day"", y=""total_bill"", split=True)
+```
+
+![](https://user-images.githubusercontent.com/315810/236629034-4cee7caf-37a0-4390-984f-32df82900112.png)
+
+However, if I want to use `hue` as well (to make the different groups stand out more), this mirrors the violin for every other hue level.
+It would be good if there were a parameter to disable this behavior.",jlumpe,7455396,closed,False,2,2024-12-03T05:51:04+00:00,2025-01-19T22:49:15+00:00,2024-12-03T13:16:58+00:00,,1,0,0,0,0,0,1
+mwaskom/seaborn,2708271666,3794,Question about abstraction,"https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/distributions.py#L1449
+
+Is there an architectural reason you don't expose the stats data? (i.e. something like `ax.p = p`)
+Most academic publications want to see the number behind the plots.",refack,96947,closed,False,1,2024-11-30T23:48:10+00:00,2024-12-01T19:42:42+00:00,2024-12-01T19:42:42+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2706749214,3793,Wanted to alter the entries persented on the y and y axis ,"Dear team,
+
+Wanted to alter entries presented on the y axis and x axis. I tried but failed to do this. Suggest on this reported issue if possible.
+![image] (https://github.com/user-attachments/assets/18f92f12-d158-4ba8-8b5b-776914b0fa47)
+This image representation wanted.
+
+This the result am getting 
+
+![image](https://github.com/user-attachments/assets/4adca2d8-5128-4194-9d8b-dd78917904aa)
+",taufiq9023,53462811,closed,False,1,2024-11-30T05:54:51+00:00,2025-01-26T02:16:53+00:00,2025-01-26T02:16:53+00:00,,1,1,0,0,0,0,0
+mwaskom/seaborn,2694762354,3790,inner='box' in violinplot shows too large quartiles and whiskers,"When making violinplots, passing `inner='box'` uses mpl's Axes.plot() to draw the inner boxplot. 
+However, the default in mpl is `solid_capstyle='projecting'`, which extends the line too far out, and thus exaggerates both the boxplot's quartiles and the whiskers.
+This becomes increasingly exaggerated with a larger linewidth, because `'projecting'` uses `linewidth/2` (https://matplotlib.org/stable/api/_enums_api.html#matplotlib._enums.CapStyle).
+
+Showing incorrect data ranges may be problematic for e.g., scientific publications.
+For more accurate plotting, I therefore suggest that seaborn sets the default for `inner_kws` to `solid_capstyle='butt'`. This limits the line to its actual endpoints. 
+
+I don't know whether this issue may extend to other types of plots as well.
+
+Below is a minimal example which shows both the default and desired behaviours. I am using seaborn 0.13.2.
+I set `box_width` to 12 to make it a bit more obvious, but even at default box_width it happens.
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+# List of 0-100
+y = np.linspace(0, 100, 100)
+avg, q1, q3 = np.mean(y), np.quantile(y, 1/4), np.quantile(y, 3/4)
+
+# To dataframe
+df = pd.DataFrame({'y': y})
+
+# Plot default behaviour
+plt.figure()
+sns.violinplot(data=df, y='y', cut=0, fill=False, inner='box', inner_kws={'box_width': 12})
+plt.axhline(avg, c='black', zorder=-100)
+plt.axhline(q1, c='black', zorder=-100)
+plt.axhline(q3, c='black', zorder=-100)
+plt.yticks([q1, avg, q3], ['q1', 'avg', 'q3'])
+plt.title('Default behaviour')
+plt.show()
+
+# Plot desired behaviour (inner_kws={'solid_capstyle': 'butt'})
+plt.figure()
+sns.violinplot(data=df, y='y', cut=0, fill=False, inner='box', inner_kws={'box_width': 12, 'solid_capstyle': 'butt'})
+plt.axhline(avg, c='black', zorder=-100)
+plt.axhline(q1, c='black', zorder=-100)
+plt.axhline(q3, c='black', zorder=-100)
+plt.yticks([q1, avg, q3], ['q1', 'avg', 'q3'])
+plt.title('Desired behaviour (solid_capstyle = ""butt"")')
+plt.show()
+```
+
+![image](https://github.com/user-attachments/assets/4309f0d7-e9e3-4d6d-81d7-e354f237d2b1)
+![image](https://github.com/user-attachments/assets/565d5410-b577-4c54-ae4b-498b89a1680d)
+
+",higher-bridge,25927272,open,False,0,2024-11-26T13:52:26+00:00,2024-11-26T13:52:26+00:00,,,1,1,0,0,0,0,0
+mwaskom/seaborn,2672894457,3789,"adds synthwave, nature, paultol, and paultol_dark palettes","#3788 
+
+Adds several more colour palettes.",OWissett,11559376,closed,False,1,2024-11-19T17:04:16+00:00,2024-11-19T23:29:16+00:00,2024-11-19T23:29:16+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2672872644,3788,[FEATURE REQUEST] New Colour Palettes,"I have a few nice colour palettes, and want to get them included in seaborn.
+
+'synthwave'
+
+![image](https://github.com/user-attachments/assets/eb860131-662b-48fb-ade0-918cb7522f67)
+
+
+",OWissett,11559376,closed,False,1,2024-11-19T16:55:43+00:00,2024-12-06T15:11:52+00:00,2024-12-06T15:11:52+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2668575914,3787,change kde line color in histplot function doesn't work,"Hi,
+
+Thanks for the great tools.
+
+I'm trying to change the KDE line color in sns.hisplot() function but it doesn't work.
+
+```
+data = [1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 6, 7]
+
+sns.histplot(data, kde=True, line_kws={'color': 'red'})  
+
+plt.show()
+```
+![download](https://github.com/user-attachments/assets/0e15f43b-4276-4dad-9602-00dfa4f8b13b)
+
+",JiyangChang,26085389,closed,False,1,2024-11-18T13:34:11+00:00,2024-11-18T13:53:20+00:00,2024-11-18T13:53:20+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2665922242,3786,Fix spacing issue in _spacing function,"- Fixed `_spacing` function to calculate spacing for grouped data.
+- Ensured proper handling of grouped values by using the minimum spacing within each group.
+- Verified changes with existing tests.
+
+",juhabae,141327091,closed,False,1,2024-11-17T14:29:50+00:00,2025-01-26T15:47:12+00:00,2025-01-26T15:47:12+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2657581034,3785,Is it possible to config seaborn to follow mpl behavior to break line plot with nan value?,"Is it possible to config seaborn to follow mpl behavior to break line plot with nan value? Some times it is useful, and this is also default for other plot tools like echarts.
+
+Refer [Plotting masked and NaN values](https://matplotlib.org/stable/gallery/lines_bars_and_markers/masked_demo.html)
+
+```py
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-np.pi/2, np.pi/2, 31)
+y = np.cos(x)**3
+
+# 1) remove points where y > 0.7
+x2 = x[y <= 0.7]
+y2 = y[y <= 0.7]
+
+# 2) mask points where y > 0.7
+y3 = np.ma.masked_where(y > 0.7, y)
+
+# 3) set to NaN where y > 0.7
+y4 = y.copy()
+y4[y3 > 0.7] = np.nan
+
+fig, ax = plt.subplots(figsize=(10, 8), nrows=2)
+ax[0].plot(x*0.1, y, 'o-', color='lightgrey', label='No mask')
+ax[0].plot(x2*0.4, y2, 'o-', label='Points removed')
+ax[0].plot(x*0.7, y3, 'o-', label='Masked values')
+ax[0].plot(x*1.0, y4, 'o-', label='NaN values')
+ax[0].legend()
+ax[0].set_title('Masked and NaN data in Matplotlib')
+
+sns.lineplot(x=x*0.1, y=y, marker='o', color='lightgrey', label='No mask', ax=ax[1])
+sns.lineplot(x=x2*0.4, y=y2, marker='o', label='Points removed', ax=ax[1])
+sns.lineplot(x=x*0.7, y=y3, marker='o', label='Masked values', ax=ax[1])
+sns.lineplot(x=x*1.0, y=y4, marker='o', label='NaN values', ax=ax[1])
+ax[1].legend()
+ax[1].set_title('Masked and NaN data in Seaborn')
+
+plt.tight_layout()
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/146b48c3-2b80-4c27-858e-468a203c562f)
+
+",randomseed42,50793718,closed,False,1,2024-11-14T04:52:43+00:00,2024-11-14T13:51:32+00:00,2024-11-14T13:51:32+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2656916608,3784,"[Feature Request] style parameter in `displot`, `catplot` and `lmplot` similar to `relplot`","Currently, `relplot` has `style` parameter that provides an additional way to ""facet"" the data beyond col, row and hue using `linestyle`. It would be nice if this was extended to the other figure plot types. This would also lead to a more consistent API across the different facet grid plots.
+
+
+- `displot` - kdeplot and ecdfplot would change `linestyle`, histplot would change patch `hatching`.
+- `catplot` - stripplot, swarmplot would change `linestyle`; boxplot, violinplot, boxenplot, barplot and countplot would change `hatching`, pointplot would change `linestyle` and `marker`
+- `lmplot` - would change `marker` and `linestyle`
+
+
+References for supporting in underlying matplotlib.
+https://matplotlib.org/stable/gallery/lines_bars_and_markers/linestyles.html
+https://matplotlib.org/stable/gallery/lines_bars_and_markers/marker_reference.html
+https://matplotlib.org/stable/gallery/shapes_and_collections/hatch_style_reference.html",hguturu,2645632,closed,False,4,2024-11-13T21:48:27+00:00,2024-11-13T22:56:40+00:00,2024-11-13T21:58:02+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2650607969,3783,linewidth should work for pointplot,"We have to resort to less than elegant solutions in order to achieve non standard linewidths for pointplots 
+see e.g. https://stackoverflow.com/questions/45540886/reduce-line-width-of-seaborn-pointplot",musm,4319522,closed,False,1,2024-11-11T23:11:20+00:00,2024-12-06T15:12:02+00:00,2024-12-06T15:12:02+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2646362723,3782,fix: use PyCapsule Interface instead of Dataframe Interchange Protocol,"closes #3756 
+closes https://github.com/mwaskom/seaborn/issues/3533
+I'm hoping that this can supersede https://github.com/mwaskom/seaborn/pull/3534
+
+This means that you get support for quite a lot more, e.g.:
+
+- **DuckDB**:
+
+![image](https://github.com/user-attachments/assets/46377d56-347f-4ccd-a547-cc830c385703)
+
+- **cuDF** (their interchange protocol implementation is currently broken anyway https://github.com/rapidsai/cudf/issues/17282)
+
+- **Polars**: it fixes the issue reported in #3533, because the PyCapsule interface actually supports nested data types:
+
+![image](https://github.com/user-attachments/assets/bd190d75-8a35-47e0-b4d1-ee18b588a4ff)
+
+In addition, this has **no effect on existing pandas users**, as there's already an early return for pandas https://github.com/MarcoGorelli/seaborn/blob/0bd85071284d45f38cbf419b8cf1efb2179eda24/seaborn/_core/data.py#L284-L285
+
+---
+
+I'm sorry for having introduced the Interchange Protocol in the first place. It's turned out to be fairly problematic, see https://github.com/pandas-dev/pandas/issues/56732#issuecomment-2466301769 as the associated discussion for more context
+
+---
+
+cc @willayd for comments",MarcoGorelli,33491632,closed,False,2,2024-11-09T17:40:29+00:00,2025-01-21T17:34:47+00:00,2025-01-21T17:34:46+00:00,,3,0,0,0,0,0,0
+mwaskom/seaborn,2645596170,3781,"Polars error for plotting when a datetime column is present, even when that column is not plotted","https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/_core/data.py#L313C9-L313C55
+
+
+```
+import polars as pl
+import seaborn as sns
+
+df = pl.LazyFrame({
+     'col1': [1,2,3],
+     'col2': [1,2,3],
+     'duration_col': [1,2,3],
+})
+
+df = df.with_columns(pl.duration(days=pl.col('duration_col')).alias('duration_col')).collect()
+df
+
+sns.scatterplot(df, x='duration_col', y='col1')
+```
+
+which gives error:
+
+```
+
+NotImplementedError                       Traceback (most recent call last)
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py:313](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py#line=312), in convert_dataframe_to_pandas(data)
+    306 try:
+    307     # This is going to convert all columns in the input dataframe, even though
+    308     # we may only need one or two of them. It would be more efficient to select
+   (...)
+    311     # interface where variables passed in Plot() may only be referenced later
+    312     # in Plot.add(). But noting here in case this seems to be a bottleneck.
+--> 313     return pd.api.interchange.from_dataframe(data)
+    314 except Exception as err:
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py:71](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py#line=70), in from_dataframe(df, allow_copy)
+     69     raise ValueError(""`df` does not support __dataframe__"")
+---> 71 return _from_dataframe(
+     72     df.__dataframe__(allow_copy=allow_copy), allow_copy=allow_copy
+     73 )
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py:94](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py#line=93), in _from_dataframe(df, allow_copy)
+     93 for chunk in df.get_chunks():
+---> 94     pandas_df = protocol_df_chunk_to_pandas(chunk)
+     95     pandas_dfs.append(pandas_df)
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py:150](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py#line=149), in protocol_df_chunk_to_pandas(df)
+    149 elif dtype == DtypeKind.DATETIME:
+--> 150     columns[name], buf = datetime_column_to_ndarray(col)
+    151 else:
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py:396](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py#line=395), in datetime_column_to_ndarray(col)
+    384 data = buffer_to_ndarray(
+    385     dbuf,
+    386     (
+   (...)
+    393     length=col.size(),
+    394 )
+--> 396 data = parse_datetime_format_str(format_str, data)  # type: ignore[assignment]
+    397 data = set_nulls(data, col, buffers[""validity""])
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py:361](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/pandas/core/interchange/from_dataframe.py#line=360), in parse_datetime_format_str(format_str, data)
+    359     return data
+--> 361 raise NotImplementedError(f""DateTime kind is not supported: {format_str}"")
+
+NotImplementedError: DateTime kind is not supported: tDu
+
+The above exception was the direct cause of the following exception:
+
+RuntimeError                              Traceback (most recent call last)
+Cell In[20], line 10
+      7 df = df.with_columns(pl.duration(days=pl.col('duration_col')).alias('duration_col')).collect()
+      8 df
+---> 10 sns.scatterplot(df, x='duration_col', y='col1')
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/relational.py:615](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/relational.py#line=614), in scatterplot(data, x, y, hue, size, style, palette, hue_order, hue_norm, sizes, size_order, size_norm, markers, style_order, legend, ax, **kwargs)
+    606 def scatterplot(
+    607     data=None, *,
+    608     x=None, y=None, hue=None, size=None, style=None,
+   (...)
+    612     **kwargs
+    613 ):
+--> 615     p = _ScatterPlotter(
+    616         data=data,
+    617         variables=dict(x=x, y=y, hue=hue, size=size, style=style),
+    618         legend=legend
+    619     )
+    621     p.map_hue(palette=palette, order=hue_order, norm=hue_norm)
+    622     p.map_size(sizes=sizes, order=size_order, norm=size_norm)
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/relational.py:396](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/relational.py#line=395), in _ScatterPlotter.__init__(self, data, variables, legend)
+    387 def __init__(self, *, data=None, variables={}, legend=None):
+    388 
+    389     # TODO this is messy, we want the mapping to be agnostic about
+    390     # the kind of plot to draw, but for the time being we need to set
+    391     # this information so the SizeMapping can use it
+    392     self._default_size_range = (
+    393         np.r_[.5, 2] * np.square(mpl.rcParams[""lines.markersize""])
+    394     )
+--> 396     super().__init__(data=data, variables=variables)
+    398     self.legend = legend
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_base.py:634](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_base.py#line=633), in VectorPlotter.__init__(self, data, variables)
+    629 # var_ordered is relevant only for categorical axis variables, and may
+    630 # be better handled by an internal axis information object that tracks
+    631 # such information and is set up by the scale_* methods. The analogous
+    632 # information for numeric axes would be information about log scales.
+    633 self._var_ordered = {""x"": False, ""y"": False}  # alt., used DefaultDict
+--> 634 self.assign_variables(data, variables)
+    636 # TODO Lots of tests assume that these are called to initialize the
+    637 # mappings to default values on class initialization. I'd prefer to
+    638 # move away from that and only have a mapping when explicitly called.
+    639 for var in [""hue"", ""size"", ""style""]:
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_base.py:679](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_base.py#line=678), in VectorPlotter.assign_variables(self, data, variables)
+    674 else:
+    675     # When dealing with long-form input, use the newer PlotData
+    676     # object (internal but introduced for the objects interface)
+    677     # to centralize [/](http://localhost:8888/) standardize data consumption logic.
+    678     self.input_format = ""long""
+--> 679     plot_data = PlotData(data, variables)
+    680     frame = plot_data.frame
+    681     names = plot_data.names
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py:57](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py#line=56), in PlotData.__init__(self, data, variables)
+     51 def __init__(
+     52     self,
+     53     data: DataSource,
+     54     variables: dict[str, VariableSpec],
+     55 ):
+---> 57     data = handle_data_source(data)
+     58     frame, names, ids = self._assign_variables(data, variables)
+     60     self.frame = frame
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py:275](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py#line=274), in handle_data_source(data)
+    271 """"""Convert the data source object to a common union representation.""""""
+    272 if isinstance(data, pd.DataFrame) or hasattr(data, ""__dataframe__""):
+    273     # Check for pd.DataFrame inheritance could be removed once
+    274     # minimal pandas version supports dataframe interchange (1.5.0).
+--> 275     data = convert_dataframe_to_pandas(data)
+    276 elif data is not None and not isinstance(data, Mapping):
+    277     err = f""Data source must be a DataFrame or Mapping, not {type(data)!r}.""
+
+File [/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py:319](http://localhost:8888/opt/conda/envs/ds/lib/python3.12/site-packages/seaborn/_core/data.py#line=318), in convert_dataframe_to_pandas(data)
+    314 except Exception as err:
+    315     msg = (
+    316         ""Encountered an exception when converting data source ""
+    317         ""to a pandas DataFrame. See traceback above for details.""
+    318     )
+--> 319     raise RuntimeError(msg) from err
+
+RuntimeError: Encountered an exception when converting data source to a pandas DataFrame. See traceback above for details.
+```
+",zacharygibbs,5280778,closed,False,2,2024-11-09T04:29:10+00:00,2024-11-10T04:29:58+00:00,2024-11-10T04:29:58+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2642812768,3780,Allow setting other scales in log_scale,"The addition of `log_scale` has been great. Especially for violins. I know you can get the base using a number, but would it possible to allow setting a different scale? For example, I use `symlog` and `logit` quite a bit in my work.",mbhall88,20403931,closed,False,2,2024-11-08T04:35:33+00:00,2024-11-10T23:12:43+00:00,2024-11-09T17:00:04+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2642567115,3779,Heatmap twinx problem when square is True ,"Hello!
+
+Thank for building seaborn. It's plots are very pretty and quick to make.
+
+I got myself into a problem when trying to add a second y axis to the heatmap. See this 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sbs
+
+rng = np.random.default_rng(seed=1)
+data = rng.standard_normal(size=(25, 5))
+fig, ax = plt.subplots()
+sbs.heatmap(data, ax=ax)  # All good
+# sbs.heatmap(data, ax=ax, square=True)  # Problem
+tax = ax.twinx()
+plt.show()
+```
+See attached figures. When I set the `square=True` option. The addition of the second ax breaks the display:
+![square_twinx](https://github.com/user-attachments/assets/ed252fba-b790-4c86-96e6-22a92f01aaad)
+![square_no_twinx](https://github.com/user-attachments/assets/7fe5560e-2201-498d-8084-11bd6c8021d4)
+
+What I would like to get by adding the second ax is to keep the setup as you get when you only set `square=True` but with the chance to modify the ticks on the right. Something of the kind that you get when you use twinx but without using the `square=True` option:
+![no_square_twinx](https://github.com/user-attachments/assets/5b7b914b-550c-4c17-b54c-b07de6bdd8a0)
+
+
+Thanks
+Pawel",the-pawel-wojcik,42147018,closed,False,1,2024-11-08T01:04:43+00:00,2024-11-09T17:01:24+00:00,2024-11-09T17:01:24+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2641518345,3778,Feature request: Dumbell plots,"
+![image](https://github.com/user-attachments/assets/d3cdb53e-83c9-41fd-80b5-954133abf81d)
+
+These can be quite common in politics or sociology in order to represent not only the data itself but also the difference between two groups. Although this kind of plot can be built by using `matplotlib` and `seaborn` combined, having a dedicated method that simplifies this work could be helpful. If this feature is interesting for more people, I can contributing into this future (both interface and implementation itself). 
+
+More examples: https://datavizcatalogue.com/blog/chart-snapshot-dumbbell-plot/",mflova,67102627,closed,False,1,2024-11-07T16:18:06+00:00,2024-11-07T23:24:11+00:00,2024-11-07T23:24:10+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2636258920,3777,seaborn.objects dodged bar width gets strangely narrow after specifying `text` parameter to `so.Plot`,"I'm not sure if it's related to [3769](https://github.com/mwaskom/seaborn/issues/3769). It seems the dodged bar width gets strangely narrower after specifying the `text` parameter to the `so.Plot()`. 
+
+MWE:
+```python
+(
+    pd.DataFrame({
+        'x': ['A', 'A', 'B', 'B', 'C', 'C'], 
+        'color': ['X', 'Y', 'X', 'Y', 'X', 'Y'],
+        'y': range(1, 7),
+    })
+    .pipe(so.Plot, x='x', y='y', color='color', text='y')
+    .add(so.Bar(), so.Dodge())
+    .add(so.Text(valign='bottom'), so.Dodge())
+)
+```
+
+<img width=""582"" alt=""Screenshot 2024-11-05 at 2 11 23 PM"" src=""https://github.com/user-attachments/assets/48c3b98c-4682-4dc2-89b9-40178b242abb"">
+
+
+
+",frfeng,47764802,open,False,1,2024-11-05T19:12:16+00:00,2024-11-15T08:12:32+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2620993843,3775,Adding bar_label to a barplot - changed behaviour with 0.13 when using palette without hue,"Hello and thanks for this awesome visualisation library!
+
+While migrating from 0.12 to 0.13, I've spotted the new behaviour of `palette` on a `barplot`, that now automatically uses `hue`.
+
+This changes the returned `containers`, as in the past all bars where part of `containers[0]`, while with the `hue` parameter 1 BarContainer is returned per bar.
+
+Example Code:
+
+```python
+import seaborn as sns
+
+penguins = sns.load_dataset(""penguins"")
+
+palette = sns.color_palette(""hls"", 3)
+
+ax = sns.barplot(penguins, x=""body_mass_g"", y=""island"",
+                 palette=palette,
+                # hue=""island"", legend=False # << This will be added by v0.13 implicitly if not provided 
+                 )
+
+print(f""Type of ax.containers[0] = {type(ax.containers[0])} / Length: {(len(ax.containers[0]))}"")
+
+ax.bar_label(ax.containers[0], fontsize=10)
+```
+
+When running this with v0.12 is resulted in all 3 bars having bar_labels (as `ax.containers[0]` contains all of them):
+![image](https://github.com/user-attachments/assets/340ea8f2-f31c-49a1-98fa-59463bdcbce6)
+
+Now with v0.13 each bar is it's own `BarContainer`, so `ax.containers[0]` is just the first bar:
+![image](https://github.com/user-attachments/assets/afe99962-1b70-41fc-8539-4b432578f001)
+
+I assume this is the supposed behaviour, as it behaves the same, when using the `hue` parameter in v0.12 (that likely not many people used).
+
+So the old behaviour can be restored, by iterating all `BarContainers` like this:
+
+```python
+for c in ax.containers:
+    ax.bar_label(c, fontsize=10)
+```
+
+Do you confirm, that this is the expected behaviour or did I miss something?",AlexTWeb,107415816,closed,False,1,2024-10-29T11:44:15+00:00,2024-10-29T17:21:23+00:00,2024-10-29T17:21:22+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2618157369,3774,Pointplot error bars do not respect rasterized=True,"Using v0.13.2, I was making a pointplot with many points. To save space on the figure, I was passing `searbon.pointplot(rasterized=True,...)`, but the svg was still extremely large. It turns out that the rasterized keyword only gets passed to the scatter portion of the call, and the error bars were plotted as vector graphics still. 
+
+This was simple to fix by adding ""rasterized"" to this iteration within the plot_errorbars function, but there may be other places I didn't check that would need something similar. However, I can confirm this correctly rasterizes the errorbars.
+
+https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/categorical.py#L1235",ASLeonard,29678761,closed,False,3,2024-10-28T11:35:05+00:00,2024-10-28T13:11:52+00:00,2024-10-28T13:11:52+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2609012718,3772,non-deterministic FacetGrid.map_dataframe,"demo: 
+```python
+import io
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = b"""""",Job Role,Gender,Outcome ,normalised_selection_rate
+0,HR Business Partner,Female,0,0.0
+1,HR Business Partner,Male,0,0.0
+2,HR Business Partner,Male,0,0.0
+3,HR Business Partner,Female,0,0.0
+4,HR Business Partner,Male,0,0.0
+5,HR Business Partner,Male,0,0.0
+6,HR Business Partner,Female,1,20.0
+7,HR Business Partner,Male,1,20.0
+8,HR Business Partner,Male,0,0.0
+9,HR Business Partner,Female,1,20.0
+10,HR Business Partner,Female,0,0.0
+11,HR Business Partner,Female,0,0.0
+12,HR Business Partner,Female,0,0.0
+13,HR Business Partner,Female,0,0.0
+14,HR Business Partner,Female,0,0.0
+15,HR Business Partner,Female,0,0.0
+16,HR Business Partner,Male,0,0.0
+17,HR Business Partner,Male,1,20.0
+18,HR Business Partner,Male,0,0.0
+19,HR Business Partner,Female,1,20.0
+20,Senior Finance Business Partner,Female,0,0.0
+21,Senior Finance Business Partner,Male,1,33.33333333333333
+22,Senior Finance Business Partner,Male,0,0.0
+23,Senior Finance Business Partner,Female,0,0.0
+24,Senior Finance Business Partner,Female,0,0.0
+25,Senior Finance Business Partner,Female,1,33.33333333333333
+26,Senior Finance Business Partner,Female,0,0.0
+27,Senior Finance Business Partner,Male,0,0.0
+28,Senior Finance Business Partner,Female,0,0.0
+29,Senior Finance Business Partner,Female,0,0.0
+30,Senior Finance Business Partner,Male,1,33.33333333333333
+31,Senior Finance Business Partner,Female,0,0.0
+32,Senior Finance Business Partner,Female,0,0.0
+33,Senior Finance Business Partner,Male,0,0.0
+34,Senior Finance Business Partner,Male,0,0.0
+35,Senior Finance Business Partner,Male,0,0.0
+36,Senior Finance Business Partner,Female,0,0.0
+37,Senior Finance Business Partner,Male,0,0.0
+38,Senior Finance Business Partner,Female,0,0.0
+39,Senior Finance Business Partner,Female,0,0.0
+40,Retail Store Manager,Female,1,10.0
+41,Retail Store Manager,Male,0,0.0
+42,Retail Store Manager,Male,0,0.0
+43,Retail Store Manager,Female,1,10.0
+44,Retail Store Manager,Male,0,0.0
+45,Retail Store Manager,Female,0,0.0
+46,Retail Store Manager,Male,0,0.0
+47,Retail Store Manager,Female,0,0.0
+48,Retail Store Manager,Male,1,10.0
+49,Retail Store Manager,Male,1,10.0
+50,Retail Store Manager,Female,1,10.0
+51,Retail Store Manager,Male,0,0.0
+52,Retail Store Manager,Male,1,10.0
+53,Retail Store Manager,Female,0,0.0
+54,Retail Store Manager,Male,1,10.0
+55,Retail Store Manager,Male,0,0.0
+56,Retail Store Manager,Female,0,0.0
+57,Retail Store Manager,Male,1,10.0
+58,Retail Store Manager,Male,1,10.0
+59,Retail Store Manager,Female,1,10.0
+""""""
+
+
+def main():
+    groupby = ""Gender""
+    job = ""Job Role""
+    plot_data = pd.read_csv(io.BytesIO(data))
+    df = plot_data
+    num_of_groups = len(df[groupby].unique())
+    cmap = plt.get_cmap(""Set3"", num_of_groups)
+    colours = [cmap(i) for i in np.linspace(0, 1, num_of_groups)]
+    color_dict = dict(zip(sorted(df[groupby].unique()), colours, strict=True))
+
+    # Create faceted plot
+    g = sns.FacetGrid(
+        plot_data,
+        col=job,
+        col_wrap=2,
+        height=4,
+        aspect=1,
+    )
+
+    # Add bars to each subplot
+    g.map_dataframe(
+        sns.barplot,
+        x=groupby,
+        y=""normalised_selection_rate"",
+        hue=groupby,
+        palette=color_dict,
+        legend=False,
+    )
+
+    return float(g.axes.flat[0].get_ylim()[1])
+
+while True:
+    try:
+        print(main())
+    finally:
+        plt.close()
+```
+
+running this prints:
+
+```
+21.874999999999996
+21.874999999999996
+17.499999999999996
+21.874999999999996
+17.499999999999996
+21.874999999999996
+21.874999999999996
+21.874999999999996
+21.874999999999996
+17.609374999999897
+21.874999999999996
+21.874999999999996
+17.499999999999996
+17.499999999999996
+...
+```",graingert-coef,151018808,closed,False,4,2024-10-23T15:24:32+00:00,2024-10-23T18:06:02+00:00,2024-10-23T17:00:29+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2601869353,3771,"No mouseover ""x=,y="" for `sns.heatmap` (works only on its colorbar), as if its `ax.format_coords()` was not set","This is much better explained in this SO question: [Interactive sns.heatmap displays x, y only hovering over the colorbar](https://stackoverflow.com/questions/76458890/interactive-sns-heatmap-displays-x-y-only-hovering-over-the-colorbar)
+
+The comments suggest this is easy to implement, but I was unable to do so.
+
+It does work fine if you replace the seaborn `heatmap()` call with direct calls to Matplotlib's `pcolormesh()` + `colorbar()`, i.e, instead of:
+```
+sns.heatmap(data, ...)
+```
+Use this
+```
+heat = plt.pcolormesh(data)
+plt.colorbar(heat)
+```
+
+So _something_ in Seaborn's usage or customization of Matplotlib's `pcolormesh` is ""unsetting"" its default `format_coords`, which I believe is a bug",MestreLion,992317,closed,False,2,2024-10-21T09:07:11+00:00,2024-10-21T11:10:59+00:00,2024-10-21T10:57:50+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2600560099,3770,Fix mark width for overlapping data (#3769),"This could be a fix for #3769, where the bin width for overlapping histograms is smaller than the actual bin width.
+
+It renames `""space""` to `""width""` in `so.Hist`'s calculated properties, and only applies extra scaling to the default width.
+
+A possibly unintended consecuence is that it changes the look for `so.Bar(), so.Hist()` which used to look like `so.Bar(), so.Count()`:
+
+```python
+import seaborn as sns
+import seaborn.objects as so
+
+penguins = sns.load_dataset(""penguins"").dropna()
+
+(
+    so.Plot(penguins, x=""species"")
+    .add(so.Bar(), so.Hist(), label=""Hist"")
+    .add(so.Bar(color=""C1""), so.Count(), label=""Count"")
+)
+```
+![image](https://github.com/user-attachments/assets/23cf954c-09d2-46dd-9e7e-e29914bc57bd)",maurosilber,9124827,open,False,0,2024-10-20T15:15:32+00:00,2024-10-20T15:15:32+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2599625197,3769,Smaller mark width for overlapping data with `so.Hist(common_bins=False)`,"When doing a `so.Hist(common_bins=False)`, if the bins for each group overlap, the width calculated for each mark is smaller that it should be.
+
+Here's a minimal working example, where I have a dataset `A`, and its x-shifted version `B = A + shift`. In each row, I'm plotting a different shift, and when they start overlapping, the bar width is smaller than the bin width.
+
+![image](https://github.com/user-attachments/assets/d5cfa989-e8df-4724-bf69-059ec16892ea)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn.objects as so
+
+
+def plot(ax, shift: float):
+    data = np.random.default_rng(0).normal(size=50)
+    df = pd.DataFrame({""A"": data, ""B"": data + shift}).melt()
+    return (
+        so.Plot(df, x=""value"", color=""variable"")
+        .add(so.Bars(), so.Hist(common_bins=False))
+        .on(ax)
+        .plot()
+    )
+
+
+shifts = [4.5, 4, 3.9, 3.8]
+fig, axes = plt.subplots(len(shifts), sharex=True, gridspec_kw={""hspace"": 0})
+for ax, shift in zip(axes, shifts):
+    plot(ax, shift)
+    ax.set(ylabel=f""{shift = }"")
+```
+
+I could trace it to this width calculation:
+https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/_core/plot.py#L1453
+which ends up running the following line for all groups as one:
+https://github.com/mwaskom/seaborn/blob/b4e5f8d261d6d5524a00b7dd35e00a40e4855872/seaborn/_core/scales.py#L467
+
+If the bin edges are `[0, 1, 2]` and `[0.5, 1.5, 2.5]` for each group, it calculates the bin width from `[0, 0.5, 1, 1.5, ...]` and finds a width of 0.5 instead of a width of 1.
+
+Maybe this is not a bug but something by design when there is overlap between marks?
+
+In case it is a bug, I could contribute a fix, but would probably need some direction as to where to fix it.
+
+Thanks!",maurosilber,9124827,open,False,1,2024-10-19T21:33:56+00:00,2024-10-24T12:11:39+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2598043819,3768,"sns.pairplot in same code, but show different result in different version.","Hello I found a problem between 0.11.0 version and 0.13.2.
+
+In the same code, there are different results.
+
+```Python
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.set_theme(style=""white"")
+tips = sns.load_dataset(""tips"")
+
+sns.pairplot(data=tips) 
+```
+
+0.11.0 version result
+![0 11 0](https://github.com/user-attachments/assets/56c6a465-1ee4-4da5-aa6c-a124fe07dd9e)
+0.13.2 version result
+![0 13 2](https://github.com/user-attachments/assets/b0518657-811e-49c6-b0e2-1986fd295bca)
+
+Could you fix the problem?
+
+Thank you.
+",nk7260ynpa,21199868,closed,False,3,2024-10-18T17:30:47+00:00,2024-10-19T15:49:26+00:00,2024-10-19T15:49:26+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2594233995,3767,Different color for each bar,"Hi.i want to set diferent color for each bar
+
+![image](https://github.com/user-attachments/assets/73deeeda-2d63-4070-978d-ec31a6c003d2)
+
+![image](https://github.com/user-attachments/assets/756d93ef-1cd3-4a04-a6d5-5ca044298d81)
+
+def ploting_cnt_amt(df,col, lim=2000) :
+    tmp=pd.crosstab(df[col] , df['isFraud'] , normalize='index')*100
+    tmp=tmp.reset_index()
+    tmp.rename(columns={ 0:'NoFraud' , 1:'Fraud'},inplace=True)
+
+
+    plt.figure(figsize=(16,14))    
+    plt.suptitle(f'{col} Distributions ', fontsize=24)
+    
+    plt.subplot(211)
+    g = sns.countplot( x=col,  data=df, order=list(tmp[col].values))
+    gt = g.twinx()
+    gt = sns.pointplot(x=col, y='Fraud', data=tmp, order=list(tmp[col].values),
+                       color='black', legend=False, )
+    gt.set_ylim(0,tmp['Fraud'].max()*1.1)
+    gt.set_ylabel(""%Fraud Transactions"", fontsize=16)
+    g.set_title(f""Most Frequent {col} values and % Fraud Transactions"", fontsize=20)
+    g.set_xlabel(f""{col} Category Names"", fontsize=16)
+    g.set_ylabel(""Count"", fontsize=17)
+    g.set_xticklabels(g.get_xticklabels(),rotation=45)
+    sizes = []
+    for p in g.patches:
+        height = p.get_height()
+        sizes.append(height)
+        g.text(p.get_x()+p.get_width()/2.,
+                height + 3,
+                '{:1.2f}%'.format(height/total*100),
+                ha=""center"",fontsize=12) 
+        
+    g.set_ylim(0,max(sizes)*1.15)
+    
+ploting_cnt_amt(df_trans , 'addr1')
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+The code is the same, but for others, the graph comes out differently for each bar, but my graph only come out in the same color.
+
+I tried setting up 'sns.set_palette()' to work this out, but the phenomenon is the same.
+Instead, if I set up barplot (palette =...) and set the color, the color comes out differently.
+It's annoying to set this up every time, is there a way for each bar to automatically come out differently when using it in the future?
+",ovan79,185353311,closed,False,1,2024-10-17T09:58:59+00:00,2024-10-17T12:27:26+00:00,2024-10-17T12:27:26+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2590054975,3766,Uncertainties v.s weights & Averaging over columns / coordinates.,"Hello. You have no idea how much I enjoy using your package. It fits exactly my usage, and I can't believe that only at this stage of my project I came to know it!
+
+I'm working with a large `xarray.Dataset` with N>4 coordinates which I convert `.to_dataframe()` in order to plot them with `seaborn.lineplot`. It became confusing to me when I wanted seaborn to show my calculations' uncertainty. At first, I wasn't sure even how to save that uncertainty, until I realized that you don't call it ""uncertainty"", but rather the weights of the data variables for the estimation, and that they should simply be saved in a separate data variable.
+
+If I need to perform estimation, it works pretty good I suppose. However, I found that terminology choice a bit peculiar, because weights are something only proportional to each other, whereas uncertainties also have a meaning when the data is not averaged. The below formulas are the formulas I'm familiar with regarding this. Note how $\mu = x_0$ and $\sigma_\mu = \sigma_0$ are obtained if the summation is over 1 element:
+
+$$ \mu = \frac{\sum_i (x_i/\sigma_i^2)}{\sum_i \sigma_i^{-2}}$$
+
+$$ \sigma_\mu = 1/\sqrt{\sum_i \sigma_i^{-2}} $$
+
+I also noticed, that if I give `seaborn.lineplot` a `dataset.to_dataframe()` with only 1 coordinate, then the `weights` aren't taken into account at all. I understand that I can supply a custom function to the `errorbar` argument. But I think it would have been much more consistent if instead of the `weights` argument, an `uncertainties` argument would have been used, and the uncertainties would have been used as error bars even if no estimation is required (because there is a single `y` per `x`).",doronbehar,10998835,closed,False,4,2024-10-15T22:16:20+00:00,2024-10-21T07:35:46+00:00,2024-10-17T21:15:24+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2588229568,3765,sns.lineplot produces confusing output,"[pipr.csv](https://github.com/user-attachments/files/17376020/pipr.csv)
+[ss.csv](https://github.com/user-attachments/files/17376021/ss.csv)
+
+The following code produces lineplots with garbled confidence intervals and average traces despite no obvious issues with the data. Seaborn version 0.13.2, matplotlib 3.8.3.
+
+```
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+pipr = pd.read_csv('pipr.csv')
+ss = pd.read_csv('ss.csv')
+
+fig, axs = plt.subplots(1, 2, figsize=(12,4),layout='tight')
+sns.lineplot(
+    data=pipr,
+    x=""time"",
+    y=""pc_pupil"",
+    hue='condition',
+    errorbar='ci',
+    palette={'red': 'tab:red', 'blue': 'tab:blue'},
+    ax=axs[0]
+)
+
+sns.lineplot(
+    data=ss,
+    x=""time"",
+    y=""pc_pupil"",
+    hue='condition',
+    errorbar='ci',
+    palette={'lms': 'tab:green', 'mel': 'tab:blue'},
+    ax=axs[1]
+)
+for ax in axs:
+    ax.set(xlabel=""Time (s)"", ylabel=""Pupil size (%-change)"")
+    ax.fill_between(
+        (0, 3), min(ax.get_ylim()), max(ax.get_ylim()), alpha=0.2, color=""k""
+    )
+    ax.grid()
+![Figure_2](https://github.com/user-attachments/assets/b0eafe42-d886-4c6c-be77-db9af65106f1)
+
+```
+
+![Figure_2](https://github.com/user-attachments/assets/b0eafe42-d886-4c6c-be77-db9af65106f1)
+",jtmbeta,11196943,closed,False,4,2024-10-15T09:47:25+00:00,2024-10-15T16:35:11+00:00,2024-10-15T16:35:11+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2577238781,3764,Error bars not attached to actual hight of sns.barplot when using bottom arg,"I'm creating a stacked bar graph using this code:
+`fig, ax = plt.subplots(figsize=(30,10))
+
+sns.barplot(x='Sample' , y=Normalized_Summary['>3nt insertion'],
+            data=Normalized_Summary,
+            bottom = AvgNorm1['>3nt deletion']+AvgNorm1['1-3nt deletion']+AvgNorm1['1-3nt insertion'],
+            label='>3nt insertion', color=""blue"")
+sns.barplot(x='Sample' , y=Normalized_Summary['1-3nt insertion'],
+            data=Normalized_Summary,
+            bottom = AvgNorm1['>3nt deletion']+AvgNorm1['1-3nt deletion'],
+            label='1-3nt insertion', color=""green"")
+sns.barplot(x=Normalized_Summary['Sample'] , y=Normalized_Summary['1-3nt deletion'],
+            data=Normalized_Summary,
+            bottom = AvgNorm1['>3nt deletion'],
+            label='1-3nt deletion', color=""orange"")
+sns.barplot(x=Normalized_Summary['Sample'] , y=Normalized_Summary['>3nt deletion'],
+            data=Normalized_Summary,
+            bottom = 0,
+            label='>3nt deletion', color=""red"")
+`
+
+Where each Sample shows up multiple times.
+
+And getting this result:
+![image](https://github.com/user-attachments/assets/ea60bc0e-b4af-452c-9b55-e9695cacabda)
+
+As you can see, the error bars are not appearing at the actual top of the stacked bar, but at the height of the bar as if it began at 0.
+
+Thanks!",droricu,42256032,closed,False,2,2024-10-10T00:24:41+00:00,2024-10-17T07:10:30+00:00,2024-10-14T11:55:56+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2570820217,3763,clustermap seems to reorder column labels even though col_cluster = False,"I frequently use clustermap for visualisations of my data and couldn't do without it. However, I recently came across an oddity where the implementation seems to change the order of the column labels even though `col_cluster = False`. I suspect this has to do with the special structure of my column names (e.g. E14.5_Ash1l+/-_F). In detail, I try to visualise a precomputed z-score matrix clustered only by the rows to make differences between columns more visible and to identify row groups while keeping the columns as they are as they already have a predefined relationship to each other. However, the returned plot seems to have reordered the columns.
+<img width=""686"" alt=""image"" src=""https://github.com/user-attachments/assets/29954632-5358-4012-baae-8f89698347ee"">
+A quick check by manual plotting the same data using `plt.imshow` shows that only the labels seem to have changed ordering but not the data (compare the colors of the above to the below image)
+<img width=""617"" alt=""image"" src=""https://github.com/user-attachments/assets/3edbd7dd-22d3-4a2a-a09e-c10050b69168"">
+So it seems that there is some part of the code that tries to sort the labels in some way even though they should stay in the given order. In turn this could result in wrong interpretations of the data.
+
+I am using version seaborn 0.13.2.",dmalzl,52696584,closed,False,1,2024-10-07T15:43:31+00:00,2024-10-07T15:48:58+00:00,2024-10-07T15:48:58+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2564779439,3762,Exclude tests/* from coverage,"https://app.codecov.io/gh/mwaskom/seaborn
+",gliptak,50109,closed,False,1,2024-10-03T18:50:17+00:00,2024-10-04T18:57:35+00:00,2024-10-03T18:56:25+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2559984273,3760,Wrong counts plotted in Seaborn bar plots in V0.13.2 and V0.11.2,"Hi! 
+I'm trying to create a stacked bar plot from the given file that includes counts of 6 categories across 4 patients.
+The barplot that seaborn is creating is totally wrong - in the amount of total counts per patients as well as the counts per category.
+In the example code below I show this, and how a barplot in pandas creates the plot correctly.
+This has happened in 2 different seaborn versions: V0.13.2 and V0.11.2 (matplotlib version is 3.7.5 in both cases).
+
+**Here is the data (df in the code), also available in the attached file:**
+```
+       Patient Category  count
+0   Patient_1b       X1   3852
+1   Patient_2a       X4   2946
+2   Patient_1a       X4   2020
+3   Patient_1b       X2   1587
+4   Patient_1a       X1   1353
+5   Patient_1a       X2   1024
+6   Patient_1a       X5    520
+7   Patient_2a       X5    489
+8   Patient_1a       X6    486
+9   Patient_1a       X3    272
+10  Patient_2a       X6    194
+11  Patient_1b       X3    119
+12  Patient_1b       X4     96
+13  Patient_1b       X5     95
+14  Patient_2a       X1     49
+15  Patient_2b       X1     44
+16  Patient_2a       X2     27
+17  Patient_2b       X5     20
+18  Patient_2b       X6     18
+19  Patient_2a       X3     17
+20  Patient_1b       X6     16
+21  Patient_2b       X4     15
+22  Patient_2b       X3      4
+23  Patient_2b       X2      3
+```
+
+**Here is the example code:**
+
+```
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+df = pd.read_csv(""seaborn_counts.csv"")
+
+# plot stacked barplot with Seaborn
+plt.clf()
+sns.barplot(data=df, x=""Patient"", y=""count"", hue=""Category"", dodge=False)
+plt.show()
+
+# Counts don't match what's in the plot!
+df.loc[df[""Patient""]==""Patient_1b"",""count""].sum() # 5,765
+df.loc[df[""Patient""]==""Patient_2a"",""count""].sum() # 3,722
+df.loc[df[""Patient""]==""Patient_1a"",""count""].sum() # 5,675
+
+# plot stacked barplot with Seaborn
+df_pivot = pd.pivot_table(df, values='count', index='Patient', columns='Category')
+plt.clf()
+df_pivot.plot.bar(stacked=True)
+```
+
+**Seaborn plot:**
+![image](https://github.com/user-attachments/assets/58074674-88df-4798-b206-4c048a874529)
+
+**Pandas plot:**
+![image](https://github.com/user-attachments/assets/e38782f2-3f9b-4440-b203-aea8b36b1b81)
+
+ 
+
+
+[seaborn_counts.csv](https://github.com/user-attachments/files/17214974/seaborn_counts.csv)
+",RachellyN,35488838,closed,False,3,2024-10-01T19:04:35+00:00,2024-10-01T20:59:00+00:00,2024-10-01T19:12:48+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2545896324,3759,seaborn objects directly specifying color,"I'm wondering if there's any way to directly specify the color of every single datapoint via seaborn objects. Currently, specifying the `color` variable groups the values and assigning a separate color to each group
+
+I was wondering if instead there was a way to manually assign colors, e.g. via a list of the same size as the input data.",SamKG,15336495,closed,False,2,2024-09-24T16:49:11+00:00,2024-09-24T17:26:46+00:00,2024-09-24T17:26:46+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2542393135,3758,so.PolyFit in conjunction with so.Plot.pair: Fit values connected in wrong order?  ,"When I use `so.PolyFit` (with order > 1) together with ` so.Plot.pair` like so:
+
+```python
+import seaborn.objects as so
+import numpy as np
+import pandas as pd
+
+np.random.seed(1)
+a = np.random.randn(20)
+b = np.random.randn(20)
+y = np.random.randn(20)
+df = pd.DataFrame({""a"": a, ""b"": b, ""y"": y})
+
+(
+so.Plot(df, y=""y"")
+    .pair(x=[""a"", ""b""])
+    .add(so.Dots(pointsize=8))
+    .add(so.Line(color='C1', linestyle='--'), so.PolyFit(order=3))
+)
+```
+
+I get the following output:
+
+![image](https://github.com/user-attachments/assets/a35f8c81-206b-40cc-844f-8419e5b34cbb)
+
+
+It looks like the orange lines connect the values of the calculated fit in the wrong order.
+
+numpy==1.24.2
+pandas==2.0.0
+matplotlib==3.7.1
+seaborn==0.13.2
+",MrMho,19611225,open,False,2,2024-09-23T11:49:08+00:00,2024-10-24T12:12:01+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2537616205,3757,DOC: fix typo,adds missing close ),brownsarahm,10656079,closed,False,0,2024-09-20T00:56:45+00:00,2025-01-26T15:18:54+00:00,2025-01-26T15:18:53+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2494293942,3756,Use Arrow PyCapsule Interface instead of Dataframe Interchange Protocol,"This is something I've chatted with @MarcoGorelli offline about. At the time it was implemented in seaborn, the Dataframe Interchange Protocol was the best option for exchanging dataframe-like data. However, since that was implemented in seaborn, the [PyArrow Capsule Interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html) has come along and solved many of the issues that the DataFrame Interchange Protocol left open.
+
+Without knowing the current state of the interchange implementation of seaborn, switching to the PyArrow Capsule Interface should solve at least the following issues:
+
+- It will add support for polars and other dataframe libraries (https://github.com/mwaskom/seaborn/issues/3277 and https://github.com/mwaskom/seaborn/issues/3188)
+- It will use the Arrow type system, which supports aggregate types (https://github.com/mwaskom/seaborn/issues/3533)
+- The wonkiness of pandas' type system won't be inherited by seaborn (potentially solving https://github.com/mwaskom/seaborn/issues/3519)
+
+The interface has been adopted by a good deal of projects already, some of which are being tracked in https://github.com/apache/arrow/issues/39195",WillAyd,609873,closed,False,13,2024-08-29T12:25:17+00:00,2025-01-28T01:14:13+00:00,2025-01-26T15:25:44+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2493638381,3755,NameError: name 'FloatSlider' is not defined when using widgets.py without ipywidgets installed,"<small>I'm running the latest seaborn (0.13.2) on Mac OS 14.2.1 (x86_64), Python 3.12.4.</small>
+
+## The issue
+When a user attempts to use widgets from widgets.py module without having ipywidgets installed, the intended ImportError is not raised because of a NameError raised moments before that.
+
+Steps to reproduce:
+
+<details>
+  <summary>1. Set up a fresh virtualenv.</summary>
+
+```shell
+$ pip freeze
+setuptools==72.1.0
+wheel==0.43.0
+```
+
+</details>
+
+<details><summary>2. Install seaborn (skip ipywidgets).</summary>
+
+```shell
+$ pip install seaborn
+...
+$ pip freeze
+contourpy==1.2.1
+cycler==0.12.1
+fonttools==4.53.1
+kiwisolver==1.4.5
+matplotlib==3.9.2
+numpy==2.0.1
+packaging==24.1
+pandas==2.2.2
+pillow==10.4.0
+pyparsing==3.1.2
+python-dateutil==2.9.0.post0
+pytz==2024.1
+seaborn==0.13.2
+setuptools==72.1.0
+six==1.16.0
+tzdata==2024.1
+wheel==0.43.0
+
+```
+</details>
+
+3. Attempt to use one of the colormap widgets.
+
+```shell
+$ python -c ""import seaborn; seaborn.choose_colorbrewer_palette('quatlitative')""                                                                                                                                                                  (test-seaborn-fresh)
+Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""<redacted>/anaconda3/envs/test-seaborn-setup/lib/python3.12/site-packages/seaborn/widgets.py"", line 134, in choose_colorbrewer_palette
+    desat=FloatSlider(min=0, max=1, value=1)):
+          ^^^^^^^^^^^
+NameError: name 'FloatSlider' is not defined
+```
+</details>
+
+## Root cause
+The widgets.py module wraps imports from `ipywidgets` with a try/except clause ([link](https://github.com/mwaskom/seaborn/blob/master/seaborn/widgets.py#L5-L10)). When the user doesn't have ipywidgets installed, the `interact` function is patched to raise an `ImportError` and notify the user on the missing module upon invocation.
+
+The local functions defined later in the module are guarded using the wrapper:
+```
+@interact
+def choose_sequential(name=opts, n=(2, 18),
+    desat=FloatSlider(min=0, max=1, value=1),
+    variant=variants):
+```
+Unfortunately, such function definitions already attempt to use the members of the ipywidgets module to define the default values for parameters (in this case the `FloatSlider` is used to define a default for `desat`). This prevents the user from seeing the intended `ImportError` and presents them with a `NameError` instead like the one reproduced above.
+",mrapacz,15965147,open,False,1,2024-08-29T07:15:11+00:00,2024-08-29T07:17:26+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2490493945,3754,added a dict return to choose_diverging_pallete function,"Title: Fix Incompatibility Between seaborn.diverging_palette and seaborn.choose_diverging_palette()
+Description:
+I noticed a divergence between the functions seaborn.diverging_palette and seaborn.choose_diverging_palette() in Seaborn. Specifically, while the documentation for seaborn.diverging_palette references seaborn.choose_diverging_palette() as a tool for selecting a palette interactively, the output from choose_diverging_palette() is not directly compatible with diverging_palette().
+
+Issue:
+Function Reference: The documentation suggests that the interactive palette created using choose_diverging_palette() can be passed directly to diverging_palette(). However, attempting to do so leads to errors or unexpected behavior because the output format of choose_diverging_palette() does not match the expected input for diverging_palette().
+Impact: This issue may cause confusion among users and disrupt workflows that rely on seamless integration between these two functions.
+Proposed Solution:
+Documentation Update: Clarify the documentation for seaborn.diverging_palette to accurately describe the relationship between these two functions and how to correctly use the output from choose_diverging_palette() with diverging_palette().
+Function Compatibility: Consider updating choose_diverging_palette() to return a format that is directly compatible with diverging_palette(), or provide a helper function to convert the output appropriately.
+Additional Notes:
+I have attached a small example illustrating the issue and how it can be resolved.
+Please let me know if there are additional tests or documentation changes you would like to see in this PR.
+Thank you for considering this update.
+
+This draft highlights the key issue, suggests a potential solution, and invites further discussion or feedback. Feel free to adjust it according to the specifics of your findings and any particular changes you're proposing.
+
+
+
+
+
+
+",athyrson06,18296543,closed,False,1,2024-08-27T22:46:31+00:00,2024-08-28T01:39:01+00:00,2024-08-28T01:38:42+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2489297263,3753,"`so.Range()` cannot be ""overplotted"" by an additional mark added with so.Plot.add()","As far as I understood seaborn.objects correctly, marks that get added later should overplot previous marks. However, it seems like that the `so.Range()` mark allways stays on top of later added marks.
+
+```
+import seaborn.objects as so
+
+y = range(1,100)
+x = range(1,100)
+
+(
+    so.Plot(x=x, y=y)
+    .add(so.Range(linewidth=5, color=""#A20013""), so.Est(errorbar=(""pi"", 50)), y=[50]*99, orient=""y"")
+    .add(so.Dot(pointsize=30, color=""Blue""), so.Agg(func=""median""), y=[50]*99, orient=""y"")
+    .add(so.Dot(pointsize=20, color=""Green""), so.Agg(func=""median""), y=[50]*99, orient=""y"")
+
+)
+```
+
+![image](https://github.com/user-attachments/assets/1a4f465d-1160-4eb1-8073-f04a35a697d6)
+
+",noboss93,51446180,closed,False,1,2024-08-27T13:00:42+00:00,2024-08-27T13:27:42+00:00,2024-08-27T13:27:42+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2485082264,3752,ModuleNotFoundError: No module named 'seaborn',"Hi,
+I am trying to import `seaborn` module but getting an error.
+ModuleNotFoundError: No module named 'seaborn'. 
+
+Tried by installing seaborn in jupyter notebook's cell by command:
+!pip install seaborn but getting  an error,
+OSError: Not available 
+
+How to fix this error. Please suggest. 
+![IMG20240825114626](https://github.com/user-attachments/assets/899f37bb-e5d8-4e80-9bdd-fed9320f5504)
+
+",Arbaz-39,125637203,closed,False,1,2024-08-25T06:17:46+00:00,2024-08-25T14:19:36+00:00,2024-08-25T14:19:36+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2485054396,3751,TypeError with seaborn.kdeplot when using fill=True and categorical hue,"### Description
+
+I encountered a `TypeError` when using `seaborn.kdeplot` with the `fill=True` option and a categorical hue in my dataset. The error message indicates that there is a problem with data types being passed to the `matplotlib` fill function.
+
+### Steps to Reproduce
+
+Here is a minimal reproducible example:
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Generate synthetic datasets
+np.random.seed(42)
+
+data = pd.DataFrame({
+    'value': np.concatenate([np.random.normal(5, 1, size=100), np.random.normal(10, 1, size=100), np.random.normal(15, 1, size=100)]),
+    'category': ['Group 1']*100 + ['Group 2']*100 + ['Group 3']*100
+})
+
+# Plot using kdeplot
+sns.kdeplot(data=data, x=""value"", hue=""category"", fill=True, palette='coolwarm', alpha=0.7)
+plt.show()
+```
+
+###**Expected Behavior**
+The KDE plot should render successfully with the filled areas for different categories.
+
+###**Actual Behavior**
+The plot does not render, and the following error is thrown:
+TypeError: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+
+
+
+###**Suggested Fix or Improvement**
+It seems that kdeplot with fill=True might need better handling for different data types or clearer documentation on the expected data types. Additionally, improving error messages to guide users to the correct data type could help prevent this issue.
+
+A temporary workaround I found was using matplotlib directly for creating ridge plots, as shown below:
+
+```
+# Ridge plot workaround using matplotlib
+from scipy.stats import gaussian_kde
+
+fig, ax = plt.subplots()
+
+for category in data['category'].unique():
+    subset = data[data['category'] == category]['value']
+    density = gaussian_kde(subset)
+    xs = np.linspace(min(subset), max(subset), 200)
+    ax.fill_between(xs, density(xs), alpha=0.6, label=category)
+
+ax.legend()
+plt.show()
+```
+
+###**Additional Notes**
+It would be helpful to either enhance the kdeplot function to handle this more gracefully or provide a warning if the data type might cause an error.
+
+",mishachada,68367551,closed,False,3,2024-08-25T04:50:44+00:00,2024-09-03T01:02:48+00:00,2024-09-03T01:02:48+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2482109835,3750,Older Versions of Seaborn Incompatible with Matplotlib 3.9.x,"I am unable to import seaborn when installed to an environment with matplotlib 3.9.x.
+
+```
+mamba create -y -n test python seaborn matplotlib statannotations
+mamba activate test
+python
+import seaborn as sb  # This is where it fails.
+```
+Error is:
+`AttributeError: module 'matplotlib.cm' has no attribute 'register_cmap'`
+
+However,
+```
+mamba create -y -n test python seaborn matplotlib=3.8 statannotations
+mamba activate test
+python
+import seaborn as sb  # fine now
+```
+and
+```
+mamba create -y -n test python seaborn
+mamba activate test
+python
+import seaborn as sb  # still fine
+```
+both work fine. 
+
+
+I realize an older version of `seaborn` is being installed (0.11 I believe), due to compatibility with `statannotations`, and that's what's struggling with the `matplotlib` versions. 
+
+Is there a way to set the `matplotlib` dependency <3.9 for older versions of `seaborn`, as that's when they updated the internal API. ",GilChrist19,23705161,closed,False,3,2024-08-23T02:19:40+00:00,2024-08-25T22:39:20+00:00,2024-08-25T22:39:20+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2477379529,3749,"Cannot plot certain data with kdeplot, warning that dataset has 0 variance which is not.","Cannot plot certain data with kdeplot, warning that dataset has 0 variance which is not.
+```
+/gpfs/share/code/pku_env/micromamba/envs/pytorch_cpu/lib/python3.12/site-packages/pandas/core/nanops.py:1016: RuntimeWarning: invalid value encountered in subtract
+  sqr = _ensure_numeric((avg - values) ** 2)
+<ipython-input-20-d1f90ecbf4e4>:1: UserWarning: Dataset has 0 variance; skipping density estimate. Pass `warn_singular=False` to disable this warning.
+  sns.kdeplot(s, bw_adjust=.25, log_scale=True)
+```
+Checking dataset
+```
+In [32]: print(s.mean(), s.std(), s.max(), s.min())
+7.094745e-11 2.368824e-10 1.5460646e-08 0.0
+```
+disable `log_scale` or use a fraction of sample such as `s[10000:]` does no help.
+dataset npy zipped file [exp2.zip](https://github.com/user-attachments/files/16688291/exp2.zip)
+",Wongboo,44860323,closed,False,1,2024-08-21T08:11:23+00:00,2024-08-21T12:06:46+00:00,2024-08-21T12:06:46+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2471754945,3748,How to hide legend while using seaborn.objects?,"I really like the flexibility of seaborn.objects. I would like to ask how to hide its legend?
+
+Next is my code：
+
+```python
+import pandas as pd
+import numpy as np
+
+# Define parameters
+num_cages = 20          # Number of cages
+num_weeks = 10          # Number of weeks
+samples_per_week = 5    # Number of samples per week
+
+# Generate data
+np.random.seed(42)  # For reproducibility
+
+# Create Week variable (1-10)
+weeks = np.tile(np.arange(1, num_weeks + 1), num_cages * samples_per_week)
+
+# Create Cage variable (1-20)
+cages = np.repeat(np.arange(1, num_cages + 1), num_weeks * samples_per_week)
+
+# Create Weight variable (randomly generated, assumed mean=50, std=5)
+weights = np.random.normal(loc=50, scale=5, size=len(weeks))
+
+# Create DataFrame
+total_data = pd.DataFrame({
+    'Week': weeks,
+    'Cage': cages,
+    'Weight': weights
+})
+
+(
+    so.Plot(total_data, x='Week', y=""Weight"", color='Cage')
+    .facet('Cage', wrap=cols).label(col=""Cage"")
+    .layout(extent=[0.,0.,3.,3.])
+    .limit(y=(0, None))
+    .scale(color=""Paired"")
+    .add(so.Line(), so.Agg())
+    .add(so.Dot(), so.Agg('mean'))
+    .add(so.Band(), so.Est())
+)
+```
+![output](https://github.com/user-attachments/assets/6e49f18e-ea2d-4ffe-994c-f8c7305b6337)
+",MarkChenXY163,178687989,closed,False,1,2024-08-18T02:43:15+00:00,2024-09-15T19:03:50+00:00,2024-08-18T12:29:03+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2466730194,3747,Fix: Add dummy widgets to suppress NameError and warn about missing ipywidgets,"This addresses #3755 
+
+## Resolution
+This PR fixes the issue by defining dummy `FloatSlider` and `IntSlider` classes which do not raise exceptions when instantiated. This allows the patched `@interact` to handle the missing ipywidgets scenario gracefully.
+
+After applying the changes suggested in this PR the `ImportError` is raised as intended.
+```shell
+$ python -c ""import seaborn; seaborn.choose_colorbrewer_palette('quatlitative')""
+
+Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""<redacted>/seaborn/seaborn/widgets.py"", line 141, in choose_colorbrewer_palette
+    @interact
+     ^^^^^^^^
+  File ""<redacted>/seaborn/seaborn/widgets.py"", line 10, in interact
+    raise ImportError(msg)
+ImportError: Interactive palettes require `ipywidgets`, which is not installed.
+```",mrapacz,15965147,open,False,0,2024-08-14T20:01:50+00:00,2024-08-29T07:15:47+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2454780673,3746,Controlling color of both line and bar at same time using object interface,"Would it not be nice to have ability to have color specified for both event and region? I can pass all color in scale but that would mess up the legend.
+
+
+```
+(
+    so.Plot(fmri,x= ""timepoint"", y=""signal"")
+      .add(so.Line(color='blue'),so.Agg('mean'),linewidth=""event"",linestyle='event',)
+      .add(so.Bar(), so.Agg(),color='region')
+      .scale(color={'parietal':'red','frontal':'green'},
+             linewidth={'cue':3,'stim':1},
+            linestyle={'cue':'solid','stim':'dashed'})
+)
+```
+<img width=""656"" alt=""Screenshot 2024-08-07 at 11 08 00 PM"" src=""https://github.com/user-attachments/assets/96bbb30c-6f52-4827-8fdc-d37222585f5b"">
+",maddytae,6070280,closed,False,4,2024-08-08T03:11:04+00:00,2024-08-20T15:16:34+00:00,2024-08-20T15:16:33+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2453782416,3745,Dual axis plot broken in 0.13.2 (vs. 0.12.2),"The following code produces a dual axis plot with properly labelled tick marks on both axis with seaborn 0.12.2 (python 3.10.11). However, with seaborn 0.13.2 (python 3.11.4) the tick labels of the right axis are duplicated on the left axis.
+
+```
+import seaborn.objects as so
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+df = pd.DataFrame(
+    {""x"": [1, 2, 3, 4, 5], ""y1"": [5, 2, 1, 6, 2], ""y2"": [1000, 240, 1300, 570, 120]}
+)
+fig, ax1 = plt.subplots(1, 1, figsize=(6, 4))
+ax2 = ax1.twinx()
+ax1.tick_params(axis=""x"", labelrotation=45)
+p1 = (
+    so.Plot(df, x=""x"", y=""y1"")
+    .add(so.Bar(width=0.7))
+    .label(x=""Month"", y=""Data 1"", title=""TITLE"")
+    .on(ax1)
+    .plot()
+)
+p2 = (
+    so.Plot(df, x=""x"", y=""y2"")
+    .add(so.Line(color=""orange"", linewidth=3))
+    .label(y=""Data 2"", title=""TITLE"")
+    .scale(y=so.Continuous().label(like=""{x:,.0f}""))
+    .on(ax2)
+    .plot()
+)
+```
+
+Result with 0.13.2:
+![image](https://github.com/user-attachments/assets/fb3982b0-7de6-41be-b175-91c793e62bf3)
+
+Result with 0.12.2:
+![image](https://github.com/user-attachments/assets/cfb5baf4-1465-449c-90d2-28c91042a711)
+
+",divingtobi,52105524,open,False,2,2024-08-07T15:33:22+00:00,2024-08-07T19:04:27+00:00,,,0,0,0,0,0,0,0
+mwaskom/seaborn,2451775185,3744,Proposal for Beeswarm to overlap points when out of space,"Added option (keep_gutters) to Beeswarm plots (swarmplot, catplot) which when set to False, will iteratively decrease the distance between the points by 10% until no more gutters are present.
+
+## Example 1
+```python
+plt.figure(figsize=(4, 4)) # set figure size
+swarmplot(data=tips, x=""size"", y=""total_bill"", hue=""size"", alpha=0.7, palette='viridis', keep_gutters=False)
+```
+![betterbeeswarm](https://github.com/user-attachments/assets/1b7d452e-10c7-4103-a7ce-14d2d58c34a1)
+
+## Example 2
+```python
+catplot(
+    data=tips, kind=""swarm"", x=""time"", y=""total_bill"", hue=""sex"",
+    col=""day"", aspect=0.6, height=2.5, alpha=0.7, size=5, keep_gutters=False)
+```
+![betterbeeswarm_cat](https://github.com/user-attachments/assets/6899d32a-f7ad-4785-8b32-55ced5f32f27)
+",tvarovski,42950514,open,False,1,2024-08-06T22:17:23+00:00,2024-08-11T08:58:38+00:00,,,2,2,0,0,0,0,0
+mwaskom/seaborn,2449009853,3743,Linear regression constrained to pass through origin,"I'd like to generate a linear line of best fit on a scatter plot with a confidence interval. I happen to know that the line must pass through the origin so the only free parameter is the slope of the line.
+
+Does seaborn provide a way to constrain the y intercept of the regression line and confidence interval to be 0?",danieleades,33452915,closed,False,2,2024-08-05T16:47:38+00:00,2024-08-05T16:58:42+00:00,2024-08-05T16:54:20+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2446832209,3742,"Test for datetime input on jointplot, code to pass test (#3664)","The initial error comes from the `_freedman_diaconis_bins` function, which I fixed with a straightforward check on data type. However, once the code got through that hurdle, it runs into a more complicated blocker with an overflow error derived from matplotlib's handling of dates as integer. I get around the overflow issue with some manipulation of the object state, but some of the fix is admittedly imperfect. Nonetheless, this code alleviates the original problem seen with `datetime64[ns]` handling, see plot below for example code and plot:
+
+```python
+import numpy as np
+from seaborn import axisgrid as ag
+
+dates = np.arange(""2024-01-01"", ""2024-04-01"", dtype=""datetime64[D]"").astype(""datetime64[ns]"")
+random_dates = np.random.choice(dates, size=1000)
+y = np.random.normal(size=1000)
+plot = ag.jointplot(x=random_dates, y=y, kind=""hex"")
+
+plot.fig.savefig(""out.png"")
+```
+
+![out](https://github.com/user-attachments/assets/8a93868d-eea4-4156-b1e2-7144d8b04f87)",athompson1991,8650695,closed,False,1,2024-08-04T05:17:05+00:00,2025-01-26T15:49:59+00:00,2025-01-26T15:49:59+00:00,,0,0,0,0,0,0,0
+mwaskom/seaborn,2437150483,3741,Seaborn with scanpy and statannotations,"Hello,
+
+I am trying to add statistical annotation on a boxplot I generated with scanpy but I get those errors : 
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+scanpy 1.10.2 requires seaborn>=0.13, but you have seaborn 0.11.2 which is incompatible.
+
+So I upgraded seaborn
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+statannotations 0.6.0 requires seaborn<0.12,>=0.9.0, but you have seaborn 0.13.0 which is incompatible.
+
+How do I solve that ?
+
+Best regards,
+
+Lionel Lenoir",LioLenr,161331704,closed,False,1,2024-07-30T07:48:35+00:00,2024-07-30T12:00:31+00:00,2024-07-30T12:00:30+00:00,,0,0,0,0,0,0,0

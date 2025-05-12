@@ -1,0 +1,4672 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+gradio-app/gradio,3057270278,11171,Fixes `save_history` not working when passing gradio component,"## Description
+Make gradio components json serializable in `browser_state` component so a user can pass gradio components to `chat_interface`.
+
+Closes: #11160, #11161
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",dawoodkhan82,12725292,open,False,2,2025-05-12T14:57:33+00:00,2025-05-12T15:09:38+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3055482108,11170,ValueError in Controlling the Reload example in Reloading Guide,"### Describe the bug
+
+In the Auto-Reloading Guide, the [""Controlling the Reload"" example](https://github.com/gradio-app/gradio/blob/9b87e12f1a44e1bcee1373a877a6d39f4e6395e9/guides/10_other-tutorials/developing-faster-with-reload-mode.md?plain=1#L115)  produces a ValueError for any input.
+
+The issue seems to be that `pipe()` returns a list object that is not accepted by `gr.Label()`.
+
+Here is a minimal fix for the error. This uses dictionary comprehension over the list returned by `pipe()` to get a {label: confidence} dict as expected by `gr.Label()`.
+
+```
+demo = gr.Interface(lambda s: {d[""label""]: d[""score""] for d in pipe(s)}, gr.Textbox(), gr.Label())
+```
+
+Another way to avoid the ValueError is to convert the list to a string, but this does not take advantage of visualization of confidence scores with `gr.Label()`:
+
+```
+# Not recommended
+#demo = gr.Interface(lambda s: str(pipe(s)), gr.Textbox(), gr.Label())
+```
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+if gr.NO_RELOAD:
+	from transformers import pipeline
+	pipe = pipeline(""text-classification"", model=""cardiffnlp/twitter-roberta-base-sentiment-latest"")
+
+demo = gr.Interface(lambda s: pipe(s), gr.Textbox(), gr.Label())
+
+if __name__ == ""__main__"":
+    demo.launch()
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+ValueError: The `Label` output interface expects one of: a string label, or an int label, a float label, or a dictionary whose keys are labels and values are confidences. Instead, got a <class 'list'>
+```
+
+### System Info
+
+```shell
+Operating System: Linux
+gradio version: 5.29.0
+gradio_client version: 1.10.0
+```
+
+### Severity
+
+I can work around it",jedick,12667794,open,False,0,2025-05-12T02:52:03+00:00,2025-05-12T02:52:03+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3055173476,11169,framepack,"### Describe the bug
+
+hello after 25/25 generation i have this message  as error : connection errored out. anyone can help me to solve it ? on the local app , and google chrome, anyhelp pls ?
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/fd190c34-5226-4b7c-b5a1-560d7298b88a)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+yes
+```
+
+### Severity
+
+I can work around it",wolfthekillerx,211251901,open,False,0,2025-05-11T19:37:44+00:00,2025-05-11T19:37:44+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3055004457,11168,Style leakage in gr.Chatbot when rendering HTML code snippet,"### Describe the bug
+
+When displaying an HTML string inside a gr.Chatbot, the styles inside the <style> tag of the HTML are applied to the entire Gradio app, leading to style leakage.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+with gr.Blocks() as demo:
+    test_html = """"""
+<!DOCTYPE html>
+<html lang=""zh"">
+<head>
+  <meta charset=""UTF-8"">
+  <meta name=""viewport"" content=""width=device-width,initial-scale=1.0"">
+  <style>
+    :root {}
+    @media(prefers-color-scheme:dark){
+      :root {}
+    }
+    body {
+      background:  #f4f1ec;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+</body>
+</html>""""""
+    gr.Chatbot(
+        value=[{""role"": ""user"", ""content"": test_html}],
+        type='messages'
+    )
+
+demo.launch()
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/b5c397c0-7b5c-4c25-88ce-4e935c24b48f)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Windows
+gradio version: 5.23.0
+gradio_client version: 1.8.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 23.2.1
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.5
+ffmpy: 0.4.0
+gradio-client==1.8.0 is not installed.
+groovy: 0.1.2
+httpx: 0.27.2
+huggingface-hub: 0.28.1
+jinja2: 3.1.4
+markupsafe: 2.1.5
+numpy: 2.1.3
+orjson: 3.10.12
+packaging: 24.2
+pandas: 2.2.3
+pillow: 11.0.0
+pydantic: 2.10.6
+pydub: 0.25.1
+python-multipart: 0.0.19
+pyyaml: 6.0.2
+ruff: 0.9.6
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.41.3
+tomlkit: 0.12.0
+typer: 0.13.1
+typing-extensions: 4.12.2
+urllib3: 2.2.3
+uvicorn: 0.32.1
+authlib; extra == 'oauth' is not installed.
+itsdangerous; extra == 'oauth' is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2024.10.0
+httpx: 0.27.2
+huggingface-hub: 0.28.1
+packaging: 24.2
+typing-extensions: 4.12.2
+websockets: 12.0
+```
+
+### Severity
+
+I can work around it",L9qmzn,55500771,open,False,0,2025-05-11T13:52:04+00:00,2025-05-11T13:52:04+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3054703357,11167,Error: Queue is stopped.,"### Describe the bug
+
+I noticed that if several people are using the Gradio API (gradio_client) the queue is down after a while. 
+ 
+- The error occurs when using different spaces. 
+- The error occurs in all 4.x.x and 5.x.x versions of gradio.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+from gradio_client import Client
+....
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/53677081-f41a-4269-9eee-dd57c4430ca6)
+
+![Image](https://github.com/user-attachments/assets/8cfa2ab8-2c89-4e39-aeb4-729974fff0b6)
+
+### Logs
+
+```shell
+4.x.x
+5.x.x
+```
+
+### System Info
+
+```shell
+5.29.0
+```
+
+### Severity
+
+I can work around it",doevent,61069711,closed,False,1,2025-05-11T04:38:40+00:00,2025-05-12T13:19:46+00:00,2025-05-12T13:19:35+00:00,bug;needs repro;pending clarification,0,0,0,0,0,0,0
+gradio-app/gradio,3049796526,11166,`gr.update()` Does Not Persist Updated Component Properties,"### Describe the bug
+
+Hi Gradio team,
+
+I recently encountered an issue where gr.update() appears to update a component's value visually, but the underlying property does not seem to persist, leading to issues in subsequent logic.
+
+To illustrate, I have a script that uses a timer to monitor the value of an output_box. When I directly `return process(input_text)`, the `output_box` value updates correctly. However, when using `gr.update(value=process(input_text))`, the visible output updates, but the actual component state doesn't reflect the change, which causes problems downstream.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+import time
+
+def process(input_text, progress=gr.Progress(track_tqdm=True)):
+    time.sleep(1)
+    return f""result: {input_text}""
+
+with gr.Blocks() as demo:
+    input_box = gr.Textbox(label=""input"")
+    submit_btn = gr.Button(""submit"")
+    output_box = gr.Textbox(label=""result"")
+    
+    @submit_btn.click(inputs=[input_box],outputs=[output_box])
+    def on_click(input_text):
+        # return gr.update(value=process(input_text))
+        return process(input_text)
+
+    timer = gr.Timer(value=1)
+    @timer.tick()
+    def time_debug():
+            print(output_box.value)
+
+
+demo.launch()
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio 5.27.0
+```",qqandy0120,63918752,closed,False,3,2025-05-08T18:36:51+00:00,2025-05-10T17:18:50+00:00,2025-05-09T18:47:29+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3049499030,11165,load `theme.css` relatively instead of from `config.root`,"## Description
+
+To address #11164, here's a proposal to load `theme.css` relatively instead of from `config.root`, so that the `link` `href` is the expected value when the gradio server is accessed via a proxy server.
+
+Closes: https://github.com/gradio-app/gradio/issues/11164
+
+### Current
+
+```
+<link rel=""stylesheet"" href=""http://127.0.0.1:7860/theme.css?v=63194d3741d384f9f85db890247b6c0ef9e7abac0f297f40a15c59fe4baba916"">
+```
+
+#### Other resources loaded in the `head`
+
+```
+<link rel=""stylesheet"" href=""http://127.0.0.1:63454/assets/DownloadLink-CqD3Uu0l.css"">
+```
+
+### With Proposed Change
+
+```
+<link rel=""stylesheet"" href=""./theme.css?v=63194d3741d384f9f85db890247b6c0ef9e7abac0f297f40a15c59fe4baba916"">
+```
+  
+",sharon-wang,25834218,open,False,1,2025-05-08T16:17:16+00:00,2025-05-12T15:10:41+00:00,,,1,1,0,0,0,0,0
+gradio-app/gradio,3049443975,11164,should the `theme.css` href be a relative path from the page url instead of relative to `config.root`?,"### Describe the bug
+
+The `href` for the theme.css `link` element is being loaded from the app root instead of relative to the document url. This is in contrast to the other resources in the `head` of the gradio app page. In proxied applications, this can lead to a `404 Not Found`, as the `theme.css` may be loaded from the actual app url that is not accessible on the machine, instead of the proxied url.
+
+I intend to submit a PR for this issue, to load the theme.css relative to the page url instead of from the `config.root`.
+
+There are [several issues](https://github.com/gradio-app/gradio/issues?q=is:issue%20state:open%20theme.css) mentioning theme.css that sound related, but none of the open issues match this exact description and reproduction steps.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+## Example Gradio Proxy Server
+
+This is a simple proxy server for a Gradio app, built using Flask. It proxies requests to a Gradio app running on a target port and exposes them under a `/proxy` subpath.
+
+### How to run
+
+1. **Create the files specified below (`requirements.txt`, `proxy_server.py`, `gradio_example.py`)**
+
+2. **Create and activate a virtual environment**:
+   ```sh
+   <preferred_python_installation> -m venv .venv
+   source .venv/bin/activate
+   ```
+   _Note: Replace `<preferred_python_installation>` with your installed Python version. I personally used Python 3.12.2._
+
+3. **Install dependencies**:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. **Run the proxy server**:
+   ```sh
+   python proxy_server.py
+   ```
+
+5. Wait for the output `👉 Access the app at <APP_URL>`
+    Sample output:
+    ```sh
+    Starting the target application...
+    * Running on local URL:  http://127.0.0.1:7860
+    * To create a public link, set `share=True` in `launch()`.
+    ✅ Target application is running at http://127.0.0.1:7860
+    ✅ Proxy server starting on port 8000
+    👉 Access the app at http://127.0.0.1:8000/proxy
+    ```
+    - `TARGET_URL` is the URL of the Gradio app -- `✅ Target application is running at <TARGET_URL>`
+    - `APP_URL` is the URL of the proxy server -- `👉 Access the app at <APP_URL>`
+
+6. Open the `<APP_URL>` `http://127.0.0.1:8000/proxy` in your browser.
+
+7. Open the browser's developer tools (usually F12 or right-click and select ""Inspect"").
+
+8. Go to the ""Elements"" tab. Expand the `<head>` section.
+
+9. Look for the `<link>` tag that includes `theme.css` -- you may want to Cmd+F or Ctrl+F to search for `theme.css`.
+
+10. Check the `href` attribute of the `<link>` tag. It should show `<TARGET_URL>/theme.css`, but the expected value is `<APP_URL>/theme.css`.
+    - Expected: `http://127.0.0.1:8000/proxy/theme.css`
+    - Actual: `http://127.0.1:7860/theme.css`
+    - The `theme.css` file is not being served from the proxy server, but from the target Gradio app.
+    - See the screenshot below.
+
+#### `requirements.txt`
+
+```txt
+gradio
+flask
+requests
+```
+
+#### `proxy_server.py`
+
+```python
+import requests
+from flask import Flask, request, Response, redirect
+import threading
+import time
+
+app = Flask(__name__)
+
+##################################################################
+# CONFIGURATION
+##################################################################
+
+TARGET_PORT = 7860
+PROXY_PORT = 8000
+TARGET_HOST = f""http://127.0.0.1:{TARGET_PORT}""
+PROXY_SUBPATH = ""/proxy""
+
+##################################################################
+# TARGET APP HELPERS
+##################################################################
+
+
+def start_target_app():
+    """"""Start the target app in a separate thread.""""""
+    import gradio_example
+
+
+########################################################################
+# PROXY SERVER ROUTES
+########################################################################
+
+
+@app.route(""/"")
+def root():
+    """"""Redirect root to the proxy subpath.""""""
+    return redirect(PROXY_SUBPATH)
+
+
+@app.route(""/<path:direct_path>"")
+def handle_direct_requests(direct_path):
+    """"""Redirect direct path requests to the proxy subpath.""""""
+    print(f""Direct path request: /{direct_path}"")
+    return redirect(f""{PROXY_SUBPATH}/{direct_path}"")
+
+
+@app.route(f""{PROXY_SUBPATH}"", defaults={""path"": """"})
+@app.route(f""{PROXY_SUBPATH}/<path:path>"")
+def proxy_subpath(path):
+    """"""Proxy requests to the target app.""""""
+    url = f""{TARGET_HOST}/{path}""
+    print(f""Proxying: {PROXY_SUBPATH}/{path} -> {url}"")
+
+    resp = requests.request(
+        method=request.method,
+        url=url,
+        headers={key: value for key, value in request.headers if key != ""Host""},
+        data=request.get_data(),
+        params=request.args,
+    )
+
+    # Directly return the response from the target app
+    return Response(resp.content, resp.status_code, resp.headers.items())
+
+
+##########################################################################
+# MAIN
+##########################################################################
+
+if __name__ == ""__main__"":
+    print(""Starting the target application..."")
+    threading.Thread(target=start_target_app, daemon=True).start()
+
+    # Wait for the target app to start
+    start_time = time.time()
+    while time.time() - start_time < 10:
+        try:
+            if requests.get(f""{TARGET_HOST}/"").status_code == 200:
+                break
+        except requests.RequestException:
+            time.sleep(1)
+
+    print(f""✅ Target application is running at {TARGET_HOST}"")
+    print(f""✅ Proxy server starting on port {PROXY_PORT}"")
+    print(f""👉 Access the app at http://127.0.0.1:{PROXY_PORT}{PROXY_SUBPATH}"")
+
+    app.run(host=""0.0.0.0"", port=PROXY_PORT)
+```
+
+#### `gradio_example.py`
+
+```python
+import gradio as gr
+
+def image_classifier(inp):
+    return {'cat': 0.3, 'dog': 0.7}
+
+demo = gr.Interface(
+    fn=image_classifier, 
+    inputs=""image"", 
+    outputs=""label"",
+    # theme=""soft""
+)
+
+demo.launch()
+```
+
+
+### Screenshot
+
+See the highlighted element in the Developer Tools for the `theme.css` `link` element. Note that the href uses the app root instead of the proxied url, which the other resources use.
+
+<img width=""1149"" alt=""Image"" src=""https://github.com/user-attachments/assets/3acdb4a3-8feb-48f2-adf1-622328e17ebc"" />
+
+In an environment where the client and proxy server are not running on the same machine, the Gradio app appears unstyled due to the missing `theme.css` file:
+
+<img width=""792"" alt=""Image"" src=""https://github.com/user-attachments/assets/57b82078-a407-4d17-a99c-5393f54d83e3"" />
+
+It is expected to look like:
+
+<img width=""776"" alt=""Image"" src=""https://github.com/user-attachments/assets/51ad6b27-791b-4d3a-8e89-8cbb6de2317d"" />
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Darwin
+gradio version: 5.29.0
+gradio_client version: 1.10.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 24.1.0
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client: 1.10.0
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.5
+orjson: 3.10.18
+packaging: 25.0
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.4
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.8
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.3
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.2
+mcp is not installed.
+pydantic: 2.11.4
+authlib is not installed.
+itsdangerous: 2.2.0
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 25.0
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+Blocking usage of gradio",sharon-wang,25834218,open,False,0,2025-05-08T15:56:24+00:00,2025-05-09T19:10:25+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3047683076,11163,Customize MCP ImageContent description for better distinguish tuple image returns,"- [x] I have searched to see if a similar issue already exists.
+
+
+**Is your feature request related to a problem? Please describe.**  
+
+When a Gradio function returns a tuple with multiple non-textual outputs (especially multiple images), the current MCP post process additional URL for each image. This causes LLM agents consuming MCP to misinterpret or ignore parts of the visual output.
+
+While the MCP protocol is planning to introduce more structured output modes ([modelcontextprotocol/modelcontextprotocol#356](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/356)), this will take time to finalize and implement.
+
+
+**Describe the solution you'd like**  
+
+I’d like a way to annotate the semantic meaning of each Image returned in a tuple. 
+
+https://github.com/gradio-app/gradio/blob/479fc28f804c674e3705763be199dacb0f5dca79/gradio/mcp.py#L453-L456
+",xiaoyao9184,6614349,open,False,0,2025-05-08T03:17:00+00:00,2025-05-08T03:17:00+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3046999276,11161,ChatInterface with gr.HTML output will not be loaded to conversation from chat history,"### Describe the bug
+
+ChatInterface with gr.HTML to render pandas dataframe output will not be loaded to conversation from chat history when clicked.
+
+It worked fine when initiating the conversation. The app is not responsive if we click on the previous chat history to load it.
+
+Can work around it by not including the gr.HTML component, but the dataframe rendering is poor in this case.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+import pandas as pd
+
+
+sample_data = pd.read_csv('data.csv').head()
+
+def chat(message, history):
+    return [{'role': 'assistant', 'content': gr.HTML(sample_data.to_html())}]
+
+
+demo = gr.ChatInterface(chat, type='messages', save_history=True)
+
+demo.launch(debug=True)
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/03e6099b-3a12-447e-a2e1-2361a7565077)
+
+Not responsive when clicked on the previous chat history.
+
+![Image](https://github.com/user-attachments/assets/6d0f5f96-6454-4a55-9b02-b1bf60d2a5c6)
+Second image to shows the dataframe rendered without using gr.HTML, in this case there is no slider and **data columns name** are wrapped.
+
+### Logs
+
+```shell
+C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\chat_interface.py:504: UserWarning: You have not specified a value for the `type` parameter. Defaulting to the 'tuples' format for chatbot messages, but this is deprecated and will be removed in a future version of Gradio. Please set type='messages' instead, which uses openai-style dictionaries with 'role' and 'content' keys.
+  Chatbot(
+Traceback (most recent call last):
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\routes.py"", line 1191, in predict
+    output = await route_utils.call_process_api(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\route_utils.py"", line 322, in call_process_api
+    output = await app.get_blocks().process_api(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\blocks.py"", line 2156, in process_api
+    data = await self.postprocess_data(block_fn, result[""prediction""], state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\blocks.py"", line 1928, in postprocess_data
+    prediction_value = postprocess_update_dict(
+        block=state[block._id],
+        update_dict=prediction_value,
+        postprocess=block_fn.postprocess,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\blocks.py"", line 655, in postprocess_update_dict
+    update_dict[""value""] = block.postprocess(value)
+                           ~~~~~~~~~~~~~~~~~^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\components\chatbot.py"", line 631, in postprocess
+    self._postprocess_message_messages(cast(MessageDict, message))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\components\chatbot.py"", line 587, in _postprocess_message_messages
+    message[""content""] = self._postprocess_content(message[""content""])
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\components\chatbot.py"", line 569, in _postprocess_content
+    raise ValueError(f""Invalid message for Chatbot component: {chat_message}"")
+ValueError: Invalid message for Chatbot component: {'_constructor_args': [{'value': '<table border=""1"" class=""dataframe"">\n  <thead>\n    <tr style=""text-align: right;"">\n      <th></th>\n      <th>Id</th>\n      <th>ParentId</th>\n      <th>UUID</th>\n      <th>SomeString</th>\n      <th>SomeUrl</th>\n      <th>SomeEmail</th>\n      <th>SomeLat</th>\n      <th>SomeLon</th>\n      <th>SomeInt</th>\n      <th>SomeReal</th>\n      <th>SomeDate</th>\n      <th>SomeBoolean</th>\n      <th>SomeCountry</th>\n      <th>MixedStringNumber</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>62.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>http://www.google.com</td>\n      <td>foo@bar.com</td>\n      <td>19.569728</td>\n      <td>158.650752</td>\n      <td>5671.0</td>\n      <td>3684.472507</td>\n      <td>2018-05-31</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>2</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>NaN</td>\n      <td>-4.628926</td>\n      <td>NaN</td>\n      <td>6655.542889</td>\n      <td>2018-04-19</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>3</td>\n      <td>45.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>25.760697</td>\n      <td>-178.298274</td>\n      <td>NaN</td>\n      <td>7603.611651</td>\n      <td>2018-05-10</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>4</td>\n      <td>38.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>10.896313</td>\n      <td>-114.710326</td>\n      <td>NaN</td>\n      <td>8137.959125</td>\n      <td>2018-04-27</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>5</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>-44.326649</td>\n      <td>99.715664</td>\n      <td>NaN</td>\n      <td>8521.891842</td>\n      <td>2018-04-04</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>0.4080873354</td>\n    </tr>\n  </tbody>\n</table>', 'render': False}, {'label': None, 'every': None, 'inputs': None, 'show_label': False, 'visible': True, 'elem_id': None, 'elem_classes': None, 'render': False, 'key': None, 'value': '<table border=""1"" class=""dataframe"">\n  <thead>\n    <tr style=""text-align: right;"">\n      <th></th>\n      <th>Id</th>\n      <th>ParentId</th>\n      <th>UUID</th>\n      <th>SomeString</th>\n      <th>SomeUrl</th>\n      <th>SomeEmail</th>\n      <th>SomeLat</th>\n      <th>SomeLon</th>\n      <th>SomeInt</th>\n      <th>SomeReal</th>\n      <th>SomeDate</th>\n      <th>SomeBoolean</th>\n      <th>SomeCountry</th>\n      <th>MixedStringNumber</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>62.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>http://www.google.com</td>\n      <td>foo@bar.com</td>\n      <td>19.569728</td>\n      <td>158.650752</td>\n      <td>5671.0</td>\n      <td>3684.472507</td>\n      <td>2018-05-31</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>2</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>NaN</td>\n      <td>-4.628926</td>\n      <td>NaN</td>\n      <td>6655.542889</td>\n      <td>2018-04-19</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>3</td>\n      <td>45.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>25.760697</td>\n      <td>-178.298274</td>\n      <td>NaN</td>\n      <td>7603.611651</td>\n      <td>2018-05-10</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>4</td>\n      <td>38.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>10.896313</td>\n      <td>-114.710326</td>\n      <td>NaN</td>\n      <td>8137.959125</td>\n      <td>2018-04-27</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>5</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>-44.326649</td>\n      <td>99.715664</td>\n      <td>NaN</td>\n      <td>8521.891842</td>\n      <td>2018-04-04</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>0.4080873354</td>\n    </tr>\n  </tbody>\n</table>', 'container': False}], 'min_height': None, 'max_height': None, 'padding': True, 'server_fns': [], '_selectable': False, 'data_model': None, '_id': 28, 'visible': True, 'elem_id': None, 'elem_classes': [], 'proxy_url': None, 'share_token': '10zUKhe7lOVEZ1AQIPjL2Labsr9haeAuhv_vqv05QH8', 'parent': None, 'rendered_in': None, 'is_rendered': False, 'state_session_capacity': 10000, 'temp_files': [], 'GRADIO_CACHE': 'C:\\Users\\cat\\AppData\\Local\\Temp\\gradio', 'key': None, 'keep_in_cache': [], 'has_launched': False, 'label': None, 'info': None, 'show_label': False, 'container': False, 'scale': None, 'min_width': None, 'interactive': None, 'load_event': None, 'load_event_to_attach': None, 'value': '<table border=""1"" class=""dataframe"">\n  <thead>\n    <tr style=""text-align: right;"">\n      <th></th>\n      <th>Id</th>\n      <th>ParentId</th>\n      <th>UUID</th>\n      <th>SomeString</th>\n      <th>SomeUrl</th>\n      <th>SomeEmail</th>\n      <th>SomeLat</th>\n      <th>SomeLon</th>\n      <th>SomeInt</th>\n      <th>SomeReal</th>\n      <th>SomeDate</th>\n      <th>SomeBoolean</th>\n      <th>SomeCountry</th>\n      <th>MixedStringNumber</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>62.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>http://www.google.com</td>\n      <td>foo@bar.com</td>\n      <td>19.569728</td>\n      <td>158.650752</td>\n      <td>5671.0</td>\n      <td>3684.472507</td>\n      <td>2018-05-31</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>2</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>NaN</td>\n      <td>-4.628926</td>\n      <td>NaN</td>\n      <td>6655.542889</td>\n      <td>2018-04-19</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>3</td>\n      <td>45.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>NaN</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>25.760697</td>\n      <td>-178.298274</td>\n      <td>NaN</td>\n      <td>7603.611651</td>\n      <td>2018-05-10</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>21</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>4</td>\n      <td>38.0</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>test1@test.com</td>\n      <td>10.896313</td>\n      <td>-114.710326</td>\n      <td>NaN</td>\n      <td>8137.959125</td>\n      <td>2018-04-27</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>NaN</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>5</td>\n      <td>NaN</td>\n      <td>123e4567-e89b-12d3-a456-426655440000</td>\n      <td>abcdef</td>\n      <td>https://www.kaggle.com</td>\n      <td>foo@bar.com</td>\n      <td>-44.326649</td>\n      <td>99.715664</td>\n      <td>NaN</td>\n      <td>8521.891842</td>\n      <td>2018-04-04</td>\n      <td>True</td>\n      <td>AL</td>\n      <td>0.4080873354</td>\n    </tr>\n  </tbody>\n</table>', 'component_class_id': 'fed55d30df7fa6a3e6507de7d303e8a5c4144f8abf30d7ce79f8a92ca9c2c3ab'}
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Windows
+gradio version: 5.29.0
+gradio_client version: 1.10.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 24.1.0
+anyio: 4.9.0
+audioop-lts: 0.2.1
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client: 1.10.0
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.5
+orjson: 3.10.18
+packaging: 25.0
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.4
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.8
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.3
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.2
+mcp: 1.7.1
+pydantic: 2.11.4
+authlib is not installed.
+itsdangerous is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 25.0
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+I can work around it",maxkskhor,98157748,open,False,0,2025-05-07T19:45:46+00:00,2025-05-12T15:02:28+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3046959375,11160,ChatInterface with save_history=True throws gr.Error message if the content is a gr.Image,"### Describe the bug
+
+ChatInterface with save_history=True throws gr.Error pop up message (ValueError: [ValueError('dictionary update sequence element #0 has length 4080; 2 is required'), TypeError('vars() argument must have __dict__ attribute')]) if the content is a gr.Image.
+
+This also causes the conversation not saved in the chat history.
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+
+def chat(message, history):
+    return [{'role': 'assistant', 'content': gr.Image('cat.jpg')}]
+
+
+demo = gr.ChatInterface(chat, type='messages', save_history=True)
+
+demo.launch()
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/92e831c4-d9cd-47ee-be73-fd6f7d082592)
+
+### Logs
+
+```shell
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 324, in jsonable_encoder
+    data = dict(obj)
+ValueError: dictionary update sequence element #0 has length 4080; 2 is required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 329, in jsonable_encoder
+    data = vars(obj)
+TypeError: vars() argument must have __dict__ attribute
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py"", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py"", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\applications.py"", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\applications.py"", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\middleware\errors.py"", line 187, in __call__
+    raise exc
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\middleware\errors.py"", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\route_utils.py"", line 840, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\gradio\route_utils.py"", line 856, in simple_response
+    await self.app(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\middleware\exceptions.py"", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\_exception_handler.py"", line 53, in wrapped_app
+    raise exc
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\_exception_handler.py"", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\routing.py"", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\routing.py"", line 734, in app
+    await route.handle(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\routing.py"", line 288, in handle
+    await self.app(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\routing.py"", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\_exception_handler.py"", line 53, in wrapped_app
+    raise exc
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\_exception_handler.py"", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\starlette\routing.py"", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\routing.py"", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\routing.py"", line 201, in serialize_response
+    return jsonable_encoder(response_content)
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 303, in jsonable_encoder
+    jsonable_encoder(
+    ~~~~~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 303, in jsonable_encoder
+    jsonable_encoder(
+    ~~~~~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 303, in jsonable_encoder
+    jsonable_encoder(
+    ~~~~~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 333, in jsonable_encoder
+    return jsonable_encoder(
+        data,
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 303, in jsonable_encoder
+    jsonable_encoder(
+    ~~~~~~~~~~~~~~~~^
+        item,
+        ^^^^^
+    ...<7 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 289, in jsonable_encoder
+    encoded_value = jsonable_encoder(
+        value,
+    ...<4 lines>...
+        sqlalchemy_safe=sqlalchemy_safe,
+    )
+  File ""C:\Users\cat\workarea\projects\gradio_playground\.venv\Lib\site-packages\fastapi\encoders.py"", line 332, in jsonable_encoder
+    raise ValueError(errors) from e
+ValueError: [ValueError('dictionary update sequence element #0 has length 4080; 2 is required'), TypeError('vars() argument must have __dict__ attribute')]
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Windows
+gradio version: 5.29.0
+gradio_client version: 1.10.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 24.1.0
+anyio: 4.9.0
+audioop-lts: 0.2.1
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client: 1.10.0
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.5
+orjson: 3.10.18
+packaging: 25.0
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.4
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.8
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.3
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.2
+mcp: 1.7.1
+pydantic: 2.11.4
+authlib is not installed.
+itsdangerous is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 25.0
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+Blocking usage of gradio",maxkskhor,98157748,open,False,0,2025-05-07T19:25:50+00:00,2025-05-09T19:10:24+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3045204126,11159,chore: Support Path type for the favicon,"## Description
+
+Type checkers currently highlight a type mismatch when we are trying to use `Path` for the `favicon_path`. This change aims to remove the ""error"" raised by the type checkers by hinting that we can also use `Path`.
+
+## 🎯 PRs Should Target Issues
+
+The change is very small, I don't think it requires an issue.
+  
+",wdroz,5570794,open,False,0,2025-05-07T08:46:17+00:00,2025-05-07T08:46:17+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3045166802,11158,gr.Chatbot: Style fixes to remove multiple scrollbars,"I was experiencing multiple scrollbars in the `gr.Chatbot` component, cf screenshot below:
+
+![image](https://github.com/user-attachments/assets/70a0afd7-9c26-4fb4-ab23-1fa1c9299738)
+
+ As seen with @freddyaboulton , I've done these changes in the style of my `gradio` demo under `app.py`:
+
+```
+#chatbot .role {
+  max-width:95%
+}
+#chatbot .bubble-wrap {
+  overflow-y: visible;
+}
+```
+So this PR hopes to integrate these changes in the main code:  however maybe I've done mistakes since I'm not sure how svelte works!
+
+Closes: https://github.com/gradio-app/gradio/issues/10934",aymeric-roucher,69208727,open,False,0,2025-05-07T08:34:56+00:00,2025-05-08T08:39:38+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3043154063,11157,Build the Gradio wheel for Lite before packaging,"## Description
+
+Experimental PR to build the Gradio wheel for Lite to bytecode expecting it makes the initial load of Lite faster.
+
+Will mark this PR ready after measuring the performance and confirming the change is effective.",whitphx,3135397,open,False,1,2025-05-06T15:06:11+00:00,2025-05-06T15:16:01+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3043109424,11156,Lazy import pandas in native_plot.py,"## Description
+
+To make the initial `import gradio` faster, importing packages that are not necessarily used every time should be deferred.
+This PR does it for `pandas`.  #7851 did it already but the same problem appeared again since then.
+
+The following charts are the import time inspection during `import gradio` obtained by the following commands:
+```
+find . -name ""__pycache__"" -type d -exec rm -r {} +  # Remove the cache
+python -X importtime -c 'import gradio' &> import_time.txt
+tuna import_time.txt
+```
+
+These results show that this PR eliminates the `pandas` import from the execution of `import gradio`.
+
+| `main` | This PR|
+| ------ | ----- |
+| ![image](https://github.com/user-attachments/assets/d9cd964e-7c83-4c73-804a-cbbd207827de) | ![image](https://github.com/user-attachments/assets/d633aecb-8740-4d77-b13d-8db09480538f) |
+
+While these results were measured in normal Gradio, this fix should contribute to reducing the initial loading time of Gradio-Lite too.",whitphx,3135397,open,False,2,2025-05-06T14:50:25+00:00,2025-05-06T14:56:21+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3039743165,11155,Improvements to MCP page,"This PR makes a few improvements to the MCP integration, mostly around documentation:
+
+* In the footer, it changes ""Use via API"" to ""Use via API or MCP"" when `mcp_server=True` (and corresponding updates to internationalization
+* Adds explicit instructions on how convert an existing Gradio Space to support MCP, as well as how to use a _private_ Space as an MCP server. 
+* Changes the tool prefix to a bit shorter
+* Allow linking directly to MCP instructions in view API page
+
+Closes: https://github.com/gradio-app/gradio/issues/11121",abidlabs,1778297,open,False,2,2025-05-05T13:49:12+00:00,2025-05-09T18:33:46+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3039661384,11154,Unexpected margin is added at the bottom after execution on mobile,"### Describe the bug
+
+A weird big margin at the bottom is added to the app only after the execution of https://huggingface.co/spaces/Zhengyi/CRM as below.
+
+| Before execution | After execution |
+| ---- | ---- |
+| ![Image](https://github.com/user-attachments/assets/dc21f1a2-872c-4d4e-8ded-85303dbd7a6c) | ![Image](https://github.com/user-attachments/assets/de540a19-da6d-4803-9011-611ca87ae816) |
+
+Sorry I gave up reproducing it with the latest ver. of Gradio while the Space is using v4.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/Zhengyi/CRM
+
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+sdk: gradio
+sdk_version: 4.21.0
+```
+
+### Severity
+
+I can work around it",whitphx,3135397,open,False,0,2025-05-05T13:21:08+00:00,2025-05-05T13:21:08+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039613316,11153,Buttons should be bigger and have enough gaps in between,"- [x] I have searched to see if a similar issue already exists.
+
+When used on mobile devices, the current button sizes and their gaps are too small and the user easily fails to tap the target button.
+
+### Button size
+The current buttons are basically 20x20, while some guidelines suggest bigger buttons such as 
+> As a general rule, a button needs a hit region of at least 44x44 pt — in visionOS, 60x60 pt — to ensure that people can select it easily, whether they use a fingertip, a pointer, their eyes, or a remote.
+> https://developer.apple.com/design/human-interface-guidelines/buttons
+
+![Image](https://github.com/user-attachments/assets/1bc7e867-d2d9-4fa5-993d-43aeedf5d150)
+
+### Gaps
+
+For example, the camera control in `gr.Image()` has two buttons to take a photo and to select the device.
+They are too close to tap the right one on mobile.
+
+![Image](https://github.com/user-attachments/assets/faccf10d-f4b1-4155-bb4a-58a0d062261a)
+
+Additional context: [internal link](https://huggingface.slack.com/archives/C03K5G9UM8V/p1746449108624729)",whitphx,3135397,open,False,0,2025-05-05T13:03:31+00:00,2025-05-06T16:05:21+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3039601871,11152,Consider saving the results for long-term generations,"Some Gradio apps (e.g. those ones that generate videos or 3d objects) can take minutes to run. In this case, it would be great if there was a way for users to save the results of their generations so that they don't worry about losing it e.g. if they leave the page or generate something else.
+
+Some ideas:
+* Let users click on the download button before the generation is complete to auto-download it
+* Allow users to get the deep-link to their Space before the generation is complete
+* Save runs of a Gradio app (basically just their corresponding deep links) in the settings so users can see the history of their previous generations. 
+",abidlabs,1778297,open,False,0,2025-05-05T13:00:12+00:00,2025-05-05T13:01:13+00:00,,enhancement;needs designing,0,0,0,0,0,0,0
+gradio-app/gradio,3039592061,11151,Fix builtin functions for gr.State value,"## Description
+
+Small bug fix. Alternative is to not allow builtins at all.
+
+Closes: #10653
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,open,False,2,2025-05-05T12:57:55+00:00,2025-05-05T13:44:07+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3039558085,11150,Show queue status before you run event,"It would be informative to users to know whether there is a long queue for a Space (or their estimated ETA) before they even run the function. Particularly for non-Zero GPU Spaces. 
+
+",abidlabs,1778297,open,False,0,2025-05-05T12:45:46+00:00,2025-05-05T12:45:49+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3039554369,11149,"Better UX around ""Errors"" in a Gradio app","Some ideas:
+
+* Provide users info on how many recent invocations of that event resulted in an error so that they have some idea of whether the error is ""their fault"" or whether the app is broken
+* Strategically provide some information from the logs, i.e. some more details than just error. We should be careful not to expose any sensitive information so this needs to be thought through 
+* On Spaces, be able to ""report"" an error --> clicking on this should open up a Discussions issue with the user's input (i.e. a deep link)",abidlabs,1778297,open,False,0,2025-05-05T12:44:15+00:00,2025-05-05T12:44:19+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3039543760,11148,Ability to hide certain columns in `gr.Examples`,"For functions with many inputs, many of them minor parameters, it can clutter the UI to have a large dataset with many columns. Users should be able to hide certain columns in `gr.Examples`. Also, by default, `additional_inputs` in `gr.Interface` should correspond to hidden columns",abidlabs,1778297,open,False,0,2025-05-05T12:40:03+00:00,2025-05-05T12:40:11+00:00,,enhancement,1,1,0,0,0,0,0
+gradio-app/gradio,3039534687,11147,"Fix ""delete"" diff instruction in JS client","## Description
+
+Sending consecutive `delete` diffs doesn't produce the intended result. We send diffs of the form `[""delete"", [0], null], [""delete"", [1], null]` but because we call `splice` to delete the first element, the diff index for the second component is off by one.
+
+My fix is to shift the delete index by 1 in the backend.
+
+This fixes an issue in FastRTC. To see the bug in action in this gradio demo check out
+
+```python
+import gradio as gr
+import random
+import time
+
+with gr.Blocks() as demo:
+    chatbot = gr.Chatbot(type=""messages"")
+    msg = gr.Textbox()
+    clear = gr.Button(""Clear"")
+
+    def user(user_message, history: list):
+        return """", history + [{""role"": ""user"", ""content"": user_message}]
+
+    def bot(history: list):
+        bot_message = random.choice([""How are you?"", ""I love you"", ""I'm very hungry""])
+        history.append({""role"": ""assistant"", ""content"": """"})
+        for character in bot_message:
+            history[-1]['content'] += character
+            time.sleep(0.05)
+            yield history
+        yield []
+        for _ in range(10):
+            time.sleep(10)
+
+
+    msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False).then(
+        bot, chatbot, chatbot
+    )
+    clear.click(lambda: None, None, chatbot, queue=False)
+
+if __name__ == ""__main__"":
+    demo.launch()
+```
+
+After you type a message, only the first message will be deleted not the second.
+
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,open,False,2,2025-05-05T12:36:22+00:00,2025-05-12T13:59:25+00:00,,v: patch;t: fix,0,0,0,0,0,0,0
+gradio-app/gradio,3039504219,11146,Session not found / connection errored out on ZeroGPU Spaces,"We noticed this issue happening intermittently while using this Space:
+
+https://huggingface.co/spaces/Pyramid-Flow/pyramid-flow
+
+Not sure if it's a widespread issue (we should check) but it was quite frustrating on this Space.",abidlabs,1778297,open,False,0,2025-05-05T12:23:42+00:00,2025-05-05T12:23:46+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039490563,11145,Better way to incorproate a README into a Gradio app,"Often users provide instructions / README-type content into a Gradio app by dumping the content into a `gr.Markdown()`, which looks quite bad from a UI perspective. An improvement would be to use the `gr.Sidebar` component so at least the text can be hidden by closing the sidebar. But can we provide an even nicer way for users to link an associated readme? ",abidlabs,1778297,open,False,0,2025-05-05T12:18:19+00:00,2025-05-05T12:19:02+00:00,,enhancement;needs designing,0,0,0,0,0,0,0
+gradio-app/gradio,3039475338,11144,"Support creating ""walkthroughs"" for complex Gradio apps","For complex Gradio applications, it would be useful to support guided walkthroughs or onboarding flows. This feature would allow developers to sequentially highlight specific components or interface sections while dimming the rest of the UI, and display tooltip descriptions or instructions.
+
+Here's what the Python syntax could look like: 
+
+```py
+import gradio as gr
+
+with gr.Blocks() as demo:
+    
+    with demo.walkthrough(step=0, description=""First put in your name and age""):
+            with gr.Row():
+                name = gr.Textbox(label=""Name"")
+                age = gr.Number(label=""Age"")
+    
+    with demo.walkthrough(step=1, description=""Then click the button"")
+          greet_btn = gr.Button(""Submit"")
+
+    output = gr.Textbox(label=""Greeting"")
+```
+
+The walkthrough should only appear when a user first visits the Gradio app from a device (although they should be able to retrigger it from the settings menu if they want).",abidlabs,1778297,open,False,0,2025-05-05T12:12:10+00:00,2025-05-05T12:12:18+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3039473147,11143,Image components' full-screen button doesn't work on Safari/iOS (or in a narrow screen),"### Describe the bug
+
+In this video, I clicked the full-screen button some times but the full screen image is not shown.
+
+https://github.com/user-attachments/assets/74bf3979-9f9d-4c07-8ea2-87e27a4fa910
+
+It's on Safari/iOS.
+
+This problem doesn't happen on Chrome/Android. The screen width was also different so this might be a reason.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/jasperai/LBM_relighting
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+sdk: gradio
+sdk_version: 5.29.0
+```
+
+### Severity
+
+I can work around it",whitphx,3135397,open,False,0,2025-05-05T12:11:14+00:00,2025-05-05T12:11:14+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039458792,11142,Preload first cached example,"As a small QoL improvement, we should preload the input and output if a user has enabled cached examples so that they load when the page first loads. For example, we could add a `preload: bool | int` parameter to `gr.Examples`, which is `True` by default, which loads the first cached example (or a user can provide an integer index if they want to load a particular example).",abidlabs,1778297,open,False,0,2025-05-05T12:05:12+00:00,2025-05-05T12:05:19+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3039445140,11141,chore: update versions,"This PR was opened by the [Changesets release](https://github.com/changesets/action) GitHub action. When you're ready to do a release, you can merge this and the packages will be published to npm automatically. If you're not ready to do a release yet, that's fine, whenever you add more changesets to main, this PR will be updated.
+
+
+# Releases
+## gradio@5.30.0
+
+### Features
+
+-   [#11129](https://github.com/gradio-app/gradio/pull/11129) [`d5ddd85`](https://github.com/gradio-app/gradio/commit/d5ddd85d4d5088cce154b1cd50a4a2db179ac227) - Ocean theme quickfix.  Thanks @aliabid94!
+",gradio-pr-bot,121576822,open,False,1,2025-05-05T11:59:23+00:00,2025-05-05T12:09:04+00:00,,no-visual-update;windows-tests;flaky-tests,0,0,0,0,0,0,0
+gradio-app/gradio,3039246350,11140,"gr.Image shows ""Click to Access WebCam"" message after taking a photo","### Describe the bug
+
+Maybe with a poor network connection
+
+In this record, I clicked the camera button in 1s but the component took ~20sec to show the image and shows the ""Click to Access WebCam"" message before that.
+
+https://github.com/user-attachments/assets/47f02529-20a3-4e75-8b4d-6c876aec120d
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/ohayonguy/PMRF
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+https://huggingface.co/spaces/whitphx/PMRF (duplicated from https://huggingface.co/spaces/ohayonguy/PMRF)
+
+sdk: gradio
+sdk_version: 5.29.0
+```
+
+### Severity
+
+I can work around it",whitphx,3135397,open,False,0,2025-05-05T10:29:26+00:00,2025-05-05T12:36:01+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039218935,11139,3D models in Model3D is not well visible in light mode,"### Describe the bug
+
+Sample: https://huggingface.co/spaces/Zhengyi/CRM
+Dark:
+![Image](https://github.com/user-attachments/assets/c71b42a5-6918-4d56-a07b-6866f9f390f2)
+Light:
+![Image](https://github.com/user-attachments/assets/32f14b81-b739-4c2b-a2bc-3b77f579c66d)
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/Zhengyi/CRM
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+sdk: gradio
+sdk_version: 4.21.0
+```
+
+### Severity
+
+I can work around it",whitphx,3135397,open,False,0,2025-05-05T10:17:03+00:00,2025-05-05T10:17:03+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039151161,11138,"If gradio error has long text without a space, the close icon gets hidden","### Describe the bug
+
+If gradio error has long text without a space, the text doesn't break and the close icon gets hidden 
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+
+def greet(name):
+    raise gr.Error(""The issue is "" + ""error"" * 50)
+    return ""Hello "" + name + ""!""
+
+
+with gr.Blocks() as demo:
+    name = gr.Textbox(label=""Name"")
+    output = gr.Textbox(label=""Output Box"")
+    greet_btn = gr.Button(""Greet"")
+    greet_btn.click(fn=greet, inputs=name, outputs=output, api_name=""greet"")
+
+if __name__ == ""__main__"":
+    demo.launch()
+```
+
+
+### Screenshot
+
+<img width=""468"" alt=""Image"" src=""https://github.com/user-attachments/assets/8224933e-7638-4527-9e00-94644cdd68ac"" />
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+mac os, gradio==5.29
+```
+
+### Severity
+
+I can work around it",aliabid94,7870876,open,False,0,2025-05-05T09:47:38+00:00,2025-05-05T09:47:38+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039094418,11137,Truncate examples for `Textbox` (and probably other components as well),"https://huggingface.co/spaces/ASLP-lab/DiffRhythm
+
+<img width=""1351"" alt=""Image"" src=""https://github.com/user-attachments/assets/a1050931-7eb4-4aea-b968-e2a69e4fda06"" />
+
+(looks even worse on mobile)
+",abidlabs,1778297,open,False,0,2025-05-05T09:22:49+00:00,2025-05-05T09:22:49+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3039088907,11136,Fonts don't load correctly on Spaces,"### Describe the bug
+
+Ends up using the browser fallback font instead of the theme font
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+
+def greet(name):
+    return ""Hello "" + name + ""!""
+
+
+with gr.Blocks() as demo:
+    name = gr.Textbox(label=""Name"")
+    output = gr.Textbox(label=""Output Box"")
+    greet_btn = gr.Button(""Greet"")
+    greet_btn.click(fn=greet, inputs=name, outputs=output, api_name=""greet"")
+
+if __name__ == ""__main__"":
+    demo.launch()
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+mac os, gradio==5.29.0
+```
+
+### Severity
+
+I can work around it",aliabid94,7870876,open,False,0,2025-05-05T09:20:42+00:00,2025-05-05T09:20:42+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039085343,11135,`gr.Image` webcam UX weird on mobile iOS / Chrome,"### Describe the bug
+
+When I use the `gr.Image` component's webcam mode on mobile, I don't see an option to actually click to take the photo. I have to ""cancel"" the webam by pressing the X button, which also leads to a weird preview of the image (a small image appears in the larger image container):
+
+https://github.com/user-attachments/assets/08992d38-ba03-4960-a5f2-67addfd70d73
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/abidlabs/webcam-test
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+5.29
+```
+
+### Severity
+
+I can work around it",abidlabs,1778297,open,False,0,2025-05-05T09:19:18+00:00,2025-05-05T09:19:18+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039071522,11134,[Mobile] Image Cropping doesn't work,"### Describe the bug
+
+Cropping an image using image editor doesn't work on mobile.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+gr.ImageEditor(sources='upload', type=""pil"")
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+n/a
+```
+
+### Severity
+
+I can work around it",dawoodkhan82,12725292,open,False,0,2025-05-05T09:13:32+00:00,2025-05-05T09:13:32+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039050039,11133,Hard to know when generation has finished,"### Describe the bug
+
+As the title. 
+
+
+I'm not sure if this is intentional but on mobile it is basically impossible to know when processing has finished. We used to have scroll to output but i think we disabled in various places we could bring that back or we could use the toast functionality to notify users (which is probably less disruptive).
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+https://github.com/user-attachments/assets/4a7be4e1-9400-4b8e-9f62-95b402885daf
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+-
+```
+
+### Severity
+
+I can work around it",pngwn,12937446,open,False,0,2025-05-05T09:04:44+00:00,2025-05-05T09:04:44+00:00,,bug;brainstorming;needs designing,0,0,0,0,0,0,0
+gradio-app/gradio,3039041327,11132,Media component sizing,"- [ ] I have searched to see if a similar issue already exists.
+
+
+**Is your feature request related to a problem? Please describe.**  
+On mobile (and partially desktop small screens) there are two issues I am seeing:
+
+- The empty sizes are large enough that when stacked in a column, more than 1 input component push the main interaction point off screen. While text instructions are helpful in determining how to use a space, so too are the components themselves. Being able to see them clearly is important. In this example, which is using a large mobile screen size (iPhone Max) the second component is partially cut off <img width=""450"" alt=""Image"" src=""https://github.com/user-attachments/assets/b3fcf3e5-53d0-4891-a9b9-cbb2b9a42c5f"" />
+- The media components (image and video in particular) likes to find its own size. I think we should limit this further and add the zoom/ fullscreen functionality that the ImageSlider has to keep things at a modest size. In the same example but with values we can see that the input video (1 of 2 inputs) takes up the whole page and then some. 
+
+https://github.com/user-attachments/assets/052f6d8e-addc-484a-8668-a09120e1082f
+
+**Describe the solution you'd like**  
+A clear and concise description of what you want to happen.
+
+**Additional context**  
+Add any other context or screenshots about the feature request here.
+",pngwn,12937446,open,False,0,2025-05-05T09:00:54+00:00,2025-05-05T09:00:54+00:00,,brainstorming;needs designing,0,0,0,0,0,0,0
+gradio-app/gradio,3039040348,11131,[Mobile] Slider label padding,"### Describe the bug
+
+Slider padding for label and input seems squished
+
+![Image](https://github.com/user-attachments/assets/503a31a8-d32b-482d-a7b5-6d994e248180)
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+https://huggingface.co/spaces/KwaiVGI/LivePortrait
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+n/a
+```
+
+### Severity
+
+I can work around it",dawoodkhan82,12725292,open,False,0,2025-05-05T09:00:27+00:00,2025-05-05T09:43:37+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3039035414,11130,"On mobile, modals are quite annoying","Especially on Spaces, every Space has an automatic modal about ""leaving the queue if you leave the tab"" and ""joining zerogpu"" that makes it scroll to the top. Closing them is also annoying
+
+I'd like the page to not scroll to the top, and also allow for users to delete a notification by swiping as well as the x icon.",aliabid94,7870876,open,False,0,2025-05-05T08:58:14+00:00,2025-05-05T12:19:51+00:00,,📱 mobile,0,0,0,0,0,0,0
+gradio-app/gradio,3038046774,11129,Ocean theme quickfix,"mono font was not monospaced, so code looked weird",aliabid94,7870876,closed,False,2,2025-05-04T14:37:17+00:00,2025-05-05T11:53:28+00:00,2025-05-05T11:53:26+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3037317097,11128,Are there any place where we can download latest code examples - demos - coding as a compound to give it into big LLMs?,"Currently context size of Gemini is truly is 1m and it may get increased very soon again
+
+However its freshness for Gradio is very bad
+
+Are there any place where I can download entire demo codes or documentation as a single file to provide it entirely?
+
+This would be a total game changer for Gradio coding ",FurkanGozukara,19240467,open,False,5,2025-05-03T10:07:11+00:00,2025-05-03T14:26:17+00:00,,docs/website,0,0,0,0,0,0,0
+gradio-app/gradio,3037089819,11127,No explicit dependency on pytz,"### Describe the bug
+
+gradio depends on pytz, but instead of being explicitly written, it is resolved as a dependency on pandas.
+As a result, if you install it without pandas to reduce the file size, it will crash at runtime.
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```py
+import gradio as gr
+
+def greet(name, intensity):
+    return ""Hello, "" + name + ""!"" * int(intensity)
+
+demo = gr.Interface(
+    fn=greet,
+    inputs=[""text"", ""slider""],
+    outputs=[""text""],
+)
+
+demo.launch()
+```
+
+```pyproject.toml
+[project]
+name = ""pytz-missing""
+version = ""0.1.0""
+description = ""Add your description here""
+readme = ""README.md""
+requires-python = "">=3.11""
+dependencies = [
+    ""gradio>=5.29.0"",
+]
+
+[tool.uv]
+override-dependencies = [
+    ""pandas; sys_platform == 'never'"",
+]
+```
+
+See https://github.com/xhiroga/til/tree/main/software-engineering/python/gradio/_src/pytz-missing
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+    import gradio as gr
+  File ""/Users/hiroga/Library/Application Support/Blender/4.4/extensions/.local/lib/python3.11/site-packages/gradio/__init__.py"", line 3, in <module>
+    import gradio._simple_templates
+  File ""/Users/hiroga/Library/Application Support/Blender/4.4/extensions/.local/lib/python3.11/site-packages/gradio/_simple_templates/__init__.py"", line 1, in <module>
+    from .simpledropdown import SimpleDropdown
+  File ""/Users/hiroga/Library/Application Support/Blender/4.4/extensions/.local/lib/python3.11/site-packages/gradio/_simple_templates/simpledropdown.py"", line 7, in <module>
+    from gradio.components.base import Component, FormComponent
+  File ""/Users/hiroga/Library/Application Support/Blender/4.4/extensions/.local/lib/python3.11/site-packages/gradio/components/__init__.py"", line 22, in <module>
+    from gradio.components.datetime import DateTime
+  File ""/Users/hiroga/Library/Application Support/Blender/4.4/extensions/.local/lib/python3.11/site-packages/gradio/components/datetime.py"", line 9, in <module>
+    import pytz
+ModuleNotFoundError: No module named 'pytz'
+
+```
+
+### System Info
+
+```shell
+% uv run gradio environment
+Traceback (most recent call last):
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/bin/gradio"", line 4, in <module>
+    from gradio.cli import cli
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/lib/python3.11/site-packages/gradio/__init__.py"", line 3, in <module>
+    import gradio._simple_templates
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/lib/python3.11/site-packages/gradio/_simple_templates/__init__.py"", line 1, in <module>
+    from .simpledropdown import SimpleDropdown
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/lib/python3.11/site-packages/gradio/_simple_templates/simpledropdown.py"", line 7, in <module>
+    from gradio.components.base import Component, FormComponent
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/lib/python3.11/site-packages/gradio/components/__init__.py"", line 22, in <module>
+    from gradio.components.datetime import DateTime
+  File ""/home/hiroga/Documents/GitHub/til/software-engineering/python/gradio/_src/pytz-missing/.venv/lib/python3.11/site-packages/gradio/components/datetime.py"", line 9, in <module>
+    import pytz
+ModuleNotFoundError: No module named 'pytz'
+
+
+
+# If you cancel the exclusion in pandas and then execute the code,
+% uv run gradio environment
+Gradio Environment Information:
+------------------------------
+Operating System: Linux
+gradio version: 5.29.0
+gradio_client version: 1.10.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 24.1.0
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client: 1.10.0
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.5
+orjson: 3.10.18
+packaging: 25.0
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.4
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.8
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.3
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.2
+mcp is not installed.
+pydantic: 2.11.4
+authlib is not installed.
+itsdangerous is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 25.0
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+I can work around it",xhiroga,13391129,closed,False,3,2025-05-03T02:12:05+00:00,2025-05-05T05:33:20+00:00,2025-05-05T05:33:20+00:00,bug;pending clarification,0,0,0,0,0,0,0
+gradio-app/gradio,3036938507,11126,Add master/worker dynamic,"Gradio apps can now have master/worker dynamics natively. A gradio app can be launched with the roles ""master"", ""worker"", or ""hybrid"" (default). A master app receives events and stores them in a queue and communicates updates to the client. A worker app communicates with the master to request tasks, process them, and reports results to the master. By default, gradio is launched in hybrid mode, so it does everything: receives tasks from the client, processes them, and then returns the result to client. A hybrid app can still have extra workers bind to it to help process tasks.
+
+An example app:
+```python
+import gradio as gr
+import sys
+import time
+
+def greet(name, prog = gr.Progress()):
+    print(""worker here..."")
+    time.sleep(4)
+    return ""Hello "" + name + ""!""
+
+with gr.Blocks() as demo:
+    name = gr.Textbox(label=""Name"")
+    output = gr.Textbox(label=""Output Box"")
+    name.submit(fn=greet, inputs=name, outputs=output, api_name=""greet"")        
+
+role = ""master"" if ""-w"" in sys.argv else ""hybrid""
+
+if __name__ == ""__main__"":
+    demo.launch(role=role, master_url=""http://localhost:7860/"", app_key=""test123"")
+```
+
+The `role` kwarg can be ""master"", ""worker"", or ""hybrid"". Launch this as `python run.py` in one terminal to start the master, and `python run.py -w` to start the worker. You can attach multiple workers. You'll notice that without any workers, the master will not process any tasks, and just show the queue size. You can then add or remove workers to see how they handle tasks.
+
+The `master_url` kwarg points a worker to the master to bind to it, and an `app_key` shared between masters and workers authenticates requests between them.
+
+The purpose of this PR was to create a more mature autoscaling approach to gradio. Previously scaling was only possible via having nginx configs that required sticky sessions, so that the same IP address was served the same gradio server in a cluster, so that state was maintained. However, if a worker went offline, we would lose the tasks it was processing. Now, if a worker goes down, the master reassigns its tasks to a new worker.
+
+With this approach, there's no need for an extra nginx config to do routing, and extra workers can be added without needing a separate IP address so that the nginx config can distinguish between them. 
+
+There are some parts of the app that are not stateless (gr.render, and any use of gr.state) and the data they hold is not JSONifyable, so in that case, gradio will internally use session_id to replicate ""sticky sessions"" - the same worker will be assigned all requests for a session_id. If a worker goes down, this data will be lost.",aliabid94,7870876,open,False,0,2025-05-02T22:39:22+00:00,2025-05-08T19:14:37+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3036870957,11125,Nested Gradio Issues Icon Issue and Expanding Additional Inputs Issue,"### Describe the bug
+
+In the latest same issue, the same issue occurs: the icon doesn't load for new chat. Try the link without being logged in. You will see the icon missing. No one tests the integrations before releasing them. @abidlabs
+
+Go on a link for nested and then not be logged in using hf.space
+
+![Image](https://github.com/user-attachments/assets/506559cf-b17f-4c1d-9f19-6da13a7737c3)
+
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.10/site-packages/gradio/queueing.py"", line 625, in process_events
+    response = await route_utils.call_process_api(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/route_utils.py"", line 322, in call_process_api
+    output = await app.get_blocks().process_api(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/blocks.py"", line 2136, in process_api
+    result = await self.call_function(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/blocks.py"", line 1662, in call_function
+    prediction = await anyio.to_thread.run_sync(  # type: ignore
+  File ""/usr/local/lib/python3.10/site-packages/anyio/to_thread.py"", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File ""/usr/local/lib/python3.10/site-packages/anyio/_backends/_asyncio.py"", line 2470, in run_sync_in_worker_thread
+    return await future
+  File ""/usr/local/lib/python3.10/site-packages/anyio/_backends/_asyncio.py"", line 967, in run
+    result = context.run(func, *args)
+  File ""/usr/local/lib/python3.10/site-packages/gradio/utils.py"", line 884, in wrapper
+    response = f(*args, **kwargs)
+  File ""/usr/local/lib/python3.10/site-packages/gradio_client/client.py"", line 1158, in _inner
+    predictions = _predict(*data)
+  File ""/usr/local/lib/python3.10/site-packages/gradio_client/client.py"", line 1270, in _predict
+    raise AppError(
+gradio_client.exceptions.AppError: The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.10/site-packages/gradio/queueing.py"", line 625, in process_events
+    response = await route_utils.call_process_api(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/route_utils.py"", line 322, in call_process_api
+    output = await app.get_blocks().process_api(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/blocks.py"", line 2136, in process_api
+    result = await self.call_function(
+  File ""/usr/local/lib/python3.10/site-packages/gradio/blocks.py"", line 1662, in call_function
+    prediction = await anyio.to_thread.run_sync(  # type: ignore
+  File ""/usr/local/lib/python3.10/site-packages/anyio/to_thread.py"", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File ""/usr/local/lib/python3.10/site-packages/anyio/_backends/_asyncio.py"", line 2470, in run_sync_in_worker_thread
+    return await future
+  File ""/usr/local/lib/python3.10/site-packages/anyio/_backends/_asyncio.py"", line 967, in run
+    result = context.run(func, *args)
+  File ""/usr/local/lib/python3.10/site-packages/gradio/utils.py"", line 884, in wrapper
+    response = f(*args, **kwargs)
+  File ""/usr/local/lib/python3.10/site-packages/gradio_client/client.py"", line 1158, in _inner
+    predictions = _predict(*data)
+  File ""/usr/local/lib/python3.10/site-packages/gradio_client/client.py"", line 1270, in _predict
+    raise AppError(
+gradio_client.exceptions.AppError: The upstream Gradio app has raised an exception but has not enabled verbose
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/c89915bb-012e-439a-9eba-aff49b9e20d0)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio 5.27.1
+```
+
+### Severity
+
+Not blocking usage of gradio",djaffer,5740725,open,False,0,2025-05-02T21:35:31+00:00,2025-05-06T16:05:58+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3035755474,11124,Option of a custom landing-page added to routes.py,"Instead to raise HTTPException for the unauthorized requests, an option as landing_page_path is added to mount_gradio_app by which the unauthorized requests are redirected to a custom landing page.
+
+## Description
+
+Please include a concise summary, in clear English, of the changes in this pull request. If it closes an issue, please mention it here.
+
+Closes: #(issue)
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",ktanff,42958461,closed,False,4,2025-05-02T11:05:04+00:00,2025-05-05T05:30:34+00:00,2025-05-05T05:30:34+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3035297579,11123,Add server startup logs in launch() to show progress,"### Describe the bug
+
+### Problem
+When calling `.launch()` in a Gradio script, the terminal appears stuck for a few seconds before the local URL is printed. This can confuse new users, especially since there’s no indication that the server is initializing.
+
+### Proposed Feature
+Add simple console messages during startup, for example:
+
+[gradio] 🚀 Starting Gradio server...
+[gradio] 🔧 Initializing components...
+
+
+### Why This Matters
+- Improves developer feedback and trust
+- Aligns with other tools like FastAPI, Vite, etc.
+- Especially helpful for debugging or when the server takes longer to boot
+
+### Version
+Observed in Gradio version 5.29.0
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/7ff7f69b-4d2f-4c1a-8c26-13de86faa71e)
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+def greet(name, intensity):
+    return ""Hello, "" + name + ""!"" * int(intensity)
+
+demo = gr.Interface(
+    fn=greet,
+    inputs=[""text"", ""slider""],
+    outputs=[""text""],
+)
+
+demo.launch()
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+OS: Windows 11
+IDE: VS Code (latest version as of May 2025)
+Python Version: 3.12^
+```
+
+### Severity
+
+I can work around it",shivnathtathe,76526542,closed,False,3,2025-05-02T06:36:44+00:00,2025-05-02T19:38:04+00:00,2025-05-02T19:37:52+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3035157042,11122,ChatInterface renders both default and custom Textbox components,"### Describe the bug
+
+When passing a custom Textbox component to gr.ChatInterface, both the default internal Textbox and the custom one are rendered. This leads to duplicated input fields, which is not expected behavior.
+
+Expected Behavior:
+Only the custom Textbox should be rendered.
+
+
+This may be a regression; the behavior was not observed in earlier versions **[gradio 5.23.2].**
+
+**Note:**
+the same behavior when passing a custom components gr.Chatbot(),
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+python_code = """"""
+def fib(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
+""""""
+
+js_code = """"""
+function fib(n) {
+    if (n <= 0) return 0;
+    if (n === 1) return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+""""""
+
+def chat(message, history):
+    if ""python"" in message.lower():
+        return ""Type Python or JavaScript to see the code."", gr.Code(language=""python"", value=python_code)
+    elif ""javascript"" in message.lower():
+        return ""Type Python or JavaScript to see the code."", gr.Code(language=""javascript"", value=js_code)
+    else:
+        return ""Please ask about Python or JavaScript."", None
+
+with gr.Blocks() as demo:
+    code = gr.Code(render=False)
+    input_message = gr.Textbox(
+        placeholder=""Type here your question..."",
+        submit_btn=True,
+        autofocus=True
+     )
+    with gr.Row():
+        with gr.Column():
+            gr.Markdown(""<center><h1>Write Python or JavaScript</h1></center>"")
+            gr.ChatInterface(
+                chat,
+                examples=[""Python"", ""JavaScript""],
+                additional_outputs=[code],
+                type=""messages"",
+                textbox=input_message
+            )
+        with gr.Column():
+            gr.Markdown(""<center><h1>Code Artifacts</h1></center>"")
+            code.render()
+
+demo.launch()
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/0fc3f780-1fa5-4d35-99e7-348777762b67)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio version: 5.29.0
+
+Python version: 3.12
+
+OS: Linux
+```
+
+### Severity
+
+Blocking usage of gradio",mussonero,5319624,open,False,4,2025-05-02T04:31:05+00:00,2025-05-06T16:05:57+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3035001830,11121,Make MCP integration compatible with private Spaces,"Users will likely want to create private Spaces to use as MCP tools. We should allow users to pass in their HF_TOKEN in the header to access their private Spaces. 
+
+Note: this will likely require https://github.com/modelcontextprotocol/python-sdk/pull/380 to be merged in.",abidlabs,1778297,open,False,0,2025-05-02T01:29:40+00:00,2025-05-02T01:29:43+00:00,,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3034671613,11120,Docs mcp server ,"Adds a guide to the website for using the docs mcp server
+
+Also links to the guide from the docs: 
+
+![Screenshot 2025-05-01 at 1 38 00 PM](https://github.com/user-attachments/assets/9beb0547-8ccb-431b-a903-9d7bedf35f41)
+",aliabd,9021060,closed,False,2,2025-05-01T20:38:18+00:00,2025-05-01T20:51:52+00:00,2025-05-01T20:51:50+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3034334516,11119,Replace invalid characters in MCP tool name,Closes: https://github.com/gradio-app/gradio/issues/11118,abidlabs,1778297,closed,False,3,2025-05-01T17:31:54+00:00,2025-05-02T01:09:51+00:00,2025-05-02T01:09:50+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3034233770,11118,MCP Tool Names containing `.` not showing in Claude Desktop,"### Describe the bug
+
+Gradio MCP Servers that contain a `.` in the name don't appear in Claude Desktop, and generate warnings/don't work in other clients.
+
+This is more of an MCP Client issue than a Gradio MCP issue, but raising here for knowledge sharing. (Also Claude Desktop /STDIO support is labelled as experimental). 
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+Create a Gradio MCP Application with a `.` in the name, and add to Claude Desktop.
+
+### Screenshot
+
+Connecting with the [space](""https://evalstate-flux1-schnell.hf.space/gradio_api/mcp/sse"") with the `.` replaced with `_` -> ""flux_1_schnell"":
+![Image](https://github.com/user-attachments/assets/620eac42-75b5-4c73-98eb-9b5674e9b9ac)
+Server and Tool is visible
+
+Connecting with the [space](""https://evalstate-flux1-schnell-6bb91ca.hf.space/gradio_api/mcp/sse"") with the `.` in the space name -> ""flux.1_schnell"":
+![Image](https://github.com/user-attachments/assets/2aac2549-b642-4560-91f7-b22788a027d7)
+Tool is not visible although Server connected.
+
+VSCode: 
+![Image](https://github.com/user-attachments/assets/9a7aa583-78cf-4755-a4b3-3d1f88e253bf)
+Displays a warning, although seems to rename the tool by automatically replacing `.` with `_`
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio 5.28, mcp-remote 0.1.0, Claude Desktop 0.9.3.0
+```
+
+### Severity
+
+I can work around it",evalstate,1936278,closed,False,0,2025-05-01T16:37:57+00:00,2025-05-02T01:09:51+00:00,2025-05-02T01:09:51+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3033994174,11117,Raise UI error if video not playable in the browser,"## Description
+
+Closes: #9640
+
+Test with:
+* Video from original [issue](https://github.com/user-attachments/assets/2b778893-5a39-44d9-8b62-8320a01e4e82
+). Should raise an error.
+* [mp4 video](https://github.com/user-attachments/assets/cd686612-cb7a-48b4-a93d-8233aaa3ebd4
+) with h264 codec. should not raise an error.
+* [webm video](https://github.com/user-attachments/assets/275130d2-d392-4c00-a4cf-cadbd2ea7f6e) should not raise an error.
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,open,False,2,2025-05-01T14:31:29+00:00,2025-05-05T11:52:35+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3032855622,11116,TypeError: argument of type 'bool' is not iterable,"### Describe the bug
+
+I'm trying to use gr.load to load a HuggingFace space: 
+
+token = os.environ['TOKEN'] 
+generator = gr.load(url, src=""spaces"", token=token)
+
+However, I'm getting this error: TypeError: argument of type 'bool' is not iterable. 
+
+I upgraded my requirements.txt to include pydantic==2.10.6 as I found in another thread that had this issue. I restarted the space from scratch, but it still didn't work. Pls help. Thanks!
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```
+token = os.environ['TOKEN'] 
+generator = gr.load(url, src=""spaces"", token=token)
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Yes, I'm running 5.28.0
+```
+
+### Severity
+
+Blocking usage of gradio",loganpearce17,23304257,closed,False,8,2025-05-01T00:22:59+00:00,2025-05-05T05:32:09+00:00,2025-05-05T05:32:08+00:00,bug;pending clarification,0,0,0,0,0,0,0
+gradio-app/gradio,3032507498,11115,update STDIO instructions to specify sse-only transport,"## Description
+
+This changes the instructions displayed for using an MCP Server with STDIO. It adds the ""--transport sse-only"" options after specifying the remote MCP endpoint. 
+
+By default, 
+Please include a concise summary, in clear English, of the changes in this pull request. If it closes an issue, please mention it here.
+
+Closes: #11114
+
+## 🎯 PRs Should Target Issues
+
+Solves issue #11114
+
+## Testing and Formatting Your Code
+
+  ",evalstate,1936278,closed,False,2,2025-04-30T21:03:24+00:00,2025-05-01T17:08:59+00:00,2025-05-01T17:08:59+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3032504232,11114,MCP STDIO Instructions fail due to default mcp-remote transport strategy,"### Describe the bug
+
+mcp-remote defaults to a transport strategy of ""http first"", which is unsupported for Gradio MCP endpoints. This can be overcome by adding `--transport sse-only` to the options.
+ 
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/f47369fc-30bf-46bc-a102-5d95a4d4f2b8)
+
+With --transport sse-only:
+
+![Image](https://github.com/user-attachments/assets/defcc55e-29bd-4ba4-b831-6cd276927287)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+5.28.0
+```
+
+### Severity
+
+I can work around it",evalstate,1936278,closed,False,0,2025-04-30T21:01:42+00:00,2025-05-01T17:09:00+00:00,2025-05-01T17:09:00+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3032229913,11113,Fix markdown change event,"## Description
+
+Issue was that the label was undefined by default so the change event kept firing? But I don't think we should be triggering the change event when the label changes anyways.
+
+Closes: #9103
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,closed,False,4,2025-04-30T19:11:36+00:00,2025-05-02T01:07:28+00:00,2025-05-02T01:07:27+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3032209344,11112,Fix passing datetime.datetime instance to gr.Datetime,"## Description
+
+Closes: #8889
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,closed,False,3,2025-04-30T19:01:37+00:00,2025-05-01T14:32:20+00:00,2025-05-01T14:32:18+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3032194375,11111,Fix gradio cc environment,"## Description
+
+We were not parsing requirements with `==` version pins correctly.
+
+```bash
+Gradio Environment Information:
+------------------------------
+Operating System: Darwin
+gradio version: 5.20.1
+gradio_client version: 1.7.2
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 23.2.1
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.7
+ffmpy: 0.3.2
+gradio-client: 1.7.2
+groovy: 0.1.1
+httpx: 0.28.1
+huggingface-hub: 0.29.3
+jinja2: 3.1.2
+markupsafe: 2.1.1
+numpy: 1.24.4
+orjson: 3.9.14
+packaging: 24.2
+pandas: 1.5.3
+pillow: 11.1.0
+pydantic: 2.11.3
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.9.3
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.12.0
+typer: 0.15.1
+typing-extensions: 4.13.2
+urllib3: 2.3.0
+uvicorn: 0.34.2
+authlib: 1.4.1
+itsdangerous: 2.2.0
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2024.12.0
+httpx: 0.28.1
+huggingface-hub: 0.29.3
+packaging: 24.2
+typing-extensions: 4.13.2
+websockets: 11.0.3
+```
+
+
+Closes: #8890
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,closed,False,3,2025-04-30T18:55:14+00:00,2025-05-01T14:32:02+00:00,2025-05-01T14:32:01+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3031918066,11110,Make video trimming faster,"## Description
+
+Closes #6664 
+
+Copy the video and audio codec as opposed to just the audio. Since we're just trimming, we can keep the same video codec.
+
+![video_trimming](https://github.com/user-attachments/assets/f00dd957-e4c9-4f55-a1d8-d3bdf9cd0bd1)
+
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,open,False,10,2025-04-30T17:02:17+00:00,2025-05-04T08:55:14+00:00,,,0,0,0,0,0,0,0
+gradio-app/gradio,3031607626,11109,Autoscroll when previous chat history provided to Chatbot,"- [x] I have searched to see if a similar issue already exists.
+
+
+**Is your feature request related to a problem? Please describe.**  
+When adding historical chat interactions to `Chatbot`, the launched session starts at the top. Ideally it should start with the last provided message. I wasn't able to figure out the correct Javascript to implement this behavior.
+
+Using 
+```
+gradio             5.27.1
+gradio-client      1.9.1
+```
+
+Example I'm working with
+
+```python
+    history = load_history()
+
+    bot = gr.Chatbot(value=history, type=""messages"")
+
+    with gr.Blocks(theme=gr.themes.Base()) as demo:
+        gr.ChatInterface(
+            fn=process_prompt,
+            type=""messages"",
+            chatbot=bot,
+        )
+
+        demo.launch()
+```
+
+**Describe the solution you'd like**  
+The `autoscroll` function should account for initial values
+
+",jbencina,5510940,open,False,1,2025-04-30T15:13:11+00:00,2025-05-06T16:06:48+00:00,,enhancement;Priority,1,1,0,0,0,0,0
+gradio-app/gradio,3031568676,11108,Improve-custom-i18n,"## Description
+
+Please include a concise summary, in clear English, of the changes in this pull request. If it closes an issue, please mention it here.
+
+Closes: #(issue)
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",hannahblair,15165908,closed,False,1,2025-04-30T15:00:31+00:00,2025-05-02T15:00:16+00:00,2025-05-02T15:00:16+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3031564396,11107,chore: update versions,"This PR was opened by the [Changesets release](https://github.com/changesets/action) GitHub action. When you're ready to do a release, you can merge this and the packages will be published to npm automatically. If you're not ready to do a release yet, that's fine, whenever you add more changesets to main, this PR will be updated.
+
+
+# Releases
+## gradio@5.29.0
+
+### Features
+
+-   [#11103](https://github.com/gradio-app/gradio/pull/11103) [`098fb29`](https://github.com/gradio-app/gradio/commit/098fb29d384ddf2c8a09efd9746bc788d74e2a17) - Add `openapi.json` route for Gradio apps as well as docs on the ""view API"" page.  Thanks @abidlabs!
+
+### Fixes
+
+-   [#11102](https://github.com/gradio-app/gradio/pull/11102) [`8cd4e53`](https://github.com/gradio-app/gradio/commit/8cd4e53a839d86ac69ea2d2eabfcb73e9ff4926c) - Fix file upload progress.  Thanks @freddyaboulton!
+-   [#11098](https://github.com/gradio-app/gradio/pull/11098) [`49ad594`](https://github.com/gradio-app/gradio/commit/49ad5943eeab96b153f0b56fe8d42d755fe1e0f8) - Fix #10281: Dragging image replaces existing instead of opening new tab.  Thanks @Martim-Rito!
+-   [#11113](https://github.com/gradio-app/gradio/pull/11113) [`c32f8de`](https://github.com/gradio-app/gradio/commit/c32f8de99a6ab3a82da2f8d5f9f3176a04129f77) - Fix markdown change event.  Thanks @freddyaboulton!
+-   [#11115](https://github.com/gradio-app/gradio/pull/11115) [`49e7a0d`](https://github.com/gradio-app/gradio/commit/49e7a0dd18174196b262d32e6c59d93ca40b1c73) - update STDIO instructions to specify sse-only transport.  Thanks @evalstate!
+-   [#11111](https://github.com/gradio-app/gradio/pull/11111) [`15d6297`](https://github.com/gradio-app/gradio/commit/15d6297261bfca97a2df30b9df358c7751386958) - Fix gradio cc environment.  Thanks @freddyaboulton!
+-   [#11112](https://github.com/gradio-app/gradio/pull/11112) [`0e5a75e`](https://github.com/gradio-app/gradio/commit/0e5a75e263dfd0557431e33771dd8cd49196b28e) - Fix passing datetime.datetime instance to gr.Datetime.  Thanks @freddyaboulton!
+-   [#11119](https://github.com/gradio-app/gradio/pull/11119) [`bb2c744`](https://github.com/gradio-app/gradio/commit/bb2c7443c25b12241ab218195251520e953f7e32) - Replace invalid characters in MCP tool name.  Thanks @abidlabs!
+
+## @gradio/annotatedimage@0.9.18
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/audio@0.17.13
+
+### Dependency updates
+
+-   @gradio/button@0.4.18
+-   @gradio/upload@0.16.4
+
+## @gradio/button@0.4.18
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+
+## @gradio/chatbot@0.26.5
+
+### Dependency updates
+
+-   @gradio/video@0.14.13
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+-   @gradio/gallery@0.15.18
+
+## @gradio/code@0.14.3
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/core@0.16.1
+
+### Fixes
+
+-   [#11115](https://github.com/gradio-app/gradio/pull/11115) [`49e7a0d`](https://github.com/gradio-app/gradio/commit/49e7a0dd18174196b262d32e6c59d93ca40b1c73) - update STDIO instructions to specify sse-only transport.  Thanks @evalstate!
+
+### Dependency updates
+
+-   @gradio/code@0.14.3
+-   @gradio/button@0.4.18
+-   @gradio/video@0.14.13
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+-   @gradio/gallery@0.15.18
+-   @gradio/file@0.12.17
+
+## @gradio/dataframe@0.17.11
+
+### Dependency updates
+
+-   @gradio/button@0.4.18
+-   @gradio/upload@0.16.4
+
+## @gradio/dataset@0.4.17
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/downloadbutton@0.3.18
+
+### Dependency updates
+
+-   @gradio/button@0.4.18
+
+## @gradio/file@0.12.17
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/fileexplorer@0.5.28
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+-   @gradio/file@0.12.17
+
+## @gradio/gallery@0.15.18
+
+### Dependency updates
+
+-   @gradio/video@0.14.13
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+-   @gradio/file@0.12.17
+
+## @gradio/html@0.6.12
+
+### Fixes
+
+-   [#11113](https://github.com/gradio-app/gradio/pull/11113) [`c32f8de`](https://github.com/gradio-app/gradio/commit/c32f8de99a6ab3a82da2f8d5f9f3176a04129f77) - Fix markdown change event.  Thanks @freddyaboulton!
+
+## @gradio/image@0.22.5
+
+### Fixes
+
+-   [#11098](https://github.com/gradio-app/gradio/pull/11098) [`49ad594`](https://github.com/gradio-app/gradio/commit/49ad5943eeab96b153f0b56fe8d42d755fe1e0f8) - Fix #10281: Dragging image replaces existing instead of opening new tab.  Thanks @Martim-Rito!
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/imageeditor@0.14.5
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+
+## @gradio/imageslider@0.2.1
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/lite@5.29.0
+
+### Dependency updates
+
+-   @gradio/core@0.16.1
+
+## @gradio/markdown@0.13.11
+
+### Fixes
+
+-   [#11113](https://github.com/gradio-app/gradio/pull/11113) [`c32f8de`](https://github.com/gradio-app/gradio/commit/c32f8de99a6ab3a82da2f8d5f9f3176a04129f77) - Fix markdown change event.  Thanks @freddyaboulton!
+
+## @gradio/model3d@0.14.12
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/multimodaltextbox@0.10.5
+
+### Dependency updates
+
+-   @gradio/video@0.14.13
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+
+## @gradio/simpleimage@0.8.28
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+
+## @gradio/upload@0.16.4
+
+### Fixes
+
+-   [#11098](https://github.com/gradio-app/gradio/pull/11098) [`49ad594`](https://github.com/gradio-app/gradio/commit/49ad5943eeab96b153f0b56fe8d42d755fe1e0f8) - Fix #10281: Dragging image replaces existing instead of opening new tab.  Thanks @Martim-Rito!
+
+## @gradio/uploadbutton@0.8.18
+
+### Dependency updates
+
+-   @gradio/button@0.4.18
+-   @gradio/upload@0.16.4
+
+## @gradio/video@0.14.13
+
+### Dependency updates
+
+-   @gradio/upload@0.16.4
+-   @gradio/image@0.22.5
+
+## website@0.56.0
+
+### Features
+
+-   [#11120](https://github.com/gradio-app/gradio/pull/11120) [`b2118d4`](https://github.com/gradio-app/gradio/commit/b2118d4b613f93b34e02c809e7d0faaa7545b875) - Docs mcp server.  Thanks @aliabd!
+
+### Dependency updates
+
+-   @gradio/code@0.14.3
+
+## @self/app@1.49.7
+
+### Dependency updates
+
+-   @gradio/core@0.16.1
+
+## @self/component-test@0.5.19
+
+### Dependency updates
+
+-   @gradio/video@0.14.13
+",gradio-pr-bot,121576822,closed,False,1,2025-04-30T14:59:12+00:00,2025-05-02T01:29:25+00:00,2025-05-02T01:22:16+00:00,no-visual-update;windows-tests;flaky-tests,0,0,0,0,0,0,0
+gradio-app/gradio,3031272302,11106,Update MCP docs,Added a troubleshooting section and fixed some other mistakes.,abidlabs,1778297,closed,False,3,2025-04-30T13:22:17+00:00,2025-04-30T17:19:21+00:00,2025-04-30T17:19:21+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3030690629,11105,Error loading mermaid when several apps are mounted with mount_gradio_app,"### Describe the bug
+
+I noticed that the mermaid in an app which is not displayed when loading the page is not properly compiled. It is probably the same root cause as this other issue : https://github.com/gradio-app/gradio/issues/11073
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+import gradio as gr
+
+
+def launch_app1():
+    with gr.Blocks() as app1:
+        gr.Markdown(""""""
+        ```mermaid
+        graph LR
+            A[Square Rect] -- Link text --> B((Circle))
+            A --> C(Round Rect)
+            B --> D{Rhombus}
+            C --> D
+        ```
+        """""")
+    return app1
+
+
+def launch_app2():
+    with gr.Blocks() as app2:
+        gr.Markdown(""""""
+        ```mermaid
+        graph TD;
+            A-->B;
+            A-->C;
+            B-->D;
+            C-->D;
+        ```
+        """""")
+    return app2
+
+
+app1 = launch_app1()
+app2 = launch_app2()
+
+app = FastAPI()
+
+app.mount(""/app1"", gr.mount_gradio_app(app, app1, path=""/app1""))
+app.mount(""/app2"", gr.mount_gradio_app(app, app2, path=""/app2""))
+
+
+@app.get(""/"")
+def main_page():
+    return FileResponse(""switcher.html"")
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Switcher Gradio Apps</title>
+    <style>
+        button { margin: 10px; padding: 10px; }
+        iframe { width: 100vw; height: 90vh; border: none; }
+    </style>
+</head>
+<body>
+    <button onclick=""showIframe('app1')"">App 1</button>
+    <button onclick=""showIframe('app2')"">App 2</button>
+    <button onclick=""refreshPage()"">Refresh</button>
+    <iframe id=""app1"" src=""/app1/"" style=""display:block""></iframe>
+    <iframe id=""app2"" src=""/app2/"" style=""display:none""></iframe>
+    <script>
+        function showIframe(app) {
+            document.getElementById(""app1"").style.display = (app === 'app1') ? ""block"" : ""none"";
+            document.getElementById(""app2"").style.display = (app === 'app2') ? ""block"" : ""none"";
+        }
+        
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
+```
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/1b37e76a-db6a-4913-8c15-06a92ada9770)
+![Image](https://github.com/user-attachments/assets/6ebd41f0-d046-4e88-8ebd-81e9dce26569)
+
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio 5.23.3
+```
+
+### Severity
+
+I can work around it",ThomasCosyn,84354650,open,False,0,2025-04-30T09:26:08+00:00,2025-04-30T09:28:52+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3030001890,11104,Fix broken placeholder link in mcp guide,Edits a link that we forgot to replace. currently breaking the website build,aliabd,9021060,closed,False,2,2025-04-30T03:23:35+00:00,2025-04-30T04:10:42+00:00,2025-04-30T04:10:41+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3029892551,11103,"Add `openapi.json` route for Gradio apps as well as docs on the ""view API"" page","On the theme of making Gradio apps consumable by other software...
+
+Closes our oldest open issue, closes: https://github.com/gradio-app/gradio/issues/672",abidlabs,1778297,closed,False,2,2025-04-30T01:43:00+00:00,2025-05-01T02:39:33+00:00,2025-05-01T02:39:31+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3029488977,11102,Fix file upload progress,"## Description
+
+Sometimes file upload progress would not display in the UI. I saw this mainly on spaces. 
+
+There was a race condition between upload and upload_progress routes. If `sse_stream` in `upload_progress` checked the upload progress before the upload_id got added to `file_upload_statuses` then a `FileUploadProgressNotTrackedError` would be raised and  the entire progress loop would exit.
+
+Compare gradio/audio_component and https://huggingface.co/spaces/freddyaboulton/audio_component  spaces and use a large audio file, like something from here:
+https://media.rss.com/around-the-prompt/feed.xml
+
+
+### Before
+
+![file_upload_old](https://github.com/user-attachments/assets/072add00-b6a3-46b5-a90a-f2259c73ec04)
+
+### After
+![file_upload_now](https://github.com/user-attachments/assets/78af9996-5249-4121-8962-a5dd7e32731d)
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,closed,False,3,2025-04-29T20:37:19+00:00,2025-04-30T19:23:44+00:00,2025-04-30T19:23:43+00:00,v: patch;t: fix,0,0,0,0,0,0,0
+gradio-app/gradio,3029445323,11101,Lite: Error with load remote source code (Python files) and then import functions from source code,"### Describe the bug
+
+I need to load source code from remote repositories such as GitHub, where Python files are packaged in a zip archive. After downloading and extracting the archive into my runtime environment, I attempt to import functions and open data files (for example, xlsx or csv) from the extracted files. However, I consistently encounter errors stating that the module cannot be imported or that the specified path cannot be found.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+from zipfile import ZipFile
+import importlib.util
+from js import fetch
+from pathlib import Path
+import os
+import sys
+import io, zipfile, sys, asyncio
+
+async def install_zip_from_url(zip_url: str, extract_to: str = """"):
+    resp = await fetch(zip_url)
+    if not resp.ok:
+        raise RuntimeError(f""Failed to fetch {zip_url}: {resp.status} {resp.statusText}"")
+
+    buf = await resp.arrayBuffer()
+    data = bytes(buf.to_py())
+
+    if data[:4] != b""PK\x03\x04"":
+
+        header = data[:100].decode(""utf8"", ""replace"")
+        raise RuntimeError(f""Not a ZIP file; got: {header!r}"")
+
+    with zipfile.ZipFile(io.BytesIO(data)) as zf:
+
+        root = zf.namelist()[0].split(""/"")[0]
+        zf.extractall(path=extract_to)
+
+zip_url = ""https://raw.githubusercontent.com/xyluo25/xyluo25/main/docs/algo_source.zip""
+algo_source = asyncio.ensure_future(install_zip_from_url(zip_url,))
+
+# this will unzipped algo_source.py under current environment / folder
+# error with import
+# import algo_source
+# from algo_source import algo_quick_sort
+
+# I double checked whether files are downloaded, and algo_source.py exist in current folder
+
+def tte(name):
+    folder_path = Path(__file__).parent.absolute()
+    return (sys.path +
+        [f""{Path(__file__).parent.absolute()}""] +
+        [os.path.join(folder_path, f) for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))] +
+        os.listdir(""/home/pyodide/"")
+)
+
+gr.Interface(fn=tte,inputs=gr.Textbox(),outputs=gr.Textbox()).launch()
+
+```
+
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/a42c9b88-f23a-4ed7-8c66-822b9b52cc65)
+
+However, when i import it, with error (line 50 in provided code)
+
+![Image](https://github.com/user-attachments/assets/c7a34d66-5307-4b49-8933-d31cdba96ceb)
+
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+<script type=""module"" crossorigin src=""https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.js""></script>
+<link rel=""stylesheet"" href=""https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.css"" />
+```
+
+### Severity
+
+Blocking usage of gradio",xyluo25,36498464,closed,False,4,2025-04-29T20:19:19+00:00,2025-04-30T13:23:43+00:00,2025-04-29T20:29:19+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3029411688,11100,chore: update versions,"This PR was opened by the [Changesets release](https://github.com/changesets/action) GitHub action. When you're ready to do a release, you can merge this and the packages will be published to npm automatically. If you're not ready to do a release yet, that's fine, whenever you add more changesets to main, this PR will be updated.
+
+
+# Releases
+## gradio@5.28.0
+
+### Features
+
+-   [#10984](https://github.com/gradio-app/gradio/pull/10984) [`8dab577`](https://github.com/gradio-app/gradio/commit/8dab5771c7d952c76f325681dbf364119c91b0b1) - Let Gradio apps also be MCP Servers.  Thanks @abidlabs!
+
+### Fixes
+
+-   [#11097](https://github.com/gradio-app/gradio/pull/11097) [`bb5a3c5`](https://github.com/gradio-app/gradio/commit/bb5a3c5b6b4459fb4d491bcc5a625e7fee7e502c) - Fix #10320: Chatbot - Ensure all messages in a group are editable.  Thanks @eduardopalricas33!
+
+## @gradio/chatbot@0.26.4
+
+### Fixes
+
+-   [#11097](https://github.com/gradio-app/gradio/pull/11097) [`bb5a3c5`](https://github.com/gradio-app/gradio/commit/bb5a3c5b6b4459fb4d491bcc5a625e7fee7e502c) - Fix #10320: Chatbot - Ensure all messages in a group are editable.  Thanks @eduardopalricas33!
+
+## @gradio/core@0.16.0
+
+### Features
+
+-   [#10984](https://github.com/gradio-app/gradio/pull/10984) [`8dab577`](https://github.com/gradio-app/gradio/commit/8dab5771c7d952c76f325681dbf364119c91b0b1) - Let Gradio apps also be MCP Servers.  Thanks @abidlabs!
+
+## @gradio/lite@5.28.0
+
+### Dependency updates
+
+-   @gradio/core@0.16.0
+
+## gradio_client@1.10.0
+
+### Features
+
+-   [#10984](https://github.com/gradio-app/gradio/pull/10984) [`8dab577`](https://github.com/gradio-app/gradio/commit/8dab5771c7d952c76f325681dbf364119c91b0b1) - Let Gradio apps also be MCP Servers.  Thanks @abidlabs!
+
+## @self/app@1.49.6
+
+### Dependency updates
+
+-   @gradio/core@0.16.0
+",gradio-pr-bot,121576822,closed,False,1,2025-04-29T20:05:00+00:00,2025-04-29T22:31:09+00:00,2025-04-29T22:31:08+00:00,no-visual-update;windows-tests;flaky-tests,0,0,0,0,0,0,0
+gradio-app/gradio,3029122487,11099,Consolidate traversing logic,"We have two separate utilities that traverse a dictionary recursively and apply a transformation:
+
+* https://github.com/gradio-app/gradio/blob/2de9f57412ec8797f745819b96ffe88869a6a693/client/python/gradio_client/utils.py#L1100
+* https://github.com/gradio-app/gradio/blob/6ccad46598302686670c0534f5fde816be1a9c61/gradio/mcp.py#L298
+
+Would be great to consolidate the logic ",abidlabs,1778297,open,False,0,2025-04-29T18:02:18+00:00,2025-04-29T18:02:18+00:00,,refactor,0,0,0,0,0,0,0
+gradio-app/gradio,3028268813,11098,Fix #10281: Dragging image replaces existing instead of opening new tab,"## Description of the problem
+In Gradio 5.x.x, dragging a second image onto an already populated `<gr.Image>` component did **not** replace the existing image—instead, the browser opened the dropped file in a new tab. Previously, the `<div class=""upload-container"">` had **no** `on:dragover` or `on:drop` handlers, so the second drop was never intercepted by Gradio’s upload logic and fell back to the browser’s default behavior.
+## Proposed solution
+- In `ImageUploader.svelte`, *added* `on_drag_over` and `on_drop` handlers to prevent default browser behavior, clear any existing `value` (via `handle_clear()` + `await tick()`), and dispatch the upload by calling `upload_input.loadFilesFromDrop(evt)`.  
+- In `Upload.svelte`, *restored* the original `loadFilesFromDrop(e: DragEvent)` function that had been removed during a prior rebase.  
+- In `js/spa/test/image_component_events.spec.ts`, *extended* the drag-to-upload test to capture the Playwright `context`, verifying that no new tabs were opened.
+
+> **Note:** The `loadFilesFromDrop` function wasn’t newly authored—it existed before the rebase and was simply restored to its original behavior.
+
+## Reproduction code
+```python
+import gradio as gr
+
+with gr.Blocks() as demo:
+    with gr.Row():
+        input_image = gr.Image(
+            label=""Insert an image"",
+            type=""pil"",
+            height=600,
+            width=400,
+            interactive=True
+        )
+
+if __name__ == ""__main__"":
+    demo.launch()
+```
+
+Closes: #10281 ",Martim-Rito,134000281,closed,False,2,2025-04-29T13:04:28+00:00,2025-04-30T14:48:49+00:00,2025-04-30T14:48:49+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3028189670,11097,Fix #10320: Chatbot - Ensure all messages in a group are editable,"## Description 
+The bug occurred when consecutive messages from the same sender were displayed in the chatbot. Only the first message in the group could be edited, while the remaining ones stayed unchanged.
+This issue was caused by the Message.svelte file, where only one textarea was available for editing within a message group. Additionally, in the ChatBot.svelte file, the message update function was only called for the first message in the group, ignoring the others.
+
+## Solution
+I changed the edit_message variable, which previously stored only a single string, to a list of strings called edit_messages.
+This list contains the updated content of all the messages in the group. When the user clicks the edit button, the list is initialized with all the messages in the group, and a textarea is displayed for each. Each textarea allows editing the corresponding message in the edit_messages list.
+
+On submission, instead of updating only the first message, the handle_action function is now executed for each message in the group, ensuring all messages are updated correctly.
+
+Additionally, I added a test case to verify this behavior and ensure the problem is fully resolved.
+To add this test case, I had to modify the demo used in the end-to-end test for message editing, adding a button that allows inserting a message from a single sender only.
+
+## Reproduction Code
+```python
+import gradio as gr
+
+examples = [
+    {""role"": ""user"", ""content"": ""User message 1.""},
+    {""role"": ""user"", ""content"": ""User message 2.""},
+    {""role"": ""assistant"", ""content"": ""Assistant text 1""},
+    {""role"": ""assistant"", ""content"": ""Assistant text 2""},
+    {""role"": ""user"", ""content"": ""User message 3.""},
+]
+
+with gr.Blocks() as demo:
+    chatbot = gr.Chatbot(
+        type=""messages"",
+        editable=""all"",
+        group_consecutive_messages=False,
+    )
+
+    demo.load(lambda: examples, None, chatbot)
+
+demo.launch()
+```
+
+## Closes
+Closes #10320
+",eduardopalricas33,134000231,closed,False,2,2025-04-29T12:41:50+00:00,2025-04-29T19:54:53+00:00,2025-04-29T19:54:53+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3027394191,11096,Adding requirements for mcp,"Cherrypicked a few commits from https://github.com/gradio-app/gradio/pull/10984/files into this separate PR so that I can merge it into `main`. The reason being that CI always installs the dependencies based on the version of `.github/actions/install-all-deps/action.yml` on `main`, so I'll go ahead and merge in this PR so that we can run CI on https://github.com/gradio-app/gradio/pull/10984/files",abidlabs,1778297,closed,False,1,2025-04-29T07:43:52+00:00,2025-04-29T07:48:00+00:00,2025-04-29T07:44:19+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3027137167,11095,[DataFrame] sorting does not work for styler dataframe,"### Describe the bug
+
+I am using the latest gradio version 5.27.1
+
+<img width=""316"" alt=""Image"" src=""https://github.com/user-attachments/assets/9ed6bcea-6222-451c-923f-a0a6d22a58c6"" />
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio==5.27.1
+```
+
+### Severity
+
+Blocking usage of gradio",jamie0725,27820994,open,False,2,2025-04-29T05:56:09+00:00,2025-04-29T06:01:51+00:00,,bug;Priority,0,0,0,0,0,0,0
+gradio-app/gradio,3026721946,11094,The gr.image component does not support uploading .tga file format,"### Describe the bug
+
+The gr.image component does not support uploading .tga file format
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```import gradio as gr
+from PIL import Image
+import tempfile
+
+def process_tga(image):
+    # 处理 TGA 图片的逻辑
+    # 假设 image 是临时文件路径
+    img = Image.open(image)
+    # 进行处理（例如转换格式）
+    output_path = tempfile.mktemp(suffix="".png"")
+    img.save(output_path, ""PNG"")
+    return output_path
+
+with gr.Blocks() as demo:
+    gr.Markdown(""Upload a TGA image and see it converted to PNG:"")
+    input_image = gr.Image(label=""Input TGA"", type=""pil"")
+    output_image = gr.Image(label=""Processed PNG"")
+    input_image.change(
+        fn=process_tga, 
+        inputs=input_image, 
+        outputs=output_image
+    )
+
+demo.launch()
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio = 5.25.2
+```
+
+### Severity
+
+I can work around it",XiaoMingCCC1,177722868,closed,False,1,2025-04-29T01:49:30+00:00,2025-04-29T13:17:11+00:00,2025-04-29T13:17:10+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3025597370,11093,"Update client.py to always send file data, even for files without extensions","## Description
+
+Update client.py to always send file data, even for files without extensions
+
+Closes: #10775 
+
+",edmcman,1017189,closed,False,2,2025-04-28T17:07:34+00:00,2025-04-28T18:14:10+00:00,2025-04-28T18:14:10+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3025559215,11092,Add gr.Dialogue component,"## Description
+
+![dialogue_component](https://github.com/user-attachments/assets/e71c4f55-f6ae-4133-bec4-b90d251429da)
+
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,open,False,2,2025-04-28T16:50:09+00:00,2025-04-29T16:22:43+00:00,,,3,0,0,0,1,0,0
+gradio-app/gradio,3025205511,11091,Fix scaling issue when setting height in Image component,"## Description
+
+Closes: #10991
+
+This reverts https://github.com/gradio-app/gradio/pull/10901 but I figure that #10991 is a bigger regression and fixing #10901 may take some time. 
+
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",freddyaboulton,41651716,closed,False,6,2025-04-28T14:51:23+00:00,2025-04-28T16:05:54+00:00,2025-04-28T16:05:52+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3024799797,11090,Error:  Exception in ASGI application,"### Describe the bug
+
+Im sure its not a bug and just a user error on my part but I want to know whats causing the issue,
+the gradio doesnt pop up.
+
+
+this is the error related to it:
+File ""[D:\LLM\envs\llms\Lib\site-packages\gradio_client\utils.py"", line 898](file:///D:/LLM/envs/llms/Lib/site-packages/gradio_client/utils.py#line=897), in get_type
+    if ""const"" in schema:
+       ^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'bool' is not iterable
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+import os
+from pathlib import Path
+from megaparse import MegaParse
+
+# Initialize MegaParse
+megaparse = MegaParse()
+
+def process_pdf_to_markdown(pdf_file, output_dir=""./knowledge-base/myself/output_markdown""):
+    """"""Process a PDF file and save as markdown""""""
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Get the base filename without extension
+    filename = Path(pdf_file).stem
+    output_path = os.path.join(output_dir, f""{filename}.md"")
+    
+    # Process the PDF
+    response = megaparse.load(pdf_file)  # This expects a file path
+    
+    # Save the markdown
+    with open(output_path, ""w"", encoding=""utf-8"") as f:
+        f.write(response)
+    
+    return output_path
+
+def handle_upload(pdf_file):
+    if pdf_file is None:
+        return ""No file uploaded.""
+    
+    # Process and save
+    saved_path = process_pdf_to_markdown(pdf_file)
+    
+    # Read back the saved markdown to display
+    with open(saved_path, ""r"", encoding=""utf-8"") as f:
+        markdown_content = f.read()
+    
+    return markdown_content
+
+# Gradio Interface
+demo = gr.Interface(
+    fn=handle_upload,
+    inputs=gr.File(type=""filepath""),  # Accepts the file path directly
+    outputs=gr.Markdown(),
+    title=""PDF to Markdown Processor"",
+    description=""Upload a PDF file, convert it to Markdown, view the result, and save it in the knowledge base.""
+)
+
+if __name__ == ""__main__"":
+    demo.launch()
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+I am running the latest version
+```
+
+### Severity
+
+Blocking usage of gradio",Shotluk,162106927,closed,False,1,2025-04-28T12:36:48+00:00,2025-04-28T18:10:21+00:00,2025-04-28T18:10:20+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3023352022,11089,chore: update versions,"This PR was opened by the [Changesets release](https://github.com/changesets/action) GitHub action. When you're ready to do a release, you can merge this and the packages will be published to npm automatically. If you're not ready to do a release yet, that's fine, whenever you add more changesets to main, this PR will be updated.
+
+
+# Releases
+## gradio@5.27.1
+
+### Fixes
+
+-   [#11093](https://github.com/gradio-app/gradio/pull/11093) [`cb322df`](https://github.com/gradio-app/gradio/commit/cb322df1f4df858590e760a82f6410f3b6db899b) - Update client.py to always send file data, even for files without extensions.  Thanks @edmcman!
+-   [#11091](https://github.com/gradio-app/gradio/pull/11091) [`e3d80e3`](https://github.com/gradio-app/gradio/commit/e3d80e3c5c305ce84771ec78e5e25c705d4eff44) - Fix scaling issue when setting height in Image component.  Thanks @freddyaboulton!
+-   [#11088](https://github.com/gradio-app/gradio/pull/11088) [`a5105cc`](https://github.com/gradio-app/gradio/commit/a5105cccd6ca0682bd206608a080e24d69dad136) - fix: ensure all translation files work as expected.  Thanks @Col0ring!
+
+## @gradio/audio@0.17.12
+
+### Dependency updates
+
+-   @gradio/button@0.4.17
+
+## @gradio/button@0.4.17
+
+### Dependency updates
+
+-   @gradio/image@0.22.4
+
+## @gradio/chatbot@0.26.3
+
+### Dependency updates
+
+-   @gradio/gallery@0.15.17
+-   @gradio/video@0.14.12
+-   @gradio/image@0.22.4
+
+## @gradio/core@0.15.1
+
+### Fixes
+
+-   [#11088](https://github.com/gradio-app/gradio/pull/11088) [`a5105cc`](https://github.com/gradio-app/gradio/commit/a5105cccd6ca0682bd206608a080e24d69dad136) - fix: ensure all translation files work as expected.  Thanks @Col0ring!
+
+### Dependency updates
+
+-   @gradio/gallery@0.15.17
+-   @gradio/button@0.4.17
+-   @gradio/video@0.14.12
+-   @gradio/image@0.22.4
+
+## @gradio/dataframe@0.17.10
+
+### Dependency updates
+
+-   @gradio/button@0.4.17
+
+## @gradio/downloadbutton@0.3.17
+
+### Dependency updates
+
+-   @gradio/button@0.4.17
+
+## @gradio/gallery@0.15.17
+
+### Dependency updates
+
+-   @gradio/video@0.14.12
+-   @gradio/image@0.22.4
+
+## @gradio/image@0.22.4
+
+### Fixes
+
+-   [#11091](https://github.com/gradio-app/gradio/pull/11091) [`e3d80e3`](https://github.com/gradio-app/gradio/commit/e3d80e3c5c305ce84771ec78e5e25c705d4eff44) - Fix scaling issue when setting height in Image component.  Thanks @freddyaboulton!
+
+## @gradio/imageeditor@0.14.4
+
+### Dependency updates
+
+-   @gradio/image@0.22.4
+
+## @gradio/lite@5.27.1
+
+### Dependency updates
+
+-   @gradio/core@0.15.1
+
+## @gradio/multimodaltextbox@0.10.4
+
+### Dependency updates
+
+-   @gradio/video@0.14.12
+-   @gradio/image@0.22.4
+
+## @gradio/uploadbutton@0.8.17
+
+### Dependency updates
+
+-   @gradio/button@0.4.17
+
+## @gradio/video@0.14.12
+
+### Dependency updates
+
+-   @gradio/image@0.22.4
+
+## gradio_client@1.9.1
+
+### Fixes
+
+-   [#11093](https://github.com/gradio-app/gradio/pull/11093) [`cb322df`](https://github.com/gradio-app/gradio/commit/cb322df1f4df858590e760a82f6410f3b6db899b) - Update client.py to always send file data, even for files without extensions.  Thanks @edmcman!
+
+## @self/app@1.49.5
+
+### Dependency updates
+
+-   @gradio/core@0.15.1
+
+## @self/component-test@0.5.18
+
+### Dependency updates
+
+-   @gradio/video@0.14.12
+",gradio-pr-bot,121576822,closed,False,1,2025-04-27T22:11:21+00:00,2025-04-28T18:33:58+00:00,2025-04-28T18:33:57+00:00,no-visual-update;windows-tests;flaky-tests,0,0,0,0,0,0,0
+gradio-app/gradio,3022873717,11088,fix: ensure all translation files work as expected,"## Description
+
+Please include a concise summary, in clear English, of the changes in this pull request. If it closes an issue, please mention it here.
+
+Closes: #11087
+
+## 🎯 PRs Should Target Issues
+
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small. 
+
+Not adhering to this guideline will result in the PR being closed. 
+
+## Testing and Formatting Your Code
+
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: `bash scripts/run_backend_tests.sh`
+
+2. Please run these bash scripts to automatically format your code: `bash scripts/format_backend.sh`, and (if you made any changes to non-Python files) `bash scripts/format_frontend.sh`
+  
+",Col0ring,47329987,closed,False,2,2025-04-27T07:24:54+00:00,2025-04-27T22:01:49+00:00,2025-04-27T22:01:49+00:00,,2,0,0,0,0,0,2
+gradio-app/gradio,3022858115,11087,[i18n] Automatic detection of Chinese translation is not working,"### Describe the bug
+
+The issue was caused by this pr https://github.com/gradio-app/gradio/pull/11049. Actually, the Chinese translation file in gradio is named using the BCP 47 language tags (zh-CN / zh-TW).
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+with gr.Blocks() as demo:
+    pass
+
+demo.launch()
+```
+
+
+### Screenshot
+
+gradio 5.27.0
+![Image](https://github.com/user-attachments/assets/49f36e08-fb28-4bdc-bddb-018eec7fe9c6)
+
+gradio 5.26.0
+![Image](https://github.com/user-attachments/assets/e780f723-c362-44d3-8e25-2b544a678d30)
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio version: 5.27.0
+gradio_client version: 1.9.0
+```
+
+### Severity
+
+I can work around it",Col0ring,47329987,closed,False,0,2025-04-27T06:59:20+00:00,2025-04-27T22:01:50+00:00,2025-04-27T22:01:50+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3022833777,11086,mount_gradio_app doesn't support path parameter at v5.27.0 any more,"### Describe the bug
+
+mount_gradio_app doesn't support to mount at '/project/{id}' at v5.27.0 any more
+
+and it works at gradio v5.19.0
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import uvicorn
+from fastapi import FastAPI
+import gradio as gr
+
+app = FastAPI()
+
+with gr.Blocks() as demo:
+    gr.Textbox('hello')
+
+gr.mount_gradio_app(app, demo, path='/project/{id}')
+
+uvicorn.run(app, host=""0.0.0.0"", port=8000)
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+v5.27.0
+```
+
+### Severity
+
+Blocking usage of gradio",CyberTianzun,1757180,open,False,1,2025-04-27T06:37:56+00:00,2025-05-06T15:35:35+00:00,,bug;Priority;Regression,0,0,0,0,0,0,0
+gradio-app/gradio,3022798873,11085,add checking type `bool` for the conversion of json schema to python type in client/python/gradio_client/utils.py,"## Description
+Added a boolean check to the schema return in `get_type` of file client/python/gradio_client/utils.py
+Closes issue: #11084 
+
+## 🎯 PRs Should Target Issues
+Before your create a PR, please check to see if there is [an existing issue](https://github.com/gradio-app/gradio/issues) for this change. If not, please create an issue before you create this PR, unless the fix is very small.
+
+Not adhering to this guideline will result in the PR being closed.
+
+## Testing and Formatting Your Code
+1. PRs will only be merged if tests pass on CI. We recommend at least running the backend tests locally, please set up [your Gradio environment locally](https://github.com/gradio-app/gradio/blob/main/CONTRIBUTING.md) and run the backed tests: bash scripts/run_backend_tests.sh
+
+2. Please run these bash scripts to automatically format your code: bash scripts/format_backend.sh, and (if you made any changes to non-Python files) bash scripts/format_frontend.sh",ZSkyX,51038567,closed,False,1,2025-04-27T05:49:58+00:00,2025-04-29T07:49:27+00:00,2025-04-29T07:49:27+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3022782426,11084,JSON schema processing issue in gradio_client/utils,"### Describe the bug
+
+In gradio_client/utils, the `get_type()` did not process the schema.
+The schema's type this function take`get_type(schema: dict)` does not match the type its calling function takes `_json_schema_to_python_type(schema: Any, defs)`.
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```
+def json_schema_to_python_type(schema: Any) -> str:
+    type_ = _json_schema_to_python_type(schema, schema.get(""$defs""))
+    return type_.replace(CURRENT_FILE_DATA_FORMAT, ""filepath"")
+
+if __name__ == '__main__':
+json_schema_to_python_type(True)
+```
+
+
+
+### Screenshot
+
+File ""gradio_client/utils.py"", line 864, in get_type
+    if ""const"" in schema:
+TypeError: argument of type 'bool' is not iterable
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Darwin
+gradio version: 4.44.1
+gradio_client version: 1.3.0
+```
+
+### Severity
+
+Blocking usage of gradio",ZSkyX,51038567,closed,False,3,2025-04-27T05:28:32+00:00,2025-04-30T18:32:53+00:00,2025-04-29T07:49:11+00:00,bug;needs repro,0,0,0,0,0,0,0
+gradio-app/gradio,3020734007,11083,Fix image url in ImageSlider README,the js docs on the website can't find the images which is breaking the build. simplest fix is to use the github urls instead. ,aliabd,9021060,closed,False,2,2025-04-25T18:22:19+00:00,2025-04-25T18:31:57+00:00,2025-04-25T18:22:53+00:00,,0,0,0,0,0,0,0
+gradio-app/gradio,3020223208,11082,Audio not playing on safari or mobile safari/mobile chrome,"### Describe the bug
+
+I have an HF space that is generating wav files, but after the audio is generated, the waveform is never displayed in the UI and the play button doesn't work, though the file can be downloaded.
+
+This seems to work on chrome, but I could not make it work on safari, mobile safari, or mobile chrome.
+
+The space is here: https://huggingface.co/spaces/xlr8harder/tahm_kench
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+click generate to load the wav, on the affected browsers the waveform is never rendered and the play button does not work, though the file can be downloaded.
+
+You'll need to provide an audio.wav.  You can generate a sample one with my HF space above, if you need one.
+
+```python
+import gradio as gr
+import os
+
+# Make sure the file exists
+AUDIO_PATH = ""audio.wav""
+assert os.path.exists(AUDIO_PATH), f""Missing file: {AUDIO_PATH}""
+
+def play_audio():
+    return AUDIO_PATH
+
+app = gr.Interface(
+    fn=play_audio,
+    inputs=[],
+    outputs=gr.Audio(type=""filepath"", label=""Your Audio""),
+    title=""Play Audio File"",
+    description=""Click the button below to play the audio.wav file.""
+)
+
+if __name__ == ""__main__"":
+    app.launch()
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+Nothing is logged with debug=True.
+```
+
+### System Info
+
+```shell
+I'm using these requirements.
+
+torch==2.4.0
+torchaudio==2.4.0
+torchao==0.9.0
+transformers==4.49.0
+tokenizers==0.21.0
+huggingface_hub==0.28.1
+gradio==5.26.0
+moshi==0.2.2
+spaces==0.32.0
+torchtune==0.4.0
+```
+
+### Severity
+
+I can work around it",xlr8harder,140839276,closed,False,6,2025-04-25T14:26:45+00:00,2025-04-25T20:19:11+00:00,2025-04-25T20:19:10+00:00,bug;pending clarification,0,0,0,0,0,0,0
+gradio-app/gradio,3019892825,11081,How to implement a screenshot for gr.Model3D() ?,"- [ ] I have searched to see if a similar issue already exists.
+Yes
+
+I want to import a 3D model via gr.Model3D() and take a screenshot and place it in gr.Image().
+
+However, I have no idea about how to implement the screenshot.
+
+So I want to ask if anyone can make it.
+
+![Image](https://github.com/user-attachments/assets/648b7df7-9a24-43bf-84a1-0083b508f77e)",Edmund-a7,93356511,closed,False,3,2025-04-25T12:14:18+00:00,2025-04-29T22:28:02+00:00,2025-04-29T22:28:01+00:00,enhancement,0,0,0,0,0,0,0
+gradio-app/gradio,3019197810,11080,why are gradio bash URL outputs so buggy with extra g/* prepends?,"### Describe the bug
+
+is there some internal agenda to prevent people from using gradio api
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+latest gradio
+```
+
+### Severity
+
+I can work around it",yosun,909246,closed,False,2,2025-04-25T07:12:01+00:00,2025-04-25T18:03:43+00:00,2025-04-25T18:03:41+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3018957137,11079,Working with Dask using Gradio,"### Describe the bug
+
+Gradio (for UI) and Dask (for large-scale or parallel computation) complement each other if you're using Gradio as a lightweight interface for triggering heavy backend data processing. Running Dask tasks asynchronously or in separate threads/processes. Visualizing outputs of computations like large data summarization, ML predictions, or distributed processing results. But Gradio runs functions synchronously, so long Dask jobs can freeze the UI unless you offload processing. If using Dask distributed, ensure the Dask scheduler/client is started outside the Gradio function. Dask uses lazy evaluation—so return values must be .compute()-ed before sending to Gradio (which expects standard Python types).
+
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+import gradio as gr
+import dask.dataframe as dd
+
+df = dd.read_csv(""large_data.csv"")
+
+def show_mean(column):
+    return df[column].mean().compute()
+
+gr.Interface(fn=show_mean, inputs=""text"", outputs=""number"").launch()
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+NA
+```
+
+### Severity
+
+I can work around it",Varshit2448,140231744,closed,False,1,2025-04-25T04:31:31+00:00,2025-04-25T18:04:38+00:00,2025-04-25T18:04:37+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3018940027,11078,Gradio API does not support input url,"### Describe the bug
+
+1) Gradio API directions specify input url
+2) actual gradio response attempts to read from local file system instead of URL
+3) add url support
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+# URL (not local filesystem path) to an image as input to a model accepting image
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+huggingface zeroGPU Pro
+```
+
+### Severity
+
+Blocking usage of gradio",yosun,909246,closed,False,3,2025-04-25T04:14:57+00:00,2025-04-29T18:48:53+00:00,2025-04-29T18:48:52+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3017802748,11077,chore: update versions,"This PR was opened by the [Changesets release](https://github.com/changesets/action) GitHub action. When you're ready to do a release, you can merge this and the packages will be published to npm automatically. If you're not ready to do a release yet, that's fine, whenever you add more changesets to main, this PR will be updated.
+
+
+# Releases
+## gradio@5.27.0
+
+### Features
+
+-   [#11027](https://github.com/gradio-app/gradio/pull/11027) [`eff532b`](https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053) - Add new `ImageSlider` component.  Thanks @pngwn!
+
+### Fixes
+
+-   [#11049](https://github.com/gradio-app/gradio/pull/11049) [`8d2aa3e`](https://github.com/gradio-app/gradio/commit/8d2aa3e99e165413bae1d8f5f3b4630e870308f5) - Ensure translations work as expected.  Thanks @hannahblair!
+
+## @gradio/accordion@0.5.14
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+-   @gradio/column@0.2.0
+
+## @gradio/annotatedimage@0.9.17
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/atoms@0.16.0
+
+### Features
+
+-   [#11027](https://github.com/gradio-app/gradio/pull/11027) [`eff532b`](https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053) - Add new `ImageSlider` component.  Thanks @pngwn!
+
+## @gradio/audio@0.17.11
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/button@0.4.16
+-   @gradio/atoms@0.16.0
+
+## @gradio/box@0.2.18
+
+### Dependency updates
+
+-   @gradio/atoms@0.16.0
+
+## @gradio/button@0.4.16
+
+### Dependency updates
+
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+
+## @gradio/chatbot@0.26.2
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/video@0.14.11
+-   @gradio/atoms@0.16.0
+-   @gradio/gallery@0.15.16
+-   @gradio/plot@0.9.15
+
+## @gradio/checkbox@0.4.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/checkboxgroup@0.6.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/code@0.14.2
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/colorpicker@0.4.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/core@0.15.0
+
+### Features
+
+-   [#11027](https://github.com/gradio-app/gradio/pull/11027) [`eff532b`](https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053) - Add new `ImageSlider` component.  Thanks @pngwn!
+
+### Fixes
+
+-   [#11049](https://github.com/gradio-app/gradio/pull/11049) [`8d2aa3e`](https://github.com/gradio-app/gradio/commit/8d2aa3e99e165413bae1d8f5f3b4630e870308f5) - Ensure translations work as expected.  Thanks @hannahblair!
+
+### Dependency updates
+
+-   @gradio/code@0.14.2
+-   @gradio/paramviewer@0.7.8
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/button@0.4.16
+-   @gradio/video@0.14.11
+-   @gradio/atoms@0.16.0
+-   @gradio/column@0.2.0
+-   @gradio/gallery@0.15.16
+-   @gradio/plot@0.9.15
+-   @gradio/textbox@0.10.10
+-   @gradio/checkbox@0.4.20
+-   @gradio/file@0.12.16
+
+## @gradio/dataframe@0.17.9
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/button@0.4.16
+-   @gradio/atoms@0.16.0
+
+## @gradio/dataset@0.4.16
+
+### Dependency updates
+
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+-   @gradio/textbox@0.10.10
+
+## @gradio/datetime@0.3.12
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/downloadbutton@0.3.16
+
+### Dependency updates
+
+-   @gradio/button@0.4.16
+
+## @gradio/dropdown@0.9.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/fallback@0.4.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/file@0.12.16
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/fileexplorer@0.5.27
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+-   @gradio/checkbox@0.4.20
+-   @gradio/file@0.12.16
+
+## @gradio/form@0.2.18
+
+### Dependency updates
+
+-   @gradio/atoms@0.16.0
+
+## @gradio/gallery@0.15.16
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/video@0.14.11
+-   @gradio/atoms@0.16.0
+-   @gradio/file@0.12.16
+
+## @gradio/highlightedtext@0.9.3
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/html@0.6.11
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/image@0.22.3
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/imageeditor@0.14.3
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/imageslider@0.2.0
+
+### Features
+
+-   [#11027](https://github.com/gradio-app/gradio/pull/11027) [`eff532b`](https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053) - Add new `ImageSlider` component.  Thanks @pngwn!
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+# @gradio/image
+
+## @gradio/json@0.5.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/label@0.5.12
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/lite@5.27.0
+
+### Dependency updates
+
+-   @gradio/atoms@0.16.0
+-   @gradio/core@0.15.0
+
+## @gradio/markdown@0.13.10
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/model3d@0.14.11
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/multimodaltextbox@0.10.3
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/video@0.14.11
+-   @gradio/atoms@0.16.0
+
+## @gradio/nativeplot@0.5.14
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/number@0.5.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/paramviewer@0.7.8
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/plot@0.9.15
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/radio@0.7.3
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/sidebar@0.1.12
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+-   @gradio/column@0.2.0
+
+## @gradio/simpledropdown@0.3.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/simpleimage@0.8.27
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## @gradio/simpletextbox@0.3.20
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/sketchbox@0.6.7
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+-   @gradio/column@0.2.0
+
+## @gradio/slider@0.6.8
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/statustracker@0.10.10
+
+### Dependency updates
+
+-   @gradio/atoms@0.16.0
+
+## @gradio/textbox@0.10.10
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/atoms@0.16.0
+
+## @gradio/upload@0.16.3
+
+### Dependency updates
+
+-   @gradio/atoms@0.16.0
+
+## @gradio/uploadbutton@0.8.16
+
+### Dependency updates
+
+-   @gradio/upload@0.16.3
+-   @gradio/button@0.4.16
+
+## @gradio/video@0.14.11
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+-   @gradio/image@0.22.3
+-   @gradio/upload@0.16.3
+-   @gradio/atoms@0.16.0
+
+## website@0.55.0
+
+### Features
+
+-   [#11027](https://github.com/gradio-app/gradio/pull/11027) [`eff532b`](https://github.com/gradio-app/gradio/commit/eff532b913a3c8f06f10a4f9471d3177e3744053) - Add new `ImageSlider` component.  Thanks @pngwn!
+
+### Dependency updates
+
+-   @gradio/code@0.14.2
+-   @gradio/paramviewer@0.7.8
+-   @gradio/statustracker@0.10.10
+
+## @self/app@1.49.4
+
+### Dependency updates
+
+-   @gradio/core@0.15.0
+
+## @self/component-test@0.5.17
+
+### Dependency updates
+
+-   @gradio/video@0.14.11
+
+## @self/storybook@0.8.2
+
+### Fixes
+
+-   [#11049](https://github.com/gradio-app/gradio/pull/11049) [`8d2aa3e`](https://github.com/gradio-app/gradio/commit/8d2aa3e99e165413bae1d8f5f3b4630e870308f5) - Ensure translations work as expected.  Thanks @hannahblair!
+
+## @self/tootils@0.7.21
+
+### Dependency updates
+
+-   @gradio/statustracker@0.10.10
+",gradio-pr-bot,121576822,closed,False,1,2025-04-24T16:23:39+00:00,2025-04-25T18:42:30+00:00,2025-04-25T18:35:44+00:00,no-visual-update;windows-tests;flaky-tests,0,0,0,0,0,0,0
+gradio-app/gradio,3016961528,11076,"[DataFrame] When start editing cell, the line-breaks disappeared permanently & No way to input a line-break.","### Describe the bug
+
+https://github.com/user-attachments/assets/6774a546-1cbc-4c9d-9515-fd70437cc1a4
+
+I created a dataframe with multi-lines in it's cells.
+When I click into the multi-line-cell, the content became in one line. Even after finish editing, it's still in one line.
+And I can't input a line-break neither by pressing [Enter],[alt+Enter] or [shift+Enter]
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+import pandas as pd
+
+with gr.Blocks() as demo:
+    gr.DataFrame(pd.DataFrame([[""1"", ""1\n2\n3""], [""2"", ""4\n5\n6""], [""3"", ""7\n8\n9""]], columns=[""col1"", ""col2""]), wrap=True, interactive=True, datatype=""markdown"", col_count=(2, ""fixed""))
+
+demo.launch()
+
+```
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+gradio version 5.26.0
+```
+
+### Severity
+
+I can work around it",tulunlxj2017,32868572,open,False,0,2025-04-24T11:35:14+00:00,2025-04-24T11:35:14+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3016470752,11075,root_path is not working on some asset files,"### Describe the bug
+
+After setting the `root_path` in `launch()`, some of the .css files are not using the custom root path. (All the files are available with the root path, but the url used in the webpage is not using the root path.)
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+App().make().queue().launch(
+    root_path=""/test""
+)
+```
+
+### Screenshot
+
+![Image](https://github.com/user-attachments/assets/5d2fad56-07ce-4765-9c6c-04ed2e44ebd1)
+The content inside that file is reset.css
+
+
+### System Info
+
+```shell
+5.26.0
+```
+
+### Severity
+
+I cannot work around",chunlampang,30290516,closed,False,6,2025-04-24T08:32:09+00:00,2025-05-06T02:25:15+00:00,2025-04-25T20:09:16+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3015756110,11074,How to cancel a chained function call with gradio,"### Describe the bug
+
+Below is the basic code for my Gradio application. I want to achieve method invocation and cancellation while simultaneously changing the button state, so I'm using chained function calls.
+
+I understand that cancel cannot directly terminate the entire chain of calls—it can only abort the function in the last .then(). However, I don't know how to modify it to achieve my goal. Can you help me out?
+
+
+### Reproduction
+
+```python
+import time
+import gradio as gr
+import pandas as pd
+
+
+def process_extract(doc_file_path=None, excel_file_path=None):
+    for i in range(10):
+        time.sleep(1)
+        yield None, f""processing......{i}"", pd.DataFrame([], columns=[""1"", ""2""])
+
+    yield None, ""done"", pd.DataFrame([], columns=[""1"", ""2""])
+
+
+with gr.Blocks() as demo:
+    with gr.Column() as extract_page:
+        with gr.Row():
+            reset_button_extract = gr.Button(
+                ""🛑 Force Stop"",
+                variant=""stop"",
+                elem_classes=""danger-button"",
+                interactive=False,
+            )
+        with gr.Row():
+            input_doc_file = gr.File(label=""Upload Doc File"")
+            input_excel_file = gr.File(label=""Upload Excel File"")
+            output_file = gr.File(label=""Download Excel File"")
+
+        with gr.Row():
+            process_button = gr.Button(""Extract"")
+        with gr.Row():
+            progress_bar = gr.Textbox()
+        with gr.Row():
+            text_bar = gr.DataFrame(label=""Table Data"")
+
+        process_event_extract = (
+            process_button.click(
+                fn=lambda: (
+                    gr.update(interactive=False),
+                    gr.update(interactive=True),
+                ),
+                outputs=[process_button, reset_button_extract],
+            )
+            .then(
+                fn=process_extract,
+                inputs=[input_doc_file, input_excel_file],
+                outputs=[output_file, progress_bar, text_bar],
+                concurrency_limit=2, 
+            )
+            .then(
+                fn=lambda: (
+                    gr.update(interactive=True),
+                    gr.update(interactive=False),
+                ),
+                outputs=[process_button, reset_button_extract],
+            )
+        )
+
+        reset_button_extract.click(
+            cancels=[process_event_extract],
+        ).then(
+            fn=lambda: (
+                ""already stoped"",
+                gr.update(interactive=True),
+                gr.update(interactive=False),
+            ),
+            outputs=[
+                progress_bar,
+                process_button,
+                reset_button_extract,
+            ],
+        )
+demo.launch()
+
+
+```
+
+
+### System Info
+
+```shell
+gradio 4.44.1
+Python 3.9.20
+```
+",PengKeRan,58772271,closed,False,1,2025-04-24T02:54:05+00:00,2025-04-29T00:40:29+00:00,2025-04-29T00:40:28+00:00,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3015351511,11073,gr.Markdown does not properly render mermaid diagram when inside a Tab that is hidden,"### Describe the bug
+
+Mermaid diagrams are not properly rendered when they are inside a tab that is hidden
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+demo = gr.Blocks()
+with demo:
+    with gr.Row():
+        with gr.Column():
+            with gr.Tab(""Test 1"", id=1):
+                gr.Markdown(
+                    value=""""""
+                ```mermaid
+                graph TD
+                    A[Start] --> B[Step 1]
+                    B --> C[Step 2]
+                    C --> D[End]
+                ```
+                """"""
+                )
+            with gr.Tab(""Test 2"", id=2):
+                gr.Markdown(
+                    value=""""""
+                ```mermaid
+                graph TD
+                    A[Start] --> B[Step 1]
+                    B --> C[Step 2]
+                    C --> D[End]
+                ```
+                """"""
+                )
+demo.launch()
+
+```
+
+
+### Screenshot
+
+<img width=""365"" alt=""Image"" src=""https://github.com/user-attachments/assets/471d9bd4-4ec2-4f1f-aee0-dd93e45dc6a7"" />
+<img width=""262"" alt=""Image"" src=""https://github.com/user-attachments/assets/2cc8342f-a510-490e-929e-d3a9252fdd3d"" />
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Darwin
+gradio version: 5.25.2
+gradio_client version: 1.8.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 24.1.0
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client==1.8.0 is not installed.
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.4
+orjson: 3.10.16
+packaging: 24.2
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.3
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.6
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.2
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.1
+authlib; extra == 'oauth' is not installed.
+itsdangerous; extra == 'oauth' is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 24.2
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+Blocking usage of gradio",injeniero,739218,open,False,2,2025-04-23T22:03:04+00:00,2025-04-29T22:29:24+00:00,,bug,0,0,0,0,0,0,0
+gradio-app/gradio,3015045520,11072,problem with base64 query parameters,"### Describe the bug
+
+Hello, I've started getting sporadic errors due to incorrect processing URL-encoding query parameters on the internal gradio endpoints.  The b64-encoded query parameter is supposed to prepopulate the code in a SQL editor app that is similar to [this one](https://github.com/gradio-app/gradio/issues/8057#issuecomment-2071103279)
+
+Is this something that's changed on the gradio side?
+
+
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+difficult
+
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+2025-04-23@13:08:26.578|DEBUG|api.log_access:51|Access to GET http://172.31.33.33:7891/sql/?q=V0lUS...aWQ= from 10.125.137.15
+2025-04-23@13:08:26.586|DEBUG|api.log_access:69|Response status: 200
+2025-04-23@13:08:27.368|DEBUG|api.log_access:51|Access to POST http://172.31.33.33:7891/sql/gradio_api/run/predict?q=V0lUS...aWQ%3D from 10.125.137.15
+  File ""/data/code/.pixi/envs/default/lib/python3.12/base64.py"", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Incorrect padding
+2025-04-23@13:08:27.378|DEBUG|.api.log_access:69|Response status: 500
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Linux
+gradio version: 5.21.0
+gradio_client version: 1.7.2
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 23.2.1
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.11
+ffmpy: 0.5.0
+gradio-client==1.7.2 is not installed.
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.29.3
+jinja2: 3.1.6
+markupsafe: 2.1.5
+numpy: 2.2.4
+orjson: 3.10.15
+packaging: 24.2
+pandas: 2.2.3
+pillow: 11.1.0
+pydantic: 2.10.6
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.0
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.1
+tomlkit: 0.13.2
+typer: 0.15.2
+typing-extensions: 4.12.2
+urllib3: 2.3.0
+uvicorn: 0.34.0
+authlib; extra == 'oauth' is not installed.
+itsdangerous; extra == 'oauth' is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.0
+httpx: 0.28.1
+huggingface-hub: 0.29.3
+packaging: 24.2
+typing-extensions: 4.12.2
+websockets: 15.0.1
+```
+
+### Severity
+
+Blocking usage of gradio",liquidcarbon,47034358,closed,False,4,2025-04-23T19:15:19+00:00,2025-04-28T13:50:39+00:00,2025-04-28T13:50:38+00:00,bug;pending clarification,0,0,0,0,0,0,0
+gradio-app/gradio,3014763313,11071,"mount_gradio_app does not work when the path is ""/""","### Describe the bug
+
+`mount_gradio_app` expects path to be `""/""` when the gradio app is mounted at the root of the FastAPI application, this is suggested by https://github.com/gradio-app/gradio/blob/0c1a9c73689de954130ba7565e0499837af1853a/gradio/routes.py#L1755 explicitly checking for `path = ""/""`.
+
+The problem is that when `path = ""/""` then the routing doesn't work anymore and infinite redirects are issued from `localhost:8000/` to `localhost:8000//` for example.
+
+### Have you searched existing issues?  🔎
+
+- [x] I have searched and found no existing issues
+
+### Reproduction
+
+```python
+import gradio as gr
+
+def greet(name, intensity):
+    return ""Hello, "" + name + ""!"" * int(intensity)
+
+demo = gr.Interface(
+    fn=greet,
+    inputs=[""text"", ""slider""],
+    outputs=[""text""],
+)
+
+from fastapi import FastAPI
+app = gr.mount_gradio_app(FastAPI(), demo, path=""/"")
+
+import uvicorn
+uvicorn.run(app, port=8000)
+```
+
+you will see the wrong redirect to `//` in the logs:
+```
+INFO:     127.0.0.1:57718 - ""GET / HTTP/1.1"" 307 Temporary Redirect
+INFO:     127.0.0.1:57718 - ""GET // HTTP/1.1"" 200 OK
+```
+
+### Screenshot
+
+_No response_
+
+### Logs
+
+```shell
+
+```
+
+### System Info
+
+```shell
+Gradio Environment Information:
+------------------------------
+Operating System: Darwin
+gradio version: 5.25.2
+gradio_client version: 1.8.0
+
+------------------------------------------------
+gradio dependencies in your environment:
+
+aiofiles: 23.2.1
+anyio: 4.9.0
+audioop-lts is not installed.
+fastapi: 0.115.12
+ffmpy: 0.5.0
+gradio-client==1.8.0 is not installed.
+groovy: 0.1.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+jinja2: 3.1.6
+markupsafe: 3.0.2
+numpy: 2.2.5
+orjson: 3.10.16
+packaging: 25.0
+pandas: 2.2.3
+pillow: 11.2.1
+pydantic: 2.11.3
+pydub: 0.25.1
+python-multipart: 0.0.20
+pyyaml: 6.0.2
+ruff: 0.11.6
+safehttpx: 0.1.6
+semantic-version: 2.10.0
+starlette: 0.46.2
+tomlkit: 0.13.2
+typer: 0.15.2
+typing-extensions: 4.13.2
+urllib3: 2.4.0
+uvicorn: 0.34.2
+authlib; extra == 'oauth' is not installed.
+itsdangerous; extra == 'oauth' is not installed.
+
+
+gradio_client dependencies in your environment:
+
+fsspec: 2025.3.2
+httpx: 0.28.1
+huggingface-hub: 0.30.2
+packaging: 25.0
+typing-extensions: 4.13.2
+websockets: 15.0.1
+```
+
+### Severity
+
+I can work around it",amol-,601423,open,False,6,2025-04-23T17:22:41+00:00,2025-05-12T14:06:25+00:00,,bug;Priority;Regression,0,0,0,0,0,0,0

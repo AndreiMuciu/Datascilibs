@@ -1,0 +1,3059 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+marimo-team/marimo,3057453508,4883,UUID: Unsupported UTF-8 sequence length when encoding string,"### Describe the bug
+
+Run simple cell with query like ```select
+    id,
+    name
+from
+    public.clients```
+
+When my ID column is UUID.
+
+I will get the `Unsupported UTF-8 sequence length when encoding string` error
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Darwin"",
+  ""OS Version"": ""24.4.0"",
+  ""Processor"": ""arm"",
+  ""Python Version"": ""3.12.2"",
+  ""Binaries"": {
+    ""Browser"": ""136.0.7103.93"",
+    ""Node"": ""v22.14.0""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.7"",
+    ""docutils"": ""0.18.1"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.1"",
+    ""markdown"": ""3.7"",
+    ""narwhals"": ""1.19.0"",
+    ""packaging"": ""23.2"",
+    ""psutil"": ""5.9.0"",
+    ""pygments"": ""2.15.1"",
+    ""pymdown-extensions"": ""10.11.2"",
+    ""pyyaml"": ""6.0.1"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.12.2"",
+    ""uvicorn"": ""0.30.6"",
+    ""websockets"": ""14.1""
+  },
+  ""Optional Dependencies"": {
+    ""altair"": ""5.0.1"",
+    ""anywidget"": ""0.9.13"",
+    ""duckdb"": ""1.1.3"",
+    ""nbformat"": ""5.10.4"",
+    ""openai"": ""1.60.0"",
+    ""pandas"": ""2.2.3"",
+    ""polars"": ""1.26.0"",
+    ""pyarrow"": ""16.1.0"",
+    ""pycrdt"": ""0.11.1"",
+    ""pytest"": ""8.3.4"",
+    ""python-lsp-server"": ""1.10.0"",
+    ""ruff"": ""0.11.2"",
+    ""sqlglot"": ""26.12.1""
+  },
+  ""Experimental Flags"": {}
+}
+
+```
+
+</details>
+
+
+### Code to reproduce
+
+```python
+@app.cell
+def _():
+    import os
+    import sqlalchemy
+
+    _password = os.environ.get(""POSTGRES_PASSWORD"", ""YO_MY_GREAT_PASSWORD"")
+    DATABASE_URL = f""postgresql://xxx:{_password}@localhost/defaultdb""
+    engine_pg = sqlalchemy.create_engine(DATABASE_URL, connect_args={'sslmode': 'require'})
+    return (engine_pg,)
+
+@app.cell
+def _(engine_pg, mo, public):
+    clients = mo.sql(
+        f""""""
+        select
+            id,
+            name
+        from
+            public.clients
+        """""",
+        engine=engine_pg
+    )
+    return (clients,)
+```",jasonrepath,185041605,open,False,1,2025-05-12T16:02:16+00:00,2025-05-12T16:20:07+00:00,,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3057362674,4882,fix: start charts tab open if any configured for table,,mscolnick,2753772,closed,False,1,2025-05-12T15:28:53+00:00,2025-05-12T16:13:02+00:00,2025-05-12T16:13:00+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3057322272,4881,fix: use keys in fe storage api,"- Use `key` in FE storage API
+- Change charts storage to use `NotebookLocalStorage`",mscolnick,2753772,closed,False,2,2025-05-12T15:14:34+00:00,2025-05-12T15:30:39+00:00,2025-05-12T15:28:02+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3057128725,4880,Problem with multiselect of mo.ui.file_browser.value and DataFrames with Path objects,"### Describe the bug
+
+Create a `mo.ui.file_browser` to select some files (`multiple=True`). 
+
+My objective is to retrieve all selected filepaths (absolute full path) into a DataFrame column. `file_browser.path(index)` seems for single file only. I couldn't find yet an officially straightforward way to acquire in batch.
+
+My current method to make do is plain old looping, like `polar.Series([str(file.path) for file in file_browser.value])` or similar.
+
+Mind the explicit `str()` because Marimo and/or Polars aren't happy with directly handling cells with path objects. Without explicit `str()` they'll err and complain ""csv writer does not support object dtype"" if I call `write_csv()`.
+
+So please enlighten me if there are better ways to do this.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Windows"",
+  ""OS Version"": ""11"",
+  ""Processor"": ""AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD"",
+  ""Python Version"": ""3.13.3"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""--""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.2.0"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.39.0"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""altair"": ""5.5.0"",
+    ""polars"": ""1.29.0"",
+    ""pycrdt"": ""0.11.1""
+  },
+  ""Experimental Flags"": {
+    ""chat_sidebar"": true,
+    ""tracing"": true
+  }
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",Vrantheo,132968157,closed,False,1,2025-05-12T14:12:46+00:00,2025-05-12T14:22:51+00:00,2025-05-12T14:22:49+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3057085948,4879,chore: test snapshots,,mscolnick,2753772,closed,False,2,2025-05-12T13:59:49+00:00,2025-05-12T14:30:04+00:00,2025-05-12T14:27:10+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3056962485,4878,Docs for mounted apps,"### Documentation is
+
+- [x] Missing
+- [ ] Outdated
+- [ ] Confusing
+- [ ] Not sure?
+
+### Explain in Detail
+
+This isn't exactly about marimo documentation, but rather about marimo potentially taking advantage of auto-documenting available in FastAPI.  Feel free to convert to feature request if appropriate.
+
+It would be great to auto-document marimo apps that take query parameters the way that FastAPI does that, using [pydantic query models](https://fastapi.tiangolo.com/tutorial/query-param-models/) and [OpenAPI](https://fastapi.tiangolo.com/tutorial/metadata).
+
+
+
+
+### Your Suggestion for Changes
+
+As marimo are Starlette, not FastAPI apps, they don't take the `docs_url` parameters that build the OpenAPI schemas and the `/docs` endpoints.   [This ](https://fastapi.tiangolo.com/how-to/extending-openapi/#modify-the-openapi-schema) also doesn't work:
+
+```
+from fastapi.openapi.utils import get_openapi
+
+openapi_schema = get_openapi(
+    title=""Custom title"",
+    version=""2.5.0"",
+    summary=""This is a very custom OpenAPI schema"",
+    description=""Here's a longer description of the custom **OpenAPI** schema"",
+    routes=app.routes,  # mounted Marimo routes do not show up here
+)
+```
+
+If it is possible to build OpenAPI docs, would you please suggest how?
+I can then add PR on docs about docs :)
+
+### Will you submit a PR?
+
+- [x] Yes",liquidcarbon,47034358,open,False,2,2025-05-12T13:21:42+00:00,2025-05-12T14:08:23+00:00,,documentation,0,0,0,0,0,0,0
+marimo-team/marimo,3056719585,4876,Comment annotation to import via micropip,"### Description
+
+I use the pyodide notebooks extensively for demos.  I go through gymnastics to have a hidden cell that `await micropip.installs` packages, but I don't want to clutter simple tutorials with that.
+
+### Suggested solution
+
+I would like to be able to write code like
+```
+import buckaroo # micropip.install
+```
+and have it installed with micropip in the pyodide environment.  Obviously the comment would do nothing in regular python because it's a comment.
+
+Would you be open to a PR that did this?
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",paddymul,40453,open,False,1,2025-05-12T12:00:10+00:00,2025-05-12T13:53:25+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3056585986,4875,Optionnaly make Slider/RangeSlider text-boxed,"### Description
+
+I'd like to have in marimo a ""TextSlider"", that is a slider where the displayed value is actually a text area : the text is updated if the slider is moved to represent the appropriate value, but the text can also be edited and when validated, the slider's position updates accordingly.
+This is because sometimes I like just moving the slider left and right to see of my system evolves, but sometimes I know exactly the value I want to try - and writing that value is way faster and intuitive than fine-tunning the slider's position.
+
+One approach to do so is to create a bidrectionnaly link between a Slider and a Number, but it requires using the `state` approach which seems un-recommended, and not very satisfying for many reasons (need to declare several widgets in separte cellc, use mo.state):
+
+```python
+# put those 4 different cells
+get_y, set_y = mo.state(0)
+
+y_slider = mo.ui.slider(
+    start=vmin,
+    stop=vmax,
+    value=get_y(),
+    on_change=set_y,
+    label=""y from slider:"",
+)
+
+y_number = mo.ui.number(
+    start=vmin,
+    stop=vmax,
+    value=get_y(),
+    on_change=set_y,
+    label=""y from number:"",
+)
+
+y_slider, y_number
+```
+
+Back in ipython/ipywidgets, I was able to create a `QuantityTextSlider`, which was a pure python ipywidget that provided this feature (as well as a parsing to convert the actual value into a Quantity object, not just a float). See [example](https://github.com/mocquin/physipy-widgets/blob/main/notebooks/Physipy%20widgets%20for%20ipython.ipynb) and [code](https://github.com/mocquin/physipy-widgets/blob/94e42370d9f29dea0ae04f9ae0429580cfeaafd5/physipywidgets/qipywidgets.py#L326)
+
+Another example of use is using a slider to browse images using the image component where the index of the image displayed is given by the slider : one could either browse left-to-right the images by sliding the slider, or go directly to a specific image given its index
+
+Also applies to RangeSlider
+
+### Suggested solution
+
+Some kwarg using : `mo.ui.slider(include_text_box=bool)`
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",mocquin,36188368,closed,False,1,2025-05-12T11:09:01+00:00,2025-05-12T13:54:13+00:00,2025-05-12T13:54:12+00:00,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3056266620,4874,fix: `typos` failing on pre-commit CI,"## 📝 Summary
+
+Fixes pre-commit failures following recommendation to set `pass_filenames: false` from https://github.com/crate-ci/typos/issues/926
+
+## 🔍 Description of Changes
+
+- [x] add the `pass_filenames: false` workaround
+- [ ] fix typos in codebase which were smuggled through while the `typos` check was malfunctioning; :confused: while it passes on CI, it fails locally for me on:
+   ```
+    typos....................................................................Failed
+    - hook id: typos
+    - exit code: 2
+    
+    error: `fo` should be `of`, `for`, `do`, `go`, `to`
+      --> ./codemirror-languageserver-marimo/src/utils.test.ts:117:35
+        |
+    117 |         expect(createMockContext(""fo"").matchBefore(pattern)).toEqual({
+        |                                   ^^
+        |
+    error: `fo` should be `of`, `for`, `do`, `go`, `to`
+      --> ./codemirror-languageserver-marimo/src/utils.test.ts:120:20
+        |
+    120 |             text: ""fo"",
+        |                    ^^
+        |
+    ```
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick
+",krassowski,5832902,closed,False,2,2025-05-12T09:16:34+00:00,2025-05-12T14:21:40+00:00,2025-05-12T14:18:03+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3055263231,4873,fix: drop internal row id in `table.value`,Fixes #4868,mscolnick,2753772,closed,False,4,2025-05-11T22:33:06+00:00,2025-05-12T14:02:51+00:00,2025-05-12T13:58:08+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3055256517,4872,fix: don't fail if url does not have port,Maybe a fix for #4871. It won't fail on printing the URL,mscolnick,2753772,closed,False,1,2025-05-11T22:19:04+00:00,2025-05-12T13:58:33+00:00,2025-05-12T13:58:31+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3055174867,4871,CLI --host doesn't accept IPv6,"### Describe the bug
+
+Looks like it cuts at the first colon and parses the rest as port number:
+
+```
+$ marimo edit --host 2001:db8::1 --headless notebook.py
+
+        Edit notebook.py in your browser 📝
+
+ERROR:    Traceback (most recent call last):
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/starlette/routing.py"", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File ""/usr/lib/python3.10/contextlib.py"", line 199, in __aenter__
+    return await anext(self.gen)
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_utils/lifespans.py"", line 51, in _manager
+    await exit_stack.enter_async_context(lifespan(app))
+  File ""/usr/lib/python3.10/contextlib.py"", line 619, in enter_async_context
+    result = await _cm_type.__aenter__(cm)
+  File ""/usr/lib/python3.10/contextlib.py"", line 199, in __aenter__
+    return await anext(self.gen)
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/api/lifespans.py"", line 73, in logging
+    print_startup(
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/print.py"", line 42, in print_startup
+    print_tabbed(f""{_utf8('➜')}  {green('URL')}: {_colorized_url(url)}"")
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/print.py"", line 93, in _colorized_url
+    if url.port:
+  File ""/usr/lib/python3.10/urllib/parse.py"", line 186, in port
+    raise ValueError(f""Port could not be cast to integer value as {port!r}"")
+ValueError: Port could not be cast to integer value as 'db8::1'
+
+ERROR:    Application startup failed. Exiting.
+```
+
+Square brackets don't work either:
+
+```
+$ marimo edit --host ""[2001:db8::1]"" --headless notebook.py 
+
+        Edit notebook.py in your browser 📝
+
+        ➜  URL: http://2001:db8::1:2718?access_token=CoctDEB_ry5fwzPIM4dQvg
+
+ERROR:    [Errno -2] Name or service not known
+
+        Thanks for using marimo!
+```
+
+Even with explicit port:
+
+```
+$ marimo edit --host ""[2001:db8::1]:2718"" --headless notebook.py 
+
+        Edit notebook.py in your browser 📝
+
+ERROR:    Traceback (most recent call last):
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/starlette/routing.py"", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File ""/usr/lib/python3.10/contextlib.py"", line 199, in __aenter__
+    return await anext(self.gen)
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_utils/lifespans.py"", line 51, in _manager
+    await exit_stack.enter_async_context(lifespan(app))
+  File ""/usr/lib/python3.10/contextlib.py"", line 619, in enter_async_context
+    result = await _cm_type.__aenter__(cm)
+  File ""/usr/lib/python3.10/contextlib.py"", line 199, in __aenter__
+    return await anext(self.gen)
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/api/lifespans.py"", line 73, in logging
+    print_startup(
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/print.py"", line 42, in print_startup
+    print_tabbed(f""{_utf8('➜')}  {green('URL')}: {_colorized_url(url)}"")
+  File ""/home/remram/.cache/pypoetry/virtualenvs/rr4-jupyter-myExjB03-py3.10/lib/python3.10/site-packages/marimo/_server/print.py"", line 93, in _colorized_url
+    if url.port:
+  File ""/usr/lib/python3.10/urllib/parse.py"", line 186, in port
+    raise ValueError(f""Port could not be cast to integer value as {port!r}"")
+ValueError: Port could not be cast to integer value as '2718:2718'
+
+ERROR:    Application startup failed. Exiting.
+```
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Linux"",
+  ""OS Version"": ""6.8.0-59-generic"",
+  ""Processor"": ""x86_64"",
+  ""Python Version"": ""3.10.12"",
+  ""Binaries"": {
+    ""Browser"": ""136.0.7103.92"",
+    ""Node"": ""v22.13.1""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.7"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.1"",
+    ""markdown"": ""3.7"",
+    ""narwhals"": ""1.13.1"",
+    ""packaging"": ""24.1"",
+    ""psutil"": ""6.1.0"",
+    ""pygments"": ""2.18.0"",
+    ""pymdown-extensions"": ""10.12"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.41.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.12.2"",
+    ""uvicorn"": ""0.32.0"",
+    ""websockets"": ""12.0""
+  },
+  ""Optional Dependencies"": {
+    ""duckdb"": ""1.1.3"",
+    ""nbformat"": ""5.10.4"",
+    ""pandas"": ""2.2.3"",
+    ""polars"": ""1.22.0"",
+    ""pyarrow"": ""18.0.0"",
+    ""pycrdt"": ""0.11.1"",
+    ""sqlglot"": ""26.6.0""
+  },
+  ""Experimental Flags"": {}
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",remram44,426784,open,False,0,2025-05-11T19:40:44+00:00,2025-05-11T19:41:06+00:00,,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3055080466,4870,feat: added input field to ui slider,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Integrated number-field into the slider and added a include_input argument to manage visibility of input. Resolves #4747 by adding the requested feature.
+
+<img width=""683"" alt=""Screenshot 2025-05-11 at 12 32 38 PM"" src=""https://github.com/user-attachments/assets/6a521406-3c56-4049-8627-dfc5f03ade6b"" />
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Added includeInput to SliderPlugin.tsx with validation
+- Added include_input to input.py along with a description
+- Integrated NumberField into SliderPlugin
+- Added a two way data binding between the slider and the integrated number-field
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,2,2025-05-11T16:24:06+00:00,2025-05-11T20:46:59+00:00,2025-05-11T19:32:29+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3054819136,4869,Support system message for Gemini,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+The system message was ignored for Gemini; this PR fixes that.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+The system message is now passed as an argument to `GenerativeModel`.
+In addition, a redundant line has been deleted.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",guyrosin,1250162,closed,False,3,2025-05-11T08:04:10+00:00,2025-05-11T20:25:55+00:00,2025-05-11T20:25:42+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3054706274,4868,write_csv() on a marimo.table.value also writes extra row number,"### Describe the bug
+
+Take a DataFrame, wrap it with marimo.ui.table, interactively select rows, then call the table's .values.write_csv() to write the selected rows.
+
+I couldn't recall since which version, the row number (seemingly an internal hidden column ""_marimo_row_id"") also gets written into the resulting CSV as an unexpected extra column.
+
+This behaviour should at least be opt-in via a parameter. Thanks for the attention.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Windows"",
+  ""OS Version"": ""11"",
+  ""Processor"": ""AMD64 Family 25 Model 116 Stepping 1, AuthenticAMD"",
+  ""Python Version"": ""3.13.3"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""--""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.2.0"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.38.2"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""altair"": ""5.5.0"",
+    ""polars"": ""1.29.0"",
+    ""pycrdt"": ""0.11.1""
+  },
+  ""Experimental Flags"": {
+    ""chat_sidebar"": true,
+    ""tracing"": true
+  }
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",Vrantheo,132968157,closed,False,1,2025-05-11T04:43:50+00:00,2025-05-12T13:58:09+00:00,2025-05-12T13:58:09+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3054305866,4867,fix: add rtc feature-flag in Labs UI,,mscolnick,2753772,closed,False,2,2025-05-10T16:00:23+00:00,2025-05-12T14:11:41+00:00,2025-05-12T13:58:42+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3053694197,4866,feat: updates to row viewer panel,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+![image](https://github.com/user-attachments/assets/c31e3273-af1a-42e7-b4ae-f6124f1cad5c)
+- Change to Row viewer panel
+- Adds cell-aware config
+- Keyboard shortcuts when element is active
+
+open to name/tooltip suggestions. Context-aware(?), reactive, adaptive
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",Light2Dark,19585239,closed,False,3,2025-05-10T05:04:25+00:00,2025-05-12T03:24:58+00:00,2025-05-12T03:22:25+00:00,,1,0,0,0,1,0,0
+marimo-team/marimo,3053356786,4865,fix: doc errors,"## 📝 Summary
+
+Fix doc errors",dmadisetti,2689338,closed,False,1,2025-05-09T23:06:05+00:00,2025-05-09T23:21:25+00:00,2025-05-09T23:21:23+00:00,,1,0,0,0,0,0,1
+marimo-team/marimo,3053189853,4864,Format signatures in LSP hover and completion documentation,"## 📝 Summary
+
+- formats signatures using ruff so that they are easier to read
+- depends on https://github.com/python-lsp/python-lsp-server/pull/631
+
+## 🔍 Description of Changes
+
+Adds `pylsp_signatures_to_markdown` hook, re-using existing `ruff` formatting utility.
+
+| Before | After |
+|--|--|
+| ![image](https://github.com/user-attachments/assets/2ffb4e27-6a26-4f69-ae7a-ed51faa5afc2) | ![Screenshot from 2025-05-09 22-01-22](https://github.com/user-attachments/assets/56bde23c-193d-4800-a2c6-81b80ab72025) |
+
+Note: this does not help with `pd.read_csv`; I am not sure why it is not hitting this code path, but notably it happens on the completion items which do not have a docstring either.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick
+",krassowski,5832902,closed,False,2,2025-05-09T21:07:06+00:00,2025-05-12T14:00:07+00:00,2025-05-12T13:57:30+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3053123787,4863,improvement: allow configuration the location of the web static assets,This allows configuring the location of the marimo static assets: to another directory or to a CDN.,mscolnick,2753772,open,False,1,2025-05-09T20:30:43+00:00,2025-05-09T20:32:10+00:00,,,0,0,0,0,0,0,0
+marimo-team/marimo,3053093978,4862,fix: align font size for line numbers with the code editor,"## 📝 Summary
+
+The font size for the line numbers remained unchanged when the ""Code editor font size"" was changed in the user settings. The following video demonstrates the difference when the font size is increased to 16px before and after applying the patch.
+
+https://github.com/user-attachments/assets/63bd8ec5-c380-46a3-9527-843b1eefed89
+
+## 🔍 Description of Changes
+I added a CSS class that uses the font size for the code editor on the line numbers.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",yjoer,47742486,closed,False,4,2025-05-09T20:11:39+00:00,2025-05-09T22:44:05+00:00,2025-05-09T22:38:51+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3053027061,4861,fix: [rtc] edge cases for auto-run and focus,"Tested with 2 users. 
+
+This fixes some edge cases with markdown auto-run and focusing when creating new cells.",mscolnick,2753772,closed,False,2,2025-05-09T19:33:39+00:00,2025-05-11T20:32:55+00:00,2025-05-11T20:26:02+00:00,merge when ready,0,0,0,0,0,0,0
+marimo-team/marimo,3052877237,4860,fix: narwhals.pyarrow does not support mean/quantile,Fixes #4859 ,mscolnick,2753772,closed,False,3,2025-05-09T18:17:02+00:00,2025-05-09T20:50:01+00:00,2025-05-09T20:47:16+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3052762158,4859,Failed to get summary for column (spark df `.toArrow()`),"### Describe the bug
+
+Everything seems to be correct but seeing error message when displaying Arrow data:
+
+<img width=""822"" alt=""Image"" src=""https://github.com/user-attachments/assets/537a8fdc-38fb-4a15-91eb-b38e2c5dc918"" />
+
+
+As comparison, pandas shows the same result but no error:
+
+<img width=""822"" alt=""Image"" src=""https://github.com/user-attachments/assets/415c5c09-c026-48a2-91ad-e072c300df0e"" />
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Darwin"",
+  ""OS Version"": ""24.4.0"",
+  ""Processor"": ""arm"",
+  ""Python Version"": ""3.12.9"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""v23.11.0""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.8"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.38.2"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""pandas"": ""2.2.3"",
+    ""polars"": ""1.29.0"",
+    ""pyarrow"": ""20.0.0"",
+    ""pycrdt"": ""0.11.1"",
+    ""pytest"": ""8.3.5""
+  },
+  ""Experimental Flags"": {}
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+```python
+from databricks.connect import DatabricksSession
+spark = DatabricksSession.builder.serverless().getOrCreate()
+
+df_taxi = spark.read.table(""samples.nyctaxi.trips"").limit(1000)
+
+df_taxi.toPandas()  # fine
+df_arrow = df_taxi.toArrow()  # looks fine but getting error message in output
+```",Julian-J-S,25177421,closed,False,1,2025-05-09T17:24:39+00:00,2025-05-09T20:47:17+00:00,2025-05-09T20:47:17+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3052744807,4858,fix: don't block on background tasks created in cells,"Fixes #3780 
+
+This gives other async tasks a chance to execute while the control request is empty. For example, we create our own background tasks (e.g. writing session metadata) and sometimes a cell can as well (holoviews does, for example in the datashader)",mscolnick,2753772,closed,False,2,2025-05-09T17:14:48+00:00,2025-05-09T17:58:50+00:00,2025-05-09T17:56:13+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3052469536,4857,docs: add relevant video for `mo.output.replace`,"## 📝 Summary
+
+Added a relevant YouTube video showcase for `mo.output.replace` function by @koaning!
+
+## 🔍 Description of Changes
+
+Tip admonition that links to a YouTube short demonstrating `mo.output.replace` (shown in the prompt and the animation later on). Thought it might be a nice thing to link to (even though the video is based on Zero shotting w/ marimo.app/ai).
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ]  I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@akshayka OR @mscolnick
+",Haleshot,57552973,closed,False,2,2025-05-09T15:10:09+00:00,2025-05-09T18:31:33+00:00,2025-05-09T17:23:11+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3050375598,4856,"fix: uv, start tutorial","## 📝 Summary
+
+Currently running the provided command will install the dependencies but fail to start the tutorial. 
+
+This change adds `uv run` to the command to ensure we invoke `uv` when starting the tutorial.
+
+```bash
+$ uv add marimo && marimo tutorial intro
+$ Using CPython 3.13.2 interpreter at: /opt/homebrew/opt/python@3.13/bin/python3.13
+Creating virtual environment at: .venv
+Resolved 24 packages in 964ms
+Prepared 22 packages in 5.27s
+Installed 22 packages in 87ms
+ + anyio==4.9.0
+ + click==8.1.8
+ + docutils==0.21.2
+ + h11==0.16.0
+ + idna==3.10
+ + itsdangerous==2.2.0
+ + jedi==0.19.2
+ + marimo==0.13.6
+ + markdown==3.8
+ + narwhals==1.38.2
+ + packaging==25.0
+ + parso==0.8.4
+ + psutil==7.0.0
+ + pycrdt==0.11.1
+ + pygments==2.19.1
+ + pymdown-extensions==10.15
+ + pyyaml==6.0.2
+ + sniffio==1.3.1
+ + starlette==0.46.2
+ + tomlkit==0.13.2
+ + uvicorn==0.34.2
+ + websockets==15.0.1
+zsh: command not found: marimo
+```
+
+## 🔍 Description of Changes
+
+Add `uv run` to the start tutorial command.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [ ] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick
+",ZacHooper,19284719,closed,False,4,2025-05-08T23:37:16+00:00,2025-05-09T00:41:31+00:00,2025-05-09T00:38:59+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3050301813,4855,fix: Restart cell in pdb,"## 📝 Summary
+
+Still doing a bit of a deep dive into PDB. Worth actually trying to use it and making sure we aren't serving up a broken experience. restart/run failed dramatically- but now actually restart
+
+I think pretty formatting for PDB can be done FE- but like we said probably not worth it just yet.
+
+@mscolnick
+",dmadisetti,2689338,closed,False,2,2025-05-08T23:07:17+00:00,2025-05-09T01:05:16+00:00,2025-05-09T01:02:33+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3050047620,4854,improvement: show toast for waiting on stdin,"![Screenshot 2025-05-08 at 4 39 40 PM](https://github.com/user-attachments/assets/9d32e175-d83a-444f-a0ca-ce8f82ff0e95)
+",mscolnick,2753772,closed,False,2,2025-05-08T20:41:31+00:00,2025-05-08T21:45:29+00:00,2025-05-08T21:42:55+00:00,merge when ready,1,0,0,0,1,0,0
+marimo-team/marimo,3049981655,4853,fix: only show one stdin,Only show one `pdb` input. Hide controls on regular `stdin`,mscolnick,2753772,closed,False,1,2025-05-08T20:08:55+00:00,2025-05-08T20:40:19+00:00,2025-05-08T20:40:18+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049950178,4852,fix: prevent hanging PDB on interact,"## 📝 Summary
+
+@mscolnick
+",dmadisetti,2689338,closed,False,2,2025-05-08T19:51:49+00:00,2025-05-08T20:50:30+00:00,2025-05-08T20:40:56+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049922844,4851,fix: brittle code extraction broken with live marimo.app/e?slug=xxxx,"## 📝 Summary
+
+The live tag is `<marimo-filename hidden>`, which didn't match
+
+@mscolnick
+",dmadisetti,2689338,closed,False,2,2025-05-08T19:37:20+00:00,2025-05-08T20:43:10+00:00,2025-05-08T20:40:32+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049873138,4850,fix: [rtc] sync language metadata,"* Sync language metadata (markdown prefix, sql dataframe name, sql conection, etc.) between clients. 
+* Couple backend fixes when closing ",mscolnick,2753772,closed,False,1,2025-05-08T19:14:09+00:00,2025-05-08T20:40:49+00:00,2025-05-08T20:40:47+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049675978,4848,fix: Issue side effects to invalidate cache blocks,"## 📝 Summary
+
+fixes #3876
+
+Issue side effects on cach usage and exceptions
+
+## 🔍 Description of Changes
+
+@mscolnick
+",dmadisetti,2689338,closed,False,2,2025-05-08T17:39:49+00:00,2025-05-08T19:41:03+00:00,2025-05-08T19:38:03+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049575541,4847,"fix: ibis data types, from upgrade",Newer version of ibis has changed the expected datatype response. Also handles some more cases in type conversion.,mscolnick,2753772,closed,False,2,2025-05-08T16:50:46+00:00,2025-05-08T17:55:27+00:00,2025-05-08T17:52:52+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049554832,4846,chore: refactor cm language files,Bit of file structure cleanup,mscolnick,2753772,closed,False,2,2025-05-08T16:41:01+00:00,2025-05-08T16:57:40+00:00,2025-05-08T16:52:07+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049457245,4845,"chore: make LanguageAdapters stateless, store metadata in EditorState","This makes the `LanguageAdapter` stateless and instead adds `LanguageAdapterMetadata` which is a map of state that is easier to access/update. 
+
+This change makes real-time syncing much easier. 
+
+This also adds some new test converge and cleans up some code (moving to to new files)",mscolnick,2753772,closed,False,2,2025-05-08T16:01:20+00:00,2025-05-08T16:40:46+00:00,2025-05-08T16:38:03+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3049005764,4844,"chore: refactor markdown file, pull out completions","Cleanup to file, since i plan to make some bigger changes here",mscolnick,2753772,closed,False,2,2025-05-08T13:26:37+00:00,2025-05-08T14:02:58+00:00,2025-05-08T14:00:25+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3048917627,4843,VScode Extension: no way to open notebooks inside VsCode,"### Describe the bug
+
+Using directly VsCode Extension to start the server and the notebook. 
+
+![Image](https://github.com/user-attachments/assets/0568c746-afe2-4e63-ab20-85f4c77177d4)
+
+The notebooks have many cells and it is possible to run it on the browser (starting the server and opening a notebook works with no issues. 
+
+The only problem seems to be on the VSCode
+
+Settings for the marimo extensions:
+![Image](https://github.com/user-attachments/assets/a953e8fc-3b1a-4fb5-8979-abcbc06225d7)
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Windows"",
+  ""OS Version"": ""11"",
+  ""Processor"": ""Intel64 Family 6 Model 170 Stepping 4, GenuineIntel"",
+  ""Python Version"": ""3.12.9"",
+  ""Binaries"": {
+    ""Browser"": ""135.0.7049.115"",
+    ""Node"": ""v22.14.0""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.8"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.38.1"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""duckdb"": ""1.2.0"",
+    ""nbformat"": ""5.10.4"",
+    ""pandas"": ""2.2.3"",
+    ""pyarrow"": ""19.0.1"",
+    ""pycrdt"": ""0.11.1"",
+    ""ruff"": ""0.9.7""
+  },
+  ""Experimental Flags"": {}
+}
+</details>
+
+
+### Code to reproduce
+
+# /// script
+# dependencies = [
+#   ""marimo>=0.11.18"",
+# ]
+# ///
+
+import marimo
+
+__generated_with = ""0.11.17""
+app = marimo.App(width=""full"")
+
+
+@app.cell
+def _():
+    import marimo as mo    
+    return mo
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        """"""
+        # Exploratory Data Analysis (EDA)
+
+        L'obiettivo dell'**analisi esplorativa dei dati** è quello di conoscere meglio il contenuto di un dataset, sia ""in assoluto"" sia relativamente alle conoscenze pregresse a disposizione.
+        """"""
+    )
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r""""""# Prima di iniziare l'esplorazione"""""")
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r""""""
+        ## Domande di contesto
+
+        - Da che contesto provengono i dati?
+        - Quale fenomeno o processo descrivono i dati?
+        - Qual è il sistema sorgente che li ha prodotti?
+            - Chi gestisce il sistema sorgente?
+            - Chi è il responsabile della qualità del dato?
+        """"""
+    )
+    return
+",DaxterXS,33525392,closed,False,2,2025-05-08T12:53:10+00:00,2025-05-08T13:26:35+00:00,2025-05-08T13:07:43+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3047951555,4842,Marimo ignores ctrl-c when running with --sandbox on Windows,"### Describe the bug
+
+I ran `marimo edit --sandbox example.py` in PowerShell on Windows. (Fresh file)
+
+Sometimes ctrl-c works.
+Sometimes it is completely ignored.
+Sometimes when I cancel quit with 'n' the kernel dies.
+
+I've looked at the previous issues relating to ctrl-c, but they are closed.
+I've installed the latest versions of Marimo and uv.
+
+The following screenshot shows the initial run, where the ctrl-c worked, then the I selected 'n', then the kernel died. Then it shows the second run where ctrl-c never worked:
+
+![Image](https://github.com/user-attachments/assets/baecc22d-76bc-4de9-b22a-a90db282c324)
+
+This is the debug log from cancelling the exit (ctrl-c, then 'n'), which leads to the kernel crashing:
+
+<details>
+
+```
+[D 250508 16:18:26 runtime:1325] Finished run.
+[D 250508 16:18:26 runtime:2093] Handled control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56410 - ""POST /api/kernel/sync/cell_ids HTTP/1.1"" 200 OK
+[D 250508 16:18:27 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56410 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+[D 250508 16:18:29 handlers:26] Interrupt request received
+[D 250508 16:18:29 runtime:2674] kernel queue.get() failed [Errno 4] Interrupted function call
+        Are you sure you want to quit? (y/n): n
+[D 250508 16:18:31 sessions:525] Closing session C:\Users\dwales\example.py because kernel died
+
+        The Python kernel for file C:\Users\dwales\example.py died unexpectedly.
+
+[D 250508 16:18:31 ws:735] Websocket terminated with CancelledError
+INFO:     127.0.0.1:56410 - ""GET /api/usage HTTP/1.1"" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\uvicorn\protocols\http\h11_impl.py"", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\uvicorn\middleware\proxy_headers.py"", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\applications.py"", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\errors.py"", line 187, in __call__
+    raise exc
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\errors.py"", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\auth.py"", line 219, in __call__
+    return await super().__call__(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\sessions.py"", line 85, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\base.py"", line 176, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\contextlib.py"", line 158, in __exit__
+    self.gen.throw(value)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\_utils.py"", line 82, in collapse_excgroups
+    raise exc
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\base.py"", line 178, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\middleware.py"", line 168, in dispatch
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\base.py"", line 156, in call_next
+    raise app_exc
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\base.py"", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\auth.py"", line 250, in __call__
+    await super().__call__(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\authentication.py"", line 48, in __call__
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\auth.py"", line 239, in wrapped_app
+    await app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\cors.py"", line 85, in __call__
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\middleware.py"", line 99, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\middleware.py"", line 381, in __call__
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\middleware.py"", line 381, in __call__
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\middleware.py"", line 381, in __call__
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\middleware\exceptions.py"", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\_exception_handler.py"", line 53, in wrapped_app
+    raise exc
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\_exception_handler.py"", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 734, in app
+    await route.handle(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 460, in handle
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 734, in app
+    await route.handle(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 288, in handle
+    await self.app(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\_exception_handler.py"", line 53, in wrapped_app
+    raise exc
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\_exception_handler.py"", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\routing.py"", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\router.py"", line 108, in wrapper_func
+    response = await response
+               ^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\starlette\authentication.py"", line 75, in async_wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\marimo\_server\api\endpoints\health.py"", line 215, in usage
+    kernel_process = psutil.Process(session.kernel_manager.kernel_task.pid)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\psutil\__init__.py"", line 317, in __init__
+    self._init(pid)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\6zd4X2lMTJWJtgw6m4s0n\Lib\site-packages\psutil\__init__.py"", line 363, in _init
+    raise NoSuchProcess(pid, msg=msg) from None
+psutil.NoSuchProcess: process PID not found (pid=39960)
+INFO:     connection closed
+[D 250508 16:18:32 middleware:373] Done with websocket proxy for ws://localhost:3119/lsp/pylsp
+INFO:     connection closed
+```
+
+</details>
+
+I've tried running it in debug mode, but this yields a new error:
+
+<details>
+
+```
+--- Logging error ---
+Traceback (most recent call last):
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\logging\__init__.py"", line 1163, in emit
+    stream.write(msg + self.terminator)
+OSError: [WinError 1] Incorrect function
+Call stack:
+  File ""<string>"", line 1, in <module>
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 314, in _bootstrap
+    self.run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2689, in launch_kernel
+    asyncio.run(control_loop(kernel))
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 194, in run
+    return runner.run(main)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 118, in run
+    return self._loop.run_until_complete(task)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 674, in run_until_complete
+    self.run_forever()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 641, in run_forever
+    self._run_once()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 1986, in _run_once
+    handle._run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\events.py"", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2683, in control_loop
+    await kernel.handle_message(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2092, in handle_message
+    await self.request_handler.handle(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2513, in handle
+    return await handler(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1987, in handle_instantiate
+    await self.instantiate(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1957, in instantiate
+    await self.run(request.execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1511, in run
+    await _run_with_uninstantiated_requests(execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1451, in _run_with_uninstantiated_requests
+    await self._run_cells(
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1320, in _run_cells
+    while cell_ids := await self._run_cells_internal(cell_ids):
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1399, in _run_cells_internal
+    await runner.run_all()
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runner\cell_runner.py"", line 589, in run_all
+    LOGGER.debug(""Running post_execution hooks in context"")
+Message: 'Running post_execution hooks in context'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\logging\__init__.py"", line 1163, in emit
+    stream.write(msg + self.terminator)
+OSError: [WinError 1] Incorrect function
+Call stack:
+  File ""<string>"", line 1, in <module>
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 314, in _bootstrap
+    self.run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2689, in launch_kernel
+    asyncio.run(control_loop(kernel))
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 194, in run
+    return runner.run(main)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 118, in run
+    return self._loop.run_until_complete(task)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 674, in run_until_complete
+    self.run_forever()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 641, in run_forever
+    self._run_once()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 1986, in _run_once
+    handle._run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\events.py"", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2683, in control_loop
+    await kernel.handle_message(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2092, in handle_message
+    await self.request_handler.handle(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2513, in handle
+    return await handler(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1987, in handle_instantiate
+    await self.instantiate(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1957, in instantiate
+    await self.run(request.execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1511, in run
+    await _run_with_uninstantiated_requests(execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1451, in _run_with_uninstantiated_requests
+    await self._run_cells(
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1320, in _run_cells
+    while cell_ids := await self._run_cells_internal(cell_ids):
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1399, in _run_cells_internal
+    await runner.run_all()
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runner\cell_runner.py"", line 591, in run_all
+    post_hook(cell, self, run_result)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\contextlib.py"", line 81, in inner
+    return func(*args, **kwds)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runner\hooks_post_execution.py"", line 63, in _set_imported_defs
+    LOGGER.debug(""Acquiring graph lock to update cell import workspace"")
+Message: 'Acquiring graph lock to update cell import workspace'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\logging\__init__.py"", line 1163, in emit
+    stream.write(msg + self.terminator)
+OSError: [WinError 1] Incorrect function
+Call stack:
+  File ""<string>"", line 1, in <module>
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\spawn.py"", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 314, in _bootstrap
+    self.run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\multiprocessing\process.py"", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2689, in launch_kernel
+    asyncio.run(control_loop(kernel))
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 194, in run
+    return runner.run(main)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\runners.py"", line 118, in run
+    return self._loop.run_until_complete(task)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 674, in run_until_complete
+    self.run_forever()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 641, in run_forever
+    self._run_once()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\base_events.py"", line 1986, in _run_once
+    handle._run()
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\asyncio\events.py"", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2683, in control_loop
+    await kernel.handle_message(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2092, in handle_message
+    await self.request_handler.handle(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 2513, in handle
+    return await handler(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1987, in handle_instantiate
+    await self.instantiate(request)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1957, in instantiate
+    await self.run(request.execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1511, in run
+    await _run_with_uninstantiated_requests(execution_requests)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1451, in _run_with_uninstantiated_requests
+    await self._run_cells(
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1320, in _run_cells
+    while cell_ids := await self._run_cells_internal(cell_ids):
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runtime.py"", line 1399, in _run_cells_internal
+    await runner.run_all()
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runner\cell_runner.py"", line 591, in run_all
+    post_hook(cell, self, run_result)
+  File ""C:\Users\dwales\AppData\Roaming\uv\python\cpython-3.12.5-windows-x86_64-none\Lib\contextlib.py"", line 81, in inner
+    return func(*args, **kwds)
+  File ""C:\Users\dwales\AppData\Local\uv\cache\archive-v0\GkP4c5-2dEMTJLhhRUps7\Lib\site-packages\marimo\_runtime\runner\hooks_post_execution.py"", line 65, in _set_imported_defs
+    LOGGER.debug(""Acquired graph lock to update import workspace."")
+Message: 'Acquired graph lock to update import workspace.'
+Arguments: ()
+```
+
+</details>
+
+I can't reproduce this 100% every time, but typically after a few tries I can reproduce this by running `marimo edit --sandbox example.py`, then creating a few simple cells such as the following:
+
+``` python
+print('hi')
+
+1/0
+
+print('test')
+```
+
+While `ctrl-c` typically works immediately after launching marimo, after a couple of minutes, and adding test cells like the above, `ctrl-c` often stops working.
+
+Here is a debug log from a time when ctrl-c stopped working:
+
+<details>
+
+```
+❯ marimo -d edit --sandbox .\example.py
+Running in a sandbox: uv run --isolated --no-project --compile-bytecode --with-requirements C:\Users\dwales\AppData\Local\Temp\tmp47c6i174.txt --python >=3.12 marimo -d edit .\example.py
+[D 250508 16:22:20 file_router:44] Routing to file .\example.py
+WARNING:  Current configuration will not reload as not all conditions are met, please refer to documentation.
+INFO:     Started server process [37568]
+INFO:     Waiting for application startup.
+[D 250508 16:22:21 lifespans:50] Setup: lsp
+[D 250508 16:22:21 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:21 lifespans:43] Language Servers are enabled
+[D 250508 16:22:21 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:21 lsp:59] Starting LSP server at port 3119...
+[D 250508 16:22:21 lsp:66] ... running command: ['C:\\Users\\dwales\\AppData\\Local\\uv\\cache\\archive-v0\\6zd4X2lMTJWJtgw6m4s0n\\Scripts\\python.exe', '-m', 'pylsp', '--ws', '-v', '--port', '3119', '--check-parent-process']
+[D 250508 16:22:21 lsp:79] ... process return code (`None` means still running): None
+[D 250508 16:22:21 lsp:105] Started LSP server at port 3119
+[D 250508 16:22:21 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:21 lifespans:50] Setup: etc
+[D 250508 16:22:21 lifespans:50] Setup: signal_handler
+[D 250508 16:22:21 lifespans:50] Setup: logging
+
+        Edit example.py in your browser 📝
+
+        ➜  URL: http://127.0.0.1:2718?access_token=8R5QjxPzqSoG7yOJ0dcgyA
+
+[D 250508 16:22:21 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:21 lifespans:50] Setup: open_browser
+[D 250508 16:22:21 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:2718 (Press CTRL+C to quit)
+[D 250508 16:22:22 auth:51] Validated access_token from query param
+[D 250508 16:22:22 assets:101] File key provided: C:\Users\dwales\example.py
+[D 250508 16:22:22 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:22 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+INFO:     127.0.0.1:56564 - ""GET /?access_token=8R5QjxPzqSoG7yOJ0dcgyA HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /public-files-sw.js?v=2 HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /public-files-sw.js?v=2 HTTP/1.1"" 200 OK
+[D 250508 16:22:24 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+INFO:     ('127.0.0.1', 56569) - ""WebSocket /ws?session_id=s_qzy75n"" [accepted]
+[D 250508 16:22:24 ws:537] Websocket open request for session with id s_qzy75n
+[D 250508 16:22:24 ws:540] Existing sessions: {}
+[D 250508 16:22:24 sessions:822] Creating new session for id s_qzy75n
+[D 250508 16:22:24 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:25 runtime:2536] Launching kernel
+INFO:     connection open
+[D 250508 16:22:25 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: ['marimo'].
+INFO:     127.0.0.1:56564 - ""GET /public-files-sw.js?v=2 HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+[D 250508 16:22:25 middleware:368] Creating websocket proxy for ws://localhost:3119/lsp/pylsp
+INFO:     ('127.0.0.1', 56573) - ""WebSocket /lsp/pylsp"" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56572 - ""POST /api/kernel/instantiate HTTP/1.1"" 200 OK
+[D 250508 16:22:25 manager:375] Using config at C:\Users\dwales\.config\marimo\marimo.toml
+[D 250508 16:22:26 runtime:2676] Received control request: CreationRequest(execution_requests=(ExecutionRequest(cell=Hbol, code_preview=1/0), ExecutionRequest(cell=MJUe, code_preview=print('hi'), ExecutionRequest(cell=vblA, code_preview=1/0), ExecutionRequest(cell=bkHC, code_preview=print('tes), ExecutionRequest(cell=lEQa, code_preview=print('hel), ExecutionRequest(cell=PKri, code_preview=1/0), ExecutionRequest(cell=Xref, code_preview=)), set_ui_element_value_request=SetUIElementValueRequest(n_elements=0, token=6d1793e8-7d81-4e29-8e2c-fe2c670956f5), auto_run=True, request=HTTPRequest(path=/api/kernel/instantiate, params=0))
+[D 250508 16:22:26 runtime:2088] Acquiring globals lock to handle request CreationRequest(execution_requests=(ExecutionRequest(cell=Hbol, code_preview=1/0), ExecutionRequest(cell=MJUe, code_preview=print('hi'), ExecutionRequest(cell=vblA, code_preview=1/0), ExecutionRequest(cell=bkHC, code_preview=print('tes), ExecutionRequest(cell=lEQa, code_preview=print('hel), ExecutionRequest(cell=PKri, code_preview=1/0), ExecutionRequest(cell=Xref, code_preview=)), set_ui_element_value_request=SetUIElementValueRequest(n_elements=0, token=6d1793e8-7d81-4e29-8e2c-fe2c670956f5), auto_run=True, request=HTTPRequest(path=/api/kernel/instantiate, params=0))
+[D 250508 16:22:26 runtime:2091] Handling control request: CreationRequest(execution_requests=(ExecutionRequest(cell=Hbol, code_preview=1/0), ExecutionRequest(cell=MJUe, code_preview=print('hi'), ExecutionRequest(cell=vblA, code_preview=1/0), ExecutionRequest(cell=bkHC, code_preview=print('tes), ExecutionRequest(cell=lEQa, code_preview=print('hel), ExecutionRequest(cell=PKri, code_preview=1/0), ExecutionRequest(cell=Xref, code_preview=)), set_ui_element_value_request=SetUIElementValueRequest(n_elements=0, token=6d1793e8-7d81-4e29-8e2c-fe2c670956f5), auto_run=True, request=HTTPRequest(path=/api/kernel/instantiate, params=0))
+[D 250508 16:22:26 runtime:1096] Mutating graph.
+[D 250508 16:22:26 runtime:1097] Current set of errors: {}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell Hbol
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell Hbol and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell Hbol
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id Hbol
+        parents {'Hbol': set()}
+        children {'Hbol': set()}
+        siblings {'Hbol': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell MJUe
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell MJUe and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell MJUe
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id MJUe
+        parents {'Hbol': set(), 'MJUe': set()}
+        children {'Hbol': set(), 'MJUe': set()}
+        siblings {'Hbol': set(), 'MJUe': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell vblA
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell vblA and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell vblA
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id vblA
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell bkHC
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell bkHC and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell bkHC
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id bkHC
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell lEQa
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell lEQa and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell lEQa
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id lEQa
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell PKri
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell PKri and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell PKri
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id PKri
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set()}
+[D 250508 16:22:26 dataflow:137] Acquiring graph lock to register cell Xref
+[D 250508 16:22:26 dataflow:139] Acquired graph lock.
+[D 250508 16:22:26 dataflow:205] Registered cell Xref and released graph lock
+[D 250508 16:22:26 runtime:805] registered cell Xref
+[D 250508 16:22:26 runtime:806] parents: set()
+[D 250508 16:22:26 runtime:807] children: set()
+[D 250508 16:22:26 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:26 runtime:930] graph:
+        cell id Xref
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+[D 250508 16:22:26 runtime:1138] After mutation, syntax errors {}
+[D 250508 16:22:26 runtime:1139] Semantic errors {}
+[D 250508 16:22:26 runtime:1183] Final set of errors, after pruning valid cells: {}
+[D 250508 16:22:26 cell_runner:552] Running preparation hooks
+[D 250508 16:22:26 cell_runner:558] Cell runner processing Hbol
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell Hbol
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 hooks_post_execution:308] Cell Hbol raised ZeroDivisionError
+[D 250508 16:22:26 cell_runner:558] Cell runner processing MJUe
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell MJUe
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 cell_runner:558] Cell runner processing vblA
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell vblA
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 hooks_post_execution:308] Cell vblA raised ZeroDivisionError
+[D 250508 16:22:26 cell_runner:558] Cell runner processing bkHC
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell bkHC
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 cell_runner:558] Cell runner processing lEQa
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell lEQa
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 cell_runner:558] Cell runner processing PKri
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell PKri
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 hooks_post_execution:308] Cell PKri raised ZeroDivisionError
+[D 250508 16:22:26 cell_runner:558] Cell runner processing Xref
+[D 250508 16:22:26 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:26 cell_runner:584] Running cell Xref
+[D 250508 16:22:26 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:26 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:26 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:26 cell_runner:598] Running on_finish hooks
+[D 250508 16:22:26 runtime:1325] Finished run.
+[D 250508 16:22:26 runtime:2093] Handled control request: CreationRequest(execution_requests=(ExecutionRequest(cell=Hbol, code_preview=1/0), ExecutionRequest(cell=MJUe, code_preview=print('hi'), ExecutionRequest(cell=vblA, code_preview=1/0), ExecutionRequest(cell=bkHC, code_preview=print('tes), ExecutionRequest(cell=lEQa, code_preview=print('hel), ExecutionRequest(cell=PKri, code_preview=1/0), ExecutionRequest(cell=Xref, code_preview=)), set_ui_element_value_request=SetUIElementValueRequest(n_elements=0, token=6d1793e8-7d81-4e29-8e2c-fe2c670956f5), auto_run=True, request=HTTPRequest(path=/api/kernel/instantiate, params=0))
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/run HTTP/1.1"" 200 OK
+[D 250508 16:22:38 runtime:2676] Received control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:38 runtime:2088] Acquiring globals lock to handle request ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:38 runtime:2091] Handling control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:38 runtime:1096] Mutating graph.
+[D 250508 16:22:38 runtime:1097] Current set of errors: {}
+[D 250508 16:22:38 runtime:899] Deleting cell Xref
+[D 250508 16:22:38 dataflow:267] Acquiring graph lock to delete cell Xref
+[D 250508 16:22:38 dataflow:269] Acquired graph lock to delete cell Xref
+[D 250508 16:22:38 dataflow:309] Deleted cell Xref and Released graph lock.
+[D 250508 16:22:38 dataflow:137] Acquiring graph lock to register cell Xref
+[D 250508 16:22:38 dataflow:139] Acquired graph lock.
+[D 250508 16:22:38 dataflow:205] Registered cell Xref and released graph lock
+[D 250508 16:22:38 runtime:805] registered cell Xref
+[D 250508 16:22:38 runtime:806] parents: set()
+[D 250508 16:22:38 runtime:807] children: set()
+[D 250508 16:22:38 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:38 runtime:930] graph:
+        cell id Xref
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set()}
+[D 250508 16:22:38 runtime:1138] After mutation, syntax errors {}
+[D 250508 16:22:38 runtime:1139] Semantic errors {}
+[D 250508 16:22:38 runtime:1183] Final set of errors, after pruning valid cells: {}
+[D 250508 16:22:38 cell_runner:552] Running preparation hooks
+[D 250508 16:22:38 cell_runner:558] Cell runner processing Xref
+[D 250508 16:22:38 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:38 cell_runner:584] Running cell Xref
+[D 250508 16:22:38 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:38 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:38 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:38 cell_runner:598] Running on_finish hooks
+[D 250508 16:22:38 runtime:1325] Finished run.
+[D 250508 16:22:38 runtime:2093] Handled control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/sync/cell_ids HTTP/1.1"" 200 OK
+[D 250508 16:22:39 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/run HTTP/1.1"" 200 OK
+[D 250508 16:22:47 runtime:2676] Received control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:47 runtime:2088] Acquiring globals lock to handle request ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:47 runtime:2091] Handling control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:47 runtime:1096] Mutating graph.
+[D 250508 16:22:47 runtime:1097] Current set of errors: {}
+[D 250508 16:22:47 dataflow:137] Acquiring graph lock to register cell ifdn
+[D 250508 16:22:47 dataflow:139] Acquired graph lock.
+[D 250508 16:22:47 dataflow:205] Registered cell ifdn and released graph lock
+[D 250508 16:22:47 runtime:805] registered cell ifdn
+[D 250508 16:22:47 runtime:806] parents: set()
+[D 250508 16:22:47 runtime:807] children: set()
+[D 250508 16:22:47 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:47 runtime:930] graph:
+        cell id ifdn
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set()}
+[D 250508 16:22:47 runtime:1138] After mutation, syntax errors {}
+[D 250508 16:22:47 runtime:1139] Semantic errors {}
+[D 250508 16:22:47 runtime:1183] Final set of errors, after pruning valid cells: {}
+[D 250508 16:22:47 cell_runner:552] Running preparation hooks
+[D 250508 16:22:47 cell_runner:558] Cell runner processing ifdn
+[D 250508 16:22:47 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:47 cell_runner:584] Running cell ifdn
+[D 250508 16:22:47 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:47 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:47 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:47 hooks_post_execution:308] Cell ifdn raised ZeroDivisionError
+[D 250508 16:22:47 cell_runner:598] Running on_finish hooks
+[D 250508 16:22:47 runtime:1325] Finished run.
+[D 250508 16:22:47 runtime:2093] Handled control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/sync/cell_ids HTTP/1.1"" 200 OK
+[D 250508 16:22:48 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+[D 250508 16:22:53 runtime:2676] Received control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/run HTTP/1.1"" 200 OK
+[D 250508 16:22:53 runtime:2088] Acquiring globals lock to handle request ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:53 runtime:2091] Handling control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:22:53 runtime:1096] Mutating graph.
+[D 250508 16:22:53 runtime:1097] Current set of errors: {}
+[D 250508 16:22:53 dataflow:137] Acquiring graph lock to register cell NpvF
+[D 250508 16:22:53 dataflow:139] Acquired graph lock.
+[D 250508 16:22:53 dataflow:205] Registered cell NpvF and released graph lock
+[D 250508 16:22:53 runtime:805] registered cell NpvF
+[D 250508 16:22:53 runtime:806] parents: set()
+[D 250508 16:22:53 runtime:807] children: set()
+[D 250508 16:22:53 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:22:53 runtime:930] graph:
+        cell id NpvF
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set()}
+[D 250508 16:22:53 runtime:1138] After mutation, syntax errors {}
+[D 250508 16:22:53 runtime:1139] Semantic errors {}
+[D 250508 16:22:53 runtime:1183] Final set of errors, after pruning valid cells: {}
+[D 250508 16:22:53 cell_runner:552] Running preparation hooks
+[D 250508 16:22:53 cell_runner:558] Cell runner processing NpvF
+[D 250508 16:22:53 cell_runner:581] Running pre_execution hooks
+[D 250508 16:22:53 cell_runner:584] Running cell NpvF
+[D 250508 16:22:53 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:22:53 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:22:53 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:22:53 hooks_post_execution:308] Cell NpvF raised ZeroDivisionError
+[D 250508 16:22:53 cell_runner:598] Running on_finish hooks
+[D 250508 16:22:53 runtime:1325] Finished run.
+[D 250508 16:22:53 runtime:2093] Handled control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/sync/cell_ids HTTP/1.1"" 200 OK
+[D 250508 16:22:54 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+[D 250508 16:23:02 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/run HTTP/1.1"" 200 OK
+[D 250508 16:23:03 runtime:2676] Received control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:23:03 runtime:2088] Acquiring globals lock to handle request ExecuteMultipleRequest(cells=1)
+[D 250508 16:23:03 runtime:2091] Handling control request: ExecuteMultipleRequest(cells=1)
+[D 250508 16:23:03 runtime:1096] Mutating graph.
+[D 250508 16:23:03 runtime:1097] Current set of errors: {}
+[D 250508 16:23:03 dataflow:137] Acquiring graph lock to register cell GlNY
+[D 250508 16:23:03 dataflow:139] Acquired graph lock.
+[D 250508 16:23:03 dataflow:205] Registered cell GlNY and released graph lock
+[D 250508 16:23:03 runtime:805] registered cell GlNY
+[D 250508 16:23:03 runtime:806] parents: set()
+[D 250508 16:23:03 runtime:807] children: set()
+[D 250508 16:23:03 runtime:2483] Updating script metadata: C:\Users\dwales\example.py. Adding namespaces: [].
+[D 250508 16:23:03 runtime:930] graph:
+        cell id GlNY
+        parents {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set(), 'GlNY': set()}
+        children {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set(), 'GlNY': set()}
+        siblings {'Hbol': set(), 'MJUe': set(), 'vblA': set(), 'bkHC': set(), 'lEQa': set(), 'PKri': set(), 'Xref': set(), 'ifdn': set(), 'NpvF': set(), 'GlNY': set()}
+[D 250508 16:23:03 runtime:1138] After mutation, syntax errors {}
+[D 250508 16:23:03 runtime:1139] Semantic errors {}
+[D 250508 16:23:03 runtime:1183] Final set of errors, after pruning valid cells: {}
+[D 250508 16:23:03 cell_runner:552] Running preparation hooks
+[D 250508 16:23:03 cell_runner:558] Cell runner processing GlNY
+[D 250508 16:23:03 cell_runner:581] Running pre_execution hooks
+[D 250508 16:23:03 cell_runner:584] Running cell GlNY
+[D 250508 16:23:03 cell_runner:589] Running post_execution hooks in context
+[D 250508 16:23:03 hooks_post_execution:63] Acquiring graph lock to update cell import workspace
+[D 250508 16:23:03 hooks_post_execution:65] Acquired graph lock to update import workspace.
+[D 250508 16:23:03 hooks_post_execution:308] Cell GlNY raised TypeError
+[D 250508 16:23:03 cell_runner:598] Running on_finish hooks
+[D 250508 16:23:03 runtime:1325] Finished run.
+[D 250508 16:23:03 runtime:2093] Handled control request: ExecuteMultipleRequest(cells=1)
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/sync/cell_ids HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+[D 250508 16:23:04 file_manager:135] Saving app to C:\Users\dwales\example.py
+INFO:     127.0.0.1:56564 - ""POST /api/kernel/save HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+INFO:     127.0.0.1:56564 - ""GET /api/usage HTTP/1.1"" 200 OK
+```
+
+</details>
+
+So far as I can tell, these issues only occur on Windows. If it's relevant, here's a screenshot of Task Manager at the time:
+
+![Image](https://github.com/user-attachments/assets/f32ac19e-0693-4047-b00b-f6519e99bc72)
+
+The only Python process running on the system is `marimo -d edit --sandbox example.py`.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.6"",
+  ""OS"": ""Windows"",
+  ""OS Version"": ""11"",
+  ""Processor"": ""Intel64 Family 6 Model 140 Stepping 1, GenuineIntel"",
+  ""Python Version"": ""3.12.7"",
+  ""Binaries"": {
+    ""Browser"": ""133.0.6943.99"",
+    ""Node"": ""--""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.8"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.37.1"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""duckdb"": ""1.2.2"",
+    ""pandas"": ""2.2.3"",
+    ""polars"": ""1.29.0"",
+    ""pyarrow"": ""20.0.0"",
+    ""pycrdt"": ""0.11.1"",
+    ""sqlglot"": ""26.16.3""
+  },
+  ""Experimental Flags"": {}
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+    marimo edit --sandbox example.py
+
+### Workaround
+
+When it gets into this state, it's still possible to terminate Marimo from the web interface by clicking the red 'X' in the top right.",daviewales,2499066,open,False,2,2025-05-08T06:27:40+00:00,2025-05-09T00:57:00+00:00,,bug;platform:windows,0,0,0,0,0,0,0
+marimo-team/marimo,3047949412,4841,chore: charts tab name & refactor,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+- tab name will show chart type + idx
+- refactor
+- adds row and column faceting. Fixes #4750 
+
+I didnt want to create a huge PR so I think writing smaller ones would help.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",Light2Dark,19585239,closed,False,2,2025-05-08T06:26:25+00:00,2025-05-12T15:56:32+00:00,2025-05-12T15:53:53+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3047126731,4840,fix: support mairmo edit on marimo.app,"Suport for `marimo edit ""https://marimo.app/e?slug=oitgic""`",mscolnick,2753772,closed,False,1,2025-05-07T20:42:43+00:00,2025-05-08T14:43:43+00:00,2025-05-08T14:43:42+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3047073801,4839,[rtc] awareness,"Adds awareness cursor for each users
+
+<img width=""674"" alt=""Screenshot 2025-05-07 at 5 36 07 PM"" src=""https://github.com/user-attachments/assets/bafdf05a-fb55-4681-9e05-ffe0da40d538"" />
+",mscolnick,2753772,closed,False,2,2025-05-07T20:15:15+00:00,2025-05-08T13:17:55+00:00,2025-05-08T13:13:43+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3046737570,4838,fix: update common llm models,Just some name updates,mscolnick,2753772,closed,False,2,2025-05-07T17:47:47+00:00,2025-05-07T18:11:45+00:00,2025-05-07T18:05:16+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3046310540,4837,Marimo Slides Fullscreen not showing tooltip,"### Describe the bug
+
+Background is that I have some altair charts with tooltip set. When a mouse hover over them, some details about the graph pop up.
+
+
+When in slides mode and NOT fulll screen, the tooltip pops up fine. However, when in full screen, the tooltip does not show up.
+
+
+Attached is a recorded video of the issue.
+
+https://github.com/user-attachments/assets/84291384-1ef4-45c4-b21e-be7871f55b2f
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+Hosted via WASM on github page.
+
+https://kenho811.github.io/home_data_centre_public_mirror/marimo/stock_trend/stock_trend_identification.html
+
+However, I confirm that even when running locally, the same issue is encountered. Therefore, it is not a WASM issue.
+
+### Code to reproduce
+
+_No response_",kenho811,57944769,closed,False,2,2025-05-07T15:07:39+00:00,2025-05-07T15:24:14+00:00,2025-05-07T15:24:12+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3046013193,4836,Add llms.txt to the online documentation,"### Description
+
+For obvious reasons.
+
+
+
+### Suggested solution
+
+Add llms.txt to the online documentation.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+https://llmstxt.org/",barseghyanartur,4925587,closed,False,2,2025-05-07T13:38:02+00:00,2025-05-07T13:47:16+00:00,2025-05-07T13:39:07+00:00,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3045921576,4835,marimo.ui.data_editor page_size not increasing cell height,"### Description
+
+For other marimo.ui classes such as tables, setting the page_size parameter to a bigger number increases the visual cell size of the output. However, for the new marimo.ui.data_editor, you only get a scrollable y-axis, not an increased size of the output. 
+
+This makes marimo.ui.data_editor not very practical to use in a published report. 
+
+From Marimo's own AI:
+
+For marimo tables (mo.ui.table), increasing page_size directly increases the number of rows shown per page, which in turn increases the vertical height of the table in the UI. This is the expected behavior, and is configurable via the page_size parameter. However, there is a practical upper limit (e.g., 200 rows) to prevent browser crashes due to rendering too many rows at once, as discussed in user reports and developer comments. If you set page_size too high, you may encounter errors or performance issues, and the table will grow taller to accommodate more rows per page [webpage crashes with large mo.ui.table page_size](https://github.com/marimo-team/marimo/issues/3407).
+
+For marimo's data editor (mo.ui.data_editor), the page_size parameter controls how many rows are shown per page when pagination is enabled, but the component's height is not simply a function of page_size. The data editor has its own layout logic and also supports a column_sizing_mode parameter to control column widths, but there is no mention in the documentation or issues that increasing page_size will increase the vertical height of the editor in the same way as mo.ui.table. Instead, the data editor may use a fixed or internally managed height, regardless of the number of rows per page, to maintain usability and editing experience [marimo.ui.data_editor API](https://docs.marimo.io/api/inputs/data_editor/#marimo.ui.data_editor).
+
+
+### Suggested solution
+
+Update the mo.ui.data_editor component so that its vertical height dynamically increases with the page_size parameter, matching the behavior of mo.ui.table.
+
+Optionally, provide a configuration option to toggle between a fixed height and a dynamic height based on page_size.
+
+Ensure that usability and performance are maintained, possibly by setting a reasonable upper limit for page_size to prevent browser performance issues (as is done for tables).
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",rlendstrand,117065335,open,False,1,2025-05-07T13:08:43+00:00,2025-05-07T13:25:53+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3045585982,4834,feat: refresh db connections,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Provides a button to refresh datasource connections, except internal duckdb engine.
+![image](https://github.com/user-attachments/assets/f57bc5e9-05ee-41ab-b19f-fe905408413c)
+
+- Artificially spin the button on click
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick",Light2Dark,19585239,closed,False,2,2025-05-07T11:03:02+00:00,2025-05-07T16:43:30+00:00,2025-05-07T16:40:51+00:00,,1,0,0,0,1,0,0
+marimo-team/marimo,3044443602,4833,fix(deps): update codemirror dependencies,"This PR contains the following updates:
+
+| Package | Change | Age | Adoption | Passing | Confidence |
+|---|---|---|---|---|---|
+| [@codemirror/view](https://redirect.github.com/codemirror/view) | [`^6.36.6` -> `^6.36.7`](https://renovatebot.com/diffs/npm/@codemirror%2fview/6.36.6/6.36.7) | [![age](https://developer.mend.io/api/mc/badges/age/npm/@codemirror%2fview/6.36.7?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![adoption](https://developer.mend.io/api/mc/badges/adoption/npm/@codemirror%2fview/6.36.7?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![passing](https://developer.mend.io/api/mc/badges/compatibility/npm/@codemirror%2fview/6.36.6/6.36.7?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![confidence](https://developer.mend.io/api/mc/badges/confidence/npm/@codemirror%2fview/6.36.6/6.36.7?slim=true)](https://docs.renovatebot.com/merge-confidence/) |
+| [@lezer/markdown](https://redirect.github.com/lezer-parser/markdown) | [`^1.4.2` -> `^1.4.3`](https://renovatebot.com/diffs/npm/@lezer%2fmarkdown/1.4.2/1.4.3) | [![age](https://developer.mend.io/api/mc/badges/age/npm/@lezer%2fmarkdown/1.4.3?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![adoption](https://developer.mend.io/api/mc/badges/adoption/npm/@lezer%2fmarkdown/1.4.3?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![passing](https://developer.mend.io/api/mc/badges/compatibility/npm/@lezer%2fmarkdown/1.4.2/1.4.3?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![confidence](https://developer.mend.io/api/mc/badges/confidence/npm/@lezer%2fmarkdown/1.4.2/1.4.3?slim=true)](https://docs.renovatebot.com/merge-confidence/) |
+| [@lezer/python](https://redirect.github.com/lezer-parser/python) | [`^1.1.17` -> `^1.1.18`](https://renovatebot.com/diffs/npm/@lezer%2fpython/1.1.17/1.1.18) | [![age](https://developer.mend.io/api/mc/badges/age/npm/@lezer%2fpython/1.1.18?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![adoption](https://developer.mend.io/api/mc/badges/adoption/npm/@lezer%2fpython/1.1.18?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![passing](https://developer.mend.io/api/mc/badges/compatibility/npm/@lezer%2fpython/1.1.17/1.1.18?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![confidence](https://developer.mend.io/api/mc/badges/confidence/npm/@lezer%2fpython/1.1.17/1.1.18?slim=true)](https://docs.renovatebot.com/merge-confidence/) |
+| [@uiw/codemirror-extensions-langs](https://uiwjs.github.io/react-codemirror/#/extensions/languages) ([source](https://redirect.github.com/uiwjs/react-codemirror)) | [`^4.23.11` -> `^4.23.12`](https://renovatebot.com/diffs/npm/@uiw%2fcodemirror-extensions-langs/4.23.11/4.23.12) | [![age](https://developer.mend.io/api/mc/badges/age/npm/@uiw%2fcodemirror-extensions-langs/4.23.12?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![adoption](https://developer.mend.io/api/mc/badges/adoption/npm/@uiw%2fcodemirror-extensions-langs/4.23.12?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![passing](https://developer.mend.io/api/mc/badges/compatibility/npm/@uiw%2fcodemirror-extensions-langs/4.23.11/4.23.12?slim=true)](https://docs.renovatebot.com/merge-confidence/) | [![confidence](https://developer.mend.io/api/mc/badges/confidence/npm/@uiw%2fcodemirror-extensions-langs/4.23.11/4.23.12?slim=true)](https://docs.renovatebot.com/merge-confidence/) |
+
+---
+
+### Release Notes
+
+<details>
+<summary>codemirror/view (@&#8203;codemirror/view)</summary>
+
+### [`v6.36.7`](https://redirect.github.com/codemirror/view/blob/HEAD/CHANGELOG.md#6367-2025-05-02)
+
+[Compare Source](https://redirect.github.com/codemirror/view/compare/6.36.6...6.36.7)
+
+##### Bug fixes
+
+Use the `aria-placeholder` attribute to communicate the placeholder text to screen readers.
+
+Fix a crash when `EditorView.composing` or `.compositionStarted` are accessed during view initialization.
+
+</details>
+
+<details>
+<summary>lezer-parser/markdown (@&#8203;lezer/markdown)</summary>
+
+### [`v1.4.3`](https://redirect.github.com/lezer-parser/markdown/blob/HEAD/CHANGELOG.md#143-2025-04-27)
+
+[Compare Source](https://redirect.github.com/lezer-parser/markdown/compare/1.4.2...1.4.3)
+
+##### Bug fixes
+
+Run the HTML parser on HTML comment blocks, since those may include non-comment content at their end.
+
+</details>
+
+<details>
+<summary>lezer-parser/python (@&#8203;lezer/python)</summary>
+
+### [`v1.1.18`](https://redirect.github.com/lezer-parser/python/blob/HEAD/CHANGELOG.md#1118-2025-04-17)
+
+[Compare Source](https://redirect.github.com/lezer-parser/python/compare/1.1.17...1.1.18)
+
+##### Bug fixes
+
+Fix parsing of match guards with conditional tests.
+
+</details>
+
+<details>
+<summary>uiwjs/react-codemirror (@&#8203;uiw/codemirror-extensions-langs)</summary>
+
+### [`v4.23.12`](https://redirect.github.com/uiwjs/react-codemirror/releases/tag/v4.23.12)
+
+[Compare Source](https://redirect.github.com/uiwjs/react-codemirror/compare/v4.23.11...v4.23.12)
+
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor) [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@&#8203;uiw/react-codemirror@4.23.12/file/README.md)
+
+Documentation v4.23.12: https://raw.githack.com/uiwjs/react-codemirror/e780cd8/index.html\
+Comparing Changes: https://github.com/uiwjs/react-codemirror/compare/v4.23.11...v4.23.12
+
+```shell
+npm i @&#8203;uiw/react-codemirror@4.23.12
+```
+
+-   🐞 fix: Fix ESM import in core package by adding .babelrc and babel-plugin-add-import-extension  ([#&#8203;732](https://redirect.github.com/uiwjs/react-codemirror/issues/732)) [`9a5ce28`](https://redirect.github.com/uiwjs/react-codemirror/commit/9a5ce28) [@&#8203;Shellishack](https://redirect.github.com/Shellishack)
+-   🐞 fix: resolve ESM import issue in the package. [#&#8203;732](https://redirect.github.com/uiwjs/react-codemirror/issues/732) [`8ce4ceb`](https://redirect.github.com/uiwjs/react-codemirror/commit/8ce4ceb) [@&#8203;jaywcjlove](https://redirect.github.com/jaywcjlove)
+
+</details>
+
+---
+
+### Configuration
+
+📅 **Schedule**: Branch creation - ""on the 7th day of the month"" (UTC), Automerge - At any time (no schedule defined).
+
+🚦 **Automerge**: Disabled by config. Please merge this manually once you are satisfied.
+
+♻ **Rebasing**: Whenever PR becomes conflicted, or you tick the rebase/retry checkbox.
+
+👻 **Immortal**: This PR will be recreated if closed unmerged. Get [config help](https://redirect.github.com/renovatebot/renovate/discussions) if that's undesired.
+
+---
+
+ - [ ] <!-- rebase-check -->If you want to rebase/retry this PR, check this box
+
+---
+
+This PR was generated by [Mend Renovate](https://mend.io/renovate/). View the [repository job log](https://developer.mend.io/github/marimo-team/marimo).
+<!--renovate-debug:eyJjcmVhdGVkSW5WZXIiOiIzOS4yNjQuMCIsInVwZGF0ZWRJblZlciI6IjM5LjI2NC4wIiwidGFyZ2V0QnJhbmNoIjoibWFpbiIsImxhYmVscyI6WyJkZXBlbmRlbmNpZXMiXX0=-->
+",renovate[bot],29139614,closed,False,1,2025-05-07T01:48:33+00:00,2025-05-08T14:44:25+00:00,2025-05-08T14:44:24+00:00,dependencies,0,0,0,0,0,0,0
+marimo-team/marimo,3043991509,4832,fix: File level cache settings are not passed to store,"## 📝 Summary
+
+@mscolnick Still compat with pyodide right?
+",dmadisetti,2689338,closed,False,2,2025-05-06T20:59:19+00:00,2025-05-06T21:44:37+00:00,2025-05-06T21:42:01+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3043958569,4831,improvement: [rtc] migrate y-js to Loro,"This moves from loro to yjs. There may be a few edge cases, but this is a huge improvement over yjs. Better devx and performance, and fewer bugs.
+
+Closes #4699
+Closes #4694
+Closes #4693
+Closes #4692",mscolnick,2753772,closed,False,7,2025-05-06T20:41:06+00:00,2025-05-07T20:19:41+00:00,2025-05-07T20:14:20+00:00,,1,0,0,0,0,0,0
+marimo-team/marimo,3043684737,4830,WASM notebooks not working for some users (No module named 'marimo'),"### Describe the bug
+
+Some users are unable to view or use any WASM notebooks whether through github pages or in the [marimo documentation itself](https://docs.marimo.io/guides/wasm/):
+![Image](https://github.com/user-attachments/assets/502dbe97-f7fe-4743-9fa8-a0e070239d21)
+I had them update to the latest version of Chrome and check again and still the same issue. Are there any requirements for opening a WASM notebook that people need to be aware of?
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+N/A (notebook from marimo docs found at **https://docs.marimo.io/guides/wasm/**)
+```
+
+</details>
+
+
+### Code to reproduce
+
+```python
+import marimo
+
+__generated_with = ""0.13.5-dev6""
+app = marimo.App()
+
+
+@app.cell
+def _():
+    import marimo as mo
+    return (mo,)
+
+
+@app.cell
+def _(mo):
+    location = mo.ui.text(value=""Planet 🌍"", debounce=False)
+    location
+    return (location,)
+
+
+@app.cell
+def _(location, mo):
+    mo.md(f""""""Hello from {location.value}!"""""")
+    return
+
+
+if __name__ == ""__main__"":
+    app.run()
+```",jbgreenh,48000025,open,False,4,2025-05-06T18:35:46+00:00,2025-05-08T13:08:35+00:00,,bug;cannot reproduce,0,0,0,0,0,0,0
+marimo-team/marimo,3043676048,4829,docs: correct on_change desc in `mo.ui.form.form`,"This makes it so that the description for `on_change` in the method-level API matches the class-level API.
+
+## 📝 Summary
+As mentioned in #4827 :
+> The [**class-level** API reference for `marimo.ui.form` ](https://docs.marimo.io/api/inputs/form/#marimo.ui.form)correctly distinguishes the two parameters:
+> 
+> * **validate** (`Callable[[Optional[JSONType]], Optional[str]]`): A function that takes the form's value and returns an error message if the value is invalid, or None if the value is valid. Defaults to None.
+> * **on_change** (`Callable[[Optional[T]], None]`): Optional callback to run when this element's value changes. Defaults to None.
+> 
+> However, the [**method-level** docs](https://docs.marimo.io/api/inputs/form/#marimo.ui.form.form) wrongly describe **both** parameters as returning an error message, implying they’re interchangeable.
+
+## 🔍 Description of Changes
+This Fixes #4827 by making sure the:
+>**method-level** documentation matches the **class-level** docs for `on_change`.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [ ] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",AH-Merii,43741215,closed,False,3,2025-05-06T18:31:49+00:00,2025-05-06T19:15:18+00:00,2025-05-06T19:12:39+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3043651217,4828,Yes,,AH-Merii,43741215,closed,False,0,2025-05-06T18:21:55+00:00,2025-05-06T18:22:20+00:00,2025-05-06T18:22:20+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3043562795,4827,Discrepancy between class and method docs for `validate` vs `on_change` in `mo.ui.form`,"### Documentation is
+
+- [ ] Missing
+- [ ] Outdated
+- [x] Confusing
+- [ ] Not sure?
+
+### Explain in Detail
+
+# Clarify discrepancy between class and method docs for `validate` vs `on_change`
+
+## Description
+
+The [**class-level** API reference for `marimo.ui.form` ](https://docs.marimo.io/api/inputs/form/#marimo.ui.form)correctly distinguishes the two parameters:
+
+* **validate** (`Callable[[Optional[JSONType]], Optional[str]]`): A function that takes the form's value and returns an error message if the value is invalid, or None if the value is valid. Defaults to None.
+* **on_change** (`Callable[[Optional[T]], None]`): Optional callback to run when this element's value changes. Defaults to None.
+
+However, the [**method-level** docs](https://docs.marimo.io/api/inputs/form/#marimo.ui.form.form) wrongly describe **both** parameters as returning an error message, implying they’re interchangeable.
+
+![Image](https://github.com/user-attachments/assets/eeb26b10-212b-44ca-8be5-a0d39fb3195a)
+
+I have verified that the actual behaviour of `on_change` in the **method-level** `form` indeed does not check for errors or block submission.
+
+Happy to submit a PR, if the above sounds right.
+
+### Your Suggestion for Changes
+
+Ensure the **method-level** documentation matches the **class-level** docs for `on_change`.
+
+### Will you submit a PR?
+
+- [x] Yes",AH-Merii,43741215,closed,False,0,2025-05-06T17:42:26+00:00,2025-05-06T19:12:41+00:00,2025-05-06T19:12:40+00:00,documentation,0,0,0,0,0,0,0
+marimo-team/marimo,3043360606,4826,fix: remove starlette from top level import,Remove some eager imports that bring in starlette and break wasm,mscolnick,2753772,closed,False,1,2025-05-06T16:18:19+00:00,2025-05-06T16:32:12+00:00,2025-05-06T16:32:11+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3043289083,4825,Github Page Deployment - Module not found : Startlette,"### Describe the bug
+
+```
+Traceback (most recent call last): File ""/lib/python312.zip/_pyodide/_base.py"", line 523, in eval_code .run(globals, locals) ^^^^^^^^^^^^^^^^^^^^ File ""/lib/python312.zip/_pyodide/_base.py"", line 357, in run coroutine = eval(self.code, globals, locals) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ File ""<exec>"", line 5, in <module> File ""/lib/python3.12/site-packages/marimo/__init__.py"", line 142, in <module> from marimo._server.asgi import create_asgi_app File ""/lib/python3.12/site-packages/marimo/_server/asgi.py"", line 18, in <module> from marimo._server.registry import LIFESPAN_REGISTRY File ""/lib/python3.12/site-packages/marimo/_server/registry.py"", line 1, in <module> from starlette.applications import Starlette ModuleNotFoundError: No module named 'starlette'
+```
+
+
+![Image](https://github.com/user-attachments/assets/13ef62df-73ac-4eeb-aaf2-7792dc90c118)
+
+https://kenho811.github.io/home_data_centre_public_mirror/marimo/stock_trend/identify_trend_for_multiple_stocks.html
+
+I have the above github page working fine yesterday. 
+
+However, starting from awhile ago, it errored out.
+
+I did not change anything.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+Github Page
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",kenho811,57944769,closed,False,5,2025-05-06T15:54:07+00:00,2025-05-06T17:03:53+00:00,2025-05-06T17:03:53+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3043252938,4824,Unable to set sql_output in .marimo.toml or .pyproject.toml,"### Description
+
+I've been trying to set the default SQL Output engine to use Pandas for my project by entering the following line:
+`sql_output=""pandas""` 
+
+in my user `.marimo.toml` and project `.pyproject.toml` files but to no avail.
+
+It appears this configuration setting cannot be set globally but it is only each workbook.
+
+When I change the config on the UI in the notebook, I notice it changes the Python code and adds a parameter on the 4th line from:
+
+`app = marimo.App(width=""medium"")`
+to
+`app = marimo.App(width=""medium"", sql_output=""pandas"")`
+
+
+Is it possible to set this globally across all new notebooks that are made? This would be hugely beneficial.
+
+Thanks!
+
+### Suggested solution
+
+Ability to add `sql_output` as a config setting in `.marimo.toml` or `.pyproject.toml` which will be applied to every notebook that is run in the project
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",rdagnew,48249981,open,False,2,2025-05-06T15:40:21+00:00,2025-05-07T16:43:44+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3042947762,4823,Feature ipython progress css style,"## 📝 Summary
+
+The current implementation of iPython HTML has a green/grey progress bar that doesn't match Marimo's style.
+
+<img width=""841"" alt=""image"" src=""https://github.com/user-attachments/assets/a6601830-dc8c-4709-816f-f1541e24c56f"" />
+
+
+## 🔍 Description of Changes
+
+I made a simple change to match Marimo's style, but it is not very elegant since it hardcodes the python formatted the CSS styling instead of using Tailwind.
+
+This is the result, visually it matches Marimo's progress bar style:
+
+https://github.com/user-attachments/assets/21d64622-c4fc-40dc-b064-78588e0369d1
+
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@akshayka OR @mscolnick
+",brenoca,72074654,open,False,3,2025-05-06T13:57:48+00:00,2025-05-12T12:37:23+00:00,,,0,0,0,0,0,0,0
+marimo-team/marimo,3042803865,4822,fix: default to medium width for columns,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [X] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",Light2Dark,19585239,closed,False,1,2025-05-06T13:11:30+00:00,2025-05-06T13:17:51+00:00,2025-05-06T13:17:49+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3042531078,4821,Warnings disappear after subsequent cell run,"### Describe the bug
+
+Steps to reproduce
+- run a cell that emits a warning. E.g., `import warnings; warnings.warn(""msg"", Warning)`
+- note the presence of the warning in the output
+- run the cell again
+- the warning is now gone
+
+The warning should persist
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.4"",
+  ""OS"": ""Linux"",
+  ""OS Version"": ""5.15.167.4-microsoft-standard-WSL2"",
+  ""Processor"": ""x86_64"",
+  ""Python Version"": ""3.11.8"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""v18.20.3""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.8"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.38.0"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""polars"": ""1.29.0"",
+    ""pycrdt"": ""0.11.1""
+  },
+  ""Experimental Flags"": {
+    ""lsp"": false
+  }
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+provided above",henryharbeck,59268910,open,False,1,2025-05-06T11:35:45+00:00,2025-05-07T16:42:46+00:00,,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3042293006,4820,feat: add both left and right resize handlers to a column.,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+I think resizing a column from the left also solves some issues with viewport so it's preferred imo.
+The left line is only displayed when hovered. Not sure what the right styles are
+
+![image](https://github.com/user-attachments/assets/1cfddb3b-abd2-490c-8fa8-6f43bcbd582e)
+
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",Light2Dark,19585239,closed,False,2,2025-05-06T10:11:37+00:00,2025-05-07T04:25:06+00:00,2025-05-07T04:19:58+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3041907624,4819,Bug Codestral AI integration,"### Description
+
+Integrate codestral from Mistral in marimo.
+
+### Suggested solution
+
+I tried to edit marimo.toml
+With this parameters but without success
+
+```toml
+[ai.open_ai]
+base_url = ""https://codestral.mistral.ai/v1/chat/completion""
+model = ""codestral/codestral-latest""
+api_key = ""***""
+```
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",laguill,74424947,open,False,1,2025-05-06T08:01:57+00:00,2025-05-11T22:36:26+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3041055238,4818,fix: mo.cache args for docs,"closes #4813 
+@mscolnick
+",dmadisetti,2689338,closed,False,2,2025-05-05T23:20:21+00:00,2025-05-05T23:48:29+00:00,2025-05-05T23:44:38+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040839986,4817,[pre-commit.ci] pre-commit autoupdate,"<!--pre-commit.ci start-->
+updates:
+- [github.com/crate-ci/typos: v1.31.1 → v1](https://github.com/crate-ci/typos/compare/v1.31.1...v1)
+- [github.com/astral-sh/ruff-pre-commit: v0.11.6 → v0.11.8](https://github.com/astral-sh/ruff-pre-commit/compare/v0.11.6...v0.11.8)
+- [github.com/biomejs/pre-commit: v1.9.4 → v2.0.0-beta.2](https://github.com/biomejs/pre-commit/compare/v1.9.4...v2.0.0-beta.2)
+<!--pre-commit.ci end-->",pre-commit-ci[bot],66853113,closed,False,1,2025-05-05T21:10:33+00:00,2025-05-05T21:42:49+00:00,2025-05-05T21:42:49+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040825272,4816,feat: Post mortem for debugging failures,"## 📝 Summary
+
+Opposed to inserting a breakpoint, drop into ""post mortem mode""
+Played around a bit before deciding this was. the best way. LMK if you have feedback on the api namespace
+
+Adding tests:
+ - [x] exceptions correctly set on failure in cell_runner
+
+@Light2Dark @mscolnick",dmadisetti,2689338,closed,False,9,2025-05-05T21:04:49+00:00,2025-05-06T17:47:25+00:00,2025-05-06T17:42:10+00:00,,1,0,0,0,0,0,1
+marimo-team/marimo,3040737438,4815,internal: add entrypoints registries,,mscolnick,2753772,closed,False,2,2025-05-05T20:21:02+00:00,2025-05-05T21:45:34+00:00,2025-05-05T21:43:00+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040594170,4814,feat: added collapseAll and expandAll hotkeys,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Added hotkeys Mod + shift + \ for collapse All and Mod + shift + / for expandAll. Partially resolves #4163 by adding the hotkeys to as mentioned in the issue.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Added hotkeys for collapseAll and expandAll in hotkeys.ts
+- Added hotkeys to the action buttons so they show in the Main Menu in useNotebookActions.tsx
+- Added useHotkey() functions for collapseAll and expandAll in edit-app.tsx to manage the functionality
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,3,2025-05-05T19:22:01+00:00,2025-05-08T01:57:20+00:00,2025-05-05T23:12:18+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040593677,4813,fix: mo.cache args for docs,,mscolnick,2753772,closed,False,1,2025-05-05T19:21:45+00:00,2025-05-05T23:21:46+00:00,2025-05-05T23:21:46+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040535722,4812,fix: fix micropip patch,,mscolnick,2753772,closed,False,1,2025-05-05T18:58:09+00:00,2025-05-05T20:14:35+00:00,2025-05-05T20:14:33+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040339484,4811,fix: use Path in test_files.py,,mscolnick,2753772,closed,False,2,2025-05-05T17:34:58+00:00,2025-05-05T18:01:21+00:00,2025-05-05T17:58:26+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3040072982,4810,fix: logging and gracefully handle bad cache stores,,mscolnick,2753772,closed,False,2,2025-05-05T15:43:20+00:00,2025-05-05T15:59:14+00:00,2025-05-05T15:56:46+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3039841733,4809,relative path in tool uv sources should be respected in `--sandbox`,"### Description
+
+I'm hoping to do something like the folllowing:
+
+```
+#!/usr/bin/env -S uv run --with marimo marimo edit --sandbox
+
+# /// script
+# requires-python = "">=3.12""
+# dependencies = [
+#     ""my_custom_package==0.1.0"",
+#     ""marimo"",
+#     ""rich"",
+# ]
+#
+# [tool.uv.sources]
+# my_custom_package = { path = ""../"" }
+# ///
+```
+
+I'm using a relative path one level up because this file is located in `./notebooks/marimo-notebook-name.py` and the root of the repository has `my_custom_package`.
+
+If I use `#!/usr/bin/env -S uv run --script` in the shebang the relative path works correctly but with `marimo edit --sandbox` it doesn't.
+
+### Suggested solution
+
+`marimo edit --sandbox` should work exactly like `uv`'s script tag.
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",kdheepak,1813121,open,False,0,2025-05-05T14:19:56+00:00,2025-05-05T14:19:56+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3038911267,4808,"fix: tracing panel ordering, step height","## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Some minor fixes and styles for tracing panel. The ordering of the chart is also fixed with this.
+Note that we may want to change the ordering once concurrent execution is available.
+
+Related to #4655 , but it's difficult to repro.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [X] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",Light2Dark,19585239,closed,False,2,2025-05-05T08:05:31+00:00,2025-05-05T13:29:34+00:00,2025-05-05T13:26:59+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3038355054,4807,feat: updated useSectionCollapse methods,"
+
+## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Updated useSectionCollapse to use collapseAllCells and expandAllCells. Partially resolves #4163 by fixing useSectionCollapse bugs.
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Updates #4550 implementation by using expandAllCells and collapseAllCells rather than running expandCell and collapseCell in a loop
+- Fixes consecutive react renders issue
+- Fixes Node not in tree errors
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,5,2025-05-05T00:37:42+00:00,2025-05-05T13:36:23+00:00,2025-05-05T13:27:27+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3038283078,4806,improvement: use script metadata for config and deps in pyodide,"This adds support for inline-script metadata for pyodide.
+
+If there are dependencies declared inline, then we use those. Otherwise we fallback to the pyodide parsing of imports (which was what we did previously).
+
+This also parses inline script metadata for config.
+
+--------------
+
+
+This looks like more lines of code, but mostly:
+1. lots of tests written and backfilled
+2. some utils moved around
+",mscolnick,2753772,closed,False,3,2025-05-04T22:30:16+00:00,2025-05-05T19:00:05+00:00,2025-05-05T18:57:30+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3038282237,4805,marimo edit https://marimo.app/l/<slug>,"### Description
+
+Just think this would be nice and quick way to play with files locally.
+
+### Suggested solution
+
+I don't think we have to make this specific to marimo.app
+I think we can:
+
+ - Set and document a user agent, with the expectation said user agent should be given a valid notebooks
+ - or document that we'll look for <url>.py
+
+and make the relevant changes to marimo cloud
+
+### Will you submit a PR?
+
+- [ ] Yes
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",dmadisetti,2689338,open,False,0,2025-05-04T22:28:09+00:00,2025-05-04T22:28:09+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3038269609,4804,fix: recovery with setup cell,"## 📝 Summary
+
+Bad casting without real conversion lead to failure",dmadisetti,2689338,closed,False,1,2025-05-04T22:00:19+00:00,2025-05-05T16:02:22+00:00,2025-05-05T16:02:20+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3037956759,4802,Enable cell-output-area config (above / below) at the notebook or even the cell level,"### Description
+
+Currently, it's possible to set the cell-output-area only on the user level. I guess the idea is to give control to the user. But in some cases, like user guides, it's logical to show the outputs *after* the code.
+
+### Suggested solution
+
+Enable cell-output-area config (above / below) at the notebook or even the cell level.
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",e10v,14168452,closed,False,4,2025-05-04T11:47:41+00:00,2025-05-04T18:30:43+00:00,2025-05-04T16:01:21+00:00,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3037955903,4801,Add public API helpers for programmatically creating notebooks,"### Description
+
+Currently, I use private functions to create notebooks programmatically, but they can change and it's hard to track changes while the API is private.
+
+Example: https://github.com/e10v/tea-tasting/blob/main/src/_internal/create_examples.py
+
+My use case: converting user guides from markdown to marimo notebooks.
+
+In understand that the use case is rare. Still, there can be other use cases for creating notebooks programmatically.
+
+### Suggested solution
+
+Expose private functions, that create notebooks programmatically, in public API.
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",e10v,14168452,open,False,2,2025-05-04T11:45:59+00:00,2025-05-04T16:25:01+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3037916697,4800,Don't require total in marimo.status.progress_bar with iterators,"### Description
+
+Currently, progress_bar throws an error when used with iterators without setting the total. There are cases when total is unknown but it's convenient still show the progress as the number of completed iterations, without the fraction of total.
+
+### Suggested solution
+
+Don't show the progress bar when used with an iterator without setting the total. Just show the progress as the number of completed iterations. This is actually a tqdm-like behaviour.
+
+### Alternative
+
+Spinner is not a solution because it doesn't show the number of completed iterations.
+
+### Additional context
+
+WASM notebook with comparison between progress_bar and tqdm behaviour: https://marimo.app/l/okbka2",e10v,14168452,open,False,2,2025-05-04T10:26:31+00:00,2025-05-04T16:31:24+00:00,,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3037661657,4799,feat: added collapseAllCells() to cells.ts and tests,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Created an collapseAllCells function that runs both transformAll() and collapseAll() together. Partially resolves #4163 by adding a way to collapse all top-level nested cells in all columns with one command
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Created collapseAllCells
+- Modified the expandAllCells tests in #4791 to include collapseAllCells as well for both multicolumn and nested testing
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,2,2025-05-03T23:10:41+00:00,2025-05-04T19:02:43+00:00,2025-05-04T18:57:28+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3037419154,4798,Firefox cmd+shift+p opens private window,"### Describe the bug
+
+The shortcut to create a new cell is `cmd+shift+p`. This is also the Firefox shortcut to open a new private window. Is it possible to override this behavior so the shortcut doesn't reach Firefox? It looks like this is already working with `cmd+k`.
+
+### Environment
+
+<details>
+
+```
+Replace this line with the output of marimo env. Leave the backticks in place.
+```
+
+</details>
+
+
+### Code to reproduce
+
+_No response_",will-lynas,43895423,closed,False,5,2025-05-03T13:45:27+00:00,2025-05-05T18:09:59+00:00,2025-05-03T14:18:22+00:00,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3037341149,4797,pytest state not immediately updated,"### Describe the bug
+
+Whenever I change the params of a pytest with parametrize and re-run quickly, the test will fail. I need to wait a moment for the state to be updated. I was confused why the test is failing until I paused and re-ran.
+
+<img width=""651"" alt=""Image"" src=""https://github.com/user-attachments/assets/687a7352-a4f9-4370-b8d9-7a5d1c0102a0"" />
+
+As you can see from the image above, the test has been updated but it fails because it's using an old value.
+
+### Environment
+
+<details>
+
+```
+{
+  ""marimo"": ""0.13.4"",
+  ""OS"": ""Darwin"",
+  ""OS Version"": ""24.3.0"",
+  ""Processor"": ""arm"",
+  ""Python Version"": ""3.12.10"",
+  ""Binaries"": {
+    ""Browser"": ""--"",
+    ""Node"": ""v22.13.0""
+  },
+  ""Dependencies"": {
+    ""click"": ""8.1.8"",
+    ""docutils"": ""0.21.2"",
+    ""itsdangerous"": ""2.2.0"",
+    ""jedi"": ""0.19.2"",
+    ""markdown"": ""3.8"",
+    ""narwhals"": ""1.37.1"",
+    ""packaging"": ""25.0"",
+    ""psutil"": ""7.0.0"",
+    ""pygments"": ""2.19.1"",
+    ""pymdown-extensions"": ""10.15"",
+    ""pyyaml"": ""6.0.2"",
+    ""starlette"": ""0.46.2"",
+    ""tomlkit"": ""0.13.2"",
+    ""typing-extensions"": ""4.13.2"",
+    ""uvicorn"": ""0.34.2"",
+    ""websockets"": ""15.0.1""
+  },
+  ""Optional Dependencies"": {
+    ""pycrdt"": ""0.11.1""
+  },
+  ""Experimental Flags"": {
+    ""chat_sidebar"": true,
+    ""table_charts"": true,
+    ""lsp"": true,
+    ""multi_column"": true,
+    ""secrets"": true,
+    ""data_table_plugin"": true,
+    ""tracing"": true,
+    ""sql_engine"": true,
+    ""sql_engines"": false,
+    ""experimental_data_table"": true
+  }
+}
+```
+
+</details>
+
+
+### Code to reproduce
+
+```python
+# /// script
+# requires-python = "">=3.12""
+# dependencies = [
+#     ""marimo"",
+#     ""pytest==8.3.5"",
+# ]
+# ///
+
+@app.cell
+def _(pytest):
+    @pytest.mark.parametrize(
+        ""first, second, expected"",
+        [
+            (1, 2, 3),
+            (2, 4, 6),
+        ],
+    )
+    def test_add(first: int, second: int, expected: int):
+        assert first + second == expected
+    return
+```",Light2Dark,19585239,open,False,1,2025-05-03T11:00:52+00:00,2025-05-03T17:08:19+00:00,,bug,0,0,0,0,0,0,0
+marimo-team/marimo,3037136372,4796,fix: styles and prevent re-running cells which aren't idle,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Feel free to remove any of these changes.
+
+- When a cell is running, you could click the keyboard shortcut to run, and it will add the same cell to the queue. Which I don't is what we want (since we disable the run button anyways).
+- Scroll to breakpoint
+- Also added a small gap between the divs.
+
+Before:
+![image](https://github.com/user-attachments/assets/4f766fb1-5f89-4ff5-a062-b4c38962023f)
+
+After:
+![image](https://github.com/user-attachments/assets/03d6a98d-ca9a-480e-b6d2-e278394991d5)
+
+![image](https://github.com/user-attachments/assets/d687a689-3217-43a7-b8bd-107a2004d8e0)
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [ ] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",Light2Dark,19585239,closed,False,2,2025-05-03T03:52:06+00:00,2025-05-03T13:19:08+00:00,2025-05-03T13:19:06+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036890941,4795,feat: add 'Insert breakpoint' in traceback,"This adds a button to insert breakpoints at the notebook line-numbers.
+As well as a single one at the bottom to insert one at the most deepest level.
+
+This also improves the `stdin` styling, input, and PDB controls.
+
+
+<img width=""677"" alt=""Screenshot 2025-05-02 at 5 52 16 PM"" src=""https://github.com/user-attachments/assets/02f3b855-63e8-44d9-bc93-42f165fe8775"" />
+<img width=""810"" alt=""Screenshot 2025-05-02 at 5 51 58 PM"" src=""https://github.com/user-attachments/assets/f9a621aa-ed69-4f25-b218-80d0426cf923"" />
+",mscolnick,2753772,closed,False,2,2025-05-02T21:53:21+00:00,2025-05-03T23:20:22+00:00,2025-05-03T23:17:53+00:00,,1,0,0,0,0,0,0
+marimo-team/marimo,3036851356,4794,[slides] Support for subslides and fragment cell types,"### Description
+
+Dear Marimo Team, I’m a professor and researcher who loves Marimo and is transitioning from Jupyter. Your work is fantastic! I often use slides for presentations and was wondering if you plan to support subslides or fragment cell types, similar to Jupyter, to enhance Marimo’s presentation features.
+
+Thank you and keep up the great work!
+
+Best,
+Emiliano
+
+### Suggested solution
+
+Add a cell type drop-down menu
+
+### Alternative
+
+_No response_
+
+### Additional context
+
+_No response_",emilopez,3355762,closed,False,1,2025-05-02T21:18:23+00:00,2025-05-02T21:56:52+00:00,2025-05-02T21:56:50+00:00,enhancement,0,0,0,0,0,0,0
+marimo-team/marimo,3036837272,4793,fix: broken ci on windows,,dmadisetti,2689338,closed,False,2,2025-05-02T21:06:36+00:00,2025-05-02T22:34:28+00:00,2025-05-02T22:31:48+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036646460,4791,feat: added expandAllCells in cells.ts,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Created an expandAllCells function that runs both transformAll() and expandAll() together. Partially resolves #4163 by adding a way to expand all nested cells in all columns with one command
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Created expandAllCells
+- Created tests for nested collapsed cells and multicolumn collapsed cells
+- Note: I will replace collapseCell() in each test when I write collapseAllCells() in the next PR
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,2,2025-05-02T19:01:50+00:00,2025-05-03T16:37:54+00:00,2025-05-02T19:34:02+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036583948,4790,fix: Do not construct a full app just to check parsing,"## 📝 Summary
+
+Auditing app start up for runtime restructure idea, and noticed some low hanging fruit
+
+@mscolnick",dmadisetti,2689338,closed,False,2,2025-05-02T18:20:56+00:00,2025-05-02T20:59:47+00:00,2025-05-02T20:56:51+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036355624,4789,"improvement: refactor cache Store, add RESTStore","This simplifies the API for `Store` and adds a new store: `RESTStore`.
+
+* This also pushes down the `save_path` from the loader into the `FileStore` because `save_path` doesn't quite make sense for remote stores (redis, rest).
+* This also removes stores from being singletons because you may have different stores with different configs. This also was needed since passing `save_path` creates a `FileStore` (diverging from the global store)
+
+```python
+class Store(ABC):
+    @abstractmethod
+    def get(self, key: str) -> Optional[bytes]:
+        """"""Get the bytes of a cache from the store""""""
+
+    @abstractmethod
+    def put(self, key: str, value: bytes) -> None:
+        """"""Put a cache into the store""""""
+
+    @abstractmethod
+    def hit(self, key: str) -> bool:
+        """"""Check if the cache is in the store""""""
+```",mscolnick,2753772,closed,False,2,2025-05-02T16:03:50+00:00,2025-05-02T20:59:20+00:00,2025-05-02T18:05:10+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036304475,4788,Fix weakvaluedict issue,"## 📝 Summary
+
+@mscolnick, unfortunately, the WeakValueDictionary broke the iPython update implementation
+Now it only outputs the initial empty bar, as it can be seen in the video below
+
+https://github.com/user-attachments/assets/2d591719-119f-44fd-9a25-e788540b3faf
+
+## 🔍 Description of Changes
+
+Reverting WeakValueDictionary change while keeping the cleanup functions.
+
+Analysis and issues
+- noticed the dictionary adds one record per cell display
+- known issue, the iPython is not unpatching, therefore the dictionary is never cleared
+
+ Here is a short video where I analyse the current behaviour
+
+https://www.loom.com/share/16a282de56724584ac0c49bc81a68539
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [ ] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@akshayka OR @mscolnick
+",brenoca,72074654,closed,False,5,2025-05-02T15:35:27+00:00,2025-05-02T16:31:34+00:00,2025-05-02T16:28:51+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036215699,4787,feat: row expanded view for table data,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Popover that displays single row data vertically. By default, it will show all rows in current page. If there is selection, it will show those rows instead.
+
+<img width=""259"" alt=""image"" src=""https://github.com/user-attachments/assets/2df873ed-41cf-4fd8-9008-15f7e003f9e7"" />
+
+![image](https://github.com/user-attachments/assets/2898dc0b-d78b-4b74-a551-945c019c3e2c)
+
+Some limitations:
+- The data is limited to whatever page the table is on. Does not persist selections across pages.
+- When you navigate through the page and select/deselect, the index on the page stays the same, meaning you could view different data as you select more rows. We don't keep track of the selected row id as the page number.
+
+Todo:
+- [ ] add tanstack table feature (focus row)
+- [ ] tests
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [X] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+",Light2Dark,19585239,closed,False,2,2025-05-02T14:49:32+00:00,2025-05-07T17:52:37+00:00,2025-05-07T17:48:36+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036186306,4786,"improvement: support more parameter descriptions, e.g. in `polars`","## 📝 Summary
+
+Small follow up to #4673.
+
+## 🔍 Description of Changes
+
+Polars often uses a simplified rst format for parameters where it does not include types.
+
+This requires `docstring-to-markdown` v0.17 with:
+- https://github.com/python-lsp/docstring-to-markdown/pull/44
+
+For example, before there was only one parameter with description for `polars.io.parquet.functions.read_parquet`, and now all 22 are displayed.
+
+Parameters from functions with overloads such as `polars.io.database.functions.read_database` remain without good suggestions.
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+@mscolnick
+",krassowski,5832902,closed,False,2,2025-05-02T14:36:37+00:00,2025-05-05T18:10:19+00:00,2025-05-05T18:06:31+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036166681,4785,fix: Uses SQL tables if available for script calls,"Also fixes some lint errors
+fixes #4675
+",dmadisetti,2689338,open,False,3,2025-05-02T14:27:32+00:00,2025-05-07T17:48:14+00:00,,,0,0,0,0,0,0,0
+marimo-team/marimo,3036035799,4784,Assume ibis interactive mode with spark? ,"I guess `ibis` does not set this flag in general because they can't assume to be running from a Python notebook but we can, so maybe it makes sense to add this? Otherwise you need to add extra verbs to the chain to see the final output. ",koaning,1019791,closed,False,1,2025-05-02T13:30:58+00:00,2025-05-02T13:38:11+00:00,2025-05-02T13:38:11+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3036012708,4783,"chore: cleanup executor, prefer composition",Prefer composition. This will make re-using/mixing executors (e.g. CachingExecutor) much easier.,mscolnick,2753772,closed,False,2,2025-05-02T13:21:12+00:00,2025-05-02T17:32:26+00:00,2025-05-02T17:29:33+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3035698305,4782,feat: mo.thread lifecycle,"Closes #4564 
+
+This change adds a `should_exit` property to `mo.Thread` which evaluates to `True`
+when the thread's spawning cell lifecycle has ended. This makes it
+possible for developers to clean up their threads.
+
+This change also adds a utility method, mo.current_thread(), that
+returns the current thread of control if it is a marimo.Thread object,
+and raises otherwise. Developers could technically use
+threading.current_thread() instead, but this method provides
+type safety and validation.",akshayka,1994308,closed,False,2,2025-05-02T10:33:14+00:00,2025-05-09T23:25:04+00:00,2025-05-09T23:21:53+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3035171247,4781,fix: pyspark schema and add example,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+
+## 📋 Checklist
+
+- [X] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [ ] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [X] I have added tests for the changes made.
+- [X] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick @koaning 
+",Light2Dark,19585239,closed,False,1,2025-05-02T04:46:07+00:00,2025-05-02T12:39:22+00:00,2025-05-02T12:39:21+00:00,,0,0,0,0,0,0,0
+marimo-team/marimo,3035154871,4780,feat: added collapseAll function to CollapsibleTree to handle collapsing of all nested expanded nodes in one call,"## 📝 Summary
+
+<!--
+Provide a concise summary of what this pull request is addressing.
+
+If this PR fixes any issues, list them here by number (e.g., Fixes #123).
+-->
+Created a collapseAll function to handle collapsing all expanded nodes including nested children. Partially resolves #4163 by adding a way to collapse all nested expanded nodes
+
+## 🔍 Description of Changes
+
+<!--
+Detail the specific changes made in this pull request. Explain the problem addressed and how it was resolved. If applicable, provide before and after comparisons, screenshots, or any relevant details to help reviewers understand the changes easily.
+-->
+- Created a collapseAll function in id-tree.tsx
+- Created tests to ensure it collapses all top-level nodes from leaves to root and some top-level nested nodes
+- Create tests for all error cases
+
+## 📋 Checklist
+
+- [x] I have read the [contributor guidelines](https://github.com/marimo-team/marimo/blob/main/CONTRIBUTING.md).
+- [x] For large changes, or changes that affect the public API: this change was discussed or approved through an issue, on [Discord](https://marimo.io/discord?ref=pr), or the community [discussions](https://github.com/marimo-team/marimo/discussions) (Please provide a link if applicable).
+- [x] I have added tests for the changes made.
+- [x] I have run the code and verified that it works as expected.
+
+## 📜 Reviewers
+
+<!--
+Tag potential reviewers from the community or maintainers who might be interested in reviewing this pull request.
+
+Your PR will be reviewed more quickly if you can figure out the right person to tag with @ -->
+
+@mscolnick
+",bjoaquinc,75667013,closed,False,2,2025-05-02T04:28:40+00:00,2025-05-02T16:53:55+00:00,2025-05-02T12:41:09+00:00,,0,0,0,0,0,0,0

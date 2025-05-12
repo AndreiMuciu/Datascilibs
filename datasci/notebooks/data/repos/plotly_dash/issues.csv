@@ -1,0 +1,2875 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+plotly/dash,3052992356,3299,Autofilled values in dcc.Input with debounce=True are not detected on submit,"dash version: `#3.0.4`
+
+When using dcc.Input with debounce=True, values autofilled by a browser are not captured unless the user manually interacts with the input (e.g., clicks or types).
+
+This leads to None values being submitted, even though the fields appear visually filled.",brogrammeur,104312435,open,False,2,2025-05-09T19:15:00+00:00,2025-05-12T12:36:47+00:00,,,0,0,0,0,0,0,0
+plotly/dash,3042930820,3298,Fix dev only resource filtering,,T4rk1n,9417722,closed,False,0,2025-05-06T13:52:22+00:00,2025-05-06T15:55:39+00:00,2025-05-06T15:55:34+00:00,,0,0,0,0,0,0,0
+plotly/dash,3034633989,3297,[BUG] Using pattern matching ALL for running argument fails when the list is empty,"When using pattern matching for the `running` argument (ex: `running=[(Output({'type': 'loading', 'id': ALL}, 'display'), 'show', 'hide')]`), if there are no components on the page dash throws the error: `state.paths.objs[idKey] is undefined`
+
+
+**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+-  replace the result of `pip list | grep dash` below
+```
+dash               3.0.4
+```
+
+**Describe the bug**
+
+When using pattern matching for the `running` argument (ex: `running=[(Output({'type': 'loading', 'id': ALL}, 'display'), 'show', 'hide')]`), if there are no components on the page dash throws the error: `state.paths.objs[idKey] is undefined`
+
+**Expected behavior**
+
+No error, no side updates (since there are no components)
+
+**Minimum Working Example**
+
+```
+import dash
+from dash import Dash, html, dcc, callback, Output, Input, Patch, ALL, callback_context
+import time
+import random
+
+
+app = Dash(use_pages=True, pages_folder="""")
+
+home_page_layout = html.Div([
+    dcc.Loading(
+        html.Div(id={'type':'scorecard', 'id': 'home1'}),
+        id={'type': 'loading', 'id': 'home1'}
+    ),
+    dcc.Loading(
+        html.Div(id={'type':'scorecard', 'id': 'home2'}),
+        id={'type': 'loading', 'id': 'home2'}
+    )
+])
+other_page_layout = html.Div('Other')
+
+dash.register_page('home', path='/', layout=home_page_layout)
+dash.register_page('blank', path='/blank', layout=other_page_layout)
+
+app.layout = html.Div([
+    dcc.Store(id='data'),
+    html.H1(children='Title of Dash App', style={'textAlign':'center'}),
+    html.Div([
+        html.Span([
+            dcc.Link(f""{page['name']} - {page['path']}"", href=page[""relative_path""]), ' | '
+        ]) for page in dash.page_registry.values()
+    ]),
+    html.Button('Reload Data', id='reload-data'),
+    dash.page_container
+])
+
+
+@callback(
+    Output('data', 'data'),
+    Input('reload-data', 'n_clicks'),
+    prevent_initial_call=True,
+    running=[(Output({'type': 'loading', 'id': ALL}, 'display'), 'show', 'hide')]
+)
+def get_data(n_clicks):
+    time.sleep(3)
+    return random.randint(0, 10)
+
+@callback(
+    Output({'type': 'scorecard', 'id': 'home1'}, 'children'),
+    Input('data', 'data'),
+    prevent_initial_call=True
+)
+def scorecard1(data):
+    return f'Data: {data}'
+
+@callback(
+    Output({'type': 'scorecard', 'id': 'home2'}, 'children'),
+    Input('data', 'data'),
+    prevent_initial_call=True
+)
+def scorecard2(data):
+    return f'Data squared: {data * data}'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+In this example, pressing the ""Reload Data"" button on the second page (/blank) throws the error as the loading elements are all on the first page
+",logankopas,5623932,open,False,0,2025-05-01T20:16:24+00:00,2025-05-08T17:39:26+00:00,,bug;P2,0,0,0,0,0,0,0
+plotly/dash,3034299570,3296,Fix unsafe access of 'external_url' field,Fixes https://github.com/plotly/dash-design-kit/issues/1435 by preventing the app from crashing with `KeyError` if `s['external_url']` key does not exist. ,marthacryan,6673460,closed,False,0,2025-05-01T17:11:51+00:00,2025-05-06T13:27:15+00:00,2025-05-01T20:32:35+00:00,,0,0,0,0,0,0,0
+plotly/dash,3032876096,3295,Changes by create-pull-request action,Automated HTML attributes update.,github-actions[bot],41898282,open,False,0,2025-05-01T00:40:33+00:00,2025-05-09T13:52:46+00:00,,P1;fix,0,0,0,0,0,0,0
+plotly/dash,3029395460,3294,adds `allow_optional` to State and Input to place no value as the placeholders,"Sometimes there is a need to have conditional inputs/states in callbacks, this allows this to happen by passing the conditions to the clientside to be parsed and null values passed back.
+
+This is accessible by `allow_optional=True` on the Input/State.
+
+fixes: https://github.com/plotly/dash/issues/3067",BSd3v,82055130,closed,False,0,2025-04-29T19:58:43+00:00,2025-05-05T14:21:17+00:00,2025-05-05T14:21:17+00:00,feature;P1;community,3,1,0,0,0,0,2
+plotly/dash,3022976203,3293,[BUG] DeprecationWarning: Parsing dates involving a day of month without a year specified is ambiguious and fails to parse leap day.,"**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+-  replace the result of `pip list | grep dash` below
+```
+dash                           3.0.4
+```
+
+**Describe the bug**
+
+When importing dash  :
+```
+DeprecationWarning: Parsing dates involving a day of month without a year specified is ambiguious
+and fails to parse leap day. The default behavior will change in Python 3.15
+to either always raise an exception or to use a different default year (TBD).
+To avoid trouble, add a specific year to the input & format.
+See https://github.com/python/cpython/issues/70647.
+  import dash
+```
+
+**Expected behavior**
+
+No deprecation warning should occur.
+The surprising part is that when I search for ""strptime"" in the dash repository, Github doesn't return any result.",ThatIsAPseudo,17936055,open,False,4,2025-04-27T10:03:04+00:00,2025-04-30T12:12:30+00:00,,bug;P3,0,0,0,0,0,0,0
+plotly/dash,3021455378,3292,[BUG] Remaining Typing/Mypy errors after Dash 3.0.2 to Dash 3.0.4 upgrade,"The following minimum example:
+``` Python
+from typing import Any
+
+from dash import Dash, html, dash_table, dcc
+
+app = Dash()
+
+app.layout = html.Div(
+    [
+        html.H3(""Initial Title"", id=""my-title""),
+        html.Div(
+            dash_table.DataTable(
+                id=""table"",
+                columns=[
+                    {""name"": ""Type"", ""id"": ""Type""},
+                    {""name"": ""Processed"", ""id"": ""Processed""},
+                    {""name"": ""Start"", ""id"": ""Start""},
+                    {""name"": ""End"", ""id"": ""End""},
+                ],
+                style_cell={""textAlign"": ""left""},
+                filter_action=""native"",
+                sort_action=""native"",
+            ),
+        ),
+    ],
+    className=""topmenu"",
+    role=""button"",
+    **{""aria-pressed"": ""false""},
+)
+
+
+class MyGraph(dcc.Graph):
+    """"""Subclass of dash_core_components.Graph to remove modeBarButtons""""""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(
+            *args,
+            **kwargs,
+            config=dict(modeBarButtonsToRemove=[""sendDataToCloud""]),
+        )
+```
+
+Generates no issues with mypy 1.15.0 and Dash 3.0.2. Then upgrading to Dash 3.0.4
+```
+(venv) PS C:\Users\gxvh\Python\dash_mypy> mypy
+Success: no issues found in 1 source file
+(venv) PS C:\Users\gxvh\Python\dash_mypy> poetry update
+Updating dependencies
+Resolving dependencies... (54.3s)
+
+Package operations: 0 installs, 1 update, 0 removals
+
+  - Updating dash (3.0.2 -> 3.0.4)
+
+Writing lock file
+(venv) PS C:\Users\gxvh\Python\dash_mypy> mypy
+dash_test.py:11: error: Module has no attribute ""DataTable""  [attr-defined]
+dash_test.py:27: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash_test.py:27: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash_test.py:27: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash_test.py:35: error: ""__init__"" of ""Graph"" gets multiple values for keyword argument ""config""  [misc]
+Found 5 errors in 1 file (checked 1 source file)
+(venv) PS C:\Users\gxvh\Python\dash_mypy>
+```
+
+",ghaarsma,4742514,open,False,2,2025-04-26T04:06:30+00:00,2025-04-30T12:12:00+00:00,,bug;P2,0,0,0,0,0,0,0
+plotly/dash,3018118285,3291,Master 3.0.4,,T4rk1n,9417722,closed,False,0,2025-04-24T18:26:45+00:00,2025-04-24T18:49:54+00:00,2025-04-24T18:49:54+00:00,,0,0,0,0,0,0,0
+plotly/dash,3018002898,3290,Version 3.0.4,,T4rk1n,9417722,closed,False,0,2025-04-24T17:41:30+00:00,2025-04-24T18:20:03+00:00,2025-04-24T18:19:59+00:00,,0,0,0,0,0,0,0
+plotly/dash,3017552004,3289,allow_duplicates to work with Loading,fixes #3288 ,BSd3v,82055130,closed,False,0,2025-04-24T14:49:19+00:00,2025-04-24T16:16:34+00:00,2025-04-24T16:16:34+00:00,,0,0,0,0,0,0,0
+plotly/dash,3017528938,3288,[BUG] Allow dcc.Loading's target_components to work with allow_duplicate=True Outputs,"Hi,
+
+I observed that the target_components dictionary available in the dcc.Loading component does not work with components, which use the keyword argument allow_duplicate=True in their respective Output(...) definition.
+
+Using debug=True in my example below indicates, that this stems from the fact, that allow_duplicate=True adds an @<HASH_VALUE> to the property name and hence the property referenced in the target_components dictionary cannot be found.
+
+A pre-discussion of the issue can be found in the Plotly forum: [https://community.plotly.com/t/using-dcc-loading-spinner-with-target-components-and-an-allow-duplicate-true-output/91998?u=robster](url)
+
+I have tested this behaviour with Dash 2.18.2 und Dash 3.0.3. Moreover for my example below I tested with dbc 1.7.1 and 2.0.2 respectively.
+
+Best
+
+Robert
+
+--
+
+```
+from time import sleep
+
+from dash import Dash, html, Input, Output
+from dash.dcc import Loading
+from dash_bootstrap_components import Input as dbcInput
+
+app = Dash(__name__)
+
+id_str = 'text-input'
+
+app.layout = html.Div(children=html.Table(children=[
+    html.Tr(children=html.Td(children=Loading(
+            id='text-input-spinner',
+            debug=True,
+            target_components={id_str: 'value'},
+            type='default',
+            children=html.Div(children=dbcInput(
+                    size='sm',
+                    id=id_str,
+                    type='text')
+            )))),
+    html.Tr(children=html.Td(html.Button(children='Click Me',
+                                         id='example-button'))),
+    html.Tr(children=html.Td(html.Label(children='Dummy',
+                                        id='le-label')))]))
+
+@app.callback(output=[Output(id_str, 'value'),
+                      Output('le-label', 'children')],
+              inputs=[Input('example-button', 'n_clicks')],
+              prevent_initial_call=True)
+def update_output(_: int):
+    sleep(2)
+    return 'dummy_value', 'Check'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```",frame1040,82090364,closed,False,0,2025-04-24T14:41:21+00:00,2025-04-24T16:16:35+00:00,2025-04-24T16:16:35+00:00,,0,0,0,0,0,0,0
+plotly/dash,3011126256,3287,Fix typing component generation & explicitize_args,"- Fix #3277
+- Fix component generated from 3.0.3 only using the meta component that is only in this version, breaking backward compatibility with previous version.
+- Add typing compliance tests to ensure no errors is thrown for simple apps by the two main static type checker, `mypy` & `pyright`",T4rk1n,9417722,closed,False,0,2025-04-22T13:37:36+00:00,2025-04-23T18:30:53+00:00,2025-04-23T18:30:50+00:00,,0,0,0,0,0,0,0
+plotly/dash,3005243576,3286,[BUG] dcc.Dropdown does not update when using components as option labels,"This example from the docs no longer works after upgrading to Dash 3: https://dash.plotly.com/dash-core-components/dropdown#components-as-option-labels
+
+dcc.Dropdown previously accepted components as labels in Dash 2. After upgrading to Dash 3, Dropdown does not update visually when a new value is selected if using components as option labels. Callbacks will fire and the value is correctly changed under the hood, component just doesn't update visually. Dropdown works properly when using strings as option labels.
+
+confirmed not working on:
+- Win11/Chrome/Python 3.9/Dash 3.0.2
+- Mac/Firefox/Python 3.12/Dash 3.0.3
+
+main.py:
+```python
+from dash import Dash, html, dcc
+
+app = Dash()
+
+app.layout = [
+    html.H1(children='Dash Bug', style={'textAlign':'center'}),
+    # dcc.Dropdown does not visually update when user selects option when using components as labels
+    dcc.Dropdown(
+        [
+            {""label"": html.Span(""Python""), ""value"": ""Python""},
+            {""label"": html.Span(""Julia""), ""value"": ""Julia""},
+            {""label"": html.Span(""R""), ""value"": ""R""},
+        ],
+        value=""Python""
+    ),
+    # works just fine with plain strings though
+    dcc.Dropdown(
+        [
+            {""label"": ""Python"", ""value"": ""Python""},
+            {""label"": ""Julia"", ""value"": ""Julia""},
+            {""label"": ""R"", ""value"": ""R""},
+        ],
+        value=""Python""
+    )
+]
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+",ckrivik,69691238,closed,False,2,2025-04-18T16:03:56+00:00,2025-04-23T12:43:59+00:00,2025-04-23T12:43:58+00:00,regression;P2,1,0,0,0,0,0,0
+plotly/dash,3005187579,3285,[BUG] callback not triggered when input changes in some configurations,"
+**context**
+```
+dash                 2.18.2
+dash-core-components 1.7.1
+dash-html-components 2.0.0
+dash-renderer        2.0.0
+dash-table           5.0.0
+```
+
+**Description**
+
+The problem I have can be reproduced running the following app:
+```
+from time import sleep
+
+import dash
+from dash import callback, dcc, html, Output, Input, State
+
+app = dash.Dash(__name__, serve_locally=False)
+
+
+app.layout = html.Div(
+    [
+        html.Div(""orig"",id=""display""),
+        dcc.Input(id='input', value='Initial Value', type='text'),
+        html.Button('Submit', id='submit-btn', n_clicks=0),
+        dcc.Store(id=""store-1""),
+        dcc.Store(id=""store-2""),
+    ]
+)
+app.enable_dev_tools(debug=True)
+server = app.server
+
+@callback(
+    Output(""display"", ""children""),
+    Input(""store-1"", ""data""),
+    Input(""store-2"", ""data""),
+prevent_initial_call=True,
+)
+def display(store1, store2):
+    print(f""display triggered, input ({store1}, {store2})"")
+    return f""store1: {store1}, store2: {store2}""
+
+@callback(
+    Output(""store-1"", ""data""),
+    Input(""submit-btn"", ""n_clicks""),
+    State(""input"", ""value""),
+prevent_initial_call=True,
+)
+def submit(_, text):
+    return text
+
+@callback(
+    Output(""store-1"", ""data"",allow_duplicate=True),
+    Output(""store-2"", ""data""),
+    Input(""store-1"", ""data""),
+prevent_initial_call=True,
+)
+def process(text):
+    print(""process triggered"")
+    sleep(3)
+    print(""process ended"")
+    return (f""processed1-{text}"", f""processed2-{text}"")
+```
+
+**Actual behavior**
+
+When I click on the button, I get:
+`submit` callback is triggered -> `store-1` modified -> **only`process` callback is triggered** -> eventually `process` finishes -> `store-1` and `store-2` modified ->  `display` is triggered
+
+and in the logs I see:
+```
+process triggered
+process ended
+display triggered, input (processed1-Initial Value, processed2-Initial Value)
+```
+
+The first `store-1` change should have triggered the `display` callback directly.
+
+**Expected behavior**
+
+When I click on the button:
+`submit` callback is triggered -> `store-1` modified -> **both `process` and `display` callback should be triggered at the same time** -> eventually `process` finishes -> `store-1` and `store-2` modified ->  `display` is triggered
+
+i.e. I should have seen in the logs:
+```
+process triggered
+display triggered, input (Initial Value, None)
+process ended
+display triggered, input (processed1-Initial Value, processed2-Initial Value)
+```",jafournier,16292862,open,False,1,2025-04-18T15:31:16+00:00,2025-04-24T14:37:58+00:00,,bug;P3,0,0,0,0,0,0,0
+plotly/dash,3003142942,3284,Fix component as props used in the same container getting the same key,"When a component as prop is rendered with the same react `key` and rendered inside the same container, (eg: https://github.com/mantinedev/mantine/blob/87639c2b706884f9809fe1f68dc7a6cbe74abfe3/packages/%40mantine/core/src/components/Switch/Switch.tsx#L224) it will not re-render. This PR change the key to always be the component path which is unique in all cases.
+",T4rk1n,9417722,closed,False,0,2025-04-17T18:06:08+00:00,2025-04-17T20:36:11+00:00,2025-04-17T20:36:08+00:00,,0,0,0,0,0,0,0
+plotly/dash,3002465129,3283,[BUG] merge_duplicate_headers breaks style_cell_conditional,"There were earlier bugs report regarding merge_duplicate_headers [Issue1877](https://github.com/plotly/dash/issues/1877) and it seems like there are still some left. I am not yet at 3.x but i found nothing regarding this in the changelog
+
+```
+dash                      2.18.2
+dash-bootstrap-components 1.2.1
+dash-core-components      2.0.0
+dash-extensions           1.0.1
+dash-html-components      2.0.0
+dash-table                5.0.0
+```
+
+**Describe the bug**
+Wrong black bold lines when using merge_duplicate_headers  and style_cell_conditional.
+
+**Expected behavior**
+No bold black lines in the wrong columns.
+
+
+**Minimal Example**
+```
+import dash
+from dash import Dash, dash_table, html
+import pandas as pd
+
+# Sample data
+data = {
+    'Group A': ['Alice', 'Bob'],
+    'Group A.1': [10, 20],
+    'Group B': ['X', 'Y'],
+    'Group B.1': [100, 200],
+    'Group B.2': [1.1, 2.2]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Define columns with headers as lists for multi-level headers
+columns = [
+    {'name': ['Name', 'Person'], 'id': 'Group A'},
+    {'name': ['Name', 'Score'], 'id': 'Group A.1'},
+    {'name': ['Details', 'Code'], 'id': 'Group B'},
+    {'name': ['Details', 'Value 1'], 'id': 'Group B.1'},
+    {'name': ['Details', 'Value 2'], 'id': 'Group B.2'},
+]
+
+# Define style for bold black borders
+style_cell_conditional = [
+    {
+        'if': {'column_id': col},
+        'borderRight': '5px solid black',
+        'fontWeight': 'bold'
+    } for col in ['Group A.1', 'Group B.1']  # Columns to highlight
+]
+
+# Dash app
+app = Dash(__name__)
+
+app.layout = html.Div([
+    dash_table.DataTable(
+        data=df.to_dict('records'),
+        columns=columns,
+        merge_duplicate_headers=True,
+        style_cell={'textAlign': 'center'},
+        style_cell_conditional=style_cell_conditional
+    )
+])
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+```
+",korzi27,160716173,open,False,1,2025-04-17T13:14:12+00:00,2025-04-22T13:03:54+00:00,,bug;P2,0,0,0,0,0,0,0
+plotly/dash,3000697532,3282,Fix incorrect cancellation of pattern matched long callbacks,Fixes: #3119,apmorton,63636,closed,False,2,2025-04-16T20:42:47+00:00,2025-04-24T12:55:01+00:00,2025-04-24T12:49:57+00:00,P1;fix;community,0,0,0,0,0,0,0
+plotly/dash,3000417397,3281,Use routes_pathname_prefix for internal Alive URL in Dash app,"When running a Dash app behind a proxy, the internal alive check (used during app startup) fails if the app is initialized with only `requests_pathname_prefix`, or if `requests_pathname_prefix` differs from `routes_pathname_prefix`.
+
+This results in a misleading error:
+```
+OSError: Address 'http://127.0.0.1:9090' already in use.
+Try passing a different port to run.
+```
+
+This is due to the alive check attempting to construct the URL using `requests_pathname_prefix`, which may not route correctly internally.
+
+###  Solution
+
+This PR updates the internal alive URL construction logic to use `routes_pathname_prefix`, which is the correct prefix for server-side routing and internal endpoint resolution.
+
+### This
+
+- Prevents startup failures when `requests_pathname_prefix` != `routes_pathname_prefix`
+- Ensures internal health check (alive check) functions correctly
+- Unblocks deployment in more complex reverse-proxy setups
+
+
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",Chiragasourabh,22270983,closed,False,0,2025-04-16T18:27:47+00:00,2025-04-16T19:05:41+00:00,2025-04-16T19:05:41+00:00,,0,0,0,0,0,0,0
+plotly/dash,2999717237,3280,Remove flask typing import.,"As report in https://github.com/plotly/dash/pull/3254#discussion_r2045770189 importing from flask.typing is not available for earlier version, instead of putting a constraint this just replace the import with a Callable.
+
+",T4rk1n,9417722,closed,False,0,2025-04-16T13:46:32+00:00,2025-04-16T15:20:06+00:00,2025-04-16T15:19:59+00:00,,0,0,0,0,0,0,0
+plotly/dash,2999498255,3279,Store callback Output value in persistence storage,"Fixes #2678
+
+This PR:
+- Solves #2678 
+- Solves the [question](https://community.plotly.com/t/dash-callback-output-value-clears-the-persistence-of-the-dcc-components/88314) from the Dash Plotly forum.
+
+TLDR:
+This PR ensures that the callback output value is written (instead of being pruned) within the browser's persistence storage for its `dcc` components that has `persistence=True` set.
+
+---
+
+For the following code (also posted in the Dash Plotly forum question that's linked above):
+```py
+from dash import Dash, dcc, html, Input, Output
+
+app = Dash(__name__)
+
+app.layout = html.Div([
+    html.Button(""Select All"", id=""select_all_button""),
+    dcc.Checklist(
+        id='checkbox',
+        options=[1, 2, 3],
+        value=[],
+        persistence=True,
+        persistence_type='session'
+    ),
+])
+
+
+@app.callback(
+    Output('checkbox', 'value'),
+    Input('select_all_button', 'n_clicks'),
+    prevent_initial_call=True,
+)
+def select_all_options(n_clicks):
+    return [1, 2, 3]
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+
+Here's how it works from the `plotly/dash::dev`:
+
+https://github.com/user-attachments/assets/065d3a46-e8a4-4585-b36a-2a4e95c087ba
+
+Here's how it works from the `petar-qb/dash::feature/store-output-value-in-persistence-storage`:
+
+https://github.com/user-attachments/assets/9d3020de-035a-4187-9858-63d16bcad9de
+
+---
+
+## Contributor Checklist
+
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",petar-qb,108530920,closed,False,4,2025-04-16T12:29:44+00:00,2025-04-30T13:05:44+00:00,2025-04-30T13:05:44+00:00,feature;P1;community,2,0,0,0,2,0,0
+plotly/dash,2997157646,3278,Fix loading selector with children starting at the same digit,"Fixes #3276 
+
+The loading selector was catching element at the same level, add a `,` to the check in order to only get the children.",T4rk1n,9417722,closed,False,0,2025-04-15T17:40:32+00:00,2025-04-15T18:07:21+00:00,2025-04-15T18:07:16+00:00,,0,0,0,0,0,0,0
+plotly/dash,2997009241,3277,[BUG] Large nr of myp errors when upgrading Dash 3.0.2 to Dash 3.0.3,"We are maintaining a decent sized Dash application. We had a relatively smooth 2.18.2 -> 3.0.0 upgrade. But when upgrading from 3.0.2 to 3.0.3 we encountered a very large (~250) number of mypy issues. I could not detect anything in the release notes that would indicate a change in (mypy) typing. 
+
+``` powershell
+(venv) PS C:\Users\Python\dash-site> poetry show | Select-string ""dash""
+
+dash                        3.0.2           A Python framework for building...
+dash-bootstrap-components   2.0.1           Bootstrap themed components for...
+
+
+(venv) PS C:\Users\Python\dash-site> mypy
+Success: no issues found in 86 source files
+(venv) PS C:\Users\Python\dash-site> poetry update
+Updating dependencies
+Resolving dependencies... (52.5s)
+
+Package operations: 0 installs, 2 updates, 0 removals
+
+  - Updating narwhals (1.34.1 -> 1.35.0)
+  - Updating dash (3.0.2 -> 3.0.3)
+
+Writing lock file
+(venv) PS C:\Users\Python\dash-site> poetry show | Select-string ""dash""
+
+dash                        3.0.3           A Python framework for building...
+dash-bootstrap-components   2.0.1           Bootstrap themed components for...
+
+
+(venv) PS C:\Users\Python\dash-site> mypy
+dash\dashboards\utils\design.py:99: error: Argument ""options"" to ""RadioItems"" has incompatible type ""list[dict[str, str]]""; expected ""Sequence[str | SupportsFloat | SupportsInt | SupportsComplex | bool] | dict[Any, Any] | Sequence[Options[Any]] | None""  [arg-type]
+dash\dashboards\utils\design.py:261: error: Incompatible return value type (got ""Div"", expected ""RangeSlider"")  [return-value]
+dash\dashboards\utils\design.py:264: error: List item 1 has incompatible type ""RangeSlider""; expected ""str | int | float""  [list-item]
+dash\dashboards\base.py:433: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\base.py:436: error: List item 1 has incompatible type ""Pre""; expected ""str | int | float""  [list-item]
+dash\dashboards\base.py:438: error: List item 3 has incompatible type ""Div | Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\base.py:439: error: List item 4 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\wrap_dash.py:60: error: ""__init__"" of ""Graph"" gets multiple values for keyword argument ""config""  [misc]
+dash\wrap_dash.py:90: error: Argument 1 to ""append"" of ""list"" has incompatible type ""Ul""; expected ""Link""  [arg-type]
+dash\wrap_dash.py:92: error: Argument 1 to ""append"" of ""list"" has incompatible type ""list[Any] | Div""; expected ""Link""  [arg-type]
+dash\wrap_dash.py:195: error: Argument 5 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\wrap_dash.py:195: error: Argument 5 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\wrap_dash.py:195: error: Argument 5 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\wrap_dash.py:209: error: Argument 2 to ""Nav"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\wrap_dash.py:209: error: Argument 2 to ""Nav"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\wrap_dash.py:209: error: Argument 2 to ""Nav"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\wrap_dash.py:224: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\wrap_dash.py:224: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\wrap_dash.py:224: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\wrap_dash.py:290: error: List item 1 has incompatible type ""A""; expected ""str | int | float""  [list-item]
+dash\dash_app.py:336: error: List item 1 has incompatible type ""Img""; expected ""str | int | float""  [list-item]
+dash\dash_app.py:432: error: List item 1 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dash_app.py:444: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\dash_app.py:444: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\dash_app.py:444: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\dash_app.py:450: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\dash_app.py:450: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\dash_app.py:450: error: Argument 4 to ""Div"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\dashboards\data_tasks.py:125: error: Argument 2 to ""Td"" has incompatible type ""**dict[str, str]""; expected ""SupportsFloat | SupportsInt | SupportsComplex | None""  [arg-type]
+dash\dashboards\data_tasks.py:125: error: Argument 2 to ""Td"" has incompatible type ""**dict[str, str]""; expected ""bool | None""  [arg-type]
+dash\dashboards\data_tasks.py:125: error: Argument 2 to ""Td"" has incompatible type ""**dict[str, str]""; expected ""Literal['hidden', 'HIDDEN'] | bool | None""  [arg-type]
+dash\dashboards\data_status.py:121: error: Argument ""className"" to ""Div"" has incompatible type ""int | str""; expected ""str | None""  [arg-type]
+dash\dashboards\data_status.py:123: error: Argument ""title"" to ""Div"" has incompatible type ""int | str""; expected ""str | None""  [arg-type]
+dash\dashboards\data_castcast.py:20: error: Module has no attribute ""DataTable""  [attr-defined]
+dash\dashboards\data_download.py:40: error: Argument ""options"" to ""Dropdown"" has incompatible type ""list[dict[str, str]]""; expected ""Sequence[str | SupportsFloat | SupportsInt | SupportsComplex | bool] | dict[Any, Any] | Sequence[Options[Any]] | None""  [arg-type]
+dash\dashboards\data_download.py:97: error: Argument ""start_date"" to ""DatePickerRange"" has incompatible type ""date""; expected ""str | datetime | None""  [arg-type]
+dash\dashboards\data_download.py:98: error: Argument ""end_date"" to ""DatePickerRange"" has incompatible type ""date""; expected ""str | datetime | None""  [arg-type]
+dash\dashboards\tension.py:33: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\tension.py:35: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\tension.py:49: error: List item 2 has incompatible type ""Interval""; expected ""str | int | float""  [list-item]
+dash\dashboards\ocean.py:376: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\ocean.py:423: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\ocean.py:497: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\h.py:136: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\h.py:138: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\h.py:160: error: List item 2 has incompatible type ""Interval""; expected ""str | int | float""  [list-item]
+dash\dashboards\h.py:211: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\kpi.py:42: error: List item 1 has incompatible type ""Interval""; expected ""str | int | float""  [list-item]
+dash\dashboards\kpi.py:43: error: List item 2 has incompatible type ""Interval""; expected ""str | int | float""  [list-item]
+dash\dashboards\kpi.py:241: error: Argument ""className"" to ""Div"" has incompatible type ""int | str""; expected ""str | None""  [arg-type]
+dash\dashboards\kpi.py:243: error: Argument ""title"" to ""Div"" has incompatible type ""int | str""; expected ""str | None""  [arg-type]
+dash\dashboards\performance.py:41: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\performance.py:42: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\performance.py:43: error: List item 2 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\performance.py:45: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\performance.py:46: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\performance.py:47: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sr.py:45: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\sr.py:47: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:57: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:58: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:59: error: List item 2 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:60: error: List item 3 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:61: error: List item 4 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:62: error: List item 5 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:67: error: List item 8 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:68: error: List item 9 has incompatible type ""Hr""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:69: error: List item 10 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:70: error: List item 11 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:71: error: List item 12 has incompatible type ""Hr""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:72: error: List item 13 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\spare_analysis.py:234: error: Argument 1 to ""extend"" of ""list"" has incompatible type ""list[Component]""; expected ""Iterable[str]""  [arg-type]
+dash\dashboards\spare_analysis.py:236: error: Argument 1 to ""append"" of ""list"" has incompatible type ""B""; expected ""str""  [arg-type]
+dash\dashboards\sms.py:90: error: List item 0 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:94: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:95: error: List item 3 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:96: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:104: error: List item 0 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:108: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:109: error: List item 3 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:110: error: List item 4 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:111: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:119: error: List item 0 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:129: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:130: error: List item 3 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:131: error: List item 4 has incompatible type ""Download""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:132: error: List item 5 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:141: error: List item 7 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:148: error: List item 9 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:149: error: List item 10 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:150: error: List item 11 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:231: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:232: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:233: error: List item 2 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:237: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:238: error: List item 5 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:249: error: List item 8 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\sms.py:250: error: List item 9 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\m.py:72: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\m.py:74: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\m.py:78: error: List item 0 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\m.py:79: error: List item 1 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\m.py:306: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\m.py:685: error: Incompatible types in assignment (expression has type ""Graph"", variable has type ""H4"")  [assignment]
+dash\dashboards\m.py:970: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\m.py:972: error: List item 2 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\m.py:973: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:313: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:314: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:315: error: List item 2 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:318: error: List item 0 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\loss.py:319: error: List item 1 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\loss.py:322: error: List item 4 has incompatible type ""RangeSlider""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:329: error: List item 5 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:330: error: List item 6 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:331: error: List item 7 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:332: error: List item 8 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:333: error: List item 9 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:339: error: List item 0 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\loss.py:340: error: List item 1 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\loss.py:343: error: List item 12 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:347: error: List item 14 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\loss.py:348: error: List item 15 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\m_t.py:74: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\m_t.py:76: error: List item 2 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\m_t.py:98: error: List item 4 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\m_t.py:100: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\hindcast_fatigue.py:39: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\hindcast_fatigue.py:41: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\hindcast_fatigue.py:42: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\hindcast_fatigue.py:43: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\hindcast_fatigue.py:50: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\hindcast_fatigue.py:53: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:68: error: List item 1 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:69: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:70: error: List item 3 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:71: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:72: error: List item 5 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:73: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:74: error: List item 7 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl_demo.py:75: error: List item 8 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:69: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:72: error: List item 3 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:74: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:75: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:244: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:245: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:246: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:248: error: List item 4 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:249: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:250: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:251: error: List item 7 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\fl.py:252: error: List item 8 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:99: error: List item 0 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:101: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:150: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:152: error: List item 2 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:155: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:156: error: List item 4 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:362: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:365: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\f_r.py:366: error: List item 4 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:60: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:62: error: List item 2 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:63: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:64: error: List item 4 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:66: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:67: error: List item 7 has incompatible type ""Hr""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:71: error: List item 9 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\cad.py:72: error: List item 10 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\asbuilt_data.py:119: error: List item 1 has incompatible type ""Hr""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:186: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:190: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:193: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:194: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:195: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:196: error: List item 7 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:197: error: List item 8 has incompatible type ""Store""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:425: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:492: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:493: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:494: error: List item 2 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:495: error: List item 3 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:496: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:497: error: List item 5 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:498: error: List item 6 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:501: error: List item 7 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:502: error: List item 8 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\umb.py:504: error: List item 10 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:53: error: List item 0 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:54: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:58: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:66: error: List item 0 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:67: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:71: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:72: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:113: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\commissioning.py:114: error: List item 1 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:122: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:126: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:127: error: List item 3 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:128: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:129: error: List item 5 has incompatible type ""H4""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:130: error: List item 6 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:131: error: List item 7 has incompatible type ""H5""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:214: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:215: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:216: error: List item 2 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:219: error: List item 5 has incompatible type ""H4""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:220: error: List item 6 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:221: error: List item 7 has incompatible type ""H4""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:222: error: List item 8 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:223: error: List item 9 has incompatible type ""H4""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:225: error: List item 11 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:312: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:314: error: List item 2 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:315: error: List item 3 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:317: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:318: error: List item 6 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:322: error: List item 10 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:323: error: List item 11 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:324: error: List item 12 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:325: error: List item 13 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:326: error: List item 14 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:358: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\ssc.py:360: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:361: error: List item 1 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:367: error: List item 1 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:368: error: List item 2 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:376: error: List item 3 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:377: error: List item 4 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:378: error: List item 5 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:641: error: Incompatible types in assignment (expression has type ""Div"", base class ""TitleMixin"" defined the type as ""H2"")  [assignment]
+dash\dashboards\ssc.py:643: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:644: error: List item 1 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:645: error: List item 2 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:658: error: List item 4 has incompatible type ""Div""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:659: error: Module has no attribute ""DataTable""  [attr-defined]
+dash\dashboards\ssc.py:828: error: List item 0 has incompatible type ""H1""; expected ""str | int | float""  [list-item]
+dash\dashboards\ssc.py:831: error: List item 1 has incompatible type ""P""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:113: error: List item 0 has incompatible type ""H2""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:114: error: List item 1 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:122: error: List item 0 has incompatible type ""Graph""; expected ""Div""  [list-item]
+dash\dashboards\tool.py:123: error: List item 1 has incompatible type ""Graph""; expected ""Div""  [list-item]
+dash\dashboards\tool.py:126: error: List item 4 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:127: error: List item 5 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:128: error: List item 6 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:129: error: List item 7 has incompatible type ""Br""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:132: error: List item 0 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\tool.py:133: error: List item 1 has incompatible type ""Loading""; expected ""Div""  [list-item]
+dash\dashboards\tool.py:139: error: List item 10 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:140: error: List item 11 has incompatible type ""H3""; expected ""str | int | float""  [list-item]
+dash\dashboards\tool.py:146: error: List item 13 has incompatible type ""Loading""; expected ""str | int | float""  [list-item]
+Found 253 errors in 29 files (checked 86 source files)
+(venv) PS C:\Users\Python\dash-site>
+```",ghaarsma,4742514,closed,False,7,2025-04-15T16:34:06+00:00,2025-04-24T20:53:16+00:00,2025-04-23T18:30:51+00:00,bug;P1,0,0,0,0,0,0,0
+plotly/dash,2996192777,3276,[BUG] dcc.Loading with children showing loading animation even when none of its children are updating,"**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+-  replace the result of `pip list | grep dash` below
+```
+dash                                     3.0.3
+dash_ag_grid                             31.3.1
+dash_auth                                2.3.0
+dash-bootstrap-components                2.0.1
+```
+
+-  if frontend related, tell us your Browser, Version and OS
+
+    - OS: iOS
+    - Browser chrome
+    - Version 135.0.7049.85 (Official Build) (arm64)
+
+**Describe the bug**
+
+`dcc.Loading` with children is showing loading animation even though none of its children are updating
+
+**Expected behavior**
+
+the loading animation is shown if and only if any of its children are updating
+
+**MWE**
+In this mwe, the `dcc.Loading` shows its loading animation while the callback is running. Note that if the first `""A""` in layout is omitted, the loading animation is not shown.
+
+```
+from time import sleep
+
+import dash_bootstrap_components as dbc
+from dash import Dash, Input, Output, callback, dcc, html
+
+layout = [
+    ""A"",
+    dcc.Loading([""A""]),
+    ""B"",
+    html.Div(),
+    ""C"",
+    html.Div(),
+    html.Div(),
+    ""Date picker"",
+    dcc.DatePickerRange(),
+    dbc.Tooltip(),
+    html.Div(id={""app_name"": ""test"", ""component"": ""last-update-div""}),
+    dcc.Interval(
+        id={""app_name"": ""test"", ""component"": ""interval-refresh""},
+        interval=1 * 1000,
+    ),
+]
+
+
+@callback(
+    Output({""app_name"": ""test"", ""component"": ""last-update-div""}, ""children"", allow_duplicate=True),
+    Input({""app_name"": ""test"", ""component"": ""interval-refresh""}, ""n_intervals""),
+    prevent_initial_call=True,
+)
+def load_data(_):
+    sleep(0.3)
+    return ""x""
+
+
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app.layout = layout
+app.run()
+```",tlauli,38265141,closed,False,2,2025-04-15T12:04:18+00:00,2025-04-15T18:07:17+00:00,2025-04-15T18:07:17+00:00,regression;bug;P1,0,0,0,0,0,0,0
+plotly/dash,2993715584,3275,Master 3.0.3,,T4rk1n,9417722,closed,False,0,2025-04-14T17:33:23+00:00,2025-04-14T18:03:07+00:00,2025-04-14T18:03:04+00:00,,0,0,0,0,0,0,0
+plotly/dash,2993644071,3274,Version 3.0.3,,T4rk1n,9417722,closed,False,0,2025-04-14T17:00:24+00:00,2025-04-14T17:23:12+00:00,2025-04-14T17:23:07+00:00,,0,0,0,0,0,0,0
+plotly/dash,2993160054,3273,Fix dash_hooks plugin entry point,"Fixes #3272 
+",T4rk1n,9417722,closed,False,0,2025-04-14T13:56:03+00:00,2025-04-14T15:40:22+00:00,2025-04-14T15:40:19+00:00,P1;fix,0,0,0,0,0,0,0
+plotly/dash,2989661551,3272,"[BUG] ""dash-hooks"" is an invalid group name in python and so plugins using it don't install","Initially reported in this community post https://community.plotly.com/t/plugin-cannot-be-installed-with-pip/91307
+
+
+**Describe the bug**
+
+follow the[ plugin guide in dash docs ](https://dash.plotly.com/dash-plugins-using-hooks?_gl=1*9cbi6o*_gcl_au*MTgwNjA2MjYzOS4xNzQxODYyODM5*_ga*MTYyMTAwMDc3Ny4xNzQxODYyODM5*_ga_6G7EE0JNSC*MTc0MjI3ODY2MS4xNi4xLjE3NDIyODA5MTMuMTEuMC4w#configure-the-dash-entrypoint-in-setup.py) and set `entry_points={""dash-hooks"": [""callback_error_plugin = callback_error_plugin""]},` in the `setup.py` file so that the hooks gets added to dash apps automatically.
+
+Trying to pip install the resulting package whl results in `ValueError: (‘Invalid group name’, ‘dash-hooks’)`  because hyphens aren't allowed from https://packaging.python.org/en/latest/specifications/entry-points/
+
+> Group names must be one or more groups of letters, numbers and underscores, separated by dots (regex ^\w+(\.\w+)*$).
+
+replacing the hyphen in this check in dash https://github.com/plotly/dash/blob/700b70690e37fd5cd9af1bbd08996cfd71f296d8/dash/_hooks.py#L252-L253 with an underscore and then modifying the setup.py file of my plugin accordingly fixed the issue for me though
+
+cc @T4rk1n @LiamConnors 
+",michaelbabyn,41019918,closed,False,1,2025-04-11T20:23:37+00:00,2025-04-14T15:40:20+00:00,2025-04-14T15:40:20+00:00,bug,1,1,0,0,0,0,0
+plotly/dash,2989107775,3271,fixing issue with tooltip styling,fixes https://github.com/plotly/dash/issues/3269,BSd3v,82055130,closed,False,1,2025-04-11T16:12:24+00:00,2025-04-14T13:52:51+00:00,2025-04-14T13:52:51+00:00,,0,0,0,0,0,0,0
+plotly/dash,2988253848,3270,"[BUG] Dash.run() raises OSError  ""Address already in use"" when ugrading to dash 3 in Jupyter","I got an error on Dash.run() when using it in Jupyter environment, behind proxy. 
+This error happens when upgrading dash from 2.18 to 3.0.2.
+
+**Environment**
+I use conda-forge to install packages.
+
+``` 
+name: visuconti-env
+dependencies:
+  - python=3.13
+  - jupyterlab
+  - jupyterhub
+  - dash=3.0.2 #2.18
+  - jupyter-server-proxy
+```
+
+**Context**
+The problem can be reproduced on ""Hello world"" dash.
+```
+from dash import Dash, dcc, html, Input, Output, jupyter_dash
+import plotly.graph_objects as go
+import dash
+app = Dash(__name__)
+app.layout = html.Div([
+    html.H4('Interactive color selection with simple Dash example'),
+    html.P(""Select color:""),
+    dcc.Dropdown(
+        id=""dropdown"",
+        options=['Gold', 'MediumTurquoise', 'LightGreen'],
+        value='Gold',
+        clearable=False,
+    ),
+    dcc.Graph(id=""graph""),
+])
+@app.callback(
+    Output(""graph"", ""figure""),
+    Input(""dropdown"", ""value""))
+def display_color(color):
+    fig = go.Figure(
+        data=go.Bar(y=[2, 3, 1], # replace with your own data source
+                    marker_color=color))
+    return fig
+jupyter_dash.infer_jupyter_proxy_config()
+app.run(debug=True, port=8056)
+```
+
+**Error**
+
+The error is raised by the app.run(), whatever the port argument.
+
+```
+---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+Cell In[1], line 25
+     23     return fig
+     24 jupyter_dash.infer_jupyter_proxy_config()
+---> 25 app.run(debug=True, port=8056)
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/dash/dash.py:2257, in Dash.run(self, host, port, proxy, debug, jupyter_mode, jupyter_width, jupyter_height, jupyter_server_url, dev_tools_ui, dev_tools_props_check, dev_tools_serve_dev_bundles, dev_tools_hot_reload, dev_tools_hot_reload_interval, dev_tools_hot_reload_watch_interval, dev_tools_hot_reload_max_retry, dev_tools_silence_routes_logging, dev_tools_disable_version_check, dev_tools_prune_errors, **flask_run_options)
+   2254             extra_files.append(path)
+   2256 if jupyter_dash.active:
+-> 2257     jupyter_dash.run_app(
+   2258         self,
+   2259         mode=jupyter_mode,
+   2260         width=jupyter_width,
+   2261         height=jupyter_height,
+   2262         host=host,
+   2263         port=port,
+   2264         server_url=jupyter_server_url,
+   2265     )
+   2266 else:
+   2267     self.server.run(host=host, port=port, debug=debug, **flask_run_options)
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/dash/_jupyter.py:405, in JupyterDash.run_app(self, app, mode, width, height, host, port, server_url)
+    403     display(HTML(msg))
+    404 else:
+--> 405     raise final_error
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/dash/_jupyter.py:392, in JupyterDash.run_app(self, app, mode, width, height, host, port, server_url)
+    389         raise err
+    391 try:
+--> 392     wait_for_app()
+    394     if self.in_colab:
+    395         JupyterDash._display_in_colab(dashboard_url, port, mode, width, height)
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/retrying.py:56, in retry.<locals>.wrap.<locals>.wrapped_f(*args, **kw)
+     54 @six.wraps(f)
+     55 def wrapped_f(*args, **kw):
+---> 56     return Retrying(*dargs, **dkw).call(f, *args, **kw)
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/retrying.py:266, in Retrying.call(self, fn, *args, **kwargs)
+    263 if self.stop(attempt_number, delay_since_first_attempt_ms):
+    264     if not self._wrap_exception and attempt.has_exception:
+    265         # get() on an attempt with an exception should cause it to be raised, but raise just in case
+--> 266         raise attempt.get()
+    267     else:
+    268         raise RetryError(attempt)
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/retrying.py:301, in Attempt.get(self, wrap_exception)
+    299         raise RetryError(self)
+    300     else:
+--> 301         six.reraise(self.value[0], self.value[1], self.value[2])
+    302 else:
+    303     return self.value
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/six.py:724, in reraise(tp, value, tb)
+    722     if value.__traceback__ is not tb:
+    723         raise value.with_traceback(tb)
+--> 724     raise value
+    725 finally:
+    726     value = None
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/retrying.py:251, in Retrying.call(self, fn, *args, **kwargs)
+    248     self._before_attempts(attempt_number)
+    250 try:
+--> 251     attempt = Attempt(fn(*args, **kwargs), attempt_number, False)
+    252 except:
+    253     tb = sys.exc_info()
+
+File /opt/conda/envs/visuconti-env/lib/python3.13/site-packages/dash/_jupyter.py:383, in JupyterDash.run_app.<locals>.wait_for_app()
+    381     if res != ""Alive"":
+    382         url = f""[http://{host}:{](http://{host}:{port/)[port](http://{host}:{port/)}""
+--> 383         raise OSError(
+    384             f""Address '{url}' already in use[.\n](https://feevisu-dev.cmp.retd.edf.fr/lab/user/fb45dddl/lab/workspaces/auto-c/tree/n)""
+    385             ""    Try passing a different port to run.""
+    386         )
+    387 except requests.ConnectionError as err:
+    388     _get_error()
+
+OSError: Address 'http://127.0.0.1:8056/' already in use.
+    Try passing a different port to run.
+```
+
+
+
+**Investigation**
+The breaking change seems to be located at line 357 dash/_jupyter.py file. When manually replacing the line by the 2.18 version, it works again. 
+
+Dash3.0.2
+alive_url = f""http://{host}:{port}{requests_pathname_prefix}_alive_{JupyterDash.alive_token}""
+
+Dash2.18
+alive_url = f""http://{host}:{port}/_alive_{JupyterDash.alive_token}""
+
+** Question **
+Should I find a less hacky way to debug this ?
+",ferdinandbayard,8361582,closed,False,5,2025-04-11T10:27:37+00:00,2025-04-16T19:06:16+00:00,2025-04-16T19:06:15+00:00,regression,0,0,0,0,0,0,0
+plotly/dash,2986823443,3269,"[BUG] dcc.Tooltip() incorect placement: ""direction"" and/or ""bbox"" params are not respected","**Context**
+After update from Dash 2.18.2 to 3.0.2, dcc.Tooltip is placed in wrong position and partially hide target objects.
+
+```
+dash 3.0.2
+dash-bootstrap-components 2.0.0
+```
+    - OS: Linux, Windows
+    - Browsers: Firefox, Edge, Chrome
+
+**Describe the bug**
+dcc.Tooltip left top corner is always placed at same position (relative to ""bbox"") regardless of ""direction"" parameter, and/or ignores some ""bbox"" values (presumably  ""x1"" and ""y1"")
+
+**Expected behavior**
+Tooltip should be placed in direction according ""direction"" parameter relative to ""bbox"" rectangle area.
+
+**Screenshots**
+In Firefox 128.8.0esr:
+![Image](https://github.com/user-attachments/assets/cfdd9b19-6eff-406c-892e-7996e558ce16)
+
+In Chrome 134:
+![Image](https://github.com/user-attachments/assets/5d8c902e-c427-43e1-8362-38b76c63fd7a)",embar-,1218781,closed,False,2,2025-04-10T20:35:04+00:00,2025-04-15T12:56:10+00:00,2025-04-14T13:52:52+00:00,,0,0,0,0,0,0,0
+plotly/dash,2986536432,3268,allows for parents to listen to descendent updates,"In Dash 3, it has become apparent that some components need to listen to updates in descendent components, and to rerender again. This PR adds this ability for component devs to subscribe to updates in descendents by placing `dashChildrenUpdate = true` on their component.
+
+Currently, there is no limit to the scope that this will rerender for.
+
+This fixes: https://github.com/plotly/dash/issues/3252
+",BSd3v,82055130,closed,False,0,2025-04-10T18:32:33+00:00,2025-04-11T13:59:51+00:00,2025-04-11T13:59:51+00:00,,1,1,0,0,0,0,0
+plotly/dash,2984995033,3267,Dash Tutorial incorrect for Generic Crossfilter Recipe,"throws  keyerror ""customdata""
+
+selectedpoints, [p[""pointNumber""] for p in selected_data[""points""]]
+
+""pointNumber"" replaces ""customdata"" then it worked for me
+",lukas48,74784590,open,False,3,2025-04-10T09:05:56+00:00,2025-04-23T15:42:17+00:00,,documentation;regression;bug;P1,0,0,0,0,0,0,0
+plotly/dash,2984948216,3266,metadata.json and props generating extra quotes for enum types,"Thank you so much for helping improve the quality of Dash!
+
+We do our best to catch bugs during the release process, but we rely on your help to find the ones that slip through.
+
+
+**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+
+
+I've followed this template and got it working https://github.com/plotly/dash-typescript-component-template
+
+
+**Describe the bug**
+
+However when i wrap one of our typescript components, e.g. out button which has this prop:
+
+```
+type = {
+variant: ""primary"" | ""secondary"" | ""tertiary""
+}
+```
+
+Then metadata.json and propTypes it generates are wrong:
+```ts
+  ""value"": [
+            { ""value"": ""'primary'"", ""computed"": false },
+            { ""value"": ""'secondary'"", ""computed"": false },
+            { ""value"": ""'tertiary'"", ""computed"": false }
+          ],
+```
+they have an extra quote around them
+
+i guess under the hood its using this https://github.com/plotly/dash/blob/dev/dash/development/_generate_prop_types.py and using the metadata.json as source of truth, which i'm not sure where is coming from maybe react-docgen, 
+
+perhaps _generate_prop_types.py should strip out extra quotes of enums before writing the proptypes code?
+
+https://github.com/plotly/dash/blob/76a8e165d5f2d779df7c9968149d1e80647a3d12/dash/development/_generate_prop_types.py#L69
+
+**Expected behavior**
+Type enum's should not have extra quotes generated 
+**Screenshots**
+
+<img width=""449"" alt=""Image"" src=""https://github.com/user-attachments/assets/a3e16f47-08c1-4328-bbd2-748e3dba9351"" />",Georgegriff,9056958,closed,False,3,2025-04-10T08:49:14+00:00,2025-04-10T15:20:51+00:00,2025-04-10T15:20:50+00:00,,0,0,0,0,0,0,0
+plotly/dash,2980844410,3265,localizing the scope of the resize handler,localizing the scope of the resize handler,BSd3v,82055130,closed,False,0,2025-04-08T20:14:00+00:00,2025-04-09T18:06:33+00:00,2025-04-09T18:06:33+00:00,P1;fix;community,0,0,0,0,0,0,0
+plotly/dash,2980000683,3264,Updating `componentPath` from the `DashWrapper` `setProps`,allows for the componentPath to be updated when moving around in the children and triggering `setProps`,BSd3v,82055130,closed,False,0,2025-04-08T14:33:52+00:00,2025-04-08T18:22:40+00:00,2025-04-08T18:22:40+00:00,,0,0,0,0,0,0,0
+plotly/dash,2977883060,3263,Add note on params that only work with background callbacks,"@T4rk1n do you know if there are any other params that only apply to background callbacks.
+
+This PR relates to this issue https://github.com/plotly/ddk-dash-docs/issues/3318
+which is specifically related to the `cancel` param, but I think it's the same for the rest of these. 
+
+
+---
+
+*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",LiamConnors,12749831,closed,False,1,2025-04-07T20:07:23+00:00,2025-04-09T13:38:00+00:00,2025-04-09T13:37:52+00:00,documentation;feature;P1,0,0,0,0,0,0,0
+plotly/dash,2977521413,3262,dcc.Dropdown pattern matching? issues in 3.0.2 vs. 2.18.2,"Unfortunately I don't have time to give a reprex but I will do my best to describe what the problem is:
+
+I wrote a data visualisation app that dynamically creates graph sections that have a dcc.Dropdown component to select data and a plotly graph. These sections have reorder buttons so I can switch them around.
+
+I reorder the sections by inserting the section where the button was clicked at index positions i+1 or i-1 in the children of my main section container div.
+
+The sections and all components in them have pattern maching IDs, e.g. {""type"": ""dash-dropdown"", ""section"": section.id}
+
+_THE PROBLEM_
+
+**Behaviour in 2.18.2:**
+After reordering sections, lets says 1 and 2 to the new order 2->1, the dropdown in 1 will correctly change the dropdown values in 1 and update the graph and the same for 2.
+
+**Behaviour in 3.0.2:**
+After reordering the sections the dropdown menu in section 1 will (visually) change the dropdown values in section 2 (the graph does not update so it appears to be just visual) and vice versa and this breaks the whole app. I tried a lot to fix this but ultimately gave up.
+
+I really hope this is a bug and not a feature, since I was very glad to have that work in my old version and would like to be up-to-date :)
+
+",hnz92,64972885,closed,False,6,2025-04-07T17:24:04+00:00,2025-04-15T12:47:45+00:00,2025-04-15T12:47:43+00:00,regression;bug;P2,0,0,0,0,0,0,0
+plotly/dash,2977419212,3261,allow cancel argument for regular callbacks,"Similar to this but for regular callbacks and more generalizable: https://github.com/plotly/dash/issues/2588
+
+Right now it's possible to use the `cancel` argument in a regular callback but it will have no effect. 
+
+Use case: in a complex multi-page app, being able to cancel running and callbacks when a user switchs from one page to another free up resources.
+
+Sample app (cancel button doesn't do anything):
+```
+# dash==3.0.2
+
+from dash import Dash, Input, Output, html, callback
+
+app = Dash(__name__)
+
+app.layout = html.Div(
+    [
+        html.Div([html.P(id=""paragraph_id"", children=[""Button not clicked""])]),
+        html.Button(id=""button_id"", children=""Run Job!""),
+        html.Button(id=""cancel_button_id"", children=""Cancel Running Job!""),
+    ]
+)
+
+@callback(
+    output=Output(""paragraph_id"", ""children""),
+    inputs=Input(""button_id"", ""n_clicks""),
+    running=[
+        (Output(""button_id"", ""disabled""), True, False),
+        (Output(""cancel_button_id"", ""disabled""), False, True),
+    ],
+    cancel=[Input(""cancel_button_id"", ""n_clicks"")],
+)
+def update_clicks(n_clicks):
+    return [f""Clicked {n_clicks} times""]
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+```",celia-lm,101562106,closed,False,3,2025-04-07T16:37:03+00:00,2025-04-08T17:56:18+00:00,2025-04-08T17:56:18+00:00,feature;P2;cs,0,0,0,0,0,0,0
+plotly/dash,2975210249,3260,Some plotly figures stopped being responsive when changing browser zoom level [dash>=3.0],"After upgrading from  dash 2.17 | 2.18 to 3.0 certain figures stopped automatically updating their size (style.height and style.width) when changing the browser zoom level. See attached images below. In these images the ag-grid (top-left) and the figure within dbc.Tabs (bottom-right) corner are unaffected (unsure why).
+
+dash==2.17.1 (Browser Zoom 50%)
+<img width=""1871"" alt=""Image"" src=""https://github.com/user-attachments/assets/726a9cda-7f3b-4d91-8c1a-bac7fe85b0df"" />
+
+dash==3.0.1 (Browser Zoom 50%)
+<img width=""1865"" alt=""Image"" src=""https://github.com/user-attachments/assets/c0254ed7-8496-4dfc-b9dd-d49208554592"" />
+
+
+In dash<3.0 the figure's .plot-container .svg-container and relevant children automatically update width and height to allow the figure to match the size of a responsive container (e.g. dbc.Col). In dash>=3.0 the width and height of these html components are static. See attached images below where I inspect the map figure (bottom-left in the previous images)
+
+dash==2.17.1 (Browser Zoom 75%)
+<img width=""1211"" alt=""Image"" src=""https://github.com/user-attachments/assets/a0838434-e02d-4e00-9462-635defcb818d"" />
+
+dash==3.0.1 (Browser Zoom 75%)
+![Image](https://github.com/user-attachments/assets/250ff912-1e86-4147-87d0-69383da8ae99)
+
+
+Other relevant info:
+- Working build: dash==2.17.1 + dash-bootstrap-components==1.6.0 + plotly==5.23.0;  Upgrading to dash==2.18 and/or dbc==2.0 and/or plotly==5.24 does not introduce the issue.
+- Broken build: dash==3.0.1 + dash-bootstrap-components==2.0.0 + plotly==5.24.0; Upgrading to Dash==3.0.2 and/or plotly>=6.0 does not fix the issue. Downgrading to plotly==5.23.0 does not fix the issue.
+
+Based on what I've gathered, dash 3.0 introduces the issue.
+
+Let me know if you need any other information. Thanks for the work you put into dash!",njcruzln,136293892,closed,False,4,2025-04-06T20:31:26+00:00,2025-04-15T12:48:13+00:00,2025-04-15T12:48:11+00:00,regression;bug;P2,0,0,0,0,0,0,0
+plotly/dash,2972467554,3259,Improve typing.,"- Update pyright to latest version and fix tests with new output.
+- Add typing to dependencies.
+- Fix untyped decorator error with mypy
+- Apply `_explicitize_args` in component meta to fix mypy not resolving types of components.",T4rk1n,9417722,closed,False,0,2025-04-04T13:58:17+00:00,2025-04-07T15:24:54+00:00,2025-04-07T15:24:50+00:00,,0,0,0,0,0,0,0
+plotly/dash,2969649506,3258,Accessing figure as a State variable changes data attribute,"```
+dash                 3.0.2
+dash-core-components 2.0.0
+dash-html-components 2.0.0
+dash-table           5.0.0
+plotly           6.0.1
+```
+**Describe the bug**
+
+When passing a figure as a `State` variable in a callback, the `data` attribute of the figure seems to be modified. This results in it being difficult to access the x, y data from the figure and use it within the callback. 
+
+**Expected behavior**
+
+Previously, the `data` attribute had the same structure as accessing the `data` attribute from the figure object itself which allowed for access to the data in the trace. The example below should make this explanation clearer.
+
+**Example**
+```python
+from dash import Dash, html, dcc, callback, Output, Input, State
+from dash.exceptions import PreventUpdate
+import dash_bootstrap_components as dbc
+import plotly.express as px
+import json
+
+app = Dash(__name__)
+
+df = px.data.iris()
+fig = px.scatter(df, x=""sepal_width"", y=""sepal_length"")
+
+app.layout = html.Div(
+    [
+        html.Div(dcc.Graph(id=""plot"", figure=fig)),
+        dbc.Button(id=""button-id"", children=""Callback!""),
+        html.H1(""Raw Plot Data:""),
+        html.Div(children=json.dumps(fig[""data""][0].to_json(), indent=2)),
+        html.H1(""Plot Data Through Callback:""),
+        html.Div(id=""callback-output"")
+    ]
+)
+
+@callback(
+    Output(""callback-output"", ""children""),
+    Input(""button-id"", ""n_clicks""),
+    State(""plot"", ""figure""),
+    prevent_initial_call=True
+)
+def display_data(n_clicks, figure):
+    if n_clicks > 0:
+        return json.dumps(figure[""data""][0], indent=2)
+    else:
+        raise PreventUpdate
+
+if __name__ == '__main__':
+    app.run(debug=True, dev_tools_hot_reload=False)
+```
+The example is a simple Dash app which displays the `data` attribute of the figure directly from the figure object and after it is used as a `State` variable in the callback.
+
+The output of `fig[""data""][0]` is the trace as expected, however, accessing `figure[""data""][0]` within the callback gives the following:
+```json
+{
+  ""hovertemplate"": ""sepal_width=%{x}<br>sepal_length=%{y}<extra></extra>"",
+  ""legendgroup"": """",
+  ""marker"": {
+    ""color"": ""#636efa"",
+    ""symbol"": ""circle""
+  },
+  ""mode"": ""markers"",
+  ""name"": """",
+  ""orientation"": ""v"",
+  ""showlegend"": false,
+  ""x"": {
+    ""dtype"": ""f8"",
+    ""bdata"": ""AAAAAAAADEAAAAAAAAAIQJqZmZmZmQlAzczMzMzMCEDNzMzMzMwMQDMzMzMzMw9AMzMzMzMzC0AzMzMzMzMLQDMzMzMzMwdAzczMzMzMCECamZmZmZkNQDMzMzMzMwtAAAAAAAAACEAAAAAAAAAIQAAAAAAAABBAmpmZmZmZEUAzMzMzMzMPQAAAAAAAAAxAZmZmZmZmDkBmZmZmZmYOQDMzMzMzMwtAmpmZmZmZDUDNzMzMzMwMQGZmZmZmZgpAMzMzMzMzC0AAAAAAAAAIQDMzMzMzMwtAAAAAAAAADEAzMzMzMzMLQJqZmZmZmQlAzczMzMzMCEAzMzMzMzMLQGZmZmZmZhBAzczMzMzMEEDNzMzMzMwIQJqZmZmZmQlAAAAAAAAADEDNzMzMzMwIQAAAAAAAAAhAMzMzMzMzC0AAAAAAAAAMQGZmZmZmZgJAmpmZmZmZCUAAAAAAAAAMQGZmZmZmZg5AAAAAAAAACEBmZmZmZmYOQJqZmZmZmQlAmpmZmZmZDUBmZmZmZmYKQJqZmZmZmQlAmpmZmZmZCUDNzMzMzMwIQGZmZmZmZgJAZmZmZmZmBkBmZmZmZmYGQGZmZmZmZgpAMzMzMzMzA0AzMzMzMzMHQJqZmZmZmQVAAAAAAAAAAEAAAAAAAAAIQJqZmZmZmQFAMzMzMzMzB0AzMzMzMzMHQM3MzMzMzAhAAAAAAAAACECamZmZmZkFQJqZmZmZmQFAAAAAAAAABECamZmZmZkJQGZmZmZmZgZAAAAAAAAABEBmZmZmZmYGQDMzMzMzMwdAAAAAAAAACEBmZmZmZmYGQAAAAAAAAAhAMzMzMzMzB0DNzMzMzMwEQDMzMzMzMwNAMzMzMzMzA0CamZmZmZkFQJqZmZmZmQVAAAAAAAAACEAzMzMzMzMLQM3MzMzMzAhAZmZmZmZmAkAAAAAAAAAIQAAAAAAAAARAzczMzMzMBEAAAAAAAAAIQM3MzMzMzARAZmZmZmZmAkCamZmZmZkFQAAAAAAAAAhAMzMzMzMzB0AzMzMzMzMHQAAAAAAAAARAZmZmZmZmBkBmZmZmZmYKQJqZmZmZmQVAAAAAAAAACEAzMzMzMzMHQAAAAAAAAAhAAAAAAAAACEAAAAAAAAAEQDMzMzMzMwdAAAAAAAAABEDNzMzMzMwMQJqZmZmZmQlAmpmZmZmZBUAAAAAAAAAIQAAAAAAAAARAZmZmZmZmBkCamZmZmZkJQAAAAAAAAAhAZmZmZmZmDkDNzMzMzMwEQJqZmZmZmQFAmpmZmZmZCUBmZmZmZmYGQGZmZmZmZgZAmpmZmZmZBUBmZmZmZmYKQJqZmZmZmQlAZmZmZmZmBkAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEBmZmZmZmYGQGZmZmZmZg5AZmZmZmZmBkBmZmZmZmYGQM3MzMzMzARAAAAAAAAACEAzMzMzMzMLQM3MzMzMzAhAAAAAAAAACEDNzMzMzMwIQM3MzMzMzAhAzczMzMzMCECamZmZmZkFQJqZmZmZmQlAZmZmZmZmCkAAAAAAAAAIQAAAAAAAAARAAAAAAAAACEAzMzMzMzMLQAAAAAAAAAhA"",
+    ""_inputArray"": {
+      ""0"": 3.5,
+      ""1"": 3,
+      ""2"": 3.2,
+      ""3"": 3.1,
+      ""4"": 3.6,
+      ""5"": 3.9,
+      ""6"": 3.4,
+      ""7"": 3.4,
+      ""8"": 2.9,
+      ""9"": 3.1,
+      ""10"": 3.7,
+      ""11"": 3.4,
+      ""12"": 3,
+      ""13"": 3,
+      ""14"": 4,
+      ""15"": 4.4,
+      ""16"": 3.9,
+      ""17"": 3.5,
+      ""18"": 3.8,
+      ""19"": 3.8,
+      ""20"": 3.4,
+      ""21"": 3.7,
+      ""22"": 3.6,
+      ""23"": 3.3,
+      ""24"": 3.4,
+      ""25"": 3,
+      ""26"": 3.4,
+      ""27"": 3.5,
+      ""28"": 3.4,
+      ""29"": 3.2,
+      ""30"": 3.1,
+      ""31"": 3.4,
+      ""32"": 4.1,
+      ""33"": 4.2,
+      ""34"": 3.1,
+      ""35"": 3.2,
+      ""36"": 3.5,
+      ""37"": 3.1,
+      ""38"": 3,
+      ""39"": 3.4,
+      ""40"": 3.5,
+      ""41"": 2.3,
+      ""42"": 3.2,
+      ""43"": 3.5,
+      ""44"": 3.8,
+      ""45"": 3,
+      ""46"": 3.8,
+      ""47"": 3.2,
+      ""48"": 3.7,
+      ""49"": 3.3,
+      ""50"": 3.2,
+      ""51"": 3.2,
+      ""52"": 3.1,
+      ""53"": 2.3,
+      ""54"": 2.8,
+      ""55"": 2.8,
+      ""56"": 3.3,
+      ""57"": 2.4,
+      ""58"": 2.9,
+      ""59"": 2.7,
+      ""60"": 2,
+      ""61"": 3,
+      ""62"": 2.2,
+      ""63"": 2.9,
+      ""64"": 2.9,
+      ""65"": 3.1,
+      ""66"": 3,
+      ""67"": 2.7,
+      ""68"": 2.2,
+      ""69"": 2.5,
+      ""70"": 3.2,
+      ""71"": 2.8,
+      ""72"": 2.5,
+      ""73"": 2.8,
+      ""74"": 2.9,
+      ""75"": 3,
+      ""76"": 2.8,
+      ""77"": 3,
+      ""78"": 2.9,
+      ""79"": 2.6,
+      ""80"": 2.4,
+      ""81"": 2.4,
+      ""82"": 2.7,
+      ""83"": 2.7,
+      ""84"": 3,
+      ""85"": 3.4,
+      ""86"": 3.1,
+      ""87"": 2.3,
+      ""88"": 3,
+      ""89"": 2.5,
+      ""90"": 2.6,
+      ""91"": 3,
+      ""92"": 2.6,
+      ""93"": 2.3,
+      ""94"": 2.7,
+      ""95"": 3,
+      ""96"": 2.9,
+      ""97"": 2.9,
+      ""98"": 2.5,
+      ""99"": 2.8,
+      ""100"": 3.3,
+      ""101"": 2.7,
+      ""102"": 3,
+      ""103"": 2.9,
+      ""104"": 3,
+      ""105"": 3,
+      ""106"": 2.5,
+      ""107"": 2.9,
+      ""108"": 2.5,
+      ""109"": 3.6,
+      ""110"": 3.2,
+      ""111"": 2.7,
+      ""112"": 3,
+      ""113"": 2.5,
+      ""114"": 2.8,
+      ""115"": 3.2,
+      ""116"": 3,
+      ""117"": 3.8,
+      ""118"": 2.6,
+      ""119"": 2.2,
+      ""120"": 3.2,
+      ""121"": 2.8,
+      ""122"": 2.8,
+      ""123"": 2.7,
+      ""124"": 3.3,
+      ""125"": 3.2,
+      ""126"": 2.8,
+      ""127"": 3,
+      ""128"": 2.8,
+      ""129"": 3,
+      ""130"": 2.8,
+      ""131"": 3.8,
+      ""132"": 2.8,
+      ""133"": 2.8,
+      ""134"": 2.6,
+      ""135"": 3,
+      ""136"": 3.4,
+      ""137"": 3.1,
+      ""138"": 3,
+      ""139"": 3.1,
+      ""140"": 3.1,
+      ""141"": 3.1,
+      ""142"": 2.7,
+      ""143"": 3.2,
+      ""144"": 3.3,
+      ""145"": 3,
+      ""146"": 2.5,
+      ""147"": 3,
+      ""148"": 3.4,
+      ""149"": 3,
+      ""bdata"": ""AAAAAAAADEAAAAAAAAAIQJqZmZmZmQlAzczMzMzMCEDNzMzMzMwMQDMzMzMzMw9AMzMzMzMzC0AzMzMzMzMLQDMzMzMzMwdAzczMzMzMCECamZmZmZkNQDMzMzMzMwtAAAAAAAAACEAAAAAAAAAIQAAAAAAAABBAmpmZmZmZEUAzMzMzMzMPQAAAAAAAAAxAZmZmZmZmDkBmZmZmZmYOQDMzMzMzMwtAmpmZmZmZDUDNzMzMzMwMQGZmZmZmZgpAMzMzMzMzC0AAAAAAAAAIQDMzMzMzMwtAAAAAAAAADEAzMzMzMzMLQJqZmZmZmQlAzczMzMzMCEAzMzMzMzMLQGZmZmZmZhBAzczMzMzMEEDNzMzMzMwIQJqZmZmZmQlAAAAAAAAADEDNzMzMzMwIQAAAAAAAAAhAMzMzMzMzC0AAAAAAAAAMQGZmZmZmZgJAmpmZmZmZCUAAAAAAAAAMQGZmZmZmZg5AAAAAAAAACEBmZmZmZmYOQJqZmZmZmQlAmpmZmZmZDUBmZmZmZmYKQJqZmZmZmQlAmpmZmZmZCUDNzMzMzMwIQGZmZmZmZgJAZmZmZmZmBkBmZmZmZmYGQGZmZmZmZgpAMzMzMzMzA0AzMzMzMzMHQJqZmZmZmQVAAAAAAAAAAEAAAAAAAAAIQJqZmZmZmQFAMzMzMzMzB0AzMzMzMzMHQM3MzMzMzAhAAAAAAAAACECamZmZmZkFQJqZmZmZmQFAAAAAAAAABECamZmZmZkJQGZmZmZmZgZAAAAAAAAABEBmZmZmZmYGQDMzMzMzMwdAAAAAAAAACEBmZmZmZmYGQAAAAAAAAAhAMzMzMzMzB0DNzMzMzMwEQDMzMzMzMwNAMzMzMzMzA0CamZmZmZkFQJqZmZmZmQVAAAAAAAAACEAzMzMzMzMLQM3MzMzMzAhAZmZmZmZmAkAAAAAAAAAIQAAAAAAAAARAzczMzMzMBEAAAAAAAAAIQM3MzMzMzARAZmZmZmZmAkCamZmZmZkFQAAAAAAAAAhAMzMzMzMzB0AzMzMzMzMHQAAAAAAAAARAZmZmZmZmBkBmZmZmZmYKQJqZmZmZmQVAAAAAAAAACEAzMzMzMzMHQAAAAAAAAAhAAAAAAAAACEAAAAAAAAAEQDMzMzMzMwdAAAAAAAAABEDNzMzMzMwMQJqZmZmZmQlAmpmZmZmZBUAAAAAAAAAIQAAAAAAAAARAZmZmZmZmBkCamZmZmZkJQAAAAAAAAAhAZmZmZmZmDkDNzMzMzMwEQJqZmZmZmQFAmpmZmZmZCUBmZmZmZmYGQGZmZmZmZgZAmpmZmZmZBUBmZmZmZmYKQJqZmZmZmQlAZmZmZmZmBkAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEBmZmZmZmYGQGZmZmZmZg5AZmZmZmZmBkBmZmZmZmYGQM3MzMzMzARAAAAAAAAACEAzMzMzMzMLQM3MzMzMzAhAAAAAAAAACEDNzMzMzMwIQM3MzMzMzAhAzczMzMzMCECamZmZmZkFQJqZmZmZmQlAZmZmZmZmCkAAAAAAAAAIQAAAAAAAAARAAAAAAAAACEAzMzMzMzMLQAAAAAAAAAhA"",
+      ""dtype"": ""f8"",
+      ""shape"": ""150""
+    }
+  },
+  ""xaxis"": ""x"",
+  ""y"": {
+    ""dtype"": ""f8"",
+    ""bdata"": ""ZmZmZmZmFECamZmZmZkTQM3MzMzMzBJAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRVAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRFAmpmZmZmZE0CamZmZmZkVQDMzMzMzMxNAMzMzMzMzE0AzMzMzMzMRQDMzMzMzMxdAzczMzMzMFkCamZmZmZkVQGZmZmZmZhRAzczMzMzMFkBmZmZmZmYUQJqZmZmZmRVAZmZmZmZmFEBmZmZmZmYSQGZmZmZmZhRAMzMzMzMzE0AAAAAAAAAUQAAAAAAAABRAzczMzMzMFEDNzMzMzMwUQM3MzMzMzBJAMzMzMzMzE0CamZmZmZkVQM3MzMzMzBRAAAAAAAAAFkCamZmZmZkTQAAAAAAAABRAAAAAAAAAFkCamZmZmZkTQJqZmZmZmRFAZmZmZmZmFEAAAAAAAAAUQAAAAAAAABJAmpmZmZmZEUAAAAAAAAAUQGZmZmZmZhRAMzMzMzMzE0BmZmZmZmYUQGZmZmZmZhJAMzMzMzMzFUAAAAAAAAAUQAAAAAAAABxAmpmZmZmZGUCamZmZmZkbQAAAAAAAABZAAAAAAAAAGkDNzMzMzMwWQDMzMzMzMxlAmpmZmZmZE0BmZmZmZmYaQM3MzMzMzBRAAAAAAAAAFECamZmZmZkXQAAAAAAAABhAZmZmZmZmGEBmZmZmZmYWQM3MzMzMzBpAZmZmZmZmFkAzMzMzMzMXQM3MzMzMzBhAZmZmZmZmFkCamZmZmZkXQGZmZmZmZhhAMzMzMzMzGUBmZmZmZmYYQJqZmZmZmRlAZmZmZmZmGkAzMzMzMzMbQM3MzMzMzBpAAAAAAAAAGEDNzMzMzMwWQAAAAAAAABZAAAAAAAAAFkAzMzMzMzMXQAAAAAAAABhAmpmZmZmZFUAAAAAAAAAYQM3MzMzMzBpAMzMzMzMzGUBmZmZmZmYWQAAAAAAAABZAAAAAAAAAFkBmZmZmZmYYQDMzMzMzMxdAAAAAAAAAFEBmZmZmZmYWQM3MzMzMzBZAzczMzMzMFkDNzMzMzMwYQGZmZmZmZhRAzczMzMzMFkAzMzMzMzMZQDMzMzMzMxdAZmZmZmZmHEAzMzMzMzMZQAAAAAAAABpAZmZmZmZmHkCamZmZmZkTQDMzMzMzMx1AzczMzMzMGkDNzMzMzMwcQAAAAAAAABpAmpmZmZmZGUAzMzMzMzMbQM3MzMzMzBZAMzMzMzMzF0CamZmZmZkZQAAAAAAAABpAzczMzMzMHkDNzMzMzMweQAAAAAAAABhAmpmZmZmZG0BmZmZmZmYWQM3MzMzMzB5AMzMzMzMzGUDNzMzMzMwaQM3MzMzMzBxAzczMzMzMGEBmZmZmZmYYQJqZmZmZmRlAzczMzMzMHECamZmZmZkdQJqZmZmZmR9AmpmZmZmZGUAzMzMzMzMZQGZmZmZmZhhAzczMzMzMHkAzMzMzMzMZQJqZmZmZmRlAAAAAAAAAGECamZmZmZkbQM3MzMzMzBpAmpmZmZmZG0AzMzMzMzMXQDMzMzMzMxtAzczMzMzMGkDNzMzMzMwaQDMzMzMzMxlAAAAAAAAAGkDNzMzMzMwYQJqZmZmZmRdA"",
+    ""_inputArray"": {
+      ""0"": 5.1,
+      ""1"": 4.9,
+      ""2"": 4.7,
+      ""3"": 4.6,
+      ""4"": 5,
+      ""5"": 5.4,
+      ""6"": 4.6,
+      ""7"": 5,
+      ""8"": 4.4,
+      ""9"": 4.9,
+      ""10"": 5.4,
+      ""11"": 4.8,
+      ""12"": 4.8,
+      ""13"": 4.3,
+      ""14"": 5.8,
+      ""15"": 5.7,
+      ""16"": 5.4,
+      ""17"": 5.1,
+      ""18"": 5.7,
+      ""19"": 5.1,
+      ""20"": 5.4,
+      ""21"": 5.1,
+      ""22"": 4.6,
+      ""23"": 5.1,
+      ""24"": 4.8,
+      ""25"": 5,
+      ""26"": 5,
+      ""27"": 5.2,
+      ""28"": 5.2,
+      ""29"": 4.7,
+      ""30"": 4.8,
+      ""31"": 5.4,
+      ""32"": 5.2,
+      ""33"": 5.5,
+      ""34"": 4.9,
+      ""35"": 5,
+      ""36"": 5.5,
+      ""37"": 4.9,
+      ""38"": 4.4,
+      ""39"": 5.1,
+      ""40"": 5,
+      ""41"": 4.5,
+      ""42"": 4.4,
+      ""43"": 5,
+      ""44"": 5.1,
+      ""45"": 4.8,
+      ""46"": 5.1,
+      ""47"": 4.6,
+      ""48"": 5.3,
+      ""49"": 5,
+      ""50"": 7,
+      ""51"": 6.4,
+      ""52"": 6.9,
+      ""53"": 5.5,
+      ""54"": 6.5,
+      ""55"": 5.7,
+      ""56"": 6.3,
+      ""57"": 4.9,
+      ""58"": 6.6,
+      ""59"": 5.2,
+      ""60"": 5,
+      ""61"": 5.9,
+      ""62"": 6,
+      ""63"": 6.1,
+      ""64"": 5.6,
+      ""65"": 6.7,
+      ""66"": 5.6,
+      ""67"": 5.8,
+      ""68"": 6.2,
+      ""69"": 5.6,
+      ""70"": 5.9,
+      ""71"": 6.1,
+      ""72"": 6.3,
+      ""73"": 6.1,
+      ""74"": 6.4,
+      ""75"": 6.6,
+      ""76"": 6.8,
+      ""77"": 6.7,
+      ""78"": 6,
+      ""79"": 5.7,
+      ""80"": 5.5,
+      ""81"": 5.5,
+      ""82"": 5.8,
+      ""83"": 6,
+      ""84"": 5.4,
+      ""85"": 6,
+      ""86"": 6.7,
+      ""87"": 6.3,
+      ""88"": 5.6,
+      ""89"": 5.5,
+      ""90"": 5.5,
+      ""91"": 6.1,
+      ""92"": 5.8,
+      ""93"": 5,
+      ""94"": 5.6,
+      ""95"": 5.7,
+      ""96"": 5.7,
+      ""97"": 6.2,
+      ""98"": 5.1,
+      ""99"": 5.7,
+      ""100"": 6.3,
+      ""101"": 5.8,
+      ""102"": 7.1,
+      ""103"": 6.3,
+      ""104"": 6.5,
+      ""105"": 7.6,
+      ""106"": 4.9,
+      ""107"": 7.3,
+      ""108"": 6.7,
+      ""109"": 7.2,
+      ""110"": 6.5,
+      ""111"": 6.4,
+      ""112"": 6.8,
+      ""113"": 5.7,
+      ""114"": 5.8,
+      ""115"": 6.4,
+      ""116"": 6.5,
+      ""117"": 7.7,
+      ""118"": 7.7,
+      ""119"": 6,
+      ""120"": 6.9,
+      ""121"": 5.6,
+      ""122"": 7.7,
+      ""123"": 6.3,
+      ""124"": 6.7,
+      ""125"": 7.2,
+      ""126"": 6.2,
+      ""127"": 6.1,
+      ""128"": 6.4,
+      ""129"": 7.2,
+      ""130"": 7.4,
+      ""131"": 7.9,
+      ""132"": 6.4,
+      ""133"": 6.3,
+      ""134"": 6.1,
+      ""135"": 7.7,
+      ""136"": 6.3,
+      ""137"": 6.4,
+      ""138"": 6,
+      ""139"": 6.9,
+      ""140"": 6.7,
+      ""141"": 6.9,
+      ""142"": 5.8,
+      ""143"": 6.8,
+      ""144"": 6.7,
+      ""145"": 6.7,
+      ""146"": 6.3,
+      ""147"": 6.5,
+      ""148"": 6.2,
+      ""149"": 5.9,
+      ""bdata"": ""ZmZmZmZmFECamZmZmZkTQM3MzMzMzBJAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRVAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRFAmpmZmZmZE0CamZmZmZkVQDMzMzMzMxNAMzMzMzMzE0AzMzMzMzMRQDMzMzMzMxdAzczMzMzMFkCamZmZmZkVQGZmZmZmZhRAzczMzMzMFkBmZmZmZmYUQJqZmZmZmRVAZmZmZmZmFEBmZmZmZmYSQGZmZmZmZhRAMzMzMzMzE0AAAAAAAAAUQAAAAAAAABRAzczMzMzMFEDNzMzMzMwUQM3MzMzMzBJAMzMzMzMzE0CamZmZmZkVQM3MzMzMzBRAAAAAAAAAFkCamZmZmZkTQAAAAAAAABRAAAAAAAAAFkCamZmZmZkTQJqZmZmZmRFAZmZmZmZmFEAAAAAAAAAUQAAAAAAAABJAmpmZmZmZEUAAAAAAAAAUQGZmZmZmZhRAMzMzMzMzE0BmZmZmZmYUQGZmZmZmZhJAMzMzMzMzFUAAAAAAAAAUQAAAAAAAABxAmpmZmZmZGUCamZmZmZkbQAAAAAAAABZAAAAAAAAAGkDNzMzMzMwWQDMzMzMzMxlAmpmZmZmZE0BmZmZmZmYaQM3MzMzMzBRAAAAAAAAAFECamZmZmZkXQAAAAAAAABhAZmZmZmZmGEBmZmZmZmYWQM3MzMzMzBpAZmZmZmZmFkAzMzMzMzMXQM3MzMzMzBhAZmZmZmZmFkCamZmZmZkXQGZmZmZmZhhAMzMzMzMzGUBmZmZmZmYYQJqZmZmZmRlAZmZmZmZmGkAzMzMzMzMbQM3MzMzMzBpAAAAAAAAAGEDNzMzMzMwWQAAAAAAAABZAAAAAAAAAFkAzMzMzMzMXQAAAAAAAABhAmpmZmZmZFUAAAAAAAAAYQM3MzMzMzBpAMzMzMzMzGUBmZmZmZmYWQAAAAAAAABZAAAAAAAAAFkBmZmZmZmYYQDMzMzMzMxdAAAAAAAAAFEBmZmZmZmYWQM3MzMzMzBZAzczMzMzMFkDNzMzMzMwYQGZmZmZmZhRAzczMzMzMFkAzMzMzMzMZQDMzMzMzMxdAZmZmZmZmHEAzMzMzMzMZQAAAAAAAABpAZmZmZmZmHkCamZmZmZkTQDMzMzMzMx1AzczMzMzMGkDNzMzMzMwcQAAAAAAAABpAmpmZmZmZGUAzMzMzMzMbQM3MzMzMzBZAMzMzMzMzF0CamZmZmZkZQAAAAAAAABpAzczMzMzMHkDNzMzMzMweQAAAAAAAABhAmpmZmZmZG0BmZmZmZmYWQM3MzMzMzB5AMzMzMzMzGUDNzMzMzMwaQM3MzMzMzBxAzczMzMzMGEBmZmZmZmYYQJqZmZmZmRlAzczMzMzMHECamZmZmZkdQJqZmZmZmR9AmpmZmZmZGUAzMzMzMzMZQGZmZmZmZhhAzczMzMzMHkAzMzMzMzMZQJqZmZmZmRlAAAAAAAAAGECamZmZmZkbQM3MzMzMzBpAmpmZmZmZG0AzMzMzMzMXQDMzMzMzMxtAzczMzMzMGkDNzMzMzMwaQDMzMzMzMxlAAAAAAAAAGkDNzMzMzMwYQJqZmZmZmRdA"",
+      ""dtype"": ""f8"",
+      ""shape"": ""150""
+    }
+  },
+  ""yaxis"": ""y"",
+  ""type"": ""scatter""
+}
+```
+
+so the data *is* there but it's now quite difficult to get at.
+
+For comparison, running dash 2.17.0, plotly 5.22.0 gives the required behaviour. Is this something that was changed in plotly v6? Is there now an easy way to access the data in a callback?
+",bionictoucan,33138337,open,False,3,2025-04-03T13:45:46+00:00,2025-04-08T14:19:14+00:00,,bug;P2,1,1,0,0,0,0,0
+plotly/dash,2966678569,3257,Add missing changelog entry,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",LiamConnors,12749831,closed,False,0,2025-04-02T15:00:10+00:00,2025-04-03T13:07:04+00:00,2025-04-03T13:07:00+00:00,,0,0,0,0,0,0,0
+plotly/dash,2964408381,3256,Master 3.0.2,,T4rk1n,9417722,closed,False,0,2025-04-01T19:36:24+00:00,2025-04-01T19:37:35+00:00,2025-04-01T19:37:35+00:00,,0,0,0,0,0,0,0
+plotly/dash,2964312439,3255,Version 3.0.2,,T4rk1n,9417722,closed,False,0,2025-04-01T18:54:01+00:00,2025-04-01T19:00:47+00:00,2025-04-01T19:00:39+00:00,,0,0,0,0,0,0,0
+plotly/dash,2963574261,3254,feat: adding more type annotations,This PR will address #3226. Using `pyright --pythonversion 3.9 ./dash` to check.,gvwilson,911566,closed,False,1,2025-04-01T14:06:46+00:00,2025-04-16T00:27:58+00:00,2025-04-14T12:43:04+00:00,P1;fix,0,0,0,0,0,0,0
+plotly/dash,2963527844,3253,tests failing with Dash 3.0.1,"After checking out a fresh copy of the repo and running build steps, 26 tests report failures:
+
+```
+tests/integration/background_callback/test_basic_long_callback010.py::test_lcbc010_side_updates[diskcache] <- ../plotly/dash/tests/integration/background_callback/test_basic_long_callback010.py FAILED [  1%]
+tests/integration/callbacks/test_callback_context.py::test_cbcx005_grouped_clicks <- ../plotly/dash/tests/integration/callbacks/test_callback_context.py FAILED [  7%]
+tests/integration/devtools/test_callback_validation.py::test_dvcv013_circular_3_step <- ../plotly/dash/tests/integration/devtools/test_callback_validation.py FAILED [ 24%]
+tests/integration/test_patch.py::test_pch001_patch_operations <- ../plotly/dash/tests/integration/test_patch.py FAILED [ 44%]
+tests/integration/test_typing.py::test_component_typing[a_string=4-assertions0] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 45%]
+tests/integration/test_typing.py::test_component_typing[a_string='FooBar'-assertions1] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 45%]
+tests/integration/test_typing.py::test_component_typing[a_number=''-assertions2] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 45%]
+tests/integration/test_typing.py::test_component_typing[a_number=0-assertions3] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[a_number=2.2-assertions4] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[a_bool=True-assertions6] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[array_string={}-assertions7] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[array_string=[]-assertions8] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[array_number=[1,2]-assertions10] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 46%]
+tests/integration/test_typing.py::test_component_typing[array_obj=[{'a': 'b'}]-assertions12] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 47%]
+tests/integration/test_typing.py::test_component_typing[union='Union'-assertions15] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 47%]
+tests/integration/test_typing.py::test_component_typing[union=1-assertions16] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 47%]
+tests/integration/test_typing.py::test_component_typing[union=0.42-assertions17] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 47%]
+tests/integration/test_typing.py::test_component_typing[element=[]-assertions19] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 48%]
+tests/integration/test_typing.py::test_component_typing[element=[TypeScriptComponent()]-assertions20] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 48%]
+tests/integration/test_typing.py::test_component_typing[element=TypeScriptComponent()-assertions21] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 48%]
+tests/integration/test_typing.py::test_component_typing[a_tuple=(1,2)-assertions23] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 48%]
+tests/integration/test_typing.py::test_component_typing[a_tuple=(1, 'tuple')-assertions24] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 48%]
+tests/integration/test_typing.py::test_component_typing[obj={}-assertions26] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 49%]
+tests/integration/test_typing.py::test_component_typing[obj={'value': 'a', 'label': 1}-assertions27] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 49%]
+tests/integration/test_typing.py::test_component_typing[obj={'value': 'a', 'label': 'lab'}-assertions28] <- ../plotly/dash/tests/integration/test_typing.py FAILED [ 49%]
+tests/unit/test_browser.py::test_browser_smoke[Firefox] <- ../plotly/dash/tests/unit/test_browser.py FAILED [ 83%]
+```",gvwilson,911566,closed,False,0,2025-04-01T13:52:26+00:00,2025-04-23T20:32:49+00:00,2025-04-23T20:32:49+00:00,bug;testing;P1,0,0,0,0,0,0,0
+plotly/dash,2960937876,3252,[BUG] Dash 3 dcc.Tab cannot be updated in a callback,"It looks like the component is not being re-rendered when a prop in the dcc.Tab component is updated in a callback.
+
+
+As reported on the [forum](https://community.plotly.com/t/dynamically-changing-disable-state-of-dbc-tab/91527) This app works in dash 2.18.2 but not in dash 3.0.1
+
+```python
+import dash
+from dash import dcc, html, Input, Output
+
+app = dash.Dash()
+
+app.layout = html.Div(
+    [
+        html.Button(""Enable Tabs"", id=""button"", n_clicks=0),
+        dcc.Store(id=""store-data"", data=None),
+        dcc.Tabs(
+            [
+                dcc.Tab(label=""Tab A"", value=""tab-a"", id=""tab-a"", disabled=True),
+                dcc.Tab(label=""Tab B"", value=""tab-b"", id=""tab-b"", disabled=True),
+            ],
+            id=""tabs"",
+            value=""tab-a"",
+        ),
+    ]
+)
+
+
+@app.callback(Output(""store-data"", ""data""), Input(""button"", ""n_clicks""))
+def update_store_data(clicks):
+    if clicks > 0:
+        return {""data"": ""available""}
+    return None
+
+
+@app.callback(
+    Output(""tab-a"", ""disabled""), Output(""tab-b"", ""disabled""),
+    Input(""store-data"", ""data""),
+)
+def toggle_tabs(store_data):    
+    if store_data is not None and ""data"" in store_data:       
+        return False, False
+    return True, True
+
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+
+
+
+```",AnnMarieW,72614349,closed,False,1,2025-03-31T16:08:51+00:00,2025-04-11T13:59:52+00:00,2025-04-11T13:59:52+00:00,regression,0,0,0,0,0,0,0
+plotly/dash,2953849351,3251,fix upload style,Closes #3246 ,AnnMarieW,72614349,closed,False,0,2025-03-27T17:17:58+00:00,2025-03-27T20:28:06+00:00,2025-03-27T20:06:47+00:00,,0,0,0,0,0,0,0
+plotly/dash,2953271782,3250,[BUG] issues with dropdown persistence in dash 3.0,"**Describe your context**
+I have recently updated my dash app to dash 3.0 and noticed the persistence on my dropdowns was gone. 
+
+I have a virtual environment (python 3.10) with dash 3.
+```
+dash                      3.0.1
+dash_ag_grid              31.3.1
+dash-bootstrap-components 2.0.0
+dash-chart-editor         0.0.1a5
+dash-core-components      2.0.0
+dash-defer-js-import      0.0.2
+dash-extensions           1.0.20
+dash-html-components      2.0.0
+dash_mantine_components   1.1.0
+dash-table                5.0.0
+dash_uploader             0.7.0a2
+
+```
+I also have an older environment (python 3.11) with an older version of dash:
+```
+dash                      2.14.1
+dash-ag-grid              2.4.0
+dash-bootstrap-components 1.5.0
+dash-core-components      2.0.0
+dash-defer-js-import      0.0.2
+dash-extensions           1.0.4
+dash-html-components      2.0.0
+dash-mantine-components   0.12.1
+dash-table                5.0.0
+dash-uploader             0.6.0        
+```
+
+**Describe the bug**
+Initially I figured it had to do with the way I had my callbacks setup (we have many and quite complicated ones) so I grabbed the example from the site and ran it standalone:
+
+``` python
+from dash import Dash, dcc, html, Input, Output, callback
+
+CITIES = ['Boston', 'London', 'Montreal']
+NEIGHBORHOODS = {
+    'Boston': ['Back Bay', 'Fenway', 'Jamaica Plain'],
+    'London': ['Canary Wharf', 'Hackney', 'Kensington'],
+    'Montreal': ['Le Plateau', 'Mile End', 'Rosemont']
+}
+
+app = Dash()
+
+app.layout = html.Div([
+    'Choose a city:',
+    dcc.Dropdown(CITIES, 'Montreal', id='persisted-city', persistence=True),
+    html.Br(),
+
+    'correlated persistence - choose a neighborhood:',
+    html.Div(dcc.Dropdown(id='neighborhood'), id='neighborhood-container'),
+    html.Br(),
+    html.Div(id='persisted-choices')
+])
+
+
+@callback(
+    Output('neighborhood-container', 'children'),
+    Input('persisted-city', 'value')
+)
+def set_neighborhood(city):
+    neighborhoods = NEIGHBORHOODS[city]
+    return dcc.Dropdown(neighborhoods, neighborhoods[0], id='neighborhood',
+        persistence_type='session',
+        persistence=city
+    )
+
+
+@callback(
+    Output('persisted-choices', 'children'),
+    Input('persisted-city', 'value'), Input('neighborhood', 'value')
+)
+def set_out(city, neighborhood):
+    return f'You chose: {neighborhood}, {city}'
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8080, host=""0.0.0.0"")
+```
+and persistence didn't hold.
+I then tested it with the old venv (dash 2) and there it does work. Even more peculiar, if I then switch to the new venv again (dash 3), it remembers the persistent values from what I changed with dash 2. But it will not remember anything I change with dash 3.
+
+**Expected behavior**
+
+I expected to have persitsence work as it is explained in the tutorial on the website for both dash 2 and dash 3
+
+",revmlx,148321134,closed,False,2,2025-03-27T14:44:35+00:00,2025-04-15T12:49:45+00:00,2025-04-15T12:49:44+00:00,regression;bug;P1,0,0,0,0,0,0,0
+plotly/dash,2950218183,3249,Move the dash.layout.setter so that type checkers can find it easier,"This rearranges two methods of the Dash class.
+Specifically you now have `@property def layout // @layout.setter def layout // def _layout_value` instead of `@property def layout // def _layout_value // @layout.setter def layout`.
+The point is to make it easier for type checkers (such as mypy) to connect the `@property layout` with the `layout.setter`, so that people who use this library with a type checker need fewer `#type: ignore` statements.
+This is a very minimal change, and I don't see how it could break anything, or make anything worse. I don't think a note in the changelog is necessary.
+
+## Contributor Checklist
+
+- [x] I have broken down my PR scope into the following TODO tasks
+   -  [x] change order of methods
+   -  [x] confirm mypy is happy
+   -  [ ] run tests
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",peter-gerlagh-kyos,193233766,closed,False,2,2025-03-26T16:39:11+00:00,2025-03-27T13:38:53+00:00,2025-03-27T13:38:53+00:00,,0,0,0,0,0,0,0
+plotly/dash,2949607853,3248,Adjusting memoization on the `DashWrapper` to be utilized,"This is a PR to test the adjustment of memoization on the `DashWrapper`
+
+you can see info here: https://github.com/plotly/dash/issues/3243
+",BSd3v,82055130,closed,False,4,2025-03-26T13:25:29+00:00,2025-04-01T17:49:24+00:00,2025-04-01T17:49:24+00:00,P1;fix;community,0,0,0,0,0,0,0
+plotly/dash,2948713233,3247,[BUG]compability issue with dash_ag_grid 31.3.1 on two or more filter when the aggrid element in multipage,"```
+dash                 3.0.1
+dash_ag_grid   31.3.1
+dash_lab          1.2.0
+```
+
+when i use `dash_ag_grid 31.3.1` on `multipage (dash_labs )` with `dash v2.18.2` , i still can use the fiture filter `and` / `or`
+
+but after i bump to `dash v3.0.1` , the filter `and` / `or` become unclickable
+
+i notice this when i try to debug install one by one the library version
+
+*note the two or more filter fitur is useable on app.layout at dash 3.0.1 but not clickable on multipage",kyoshizzz,64761311,closed,False,2,2025-03-26T08:02:55+00:00,2025-03-28T03:48:06+00:00,2025-03-28T03:44:20+00:00,,0,0,0,0,0,0,0
+plotly/dash,2947905787,3246,[BUG] Upload component styling using HTML classes,"As far as I can tell, the `className_*` properties in the upload component don't seem to have any effect (I'm using Dash 3.0.1 on Windows with Edge Version 134.0.3124.83).  
+With the following app and CSS file, the upload component is colored yellow but does not change color when I drag files onto it (be it one file for the active case or multiple files for the rejected case):
+
+```python
+from dash import Dash, dcc
+
+app = Dash()
+app.layout = dcc.Upload(
+    ""Upload"",
+    className=""upload"",
+    className_active=""upload-active"",
+    className_reject=""upload-reject"",
+)
+app.run(debug=True)
+```
+
+```css
+.upload { background: yellow; }
+.upload-active { background: green; }
+.upload-reject { background: red; }
+```
+
+If I use the `style_*` properties, everything works fine:
+
+```python
+from dash import Dash, dcc
+
+app = Dash()
+app.layout = dcc.Upload(
+    ""Upload"",
+    style={""background"": ""yellow""},
+    style_active={""background"": ""green""},
+    style_reject={""background"": ""red""},
+)
+app.run(debug=True)
+```",jburtscher,4416893,closed,False,4,2025-03-25T22:20:11+00:00,2025-03-27T21:53:40+00:00,2025-03-27T20:06:48+00:00,,0,0,0,0,0,0,0
+plotly/dash,2946875739,3245,Performance regression in dash 3.0,"**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+-  replace the result of `pip list | grep dash` below
+New env
+```
+dash                                     3.0.0
+dash_ag_grid                             31.3.1
+dash_auth                                2.3.0
+dash-bootstrap-components                2.0.0
+dash-bootstrap-templates                 2.1.0
+dash-pivottable                          0.0.2
+```
+Old env
+```
+dash                                     2.18.2
+dash_ag_grid                             31.2.0
+dash_auth                                2.3.0
+dash-bootstrap-components                1.7.1
+dash-bootstrap-templates                 1.3.0
+dash-core-components                     2.0.0
+dash-html-components                     2.0.0
+dash-pivottable                          0.0.2
+dash-table                               5.0.0
+
+```
+-  if frontend related, tell us your Browser, Version and OS
+
+    - OS: iOS
+    - Browser: Chrome
+    - Version : 134.0.6998.118
+
+**Describe the bug**
+
+Page that used to work without any issues is now extremely laggy.
+
+**Expected behavior**
+
+No performance decrease in the new version.
+
+
+I tried profiling it in react dev tools, but I do not really have a good idea what I am looking at. ",tlauli,38265141,closed,False,11,2025-03-25T15:09:28+00:00,2025-04-15T12:57:30+00:00,2025-04-15T12:57:29+00:00,regression;performance;bug;P1,3,3,0,0,0,0,0
+plotly/dash,2946794336,3244,Master 3.0.1,,T4rk1n,9417722,closed,False,0,2025-03-25T14:45:55+00:00,2025-03-25T15:06:00+00:00,2025-03-25T15:05:54+00:00,,0,0,0,0,0,0,0
+plotly/dash,2946572295,3243,Prop tests in Debug=True slow when manipulating lots of children,"Good day,
+
+You can find a discussion here for some examples: https://github.com/RenaudLN/dash-pydantic-form/issues/86
+
+Anyways, if you run the below example with:
+```
+dash>=3.0.0
+dash-mantine-component==1.1.0
+```
+
+```
+
+import dash_mantine_components as dmc
+from dash import Output, Input, html, callback, Dash, ctx, _dash_renderer
+from dash.exceptions import PreventUpdate
+from dash_iconify import DashIconify
+
+# this is optional when using dash >3.0.0
+_dash_renderer._set_react_version(""18.2.0"")
+
+app = Dash(__name__, external_stylesheets=dmc.styles.ALL)
+
+app.layout = dmc.MantineProvider(
+    [
+        dmc.Accordion(
+            [dmc.AccordionItem([
+                dmc.AccordionControl(f'{x}'),
+                dmc.AccordionPanel([
+                    html.Div([dmc.Anchor(f'{y}', href=f'{y}'), dmc.Text(), dmc.TextInput()]) for y in range(100)
+                ])
+            ], value =f'{x}') for x in range(10)]
+        )
+    ]
+)
+
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+```
+
+If you keep as is, it takes a good amount of time to render an update to the accordion. If, however, you disable debug mode, the results are what we would expect less than half a second to open.
+
+This seems to be related to the check props while in debug mode. This needs to be more efficient, or possibly even controlled by the app configuration.
+",BSd3v,82055130,closed,False,2,2025-03-25T13:35:53+00:00,2025-04-01T17:49:25+00:00,2025-04-01T17:49:25+00:00,regression;performance;bug;P1,0,0,0,0,0,0,0
+plotly/dash,2946543574,3242,Fix ignored props from test package getting in the way of html build,"The `dash_prop_typing` file from the test package `@plotly/dash-generator-test-component` somehow was getting in the html build and overriding the default value.
+",T4rk1n,9417722,closed,False,0,2025-03-25T13:26:44+00:00,2025-03-25T13:55:51+00:00,2025-03-25T13:54:50+00:00,,0,0,0,0,0,0,0
+plotly/dash,2944617776,3241,Add collapse button to devtools,"## User facing changes
+* Adds a collapse / expand button that uses local storage for collapse state. It has the same little rotating animation as the old dev tools!
+![devtools-collapse](https://github.com/user-attachments/assets/b04c46ee-6a11-4495-944a-aa4056918f05)
+
+## Code changes
+* Changes the `DebugMenu` from a class component to functional component (it made using state easier and we're trying to move components to that anyway). ",marthacryan,6673460,closed,False,5,2025-03-24T22:24:49+00:00,2025-03-26T20:14:56+00:00,2025-03-26T20:14:53+00:00,,0,0,0,0,0,0,0
+plotly/dash,2944417253,3240,Version 3.0.1,,T4rk1n,9417722,closed,False,0,2025-03-24T20:43:10+00:00,2025-03-24T21:03:52+00:00,2025-03-24T21:03:46+00:00,,0,0,0,0,0,0,0
+plotly/dash,2943835859,3239,Remove stringcase,"Fix #3238 
+",T4rk1n,9417722,closed,False,0,2025-03-24T16:38:06+00:00,2025-03-24T20:03:43+00:00,2025-03-24T20:03:24+00:00,,7,3,0,0,0,0,0
+plotly/dash,2943756225,3238,The stringcase package can no longer be installed with setuptools version >=78.,"              The [https://pypi.org/project/stringcase/](stringcase) package, that is hard dependacy of Dash since this PR can no longer be installed using setuptools >=78, because of the following PR [https://github.com/pypa/setuptools/pull/4870](#4870). As a result, Dash can no longer be installed with setuptools version >=78.
+
+_Originally posted by @ivan-mingolov-blue-technologies in https://github.com/plotly/dash/issues/3220#issuecomment-2748637195_
+            ",T4rk1n,9417722,closed,False,3,2025-03-24T16:07:40+00:00,2025-03-24T20:03:26+00:00,2025-03-24T20:03:26+00:00,bug;P1,8,6,0,0,0,0,2
+plotly/dash,2943189001,3237,admin: removing Alex Johnson from code owners,"At Alex's request, removing him from code owners so that he gets fewer notifications.",gvwilson,911566,closed,False,0,2025-03-24T12:59:30+00:00,2025-03-24T13:31:07+00:00,2025-03-24T13:31:00+00:00,infrastructure,0,0,0,0,0,0,0
+plotly/dash,2943096627,3236,Dash 3 not properly rendering initially hidden plotly figures,"**Describe the bug**
+
+If more than 1 plots are created into a `Div` (which is initially hidden) and subsequently updated and shown, then the width of some of the plots is not correctly set. If using `responsive=True`, resizing the browser window fixes the behaviour. This appeared in Dash 3 and it was not present in Dash 2.
+
+Consider the following MWE
+
+<details>
+
+```python
+import dash
+from dash import dcc, html, Input, Output
+import plotly.graph_objects as go
+
+app = dash.Dash(__name__)
+
+app.layout = html.Div(
+    [
+        html.Button(""Generate Figures"", id=""generate-btn"", n_clicks=0),
+        html.Div(
+            id=""graph-container"",
+            children=[
+                dcc.Graph(
+                    id=""prec-climate-daily"",
+                    style={""height"": ""45vh""},
+                    config={""responsive"": True}
+                ),
+                dcc.Graph(
+                    id=""temp-climate-daily"",
+                    style={""height"": ""45vh""},
+                    config={""responsive"": True}
+                ),
+            ],
+            style={""display"": ""none""}
+        ),
+    ]
+)
+
+@app.callback(
+    [
+        Output(""prec-climate-daily"", ""figure""),
+        Output(""temp-climate-daily"", ""figure""),
+        Output(""graph-container"", ""style""),
+    ],
+    [Input(""generate-btn"", ""n_clicks"")],
+    prevent_initial_call=True,
+)
+def update_figures(n_clicks):
+    fig_acc = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[0, 1, 0], mode=""lines"")])
+    fig_daily = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[1, 0, 1], mode=""lines"")])
+    return fig_acc, fig_daily, {""display"": ""block""}
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+```
+
+</details>
+
+When running you'll notice that one of the figures is created with default width and height values instead of filling the whole container.
+
+![Image](https://github.com/user-attachments/assets/dd75cf14-f933-4076-bf8e-e75990492e24)
+
+There are different workarounds (which however are not compatible with different logics).
+
+1) create `Graph` components directly in the callback (but this means they're not available in the initial app layout and thus not exposed to other callbacks)
+
+<details>
+
+```python
+import dash
+from dash import dcc, html, Input, Output
+import plotly.graph_objects as go
+
+app = dash.Dash(__name__)
+
+app.layout = html.Div(
+    [
+        html.Button(""Generate Figures"", id=""generate-btn"", n_clicks=0),
+        html.Div(
+            id=""graph-container"",
+            children=[],  # Initially empty
+            style={""display"": ""none""}  # Initially hidden
+        ),
+    ]
+)
+
+@app.callback(
+    [
+        Output(""graph-container"", ""children""),
+        Output(""graph-container"", ""style""),
+    ],
+    [Input(""generate-btn"", ""n_clicks"")],
+    prevent_initial_call=True,
+)
+def update_figures(n_clicks):
+    fig_acc = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[0, 1, 0], mode=""lines"")])
+    fig_daily = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[1, 0, 1], mode=""lines"")])
+    children = [
+        dcc.Graph(
+             id=""prec-climate-daily"",
+            style={""height"": ""45vh""},
+            config={""responsive"": True},
+            figure=fig_acc
+        ),
+        dcc.Graph(
+             id=""temp-climate-daily"",
+            style={""height"": ""45vh""},
+            config={""responsive"": True},
+            figure=fig_daily
+        ),
+    ]
+    return children, {""display"": ""block""}
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+```
+
+</details>
+
+![Image](https://github.com/user-attachments/assets/f3c260ae-efae-46bd-9f96-b69c01b2a2d6)
+
+2) Removing the `hidden` property, thus showing empty plots on app startup
+3) Reverting back to Dash 2.* where this issue is not present
+4) Only having 1 plot into the app (I tried to make 1 `Div` per plot with different callbacks but this still trigger the issue...) 
+
+I don't have any error nor warning in the console so I'm kind of confused on what is triggering this issue in Dash 3 ",guidocioni,12760310,closed,False,4,2025-03-24T12:28:36+00:00,2025-04-15T12:50:06+00:00,2025-04-15T12:50:05+00:00,regression;bug;P1,1,0,0,0,0,0,0
+plotly/dash,2942785649,3235,"[BUG] Dash 3 and Collapsible component, plots do not inherit parent width","**Context**
+
+```
+dash                      3.0.0
+dash-bootstrap-components 2.0.0
+```
+
+**Describe the bug**
+I'm using a `Collapse` component from `dash-bootstrap-components` to show some plots after the user presses a button. When having multiple plots inside the same `Collapse` some of them (sometimes all of them) do not inherit the width of the parent container: this instead defaults to 700 (as shown in the Screenshot). With Dash 2.* this issue is not present. 
+
+Here is a MWE that you can run to replicate the issue
+
+<details>
+
+```python
+import dash
+from dash import dcc, html, Input, Output, State
+import dash_bootstrap_components as dbc
+import plotly.graph_objects as go
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+app.layout = html.Div(
+    [
+        html.Button(""Generate Figures"", id=""generate-btn"", n_clicks=0),
+        dbc.Collapse(
+            children=[
+                dcc.Graph(
+                    id=""acc-figure"",
+                    style={""height"": ""45vh""},
+                    config={""responsive"": True},
+                ),
+                dcc.Graph(
+                    id=""daily-figure"",
+                    style={""height"": ""45vh""},
+                    config={""responsive"": True},
+                ),
+            ],
+            id=""collapse"",
+            is_open=False,
+        ),
+    ]
+)
+
+@app.callback(
+    [
+        Output(""acc-figure"", ""figure""),
+        Output(""daily-figure"", ""figure""),
+        Output(""collapse"", ""is_open""),
+    ],
+    [Input(""generate-btn"", ""n_clicks"")],
+    [State(""collapse"", ""is_open"")],
+    prevent_initial_call=True,
+)
+def update_figures(n_clicks, is_open):
+    fig_acc = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[0, 1, 0], mode=""lines"")])
+    fig_daily = go.Figure(data=[go.Scatter(x=[0, 1, 2], y=[1, 0, 1], mode=""lines"")])
+    # Toggle collapse each time the button is pressed
+    return fig_acc, fig_daily, not is_open
+
+
+if __name__ == ""__main__"":
+    app.run(debug=True)
+
+```
+</details>
+
+What I noticed is:
+
+- once the plot has been created if one tries to resize the browser window then everything works as expected (most likely because the `responsive` attribute is forcing an update of the svg container width)
+- this is not related to `dash-bootstrap-components` because the same happens with `dash-mantine-components.Collapse`
+- when only a single plot is present in `Collapse` the issue does not show up
+- wrapping every figure in its own `Collapse` component does NOT solve the issue
+- removing `responsive=True` does NOT solve the issue. In this case, for some reason, the second figure created is still responsive while the first is not 
+- for some reason removing `style={""height"": ""45vh""}` hides one of the plots until the browser window is resized
+
+**Expected behavior**
+
+I would expect the same behaviour in Dash 3.* and Dash 2.* for plots wrapped into a `Collapse` component. 
+
+**Screenshots**
+
+With Dash 3.*  after pressing the button 
+
+![Image](https://github.com/user-attachments/assets/d40b78e0-cac3-4be7-88ba-3b52503ba48d)
+
+With Dash 2.* after pressing the button
+
+![Image](https://github.com/user-attachments/assets/87ea3f02-6d00-4f6a-9267-1227f49c6130)
+",guidocioni,12760310,closed,False,2,2025-03-24T10:33:42+00:00,2025-03-24T12:11:15+00:00,2025-03-24T12:11:14+00:00,,0,0,0,0,0,0,0
+plotly/dash,2939449215,3234,[BUG] Dash 3 Components as Props,"When components are props are unmounted, they dont unmount properly",BSd3v,82055130,closed,False,7,2025-03-21T20:33:14+00:00,2025-04-01T18:01:17+00:00,2025-04-01T18:01:16+00:00,bug;P1;dash-3.0,0,0,0,0,0,0,0
+plotly/dash,2938962826,3233,Fix html build,,T4rk1n,9417722,closed,False,0,2025-03-21T16:50:06+00:00,2025-03-21T17:08:11+00:00,2025-03-21T17:08:06+00:00,,0,0,0,0,0,0,0
+plotly/dash,2936244280,3232,Add error handling for when localStorage is disabled,,marthacryan,6673460,closed,False,0,2025-03-20T17:51:39+00:00,2025-03-24T20:24:22+00:00,2025-03-24T20:24:18+00:00,P1;fix,0,0,0,0,0,0,0
+plotly/dash,2936091779,3231,implement support for React 19,"We should start exploring React 19 support. React 19 has many changes which may affect how Dash works.
+
+We know that component libraries will be affected as `defaultProps` is removed in React 19.
+
+
+From @T4rk1n :
+
+> The `defaultProps` was mostly handled with the upgrade to react 18 and most components libs now.
+`propTypes` removal doesn't really affect us because we still have the runtime check on our own, we also have our own typescript prop type support altho that might be difficult to update in the future if typescript indeed goes with the go rewrite that been in the news recently.
+> `contextType` removal is a new one I didn't see before, might have to update some components for it to work.
+string refs removals was also part of the 18 update along with ReactDOM.render -> ReactDOM.createRoot
+> `findDOMNode` removal was part of react 18 upgrade.
+new one is JSX namespace is changed https://react.dev/blog/2024/04/25/react-19-upgrade-guide#the-jsx-namespace-in-typescript might need some adaptation to the types.
+> The rest of the changes I don't think would affect us that much, I don't see anything that would prevent us to update. The initial fear with react 19 was with their new compiler but I think that was dropped.
+",ndrezn,38958867,open,False,0,2025-03-20T16:45:46+00:00,2025-03-21T17:20:44+00:00,,feature;P2,0,0,0,0,0,0,0
+plotly/dash,2935974538,3230,document type checking for Dash apps,"we want `pyright dash` to produce few (or no) errors - we should add a note saying we are working toward this goal to the documentation, while also explaining that `pyright dash` does currently produce errors and that piecemal community contributions are very welcome.",gvwilson,911566,closed,False,0,2025-03-20T16:01:18+00:00,2025-03-21T17:40:33+00:00,2025-03-21T17:40:33+00:00,documentation;P1,0,0,0,0,0,0,0
+plotly/dash,2932737781,3229,[BUG] Add error handling for when localStorage is disabled,Dash devtools uses localStorage to keep a cache of requests to the version server. We should add error handling to prevent a request if local storage access fails so that it doesn't hit the server over and over again,marthacryan,6673460,closed,False,1,2025-03-19T18:18:05+00:00,2025-04-01T18:19:30+00:00,2025-04-01T18:19:30+00:00,feature;P1,0,0,0,0,0,0,0
+plotly/dash,2929092304,3227,Update CHANGELOG.md,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",LiamConnors,12749831,closed,False,0,2025-03-18T16:18:53+00:00,2025-03-19T13:11:54+00:00,2025-03-19T13:11:50+00:00,,0,0,0,0,0,0,0
+plotly/dash,2927954468,3226,Version 3 adds breaking type annotations that do not comply with mypy,"With the release of dash 3.0 our CI/CD fails for stuff that used to work.
+Here's a minimum working example:
+```python
+from dash import Dash, dcc, html
+from dash.dependencies import Input, Output
+from typing import Callable
+
+app = Dash(__name__)
+
+def create_layout() -> html.Div:
+    return html.Div([
+        dcc.Input(id='input-text', type='text', value='', placeholder='Enter text'),
+        html.Div(id='output-text')
+    ])  
+
+app.layout = create_layout
+
+@app.callback(Output('output-text', 'children'), Input('input-text', 'value'))
+def update_output(value: str) -> str:
+    return f'You entered: {value}'
+
+if __name__ == '__main__':
+    app.run(debug=True, port=9000)
+```
+running mypy on this file results in:
+```bash
+$ mypy t.py --strict
+t.py:1: error: Skipping analyzing ""dash"": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+t.py:2: error: Skipping analyzing ""dash.dependencies"": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+t.py:2: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+t.py:15: error: Untyped decorator makes function ""update_output"" untyped  [misc]
+Found 3 errors in 1 file (checked 1 source file)
+```
+which we used to solve by adding `# type: ignore[misc]` to every `callback` call and by adding
+```toml
+[[tool.mypy.overrides]]
+module = [
+  ""dash.*"",
+  ""dash_ag_grid"",
+  ""dash_bootstrap_components.*"",
+  ""plotly.*"",
+]
+ignore_missing_imports = true
+```
+to our `pyproject.toml`.
+
+However, when updating to version 3, we get:
+```bash
+$ mypy --strict t.py 
+t.py:8: error: Returning Any from function declared to return ""Div""  [no-any-return]
+t.py:13: error: Property ""layout"" defined in ""Dash"" is read-only  [misc]
+t.py:15: error: Call to untyped function ""Input"" in typed context  [no-untyped-call]
+t.py:15: error: Call to untyped function ""Output"" in typed context  [no-untyped-call]
+t.py:15: error: Call to untyped function ""callback"" in typed context  [no-untyped-call]
+t.py:15: note: Error code ""no-untyped-call"" not covered by ""type: ignore"" comment
+Found 5 errors in 1 file (checked 1 source file)
+```
+without changing anything else.
+
+This can't be intended behavior, right? How to fix that?
+
+community post: https://community.plotly.com/t/dash-3-0-fails-mypy/91308",gothicVI,33968289,open,False,28,2025-03-18T10:25:57+00:00,2025-05-07T16:08:26+00:00,,regression;bug;P2,3,3,0,0,0,0,0
+plotly/dash,2927660487,3225,Documentation needs to be updated.,"The content below should be updated as the stable version of `3.0` has been released.
+
+https://dash.plotly.com/dash-plugins-using-hooks
+
+![Image](https://github.com/user-attachments/assets/df75e2d0-733e-486e-afb0-de607ea26abd)",CNFeffery,49147660,closed,False,1,2025-03-18T08:52:45+00:00,2025-03-18T13:48:13+00:00,2025-03-18T13:48:11+00:00,,0,0,0,0,0,0,0
+plotly/dash,2926121735,3224,reworking dash debug tools interface,"See https://github.com/plotly/dash/pull/3219 for comments on the PR.
+
+Reopening to target dev branch vs the deleted 3.0 branch.",BSd3v,82055130,closed,False,2,2025-03-17T19:12:55+00:00,2025-04-09T20:21:36+00:00,2025-04-09T20:21:36+00:00,feature;P2;community,0,0,0,0,0,0,0
+plotly/dash,2926106825,3223,Master 3.0.0,,T4rk1n,9417722,closed,False,0,2025-03-17T19:05:08+00:00,2025-03-17T19:41:23+00:00,2025-03-17T19:41:18+00:00,,0,0,0,0,0,0,0
+plotly/dash,2925145737,3222,Dash 3.0,,T4rk1n,9417722,closed,False,0,2025-03-17T13:41:10+00:00,2025-03-17T18:49:20+00:00,2025-03-17T18:49:14+00:00,,0,0,0,0,0,0,0
+plotly/dash,2922143544,3221,Replace UNPKG w/ jsDelivr,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [x] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [x] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+
+----
+
+UNPKG has not been actively maintained and ~~has been down since `Mar 15, 2025`~~ was down from Mar 15, 2025, 2:00 AM and down for 18 hours (https://github.com/unpkg/unpkg/issues/412). Migrating to jsDelivr means a more stable and reliant service.
+
+The PR replaces UNPKG usage with jsDelivr",SukkaW,40715044,open,False,3,2025-03-15T14:24:45+00:00,2025-03-31T15:57:33+00:00,,feature;P2;community,0,0,0,0,0,0,0
+plotly/dash,2920592844,3220,Improve prop typing generation,"Resolve #3216
+
+Add:
+
+- `ignore_props` variable to `dash_prop_typing.py`, is a `list[str]` with the name of props to ignore typing generation for all components (set to `any`). Default to `[""style""]`.
+- `*` key in `custom_imports` and `custom_props` to apply the prop typing function to all the component that matches.
+- Reduced generated `proptypes.js` footprint.",T4rk1n,9417722,closed,False,1,2025-03-14T15:45:02+00:00,2025-03-24T16:01:43+00:00,2025-03-14T19:44:25+00:00,,0,0,0,0,0,0,0
+plotly/dash,2920395715,3219,reworking dash debug tools interface,"A couple of things to note here:
+- I removed color declarations in order to allow app definitions to take precedence over the colors.
+- I adjusted the color on the toolbar itself to have some alpha in order to allow the app background to get added to
+- the toolbar is now toggle-able, when hidden error count goes to the toggle button
+- the toolbar is now a footer
+- when the toolbar is shown, the app is scaled dynamically based upon the screen size and given 40px for the toolbar to display
+- when the toolbar is not shown, the app is full size, and the toggle button is placed on top with a zIndex of 10000
+- the toolbar no longer needs zIndex as it has been given space in the page
+
+The main thing that needs to get worked on here is the toggle button:
+- obviously the button needs to be styled
+- when the screen size is narrow, the toolbar and button collide, need to implement some sort of way to implement a selection for the tool to display and the other info to display (dash version)
+
+
+@marthacryan @ndrezn",BSd3v,82055130,closed,False,3,2025-03-14T14:28:19+00:00,2025-03-17T18:49:20+00:00,2025-03-17T18:49:20+00:00,feature;P1;community,0,0,0,0,0,0,0
+plotly/dash,2919897903,3218,deselect all tabs in dcc tab component,"I'm building an application that is using the tab dcc component. This component provide the option of not selecting anything as initial value. I want to take davantage of this feature to display specific information but if I interact with the tabs I have no way to go back to a ""nothing selected"" state. 
+
+The following demo application is showing this exact behaviour, once I click somewhere i cannot show back the ""dark"" content. 
+
+```python 
+import dash
+from dash import dcc, html
+
+# Initialize Dash app
+app = dash.Dash(__name__)
+
+app.layout = html.Div([
+    dcc.Tabs(
+        id=""tabs-example"",
+        value=None,  # No tab selected by default
+        children=[
+            dcc.Tab(label=""Tab Alpha"", value=""alpha""),
+            dcc.Tab(label=""Tab Beta"", value=""beta""),
+            dcc.Tab(label=""Tab Gamma"", value=""gamma""),
+        ],
+    ),
+    html.Div(id=""tabs-content"", style={""padding"": ""20px"", ""fontSize"": ""18px""})
+])
+
+@app.callback(
+    dash.Output(""tabs-content"", ""children""),
+    dash.Output(""tabs-content"", ""style""),
+    dash.Input(""tabs-example"", ""value""),
+)
+def update_content(selected_tab):
+    content_styles = {""padding"": ""20px"", ""fontSize"": ""18px""}
+
+    if selected_tab == ""alpha"":
+        return html.P(""Lorem ipsum dolor sit amet, consectetur adipiscing elit.""), {**content_styles, ""color"": ""red""}
+    elif selected_tab == ""beta"":
+        return html.P(""Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.""), {**content_styles, ""color"": ""blue""}
+    elif selected_tab == ""gamma"":
+        return html.P(""Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.""), {**content_styles, ""color"": ""green""}
+    else:
+        return html.P(""Nothing selected"", style={""color"": ""black""}), content_styles
+
+# Run app
+if __name__ == ""__main__"":
+    app.run_server(debug=True)
+
+```
+
+Can you had a way to get back to this state like clicking again on the selected one ? ",12rambau,12596392,open,False,2,2025-03-14T11:00:04+00:00,2025-03-17T18:20:23+00:00,,feature;P3,0,0,0,0,0,0,0
+plotly/dash,2918232146,3216,Generated props too large.,"The generated props from types like `React.CSSProperties` are too big and result in very large component docstrings.
+
+There should be a way to exclude properties name from being generated without having to specify all the components in `dash_prop_typing.py`.",T4rk1n,9417722,open,False,0,2025-03-13T19:43:25+00:00,2025-03-17T18:19:54+00:00,,bug;P2,3,3,0,0,0,0,0
+plotly/dash,2917565312,3215,move Dash 3.0 dev tools into footer,"Move the dev tools into a footer.
+
+- closes #3200 
+- may close #3210",gvwilson,911566,open,False,8,2025-03-13T15:25:10+00:00,2025-04-01T13:16:54+00:00,,feature;P2;dash-3.0,0,0,0,0,0,0,0
+plotly/dash,2917297432,3214,dcc.Dropdown width rendering incorrect with Dash 3 rc4,"**Describe your context**
+Please provide us your environment, so we can easily reproduce the issue.
+
+-  replace the result of `pip list | grep dash` below
+```
+dash                 3.0.0rc4
+dash-core-components 2.0.0
+dash_design_kit      1.14.0
+dash-html-components 2.0.0
+dash-table           5.0.0
+```
+-  if frontend related, tell us your Browser, Version and OS
+
+    - OS: [e.g. iOS] MacOS
+    - Browser [e.g. chrome, safari] Chrome & Safari
+    - Version [e.g. 22] `Version 134.0.6998.88` Arm64
+
+**Describe the bug**
+
+`dcc.Dropdown` renders squashed with Dash 3, whereas it renders at full-width with Dash 2.x
+
+
+**Expected behavior**
+
+The `dcc.Dropdown` should render the same way between Dash 2.x and Dash 3.x, if there have been no code changes in the app.
+
+**Screenshots**
+
+Dash 3.0
+![Image](https://github.com/user-attachments/assets/8439ae7b-b623-41a0-9752-96e8cb5e0704)
+
+Dash 2.0
+
+![Image](https://github.com/user-attachments/assets/9e33b722-4e5c-42a5-a62f-268bf412f7db)
+
+",susodapop,17067911,closed,False,1,2025-03-13T14:07:28+00:00,2025-04-15T18:12:33+00:00,2025-04-15T18:12:32+00:00,bug;P1;dash-3.0,0,0,0,0,0,0,0
+plotly/dash,2914949912,3213,Fix getattr,Fix #3212 ,T4rk1n,9417722,closed,False,0,2025-03-12T19:21:54+00:00,2025-03-12T21:12:26+00:00,2025-03-12T21:12:22+00:00,,0,0,0,0,0,0,0
+plotly/dash,2914842395,3212,Dash 3.0 getattr on app recursive error,"Calling `getattr(app, ""property_name"")` generate an infinite recursive error. ",T4rk1n,9417722,closed,False,0,2025-03-12T18:33:46+00:00,2025-03-13T13:21:26+00:00,2025-03-13T13:21:26+00:00,bug;P1;dash-3.0,0,0,0,0,0,0,0
+plotly/dash,2911939401,3211,[BUG] Version 3.0.0rc3 - Default Dropdown Value Bug,"When selecting another option from the dropdown that is not the default option, it changes normally, but when returning to the default option, it does not switch back to it.
+It is possible to see in the video that ""Tratar + Ignorar"" was the default option and after I change that, I can't switch back to it.
+
+https://github.com/user-attachments/assets/3f377f08-61fe-474f-a86b-0230d0af542c
+
+Code:
+```python
+dbc.Label(""Escolha o Tratamento de inviabilidades"", className=""d-flex justify-content-center"", style={""color"": ""#002f4a"", ""font-weight"": ""bold""}),
+dcc.Dropdown(
+id='inviabilidade-estudo',
+options=[
+{""label"": ""Tratar inviabilidades"", ""value"": 1},
+{""label"": ""Ignorar inviabilidades"", ""value"": 2},
+{""label"": ""Tratar + Ignorar"", ""value"": 3},
+{""label"": ""Tratamento True"", ""value"": 4}
+],
+value=3
+)
+``` 
+
+Versions:
+dash==3.0.0rc3
+dash-bootstrap-components==2.0.0b2
+dash-breakpoints==0.1.0
+dash-core-components==2.0.0
+dash-html-components==2.0.0
+dash-table==5.0.0
+dash-ag-grid==31.3.1rc1
+dash_auth==2.3.0
+dash-mantine-components==0.12.1",xiforivia,88514727,open,False,13,2025-03-11T21:35:25+00:00,2025-04-25T16:15:14+00:00,,,0,0,0,0,0,0,0
+plotly/dash,2911560095,3210,Devtools UI can block UI elements in bottom corner,"This is the app that I used to test this:
+```
+from dash import Dash, html, Input, Output, dcc
+import dash_mantine_components as dmc
+from dash_iconify import DashIconify
+
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = Dash(__name__)
+import dash_mantine_components as dmc
+from dash import Output, Input, html, callback
+
+""""""
+Add Notifications to your app layout.
+""""""
+
+app.layout = dmc.MantineProvider(
+    [
+        dmc.NotificationProvider(),
+        html.Div(id=""notifications-container""),
+        dmc.Button(""Show Notification"", id=""notify""),
+    ]
+)
+
+@callback(
+    Output(""notifications-container"", ""children""),
+    Input(""notify"", ""n_clicks""),
+    prevent_initial_call=True,
+)
+def show(n_clicks):
+    return dmc.Notification(
+        title=""Hey there!"",
+        id=""simple-notify"",
+        action=""show"",
+        autoClose=False,
+        position=""bottom-right"",
+        message=""Notifications in Dash, Awesome!"",
+        icon=DashIconify(icon=""ic:round-celebration""),
+    )
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+I tried changing the z-index for the devtools, but it appears that the dmc Notification component uses position static, which means that it ignores z-index. Not sure what the solution is for that! If we switch to a footer for the devtools then this issue can be closed",marthacryan,6673460,closed,False,1,2025-03-11T18:51:38+00:00,2025-04-07T15:51:35+00:00,2025-04-07T15:51:33+00:00,bug;P1,0,0,0,0,0,0,0
+plotly/dash,2911270912,3209,Fix devtools padding ,,marthacryan,6673460,closed,False,0,2025-03-11T16:59:36+00:00,2025-03-11T18:41:27+00:00,2025-03-11T18:41:24+00:00,P1;fix;dash-3.0,0,0,0,0,0,0,0
+plotly/dash,2910463533,3208,Add support for retrieving `HTMLElement` by Dash component ID in clientside callbacks.,"This has been [discussed on the forum](https://community.plotly.com/t/how-to-use-document-queryselector-with-non-string-ids-in-clientside-callback/91146). A feature request seems more appropriate.
+
+**Is your feature request related to a problem? Please describe.**
+When using clientside callbacks and pattern matching, the idiomatic for getting access to third party javascript objects seems to be (an example from ag Grid) :
+
+
+```{python}
+clientside_callback(
+    """"""
+(grid_id, html_id, ...) => {
+  // works 
+  const gridApi = dash_ag_grid.getApi(id);
+  // doesn't work
+  const el = document.querySelector(`div#{html_id}`);
+}
+    """""",
+    Output(MATCH, ""id""),
+    Input({""type"": ""ag-grid"", ""index"": MATCH}, ""id""),
+    Input({""type"": ""html-element"", ""index"": MATCH}, ""id""),
+    # ... any other inputs that would be used here to trigger this behavior
+)
+```
+
+
+**Describe the solution you'd like**
+I would like Dash to expose a method like `dash_clientside.get_element_by_id(id: String | Object<String, String | _WildCard>): HTMLElement` which takes advantage of dash internals correctly to replicate this use case.
+
+**Describe alternatives you've considered**
+There is a [forum post](https://community.plotly.com/t/adding-component-via-clientside-callbacks/76535/5?u=ctdunc) describing an implementation of `stringifyId` that can query HTMLElements using `document.querySelector`. However, even the author [acknowledges](https://community.plotly.com/t/how-to-use-document-queryselector-with-non-string-ids-in-clientside-callback/91146/2?u=ctdunc) that the behavior may not be consistent, and runtime checks are necessary to ensure correctness. Plus, if Dash ever changes how object IDs are serialized for use in the DOM, any projects depending on this solution will break in unexpected ways.",ctdunc,36877218,open,False,1,2025-03-11T12:59:20+00:00,2025-03-11T13:58:18+00:00,,feature;P2,0,0,0,0,0,0,0
+plotly/dash,2909150561,3207,Editshape - overwriting the behavior of the editable properly in shape definition,"Thank you so much for helping improve the quality of Dash!
+
+We do our best to catch bugs during the release process, but we rely on your help to find the ones that slip through.
+
+
+**Context**
+In DCC Graph if `'edits': {'shapePosition':True}` is defined - it overwrites the editable property of the shapes when defining the shapes. Is that the expected behavior? 
+The shapes are defined as following (I was hoping to have two shapes as non-moveable / editable and two shapes to be moveable): 
+
+```python
+        if command_issued is not None:
+            fig.add_shape(dict(type='line', x0=command_issued, x1=command_issued, y0=0, y1=1, yref='paper', xref='x', line_color=""blue"", line_width=1.5, line_dash=""dash"", editable=True, opacity=0.75,
+                               layer=""between"",
+                               label=dict(text=f""Command Issue Time"", textangle=0, xanchor=""left"", )))
+        if limit_reached is not None:
+            fig.add_shape(dict(type='line', x0=limit_reached, x1=limit_reached, y0=0, y1=1, yref='paper', xref='x', line_color=""red"", line_width=1.5, line_dash=""dash"", editable=True, opacity=0.75,
+                               layer=""between"",
+                               label=dict(text=f""Power Limit Reach Time"", textangle=0, xanchor=""left"", )))
+
+        fig.add_shape(dict(type='line', x0=0, x1=1, y0=active_power_limit / 100, y1=active_power_limit / 100, yref='y', xref='paper',
+                           line_color=""green"", line_width=1.0, line_dash=""dash"", editable=False, opacity=0.75,
+                               layer=""between"",
+                               label=dict(text=f""Active Power Limit ({active_power_limit:0.2f})%"", textangle=0,  )))
+
+        fig.add_shape(type=""rect"",editable=False,
+                      x0=0, y0=active_power_limit / 100 - 0.05, x1=1, y1=active_power_limit / 100 + 0.05,xref='paper',
+                      line=dict(
+                          color=""yellow"",
+                          width=1,
+                      ),
+                      fillcolor=""yellow"",opacity=0.2,
+                      )
+```
+
+-  replace the result of `pip list | grep dash` below
+```
+dash                 2.18
+
+```
+
+
+
+**Expected behavior**
+
+Expected behavior was if editable property are defined that should be respected and editshapes should only allow the user to move whatever shapes the developer allowed to move while defining the shape.
+
+
+",sssaha,15896229,closed,False,1,2025-03-11T05:13:02+00:00,2025-03-11T05:15:39+00:00,2025-03-11T05:15:39+00:00,,0,0,0,0,0,0,0
+plotly/dash,2907960868,3206,Adding Pattern Matching selector ALLELSE,"Similar to `ALLSMALLER` but doesn't asume that id index are numeric and sequential
+
+## Use case
+
+**General description**
+- There's a set of components with the same pattern-matching id type. 
+- Based on an interaction with one of those components (or with another component with the same pattern-matching id index), something about it will change. 
+- That same property will also change in the rest of the components of the set, but with a different value.
+
+**Example**
+- We have 6 clickable cards.
+- Each clickable card is an html.Div with pattern-matching id `{'type':'card,'index': f""card_{i}""}` wrapped in an html.A with pattern-matching id `{'type':'invisible_button,'index': f""card_{i}""}`.
+- When a user clicks one card, its `style` changes to HIGHLIGHT_STYLE (red) and the `style` of the rest changes to DEFAULT_STYLE (black).
+
+https://github.com/user-attachments/assets/63e0d473-537c-4df7-bd04-140ad784b449
+
+## Desired behavior/code
+
+```
+@callback(
+    Output({'type':'card','id': MATCH}, 'style'),
+    Output({'type':'card','id': ALLELSE}, 'style'),
+    Input({'type':'invisible_button','id': MATCH}, 'n_clicks'),
+    )
+def restore_card_format(n_clicks):
+    return HIGHLIGHT_STYLE, [DEFAULT_STYLE]*5
+```
+
+## Current behavior/code
+
+```
+@callback(
+    Output({'type':'card','id': ALL}, 'style'),
+    Input({'type':'invisible_button','id': ALL}, 'n_clicks'),
+    )
+def restore_card_format(n_clicks):
+    return DEFAULT_STYLE
+
+@callback(
+    Output({'type':'card','id': MATCH}, 'style'),
+    Input({'type':'invisible_button','id': MATCH}, 'n_clicks'),
+    )
+def highlight_card(n_clicks):
+    return HIGHLIGHT_STYLE
+```
+Using the above code produces an error like this:
+```
+In the callback for output(s): {""id"":MATCH,""type"":""card""}.style Output 0 ({""id"":MATCH,""type"":""card""}.style) overlaps another output ({""id"":ALL,""type"":""card""}.style) used in a different callback.
+```
+
+**Workaround - current way to implement this functionality:**
+```
+from dash import Dash, Input, Output, callback, html, dcc, ALL, MATCH, ctx
+
+app = Dash()
+server = app.server
+
+DEFAULT_STYLE = {
+    ""height"":""200px"",
+    ""width"":""200px"",
+    ""margin"":""5px"",
+    ""background-color"": ""black"",
+    ""color"":""white""
+    }
+
+HIGHLIGHT_STYLE = {
+    ""height"":""200px"",
+    ""width"":""200px"",
+    ""margin"":""5px"",
+    ""background-color"": ""red"",
+    }
+
+app.layout = html.Div([
+    html.A(
+        html.Div(
+            id={'type':'card','index': f""card_{i}""}, 
+            style=DEFAULT_STYLE,
+            children=f""card_{i}""
+            ),
+        id={'type':'invisible_button','index': f""card_{i}""}, 
+        )
+    for i in range(6)
+], style={""display"":""inline-flex""})
+
+@callback(
+    Output({'type':'card','index': ALL}, 'style'),
+    Input({'type':'invisible_button','index': ALL}, 'n_clicks'),
+    prevent_initial_call=True
+    )
+def highlight_card(n_clicks):
+    selected_card_id = ctx.triggered_id[""index""]
+    # this is how ctx.outputs_list looks like
+    # [{'id': {'index': 'card_0', 'type': 'card'}, 'property': 'style'}, {'id': {'index': 'card_1', 'type': 'card'}, ...]
+    new_styles = [HIGHLIGHT_STYLE if card[""id""][""index""]==selected_card_id else DEFAULT_STYLE for card in ctx.outputs_list]
+    return new_styles
+
+app.run(debug=True)
+```
+
+
+",celia-lm,101562106,open,False,0,2025-03-10T17:27:03+00:00,2025-03-11T09:17:39+00:00,,feature;P2;cs,0,0,0,0,0,0,0
+plotly/dash,2905909405,3205,Added missing docstrings to test_configs file #3194,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+Added missing docstrings to test_configs file #3194
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",JinHuang0101,54080607,open,False,5,2025-03-10T02:27:59+00:00,2025-03-20T16:05:12+00:00,,documentation;feature;P2;community,0,0,0,0,0,0,0
+plotly/dash,2905813719,3204,Added missing docstrings to test_configs file #3194,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+Added missing docstrings to test_configs file #3194
+## Contributor Checklist
+
+- [ ] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",JinHuang0101,54080607,closed,False,0,2025-03-10T00:56:38+00:00,2025-03-10T02:17:45+00:00,2025-03-10T02:17:45+00:00,,0,0,0,0,0,0,0
+plotly/dash,2905765823,3203,Added missing docstrings to test_configs file #3194,"*Start with a description of this PR. Then edit the list below to the items that make sense for your PR scope, and check off the boxes as you go!*
+Addressing issue #3194, added missing docstrings to test_configs file.
+
+## Contributor Checklist
+
+- [ x] I have broken down my PR scope into the following TODO tasks
+   -  [ ] task 1
+   -  [ ] task 2
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",JinHuang0101,54080607,closed,False,0,2025-03-10T00:01:52+00:00,2025-03-10T00:27:11+00:00,2025-03-10T00:27:11+00:00,,0,0,0,0,0,0,0
+plotly/dash,2905547480,3202,feat: expose the closeMenuOnSelect option in dropdown component,"This feature have been requested multiple time by memebers of my team at work. I checked a bit on the web and multiple Threads on your forum mentioned it without providing any solution: 
+- https://community.plotly.com/t/dash-dropdown-select-multi-keep-options-open-after-selection/34576
+- https://community.plotly.com/t/keep-the-dcc-dropdown-multi-true-open-when-choosing-a-value-from-options/72542
+
+That's my first contribution to dash so i'm still a bit lost with everything in the repository but I simply tried to expose what is available in the react-select options. I only made changes to the JS exposed options but I'm unsure if I should modify anything from the python side. 
+
+I'll move forward with the contributor check list once I'm sure I didn't do anything stupid. 
+
+Thanks for your help. 
+
+## Contributor Checklist
+
+- [ ] I have run the tests locally and they passed. (refer to testing section in [contributing](https://github.com/plotly/dash/blob/master/CONTRIBUTING.md))
+- [ ] I have added tests, or extended existing tests, to cover any new features or bugs fixed in this PR
+
+### optionals
+
+- [ ] I have added entry in the `CHANGELOG.md`
+- [ ] If this PR needs a follow-up in **dash docs**, **community thread**, I have mentioned the relevant URLS as follows
+    -  [ ] this GitHub [#PR number]() updates the dash docs
+    -  [ ] here is the show and tell thread in Plotly Dash community
+",12rambau,12596392,closed,False,7,2025-03-09T17:03:04+00:00,2025-03-23T17:39:43+00:00,2025-03-20T14:34:12+00:00,feature;P2;community,0,0,0,0,0,0,0
+plotly/dash,2901569158,3200,Dev UI Dash 3,"In Dash 3, dev UI:
+- cannot be minimized
+- is a much larger footprint
+
+Please migrate this position to being a footer vs positioned on top of the app.
+
+@gvwilson ",BSd3v,82055130,closed,False,2,2025-03-06T22:30:55+00:00,2025-03-13T20:56:19+00:00,2025-03-13T20:56:18+00:00,feature;P2,2,2,0,0,0,0,0
+plotly/dash,2901214515,3199,Update dcc.Markdown for react 18 compatibility,"> @T4rk1n 
+> I just noticed that `dcc.Mardown` generates a warning in the console - which is weird because it's not a function component.
+>Warning: v: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead. Error Component Stack
+> 
+> ```
+> 
+> from dash import Dash, dcc
+> 
+> app=Dash()
+> app.layout = dcc.Markdown(""I have a console warning"")
+> 
+> if __name__ == ""__main__"":
+>     app.run(debug=True)
+> 
+> 
+> 
+> ``` 
+
+ _Originally posted by @AnnMarieW in [#3148](https://github.com/plotly/dash/issues/3148#issuecomment-2686404238)_",T4rk1n,9417722,open,False,0,2025-03-06T19:12:02+00:00,2025-03-06T20:51:40+00:00,,feature;P1,0,0,0,0,0,0,0
+plotly/dash,2901210988,3198,Typing error in pycharm and dash 3.0,"> Sorry, I meant the `custom_spinner` in the `dcc.Loading`  Here's what it looks like for me in Pycharm:
+> 
+> 
+> **DMC or DBC  componets:**
+> ![Image](https://github.com/user-attachments/assets/2abddb39-f60a-40a4-bb1a-4b1193c531fb)
+> 
+> ![Image](https://github.com/user-attachments/assets/171620dc-c005-457f-a338-0f0628f883dd)
+> 
+> **html component is fine - no error:**
+> 
+> ![Image](https://github.com/user-attachments/assets/4c034fe2-3508-4101-9d71-234856fad813)
+> 
+>  
+
+ _Originally posted by @AnnMarieW in [#3148](https://github.com/plotly/dash/issues/3148#issuecomment-2640091800)_",T4rk1n,9417722,open,False,0,2025-03-06T19:10:04+00:00,2025-03-06T20:51:24+00:00,,bug;P1,1,1,0,0,0,0,0
+plotly/dash,2894830146,3197,Fix initial props reset back,"- Fix initial props not updated in setProps causing the initial value of props to not be able to be set again.
+- Improved layout path sum stringify of paths.
+",T4rk1n,9417722,closed,False,0,2025-03-04T16:29:34+00:00,2025-03-04T20:29:35+00:00,2025-03-04T20:29:31+00:00,,0,0,0,0,0,0,0

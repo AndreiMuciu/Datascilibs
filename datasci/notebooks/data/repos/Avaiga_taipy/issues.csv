@@ -1,0 +1,3689 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+Avaiga/taipy,3055091869,2611,[OTHER] <add dynamic components on demand>,"### 📌 What would you like to share or ask?
+
+I'm a Taipy newbie. I checked the documentation and learned how to dynamically create new components: https://docs.taipy.io/en/develop/userman/gui/pages/partial/. However, this approach iterates over the `state.links` data structure every time. In my use case, this data structure is usually very large, and I don’t want to create components iteratively. Instead, I’d like to create one component per click. Are there any official recommendations for this?
+
+Additionally, I'd like to ask if there are any sample applications similar to a to-do list. For each task, there should be an independent component, allowing me to operate these components individually to start and track the execution status of each task in real time.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)",Ysllllll,34794046,open,False,1,2025-05-11T16:48:03+00:00,2025-05-12T08:20:54+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3052352402,2610,[🐛 BUG] Text disappears in certain condition,"### 🔍 What went wrong?
+
+It seems that having a multiline string with `""""""` and a line break before the text will make the text disappear.
+
+### ✅ Expected Behavior
+
+It should not disappear.
+
+### 🔄 Steps to Reproduce
+
+Run:
+```python
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+
+selected_tutorial = ""Test""
+
+with tgb.Page() as page:
+    tgb.text(
+        """"""
+Finding a rate: {selected_tutorial}"""""",
+    )
+
+Gui(page).run()
+
+```
+
+The page will show nothing.
+
+The page 
+
+### 💡 Possible Solution (Optional)
+
+_No response_
+
+### 🖼️ Screenshots (Optional)
+
+_No response_
+
+### 💻 Runtime Environment
+
+_No response_
+
+### 🌐 Browser (if applicable)
+
+_No response_
+
+### 🖥️ Operating System
+
+_No response_
+
+### 📦 Taipy Version
+
+4.0.3
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in
+",FlorianJacta,98709993,open,False,0,2025-05-09T14:29:13+00:00,2025-05-09T14:29:47+00:00,,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,3050649437,2609,[✨ FEATURE] Improve table stylekit,"### 🔍 Feature Description
+
+In the following image, the first row is selected and I'm hovering over the second row. The background color is (almost?) the same:
+
+![Image](https://github.com/user-attachments/assets/2f04e3ad-ba05-41a6-ac97-2da1946f3aa7)
+
+It would be good to be more visually obvious when a row is selected vs. hovered.
+
+Example code:
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {""a"": [1, 2, 3, 4, 5], ""b"": [5, 4, 3, 2, 1]}
+
+selected = [0]
+
+
+def num_on_action(state, var_name, payload):
+    index = payload.get(""index"")
+    if index in state.selected:
+        state.selected = list(set(state.selected) - {index})
+    else:
+        state.selected = state.selected + [index]
+
+
+with tgb.Page() as page:
+    tgb.toggle(theme=True)
+
+    tgb.table(""{data}"", selected=""{selected}"", on_action=num_on_action)
+
+    tgb.table(""{data}"", selected=""{selected}"", on_action=num_on_action, class_name=""rows-similar rows-bordered"")
+
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page)
+    gui.run(run_browser=False, use_reloader=True)
+```
+
+Play around with:
+1. Changing the theme
+2. Selected different rows
+3. Hovering over different rows
+
+I quickly get very confused with the colors. It's much better on the table with ""rows-similar"" though.
+
+### 💡 Proposed Solution
+
+Overhaul the stylekit for taipy tables. Consider interaction with:
+1. Theme
+2. ""rows-similar"" stylekit class
+3. ""selected"" rows (Mui-selected)
+4. Hovering on selected/unselected rows
+
+Consider adding:
+1. Different background color for table header row
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",arcanaxion,48582724,open,False,0,2025-05-09T03:35:08+00:00,2025-05-09T03:35:19+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3050617924,2608,"[✨ FEATURE] Table ""selected"" property doesn't respect sort","### 🔍 Feature Description
+
+We may want to highlight a certain row (using ""selected""), even when the table is sorted.
+
+Example:
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {""a"": [1, 2, 3, 4, 5], ""b"": [5, 4, 3, 2, 1]}
+selected = [0]
+
+
+with tgb.Page() as page:
+    tgb.table(""{data}"", selected=""{selected}"")
+
+
+if __name__ == ""__main__"":
+    Gui(page=page).run()
+```
+
+Currently, ""selected"" doesn't update with the table sort. The first row (index 0) remains selected/highlighted regardless of the sort:
+
+https://github.com/user-attachments/assets/03b95dff-e943-4514-99db-1da0da139923
+
+### 💡 Proposed Solution
+
+Perhaps a new property to indicate if the indices in `selected` are ""static"" (the current behaviour) or if they should be ""dynamic"" and adjust to the table sort.
+
+Alternatively, if sorting triggers a callback (e.g. #2307) then the developer can update `selected` themselves, although it would be more tedious.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",arcanaxion,48582724,open,False,0,2025-05-09T03:08:31+00:00,2025-05-09T03:09:30+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3050575448,2607,[✨ FEATURE] Allow resetting sort for taipy tables,"### 🔍 Feature Description
+
+After clicking a column to sort, I can only toggle between asc and desc sort. It would be good to have 3rd state which is the unsorted // reset state.
+
+Example:
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {""Sentence"": ""Eddie ate dynamite, good bye Eddie"".split("" "")}
+
+with tgb.Page() as page:
+    tgb.table(""{data}"")
+
+if __name__ == ""__main__"":
+    Gui(page=page).run()
+```
+
+After clicking the column to sort, I'm unable to reset the sort unless I refresh the page:
+
+![Image](https://github.com/user-attachments/assets/651330df-9ef9-4f4c-b958-99ec786bf5c9)
+
+### 💡 Proposed Solution
+
+Clicking the col header to sort could toggle from `unsorted -> asc -> desc -> unsorted`
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",arcanaxion,48582724,open,False,0,2025-05-09T02:41:15+00:00,2025-05-09T02:41:28+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3050556411,2606,[🐛 BUG] Unable to sort first column of table when using list of list of values,"### 🔍 What went wrong?
+
+Example:
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = [[1, 5], [2, 4], [3, 3], [4, 2], [5, 1]]  # sorting on the first column doesn't work when data is list of lovs
+
+with tgb.Page() as page:
+    tgb.table(""{data}"")
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page)
+    gui.run(run_browser=False, use_reloader=True)
+```
+
+Upon clicking the first column header to sort, the sort arrow indicator is updated but no sort is applied. The following is printed to console:
+
+```
+/home/app/.venv/lib/python3.10/site-packages/taipy/gui/data/pandas_data_accessor.py:403: TaipyGuiWarning: Cannot sort _TpD_tpec_TpExPr_data_TPMDL_1 on columns 0.
+  _warn(f""Cannot sort {var_name} on columns {order_by}."")
+```
+
+The icon indicates a descending sort, but the table is unchanged:
+
+![Image](https://github.com/user-attachments/assets/2f2a80d0-0121-499b-8eb9-e871921bba77)
+
+### 📦 Taipy Version
+
+develop
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",arcanaxion,48582724,open,False,0,2025-05-09T02:28:33+00:00,2025-05-09T02:28:44+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3045695302,2605,Enterprise 666 prepare migration feature,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Expose task_config scope and hidden scenario API to retrieve existing data nodes referenced by a scenario.
+
+These are made to be used in taipy-enterprise feature to migrate scenarios.
+",jrobinAV,88036007,closed,False,0,2025-05-07T11:46:41+00:00,2025-05-09T11:56:41+00:00,2025-05-09T11:56:37+00:00,Core;🟨 Priority: Medium;Enterprise,0,0,0,0,0,0,0
+Avaiga/taipy,3045661167,2604,#enterprise-666 prepare migration feature into release/4.1,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+- Expose the scope of a TaskConfig as the minimum scope of its DataNodeConfigs. (similar to the task scope.)
+- Expose a new hidden method from Scenario class `_get_existing_data_nodes(self, additional:bool=False)` used to retrieve data nodes referenced in a scenario that exist in the repository. Indeed, during the migration process (to be implemented on another PR), there is a temporary state where a scenario references some data nodes that no longer exist.
+",jrobinAV,88036007,closed,False,1,2025-05-07T11:32:24+00:00,2025-05-09T07:18:06+00:00,2025-05-09T07:18:02+00:00,Core;🟥 Priority: Critical;Enterprise,0,0,0,0,0,0,0
+Avaiga/taipy,3045626261,2603,[Refactor] Add separator property to CSV DataNode,"### 📌 Description
+
+ Add a separator property to CSV DataNode. CSVs have sometimes other separators like ;. It would be great to have Taipy handle these, too.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] The refactored code maintains existing functionality without breaking changes.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Performance improvements are documented, if applicable.
+",FlorianJacta,98709993,open,False,0,2025-05-07T11:17:59+00:00,2025-05-09T13:00:13+00:00,,Core;📈 Improvement;🆘 Help wanted;🟨 Priority: Medium,0,0,0,0,0,0,0
+Avaiga/taipy,3045327537,2602,2597 fix parent ids to release/4.1,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Issue
+- Related Issue #2597
+- Closes #2597
+",jrobinAV,88036007,closed,False,1,2025-05-07T09:24:18+00:00,2025-05-07T11:25:16+00:00,2025-05-07T11:25:11+00:00,Core;🟥 Priority: Critical;💥Malfunction;Core: Repository,0,0,0,0,0,0,0
+Avaiga/taipy,3045130966,2601,#2597 Fix missing parent_ids,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [X] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+
+
+## Related Tickets & Documents
+
+- Closes #2597
+- Related to #2597
+
+",jrobinAV,88036007,closed,False,1,2025-05-07T08:23:56+00:00,2025-05-07T11:12:34+00:00,2025-05-07T11:12:31+00:00,Core;🟨 Priority: Medium;Core: Repository,0,0,0,0,0,0,0
+Avaiga/taipy,3045100528,2600,2306 event consumer into 4.1,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [x] 📝 Documentation Update
+
+## Description
+```python
+import taipy as tp
+from taipy import Event, GuiEventConsumer, Gui, State
+
+def store_latest_scenario(state: State, event: Event, scenario: Scenario):
+    print(f""Scenario '{scenario.name}' created at '{event.creation_date}'."")
+    state.latest_scenario = scenario
+
+if __name__ == ""__main__"":
+    gui = Gui()
+    event_consumer = GuiEventConsumer(gui)
+    event_consumer.broadcast_on_scenario_created(callback=store_latest_scenario)
+    event_consumer.start()
+    ...
+    taipy.run(gui)
+```
+
+## Related Tickets & Documents
+
+- Closes #2306
+- Related to #2306
+
+## Backporting
+_This change should be backported to:_
+- [ ] 3.0
+- [ ] 3.1
+- [ ] 4.0
+- [x] develop
+
+## Checklist
+_We encourage keeping the code coverage percentage at **80% or above**._
+
+- [x] ✅ This solution meets the acceptance criteria of the related issue.
+- [x] 📝 The related issue checklist is completed.
+- [x 🧪 This PR includes **unit tests** for the developed code.
+    If not, explain why:
+- [ ] 🔄 **End-to-End tests** have been added or updated.
+    If not, explain why:
+- [x] 📚 The **documentation** has been updated, or a dedicated issue has been created.
+    If not, explain why:
+- [ ] 📌 The **release notes** have been updated.
+    If not, explain why: Another issue
+",jrobinAV,88036007,closed,False,1,2025-05-07T08:13:14+00:00,2025-05-07T10:40:04+00:00,2025-05-07T10:39:59+00:00,Core;🟥 Priority: Critical;🖰 GUI,0,0,0,0,0,0,0
+Avaiga/taipy,3043246299,2599,Fix/3.1 - Limit pipenv version to <2025.0.0,Closes #2598 ,trgiangdo,37588363,open,False,0,2025-05-06T15:37:58+00:00,2025-05-06T15:37:58+00:00,,🖧 Devops;💥Malfunction;dependencies,0,0,0,0,0,0,0
+Avaiga/taipy,3039021878,2598,[🐛 BUG] Cannot install dependencies on GitHub windows machines anymore,"### 🔍 What went wrong?
+
+```
+Run pipenv install --dev --python=3.12
+Creating a virtualenv for this project
+Pipfile: D:\a\taipy\taipy\Pipfile
+Using C:/hostedtoolcache/windows/Python/3.12.10/x86/python.exe3.12.10 to create
+virtualenv...
+created virtual environment CPython3.12.10.final.0-32 in 2808ms
+  creator 
+CPython3Windows(dest=C:\Users\runneradmin\.virtualenvs\taipy-GC3mvdRt, 
+clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, via=copy, 
+app_data_dir=C:\Users\runneradmin\AppData\Local\pypa\virtualenv)
+    added seed packages: pip==25.0.1
+  activators 
+BashActivator,BatchActivator,FishActivator,NushellActivator,PowerShellActivator
+,PythonActivator
+
+Successfully created virtual environment!
+Virtualenv location: C:\Users\runneradmin\.virtualenvs\taipy-GC3mvdRt
+Pipfile.lock not found, creating...
+Locking  dependencies...
+Building requirements...
+Resolving dependencies...
+Locking Failed!
+Could not find a matching version of python-magic==0.4.24; sys_platform != 
+""win32"" for your environment, its dependencies will be skipped.
+ERROR:pip.subprocessor:Preparing metadata (pyproject.toml) exited with 1
+[ResolutionFailure]:   File 
+""C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages\pipenv\resolve
+r.py"", line 451, in main
+[ResolutionFailure]:       _main(
+[ResolutionFailure]:   File 
+""C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages\pipenv\resolve
+r.py"", line 436, in _main
+[ResolutionFailure]:       resolve_packages(
+[ResolutionFailure]:   File 
+""C:\hostedtoolcache\windows\Python\3.12.10\x64\Lib\site-packages\pipenv\resolve
+r.py"", line 400, in resolve_packages
+[ResolutionFailure]:       results, resolver = resolve_deps(
+[ResolutionFailure]:       ^^^^^^^^^^^^^
+[ResolutionFailure]:   File 
+```
+
+### 📦 Taipy Version
+
+All
+
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",jrobinAV,88036007,closed,False,0,2025-05-05T08:52:21+00:00,2025-05-05T10:03:36+00:00,2025-05-05T10:03:36+00:00,🟥 Priority: Critical;🖧 Devops;💥Malfunction;dependencies,0,0,0,0,0,0,0
+Avaiga/taipy,3038893703,2597,[🐛 BUG] incomplete parent ids list for global data nodes,"### 🔍 What went wrong?
+
+In some cases, depending on the order of task configs in the scenario config constructor,
+Global-scoped data nodes are missing some task IDs in the `parent_ids` attribute. 
+
+### ✅ Expected Behavior
+
+The `paren_ids` should always contain all the tasks referencing the data node. 
+
+### 🔄 Steps to Reproduce
+
+
+```python
+from datetime import datetime
+
+import taipy as tp
+
+from taipy import Config, Scope, Frequency
+
+def some_algo(*entry: str):
+    # does nothing!
+    return entry
+
+if __name__ == ""__main__"":
+
+    dnc1 = Config.configure_data_node(""dn1"", scope=Scope.GLOBAL, default_data=""Some content"")
+    dnc2 = Config.configure_data_node(""dn3"", scope=Scope.GLOBAL)
+    dnc3 = Config.configure_data_node(""dn2"", scope=Scope.CYCLE)
+    task_g = Config.configure_task(""task_c"", some_algo, dnc1, dnc2)
+    task_c = Config.configure_task(""task_g"", some_algo, dnc1, dnc3)
+
+    scenario_cfg = Config.configure_scenario(""my_scenario"", [task_c, task_g], frequency=Frequency.DAILY)
+    #scenario_cfg = Config.configure_scenario(""my_scenario"", [task_g, task_c], frequency=Frequency.DAILY)
+
+    first_date = datetime(2023, 10, 1)
+    second_date = datetime(2023, 10, 2)
+
+    tp.create_scenario(scenario_cfg, name=""sc1_1"", creation_date=first_date)
+    tp.create_scenario(scenario_cfg, name=""sc2_2"", creation_date=second_date)
+```
+The previous code outputs the following: 
+```console
+taipy run main.py 
+[2025-05-05 09:46:30.951][Taipy][INFO] Updating configuration with command-line arguments...
+[2025-05-05 09:46:30.952][Taipy][INFO] Managing application's version...
+[2025-05-05 09:46:30.955][Taipy][INFO] Development mode: Clean all entities of version 38f36cd6-4404-48eb-9894-45b0346fd840
+[2025-05-05 09:46:30.993][Taipy][INFO] Checking application's version...
+[2025-05-05 09:46:30.994][Taipy][INFO] Blocking configuration update...
+[2025-05-05 09:46:30.994][Taipy][DEBUG] Blocking configuration update.
+Data node dn1 has 2 parents.
+
+Process finished with exit code 0
+```
+**dn1 should contain 3 parents. One `task_g` and two `task_c`.**
+
+Switching the order of the task configurations in the configure_scenario method results in a different output: 
+
+```python
+from datetime import datetime
+
+import taipy as tp
+
+from taipy import Config, Scope, Frequency
+
+def some_algo(*entry: str):
+    # does nothing!
+    return entry
+
+if __name__ == ""__main__"":
+
+    dnc1 = Config.configure_data_node(""dn1"", scope=Scope.GLOBAL, default_data=""Some content"")
+    dnc2 = Config.configure_data_node(""dn3"", scope=Scope.GLOBAL)
+    dnc3 = Config.configure_data_node(""dn2"", scope=Scope.CYCLE)
+    task_g = Config.configure_task(""task_c"", some_algo, dnc1, dnc2)
+    task_c = Config.configure_task(""task_g"", some_algo, dnc1, dnc3)
+
+    #scenario_cfg = Config.configure_scenario(""my_scenario"", [task_c, task_g], frequency=Frequency.DAILY)
+    scenario_cfg = Config.configure_scenario(""my_scenario"", [task_g, task_c], frequency=Frequency.DAILY)
+
+    first_date = datetime(2023, 10, 1)
+    second_date = datetime(2023, 10, 2)
+
+    scenario = tp.create_scenario(scenario_cfg, name=""sc1_1"", creation_date=first_date)
+    tp.create_scenario(scenario_cfg, name=""sc2_2"", creation_date=second_date)
+
+    print(f""Data node dn1 has {len(scenario.dn1.parent_ids)} parents."")
+```
+```console
+taipy run main.py
+[2025-05-05 09:49:44.147][Taipy][INFO] Updating configuration with command-line arguments...
+[2025-05-05 09:49:44.148][Taipy][INFO] Managing application's version...
+[2025-05-05 09:49:44.151][Taipy][INFO] Development mode: Clean all entities of version 38f36cd6-4404-48eb-9894-45b0346fd840
+[2025-05-05 09:49:44.192][Taipy][INFO] Checking application's version...
+[2025-05-05 09:49:44.193][Taipy][INFO] Blocking configuration update...
+[2025-05-05 09:49:44.193][Taipy][DEBUG] Blocking configuration update.
+Data node dn1 has 3 parents.
+
+Process finished with exit code 0
+```
+
+### 📦 Taipy Version
+
+develop, 4.1, 4.0, 3.1
+
+### 📋 Additional Context (Optional)
+
+Note that the opposite reference (from task to data node) is correct. Only the reference from the data node to the task seems buggy in some rare cases.
+As a consequence, this bug does not break any orchestration. However, it breaks the possibility for a developer to manually retrieve all parent tasks easily.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",jrobinAV,88036007,closed,False,1,2025-05-05T07:57:00+00:00,2025-05-07T11:12:32+00:00,2025-05-07T11:12:32+00:00,Core;🟥 Priority: Critical;💥Malfunction;📝Release Notes;🔒 Staff only;Core: ⚙️ Configuration;Core: 📁 Data node;Core: 🎬 Scenario & Cycle,0,0,0,0,0,0,0
+Avaiga/taipy,3038480985,2596,Debug installing dependencies with Pipfile from release/4.0,Debug installing dependencies with Pipfile from release/4.0,trgiangdo,37588363,closed,False,1,2025-05-05T03:00:49+00:00,2025-05-06T09:30:59+00:00,2025-05-06T09:30:54+00:00,🖧 Devops;💥Malfunction;dependencies,0,0,0,0,0,0,0
+Avaiga/taipy,3038474479,2595,[DO NOT MERGE] Debug installing dependencies with Pipfile from release/4.0,Debug installing dependencies with Pipfile from release/4.0,trgiangdo,37588363,closed,False,0,2025-05-05T02:56:38+00:00,2025-05-05T02:57:35+00:00,2025-05-05T02:57:35+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,3035834208,2594,fix: make _Reloader context manager re-entrant,"   Fixes #2589
+
+   This PR makes the `_Reloader` context manager re-entrant by:
+   - Adding a `_context_depth` counter to track nested context levels
+   - Incrementing the counter in `__enter__`
+   - Decrementing the counter in `__exit__` and only setting `_no_reload_context` to `False` when the counter reaches 0
+
+   This fixes the issue where nested `with` statements didn't work correctly:
+   ```python
+   with _Reloader():
+       with _Reloader():
+           some_code()
+       some_other_code()
+   ```
+   Now both `some_code()` and `some_other_code()` will have reloading disabled until the outermost context exits.",abhigyan631,101783480,open,False,0,2025-05-02T11:45:20+00:00,2025-05-06T08:29:17+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3035335157,2593,[🐛 BUG] Taipy designer package error,"### 🔍 What went wrong?
+
+i am trying to create a application using taipy designer so when im trying it is showing no module named with python package and i tried installing package it is showing couldn't find the version , can you please help me to figure out this issue
+this is my code:
+from taipy.gui import Gui
+from taipy.designer import Page as DesignerPage
+
+Rwi = ""Baseline_reports""
+
+# Load the page designed with Taipy Designer
+page = DesignerPage(""Wassan.xprjson"")
+
+# Initialize the GUI
+gui = Gui()
+gui.add_page(""Wassan"", page)
+
+# Run the GUI on port 2034
+gui.run(port=2034)
+
+error 1: ModuleNotFoundError: No module named 'taipy.designer'     
+trying to install package error 2: ERROR: Could not find a version that satisfies the requirement taipy-designer (from versions: none)
+ERROR: No matching distribution found for taipy-designer
+
+### 📦 Taipy Version
+
+Taipy 3.1.1
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",prasannasona,112371835,open,False,1,2025-05-02T07:02:57+00:00,2025-05-05T09:07:24+00:00,,❓ Question;💬 Discussion;🏗 Designer;Enterprise,0,0,0,0,0,0,0
+Avaiga/taipy,3035163193,2592,Refactor - Allow expanding read/write FileBasedDataNode with custom path,"## What type of PR is this? (Check all that apply)
+
+- 🛠 Refactor
+
+## Description
+
+In this PR:
+- `_get_last_modified_datetime()` method is moved to the `FileBasedDataNodeMixin` since it only works when there's a path.
+- Fix `DataNode._class_map()` sometimes override enterprise DN with community one.
+- Allow file-based DN to write to custom path, not just `self._path`
+",trgiangdo,37588363,closed,False,0,2025-05-02T04:38:04+00:00,2025-05-06T15:30:58+00:00,2025-05-06T15:30:54+00:00,📈 Improvement;Core: 📁 Data node,0,0,0,0,0,0,0
+Avaiga/taipy,3035145473,2591,[Refactor] Check dependencies code is not shared,"### 📌 Description
+
+Currently, the code that checks for installed dependencies (including enterprise) is not shared by the whole project.
+
+All places that needs to check if a dependency is installed should invoke the same `taipy.common.check_dependencies._check_dependency_is_installed()` function
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] The refactored code maintains existing functionality without breaking changes.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Performance improvements are documented, if applicable.
+",trgiangdo,37588363,open,False,0,2025-05-02T04:18:16+00:00,2025-05-09T12:29:05+00:00,,Core;📈 Improvement;🖰 GUI;🟨 Priority: Medium,0,0,0,0,0,0,0
+Avaiga/taipy,3033636383,2590,support a list of Icon as Users,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Support a list of Icon for users
+
+## Related Tickets & Documents
+- Closes #2583 
+
+## How to reproduce the issue
+
+```py
+from taipy.gui import Gui
+from taipy.gui import builder as tgb
+from taipy.gui.icon import Icon
+
+# This does work
+# users = [
+#     (""Alice"", Icon(path=""./demo_img/alice-avatar.png"", text=""Alice"")),
+#     (""Beatrix"", Icon(path=""./demo_img/beatrix-avatar.png"", text=""Beatrix"")),
+# ]
+
+# # This works fine
+# users = [
+#     ""Maria"",
+#     ""Albert"",
+# ]
+
+# # This works too
+users = [
+    Icon(path=""./demo_img/alice-avatar.png"", text=""Alice""),
+    Icon(path=""./demo_img/beatrix-avatar.png"", text=""Beatrix""),
+]
+
+messages: list[tuple] = []
+
+
+def analyze_string(s):
+    vowels = ""aeiouAEIOU""
+    vowel_count = 0
+    consonant_count = 0
+
+    for char in s:
+        if char.isalpha():
+            if char in vowels:
+                vowel_count += 1
+            else:
+                consonant_count += 1
+
+    total_length = len(s)
+    return (vowel_count, consonant_count, total_length)
+
+
+def respond(message):
+    analysis = analyze_string(message)
+    response = f""""""Your message has:
+* {analysis[0]} vowels
+* {analysis[1]} consonant_count
+* {analysis[2]} total length
+""""""
+    return response
+
+
+def chat(state, var_name: str, payload: dict):
+    # Retrieve the callback parameters
+    print(f""""""payload: {payload}"""""")
+    (_, _, user_message, sender_id, _) = payload.get(""args"", [])
+
+    # Add the input content as a sent message
+    messages.append((f""{len(messages)}"", user_message, sender_id))
+
+    try:
+        result_message = respond(user_message)
+    except Exception:
+        result_message = ""There was a problem!""
+    messages.append((f""{len(messages)}"", result_message, users[1].text)) # or users[1][0]
+    state.messages = messages
+
+
+with tgb.Page() as chat_page:
+    tgb.text(""# Icon problem"", mode=""md"")
+    tgb.html(""hr"")
+    with tgb.part():
+        tgb.chat(
+            ""{messages}"",
+            users=""{users}"",
+            show_sender=True,
+            sender_id=""{users[0].text}"", # or users[0][0]
+            on_action=chat,
+            mode=""markdown"",
+        )
+
+if __name__ == ""__main__"":
+    gui = Gui(chat_page)
+    gui.run(title=""2583- Simple Chat"")
+
+```
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-05-01T11:00:13+00:00,2025-05-02T09:11:34+00:00,2025-05-02T09:11:31+00:00,💥Malfunction;🟧 Priority: High;📝Release Notes;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,3030526758,2589,[🐛 BUG] _Reloader context manager must be re-entrant,"### 🔍 What went wrong?
+
+`_Reloader` is a singleton made to manage automatic reloading and automatic entity reloading.
+It is also a context manager that allows skipping reloads on a complete code block.
+```python
+with _Reloader():
+    some_code()
+```
+ In the previous code, any automatic entity reload within `some_code()` is skipped.
+
+The current implementation does not support re-entry.
+```python
+with _Reloader():
+    with _Reloader():
+        some_code()
+    some_other_code()
+```
+In the previous code, any automatic entity reload within `some_code()` is skipped, but NOT within `some_other_code()`.
+
+
+
+ 
+
+### ✅ Expected Behavior
+
+```python
+with _Reloader():
+    with _Reloader():
+        some_code()
+    some_other_code()
+```
+Any automatic entity reload attempt within `some_code()` and `some_other_code()` must be skipped.
+
+### 💡 Possible Solution (Optional)
+
+```python
+import functools
+import threading
+
+from .._manager._manager import _Manager
+from ..notification import EventOperation, Notifier, _make_event
+from taipy.common.logger._taipy_logger import _TaipyLogger
+
+class _Reloader:
+    """"""The _Reloader singleton class""""""
+
+    _instance = None
+    _lock = threading.RLock()  # Class-level lock for managing shared context
+
+    def __new__(cls):
+        if not isinstance(cls._instance, cls):
+            cls._instance = super().__new__(cls)
+            cls._instance._no_reload_context = False  # Initialize once
+            cls._instance._context_depth = 0  # Track nested `with` usage
+        return cls._instance
+
+    def _reload(self, manager: str, obj):
+        if self._no_reload_context:
+            return obj
+
+        entity = _get_manager(manager)._get(obj, obj)
+        if obj._is_in_context and hasattr(entity, ""_properties""):
+            if obj._properties._pending_changes:
+                entity._properties._pending_changes = obj._properties._pending_changes
+            if obj._properties._pending_deletions:
+                entity._properties._pending_deletions = obj._properties._pending_deletions
+            entity._properties._entity_owner = obj
+        return entity
+
+    def __enter__(self):
+        with self._lock:
+            self._context_depth += 1
+            self._no_reload_context = True
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        with self._lock:
+            self._context_depth -= 1
+            if self._context_depth == 0:
+                self._no_reload_context = False
+
+
+def _self_reload(manager: str):
+    def __reload(fct):
+        @functools.wraps(fct)
+        def _do_reload(self, *args, **kwargs):
+            self = _Reloader()._reload(manager, self)
+            return fct(self, *args, **kwargs)
+
+        return _do_reload
+
+    return __reload
+
+
+def _self_setter(manager):
+    def __set_entity(fct):
+        @functools.wraps(fct)
+        def _do_set_entity(self, *args, **kwargs):
+            fct(self, *args, **kwargs)
+            entity_manager = _get_manager(manager)
+            value = args[0] if len(args) == 1 else args
+            event = _make_event(
+                self,
+                EventOperation.UPDATE,
+                attribute_name=fct.__name__,
+                attribute_value=value,
+            )
+            if not self._is_in_context:
+                entity = _Reloader()._reload(manager, self)
+                fct(entity, *args, **kwargs)
+                entity_manager._set(entity)
+                Notifier.publish(event)
+            else:
+                self._in_context_attributes_changed_collector.append(event)
+
+        return _do_set_entity
+
+    return __set_entity
+
+
+@functools.lru_cache
+def _get_manager(manager: str) -> _Manager:
+    from ..cycle._cycle_manager_factory import _CycleManagerFactory
+    from ..data._data_manager_factory import _DataManagerFactory
+    from ..job._job_manager_factory import _JobManagerFactory
+    from ..scenario._scenario_manager_factory import _ScenarioManagerFactory
+    from ..sequence._sequence_manager_factory import _SequenceManagerFactory
+    from ..submission._submission_manager_factory import _SubmissionManagerFactory
+    from ..task._task_manager_factory import _TaskManagerFactory
+
+    return {
+        ""scenario"": _ScenarioManagerFactory._build_manager(),
+        ""sequence"": _SequenceManagerFactory._build_manager(),
+        ""data"": _DataManagerFactory._build_manager(),
+        ""cycle"": _CycleManagerFactory._build_manager(),
+        ""job"": _JobManagerFactory._build_manager(),
+        ""task"": _TaskManagerFactory._build_manager(),
+        ""submission"": _SubmissionManagerFactory._build_manager(),
+    }[manager]  # type: ignore
+```
+
+### 📦 Taipy Version
+
+>=4.1, develop
+
+### 📋 Additional Context (Optional)
+
+```bash
+The code and unit tests should be merged into `release/4.1` and `develop` branches.
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",jrobinAV,88036007,open,False,0,2025-04-30T08:22:35+00:00,2025-05-11T16:59:50+00:00,,Core;🟥 Priority: Critical;🧪Testing;💥Malfunction;📝Release Notes;🔒 Staff only;Core: Versioning;Core: Repository;Enterprise,0,0,0,0,0,0,0
+Avaiga/taipy,3028607301,2588,Debug - Dependencies installation issue with Windows,"Installing dependencies:
+- With the current Pipfile from `develop branch`: Failed on Windows with Python 3.12
+- With removing `fastparquet`: Failed on Windows with all Python versions
+- With pinning `fastparquet` to 2024.11.0 version: Failed on every environments
+- Removing the **duplicated** `python-dotenv`: Doesn't fix
+- Removing all dev-packgages: Still failed on Windows with all Python versions
+- Removing the bottom half of packages: Doesn't fix
+- Removing the top half of packages: The installation passes
+- Restore all dev-packages: Failed on Windows with all Python version
+    --> Maybe because of conflict between a package in top half with a dev package?
+- Limit the version of `setuptools`: Doesn't fix
+
+- Limit the version of `pipenv` to ""<2025.0.0"": Fix the installation issue 🎇",trgiangdo,37588363,closed,False,0,2025-04-29T14:37:59+00:00,2025-05-05T10:03:39+00:00,2025-05-05T10:03:35+00:00,🖧 Devops;💥Malfunction;dependencies,0,0,0,0,0,0,0
+Avaiga/taipy,3026233734,2586,[🐛 BUG] Slider labels don't work well with negative and decimal values,"### 🔍 What went wrong?
+
+When using the `slider` visual element, if I use the `labels` parameter to customize the displayed values, it works fine if I use the default step (1) as long as I use positive values. it also works well if I use steps over 1.
+
+However, if the `step` is under 1, it groups all the labels at the location of the unit part of the number (not rounded --> 0.1, 0.3, and 0.7 get grouped under 0). 
+
+If the `min` value  specifies a range that goes in the negatives, labels seem to do OK with bounding to the minimum value, but all other negative steps semm to not work (at all, they don't get grouped anywhere).
+
+### ✅ Expected Behavior
+
+The `labels` argument should be able to place labels at negative ticks, as well as decimals. 
+I could imagine problems if someone sets unlikely steps (imagine, 0.65987... but I tried with 1.036 and the steps work good -the labels don't).
+
+### 🔄 Steps to Reproduce
+
+This code shows several case scerios:
+```python
+from taipy.gui import Gui
+from taipy.gui import builder as tgb
+
+with tgb.Page() as slider_page:
+    tgb.text(""# Problem with slider labels with some steps"", mode=""md"")
+
+    tgb.text(""## With positive natural values, it seems OK"", mode=""md"")
+    tgb.slider(
+        value=""{None}"",
+        min=0,
+        max=4,
+        step=1,  # Default
+        labels={
+            0: ""1"",
+            1: ""2"",
+            2: ""3"",
+            3: ""4"",
+            4: ""5"",
+        },
+    )
+
+    tgb.text(
+        ""## Negative values seem to be problematic, except for lower bound"", mode=""md""
+    )
+    tgb.slider(
+        value=""{None}"",
+        min=-2,
+        max=2,
+        step=1,  # Default
+        labels={
+            -2: ""-2"",
+            -1: ""-1"",  # This one just disappears, as opposed to deciomal values that get overlapped
+            0: ""0"",
+            1: ""1"",
+            2: ""2"",
+        },
+    )
+
+    tgb.text(""## Decimal steps seem to cause problems:"", mode=""md"")
+    tgb.slider(
+        value=""{None}"",
+        min=0,
+        max=1,
+        step=0.1,
+        labels={
+            0.0: ""0"",
+            0.2: ""0.2"",
+            0.4: ""0.4"",
+            0.6: ""0.6"",
+            0.8: ""0.8"",
+            1.0: ""1"",
+        },
+    )
+
+    tgb.text(""## Non decimal steps seem to do ok:"", mode=""md"")
+    tgb.slider(
+        value=""{None}"",
+        min=0,
+        max=40,
+        step=10,
+        labels={
+            0: ""1"",
+            10: ""2"",
+            20: ""3"",
+            30: ""4"",
+            40: ""5"",
+        },
+    )
+
+    tgb.text(""## Let's try a dumb step, just for fun:"", mode=""md"")
+    tgb.slider(
+        value=""{None}"",
+        min=0,
+        max=10,
+        step=1.036,  # Default
+        labels={
+            0: ""a"",
+            1.036: ""b"",
+            2.072: ""c"",
+            4.08: ""d"",
+            5.44: ""e"",
+        },
+    )
+
+if __name__ == ""__main__"":
+    gui = Gui(slider_page)
+    gui.run(
+        title=""Slider step problem"",
+        dark_mode=False,
+        use_reloader=True,
+    )
+```
+
+
+### 🖼️ Screenshots (Optional)
+
+![Image](https://github.com/user-attachments/assets/d07ed0f3-d930-49e1-9e27-5fbcd2dacbdb)
+
+### 💻 Runtime Environment
+
+Lubuntu 24.04
+
+### 🌐 Browser (if applicable)
+
+Brave
+
+### 🖥️ Operating System
+
+Linux
+
+### 📦 Taipy Version
+
+4.0.2 and 4.0.3
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",enarroied,67969409,open,False,0,2025-04-28T21:09:39+00:00,2025-04-28T21:09:51+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,3025833404,2585,Drag n Drop (native),"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+less invasive DnD
+
+## Related Tickets & Documents
+
+## How to reproduce the issue
+
+```py
+import taipy.gui.builder as tgb
+from taipy.gui import Gui, State
+
+value = ""Item 2""
+
+
+def on_action(state: State, id: str, payload: dict):
+    print(f""Action triggered: {id} with payload: {payload}"")
+    if payload.get(""targetId"") == ""Part_2"":
+        partial.update_content(
+            state,
+            f""received from {payload.get('sourceId')}: {payload.get('sourceParams', '')}{payload.get('targetParams', '')}"",
+        )
+
+
+with tgb.Page() as page:
+    with tgb.layout(""1 1 1""):
+        with tgb.part():
+            tgb.text(""# Input list"", mode=""md"")
+            tgb.selector(""{value}"", lov=""Item 1;Item 2;Item 3"", drag_type=""data_type_1"", id=""Selector_1"")
+            tgb.selector(""{value}"", lov=""Item 4;Item 5;Item 6"", drop_types=[""data_type_1""], id=""Selector_2"")
+        with tgb.part(
+            ""part1"",
+            width=""20vw"",
+            height=200,
+            drag_type=""data_type_2"",
+            id=""Part_1"",
+            drag_parameters={""param1"": ""some relevant value""},
+            # style={""background"": ""lightgrey""}
+        ):
+            tgb.text(""Drag me to the drop area"")
+        tgb.part(
+            ""part2"",
+            width=""100%"",
+            height=""40vh"",
+            drop_types=[""data_type_1"", ""data_type_2""],
+            id=""Part_2"",
+            partial=""{partial}"",
+        )
+
+if __name__ == ""__main__"":
+    gui = Gui(page)
+    partial = gui.add_partial(""# Drop me here"")
+    gui.run(title=""Drag and Drop"")
+
+```
+",FredLL-Avaiga,90181748,closed,False,2,2025-04-28T18:42:21+00:00,2025-05-12T13:04:03+00:00,2025-05-12T13:04:00+00:00,🖰 GUI;🟧 Priority: High;✨New feature;📝Release Notes,0,0,0,0,0,0,0
+Avaiga/taipy,3022227926,2584,[🐛 BUG] var_name renders as empty string in chat's on_action's callback,"### 🔍 What went wrong?
+
+When using the `chat` visual element, I can trigger a callback, it's the `on_action` parameter.
+According to the [documentation](https://docs.taipy.io/en/latest/refmans/gui/viselements/generic/chat/), the callback's signature has a `var_name` argument in the second position, and it references the name of the `messages` variable. However, it returns an empty string instead.
+
+### ✅ Expected Behavior
+
+It should return the name of the variable :) 
+
+### 🔄 Steps to Reproduce
+
+The following code reproduces the issue, just send messages and check the terminal, the strings for `var_name` are empty, but the variable has a name (it can't not have it):
+
+```python
+from taipy.gui import Gui
+from taipy.gui import builder as tgb
+
+
+def say_hi():
+    return ""hi""
+
+
+def chat(state, var_name: str, payload: dict):
+    # Retrieve the callback parameters
+    print(var_name)  # Prints nothing (empty line)
+    print(len(var_name))  # It's has 0 length, it's coherent with the empty line
+    print(type(var_name))  # It's a string indeed
+
+    (_, _, user_message, sender_id) = payload.get(""args"", [])
+    # Add the input content as a sent message
+    messages.append((f""{len(messages)}"", user_message, sender_id))
+
+    try:
+        result_message = say_hi()
+    except Exception:
+        result_message = ""There was a problem!""
+    messages.append((f""{len(messages)}"", result_message, users[1]))
+    state.messages = messages
+
+
+with tgb.Page() as chat_page:
+    tgb.text(""# PII Analyzer"", mode=""md"")
+    tgb.html(""hr"")
+    tgb.chat(
+        messages=""{messages}"",
+        users=""{users}"",
+        show_sender=True,
+        sender_id=""{users[0]}"",
+        on_action=chat,
+        mode=""markdown"",
+    )
+
+if __name__ == ""__main__"":
+    users = [""User"", ""Bot""]
+
+    messages = []  # This is the message variable, its name is ""messages""
+    gui = Gui(chat_page)
+    gui.run(title=""var_name not showing"", dark_mode=False, use_reloader=True)
+```
+
+### 💻 Runtime Environment
+
+Lubuntu 24.04
+
+### 🌐 Browser (if applicable)
+
+Brave
+
+### 🖥️ Operating System
+
+Linux
+
+### 📦 Taipy Version
+
+4.0.2 and 4.0.3
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",enarroied,67969409,open,False,0,2025-04-26T19:03:44+00:00,2025-04-28T08:15:01+00:00,,🖰 GUI;💥Malfunction;🟨 Priority: Medium,0,0,0,0,0,0,0
+Avaiga/taipy,3021609540,2583,[🐛 BUG] Chat elements have trouble handling Icons,"### 🔍 What went wrong?
+
+Hi!
+
+I'm testing the `chat` visual element, I wanted to add icons to sender and receiver.
+When I declare users as strings, it all works as expected (there's just no icons, since I don't add them!)
+
+When I add Icon objects, I see 2 problems:
+
+1- The sender's Icon displays fine, but its user name becomes the name of the Icon's `id` (see image 1 below)
+2- The bot's name becomes `[object Object]`, and it displays no Icon. 
+
+### ✅ Expected Behavior
+
+1- When using `Icon`, the chat shoud display the icon as an image, and the name as a string
+2- When using `Icon` for multiple users, all users should have the same type of dispaly
+
+### 🔄 Steps to Reproduce
+
+```python
+from taipy.gui import Gui
+from taipy.gui import builder as tgb
+from taipy.gui.icon import Icon
+
+# This does not work right (display issue, the chat DOES work):
+# users = [
+#     (""Maria"", Icon(path=""./img/avatar_1.png"", text=""Maria"")),
+#     (""Albert"", Icon(path=""./img/avatar_2.png"", text=""Albert"")),
+# ]
+
+# This works fine
+users = [
+    ""Maria"",
+    ""Albert"",
+]
+
+# This works for the sender, but not the answerer
+users = [
+    Icon(path=""./img/avatar_1.png"", text=""Maria""),
+    Icon(path=""./img/avatar_2.png"", text=""Albert""),
+]
+
+messages = []
+
+
+def analyze_string(s):
+    vowels = ""aeiouAEIOU""
+    vowel_count = 0
+    consonant_count = 0
+
+    for char in s:
+        if char.isalpha():
+            if char in vowels:
+                vowel_count += 1
+            else:
+                consonant_count += 1
+
+    total_length = len(s)
+    return (vowel_count, consonant_count, total_length)
+
+
+def respond(message):
+    analysis = analyze_string(message)
+    response = f""""""Your message has:
+* {analysis[0]} vowels
+* {analysis[1]} consonant_count
+* {analysis[2]} total length
+""""""
+    return response
+
+
+def chat(state, var_name: str, payload: dict):
+    # Retrieve the callback parameters
+    print(f""""""payload: {payload}"""""")
+    (_, _, user_message, sender_id) = payload.get(""args"", [])
+
+    # Add the input content as a sent message
+    messages.append((f""{len(messages)}"", user_message, sender_id))
+
+    try:
+        result_message = respond(user_message)
+    except Exception:
+        result_message = ""There was a problem!""
+    messages.append((f""{len(messages)}"", result_message, users[1]))
+    state.messages = messages
+
+
+with tgb.Page() as chat_page:
+    tgb.text(""# Icon problem"", mode=""md"")
+    tgb.html(""hr"")
+    with tgb.part():
+        tgb.chat(
+            ""{messages}"",
+            users=""{users}"",
+            show_sender=True,
+            sender_id=""{users[0]}"",
+            on_action=chat,
+            mode=""markdown"",
+        )
+        # tgb.button(
+        #     label=""{users[1]}"",
+        # )  ## I can add an Icon to a button without problems
+
+
+gui = Gui(chat_page)
+gui.run(title=""Simple Chat"", dark_mode=False, use_reloader=True)
+```
+
+### 🖼️ Screenshots (Optional)
+
+Image 1: Note how the user name displays the name of the Icon's id, not the actual user name
+
+![Image](https://github.com/user-attachments/assets/9509e97f-13d5-4f40-bf9c-b8a2da625e1d)
+
+Image 2:
+
+![Image](https://github.com/user-attachments/assets/5cae565d-451f-4dd5-854d-6cf2bb46e46c)
+
+### 💻 Runtime Environment
+
+Lubuntu 24.04
+
+### 🌐 Browser (if applicable)
+
+Brave
+
+### 🖥️ Operating System
+
+Linux
+
+### 📦 Taipy Version
+
+4.0.2 and 4.0.3
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",enarroied,67969409,closed,False,11,2025-04-26T08:06:34+00:00,2025-05-02T09:11:32+00:00,2025-05-02T09:11:32+00:00,🖰 GUI;💥Malfunction;🟨 Priority: Medium;💬 Discussion,0,0,0,0,0,0,0
+Avaiga/taipy,3018719333,2582,Bump react-router from 7.4.0 to 7.5.2 in /frontend/taipy-gui,"Bumps [react-router](https://github.com/remix-run/react-router/tree/HEAD/packages/react-router) from 7.4.0 to 7.5.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/remix-run/react-router/releases"">react-router's releases</a>.</em></p>
+<blockquote>
+<h2>v7.5.2</h2>
+<p>See the changelog for release notes: <a href=""https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v752"">https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v752</a></p>
+<h2>v7.5.1</h2>
+<p>See the changelog for release notes: <a href=""https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v751"">https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v751</a></p>
+<h2>v7.5.0</h2>
+<p>See the changelog for release notes: <a href=""https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v750"">https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v750</a></p>
+<h2>v7.4.1</h2>
+<p>See the changelog for release notes: <a href=""https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v741"">https://github.com/remix-run/react-router/blob/main/CHANGELOG.md#v741</a></p>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/remix-run/react-router/blob/main/packages/react-router/CHANGELOG.md"">react-router's changelog</a>.</em></p>
+<blockquote>
+<h2>7.5.2</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li>
+<p>Update Single Fetch to also handle the 204 redirects used in <code>?_data</code> requests in Remix v2 (<a href=""https://redirect.github.com/remix-run/react-router/pull/13364"">#13364</a>)</p>
+<ul>
+<li>This allows applications to return a redirect on <code>.data</code> requests from outside the scope of React Router (i.e., an <code>express</code>/<code>hono</code> middleware)</li>
+<li>⚠️ Please note that doing so relies on implementation details that are subject to change without a SemVer major release</li>
+<li>This is primarily done to ease upgrading to Single Fetch for existing Remix v2 applications, but the recommended way to handle this is redirecting from a route middleware</li>
+</ul>
+</li>
+<li>
+<p>Adjust approach for Prerendering/SPA Mode via headers (<a href=""https://redirect.github.com/remix-run/react-router/pull/13453"">#13453</a>)</p>
+</li>
+</ul>
+<h2>7.5.1</h2>
+<h3>Patch Changes</h3>
+<ul>
+<li>
+<p>Fix single fetch bug where no revalidation request would be made when navigating upwards to a reused parent route (<a href=""https://redirect.github.com/remix-run/react-router/pull/13253"">#13253</a>)</p>
+</li>
+<li>
+<p>When using the object-based <code>route.lazy</code> API, the <code>HydrateFallback</code> and <code>hydrateFallbackElement</code> properties are now skipped when lazy loading routes after hydration. (<a href=""https://redirect.github.com/remix-run/react-router/pull/13376"">#13376</a>)</p>
+<p>If you move the code for these properties into a separate file, you can use this optimization to avoid downloading unused hydration code. For example:</p>
+<pre lang=""ts""><code>createBrowserRouter([
+  {
+    path: &quot;/show/:showId&quot;,
+    lazy: {
+      loader: async () =&gt; (await import(&quot;./show.loader.js&quot;)).loader,
+      Component: async () =&gt; (await import(&quot;./show.component.js&quot;)).Component,
+      HydrateFallback: async () =&gt;
+        (await import(&quot;./show.hydrate-fallback.js&quot;)).HydrateFallback,
+    },
+  },
+]);
+</code></pre>
+</li>
+<li>
+<p>Properly revalidate prerendered paths when param values change (<a href=""https://redirect.github.com/remix-run/react-router/pull/13380"">#13380</a>)</p>
+</li>
+<li>
+<p>UNSTABLE: Add a new <code>unstable_runClientMiddleware</code> argument to <code>dataStrategy</code> to enable middleware execution in custom <code>dataStrategy</code> implementations (<a href=""https://redirect.github.com/remix-run/react-router/pull/13395"">#13395</a>)</p>
+</li>
+<li>
+<p>UNSTABLE: Add better error messaging when <code>getLoadContext</code> is not updated to return a <code>Map</code>&quot; (<a href=""https://redirect.github.com/remix-run/react-router/pull/13242"">#13242</a>)</p>
+</li>
+<li>
+<p>Do not automatically add <code>null</code> to <code>staticHandler.query()</code> <code>context.loaderData</code> if routes do not have loaders (<a href=""https://redirect.github.com/remix-run/react-router/pull/13223"">#13223</a>)</p>
+<ul>
+<li>This was a Remix v2 implementation detail inadvertently left in for React Router v7</li>
+<li>Now that we allow returning <code>undefined</code> from loaders, our prior check of <code>loaderData[routeId] !== undefined</code> was no longer sufficient and was changed to a <code>routeId in loaderData</code> check - these <code>null</code> values can cause issues for this new check</li>
+<li>⚠️ This could be a &quot;breaking bug fix&quot; for you if you are doing manual SSR with <code>createStaticHandler()</code>/<code>&lt;StaticRouterProvider&gt;</code>, and using <code>context.loaderData</code> to control <code>&lt;RouterProvider&gt;</code> hydration behavior on the client</li>
+</ul>
+</li>
+<li>
+<p>Fix prerendering when a loader returns a redirect (<a href=""https://redirect.github.com/remix-run/react-router/pull/13365"">#13365</a>)</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/remix-run/react-router/commit/5819e0c45df69a0b4ac582497e5adb1c089385b5""><code>5819e0c</code></a> chore: Update version for release (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13456"">#13456</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/d0cac3395f004424e6afd17248d6ff166ecb6fa6""><code>d0cac33</code></a> chore: Update version for release (pre) (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13454"">#13454</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/c84302972a152d851cf5dd859ff332b354b70111""><code>c843029</code></a> Adjust approach for prerendering/SPA mode via headers (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13453"">#13453</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/8e4963faece8dda24bf40dd04dd547c9959509d0""><code>8e4963f</code></a> Restore handling of 204 &quot;soft&quot; redirects on data requests (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13364"">#13364</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/ed77157ed5a9faeb53787c3fbb092557e28e1872""><code>ed77157</code></a> update session documentation links (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13448"">#13448</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/4281172339337fa449a98e93b2abeae18f055283""><code>4281172</code></a> Missed refactor updates</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/b166e483b2134ef67d6630521eb3fdb40d64e448""><code>b166e48</code></a> Minor refactors to support RSC (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13423"">#13423</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/5dd7c1580f2d782bded3f906a66d57005b083db9""><code>5dd7c15</code></a> chore: Update version for release (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13422"">#13422</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/6ce4a79774f6f9734b7457463768bc2860398263""><code>6ce4a79</code></a> chore: Update version for release (pre) (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13412"">#13412</a>)</li>
+<li><a href=""https://github.com/remix-run/react-router/commit/cd5681bd2fd66b8b9958deb1c1fb6bdb9af08366""><code>cd5681b</code></a> Slight refactor of fetchAndDecode for RSC (<a href=""https://github.com/remix-run/react-router/tree/HEAD/packages/react-router/issues/13409"">#13409</a>)</li>
+<li>Additional commits viewable in <a href=""https://github.com/remix-run/react-router/commits/react-router@7.5.2/packages/react-router"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=react-router&package-manager=npm_and_yarn&previous-version=7.4.0&new-version=7.5.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/Avaiga/taipy/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2,2025-04-25T00:37:35+00:00,2025-05-12T13:05:22+00:00,2025-05-12T13:05:21+00:00,dependencies;javascript,0,0,0,0,0,0,0
+Avaiga/taipy,3016474295,2581,[OTHER] Upgrade Mui to 7,"### 📌 What would you like to share or ask?
+
+and Mui-X to 8
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)",FredLL-Avaiga,90181748,open,False,0,2025-04-24T08:33:36+00:00,2025-04-24T08:35:28+00:00,,📈 Improvement;🟧 Priority: High;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,3004801199,2580,[Refactor] Improve Chat Outputs,"### 📌 Description
+
+Hi!
+
+This request probably involves two distinct developments, but from a user's perspective, here are some improvements I'd add to the chat's output:
+
+## 1- Improve code outputs
+
+In `markdown` (default) mode, code that's returned from an LLM as Markdown will be like:
+
+```
+```python
+def fibonacci_number(n):
+    if n <= 0:
+  ...  
+```
+
+Which properly generates:
+```HTML 
+<pre><code class=""language-python""> ...
+```
+
+But i'd be great is these boxes have (as an option):
+* language-specific styling
+* a `copy` button, to copy the output code
+
+## Properly render Markdown tables
+
+When the LLM returns tables in Markdown mode, the output is placed between `<p>` tags, It'd be nice if it could display it as an HTML table instead. This is a sample of current output:
+
+![Image](https://github.com/user-attachments/assets/1c2b075f-8754-4694-9079-63dd0203a027)
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] The refactored code maintains existing functionality without breaking changes.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Performance improvements are documented, if applicable.
+",enarroied,67969409,open,False,2,2025-04-18T12:02:07+00:00,2025-04-22T07:43:14+00:00,,📈 Improvement;🖰 GUI;🆘 Help wanted;🟩 Priority: Low,0,0,0,0,0,0,0
+Avaiga/taipy,3004601482,2579,[✨ FEATURE] Add newspaces to chat input,"### 🔍 Feature Description
+
+Hi!
+
+When I create a chat element with;
+```python
+tgb.chat(""{messages}"", users=""{users}"", sender_id=""{users[0]}"", on_action=chat)
+```
+
+It creates a chat interface. But the input field doesn't accept newlines, even if I add `\n`, the screen would print the `\n`. Even if I copy-paste a text with a newline into the chat input, it transforms them into spaces.
+
+It would be nice to be able to add newlines (either from copy-pasted text or from a `ctrl + enter` command). This would make chatting a way better experience.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",enarroied,67969409,open,False,1,2025-04-18T09:56:28+00:00,2025-05-09T18:44:43+00:00,,🖰 GUI;🆘 Help wanted;🟩 Priority: Low;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,3004452290,2578,[✨ FEATURE] Give access to shared variables in a non state callback,"### 🔍 Feature Description
+
+Using Events, non state callbacks and shared variables, we can have a desire to get the value of a shared variable when we don't have access to a state.
+
+This function here is called when a scenario is created or deleted. Note that I am looping on all the scenarios where in fact, what interests me is adding a row or deleting a row from this shared variable (*predictions_of_all_scenarios*). My code is not optimal. Having a way to get my shared variable from this context will allow me to do that.
+```python
+def update_scenario_table(event, gui: Gui):
+    """"""Broadcast updated list of scenarios and their predictions.""""""
+    print(""==> Broadcasting scenario table update"")
+    predictions_df = pd.DataFrame(
+        {
+            ""id"": [s.id for s in tp.get_scenarios()],
+            ""name"": [s.name for s in tp.get_scenarios()],
+            ""value"": [
+                s.predictions.read() if s.predictions.is_ready_for_reading else None
+                for s in tp.get_scenarios()
+            ],
+        }
+    )
+    gui.broadcast(""predictions_of_all_scenarios"", predictions_df)
+```
+
+### 💡 Proposed Solution
+
+Open an API to get the value of a shared variable.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",FlorianJacta,98709993,open,False,0,2025-04-18T08:54:23+00:00,2025-04-18T08:55:36+00:00,,🖰 GUI;🟧 Priority: High;✨New feature;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,3004354223,2577,Refactor - Allow passing extra package name to check dependency,"## Type of PR
+
+- 🛠 Refactor
+
+## Description
+
+The `_check_dependency_is_installed()` function now accept the `extra_taipy_package_name` to be extendable.
+
+Also, the taipy sub-library name can be provided.",trgiangdo,37588363,closed,False,0,2025-04-18T08:15:49+00:00,2025-05-05T16:29:15+00:00,2025-05-05T16:29:08+00:00,Core;📈 Improvement,0,0,0,0,0,0,0
+Avaiga/taipy,3002423518,2576,Fix wrong pyprojects,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+The two pyprojects.toml files were forgotten.
+",jrobinAV,88036007,closed,False,0,2025-04-17T13:00:03+00:00,2025-04-17T13:14:05+00:00,2025-04-17T13:14:01+00:00,🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,3002220937,2575,Backport simplified build process,"I backported the build process modifications from develop to the branch `tmp/4.1` that is going to be the `release/4.1` branch at the end.
+",jrobinAV,88036007,closed,False,0,2025-04-17T11:31:39+00:00,2025-04-17T13:17:05+00:00,2025-04-17T13:17:01+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,3001846006,2574,[🐛 BUG] style in part breaks the JSX renderer,"### 🔍 What went wrong?
+
+style in part breaks the JSX renderer
+```py
+tgb.part(...style={""background-color"": ""red""}...)
+```
+
+### 📦 Taipy Version
+
+- [ ] develop
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",FredLL-Avaiga,90181748,open,False,0,2025-04-17T08:45:55+00:00,2025-04-18T12:33:47+00:00,,🖰 GUI;💥Malfunction;🟧 Priority: High;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2999389896,2573,Change version to 4.0.3,,jrobinAV,88036007,closed,False,1,2025-04-16T11:46:47+00:00,2025-04-16T11:58:43+00:00,2025-04-16T11:47:31+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2999387359,2572,Set package versions to 4.0.3 (final),,jrobinAV,88036007,closed,False,0,2025-04-16T11:45:41+00:00,2025-04-16T11:46:49+00:00,2025-04-16T11:46:49+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2999119320,2571,Devops/update publish.yml,,jrobinAV,88036007,closed,False,1,2025-04-16T09:58:47+00:00,2025-04-16T10:12:19+00:00,2025-04-16T09:59:58+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2999099017,2570,update publish.yml,"- to be backported on develop (and create a requirement.txt file local to the release scripts.)
+",jrobinAV,88036007,closed,False,1,2025-04-16T09:50:42+00:00,2025-04-16T10:02:36+00:00,2025-04-16T09:52:19+00:00,🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,2998934673,2569,Notebook Gui Test Skipped on Windows,"Due to some unknown reason, the flask notebook test is not passing on windows. This should be investigated more down the line.",dinhlongviolin1,45910030,open,False,0,2025-04-16T08:48:20+00:00,2025-04-16T14:03:21+00:00,,🖧 Devops;🖰 GUI;🆘 Help wanted;🟩 Priority: Low;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2998881189,2568,Drag n Drop,"
+## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Drag n Drop for Selector & Part
+
+## Related Tickets & Documents
+
+## How to reproduce the issue
+
+```py
+import taipy.gui.builder as tgb
+from taipy.gui import Gui, State
+
+value = ""Item 2""
+
+
+def on_action(state: State, id: str, payload: dict):
+    print(f""Action triggered: {id} with payload: {payload}"")
+    if payload.get(""target_id"") == ""Part_2"":
+        partial.update_content(
+            state,
+            f""received from {payload.get('source_id')}: {payload.get('drag_parameters', '')}{payload.get('item_id', '')}"",
+        )
+
+
+with tgb.Page() as page:
+    tgb.text(""# Selector fullwidth"", mode=""md"")
+    tgb.selector(""{value}"", lov=""Item 1;Item 2;Item 3"", drag_type=""yo"", id=""Selector_1"")
+    tgb.selector(""{value}"", lov=""Item 1;Item 2;Item 3"", drop_types=[""yo""], id=""Selector_2"")
+    with tgb.part(
+        ""part1"",
+        width=""20vw"",
+        height=""10vh"",
+        drag_type=""yo"",
+        id=""Part_1"",
+        drag_parameters={""first param"": ""yo""},
+    ):
+        tgb.text(""Drag me to the selector"")
+    tgb.part(
+        ""part2"",
+        width=""100%"",
+        height=""40vh"",
+        drop_types=[""yo""],
+        id=""Part_2"",
+        partial=""{partial}"",
+    )
+
+if __name__ == ""__main__"":
+    gui = Gui(page)
+    partial = gui.add_partial(""# Drop me here"")
+    gui.run(title=""Drag and Drop"")
+
+```
+
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-16T08:28:05+00:00,2025-04-30T15:57:48+00:00,2025-04-30T15:57:48+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2997151941,2567,Bump packages versions to 4.0.3.dev5,,FabienLelaquais,86590727,closed,False,1,2025-04-15T17:37:37+00:00,2025-04-15T17:49:44+00:00,2025-04-15T17:39:26+00:00,🟥 Priority: Critical;🧪Testing;🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,2996765600,2566,Event consumer API simplification into develop ,"## What type of PR is this? (Check all that apply)
+
+- [x] 🛠 Refactor
+- [x] ✨ Feature
+- [ ] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Open a new API using an EventConsumer Service
+
+## Related Tickets & Documents
+
+- Related Issue #2306 
+- Closes #2306 
+
+## Checklist
+_We encourage keeping the code coverage percentage at **80% or above**._
+
+- [x] ✅ This solution meets the acceptance criteria of the related issue.
+- [x] 📝 The related issue checklist is completed.
+- [x] 🧪 This PR includes **unit tests** for the developed code.
+- [ ] 📚 The **documentation** has been updated, or a dedicated issue has been created.
+    If not, explain why:
+- [ ] 📌 The **release notes** have been updated.
+    If not, explain why:
+",jrobinAV,88036007,closed,False,1,2025-04-15T15:05:17+00:00,2025-05-07T10:17:57+00:00,2025-05-07T10:17:54+00:00,Core;🟨 Priority: Medium;Core: 🔔Notifications,0,0,0,0,0,0,0
+Avaiga/taipy,2996589396,2565,process events under authorization - Issue #662 - Backport #2540,"Backport changes from https://github.com/Avaiga/taipy/pull/2540
+
+- Related Issue #662",jrobinAV,88036007,closed,False,0,2025-04-15T14:14:40+00:00,2025-04-15T17:15:25+00:00,2025-04-15T17:15:22+00:00,Core;Gui: Back-End;Core: 🔔Notifications;Enterprise: 🛂 Authorization,0,0,0,0,0,0,0
+Avaiga/taipy,2996415031,2564,Event consumer API simplification to release 4.1,"This is part of https://github.com/Avaiga/taipy-enterprise/issues/667
+
+The branch `temp/4.1` is temporary. It has been created waiting for release 4.0.3 to be shipped, so we have a reference branch for opening PRs to review. However, it aims at being closed.
+
+In the end, this branch should be merged to a new branch `release/4.1` branching from `release/4.0` is out so we can create a real release branch.",jrobinAV,88036007,closed,False,0,2025-04-15T13:20:38+00:00,2025-04-17T08:28:12+00:00,2025-04-16T15:27:33+00:00,Core: 🔔Notifications,0,0,0,0,0,0,0
+Avaiga/taipy,2993322907,2563,process events under authorization - Issue #662 - Backport #2540,"Backport changes from https://github.com/Avaiga/taipy/pull/2540
+
+- Related Issue #662
+",jrobinAV,88036007,closed,False,1,2025-04-14T14:50:45+00:00,2025-04-15T17:05:35+00:00,2025-04-15T17:05:10+00:00,Core;Gui: Back-End;Core: 🔔Notifications;Enterprise: 🛂 Authorization,0,0,0,0,0,0,0
+Avaiga/taipy,2993137236,2562,"[✨ FEATURE] add an ""editable"" argument to scenario_selector","### 🔍 Feature Description
+
+Hi!
+The `scenario_selector` visual element allows to select different scenarios, but also to create new Scenarios (if `show_add_button=True`, which is the default), sort scenarios (if selected..) and to edit Scenarios (name, tags). The later is not optional, and in some cases, it would be nice to restrict this option.
+
+### 💡 Proposed Solution
+
+Add an optional argument to `scenario_selector`, something like `editable` or `show_edit_button`, with default value set to `True`, to let users restrict the selector's behavior.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",enarroied,67969409,open,False,0,2025-04-14T13:47:55+00:00,2025-04-15T12:46:27+00:00,,Core;🖰 GUI;🟩 Priority: Low;✨New feature,1,0,0,0,0,0,1
+Avaiga/taipy,2992927194,2561,Backport fix gui_core events authorization,"Backport changes from https://github.com/Avaiga/taipy/pull/2540
+
+- Related Issue #662
+
+",jrobinAV,88036007,closed,False,0,2025-04-14T12:30:12+00:00,2025-04-14T14:46:30+00:00,2025-04-14T14:46:29+00:00,Core;🖰 GUI;Enterprise: 🛂 Authorization,0,0,0,0,0,0,0
+Avaiga/taipy,2992735416,2560,[🐛 BUG] State update problem,"### 🔍 What went wrong?
+
+I have a problem with the `state` behavior,  there seems to be a coordination problem between the front and the back end. It's difficult to explain, I provided a minimal code snippet below that reproduces the issue. I'm currently using Lubuntu, Python 3.12, Taipy 4.0.2 and Brave browser. I don't know how generic this problem is, so I'll describe what I encountered, specifically:
+
+I've seen this problem with the `scenario_selector` element, using the `on_change` callback. When I use this callback, I update other visual elements in the app from the newly selected Scenario, using the `Datanode.read()` method. 
+
+Generally speaking, it works well. However, if I change the selected Scenario fast enough, before the previously new visual element values are updated in the GUI, the application seems lo loose it and it keeps running the callback endlessly. I've tried to use a `hold_control()` and `resume_control()`, but my guess is that the problem is the communication between back and front, because all the bound variable seem to update in the backend, but take longer to update in the front.
+
+
+
+### 🔄 Steps to Reproduce
+
+You can try to reproduce the bug with this app. You can create 2-3 different Scenarios, and then change them quickly, I think it happens especially when you come back to the previous one, but this is empiric
+
+```python
+import taipy as tp
+import taipy.gui.builder as tgb
+from taipy.gui import notify, hold_control, resume_control
+import taipy as tp
+from taipy import Config
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+import random
+
+
+def add_1(number):
+    return int(number) + 1
+
+
+number_node = Config.configure_data_node(id=""number"")
+output_node = Config.configure_data_node(id=""output_number"")
+add_1_task = Config.configure_task(
+    id=""add_1_task"", function=add_1, input=number_node, output=output_node
+)
+test_scenario = Config.configure_scenario(
+    id=""ndvi_scenario"",
+    task_configs=[add_1_task],
+)
+
+
+############
+def submit_scenario(state):
+    scenario = tp.create_scenario(test_scenario)
+    scenario.number.write(state.input_value)
+    scenario.submit()
+    state.output_value = scenario.output_number.read()
+
+
+def change_scenario(state):
+    with state as s:
+        if (
+            s.selected_scenario.number.is_valid
+            and s.selected_scenario.output_number.is_valid
+        ):
+            hold_control(s, message=f""changing Scenario: {s.selected_scenario.name}"")
+
+            # This is the important part:
+            state.input_value = s.selected_scenario.number.read()
+            state.output_value = s.selected_scenario.output_number.read()
+            print(f""changing scenario values... {random.random()}"")
+
+            notify(s, ""i"", f""Changed Scenario"")
+            resume_control(s)
+        else:
+            notify(s, ""w"", ""Scenario is incomplete"")
+
+
+with tgb.Page() as update_test:
+
+    tgb.text(""# Testing State discoordination"", mode=""md"")
+    tgb.scenario_selector(
+        ""{selected_scenario}"",
+        on_change=change_scenario,
+        show_add_button=False,
+    )
+    tgb.selector(
+        ""{input_value}"",
+        lov=[0, 1, 2, 3, 4],
+        label=""select number to add 1"",
+        dropdown=True,
+    )
+    tgb.button(
+        label=""submit scenario"",
+        on_action=submit_scenario,
+    )
+    tgb.text(""Your Number plus 1 is {output_value}"")
+
+
+if __name__ == ""__main__"":
+
+    tp.Orchestrator().run()
+    input_value = 0
+    output_value = None
+
+    scenario_1 = tp.create_scenario(test_scenario)
+    scenario_1.number.write(input_value)
+    scenario_1.submit()
+    output_value = scenario_1.output_number.read()
+
+    selected_scenario = scenario_1
+
+    gui = Gui(page=update_test, css_file=""./css/main.css"")
+
+    gui.run(
+        title=""Update_test"",
+        dark_mode=False,
+        use_reloader=True,
+    )
+```
+
+
+### 🌐 Browser (if applicable)
+
+Brave
+
+### 🖥️ Operating System
+
+Linux
+
+### 📦 Taipy Version
+
+4.0.2
+
+### 📋 Additional Context (Optional)
+
+```bash
+At some point, when the callback goes into its endless loop, it makes the browser freeeze
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",enarroied,67969409,open,False,2,2025-04-14T11:12:55+00:00,2025-04-18T12:27:31+00:00,,💥Malfunction;🟧 Priority: High;🔒 Staff only;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2991983907,2559,[🐛 BUG] Initial render of lists/tuples as text are shown with brackets,"### 🔍 What went wrong?
+
+When taipy first renders the page, lists and tuples are enclosed in brackets. String elements are wrapped in quotes. After modification, they are rendered as comma-separated values without brackets/quotes.
+
+```python
+from taipy.gui import Gui, Markdown
+
+text = ""world""
+
+country_lov = [(""001"", ""USA""), (""002"", ""Canada""), (""003"", ""Mexico"")]
+selected_value = country_lov[0]
+
+page = Markdown(
+    """"""
+<|{text}|input|label=Input|>
+                
+<|{('hello', text)}|>
+
+<|{selected_value}|selector|lov={country_lov}|>
+
+<|{selected_value}|>
+""""""
+)
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page)
+    gui.run(run_browser=False, use_reloader=True)
+```
+
+See example:
+
+1. Initially rendered with brackets and quotes: `[""001"", ""USA""]`
+2. After modification, rendered without brackets and quotes: `002,Canada`
+3. After refresh, back to brackets and quotes: `[""002"", ""Canada""]`
+
+https://github.com/user-attachments/assets/43a86d02-7339-4b2d-908d-6406d1d856cd
+
+### ✅ Expected Behavior
+
+The render should be consistent.
+
+In my opinion, brackets are preferred since it makes it obvious that a list/tuple is being rendered:
+
+1. If the developer sees it, they know they should format their output better
+2. If an end user sees it, it's still human-readable
+
+If no brackets is preferred, then perhaps a white space may be added to the separator (i.e. `"", ""` instead of `"",""`).
+
+### 🔄 Steps to Reproduce
+
+1. Run attached code
+
+### 🌐 Browser (if applicable)
+
+Chrome
+
+### 🖥️ Operating System
+
+Linux
+
+### 📦 Taipy Version
+
+develop
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",arcanaxion,48582724,open,False,0,2025-04-14T06:05:40+00:00,2025-04-18T12:13:36+00:00,,🖰 GUI;💥Malfunction;🟩 Priority: Low;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2991244716,2558,[Refactor] Add active parameter to scenario_selector (maybe others),"### 📌 Description
+
+Hi!
+Several visual elements, such as `selector`, `button`, or `scenario` have an `active` argument, which defaults to `True` and can be set to `False`. When set to `False` (usually with a bound variable that I interact with from a callback),  it makes the element inactive. This is super useful to prevent changing bound variables or triggering a callback while a certain callback is already running.
+
+In the case of a `scenario_selector`, we can have an `on_change` callback, an `on_creation` callback, as well as a bound variable: Adding an `active` parameter could help deal with unstable situations. 
+
+I specifically encountered a small issue in an app I coded that could benefit from such evolution, but I think that this optional parameter could be added to any visual element that either changes bound variables or triggers callbacks --> It seems to only be missing in other Scenario controls, like `data_node_selector`, `job_selector` and `scenario_dag`.
+
+
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] The refactored code maintains existing functionality without breaking changes.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Performance improvements are documented, if applicable.
+",enarroied,67969409,open,False,1,2025-04-13T12:48:40+00:00,2025-05-09T12:58:40+00:00,,Core;📈 Improvement;🖰 GUI;🟨 Priority: Medium;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2988907736,2557,[✨ FEATURE] Add FastAPI as a web framework option,"### 🔍 Feature Description
+
+FastAPI is a well-known ASGI web framework which should be included in Taipy
+
+### 💡 Proposed Solution
+
+Generalized server implementation so multiple web frameworks can be implemented
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",dinhlongviolin1,45910030,open,False,1,2025-04-11T14:57:02+00:00,2025-05-05T09:43:42+00:00,,📈 Improvement;🖰 GUI;Core: Rest API;🟨 Priority: Medium;✨New feature;🔒 Staff only;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2988785224,2556,Backport: File upload should be reset,"resolves #2103
+
+## What type of PR is this? (Check all that apply)
+
+- [x] 🛠 Backport
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+File upload should be reset
+
+## Related Tickets & Documents
+- Closes #2103 
+
+## How to reproduce the issue
+see original issue
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-11T14:10:07+00:00,2025-04-11T15:28:20+00:00,2025-04-11T15:28:20+00:00,🟥 Priority: Critical;💥Malfunction;📝Release Notes;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2988677741,2555,Backport: Table with lists,"resolves #2553
+
+## What type of PR is this? (Check all that apply)
+
+- [x] 🛠 Backport
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Table with lists
+
+## Related Tickets & Documents
+- Closes #2553 
+
+## How to reproduce the issue
+
+```py
+import pandas as pd
+
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {
+    ""State"": [[""NY""], [""IL""], [""TX""], [""WA""]],
+    ""Plant Id"": [101, 102, 103, 104]
+}
+
+plants = pd.DataFrame(data)
+
+with tgb.Page() as page:
+    tgb.table(""{plants}"",)
+
+Gui(page).run(title=""2553 Table with list"")
+```
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-11T13:26:33+00:00,2025-04-11T14:34:33+00:00,2025-04-11T14:34:30+00:00,🟥 Priority: Critical;💥Malfunction;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2988660521,2554,Table with list,"resolves #2553
+
+## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Table with list
+
+## Related Tickets & Documents
+- Closes #2553 
+
+## How to reproduce the issue
+
+```py
+import pandas as pd
+
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = {
+    ""State"": [[""NY""], [""IL""], [""TX""], [""WA""]],
+    ""Plant Id"": [101, 102, 103, 104]
+}
+
+plants = pd.DataFrame(data)
+
+with tgb.Page() as page:
+    tgb.table(""{plants}"",)
+
+Gui(page).run(title=""2553 Table with list"")
+
+```
+
+## Backporting
+_This change should be backported to:_
+- [ ] 3.0
+- [ ] 3.1
+- [x] 4.0
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-11T13:19:31+00:00,2025-04-11T14:34:12+00:00,2025-04-11T14:34:09+00:00,🟥 Priority: Critical;💥Malfunction;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2988571088,2553,[🐛 BUG] Issue when having a column with type list,"### 🔍 What went wrong?
+
+This is a regression from 4.0.2. Now, in 4.0.3.dev4, a table with a column of type list will crash the app:
+
+![Image](https://github.com/user-attachments/assets/87fd85e7-1098-4269-be90-7fc7ed0098e5)
+
+
+**We should also investigate if this issue does not have other impacts!**
+
+```
+TypeError: e.split is not a function
+    at vV (taipy-gui.js?009c41ac31791fa43c61:184:179451)
+    at _V (taipy-gui.js?009c41ac31791fa43c61:184:186332)
+    at us (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:179841)
+    at Sl (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:238782)
+    at xr (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:228034)
+    at Mr (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:227962)
+    at zr (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:227825)
+    at or (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:224660)
+    at ar (taipy-gui-deps.dll.js?009c41ac31791fa43c61:75:223216)
+    at j (taipy-gui-deps.dll.js?009c41ac31791fa43c61:106:4016784)
+```
+
+### ✅ Expected Behavior
+
+This should work fine.
+
+### 🔄 Steps to Reproduce
+
+```python
+from taipy import Gui 
+import pandas as pd
+import taipy.gui.builder as tgb
+
+data = {
+    ""State"": [[""NY""], [""IL""], [""TX""], [""WA""]],
+    ""Plant Id"": [101, 102, 103, 104]
+}
+
+plants = pd.DataFrame(data)
+
+with tgb.Page() as page:
+    tgb.table(""{plants}"",)
+    
+Gui(page).run()
+```
+
+### 📦 Taipy Version
+
+4.0.3.dev4 develop
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",FlorianJacta,98709993,closed,False,2,2025-04-11T12:43:53+00:00,2025-04-11T14:34:10+00:00,2025-04-11T14:34:10+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2987910879,2551,[🐛 BUG] Data Node viewer red alert,"### 🔍 What went wrong?
+
+Playing with the data node selector and viewer, we get at some point:
+
+![Image](https://github.com/user-attachments/assets/a8b0067f-9b0a-4266-9cd5-8077ecc2f763)
+
+Also, sometimes, the data frames are not updated correctly (saying the number of lines without showing anything). Changing to another data node sometimes does not work.
+
+### ✅ Expected Behavior
+
+We should have no issues along the way.
+
+I propose we conduct a stress test of various sorts for the data node viewer.
+
+### 🔄 Steps to Reproduce
+
+I propose using the COVID-19 dashboard as an example instead of creating a minimal example. I think we are missing issues when using minimal examples. This dashboard has a lot of rows and a lot of different types od datanodes/types of objects that fits.
+
+I run the *src_tgb* code.
+
+https://github.com/Avaiga/demo-covid-dashboard
+
+### 📦 Taipy Version
+
+4.0.3.dev4 ???
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",FlorianJacta,98709993,closed,False,2,2025-04-11T08:12:42+00:00,2025-04-16T15:08:47+00:00,2025-04-16T15:08:47+00:00,Core;🖰 GUI;💥Malfunction;🟨 Priority: Medium,0,0,0,0,0,0,0
+Avaiga/taipy,2987676787,2550,Set version for complete and final 4.0.3 release.,,FabienLelaquais,86590727,closed,False,1,2025-04-11T06:26:50+00:00,2025-04-16T11:45:11+00:00,2025-04-16T11:45:11+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2985905803,2549,backport multiline scroll,"#2546
+
+## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+backport multiline scroll
+
+## Related Tickets & Documents
+- Closes #2546 
+
+## How to reproduce the issue
+
+```py
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+
+app_title = ""Testing""
+
+textarea = ""\n"".join([str(i) for i in range(1, 30)])
+
+with tgb.Page() as page:
+    tgb.text(value=""# {app_title}"", mode=""md"")
+    tgb.input(label=""Textarea"", value=""{textarea}"", multiline=True, lines_shown=10, id=""my_textarea"")
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page, css_file=""main.css"")
+    gui.run(title=f""2546 {app_title}"")
+```
+
+## Backporting
+<!-- Specify any branches or releases this change needs to be backported to. -->
+_This change should be backported to:_
+- [ ] 3.0
+- [ ] 3.1
+- [x] 4.0
+- [x] develop
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-10T14:33:53+00:00,2025-04-11T06:26:36+00:00,2025-04-10T16:09:57+00:00,💥Malfunction;🟧 Priority: High;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2985870330,2548,make `lines_shown` more directive,"resolves #2546
+
+## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+make `lines_shown` more directive
+
+## Related Tickets & Documents
+- Closes #2546 
+
+## How to reproduce the issue
+
+```py
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+
+app_title = ""Testing""
+
+textarea = ""\n"".join([str(i) for i in range(1, 30)])
+
+with tgb.Page() as page:
+    tgb.text(value=""# {app_title}"", mode=""md"")
+    tgb.input(label=""Textarea"", value=""{textarea}"", multiline=True, lines_shown=5, id=""my_textarea"")
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page, css_file=""main.css"")
+    gui.run(title=f""2546 {app_title}"")
+
+```
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-10T14:21:54+00:00,2025-04-10T15:12:30+00:00,2025-04-10T15:12:26+00:00,💥Malfunction;🟧 Priority: High;📝Release Notes;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2982717194,2546,[🐛 BUG] multiline input: not scrollable,"### 🔍 What went wrong?
+
+I have an input with multiline set to True and lines_shown set to 15, however the input grows indefinitely when the bound variable is updated with a large text. This still happens after a css style is applied to the input.
+
+### ✅ Expected Behavior
+
+I would like the multiline input to become scrollable when the text exceeds lines_shown argument.
+
+### 🔄 Steps to Reproduce
+
+The following proof-of-concept code demonstrates the issue:
+
+main.py:
+```py
+from taipy.gui import Gui
+import taipy.gui.builder as tgb
+
+app_title = 'Testing'
+
+textarea = '\n'.join([str(i) for i in range(1,30)])
+
+with tgb.Page() as page:
+    tgb.text(value=""# {app_title}"", mode=""md"")
+    tgb.input(label=""Textarea"", value=""{textarea}"", multiline=True, lines_shown=5, id=""my_textarea"")
+
+if __name__ == ""__main__"":
+    gui = Gui(page=page, css_file='main.css')
+    gui.run(title=f""{app_title}"", host='0.0.0.0', port=5001, debug=True, use_reloader=True)
+
+```
+main.css:
+```css
+#my_textarea {
+    overflow-y: auto;
+}
+```
+
+### 💻 Runtime Environment
+
+Mac, Safari, Python 3.9
+
+### 🌐 Browser (if applicable)
+
+Safari
+
+### 🖥️ Operating System
+
+Mac
+
+### 📦 Taipy Version
+
+4.0.2
+
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",ntunes,8285842,closed,False,3,2025-04-09T12:46:11+00:00,2025-04-10T15:12:28+00:00,2025-04-10T15:12:28+00:00,🖰 GUI;💥Malfunction;🟨 Priority: Medium,0,0,0,0,0,0,0
+Avaiga/taipy,2982353346,2545,Simplified build process,"Addresses #2514 for 4.1 and forward, and #2515.
+
+- Compute all dev release index (no more 'dev' in version.json)
+- Bump patch version when creating a production release
+- Favor pyproject.toml over setup and MANIFEST
+- Optimize Taipy build (cache on GUI bundle)
+- Removed unused scripts
+
+TODO: documentation on these.
+",FabienLelaquais,86590727,closed,False,2,2025-04-09T10:20:49+00:00,2025-04-10T16:12:06+00:00,2025-04-10T16:11:57+00:00,📈 Improvement;🖧 Devops;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2978992535,2544,Back/front unsync: default behavior,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [x] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Back/front unsync: default behavior
+
+## Related Tickets & Documents
+- Closes #2344
+
+## How to reproduce the issue
+Restart the server
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-08T08:16:49+00:00,2025-04-08T13:10:58+00:00,2025-04-08T13:10:54+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High;✨New feature;📝Release Notes,0,0,0,0,0,0,0
+Avaiga/taipy,2976582277,2543,[✨ FEATURE] Make certain values of lov inactive,"### 🔍 Feature Description
+
+A user requested the ability to mark certain values in their list of values (LOV) as inactive.
+This of course cannot be done, but the ability to have items that are not activable in controls that use them.
+
+The initial use case was for toggles, but this functionality could be extended to other UI elements that support LOVs.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",FlorianJacta,98709993,open,False,0,2025-04-07T11:43:44+00:00,2025-04-11T12:34:59+00:00,,📄 Documentation;🖰 GUI;🟧 Priority: High;✨New feature;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2974077349,2542,Fix URL encoding in content accessor by replacing quote_plus with quote for file URLs,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+This PR fixes an issue with the file_download control when file names contain spaces. Previously, spaces in filenames were encoded as **`+`** characters (using **`urllib.parse.quote_plus`**), which caused browsers to fail to locate the files. This PR changes the URL encoding to use **`urllib.parse.quote`** instead, which properly encodes spaces as **`%20`** in URLs, allowing files with spaces in their names to be downloaded correctly.
+
+## Related Tickets & Documents
+
+- Closes #2523 
+
+## How to reproduce the issue
+
+1. Create two text files in the same directory: sample_file.txt and sample file.txt (with a space)
+2. Create a Taipy app with: 
+```
+ import taipy.gui.builder as tgb
+   from taipy import Gui
+
+   with tgb.Page() as test_page:
+       tgb.text(""# Test Download button"", mode=""md"")
+       tgb.file_download(
+           content=""sample file.txt"",  # Use file with space in name
+           label=""Download File"",
+       )
+
+   if __name__ == ""__main__"":
+       gui = Gui(page=test_page)
+       gui.run(
+           title=""Test download"",
+           use_reloader=True,
+       )
+```
+
+3. Run the app and click the download button
+4. Before the fix: A .htm file is downloaded with a 404 error message
+5. After the fix: The text file is properly downloaded
+
+## Backporting
+<!-- Specify any branches or releases this change needs to be backported to. -->
+_This change should be backported to:_
+- [ ] 3.0
+- [ ] 3.1
+- [ ] 4.0
+- [ ] develop
+
+## Checklist
+_We encourage keeping the code coverage percentage at **80% or above**._
+- [x] ✅ This solution meets the acceptance criteria of the related issue.
+- [ ] 📝 The related issue checklist is completed.
+- [x] 🧪 This PR includes **unit tests** for the developed code.
+    If not, explain why:
+- [ ] 🔄 **End-to-End tests** have been added or updated.
+    If not, explain why:
+- [ ] 📚 The **documentation** has been updated, or a dedicated issue has been created.
+    If not, explain why:
+- [ ] 📌 The **release notes** have been updated.
+    If not, explain why:
+",pranshugupta01,100456318,closed,False,1,2025-04-05T09:17:15+00:00,2025-04-08T09:20:50+00:00,2025-04-08T08:42:21+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2972772302,2541,How to Exchange Data with a Custom Element Handling Tabular Data,"I would like to add a custom element in Taipy to handle tables, using the third-party JS library Handsontable. I referred to the implementation of GameTable in the ""Using tabular data"" section of the Taipy documentation and replaced the table based on HTML tags with Handsontable. The data from the Taipy backend can be successfully displayed in Handsontable, but I don't know how to send the updated data from Handsontable back to the Taipy backend after modifying the table data on the front-end page. Are there any other examples that describe how to achieve this?",Taiyangqihuo,113433509,open,False,4,2025-04-04T15:42:59+00:00,2025-04-08T15:44:01+00:00,,📄 Documentation;🖰 GUI;🟩 Priority: Low;💬 Discussion,0,0,0,0,0,0,0
+Avaiga/taipy,2972155309,2540,process events under authorization.,"## What type of PR is this? (Check all that apply)
+
+- [x] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Some bugs and log warnings exist when processing core events in the core_gui context using authorizations.
+
+## Related Tickets & Documents
+
+- Related Issue https://github.com/Avaiga/taipy-enterprise/issues/662
+- Closes https://github.com/Avaiga/taipy-enterprise/issues/662
+
+## Backporting
+
+_This change should be backported to:_
+- [x] 3.0
+- [x] 3.1
+- [x] 4.0
+- [x] develop
+
+## Checklist
+_We encourage keeping the code coverage percentage at **80% or above**._
+
+- [x] ✅ This solution meets the acceptance criteria of the related issue.
+- [x] 📝 The related issue checklist is completed.
+- [x] 🧪 This PR includes **unit tests** for the developed code.
+- [ ] 📌 The **release notes** have been updated.
+    If not, explain why: No need to document a minor log issue
+",jrobinAV,88036007,closed,False,0,2025-04-04T11:56:22+00:00,2025-04-14T13:19:12+00:00,2025-04-14T13:19:08+00:00,Core;🖰 GUI;Enterprise: 🛂 Authorization;Enterprise,0,0,0,0,0,0,0
+Avaiga/taipy,2971999349,2539,Backport: chart none data,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Backport
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Backport: chart none data
+
+## Related Tickets & Documents
+- Closes #2537 
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-04T10:49:31+00:00,2025-04-04T12:07:50+00:00,2025-04-04T12:07:17+00:00,🟥 Priority: Critical;💥Malfunction;📝Release Notes;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2971870958,2538,chart none data,"## What type of PR is this? (Check all that apply)
+
+- [ ] 🛠 Refactor
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+chart none data
+
+## Related Tickets & Documents
+- Closes #2537 
+
+ How to reproduce the issue
+
+```py
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+data = None
+
+with tgb.Page() as page:
+    tgb.chart(""{data}"")
+
+if __name__ == ""__main__"":
+    Gui(page).run(title=""2537 Chart with None data"")
+
+```
+
+## Backporting
+_This change should be backported to:_
+- [ ] 3.0
+- [ ] 3.1
+- [x] 4.0
+- [ ] develop
+
+## Checklist
+_We encourage keeping the code coverage percentage at **80% or above**._
+
+- [x] ✅ This solution meets the acceptance criteria of the related issue.
+- [ ] 📝 The related issue checklist is completed.
+- [x] 🧪 This PR includes **unit tests** for the developed code.
+",FredLL-Avaiga,90181748,closed,False,0,2025-04-04T09:59:09+00:00,2025-04-04T10:42:01+00:00,2025-04-04T10:41:57+00:00,🟥 Priority: Critical;💥Malfunction;📝Release Notes;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2971814912,2537,[🐛 BUG] None data break chart control,"### 🔍 What went wrong?
+
+Bounding a data property of a chart breaks the chart control. This is a regression.
+
+```bash
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\flask\app.py"", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\flask\app.py"", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\flask_cors\extension.py"", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\flask\app.py"", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\flask\app.py"", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\gui.py"", line 2632, in __render_page
+    context = page.render(self)  # type: ignore[arg-type]
+              ^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\_page.py"", line 47, in render
+    self._rendered_jsx = self._renderer.render(gui)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\page.py"", line 63, in render
+    return self._base_element._render(gui)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\_element.py"", line 194, in _render
+    return f""{el[0]}{self._render_children(gui)}</{el[1]}>""
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\_element.py"", line 197, in _render_children
+    return ""\n"".join([child._render(gui) for child in self._children])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\_element.py"", line 197, in <listcomp>
+    return ""\n"".join([child._render(gui) for child in self._children])
+                      ^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\_element.py"", line 276, in _render
+    el = _BuilderFactory.create_element(gui, self._ELEMENT_NAME, self._deepcopy_properties())
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\builder\_factory.py"", line 20, in create_element
+    builder_html = _Factory.call_builder(gui, element_type, properties, True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\_renderers\factory.py"", line 752, in call_builder
+    built = builder(gui, name, all_properties)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\_renderers\factory.py"", line 148, in <lambda>
+    ._get_chart_config(""scatter"", ""lines+markers"")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\_renderers\builder.py"", line 732, in _get_chart_config
+    config = _build_chart_config(self.__gui, self.__prop_values, cols_description)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\utils\chart_config_builder.py"", line 226, in _build_chart_config
+    icols = [
+            ^
+  File ""C:\Users\jacta\OneDrive\Bureau\taipy\Code\basic_code_for_demo\gui\.venv\Lib\site-packages\taipy\gui\utils\chart_config_builder.py"", line 231, in <listcomp>
+    for c1 in t.cast(dict, col_dicts[i] if i < len(col_dicts) else col_dicts[0]).keys()
+                                                                   ~~~~~~~~~^^^
+IndexError: list index out of range
+```
+
+### ✅ Expected Behavior
+
+This should not break the app like 4.0.2.
+
+### 🔄 Steps to Reproduce
+
+Run this code:
+
+```python
+from taipy import Gui 
+import taipy.gui.builder as tgb 
+
+data = None
+
+with tgb.Page() as page:
+    tgb.chart(""{data}"")
+
+Gui(page).run()
+```
+
+### 📦 Taipy Version
+
+4.0.3.dev2
+
+### 📋 Additional Context (Optional)
+
+```bash
+
+```
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A reproducible unit test is added.
+- [ ] Code coverage is **at least 90%**.
+- [ ] The bug reporter validated the fix.
+- [ ] Relevant **documentation updates** or an issue created in",FlorianJacta,98709993,closed,False,0,2025-04-04T09:36:38+00:00,2025-04-04T10:41:58+00:00,2025-04-04T10:41:58+00:00,🟥 Priority: Critical;🖰 GUI;💥Malfunction,0,0,0,0,0,0,0
+Avaiga/taipy,2968588848,2536,Bump package versions to 4.0.3.dev3,,FabienLelaquais,86590727,closed,False,1,2025-04-03T07:25:39+00:00,2025-04-03T08:19:30+00:00,2025-04-03T08:19:26+00:00,🟥 Priority: Critical;📈 Improvement;🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,2968569991,2535,[✨ FEATURE] Dynamic styling for chat messages,"### 🔍 Feature Description
+
+Currently there isn't anyway to style the messages in a chat element differently based on the sender / index / etc.
+
+There exists `taipy-chat-sent` and `taipy-chat-received` classes, but they are limited to differentiate between send and received messages only.
+
+### 💡 Proposed Solution
+
+Add dynamic styling on messages with an API like table `row_class_name`, to let user generate a class name for each message in chat.
+
+### 📈 Impact of the Feature
+
+It allows fine-grained control on messages styling. If the new property isn't set, nothing will change for chat element.
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [ ] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",gaoyichuan,3352188,open,False,1,2025-04-03T07:16:45+00:00,2025-04-03T12:59:24+00:00,,📈 Improvement;🖰 GUI;🟨 Priority: Medium,1,1,0,0,0,0,0
+Avaiga/taipy,2967868547,2534,[✨ FEATURE] Create a conda-forge channel release,"### 🔍 Feature Description
+
+Hi. Our environment is entirely dependent on conda-forge, and we'd love to start using taipy. Would it be possible to release taipy on conda forge as well as what you currently do in pip?
+
+### 📜 Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+) to avoid duplicates.
+- [x] I am willing to work on this issue (optional)
+
+### ✅ Acceptance Criteria
+
+- [ ] A working demo or example code (if applicable) is provided.
+- [ ] Integration tests demonstrate the new functionality.
+- [ ] Any new code is covered by unit tests.
+- [ ] Code coverage remains at least 90%.
+- [ ] Related documentation updates and release notes are created.",jamespinkerton,19433437,open,False,0,2025-04-03T00:40:56+00:00,2025-04-03T12:43:12+00:00,,🖧 Devops;🟨 Priority: Medium;💬 Discussion,0,0,0,0,0,0,0
+Avaiga/taipy,2967866969,2533,Refactor: route DataNode.read() and write() to _DataNodeManager,"## What type of PR is this? (check all applicable)
+
+- Refactor
+- Feature
+
+## Description
+
+This PR reroutes the DataNode.read() and write() methods to call to the manager methods.
+
+## Related Tickets & Documents
+
+- Related Issue https://github.com/Avaiga/taipy-enterprise/issues/651",trgiangdo,37588363,closed,False,0,2025-04-03T00:39:33+00:00,2025-04-07T13:45:05+00:00,2025-04-07T12:47:28+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2967044833,2532,Backport: Builder Args order,"## What type of PR is this? (Check all that apply)
+
+- [x] 🛠 Backport
+- [ ] ✨ Feature
+- [x] 🐛 Bug Fix
+- [ ] ⚡ Optimization
+- [ ] 📝 Documentation Update
+
+## Description
+Backport: Builder Args order
+
+## Related Tickets & Documents
+- Closes #2529 
+
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-02T17:06:54+00:00,2025-04-03T07:19:34+00:00,2025-04-03T07:19:21+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High;📝Release Notes,0,0,0,0,0,0,0
+Avaiga/taipy,2966835311,2530,order of parameter generation for builder,"## What type of PR is this? (check all applicable)
+
+- [ ] Refactor
+- [ ] Feature
+- [x] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+order of parameter generation for builder
+
+## Related Tickets & Documents
+- Closes #2529 
+
+## Other branches or releases that this needs to be backported
+4.0 ?
+
+
+",FredLL-Avaiga,90181748,closed,False,0,2025-04-02T15:43:17+00:00,2025-04-02T16:58:53+00:00,2025-04-02T16:58:33+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High;📝Release Notes,0,0,0,0,0,0,0
+Avaiga/taipy,2966731349,2529,[🐛 BUG] Part API is broken in develop with the Python API,"### What went wrong? 🤔
+
+The *render* parameter is now the first parameter of part which breaks the API for 4.0.3.dev2 and develop for the Python API.
+
+### Expected Behavior
+
+*class_name* should be the first parameter and the order of the parameters should not be changed. Same as before and same as the markdown.
+
+### Steps to Reproduce Issue
+
+```python
+import taipy.gui.builder as tgb
+
+tgb.part( #see the first property
+```
+
+### Screenshots
+
+![Image](https://github.com/user-attachments/assets/e4cd70ea-1992-4f65-b97f-399484c81dff)
+
+### Version of Taipy
+
+4.0.3.dev2 develop
+
+### Additional Context
+
+```bash
+
+```
+
+### Acceptance Criteria
+
+- [ ] A unit test reproducing the bug is added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] The bug reporter validated the fix.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FlorianJacta,98709993,closed,False,0,2025-04-02T15:14:10+00:00,2025-04-02T16:58:34+00:00,2025-04-02T16:58:34+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2965819610,2528,Bump package versions to 4.0.3.dev2,,FabienLelaquais,86590727,closed,False,1,2025-04-02T09:39:59+00:00,2025-04-02T10:25:07+00:00,2025-04-02T10:25:03+00:00,🟥 Priority: Critical;📈 Improvement;🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,2965512701,2527,Backport/#2524 linebreak in table cells,"## What type of PR is this? (check all applicable)
+
+- [ ] Refactor
+- [x] Backport Feature
+- [ ] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+linebreak in table cells
+
+## Related Tickets & Documents
+- Closes #2524 
+
+
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-02T08:00:13+00:00,2025-04-02T08:58:22+00:00,2025-04-02T08:58:18+00:00,🟧 Priority: High;✨New feature;📝Release Notes;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2965401517,2526,Feature/server generalize,"## What type of PR is this? (check all applicable)
+
+- [x] Refactor
+- [x] Feature
+- [ ] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+- Generalized/abstracted all related server component -> less dependent on actual server implementation
+- Fastapi integration. 
+
+## Related Tickets & Documents
+
+<!--
+For pull requests that relate or close an issue, please include them
+below.  We like to follow [Github's guidance on linking issues to pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
+
+For example having the text: ""closes #1234"" would connect the current pull
+request to issue 1234.  And when we merge the pull request, Github will
+automatically close the issue.
+-->
+
+- Related Issue #456 #2557 #2569
+- Closes #
+
+## How to reproduce the issue
+
+_Please replace this line with instructions on how to reproduce the issue or test the feature._
+
+## Other branches or releases that this needs to be backported
+_Describe which projects this change will impact and that needs to be backported._
+
+## Checklist
+_We encourage you to keep the code coverage percentage at 80% and above._
+
+- [ ] This solution meets the acceptance criteria of the related issue.
+- [ ] The related issue checklist is completed.
+- [ ] This PR adds unit tests for the developed code. If not, why?
+- [ ] End-to-End tests have been added or updated. If not, why?
+- [ ] The documentation has been updated, or a dedicated issue created. (If applicable)
+- [ ] The release notes have been updated? (If applicable)
+",dinhlongviolin1,45910030,open,False,0,2025-04-02T07:12:15+00:00,2025-05-06T09:47:01+00:00,,🖰 GUI;✨New feature;📝Release Notes;Gui: Back-End,0,0,0,0,0,0,0
+Avaiga/taipy,2963487130,2525,line breaks in table cells,"## What type of PR is this? (check all applicable)
+
+- [ ] Refactor
+- [x] Feature
+- [ ] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+Support line breaks in table cells
+
+## Related Tickets & Documents
+- Closes #2514 
+
+## How to reproduce the issue
+
+```py
+import pandas as pd
+
+import taipy.gui.builder as tgb
+from taipy.gui import Gui
+
+data = pd.DataFrame(
+    {
+        ""AC"": [1, 2, 3],
+        ""BC"": [4, 5, 6],
+        ""CC"": [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Quisque porttitor, ante et dictum rutrum, lacus turpis euismod dui, et suscipit nunc dolor in dui.\n Curabitur non elit tellus.\n Praesent sed placerat lorem.\n Nunc eleifend nisl vitae pretium iaculis.\n Donec dignissim, nisl a malesuada varius, risus elit tristique nisi, vitae imperdiet tortor dolor in dolor.\n In leo leo, finibus eget interdum sit amet, tempus maximus nibh.\n Pellentesque quis laoreet velit.\n Phasellus ultricies ligula sit amet ligula mollis placerat.\n Aenean eget iaculis felis.\n Aliquam vehicula rutrum justo a tincidunt.\n In hac habitasse platea dictumst.\n Aliquam volutpat in massa vel sodales.',
+            ""8"",
+            """"""Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Quisque porttitor, ante et dictum rutrum, lacus turpis euismod dui, et suscipit nunc dolor in dui.
+            Curabitur non elit tellus.
+            Praesent sed placerat lorem.
+            Nunc eleifend nisl vitae pretium iaculis.
+            Donec dignissim, nisl a malesuada varius, risus elit tristique nisi, vitae imperdiet tortor dolor in dolor.
+            In leo leo, finibus eget interdum sit amet, tempus maximus nibh.
+            Pellentesque quis laoreet velit.
+            Phasellus ultricies ligula sit amet ligula mollis placerat.
+            Aenean eget iaculis felis.
+            Aliquam vehicula rutrum justo a tincidunt.
+            In hac habitasse platea dictumst.
+            Aliquam volutpat in massa vel sodales."""""",
+        ],
+    }
+)
+
+with tgb.Page() as page:
+    tgb.table(data=""{data}"", show_all=True)
+
+Gui(page=page).run(title=""2524 Line breaks in Table cells"")
+
+```
+",FredLL-Avaiga,90181748,closed,False,1,2025-04-01T13:38:07+00:00,2025-04-02T07:18:51+00:00,2025-04-02T07:18:48+00:00,📈 Improvement;🟧 Priority: High;📝Release Notes;GUI: Front-End,0,0,0,0,0,0,0
+Avaiga/taipy,2963378097,2524,Feature Request: Support Line Breaks in Table,"### Description
+
+This issue's goal is to have line breaks inside table cells.
+Values like ""Item 1\nItem 2\nItem 3"" should be rendered as:
+
+```
+Item 1
+Item 2
+Item 3
+```
+
+Currently, \n is not being rendered as an HTML line break. It is written as plain text.
+
+We could also consider having markdown inside tables.
+
+### Solution Proposed
+
+Consider automatically supporting \n or <br> conversion via an optional formatting flag.
+
+### Acceptance Criteria
+
+- [ ] If applicable, a new demo code is provided to show the new feature in action.
+- [ ] Integration tests exhibiting how the functionality works are added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FlorianJacta,98709993,closed,False,0,2025-04-01T13:00:02+00:00,2025-04-02T07:18:49+00:00,2025-04-02T07:18:49+00:00,🖰 GUI;🟧 Priority: High;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,2960506766,2523,[🐛 BUG] Problem with file_download when file name has spaces,"### What went wrong? 🤔
+
+I have a problem with the `file_download` selector, the problem only happens when the file name has spaces. In that case, I can download a file, but it's a `.htm` file that says ""The requested URL was not found on the server. If you entered the URL manually, please check your spelling and try again.""
+
+This happens when using Windows (I haven't tested with other OS). 
+
+### Expected Behavior
+
+URLs should handle file names with spaces (or at minimum, the documentation should specify not to include spaces, but that would be sub-optimum in my opinion). 
+
+### Steps to Reproduce Issue
+
+In the same directory, I create 2 .txt files:
+* `sample_file.txt`
+* `sample file.txt` <-- Note the space
+
+They both have this content:
+This is a sample file
+
+In the same directory, I create the following app. Note the commented code; you can switch comments to reproduce the issue or to see the version that works (the one with an underscore):
+
+```python
+import taipy.gui.builder as tgb
+from taipy import Gui
+
+with tgb.Page() as test_page:
+
+    tgb.text(""# Test Download button"", mode=""md"")
+    tgb.file_download(
+        # content=""sample_file.txt"", # This works (if the file's name is that, of course!)
+        content=""sample file.txt"", # This doesn't work (even if that's the file's name...)
+        label=""Download File"",
+    )
+if __name__ == ""__main__"":
+    gui = Gui(page=test_page)
+    gui.run(
+        title=""Test download"",
+        use_reloader=True,
+    )
+```
+
+### Browsers
+
+Brave
+
+### OS
+
+Windows
+
+### Version of Taipy
+
+- 3.0
+- 3.1
+- 4.0.2
+
+### Additional Context
+
+```bash
+
+```
+
+### Acceptance Criteria
+
+- [ ] A unit test reproducing the bug is added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] The bug reporter validated the fix.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",enarroied,67969409,closed,False,4,2025-03-31T13:28:30+00:00,2025-04-08T08:42:22+00:00,2025-04-08T08:42:22+00:00,🖰 GUI;💥Malfunction;good first issue;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2960452104,2522,Prepare for 4.0.3 (dev1),Addresses #2521.,FabienLelaquais,86590727,closed,False,1,2025-03-31T13:07:44+00:00,2025-03-31T14:29:49+00:00,2025-03-31T13:31:30+00:00,🖧 Devops,0,0,0,0,0,0,0
+Avaiga/taipy,2960436091,2521,Integrate backport #2516 (Datanode selector) to 4.0.3 and build 4.0.3.dev1,"### What went wrong? 🤔
+
+Build 4.0.3.dev1 integrating fix for#2516 (Datanode selector).
+
+### Additional Context
+
+```bash
+
+```
+
+### Acceptance Criteria
+
+- [ ] A unit test reproducing the bug is added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] The bug reporter validated the fix.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FabienLelaquais,86590727,closed,False,0,2025-03-31T13:02:13+00:00,2025-03-31T14:30:10+00:00,2025-03-31T14:30:09+00:00,🟥 Priority: Critical;🖧 Devops;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,2960086024,2520,Bug/#2516 dn selector filter,"## What type of PR is this? (check all applicable)
+
+- [ ] Refactor
+- [ ] Feature
+- [x] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+
+This is a backport of a fix made on develop.
+
+## Related Tickets & Documents
+- Closes #2516 ",jrobinAV,88036007,closed,False,0,2025-03-31T10:20:26+00:00,2025-03-31T12:37:21+00:00,2025-03-31T12:32:19+00:00,Core;🖰 GUI;💥Malfunction,0,0,0,0,0,0,0
+Avaiga/taipy,2959818506,2519,Feature: #2471 notification on_close,"## What type of PR is this? (check all applicable)
+
+- [ ] Refactor
+- [X] Feature
+- [ ] Bug Fix
+- [ ] Optimization
+- [ ] Documentation Update
+
+## Description
+
+Implementation of a way to now if a notification was closed or not, including a callback function for the notification and the reason behind it.
+```
+def notify(
+    state: State,
+    notification_type: str = ""info"",
+    message: str = """",
+    system_notification: t.Optional[bool] = None,
+    duration: t.Optional[int] = None,
+    id: str = """",
+    on_close: t.Optional[t.Callable[[State, str, str], None]] = None,
+) -> t.Optional[str]:
+
+
+def close_notification(state: State, id: str, reason:str) -> None:
+
+```
+
+## Related Tickets & Documents
+
+<!--
+For pull requests that relate or close an issue, please include them
+below.  We like to follow [Github's guidance on linking issues to pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
+
+For example having the text: ""closes #1234"" would connect the current pull
+request to issue 1234.  And when we merge the pull request, Github will
+automatically close the issue.
+-->
+
+- Related Issue #2471 
+- Closes #2471 
+
+## How to reproduce the issue
+
+_Please replace this line with instructions on how to reproduce the issue or test the feature._
+
+## Other branches or releases that this needs to be backported
+_Describe which projects this change will impact and that needs to be backported._
+
+## Checklist
+_We encourage you to keep the code coverage percentage at 80% and above._
+
+- [x] This solution meets the acceptance criteria of the related issue.
+- [ ] The related issue checklist is completed.
+- [x] This PR adds unit tests for the developed code. If not, why?
+- [ ] End-to-End tests have been added or updated. If not, why?
+- [ ] The documentation has been updated, or a dedicated issue created. (If applicable)
+- [ ] The release notes have been updated? (If applicable)
+",Andre-Pestana0,96492636,open,False,16,2025-03-31T08:33:04+00:00,2025-04-30T15:52:26+00:00,,,0,0,0,0,0,0,0
+Avaiga/taipy,2959754430,2518,Apply decimator on all traces,"### Description
+
+From a user:
+
+Second issue is that I would like to use the decimator as the dataset is big (400 k rows). I notice that the in my current file the decimator is only applied to the first signal but when I select more signals the decimator is not applied to these additional signals making the dashboard slow and irresponsive again. I would like the decimator to be applied to all the signals that I select.
+
+So my question if someone knows or can direct me to a tutorial which deals with plotting large datasets with a multi selector in combination with a decimator.
+
+
+```python
+import pandas as pd
+import taipy.gui.builder as tgb
+from taipy.gui import Gui, notify
+from taipy.gui.data.decimator import MinMaxDecimator
+
+
+def create_fake_df():
+    return pd.DataFrame(
+        {
+            ""Index"": [1, 2, 3, 4, 5],
+            ""Signal 1"": [1, 2, 3, 4, 5],
+            ""Signal 2"": [6, 7, 8, 9, 10],
+            ""Signal 3"": [11, 12, 13, 14, 15],
+            ""Signal 4"": [16, 17, 18, 19, 20],
+            ""Signal 5"": [21, 22, 23, 24, 25],
+        }
+    )
+
+
+df = create_fake_df()
+# Load data from CSV file
+# df = pd.read_csv(r""DATA/INPUT/MERGED.csv"")
+df[""Index""] = df.index
+
+# Fill non-finite values with 0
+df = df.replace([float(""inf""), float(""-inf"")], 0)
+
+# Convert float and int64 columns to int32, skipping NaN values
+for col in df.select_dtypes(include=[""float"", ""int64""]).columns:
+    df[col] = pd.to_numeric(df[col], downcast=""integer"", errors=""coerce"")
+
+# Initialize context variables
+signals = list(df.columns)
+selected_signals = [signals[1]]  # Default to the second signal in the list
+
+# Initialize the MinMaxDecimator
+decimator_instance = MinMaxDecimator(n_out=100, zoom=True)
+
+# Initialize chart data
+chart_data = df[[""Index""] + selected_signals]
+
+
+def update_data(state):
+    if all(signal in df.columns for signal in state.selected_signals):
+        state.chart_data = df[[""Index""] + state.selected_signals]
+        print(state.chart_data)
+    else:
+        print(f""Error: Some selected signals are not found in DataFrame columns"")
+    return
+
+
+# Define Dashboard
+with tgb.Page() as page:
+    tgb.text(value=""# DATA DASHBOARD"", mode=""md"")
+    tgb.selector(
+        dropdown=True,
+        value=""{selected_signals}"",
+        lov=signals,
+        on_change=update_data,
+        multiple=True,
+    )
+    tgb.chart(
+        data=""{chart_data}"",
+        x=""Index"",
+        y=""{selected_signals}"",
+        rebuild=True,
+        decimator=decimator_instance,
+        mode=""markers"",
+    )
+    tgb.table(data=""{chart_data}"", page_size=10, rebuild=True)
+
+Gui(page=page).run(port=5002, use_reloader=True, debug=True)
+
+```
+
+### Solution Proposed
+
+The decimator could maybe apply to all traces if not specified and not only to the first one.
+
+### Acceptance Criteria
+
+- [ ] If applicable, a new demo code is provided to show the new feature in action.
+- [ ] Integration tests exhibiting how the functionality works are added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FlorianJacta,98709993,open,False,2,2025-03-31T08:02:07+00:00,2025-04-11T07:34:21+00:00,,🖰 GUI;🟨 Priority: Medium;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,2958923428,2517,[OTHER] Input Delay and Order Issue Due to Network Latency,"### What would you like to share or ask?
+
+When I deploy my Web application to the server for user access, there is a noticeable delay when the value of any input elements changes due to network latency, and it can even alter the order of my inputs. When I set the change_delay to -1, this problem is resolved, but it requires all inputs to be transmitted to the server using the Enter key. If users forget this, it will cause inconsistency between the text displayed in the input element and the actual value on the server. If it were possible to transmit the value to the server when the input loses focus, rather than requiring the Enter key, this problem could be solved. However, I haven't found a way to implement this. Alternatively, if there was a way to force certain controls to update their values to the server when a user presses a specific button, it would also solve my problem, but I haven't found a solution for that either.
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",Taiyangqihuo,113433509,closed,False,2,2025-03-30T15:00:53+00:00,2025-04-02T08:18:14+00:00,2025-04-02T08:18:14+00:00,🖰 GUI;❓ Question;💬 Discussion,0,0,0,0,0,0,0
+Avaiga/taipy,2958813372,2516,Exception raised when using the data_node_selector filter,"### What went wrong? 🤔
+
+When using the filter feature of the Data Node selector, an exception is raised and the filter does not apply.
+
+
+### Expected Behavior
+
+Datanodes should be filtered.
+
+### Steps to Reproduce Issue
+
+Run the following code:
+
+```python
+import taipy as tp
+
+from taipy.common.config import Config, Scope
+from taipy.gui import Gui
+
+
+dn_cfgs = [Config.configure_data_node(id=id, scope=Scope.GLOBAL) for id in [""united_states_of_america"", ""china"", ""germany""]]
+
+data_node = None
+
+if __name__ == ""__main__"":
+    tp.Orchestrator().run()
+
+    for dn_cfg in dn_cfgs:
+        tp.create_global_data_node(dn_cfg)
+
+    Gui(page=""<|{data_node}|data_node_selector|>"").run()
+```
+
+Press the filter icon of the control, set to:
+- Property = Label
+- Condition = contains
+- String = g
+
+Only the data node labeled ""germany"" matches.
+
+However, when applied, these messages show up in the console, and data nodes are not filtered.
+
+```console
+...\Lib\site-packages\taipy\gui\utils\_evaluator.py:297: TaipyGuiWarning: Exception raised evaluating __gui._get_adapted_lov(__taipy_gui_core_Ctx.get_datanodes_tree(None, None, __tpgc_dn_filter21, __tpgc_dn_sort21),'tgc_datanode'):
+[Errno 2] No such file or directory: 'user_data/pickles/DATANODE_germany_230bda54-d908-454a-8528-50e1fe41cee3.p'
+  _warn(f""Exception raised evaluating {expr_string}"", e)
+```
+
+### Version of Taipy
+
+4.0.3.dev0
+
+### Additional Context
+
+Taipy was installed with:
+
+```bash
+pip intall https://github.com/Avaiga/taipy/releases/tag/4.0.3.dev0
+```
+
+### Acceptance Criteria
+
+- [ ] A unit test reproducing the bug is added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] The bug reporter validated the fix.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FabienLelaquais,86590727,closed,False,2,2025-03-30T11:19:01+00:00,2025-03-31T13:18:16+00:00,2025-03-31T13:18:16+00:00,🟥 Priority: Critical;🖰 GUI;💥Malfunction;Core: 📁 Data node,0,0,0,0,0,0,0
+Avaiga/taipy,2953958587,2515,Remove extension from version.json files and make actions pick the extension digit automatically,"# Description
+
+Keeping the extension in the version.json files does not bring value. A developer who wants to create a dev release does not care which number it is.
+
+This issue has two goals.
+1. It aims to remove the extension in all the version.json files and keep the next version number targeted.
+2. It also aims to make the build and release processes automatically pick the correct dev version to build based on the versions already created.
+
+# Example
+
+Let's assume the last stable versions are the following:
+- `taipy-common-X.Y.Z`
+- `taipy-gui-X.Y.Z+1`
+- `taipy-core-X.Y.Z+2`
+- `taipy-rest-X.Y.Z`
+- `taipy-templates-X.Y.Z`
+- `taipy-X.Y.Z+3`
+
+### develop branch
+
+On the `develop` branch, the version.json files should contain `X.Y+1.0` for all packages (taipy, common, gui, core, rest, template)
+
+### release branch
+
+On the `release/X.Y` branch, the version.json files should contain the following:
+- taipy-common: `X.Y.Z+1`
+- taipy-gui: `X.Y.Z+2`
+- taipy-core: `X.Y.Z+3`
+- taipy-rest: `X.Y.Z+1`
+- taipy-templates: `X.Y.Z+1`
+- taipy: `X.Y.Z+4`
+
+# Release single package workflow
+
+After releasing a production version, let's say `X.Y.Z` (from branch `release/X.Y`), the version.json of the released package in the `release/X.Y` branch should now contain  `X.Y.Z+1`. The other packages should not be changed.
+
+When releasing a dev version to prepare release `X.Y.Z`, the workflow should automatically find the latest dev version of the `X.Y.Z`. Let's say the latest dev release was `X.Y.Z.devA`.
+Then the workflow should build the `X.Y.Z.devA+1`. Once it is built. There is nothing to update in the version.json files on any branch.
+
+# Release all packages workflow
+
+After releasing a production version, let's say `X.Y.0` (from branch `release/X.Y`), all the version.json in the `release/X.Y` branch should now contain  `X.Y.1`.
+All the version.json in the `develop` branch should now contain  `X.Y+1.0`.
+
+When releasing a dev version to prepare release `X.Y.0`, the workflow should automatically find the latest dev version of the `X.Y.0`. Let's say the latest dev release was `X.Y.0.devA`. Then the workflow should build the `X.Y.Z.devA+1`. Once it is built. There is nothing to update in the version.json files on any branch.
+
+",jrobinAV,88036007,closed,False,1,2025-03-27T17:49:21+00:00,2025-04-12T10:32:34+00:00,2025-04-12T10:32:31+00:00,🖧 Devops;🟧 Priority: High;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2952410181,2514,Build & release process changes,"### What went wrong? 🤔
+
+Issues #2496 and #2512 were fixed in Taipy 4.0 in [PR#2499](https://github.com/Avaiga/taipy/pull/2499).
+This needs to be applied to the develop branch as well.
+
+### Acceptance Criteria
+
+- [ ] Release can be build (production and dev modes) for all packages at once, or individually.
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FabienLelaquais,86590727,closed,False,0,2025-03-27T10:30:49+00:00,2025-04-02T07:18:49+00:00,2025-04-02T07:18:49+00:00,🖧 Devops;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0
+Avaiga/taipy,2946135092,2512,Latest release may be wrong,"### What went wrong? 🤔
+
+The latest build of the 'taipy' package with a production type is marked 'latest'.
+There are situations where this is wrong, and needs manual fixing:
+    - building a patch release for a sub-package marks this package as latest, which is wrong.
+    - building a patch release for a legacy minor version marks this package as latest, which is wrong.
+
+### Steps to Reproduce Issue
+
+Manually build a patch release for a sub-package.
+
+### Additional Context
+
+```bash
+
+```
+
+### Acceptance Criteria
+
+- [ ] A unit test reproducing the bug is added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] The bug reporter validated the fix.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",FabienLelaquais,86590727,closed,False,0,2025-03-25T10:59:11+00:00,2025-03-27T10:07:44+00:00,2025-03-27T10:07:44+00:00,🖧 Devops;💥Malfunction;🟨 Priority: Medium;🔒 Staff only,0,0,0,0,0,0,0
+Avaiga/taipy,2943678393,2511,PyGWalker integration,"### Description
+
+Including dynamically content generated by pygwalker into a taipy page should be great.
+
+For example, would it be possible to include html generated by PyGWalker in a dialog component (assuming my datas are in ""df"", ""cit_pgw_partial"" properly defined in main in the example below)
+With current taipy version, html from PyGWalker is just displayed in a new browser's tab. More over, when I close this pyg page, the following exception is raised :
+```
+on_action(): Exception raised in 'gen_pgw_html()':
+'content' argument is missing for class '_Renderer'
+```
+Page example :
+```python
+from taipy.gui import Html
+import taipy.gui.builder as tgb
+import pandas as pd
+import pygwalker as pyg
+
+sel_expanded = False
+show_dialog = False
+
+df = load_my_datas() # just loading some datas for tests
+
+def gen_pgw_html(state):
+    state.cit_pgw_partial.update_content(state, Html(pyg.walk(state.df,return_html=True,)))    
+    state.show_dialog = True
+
+def dialog_action(state, _, payload):
+    if payload[""args""][0] == -1:
+        state.show_dialog = False
+
+with tgb.Page() as pgw_tgb:
+    with tgb.part(class_name='container align_columns_center'):
+        tgb.menu(lov=""{lov_menu}"",on_action=""menu_option_selected"")
+    with tgb.expandable(title=""Requete Oracle"",expanded=""{sel_expanded}"",on_change=""expand""):      
+        with tgb.part():
+            tgb.button(label=""{icon_apply}"", on_action=""gen_pgw_html"")
+    tgb.dialog(""{show_dialog}"",partial=""{cit_pgw_partial}"",on_action=""dialog_action"")
+```
+
+### Acceptance Criteria
+
+- [ ] If applicable, a new demo code is provided to show the new feature in action.
+- [ ] Integration tests exhibiting how the functionality works are added.
+- [ ] Any new code is covered by a unit tested.
+- [ ] Check code coverage is at least 90%.
+- [ ] Related issue(s) in taipy-doc are created for documentation and Release Notes are updated.
+
+
+### Code of Conduct
+
+- [x] I have checked the [existing issues](https://github.com/Avaiga/taipy/issues?q=is%3Aissue+).
+- [ ] I am willing to work on this issue (optional)",dataxcount,179919478,closed,False,5,2025-03-24T15:43:44+00:00,2025-04-03T12:37:12+00:00,2025-04-03T12:37:10+00:00,🖰 GUI;❓ Question;🟨 Priority: Medium;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,2943419266,2510,Feature/#2292 allow menu to be expanded by default (Redo),"## What type of PR is this?
+
+- [X] Feature
+
+## Description
+I added the ""expanded"" parameter to the Menu component. It is a boolean that, when set to true, causes the menu to start off expanded.
+
+![Screenshot 2025-03-21 160053](https://github.com/user-attachments/assets/08ce76b4-9386-4425-99ca-c6d39367777e)
+
+ Default value is false, which starts the menu folded.
+
+![Screenshot 2025-03-21 160025](https://github.com/user-attachments/assets/def2cdcf-d9e3-46f1-9c93-b403da503c82)
+
+## Related Tickets & Documents
+
+- Related Issue #2292
+- Closes #2292
+
+## Feature description
+
+Running this code will generate a folded menu:
+
+
+from taipy.gui import Gui
+import taipy.gui.builder as tgb
+
+options = [(""a"", ""Option A""), (""b"", ""Option B""), (""c"", ""Option C""), (""d"", ""Option D"")]
+
+
+with tgb.Page() as page:
+   tgb.menu(label = ""options"",
+            lov = options,
+)
+
+
+if __name__ == ""__main__"":
+    Gui(page).run(title=""Menu - Selected"")
+
+By setting the ""expanded"" property to ""True"", the menu will start expanded:
+
+[...]
+
+with tgb.Page() as page:
+   tgb.menu(label = ""options"",
+            lov = options,
+            expanded = True,
+)
+
+[...]
+
+## Checklist
+
+- [X] This solution meets the acceptance criteria of the related issue.
+- [X] This PR adds unit tests for the developed code. 
+
+(This is an updated version of another fork by the same name)
+
+",MiguelLehmann,126074597,closed,False,4,2025-03-24T14:18:13+00:00,2025-03-26T09:07:59+00:00,2025-03-26T09:07:59+00:00,🖰 GUI;🟧 Priority: High;✨New feature,0,0,0,0,0,0,0
+Avaiga/taipy,2942872230,2509,Refactor - Remove _Manager._set() api and add _Manager._update(),"## What type of PR is this? (check all applicable)
+
+- Refactor
+- Feature
+",trgiangdo,37588363,closed,False,2,2025-03-24T11:04:32+00:00,2025-03-28T06:50:14+00:00,2025-03-28T06:50:12+00:00,,0,0,0,0,0,0,0
+Avaiga/taipy,2938723560,2508,Feature/#2292 allow menu to be expanded by default,"## What type of PR is this?
+
+- [X] Feature
+
+## Description
+I added the ""expanded"" parameter to the Menu component. It is a boolean that, when set to true, causes the menu to start off expanded.
+
+![Screenshot 2025-03-21 160053](https://github.com/user-attachments/assets/08ce76b4-9386-4425-99ca-c6d39367777e)
+
+ Default value is false, which starts the menu folded.
+
+![Screenshot 2025-03-21 160025](https://github.com/user-attachments/assets/def2cdcf-d9e3-46f1-9c93-b403da503c82)
+
+## Related Tickets & Documents
+
+- Related Issue #2292
+- Closes #2292
+
+## Feature description
+
+Running this code will generate a folded menu:
+
+
+from taipy.gui import Gui
+import taipy.gui.builder as tgb
+
+options = [(""a"", ""Option A""), (""b"", ""Option B""), (""c"", ""Option C""), (""d"", ""Option D"")]
+
+
+with tgb.Page() as page:
+   tgb.menu(label = ""options"",
+            lov = options,
+)
+
+
+if __name__ == ""__main__"":
+    Gui(page).run(title=""Menu - Selected"")
+
+By setting the ""extended"" property to ""True"", the menu will start expanded:
+
+[...]
+
+with tgb.Page() as page:
+   tgb.menu(label = ""options"",
+            lov = options,
+            expanded = True,
+)
+
+[...]
+
+## Checklist
+
+- [X] This solution meets the acceptance criteria of the related issue.
+- [X] This PR adds unit tests for the developed code. 
+
+
+",MiguelLehmann,126074597,closed,False,3,2025-03-21T15:17:02+00:00,2025-03-24T14:36:11+00:00,2025-03-24T14:36:11+00:00,🖰 GUI;🟧 Priority: High;✨New feature;📝Release Notes,0,0,0,0,0,0,0
+Avaiga/taipy,2936596690,2507,Refactor button and input components to use dynamic height based on size prop,"## What type of PR is this? (check all applicable)
+
+- [x] Refactor
+- [ ] Feature
+- [X] Bug Fix
+- [ ] Optimization
+- [x] Documentation Update
+
+## Description
+The sizes have been changed to these:
+`small` - minHeight: 32px
+`medium`/`default` - minHeight: 48px
+`large` - minHeight: 56px
+## Related Tickets & Documents
+
+<!--
+For pull requests that relate or close an issue, please include them
+below.  We like to follow [Github's guidance on linking issues to pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
+
+For example having the text: ""closes #1234"" would connect the current pull
+request to issue 1234.  And when we merge the pull request, Github will
+automatically close the issue.
+-->
+
+- Related Issue #588 
+- Closes #588 
+
+## How to reproduce the issue
+
+Described in the issue.
+",NOF03,105490848,closed,False,12,2025-03-20T20:40:43+00:00,2025-04-04T07:48:29+00:00,2025-04-04T07:48:29+00:00,🖰 GUI;💥Malfunction;🟧 Priority: High,0,0,0,0,0,0,0

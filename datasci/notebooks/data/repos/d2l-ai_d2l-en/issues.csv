@@ -1,0 +1,1121 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+d2l-ai/d2l-en,3048758729,2646,fix expectation for densities,"*Description of changes:*
+Current version shows the following:
+
+$E[X] = \int x \;dp(x)$
+
+Updated to:
+
+$E[X] = \int x p(x)\;dx$
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Mrutyunjay01,53314831,open,False,0,2025-05-08T11:50:52+00:00,2025-05-08T11:50:52+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,3041548343,2645,Define logit,"I don't think logits are ever formally defined anywhere in the book, they're just suddenly mentioned in 4.1 Softmax Regression.",rdong8,66289396,open,False,0,2025-05-06T05:20:32+00:00,2025-05-06T05:20:32+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,3021886556,2644,BOOK TRANSLATION,Is there any plan to release an official Russian translation of the book? Im really looking forward to it!,ladan27,190695648,open,False,0,2025-04-26T13:46:11+00:00,2025-04-26T13:46:11+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,3011381717,2643,Fixed typo in dimensions of bias term,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+
+In the Vectorization section, 
+
+We have
+$\mathbf{X} \in \mathbb{R}^{n \times d}$, $\mathbf{W} \in \mathbb{R}^{d \times q}$.
+
+Now, since:
+$$\mathbf{O} = \mathbf{X} \mathbf{W} + \mathbf{b}$$
+and
+$$\hat{\mathbf{Y}} = \mathrm{softmax}(\mathbf{O}),$$
+
+we require $\mathbf{b} \in \mathbb{R}^{n \times q}$. This ensures that the softmax operation can be computed row-wise on $\mathbf{O}$.
+
+",deepam20050,88540910,open,False,0,2025-04-22T15:08:54+00:00,2025-04-22T15:08:54+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,3005672971,2642,Mention that Binary Classification is also called Logistic Regression,"Mention that Binary Classification is also called Logistic Regression. And also answer why even if it's called ""regression"", it's actually a classification problem",Gianni1298,53049920,open,False,0,2025-04-18T20:11:55+00:00,2025-04-18T20:11:55+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2965979248,2641,Is the English version of colab notebooks more advanced than Chinese version?,"I have seen that the English version of the notebooks and the Chinese version of the notebooks are not the same, which one is more advanced?",Crinstttina,69063540,open,False,1,2025-04-02T10:43:00+00:00,2025-04-04T07:28:08+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2959385495,2640,Update auto-parallelism.md ,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Zemelee,29793246,open,False,0,2025-03-31T03:35:02+00:00,2025-03-31T03:35:02+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2937636735,2639,Please do not talk too much about the broadcast mechanism.,"About Chapter 2.1.4 and 2.3.7, there is too much talk about the broadcast mechanism. It's like the implicit type conversion rule, which is not a good programming style.
+
+About 2.3.7, a good programming style is to call the functions supplied by `torch.nn.functional`:
+
+```python
+import torch
+import torch.nn.functional as F
+
+# 创建示例张量
+data = torch.arange(20, dtype=torch.float32).reshape(5, 4)
+
+# 使用 torch.nn.functional.normalize 进行 L2 归一化
+normalized_data_l2 = F.normalize(data, p=2, dim=1)
+
+# 使用 torch.nn.functional.normalize 进行 L1 归一化
+normalized_data_l1 = F.normalize(data, p=1, dim=1)
+
+print(""Original data:"")
+print(data)
+print(""Normalized data (L2 norm):"")
+print(normalized_data_l2)
+print(""Normalized data (L1 norm):"")
+print(normalized_data_l1)
+```
+
+If there is really a need to use the broadcast mechanism, recommend first checkout the broadcast output:
+
+
+```
+np.broadcast_arrays(x, y)
+```
+
+```
+torch.broadcast_tensors(x, y)
+```
+
+This helps to check what the internal broadcast mechanism will output. The broadcast mechanism is an internal mechanism in NumPy designed for speeding up computations. However, encouraging the use of this style of code is not a good idea.",a358003542,1977659,open,False,0,2025-03-21T08:10:28+00:00,2025-03-21T08:37:41+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2928242273,2638,d2l broken (numpy) in colab with default pytorch 2.6.0,"Colab just updated pytorch to 2.6.0 and it breaks d2l:
+
+```bash
+---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+[<ipython-input-2-a93af434f2cf>](https://localhost:8080/#) in <cell line: 0>()
+      1 get_ipython().run_line_magic('matplotlib', 'inline')
+----> 2 from d2l import torch as d2l
+      3 import torchvision
+
+14 frames
+
+[/usr/local/lib/python3.11/dist-packages/d2l/torch.py](https://localhost:8080/#) in <module>
+      4 import numpy as np
+      5 import torch
+----> 6 import torchvision
+      7 from PIL import Image
+      8 from torch import nn
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/__init__.py](https://localhost:8080/#) in <module>
+      8 # .extensions) before entering _meta_registrations.
+      9 from .extension import _HAS_OPS  # usort:skip
+---> 10 from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  # usort:skip
+     11 
+     12 try:
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/models/__init__.py](https://localhost:8080/#) in <module>
+      1 from .alexnet import *
+----> 2 from .convnext import *
+      3 from .densenet import *
+      4 from .efficientnet import *
+      5 from .googlenet import *
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/models/convnext.py](https://localhost:8080/#) in <module>
+      6 from torch.nn import functional as F
+      7 
+----> 8 from ..ops.misc import Conv2dNormActivation, Permute
+      9 from ..ops.stochastic_depth import StochasticDepth
+     10 from ..transforms._presets import ImageClassification
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/ops/__init__.py](https://localhost:8080/#) in <module>
+     21 from .giou_loss import generalized_box_iou_loss
+     22 from .misc import Conv2dNormActivation, Conv3dNormActivation, FrozenBatchNorm2d, MLP, Permute, SqueezeExcitation
+---> 23 from .poolers import MultiScaleRoIAlign
+     24 from .ps_roi_align import ps_roi_align, PSRoIAlign
+     25 from .ps_roi_pool import ps_roi_pool, PSRoIPool
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/ops/poolers.py](https://localhost:8080/#) in <module>
+      8 
+      9 from ..utils import _log_api_usage_once
+---> 10 from .roi_align import roi_align
+     11 
+     12 
+
+[/usr/local/lib/python3.11/dist-packages/torchvision/ops/roi_align.py](https://localhost:8080/#) in <module>
+      5 import torch.fx
+      6 from torch import nn, Tensor
+----> 7 from torch._dynamo.utils import is_compile_supported
+      8 from torch.jit.annotations import BroadcastingList2
+      9 from torch.nn.modules.utils import _pair
+
+[/usr/local/lib/python3.11/dist-packages/torch/_dynamo/__init__.py](https://localhost:8080/#) in <module>
+      1 import torch
+      2 
+----> 3 from . import convert_frame, eval_frame, resume_execution
+      4 from .backends.registry import list_backends, lookup_backend, register_backend
+      5 from .callback import callback_handler, on_compile_end, on_compile_start
+
+[/usr/local/lib/python3.11/dist-packages/torch/_dynamo/convert_frame.py](https://localhost:8080/#) in <module>
+     31 from torch._C._dynamo.guards import GlobalStateGuard
+     32 from torch._dynamo.distributed import get_compile_pg
+---> 33 from torch._dynamo.symbolic_convert import TensorifyState
+     34 from torch._guards import compile_context, CompileContext, CompileId, tracing
+     35 from torch._logging import structured
+
+[/usr/local/lib/python3.11/dist-packages/torch/_dynamo/symbolic_convert.py](https://localhost:8080/#) in <module>
+     25 import torch
+     26 import torch._logging
+---> 27 from torch._dynamo.exc import TensorifyScalarRestartAnalysis
+     28 from torch._guards import tracing, TracingContext
+     29 
+
+[/usr/local/lib/python3.11/dist-packages/torch/_dynamo/exc.py](https://localhost:8080/#) in <module>
+      9 
+     10 from . import config
+---> 11 from .utils import counters
+     12 
+     13 
+
+[/usr/local/lib/python3.11/dist-packages/torch/_dynamo/utils.py](https://localhost:8080/#) in <module>
+    109             np.fft,
+    110             np.linalg,
+--> 111             np.random,
+    112         )
+    113 
+
+[/usr/local/lib/python3.11/dist-packages/numpy/__init__.py](https://localhost:8080/#) in __getattr__(attr)
+    335             if not abs(x.dot(x) - 2.0) < 1e-5:
+    336                 raise AssertionError()
+--> 337         except AssertionError:
+    338             msg = (""The current Numpy installation ({!r}) fails to ""
+    339                    ""pass simple sanity checks. This can be caused for example ""
+
+[/usr/local/lib/python3.11/dist-packages/numpy/random/__init__.py](https://localhost:8080/#) in <module>
+    178 
+    179 # add these for module-freeze analysis (like PyInstaller)
+--> 180 from . import _pickle
+    181 from . import _common
+    182 from . import _bounded_integers
+
+[/usr/local/lib/python3.11/dist-packages/numpy/random/_pickle.py](https://localhost:8080/#) in <module>
+----> 1 from .mtrand import RandomState
+      2 from ._philox import Philox
+      3 from ._pcg64 import PCG64, PCG64DXSM
+      4 from ._sfc64 import SFC64
+      5 
+
+mtrand.pyx in init numpy.random.mtrand()
+
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+```",drapado,45577687,open,False,0,2025-03-18T11:51:11+00:00,2025-03-18T13:02:53+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2922425582,2637,Fail to open discussion,"Fail to open the discussion in the book website : discuss.d2l.ai
+
+504 Gateway Time-out",stormwyrmx,76990712,closed,False,5,2025-03-15T18:29:47+00:00,2025-04-11T07:47:29+00:00,2025-04-11T07:47:28+00:00,,3,3,0,0,0,0,0
+d2l-ai/d2l-en,2886866885,2636,failed to access  https://discuss.d2l.ai/,"![Image](https://github.com/user-attachments/assets/7282fb67-1e69-425f-9493-1d86ba522cdf)
+have tried to delete cookie cache, but didn't work
+
+related issue https://github.com/d2l-ai/d2l-en/issues/2581",domonnss,60506557,closed,False,7,2025-02-28T11:08:17+00:00,2025-04-11T07:49:21+00:00,2025-04-11T07:49:20+00:00,,7,7,0,0,0,0,0
+d2l-ai/d2l-en,2853905192,2635,jax.lax.stop_gradient should be not useless in an example,"The `x` in `u(x)` is different from one in lambdas, so `stop_gradient` was doing nothing. I have fixed the example for it to have some effect.
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",faucct,5202503,open,False,0,2025-02-14T14:45:06+00:00,2025-02-14T14:45:06+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2819169065,2634,Update densenet.md,"The statmement may cause confusion. Smaller means that paramers are smaller in value rather than smaller in number. Fewer represents that a smaller number of parameters are needed.
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",ratnarajsingh,2114902,open,False,0,2025-01-29T20:11:35+00:00,2025-01-29T20:11:35+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2799360125,2633,equation error fix,"*Description of changes:*
+This pr is to resolve #2632.
+
+<img width=""500"" alt=""image"" src=""https://github.com/user-attachments/assets/9fcc0a59-8185-4d8c-bff1-cfa1f239c889"" />
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",wsehjk,59788262,open,False,0,2025-01-20T14:05:07+00:00,2025-01-20T14:05:07+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2795657042,2632,Equation error in calculus.md,"In section [2.4.3 2.4.3. Partial Derivatives and Gradients](https://d2l.ai/chapter_preliminaries/calculus.html#partial-derivatives-and-gradients), the equation seems to be wrong, 
+
+<img width=""477"" alt=""Image"" src=""https://github.com/user-attachments/assets/5fb2a401-164c-4ec2-b657-a368380103d6"" />
+
+It should be 
+
+<img width=""495"" alt=""Image"" src=""https://github.com/user-attachments/assets/bd35af03-e7c1-48c4-9fd9-33c2eddd2e3e"" />
+
+If so, I would like to create a pr to fix.
+Thanks",wsehjk,59788262,open,False,0,2025-01-17T14:50:03+00:00,2025-01-17T14:50:22+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2765412403,2631,Code consistency fix in linear-regression-scratch.md,"Model.train() and Model.eval() are used without explanation. In addition, the other parts of the section directly set Model.training = True/False instead of invoking the methods.
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",dkmoon,1297508,open,False,0,2025-01-02T03:55:34+00:00,2025-01-02T03:55:34+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2765358211,2630,Typo fix in utils.md,"Changed ""Progress bar"" to ""Progress board""
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",dkmoon,1297508,open,False,0,2025-01-02T01:55:23+00:00,2025-01-02T01:55:23+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2735963653,2629,Update qlearning.md: gradient descent coefficients,"* equations 17.3.3 and 17.3.4 had a wrong ""-"" instead of ""+"" in front of $\alpha$.
+* In order for the coefficient of $Q_{s_t^i, a_t^i}$ to be $1 - \alpha$, there needs to be a $1/2$ in $l(Q)$ in equation 17.3.2.
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",vlad-ulmeanu01,73878428,open,False,0,2024-12-12T13:44:35+00:00,2024-12-12T13:44:35+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2730285473,2628,Fixed typo: Epanechikov -> Epanechnikov,"Also, the definition of Epanechnikov kernel in (11.2.1) seems different from a typical definition that uses quadratic function.
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",tatsuookubo,14331989,open,False,0,2024-12-10T14:29:54+00:00,2024-12-10T14:29:54+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2696514040,2627,fix typo,"tiny typo.
+
+now the text is consistent with what is shown in the following code snippets",filevich,5137488,open,False,0,2024-11-27T00:04:47+00:00,2024-11-27T00:04:47+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2684055670,2626,Numpy version mismatch in d2l installation JAX,"I am trying to install d2l for jax but
+[Installation Link](https://d2l.ai/chapter_installation/index.html)
+and I am getting Error in numpy package version when i install `d2l` by
+
+```
+pip install d2l==1.0.3
+```
+
+error:
+```
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+chex 0.1.82 requires numpy>=1.25.0, but you have numpy 1.23.5 which is incompatible.
+tensorflow 2.18.0 requires numpy<2.1.0,>=1.26.0, but you have numpy 1.23.5 which is incompatible.
+Successfully installed d2l-1.0.3 numpy-1.23.5
+```",itahang,128391352,open,False,0,2024-11-22T17:42:22+00:00,2024-11-22T17:42:22+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2670440517,2625,Error when installing d2l: module pkgutil has no attribute ImpImporter.,"I am trying to install the d2l library using the ````pip install d2l==1.0.3```` and I get the following error:
+
+`AttributeError: module pkgutil has no attribute ImpImporter. Did you mean: zipimporter   
+  note: This error originates from a subprocess, and is likely not a problem with pip.`
+
+
+How can I solve this? I have my conda env setup properly. 
+
+Thanks!",hamiddashti,5567953,open,False,2,2024-11-19T01:21:02+00:00,2024-12-08T00:06:35+00:00,,,2,2,0,0,0,0,0
+d2l-ai/d2l-en,2640256781,2624,Fix typo in semantic-segmentation-and-dataset.md,On of the -> One of the,GabrielGodefroy,11786782,open,False,0,2024-11-07T08:31:16+00:00,2024-11-12T12:15:53+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2627638547,2623,Fix typos,"*Description of changes:*
+
+Fix typos found via `codespell -S *.svg,static,docker,graffle,*.bib -L nin,nd,sie,whet,teh,theses,claus,whe,leary` and `typos --hidden --format brief`
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",kianmeng,134518,open,False,0,2024-10-31T19:12:48+00:00,2024-10-31T19:12:48+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2508419050,2620,Update multivariable-calculus.md,"fix an typo:
+(22.4.2) should not have \epsilon_N
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",hymalaya,180575689,open,False,0,2024-09-05T18:02:29+00:00,2024-09-10T11:41:04+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2506169617,2619,"AI-Powered Text Processing Enhancements: Options for Formatting, Dealing with Errors, and Flexibility"," #### 1. **Summary:** 
+ This pull request implements several new features based on Artificial Intelligence that enhance text processing and formatting and also error management in the script. Other changes are the use of artificial intelligence in analyzing text and improving the style, automatic text cleaning to fix some formatting mistakes, intelligent formatting changes in areas of the document that may change, effective page numbering and index management, automated hyperlink protection, and better error detection. They include the application of machine learning and natural language processing that helps the script to perform better in formatting documents that contain complicated formatting features. 
+ 
+ #### 2. **Related Issues:** 
+ Most of these changes are the response to the following issues: inconsistent text formatting, the problem with the document structure (e. g. unnumbered 
+ 
+ #### 3. **Discussions:** 
+ Topics covered included the enhancement of text processing through the application of AI and machine learning, page numbering and index management, and, error management. It also discussed the right approaches to using AI in enhancing text style, formatting, and hyperlinking. 
+ 
+ #### 4. **QA Instructions:** 
+ - Use the feature that leverages Artificial Intelligence to analyze text and check whether the text style and format is appropriately enhanced. 
+ - Ensure that the smart text cleanup module is effective in detecting general text editing errors especially in Latex based document attributes. 
+ - Make sure that the adaptive formatting changes are applied well to the sections, chapters, and appendices especially in documents which have unnumbered chapters. 
+ - Ensure that the page numbering and index are correct especially in the documents which have an intelligent structure. 
+ - Check the automated hyperlink protection to ensure that the links in the captions and reference sections are well formatted and can be clicked. 
+ - Assess the improvements made to the error management system and the reporting to check that all the formatting errors are identified and depicted effectively. 
+ 
+ #### 5. **Merge Plan:** 
+ Once the QA testing and validation is done, the branch will then be merged into the master branch. It will be our concern to make sure that all AI facilitated features are working appropriately in the production process besides the formatting issues of the text and the errors therein. 
+ 
+ #### 6. **Motivation and Context:** 
+ These updates are based from the need to improve the script’s functionality in terms of document processing and formatting, in order to accommodate more varieties of document types. With the help of the integration of AI and machine learning the script can now do more complex text analysis and formatting changes that will make the document more accurate and standard. These changes also incorporate the enhancement of error management and the more flexible control of other components of the document such as the page numbering and the indexes. 
+ 
+ #### 7. **Types of Changes:** 
+ - **New Feature:New features of text analysis and formatting thanks to AI. 
+ - **Enhancement:** Smart text cleanup, automatic formatting changes, and hyperlinks protection settings. 
+ - **Performance:Some of the changes that have been made to enhance the efficiency of the script include; Better error management and reporting. 
+ - **Dependency Update:** Improvements on the code base to incorporate new features through the use of artificial intelligence and machine learning libraries.",RahulVadisetty91,24702792,open,False,0,2024-09-04T19:59:32+00:00,2024-09-10T09:00:10+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2497319080,2618,[suggestion of presentation] pre-norm transformers,"the figure&description in transformer.ipynb follows its historical post-norm version. Since (almost?) all modern projects uses pre-norm transformers, maybe it'd be presented head-up, not until in ViT section, to give newbies (like me) an optimized first-impression, and leave the historically significant version to a lesser position. 
+
+Thanks! cheers for your great book!",jkpjkpjkp,19739961,open,False,0,2024-08-30T13:57:12+00:00,2024-08-30T13:57:12+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2494054739,2617,Question about showing picture of jupyter in pycharm,"This is a great job, I like it! But I have met some problem in **showing picture of jupyter locally in my pycharm**.
+
+The case is, every picture in my jupyter is in the form of `../img/picture_name`, which result in the failure of showing picture.
+
+![image](https://github.com/user-attachments/assets/765fe8e2-b211-4d0b-acad-ed2fadc8edf6)
+![image](https://github.com/user-attachments/assets/1309e3ab-024a-41de-8bd6-1e56c337e6f7)
+
+It looks like to be a must to modify it to `..\img\picture_name`， **(Use `\` instead of `/`)**
+(I am using Windows operate system)
+
+Do I need to make this type of modification ones by ones? It's really a time-cosuming work, Is there a better way to adjust this problem? Looking forward to your guidence.
+
+Best regards.
+
+![image](https://github.com/user-attachments/assets/8f93f45b-983a-4a25-afa9-80ee7f37bb73)
+![image](https://github.com/user-attachments/assets/d69eeea4-a962-4bdd-9915-d48b010a9a15)
+",chenzhigang00,128814103,open,False,0,2024-08-29T10:28:16+00:00,2024-08-29T10:28:16+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2493006574,2616,Potential error in the derivation for backpropagation through through time in RNNs,"We believe there is an error with section 9.7.2: Backpropagation Through Time in Detail, and would like to ask for clarification, and we would like to help fix the error if it indeed is present. This issue was researched by myself, @ishaanharry, and @Calcu-dev, with guidance from our course instructor. The text of this issue was primarily authored by @ishaanharry.
+
+The text notes that
+
+![image1](https://github.com/user-attachments/assets/7f6cf4a2-62a3-4c8d-bdb0-9555ea7149d5)
+
+Thus as an intermediate step to computing dL/dW_hx and dL/dW_hh, dh_t/dW_hx and dh_t/dW_hh must be computed.
+
+The text equates the above expressions to these, which implies that dh_t/dW_hx = x_t\^T and dh_t/dW_hh = h\_{t-1}\^T
+
+![image2](https://github.com/user-attachments/assets/afbcd9b2-33c9-40fb-8cb5-c678e82efa84)
+
+However, this cannot be correct, as can be seen upon reviewing the expression for h_t.
+
+![image3](https://github.com/user-attachments/assets/63406ef5-68bb-4fb6-95d2-dbde4daab7a7)
+
+Observe that h_t contains the term h\_{t-1}, so this is a telescopic function that rolls out until the initial value. What's important to note is that each telescoping term contains another W_hx and W_hh, so the derivative of h_t w.r.t either of the weight matrices must have multiple terms, not simply x_t\^T or h\_{t-1}\^T.
+
+The textbook even states this in a prior section. In 9.7.1: Analysis of Gradients in RNNs, the text derived dh_t/dw_h using the rollout I described earlier, with h_t being a generalized function of x_t, h\_{t-1}, and w_h.
+
+![image5](https://github.com/user-attachments/assets/206192fc-8df9-4c6b-86aa-47ab060adf98)
+
+So applying this to the earlier derivation of dL/dW_hx and dL/dW_hh, we should get
+
+![image4](https://github.com/user-attachments/assets/7ad852a9-36e9-4f25-805f-86162b62e91b)",faerryn,50803946,open,False,0,2024-08-28T21:17:59+00:00,2024-08-28T21:17:59+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2471847108,2615,Create SECURITY.md,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",melissamforbs,32193194,closed,False,0,2024-08-18T08:02:36+00:00,2024-09-10T13:40:22+00:00,2024-09-10T13:40:22+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2438838968,2614,",",,hodfa840,78338247,closed,False,0,2024-07-30T23:39:08+00:00,2025-04-02T10:28:46+00:00,2025-04-02T10:28:46+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2418249472,2613,fix: Update setup.py to support Python 3.12.4 and NumPy 2.0.0.,"Update setup.py for Python 3.12.4 and NumPy 2.0.0.  
+This PR is compatible with the latest iterations of Python v3.10, v3.11 and v3.12.  Python v3.9 is not supported.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",slewsys,418762,open,False,0,2024-07-19T07:25:08+00:00,2024-09-18T20:49:16+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2393371785,2612,Update calculus.md,"If users are running the code locally in VSCode, the figure won't appear if lack this line of code
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Raine-4,154307556,open,False,0,2024-07-06T03:57:22+00:00,2024-07-06T03:57:22+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2377098799,2611,why-conv chapter update,"*Description of changes:*
+
+In the original version, the terms translation invariance and equivariance were used interchangeably and with a few inconsistencies (for example, describing convolution as a translation-invariant operation). In this PR, both terms are described separately and supported with examples, with the rest of the text updated accordingly.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",kumgleb,68147941,open,False,0,2024-06-27T04:28:57+00:00,2024-06-27T04:28:57+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2372844229,2610,[spelling] architecture -> architectures,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",MassEast,72736286,open,False,0,2024-06-25T14:24:30+00:00,2024-06-25T14:24:30+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2372683598,2609,[spelling mistake] chapeter -> chapter,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",MassEast,72736286,open,False,0,2024-06-25T13:18:32+00:00,2024-06-25T13:18:32+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2372199395,2608,Can't install d2l 1.0.3 on python 3.12.4,"The D2L Package version 1.0.3 requires numpy 1.23.5. Python 3.12.4/pip 24.1 consider it(numpy 1.23.5) depreciated and does not conclude the installation. It's needed to update the D2L package to depend on numpy 2.0.0. I'm waiting for it.
+
+Regards.",TheJeffah,173787518,open,False,8,2024-06-25T09:40:51+00:00,2025-02-11T13:12:20+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2368666728,2607,fix typo,"Fixed minor typographical error
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",filevich,5137488,open,False,0,2024-06-23T16:02:10+00:00,2024-06-23T16:02:10+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2361578741,2606,Transformer encoder -> Transformer decoder,"In section 11.9.3 Decoder-Only, it should say ""GPT pretraining with a Transformer decoder"" instead of ""GPT pretraining with a Transformer encoder"", just as depicted in Fig. 11.9.6
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",MassEast,72736286,open,False,0,2024-06-19T07:34:54+00:00,2024-06-19T07:34:54+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2356637924,2605,"d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,       2                              num_layers=2)","---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[21], [line 4](vscode-notebook-cell:?execution_count=21&line=4)
+      [1](vscode-notebook-cell:?execution_count=21&line=1) encoder = d2l.Seq2SeqEncoder(vocab_size=10, embed_size=8, num_hiddens=16,
+      [2](vscode-notebook-cell:?execution_count=21&line=2)                              num_layers=2)
+      [3](vscode-notebook-cell:?execution_count=21&line=3) encoder.eval()
+----> [4](vscode-notebook-cell:?execution_count=21&line=4) decoder = Seq2SeqAttentionDecoder(vocab_size=10, embed_size=8, num_hiddens=16,
+      [5](vscode-notebook-cell:?execution_count=21&line=5)                                   num_layers=2)
+      [6](vscode-notebook-cell:?execution_count=21&line=6) decoder.eval()
+      [7](vscode-notebook-cell:?execution_count=21&line=7) X = torch.zeros((4, 7), dtype=torch.long)  # (batch_size,num_steps)
+
+Cell In[20], [line 5](vscode-notebook-cell:?execution_count=20&line=5)
+      [2](vscode-notebook-cell:?execution_count=20&line=2) def __init__(self, vocab_size, embed_size, num_hiddens, num_layers,
+      [3](vscode-notebook-cell:?execution_count=20&line=3)              dropout=0, **kwargs):
+      [4](vscode-notebook-cell:?execution_count=20&line=4)     super(Seq2SeqAttentionDecoder, self).__init__(**kwargs)
+----> [5](vscode-notebook-cell:?execution_count=20&line=5)     self.attention = d2l.AdditiveAttention(
+      [6](vscode-notebook-cell:?execution_count=20&line=6)         num_hiddens, num_hiddens, num_hiddens, dropout)
+      [7](vscode-notebook-cell:?execution_count=20&line=7)     self.embedding = nn.Embedding(vocab_size, embed_size)
+      [8](vscode-notebook-cell:?execution_count=20&line=8)     self.rnn = nn.GRU(
+      [9](vscode-notebook-cell:?execution_count=20&line=9)         embed_size + num_hiddens, num_hiddens, num_layers,
+     [10](vscode-notebook-cell:?execution_count=20&line=10)         dropout=dropout)
+
+TypeError: __init__() takes 3 positional arguments but 5 were given",achaosss,35690593,open,False,2,2024-06-17T07:45:10+00:00,2024-06-17T08:29:55+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2341368366,2604,Fix encoding error in TokenEmbedding,"*Description of changes:*
+
+Some operating systems don't use `utf-8` as the default encoding, and a `UnicodeDecodeError` is raised when reading embedding vectors.
+
+The issue is also described in [this discussion](https://discuss.d2l.ai/t/sentiment-analysis-using-recurrent-neural-networks/1424/3).
+
+Related PR: #2287 
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",GoodCoder666,59763425,open,False,0,2024-06-08T01:53:16+00:00,2024-06-08T01:53:16+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2334093411,2603,Addition of dark mode,"Please, add a dark mode for the book. It becomes really difficult to read the book with so much white.",mokshmalik5757,98465137,open,False,1,2024-06-04T18:05:25+00:00,2025-04-12T14:37:49+00:00,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,2329021027,2602,AttributeError: partially initialized module 'charset_normalizer' has no attribute 'md__mypyc' (most likely due to a circular import),"Hello, 
+
+I am reading chapter 9 of d2l.
+I tried to import libraries as followed
+
+```
+%matplotlib inline
+import torch
+from torch import nn
+from d2l import torch as d2l
+```
+
+
+But I got error 
+`AttributeError: partially initialized module 'charset_normalizer' has no attribute 'md__mypyc' (most likely due to a circular import)`
+
+
+I am using pytorch 2.3 and d2l==1.0.3
+",Nevermetyou65,67499630,open,False,0,2024-06-01T08:58:22+00:00,2024-06-01T08:58:22+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2328988912,2601,nn.dataparallel has issue for mac (mps device),"This is the error i get when I use the below function
+
+def try_all_gpus():  #@save
+    """"""Return all available GPUs, or [cpu(),] if no GPU exists.""""""
+    devices = [torch.device(f'cuda:{i}')
+             for i in range(torch.cuda.device_count())]
+    return devices if devices else [torch.device('cpu')]
+
+ trainer = torch.optim.Adam(net.parameters(), lr=lr)
+      3 loss = nn.CrossEntropyLoss(reduction=""none"")
+----> 4 d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs)
+
+File ~/anaconda3/envs/dl_env/lib/python3.10/site-packages/d2l/torch.py:1507, in train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
+   1504 timer, num_batches = d2l.Timer(), len(train_iter)
+   1505 animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0, 1],
+   1506                         legend=['train loss', 'train acc', 'test acc'])
+-> 1507 net = nn.DataParallel(net, device_ids=devices).to(devices[0])
+   1508 for epoch in range(num_epochs):
+   1509     # Sum of training loss, sum of training accuracy, no. of examples,
+   1510     # no. of predictions
+   1511     metric = d2l.Accumulator(4)
+
+IndexError: list index out of range
+
+This happens as mac does not have cuda support.
+
+by tweaking the above function by just changing cpu to mps, kernel always dies
+def try_all_gpus():  #@save
+    """"""Return all available GPUs, or [cpu(),] if no GPU exists.""""""
+    devices = [torch.device(f'cuda:{i}')
+             for i in range(torch.cuda.device_count())]
+    return devices if devices else [torch.device('mps')]
+
+How can i run the nn.dataparallel or for that matter chapter 16 d2l.train_ch13 function from 16.2 section ?",rnb007,28823669,open,False,0,2024-06-01T07:47:35+00:00,2024-06-01T07:57:22+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2324739944,2600,Fix pytorch version of custom-layer to allow auto grad,"self.weight’ and ‘self.bias’ should be used instead of ‘self.weight.data’ and ‘self.bias.data’ to make sure that BP works for weight and bias.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",zhouzhiwen2000,8504573,open,False,0,2024-05-30T05:32:46+00:00,2024-05-30T05:32:46+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2309439599,2599,replace arange with range,"*Description of changes:*
+
+`arange` is used here in the expression generating a list of legends:
+```python
+legend=[""Col %d"" % d for d in d2l.arange(6, 10)]
+```
+I think it's better to use the builtin `range` here (as the created tensor is only looped through with `d`).
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",GoodCoder666,59763425,open,False,0,2024-05-22T02:26:15+00:00,2024-05-22T02:26:15+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2306641907,2598,Grammatical error in probability.md,"*Description of changes:*
+Removed extra 10$\times$ from investment probability explanation.
+
+By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
+",matthambrecht,14303543,closed,False,0,2024-05-20T19:34:58+00:00,2024-08-29T21:10:01+00:00,2024-08-29T21:10:01+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2291174041,2597,Update torch.einsum sublist format example,"*Description of changes:*
+torch 1.10 updated sublist format in torch.einsum api, see https://pytorch.org/docs/stable/generated/torch.einsum.html
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",BanananaFish,43786104,open,False,0,2024-05-12T05:25:40+00:00,2024-05-12T05:25:40+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2256018471,2596,Update oo-design.md,"I noticed a potential typo in the code. It seems like 'Neural network is defined' should be changed to 'Neural network is not defined'.
+
+In the module class:
+    def forward(self, X):
+            assert hasattr(self, 'net'), 'Neural network is defined'
+            return self.net(X)",gui1223,167750254,open,False,0,2024-04-22T09:15:36+00:00,2024-04-22T09:15:36+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2216759585,2595,The content is outdated,"I found the book having very good content for the topics it covers. But the book stopped at GANs. Many not-very-new topics like YOLO, Diffusion were never discussed. I've seen some opened issues mentioned this several years ago but it seems no contents have been added. Will the book continue to be updated or it's archived?",hiepdang-ml,49779915,open,False,1,2024-03-31T03:33:11+00:00,2024-12-15T15:41:30+00:00,,,3,3,0,0,0,0,0
+d2l-ai/d2l-en,2190465154,2592,"Fixed incorrect ""translation invariance"" in problem in softmax-regression.md","Hello, when working through the exercises inside of softmax-regression.md I've noticed that one of the problem seems to have a small error, namely the function $g$ is not translation invariant, but rather translation equivariant. This means that there should be a $+b$ term outside of the function as well.
+
+Also I've changed the sign of the b to align it closer to what should be done in the last subproblem: ""Show that if we choose $b = \mathrm{max}_i x_i$ we end up with a numerically stable implementation.""
+
+As such the corrected version of the problem is $g(\underline{x} - b) = g(\underline{x}) - b$.
+
+### Proof
+```math
+\begin{aligned}
+g(\underline{x} - b) &= \log \sum_i \exp(x_i - b) \\
+&= \log \sum_i \exp(x_i) \exp(-b) \\
+&= \log \left( \left( \sum_i \exp(x_i) \right) \exp(-b) \right) \\
+&\overset{1}{=} \log \left(\sum_i \exp(x_i)\right) + \log \exp(-b) \\
+&\overset{2}{=} \log \left(\sum_i \exp(x_i)\right) - b = g(\underline{x}) - b.
+\end{aligned}
+```
+Where we have used that (1) $\log(xy) = \log(x) + \log(y)$ and (2) $\log\exp x = x$.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Daniel-Sinkin,48285028,closed,False,0,2024-03-17T03:51:21+00:00,2024-06-18T10:57:07+00:00,2024-06-18T10:57:07+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2190289048,2591,Fixed uci.edu dataset link for Airfoil dataset,"This is probably related to when the link fixed in #2568 broke.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",Daniel-Sinkin,48285028,closed,False,1,2024-03-16T22:32:53+00:00,2024-03-16T22:46:02+00:00,2024-03-16T22:46:02+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2184270025,2590,Website of preview version is down.,Please fix. Thanks!,Shujian2015,11813717,open,False,5,2024-03-13T15:16:28+00:00,2024-04-29T14:30:59+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2179110150,2589,question about ”d2l = sys.modules[__name__]“,"I want to know why in d2l.torch there is this line of code: d2l = sys.modules[__name__], which causes my IDE to not correctly recognize some functions inside torch. When I try to view the source code, it doesn't jump to the correct location. However, I believe there might be another purpose for writing it this way, and I want to understand the benefits of doing so.",lprdsb,59593987,open,False,0,2024-03-11T13:15:29+00:00,2024-03-11T13:15:29+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2174539803,2588,WikiText-2 is not a zip file,"When I executed the following part:
+
+```python
+from d2l import torch as d2l
+
+batch_size, max_len = 512, 64
+train_iter, vocab = d2l.load_data_wiki(batch_size, max_len)
+```
+
+```python
+from d2l import mxnet as d2l
+
+batch_size, max_len = 512, 64
+train_iter, vocab = d2l.load_data_wiki(batch_size, max_len)
+```
+
+I met this error:
+```
+Traceback (most recent call last):
+  File ""<stdin>"", line 1, in <module>
+  File ""/home/charry/miniconda3/envs/d2l/lib/python3.9/site-packages/d2l/torch.py"", line 2443, in load_data_wiki
+    data_dir = d2l.download_extract('wikitext-2', 'wikitext-2')
+  File ""/home/charry/miniconda3/envs/d2l/lib/python3.9/site-packages/d2l/torch.py"", line 3247, in download_extract
+    fp = zipfile.ZipFile(fname, 'r')
+  File ""/home/charry/miniconda3/envs/d2l/lib/python3.9/zipfile.py"", line 1266, in __init__
+    self._RealGetContents()
+  File ""/home/charry/miniconda3/envs/d2l/lib/python3.9/zipfile.py"", line 1333, in _RealGetContents
+    raise BadZipFile(""File is not a zip file"")
+zipfile.BadZipFile: File is not a zip file
+```
+
+I think it is because the dataset in the server has been damaged. I reimplemented this error with d2l 1.0.0 - 1.0.3. And it will cause some errors when WikiText-2 dataset is needed.
+
+I have a pull request failed due to this error. I also mentioned that there are some pull requests related fixing typo errors also failed check due to this error.
+
+I hope this error can be fixed as soon as possible.",CharryLee0426,61964798,open,False,4,2024-03-07T18:49:37+00:00,2025-03-18T03:50:25+00:00,,,3,3,0,0,0,0,0
+d2l-ai/d2l-en,2173506414,2587,Enable Apple Silicon GPU Acceleration for d2l,"*Description of changes:*
+In this Pull Request: The Apple Silicon GPU support is added to d2l. So after this commit, d2l can detect Apple Silicon directly and use Apple Silicon GPU to accelerate parallel computing. It applies to two most popular deep learning frameworks: PyTorch and TensorFlow.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",CharryLee0426,61964798,closed,False,1,2024-03-07T10:19:26+00:00,2024-07-15T07:01:36+00:00,2024-07-15T07:01:36+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2171108608,2586,Update pandas.md. Adapted for higher versions of the Pandas library,"In older versions of the Pandas library, when the mean() method is applied to 'inputs', it would skip uncomputable types and calculate the data directly, thus ignoring any errors. However, in higher versions of the Pandas library, strict data type checking is performed, which triggers the error 'TypeError: can only concatenate str (not ""int"") to str'. The revised code will filter and calculate the data based on the data types, avoiding the occurrence of this error.
+",yssickjgd,68366961,closed,False,0,2024-03-06T10:03:02+00:00,2024-12-08T12:56:37+00:00,2024-12-08T12:56:36+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2141972288,2585,Some issues with the book,"Hello!
+
+I take them all together in one post.
+
+First, I would like an easier way to download interactive version of the book - why manuals and books these days cannot be downloaded just by one click? :P
+
+Second, when I copy the code from the book, it will not keep indents - it's hard to copy from PDF. It should be structured differently to keep the spaces and empty lines of Python code.
+
+Third, for some reason, if I download TensorFlow PDF, it still contains PyTorch code.
+
+Fourth, in d2l pip download, there are not all @saved functions. I tried this (for example from page 143):
+>>> from d2l import torch as d2l
+>>> d2l.train_ch3
+Traceback (most recent call last):
+  File ""<stdin>"", line 1, in <module>
+AttributeError: module 'd2l.torch' has no attribute 'train_ch3'. Did you mean: 'train_ch13'?
+
+Fifth, as I am often in place without internet connection, it would help me a lot if there was a way to pre-download all datasets used in a book, kind of like d2l, for example with one command, and then use those cached datasets. Maybe two commands ""cache_datasets"" and ""use_cached_datasets"".
+
+I think I haven't ran into any more troubles with this book.",tambetvali,119508958,open,False,0,2024-02-19T09:56:54+00:00,2024-02-19T09:56:54+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2087533907,2584,Correct typo in environment-and-distribution-shift.md,"*Description of changes:*
+'relative prevalence of diagnoses' is a singular noun. Thus, I changed the verb 'are' to 'is'.
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",qwercxzsda,101696461,open,False,1,2024-01-18T05:28:32+00:00,2024-11-06T00:28:55+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2087507457,2583,Can't build the book on MacOS when trying to add MLX implementation,"I'm trying to add Apple's MLX code implementation, but when I am trying to build the html book I run into this when running `d2lbook build html`:
+
+```
+Traceback (most recent call last):
+  File ""/Users/zhongkaining/Library/Python/3.9/bin/d2lbook"", line 8, in <module>
+    sys.exit(main())
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/main.py"", line 25, in main
+    commands[args.command[0]]()
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 43, in build
+    getattr(builder, cmd)()
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 55, in warp
+    func(self)
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 342, in html
+    self.rst()
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 55, in warp
+    func(self)
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 316, in rst
+    self.eval()
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 55, in warp
+    func(self)
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 160, in eval
+    _process_and_eval_notebook(scheduler, src, tgt, run_cells,
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/build.py"", line 515, in _process_and_eval_notebook
+    scheduler.add(1, num_gpus, target=_job,
+  File ""/Users/zhongkaining/Library/Python/3.9/lib/python/site-packages/d2lbook/resource.py"", line 102, in add
+    assert num_cpus <= self._num_cpus and num_gpus <= self._num_gpus, \
+AssertionError: Not enough resources (CPU 2, GPU 0 ) to run the task (CPU 1, GPU 1)
+```
+
+Looks like building this book requires a GPU, but on MacBook there is no Nvidia GPU. If I want to build on other OS, then I don't MLX will be available on those platforms since this is kinda specifically designed for MacOS.
+
+I think this problem blocks people who attempts to contribute MLX code to this book.",PRESIDENT810,44538064,open,False,0,2024-01-18T05:01:29+00:00,2024-01-18T05:01:29+00:00,,,2,2,0,0,0,0,0
+d2l-ai/d2l-en,2068567608,2582,The mlm loss computation in the function _get_batch_loss_bert seems wrong in d2l pytorch code ,"In my opinion, the BERT pretrain batch loss in the function _get_batch_loss_bert is not correct. The following is the detail:
+
+The CrossEntropyLoss is initialized with default reduction 'mean', 
+`loss = nn.CrossEntropyLoss() 
+`
+In the function _get_batch_loss_bert, mlm_loss and nsp_loss used the same input instance loss for computation.
+`mlm_l = loss(mlm_Y_hat.reshape(-1, vocab_size), mlm_Y.reshape(-1)) *mlm_weights_X.reshape(-1, 1)
+`
+Since the reduction='mean', the resultant tensor of 'loss(mlm_Y_hat.reshape(-1, vocab_size), mlm_Y.reshape(-1)) ' is a scalar tensor, it leads a problem for mlm loss computation by positionwise product with the input tensor mlm_weights_X.",lyconghk,109452366,open,False,2,2024-01-06T11:44:26+00:00,2024-01-29T02:13:33+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2066931135,2581,The discussion link can not be accessed.,"The discussion link [https://discuss.d2l.ai/](https://discuss.d2l.ai/) can not be accessed.
+
+![image](https://github.com/d2l-ai/d2l-en/assets/45477220/eaef03ab-6c75-4cfa-98b5-3fe220805016)
+",AXYZdong,45477220,closed,False,9,2024-01-05T08:29:21+00:00,2025-03-03T03:44:38+00:00,2024-01-20T10:37:24+00:00,,2,2,0,0,0,0,0
+d2l-ai/d2l-en,2058167620,2580,Chinese version of the code is out of date,"I found that there are some compatibility issues between the code in the Chinese version and the latest d2l package, by checking the English version, I found that the code in the English version has been updated with pytorch2.0, and the d2l package has been updated with it, and these updates have not been synchronized to the Chinese version in time, which causes a lot of problems to students who use the Chinese version for learning. So I would like to ask the team if there is any plan to update the Chinese version, and if there is anything I can do to contribute to this?",LiquidTaeJa,96654938,open,False,2,2023-12-28T08:53:14+00:00,2025-02-01T06:44:20+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2057904653,2579,"[**emergency**] the comment block is down, please fix it right now","this block is down again since last time about 1 month ago. please give a stable  service to let learners happy to learn. 
+https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html#pytorch-7-0
+
+many thanks ~",JH-Lam,53388447,closed,False,1,2023-12-28T02:01:27+00:00,2024-01-20T10:36:38+00:00,2024-01-20T10:36:37+00:00,,3,3,0,0,0,0,0
+d2l-ai/d2l-en,2055233276,2578,Corrected minor typos from appendix,"*Description of changes.* The grammatical corrections made are as follows:
+1. fist -> first
+2. in -> is
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",jinensetpal,52078103,open,False,1,2023-12-24T23:11:24+00:00,2024-11-06T00:30:07+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2055121044,2577,Errors in train_ch3 in tensorflow version softmax-regression-scratch.ipynb,"Here is the function that causes an error when I use train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs, updater)
+
+in the softmax-regression-scratch.ipynb
+
+def train_ch3(net, train_iter, test_iter, loss, num_epochs, updater):  
+    """"""动画+训练模型（定义见第3章）""""""
+    animator = Animator(xlabel='epoch', xlim=[1, num_epochs], ylim=[0.3, 0.9],
+                        legend=['train loss', 'train acc', 'test acc'])
+    for epoch in range(num_epochs):
+        train_metrics = train_epoch_ch3(net, train_iter, loss, updater)
+##NameError: name 'train_epoch_ch3' is not defined
+        test_acc = evaluate_accuracy(net, test_iter)
+        animator.add(epoch + 1, train_metrics + (test_acc,))
+    train_loss, train_acc = train_metrics
+    assert train_loss < 0.5, train_loss
+    assert train_acc <= 1 and train_acc > 0.7, train_acc
+    assert test_acc <= 1 and test_acc > 0.7, test_acc
+
+Here is the bug details
+*********************
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+[<ipython-input-31-a66acf440358>](https://localhost:8080/#) in <cell line: 2>()
+      1 num_epochs = 10
+----> 2 train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs, updater)
+
+[<ipython-input-30-fbfd589885da>](https://localhost:8080/#) in train_ch3(net, train_iter, test_iter, loss, num_epochs, updater)
+      4                         legend=['train loss', 'train acc', 'test acc'])
+      5     for epoch in range(num_epochs):
+----> 6         train_metrics = train_epoch_ch3(net, train_iter, loss, updater)
+      7         test_acc = evaluate_accuracy(net, test_iter)
+      8         animator.add(epoch + 1, train_metrics + (test_acc,))
+
+NameError: name 'train_epoch_ch3' is not defined
+*******************",Neverforgetme,90892901,open,False,1,2023-12-24T14:37:15+00:00,2023-12-24T15:15:44+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2053305351,2576,Correct spacing typo in hardware.md,"*Description of changes:*
+
+This PR has a minor change that corrects a spacing typo.
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",rajrkane,34749682,open,False,1,2023-12-22T02:59:55+00:00,2023-12-22T03:30:32+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2053174515,2575,Not able to render :begin_tab:toc,Hello I have installed all the dependencies but my notebook is not able to render markers like `:begin_tab:toc....:end_tab:`. ,roychowdhuryrohit-dev,24897721,open,False,4,2023-12-21T23:34:10+00:00,2024-12-25T11:06:15+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2049991811,2574,Fix UCI datasets url,"Fix UCI datasets url
+
+*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",anyinlover,6896526,closed,False,1,2023-12-20T07:30:11+00:00,2024-05-24T23:34:17+00:00,2024-05-24T23:34:17+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2049002323,2573, Incorrect Use of torch.no_grad() in fit_epoch Method in d2l/torch.py::Trainer::fit_epoch,"Hello, 
+
+I noticed a potential issue in the fit_epoch method in https://github.com/d2l-ai/d2l-en/blob/master/d2l/torch.py, where loss.backward() is called within a torch.no_grad() block:
+
+```
+self.optim.zero_grad()
+with torch.no_grad():
+    loss.backward()
+    ...
+```
+
+This usage likely prevents the calculation of gradients, as loss.backward() should not be inside a torch.no_grad() block. The correct approach would be:
+
+```
+self.optim.zero_grad()
+loss.backward()
+...
+```
+
+Here is the original code:
+
+```
+    def fit_epoch(self):
+        """"""Defined in :numref:`sec_linear_scratch`""""""
+        self.model.train()
+        for batch in self.train_dataloader:
+            loss = self.model.training_step(self.prepare_batch(batch))
+            self.optim.zero_grad()
+            with torch.no_grad():
+                loss.backward()
+                if self.gradient_clip_val > 0:  # To be discussed later
+                    self.clip_gradients(self.gradient_clip_val, self.model)
+                self.optim.step()
+            self.train_batch_idx += 1
+        if self.val_dataloader is None:
+            return
+        self.model.eval()
+        for batch in self.val_dataloader:
+            with torch.no_grad():
+                self.model.validation_step(self.prepare_batch(batch))
+            self.val_batch_idx += 1
+```",caydenwei,21691467,open,False,3,2023-12-19T16:21:48+00:00,2024-10-29T17:35:14+00:00,,,2,2,0,0,0,0,0
+d2l-ai/d2l-en,2041423263,2572,Update probability.md,"Fix the typo, from die -> dice.
+
+*Description of changes:*
+
+Fix the typo of the word ""dice"".
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",trunghieu11,2252876,open,False,1,2023-12-14T10:40:52+00:00,2023-12-14T11:11:41+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2034692709,2571,Add type hinting to functions,"Sometimes it's hard to understand the intent of the code without type hints. It would help a lot in understand the the pieces of code that is added to classes.
+
+It would likely take a while to migrate all functions to type hinting, but it's still worth discussing it in a bug.",f0lie,9092074,open,False,1,2023-12-11T02:13:23+00:00,2024-03-31T03:24:43+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2034244763,2570,MLX support,"I plan on contributing for the new ML framework by Apple for silicon https://github.com/ml-explore/mlx
+
+I tried setting up jupyter notebook to directly edit markdown using these resources:
+1. https://d2l.ai/chapter_appendix-tools-for-deep-learning/contributing.html
+2. https://github.com/d2l-ai/d2l-en/blob/master/CONTRIBUTING.md
+
+I still can't run the code .md files as jupyter notebook is opening md files in text format only.
+
+What is the recommended approach to add new framework support?",rahulchittimalla,9348137,open,False,1,2023-12-10T06:52:32+00:00,2024-01-17T05:19:37+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2033952428,2569,Ethics?,This resource strives to be for the benefit of people new to the topics. Not including chapter on ethics seems like a worrisome oversight. ,ericjmorey,771490,open,False,0,2023-12-09T17:21:49+00:00,2023-12-09T17:21:49+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2031223968,2568,Update MCI Datasets URL,"The URL for the MCI Datasets no longer includes the `.php` extension. Visiting the URL with the `.php` intact will result in a `404`.
+
+*Description of changes:* Remove `.php` from the <https://archive.ics.uci.edu/datasets.php> URL, making it <https://archive.ics.uci.edu/datasets>
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",mickelsonmichael,19243212,closed,False,1,2023-12-07T17:37:36+00:00,2023-12-11T03:00:32+00:00,2023-12-11T03:00:31+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2016947505,2567,Update my affiliation,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",terrytangyuan,4269898,closed,False,1,2023-11-29T16:16:37+00:00,2023-11-29T16:47:42+00:00,2023-11-29T16:24:39+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2008454370,2566,Fixed a small typo,"There was a missing ""s"" in ""The breakthrough deep Q-network, that beat humans""",lorenzo9uerra,43646324,open,False,1,2023-11-23T15:31:38+00:00,2023-11-23T17:14:29+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,2000435021,2565,Free copy for the first 100 contributors,"Hello team, 
+
+first of all, congratulations on getting the book published!
+A few years ago you promised sending a free copy to the first 100 contributors once it gets published (see https://github.com/d2l-ai/d2l-en/blob/0d25f0311eb8b86c91f01c4e183c268bf2480854/README.md)
+Now that this finally happened, are you keeping that promise? :wink: ",muelleme,8862196,open,False,0,2023-11-18T14:04:46+00:00,2023-11-18T14:04:46+00:00,,,1,0,0,0,0,0,0
+d2l-ai/d2l-en,1989788476,2564,Update kaggle-house-price.md with corrected y/y_hat equation,"*Description of changes:*
+The equation (""translates to y_hat/y"") on line 295 was in error. It should instead by ""y/y_hat"". I corrected this typo.
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",dr-neil,134828888,open,False,1,2023-11-13T02:50:13+00:00,2024-07-07T20:44:51+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1971282225,2563,Fix a grammatical error in lenet.md,"Changes ""down this rabbit to hole"" to ""down this rabbit hole""
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",llamington,54869395,closed,False,1,2023-10-31T20:51:25+00:00,2023-12-11T03:03:37+00:00,2023-12-11T03:03:37+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1966854159,2562,PyTorch Colab of Chapter 13.5  is having an IndexError,"Chapter 13.5 Training on Multiple GPUs
+13.5.5. Distributing Data
+IndexError: list index out of range
+![image](https://github.com/d2l-ai/d2l-en/assets/33608782/f3be54a1-b3c1-4aac-a9fc-f08983a8b8fa)
+",gab-chen,33608782,closed,False,2,2023-10-29T05:44:06+00:00,2023-12-31T06:43:35+00:00,2023-12-31T06:43:35+00:00,question,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1942967181,2561,Update and restructure some of the content for large-pretraining-transformers.md ,"*Description of changes:*
+
+* Minor edits to the GPT-3 part
+* Major revision for the LLM part
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",stv-lin,147808067,open,False,1,2023-10-14T04:50:16+00:00,2023-10-14T05:35:23+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1931180278,2560,A question about 4.7.3.3. Label Shift Correction,"I'm confused about the equation $\sum_jc_{ij}p(y_j)=\mu(\hat y_i)$ and the definition of confusion matrix $C$ above.
+As I understood, the equation is based on the full probability equation $$\sum_jP(\hat y=y_i|y=y_j)P(y=y_j)=P(\hat y=y_i)$$ where $\hat{y}$ stands for the predicted label of $x$ and $y$ stands for the true label of $x$. To link the two equation together, I got $P(\hat y=y_i)$ is equal to $\mu(\hat y_i)$ and $P(y=y_j)$ is equal to $p(y_j)$. So the confusion matrix element $c_{ij}$ need to be the conditional probability, while according to the definition above, the $c_{ij}$ is actually a joint probability drawn from training distribution. My question is
+* Am I thinking wrong?
+* or are we using the joint probability to calculate the target label distribution approximately while never precisely?
+
+Looking forward to your reply!",OneCoin123,78289956,open,False,1,2023-10-07T04:22:40+00:00,2023-10-07T04:25:29+00:00,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1918652172,2559,module 'd2l.torch' has no attribute 'count_corpus',"import math
+import os
+import random
+import torch
+from d2l import torch as d2l
+import os
+import matplotlib.pyplot as plt
+
+os.environ[""KMP_DUPLICATE_LIB_OK""]=""TRUE""
+#@save
+d2l.DATA_HUB['ptb'] = (d2l.DATA_URL + 'ptb.zip',
+                       '319d85e578af0cdc590547f26231e4e31cdf1e42')
+
+#@save
+def read_ptb():
+    """"""将PTB数据集加载到文本行的列表中""""""
+    data_dir = d2l.download_extract('ptb')
+    # Readthetrainingset.
+    with open(os.path.join(data_dir, 'ptb.train.txt')) as f:
+        raw_text = f.read()
+    return [line.split() for line in raw_text.split('\n')]
+
+sentences = read_ptb()
+f'# sentences数: {len(sentences)}'
+vocab = d2l.Vocab(sentences, min_freq=10)
+f'vocab size: {len(vocab)}'
+#@save
+def subsample(sentences, vocab):
+    """"""下采样高频词""""""
+    # 排除未知词元'<unk>'
+    sentences = [[token for token in line if vocab[token] != vocab.unk]
+                 for line in sentences]
+    counter = d2l.count_corpus(sentences)
+    num_tokens = sum(counter.values())
+
+    # 如果在下采样期间保留词元，则返回True
+    def keep(token):
+        return(random.uniform(0, 1) <
+               math.sqrt(1e-4 / counter[token] * num_tokens))
+
+    return ([[token for token in line if keep(token)] for line in sentences],
+            counter)
+
+subsampled, counter = subsample(sentences, vocab)
+d2l.show_list_len_pair_hist(
+    ['origin', 'subsampled'], '# tokens per sentence',
+    'count', sentences, subsampled)
+plt.show()
+
+",wangze1219,28774694,open,False,4,2023-09-29T06:10:56+00:00,2024-09-12T14:43:04+00:00,,question,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1876302837,2558,Fixed some typos and wordings in a few files in the appendix section,"*Description of changes:* 
+
+Fixed some typos and wordings in a few files in the appendix section.  Please review changes below.
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",huyndao,40338813,closed,False,1,2023-08-31T21:03:53+00:00,2023-10-02T11:53:31+00:00,2023-10-02T11:53:31+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1874004766,2557,AttributeError: module 'd2l.torch' has no attribute 'train_ch3',"Hi there,
+I could not run train_ch3 even at the start of the chapter about softmax. May I know is it because I have the wrong version of d2l? and which version should I have for the lesson",WILLSONXWX,123813085,open,False,5,2023-08-30T16:21:24+00:00,2024-01-05T10:40:29+00:00,,question,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1857308650,2556,Release 1.0.3 for vol1,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,1,2023-08-18T21:26:35+00:00,2023-08-18T22:02:02+00:00,2023-08-18T21:26:43+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1857169124,2555,Release 1.0.3,"Add scipy dependency
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,1,2023-08-18T19:06:09+00:00,2023-08-18T19:43:24+00:00,2023-08-18T19:09:56+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1857157411,2554,[Add scipy dep in 1.0.2],"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,1,2023-08-18T18:55:24+00:00,2023-08-18T19:41:45+00:00,2023-08-18T19:03:49+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1857130137,2553,[Add scipy dep in 1.0.2],"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,0,2023-08-18T18:34:56+00:00,2023-08-18T18:54:08+00:00,2023-08-18T18:54:08+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1856355175,2552,[Test Release 2.0.0 d2l-en-1.0.0.zip],"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,1,2023-08-18T09:12:33+00:00,2023-08-18T09:39:46+00:00,2023-08-18T09:14:22+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1856350925,2551,Update INFO.md,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,1,2023-08-18T09:09:46+00:00,2023-08-18T09:43:43+00:00,2023-08-18T09:09:56+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1855886327,2550,Release 1.0.0,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,2,2023-08-18T00:53:29+00:00,2023-08-18T06:48:16+00:00,2023-08-18T06:48:15+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1855799790,2549,Release 1.0.0,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,2,2023-08-17T22:47:45+00:00,2023-08-17T23:54:30+00:00,2023-08-17T23:54:30+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1855174331,2548,TF: default tensors creation statement fixed,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",AnirudhDagar,23621655,closed,False,1,2023-08-17T14:56:34+00:00,2023-08-17T18:47:09+00:00,2023-08-17T18:47:08+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1854861739,2547,Release 1.0.0,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,4,2023-08-17T12:00:20+00:00,2023-08-17T22:51:21+00:00,2023-08-17T22:32:55+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1853493011,2546,Notebooks are not working on Colab,"Trying to run the very first cell (in any notebook):
+
+`!pip install d2l==1.0.0-beta0`
+
+I get the following error:
+
+```
+Collecting d2l==1.0.0-beta0
+  Using cached d2l-1.0.0b0-py3-none-any.whl (141 kB)
+Collecting jupyter (from d2l==1.0.0-beta0)
+  Using cached jupyter-1.0.0-py2.py3-none-any.whl (2.7 kB)
+Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from d2l==1.0.0-beta0) (1.23.5)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.10/dist-packages (from d2l==1.0.0-beta0) (3.7.1)
+Requirement already satisfied: matplotlib-inline in /usr/local/lib/python3.10/dist-packages (from d2l==1.0.0-beta0) (0.1.6)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from d2l==1.0.0-beta0) (2.31.0)
+Requirement already satisfied: pandas in /usr/local/lib/python3.10/dist-packages (from d2l==1.0.0-beta0) (1.5.3)
+Collecting gym==0.21.0 (from d2l==1.0.0-beta0)
+  Using cached gym-0.21.0.tar.gz (1.5 MB)
+  error: subprocess-exited-with-error
+  
+  × python setup.py egg_info did not run successfully.
+  │ exit code: 1
+  ╰─> See above for output.
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  Preparing metadata (setup.py) ... error
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> See above for output.
+
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+```
+It's not possible to run notebooks right now.",lithuak,225642,closed,False,3,2023-08-16T15:41:05+00:00,2023-08-28T08:32:14+00:00,2023-08-28T08:32:13+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1851590291,2545,freeze d2l lib for v1.0.0 release,"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",AnirudhDagar,23621655,closed,False,3,2023-08-15T14:57:11+00:00,2023-08-16T00:36:41+00:00,2023-08-16T00:16:42+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1849928614,2544,JAX: Add discussion tabs [skip CI],"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",AnirudhDagar,23621655,closed,False,1,2023-08-14T14:42:59+00:00,2023-08-14T16:03:03+00:00,2023-08-14T16:03:02+00:00,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1848478967,2543,[Pre-merge] Release 1.0.0 (to enable GitHub Actions),"*Description of changes:*
+
+
+By submitting this pull request, I confirm that you can use, modify,
+copy, and redistribute this contribution, under the terms of your
+choice.
+",astonzhang,22279212,closed,False,0,2023-08-13T08:16:38+00:00,2023-08-14T16:18:56+00:00,2023-08-14T16:18:56+00:00,,0,0,0,0,0,0,0

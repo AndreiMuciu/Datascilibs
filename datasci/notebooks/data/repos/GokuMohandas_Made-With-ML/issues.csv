@@ -1,0 +1,1456 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+GokuMohandas/Made-With-ML,2951350799,274,ModuleNotFoundError: No module named 'pkg_resources._vendor',"Although I did install all the packages as instructed in [Setup ](https://madewithml.com/courses/mlops/setup/). But when I do run the cell code in [Distributed Data Processing](https://madewithml.com/courses/mlops/distributed-data/), I get the following error.
+
+```python
+# Data ingestion
+ds = ray.data.read_csv(DATASET_LOC)
+ds = ds.random_shuffle(seed=1234)
+ds.take(1)
+```
+
+```shell
+---------------------------------------------------------------------------
+RayTaskError(ModuleNotFoundError)         Traceback (most recent call last)
+Cell In[40], line 2
+      1 # Data ingestion
+----> 2 ds = ray.data.read_csv(DATASET_LOC)
+      3 ds = ds.random_shuffle(seed=1234)
+      4 ds.take(1)
+
+File d:\madewithml\venv\lib\site-packages\ray\data\read_api.py:1208, in read_csv(paths, filesystem, parallelism, ray_remote_args, arrow_open_stream_args, meta_provider, partition_filter, partitioning, ignore_missing_paths, **arrow_csv_args)
+   1206 if meta_provider is None:
+   1207     meta_provider = get_generic_metadata_provider(CSVDatasource._FILE_EXTENSION)
+-> 1208 return read_datasource(
+   1209     CSVDatasource(),
+   1210     parallelism=parallelism,
+   1211     paths=paths,
+   1212     filesystem=filesystem,
+   1213     ray_remote_args=ray_remote_args,
+   1214     open_stream_args=arrow_open_stream_args,
+   1215     meta_provider=meta_provider,
+   1216     partition_filter=partition_filter,
+   1217     partitioning=partitioning,
+   1218     ignore_missing_paths=ignore_missing_paths,
+   1219     **arrow_csv_args,
+   1220 )
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\auto_init_hook.py:24, in wrap_auto_init.<locals>.auto_init_wrapper(*args, **kwargs)
+     21 @wraps(fn)
+     22 def auto_init_wrapper(*args, **kwargs):
+     23     auto_init_ray()
+---> 24     return fn(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\data\read_api.py:371, in read_datasource(datasource, parallelism, ray_remote_args, **read_args)
+    363     scheduling_strategy = NodeAffinitySchedulingStrategy(
+    364         ray.get_runtime_context().get_node_id(),
+    365         soft=False,
+    366     )
+    367     get_reader = cached_remote_fn(
+    368         _get_reader, retry_exceptions=False, num_cpus=0
+    369     ).options(scheduling_strategy=scheduling_strategy)
+--> 371     (requested_parallelism, min_safe_parallelism, inmemory_size, reader,) = ray.get(
+    372         get_reader.remote(
+    373             datasource,
+    374             ctx,
+    375             cur_pg,
+    376             parallelism,
+    377             local_uri,
+    378             _wrap_arrow_serialization_workaround(read_args),
+    379         )
+    380     )
+    382 # TODO(hchen/chengsu): Remove the duplicated get_read_tasks call here after
+    383 # removing LazyBlockList code path.
+    384 read_tasks = reader.get_read_tasks(requested_parallelism)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\auto_init_hook.py:24, in wrap_auto_init.<locals>.auto_init_wrapper(*args, **kwargs)
+     21 @wraps(fn)
+     22 def auto_init_wrapper(*args, **kwargs):
+     23     auto_init_ray()
+---> 24     return fn(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\client_mode_hook.py:103, in client_mode_hook.<locals>.wrapper(*args, **kwargs)
+    101     if func.__name__ != ""init"" or is_client_mode_enabled_by_default:
+    102         return getattr(ray, func.__name__)(*args, **kwargs)
+--> 103 return func(*args, **kwargs)
+
+File d:\madewithml\venv\lib\site-packages\ray\_private\worker.py:2547, in get(object_refs, timeout)
+   2545     worker.core_worker.dump_object_store_memory_usage()
+   2546 if isinstance(value, RayTaskError):
+-> 2547     raise value.as_instanceof_cause()
+   2548 else:
+   2549     raise value
+
+RayTaskError(ModuleNotFoundError): ray::_get_reader() (pid=17388, ip=127.0.0.1)
+  File ""python\ray\_raylet.pyx"", line 1616, in ray._raylet.execute_task
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\read_api.py"", line 2348, in _get_reader
+    reader = ds.create_reader(**kwargs)
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\datasource\file_based_datasource.py"", line 256, in create_reader
+    return _FileBasedDatasourceReader(self, **kwargs)
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\datasource\file_based_datasource.py"", line 476, in __init__
+    _check_pyarrow_version()
+  File ""d:\madewithml\venv\lib\site-packages\ray\data\_internal\util.py"", line 78, in _check_pyarrow_version
+    from pkg_resources._vendor.packaging.version import parse as parse_version
+ModuleNotFoundError: No module named 'pkg_resources._vendor'
+```
+",hoangziet,108646783,open,False,1,2025-03-27T03:07:07+00:00,2025-04-02T07:35:56+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2801614505,273,Fix course link in README.md,Fix course link in README.md,kudosscience,45144290,open,False,0,2025-01-21T11:51:37+00:00,2025-01-21T11:51:37+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2579428088,271,TypeError in Ray TorchTrainer with StreamSplitDataIterator,"### What happened + What you expected to happen
+
+## **Description:**
+
+I encountered a TypeError when running TorchTrainer in a Ray Tune experiment. The error occurs due to an issue with StreamSplitDataIterator, which does not have a defined len() method. This issue causes the trial to fail and the training process to stop.
+ 
+ ## Error Traceback:
+ 
+ ```
+---------------------------------------------------------------------------
+RayTaskError(TypeError)                   Traceback (most recent call last)
+RayTaskError(TypeError): ray::_Inner.train() (pid=545925, ip=127.0.1.1, actor_id=8df214bd0f57efa0f244450001000000, repr=TorchTrainer)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/tune/trainable/trainable.py"", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 57, in check_for_failure
+    ray.get(object_ref)
+ray.exceptions.RayTaskError(TypeError): ray::_RayTrainWorker__execute.get_next() (pid=546125, ip=127.0.1.1, actor_id=2c8fbaded7de91dfce4cb83501000000, repr=<ray.train._internal.worker_group.RayTrainWorker object at 0x7099dcd57c70>)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/worker_group.py"", line 33, in __execute
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 176, in discard_return_wrapper
+    train_func(*args, **kwargs)
+  File ""/tmp/ipykernel_542780/2278135304.py"", line 29, in train_loop_per_worker
+TypeError: object of type 'StreamSplitDataIterator' has no len()
+
+ ```
+
+## **Expected Behavior:**
+I expected the training loop to handle the `StreamSplitDataIterator` properly without raising the `TypeError`.
+
+
+## **Actual Behavior:**
+The `TypeError` prevents the training process from completing, as it attempts to calculate the length of an object that lacks a `__len__` method.
+
+
+
+## **Detailed Traceback**
+
+```
+2024-10-10 16:42:48,349	DEBUG resource_updater.py:258 -- Checking Ray cluster resources.
+2024-10-10 16:42:48,673	DEBUG tune_controller.py:1240 -- Future TRAIN FAILED for trial TorchTrainer_ccdf1_00000: ray::_Inner.train() (pid=545925, ip=127.0.1.1, actor_id=8df214bd0f57efa0f244450001000000, repr=TorchTrainer)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/tune/trainable/trainable.py"", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 57, in check_for_failure
+    ray.get(object_ref)
+ray.exceptions.RayTaskError(TypeError): ray::_RayTrainWorker__execute.get_next() (pid=546125, ip=127.0.1.1, actor_id=2c8fbaded7de91dfce4cb83501000000, repr=<ray.train._internal.worker_group.RayTrainWorker object at 0x7099dcd57c70>)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/worker_group.py"", line 33, in __execute
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 176, in discard_return_wrapper
+    train_func(*args, **kwargs)
+  File ""/tmp/ipykernel_542780/2278135304.py"", line 29, in train_loop_per_worker
+TypeError: object of type 'StreamSplitDataIterator' has no len()
+2024-10-10 16:42:48,674	ERROR tune_controller.py:1331 -- Trial task failed for trial TorchTrainer_ccdf1_00000
+Traceback (most recent call last):
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/air/execution/_internal/event_manager.py"", line 110, in resolve_future
+    result = ray.get(future)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/_private/auto_init_hook.py"", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/_private/client_mode_hook.py"", line 103, in wrapper
+    return func(*args, **kwargs)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/_private/worker.py"", line 2691, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/_private/worker.py"", line 871, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(TypeError): ray::_Inner.train() (pid=545925, ip=127.0.1.1, actor_id=8df214bd0f57efa0f244450001000000, repr=TorchTrainer)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/tune/trainable/trainable.py"", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 57, in check_for_failure
+    ray.get(object_ref)
+ray.exceptions.RayTaskError(TypeError): ray::_RayTrainWorker__execute.get_next() (pid=546125, ip=127.0.1.1, actor_id=2c8fbaded7de91dfce4cb83501000000, repr=<ray.train._internal.worker_group.RayTrainWorker object at 0x7099dcd57c70>)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/worker_group.py"", line 33, in __execute
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 176, in discard_return_wrapper
+    train_func(*args, **kwargs)
+  File ""/tmp/ipykernel_542780/2278135304.py"", line 29, in train_loop_per_worker
+TypeError: object of type 'StreamSplitDataIterator' has no len()
+2024-10-10 16:42:48,843	DEBUG tune_controller.py:1367 -- Requesting to STOP actor for trial TorchTrainer_ccdf1_00000
+2024-10-10 16:42:48,845	DEBUG tune_controller.py:735 -- Setting status for trial TorchTrainer_ccdf1_00000 from RUNNING to ERROR
+2024-10-10 16:42:48,845	DEBUG tune_controller.py:1396 -- Terminating actor for trial TorchTrainer_ccdf1_00000: <TrackedActor 55643445138953405172927010354651748243>
+2024-10-10 16:42:48,852	DEBUG experiment_state.py:122 -- Experiment state snapshotting took 0.00 seconds. Adjusting snapshotting period to 10.00 seconds.
+2024-10-10 16:42:48,941	DEBUG experiment_state.py:122 -- Experiment state snapshotting took 0.08 seconds. Adjusting snapshotting period to 10.00 seconds.
+2024-10-10 16:42:48,942	INFO tune.py:1009 -- Wrote the latest version of all result files and experiment state to '/home/ali/Desktop/projects/AIUpdateHub/efs/llm' in 0.0838s.
+2024-10-10 16:42:48,949	DEBUG tune_controller.py:784 -- CLEANING UP all trials
+2024-10-10 16:42:48,952	DEBUG tune_controller.py:800 -- Waiting for actor manager to clean up final state [dedup]
+== Status ==
+Current time: 2024-10-10 16:42:48 (running for 00:00:50.81)
+Using FIFO scheduling algorithm.
+Logical resource usage: 2.0/4 CPUs, 0/0 GPUs
+Result logdir: /tmp/ray/session_2024-10-10_16-36-38_318744_542780/artifacts/2024-10-10_16-41-57/llm/driver_artifacts
+Number of trials: 1/1 (1 ERROR)
+Number of errored trials: 1
++--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Trial name               |   # failures | error file                                                                                                                                                     |
+|--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| TorchTrainer_ccdf1_00000 |            1 | /tmp/ray/session_2024-10-10_16-36-38_318744_542780/artifacts/2024-10-10_16-41-57/llm/driver_artifacts/TorchTrainer_ccdf1_00000_0_2024-10-10_16-41-58/error.txt |
++--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+== Status ==
+Current time: 2024-10-10 16:42:48 (running for 00:00:50.90)
+Using FIFO scheduling algorithm.
+Logical resource usage: 2.0/4 CPUs, 0/0 GPUs
+Result logdir: /tmp/ray/session_2024-10-10_16-36-38_318744_542780/artifacts/2024-10-10_16-41-57/llm/driver_artifacts
+Number of trials: 1/1 (1 ERROR)
+Number of errored trials: 1
++--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Trial name               |   # failures | error file                                                                                                                                                     |
+|--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| TorchTrainer_ccdf1_00000 |            1 | /tmp/ray/session_2024-10-10_16-36-38_318744_542780/artifacts/2024-10-10_16-41-57/llm/driver_artifacts/TorchTrainer_ccdf1_00000_0_2024-10-10_16-41-58/error.txt |
++--------------------------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+2024-10-10 16:42:49,091	DEBUG tune_controller.py:1149 -- Actor STOPPED: <TrackedActor 55643445138953405172927010354651748243>
+2024-10-10 16:42:49,094	DEBUG tune_controller.py:805 -- Force cleanup of remaining actors
+2024-10-10 16:42:49,099	ERROR tune.py:1037 -- Trials did not complete: [TorchTrainer_ccdf1_00000]
+2024-10-10 16:42:49,103	INFO tune.py:1041 -- Total run time: 51.81 seconds (50.81 seconds for the tuning loop).
+---------------------------------------------------------------------------
+RayTaskError(TypeError)                   Traceback (most recent call last)
+RayTaskError(TypeError): ray::_Inner.train() (pid=545925, ip=127.0.1.1, actor_id=8df214bd0f57efa0f244450001000000, repr=TorchTrainer)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/tune/trainable/trainable.py"", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 57, in check_for_failure
+    ray.get(object_ref)
+ray.exceptions.RayTaskError(TypeError): ray::_RayTrainWorker__execute.get_next() (pid=546125, ip=127.0.1.1, actor_id=2c8fbaded7de91dfce4cb83501000000, repr=<ray.train._internal.worker_group.RayTrainWorker object at 0x7099dcd57c70>)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/worker_group.py"", line 33, in __execute
+    raise skipped from exception_cause(skipped)
+  File ""/home/ali/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/_internal/utils.py"", line 176, in discard_return_wrapper
+    train_func(*args, **kwargs)
+  File ""/tmp/ipykernel_542780/2278135304.py"", line 29, in train_loop_per_worker
+TypeError: object of type 'StreamSplitDataIterator' has no len()
+
+The above exception was the direct cause of the following exception:
+
+TrainingFailedError                       Traceback (most recent call last)
+File <timed exec>:2
+
+File ~/Desktop/projects/AIUpdateHub/venv/lib/python3.10/site-packages/ray/train/base_trainer.py:638, in BaseTrainer.fit(self)
+    634 result = result_grid[0]
+    635 if result.error:
+    636     # Raise trainable errors to the user with a message to restore
+    637     # or configure FailureConfig in a new run.
+--> 638     raise TrainingFailedError(
+    639         ""\n"".join([restore_msg, TrainingFailedError._FAILURE_CONFIG_MSG])
+    640     ) from result.error
+    641 return result
+
+TrainingFailedError: The Ray Train run failed. Please inspect the previous error messages for a cause. After fixing the issue (assuming that the error is not caused by your own application logic, but rather an error such as OOM), you can restart the run from scratch or continue this run.
+To continue this run, you can use: trainer = TorchTrainer.restore(""/home/ali/Desktop/projects/AIUpdateHub/efs/llm"").
+To start a new run that will retry on training failures, set train.RunConfig(failure_config=train.FailureConfig(max_failures)) in the Trainer's run_config with max_failures > 0, or max_failures = -1 for unlimited retries
+``` 
+    
+    
+    
+
+### Versions / Dependencies
+
+## **Environment**:
+
+**Ray version:** 2.37.0
+**Python version:** 3.10
+**OS:** Ubuntu
+**Hardware:** CPU-based training on local laptop
+
+### Reproduction script
+
+## **Related codes**
+
+----------- **Trainer** -----------------
+```
+trainer = TorchTrainer(
+    train_loop_per_worker=train_loop_per_worker,
+    train_loop_config=train_loop_config,
+    scaling_config=scaling_config,
+    run_config=run_config,
+    datasets={""train"": train_ds, ""val"": val_ds},
+    dataset_config=dataset_config,
+    metadata={""class_to_index"": preprocessor.class_to_index}
+)
+```
+
+ ------------------------ **train_step**  -------------------------
+```
+def train_step(ds, batch_size, model, num_classes, loss_fn, optimizer):
+    """"""Train step.""""""
+    model.train()  # Set model to training mode
+    cumulative_loss = 0.0  # Initialize cumulative loss
+    #ds_generator = ds.iter_torch_batches(batch_size=batch_size, collate_fn=collate_fn)  # Batch-wise generator
+    ds_generator = ds.iter_batches(batch_size=batch_size, batch_format=""torch"", collate_fn=collate_fn)
+    # Loop over batches
+    for i, batch in enumerate(ds_generator):
+        optimizer.zero_grad()  # Reset gradients before each batch
+        z = model(batch)  # Forward pass
+        
+        # Ensure that targets are one-hot encoded properly
+        targets = F.one_hot(batch[""targets""], num_classes=num_classes).float()
+        
+        # Calculate loss
+        loss = loss_fn(z, targets)
+        
+        # Backpropagation
+        loss.backward()  # Backward pass
+        optimizer.step()  # Update model weights
+        
+        # Calculate cumulative loss
+        cumulative_loss += loss.detach().item()
+    
+    # Return the average loss over all batches
+    return cumulative_loss / (i + 1)
+
+```
+
+----------------- **train_loop_per_worker** -------------------------
+```
+# Set up logging
+logging.basicConfig(level=logging.INFO)  # You can set this to DEBUG for more detail
+logger = logging.getLogger(__name__)
+
+# Training loop
+def train_loop_per_worker(config):
+    # Hyperparameters
+    dropout_p = config[""dropout_p""]
+    lr = config[""lr""]
+    lr_factor = config[""lr_factor""]
+    lr_patience = config[""lr_patience""]
+    num_epochs = config[""num_epochs""]
+    batch_size = config[""batch_size""]
+    num_classes = config[""num_classes""]
+
+    # Get datasets
+    set_seeds()
+    logger.info(""Loading dataset shards..."")
+    train_ds = train.get_dataset_shard(""train"")
+    val_ds = train.get_dataset_shard(""val"")
+    logger.info(f""Dataset shards loaded. Training data size: {len(train_ds)}, Validation data size: {len(val_ds)}"")
+
+    # Model
+    llm = BertModel.from_pretrained(""allenai/scibert_scivocab_uncased"", return_dict=False)
+    model = FinetunedLLM(llm=llm, dropout_p=dropout_p, embedding_dim=llm.config.hidden_size, num_classes=num_classes)
+    model = train.torch.prepare_model(model)
+    logger.info(""Model initialized."")
+
+    # Training components
+    loss_fn = nn.BCEWithLogitsLoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode=""min"", factor=lr_factor, patience=lr_patience)
+    logger.info(""Optimizer and scheduler initialized."")
+
+    # Training
+    num_workers = train.get_context().get_world_size()
+    batch_size_per_worker = batch_size // num_workers
+    logger.info(f""Training started with {num_workers} workers and batch size per worker: {batch_size_per_worker}"")
+
+    for epoch in range(num_epochs):
+        logger.info(f""Epoch {epoch + 1}/{num_epochs}"")
+        train_loss = train_step(train_ds, batch_size_per_worker, model, num_classes, loss_fn, optimizer)
+        logger.info(f""Training loss for epoch {epoch + 1}: {train_loss}"")
+
+        val_loss, _, _ = eval_step(val_ds, batch_size_per_worker, model, num_classes, loss_fn)
+        logger.info(f""Validation loss for epoch {epoch + 1}: {val_loss}"")
+        scheduler.step(val_loss)
+
+        # Checkpoint
+        with tempfile.TemporaryDirectory() as dp:
+            if isinstance(model, torch.nn.parallel.DistributedDataParallel):  # CPU case
+                model.module.save(dp=dp)
+            else:
+                model.save(dp=dp)
+            metrics = dict(epoch=epoch, lr=optimizer.param_groups[0][""lr""], train_loss=train_loss, val_loss=val_loss)
+            checkpoint = Checkpoint.from_directory(dp)
+            train.report(metrics, checkpoint=checkpoint)
+            logger.info(f""Epoch {epoch + 1} completed and checkpoint saved."")
+```
+
+--------- **load_data** ----------
+
+```
+def load_data(dataset_loc: str, num_samples: int = None) -> Dataset:
+    """"""Load data from source into a Ray Dataset.
+
+    Args:
+        dataset_loc (str): Location of the dataset.
+        num_samples (int, optional): The number of samples to load. Defaults to None.
+
+    Returns:
+        Dataset: Our dataset represented by a Ray Dataset.
+    """"""
+    ds = ray.data.read_csv(dataset_loc)
+    ds = ds.random_shuffle(seed=1234)
+    ds = ray.data.from_items(ds.take(num_samples)) if num_samples else ds
+    return ds
+    ```
+
+### Issue Severity
+
+High: It blocks me from completing my task.",AliHaiderAhmad001,102966515,open,False,0,2024-10-10T17:25:33+00:00,2024-10-10T17:25:33+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2545905359,270,The Ray link is not updated,"In the [Setup](https://madewithml.com/courses/mlops/setup/) section, the Ray link provided is (https://github.com/project-ray/ray) and it is not found. I think the link will be (https://github.com/ray-project/ray).  Could anyone correct this typo?
+
+![ray_error](https://github.com/user-attachments/assets/a2412d95-22a8-4d86-b5ba-d21af9ac70d7)",JaiSuryaPrabu,106684947,open,False,0,2024-09-24T16:54:21+00:00,2024-09-24T16:54:21+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2471783583,264,Create nextjs.yml,,jekabspl,53561329,open,False,0,2024-08-18T04:34:14+00:00,2024-08-18T04:34:14+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2440946249,263,Getting TypeError: RayTaskError.as_instanceof_cause.<locals>.cls.__init__() takes 2 positional arguments but 4 were given ,"After running below code
+
+```
+# Trainer
+trainer = TorchTrainer(
+    train_loop_per_worker=train_loop_per_worker,
+    train_loop_config=train_loop_config,
+    scaling_config=scaling_config,
+    run_config=run_config,
+    datasets={""train"": train_ds, ""val"": val_ds},
+    dataset_config=dataset_config,
+    metadata={""class_to_index"": preprocessor.class_to_index}
+)
+
+%%time
+# Train
+results = trainer.fit()
+```
+Setuptools version - `69.5.1`
+Ray version - `2.7.0` also tried `2.7.1` & `2.7.2`
+
+getting below error - 
+
+> -------------------------------------------------------------------------
+> TypeError                                 Traceback (most recent call last)
+> File <timed exec>:2
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/train/base_trainer.py:653, in BaseTrainer.fit(self)
+>     647 restore_msg = TrainingFailedError._RESTORE_MSG.format(
+>     648     trainer_cls_name=self.__class__.__name__,
+>     649     path=str(experiment_local_path),
+>     650 )
+>     652 try:
+> --> 653     result_grid = tuner.fit()
+>     654 except TuneError as e:
+>     655     # Catch any `TuneError`s raised by the `Tuner.fit` call.
+>     656     # Unwrap the `TuneError` if needed.
+>     657     parent_error = e.__cause__ or e
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/tuner.py:372, in Tuner.fit(self)
+>     370 if not self._is_ray_client:
+>     371     try:
+> --> 372         return self._local_tuner.fit()
+>     373     except TuneError as e:
+>     374         raise TuneError(
+>     375             _TUNER_FAILED_MSG.format(
+>     376                 path=self._local_tuner.get_experiment_checkpoint_dir()
+>     377             )
+>     378         ) from e
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/impl/tuner_internal.py:585, in TunerInternal.fit(self)
+>     581     analysis = self._fit_resume(trainable, param_space)
+>     583 self._experiment_analysis = analysis
+> --> 585 return ResultGrid(self._experiment_analysis)
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/result_grid.py:83, in ResultGrid.__init__(self, experiment_analysis)
+>      78 def __init__(
+>      79     self,
+>      80     experiment_analysis: ExperimentAnalysis,
+>      81 ):
+>      82     self._experiment_analysis = experiment_analysis
+> ---> 83     self._results = [
+>      84         self._trial_to_result(trial) for trial in self._experiment_analysis.trials
+>      85     ]
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/result_grid.py:84, in <listcomp>(.0)
+>      78 def __init__(
+>      79     self,
+>      80     experiment_analysis: ExperimentAnalysis,
+>      81 ):
+>      82     self._experiment_analysis = experiment_analysis
+>      83     self._results = [
+> ---> 84         self._trial_to_result(trial) for trial in self._experiment_analysis.trials
+>      85     ]
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/result_grid.py:317, in ResultGrid._trial_to_result(self, trial)
+>     309 else:
+>     310     metrics_df = self._experiment_analysis.trial_dataframes.get(
+>     311         trial.local_path
+>     312     )
+>     314 result = Result(
+>     315     checkpoint=checkpoint,
+>     316     metrics=trial.last_result.copy(),
+> --> 317     error=self._populate_exception(trial),
+>     318     _local_path=trial.local_path,
+>     319     _remote_path=trial.remote_path,
+>     320     _storage_filesystem=(
+>     321         self._experiment_analysis._fs
+>     322         if isinstance(self._experiment_analysis, ExperimentAnalysis)
+>     323         else None
+>     324     ),
+>     325     metrics_dataframe=metrics_df,
+>     326     best_checkpoints=best_checkpoints,
+>     327 )
+>     328 return result
+> 
+> File /opt/anaconda3/envs/madewithml/lib/python3.10/site-packages/ray/tune/result_grid.py:262, in ResultGrid._populate_exception(trial)
+>     260 if trial.pickled_error_file and os.path.exists(trial.pickled_error_file):
+>     261     with open(trial.pickled_error_file, ""rb"") as f:
+> --> 262         e = cloudpickle.load(f)
+>     263         return e
+>     264 elif trial.error_file and os.path.exists(trial.error_file):
+> 
+> TypeError: RayTaskError.as_instanceof_cause.<locals>.cls.__init__() takes 2 positional arguments but 4 were given
+",NikhilK-crypto,58160895,open,False,2,2024-07-31T20:59:47+00:00,2024-11-13T23:38:23+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2434604372,262,docs: fixed course link in README.md,Fixed the course link in README's set up,vladlearns,48068368,open,False,1,2024-07-29T06:54:17+00:00,2024-07-29T06:54:43+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2406815753,261,Reporting a typo! ,"in the 
+(Evaluating Machine Learning Models) webpage. 
+
+We can also use model-specific approaches to interpretability we we did in our [embeddings lesson](https://madewithml.com/courses/foundations/embeddings/#interpretability) to identify the most influential n-grams in our text. ===>>
+We can also use model-specific approaches to interpretability we did in our [embeddings lesson](https://madewithml.com/courses/foundations/embeddings/#interpretability) to identify the most influential n-grams in our text. 
+
+there is an extra (we) in this text",mohammad-gh009,75425392,closed,False,1,2024-07-13T09:19:51+00:00,2025-04-28T22:40:53+00:00,2025-04-28T22:40:53+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2392899326,260,add GTM container,,saihaj,44710980,closed,False,1,2024-07-05T16:46:37+00:00,2024-07-05T18:11:41+00:00,2024-07-05T18:11:39+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2387032908,259,"Anyscale Web UI updated, problem at Setup","The any scale web UI seems to have changed compared to the demo. I was at the setup and wanted to ask how to set the compute config to ""madewithml-cluster-compute"" - is this just a name or has more config built in?
+
+And also, how do I specify the post build commands?
+
+<img width=""145"" alt=""Screenshot 2024-07-02 at 12 49 03"" src=""https://github.com/GokuMohandas/Made-With-ML/assets/27727185/56ff3b8d-7d52-4757-be56-a63bf3db9eb5"">
+
+
+Thanks in advance",jmayank23,27727185,open,False,1,2024-07-02T19:50:00+00:00,2024-11-06T00:48:39+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2341778148,258,"Usage of double quotes inside an f-string, which causes a syntax error","In the section 'Machine Learning' in the 'Foundations' course, there is a code block in the 'Inference' sub-section:
+
+`# Unstandardize predictions
+pred_infer = model(X_infer).detach().numpy() * np.sqrt(y_scaler.var_) + y_scaler.mean_
+for i, index in enumerate(sample_indices):
+    print (f""{df.iloc[index][""y""]:.2f} (actual) → {pred_infer[i][0]:.2f} (predicted)"")`
+
+However since there are also double-quotes around the y in the indexing (intended to display as ""y""), the f-string ends early.
+
+A fix would include simply changing the double quotes around the ""y"" to single quotes 'y':
+
+`# Unstandardize predictions
+pred_infer = model(X_infer).detach().numpy() * np.sqrt(y_scaler.var_) + y_scaler.mean_
+for i, index in enumerate(sample_indices):
+    print (f""{df.iloc[index]['y']:.2f} (actual) → {pred_infer[i][0]:.2f} (predicted)"")`
+
+",zachpinto,45244995,open,False,0,2024-06-08T18:42:10+00:00,2024-06-08T18:42:10+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2317153552,257,ray.init() fails to start the dashboard with new version of setuptools (70.0.0),"Error:
+```
+2024-05-25 13:42:16,677 ERROR services.py:1222 -- Failed to start the dashboard , return code 1
+
+...
+
+File ""C:\madewithml\venv\lib\site-packages\ray\dashboard\modules\dashboard_sdk.py"", line 10, in <module>
+    from pkg_resources import packaging
+ImportError: cannot import name 'packaging' from 'pkg_resources' (C:\madewithml\venv\lib\site-packages\pkg_resources\__init__.py)  
+```",jgtiu,33926951,open,False,5,2024-05-25T17:45:51+00:00,2024-07-03T15:24:44+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2234555075,256,Tolearn,,syf00ysf,109174055,open,False,2,2024-04-10T01:01:47+00:00,2024-04-10T01:25:33+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2176277845,255,Ray Configuration on Mac M1,"Hi, I'm facing some issues with Ray when running it locally on my mac (M1, Sonoma 14.1.1). I wonder whether for those of us running locally, a different configuration or setup of Ray would be required.
+
+Many thanks
+
+
+
+```
+2024-03-08 12:31:00,522	ERROR services.py:1222 -- Failed to start the dashboard , return code 1
+2024-03-08 12:31:00,524	ERROR services.py:1247 -- Error should be written to 'dashboard.log' or 'dashboard.err'. We are printing the last 20 lines for you. See 'https://docs.ray.io/en/master/ray-observability/ray-logging.html#logging-directory-structure' to find where the log file is.
+2024-03-08 12:31:00,529	ERROR services.py:1291 -- 
+The last 20 lines of /tmp/ray/session_2024-03-08_12-30-58_875047_6306/logs/dashboard.log (it contains the error message from the dashboard): 
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/Users/rubencontesti/Code/madewithml/venv/lib/python3.11/site-packages/ray/dashboard/utils.py"", line 134, in get_all_modules
+    raise e
+  File ""/Users/rubencontesti/Code/madewithml/venv/lib/python3.11/site-packages/ray/dashboard/utils.py"", line 121, in get_all_modules
+    importlib.import_module(name)
+  File ""/opt/homebrew/Cellar/python@3.11/3.11.4_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/__init__.py"", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""<frozen importlib._bootstrap>"", line 1204, in _gcd_import
+  File ""<frozen importlib._bootstrap>"", line 1176, in _find_and_load
+  File ""<frozen importlib._bootstrap>"", line 1147, in _find_and_load_unlocked
+  File ""<frozen importlib._bootstrap>"", line 690, in _load_unlocked
+  File ""<frozen importlib._bootstrap_external>"", line 940, in exec_module
+  File ""<frozen importlib._bootstrap>"", line 241, in _call_with_frames_removed
+  File ""/Users/rubencontesti/Code/madewithml/venv/lib/python3.11/site-packages/ray/dashboard/modules/test/test_agent.py"", line 6, in <module>
+    import ray.dashboard.modules.test.test_utils as test_utils
+  File ""/Users/rubencontesti/Code/madewithml/venv/lib/python3.11/site-packages/ray/dashboard/modules/test/test_utils.py"", line 3, in <module>
+    import async_timeout
+ModuleNotFoundError: No module named 'async_timeout'
+2024-03-08 12:31:00,654	INFO worker.py:1642 -- Started a local Ray instance.
+(raylet) [2024-03-08 12:31:01,402 E 6333 155252] (raylet) agent_manager.cc:70: The raylet exited immediately because one Ray agent failed, agent_name = dashboard_agent/470211272.
+(raylet) The raylet fate shares with the agent. This can happen because
+(raylet) - The version of `grpcio` doesn't follow Ray's requirement. Agent can segfault with the incorrect `grpcio` version. Check the grpcio version `pip freeze | grep grpcio`.
+(raylet) - The agent failed to start because of unexpected error or port conflict. Read the log `cat /tmp/ray/session_latest/logs/{dashboard_agent|runtime_env_agent}.log`. You can find the log file structure here https://docs.ray.io/en/master/ray-observability/ray-logging.html#logging-directory-structure.
+(raylet) - The agent is killed by the OS (e.g., out of memory).
+```",rcontesti,13105045,open,False,2,2024-03-08T15:38:25+00:00,2024-12-17T20:43:43+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2119888425,254,Getting TypeError: __init__() takes 2 positional arguments but 4 were given ,"Hi, I am following your made-with-ML tutorial and currently at the experiment tracking step. When I ran the following code after specifying a run config based on ML flow callbacks, I am getting **Getting TypeError: __init__() takes 2 positional arguments but 4 were given** . Could you please help?
+
+```
+# Dataset
+ds = load_data()
+train_ds, val_ds = stratify_split(ds, stratify=""tag"", test_size=test_size)
+
+# Preprocess
+preprocessor = CustomPreprocessor()
+train_ds = preprocessor.fit_transform(train_ds)
+val_ds = preprocessor.transform(val_ds)
+train_ds = train_ds.materialize()
+val_ds = val_ds.materialize()
+
+# Trainer
+trainer = TorchTrainer(
+    train_loop_per_worker=train_loop_per_worker,
+    train_loop_config=train_loop_config,
+    scaling_config=scaling_config,
+    run_config=run_config,  # uses RunConfig with MLflow callback
+    datasets={""train"": train_ds, ""val"": val_ds},
+    dataset_config=dataset_config,
+    preprocessor=preprocessor,
+)
+
+# Train
+results = trainer.fit()
+```",minyoungjeong0812,44269110,open,False,2,2024-02-06T03:37:14+00:00,2024-07-31T19:59:45+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2113916565,253,trainer.fit() Object Memory Error in Local Machine,"I run out of memory in trainer.fit(), I have 8gb RAM and i7 8th gen 12 core CPU. I also see error in trainer.fit(). Is there any way to reduce the load on RAM or will I need another RAM to be able to run this.",satyamnyati,54992332,closed,False,5,2024-02-02T02:45:44+00:00,2024-11-16T11:48:02+00:00,2024-11-16T11:48:02+00:00,,1,1,0,0,0,0,0
+GokuMohandas/Made-With-ML,2087599485,252,Ray train failed - Permission Error Windows,"Hello,
+
+I am getting a Permission Error while running the `trainer.fit()`. I am running the code a personal laptop.
+
+Code:
+```python
+# Train loop config
+train_loop_config = {
+    ""dropout_p"": 0.5,
+    ""lr"": 1e-2,
+    ""lr_factor"": 0.8,
+    ""lr_patience"": 3,
+    ""num_epochs"": 5,
+    ""batch_size"": 32,
+    ""num_classes"": num_classes,
+}
+
+# Scaling config
+scaling_config = ScalingConfig(
+    num_workers=num_workers,
+    use_gpu=bool(resources_per_worker[""GPU""]),
+    resources_per_worker=resources_per_worker
+)
+
+# Run config
+checkpoint_config = CheckpointConfig(num_to_keep=1, checkpoint_score_attribute=""val_loss"", checkpoint_score_order=""min"")
+run_config = RunConfig(name=""llm"", checkpoint_config=checkpoint_config, storage_path=Path('./').resolve())
+
+# Dataset
+ds = load_data()
+train_ds, val_ds = stratify_split(ds, stratify=""tag"", test_size=test_size)
+
+# Preprocess
+preprocessor = CustomPreprocessor()
+preprocessor =  preprocessor.fit(train_ds)
+train_ds = preprocessor.transform(train_ds)
+val_ds = preprocessor.transform(val_ds)
+train_ds = train_ds.materialize()
+val_ds = val_ds.materialize()
+
+# Dataset config
+options = ray.data.ExecutionOptions(preserve_order=True)
+dataset_config = DataConfig(
+    datasets_to_split=[""train""],
+    execution_options=options)
+
+# Trainer
+trainer = TorchTrainer(
+    train_loop_per_worker=train_loop_per_worker,
+    train_loop_config=train_loop_config,
+    scaling_config=scaling_config,
+    run_config=run_config,
+    datasets={""train"": train_ds, ""val"": val_ds},
+    dataset_config=dataset_config,
+    metadata={""class_to_index"": preprocessor.class_to_index}
+)
+
+%%time
+# Train
+results = trainer.fit()
+```
+
+Error Log:
+```bash
+2024-01-18 11:37:34,621	ERROR tune_controller.py:1374 -- Trial task failed for trial TorchTrainer_10734_00000
+Traceback (most recent call last):
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\air\execution\_internal\event_manager.py"", line 110, in resolve_future
+    result = ray.get(future)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\auto_init_hook.py"", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\client_mode_hook.py"", line 103, in wrapper
+    return func(*args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\worker.py"", line 2624, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(PermissionError): ray::_Inner.train() (pid=16812, ip=127.0.0.1, actor_id=9fe2423e0cd57b52c144a08a01000000, repr=TorchTrainer)
+  File ""python\ray\_raylet.pyx"", line 1813, in ray._raylet.execute_task
+  File ""python\ray\_raylet.pyx"", line 1754, in ray._raylet.execute_task.function_executor
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\function_manager.py"", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\util\tracing\tracing_helper.py"", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\tune\trainable\trainable.py"", line 342, in train
+    raise skipped from exception_cause(skipped)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\utils.py"", line 43, in check_for_failure
+    ray.get(object_ref)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\auto_init_hook.py"", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\client_mode_hook.py"", line 103, in wrapper
+    return func(*args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\worker.py"", line 2624, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(PermissionError): ray::_RayTrainWorker__execute.get_next() (pid=9492, ip=127.0.0.1, actor_id=bc7d4a1c3843a673dd0e184f01000000, repr=<ray.train._internal.worker_group.RayTrainWorker object at 0x0000023D4BB79090>)
+  File ""python\ray\_raylet.pyx"", line 1813, in ray._raylet.execute_task
+  File ""python\ray\_raylet.pyx"", line 1754, in ray._raylet.execute_task.function_executor
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\_private\function_manager.py"", line 726, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\util\tracing\tracing_helper.py"", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\worker_group.py"", line 33, in __execute
+    raise skipped from exception_cause(skipped)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\utils.py"", line 118, in discard_return_wrapper
+    train_func(*args, **kwargs)
+  File ""C:\Users\YASH\AppData\Local\Temp\ipykernel_10888\3384315726.py"", line 44, in train_loop_per_worker
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\session.py"", line 644, in wrapper
+    return fn(*args, **kwargs)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\session.py"", line 706, in report
+    _get_session().report(metrics, checkpoint=checkpoint)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\session.py"", line 417, in report
+    persisted_checkpoint = self.storage.persist_current_checkpoint(checkpoint)
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\storage.py"", line 558, in persist_current_checkpoint
+    _pyarrow_fs_copy_files(
+  File ""d:\MLOps\mlenv\lib\site-packages\ray\train\_internal\storage.py"", line 110, in _pyarrow_fs_copy_files
+    return pyarrow.fs.copy_files(
+  File ""d:\MLOps\mlenv\lib\site-packages\pyarrow\fs.py"", line 244, in copy_files
+    _copy_files_selector(source_fs, source_sel,
+  File ""pyarrow\_fs.pyx"", line 1229, in pyarrow._fs._copy_files_selector
+  File ""pyarrow\error.pxi"", line 110, in pyarrow.lib.check_status
+PermissionError: [WinError 32] Failed copying 'C:/Users/YASH/AppData/Local/Temp/tmpsm8_7sn1/model.pt' to 'D:/MLOps/Made-With-ML/notebooks/llm/TorchTrainer_10734_00000_0_2024-01-18_11-31-47/checkpoint_000000/model.pt'. Detail: [Windows error 32] The process cannot access the file because it is being used by another process.
+2024-01-18 11:37:38,459	ERROR tune.py:1038 -- Trials did not complete: [TorchTrainer_10734_00000]
+2024-01-18 11:37:38,466	INFO tune.py:1042 -- Total run time: 351.06 seconds (347.16 seconds for the tuning loop).
+```
+
+Directory:
+![image](https://github.com/GokuMohandas/Made-With-ML/assets/58077762/3a030838-f217-4a8d-809b-00cb12232fd6)
+",yashpaneliya,58077762,open,False,1,2024-01-18T06:22:53+00:00,2024-03-11T15:47:04+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2080746858,251,Serving issue with /predict/ POST request,"I have this code running on jupyter notebook:
+```
+@serve.deployment(num_replicas=""1"", ray_actor_options={""num_cpus"": 8, ""num_gpus"": 0})
+@serve.ingress(app)
+class ModelDeployment:
+    def __init__(self, run_id: str, threshold: int = 0.9):
+        self.run_id = run_id
+        self.threshold = threshold
+        mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+        checkpoint = predict.get_best_checkpoint(run_id=run_id)
+        self.predictor = predict.TorchPredictor.from_checkpoint(checkpoint)
+
+    @app.get(""/"")
+    def _index(self) -> Dict:
+        response = {
+            ""message"": HTTPStatus.OK.phrase,
+            ""status-code"": HTTPStatus.OK,
+            ""data"": {}
+        }
+        return response
+
+    @app.post(""/evaluate/"")
+    async def _evaluate(self, request: Request) -> Dict:
+        data = await request.json()
+        results = evaluate.evaluate(run_id=self.run_id, dataset_loc=data.get(""dataset""))
+        return {""results"": results}
+
+    @app.post(""/predict/"")
+    async def _predict(self, request: Request) -> Dict:
+        data = await request.json()
+        sample_ds = ray.data.from_items([{""title"": data.get(""title"", """"),
+                                  ""description"": data.get(""description"", """"), 
+                                  ""tag"": ""other""}])    
+        results = predict.predict_proba(ds=sample_ds, predictor=self.predictor)
+        
+        for i, result in enumerate(results):
+            pred = result[""prediction""]
+            prob = result[""probabilities""]
+            if prob[pred] < self.threshold:
+                results[i][""prediction""] = ""other""
+
+        return {""results"": results}
+```
+When I send a POST request from Postman with a json file:
+```
+{
+    ""title"": ""Transfer learning with transformers"",
+    ""description"": ""no title"",
+}
+```
+ to ```/predict/```, I get this error. 
+I checked ```/evaluate/```, results of the metrics are outputed. I can't figure it out where is the problem...
+
+
+```((ServeReplica:default:ModelDeployment pid=53855) Traceback (most recent call last):
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/starlette/routing.py"", line 746, in __call__ [repeated 7x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/ray-logging.html#log-deduplication for more options.)
+(ServeReplica:default:ModelDeployment pid=53855)     raise e from None
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/ray/serve/_private/replica.py"", line 895, in call_user_method [repeated 2x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855) ray.exceptions.RayTaskError: ray::ServeReplica:default:ModelDeployment() (pid=53855, ip=172.20.10.2)
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/fastapi/encoders.py"", line 330, in jsonable_encoder [repeated 7x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     data = dict(obj)
+(ServeReplica:default:ModelDeployment pid=53855) TypeError: 'numpy.float32' object is not iterable
+(ServeReplica:default:ModelDeployment pid=53855) ray::ServeReplica:default:ModelDeployment() (pid=53855, ip=172.20.10.2) [repeated 6x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855) During handling of the above exception, another exception occurred:
+(ServeReplica:default:ModelDeployment pid=53855)     data = vars(obj)
+(ServeReplica:default:ModelDeployment pid=53855) TypeError: vars() argument must have __dict__ attribute
+(ServeReplica:default:ModelDeployment pid=53855) The above exception was the direct cause of the following exception:
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/ray/serve/_private/utils.py"", line 165, in wrap_to_ray_error
+(ServeReplica:default:ModelDeployment pid=53855)     raise exception
+(ServeReplica:default:ModelDeployment pid=53855)     result = await method_to_call(*request_args, **request_kwargs)
+(ServeReplica:default:ModelDeployment pid=53855)     await self._asgi_app(
+(ServeReplica:default:ModelDeployment pid=53855)     await super().__call__(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)     await self.middleware_stack(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)     raise exc [repeated 3x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     await self.app(scope, receive, _send)
+(ServeReplica:default:ModelDeployment pid=53855)     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/starlette/_exception_handler.py"", line 44, in wrapped_app [repeated 4x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     await app(scope, receive, sender) [repeated 2x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     await route.handle(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/starlette/routing.py"", line 288, in handle
+(ServeReplica:default:ModelDeployment pid=53855)     await self.app(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/fastapi/routing.py"", line 315, in app [repeated 3x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+(ServeReplica:default:ModelDeployment pid=53855)     response = await func(request)
+(ServeReplica:default:ModelDeployment pid=53855)     content = await serialize_response(
+(ServeReplica:default:ModelDeployment pid=53855)   File ""/home/miras/envs/v1/lib/python3.10/site-packages/fastapi/routing.py"", line 170, in serialize_response
+(ServeReplica:default:ModelDeployment pid=53855)     return jsonable_encoder(
+(ServeReplica:default:ModelDeployment pid=53855)     encoded_value = jsonable_encoder( [repeated 3x across cluster]
+(ServeReplica:default:ModelDeployment pid=53855)     jsonable_encoder(
+(ServeReplica:default:ModelDeployment pid=53855)     raise ValueError(errors) from e
+(ServeReplica:default:ModelDeployment pid=53855) ValueError: [TypeError(""'numpy.float32' object is not iterable""), TypeError('vars() argument must have __dict__ attribute')]",transiteration,78851937,closed,False,1,2024-01-14T14:16:57+00:00,2024-01-16T06:30:50+00:00,2024-01-16T06:30:49+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2062873396,250,Code in Github repository mismatch with code in website content,"Hi,
+
+There are multiple changes in the Github repository code but these changes are not yet integrated into the code which is displayed in frontend content. ",GudlaArunKumar,58899747,open,False,0,2024-01-02T19:52:15+00:00,2024-01-02T19:52:15+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2033034894,249,Ml ,,pyramidxyz,113439871,closed,False,0,2023-12-08T17:13:10+00:00,2023-12-10T22:45:37+00:00,2023-12-10T22:45:37+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2031401625,248,updated cluster env and local catch for efs,,GokuMohandas,8000987,closed,False,0,2023-12-07T19:37:29+00:00,2023-12-07T19:37:38+00:00,2023-12-07T19:37:38+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,2022124182,247,Get this error when running trainer.fit() ,"File ""pyarrow\error.pxi"", line 99, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: GetFileInfo() yielded path 'C:/Users/azhar/ray_results/llm', which is outside base dir 'C:/Users/azhar/ray_results\llm'
+
+I am running the notebook on a windows machine",rahzaazhar,44742531,open,False,2,2023-12-02T16:59:40+00:00,2024-05-26T15:31:46+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1962536676,246,OSError: [Errno 30] Cannot create directory '/efs'. Detail: [errno 30] Read-only file system,@GokuMohandas can you help me figure this out,bhavya-giri,102273412,open,False,5,2023-10-26T01:18:38+00:00,2023-12-03T11:12:23+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1934561045,245,"Issue with ""preprocessor"" argument in TorchTrainer() and ray 2.7","I think the code needs to be updated. Calling the TorchTrainer class below:
+
+```
+# Trainer
+trainer = TorchTrainer(
+    train_loop_per_worker=train_loop_per_worker,
+    train_loop_config=train_loop_config,
+    scaling_config=scaling_config,
+    run_config=run_config,
+    datasets={""train"": train_ds, ""val"": val_ds},
+    dataset_config=dataset_config,
+    preprocessor=preprocessor,
+)
+```
+reults in the following error
+
+```
+2023-10-09 11:00:25,041	WARNING data_parallel_trainer.py:283 -- The dict form of `dataset_config` is deprecated. Use the DataConfig class instead. Support for this will be dropped in a future release.
+---------------------------------------------------------------------------
+DeprecationWarning                        Traceback (most recent call last)
+[<ipython-input-101-7feea6243449>](https://localhost:8080/#) in <cell line: 2>()
+      1 # Trainer
+----> 2 trainer = TorchTrainer(
+      3     train_loop_per_worker=train_loop_per_worker,
+      4     train_loop_config=train_loop_config,
+      5     scaling_config=scaling_config,
+
+2 frames
+[/usr/local/lib/python3.10/dist-packages/ray/train/base_trainer.py](https://localhost:8080/#) in __init__(self, scaling_config, run_config, datasets, metadata, resume_from_checkpoint, preprocessor)
+    227 
+    228         if preprocessor is not None:
+--> 229             raise DeprecationWarning(PREPROCESSOR_DEPRECATION_MESSAGE)
+    230 
+    231     @PublicAPI(stability=""alpha"")
+
+DeprecationWarning: The `preprocessor` argument to Trainers is deprecated as of Ray 2.7. Instead, use the Preprocessor `fit` and `transform` APIs directly on the Ray Dataset. For any state that needs to be saved to the trained checkpoint, pass it in using the `metadata` argument of the `Trainer`. For a full example, see https://docs.ray.io/en/master/train/user-guides/data-loading-preprocessing.html#preprocessing-structured-data
+```",Ibraheem101,46232711,closed,False,0,2023-10-10T07:06:43+00:00,2023-10-22T20:05:15+00:00,2023-10-22T20:05:15+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1917931527,244,Update requirements.txt,"To fix vulnerabilities in the mlflow package 
+
+Relative Path Traversal
+mlflow is a platform to streamline machine learning development, including tracking experiments, packaging code into reproducible runs, and sharing and deploying models.
+
+Affected versions of this package are vulnerable to Relative Path Traversal due to allowing the ability to provide relative paths in registered model sources.
+
+
+![image](https://github.com/GokuMohandas/Made-With-ML/assets/81183603/3cc8bad6-d275-4451-aea8-d3db33f8c9b8)
+
+Access Restriction Bypass
+
+Affected versions of this package are vulnerable to Access Restriction Bypass. Users of the MLflow Open Source Project who are hosting the MLflow Model Registry using the mlflow server or mlflow ui commands may be vulnerable to a remote file access exploit if they are not limiting who can query their server (for example, by using a cloud VPC, an IP allowlist for inbound requests, or authentication / authorization middleware).
+
+This issue only affects users and integrations that run the mlflow server and mlflow ui commands. Integrations that do not make use of mlflow server or mlflow ui are unaffected; for example, the Databricks Managed MLflow product and MLflow on Azure Machine Learning do not make use of these commands and are not impacted by these vulnerabilities in any way. The vulnerability is very similar to [CVE-2023-1177](https://security.snyk.io/vuln/SNYK-PYTHON-MLFLOW-3373049)",suryadev99,81183603,open,False,1,2023-09-28T16:55:43+00:00,2023-09-28T16:56:44+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1911206250,243,how to download from madewithml.data import stratify_split?,"How to download?
+
+```
+ from madewithml.data import stratify_split
+
+```",andysingal,20493493,open,False,4,2023-09-25T10:46:47+00:00,2024-03-12T22:02:51+00:00,,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1903712478,241,updating to Ray 2.7,,GokuMohandas,8000987,closed,False,0,2023-09-19T20:56:32+00:00,2023-09-19T20:56:38+00:00,2023-09-19T20:56:38+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1899746913,240,issue in data engineering lesson,"Hi @GokuMohandas,
+
+I was trying to run the data engineering lessons in my local.
+
+The tags dataset don't have id column so inside dbt cloud development when we run this sql code, it throws an error as tags doesn't have id. Please correct me if am missing something.
+
+`-- models/labeled_projects/labeled_projects.sql
+SELECT p.id, created_on, title, description, tag
+FROM `made-with-ml-XXXXXX.mlops_course.projects` p  -- REPLACE
+LEFT JOIN `made-with-ml-XXXXXX.mlops_course.tags` t  -- REPLACE
+ON p.id = t.id`",akashsonowal,34851159,open,False,2,2023-09-17T11:12:54+00:00,2024-06-30T02:19:01+00:00,,,1,1,0,0,0,0,0
+GokuMohandas/Made-With-ML,1898770108,239,adding dotenv for credentials management,,GokuMohandas,8000987,closed,False,0,2023-09-15T16:46:10+00:00,2023-09-15T16:46:18+00:00,2023-09-15T16:46:18+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1857711387,238,trigger ci/cd workflows,,GokuMohandas,8000987,closed,False,2,2023-08-19T13:27:03+00:00,2023-08-19T13:41:40+00:00,2023-08-19T13:41:40+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1857702346,237,added other class to datasets,,GokuMohandas,8000987,closed,False,0,2023-08-19T12:52:29+00:00,2023-08-19T12:52:53+00:00,2023-08-19T12:52:53+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1836093699,236,fixed predict with probs error,,GokuMohandas,8000987,closed,False,0,2023-08-04T05:33:08+00:00,2023-08-04T05:33:11+00:00,2023-08-04T05:33:11+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1835817574,235,TypeError running prediction task -> unexpected keyword argument,"While running prediction task I receive type error
+
+```
+export EXPERIMENT_NAME=""llm""
+export RUN_ID=$(python madewithml/predict.py get-best-run-id --experiment-name $EXPERIMENT_NAME --metric val_loss --mode ASC)
+python madewithml/predict.py predict \
+    --run-id $RUN_ID \
+    --title ""Transfer learning with transformers"" \
+    --description ""Using transformers for transfer learning on text classification tasks.""
+
+╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮
+│ /Users/surajb/private/Made-With-ML/madewithml/predict.py:133 in predict                          │
+│                                                                                                  │
+│   130 │                                                                                          │
+│   131 │   # Predict                                                                              │
+│   132 │   sample_df = pd.DataFrame([{""title"": title, ""description"": description, ""tag"": ""other   │
+│ ❱ 133 │   results = predict_with_proba(df=sample_df, predictor=predictor, index_to_class=prepr   │
+│   134 │   logger.info(json.dumps(results, cls=NumpyEncoder, indent=2))                           │
+│   135 │   return results                                                                         │
+│   136                                                                                            │
+│                                                                                                  │
+│ ╭─────────────────────────────────────────── locals ───────────────────────────────────────────╮ │
+│ │ best_checkpoint = TorchCheckpoint(local_path=/private/tmp/mlflow/852956352849222177/3dab467… │ │
+│ │     description = 'Using transformers for transfer learning on text classification tasks.'   │ │
+│ │       predictor = TorchPredictor(model=FinetunedLLM(                                         │ │
+│ │                     (llm): BertModel(                                                        │ │
+│ │                   │   (embeddings): BertEmbeddings(                                          │ │
+│ │                   │     (word_embeddings): Embedding(31090, 768, padding_idx=0)              │ │
+│ │                   │     (position_embeddings): Embedding(512, 768)                           │ │
+│ │                   │     (token_type_embeddings): Embedding(2, 768)                           │ │
+│ │                   │     (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)   │ │
+│ │                   │     (dropout): Dropout(p=0.1, inplace=False)                             │ │
+│ │                   │   )                                                                      │ │
+│ │                   │   (encoder): BertEncoder(                                                │ │
+│ │                   │     (layer): ModuleList(                                                 │ │
+│ │                   │   │   (0-11): 12 x BertLayer(                                            │ │
+│ │                   │   │     (attention): BertAttention(                                      │ │
+│ │                   │   │   │   (self): BertSelfAttention(                                     │ │
+│ │                   │   │   │     (query): Linear(in_features=768, out_features=768,           │ │
+│ │                   bias=True)                                                                 │ │
+│ │                   │   │   │     (key): Linear(in_features=768, out_features=768, bias=True)  │ │
+│ │                   │   │   │     (value): Linear(in_features=768, out_features=768,           │ │
+│ │                   bias=True)                                                                 │ │
+│ │                   │   │   │     (dropout): Dropout(p=0.1, inplace=False)                     │ │
+│ │                   │   │   │   )                                                              │ │
+│ │                   │   │   │   (output): BertSelfOutput(                                      │ │
+│ │                   │   │   │     (dense): Linear(in_features=768, out_features=768,           │ │
+│ │                   bias=True)                                                                 │ │
+│ │                   │   │   │     (LayerNorm): LayerNorm((768,), eps=1e-12,                    │ │
+│ │                   elementwise_affine=True)                                                   │ │
+│ │                   │   │   │     (dropout): Dropout(p=0.1, inplace=False)                     │ │
+│ │                   │   │   │   )                                                              │ │
+│ │                   │   │     )                                                                │ │
+│ │                   │   │     (intermediate): BertIntermediate(                                │ │
+│ │                   │   │   │   (dense): Linear(in_features=768, out_features=3072, bias=True) │ │
+│ │                   │   │   │   (intermediate_act_fn): GELUActivation()                        │ │
+│ │                   │   │     )                                                                │ │
+│ │                   │   │     (output): BertOutput(                                            │ │
+│ │                   │   │   │   (dense): Linear(in_features=3072, out_features=768, bias=True) │ │
+│ │                   │   │   │   (LayerNorm): LayerNorm((768,), eps=1e-12,                      │ │
+│ │                   elementwise_affine=True)                                                   │ │
+│ │                   │   │   │   (dropout): Dropout(p=0.1, inplace=False)                       │ │
+│ │                   │   │     )                                                                │ │
+│ │                   │   │   )                                                                  │ │
+│ │                   │     )                                                                    │ │
+│ │                   │   )                                                                      │ │
+│ │                   │   (pooler): BertPooler(                                                  │ │
+│ │                   │     (dense): Linear(in_features=768, out_features=768, bias=True)        │ │
+│ │                   │     (activation): Tanh()                                                 │ │
+│ │                   │   )                                                                      │ │
+│ │                     )                                                                        │ │
+│ │                     (dropout): Dropout(p=0.5, inplace=False)                                 │ │
+│ │                     (fc1): Linear(in_features=768, out_features=6, bias=True)                │ │
+│ │                   ), preprocessor=<madewithml.data.CustomPreprocessor object at              │ │
+│ │                   0x17fbc5b10>, use_gpu=False)                                               │ │
+│ │    preprocessor = <madewithml.data.CustomPreprocessor object at 0x17fbc5b10>                 │ │
+│ │          run_id = '3dab46713f524aa0a9a3df3227e0ca1f'                                         │ │
+│ │       sample_df = │   │   │   │   │   │   │   │    title                                     │ │
+│ │                   description    tag                                                         │ │
+│ │                   0  Transfer learning with transformers  Using transformers for transfer    │ │
+│ │                   learning on te...  other                                                   │ │
+│ │           title = 'Transfer learning with transformers'                                      │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+TypeError: predict_with_proba() got an unexpected keyword argument 'index_to_class'
+```
+
+I was able to successfully run predict task by removing the last argument https://github.com/GokuMohandas/Made-With-ML/blob/68e031d63244b19283251e0476f77e8581dfddfb/madewithml/predict.py#L133
+
+to match the function definition
+https://github.com/GokuMohandas/Made-With-ML/blob/68e031d63244b19283251e0476f77e8581dfddfb/madewithml/predict.py#L50-L53
+",biyanisuraj,5322255,closed,False,1,2023-08-03T22:37:56+00:00,2023-08-04T05:34:21+00:00,2023-08-04T05:34:21+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1826046962,234,Serving from Old course,"Hello, I appreciate your content and find it really comprehensive. Could you please upload a the serving section from the old course (FAST API).",Morse2580,73859531,closed,False,3,2023-07-28T09:15:02+00:00,2023-08-22T00:18:41+00:00,2023-07-30T02:49:46+00:00,,2,2,0,0,0,0,0
+GokuMohandas/Made-With-ML,1824646396,233,Missing some topics after updates,"I sincerely appreciate your work and find the materials you provide to be incredibly useful. However, I've noticed that some valuable topics have disappeared after the last updates. I kindly request you to reinstate those topics, such as CLI (though it currently exists, it lacks substantial material), Optuna optimization, Airflow, Git, Feature store, and others.
+For example here is old link and it provides error 404:
+[https://madewithml.com/courses/mlops/optimization/](https://madewithml.com/courses/mlops/optimization/
+)
+",Lavreniuk,10463142,closed,False,3,2023-07-27T15:41:54+00:00,2023-07-30T16:15:27+00:00,2023-07-27T17:54:10+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1824157086,232,Where is the old course?,Hi! Can you please post the old course in an archive. The new course does not have the foundations part.,vsrohit,11407240,closed,False,1,2023-07-27T11:16:35+00:00,2023-07-27T17:54:49+00:00,2023-07-27T17:54:49+00:00,,1,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1822938423,231,"""Product Design"" page text cut-off","I'm look at the [Product Design](https://madewithml.com/courses/mlops/product-design/) page, and I'm seeing two small errors:
+
+1. Small typo in the ""Value Proposition"" section
+> `product`: what needs to be **build** to help our users reach their goals?
+2. The article stops abruptly mid-sentence, see below
+<img width=""794"" alt=""Screenshot 2023-07-26 at 11 20 45 AM"" src=""https://github.com/GokuMohandas/Made-With-ML/assets/78717839/6d891b1d-b565-4005-b225-605863e22d4f"">",emmyscode,78717839,closed,False,1,2023-07-26T18:23:24+00:00,2023-07-26T18:43:27+00:00,2023-07-26T18:43:26+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1822275551,230,v1 ml app with ci/cd,,GokuMohandas,8000987,closed,False,2,2023-07-26T12:06:10+00:00,2023-07-26T12:22:42+00:00,2023-07-26T12:22:42+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1699037389,229,Missing legend in the plot of Logistic Regression,"**Problem:** only `malignant` legend was shown ( `plot data` section of the [Logistic Regression](https://madewithml.com/courses/foundations/logistic-regression/) lesson.)
+![image](https://user-images.githubusercontent.com/1311412/236676696-e0bc6e75-892c-427a-a5ed-12c619d609e0.png)
+
+**Fix**
+I am not sure if I should create a PR for a notebook ... so I created this issue with a working code instead. Please see below
+
+```
+# Define X and y
+X = df[[""leukocyte_count"", ""blood_pressure""]].values
+y = df[""tumor_class""].values
+
+# Split the data into separate arrays for benign and malignant classes
+X_benign = X[y == ""benign""]
+X_malignant = X[y == ""malignant""]
+
+# Plot the data for each class separately
+fig, ax = plt.subplots()
+ax.scatter(X_benign[:, 0], X_benign[:, 1], c=""blue"", s=25, edgecolors=""k"", label=""benign"")
+ax.scatter(X_malignant[:, 0], X_malignant[:, 1], c=""red"", s=25, edgecolors=""k"", label=""malignant"")
+ax.set_xlabel(""leukocyte count"")
+ax.set_ylabel(""blood pressure"")
+ax.legend(loc=""upper right"")
+plt.show()
+```",nguyenvulong,1311412,closed,False,4,2023-05-07T12:12:46+00:00,2023-07-26T11:53:52+00:00,2023-07-26T11:53:52+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1683289254,228,04_pandas,"Updated rotation to be 45, instead of ""45"" 
+As per Matplotlib's documentation, valid values for rotation are either 'vertical', 'horizontal' or a float number (https://matplotlib.org/3.4.3/api/text_api.html#matplotlib.text.Text)",MocktaiLEngineer,87231692,closed,False,0,2023-04-25T14:29:48+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:34+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1683003100,227,Updated 03_NumPy,"Fixed a typo, and added the 'Gotchas' section that you have on 'NumPy for Machine Learning' (Not sure if it was left out purposefully though). 
+
+Also, thank you for this wonderful repo!",MocktaiLEngineer,87231692,closed,False,0,2023-04-25T11:42:52+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1642692478,226,Integrating Jupysql to the notebooks page,"It'd be great to see how you can easily connect to data sources and do EDA on real-life data with [JupySQL](https://github.com/ploomber/jupysql).
+
+Happy to help with a PR if needed, we can take one of the available guides!",idomic,11596985,closed,False,0,2023-03-27T19:31:34+00:00,2023-07-26T11:53:58+00:00,2023-07-26T11:53:58+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1637647113,225,[Discussion] End2end MLOps platform with notebook vs. Testable python modules,"Hi thanks for these impressive courses, They really help me a lot in my career.
+I have some thoughts that I want to discuss. As there are and more more end2end MLOps platforms that use notebooks to deliver models to production, what is your opinion about converting notebooks to fully testable python modules (in 2023)? Is that still bring some benefits if the platform could ensure the reproducibility for training/data processing...?
+
+Thanks in advance for your reply.
+
+Hanyuan",penghanyuan,12324420,closed,False,1,2023-03-23T14:21:37+00:00,2023-03-23T15:04:54+00:00,2023-03-23T15:04:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1631043186,224,Fix quote sign in 07_Logistic_Regression.ipynb,"Fix quote conflicts, from
+```python
+print (f""train m:b = {train_class_counts[""malignant""]/train_class_counts[""benign""]:.2f}"")
+```
+To 
+```python
+print (f""""""train m:b = {train_class_counts[""malignant""]/train_class_counts[""benign""]:.2f}"""""")
+```",martin-liu,1459760,closed,False,0,2023-03-19T17:33:35+00:00,2023-05-30T18:19:01+00:00,2023-05-30T18:19:01+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1586756897,223,Machine learning ,,pragalbn1201,113866862,closed,False,0,2023-02-15T23:43:59+00:00,2023-02-15T23:51:34+00:00,2023-02-15T23:51:34+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1576356254,222,fix typo,,hehli,75807102,closed,False,0,2023-02-08T15:41:38+00:00,2023-07-26T11:54:04+00:00,2023-07-26T11:54:04+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1488889386,220,sns.barplot in EDA,"i think instead of
+`ax = sns.barplot(list(tags), list(tag_counts))`
+it should be
+`ax = sns.barplot(x=list(tags), y=list(tag_counts))`
+in code at https://madewithml.com/courses/mlops/exploratory-data-analysis/",gexahedron,3427698,closed,False,5,2022-12-10T19:55:28+00:00,2023-03-16T20:04:02+00:00,2022-12-11T05:34:40+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1476455820,219,Recreated content authorized by the original copyright owner,"Hi,GokuMohandas:
+  I translate all content of Made-With-ML into chinese language, I post  the content in my [blog] (https://franztao.github.io) and [wechat blog](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg5Nzg3MTc4NQ==&action=getalbum&album_id=2663428189704339461&scene=173&from_msgid=2247484681&from_itemidx=1&count=3&nolastread=1#wechat_redirect)。I wish get your agree about the recreated content  by the original copyright owner?
+
+",franztao,6941820,closed,False,2,2022-12-05T12:28:44+00:00,2022-12-11T05:35:01+00:00,2022-12-11T05:35:01+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1463584830,218,num_classes vs num_tokens,"The following padding function used in [https://madewithml.com/courses/foundations/convolutional-neural-networks/](url) refers to `num_classes `which in the example used comes up to 500. I was wondering if it should be referred as `num_tokens` (as used in other functions). Just getting confused since as per my understanding `num_classes = 4.`
+
+
+```
+def pad_sequences(sequences, max_seq_len=0):
+      """"""Pad sequences to max length in sequence.""""""
+      max_seq_len = max(max_seq_len, max(len(sequence) for sequence in sequences))
+      num_classes = sequences[0].shape[-1]
+      padded_sequences = np.zeros((len(sequences), max_seq_len, num_classes))
+      for i, sequence in enumerate(sequences):
+          padded_sequences[i][:len(sequence)] = sequence
+      return padded_sequences
+
+```
+",Aman0807,38885615,closed,False,1,2022-11-24T16:30:07+00:00,2022-11-25T17:54:51+00:00,2022-11-25T17:54:50+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1462988105,217,No Batch Normalization in CNN? ,"Hi there, 
+While doing CNN module, I found that no batch normalization is applied in the forward pass? 
+
+```python
+class CNN(nn.Module):
+    def __init__(self, vocab_size, num_filters, filter_size,
+                 hidden_dim, dropout_p, num_classes):
+        super(CNN, self).__init__()
+
+        # Convolutional filters
+        self.filter_size = filter_size
+        self.conv = nn.Conv1d(
+            in_channels=vocab_size, out_channels=num_filters,
+            kernel_size=filter_size, stride=1, padding=0, padding_mode=""zeros"")
+        self.batch_norm = nn.BatchNorm1d(num_features=num_filters)
+
+        # FC layers
+        self.fc1 = nn.Linear(num_filters, hidden_dim)
+        self.dropout = nn.Dropout(dropout_p)
+        self.fc2 = nn.Linear(hidden_dim, num_classes)
+
+    def forward(self, inputs, channel_first=False,):
+
+        # Rearrange input so num_channels is in dim 1 (N, C, L)
+        x_in, = inputs
+        if not channel_first:
+            x_in = x_in.transpose(1, 2)
+
+        # Padding for `SAME` padding
+        max_seq_len = x_in.shape[2]
+        padding_left = int((self.conv.stride[0]*(max_seq_len-1) - max_seq_len + self.filter_size)/2)
+        padding_right = int(math.ceil((self.conv.stride[0]*(max_seq_len-1) - max_seq_len + self.filter_size)/2))
+
+        # Conv outputs
+        z = self.conv(F.pad(x_in, (padding_left, padding_right)))
+        # ---------MISSING Batch Normalization here ? -----------
+        z = F.max_pool1d(z, z.size(2)).squeeze(2)
+
+        # FC layer
+        z = self.fc1(z)
+        z = self.dropout(z)
+        z = self.fc2(z)
+        return z
+```",knosing,45248239,closed,False,1,2022-11-24T08:58:40+00:00,2022-11-25T17:48:10+00:00,2022-11-25T17:48:10+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1461861923,216,Silly question: LabelEncoder,"While creating the `LabelEncoder` class, I couldnt understand why `return self` in class method `fit(self,y)`? 
+My understanding is that when we call this method, the object variables are updated so no need for self? 
+Please correct me if I'm wrong, just trying to reason myself with each step of the code. 
+
+```python
+    def fit(self, y):
+        classes = np.unique(y)
+        for i, class_ in enumerate(classes):
+            self.class_to_index[class_] = i
+        self.index_to_class = {v: k for k,v in self.class_to_index.items()}
+        self.classes = list(self.class_to_index.keys())
+        return self #Why?
+```",knosing,45248239,closed,False,2,2022-11-23T14:24:52+00:00,2022-11-25T17:38:12+00:00,2022-11-23T14:35:21+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1440244690,215,Update 12_Embeddings.ipynb skipgram image url,Fixed url of skipgram image in 12_Embeddings.ipynb,danczw,25065665,closed,False,0,2022-11-08T13:52:43+00:00,2022-12-25T14:07:16+00:00,2022-12-25T14:07:16+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1407843606,214,On MLOps > Design > Product > Task have mislabeled columns?,"## Wondering if table headers in Task section under Overview Background (`Assumption , Actual, Reason`) shouldn't be `Assumption, Reason, Actual`
+
+<img width=""724"" alt=""image"" src=""https://user-images.githubusercontent.com/7839627/195614855-479cd9db-1e63-4891-bc45-4da4a21563d8.png"">
+
+",data-steve,7839627,closed,False,1,2022-10-13T13:49:58+00:00,2022-10-13T14:02:51+00:00,2022-10-13T14:02:50+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1393530298,213,02_Python.ipynb,"Hey, very good content. 
+When reading this section I just found what might be two minor mistakes.  Best",Almonok,65896417,closed,False,0,2022-10-01T19:51:39+00:00,2022-11-15T14:51:36+00:00,2022-11-15T14:51:36+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1386405609,212,Update 07_Logistic_Regression.ipynb - softmax definition fix,Changed $\\hat{y} = \\frac{e^{XW_y}}{\\sum_j e^{XW}}$ to $\\hat{y} = \\frac{e^{XW}}{\\sum_j e^{XW_j}}$ in the equation defining softmax (located after the second paragraph).,matospiso,88934029,closed,False,1,2022-09-26T16:43:48+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1359221800,211,Update 07_Logistic_Regression.ipynb,"fstring format error with too many double quotes as in the first example of this error `print (f""m:b = {class_counts[""malignant""]/class_counts[""benign""]:.2f}"")`, Should be single quote like `print (f'm:b = {class_counts[""malignant""]/class_counts[""benign""]:.2f}')`",data-steve,7839627,closed,False,0,2022-09-01T18:07:36+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1350789163,210,Issue in viewing the experiment in MLflow ,"I am running the tagifai.ipynb notebook on the **windows** platform but facing difficulty viewing the experiment in MLflow.
+
+**Steps Done**:
+1. Cloned the repo
+2. Running the  ""`mlops-course\notebooks\tagifai.ipynb`"" in vs code locally.
+3. To run the server ""`mlflow server -h 0.0.0.0 -p 8000 --backend-store-uri /experiments/`"" from the location of the notebook, experiments is the next folder inside it. # $PWD is omitted because of windows.
+4. Opening the ""http://localhost:8000/#/""
+
+**Observation** : 
+1. No signs of experiment run.
+2. Image attached below for ref.
+![image](https://user-images.githubusercontent.com/5962451/186658579-6cf3c711-dff2-465e-a3e4-1c5d71282458.png)
+
+Please provide assistance with this issue.
+
+Thanks",mukul74,5962451,closed,False,2,2022-08-25T12:03:03+00:00,2022-08-25T18:23:26+00:00,2022-08-25T18:23:26+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1342586093,209,Issue with EDA cell for dataset loading,"# Load projects
+url = ""https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json""
+projects = json.loads(urlopen(url).read())
+print (f""{len(projects)} projects"")
+print (json.dumps(projects[0], indent=2))
+
+This cell will lead to 404 error(as the .json file is no longer in the directory, .csv file format replaces .json file).",mukul74,5962451,closed,False,1,2022-08-18T05:41:48+00:00,2022-08-18T15:45:37+00:00,2022-08-18T15:38:53+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1338236007,208,Update 06_Linear_Regression.ipynb,"Small typo - should be ""y_val"" instead of ""y_test"".",Danayal,19618393,closed,False,0,2022-08-14T12:47:42+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1271196417,207,Foundations --> Transformers,"Hi Goku... I am really thankful for all your amazing tutorials.
+
+I however was facing some issues in the Transformers lecture. There are a few minor bugs here with missing variables and imports; which was not an issue.
+
+The training code however is missing the block:
+
+```
+# Train
+best_model = trainer.train(
+    num_epochs, patience, train_dataloader, val_dataloader)
+```
+
+Also when i wrote this and ran it, I got an error:
+```
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:14: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:15: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  from ipykernel import kernelapp as app
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+[<ipython-input-68-8d0f0dee99db>](https://localhost:8080/#) in <module>()
+      1 # Train
+      2 best_model = trainer.train(
+----> 3     num_epochs, patience, train_dataloader, val_dataloader)
+
+6 frames
+[/usr/local/lib/python3.7/dist-packages/torch/nn/functional.py](https://localhost:8080/#) in dropout(input, p, training, inplace)
+   1277     if p < 0.0 or p > 1.0:
+   1278         raise ValueError(""dropout probability has to be between 0 and 1, "" ""but got {}"".format(p))
+-> 1279     return _VF.dropout_(input, p, training) if inplace else _VF.dropout(input, p, training)
+   1280 
+   1281 
+
+TypeError: dropout(): argument 'input' (position 1) must be Tensor, not str
+```
+
+Apparently, the issue comes from the line :
+
+```
+seq, pool = self.transformer(input_ids=ids, attention_mask=masks)
+``` 
+
+wherein the ""pool"" returned is of class string.
+Upon printing the type and the value of it i get the following : 
+
+```
+<class 'str'>
+pooler_output
+```
+
+Can you please have a look into this.
+Thanks in Advance!!
+
+",shashankvasisht,13146464,closed,False,2,2022-06-14T18:25:33+00:00,2022-12-08T17:50:02+00:00,2022-06-14T21:54:07+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1263782863,206,Foundations --> CNN Doubts,"Hi, Thank you for such excellent lessons!!!
+
+I had 3 doubts in the lecture, can you please explain them:
+
+1. When we pad the one-hot sequences to max number of seq length, why do we not put 1 at the 0th index? (so as to make it to correspond to < pad > token) Why is it currently all zeros ?
+
+2. When we're loading the weights in the interpretableCNN model, why dont we get the weight mis-match error ? (as we have dropped the FC layer part and we're also not using strict=False )
+
+3. My sns heatmap / conv_output have all the values 1 . It does not resemble yours...Can you help me with this?
+
+![image](https://user-images.githubusercontent.com/13146464/172468816-c2b54a33-b2f6-417c-952f-2ee1d6c074ba.png)
+
+",shashankvasisht,13146464,closed,False,1,2022-06-07T19:44:14+00:00,2022-06-08T23:28:13+00:00,2022-06-08T23:28:12+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1255461717,205,Module not imported but called in the section Evaluating Machine Learning Model section,"The website link https://madewithml.com/courses/mlops/evaluation/#intuition of Coarse-grained section suggests to import function `precision_recall_curve` by
+
+```python
+from sklearn.metrics import precision_recall_curve
+```
+
+but another function `precision_recall_fscore_support` from the same module path is called for computing evaluation metrics by
+
+```python
+overall_metrics = precision_recall_fscore_support(y_test, y_pred, average=""weighted"")
+```",sahajrajmalla,51092972,closed,False,1,2022-06-01T09:16:25+00:00,2022-06-08T23:16:27+00:00,2022-06-08T23:16:27+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1180943067,204,Automate your cycle of Intelligence,"Katonic MLOps Platform is a collaborative platform with a Unified UI to manage all data science activities in one place and introduce MLOps practice into the production systems of customers and developers. It is a collection of cloud-native tools for all of these stages of MLOps:
+
+-Data exploration
+-Feature preparation
+-Model training/tuning
+-Model serving, testing and versioning
+
+Katonic is for both data scientists and data engineers looking to build production-grade machine learning implementations and can be run either locally in your development environment or on a production cluster. Katonic provides a unified system—leveraging Kubernetes for containerization and scalability for the portability and repeatability of its pipelines.
+
+It will be great if you can list it on your account
+
+Website -
+[Katonic One Pager.pdf](https://github.com/pachyderm/pachyderm/files/8351851/Katonic.One.Pager.pdf)
+
+https://katonic.ai/",faizansiddiqu007,67633595,closed,False,0,2022-03-25T15:35:58+00:00,2022-05-12T16:22:02+00:00,2022-05-12T16:22:02+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1030054724,203,Foundations --> Embeddings,"1. Typo under Model section: `3. We'll apply convolution via filters (filter_size, vocab_size, num_filters)` should be `embedding_dim` to replace `vocab_size`?
+2. Typo under Experiments: `first have to decice`
+3. Typo under Interpretability `padding our inputs before convolution to result is outputs` `is` should be `in` 
+4. Could there be a general explanation of moving models/data across devices? My current understanding is that they have to be both on the same place (cpu/gpu). If on gpu, just stay on gpu through the whole train/eval/predict session. I couldn't understand why under Inference `device = torch.device(""cpu"")` moves things back to cpu.
+5. `interpretable_trainer.predict_step(dataloader)` breaks with `AttributeError: 'list' object has no attribute 'dim'`. The precise step is `F.softmax(z)`, where for interpretable_model, z is a list of 3 items and it was trying to softmax a list instead of a tensor.",gitgithan,29853829,closed,False,3,2021-10-19T09:11:44+00:00,2021-10-20T04:51:30+00:00,2021-10-19T17:23:39+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1029843748,202,Foundations --> CNN clarifications,"1. Under Modelling there is a sequence of 3D diagrams showing the flow of shapes. It seems that the vocab_size dimension disappeared after the convolution step. From the earlier gifs showing convolution, they only use integers in each cell instead of a one hot encoded vector. I was hoping for some explanation of where the vocab_size dimension went during convolution, like what kind of aggregation happened there. 
+
+2. If there were annotations of the shapes as pytorch requires (including the manual axis 1,2 transpose) under each step will be very helpful. I had been trying to see the shapes throughout the flow using `torchsummary.summary(model,(500,8,1))` but no matter what pattern i try it gives `ValueError: too many values to unpack (expected 1)`.
+It is breaking at user-defined code which is strange because i thought it should be torchsummary's issue. If i try to turn this 3-tuple into a single integer, then this user-code passes but torchsummary breaks saying integer is not iterable. 
+
+Does torchsummary work by sending random values through the pipeline to get the shapes and that's why it has to run user-code and that's why i see this unpacking error? How do I use properly torchsummary to view CNN shapes?
+```
+     19 
+     20         # Rearrange input so num_channels is in dim 1 (N, C, L)
+---> 21         x_in, = inputs
+     22         if not channel_first:
+     23             x_in = x_in.transpose(1, 2)
+```",gitgithan,29853829,closed,False,1,2021-10-19T04:21:27+00:00,2021-10-19T05:10:38+00:00,2021-10-19T05:10:38+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1028280302,201,Foundations -> Utilities Errors and questions,"1. Under `def predict_step`,  `z = F.softmax(z).cpu().numpy()` is shown on webpage. Notebook correctly assigns to `y_prob = F.softmax(z).cpu().numpy()` though
+2. Extra single quote after ""k""  Syntax Error `plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors=""k""')`  (happens 1x here, 2x in Data Quality page)
+3. Why did the softmax get manually calculated in Numpy section of Neural Networks page, but here in `def train_step`,
+the raw logits were passed directly at 
+```
+z = self.model(inputs)  # Forward pass
+J = self.loss_fn(z, targets)  # Define loss
+```
+without a `apply_softmax = True`
+
+4. Why did `train_step`'s Loss need `J.detach().item()` but `eval_step` used J directly without detach and item
+5. In the `collate_fn`, `batch = np.array(batch, dtype=object)` was used but i didn't understand why convert to object. Adding a note on what happens without it `VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated.` would be very helpful in preparing students for ragged tensors and padding in CNN/RNN later
+6. I was wondering why stack X and y. It seems that X is necessary because without stacking, float casting in `X = torch.FloatTensor(X.astype(np.float32)` breaks with `ValueError: setting an array element with a sequence.` because batch[:,0] indexing creates nested numpy array objects that can't be casted, but this nested array thing will not occur for y during batch[:,1], because y begun as a 1d object already, so no nested array, so no problem casting, so there's no need to stack y? (same for CNN stacking y) 
+This question came about when going through CNN and thinking why was there no X stacking there. Then I realized int casting worked there because `padded_sequences = np.zeros` begun without nesting, and also numpy was able to implicitly flatten the `sequence` numpy array during `padded_sequences[i][:len(sequence)] = sequence`. 
+",gitgithan,29853829,closed,False,1,2021-10-17T10:24:22+00:00,2021-10-18T22:19:15+00:00,2021-10-18T22:19:15+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1028237077,200,Foundations --> Neural Network,"1. In the table at the top, outputs from second layer shows NxH should be NxC?
+2. SyntaxError: `plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], edgecolors=""k""', s=25)` Extra single quote behind ""k"" in notebook
+3. Is `def init_weights(self):` used anywhere?  It seems this was defined but not applied anywhere, or does pytorch implicitly apply it during some step? I was expecting `model.apply(init_weights)` somewhere
+4. `The objective is to have weights that are able to produce outputs that follow a similar distribution across all neurons` 
+Could there be more clarity on this statement? What exactly is a ""distribution across neurons"" , and what does ""similar"" mean? What are the objects that we want similar? Is it we have 1 distribution per layer of neurons, and each neuron's single output value contributes to this discrete distribution of outputs in a layer, and we're comparing similarity across layers?  (but this sounds wrong because each layer would have different number of neurons, can discrete distributions with different number of items in x-axis be compared?)
+
+5. Is there missing - sign in term (with 1/y) on the left side of = a(y-1) in gradient derivation of dJ/dW2y",gitgithan,29853829,closed,False,1,2021-10-17T06:54:55+00:00,2021-10-18T21:50:57+00:00,2021-10-18T21:50:56+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1028210237,199,Foundations --> Logistic regression feedback/errors,"1. Webpage says W dimension is Dx1 but notebook says DxC. Prefer webpage to also show DxC to expose people to the more general multi-class W
+2. Two errors causing notebook to not run top-down
+    a. Extra single quote behind k: `plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors=""k""')`
+    b. SyntaxError: Double quotes to index dictionary early closing double quotes for f-string (happens in 2 cells) `print (f""m:b = {class_counts[""malignant""]/class_counts[""benign""]:.2f}"")`
+3. Hope the matrix calculus section had more explanation, feels to me like for people who understand it, they won't need the formulas, but for people who don't understand, it doesn't help much. 
+Some questions I had going through that section.
+   1.  What's the physical meaning of y and j indexes in loss formula? Why does W have y subscript in numerator and sum across j in denominator? Why does denominator's W have no subscript. Seems to me like both y, j refer to one of the classes in a set of unique classes. 
+   2. In gradients formula, what is the physical meaning of Wy Wj, and why are we differentiating wrt to them?
+   3. Why did i disappear from subscript of X in gradients section
+   4. Why do some W have subscripts y/j while some W don't have any subscript
+   5. Linking to some derivations like these (https://towardsdatascience.com/derivative-of-the-softmax-function-and-the-categorical-cross-entropy-loss-ffceefc081d1) would be very helpful
+   
+4. How did `db = np.sum(dscores, axis=0, keepdims=True)` implementation come about? Was expecting a formula version describing gradient wrt bias but previous it's mentioned `We'll leave the bias weights out for now to avoid complicating the backpropagation calculation`
+5. `W_{unscaled}`  includes sum in formula which it shouldn't?
+",gitgithan,29853829,closed,False,1,2021-10-17T04:08:56+00:00,2021-10-18T21:20:16+00:00,2021-10-18T21:20:16+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1023359204,198,Foundations --> Linear regression (Error in implementation),"Under Pytorch --> Interpretability:
+`b_unscaled = b * y_scaler.scale_ + y_scaler.mean_ - np.sum(W_unscaled*X_scaler.mean_)`
+This line seems to be missing a `* (y_scaler.scale_/X_scaler.scale_)` in the last np.sum term.
+
+The table for W unscaled was also confusing. 
+It has a sum term shown there, which means if X began with 2 predictors (this lesson only used 1 predictor), the scaled W will have 2 predictors while the sum will aggregate the 2 weights into 1 unscaled weight? Can't wrap my head around this.
+
+Also, under Pytorch --> Interpretability, `W_unscaled = W * (y_scaler.scale_/X_scaler.scale_)` there was no sum used here, so looks inconsistent with the formula in the table. 
+
+![image](https://user-images.githubusercontent.com/29853829/136892649-a52c55e8-04ad-43b7-b38a-3a544e87e459.png)
+",gitgithan,29853829,closed,False,3,2021-10-12T04:47:43+00:00,2021-10-12T06:36:21+00:00,2021-10-12T05:29:39+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,1000853923,197,Update 11_Convolutional_Neural_Networks.ipynb,Fix a typo on 11_Convolutional_Neural_Networks.ipynb file,callezenwaka,29546622,closed,False,0,2021-09-20T11:21:52+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,999409374,196,Update 10_Utilities.ipynb,Fix a typo in Update 10_Utilities.ipynb file,callezenwaka,29546622,closed,False,0,2021-09-17T14:19:11+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,998017929,195,Update 08_Neural_Networks.ipynb,Fix a typo in Update 08_Neural_Networks.ipynb file,callezenwaka,29546622,closed,False,0,2021-09-16T09:58:14+00:00,2023-07-26T11:49:35+00:00,2023-07-26T11:49:35+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,985373042,194,error in 10_Utilities,"class `Dataset` 's method `collate_fn`  needs a little change as otherwise following error in thrown when creating dataloader
+
+`ValueError: setting an array element with a sequence`  
+
+Given Code
+
+```
+""""""Processing on a batch.""""""
+    # Get inputs
+    batch = np.array(batch, dtype=object)
+    X = batch[:, 0]    # This line execution throws above error 
+    y = np.stack(batch[:, 1], axis=0)
+```
+Suggested solution 
+
+````
+""""""Processing on a batch.""""""
+    # Get inputs
+    batch = np.array(batch, dtype=object)
+    X = np.stack(batch[:, 0] ,axis=0) 
+    y = np.stack(batch[:, 1], axis=0)
+```
+
+",kumar-mahendra,66687425,closed,False,1,2021-09-01T16:47:14+00:00,2021-09-01T17:12:06+00:00,2021-09-01T17:12:06+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,971786822,193,feature.json not found,"ERROR: failed to pull data from the cloud - Checkout failed for following targets:
+features.json
+projects.json
+tags.json
+features.parquet",kpputhiyattil,9799869,closed,False,1,2021-08-16T14:17:50+00:00,2021-08-16T17:29:23+00:00,2021-08-16T17:29:22+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,969749008,192,"Revert ""fix bibtex""","Reverts GokuMohandas/MadeWithML#190
+
+Received several issues about this format change for people adding it to their projects resources. I'll take a look next week when I have some time to look more into this.",GokuMohandas,8000987,closed,False,0,2021-08-12T23:26:46+00:00,2021-08-12T23:27:21+00:00,2021-08-12T23:26:56+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,951798778,191,added Set part + sets image,"@GokuMohandas please note I added:
+1. Sets part in the python (02) notebook.
+2. a new image I created for Sets as well, you can review / discard it.
+If you accept it, my notebook version of sets should load it and the image should work.
+If you reject that image, then you can add your own image somewhere, up to you :)
+
+Thank you for making me a contributor!
+
+Daniel",Daniel8hen,11201528,closed,False,0,2021-07-23T18:12:16+00:00,2021-08-12T22:59:23+00:00,2021-08-12T22:59:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,946868123,190,fix bibtex,,dayyass,26326659,closed,False,3,2021-07-17T17:44:40+00:00,2021-07-17T18:11:14+00:00,2021-07-17T18:11:14+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,945843207,189,12_Embeddings.ipynb - small typo,Fix some small typos in `12_Embeddings.ipynb`,blakechi,56323787,closed,False,0,2021-07-16T00:28:18+00:00,2021-08-12T22:59:23+00:00,2021-08-12T22:59:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,932822042,188,"I have written blog for MLOps pipeline from scratch to advance, Share it with everyone hope it helps.",Check my blog here: http://bit.ly/RG-mlops,rohitg00,48523873,closed,False,0,2021-06-29T15:21:07+00:00,2021-06-29T15:22:15+00:00,2021-06-29T15:22:15+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,925635634,187,Fixed Minor Typos,Fixed some minor typos,aflah02,72096386,closed,False,0,2021-06-20T16:31:54+00:00,2021-08-12T22:59:23+00:00,2021-08-12T22:59:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,925552075,186,"Some links in foundations table are expired . I have updated them with working links ,",,laksh9950,32505743,closed,False,0,2021-06-20T08:51:53+00:00,2021-08-12T22:59:23+00:00,2021-08-12T22:59:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,925524804,185,fix typo,,chandescartes,16503246,closed,False,0,2021-06-20T05:35:42+00:00,2021-08-12T22:59:23+00:00,2021-08-12T22:59:23+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,921622603,184,Thoughts on Cookiecutter Data Science Integration?,"Hi Goku, I really enjoy the contents of the course! I have two questions:
+
+1. What are your thoughts on [Cookiecutter Data Science template](https://github.com/drivendata/cookiecutter-data-science) or its variations ([pyscaffoldext-dsproject](https://github.com/pyscaffold/pyscaffoldext-dsproject), [Kedro](https://github.com/quantumblacklabs/kedro))
+2. Do you plan to structure your course based on the Cookie DS template?",hieucnguyen,39396316,closed,False,1,2021-06-15T17:14:46+00:00,2021-06-15T21:02:42+00:00,2021-06-15T21:02:42+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,920135128,183,Removing outliers,"Hello! Great content =]
+
+But are you sure you want to remove outliers before feature engineering? E.g. if a feature has a power law distribution (as many do) then you would have outliers that are no longer outliers once you take the log of the feature.  
+Maybe you could add a warning or something. I makes sense to deal with outliers before your feature store but I wouldn't want to remove any outliers before having performed a thorough EDA. Now that I think about it the same goes for dealing with missing values. Of course we are talking MLOps so you might have meant that one should follow this guide once they have a model they are happy with but it seems more all encompassing what you have created.
+
+Just a thought. Feel free to close this issue whenever you want.",grofte,7976840,closed,False,1,2021-06-14T07:57:06+00:00,2021-06-14T12:10:25+00:00,2021-06-14T12:10:25+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,789621088,182,Lambda function missing,"Hi Goku,
+
+I'm going through the [Pandas](https://madewithml.com/courses/ml-foundations/pandas/) and I noticed that in the Feature engineering section, you mentioned about applying a lambda function to create a new feature, but the code for it does not appear. I think it's just a minor typo.
+
+Regards,
+Roberto",jroberayalas,8128586,closed,False,2,2021-01-20T04:31:00+00:00,2021-01-20T04:55:08+00:00,2021-01-20T04:44:25+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,752875412,181,Link to SVM medium article in Logistic Regression notebook is broken,"
+Link to medium article on SVM in the logistic regression notebook is broken:
+
+
+![image](https://user-images.githubusercontent.com/7872601/100537951-b0367c80-3252-11eb-89ca-476dcc2657ad.png)
+
+
+![image](https://user-images.githubusercontent.com/7872601/100537987-e673fc00-3252-11eb-9d29-29682d4e1711.png)
+",abhayana24,7872601,closed,False,1,2020-11-29T09:28:05+00:00,2020-11-30T21:57:54+00:00,2020-11-30T21:57:54+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,712225440,180,Create Sudoko Solver,,vishwatejharer,56029741,closed,False,0,2020-09-30T19:37:44+00:00,2020-10-02T15:43:24+00:00,2020-10-02T15:43:24+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,650370293,179,"For bias, amend dJ/dw to dJ/db","Hi Goku, as discussed at Slack please see the revision. I helped to amend both PyTorch and TF notebooks. BTW, it's my first PR :) 
+Cheers.
+
+>>
+Goku Mohandas  1 hour ago
+Hey @Andrew N., you just caught a big bug! It’s supposed to say dJ/db for the second one. Common practice on papers seems to be to leave out the bias (b) to simplify the math but it’s assumed, so technically y_hat is WX + b. Hope that helps and feel free to submit a PR correcting this on jupyter if you’d like to we can give you proper credit.",andrewng88,44232530,closed,False,1,2020-07-03T06:18:12+00:00,2020-07-03T06:28:50+00:00,2020-07-03T06:28:50+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,646653941,178,hyper parameter search refactored using generators.,,cihatceliker,44542670,closed,False,0,2020-06-27T10:21:17+00:00,2020-06-30T09:38:58+00:00,2020-06-30T09:38:58+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,619192709,177,reorg for e2e video lesson ,,GokuMohandas,8000987,closed,False,0,2020-05-15T19:28:39+00:00,2020-05-15T19:28:51+00:00,2020-05-15T19:28:46+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,618683001,176,notebook 05_TensorFlow Error,"The topic ""Gradients"" is PyTorch no TensorFlow",NLGRF,19254205,closed,False,1,2020-05-15T04:08:11+00:00,2020-05-15T14:44:19+00:00,2020-05-15T14:44:18+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,590636073,175,Itsderek23/utils use glove,,GokuMohandas,8000987,closed,False,1,2020-03-30T22:20:01+00:00,2020-03-30T22:21:15+00:00,2020-03-30T22:21:09+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,590605694,174,Typo - Boostrap/Bootstrap,,itsderek23,7880,closed,False,0,2020-03-30T21:23:04+00:00,2020-03-30T22:21:47+00:00,2020-03-30T22:21:47+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,590596309,173,"APIs PT lesson fixes - use_glove => use-glove, utilities","Noticed two things when following the [API README](https://github.com/madewithml/lessons/blob/master/notebooks/03_APIs/pt-text-classification/README.md) instructions:
+
+> python text_classification/utils.py
+
+This fails with:
+
+```
+Traceback (most recent call last):
+  File ""text_classification/utils.py"", line 90, in <module>
+    utilities.create_dirs(embeddings_dir)
+NameError: name 'utilities' is not defined
+```
+
+Looks like `create_dirs()` is defined in the same `utils.py` file.
+
+The training step says:
+
+> python text_classification/train.py \
+    --data-url https://raw.githubusercontent.com/madewithml/lessons/master/data/news.csv --lower --shuffle --use_glove
+
+Which fails:
+
+```
+train.py: error: unrecognized arguments: --use_glove
+```
+
+I think `--use_glove` should be `--use-glove`.",itsderek23,7880,closed,False,0,2020-03-30T21:06:42+00:00,2020-03-30T22:21:11+00:00,2020-03-30T22:21:11+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,590502233,172,added tuning + api reorg,,GokuMohandas,8000987,closed,False,0,2020-03-30T18:32:46+00:00,2020-03-30T18:33:44+00:00,2020-03-30T18:33:04+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,585333232,171,Corrected couple of notebook links,Corrected notebook links for tensorflow and pytorch.,thisisbhavin,14941831,closed,False,1,2020-03-20T21:20:06+00:00,2020-03-21T04:41:49+00:00,2020-03-21T04:41:49+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,585160065,170,Image missing in notebook for NumPy,"In [notebooks/01_Foundations/03_NumPy.ipynb](https://github.com/madewithml/lessons/blob/master/notebooks/01_Foundations/03_NumPy.ipynb), the images in the notebook are missing.",ynshung,61302840,closed,False,1,2020-03-20T15:48:53+00:00,2020-03-20T17:24:59+00:00,2020-03-20T17:24:59+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,583496752,169,some pages cannot be opened,,Sherlock-1,61346330,closed,False,5,2020-03-18T06:24:31+00:00,2020-03-19T01:27:43+00:00,2020-03-18T14:26:27+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,566432057,168,Homepage Not Loading,[Homepage](https://practicalai.me/) does not seem to work.,loganwedwards,2034000,closed,False,3,2020-02-17T17:19:36+00:00,2020-02-17T17:44:21+00:00,2020-02-17T17:21:31+00:00,,0,0,0,0,0,0,0
+GokuMohandas/Made-With-ML,564582654,167,Fix various typos in notebooks,Found using `codespell -wi3` and some manual editing.,Calinou,180032,closed,False,2,2020-02-13T10:25:18+00:00,2020-02-15T01:08:58+00:00,2020-02-15T01:07:50+00:00,,0,0,0,0,0,0,0

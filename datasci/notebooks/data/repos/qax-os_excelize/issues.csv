@@ -1,0 +1,4457 @@
+repo_full_name,issue_id,number,title,body,user_login,user_id,state,locked,comments_count,created_at,updated_at,closed_at,labels,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+qax-os/excelize,3055485766,2130,RemoveRow corrupts file (calcChain.xml) leading to nil pointer dereference in adjustCalcChain,"### Description
+
+When using excelize/v2@v2.9.0 with Go 1.24.2, performing RemoveRow operations on a sheet containing formulas (e.g., =DATEDIF(A_cell,TODAY(),""d"")，other untested) and then saving the file can lead to a corrupted XLSX file. Microsoft Excel reports issues with the file content, often related to /xl/calcChain.xml (Calculation Properties) and sometimes shared formulas.
+
+Subsequently,if you open the file with Excel and repair&save it,then attempting to open this corrupted file with excelize and perform further RemoveRow operations on it causes a panic: runtime error: invalid memory address or nil pointer dereference. The panic occurs within the excelize.(*File).adjustCalcChain method, specifically at the loop header for i := 0; i < len(f.CalcChain.C); i++ { (which corresponds to line 850 in adjust.go for v2.9.0 in my pkg/mod directory), indicating f.CalcChain is likely nil at that point due to the prior file corruption.
+
+This issue demonstrates a two-stage problem:
+
+Initial file corruption caused by RemoveRow + SaveAs.
+Subsequent panic when excelize attempts to process this self-corrupted file which recovered from excel.
+
+当在 Go 1.24.2 环境下使用 excelize/v2@v2.9.0 时，对包含公式（例如 =DATEDIF(A_cell,TODAY(),""d"")，其它未测试）的工作表执行 RemoveRow 操作并保存文件后，可能导致生成的 XLSX 文件损坏。Microsoft Excel 会报告文件内容存在问题，通常与 /xl/calcChain.xml（计算属性）相关，有时也与共享公式相关。
+
+随后，如果此时使用excel打开该文件并进行修复保存，再尝试使用 excelize 打开这个已损坏的文件并对其执行进一步的 RemoveRow 操作时，会引发一个 panic: runtime error: invalid memory address or nil pointer dereference（运行时错误：无效的内存地址或空指针解引用）。此 panic发生在 excelize.(*File).adjustCalcChain 方法内部，具体是在循环头 for i := 0; i < len(f.CalcChain.C); i++ { 处（根据我 pkg/mod 目录中 v2.9.0 版本的 adjust.go 文件，这对应第 850 行），表明由于之前的文件损坏，f.CalcChain 在此时很可能为 nil。
+
+此问题表现为一个两阶段过程：
+
+首先，RemoveRow + SaveAs 操作导致了初始的文件损坏。
+然后，当 excelize 尝试处理被excel修复的文件时，发生后续的 panic。
+
+### Steps to reproduce the issue
+
+**1. Environment / 环境:**
+
+Go version / Go 版本: 1.24.2
+excelize version / excelize 版本: github.com/xuri/excelize/v2@v2.9.0
+Operating System / 操作系统: Windows 11 24H2
+
+**2. Prepare Source Excel File / 准备源 Excel 文件:**
+Create an Excel file named test_source_AB.xlsx with the following structure on a sheet named Sheet1:
+
+创建一个名为 test_source_AB.xlsx 的 Excel 文件，在名为 Sheet1 的工作表上包含以下结构：
+
+| Column A (Date) / A列 (日期) | Column B (Formula using DATEDIF & TODAY) / B列 (使用DATEDIF和TODAY的公式) |
+| :--------------------------- | :----------------------------------------------------------------------- |
+| (Header) Date / (表头) 日期    | (Header) Days Diff / (表头) 天数差                                         |
+| 2024-01-15                   | =DATEDIF(A2,TODAY(),""d"")                                               |
+| 2024-02-20                   | =DATEDIF(A3,TODAY(),""d"")                                               |
+| 2024-03-25                   | =DATEDIF(A4,TODAY(),""d"")                                               |
+| 2024-04-30                   | =DATEDIF(A5,TODAY(),""d"")                                               |
+
+Ensure cells in Column A are formatted as dates.
+
+请确保 A 列的单元格在 Excel 中已格式化为日期。
+
+[test_source_AB.xlsx](https://github.com/user-attachments/files/20153428/test_source_AB.xlsx)
+
+**3. Go Code to Reproduce / 用于复现的 Go 代码:**
+Save the following Go code (e.g., as excelize_bug_test.go) in the same directory as test_source_AB.xlsx:
+
+将以下 Go 代码（例如，保存为 excelize_bug_test.go）与 test_source_AB.xlsx 文件放置在同一目录下：
+
+```
+package main
+
+import (
+	""fmt""
+	""log""
+	""os""
+	""time""
+
+	""github.com/xuri/excelize/v2""//2.9.0
+)
+
+const (
+	manualSourceFile        = ""test_source_AB.xlsx"" // Manually created file / 手动创建的文件
+	intermediateCorruptedFile = ""intermediate_corrupted_AB.xlsx""
+	finalOutputFile         = ""final_output_AB.xlsx""
+	sheetName               = ""Sheet1""
+)
+
+func main() {
+	log.Println(""--- Starting single-thread test for excelize bug ---"")
+	log.Println(""--- 开始 excelize bug 的单线程测试 ---"")
+	log.Printf(""Excelize target version: v2.9.0 (confirm via go.mod)"")
+	log.Printf(""Excelize 目标版本: v2.9.0 (请通过 go.mod 确认)"")
+	log.Printf(""Current date for TODAY(): %s"", time.Now().Format(time.DateOnly))
+     log.Printf(""TODAY() 使用的当前日期: %s"", time.Now().Format(time.DateOnly))
+
+
+	log.Printf(""IMPORTANT: Ensure '%s' is manually created as per instructions."", manualSourceFile)
+	log.Printf(""重要提示: 请确保按照说明手动创建了 '%s' 文件。"", manualSourceFile)
+	if _, err := os.Stat(manualSourceFile); os.IsNotExist(err) {
+		log.Fatalf(""!!! Source file '%s' not found. Please create it and re-run."", manualSourceFile)
+		log.Fatalf(""!!! 源文件 '%s' 未找到。请创建该文件后重新运行。"", manualSourceFile)
+	}
+
+	// --- Phase 1: Generate the intermediate (likely corrupted) file ---
+	// --- 阶段 1: 生成中间（可能已损坏的）文件 ---
+	log.Println(""\n--- Phase 1: Generating intermediate file (expect Excel to report corruption) ---"")
+	log.Println(""\n--- 阶段 1: 生成中间文件 (预期 Excel 会报告文件损坏) ---"")
+	var successPhase1 bool
+	func() {
+		f1, err := excelize.OpenFile(manualSourceFile)
+		if err != nil {
+			log.Fatalf(""Phase 1: Failed to open source file '%s': %v"", manualSourceFile, err)
+			log.Fatalf(""阶段 1: 打开源文件 '%s' 失败: %v"", manualSourceFile, err)
+			return
+		}
+		defer f1.Close()
+
+		_, sheetCheckErr := f1.GetSheetIndex(sheetName)
+		if sheetCheckErr != nil {
+			log.Printf(""!!! Phase 1: Sheet '%s' not found in '%s'."", sheetName, manualSourceFile)
+			log.Printf(""!!! 阶段 1: 在 '%s' 文件中未找到工作表 '%s'。"", sheetName, manualSourceFile)
+			return
+		}
+
+		rowToRemoveInPhase1 := 3 // Attempt to remove the 2nd data row (Excel row 3) / 尝试删除第2条数据行 (Excel 中的第3行)
+		log.Printf(""Phase 1: Removing row %d from sheet '%s' in '%s'..."", rowToRemoveInPhase1, sheetName, manualSourceFile)
+		log.Printf(""阶段 1: 从 '%s' 的 '%s' 工作表中删除第 %d 行..."", rowToRemoveInPhase1, sheetName, manualSourceFile)
+		if err := f1.RemoveRow(sheetName, rowToRemoveInPhase1); err != nil {
+			log.Printf(""!!! Phase 1: f1.RemoveRow() returned an error: %v. This might indicate internal state issues."", err)
+			log.Printf(""!!! 阶段 1: f1.RemoveRow() 调用返回错误: %v。这可能表明存在内部状态问题。"", err)
+		} else {
+			log.Printf(""Phase 1: f1.RemoveRow() call completed without direct error."")
+			log.Printf(""阶段 1: f1.RemoveRow() 调用成功完成 (未直接返回错误)。"")
+		}
+
+		log.Printf(""Phase 1: Saving intermediate file as '%s'..."", intermediateCorruptedFile)
+		log.Printf(""阶段 1: 将中间文件保存为 '%s'..."", intermediateCorruptedFile)
+		if err := f1.SaveAs(intermediateCorruptedFile); err != nil {
+			log.Fatalf(""Phase 1: Failed to save intermediate file '%s': %v"", intermediateCorruptedFile, err)
+			log.Fatalf(""阶段 1: 保存中间文件 '%s' 失败: %v"", intermediateCorruptedFile, err)
+			return
+		}
+		log.Printf(""Phase 1: Intermediate file '%s' saved."", intermediateCorruptedFile)
+		log.Printf(""阶段 1: 中间文件 '%s' 已保存。"", intermediateCorruptedFile)
+		log.Println("">>> After Phase 1, try manually opening this intermediate file with Excel; expect a corruption warning."")
+		log.Println("">>> 阶段 1 完成后, 请尝试用 Excel 手动打开此中间文件；预期会看到损坏警告。"")
+		successPhase1 = true
+	}()
+
+	if !successPhase1 {
+		log.Println(""Phase 1 did not complete successfully. Test aborted."")
+		log.Println(""阶段 1 未成功完成。测试中止。"")
+		return
+	}
+
+	// --- Phase 2: Attempt to process the (likely corrupted) intermediate file ---
+	// --- 阶段 2: 尝试处理（可能已损坏的）中间文件 ---
+	log.Println(""\n--- Phase 2: Processing intermediate file (expect potential panic) ---"")
+	log.Println(""\n--- 阶段 2: 处理中间文件 (预期可能发生 panic) ---"")
+	func() {
+
+**//Before executing this section, use Excel to open and repair the saved ""test_datedif_intermediate_corrupted.xlsx"" file.
+//在此段执行前使用excel打开并修复保存“test_datedif_intermediate_corrupted.xlsx”文件。**
+
+		log.Printf(""Phase 2: Opening intermediate file '%s'"", intermediateCorruptedFile)
+		log.Printf(""阶段 2: 打开中间文件 '%s'"", intermediateCorruptedFile)
+		f2, err := excelize.OpenFile(intermediateCorruptedFile)
+		if err != nil {
+			log.Printf(""!!! Phase 2: Failed to open intermediate file '%s': %v. This might be due to severe corruption."", intermediateCorruptedFile, err)
+			log.Printf(""!!! 阶段 2: 打开中间文件 '%s' 失败: %v。这可能是由于文件严重损坏。"", intermediateCorruptedFile, err)
+			return
+		}
+		defer f2.Close()
+ 		
+		// After removing row 3 in Phase 1 (original Excel row 3, which was the 2nd data row),
+		// the sheet now has Header (row 1), original Data1 (now row 2), original Data3 (now row 3), etc.
+		// Let's try to remove the current row 2 (which was original Data1).
+		// 阶段 1 中删除了第 3 行（原始 Excel 的第3行，即第2条数据行）之后，
+		// 工作表现有表头（第1行）、原始数据1（现为第2行）、原始数据3（现为第3行）等。
+		// 我们尝试删除当前的第 2 行（即原始数据1所在行）。
+		rowToRemoveInPhase2 := 2 
+		log.Printf(""Phase 2: Attempting to remove row %d from sheet '%s' in '%s'..."", rowToRemoveInPhase2, sheetName, intermediateCorruptedFile)
+		log.Printf(""阶段 2: 尝试从 '%s' 的 '%s' 工作表中删除第 %d 行..."", rowToRemoveInPhase2, sheetName, intermediateCorruptedFile)
+		
+		// *****************************************************************************
+		// *** EXPECTED PANIC LOCATION: nil pointer dereference in adjustCalcChain ***
+		// *** 预期发生 PANIC 的位置: adjustCalcChain 中的空指针解引用 ***
+		// *****************************************************************************
+		if err := f2.RemoveRow(sheetName, rowToRemoveInPhase2); err != nil {
+			log.Printf(""!!! Phase 2: f2.RemoveRow() returned an error: %v"", err)
+			log.Printf(""!!! 阶段 2: f2.RemoveRow() 调用返回错误: %v"", err)
+		} else {
+			log.Printf(""Phase 2: f2.RemoveRow() call completed without direct error."")
+			log.Printf(""阶段 2: f2.RemoveRow() 调用成功完成 (未直接返回错误)。"")
+		}
+
+		log.Printf(""Phase 2: Attempting to save final output file '%s'..."", finalOutputFile)
+		log.Printf(""阶段 2: 尝试保存最终输出文件 '%s'..."", finalOutputFile)
+		if err := f2.SaveAs(finalOutputFile); err != nil {
+			log.Printf(""!!! Phase 2: Failed to save final output file '%s': %v"", finalOutputFile, err)
+			log.Printf(""!!! 阶段 2: 保存最终输出文件 '%s' 失败: %v"", finalOutputFile, err)
+		} else {
+			log.Printf(""Phase 2: Final output file '%s' saved."", finalOutputFile)
+			log.Printf(""阶段 2: 最终输出文件 '%s' 已保存。"", finalOutputFile)
+			log.Println("">>> Please manually inspect this final file with Excel as well."")
+			log.Println("">>> 请同时用 Excel 手动检查此最终文件。"")
+		}
+	}()
+
+	log.Println(""\n--- Test finished ---"")
+	log.Println(""\n--- 测试结束 ---"")
+	log.Println("">>> Review console output for errors or panic stack traces."")
+	log.Println("">>> 请检查控制台输出的错误或 panic 堆栈跟踪。"")
+	log.Println("">>> Manually check 'intermediate_corrupted_AB.xlsx' with Excel for corruption warnings."")
+	log.Println("">>> 请用 Excel 手动检查 'intermediate_corrupted_AB.xlsx' 文件是否有损坏警告。"")
+}
+```
+
+**4. Run the Go Program / 运行 Go 程序:**
+go run excelize_bug_test.go
+
+### Describe the results you received
+
+**Phase 1 Output (intermediate_corrupted_AB.xlsx) / 阶段1输出 (intermediate_corrupted_AB.xlsx):**
+
+When intermediate_corrupted_AB.xlsx is opened with Microsoft Excel, a warning dialog appears: ""Excel found a problem with some content in 'intermediate_corrupted_AB.xlsx'. Do you want us to try to recover as much as we can? If you trust the source of this workbook, click Yes.""
+当用 Microsoft Excel 打开 intermediate_corrupted_AB.xlsx 文件时，会弹出一个警告对话框：“Excel发现在 'intermediate_corrupted_AB.xlsx' 文件中存在一些内容问题。是否希望我们尽可能尝试恢复？如果您信任此工作簿的源，请单击‘是’。”
+If ""Yes"" is clicked, Excel's recovery log (e.g., errorXXXXX_XX.xml) may indicate issues such as:
+已删除的记录: /xl/calcChain.xml 部分的 公式 (计算属性) (Deleted record: Formula (Calculation properties) from /xl/calcChain.xml part)
+如果单击“是”，Excel 的恢复日志（例如 errorXXXXX_XX.xml）可能会指出如下问题：
+已删除的记录: /xl/calcChain.xml 部分的 公式 (计算属性)
+
+**Phase 2 Behavior (Go Program Console Output) / 阶段2行为 (Go程序控制台输出):**
+
+The program panics during the f2.RemoveRow() call in Phase 2.
+
+程序在阶段2调用 f2.RemoveRow() 时发生 panic。
+
+Panic Message / Panic 信息: panic: runtime error: invalid memory address or nil pointer dereference
+
+Stack Trace includes / 堆栈跟踪包含:
+
+```
+[signal 0xc0000005 code=0x0 addr=0x0 pc=0x...]
+goroutine 1 [running]:
+github.com/xuri/excelize/v2.(*File).adjustCalcChain({0x...}, {0x...}, {0x...}, 0x1, 0x2, 0xffffffffffffffff, 0x...)
+	C:/Users/.../go/pkg/mod/github.com/xuri/excelize/v2@v2.9.0/adjust.go:850 +0x... 
+github.com/xuri/excelize/v2.init.func30({0x...}, ...)
+	C:/Users/.../go/pkg/mod/github.com/xuri/excelize/v2@v2.9.0/adjust.go:53 +0x...
+github.com/xuri/excelize/v2.(*File).adjustHelper({0x...}, {0x...}, 0x1, 0x2, 0xffffffffffffffff)
+	C:/Users/.../go/pkg/mod/github.com/xuri/excelize/v2@v2.9.0/adjust.go:91 +0x...
+github.com/xuri/excelize/v2.(*File).RemoveRow({0x...}, {0x...}, 0x2)
+	C:/Users/.../go/pkg/mod/github.com/xuri/excelize/v2@v2.9.0/rows.go:590 +0x...
+main.main.func2()
+	.../excelize_bug_test.go:LINE_OF_F2_REMOVEROW +0x... 
+...
+```
+(Note: The adjust.go:850 refers to the line for i := 0; i < len(f.CalcChain.C); i++ { in excelize/v2@v2.9.0/adjust.go as loaded in my Go module cache, indicating f.CalcChain is likely nil.)
+
+（注意：adjust.go:850 指的是在我 Go 模块缓存中加载的 excelize/v2@v2.9.0/adjust.go 文件中的 for i := 0; i < len(f.CalcChain.C); i++ { 这一行，表明 f.CalcChain 很可能为 nil。）
+
+### Describe the results you expected
+
+Phase 1 / 阶段 1:
+ excelize should save intermediate_corrupted_AB.xlsx as a valid, non-corrupted Excel file. Microsoft Excel should open this file without any warnings or need for recovery.
+
+excelize 应该将 intermediate_corrupted_AB.xlsx 保存为一个有效的、未损坏的 Excel 文件。Microsoft Excel 打开此文件时不应有任何警告或恢复提示。
+
+Phase 2 / 阶段 2:
+excelize should be able to successfully open the intermediate_corrupted_AB.xlsx file (which should not have been corrupted in the first place).
+
+excelize 应该能够成功打开 intermediate_corrupted_AB.xlsx 文件（该文件首先就不应该被损坏）。
+
+The subsequent f2.RemoveRow() call should execute without errors or panics.
+
+后续的 f2.RemoveRow() 调用应该无错误或 panic 地执行。
+
+The final_output_AB.xlsx file should be saved as a valid Excel file.
+
+[test_datedif_source.xlsx](https://github.com/user-attachments/files/20153392/test_datedif_source.xlsx)
+
+final_output_AB.xlsx 文件应该被保存为一个有效的 Excel 文件。
+
+### Go version
+
+1.23.2
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Windows 11 24H2
+Microsoft® Excel® 适用于 Microsoft 365MSO (版本 2504 Build 16.0.18730.20030) 64 位
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",htnosakura,22410697,closed,False,2,2025-05-12T02:55:25+00:00,2025-05-12T16:11:34+00:00,2025-05-12T16:11:34+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,3055014874,2129,Using binary search instead of sequential search for rowData,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+Using binary search instead of sequential search for rowData
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+#1961 
+
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+
+Performance testing was conducted on an AMD64 WSL using Go's benchmark tool. The benchmarks were run the test mentioned in #1961 8 times . The following results were observed:
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/xuri/excelize/v2
+cpu: 12th Gen Intel(R) Core(TM) i5-12400F
+               │ base.txt   │             new.txt               │
+               │   sec/op   │   sec/op    vs base               │
+GetFormulas-12   3.951 ± 4%   1.382 ± 3%  -65.02% (p=0.000 n=8)
+
+               │  base.txt    │           new.txt             │
+               │     B/op     │     B/op      vs base         │
+GetFormulas-12   815.1Mi ± 0%   815.1Mi ± 0%  ~ (p=0.721 n=8)
+
+               │  base.txt   │           new.txt            │
+               │  allocs/op  │  allocs/op   vs base         │
+GetFormulas-12   10.87M ± 0%   10.87M ± 0%  ~ (p=0.940 n=8)
+(The version of the issue submitted is 27 seconds in the same environment)
+```
+code:
+```
+
+func BenchmarkGetFormulas(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		file, err := OpenFile(""4600Formulas.xlsx"")
+		if err != nil {
+			panic(err)
+		}
+		begin := time.Now()
+		cc := 0
+		for row := 1; row <= 4600; row++ { // 4600
+			for col := 1; col <= 55; col++ { //55
+				axis, _ := CoordinatesToCellName(col, row)
+				str, err := file.GetCellFormula(""Sheet1"", axis)
+				if err != nil {
+					panic(err)
+				}
+				if str != """" {
+					cc++
+				}
+			}
+		}
+		assert.Equal(b, 45990, cc)
+		b.Logf(""GetCellFormula time cost:%dms cc:%v"", time.Since(begin).Milliseconds(), cc)
+	}
+}
+```
+
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",shcabin,5463832,closed,False,4,2025-05-11T14:11:57+00:00,2025-05-12T05:37:42+00:00,2025-05-12T05:37:34+00:00,size/S,0,0,0,0,0,0,0
+qax-os/excelize,3050596547,2128,"This related with #2123, made editAs attribute value empty for one cell anchor drawing object","# PR Details
+
+Made editAs attribute value empty for one cell anchor drawing object
+
+## Description
+
+Fix generated workbook corrupted on Office 2007.
+
+## Related Issue
+
+#2123 (pull request)
+#2001
+#2002
+
+## Motivation and Context
+
+Follow maintainer's suggestion in pull request #2123.
+
+## How Has This Been Tested
+
+Test with `go test -v` locally
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",Now-Shimmer,130445987,closed,False,2,2025-05-09T02:54:26+00:00,2025-05-09T16:03:26+00:00,2025-05-09T16:03:03+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,3046055673,2127,"DefinedNames SheetNames are not escaped correctly, if a sheet gets renamed","# PR Details
+
+DefinedNames SheetNames are not escaped correctly, if a sheet gets renamed
+
+## Description
+
+Renaming a sheet might cause Microsoft Excel to show a warning that the file contains broken links. This happens if the sheet name contains whitespaces for example and definedNames referencing this sheet. This is also the reason why some sheet names are escaped and others not. This PR checks via regex for non word characters and escapes sheet names in definedNames if required. The current implementation only preserves already present escaping, even if it is not required anymore.
+Currently ""Sheet 2!$A$1:$A$2""
+Required ""'Sheet 2'!$A$1:$A$2""
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+#2126 
+
+## Motivation and Context
+
+Fixes ""broken links"".
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+Tested in a local project.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",R3dByt3,20931260,closed,False,2,2025-05-07T13:52:17+00:00,2025-05-08T11:59:00+00:00,2025-05-08T11:58:30+00:00,size/S,0,0,0,0,0,0,0
+qax-os/excelize,3046029813,2126,"DefinedNames SheetNames are not escaped correctly, if a sheet gets renamed","### Description
+
+Renaming a sheet might cause Microsoft Excel to show a warning that the file contains broken links. This happens if the sheet name contains whitespaces for example and definedNames referencing this sheet. This is also the reason why some sheet names are escaped and others not. This PR checks via regex for non word characters and escapes sheet names in definedNames if required. The current implementation only preserves already present escaping, even if it is not required anymore.
+Currently ""Sheet 2!$A$1:$A$2""
+Required ""'Sheet 2'!$A$1:$A$2""
+
+### Steps to reproduce the issue
+
+DefinedName = ""Sheet1!$A$1:$A$2""
+```
+	if err := f.SetSheetName(""Sheet1"", ""Requires escaping""); err != nil {
+		log.Println(err)
+		return err
+	}
+```
+
+### Describe the results you received
+
+DefinedName = ""Requires escaping!$A$1:$A$2""
+
+### Describe the results you expected
+
+DefinedName = ""'Requires escaping'!$A$1:$A$2"" 
+
+### Go version
+
+1.24.2
+
+### Excelize version or commit ID
+
+2.9.0 / master
+
+### Environment
+
+```shell
+Alpine, Microsoft Excel 365
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",R3dByt3,20931260,closed,False,0,2025-05-07T13:43:39+00:00,2025-05-08T11:58:31+00:00,2025-05-08T11:58:31+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,3035222117,2125,Empty `<fill></fill>` are generated in certain cases,"### Description
+
+In certain cases this is being generated in styles.xml:
+
+```xml
+  <fills count=""3"">
+    <fill>
+      <patternFill patternType=""none""></patternFill>
+    </fill>
+    <fill>
+      <patternFill patternType=""gray125""></patternFill>
+    </fill>
+    <fill></fill>
+  </fills>
+```
+
+```xml
+    <xf numFmtId=""164"" fontId=""0"" fillId=""2"" borderId=""0"" xfId=""0"" applyNumberFormat=""true"" applyFill=""true"" applyAlignment=""false"">
+      <alignment></alignment>
+    </xf>
+```
+
+Here, the last `<fill></fill>` is invalid and causing errors when using strict parsers like openpyxl.
+
+### Steps to reproduce the issue
+
+It's bit hard to create a minimal reproduction. The code is part of our internal application. Though the fix is similar to #332
+
+```diff
+diff --git a/styles.go b/styles.go
+index 5992cc3..36c90d0 100644
+--- a/styles.go
++++ b/styles.go
+@@ -1470,7 +1470,7 @@ func (f *File) extractBorders(bdr *xlsxBorder, s *xlsxStyleSheet, style *Style)
+ // extractFills provides a function to extract fill styles settings by
+ // given fill styles definition.
+ func (f *File) extractFills(fl *xlsxFill, s *xlsxStyleSheet, style *Style) {
+-	if fl != nil {
++	if fl != nil && (fl.GradientFill != nil || fl.PatternFill != nil) {
+ 		var fill Fill
+ 		if fl.GradientFill != nil {
+ 			fill.Type = ""gradient""
+
+```
+
+This is the only place where `style.Fill = fill` was being assigned without any checks on whether the fill has a gradientfill/patternfill child.
+
+### Describe the results you received
+
+`<fill></fill>` is being generated and `fillId=""2""` is referencing it.
+
+### Describe the results you expected
+
+No empty fill should be generated. `fillId=""0""` should be used instead.
+
+### Go version
+
+1.24.2
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+OS: darwin/arm64 – macOS 15.4.1 (24E263)
+Microsoft Excel Version: 16.96.1 (25042021)
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [ ] The provided reproduction is a minimal reproducible example of the bug.",brc-dd,40380293,closed,False,3,2025-05-02T05:34:54+00:00,2025-05-02T07:18:25+00:00,2025-05-02T07:15:32+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,3032306543,2124,Allow selecting multiple sheets as active,"### Description
+
+Excel allows selecting multiple sheets as active, by shift- (or ctrl-) clicking on the tabs. This comes out in the resulting xlsx as
+
+```
+  <sheetViews>
+    <sheetView tabSelected=""1"" workbookViewId=""0""/>
+  </sheetViews>
+```
+
+in multiple sheet files. There's already a `SetActiveSheet` and `GetActiveSheetIndex` but they pre-suppose that only a single sheet is active at a time. This is a very minor feature, but helpful for e.g. printing multiple sheets without having to first select them.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",imirkin,817874,open,False,0,2025-04-30T19:40:21+00:00,2025-05-04T13:40:18+00:00,,enhancement,1,1,0,0,0,0,0
+qax-os/excelize,3024371438,2123,Fixed drawingResize dimensions calculation,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+The current implementation does not seem to be in accordance to the specification:
+https://github.com/closedxml/closedxml/wiki/Cell-Dimensions
+https://github.com/closedxml/closedxml/wiki/Cell-Dimensions#mdw
+https://github.com/closedxml/closedxml/wiki/Cell-Dimensions#skiasharp-code
+
+Also there seem to be logical issues as well. This commit solves an identical issue as linked below.
+
+## Description
+
+<!--- Describe your changes in detail -->
+Looking at the C# ClosedXML Excel file Wiki:
+- The conversion from pt to px was incorrect (row height).
+- The default conversion from MDW to px were incorrect (column width - there is no margin) - also this calculation should depend on the used font; To be honest I have not checked if and how this could be achieved within the project.
+- The aspect ratio calculation has been simplified
+- The offset values were subtracted from the image dimensions which is simply not correct
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+https://github.com/qax-os/excelize/issues/2001
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+In my use case I encountered the problems mentioned in the issue #2001 and these changes applied locally fixed my issues.
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+Try to add multiple images into a single cell using offsets as mentioned in #2001. Currently this will cause problems. Like mentioned earlier these changes solve these issues.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",R3dByt3,20931260,closed,False,25,2025-04-28T09:50:49+00:00,2025-05-09T11:26:20+00:00,2025-05-07T01:35:32+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,3022950180,2122,Use mmap in ReadAll if possible,"# PR Details
+
+Use mmap instead of io.ReadAll, if possible
+
+## Description
+
+Introduce readAll function which uses mmap if possible, io.ReadAll otherwise.
+
+## Related Issue
+
+#2121 
+
+## Motivation and Context
+
+Memory inefficiency.
+
+## How Has This Been Tested
+
+go test
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [X] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [X] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [X] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [X] All new and existing tests passed.
+",tgulacsi,256074,open,False,2,2025-04-27T09:11:44+00:00,2025-04-29T15:24:41+00:00,,size/M,1,1,0,0,0,0,0
+qax-os/excelize,3022948841,2121,Use mmap if possible (can save memory with big files),"### Description
+
+ReadAll is used only in a few places, but most dominantly it is used to slurp up all the .xlsx we are opening.
+It may be only a few MiBs, but mmap is an easy solution for this.
+ 
+
+### Steps to reproduce the issue
+
+1. open a big .xlsx
+2. Check used memory and GC churn
+
+### Describe the results you received
+
+At least the size of .xlsx is used, then later may be released.
+
+### Describe the results you expected
+
+Not a lot of memory is used, GC is in peace
+
+### Go version
+
+1.24.1
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Debian Linux testing
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",tgulacsi,256074,open,False,1,2025-04-27T09:09:13+00:00,2025-04-29T10:53:09+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,3022934339,2120,force-remove all files on Close,"# PR Details
+
+Force removing of all temporary files on File.Close().
+
+## Description
+
+Don't quit on error while removing temp files during iteration over tempFiles Map.
+
+## Related Issue
+
+#2119 
+
+## Motivation and Context
+
+Some of the temp files may be left there, occupying space.
+
+## How Has This Been Tested
+
+go test
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [X] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [X] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [X] I have read the **CONTRIBUTING** document.
+- [X] I have added tests to cover my changes.
+- [X] All new and existing tests passed.
+",tgulacsi,256074,closed,False,5,2025-04-27T08:40:19+00:00,2025-04-28T01:43:36+00:00,2025-04-28T01:43:13+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,3022926214,2119,Temp files may be left,"### Description
+
+Temp files may be left if some of them is removed before Close.
+
+### Steps to reproduce the issue
+
+1. Open an xlsx
+2. Remove one of the created $TMPDIR/excelize-* files
+3. Close the opened xlsx
+
+### Describe the results you received
+
+Depending on closing order, some of the temp files may be left.
+
+### Describe the results you expected
+
+No /tmp/excelize-* files left
+
+### Go version
+
+1.24.1
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Debian Linux testing
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",tgulacsi,256074,closed,False,2,2025-04-27T08:26:45+00:00,2025-04-28T01:43:14+00:00,2025-04-28T01:43:14+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,3017079819,2118,feat: add formula shared index,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+build Shared formula index, optimize performance of GetCellFormula 
+Related issues: [https://github.com/qax-os/excelize/issues/1961](url)
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+https://github.com/qax-os/excelize/issues/1961 
+On my pc, the test mentioned in the issue has been reduced from 27 seconds to 4 seconds
+
+https://github.com/qax-os/excelize/pull/2030
+As discussed in #2030 , the deepcopy will use gitHub/mahae/deepcopy
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",shcabin,5463832,closed,False,1,2025-04-24T12:20:36+00:00,2025-05-04T09:02:07+00:00,2025-04-26T09:29:33+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,3008156716,2117,how to show table data under col chart,"### Description
+
+can I add chart like this?
+
+![Image](https://github.com/user-attachments/assets/15b06c1e-f0ce-41d6-a6b7-199d0df1b460)
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",mediawall,109123576,closed,False,3,2025-04-21T10:55:04+00:00,2025-04-22T01:23:54+00:00,2025-04-22T00:00:00+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,3000291208,2116,improve cell read performance by optimizing xml parsing,"# PR Details
+
+improve cell read performance by optimizing  unmarshal for xlsxC struct
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+Improve the cell reading performance of large documents
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+Performance testing was conducted on an AMD64 WSL using Go's benchmark tool. The benchmarks were run BenchmarkRows 10 times each to ensure statistical significance. The following results were observed:
+goos: linux
+goarch: amd64
+pkg: github.com/xuri/excelize/v2
+cpu: 12th Gen Intel(R) Core(TM) i5-12400F
+```
+        │ bashline_1.txt │              new_1.txt              │
+        │     sec/op     │   sec/op     vs base                │
+Rows-12      164.7µ ± 5%   131.1µ ± 2%  -20.41% (p=0.000 n=10)
+
+        │ bashline_1.txt │              new_1.txt              │
+        │      B/op      │     B/op      vs base               │
+Rows-12     72.20Ki ± 0%   66.44Ki ± 0%  -7.99% (p=0.000 n=10)
+
+        │ bashline_1.txt │              new_1.txt              │
+        │   allocs/op    │  allocs/op   vs base                │
+Rows-12      1.903k ± 0%   1.658k ± 0%  -12.87% (p=0.000 n=10)
+```
+
+Due to the small size of Book1.xlsx, I replaced it with TestStreamWriter.xlsx(Get after run TestStreamWriter) and re-executed it:
+```
+       │ bashline_2.txt │             new_2.txt              │
+        │     sec/op     │   sec/op    vs base                │
+Rows-12       5.662 ± 3%   3.970 ± 3%  -29.88% (p=0.000 n=10)
+
+        │ bashline_2.txt │              new_2.txt               │
+        │      B/op      │     B/op      vs base                │
+Rows-12     2.387Gi ± 0%   2.044Gi ± 0%  -14.38% (p=0.000 n=10)
+
+        │ bashline_2.txt │              new_2.txt              │
+        │   allocs/op    │  allocs/op   vs base                │
+Rows-12      64.82M ± 0%   52.02M ± 0%  -19.75% (p=0.000 n=10)
+```
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",shcabin,5463832,closed,False,1,2025-04-16T17:29:48+00:00,2025-04-18T11:53:32+00:00,2025-04-18T11:52:59+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,2988623991,2115,Style compositing,"### Description
+
+Working with styles is painful.
+Why not add functions to compose styles based in distinct properties?
+We could then call something like this:
+```go
+file.SetCellStyle(sheet, start, end, excelize.ComposeStyle(excelize.Bold(), excelize.Color(""#ffffff""), excelize.Fill(""#40b040""), excelize.FontSize(12))
+```
+We could also create an AddCellStyle function, which would read the cell's current style and replace the provided cell property, so you can have a base style for your cells (say, like having a different for odd and even rows), and change the style property for something else than the background for one particular cell, without touching the background color. For example:
+```go
+file.AddCellStyle(sheet, start, end, excelize.Italic(), excelize.Color(""#ff0000"")
+```
+That would also simply the process of adding borders to cells.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",BZValoche,48053275,closed,False,2,2025-04-11T13:03:40+00:00,2025-04-14T08:48:04+00:00,2025-04-14T08:48:03+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2981905728,2114,refactor: directly swap the values of two variables,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+directly swap the values of two variables
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",timesince,169233406,closed,False,1,2025-04-09T07:49:02+00:00,2025-04-09T08:03:43+00:00,2025-04-09T08:02:53+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2977195314,2113,CellLink not generated for form checkboxes,"### Description
+
+One should be able to link cellsd to checkboxes. The library explicitely only allows the CellLink property on scrollbars and spin buttons.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",BZValoche,48053275,closed,False,3,2025-04-07T15:12:01+00:00,2025-04-11T12:54:22+00:00,2025-04-11T06:45:53+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2975570962,2112,Add feature that get the cellValues for certain single row or column,"### Description
+
+Hi, respected developers,
+I wonder as the features like `RemoveRow`, `SetSheetRow` exist, why there's no such a function called `GetSheetRow(sheet string, row int)` so that I can get the whole value of the specific row.
+Though there is `GetRows` and the Iterator `Rows`, I still think this feature is needed.
+Especially when you just want only one row value of a really large sheetFile, `GetRows` will have a huge time cost.
+
+### Additional context
+
+What I want
+```go
+package main
+
+import (
+    ""fmt""
+
+    ""github.com/xuri/excelize/v2""
+)
+
+func main() {
+    f, err := excelize.OpenFile(""Book1.xlsx"")
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    defer func() {
+        // Close the spreadsheet.
+        if err := f.Close(); err != nil {
+            fmt.Println(err)
+        }
+    }()
+    // Get row by given worksheet name and row index.
+    row, err := f.GetSheetRow(""Sheet1"", 2)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    for _, colCell := range row {
+        fmt.Print(colCell, ""\t"")
+    }
+    fmt.Println()
+
+    // Get column by given worksheet name and column reference.
+    col, err := f.GetSheetColumn(""Sheet1"", ""B"")
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    for _, rowCell := range col {
+        fmt.Print(rowCell , ""\t"")
+    }
+    fmt.Println()
+}
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",PramSin,65845106,closed,False,2,2025-04-07T04:12:15+00:00,2025-04-07T12:49:31+00:00,2025-04-07T12:49:30+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2953877736,2111,Avoid looking up absent cells in `rangeResolver`,"# PR Details
+
+While benchmarking the performance of `SUMIFS` I've discovered that when a range references an entire column or an entire row, excelize scans the entire theoretical range even if the file is smaller than that. This was already discovered by #2056.
+
+## Description
+
+I've initially tried to reduce the scan range, but a lot of the code assume that `rangeResolver` is going to be scanning the entire range, so I've changed it to instead skip looking up cells that don't exist.
+
+## Related Issue
+
+#2056
+
+## Motivation and Context
+
+This makes a big performance difference.
+
+## How Has This Been Tested
+
+I've run tests and also tested this on my projects.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+
+---
+
+PR developed together with @Aprax14.
+",paolobarbolini,6215781,closed,False,1,2025-03-27T17:25:50+00:00,2025-03-29T14:51:16+00:00,2025-03-29T14:51:05+00:00,size/M,1,0,0,0,0,0,1
+qax-os/excelize,2947595387,2110,SetCellStyle doesnt work on macos excel,"### Description
+
+When i create a file with NewStyle and SetCellStyle, style alignment didnt apply
+
+After double click on cell, it work
+
+But on Ubuntu 24 it works as expected
+
+### Steps to reproduce the issue
+
+Create new style
+```
+breakLineStyle, err := file.NewStyle(&excelize.Style{
+	Alignment: &excelize.Alignment{
+		WrapText: true,
+	},
+})
+
+```
+
+SetStyle
+`err = file.SetCellStyle(sheetName, cell, cell, breakLineStyle)`
+
+### Describe the results you received
+
+<img width=""201"" alt=""Image"" src=""https://github.com/user-attachments/assets/2d5065fb-554e-4057-ad08-20afac6d7fb5"" />
+
+Alignment didnt apply
+
+<img width=""190"" alt=""Image"" src=""https://github.com/user-attachments/assets/157dcd7b-26f7-4775-ba82-31f753d8346e"" />
+
+When I doubleclick on cell, it work properly
+
+### Describe the results you expected
+
+<img width=""152"" alt=""Image"" src=""https://github.com/user-attachments/assets/397393c1-3a4f-4f4c-878b-72cf041bf7af"" />
+
+And applied alignment 
+
+<img width=""170"" alt=""Image"" src=""https://github.com/user-attachments/assets/30622fca-9505-4680-8a8c-8697f59d577c"" />
+
+### Go version
+
+1.22
+
+### Excelize version or commit ID
+
+v2.8.1
+
+### Environment
+
+```shell
+MacOs Sonoma 14.4
+Excel 2019 for mac
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",mc2j73,31831497,closed,False,2,2025-03-25T19:44:43+00:00,2025-03-28T00:41:02+00:00,2025-03-28T00:41:02+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2938353256,2109,"This closes #2108, Add helper to auto scale sheet on page by single, columns and rows options","- Add new SheetAutoScalingPageMode data type
+- Add new consts SheetFitOnPage, SheetFitAllColumnsOnPage, SheetFitAllRowsOnPage
+- Add new function SetSheetAutoScalingPageByMode
+- Update unit tests
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [X] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [X] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [X] My code follows the code style of this project.
+- [X] My change requires a change to the documentation.
+- [X] I have updated the documentation accordingly.
+- [X] I have read the **CONTRIBUTING** document.
+- [X] I have added tests to cover my changes.
+- [X] All new and existing tests passed.
+",moisespsena,350884,closed,False,2,2025-03-21T13:06:10+00:00,2025-03-23T11:58:34+00:00,2025-03-23T11:58:06+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2938248523,2108,"Add helper to auto scale sheet on page by single, columns and rows options","### Description
+
+I have used excelize to generate data sheets for print. In many cases, when have many columns, the MS Excel or WPS SpreadSheets or LibreOffice Calc, add automatic page breaks on columns. This is a bad option for my sheets!
+
+I see what those sheet editors have a page setup for auto scaling with three options for solve these problems: 1) **Fit sheet on one page**, 2) **Fit all columns on one page** and 3) **Fit all rows on one page**. See bellow image:
+
+![Image](https://github.com/user-attachments/assets/406578db-a456-4373-a34f-314b392ff5aa)
+
+I notice what this options is a helper to set other sheet options:
+
+1. **Fit sheet on one page**: must set `SheetPropsOptions.FitToPage = true`
+2. **Fit all columns on one page**: set `SheetPropsOptions.FitToPage = true` and `PageLayoutOptions.FitToHeight = 0`
+3. **Fit all rows on one page**: set `SheetPropsOptions.FitToPage = true` and `PageLayoutOptions.FitToWidth = 0`
+
+I searched excelize api and  5th edition of the ECMA-376 Standard for Office Open XML to set those options on my sheet but i found nothing. For solve this problem, i have created sheets with those options and see the `xl/worksheets/sheet1.xml` file to check the XML attibutes  set.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",moisespsena,350884,closed,False,1,2025-03-21T12:26:36+00:00,2025-03-23T11:58:08+00:00,2025-03-23T11:58:08+00:00,kind/documentation,0,0,0,0,0,0,0
+qax-os/excelize,2932362614,2107,Excel spreadsheet is corrupt with larger data exports,"### Description
+
+We've been using Excelize for a year or so now to allow our users to export data out of our Elastic DB and into Excel - it's been working great!
+
+However, with larger exports (i.e., > 50,000 operations or 5,000 rows of 10x columns written) you can still open the spreadsheet, but you get the error:
+
+<img width=""270"" alt=""Image"" src=""https://github.com/user-attachments/assets/6b70edd7-09d2-4a14-af5d-3b95d934fd3c"" />
+
+
+Recovery works, but the customer is complaining because Excel is telling them the extract is corrupt and they want it working without errors (a reasonable request). This error presents itself on Windows and macOS.
+
+I've been able to reproduce using our closed-source codebase locally, but wanted to see if anyone else has experienced this, or has any idea why it could be failing before I craft a minimum example to submit to this ticket? I'm writing directly to a Google Cloud Storage (GCS) object stream using:
+
+```go
+f.WriteTo(objStream)
+```
+
+It's not due to bad characters being written because I tried cleaning the strings before writing using the regex:
+
+```go
+// sanitizeForExcel allows alphanumeric characters, common symbols, punctuation, and emojis.
+func sanitizeForExcel(input string) string {
+	// Define a regex pattern to remove unwanted characters but keep emojis and punctuation
+	re := regexp.MustCompile(`[^a-zA-Z0-9\s\p{P}\p{So}\-_/\\.(){}:=,]`)
+
+	// Replace disallowed characters with an empty string
+	return re.ReplaceAllString(input, """")
+}
+```
+
+But I still get the same problem.
+
+### Steps to reproduce the issue
+
+1. Export an data-set to Excel spreadsheet with 1,000 records (WORKS)
+2. Export an data-set to Excel spreadsheet with > 5,000 records (BREAKS AS ABOVE)
+
+### Describe the results you received
+
+The only recovery details provided by Excel are as follows:
+
+```xml
+<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+  <recoveryLog xmlns=""http://schemas.openxmlformats.org/spreadsheetml/2006/main"">
+  <logFileName>Repair Result to 347a2577-c274-4c8d-b357-b3478b5fbe060.xml</logFileName>
+  <summary>Errors were detected in file ’/Users/work/Downloads/sysxfault2025002/Toms/347a2577-c274-4c8d-b357-b3478b5fbe06.xlsx’</summary>
+  <repairedRecords summary=""Following is a list of repairs:"">
+    <repairedRecord>Repaired Records: String properties from /xl/sharedStrings.xml part (Strings)</repairedRecord>
+  </repairedRecords>
+</recoveryLog>
+```
+
+### Describe the results you expected
+
+We'd ideally like to avoid any prompts in Excel saying to the non-technical end-user that their export is corrupt and needs restoring.
+
+### Go version
+
+1.23.3
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Reproduced locally on a macOS 15.3.1, but also happens in Google Cloud Run using `ubuntu:latest`.
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",tommed,13066,closed,False,11,2025-03-19T16:07:50+00:00,2025-03-21T01:32:01+00:00,2025-03-20T12:33:43+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2923253146,2105,Chart labels have very low opacity level and are barely visible,"### Description
+
+i am creating a new excelize.Bar chart and after adding it, the labels are not visible. They are visible by default when added from the Microsoft Excel but not when added from excelize and viewed in Excel
+
+![Image](https://github.com/user-attachments/assets/f383ab5b-db51-4e45-823f-61b2aa272c1c)
+
+### Steps to reproduce the issue
+
+Add a bar chart even using the default chart in the root readme reproduces this issue.  
+
+### Describe the results you received
+
+Low visibility of labels
+
+### Describe the results you expected
+
+Same visibility as the new inserted chart from excel
+
+### Go version
+
+1.22.4
+
+### Excelize version or commit ID
+
+v2.8.1
+
+### Environment
+
+```shell
+chart created in Ubuntu 22.04 and sheet viewed in Microsoft Drive Excel
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",ZainJavedDev,33459428,closed,False,2,2025-03-16T19:08:34+00:00,2025-03-17T04:41:27+00:00,2025-03-17T01:57:20+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2923075668,2104,Fix panic on delete calc chain,"# PR Details
+
+- Fix panic on delete calc chain 
+- Remove XML tags for the CalcPropsOptions data structure
+- Update dependencies modules
+
+## Description
+
+- Fix panic on delete calc chain 
+- Remove XML tags for the CalcPropsOptions data structure
+- Update dependencies modules
+
+## Related Issue
+
+None
+
+## Motivation and Context
+
+- Fix panic on delete calc chain 
+- Remove XML tags for the CalcPropsOptions data structure
+- Update dependencies modules
+
+## How Has This Been Tested
+
+All unit tests have been passed
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",hm3248,177785712,closed,False,1,2025-03-16T13:48:28+00:00,2025-03-16T16:04:55+00:00,2025-03-16T16:04:03+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2922964028,2103,"This closes #2102, fix panic on set chart title font","# PR Details
+
+fix panic on set chart title font
+
+## Description
+
+fix panic on set chart title font
+
+## Related Issue
+
+#2102
+
+## Motivation and Context
+
+fix panic on set chart title font
+
+## How Has This Been Tested
+
+I updated an unit test, all unit tests has been passed
+
+## Types of changes
+
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",LZCZ,74762395,closed,False,1,2025-03-16T11:29:00+00:00,2025-03-21T17:52:39+00:00,2025-03-16T14:00:30+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2922870860,2102,Not able to specify font family on the title of a chart,"### Description
+
+When I specify the font family for the title on a chart then I am getting a nil pointer exception:
+
+...
+Title:     []excelize.RichTextRun{{Text: ""Test"", Font: &excelize.Font{Size: 11, Family: ""Aptos""}}},
+...
+
+For me it looks like the problem is here:
+
+```
+diff --git a/drawing.go b/drawing.go
+index 7241dac..8c336f2 100644
+--- a/drawing.go
++++ b/drawing.go
+@@ -1198,6 +1198,9 @@ func drawChartFont(fnt *Font, r *aRPr) {
+                r.SolidFill.SrgbClr = &attrValString{Val: stringPtr(strings.ReplaceAll(strings.ToUpper(fnt.Color), ""#"", """"))}
+        }
+        if fnt.Family != """" {
++               if r.Latin == nil {
++                       r.Latin = &xlsxCTTextFont{}
++               }
+                r.Latin.Typeface = fnt.Family
+        }
+        if fnt.Size > 0 {
+```
+
+### Steps to reproduce the issue
+
+Add Family parameter to title of a chart
+
+### Describe the results you received
+
+Getting a nil pointer exception
+
+### Describe the results you expected
+
+No exceptions
+
+### Go version
+
+1.24
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Linux
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",jebirch,57061109,closed,False,1,2025-03-16T08:21:15+00:00,2025-03-16T14:02:02+00:00,2025-03-16T14:00:31+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2901987705,2101,Blank rows should be skipped,"### Description
+
+Simliar to #1383 , the source input file contains blank rows with very big column index, when saving the modified file, excelize will add a lot of empty cells and the file size will increase from 11706 bytes to 2761047 bytes.
+
+[input.xlsx](https://github.com/user-attachments/files/19120162/input.xlsx)
+
+### Steps to reproduce the issue
+
+```
+func main() {
+	input, _ := excelize.OpenFile(""input.xlsx"")
+	defer input.Close()
+	sheetName := input.GetSheetName(0)
+	input.RemoveRow(sheetName, 1)
+	input.SaveAs(""output.xlsx"")
+	fs1, _ := os.Stat(""input.xlsx"")
+	fs2, _ := os.Stat(""output.xlsx"")
+	fmt.Printf(""%d vs %d"", fs1.Size(), fs2.Size())
+}
+```
+
+### Describe the results you received
+
+The output is `11706 vs 2761047`
+
+### Describe the results you expected
+
+The file size should not grow.
+
+### Go version
+
+1.23.6
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+OS independent
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",seanliang,1852862,closed,False,1,2025-03-07T04:38:49+00:00,2025-03-07T04:47:55+00:00,2025-03-07T04:47:15+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2900005356,2100,replace xml.NewEncoder with xml.EscapeText,"# PR Details
+
+Memory allocations
+
+## Description
+
+`xml.NewEncoder` uses `bufio.NewWriter`, which allocates 4096 bytes to every call (every sell with text in the xlsx, you can imagine how much it can be).
+
+```
+const (
+	defaultBufSize = 4096
+)
+
+func NewWriter(w io.Writer) *Writer {
+	return NewWriterSize(w, defaultBufSize)
+}
+```
+
+And this `xml.EscapeText` shows new lines properly in the xlsx file.
+
+<!--- Describe your changes in detail -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",artur-chopikian,49234559,closed,False,9,2025-03-06T10:29:57+00:00,2025-03-25T04:48:15+00:00,2025-03-25T04:41:15+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2899241918,2099,Support for Funnel Chart,"### Description
+
+Hi @xuri!
+
+First of all, thank you for all the hard work you put into maintaining Excelize! It’s an amazing library, and I appreciate the effort to keep it feature-rich and well-documented.
+
+I wanted to ask if there are **any plans to add support for Funnel Charts?** This chart type is quite handy for visualizing data.
+
+I’d love to hear your thoughts on whether this is something that fits into the roadmap. If this is something you'd like to add, I’d be happy to contribute and help build this feature! Let me know how I can assist.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",barismar,36620482,open,False,1,2025-03-06T03:36:18+00:00,2025-03-06T07:43:46+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2890238580,2098,Introduce 2 new functions SetCalcProps and GetCalcProps,"# PR Details
+
+support recalc formula cell values on load
+
+## Description
+
+sets xl/workbook.xml/workbook/calcPr@fullCalcOnLoad=true to recalc formula cell values on Excel load workbook
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+created document with formula doesn`t calculate value on document load
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [v] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [v] My code follows the code style of this project.
+- [v] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [v] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [v] All new and existing tests passed.
+",romanshevelev,13408092,closed,False,1,2025-03-03T05:50:16+00:00,2025-03-04T13:20:35+00:00,2025-03-04T13:20:24+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,2888396408,2097,fix: return nil instead of error directly,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+return nil instead of error directly
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",huochexizhan,178075571,closed,False,1,2025-03-01T02:07:19+00:00,2025-03-04T08:52:05+00:00,2025-03-04T08:52:05+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2884663639,2096,reduce memory allocation when possible,"# PR Details
+
+Redure memory allocation
+
+## Description
+
+Skip xml encoding when string is empty
+
+## Related Issue
+
+Do not know about it
+
+## Motivation and Context
+
+Reduce memory usage
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",artur-chopikian,49234559,closed,False,1,2025-02-27T14:20:05+00:00,2025-03-02T03:24:58+00:00,2025-03-02T03:24:49+00:00,size/XS,1,1,0,0,0,0,0
+qax-os/excelize,2879937145,2095,Setting defaultRowHeight attr don't work.,"### Description
+
+Hi, 
+
+I found that setting the defaultRowHeight does not work, is there any best practices?
+
+
+### Steps to reproduce the issue
+
+![Image](https://github.com/user-attachments/assets/7f21ce1e-95d4-4074-9035-8aceabe1f0bc)
+
+### Describe the results you received
+
+![Image](https://github.com/user-attachments/assets/82d889be-5ddf-4f5a-82de-79a82b893d92)
+
+### Describe the results you expected
+
+RowHeights be set to 27.
+
+### Go version
+
+go version go1.23.4 darwin/arm64
+
+### Excelize version or commit ID
+
+github.com/xuri/excelize/v2 v2.9.0 // indirect
+
+### Environment
+
+```shell
+darwin/arm64
+MacOS 15.2 (24C101)
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",zzinx58,77034104,closed,False,3,2025-02-26T02:00:19+00:00,2025-04-24T02:31:57+00:00,2025-04-24T02:31:56+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2876543518,2094,Modify cell styles while keeping the existing format,"### Description
+
+你好, 所有的都很好, 除了样式合并.
+我目前没有找到能分阶段设置一个 Cell 的样式的方法, 比如在代码 A 部分设置 Cell 的字体, 代码 B 部分设置 Cell 的 border 等. 分阶段设置样式对于较复杂的 excel 表格生成似乎较为实用, 就比如设置范围单元格边框, 我只需要遍历cells并设置上右下左, 合并 border 的样式即可, 在我找到的您的一个相关代码示例, 感觉这实在有些麻烦了, 有什么方式可以解决这个问题吗? 不允许样式合并的话这意味着所有cell样式都需要预先确认好?对于动态增添数据行也十分不便.
+
+https://github.com/qax-os/excelize/issues/37
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",zzinx58,77034104,closed,False,3,2025-02-25T00:55:19+00:00,2025-02-25T06:26:14+00:00,2025-02-25T05:28:05+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2868232896,2093,Introduce a Sheet Receiver to Avoid Repeated Sheet Name Arguments,"### Description
+
+It would be great if, in future versions, you could avoid having to pass the sheet name as an argument on every call. For example, instead of all methods being defined on a File receiver that require you to specify the sheet name each time, a Sheet receiver could be introduced so that the current sheet’s state is maintained internally.
+
+In the current API—as shown in the sample code—you must repeatedly pass the same sheet name. This forces the application to manage state externally and adds unnecessary verbosity. A design change to use a Sheet receiver would simplify the usage and reduce boilerplate.
+
+https://github.com/qax-os/excelize?tab=readme-ov-file#add-picture-to-spreadsheet-file
+
+```
+// you can perform operations on the sheet without specifying the sheet name each time.
+sheet.SetCellValue(""A1"", ""Hello"")
+sheet.SetCellValue(""B2"", 123)
+```
+
+However, for compatibility reasons, I believe we should also retain the current method.
+
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",yuki2006,1004620,closed,False,2,2025-02-21T07:20:07+00:00,2025-02-21T07:35:32+00:00,2025-02-21T07:35:31+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2864998024,2092,Platform shared library support,"### Description
+
+请把支持生成共享库代码部分放在本仓库，用于生成共享库(dll/so/dylib)，还有要动态生成 pkg-config 配置文件（.pc)
+![Image](https://github.com/user-attachments/assets/727a6c19-1578-430c-8afc-546e337f78be)
+
+
+### Additional context
+
+之前在你的帮助(#728)下实现了共享库构建并提交到 MSYS 仓库，因为代码位置的问题一直没通过
+https://github.com/msys2/MINGW-packages/pull/22923
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",taozuhong,13451009,closed,False,2,2025-02-20T03:50:34+00:00,2025-02-28T09:15:14+00:00,2025-02-28T09:15:13+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2859925123,2091,go test -v github.com/xuri/excelize/v2 failed on go1.24,"### Description
+
+Executing go test -v github.com/xuri/excelize/v2 passes normally on go1.23.3 and fails with go1.24 with the following output:
+
+
+### Steps to reproduce the issue
+
+1.Install go1.24 sdk
+2.go test -v github.com/xuri/excelize/v2 | grep -E ""FAIL|error""
+
+### Describe the results you received
+
+go test -v github.com/xuri/excelize/v2 | grep -E ""FAIL|error""
+--- FAIL: TestSetCellValuesMultiByte (0.02s)
+                Error:          Received unexpected error:
+--- FAIL: TestRows (0.02s)
+--- FAIL: TestStreamWriter (29.37s)
+--- FAIL: TestStreamSetRowNilValues (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+        panic: runtime error: index out of range [0] with length 0
+FAIL    github.com/xuri/excelize/v2     78.310s
+FAIL
+
+### Describe the results you expected
+
+go test -v github.com/xuri/excelize/v2 There should be no errors and output OK
+PASS
+ok      github.com/xuri/excelize/v2     100.218s
+
+### Go version
+
+1.24.0
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+uname -a
+Linux  3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+
+centos 7.9
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",me-cs,49519858,closed,False,1,2025-02-18T10:06:20+00:00,2025-02-19T07:04:54+00:00,2025-02-19T06:13:27+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2850023491,2090,.xlsm file is getting corrupted after using writeTo(),"### Description
+
+Hi there,
+
+We are experiencing performance issues when using SaveAs() to save an .xlsm file with macros. To improve performance, we attempted to use WriteTo(), which successfully creates the file, but the resulting file is corrupted.
+
+Just a few questions:
+- Is WriteTo() effective for improving performance when saving large files? If not, are there better alternatives?
+- Additionally, can WriteTo() handle .xlsm files with macros
+
+### Steps to reproduce the issue
+
+1. create an excel file 
+2. add `vbaProject.bin` to the file 
+```
+file, err := embeddedFile.ReadFile(""vbaProject.bin"")
+	if err != nil {
+		return nil, err
+	}
+
+	if err := f.AddVBAProject(file); err != nil {
+		return nil, err
+	}
+```
+3. save file using `writeTo()`
+```
+file, err := os.Create(""output.xlsm"")
+	if err != nil {
+		fmt.Println(""Failed to create file:"", err)
+		return """", err
+	}
+	defer file.Close()
+
+	if _, err := sf.ExcelFile.WriteTo(file); err != nil {
+		fmt.Println(""Failed to write file:"", err)
+		return """", err
+	}
+
+	fmt.Println(""File written `successfully"")
+```
+
+### Describe the results you received
+
+![Image](https://github.com/user-attachments/assets/616e6c9c-6784-41d2-a885-2741acbce189)
+
+### Describe the results you expected
+
+I expect the file to be openable with macros, just like it is when using SaveAs().
+
+### Go version
+
+go1.22.3 
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+linux/amd64
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",azju,8201032,closed,False,1,2025-02-13T05:45:38+00:00,2025-02-15T15:23:24+00:00,2025-02-15T15:21:48+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2841818253,2089,"When reading rows in Excel, a space is added at the end when reading decimals.","### Description
+
+When reading the same Excel file, the results for decimals differ between versions v2.8.0 and v2.9.0. Specifically, version v2.9.0 appends a space at the end of the decimal values. This has led to issues in my program.
+
+
+### Steps to reproduce the issue
+
+test excel：[test.xlsx](https://github.com/user-attachments/files/18731112/test.xlsx)
+
+The results vary when reading the ""value"" in Sheet1 using different versions.
+
+### Describe the results you received
+
+v2.8.0 result: `1`
+v2.9.0 result: `1.00 `，there is a space appended at the end.
+
+### Describe the results you expected
+
+I hope that no space will appear.
+
+### Go version
+
+1.23.2
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Microsoft Office Home and Student 2016
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",muyi911,20811746,closed,False,1,2025-02-10T09:21:45+00:00,2025-02-12T07:57:57+00:00,2025-02-11T09:01:32+00:00,wontfix,0,0,0,0,0,0,0
+qax-os/excelize,2841726111,2088,Switch Order of Values and Columns in Pivot Tables,"### Description
+
+In Pivot tables, would it be possible to add the possibility of grouping by values first and then by columns?  For example, in the image attached, inside Excel, we can drag ""Values"" above the ""MONTH""
+
+![Image](https://github.com/user-attachments/assets/ff12bef4-2c14-40ef-91b5-f44de5d7c951)
+
+
+
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",philguiol,19158802,open,False,1,2025-02-10T08:47:01+00:00,2025-02-11T09:13:12+00:00,,,0,0,0,0,0,0,0
+qax-os/excelize,2840593874,2087,try to fix #2086,"新增 `StreamRead` 可替代 OpenFile，用于真正流式读取 Excel，OpenFile 会调用 OpenReader，OpenReader 会调用 io.ReadAll, 而 io.ReadAll 会将整个文件加载到内存，使流式读取失效；
+
+请注意，StreamRead 不支持打开加密的 Excel 2003",ijustyce,6041166,open,False,0,2025-02-09T11:26:02+00:00,2025-04-17T03:25:20+00:00,,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2835579782,2086,io.ReadAll impact the OpenReader function memory usage,"OpenReader 源码如下：
+```go
+func OpenReader(r io.Reader, opts ...Options) (*File, error) {
+	b, err := io.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
+	f := newFile()
+	f.options = f.getOptions(opts...)
+	if err = f.checkOpenReaderOptions(); err != nil {
+		return nil, err
+	}
+	if bytes.Contains(b, oleIdentifier) {
+		if b, err = Decrypt(b, f.options); err != nil {
+			return nil, ErrWorkbookFileFormat
+		}
+	}
+	zr, err := zip.NewReader(bytes.NewReader(b), int64(len(b)))
+	if err != nil {
+		if len(f.options.Password) > 0 {
+			return nil, ErrWorkbookPassword
+		}
+		return nil, err
+	}
+	file, sheetCount, err := f.ReadZipReader(zr)
+	if err != nil {
+		return nil, err
+	}
+	f.SheetCount = sheetCount
+	for k, v := range file {
+		f.Pkg.Store(k, v)
+	}
+	if f.CalcChain, err = f.calcChainReader(); err != nil {
+		return f, err
+	}
+	if f.sheetMap, err = f.getSheetMap(); err != nil {
+		return f, err
+	}
+	if f.Styles, err = f.stylesReader(); err != nil {
+		return f, err
+	}
+	f.Theme, err = f.themeReader()
+	return f, err
+}
+```
+其中 io.ReadAll 会导致将所有数据加载到内存，这和流式读取的初衷违背；这里 io.ReadAll 的结果 b 的使用相关代码是：
+```go
+if bytes.Contains(b, oleIdentifier) {
+	if b, err = Decrypt(b, f.options); err != nil {
+		return nil, ErrWorkbookFileFormat
+	}
+}
+zr, err := zip.NewReader(bytes.NewReader(b), int64(len(b)))
+```
+建议将这串代码直接改为：
+```go
+zr, err := zip.OpenReader(name)
+```
+并将 `file, sheetCount, err := f.ReadZipReader(zr)`  改为 `file, sheetCount, err := f.ReadZipReader(&zr.Reader)`  即可实现真正的流式读取。
+我在本地 replace 后测试，修改后，读取 7.8G 的 excel 文件，内存占用不到 10M，而修改前 32G 内存占用。
+
+但并不确定如下代码的用途：
+```go
+if bytes.Contains(b, oleIdentifier) {
+	if b, err = Decrypt(b, f.options); err != nil {
+		return nil, ErrWorkbookFileFormat
+	}
+}
+```
+该代码看起来是兼容老版本的 Excel，但具体我并不清楚，在我的测试中，Excel 文件后缀为：xlsx，且读取的数据和实际数据一致。
+
+所以，我的建议是，能否按上面的修改来确保流式读取是真正的流式读取，而不是先 io.ReadAll 全部读取到内存，然后才流式读取，这无意义。如果上面我不确定用途的代码，有实际含义，那么能否在流式读取中兼容它？如果不兼容，那么能否提供不兼容部分格式的流式读取呢？
+
+类似的 issue 有：https://github.com/qax-os/excelize/issues/1775，但该 issue 已经关闭。",ijustyce,6041166,closed,False,4,2025-02-06T13:45:01+00:00,2025-02-12T07:57:33+00:00,2025-02-12T07:53:57+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2834975031,2085,Support headers all and just table name refs,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",IvanHristov98,35896427,closed,False,0,2025-02-06T09:19:17+00:00,2025-02-06T09:19:54+00:00,2025-02-06T09:19:54+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2833379258,2084,#2083 Fix subexpression calculation,"# Fix subexpression calculation
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+Fixes how subexpressions are calculated. An example formula that is incorrectly calculated is `=IF(2<0, 1, (4))`. More examples are provided in the related issue. 
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+https://github.com/qax-os/excelize/issues/2083
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+It fixes the calculation when there are subexpressions.
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+With unit tests. I incidentally found this issue while working with the library.
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",IvanHristov98,35896427,closed,False,1,2025-02-05T16:12:46+00:00,2025-02-08T01:40:45+00:00,2025-02-08T01:40:37+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2833367724,2083,Subexpressions aren't correctly calculated,"### Description
+
+When trying to calculate the expression `=IF(2<0, 1, (4))` I receive an empty string. Incorrect results are also received for `=IF(2>0, (1), 4)` and `=IF(2>0, (A1)*2.5, 4)`.
+
+### Steps to reproduce the issue
+
+1. Create a cell.
+2. Set the formula to `=IF(2<0, 1, (4))`.
+3. Perform `CalcCellValue` to calculate the value.
+4. Receive an empty string. 🤷
+
+### Describe the results you received
+
+An empty string most of the times. Sometimes just incorrect return values.
+
+### Describe the results you expected
+
+Not an empty string and a correct value.
+
+For the described examples the correct values should respectively be:
+1. `=IF(2<0, 1, (4))` -> 4
+2. `=IF(2>0, (1), 4)` -> 1
+3. `=IF(2>0, (A1)*2.5, 4)` -> 2.5
+
+### Go version
+
+1.20
+
+### Excelize version or commit ID
+
+432462292a40ea72005193735b2f82b287654571
+
+### Environment
+
+```shell
+Apple M3 Pro, OS version 14.4 (23E214)
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",IvanHristov98,35896427,closed,False,0,2025-02-05T16:07:39+00:00,2025-02-08T01:41:33+00:00,2025-02-08T01:40:38+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2820399231,2080,Handle the format '?' in number formatting,"# Handle the format '?' in number formatting
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+When excelize tries to read a cell where the formatCode in the style is ""?"" it will return an empty string instead of the number.
+
+## Motivation and Context
+
+This handles that the formatCode ""?"" is valid and returns a the number correctly
+
+## How Has This Been Tested
+
+This has been tested in the unit test and with an actual file.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",kurtinge,264303,closed,False,2,2025-01-30T10:07:07+00:00,2025-02-07T01:04:59+00:00,2025-02-07T01:01:27+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2810651408,2079,Fix GetStyle function can not get VertAlign format,"- Fix redundant cols element generated by stream writer
+- Update dependencies module
+- Update docs for the GetCellRichText function
+- Move TestSetCellIntFunc function to cell_test.go
+
+# PR Details
+
+Fix GetStyle function can not get VertAlign format
+
+## Description
+
+Fix GetStyle function can not get VertAlign format
+
+## Related Issue
+
+None
+
+## Motivation and Context
+
+Fix GetStyle function can not get VertAlign format
+
+## How Has This Been Tested
+
+I add the new test, old test had been passed.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",hly-717,196394708,closed,False,1,2025-01-25T00:45:32+00:00,2025-01-25T02:01:35+00:00,2025-01-25T02:01:27+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2806823199,2078,[QUESTION] Do we have some solution for big usage of memory?,,artur-chopikian,49234559,closed,False,0,2025-01-23T12:48:11+00:00,2025-01-23T13:09:37+00:00,2025-01-23T13:09:37+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2806271899,2077,SetCellStyle example in docs doesn't work,"### Description
+
+I'm trying out this example in your documentation:
+
+`style, err := xlsx.NewStyle(`{""font"":{""bold"":true,""italic"":true,""family"":""Berlin Sans FB Demi"",""size"":36,""color"":""#777777""}}`)
+if err != nil {
+    fmt.Println(err)
+}
+xlsx.SetCellStyle(""Sheet1"", ""H9"", ""H9"", style)`
+
+But if I run the code, I get this error:
+
+`.\excelize_bold.go:17:30: cannot use `{""font"":{""bold"":true,""italic"":true,""family"":""Berlin Sans FB Demi"",""size"":36,""color"":""#777777""}}` (untyped string constant ""{\""font\"":{\""bold\"":true,\""italic\"":true,\""family\"":\""Berlin Sans FB...) as *excelize.Style value in argument to file.NewStyle`
+
+
+Running:
+go version go1.23.3 windows/amd64
+github.com/xuri/excelize/v2 v2.9.0
+
+### Steps to reproduce the issue
+
+1. I created a sample excel file with random data.
+2. I created code to open the file, then run the sample code above, then save the file.
+
+
+### Describe the results you received
+
+I got this error when I tried to run the code:
+
+`.\excelize_bold.go:17:30: cannot use `{""font"":{""bold"":true,""italic"":true,""family"":""Berlin Sans FB Demi"",""size"":36,""color"":""#777777""}}` (untyped string constant ""{\""font\"":{\""bold\"":true,\""italic\"":true,\""family\"":\""Berlin Sans FB...) as *excelize.Style value in argument to file.NewStyle`
+
+### Describe the results you expected
+
+I expected the code to run and set that style to the excel file.
+
+### Go version
+
+1.23.3
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Windows 11
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",spyhunter925,186526706,closed,False,1,2025-01-23T08:40:47+00:00,2025-01-23T08:46:22+00:00,2025-01-23T08:46:17+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2805816040,2076,"This close #2075, support streaming writer to set col style","Change-Id: I46c227cc449e2c95ce1921b668da0bc780d24853
+
+# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mengpromax,33193572,closed,False,3,2025-01-23T03:29:19+00:00,2025-01-26T02:52:30+00:00,2025-01-24T09:45:25+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,2805814693,2075,streaming writer support set col style,"### Description
+
+Now StreamWriter only has a SetColWidth method, i want to set col width and col style id when setting col.
+
+### Additional context
+
+_No response_
+
+### Validations
+
+- [x] Check that there isn't already an issue that requests the same feature to avoid creating a duplicate.",mengpromax,33193572,closed,False,0,2025-01-23T03:27:50+00:00,2025-01-24T09:45:26+00:00,2025-01-24T09:45:26+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2803841006,2074,GetSheetDimension return A1:IV65536,"[row 65536.xlsx](https://github.com/user-attachments/files/18502868/row.65536.xlsx)
+
+### Description
+
+When I opened this xlsx document, the number of rows and columns in the parsed sheet was wrong, and the result was `A1:IV65536`
+
+But when I don't modify the data and just save the file by pressing ctrl+s in Excel, try again will give me the result `A1`
+
+### Steps to reproduce the issue
+
+```go
+func TestRowNum(t *testing.T) {
+	file, err := excelize.OpenFile(""row 65536.xlsx"")
+	if err != nil {
+		return
+	}
+
+	dimension, err := file.GetSheetDimension(""Sheet1"")
+	if err != nil {
+		return
+	}
+
+	fmt.Println(dimension)
+}
+```
+
+
+### Describe the results you received
+
+dimension is A1:IV65536
+
+### Describe the results you expected
+
+dimension is A1
+
+### Go version
+
+1.22.3
+
+### Excelize version or commit ID
+
+v2.9.1-0.20250105013731-af422e17009b
+
+### Environment
+
+```shell
+Win10, Excel 2016
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",liuwangchao,59493205,closed,False,2,2025-01-22T09:21:19+00:00,2025-01-23T09:52:11+00:00,2025-01-22T12:03:32+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2801848353,2073,Fix adjustDataValidations skips adjustments on subsequent sheets when the first sheet has no validations,"# PR Details
+
+Fix https://github.com/qax-os/excelize/issues/2072
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",gypsy1234,23316234,closed,False,1,2025-01-21T13:24:17+00:00,2025-01-22T10:54:33+00:00,2025-01-22T10:54:05+00:00,size/S,0,0,0,0,0,0,0
+qax-os/excelize,2801787986,2072,adjustDataValidations skips adjusting data validations on subsequent sheets if the first sheet has no data validations,"### Description
+
+The adjustDataValidations function, which is invoked by operations such as RemoveCol, skips properly adjusting data validations on subsequent sheets if the first sheet in a workbook has no data validations.
+
+### Steps to reproduce the issue
+
+```golang
+t.Run(""no_data_validations_on_first_sheet"", func(t *testing.T) {
+	f := NewFile()
+
+	// Add Sheet2 and set a data validation
+	_, err = f.NewSheet(""Sheet2"")
+	assert.NoError(t, err)
+	dv := NewDataValidation(true)
+	dv.Sqref = ""C5:D6""
+	assert.NoError(t, f.AddDataValidation(""Sheet2"", dv))
+
+	// Adjust Sheet2 by removing a column
+	assert.NoError(t, f.RemoveCol(""Sheet2"", ""A""))
+
+	// Verify that data validations on Sheet2 are adjusted correctly
+	dvs, err = f.GetDataValidations(""Sheet2"")
+	assert.NoError(t, err)
+	assert.Equal(t, ""B5:C6"", dvs[0].Sqref) // test failed
+})
+```
+
+### Describe the results you received
+
+DataValidation not updated
+
+### Describe the results you expected
+
+DataValidation adjusted
+
+### Go version
+
+go version go1.22.2 darwin/arm64
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Mac
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",gypsy1234,23316234,closed,False,0,2025-01-21T12:59:38+00:00,2025-01-22T10:54:29+00:00,2025-01-22T10:54:06+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2801229176,2071,"This closes #2068, breaking changes: SetCellInt function required int64 data type parameter","# PR Details
+
+SetCellInt function required int64 data type parameter
+
+## Description
+
+SetCellInt function required int64 data type parameter
+
+## Related Issue
+
+ #2068
+
+## Motivation and Context
+
+SetCellInt function required int64 data type parameter
+
+## How Has This Been Tested
+
+Add unit test and update existing unit test
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [x] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",xuri,2809468,closed,False,1,2025-01-21T09:32:27+00:00,2025-01-22T01:53:21+00:00,2025-01-22T01:52:58+00:00,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2801190055,2070,Eager evaluation of function arguments doesn't work with LOOKUP functions,"### Description
+
+It seems excelize evaluates all function arguments before calling a function, which doesn't work well with LOOKUP (HLOOKUP, VLOOKUP ...) functions, especially if table range is large.
+
+E.g. `=VLOOKUP(C1, A:XFD, 2)` will try to calculate all the cells in the table, instead of just lazily calculating cells in A column, and then calculate a corresponding single cell from B column.
+
+### Steps to reproduce the issue
+
+1. Add this simple table to the project
+[vlookup.xlsx](https://github.com/user-attachments/files/18487696/vlookup.xlsx)
+
+2. Run this code
+```go
+package main
+
+import (
+	""fmt""
+	""github.com/xuri/excelize/v2""
+)
+
+func unwrap[T any](v T, err error) T {
+	if err != nil {
+		panic(err)
+	}
+	return v
+}
+
+func main() {
+	file := unwrap(excelize.OpenFile(""vlookup.xlsx""))
+	val := unwrap(file.CalcCellValue(""Sheet1"", ""C2""))
+	fmt.Println(val)
+}
+```
+
+### Describe the results you received
+
+It takes ages to calculate this field value.
+
+### Describe the results you expected
+
+It should be instant to calculate this cell value.
+
+### Go version
+
+1.23.4
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+Windows 11
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",xaoctech,22726467,open,False,0,2025-01-21T09:17:18+00:00,2025-01-27T02:57:28+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2794834313,2069,Unable to install excelize v2,"### Description
+
+When I run go get github.com/xuri/excelize/v2 I get an error:
+
+go: downloading github.com/xuri/excelize/v2 v2.9.0
+go: module github.com/xuri/excelize@upgrade found (v1.4.1), but does not contain package github.com/xuri/excelize/v2
+
+I’ve cleaned the cache with go clean -cache -modcache
+
+I’m also pulling packages through Artifactory, which works with all my other packages. 
+
+Any ideas
+
+### Steps to reproduce the issue
+
+1. Run go get github.com/xuri/excelize/v2
+
+### Describe the results you received
+
+go: downloading github.com/xuri/excelize/v2 v2.9.0
+go: module github.com/xuri/excelize@upgrade found (v1.4.1), but does not contain package github.com/xuri/excelize/v2
+
+### Describe the results you expected
+
+An installed go package
+
+### Go version
+
+1.23.3
+
+### Excelize version or commit ID
+
+2.9.0
+
+### Environment
+
+```shell
+WSL on Windows 11
+Artifactory as GOPROXY
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",andersbogsnes,14262420,closed,False,4,2025-01-17T08:09:20+00:00,2025-01-26T01:56:49+00:00,2025-01-26T01:56:48+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2794657756,2068,SetCellValue  type int64  get a wrong negative number,"### Description
+
+if type int64  value bigger than max value of int (2147483647)     will get a negative number
+
+https://github.com/qax-os/excelize/blob/master/cell.go#L218
+
+i have to transform this value to string type   as temporary solution
+
+
+
+
+### Steps to reproduce the issue
+
+for examlpe:
+
+`var int64Value =  int64(3445478214)`
+`f.SetCellValue(""Sheet1"",  ""A1"",  int64Value)`
+
+this code  will   get negative number,  
+because force transform int64 value into int value:    int(int64Value)
+
+
+### Describe the results you received
+
+a negative number like:
+-200000
+
+### Describe the results you expected
+
+right  int64 number
+
+### Go version
+
+1.16.1
+
+### Excelize version or commit ID
+
+v1.4.0
+
+### Environment
+
+```shell
+windows
+```
+
+### Validations
+
+- [x] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [x] The provided reproduction is a minimal reproducible example of the bug.",wellzm,65325629,closed,False,3,2025-01-17T06:07:10+00:00,2025-01-21T01:42:09+00:00,2025-01-21T01:15:06+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2790958348,2067,"border style ""none"" is not recognized","**Issue:**
+working on generating an xlsx file
+when trying to create a sheet with borderless cells, using style index 0 results in cells being created with the default borders
+```Border: []excelize.Border{{Type: ""top"", Color: ""#000000"", Style: 0}, {Type: ""bottom"", Color: ""#000000"", Style: 0}, {Type: ""left"", Color: ""#000000"", Style: 0}, {Type: ""right"", Color: ""#000000"", Style: 0}}```
+
+**Troubleshoot:**
+while trying to identify the source of the issue, I examined a manually created file with the intended result and saw that cells with no borders had style = """" assigned to them (and not ""none"")
+
+is it possible that the following value needs to be updated to empty string instead of ""none""?
+
+https://github.com/qax-os/excelize/blob/e9efc47316198d7deecc519f1161d859d1d8787b/styles.go#L1032",leoygold,2326961,closed,False,2,2025-01-15T21:31:12+00:00,2025-01-25T06:34:34+00:00,2025-01-25T06:34:33+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2782325674,2066,fix function name,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+fix function name
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+
+",zhuhaicity,183378780,closed,False,1,2025-01-12T07:13:49+00:00,2025-01-14T11:19:28+00:00,2025-01-14T11:19:16+00:00,size/XS,0,0,0,0,0,0,0
+qax-os/excelize,2772685350,2065,Issue about read spreadsheet cell value with percentage number format,"### Description
+
+40.885% => 40.88%  直接将5给舍弃了
+104.5152% => 104.52%  进行四舍五入进位了
+
+### Steps to reproduce the issue
+
+1. 设置单元格格式为百分比，小数位数为2位。
+2. 单元格内输入 40.885。  这时候单元格内显示 40.89%，代码读取到的是 40.88%。
+3. 单元格内输入 104.5152%。 这时候单元格内显示 104.52%，代码读取到的是 104.52%
+
+### Describe the results you received
+
+40.885% => 40.88%  直接将5给舍弃了
+104.5152% => 104.52%  进行四舍五入进位了
+
+### Describe the results you expected
+
+40.885% => 40.89%  
+104.5152% => 104.52%  
+期望：全部都进行四舍五入进位。
+
+### Go version
+
+1.22.2
+
+### Excelize version or commit ID
+
+v2.8.1
+
+### Environment
+
+```shell
+wps
+```
+
+
+### Validations
+
+- [X] Check that there isn't already an issue that reports the same bug to avoid creating a duplicate.
+- [X] The provided reproduction is a minimal reproducible example of the bug.",mjianuguo,40491980,closed,False,1,2025-01-07T12:08:12+00:00,2025-01-19T06:34:12+00:00,2025-01-19T06:33:52+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2768376011,2064,"This closes #2061, fix border styles missing after saved workbook","# PR Details
+
+- Fix border styles missing after saved workbook
+- Using form template for GitHub issues
+- Typo fix for comments of the getSupportedLanguageInfo function
+
+## Related Issue
+
+#2061
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",Arpelicy,165371648,closed,False,1,2025-01-04T02:35:11+00:00,2025-01-04T03:18:24+00:00,2025-01-04T03:17:56+00:00,size/L,0,0,0,0,0,0,0
+qax-os/excelize,2767741024,2063,Support table referencing with columns,"# Add support for table referencing (aka structured references)
+
+## Description
+
+After experimenting I noticed that table references aren't supported. 
+
+Docs used for reference during implementation:
+- https://support.microsoft.com/en-us/office/using-structured-references-with-excel-tables-f5ed2452-2337-4f71-bed3-c8ae6d2b276e
+- https://support.google.com/docs/answer/15637642?hl=en
+
+## Related Issue
+
+https://github.com/qax-os/excelize/issues/2062
+
+## Motivation and Context
+
+It allows table referencing when calculating cell formulas.
+
+## How Has This Been Tested
+
+I tested it with unit tests. TODO (will test with actual files)
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document. (couldn't find such a document)
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",IvanHristov98,35896427,open,False,6,2025-01-03T15:16:14+00:00,2025-02-04T09:41:22+00:00,,size/L,1,0,0,0,0,0,1
+qax-os/excelize,2767736009,2062,Add support for table referencing,"**Description**
+
+The library currently doesn't support table referencing. E.g. a formula like `=INDEX(MyTable[Column1], 2)` isn't calculated correctly. It returns an `invalid reference` error. It is interesting though that the library already has a notion of tables.
+
+The goal of this issue is to add support for table referencing.
+
+**Steps to reproduce the issue:**
+
+1. Create a table with `f.AddTable(""Sheet1"", &Table{Range: ""A2:C5"", Name: ""MyTable""})`.
+2. Add a cell formula `f.SetCellFormula(""Sheet1"", ""A1"", ""=INDEX(MyTable[Column1], 2)"")`
+3. Set the value of cell `A3` to be ""Foo"" with `f.SetCellValue(""Sheet1"", ""A3"", ""Foo"")`
+4. Calculate the cell value `f.CalcCellValue(""Sheet1"", ""A1"")` and receive an error `invalid reference`.
+
+**Describe the results you received:**
+
+An error called `invalid reference`.
+
+**Describe the results you expected:**
+
+To receive ""Foo"" after calculating the value of ""A1"".
+
+**Output of `go version`:**
+
+```text
+go version go1.23.2 darwin/arm64
+```
+
+**Excelize version or commit ID:**
+
+```text
+caf22e4974afa377baeac21803de3923fd78e627
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+
+Apple M3 Pro, macOS 14.4 (23E214)
+
+Received the result with an xlsx file generated by gsheet.
+
+**Notes**
+
+I think I already implemented the feature. There should be a reference PR with the proposed change.
+",IvanHristov98,35896427,open,False,1,2025-01-03T15:12:37+00:00,2025-01-06T08:30:47+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2765437186,2061,How to Resolve the Issue of Original Cell Borders Disappearing When Using Excelize?,"In the MS Excel program, I set borders for individual cells.
+![image](https://github.com/user-attachments/assets/fec9615d-210c-474b-9bb9-d8177cb7af73)
+
+Then, I applied borders to the same cells using the rules in ""Conditional Formatting.""
+
+![image](https://github.com/user-attachments/assets/7ab2457d-0b8c-486f-a3e4-6042ebbe51eb)
+![image](https://github.com/user-attachments/assets/3a279a68-2270-426b-8492-2d161671f9ca)
+![image](https://github.com/user-attachments/assets/a0ed97d6-94b0-430a-8fa3-c3b6580eedde)
+
+After saving and closing the Excel file, when I reopen it and save it again using Excelize, only the borders set through ""Conditional Formatting"" remain, while the original cell borders disappear.
+![image](https://github.com/user-attachments/assets/bb433384-1ac3-4a0a-a793-5aec6b59cc4c)
+
+I will attach the test file and provide the source code I developed in Golang.
+[test.xlsx](https://github.com/user-attachments/files/18287903/test.xlsx)
+
+```go
+package main
+
+import (
+	""flag""
+	""fmt""
+
+	""github.com/xuri/excelize/v2""
+)
+
+func main() {
+   file_name := flag.String(""file"", """", ""Input file Name"")
+   flag.Parse()
+
+   fmt.Println(*file_name, *order_code)
+
+   f, err := excelize.OpenFile(*file_name)
+   if err != nil {
+      fmt.Println(err)
+      return
+   }
+
+   tables, err := f.GetTables(""Sheet1"")
+   if err != nil {
+      fmt.Println(err)
+      return
+   }
+
+   fmt.Println(tables)
+
+   if err := f.SaveAs(""test1.xlsx"",); err != nil {
+      fmt.Println(err)
+   }
+}
+``` 
+
+Is there a way to resolve this issue?",DeveloperJo,97277282,closed,False,1,2025-01-02T04:43:40+00:00,2025-01-04T03:18:55+00:00,2025-01-04T03:17:57+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2763894492,2059,DeletePicture not work,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+```golang
+func main() {
+	{
+		f, err := excelize.OpenFile(""delete-pic.xlsx"")
+		if err != nil {
+			return
+		}
+		cells, err := f.GetPictureCells(""Sheet1"")
+		if err != nil {
+			return
+		}
+		for _, cell := range cells {
+			fmt.Println(cell)
+			err = f.DeletePicture(""Sheet1"", cell)
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+		f.SaveAs(""new.xlsx"")
+	}
+}
+```
+goland output result:
+![image](https://github.com/user-attachments/assets/04fa6da4-1600-442c-b4c4-e861f92181ad)
+
+delete-pic.xlsx pic:
+![image](https://github.com/user-attachments/assets/13366292-c742-47b0-b27d-7a2897fbc17f)
+
+new file pic:
+![image](https://github.com/user-attachments/assets/3eedade9-d921-40ee-99b9-51bdb314c2f8)
+
+**Describe the results you received:**
+
+**Describe the results you expected:**
+delete the image correctly
+**Output of `go version`:**
+ 1.20.14
+```text
+(paste your output here)
+```
+
+**Excelize version or commit ID:**
+
+```text
+(paste here)
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+",jingc1413,13563637,closed,False,2,2024-12-31T02:54:38+00:00,2025-01-02T00:18:50+00:00,2025-01-01T23:33:09+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2762045262,2058,numfmt,"with custom numfmt ""[$¥-8004]\"" \""#\"" \""####\""\"""", the value ""80145.899999999994"" format to ""80145.899999999994"", but excel format as ""¥ 8 0146""。
+
+after the following change, the result is correct:
+in numfmt.go:
+supportedLanguageCodeInfo={
+""8004"":xxx,
+xxx
+}
+in printNumberLiteral func:
+...
+if token.TType == nfp.TokenTypeHashPlaceHolder || token.TType == nfp.TokenTypeZeroPlaceHolder {
+			if useLiteral && usePlaceHolder {
+				//change here
+                                 //return nf.value
+				return result
+			}
+...
+",sunnyawake5,15309147,closed,False,3,2024-12-29T00:05:34+00:00,2025-01-26T12:08:46+00:00,2025-01-26T11:53:37+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2761762741,2057,Performance enhancement - cache calculated values,"**Description**
+
+My use case is as follows.  I open an Excel file.  I inject around 10 values into various cells (using SetCellStr) and then extract around 100 values from formulas on the sheet (using CalcCellValue) and then exit.
+
+It seems that Excelize doesn't cache any values it has calculated via CalcCellValue, and recalculates them over and over if they are used in other cells.  If these formulae are time consuming this is very wasteful.
+
+**Steps to reproduce the issue:**
+
+Example : 
+
+A1:  40
+A2:  =VERYEXPENSIVEFUNCTION( )
+A3:  =A1+A2
+
+**Describe the results you received:**
+
+CalcCellValue(""Sheet1"", ""A1"")  // takes 0ms
+CalcCellValue(""Sheet1"", ""A2"")  // takes 100ms (for example)
+CalcCellValue(""Sheet1"", ""A3"")  // takes 100ms (for example)
+
+**Describe the results you expected:**
+
+CalcCellValue(""Sheet1"", ""A3"") could be practically instant, because Excelize could/should already know the value of A1 and A2 from its previous calculations.  It also knows that no SetCellX( ) functions have been called and therefore the values A1 and A2 can't have changed.  So it shouldn't have to recalculate A2 when calculating A3.
+
+As a first pass Excelize could cache the results of CalcCellValue and invalidate whole cache when any SetCellX( ) is called.
+
+A better version could only invalidate the parts of the cache that are affected by a SetCellX( ) by building a formula dependency tree (as previously suggested [here](https://github.com/qax-os/excelize/issues/757))
+
+
+**Output of `go version`:**
+
+```text
+go version go1.23.1 windows/amd64
+```
+
+**Excelize version or commit ID:**
+
+```text
+2.9.0
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+Windows",grahamorrell,47479520,open,False,0,2024-12-28T15:06:59+00:00,2025-01-22T12:04:02+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2760974600,2056,"Very slow SUMIF performance when using ""Row Range Notation""","**Description**
+
+I have an Excel workbook (minimal example attached) which has some SUMIF( ) formulae that use ""Row Range Notation"", for example : 
+
+```text
+=SUMIF(2:2, B11, 4:4)
+```
+
+These perform very poorly in Excelize despite there only being 25 columns in the worksheet.  To calculate the sum of 8 of these SUMIF( ) statements takes over 3 seconds.
+
+If I change the SUMIFs to also specify the columns, for example : 
+
+```text
+=SUMIF(B2:Y2, B11, B4:Y4)
+```
+
+Performance is dramatically improved, taking just 8 milliseconds to calculate the sum of 8 of them.
+
+**Steps to reproduce the issue:**
+1.  Call CalcCellValue on a SUMIF( ) using Row Range Notation
+
+**Describe the results you received:**
+
+![image](https://github.com/user-attachments/assets/050a72fb-7bce-4572-9dd8-e57cb7419c17)
+
+**Describe the results you expected:**
+
+Performance should be almost identical in both cases because the sheet only has 25 columns.
+
+**Output of `go version`:**
+
+```text
+N/A
+```
+
+**Excelize version or commit ID:**
+
+```text
+excelize-wasm 0.0.7
+```
+
+Windows
+[SUMIF Performance.xlsx](https://github.com/user-attachments/files/18261192/SUMIF.Performance.xlsx)
+
+",grahamorrell,47479520,closed,False,2,2024-12-27T14:53:25+00:00,2025-04-04T09:56:02+00:00,2025-03-29T14:51:06+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2760756223,2055,SUMIF doesn't work correctly for columns beyond AA,"**Description**
+
+SUMIF( ) seems to work fine when the ranges are in columns A to Z, but returns incorrect results for ranges beyond AA
+
+**Steps to reproduce the issue:**
+
+**Working version :** 
+
+![image](https://github.com/user-attachments/assets/a13c492b-a8c7-43b4-9360-fb0a86ac8e19)
+=SUMIF('Test SUMIF'!N1:T1, ""Fred"", 'Test SUMIF'!N2:T2)
+CalcCellValue(...) = 700 // This is correct
+
+**Broken version :** 
+![image](https://github.com/user-attachments/assets/b872541a-8fe6-4b75-9bbd-770ab84ce765)
+(Note this is exactly the same table, just moved right to span across the AA column)
+=SUMIF('Test SUMIF'!X1:AD1, ""Fred"", 'Test SUMIF'!X2:AD2)
+CalcCellValue(...) = 400 // This is incorrect - should be 700!
+
+**Describe the results you received:**
+Received 400 when the range spanned across the AA column
+
+**Describe the results you expected:**
+Expected 700
+
+**Output of `go version`:**
+N/A
+
+**Excelize version or commit ID:**
+
+
+```text
+excelize-wasm 0.0.7
+```
+
+Windows
+",grahamorrell,47479520,closed,False,3,2024-12-27T11:17:12+00:00,2024-12-28T11:52:58+00:00,2024-12-28T11:46:28+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2760528154,2054,Unable to write data!,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+1.
+2.
+3.
+
+**Describe the results you received:**
+
+**Describe the results you expected:**
+
+**Output of `go version`:**
+
+```text
+(paste your output here)
+``
+![image](https://github.com/user-attachments/assets/20c924ff-4391-40f8-b146-ccaa3a542146)
+
+
+**Excelize version or commit ID:**
+
+```text
+(paste here)
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+",zhongpengjian,12581656,closed,False,2,2024-12-27T07:37:06+00:00,2025-01-02T00:37:34+00:00,2025-01-02T00:37:34+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2759165314,2052,How to set the font for DataLabel in ChartSeries?,"**Description**
+
+When generate Chart, the default FontSize of ChartSeries is 10, which is a little larger. Is there any way that I can change the Font, like: FontSize, FontColor, etc. ?
+ 
+
+Below is an example:
+```go
+package main
+
+import (
+	""fmt""
+
+	""github.com/xuri/excelize/v2""
+)
+
+func main() {
+	f := excelize.NewFile()
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+
+	sheetName := ""Sheet1""
+	index, err := f.NewSheet(sheetName)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	f.SetActiveSheet(index)
+
+	data := [][]interface{}{
+		{""RL6547E"", ""Octo"", ""Nove"", nil, ""WW46"", ""WW47"", ""WW48"", ""WW49"", ""WW50""},
+		{""Input"", 1469, 1190, nil, 200, 300, 123, 243, 324},
+		{""Output"", 1469, 1190, nil, 200, 300, 123, 243, 324},
+		{""Final Yield"", 0.9767, 0.9799, nil, 0.9765, 0.9774, 0.9814, 0.9635, 0.9903},
+		{""Yield Limit"", 0.9500, 0.9500, nil, 0.9500, 0.9500, 0.9500, 0.9500, 0.9500},
+	}
+	for idx, row := range data {
+		cell, err := excelize.CoordinatesToCellName(1, idx+1)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		if err := f.SetSheetRow(""Sheet1"", cell, &row); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+
+	colLen := len(data[0])
+	rowLen := len(data)
+	maxColAscii := CalcAscii(colLen - 1)
+	// maxRowAscii := CalcAscii(rowLen)
+
+	enable, disable := true, false
+	barChart := excelize.Chart{
+		Dimension: excelize.ChartDimension{
+			Height: 350,
+			Width:  700,
+		},
+		Type: excelize.Col,
+		Series: []excelize.ChartSeries{
+			{
+				Name:              fmt.Sprintf(""%s!$A$2"", sheetName),
+				Categories:        fmt.Sprintf(""%s!$B$1:$%s$1"", sheetName, maxColAscii),
+				Values:            fmt.Sprintf(""%s!$B$2:$%s$2"", sheetName, maxColAscii),
+				DataLabelPosition: excelize.ChartDataLabelsPositionAbove,
+			},
+			{
+				Name:              fmt.Sprintf(""%s!$A$3"", sheetName),
+				Categories:        fmt.Sprintf(""%s!$B$1:$%s$1"", sheetName, maxColAscii),
+				Values:            fmt.Sprintf(""%s!$B$3:$%s$3"", sheetName, maxColAscii),
+				DataLabelPosition: excelize.ChartDataLabelsPositionAbove,
+			},
+		},
+		Format: excelize.GraphicOptions{
+			ScaleX:          1,
+			ScaleY:          1,
+			OffsetX:         15,
+			OffsetY:         10,
+			PrintObject:     &enable,
+			LockAspectRatio: false,
+			Locked:          &disable,
+		},
+		Title: []excelize.RichTextRun{
+			{
+				Text: fmt.Sprintf(""%s CP Yield Performance"", data[0][0]),
+			},
+		},
+		Legend: excelize.ChartLegend{
+			Position:      ""bottom"",
+			ShowLegendKey: false,
+		},
+		PlotArea: excelize.ChartPlotArea{
+			ShowCatName:     false,
+			ShowLeaderLines: false,
+			ShowPercent:     false,
+			ShowSerName:     false,
+			ShowVal:         true,
+		},
+		ShowBlanksAs: ""gap"",
+		YAxis: excelize.ChartAxis{
+			MajorGridLines: true,
+			Secondary:      true,
+			Font: excelize.Font{
+				Color: ""#000000"",
+				Size:  10,
+			},
+		},
+	}
+
+	lineChart := excelize.Chart{
+		Type: excelize.Line,
+		Series: []excelize.ChartSeries{
+			{
+				Name:              fmt.Sprintf(""%s!$A$4"", sheetName),
+				Categories:        fmt.Sprintf(""%s!$B$1:$%s$1"", sheetName, maxColAscii),
+				Values:            fmt.Sprintf(""%s!$B$4:$%s$4"", sheetName, maxColAscii),
+				DataLabelPosition: excelize.ChartDataLabelsPositionCenter,
+				Marker: excelize.ChartMarker{
+					Symbol: ""none"", Size: 9,
+				},
+			},
+			{
+				Name:              fmt.Sprintf(""%s!$A$5"", sheetName),
+				Categories:        fmt.Sprintf(""%s!$B$1:$%s$1"", sheetName, maxColAscii),
+				Values:            fmt.Sprintf(""%s!$B$5:$%s$5"", sheetName, maxColAscii),
+				DataLabelPosition: excelize.ChartDataLabelsPositionCenter,
+				Marker: excelize.ChartMarker{
+					Symbol: ""none"", Size: 9,
+				},
+			},
+		},
+		Legend: excelize.ChartLegend{
+			Position:      ""bottom"",
+			ShowLegendKey: false,
+		},
+		Format: excelize.GraphicOptions{
+			ScaleX:          1,
+			ScaleY:          1,
+			OffsetX:         15,
+			OffsetY:         10,
+			PrintObject:     &enable,
+			LockAspectRatio: false,
+			Locked:          &disable,
+		},
+		PlotArea: excelize.ChartPlotArea{
+			ShowCatName:     false,
+			ShowLeaderLines: false,
+			ShowPercent:     false,
+			ShowSerName:     false,
+			ShowVal:         true,
+			NumFmt: excelize.ChartNumFmt{
+				CustomNumFmt: ""0.00%"",
+			},
+		},
+		ShowBlanksAs: ""gap"",
+		YAxis: excelize.ChartAxis{
+			MajorGridLines: true,
+			Secondary:      true,
+			Font: excelize.Font{
+				Color: ""#000000"",
+				Size:  10,
+			},
+		},
+	}
+
+	chartStartCell, err := excelize.CoordinatesToCellName(1, rowLen+1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if err := f.AddChart(""Sheet1"", chartStartCell,
+		&barChart, &lineChart,
+	); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if err := f.SaveAs(""TestCharts.xlsx""); err != nil {
+		fmt.Println(err)
+	}
+}
+
+func CalcAscii(num int) string {
+	startAscii := 65 // A
+	return string(rune(startAscii + num))
+}
+```
+
+**Steps to reproduce the issue:**
+1. run the code above
+2. observe the chart
+3. the font size is a litter larger
+
+**Describe the results you received:**
+I cannot find any option in ChartSeries
+```go
+type ChartSeries struct {
+	Name              string
+	Categories        string
+	Values            string
+	Sizes             string
+	Fill              Fill
+	Line              ChartLine
+	Marker            ChartMarker
+	DataLabelPosition ChartDataLabelPositionType
+}
+```
+
+**Describe the results you expected:**
+Change the font like XAxis or YAxis
+
+**Output of `go version`:**
+1.23.1
+
+**Excelize version or commit ID:**
+github.com/xuri/excelize/v2 v2.9.0
+
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+OS: Windows 11
+Excel version: Microsoft Office Home and Student 2019",water160,7490251,closed,False,3,2024-12-26T01:35:17+00:00,2025-01-06T07:25:28+00:00,2024-12-29T04:32:08+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2755540994,2051,The order of the pivot table supports custom fields,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+1. I created a pivot table by this simple data and generated a simple pivot table
+![1a84bed9702b470ba8d71e8a01c2b0bd](https://github.com/user-attachments/assets/a8a656eb-b577-4863-9e78-ae7215cd2780)
+![9bf037fa975d44e7b06d071735bd5542](https://github.com/user-attachments/assets/c6c8d400-f55a-45da-a125-7eac39532ebf)
+
+
+
+2. But after I use Excel's Analyze - Fields, Items, and Sets - Calculated Fields function to add a field, and call `func (f *File) getPivotTable(sheet, pivotTableXML, pivotCacheRels string)`
+![80f519cdf36e4d6fb364649c57aff7cc](https://github.com/user-attachments/assets/3f0b0c51-beac-4c05-8b56-0737d732c976)
+![b98efa584c2f45158d057e7271076d4b](https://github.com/user-attachments/assets/aff69939-1df0-44a3-9c96-bbae886b6bf8)
+![73862595fc3b4e78ba30da577c8d6b3b](https://github.com/user-attachments/assets/c088926d-9604-4f03-b82e-34da3c70e749)
+
+
+**Describe the results you received:**
+
+I get panic: ``""msg"":""runtime error: index out of range [3] with length 3""`` 
+
+**Describe the results you expected:**
+
+The error was reported at line 955 of the `func (f *File) extractPivotTableFields(order []string, pt *xlsxPivotTableDefinition, opts *PivotTableOptions)`, the pivot table has four fields, but the length of the ORDER is still 3.
+![c5515bf2ce3d474490f330777511d8e5](https://github.com/user-attachments/assets/b8c524ac-ce09-4718-83aa-9e7aba5656ca)
+
+
+
+**Output of `go version`:**
+
+```text
+1.22
+```
+
+**Excelize version or commit ID:**
+
+```text
+v2.9.1-0.20241221071117-9934bf5c8634
+```
+
+",liuwangchao,59493205,closed,False,2,2024-12-23T08:47:23+00:00,2025-01-06T01:53:19+00:00,2025-01-05T01:37:41+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2755450581,2050,Retaining Cell Styles While Changing Background Color with SetCellStyle,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+When using the SetCellStyle method, I’ve noticed that it overwrites all the existing styles of the cell. Is there a way to change the cell’s background color while preserving other cell styles (such as font, conditional formatting, bolding, etc.)?
+
+**Describe the results you received:**
+
+I used SetCellStyle to change the background color of cell A5, and then it lost the valid decimal format. 
+<img width=""143"" alt=""image"" src=""https://github.com/user-attachments/assets/b2988737-5c6c-4dd9-8db4-e32e7fa54858"" />
+
+
+**Describe the results you expected:**
+
+**Output of `go version`:**
+My expectation is like this:
+<img width=""142"" alt=""image"" src=""https://github.com/user-attachments/assets/0c02d3f2-5755-42bf-929b-348cd1aaab0a"" />
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+go 1.16 github.com/360EntSecGroup-Skylar/excelize v1.4.1
+",stephsix,23513086,closed,False,1,2024-12-23T07:56:02+00:00,2024-12-24T02:25:39+00:00,2024-12-24T02:25:38+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2749361317,2049,#2; Fix export slowness due to creating a new style for every time-type cell.,"# PR Details
+* Reverts parts of a commit that were causing slowness in the export process.
+
+
+",Parvaneh-Zarei,136600683,closed,False,0,2024-12-19T06:12:05+00:00,2024-12-19T06:16:32+00:00,2024-12-19T06:16:32+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2749047056,2048,How can I fix the issue of cell borders disappearing from the custom table style?,"I created a custom table style in an MS Excel sheet using the Excel program. The style includes cell borders for each cell.
+
+![image](https://github.com/user-attachments/assets/5f61dd4d-9a5d-4eff-ba42-294221431bd7)
+
+However, after saving and closing the Excel file, when I reopen it and save it again using Excelize, the cell borders from my custom table style disappear.
+
+![image](https://github.com/user-attachments/assets/c7aeb215-77d0-4448-a336-76d96568595f)
+
+Is there a way to resolve this issue?",DeveloperJo,97277282,closed,False,4,2024-12-19T01:24:41+00:00,2024-12-20T02:38:59+00:00,2024-12-20T01:44:11+00:00,bug,0,0,0,0,0,0,0
+qax-os/excelize,2746796953,2047,error download file api to vue browser,"func (h *BookingMuseumHandler) DownloadExcels(c echo.Context) error {
+
+
+    data, _, err := h.bookingUcase.Fetch(ctx, au, &params)
+    if err != nil {
+        return err
+    }
+
+    // Prepare the response data
+    pubRes := []domain.ListBookingMuseumDataResponse{}
+    for _, row := range data {
+        res := domain.ListBookingMuseumDataResponse{
+            ID:                row.ID,
+            Nama:              row.PengunjungBookings.Nama,
+            Email:             row.PengunjungBookings.Email,
+            Kategori:          row.KategoriBookings.Nama,
+            Sesi:              row.SesiBookings.Nama,
+            JumlahPengunjung:  row.JumlahPengunjung,
+            TanggalBerkunjung: row.TanggalBerkunjung,
+            Dokumen:           row.DocBookings.Doc,
+            BuktiBayarBookings: row.BuktiBayarBookings.Bukti,
+            Status:            row.Status,
+        }
+
+        pubRes = append(pubRes, res)
+    }
+
+	
+    // Create a new Excel file
+    f := excelize.NewFile()
+    index, err := f.NewSheet(""Booking Museum"")
+    if err != nil {
+        return err
+    }
+    f.SetActiveSheet(index)
+	// Simpan file sementara di server untuk debugging
+
+    // Set header
+    headers := []string{
+        ""ID"", ""Nama"", ""Email"", ""Kategori"", ""Sesi"", ""Jumlah Pengunjung"", ""Tanggal Berkunjung"", ""Dokumen"", ""Bukti Bayar"", ""Status"",
+    }
+    for col, header := range headers {
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""%s1"", string('A'+col)), header)
+    }
+
+    // Write data to Excel file
+    for i, res := range pubRes {
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""A%d"", i+2), strconv.FormatInt(res.ID, 10))
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""B%d"", i+2), res.Nama)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""C%d"", i+2), res.Email)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""D%d"", i+2), res.Kategori)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""E%d"", i+2), res.Sesi)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""F%d"", i+2), strconv.FormatInt(res.JumlahPengunjung, 10))
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""G%d"", i+2), res.TanggalBerkunjung)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""H%d"", i+2), res.Dokumen)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""I%d"", i+2), res.BuktiBayarBookings)
+        f.SetCellValue(""Booking Museum"", fmt.Sprintf(""J%d"", i+2), res.Status)
+    }
+	if err := f.SaveAs(""temp_booking_museum.xlsx""); err != nil {
+		return err
+	}
+	buf := new(bytes.Buffer)
+	if err := f.Write(buf); err != nil {
+		return c.JSON(500, ""Failed to write Excel data to memory"")
+	}
+	
+	// Debugging: Periksa ukuran buffer
+	fmt.Println(""Buffer size:"", buf.Len())  // Pastikan ukuran file lebih besar dari 0
+	fmt.Printf(""File size before sending: %d bytes\n"", len(buf.Bytes()))
+
+	// Pastikan kita mengirimkan data dalam bentuk binary (Blob)
+	c.Response().Header().Set(""Content-Disposition"", ""attachment; filename=booking_data.xlsx"")
+	c.Response().Header().Set(""Content-Type"", ""application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"")
+	c.Response().Header().Set(""Cache-Control"", ""no-store, no-cache, must-revalidate, proxy-revalidate"")
+	c.Response().Header().Set(""Pragma"", ""no-cache"")
+	c.Response().Header().Set(""Transfer-Encoding"", ""chunked"")
+
+	// Kirimkan data dalam bentuk byte array (Blob)
+	return c.Blob(200, ""application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"", buf.Bytes())
+	}
+	
+         echo/v4 v4.11.3
+	excelize/v2 v2.9.0 
+	hasil dari pemanggilan api 
+	
+<img width=""679"" alt=""Jepretan Layar 2024-12-18 pukul 12 17 07"" src=""https://github.com/user-attachments/assets/11f8290d-0aa5-4c9c-b401-8ae717ed172d"" />
+
+
+
+",danzf,70891383,closed,False,19,2024-12-18T05:17:47+00:00,2024-12-24T03:23:13+00:00,2024-12-23T05:24:57+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2739147086,2046,"Add a way to ignore ""number stored as text"" error","There can be funny reasons why we have to store a number-looking thing as text. For example, this could be due to a desire to introduce rich-text formats to the cell. Excel provides a way to ignore these errors so the sheet isn't full of little error triangles:
+
+```xml
+  <ignoredErrors>
+    <ignoredError sqref=""D15 C18:D19"" numberStoredAsText=""1""/>
+  </ignoredErrors>
+```
+
+There are most likely other properties whose errors can be ignored too. Not sure what the right API is -- provide a sqref + errors to ignore, or try to manage it ""more optimally""...
+
+A quick search suggests at least these errors can be ignored, no idea if this set is exhaustive: `calculatedColumn`, `emptyCellReference`, `evalError`, `formula`, `formulaRange`, `listDataValidation`, `numberStoredAsText`, `twoDigitTextYear`, `unlockedFormula`.",imirkin,817874,closed,False,1,2024-12-13T20:19:02+00:00,2024-12-21T07:14:43+00:00,2024-12-21T07:12:06+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2737980321,2044,AutoFit for row height,"Is there any way that I can autofit like the onlyoffice the row height as row 18?
+![image](https://github.com/user-attachments/assets/6162ef1a-9fec-4bb3-9c45-e48a3b50b735)
+![image](https://github.com/user-attachments/assets/ec2bd743-e0ec-4ede-a98c-4ae023440cb8)
+",tea0112,35191308,closed,False,1,2024-12-13T09:52:18+00:00,2024-12-16T02:42:16+00:00,2024-12-16T02:42:02+00:00,duplicate,1,1,0,0,0,0,0
+qax-os/excelize,2734693772,2043,SetCellStr() does not set cell format to text,"
+**Description**
+
+SetCellStr() does not set cell format to text
+
+**Steps to reproduce the issue:**
+1. Open Excel file with cells populated with SetCellStr()
+2. Confirm that cell is not Text but ""General""
+
+**Describe the results you received:**
+Cell format is General
+
+**Describe the results you expected:**
+Cell format is Text
+**Output of `go version`:**
+1.22.6
+
+**Excelize version or commit ID:**
+v2.8.1
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+Microsoft Excel 365",Morrowless,16893090,closed,False,1,2024-12-12T03:50:38+00:00,2024-12-13T02:59:25+00:00,2024-12-13T02:59:18+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2734103225,2042,WIP add support for new icon sets,"# PR Details
+
+This adds support for the ""new"" icon sets (3 triangles, 3 stars, 5 boxes). These were introduced in a later revision of the spec, and thus need different namespaces/etc.
+
+## Description
+
+For the new icon sets, we add an x14-namespaced conditional formatting entry + rules. Note that unlike the data bar, these are entirely in the ""new"" land, so no need to add it in the old location + ext.
+
+Still WIP:
+
+- [ ] Strategy for priorities
+- [ ] GUID generation? The Excel-generated samples have GUIDs, but seem to work without it
+- [x] Decoding
+
+Looking for some feedback/suggestions.
+
+## Related Issue
+
+#2038
+
+## How Has This Been Tested
+
+I added the conditional format with all 3 ""new"" icon sets (as well as a data bar with solid=true just to make sure I'm not breaking anything existing), and it displayed fine in Excel.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",imirkin,817874,open,False,2,2024-12-11T21:52:00+00:00,2025-03-31T07:26:31+00:00,,size/M,0,0,0,0,0,0,0
+qax-os/excelize,2733333397,2041,Sheets created with CopySheet cannot have images added,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+I am aware that CloneSheet does not work with images but I tried to CloneSheet, fill with data and then add images.
+Tried to do it in one go, save than open the output file and add the images afterwards but no luck.
+
+One thing i noticed is that the file names are being changed, the sheet index and sheetId are not being handled properly
+I have a template file with index sheet and a template sheet, the Index sheet has ID 508 so all the new sheets have ids 509, 510 etc...
+When i inspect the unzipped folder I saw that the new sheet.xml files have the ID (509) in the name, not the index (3), after recovering the file the sheet.xml files are being renamed to have the index in the name
+Before:
+![image](https://github.com/user-attachments/assets/4e8a6907-b305-4500-80a2-3d08ccc7e4a1)
+
+After:
+![image](https://github.com/user-attachments/assets/b4170eee-e2dd-4593-a5b3-a07a15dfad2f)
+
+
+**Steps to reproduce the issue:**
+1. OpenFile
+2. AddSheet
+3. CloneSheet
+4. AddImage to the new Sheet
+
+**Describe the results you received:**
+
+When I open the file in Excel:
+`We found a problem with some content of 'file.xlsx'`
+After clicking Ok, It's able to recover and it displays properly
+
+**Describe the results you expected:**
+
+File working without need to recover
+
+**Output of `go version`:**
+
+```text
+go version go1.23.2
+```
+
+**Excelize version or commit ID:**
+
+```text
+github.com/xuri/excelize/v2 v2.9.0
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+go runs on Debian Linux
+Excel on Windows 11",FedotCompot,46230197,closed,False,4,2024-12-11T15:46:27+00:00,2024-12-18T18:14:01+00:00,2024-12-13T03:14:34+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2733276345,2040,Sheets created with CopySheet cannot have images added ,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+I am aware that CloneSheet does not work with images but I tried to CloneSheet, fill with data and then add images.
+Tried to do it in one go, save than open the output file and add the images afterwards but no luck.
+
+One thing i noticed is that the file names are being changed, the sheet index and sheetId are not being handled properly
+I have a template file with index sheet and a template sheet, the Index sheet has ID 508 so all the new sheets have ids 509, 510 etc...
+When i inspect the unzipped folder I saw that the new sheet.xml files have the ID (509) in the name, not the index (3), after recovering the file the sheet.xml files are being renamed to have the index in the name
+Before:
+![image](https://github.com/user-attachments/assets/4e8a6907-b305-4500-80a2-3d08ccc7e4a1)
+
+After:
+![image](https://github.com/user-attachments/assets/b4170eee-e2dd-4593-a5b3-a07a15dfad2f)
+
+
+**Steps to reproduce the issue:**
+1. OpenFile
+2. AddSheet
+3. CloneSheet
+4. AddImage to the new Sheet
+
+**Describe the results you received:**
+
+When I open the file in Excel:
+`We found a problem with some content of 'file.xlsx'`
+After clicking Ok, It's able to recover and it displays properly
+
+**Describe the results you expected:**
+
+File working without need to recover
+
+**Output of `go version`:**
+
+```text
+go version go1.23.2
+```
+
+**Excelize version or commit ID:**
+
+```text
+github.com/xuri/excelize/v2 v2.9.0
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+go runs on Debian Linux
+Excel on Windows 11",FiodarShurankou,108727928,closed,False,1,2024-12-11T15:22:56+00:00,2024-12-13T03:13:09+00:00,2024-12-11T15:46:17+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2731650804,2039,why FitToHeight can not be 0?,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+I want to set all columns of an Excel sheet to fit on one page when printing. However, the FitToHeight option can only be set to 1 or higher. What should I do in this case?
+```go
+// setPageLayout provides a method to set the fit to height for the worksheet.
+func (p FitToHeight) setPageLayout(ps *xlsxPageSetUp) {
+	if int(p) > 0 {
+		ps.FitToHeight = intPtr(int(p))
+	}
+}
+```
+
+**Describe the results you received:**
+
+**Describe the results you expected:**
+
+**Output of `go version`:**
+
+```text
+go version go1.22.5 darwin/arm64
+```
+
+**Excelize version or commit ID:**
+
+```text
+github.com/xuri/excelize/v2 v2.6.1
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+",HyuncheolKim2021,91875713,closed,False,2,2024-12-11T02:21:51+00:00,2024-12-16T05:25:57+00:00,2024-12-16T05:25:57+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2731636317,2038,"Conditional Formatting: support new Icon Sets, custom breakpoints","There's currently functionailty to support an IconSet on a conditional format. However if one doesn't want to use a built-in scheme, Excel allows a custom scheme instead where icons are individually picked out. This is currently not supported in Excelize. A sample xml block for such a conditional format rule might be
+
+```xml
+          <x14:cfRule type=""iconSet"" priority=""7"" id=""{EFADC4A8-BD1B-48CB-BBAC-95556150EFE4}"">
+            <x14:iconSet showValue=""0"" custom=""1"">
+              <x14:cfvo type=""percent"">
+                <xm:f>0</xm:f>
+              </x14:cfvo>
+              <x14:cfvo type=""num"">
+                <xm:f>0</xm:f>
+              </x14:cfvo>
+              <x14:cfvo type=""num"" gte=""0"">
+                <xm:f>0</xm:f>
+              </x14:cfvo>
+              <x14:cfIcon iconSet=""3Triangles"" iconId=""0""/>
+              <x14:cfIcon iconSet=""3Triangles"" iconId=""1""/>
+              <x14:cfIcon iconSet=""3Triangles"" iconId=""2""/>
+            </x14:iconSet>
+          </x14:cfRule>
+```
+
+I may or may not end up needing this, but wanted to log it in case others find it useful as a starting point.",imirkin,817874,open,False,2,2024-12-11T02:07:27+00:00,2024-12-16T05:22:50+00:00,,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2726149867,2037,issue with implementing cascading dropdown lists in Excel file using the excelize Go package.!,"
+@pvelder @slashdotdash @jinzhu @mtmcfarl Please help with this
+``
+I'm trying to create an Excel file with dependent dropdown lists using the excelize Go package. I have a file with three sheets: FruitData, VarietyData, and ColorData. 
+On the main sheet (Main), **I want to have a cascading dropdown:**
+
+A Fruit dropdown (populated from FruitData sheet). A Variety dropdown (filtered based on the selected fruit, from the VarietyData sheet). A Color dropdown (filtered based on the selected variety, from the ColorData sheet). However, I am unable to get the dependent dropdowns to work properly. The values for the Variety and Color dropdowns are not being filtered correctly when the Fruit or Variety values are selected.
+
+Here is the Go code I am using:
+
+```
+package main
+
+import (
+    ""fmt""
+    ""log""
+
+    ""github.com/xuri/excelize/v2""
+)
+
+func main() {
+    // Initialize the Excel file
+    file := excelize.NewFile()
+
+    // Create sheets for data
+    fruitDataSheet := ""FruitData""
+    varietyDataSheet := ""VarietyData""
+    colorDataSheet := ""ColorData""
+    mainSheet := ""Main""
+
+    // Add sheets for Fruit, Variety, Color, and Main
+    file.NewSheet(mainSheet)
+    file.NewSheet(fruitDataSheet)
+    file.NewSheet(varietyDataSheet)
+    file.NewSheet(colorDataSheet)
+
+    // Populate FruitData sheet
+    fruits := [][]string{
+        {""FruitID"", ""FruitName""},
+        {""1"", ""Apple""},
+        {""2"", ""Banana""},
+        {""3"", ""Orange""},
+    }
+    for i, row := range fruits {
+        cell, _ := excelize.CoordinatesToCellName(1, i+1)
+        file.SetSheetRow(fruitDataSheet, cell, &row)
+    }
+
+    // Populate VarietyData sheet
+    varieties := [][]string{
+        {""VarietyID"", ""VarietyName"", ""FruitID""},
+        {""1"", ""Red Apple"", ""1""},
+        {""2"", ""Green Apple"", ""1""},
+        {""3"", ""Yellow Banana"", ""2""},
+        {""4"", ""Green Banana"", ""2""},
+        {""5"", ""Navel Orange"", ""3""},
+        {""6"", ""Blood Orange"", ""3""},
+    }
+    for i, row := range varieties {
+        cell, _ := excelize.CoordinatesToCellName(1, i+1)
+        file.SetSheetRow(varietyDataSheet, cell, &row)
+    }
+
+    // Populate ColorData sheet
+    colors := [][]string{
+        {""ColorID"", ""ColorName"", ""VarietyID""},
+        {""1"", ""Red"", ""1""},
+        {""2"", ""Dark Red"", ""1""},
+        {""3"", ""Green"", ""2""},
+        {""4"", ""Light Green"", ""2""},
+        {""5"", ""Yellow"", ""3""},
+        {""6"", ""Light Yellow"", ""3""},
+        {""7"", ""Light Orange"", ""5""},
+        {""8"", ""Orange"", ""5""},
+        {""9"", ""Blood Red"", ""6""},
+        {""10"", ""Dark Red"", ""6""},
+    }
+    for i, row := range colors {
+        cell, _ := excelize.CoordinatesToCellName(1, i+1)
+        file.SetSheetRow(colorDataSheet, cell, &row)
+    }
+
+    // Set up Main sheet headers
+    mainHeaders := []string{""Fruit"", ""Variety"", ""Color""}
+    file.SetSheetRow(mainSheet, ""A1"", &mainHeaders)
+
+    // Define formulas for data validation
+    fruitFormula := fmt.Sprintf(""'%s'!$B$2:$B$%d"", fruitDataSheet, len(fruits))
+    varietyFormula := ""=FILTER(VarietyData!$B$2:$B$100, VarietyData!$C$2:$C$100=A2)""
+    colorFormula := ""=FILTER(ColorData!$B$2:$B$100, ColorData!$C$2:$C$100=B2)""
+
+    // Add Fruit dropdown validation
+    if err := file.AddDataValidation(mainSheet, &excelize.DataValidation{
+        Type:             ""list"",
+        Formula1:         fruitFormula,
+        Sqref:            ""A2:A1048576"",
+        ShowErrorMessage: true,
+        ErrorTitle:       stringPtr(""Invalid Fruit""),
+        Error:            stringPtr(""Please select a valid Fruit from the list.""),
+    }); err != nil {
+        log.Fatalf(""Failed to add Fruit validation: %v"", err)
+    }
+
+    // Add Variety dropdown validation
+    if err := file.AddDataValidation(mainSheet, &excelize.DataValidation{
+        Type:             ""list"",
+        Formula1:         varietyFormula,
+        Sqref:            ""B2:B1048576"",
+        ShowErrorMessage: true,
+        ErrorTitle:       stringPtr(""Invalid Variety""),
+        Error:            stringPtr(""Please select a valid Variety based on Fruit.""),
+    }); err != nil {
+        log.Fatalf(""Failed to add Variety validation: %v"", err)
+    }
+
+    // Add Color dropdown validation
+    if err := file.AddDataValidation(mainSheet, &excelize.DataValidation{
+        Type:             ""list"",
+        Formula1:         colorFormula,
+        Sqref:            ""C2:C1048576"",
+        ShowErrorMessage: true,
+        ErrorTitle:       stringPtr(""Invalid Color""),
+        Error:            stringPtr(""Please select a valid Color based on Variety.""),
+    }); err != nil {
+        log.Fatalf(""Failed to add Color validation: %v"", err)
+    }
+    _ = file.DeleteSheet(""Sheet1"")
+
+    // Save the file
+    if err := file.SaveAs(""DependentDropdowns.xlsx""); err != nil {
+        log.Fatalf(""Failed to save file: %v"", err)
+    }
+
+    fmt.Println(""Excel file with dependent dropdowns created successfully!"")
+}
+
+func stringPtr(s string) *string {
+    return &s
+}
+```
+![image](https://github.com/user-attachments/assets/8ad1d171-a247-4c15-a9ca-48d26dff294d)
+
+**Issue:**
+
+The dependent dropdowns are not working as expected. The Variety dropdown does not get filtered based on the selected Fruit, and similarly, the Color dropdown is not filtered based on the selected Variety.
+
+**What I've tried:**
+
+I've defined formulas for filtering the Variety and Color lists based on the selected fruit and variety. The formulas are written as =FILTER(...), but they do not seem to work properly when selecting items from the first dropdown.
+
+**Question:**
+
+How can I implement dependent dropdown lists in Excel using the excelize Go package? Why are my dropdown lists not filtering based on the selected values? Is there any way to properly filter the lists dynamically in Excel using excelize?",mohanrajreese,77585218,open,False,1,2024-12-09T06:44:46+00:00,2024-12-19T01:04:41+00:00,,,0,0,0,0,0,0,0
+qax-os/excelize,2724390322,2035,Is there a way to insert a picture with InsertType PictureInsertTypeDISPIMG?,"Is there a way to insert a picture with InsertType PictureInsertTypeDISPIMG ?
+类似于wps中的图片嵌入单元格操作",QingShan-Xu,78079408,closed,False,1,2024-12-07T05:38:20+00:00,2024-12-07T12:34:05+00:00,2024-12-07T12:33:56+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2717559477,2034,Is there a way to copy a function down while keeping the references?,"**Description**
+
+I'd like to copy a formula from a cell to another and get updated references.
+
+**Example** 
+
+If I have a formula in C1 (`=A1+B1`), copied down (in C2), I'd like the formula to update to `=A2+B2`.
+Is there a way to do it? I could not find any reference of that in the documentation. If not, I think that'd be a great feature to add.
+",nlassaux,1917120,closed,False,3,2024-12-04T12:13:05+00:00,2024-12-13T03:00:54+00:00,2024-12-13T03:00:53+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2716469087,2033,"How to set GapWidth when plotting Col chart using function ""AddChart""?","<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+1.
+2.
+3.
+
+**Describe the results you received:**
+
+**Describe the results you expected:**
+
+**Output of `go version`:**
+
+```text
+(paste your output here)
+```
+
+**Excelize version or commit ID:**
+
+```text
+(paste here)
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+",ffh-zhang,152372621,closed,False,1,2024-12-04T03:28:17+00:00,2024-12-08T03:46:58+00:00,2024-12-08T03:40:09+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2714699621,2032,missing the last column of the current row is empty,"if last column of the current row is empty，can not get the last column; The cell will be skipped
+
+",Sadio94,73929311,closed,False,4,2024-12-03T11:06:02+00:00,2025-03-25T12:19:39+00:00,2024-12-04T01:22:08+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2695261605,2031,int overflow of WriteToBuffer,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+int overflow of when call WriteToBuffer
+
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+You can view the code directly
+1. write int64 to streamWriter
+2. get buffer by call WriteToBuffer
+3. read content from the buffer, the value of int64 is overflow.
+
+**Describe the results you received:**
+the actual value is ""6.87914389418332E+18""
+
+**Describe the results you expected:**
+the expected value should be ""6879143894183324362""
+
+**Output of `go version`:**
+go version go1.22.3 darwin/arm64
+
+```text
+--- FAIL: TestWriteToBuffer (0.01s)
+    /Users/xxf0512/Code/Github/excelize/stream_test.go:402: 
+        	Error Trace:	/Users/xxf0512/Code/Github/excelize/stream_test.go:402
+        	Error:      	Not equal: 
+        	            	expected: ""6879143894183324362""
+        	            	actual  : ""6.87914389418332E+18""
+        	            	
+        	            	Diff:
+        	            	--- Expected
+        	            	+++ Actual
+        	            	@@ -1 +1 @@
+        	            	-6879143894183324362
+        	            	+6.87914389418332E+18
+        	Test:       	TestWriteToBuffer
+FAIL
+FAIL	github.com/xuri/excelize/v2	0.428s
+FAIL
+```
+
+**Excelize version or commit ID:**
+c93618856aaf68b0c4dc1c60f8757da0b95effc4
+
+```go
+func TestWriteToBuffer(t *testing.T) {
+	val := int64(6879143894183324362)
+
+	f := NewFile()
+	sw, err := f.NewStreamWriter(""Sheet1"")
+	assert.NoError(t, err)
+
+	err = sw.SetRow(""A1"", []interface{}{val})
+	assert.NoError(t, err)
+
+	buf, err := f.WriteToBuffer()
+	assert.NoError(t, err)
+
+	newFile, err := OpenReader(buf)
+	assert.NoError(t, err)
+
+	rows, err := newFile.GetRows(""Sheet1"")
+	assert.NoError(t, err)
+	
+	assert.Equal(t, ""6879143894183324362"", rows[0][0])
+}
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+MacOS 15.1
+",xxf0512,49829039,closed,False,1,2024-11-26T16:18:43+00:00,2024-11-27T12:13:41+00:00,2024-11-27T12:13:41+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2682854358,2030,Use a faster deepcopy library,"# PR Details
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+Closes https://github.com/qax-os/excelize/issues/2029.
+
+## Motivation and Context
+
+Benchmark:
+
+```go
+package excelize
+
+import (
+	""testing""
+
+	olddeepcopy ""github.com/mohae/deepcopy""
+	newdeepcopy ""github.com/tiendc/go-deepcopy""
+)
+
+func BenchmarkCopyXlsxCol(b *testing.B) {
+	src := xlsxCol{}
+
+	b.Run(""old"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			olddeepcopy.Copy(src)
+		}
+	})
+
+	b.Run(""new"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			var dst xlsxCol
+			newdeepcopy.Copy(&dst, src)
+		}
+	})
+}
+
+func BenchmarkCopyXlsxRow(b *testing.B) {
+	src := xlsxRow{}
+
+	b.Run(""old"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			olddeepcopy.Copy(src)
+		}
+	})
+
+	b.Run(""new"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			var dst xlsxRow
+			newdeepcopy.Copy(&dst, src)
+		}
+	})
+}
+
+func BenchmarkCopyXlsxWorksheet(b *testing.B) {
+	f, err := prepareTestBook1()
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	idx, err := f.NewSheet(""CopySheet"")
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	fromSheet := f.GetSheetName(idx)
+	src, err := f.workSheetReader(fromSheet)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	b.Run(""old"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			olddeepcopy.Copy(src)
+		}
+	})
+
+	b.Run(""new"", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			var dst xlsxWorksheet
+			newdeepcopy.Copy(&dst, src)
+		}
+	})
+}
+```
+
+Result:
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/xuri/excelize/v2
+cpu: AMD Ryzen 7 PRO 4750U with Radeon Graphics
+BenchmarkCopyXlsxCol/old-16      	  446193	      2483 ns/op	     224 B/op	      13 allocs/op
+BenchmarkCopyXlsxCol/new-16      	  963056	      1148 ns/op	     128 B/op	       3 allocs/op
+BenchmarkCopyXlsxRow/old-16      	  344492	      3135 ns/op	     344 B/op	      16 allocs/op
+BenchmarkCopyXlsxRow/new-16      	  909142	      1371 ns/op	     192 B/op	       3 allocs/op
+BenchmarkCopyXlsxWorksheet/old-16         	   49108	     23097 ns/op	    3656 B/op	     128 allocs/op
+BenchmarkCopyXlsxWorksheet/new-16         	  176534	      7085 ns/op	     808 B/op	       6 allocs/op
+PASS
+ok  	github.com/xuri/excelize/v2	7.377s
+```
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- See how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",Juneezee,20135478,closed,False,8,2024-11-22T11:19:35+00:00,2025-04-24T12:51:58+00:00,2024-11-22T13:56:38+00:00,size/S,0,0,0,0,0,0,0
+qax-os/excelize,2679391282,2029,Use a faster deepcopy library,"**Description**
+
+We currently use the deepcopy function from https://github.com/mohae/deepcopy to duplicate columns, rows, and worksheets, as shown in the following references:
+
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/col.go#L536
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/col.go#L554
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/rows.go#L656
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/rows.go#L732
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/rows.go#L762
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/sheet.go#L127
+https://github.com/qax-os/excelize/blob/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6/sheet.go#L753
+
+The https://github.com/mohae/deepcopy library has not been updated in 7 years (last commit was September 2017). We should opt for a newer deep copy library.
+
+I suggest we switch to https://github.com/tiendc/go-deepcopy. The [benchmarks](https://github.com/tiendc/go-deepcopy?tab=readme-ov-file#benchmarks) indicate that it is faster than other popular deep copy libraries.",Juneezee,20135478,closed,False,2,2024-11-21T13:09:55+00:00,2024-11-22T13:56:39+00:00,2024-11-22T13:56:39+00:00,enhancement,1,1,0,0,0,0,0
+qax-os/excelize,2656208091,2028,add way to SetColWidth to optimal width,"add option to this function ""SetColWidth()"" : optimal width",AamerHelmy,73950242,closed,False,1,2024-11-13T17:15:29+00:00,2024-11-14T11:53:48+00:00,2024-11-14T11:53:48+00:00,duplicate,0,0,0,0,0,0,0
+qax-os/excelize,2656159802,2027,Cannot Import - unexpected EOF,"I am attempting to ""go get  github.com/xuri/excelize/v2"" but it fails every time with: `github.com/xuri/excelize/v2: github.com/xuri/excelize/v2@v2.9.0: read ""https://proxy.golang.org/github.com/xuri/excelize/v2/@v/v2.9.0.zip"": unexpected EOF`
+
+If I open a browser and attempt to download the file directly, using `https://proxy.golang.org/github.com/xuri/excelize/v2/@v/v2.9.0.zip`, The file seems to start to download but then fails, no matter hw many times I attempt to resume.
+
+My Go version is `go1.23.2 windows/amd64` but since it fails to download via the browser, that would not seem to be an issue.
+
+I am running `Windows 10 Pro`, and the browser I tested with is `Chrome version 130.0.6723.117 (Official Build) (64-bit)`.
+
+I cannot add excelize to any projects until this is resolved.  Thanks!",teschste-reyrey,73855800,closed,False,2,2024-11-13T16:57:11+00:00,2024-11-13T18:13:40+00:00,2024-11-13T18:13:39+00:00,,0,0,0,0,0,0,0
+qax-os/excelize,2654231663,2026,Why is the Excel export speed slow after setting custom number formats,"<!--
+If you are reporting a new issue, make sure that we do not have any duplicates
+already open. You can ensure this by searching the issue list for this
+repository. If there is a duplicate, please close your issue and add a comment
+to the existing issue instead.
+
+Use the commands below to provide key information from your environment:
+You do NOT have to include this information if this is a FEATURE REQUEST
+-->
+
+**Description**
+Why is the Excel export speed slow after setting custom number formats?
+
+In a 200*300 Excel report. The logic previously was to not fill cells with data that was 0, but the new requirement is to fill and display cells with 0 data as invisible. Upon inquiry, I found that the following method can be used to set the custom number format:
+`style := excelize.Style{}
+customerNumStyle := ""0;-0;;@""
+style.CustomNumFmt = &customerNumStyle
+`
+However, after setting the style, I found that the export speed of Excel has become very slow. Tasks that used to be completed in less than a second now might require waiting for three to four seconds. Is there a way to solve this?
+<!--
+Briefly describe the problem you are having in a few paragraphs.
+-->
+
+**Steps to reproduce the issue:**
+1.
+2.
+3.
+
+**Describe the results you received:**
+
+**Describe the results you expected:**
+
+**Output of `go version`:**
+
+```text
+1.22.5
+```
+
+**Excelize version or commit ID:**
+
+```text
+v2.8.1
+```
+
+**Environment details (OS, Microsoft Excel™ version, physical, etc.):**
+Windows11、Microsoft Excel 2019
+",YiTianChiSiDun1,186901724,closed,False,2,2024-11-13T05:31:24+00:00,2024-12-23T05:27:03+00:00,2024-11-18T04:56:22+00:00,needs more info,0,0,0,0,0,0,0
+qax-os/excelize,2651681557,2025,Horizontal axis text alignment,"Can I set the text alignment direction for the horizontal axis
+![image](https://github.com/user-attachments/assets/698c3e1c-3a32-4610-ad3d-95c5e033e4d4)
+
+",xuexnGo,101611647,closed,False,1,2024-11-12T10:03:52+00:00,2024-11-15T14:06:40+00:00,2024-11-15T14:03:16+00:00,enhancement,0,0,0,0,0,0,0
+qax-os/excelize,2647331005,2024,Flexability in temporary folder in StreamWriter files,"The StreamWriter feature in Excelize is great for handling large XLSX file generation. Currently, temporary files are created using Golang's os.CreateTemp, as seen in [stream.go#L740](https://github.com/qax-os/excelize/blob/30d3561d0e9bceb3a669ee864e5dcc672eff5341/stream.go#L740).
+
+In some cases, relying on os.CreateTemp is not flexible enough. Specifically, there are scenarios where it's preferable to direct these temporary files to different or dynamically determined storage locations based on the request context. This restriction can limit the usage of StreamWriter in more complex environments.
+
+I propose adding an option in StreamWriter to allow users to provide a custom temporary file creation method. This would follow the options pattern, maintaining the current behavior as the default. The user would be able to specify their own TempFileFactory, allowing for dynamic control over the temporary file path.
+
+For example:
+```golang
+type TempFileFactory func() (*os.File, error)
+
+var DefaultTempFileFactory TempFileFactory = func() {
+    return os.CreateTemp(os.TempDir(), ""excelize-"")
+}
+
+
+// Line 740:
+bw.tmp, err = newTempFile();
+```
+
+I have no problem to contribue this solution for the library if there is an agreement on a solution.",eliyaoo32,6465846,open,False,4,2024-11-10T15:13:49+00:00,2024-11-14T11:51:48+00:00,,enhancement,0,0,0,0,0,0,0

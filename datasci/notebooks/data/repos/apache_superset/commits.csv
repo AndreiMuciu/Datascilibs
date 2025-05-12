@@ -1,0 +1,135 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+apache/superset,73701b729563d796d4aae628eff24f7163e7671c,https://github.com/apache/superset/commit/73701b729563d796d4aae628eff24f7163e7671c,irodriguez-nebustream,81891746,User,2025-05-09T22:25:40+00:00,web-flow,2025-05-09T22:25:40+00:00,"fix(embedded): handle SUPERSET_APP_ROOT in embedded dashboard URLs (#33356)
+
+Co-authored-by: Irving Rodriguez <irodriguez@Mac.lan>",3,2,5,1,22475e787e3e8a9c9cfcaf82eebce75ff9e63151
+apache/superset,22475e787e3e8a9c9cfcaf82eebce75ff9e63151,https://github.com/apache/superset/commit/22475e787e3e8a9c9cfcaf82eebce75ff9e63151,amaannawab923,206851456,User,2025-05-09T17:27:31+00:00,web-flow,2025-05-09T17:27:31+00:00,"feat(Table Chart): Row limit Increase , Backend Sorting , Backend Search , Excel/CSV Improvements (#33357)
+
+Co-authored-by: Amaan Nawab <nelsondrew07@gmail.com>",935,78,1013,23,9e38a0cc29e4026c361f8891e9e3d2d1096c5c9f
+apache/superset,9e38a0cc29e4026c361f8891e9e3d2d1096c5c9f,https://github.com/apache/superset/commit/9e38a0cc29e4026c361f8891e9e3d2d1096c5c9f,ved-kashyap-samsung,34643160,User,2025-05-09T17:12:23+00:00,web-flow,2025-05-09T17:12:23+00:00,docs: fix for role sync issues in case of custom OAuth2 configuration (#30878),9,0,9,1,a391ebecca893510defd4df871394f4f9fcb2917
+apache/superset,a391ebecca893510defd4df871394f4f9fcb2917,https://github.com/apache/superset/commit/a391ebecca893510defd4df871394f4f9fcb2917,rebenitez1802,2151636,User,2025-05-09T15:35:59+00:00,web-flow,2025-05-09T15:35:59+00:00,feat: Run SQL on DataSourceEditor implementation (#33340),331,24,355,8,72cd9dffa3257b8f5a26dc4bbf25c8b62328e42c
+apache/superset,72cd9dffa3257b8f5a26dc4bbf25c8b62328e42c,https://github.com/apache/superset/commit/72cd9dffa3257b8f5a26dc4bbf25c8b62328e42c,Vitor-Avila,96086495,User,2025-05-08T18:22:25+00:00,web-flow,2025-05-08T18:22:25+00:00,fix: Persist catalog change during dataset update + validation fixes (#33384),543,246,789,6,4ed05f4ff16805b1253a902172a53e973cf41f1e
+apache/superset,4ed05f4ff16805b1253a902172a53e973cf41f1e,https://github.com/apache/superset/commit/4ed05f4ff16805b1253a902172a53e973cf41f1e,hainenber,41283691,User,2025-05-07T21:45:15+00:00,web-flow,2025-05-07T21:45:15+00:00,"fix(be/utils): sync cache timeout for memoized function (#31917)
+
+Signed-off-by: hainenber <dotronghai96@gmail.com>",4,2,6,1,871cfe0c78686867b79c0476793daa208d060ec4
+apache/superset,871cfe0c78686867b79c0476793daa208d060ec4,https://github.com/apache/superset/commit/871cfe0c78686867b79c0476793daa208d060ec4,bestlong,4023909,User,2025-05-07T21:18:05+00:00,web-flow,2025-05-07T21:18:05+00:00,fix(i18n): zh_TW pybabel compile error: placeholders are incompatible (#33345),17,17,34,1,a928f8cd9e2e8461a3d3d8f650c1eb00c8cc04cd
+apache/superset,a928f8cd9e2e8461a3d3d8f650c1eb00c8cc04cd,https://github.com/apache/superset/commit/a928f8cd9e2e8461a3d3d8f650c1eb00c8cc04cd,fardin-developer,105560328,User,2025-05-07T14:56:02+00:00,web-flow,2025-05-07T14:56:02+00:00,"feat: add metric name for big number chart types #33013 (#33099)
+
+Co-authored-by: Fardin Mustaque <fardinmustaque@Fardins-Mac-mini.local>",382,124,506,15,afaaf64f5217dbd53c54bc95748154f2d1be076a
+apache/superset,afaaf64f5217dbd53c54bc95748154f2d1be076a,https://github.com/apache/superset/commit/afaaf64f5217dbd53c54bc95748154f2d1be076a,dependabot[bot],49699333,Bot,2025-05-07T14:14:46+00:00,web-flow,2025-05-07T14:14:46+00:00,"chore(deps): bump antd from 5.24.5 to 5.24.9 in /docs (#33319)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",46,58,104,2,dc0d542054f0b712efb1d7be4d7fab83bb7d56b1
+apache/superset,dc0d542054f0b712efb1d7be4d7fab83bb7d56b1,https://github.com/apache/superset/commit/dc0d542054f0b712efb1d7be4d7fab83bb7d56b1,betodealmeida,1534870,User,2025-05-06T22:56:00+00:00,web-flow,2025-05-06T22:56:00+00:00,chore: regenerate `openapi.json` (#33378),8823,6658,15481,1,0cd3a12daa126a59a5f78c3b48c7c35a532e048a
+apache/superset,0cd3a12daa126a59a5f78c3b48c7c35a532e048a,https://github.com/apache/superset/commit/0cd3a12daa126a59a5f78c3b48c7c35a532e048a,github-actions[bot],41898282,Bot,2025-05-06T16:06:59+00:00,web-flow,2025-05-06T16:06:59+00:00,"chore(🦾): bump python markdown 3.7 -> 3.8 (#33279)
+
+Co-authored-by: GitHub Action <action@github.com>
+Co-authored-by: Maxime Beauchemin <maximebeauchemin@gmail.com>",4,2,6,3,35b30480f088a4b728c1057b61d2e4809a080554
+apache/superset,35b30480f088a4b728c1057b61d2e4809a080554,https://github.com/apache/superset/commit/35b30480f088a4b728c1057b61d2e4809a080554,amaannawab923,206851456,User,2025-05-06T11:40:27+00:00,web-flow,2025-05-06T11:40:27+00:00,"fix: Exclude Filter Values (#33271)
+
+Co-authored-by: Amaan Nawab <nelsondrew07@gmail.com>",124,40,164,4,6d1f17bd46748255478137a91cfb07a13d51a491
+apache/superset,6d1f17bd46748255478137a91cfb07a13d51a491,https://github.com/apache/superset/commit/6d1f17bd46748255478137a91cfb07a13d51a491,github-actions[bot],41898282,Bot,2025-05-06T01:30:08+00:00,web-flow,2025-05-06T01:30:08+00:00,"chore(🦾): bump python sshtunnel subpackage(s) (#33370)
+
+Co-authored-by: GitHub Action <action@github.com>",0,0,0,0,ab899e71e7e054134655b8ac24f7d333fab3583b
+apache/superset,ab899e71e7e054134655b8ac24f7d333fab3583b,https://github.com/apache/superset/commit/ab899e71e7e054134655b8ac24f7d333fab3583b,github-actions[bot],41898282,Bot,2025-05-06T01:29:40+00:00,web-flow,2025-05-06T01:29:40+00:00,"chore(🦾): bump python cryptography 44.0.2 -> 44.0.3 (#33371)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,6b9d8708d34952cf0df8eabafc6792b5b3c69662
+apache/superset,6b9d8708d34952cf0df8eabafc6792b5b3c69662,https://github.com/apache/superset/commit/6b9d8708d34952cf0df8eabafc6792b5b3c69662,github-actions[bot],41898282,Bot,2025-05-06T01:29:10+00:00,web-flow,2025-05-06T01:29:10+00:00,"chore(🦾): bump python humanize 4.12.2 -> 4.12.3 (#33369)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,bc1e8e07cfcd8608152c2afbaca20ac0f2e824ed
+apache/superset,bc1e8e07cfcd8608152c2afbaca20ac0f2e824ed,https://github.com/apache/superset/commit/bc1e8e07cfcd8608152c2afbaca20ac0f2e824ed,github-actions[bot],41898282,Bot,2025-05-06T01:28:56+00:00,web-flow,2025-05-06T01:28:56+00:00,"chore(🦾): bump python sqlglot 26.16.2 -> 26.16.4 (#33368)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,82526865d223005367b224d3461e7d0fee6d9305
+apache/superset,82526865d223005367b224d3461e7d0fee6d9305,https://github.com/apache/superset/commit/82526865d223005367b224d3461e7d0fee6d9305,github-actions[bot],41898282,Bot,2025-05-05T23:41:10+00:00,web-flow,2025-05-05T23:41:10+00:00,"chore(🦾): bump python h11 0.14.0 -> 0.16.0 (#33339)
+
+Co-authored-by: GitHub Action <action@github.com>",2,4,6,2,02c8c9c752269f72832a5923abd390d465513770
+apache/superset,02c8c9c752269f72832a5923abd390d465513770,https://github.com/apache/superset/commit/02c8c9c752269f72832a5923abd390d465513770,dpgaspar,4025227,User,2025-05-05T23:02:25+00:00,web-flow,2025-05-05T23:02:25+00:00,fix: bump FAB to 4.6.3 (#33363),3,3,6,3,6475188e6a5b9aa5931cee8261f80a8cced81f5d
+apache/superset,6475188e6a5b9aa5931cee8261f80a8cced81f5d,https://github.com/apache/superset/commit/6475188e6a5b9aa5931cee8261f80a8cced81f5d,dependabot[bot],49699333,Bot,2025-05-05T22:34:20+00:00,web-flow,2025-05-05T22:34:20+00:00,"chore(deps): bump swagger-ui-react from 5.20.2 to 5.21.0 in /docs (#33318)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,2,6e485c9f707cce84d3691209894d273fbf586b19
+apache/superset,6e485c9f707cce84d3691209894d273fbf586b19,https://github.com/apache/superset/commit/6e485c9f707cce84d3691209894d273fbf586b19,dependabot[bot],49699333,Bot,2025-05-05T22:33:58+00:00,web-flow,2025-05-05T22:33:58+00:00,"chore(deps-dev): update ts-loader requirement from ^9.5.1 to ^9.5.2 in /superset-frontend/packages/superset-ui-demo (#33323)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",1,1,2,1,b49e5857c9bf2b70e44a0b8ac594fdb51e703006
+apache/superset,b49e5857c9bf2b70e44a0b8ac594fdb51e703006,https://github.com/apache/superset/commit/b49e5857c9bf2b70e44a0b8ac594fdb51e703006,dependabot[bot],49699333,Bot,2025-05-05T22:33:18+00:00,web-flow,2025-05-05T22:33:18+00:00,"chore(deps): bump uuid from 11.0.2 to 11.1.0 in /superset-websocket (#33311)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",9,8,17,2,13ced5826152c6c0330c778fa0ec9482bc82a814
+apache/superset,13ced5826152c6c0330c778fa0ec9482bc82a814,https://github.com/apache/superset/commit/13ced5826152c6c0330c778fa0ec9482bc82a814,dependabot[bot],49699333,Bot,2025-05-05T22:32:59+00:00,web-flow,2025-05-05T22:32:59+00:00,"chore(deps-dev): bump @eslint/js from 9.17.0 to 9.25.1 in /superset-websocket (#33312)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",25,8,33,2,ed36674a99dbe322939ffe39af667e2883fd0e01
+apache/superset,ed36674a99dbe322939ffe39af667e2883fd0e01,https://github.com/apache/superset/commit/ed36674a99dbe322939ffe39af667e2883fd0e01,dependabot[bot],49699333,Bot,2025-05-05T22:32:28+00:00,web-flow,2025-05-05T22:32:28+00:00,"chore(deps): bump less from 4.2.2 to 4.3.0 in /docs (#33317)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",6,11,17,2,99aa3a6507f7e4fb60350b65cd89bd27eb5bca13
+apache/superset,99aa3a6507f7e4fb60350b65cd89bd27eb5bca13,https://github.com/apache/superset/commit/99aa3a6507f7e4fb60350b65cd89bd27eb5bca13,jdorel,20277513,User,2025-05-05T22:31:33+00:00,web-flow,2025-05-05T22:31:33+00:00,docs(docker-builds.mdx): clarify dockerize images (#33350),1,1,2,1,f045a73e2de7ff7a014bdf623765bf7f85fe2159
+apache/superset,f045a73e2de7ff7a014bdf623765bf7f85fe2159,https://github.com/apache/superset/commit/f045a73e2de7ff7a014bdf623765bf7f85fe2159,mistercrunch,487433,User,2025-05-05T11:07:23+00:00,web-flow,2025-05-05T11:07:23+00:00,fix: loading examples from raw.githubusercontent.com fails with 429 errors (#33354),60,11,71,2,7791674f249660a66295af673fac350c43bf3e2d
+apache/superset,7791674f249660a66295af673fac350c43bf3e2d,https://github.com/apache/superset/commit/7791674f249660a66295af673fac350c43bf3e2d,dependabot[bot],49699333,Bot,2025-05-03T21:37:33+00:00,web-flow,2025-05-03T21:37:33+00:00,"chore(deps-dev): bump eslint-config-prettier from 10.1.1 to 10.1.2 in /docs (#33315)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,2,9f0ae7734129950ca5d807bf923be3414156ec94
+apache/superset,9f0ae7734129950ca5d807bf923be3414156ec94,https://github.com/apache/superset/commit/9f0ae7734129950ca5d807bf923be3414156ec94,Vitor-Avila,96086495,User,2025-05-03T01:20:57+00:00,web-flow,2025-05-03T01:20:57+00:00,fix: Edge case with metric not getting quoted in sort by when normalize_columns is enabled (#33337),4,4,8,1,5a9e366c0abb9ee7fed8358736f7a99f52c5eef9
+apache/superset,5a9e366c0abb9ee7fed8358736f7a99f52c5eef9,https://github.com/apache/superset/commit/5a9e366c0abb9ee7fed8358736f7a99f52c5eef9,dependabot[bot],49699333,Bot,2025-05-02T17:00:13+00:00,web-flow,2025-05-02T17:00:13+00:00,"chore(deps-dev): bump typescript from 5.8.2 to 5.8.3 in /docs (#33320)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,2,c22c532a5c8e8e1ef683f5df2edac7275c244766
+apache/superset,c22c532a5c8e8e1ef683f5df2edac7275c244766,https://github.com/apache/superset/commit/c22c532a5c8e8e1ef683f5df2edac7275c244766,dependabot[bot],49699333,Bot,2025-05-02T16:59:53+00:00,web-flow,2025-05-02T16:59:53+00:00,"chore(deps-dev): bump eslint-plugin-react from 7.37.4 to 7.37.5 in /docs (#33314)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",15,23,38,2,6db3a4d9d25a73cfe2802427692d85c398262fbc
+apache/superset,6db3a4d9d25a73cfe2802427692d85c398262fbc,https://github.com/apache/superset/commit/6db3a4d9d25a73cfe2802427692d85c398262fbc,michael-s-molina,70410625,User,2025-05-02T11:27:49+00:00,web-flow,2025-05-02T11:27:49+00:00,fix: Temporal filter conversion in viz migrations (#33224),34,12,46,2,17d7b72f3b1a76995624099b64447da380cee7e5
+apache/superset,17d7b72f3b1a76995624099b64447da380cee7e5,https://github.com/apache/superset/commit/17d7b72f3b1a76995624099b64447da380cee7e5,dependabot[bot],49699333,Bot,2025-05-02T07:31:29+00:00,web-flow,2025-05-02T07:31:29+00:00,"chore(deps-dev): bump webpack from 5.98.0 to 5.99.7 in /docs (#33316)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",13,46,59,2,fee33dd0cf46fe4299abb4aa3dcc14ca4762df84
+apache/superset,fee33dd0cf46fe4299abb4aa3dcc14ca4762df84,https://github.com/apache/superset/commit/fee33dd0cf46fe4299abb4aa3dcc14ca4762df84,dependabot[bot],49699333,Bot,2025-05-02T07:29:44+00:00,web-flow,2025-05-02T07:29:44+00:00,"chore(deps): bump @rjsf/validator-ajv8 from 5.24.1 to 5.24.9 in /superset-frontend (#33321)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,2,65605b4a54f404b283c44ca34fcfcc90b8f6b53a
+apache/superset,65605b4a54f404b283c44ca34fcfcc90b8f6b53a,https://github.com/apache/superset/commit/65605b4a54f404b283c44ca34fcfcc90b8f6b53a,dependabot[bot],49699333,Bot,2025-05-02T07:28:41+00:00,web-flow,2025-05-02T07:28:41+00:00,"chore(deps-dev): bump @babel/plugin-transform-runtime from 7.25.9 to 7.27.1 in /superset-frontend (#33332)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",69,55,124,2,e304f2d5adbd3c1b12994c01cb39b06268beb700
+apache/superset,e304f2d5adbd3c1b12994c01cb39b06268beb700,https://github.com/apache/superset/commit/e304f2d5adbd3c1b12994c01cb39b06268beb700,dependabot[bot],49699333,Bot,2025-05-01T23:22:16+00:00,web-flow,2025-05-01T23:22:16+00:00,"chore(deps): bump react-intersection-observer from 9.15.1 to 9.16.0 in /superset-frontend (#33333)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",5,5,10,2,4e0c261c9dba2a43303183247e0f3ce08fde6070
+apache/superset,4e0c261c9dba2a43303183247e0f3ce08fde6070,https://github.com/apache/superset/commit/4e0c261c9dba2a43303183247e0f3ce08fde6070,betodealmeida,1534870,User,2025-05-01T22:36:32+00:00,web-flow,2025-05-01T22:36:32+00:00,fix: show only filterable columns on filter dropdown (#33338),75,3,78,3,22de26cd77199495ff1cd50672f584d7e45f5a9c
+apache/superset,22de26cd77199495ff1cd50672f584d7e45f5a9c,https://github.com/apache/superset/commit/22de26cd77199495ff1cd50672f584d7e45f5a9c,betodealmeida,1534870,User,2025-05-01T22:16:51+00:00,web-flow,2025-05-01T22:16:51+00:00,"fix: `metric.currency` should be JSON, not string (#33303)",171,44,215,18,339ba9660018c9ca334b94336571d3fd70e67de5
+apache/superset,339ba9660018c9ca334b94336571d3fd70e67de5,https://github.com/apache/superset/commit/339ba9660018c9ca334b94336571d3fd70e67de5,betodealmeida,1534870,User,2025-05-01T17:45:03+00:00,web-flow,2025-05-01T17:45:03+00:00,fix: improve function detection (#33306),71,34,105,4,3c6091144bf48d0ee8ed5ee5091ad957324b23b2
+apache/superset,3c6091144bf48d0ee8ed5ee5091ad957324b23b2,https://github.com/apache/superset/commit/3c6091144bf48d0ee8ed5ee5091ad957324b23b2,phillipleblanc,879445,User,2025-05-01T04:31:47+00:00,web-flow,2025-05-01T04:31:47+00:00,"chore(deps): Upgrade pyarrow to 18.1.0 (#31476)
+
+Co-authored-by: Ville Brofeldt <33317356+villebro@users.noreply.github.com>",3,3,6,3,ef14b529b82798989b3aa850a5442a5e5b127dd9
+apache/superset,ef14b529b82798989b3aa850a5442a5e5b127dd9,https://github.com/apache/superset/commit/ef14b529b82798989b3aa850a5442a5e5b127dd9,justinpark,1392866,User,2025-04-30T17:18:18+00:00,web-flow,2025-04-30T17:18:18+00:00,fix(echarts): rename time series shifted colnames (#33269),118,36,154,2,2a97a6ec1f61587aff861a8e7350ccc2d5c41b6b
+apache/superset,2a97a6ec1f61587aff861a8e7350ccc2d5c41b6b,https://github.com/apache/superset/commit/2a97a6ec1f61587aff861a8e7350ccc2d5c41b6b,github-actions[bot],41898282,Bot,2025-04-29T17:03:18+00:00,web-flow,2025-04-29T17:03:18+00:00,"chore(🦾): bump python importlib-metadata 8.6.1 -> 8.7.0 (#33277)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,fa6548939e74f72a5b06eb6e3297ae035d591716
+apache/superset,fa6548939e74f72a5b06eb6e3297ae035d591716,https://github.com/apache/superset/commit/fa6548939e74f72a5b06eb6e3297ae035d591716,github-actions[bot],41898282,Bot,2025-04-29T17:02:45+00:00,web-flow,2025-04-29T17:02:45+00:00,"chore(🦾): bump python mako 1.3.9 -> 1.3.10 (#33280)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,418c67369967296f03f9e8615645fff4166d8395
+apache/superset,418c67369967296f03f9e8615645fff4166d8395,https://github.com/apache/superset/commit/418c67369967296f03f9e8615645fff4166d8395,github-actions[bot],41898282,Bot,2025-04-29T17:01:42+00:00,web-flow,2025-04-29T17:01:42+00:00,"chore(🦾): bump python pyparsing 3.2.2 -> 3.2.3 (#33281)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,13f77a74166c25a20ad2c25bf58db6a6b7cafae2
+apache/superset,13f77a74166c25a20ad2c25bf58db6a6b7cafae2,https://github.com/apache/superset/commit/13f77a74166c25a20ad2c25bf58db6a6b7cafae2,github-actions[bot],41898282,Bot,2025-04-29T15:28:39+00:00,web-flow,2025-04-29T15:28:39+00:00,"chore(🦾): bump python celery 5.4.0 -> 5.5.2 (#33257)
+
+Co-authored-by: GitHub Action <action@github.com>",8,10,18,2,303a80a316b905f1ea9442f0c287386fba85a3a2
+apache/superset,303a80a316b905f1ea9442f0c287386fba85a3a2,https://github.com/apache/superset/commit/303a80a316b905f1ea9442f0c287386fba85a3a2,github-actions[bot],41898282,Bot,2025-04-29T15:27:48+00:00,web-flow,2025-04-29T15:27:48+00:00,"chore(🦾): bump python packaging 24.2 -> 25.0 (#33259)
+
+Co-authored-by: GitHub Action <action@github.com>",0,0,0,0,2392ac6827f95d72cacbf3969839aeed4bf8beb3
+apache/superset,2392ac6827f95d72cacbf3969839aeed4bf8beb3,https://github.com/apache/superset/commit/2392ac6827f95d72cacbf3969839aeed4bf8beb3,github-actions[bot],41898282,Bot,2025-04-29T15:27:25+00:00,web-flow,2025-04-29T15:27:25+00:00,"chore(🦾): bump python deprecation subpackage(s) (#33260)
+
+Co-authored-by: GitHub Action <action@github.com>",0,0,0,0,01ce4b987e3c7791da47b01e8f098449e8b2bc40
+apache/superset,01ce4b987e3c7791da47b01e8f098449e8b2bc40,https://github.com/apache/superset/commit/01ce4b987e3c7791da47b01e8f098449e8b2bc40,github-actions[bot],41898282,Bot,2025-04-29T15:26:59+00:00,web-flow,2025-04-29T15:26:59+00:00,"chore(🦾): bump python python-dotenv 1.0.1 -> 1.1.0 (#33262)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,2f308a85d8c6a5acf70e6542afd614f62f1c2a3c
+apache/superset,2f308a85d8c6a5acf70e6542afd614f62f1c2a3c,https://github.com/apache/superset/commit/2f308a85d8c6a5acf70e6542afd614f62f1c2a3c,github-actions[bot],41898282,Bot,2025-04-29T15:26:40+00:00,web-flow,2025-04-29T15:26:40+00:00,"chore(🦾): bump python pandas subpackage(s) (#33263)
+
+Co-authored-by: GitHub Action <action@github.com>",0,0,0,0,e8d60509a0903118d04e4dcadb724e1e29f21312
+apache/superset,e8d60509a0903118d04e4dcadb724e1e29f21312,https://github.com/apache/superset/commit/e8d60509a0903118d04e4dcadb724e1e29f21312,github-actions[bot],41898282,Bot,2025-04-29T15:26:01+00:00,web-flow,2025-04-29T15:26:01+00:00,"chore(🦾): bump python sqlglot 26.11.1 -> 26.16.2 (#33266)
+
+Co-authored-by: GitHub Action <action@github.com>",2,2,4,2,d6f80eaae70aa7e6faecd6f1c130c70d8c1d5e21
+apache/superset,d6f80eaae70aa7e6faecd6f1c130c70d8c1d5e21,https://github.com/apache/superset/commit/d6f80eaae70aa7e6faecd6f1c130c70d8c1d5e21,github-actions[bot],41898282,Bot,2025-04-29T15:25:23+00:00,web-flow,2025-04-29T15:25:23+00:00,"chore(🦾): bump python gunicorn subpackage(s) (#33265)
+
+Co-authored-by: GitHub Action <action@github.com>",4,4,8,2,a5f986fec5ffc499b9d13276c993febc37c5f787
+apache/superset,a5f986fec5ffc499b9d13276c993febc37c5f787,https://github.com/apache/superset/commit/a5f986fec5ffc499b9d13276c993febc37c5f787,CodeWithEmad,49523567,User,2025-04-29T15:01:34+00:00,web-flow,2025-04-29T15:01:34+00:00,feat: Persian translations (#29580),39875,20553,60428,22,141d0252f26e4b92672241c31b14bd22e9d02096

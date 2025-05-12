@@ -1,0 +1,96 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+PrefectHQ/prefect,8361f0c5a41cd85991e29921af11b31445144b5f,https://github.com/PrefectHQ/prefect/commit/8361f0c5a41cd85991e29921af11b31445144b5f,zzstoatzz,31014960,User,2025-05-12T13:45:52+00:00,web-flow,2025-05-12T13:45:52+00:00,make `RedisLockManager` picklable for ray/dask compat (#18018),149,3,152,2,7f25bbdf45fc81cca6dc23fb6a7377d436b70c83
+PrefectHQ/prefect,7f25bbdf45fc81cca6dc23fb6a7377d436b70c83,https://github.com/PrefectHQ/prefect/commit/7f25bbdf45fc81cca6dc23fb6a7377d436b70c83,dependabot[bot],49699333,Bot,2025-05-12T01:08:05+00:00,web-flow,2025-05-12T01:08:05+00:00,chore(deps-dev): bump typescript-eslint from 8.31.1 to 8.32.0 in /ui-v2 in the eslint group (#18023),61,60,121,2,f9346cb6934abec911bf71b8a871eeb05300382f
+PrefectHQ/prefect,f9346cb6934abec911bf71b8a871eeb05300382f,https://github.com/PrefectHQ/prefect/commit/f9346cb6934abec911bf71b8a871eeb05300382f,zzstoatzz,31014960,User,2025-05-09T15:04:18+00:00,web-flow,2025-05-09T15:04:18+00:00,misc type fixes in `prefect-shell` (#18002),63,47,110,3,93b1002f14343c93084412b52a3c7a8ee2b27c24
+PrefectHQ/prefect,93b1002f14343c93084412b52a3c7a8ee2b27c24,https://github.com/PrefectHQ/prefect/commit/93b1002f14343c93084412b52a3c7a8ee2b27c24,desertaxle,12350579,User,2025-05-09T14:36:13+00:00,web-flow,2025-05-09T14:36:13+00:00,Move generation hooks to pre-push (#18010),8,0,8,1,2f1e62eea9776399cb808ee5cdccc5048a6d650a
+PrefectHQ/prefect,2f1e62eea9776399cb808ee5cdccc5048a6d650a,https://github.com/PrefectHQ/prefect/commit/2f1e62eea9776399cb808ee5cdccc5048a6d650a,desertaxle,12350579,User,2025-05-09T14:14:53+00:00,web-flow,2025-05-09T14:14:53+00:00,Disable `kopf` scanning for `prefect-kubernetes` observer (#18013),5,0,5,1,b47ad8e12d507c5f24bb8a6582db409ad6ba21be
+PrefectHQ/prefect,b47ad8e12d507c5f24bb8a6582db409ad6ba21be,https://github.com/PrefectHQ/prefect/commit/b47ad8e12d507c5f24bb8a6582db409ad6ba21be,znicholasbrown,27291717,User,2025-05-08T19:50:43+00:00,web-flow,2025-05-08T19:50:43+00:00,Bugfix: Scatterplot pagination (#18009),5,4,9,1,0dadc0bf80981128dadfb91a050a20644bdbfe49
+PrefectHQ/prefect,0dadc0bf80981128dadfb91a050a20644bdbfe49,https://github.com/PrefectHQ/prefect/commit/0dadc0bf80981128dadfb91a050a20644bdbfe49,marvin-robot,41086007,User,2025-05-08T19:39:40+00:00,web-flow,2025-05-08T19:39:40+00:00,"Update @prefecthq/prefect-design to version 2.14.25 (#18011)
+
+Co-authored-by: marvin-robot <marvin-robot@users.noreply.github.com>",8,8,16,2,e18d4dcc285314208018b1f77f0c313f0d8b56f1
+PrefectHQ/prefect,e18d4dcc285314208018b1f77f0c313f0d8b56f1,https://github.com/PrefectHQ/prefect/commit/e18d4dcc285314208018b1f77f0c313f0d8b56f1,kevingrismore,146098880,User,2025-05-08T18:25:05+00:00,web-flow,2025-05-08T18:25:05+00:00,Add deployment versioning docs (#17974),260,3,263,3,ca4119ed86f57106d5a62e4e20a22a7dee5f7e01
+PrefectHQ/prefect,ca4119ed86f57106d5a62e4e20a22a7dee5f7e01,https://github.com/PrefectHQ/prefect/commit/ca4119ed86f57106d5a62e4e20a22a7dee5f7e01,desertaxle,12350579,User,2025-05-08T17:31:17+00:00,web-flow,2025-05-08T17:31:17+00:00,"Refactor Kubernetes worker to reduce statefulness (#18004)
+
+Co-authored-by: nate nowack <thrast36@gmail.com>",1791,1966,3757,21,b6a186b691e643a2bc5b92730c0b689deaa52a29
+PrefectHQ/prefect,b6a186b691e643a2bc5b92730c0b689deaa52a29,https://github.com/PrefectHQ/prefect/commit/b6a186b691e643a2bc5b92730c0b689deaa52a29,chrisguidry,8194,User,2025-05-08T16:39:00+00:00,web-flow,2025-05-08T16:39:00+00:00,Uses UUIDv7 for the IDs of time-oriented objects (#18008),107,42,149,20,a54b1ebafcf409539aa8e2a49453e6ef1f502ad4
+PrefectHQ/prefect,a54b1ebafcf409539aa8e2a49453e6ef1f502ad4,https://github.com/PrefectHQ/prefect/commit/a54b1ebafcf409539aa8e2a49453e6ef1f502ad4,chrisguidry,8194,User,2025-05-08T13:41:15+00:00,web-flow,2025-05-08T13:41:15+00:00,Adds support for `AND`ed related resources in queries and triggers (#18003),443,123,566,9,7e7a18743f5fd0bd4e513ca22c5408e7176390b8
+PrefectHQ/prefect,7e7a18743f5fd0bd4e513ca22c5408e7176390b8,https://github.com/PrefectHQ/prefect/commit/7e7a18743f5fd0bd4e513ca22c5408e7176390b8,desertaxle,12350579,User,2025-05-07T16:58:59+00:00,web-flow,2025-05-07T16:58:59+00:00,Allow `flow.sumbit` to be non-blocking for some infrastructure types (#17992),275,66,341,11,efd760ea8d067d3b87326b12715c61a5f705e413
+PrefectHQ/prefect,efd760ea8d067d3b87326b12715c61a5f705e413,https://github.com/PrefectHQ/prefect/commit/efd760ea8d067d3b87326b12715c61a5f705e413,marvin-robot,41086007,User,2025-05-07T16:22:50+00:00,web-flow,2025-05-07T16:22:50+00:00,"Update @prefecthq/prefect-ui-library to version 3.12.12 (#17998)
+
+Co-authored-by: marvin-robot <marvin-robot@users.noreply.github.com>",8,8,16,2,eac7f62f14c239c846ccab30f8071526b41db531
+PrefectHQ/prefect,eac7f62f14c239c846ccab30f8071526b41db531,https://github.com/PrefectHQ/prefect/commit/eac7f62f14c239c846ccab30f8071526b41db531,znicholasbrown,27291717,User,2025-05-07T16:21:06+00:00,web-flow,2025-05-07T16:21:06+00:00,Bugfix: Coalesce flow run start times with expected start times (#17997),38,7,45,3,612751ab0d7e4bdfd44b7fb92a9c1074abb64e78
+PrefectHQ/prefect,612751ab0d7e4bdfd44b7fb92a9c1074abb64e78,https://github.com/PrefectHQ/prefect/commit/612751ab0d7e4bdfd44b7fb92a9c1074abb64e78,desertaxle,12350579,User,2025-05-07T16:14:46+00:00,web-flow,2025-05-07T16:14:46+00:00,Fix generated work pool storage config for GCS (#18000),4,4,8,2,661452cbdf48896547769289318fe51e81455c93
+PrefectHQ/prefect,661452cbdf48896547769289318fe51e81455c93,https://github.com/PrefectHQ/prefect/commit/661452cbdf48896547769289318fe51e81455c93,zzstoatzz,31014960,User,2025-05-07T13:39:29+00:00,web-flow,2025-05-07T13:39:29+00:00,organize types (#17994),301,295,596,10,15e90f75877628d769414cb3382d3aa5b30b50a5
+PrefectHQ/prefect,15e90f75877628d769414cb3382d3aa5b30b50a5,https://github.com/PrefectHQ/prefect/commit/15e90f75877628d769414cb3382d3aa5b30b50a5,znicholasbrown,27291717,User,2025-05-06T23:44:27+00:00,web-flow,2025-05-06T23:44:27+00:00,Chore: Update variable name validator to allow hyphens (#17995),8,11,19,3,467b4c3a84e846d8ea5cabaf243f4f39f775749c
+PrefectHQ/prefect,467b4c3a84e846d8ea5cabaf243f4f39f775749c,https://github.com/PrefectHQ/prefect/commit/467b4c3a84e846d8ea5cabaf243f4f39f775749c,zzstoatzz,31014960,User,2025-05-06T18:14:50+00:00,web-flow,2025-05-06T18:14:50+00:00,catch `FileNotFoundError` in `find_uv_bin` (#17993),1,1,2,1,6c30078e86f6f9536136db27354797306fc7e813
+PrefectHQ/prefect,6c30078e86f6f9536136db27354797306fc7e813,https://github.com/PrefectHQ/prefect/commit/6c30078e86f6f9536136db27354797306fc7e813,zzstoatzz,31014960,User,2025-05-06T17:41:12+00:00,web-flow,2025-05-06T17:41:12+00:00,add aef index (#17981),61,3,64,4,6869a02a044c8d68c6a6dee8116b40ca335aeee2
+PrefectHQ/prefect,6869a02a044c8d68c6a6dee8116b40ca335aeee2,https://github.com/PrefectHQ/prefect/commit/6869a02a044c8d68c6a6dee8116b40ca335aeee2,desertaxle,12350579,User,2025-05-06T17:21:00+00:00,web-flow,2025-05-06T17:21:00+00:00,Update `Runner` to use a long-lived `EventsClient` (#17986),65,60,125,3,754f25a7cf75b3b5dc972cbc2a913b386a545bda
+PrefectHQ/prefect,754f25a7cf75b3b5dc972cbc2a913b386a545bda,https://github.com/PrefectHQ/prefect/commit/754f25a7cf75b3b5dc972cbc2a913b386a545bda,marvin-robot,41086007,User,2025-05-06T15:22:56+00:00,web-flow,2025-05-06T15:22:56+00:00,"Update @prefecthq/prefect-ui-library to version 3.12.11 (#17991)
+
+Co-authored-by: marvin-robot <marvin-robot@users.noreply.github.com>",16,16,32,2,d7cb487dfee5e6df2aad6209e2f72c33d739b750
+PrefectHQ/prefect,d7cb487dfee5e6df2aad6209e2f72c33d739b750,https://github.com/PrefectHQ/prefect/commit/d7cb487dfee5e6df2aad6209e2f72c33d739b750,kevingrismore,146098880,User,2025-05-06T15:09:44+00:00,web-flow,2025-05-06T15:09:44+00:00,Parse docker image strings with digests (#17987),22,8,30,2,7e40be9989c080515e5fa197d6118294ef123a4b
+PrefectHQ/prefect,7e40be9989c080515e5fa197d6118294ef123a4b,https://github.com/PrefectHQ/prefect/commit/7e40be9989c080515e5fa197d6118294ef123a4b,vyagubov,96046012,User,2025-05-06T13:49:55+00:00,web-flow,2025-05-06T13:49:55+00:00,"Support `@staticmethod` and `@classmethod` flow entrypoints (#17976)
+
+Co-authored-by: Yagubov Vugar <vugar.yagubov@joyn.de>
+Co-authored-by: Vugar Yagubov <vugar.yagubov@flix.com>",711,241,952,3,3232581c69f5c912aa32787ca327ae549bc6eac7
+PrefectHQ/prefect,3232581c69f5c912aa32787ca327ae549bc6eac7,https://github.com/PrefectHQ/prefect/commit/3232581c69f5c912aa32787ca327ae549bc6eac7,dependabot[bot],49699333,Bot,2025-05-05T21:55:18+00:00,web-flow,2025-05-05T21:55:18+00:00,"chore(deps-dev): bump vue-tsc from 2.2.8 to 2.2.10 in /ui (#17923)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",22,22,44,2,d8bec12e4bfba3ad308bf38a1f7f82e93792d9ec
+PrefectHQ/prefect,d8bec12e4bfba3ad308bf38a1f7f82e93792d9ec,https://github.com/PrefectHQ/prefect/commit/d8bec12e4bfba3ad308bf38a1f7f82e93792d9ec,zzstoatzz,31014960,User,2025-05-05T20:25:39+00:00,web-flow,2025-05-05T20:25:39+00:00,fix regex for snowflake private keys (#17985),54,5,59,2,84a4964980a76da7fd9aa9486037dba2f9fa59e4
+PrefectHQ/prefect,84a4964980a76da7fd9aa9486037dba2f9fa59e4,https://github.com/PrefectHQ/prefect/commit/84a4964980a76da7fd9aa9486037dba2f9fa59e4,zzstoatzz,31014960,User,2025-05-05T15:55:01+00:00,web-flow,2025-05-05T15:55:01+00:00,"add parameter form docs (#17972)
+
+Co-authored-by: Chris White <chris@prefect.io>",289,0,289,9,f74293ebdf38442f1684c4c3a0154fadce18416f
+PrefectHQ/prefect,f74293ebdf38442f1684c4c3a0154fadce18416f,https://github.com/PrefectHQ/prefect/commit/f74293ebdf38442f1684c4c3a0154fadce18416f,vilhenad,44610689,User,2025-05-05T13:29:28+00:00,web-flow,2025-05-05T13:29:28+00:00,Add test covering `.with_options` when used with a `classmethod` flow (#17647),22,0,22,1,c158d3eb6aae366fd814ba55c9151ca73ca1666a
+PrefectHQ/prefect,c158d3eb6aae366fd814ba55c9151ca73ca1666a,https://github.com/PrefectHQ/prefect/commit/c158d3eb6aae366fd814ba55c9151ca73ca1666a,zzstoatzz,31014960,User,2025-05-05T01:44:41+00:00,web-flow,2025-05-05T01:44:41+00:00,use correct secret in websocket subscription (#17975),114,18,132,4,2e25bb541dd9f47d21a913037d832f8d648319d9
+PrefectHQ/prefect,2e25bb541dd9f47d21a913037d832f8d648319d9,https://github.com/PrefectHQ/prefect/commit/2e25bb541dd9f47d21a913037d832f8d648319d9,dependabot[bot],49699333,Bot,2025-05-05T01:25:36+00:00,web-flow,2025-05-05T01:25:36+00:00,"chore(deps-dev): bump the eslint group in /ui-v2 with 3 updates (#17978)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",671,62,733,2,378fc4f6b72aace32343264ee6cea198d949ba6a
+PrefectHQ/prefect,378fc4f6b72aace32343264ee6cea198d949ba6a,https://github.com/PrefectHQ/prefect/commit/378fc4f6b72aace32343264ee6cea198d949ba6a,desertaxle,12350579,User,2025-05-03T20:24:58+00:00,web-flow,2025-05-03T20:24:58+00:00,Refactor `Runner` to receive cancellation signals via websocket (#17973),109,199,308,3,c80e444246c8805f1dfb684267e0d88dbfcc8d38
+PrefectHQ/prefect,c80e444246c8805f1dfb684267e0d88dbfcc8d38,https://github.com/PrefectHQ/prefect/commit/c80e444246c8805f1dfb684267e0d88dbfcc8d38,kevingrismore,146098880,User,2025-05-02T19:37:05+00:00,web-flow,2025-05-02T19:37:05+00:00,"Move version info inference to `apply()` (#17966)
+
+Co-authored-by: zzstoatzz <thrast36@gmail.com>",230,30,260,7,44b7acafafb807c2c737e7f5840e3a1c66cf1306
+PrefectHQ/prefect,44b7acafafb807c2c737e7f5840e3a1c66cf1306,https://github.com/PrefectHQ/prefect/commit/44b7acafafb807c2c737e7f5840e3a1c66cf1306,cicdw,13255838,User,2025-05-02T17:10:06+00:00,web-flow,2025-05-02T17:10:06+00:00,Downgrade log message for limiter to debug level (#17970),2,2,4,2,ff334f0ae0f55d0de0937d2bf74d2de86fa1dfe3
+PrefectHQ/prefect,ff334f0ae0f55d0de0937d2bf74d2de86fa1dfe3,https://github.com/PrefectHQ/prefect/commit/ff334f0ae0f55d0de0937d2bf74d2de86fa1dfe3,dependabot[bot],49699333,Bot,2025-05-02T16:55:51+00:00,web-flow,2025-05-02T16:55:51+00:00,"chore(deps): update packaging requirement from <24.3,>=21.3 to >=21.3,<25.1 (#17871)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Alex Streed <alex.s@prefect.io>",3,3,6,3,f3dc50918d6fed4b8daf797eda1acf5a1d8e3b98
+PrefectHQ/prefect,f3dc50918d6fed4b8daf797eda1acf5a1d8e3b98,https://github.com/PrefectHQ/prefect/commit/f3dc50918d6fed4b8daf797eda1acf5a1d8e3b98,marvin-robot,41086007,User,2025-05-02T16:37:58+00:00,web-flow,2025-05-02T16:37:58+00:00,"Update @prefecthq/prefect-ui-library to version 3.12.10 (#17969)
+
+Co-authored-by: marvin-robot <marvin-robot@users.noreply.github.com>",8,8,16,2,1829d81a66e1f236ad492219849ec138da7198eb
+PrefectHQ/prefect,1829d81a66e1f236ad492219849ec138da7198eb,https://github.com/PrefectHQ/prefect/commit/1829d81a66e1f236ad492219849ec138da7198eb,devinvillarosa,102188207,User,2025-05-02T16:36:44+00:00,web-flow,2025-05-02T16:36:44+00:00,"[UI v2] feat: Adds block document create page (#17862)
+
+Co-authored-by: Alex Streed <desertaxle@users.noreply.github.com>",246,5,251,6,800ea5dc79bb6e2a79ee934fee3003346b6a8c56
+PrefectHQ/prefect,800ea5dc79bb6e2a79ee934fee3003346b6a8c56,https://github.com/PrefectHQ/prefect/commit/800ea5dc79bb6e2a79ee934fee3003346b6a8c56,desertaxle,12350579,User,2025-05-02T16:02:57+00:00,web-flow,2025-05-02T16:02:57+00:00,Add default result storage for work pools (#17953),648,32,680,13,6b626d4e90e01cd0f44bad996defd7f90cec9e56
+PrefectHQ/prefect,6b626d4e90e01cd0f44bad996defd7f90cec9e56,https://github.com/PrefectHQ/prefect/commit/6b626d4e90e01cd0f44bad996defd7f90cec9e56,desertaxle,12350579,User,2025-05-02T15:58:04+00:00,web-flow,2025-05-02T15:58:04+00:00,Run integration tests against `prefect-client` (#17967),71,22,93,2,95e26b0ac34c20ad134a06748a6a6dbc37798049
+PrefectHQ/prefect,95e26b0ac34c20ad134a06748a6a6dbc37798049,https://github.com/PrefectHQ/prefect/commit/95e26b0ac34c20ad134a06748a6a6dbc37798049,devinvillarosa,102188207,User,2025-05-02T14:54:16+00:00,web-flow,2025-05-02T14:54:16+00:00,[UI v2] feat: Adds create block document rq mutation (#17859),96,1,97,3,0a3c0e4c61fc272de329fdc895f71d5eb2249caf
+PrefectHQ/prefect,0a3c0e4c61fc272de329fdc895f71d5eb2249caf,https://github.com/PrefectHQ/prefect/commit/0a3c0e4c61fc272de329fdc895f71d5eb2249caf,dependabot[bot],49699333,Bot,2025-05-02T14:35:25+00:00,web-flow,2025-05-02T14:35:25+00:00,"chore(deps): update whenever requirement from <0.8.0,>=0.7.3 to >=0.7.3,<0.9.0 (#17962)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Alex Streed <alex.s@prefect.io>",3,3,6,3,23b2c91b5c870390f652ce05bdbcecb03cf678c7
+PrefectHQ/prefect,23b2c91b5c870390f652ce05bdbcecb03cf678c7,https://github.com/PrefectHQ/prefect/commit/23b2c91b5c870390f652ce05bdbcecb03cf678c7,dependabot[bot],49699333,Bot,2025-05-02T14:28:44+00:00,web-flow,2025-05-02T14:28:44+00:00,"chore(deps): bump astral-sh/setup-uv from 5 to 6 (#17906)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Alex Streed <alex.s@prefect.io>",18,17,35,11,bc7f6b29e6dd3b819d07f336884b59d02ea0e16c
+PrefectHQ/prefect,bc7f6b29e6dd3b819d07f336884b59d02ea0e16c,https://github.com/PrefectHQ/prefect/commit/bc7f6b29e6dd3b819d07f336884b59d02ea0e16c,zzstoatzz,31014960,User,2025-05-02T13:53:44+00:00,web-flow,2025-05-02T13:53:44+00:00,add logfire dep group for performance exploration (#17860),3189,2998,6187,6,1c5064cf974b431681e59eabe37b9c8f7b213f6d
+PrefectHQ/prefect,1c5064cf974b431681e59eabe37b9c8f7b213f6d,https://github.com/PrefectHQ/prefect/commit/1c5064cf974b431681e59eabe37b9c8f7b213f6d,danfairs,24726,User,2025-05-02T13:40:20+00:00,web-flow,2025-05-02T13:40:20+00:00,fix: Specify project during Cloud Run provision (#17965),2,1,3,2,5d6e0c61baba4513aa9744c942297d645fc4db2c
+PrefectHQ/prefect,5d6e0c61baba4513aa9744c942297d645fc4db2c,https://github.com/PrefectHQ/prefect/commit/5d6e0c61baba4513aa9744c942297d645fc4db2c,desertaxle,12350579,User,2025-05-01T19:37:52+00:00,web-flow,2025-05-01T19:37:52+00:00,"Remove `extra=""forbid""` config on `WorkPoolStorageConfiguration` (#17960)",0,2,2,1,5c2e15fe21426d0b58fd25ef44f86c2a75bf0b83
+PrefectHQ/prefect,5c2e15fe21426d0b58fd25ef44f86c2a75bf0b83,https://github.com/PrefectHQ/prefect/commit/5c2e15fe21426d0b58fd25ef44f86c2a75bf0b83,marvin-robot,41086007,User,2025-05-01T18:48:19+00:00,web-flow,2025-05-01T18:48:19+00:00,"Update @prefecthq/prefect-ui-library to version 3.12.9 (#17959)
+
+Co-authored-by: marvin-robot <marvin-robot@users.noreply.github.com>",8,8,16,2,a17e3d0c67470caaa102e3bddab0d8717aa7dc04
+PrefectHQ/prefect,a17e3d0c67470caaa102e3bddab0d8717aa7dc04,https://github.com/PrefectHQ/prefect/commit/a17e3d0c67470caaa102e3bddab0d8717aa7dc04,zzstoatzz,31014960,User,2025-05-01T18:45:43+00:00,web-flow,2025-05-01T18:45:43+00:00,remove unnecessary walrus (#17957),5,5,10,1,89121bb703cddda798f83b4cd62a6edaedd88567
+PrefectHQ/prefect,89121bb703cddda798f83b4cd62a6edaedd88567,https://github.com/PrefectHQ/prefect/commit/89121bb703cddda798f83b4cd62a6edaedd88567,cicdw,13255838,User,2025-05-01T15:13:53+00:00,web-flow,2025-05-01T15:13:53+00:00,Remove future garbage collection warning (#17954),3,130,133,6,a82ec550b356c4e857fc04fa6ec3e8adfd60daa1
+PrefectHQ/prefect,a82ec550b356c4e857fc04fa6ec3e8adfd60daa1,https://github.com/PrefectHQ/prefect/commit/a82ec550b356c4e857fc04fa6ec3e8adfd60daa1,desertaxle,12350579,User,2025-04-30T18:26:59+00:00,web-flow,2025-04-30T18:26:59+00:00,Remove flow run notifications (#17939),657,3343,4000,50,09dc2d0957ee7fa9743dd26b168d0a20ff2663b1
+PrefectHQ/prefect,09dc2d0957ee7fa9743dd26b168d0a20ff2663b1,https://github.com/PrefectHQ/prefect/commit/09dc2d0957ee7fa9743dd26b168d0a20ff2663b1,dependabot[bot],49699333,Bot,2025-04-30T18:17:49+00:00,web-flow,2025-04-30T18:17:49+00:00,"chore(deps-dev): bump vite from 6.3.2 to 6.3.4 in /ui-v2 (#17950)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",7,7,14,2,7baf93fbb1c49228eb43b34dd0d726159d69b19c
+PrefectHQ/prefect,7baf93fbb1c49228eb43b34dd0d726159d69b19c,https://github.com/PrefectHQ/prefect/commit/7baf93fbb1c49228eb43b34dd0d726159d69b19c,dependabot[bot],49699333,Bot,2025-04-30T17:51:13+00:00,web-flow,2025-04-30T17:51:13+00:00,"chore(deps-dev): bump vite from 6.3.2 to 6.3.4 in /ui (#17949)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",32,32,64,2,9f71cac1c58b51a11f9e9c63b04cf7073ac96a6e
+PrefectHQ/prefect,9f71cac1c58b51a11f9e9c63b04cf7073ac96a6e,https://github.com/PrefectHQ/prefect/commit/9f71cac1c58b51a11f9e9c63b04cf7073ac96a6e,zzstoatzz,31014960,User,2025-04-30T17:13:58+00:00,web-flow,2025-04-30T17:13:58+00:00,"[wip] fix dead-lock between `ConcurrentTaskRunner`, `wait_for`, and tag concurrency limits (#17943)",89,23,112,3,4feb44e9c73fada74cb9e8d59216537d3c7a1fac

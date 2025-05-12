@@ -1,0 +1,186 @@
+repo_full_name,sha,html_url,author_login,author_id,author_type,authored_date,committer_login,committed_date,message,additions,deletions,total_changes,files_changed_count,parent_shas
+qax-os/excelize,2c3d13fe8b492892671798fa90a85de1a04dc796,https://github.com/qax-os/excelize/commit/2c3d13fe8b492892671798fa90a85de1a04dc796,shcabin,5463832,User,2025-05-12T05:37:33+00:00,web-flow,2025-05-12T05:37:33+00:00,"Using binary search instead of sequential search for cell (#2129)
+
+- Update unit tests",28,9,37,2,094ff396fe73233056a3c87da554b80b4c9d9bb7
+qax-os/excelize,094ff396fe73233056a3c87da554b80b4c9d9bb7,https://github.com/qax-os/excelize/commit/094ff396fe73233056a3c87da554b80b4c9d9bb7,Now-Shimmer,130445987,User,2025-05-09T16:03:03+00:00,web-flow,2025-05-09T16:03:03+00:00,"This related with #2123, made editAs attribute value empty for one cell anchor drawing object (#2128)
+
+* Fix absolute positioning to-point error and adjust one cell anchor drawing object failed
+* Revert default column width and row height
+* Clean shared formula cell cache before remvoe it in calc chain
+* Revert adjustFormulaRef changes in the commit 3ccbdaa9cc8c0f0c94f0445da3a3097c19fd2d78
+* Update unit tests
+
+
+
+* Format code",66,54,120,13,d230ecdb48b77450baa5fe664f5681ef3ad38360
+qax-os/excelize,d230ecdb48b77450baa5fe664f5681ef3ad38360,https://github.com/qax-os/excelize/commit/d230ecdb48b77450baa5fe664f5681ef3ad38360,R3dByt3,20931260,User,2025-05-08T11:58:30+00:00,web-flow,2025-05-08T11:58:30+00:00,"This closes #2126, fix sheet name error in defined name after rename sheet (#2127)
+
+- Update unit tests",11,10,21,2,8fdc26e286734b808dcab1546760768b60045e67
+qax-os/excelize,8fdc26e286734b808dcab1546760768b60045e67,https://github.com/qax-os/excelize/commit/8fdc26e286734b808dcab1546760768b60045e67,R3dByt3,20931260,User,2025-05-07T01:35:32+00:00,web-flow,2025-05-07T01:35:32+00:00,"This fixes #2001 and fixes #2002. Breaking changes: offsets no longer affect the image size (#2123)
+
+- Change default column width from 9.140625 to 10.5
+- Change default column width in pixels from 64 to 84
+- Change default row height from 15 to 15.6
+- Change default row height in pixels from 20 to 20.8
+- Change column width and row height to pixels conversion calculation logic
+- Support to insert one cell anchor image when specified the positioning as ""oneCell""",133,92,225,12,efdfc52252a3f9a840e47da0c8bd4017845eef7a
+qax-os/excelize,efdfc52252a3f9a840e47da0c8bd4017845eef7a,https://github.com/qax-os/excelize/commit/efdfc52252a3f9a840e47da0c8bd4017845eef7a,tgulacsi,256074,User,2025-04-28T01:43:13+00:00,web-flow,2025-04-28T01:43:13+00:00,"This closes #2119, remove all temporary files on close workbook (#2120)",40,15,55,5,3ccbdaa9cc8c0f0c94f0445da3a3097c19fd2d78
+qax-os/excelize,3ccbdaa9cc8c0f0c94f0445da3a3097c19fd2d78,https://github.com/qax-os/excelize/commit/3ccbdaa9cc8c0f0c94f0445da3a3097c19fd2d78,xuri,2809468,User,2025-04-27T02:16:57+00:00,xuri,2025-04-27T02:16:57+00:00,Clean shared formula cell cache on remove formula and simplify adjust formula reference code,10,27,37,2,b9f2c9e0055d7e95755d71f3f9861aa090d8eb81
+qax-os/excelize,b9f2c9e0055d7e95755d71f3f9861aa090d8eb81,https://github.com/qax-os/excelize/commit/b9f2c9e0055d7e95755d71f3f9861aa090d8eb81,shcabin,5463832,User,2025-04-26T09:29:33+00:00,web-flow,2025-04-26T09:29:33+00:00,"This closes #1961, add shared formula cell cache for speedup calculation (#2118)
+
+- Reuse formula shared index when update refer cell formula
+- Fix shared cell not been updated on update refer cell formula with new range
+- Upgrade dependencies package go-deepcopy to v1.5.2
+- Update unit tests",177,58,235,14,0f19d7fcd7c7c6ab3f25a363ced93896a4d323e8
+qax-os/excelize,0f19d7fcd7c7c6ab3f25a363ced93896a4d323e8,https://github.com/qax-os/excelize/commit/0f19d7fcd7c7c6ab3f25a363ced93896a4d323e8,xuri,2809468,User,2025-04-21T23:59:52+00:00,xuri,2025-04-21T23:59:52+00:00,"This closes #2117, support add data table for chart
+
+- Add ShowDataTable and ShowDataTableKeys fields in the ChartPlotArea data type
+- Update unit tests",46,10,56,4,55cf0d42a76bc4f8d8810d4d8dcc5017debe1082
+qax-os/excelize,55cf0d42a76bc4f8d8810d4d8dcc5017debe1082,https://github.com/qax-os/excelize/commit/55cf0d42a76bc4f8d8810d4d8dcc5017debe1082,shcabin,5463832,User,2025-04-18T11:52:59+00:00,web-flow,2025-04-18T11:52:59+00:00,"Improve cell read performance by optimizing XML parsing (#2116)
+
+- Rows iterator speedup about 20%, memory allocation reduce about 10%
+- Update unit test
+- Extends time out to 50 minutes in GitHub Action for made TestZip64 stable",120,2,122,3,ce9061fe468b7eb3a74ccf24e06bfc00a6d3552e
+qax-os/excelize,ce9061fe468b7eb3a74ccf24e06bfc00a6d3552e,https://github.com/qax-os/excelize/commit/ce9061fe468b7eb3a74ccf24e06bfc00a6d3552e,xuri,2809468,User,2025-04-16T11:54:32+00:00,xuri,2025-04-16T11:54:32+00:00,"This fix corrupted workbook generated when any inner ZIP64 file's size exceeds 4GB
+
+- Update unit tests
+- Support set version required to 4.5 in local file header
+- Note that this fix not work on Office 2010",131,29,160,3,f85dae6cfa7aabfa67a957a1dc1b926e07a58147
+qax-os/excelize,f85dae6cfa7aabfa67a957a1dc1b926e07a58147,https://github.com/qax-os/excelize/commit/f85dae6cfa7aabfa67a957a1dc1b926e07a58147,xuri,2809468,User,2025-04-11T06:45:48+00:00,xuri,2025-04-11T06:45:48+00:00,"This closes #2113, AddFormControl function support set cell link for check box",9,2,11,2,6007d25231b134935ee3aedad4cfb5f13cfb4a62
+qax-os/excelize,6007d25231b134935ee3aedad4cfb5f13cfb4a62,https://github.com/qax-os/excelize/commit/6007d25231b134935ee3aedad4cfb5f13cfb4a62,timesince,169233406,User,2025-04-09T08:02:53+00:00,web-flow,2025-04-09T08:02:53+00:00,Simplifying code with directly swap the values of two variables (#2114),1,3,4,1,e12da49e38c43ebe47997688c16905dc91e042d9
+qax-os/excelize,e12da49e38c43ebe47997688c16905dc91e042d9,https://github.com/qax-os/excelize/commit/e12da49e38c43ebe47997688c16905dc91e042d9,xuri,2809468,User,2025-04-04T09:50:18+00:00,xuri,2025-04-04T09:50:18+00:00,"This fixes #2056, fix incorrect formula calculation result caused by shared formula parsed error
+
+- Also reference #844
+- Update unit test
+- Update documentation of the SheetPropsOptions data structure
+- Update dependencies modules",61,71,132,5,3650e5c58d62b92e3c3ea4bee08f9217309e2283
+qax-os/excelize,3650e5c58d62b92e3c3ea4bee08f9217309e2283,https://github.com/qax-os/excelize/commit/3650e5c58d62b92e3c3ea4bee08f9217309e2283,paolobarbolini,6215781,User,2025-03-29T14:51:05+00:00,web-flow,2025-03-29T14:51:05+00:00,Avoid looking up absent cells in `rangeResolver` (#2111),59,7,66,2,91d36ccf7cfdf52b9827e2786c83cfc27cbb2f38
+qax-os/excelize,91d36ccf7cfdf52b9827e2786c83cfc27cbb2f38,https://github.com/qax-os/excelize/commit/91d36ccf7cfdf52b9827e2786c83cfc27cbb2f38,artur-chopikian,49234559,User,2025-03-25T04:41:15+00:00,web-flow,2025-03-25T04:41:15+00:00,"Fix performance regression in v2.9.0, reduce trim cell value memory allocation for blank cells (#2100)",6,8,14,1,e9d27c7fab285d87d26035cc325c1658004ecab5
+qax-os/excelize,e9d27c7fab285d87d26035cc325c1658004ecab5,https://github.com/qax-os/excelize/commit/e9d27c7fab285d87d26035cc325c1658004ecab5,moisespsena,350884,User,2025-03-23T11:58:06+00:00,web-flow,2025-03-23T11:58:06+00:00,"This closes #2108, Add docs to SheetPropsOptions function for how to set 4 kinds of scaling options (#2109)",52,1,53,1,d399e7bc3ed839b09208ebcc0c69ded51b19a00a
+qax-os/excelize,d399e7bc3ed839b09208ebcc0c69ded51b19a00a,https://github.com/qax-os/excelize/commit/d399e7bc3ed839b09208ebcc0c69ded51b19a00a,hm3248,177785712,User,2025-03-16T16:04:03+00:00,web-flow,2025-03-16T16:04:03+00:00,"Breaking changes: Go 1.23 and later required for upgrade of dependency package `golang.org/x/crypto` (#2104)
+
+- Fix panic on delete calc chain
+- Remove XML tags for the CalcPropsOptions data structure
+- Update dependencies modules
+- Update the godoc",96,96,192,62,2bb89f4bd971421cb608b779c84c6e8908f7873a
+qax-os/excelize,2bb89f4bd971421cb608b779c84c6e8908f7873a,https://github.com/qax-os/excelize/commit/2bb89f4bd971421cb608b779c84c6e8908f7873a,LZCZ,74762395,User,2025-03-16T14:00:30+00:00,web-flow,2025-03-16T14:00:30+00:00,"This closes #2102, fix panic on set chart title font (#2103)
+
+- Update unit tests",4,1,5,2,d6931a8f3e8dc950af5cd3b00ed5a3039e0eb608
+qax-os/excelize,d6931a8f3e8dc950af5cd3b00ed5a3039e0eb608,https://github.com/qax-os/excelize/commit/d6931a8f3e8dc950af5cd3b00ed5a3039e0eb608,xuri,2809468,User,2025-03-06T11:47:10+00:00,xuri,2025-03-06T11:47:10+00:00,"Add optional value checking for CalcMode and RefMode calculation properties
+
+- Add valid optional value prompt in error message for the functions: `AddFormControl`, `AddPicture` and `AddPictureFromBytes`
+- Rename the internal error message function `newInvalidPageLayoutValueError` to `newInvalidOptionalValue`
+- Update unit tests",36,16,52,9,aef20e226cba5cab0fc9331c63f34f563cd24ebc
+qax-os/excelize,aef20e226cba5cab0fc9331c63f34f563cd24ebc,https://github.com/qax-os/excelize/commit/aef20e226cba5cab0fc9331c63f34f563cd24ebc,romanshevelev,13408092,User,2025-03-04T13:20:24+00:00,xuri,2025-03-04T13:23:33+00:00,"Introduce 2 new functions SetCalcProps and GetCalcProps (#2098)
+
+- Add new CalcPropsOptions data type
+- Support assign exported data structure fields value to internal data structure fields dynamically by specified fields name list
+- Simplify code for function SetAppProps, SetDocProps, SetWorkbookProps, GetWorkbookProps and getPivotTable
+- Update unit tests",182,81,263,6,c6d161fc76e6165cc95693a1c50696dac7faa74b
+qax-os/excelize,c6d161fc76e6165cc95693a1c50696dac7faa74b,https://github.com/qax-os/excelize/commit/c6d161fc76e6165cc95693a1c50696dac7faa74b,artur-chopikian,49234559,User,2025-03-02T03:24:49+00:00,web-flow,2025-03-02T03:24:49+00:00,Reduce trim cell value memory allocation for blank cells (#2096),3,3,6,1,52642854413f0ff528792db55b145bea88dbeec0
+qax-os/excelize,52642854413f0ff528792db55b145bea88dbeec0,https://github.com/qax-os/excelize/commit/52642854413f0ff528792db55b145bea88dbeec0,xuri,2809468,User,2025-02-19T06:12:59+00:00,xuri,2025-02-19T06:12:59+00:00,"This closes #2091, update GitHub Actions workflow configuration, test on Go 1.24.x
+
+- Update dependencies modules",13,13,26,3,718417e15ed6ede2ab7a732bbb032c9c3304d957
+qax-os/excelize,718417e15ed6ede2ab7a732bbb032c9c3304d957,https://github.com/qax-os/excelize/commit/718417e15ed6ede2ab7a732bbb032c9c3304d957,IvanHristov98,35896427,User,2025-02-08T01:40:36+00:00,web-flow,2025-02-08T01:40:36+00:00,"This closes #2083, fix subexpression calculation (#2084)
+
+Co-authored-by: Ivan Hristov <ivan.hristov@abraxa.com>",4,8,12,2,05ed940040c1d5d1961f19a03dcc9c2c616d6f10
+qax-os/excelize,05ed940040c1d5d1961f19a03dcc9c2c616d6f10,https://github.com/qax-os/excelize/commit/05ed940040c1d5d1961f19a03dcc9c2c616d6f10,kurtinge,264303,User,2025-02-07T01:01:27+00:00,web-flow,2025-02-07T01:01:27+00:00,Handle the format '?' in number formatting (#2080),2,1,3,2,432462292a40ea72005193735b2f82b287654571
+qax-os/excelize,432462292a40ea72005193735b2f82b287654571,https://github.com/qax-os/excelize/commit/432462292a40ea72005193735b2f82b287654571,xuri,2809468,User,2025-01-26T11:53:30+00:00,xuri,2025-01-26T11:53:30+00:00,"This closes #2058, support apply number format with hash and zero place holder
+
+- Update unit tests
+- Disable blank issue creation",39,19,58,3,b19e5940b84eb10f6b16642aea91c618f702fea2
+qax-os/excelize,b19e5940b84eb10f6b16642aea91c618f702fea2,https://github.com/qax-os/excelize/commit/b19e5940b84eb10f6b16642aea91c618f702fea2,hly-717,196394708,User,2025-01-25T02:01:27+00:00,web-flow,2025-01-25T02:01:27+00:00,"Fix GetStyle function can not get VertAlign format (#2079)
+
+- Fix redundant cols element generated by stream writer
+- Update dependencies module
+- Update docs for the GetCellRichText function
+- Move TestSetCellIntFunc function to cell_test.go",61,53,114,6,0e0e2dadcf1a37c45b98b5adc8d3035c6db8b3c7
+qax-os/excelize,0e0e2dadcf1a37c45b98b5adc8d3035c6db8b3c7,https://github.com/qax-os/excelize/commit/0e0e2dadcf1a37c45b98b5adc8d3035c6db8b3c7,mengpromax,33193572,User,2025-01-24T09:45:25+00:00,web-flow,2025-01-24T09:45:25+00:00,"This close #2075, add new function SetColStyle for streaming writer to support set columns style (#2076)
+
+- Add new exported error variable ErrStreamSetColStyle
+- Fix cell default style doesn't override by none-zero row style when set row by stream writer
+- Update unit tests
+
+Signed-off-by: mengzhongyuan <mengzhongyuan@bytedance.com>",119,33,152,4,7e614c510433a9b7411fd4a339dc015a4885be2c
+qax-os/excelize,7e614c510433a9b7411fd4a339dc015a4885be2c,https://github.com/qax-os/excelize/commit/7e614c510433a9b7411fd4a339dc015a4885be2c,gypsy1234,23316234,User,2025-01-22T10:54:04+00:00,web-flow,2025-01-22T10:54:04+00:00,"This closes #2072, support adjust data validations cross multiple worksheets (#2073)",20,1,21,2,a45d47d57ca7d4872e272330614fc7ae2eaad880
+qax-os/excelize,a45d47d57ca7d4872e272330614fc7ae2eaad880,https://github.com/qax-os/excelize/commit/a45d47d57ca7d4872e272330614fc7ae2eaad880,xxf0512,49829039,User,2024-11-26T14:58:19+00:00,xuri,2025-01-22T01:52:58+00:00,Fix: int overflow of function,23,0,23,1,b936343814c1ad075fd90e435cb469c15758cecb
+qax-os/excelize,b936343814c1ad075fd90e435cb469c15758cecb,https://github.com/qax-os/excelize/commit/b936343814c1ad075fd90e435cb469c15758cecb,xuri,2809468,User,2025-01-21T01:13:23+00:00,xuri,2025-01-21T01:13:23+00:00,"This closes #2068, breaking changes: SetCellInt function required int64 data type parameter
+
+- Update unit tests",18,18,36,4,e9efc47316198d7deecc519f1161d859d1d8787b
+qax-os/excelize,e9efc47316198d7deecc519f1161d859d1d8787b,https://github.com/qax-os/excelize/commit/e9efc47316198d7deecc519f1161d859d1d8787b,zhuhaicity,183378780,User,2025-01-14T11:19:16+00:00,web-flow,2025-01-14T11:19:16+00:00,Correct comments of the internal function setSheetOutlineProps (#2066),1,1,2,1,af422e17009b031012c01c90836bbf1dc18b7a61
+qax-os/excelize,af422e17009b031012c01c90836bbf1dc18b7a61,https://github.com/qax-os/excelize/commit/af422e17009b031012c01c90836bbf1dc18b7a61,xuri,2809468,User,2025-01-05T01:37:31+00:00,xuri,2025-01-05T01:37:31+00:00,"This closes #1954 and closes #2051, fix get pivot tables panic in some case",16,3,19,1,4b4d4df76b84974d16a5e39216dbc8fe9ccad832
+qax-os/excelize,4b4d4df76b84974d16a5e39216dbc8fe9ccad832,https://github.com/qax-os/excelize/commit/4b4d4df76b84974d16a5e39216dbc8fe9ccad832,Arpelicy,165371648,User,2025-01-04T03:17:56+00:00,web-flow,2025-01-04T03:17:56+00:00,"This closes #2061, fix border styles missing after saved workbook (#2064)
+
+- Using form template for GitHub issues
+- Typo fix for comments of the getSupportedLanguageInfo function",127,113,240,7,caf22e4974afa377baeac21803de3923fd78e627
+qax-os/excelize,caf22e4974afa377baeac21803de3923fd78e627,https://github.com/qax-os/excelize/commit/caf22e4974afa377baeac21803de3923fd78e627,xuri,2809468,User,2025-01-01T23:32:49+00:00,xuri,2025-01-01T23:32:49+00:00,"This closes #2059, support delete one cell anchor image
+
+- Fix delete wrong images in some case which caused by image reference detection issue
+- Update unit tests",101,66,167,4,3f6ecffcca8968aa4bffe0ca0f3769159745bf3a
+qax-os/excelize,3f6ecffcca8968aa4bffe0ca0f3769159745bf3a,https://github.com/qax-os/excelize/commit/3f6ecffcca8968aa4bffe0ca0f3769159745bf3a,xuri,2809468,User,2024-12-29T04:30:28+00:00,xuri,2024-12-29T04:30:28+00:00,"This closes #2052, support to sets the format of the chart series data label
+
+- Add new field DataLabel in the ChartSeries data type",19,2,21,4,9934bf5c86343ecc32b96454aa8b0b63f99c77bb
+qax-os/excelize,9934bf5c86343ecc32b96454aa8b0b63f99c77bb,https://github.com/qax-os/excelize/commit/9934bf5c86343ecc32b96454aa8b0b63f99c77bb,xuri,2809468,User,2024-12-21T07:11:17+00:00,xuri,2024-12-21T07:11:17+00:00,"This closes #2046, add new function AddIgnoredErrors support to ignored error for a range of cells
+
+- Add new exported IgnoredErrorsType enumeration
+- Change the type of DataValidationType, DataValidationErrorStyle, DataValidationOperator, PictureInsertType from int to byte",97,7,104,5,5ef4a360c1955fdad7e11f1841b4ae8ea150e9f7
+qax-os/excelize,5ef4a360c1955fdad7e11f1841b4ae8ea150e9f7,https://github.com/qax-os/excelize/commit/5ef4a360c1955fdad7e11f1841b4ae8ea150e9f7,xuri,2809468,User,2024-12-20T01:43:44+00:00,xuri,2024-12-20T01:43:44+00:00,"This closes #2048, fix missing vertical and horizontal border styles
+
+- Update dependencies module",13,11,24,3,8e0490927eb2636cc4f72fa4cc64c36b00828502
+qax-os/excelize,8e0490927eb2636cc4f72fa4cc64c36b00828502,https://github.com/qax-os/excelize/commit/8e0490927eb2636cc4f72fa4cc64c36b00828502,xuri,2809468,User,2024-12-14T01:45:36+00:00,xuri,2024-12-14T01:45:36+00:00,"Update unit test for internal function unzipToTemp
+
+- Move security markdown into .github directory
+- Fix incorrect docs of the AddChart function
+- Update the CodeQL config",3,7,10,4,b53bad35417e743652d2dc8aaa62c308586b4430
+qax-os/excelize,b53bad35417e743652d2dc8aaa62c308586b4430,https://github.com/qax-os/excelize/commit/b53bad35417e743652d2dc8aaa62c308586b4430,xuri,2809468,User,2024-12-12T08:43:48+00:00,xuri,2024-12-12T08:43:48+00:00,"Breaking changes: Go 1.20 and later required
+
+- Update dependencies module",129,129,258,66,3ca60f8d23824bc284400e04d2f13a63ae258958
+qax-os/excelize,3ca60f8d23824bc284400e04d2f13a63ae258958,https://github.com/qax-os/excelize/commit/3ca60f8d23824bc284400e04d2f13a63ae258958,xuri,2809468,User,2024-12-08T03:39:54+00:00,xuri,2024-12-08T03:39:54+00:00,"This closes #2033, support set gap width and overlap for column and bar chart
+
+- Add new fields GapWidth and Overlap in the Chart data type
+- Update unit tests
+- Update dependencies modules",97,23,120,7,c93618856aaf68b0c4dc1c60f8757da0b95effc4
+qax-os/excelize,c93618856aaf68b0c4dc1c60f8757da0b95effc4,https://github.com/qax-os/excelize/commit/c93618856aaf68b0c4dc1c60f8757da0b95effc4,Juneezee,20135478,User,2024-11-22T13:56:38+00:00,web-flow,2024-11-22T13:56:38+00:00,"This closes #2029, use a faster deepcopy library (#2030)
+
+Signed-off-by: Eng Zer Jun <engzerjun@gmail.com>",22,16,38,5,5f446f25f0a09de04d6b8b93b4dd151bdac75bd6
+qax-os/excelize,5f446f25f0a09de04d6b8b93b4dd151bdac75bd6,https://github.com/qax-os/excelize/commit/5f446f25f0a09de04d6b8b93b4dd151bdac75bd6,xuri,2809468,User,2024-11-15T14:03:10+00:00,xuri,2024-11-15T14:03:10+00:00,"This closes #2025, support set chart axis text direction and rotation
+
+- Add new field Alignment in the ChartAxis data type
+- Update unit tests
+- Update doc of the AddHeaderFooterImage function",36,6,42,6,30d3561d0e9bceb3a669ee864e5dcc672eff5341
+qax-os/excelize,30d3561d0e9bceb3a669ee864e5dcc672eff5341,https://github.com/qax-os/excelize/commit/30d3561d0e9bceb3a669ee864e5dcc672eff5341,imirkin,817874,User,2024-11-09T10:36:42+00:00,web-flow,2024-11-09T10:36:42+00:00,"Rename SetLegacyDrawingHF to AddHeaderFooterImage (#2023)
+
+- Add new exported HeaderFooterImagePositionType enumeration
+- An error will be return if the image format is unsupported
+- Rename exported data type HeaderFooterGraphics to HeaderFooterImageOptions
+- Support add and update exist header and footer images
+- Changes the VML data ID to sheet ID
+- Update unit tests
+- Update dependencies modules",226,84,310,6,d2be5cdf8e4c3e0e3155de4743603f082e51ac19
+qax-os/excelize,d2be5cdf8e4c3e0e3155de4743603f082e51ac19,https://github.com/qax-os/excelize/commit/d2be5cdf8e4c3e0e3155de4743603f082e51ac19,imirkin,817874,User,2024-11-08T08:59:07+00:00,web-flow,2024-11-08T08:59:07+00:00,"The SetPageLayout function support set page order of page layout (#2022)
+
+- Add new fields PageOrder for PageLayoutOptions
+- Add a new exported error variable ErrPageSetupAdjustTo
+- An error will be return if the option value of the SetPageLayout function is invalid
+- Updated unit tests",51,6,57,5,b7375bc6d402fc70a408b138688e964087389462
+qax-os/excelize,b7375bc6d402fc70a408b138688e964087389462,https://github.com/qax-os/excelize/commit/b7375bc6d402fc70a408b138688e964087389462,imirkin,817874,User,2024-11-04T02:39:55+00:00,web-flow,2024-11-04T02:39:55+00:00,"This closes #1395, add new function SetLegacyDrawingHF support to set graphics in a header/footer (#2018)",171,8,179,5,0d5d1c53b2bd33c68784f19fb8a4324ed68f372e
+qax-os/excelize,0d5d1c53b2bd33c68784f19fb8a4324ed68f372e,https://github.com/qax-os/excelize/commit/0d5d1c53b2bd33c68784f19fb8a4324ed68f372e,xuri,2809468,User,2024-10-25T00:52:59+00:00,xuri,2024-10-25T00:52:59+00:00,"This closes #2015, fix a v2.9.0 regression bug introduced by commit 7715c1462a917c657d4022a4fe5b57d41d77055a
+
+- Fix corrupted workbook generated by open the workbook generated by stream writer
+- Update unit tests",14,5,19,5,af190c7fdc15409655b7409954984afd7d1640d7
+qax-os/excelize,af190c7fdc15409655b7409954984afd7d1640d7,https://github.com/qax-os/excelize/commit/af190c7fdc15409655b7409954984afd7d1640d7,xuri,2809468,User,2024-10-23T13:52:32+00:00,xuri,2024-10-23T14:07:25+00:00,"This closes #2014, fix redundant none type pattern fill generated
+
+- Simplify unit tests",5,4,9,2,d1937a0cde23ff87549e59ef261a19d65b735c7b
+qax-os/excelize,d1937a0cde23ff87549e59ef261a19d65b735c7b,https://github.com/qax-os/excelize/commit/d1937a0cde23ff87549e59ef261a19d65b735c7b,wushiling50,120616893,User,2024-10-21T01:36:04+00:00,web-flow,2024-10-21T01:36:04+00:00,"This closes #1885, add new CultureNameJaJP, CultureNameKoKR and CultureNameZhTW enumeration values (#1895)
+
+- Support apply number format for the Japanese calendar years, the Korean Danki calendar and the Republic of China year
+- Update unit tests
+
+Signed-off-by: wushiling50 <2531010934@qq.com>",174,33,207,4,f1d1a5dc2b7f1e6a10a9275b2a6e392638457ee7
+qax-os/excelize,f1d1a5dc2b7f1e6a10a9275b2a6e392638457ee7,https://github.com/qax-os/excelize/commit/f1d1a5dc2b7f1e6a10a9275b2a6e392638457ee7,xuri,2809468,User,2024-10-10T14:44:38+00:00,xuri,2024-10-10T14:44:38+00:00,"This closes #2004, support apply number format for time and duration cell value
+
+- Add unit tests
+- Update dependencies modules",71,17,88,6,b23e5a26df2a70102503fd73bf2f7ede38e189b8
+qax-os/excelize,b23e5a26df2a70102503fd73bf2f7ede38e189b8,https://github.com/qax-os/excelize/commit/b23e5a26df2a70102503fd73bf2f7ede38e189b8,Zncl2222,77830479,User,2024-09-30T13:00:59+00:00,web-flow,2024-09-30T13:00:59+00:00,"This closes #1076, add new function MoveSheet to support changing sheet order in the workbook  (#1996)
+
+- Add unit tests",80,0,80,2,bebb8020699ee65bf39fa44380142f3a3d39bc5b
