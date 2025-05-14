@@ -1,0 +1,521 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+streamlit/streamlit,310573212,1,Implement Caching object to support running code blocks only once,"```python
+import streamlit as st
+import time
+
+c = st.Cache()
+if c:
+    time.sleep(2)
+    c.my_dict = {
+        'a': 42
+    }
+
+st.write(c.my_dict)
+```",domoritz,589034,closed,False,2019-08-24T01:30:05+00:00,2019-08-24T03:21:36+00:00,2019-08-24T03:21:18+00:00,2019-08-24T03:21:18+00:00,f8167a445e9a919ab8877b2ffd3f79376717e16b,unknown,226,28,4,27,0,0,treuille,,
+streamlit/streamlit,310584144,2,Improve caching code,"* Fix argument to error message
+* Fix typos
+* Implement Python 2 compatible example code generation
+* Add test",domoritz,589034,closed,False,2019-08-24T04:56:48+00:00,2019-08-24T22:26:26+00:00,2019-08-24T22:26:25+00:00,2019-08-24T22:26:25+00:00,f5332a18596bc681f1efcc00ee6eae0ad0f81152,unknown,30,13,3,4,4,0,,,
+streamlit/streamlit,310585149,3,Fix line number in error message,"<img width=""641"" alt=""Screen Shot 2019-08-23 at 10 44 19 PM"" src=""https://user-images.githubusercontent.com/589034/63633124-a35ebe00-c5f7-11e9-9847-b66f81901b24.png"">
+",domoritz,589034,closed,False,2019-08-24T05:19:47+00:00,2019-08-24T20:21:48+00:00,2019-08-24T20:21:48+00:00,2019-08-24T20:21:48+00:00,19cd970a49515096945d958e42ddea5be3583769,unknown,35,13,2,2,0,0,,,
+streamlit/streamlit,310585325,4,Remove incorrect background of code inside error messages,"Before:
+
+<img width=""677"" alt=""Screen Shot 2019-08-23 at 10 23 05 PM"" src=""https://user-images.githubusercontent.com/589034/63632916-b15f0f80-c5f4-11e9-8363-ab94bbc3b1fd.png"">
+
+After:
+
+<img width=""641"" alt=""Screen Shot 2019-08-23 at 10 23 59 PM"" src=""https://user-images.githubusercontent.com/589034/63632920-ba4fe100-c5f4-11e9-83ef-0baec8115aeb.png"">
+",domoritz,589034,closed,False,2019-08-24T05:24:13+00:00,2019-08-24T20:21:59+00:00,2019-08-24T20:21:59+00:00,2019-08-24T20:21:59+00:00,d0dfca6ee0988ec8934d30bc51608c5606ccef35,unknown,0,1,1,1,0,0,jrhone,,
+streamlit/streamlit,310777669,7,Fix vertical spacing in Streamlit reports,"The Sidebar PR accidentally reduced the vertical spacing of Streamlit elements. This fixes that with a one-line CSS change, and then does some small refactors for Block-related readability.",tvst,690814,closed,False,2019-08-26T06:08:52+00:00,2019-08-26T18:51:20+00:00,2019-08-26T18:51:17+00:00,2019-08-26T18:51:17+00:00,a62f621104286dcf5baec52bbee1c70a578bb828,unknown,72,53,4,6,8,0,,,
+streamlit/streamlit,310779747,8,Fix #1230: OSError not caught when writing cache to disk,"This fixes an uncaught Python 2 exception, as reported here: #1230.
+
+It also hides a hashing warning when a user imports a module from inside a cached function. This is a common scenario, and the warning UI is too invasive today. We should come up with a better UI.",tvst,690814,closed,False,2019-08-26T06:17:53+00:00,2019-11-12T04:33:19+00:00,2019-08-26T06:38:11+00:00,2019-08-26T06:38:11+00:00,2f73a88d80dc64e3ae40679d3236bf7d439cbdf9,unknown,16,5,2,2,0,3,,,
+streamlit/streamlit,310783912,9,Fix #6: report should load element by element (was broken since Sidebar PR),,tvst,690814,closed,False,2019-08-26T06:34:24+00:00,2019-08-26T18:44:42+00:00,2019-08-26T18:44:35+00:00,2019-08-26T18:44:35+00:00,afd964489be26eabd4439a1a6112af0c3cb01e34,unknown,3,1,1,1,0,0,,,
+streamlit/streamlit,310910142,11,Standardize cypress viewport across all tests and fixes,"Standardize cypress viewport across all tests
+- setting to [most common screen resolution](http://gs.statcounter.com/screen-resolution-stats/desktop/worldwide)
+- update cypress snapshots for mac and linux
+
+Additional fixes and changes
+- fix a test in `empty_dataframes.py`, that was old and needed updating
+- remove snapshot corresponding to missing `mplotlib` test
+- fixed issue with snapshots being cutoff or wrong element being captured sporadically
+- increased snapshot diff threshold by .5%
+- fix `reuse_label.py` test because we run in headless mode on circleci but not locally
+- increase snapshot bounding box for `disconnect.py` and `empty_dataframes.py`
+- allow multiple valid width values for `vega_lite_chart.py`
+- set `devicePixelRatio` to 1 when running `cypress open`.. fixes [918](https://github.com/streamlit/streamlit-old-private/issues/918)
+- remove spinner e2e test and core example.. replaced with #5 
+- fix `audio.py` test by increasing the timeout because we're fetching an external file
+- fix `disabled.py` test because the slider api changed
+- preload `viz.js` when running `yarn start`.. fixes [884](https://github.com/streamlit/streamlit-old-private/issues/884)
+
+[Issue](https://github.com/streamlit/streamlit-old-private/issues/1246)
+",jrhone,699897,closed,False,2019-08-26T13:04:43+00:00,2019-08-28T00:46:52+00:00,2019-08-28T00:46:52+00:00,2019-08-28T00:46:52+00:00,712c2cda7f0fe8b8602fd689a7e31c873ddaa86f,unknown,49,86,154,38,5,0,tconkling;kantuni;arraydude;monchier,,
+streamlit/streamlit,310990004,12,Adding support for if and for to magic,Same as on old branch: https://github.com/streamlit/streamlit-old-private/pull/1271,monchier,6821233,closed,False,2019-08-26T16:32:15+00:00,2019-08-26T20:05:34+00:00,2019-08-26T20:05:34+00:00,2019-08-26T20:05:34+00:00,e6ec7c03c60f962a4fd73d4257d6582914c6bd07,unknown,10,4,1,1,1,0,,,
+streamlit/streamlit,311045711,13,Adding unit tests for magic,,monchier,6821233,closed,False,2019-08-26T19:06:34+00:00,2019-08-27T22:46:55+00:00,2019-08-27T22:46:55+00:00,2019-08-27T22:46:55+00:00,4643324a55744b4d7566ddb9633c49ff0643b61c,unknown,121,0,1,4,3,0,,,
+streamlit/streamlit,311055113,14,st.map() using deck_gl,"Original PR: https://github.com/streamlit/streamlit-old-private/pull/1274
+
+This PR fixes #512:
+
+1. Added new map element in which is contained all the logics.
+2. The map element is a shorthand for deck_gl in which is calculated the center and zoom level.
+3. New zoom parameter to map in case you want to specify a different one.",arraydude,631997,closed,False,2019-08-26T19:29:43+00:00,2019-08-26T20:10:39+00:00,2019-08-26T20:10:34+00:00,2019-08-26T20:10:34+00:00,d6d375cbb531b3bf8e0424afeecb5a08a192e4b0,unknown,296,223,11,10,0,0,tconkling;kantuni,,
+streamlit/streamlit,311091581,15,Move all e2e test files into saner folders,"* Moved all files from `frontend/cypress/integration/examples/core/` to `e2e/tests/`
+* Moved all files from `examples/core/` to `e2e/scripts/`
+* Changed `run_e2e_tests.sh` to support retrying a failed test.
+
+@jrhone, don't worry: I'll merge this _after_ your in-flights PRs :smile: ",tvst,690814,closed,False,2019-08-26T20:59:14+00:00,2019-09-11T18:03:38+00:00,2019-09-11T18:03:34+00:00,2019-09-11T18:03:34+00:00,4128f4f0821457c37eea19cbcbb79942158cda2f,unknown,69,33,113,5,0,2,,,
+streamlit/streamlit,311120275,16,Hash numpy arrays. Use fixed size sample.,,domoritz,589034,closed,False,2019-08-26T22:26:38+00:00,2019-08-28T18:16:43+00:00,2019-08-28T18:16:41+00:00,2019-08-28T18:16:41+00:00,5ccf7ffdb9e06b61d22c7bebfaff5d5c5b8834c0,unknown,44,7,2,3,7,0,treuille,,
+streamlit/streamlit,311208499,20,"Remove hexagon layer from st.map, use Pandas for range computation, and other st.map improvements","I was doing the release and realized the new `st.map` was showing both a scatterplot layer and hexagon layer, when it should only show scatterplots. This PR fixes that.
+
+...and since I was touching that code, I noticed a few other places it would be improved:
+1. We should use Pandas to compute min/max since it's faster than doing a loop in Python
+2. Some docstrings and exception messages needed a little love
+3. I realized DeckGlChart supports columns named lat/lon as well as latitude/longitude (this is handled in JS), so I made `st.map` support the both types as well.
+4. Since I removed the hex layer, I set the `pitch` to 0 to get a flat map.",tvst,690814,closed,False,2019-08-27T05:39:54+00:00,2019-08-27T18:52:44+00:00,2019-08-27T18:52:36+00:00,2019-08-27T18:52:36+00:00,75bb54948449915dd5b66458755761f57975431b,unknown,59,109,3,9,0,0,,,
+streamlit/streamlit,311462959,21,ForwardMsg.metadata,"Delta metadata (id, parent_block) is now stored in a `ForwardMsgMetadata` message that hangs off `ForwardMsg`. These bits won't be hashed by the upcoming ForwardMsg de-duping stuff I'm working on.",tconkling,709022,closed,False,2019-08-27T16:16:34+00:00,2019-08-27T19:39:28+00:00,2019-08-27T19:39:25+00:00,2019-08-27T19:39:25+00:00,bb7a0a0910112cc2f25cc055f85373ea0dcce1e3,unknown,122,85,13,4,5,0,kantuni,,
+streamlit/streamlit,311503423,22,Deprecating data parameter from st.deck_gl_chart(),This PR Fixes streamlit/streamlit-old-private#956 step 2,arraydude,631997,closed,False,2019-08-27T18:10:54+00:00,2019-08-28T17:13:04+00:00,2019-08-28T17:13:00+00:00,2019-08-28T17:13:00+00:00,2d7074139f63dc7d8c57443f222e05ea00cb3828,unknown,76,63,6,7,3,0,kantuni,,
+streamlit/streamlit,311577371,28,ForwardMsg de-duping,"This is the first part of ForwardMsg caching:
+
+## Server
+
+- `ForwardMsg.hash` is calculated on every outgoing ForwardMsg
+- The server caches all messages whose size is >= 10k in its `MessageCache` instance. (These cached message are never evicted - this will come in a future PR.) Each entry in the cache contains the cached message, and also a (weak-referenced) set of all ReportSessions for which that message has already been delivered.
+- Cached ForwardMsgs have the `metadata.cacheable` flag set. When the client receives a ForwardMsg with `cacheable == true`, it also caches it.
+- If the server believes that a client has cached a given ForwardMsg (because the cache has an entry for that message+session), it instead sends a ""reference"" message that points to the original message via `ForwardMsg.ref_hash`.
+- The server also exposes a new HTTP endpoint, `/message`, from which clients can request messages that they have received a `ref_hash` message for, but are missing in that client's local cache. (This should not happen frequently! If clients are getting a bunch of local cache misses, then the server is not maintaining its cache properly.)
+
+## Client
+
+- `WebsocketConnection` has a new `ForwardMsgCache` member
+- All incoming `ForwardMsgs` are passed through this cache (via `ForwardMsgCache.processMessage`):
+  - If the ForwardMsg is *not* a reference message, it is cached locally and nothing more is done
+  - If the ForwardMsg *is* a reference message, the client checks to see if it has the original message in its cache; if so, it gets returned
+  - If the reference message is missing from the client's cache, it is requested from the server's `/message` endpoint, and then cached.
+
+## TODO:
+
+- The client and server both need to perform cache eviction; currently, their caches never have anything removed from them.
+- I'd like to have some better client tests that use a mock server to test its handling of the `/message` endpoint",tconkling,709022,closed,False,2019-08-27T21:34:04+00:00,2019-08-28T20:35:59+00:00,2019-08-28T20:35:49+00:00,2019-08-28T20:35:49+00:00,10061f7da841336081a5d0519249276320386d6a,dirty,819,76,17,58,34,0,,,
+streamlit/streamlit,311601425,30,st.image() resizing images when are bigger than the maximum,This PR fixes streamlit/streamlit-old-private#1174,arraydude,631997,closed,False,2019-08-27T22:59:31+00:00,2020-07-11T04:04:48+00:00,2019-08-28T17:44:17+00:00,2019-08-28T17:44:17+00:00,dfe171249a251094498f4f17902f2486eb2fa941,unknown,27,10,2,4,4,1,jrhone;tconkling;kantuni;monchier,,
+streamlit/streamlit,311608199,31,Config: global.minCachedMessageSize,"(This builds on https://github.com/streamlit/streamlit/pull/28, which should be merged first.)
+
+Adds a new config option, `global.minCachedMessageSize`, which defaults to 10k. This value is passed to the client in the `Initialize` message, and stored in `SessionInfo`, so that the client and server's cache params are guaranteed to be in sync.",tconkling,709022,closed,False,2019-08-27T23:27:06+00:00,2019-08-28T16:54:58+00:00,2019-08-28T16:54:46+00:00,,c2648fe9bef5449418c8c954b680bf1ea9f27162,dirty,767,72,18,48,1,1,tvst,,
+streamlit/streamlit,311990430,33,Adding width and height parameter to st.dataframe,"This PR proposes to add a width and height parameter to st.dataframe. Protobuf is changed to include an ElementDimensionSpec field to carry this information. This is included as part of the forward message metadata. The message is parsed and height/width information is extracted and passed down to the Dataframe React component in Block.tsx. Width is set in Block.tsx since existing logic applies to a generic element, while height is set in the Dataframe element in some ad hoc logic.",monchier,6821233,closed,False,2019-08-28T18:57:27+00:00,2019-08-30T21:05:58+00:00,2019-08-30T21:05:58+00:00,2019-08-30T21:05:58+00:00,7a9135d6b84bea900a479e277fa0142127f2479a,unknown,121,10,7,6,10,1,kantuni;tconkling,,
+streamlit/streamlit,312061403,34,Merge version 0.45.0,,tvst,690814,closed,False,2019-08-28T22:28:47+00:00,2019-08-28T22:56:44+00:00,2019-08-28T22:56:44+00:00,2019-08-28T22:56:44+00:00,513f6337acc9722c55c4247faba0491806da8bfe,unknown,778,568,41,38,0,0,,,
+streamlit/streamlit,312061483,35,Test frontend in CircleCI,"The Python 3 CircleCI job now runs our frontend Jest tests.
+
+Also added a `make jscoverage` Makefile rule in case we care about generating test coverage reports in the future. (It looks like someone expected this to exist at one point, but it's never existed or been used.)",tconkling,709022,closed,False,2019-08-28T22:29:06+00:00,2019-09-04T16:36:00+00:00,2019-08-29T18:41:09+00:00,2019-08-29T18:41:09+00:00,a63fc5aee64d4f547720d40baef94b56581f3126,unknown,23,2,2,5,0,1,jrhone,,
+streamlit/streamlit,312381929,37,403 Error message,This PR fixes https://github.com/streamlit/streamlit-old-private/issues/1098,arraydude,631997,closed,False,2019-08-29T15:43:20+00:00,2019-08-29T21:14:45+00:00,2019-08-29T21:14:39+00:00,2019-08-29T21:14:38+00:00,9549a3561b09bed5d091867ed9cebc33fde0ddfd,unknown,18,0,1,2,0,0,tvst;monchier;tconkling,,
+streamlit/streamlit,312532082,38,Fix WebsocketConnection totalTries count,"1. Moved `onreadystatechange`  logics to `onload` event as these two events were overlapping between.
+2. Removed unused events
+",arraydude,631997,closed,False,2019-08-29T23:46:24+00:00,2019-09-04T14:12:19+00:00,2019-09-04T14:12:16+00:00,2019-09-04T14:12:16+00:00,b7672b188ff1eee0efa41ee070ea61b0aa3547b9,unknown,30,44,1,2,0,1,kantuni,,
+streamlit/streamlit,312722730,39,Docker file to mirror CircleCI for Cypress tests,"Issue #25
+
+Dockerfile that matches the CircleCI config.yml setup so we can run Cypress tests in the same environment that CircleCI does.
+
+- Lowered image snapshot diff threshold to 1%
+- Regenerated snapshots for mac and linux
+- Fixed e2e script task failing on circle with no failed tests
+- Swapped beforeEach with before in Cypress specs where it wasn't necessary to reload the page before each test
+- Increased timeout for video test since we're requesting an external file
+- Added docker build/run commands to Make file",jrhone,699897,closed,False,2019-08-30T12:42:03+00:00,2019-09-09T14:01:59+00:00,2019-09-09T14:01:59+00:00,2019-09-09T14:01:59+00:00,3c7856477814c27650c56def6435257d7adbfef3,unknown,271,2384,116,15,9,2,tvst;tconkling;kantuni;arraydude,,
+streamlit/streamlit,312895551,41,"Update docs. Remove some old tutorials, rename others, fix links.","* Updated broken links for st.cache
+* Removed these tutorials:
+  * First steps
+  * Caching mapping and more
+* Updated text for `index.md`. Now points to the get started guide and the interactive report tutorial. 
+* Updated title to: ""Tutorial: Create your first interactive report""
+* Updated title to : ""Tutorial: Run Streamlit remotely""",erikhopf,15851084,closed,False,2019-08-30T21:57:24+00:00,2019-09-09T23:03:59+00:00,2019-09-09T23:03:59+00:00,2019-09-09T23:03:59+00:00,36d95b374dcb4189b455bae7f9cb5079e538c5f3,unknown,57,556,8,4,0,4,,,
+streamlit/streamlit,312908185,42,Add end2end test for st.dataframe width and height parameters,I added an end2end test that verifies that the dimensions of a dataframe on the UI is as expected for different values of height and width parameters.,monchier,6821233,closed,False,2019-08-30T23:18:26+00:00,2019-09-04T17:16:30+00:00,2019-09-04T17:16:30+00:00,2019-09-04T17:16:30+00:00,b7fc5498489f181da5348616275f8488132e6608,unknown,70,0,2,2,2,0,tvst,,
+streamlit/streamlit,313408590,45,Reset Widget State,Closes [#1094](https://github.com/streamlit/streamlit-old-private/issues/1094).,kantuni,6151409,closed,False,2019-09-03T03:33:53+00:00,2019-09-27T12:20:25+00:00,2019-09-27T12:20:21+00:00,2019-09-27T12:20:20+00:00,1adcd064e2897ae53cb48a6bf5b68c97ed12ae7e,unknown,579,562,41,31,8,0,,,
+streamlit/streamlit,314122490,50,Merge develop into feature/hashing,Adds the latest commits from `develop` to `feature/hashing`.,tconkling,709022,closed,False,2019-09-04T16:28:08+00:00,2019-09-04T16:35:13+00:00,2019-09-04T16:35:09+00:00,2019-09-04T16:35:09+00:00,735b3d4138d21c16e55b77240b8e307769695c17,dirty,1283,786,211,11,0,0,tvst,,
+streamlit/streamlit,314218914,51,Add a multiselect widget,"This PR proposes to add a multiselect widget.
+It includes
+* Client side code for the React component
+* Python code for the streamlit command with unit tests
+* e2e Cypress test
+",monchier,6821233,closed,False,2019-09-04T20:38:49+00:00,2019-09-09T17:59:44+00:00,2019-09-09T17:59:44+00:00,2019-09-09T17:59:44+00:00,455ae6190a09933f9d9ccd625ef64aa31c3f6a75,unknown,522,4,22,3,18,2,tvst;jrhone,,
+streamlit/streamlit,315023165,55,ESLint + Prettier,ESLint (with TypeScript) + Prettier,kantuni,6151409,closed,False,2019-09-06T16:16:00+00:00,2019-09-07T16:25:11+00:00,2019-09-07T16:25:06+00:00,2019-09-07T16:25:06+00:00,f80df5d2a2973dc211e338fdd8ba482c6c1a57bd,unknown,3385,2895,162,4,2,0,tvst;arraydude;jrhone;tconkling,,
+streamlit/streamlit,315118389,56,Issue 1204: Graphs using Vega-Lite,"This PR fixes streamlit/streamlit-old-private#1204
+
+- LineChart using Altair
+- BarChart using Altair
+- AreaChart using Altair
+- Updated unit tests
+- Updated e2e tests
+- DeltaGenerator has a `delta_type` property
+- `add_rows` method transforms the structure if it is needed depending on the `delta_type`
+- Fixing pylint from affected files",arraydude,631997,closed,False,2019-09-06T21:23:15+00:00,2019-09-23T23:11:51+00:00,2019-09-23T23:11:48+00:00,2019-09-23T23:11:48+00:00,0f1a774069fe78d2df5ecbdc7de533826187fd75,unknown,293,1024,192,51,33,4,jrhone;monchier,,
+streamlit/streamlit,315212229,57,Fix security vulnerabilities,https://yarnpkg.com/lang/en/docs/selective-version-resolutions/,kantuni,6151409,closed,False,2019-09-07T17:31:26+00:00,2020-04-05T17:53:35+00:00,2019-09-08T04:17:06+00:00,2019-09-08T04:17:06+00:00,32cc7ffa30690c5f3dec8ffbf0062515fe45a7e6,unknown,2991,630,2,1,0,0,tvst,,
+streamlit/streamlit,315710328,59,Adding Linux snapshots for multiselect test,These are the missing images for the multiselect end2end test,monchier,6821233,closed,False,2019-09-09T20:49:58+00:00,2019-09-10T18:14:26+00:00,2019-09-10T18:13:53+00:00,,d80dec3559aaa98ed947657de101ac7222ebc13c,unknown,0,0,6,1,0,3,tvst;jrhone,,
+streamlit/streamlit,315735780,60,Update Cypress key,,tvst,690814,closed,False,2019-09-09T22:09:26+00:00,2019-09-09T23:30:28+00:00,2019-09-09T23:30:25+00:00,2019-09-09T23:30:25+00:00,544657555272dc51f0bbd6da5668f0473aefc429,unknown,1,1,1,1,0,0,jrhone,,
+streamlit/streamlit,315745501,61,Make resolution of st.image and st.pyplot high DPI,,tvst,690814,closed,False,2019-09-09T22:47:02+00:00,2019-09-09T23:29:51+00:00,2019-09-09T23:29:48+00:00,2019-09-09T23:29:48+00:00,cefc030f90db9cb1f062f86568b44246f3bfac13,unknown,3,1,1,2,0,0,jrhone,,
+streamlit/streamlit,315938257,67,Fix named volume for yarn-start cache in Docker file for Cypress,Fixes permission denied error,jrhone,699897,closed,False,2019-09-10T11:05:13+00:00,2019-09-10T16:57:29+00:00,2019-09-10T16:57:24+00:00,2019-09-10T16:57:24+00:00,7782512524b5b47ea300aaeebf3105baa4cea716,unknown,5,4,1,1,1,1,arraydude;kantuni;tconkling;tvst,,
+streamlit/streamlit,315993884,71,Test current state of snapshots on CircleCI,Do not merge,jrhone,699897,closed,False,2019-09-10T13:26:17+00:00,2019-09-10T16:56:57+00:00,2019-09-10T16:56:42+00:00,,0be88ec4a7075c93f6f8a4b1f371f8b0b7f1c8c8,unknown,0,0,1,1,0,0,,,
+streamlit/streamlit,316114657,79,Adding `run -m` option to run modules,This PR adds an option `-m <module_name>` or `--module <module_name>` option to the `run` command. This option will import and run a module named <module_name>,monchier,6821233,closed,False,2019-09-10T18:08:59+00:00,2020-01-30T21:15:45+00:00,2020-01-30T21:15:45+00:00,,ba541aa294ac2ec88c4b2d2403582ed3de41ce25,dirty,25,3,1,3,10,10,treuille,,
+streamlit/streamlit,316116623,80,Adding Linux snapshots for multiselect tests,Adding snapshots for multiselect,monchier,6821233,closed,False,2019-09-10T18:14:58+00:00,2019-09-10T20:00:31+00:00,2019-09-10T20:00:31+00:00,2019-09-10T20:00:31+00:00,93cf9393877c3122b569b74a4f35f0dea01d26cd,unknown,0,0,6,1,0,0,tvst,,
+streamlit/streamlit,316121923,81,Black + Pre-commit Hook,"Black - https://black.readthedocs.io/en/stable/
+Git hooks with Husky - https://github.com/typicode/husky
+",kantuni,6151409,closed,False,2019-09-10T18:29:29+00:00,2019-09-13T21:24:41+00:00,2019-09-13T20:40:08+00:00,2019-09-13T20:40:08+00:00,62588bfa09b05dcaa40c9ff2b9d65e83f9c56139,unknown,6527,6166,302,17,2,1,domoritz;arraydude;jrhone;tconkling;monchier,,
+streamlit/streamlit,316130291,82,ForwardMsgCache expiration,"This implements `ForwardMsgCache` expiration on both the client and the server.
+
+- The `global.maxCachedMessageAge` config value specifies the maximum age of a message in the cache. The age of a message is defined by the number of times a referencing report has finished running since the message was accessed by that report. So when a report finishes running for the first time, the age of all its cached messages is 1.
+- Our default maxCachedMessageAge is 2, which means that messages will remain cached even after not having been referenced for a report run.
+- To determine the age of messages in its cache, the server tracks a `report_run_count` alongside each `ReportSession` in its websocket->reportsession dictionary. The server increments this value each time it processes a `report_finished` ForwardMsg message for a report.
+- When the server increments `report_finished`, it also asks the cache to remove any expired messages. I haven't done anything fancy here - the cache just iterates through all its entries, does an age check, and deletes them if they're expired. @tvst, I know you were potentially concerned about performance issues with the ""iterate the whole cache"" strategy. We could add a simple timer to this function to collect local metrics to see if it's actually an issue?
+- Similarly, when the client receives a `report_finished` ForwardMsg, it performs the same cache expiration step. This means that the server and client's caches should stay in sync. (I haven't thought hard enough about whether it's possible for them to get briefly out of sync, but if they do, we have the new `/message` endpoint as a fallback.)
+- If a report fails to run due to a compilation error, neither the server nor the client will increment the `report_run_count` for that session. (The run-count incrementing is conditional on the status value of the `report_finished` message, which is set to `FINISHED_WITH_COMPILE_ERROR` when that happens.)
+
+
+There are client and server tests for all this new logic. But the easiest way to see the expiration in action is to run something like `examples/core/message_deduping.py` and watch the debug output on the server and the client. (You'll see logs for cache hits and misses - you should never see a miss! - on the client; and logs for sending cached message refs on the server.)
+- This example just creates a big dataframe and sends it twice
+- The first time the report is run, the message will only be delivered to the client once.
+- If you rerun the report, the message won't be delivered at all because it'll be cached.
+- If you remove the `st.dataframe()` calls and rerun the report, the dataframe will *not* be removed from the cache because it won't be old enough. Re-adding those calls and rerunning the report should confirm this.
+- If you remove the dataframe calls and re-run the report _twice_ with them missing, they will then be expired from the cache. Re-adding them should result in the message being resent to the client.",tconkling,709022,closed,False,2019-09-10T18:53:29+00:00,2019-09-17T18:10:40+00:00,2019-09-17T18:10:36+00:00,2019-09-17T18:10:36+00:00,bbbb2869743e4fa46cc3d2ffa39432cd6b8d2c71,dirty,1018,418,24,20,12,0,monchier,,
+streamlit/streamlit,316203095,85,"Email, metrics prompt","- Nicer `streamlit activate` prompt and text from @tvst
+- Remove the unused ""activation code"" stuff from Credentials.
+- Credentials: email is now optional. If the user doesn't enter one, it will be stored as the empty string. The client will omit the ""authoremail"" trait from the Segment.io identifier if the user didn't enter an email.
+
+Fixes #63 ",tconkling,709022,closed,False,2019-09-10T22:29:13+00:00,2019-09-13T17:11:53+00:00,2019-09-13T17:11:46+00:00,2019-09-13T17:11:46+00:00,f1578e52aa2e156d61e46c53d7ef8821d2fc0a72,unknown,110,141,3,7,6,1,tvst,,
+streamlit/streamlit,316272913,87,Add show_spinner option to st.cache,Add an option to st.cache to disable the spinner,monchier,6821233,closed,False,2019-09-11T05:02:27+00:00,2019-09-12T17:14:19+00:00,2019-09-12T17:14:18+00:00,2019-09-12T17:14:18+00:00,94d69ab6fedaf87a901534a4e4b751fdbeb2f05a,unknown,69,5,3,3,0,2,tvst;treuille,,
+streamlit/streamlit,316282840,88,Better method signatures,"Most DeltaGenerator methods are decorated with helper functions that insert special arguments into them. For example, the arugment `element` is inserted into almost every DeltaGenerator method, and `ui_value` is inserted into every widget method.
+
+These arguments aren't be user-visible, in the sense that users can't pass their own `element` proto into these methods. So a while back we implemented the `_wraps_with_cleaned_sig` function to modify some special metadata in those methods, so the `element` argument wouldn't appear in the output of utilities like Python's `help()` function, ipython's `?`, Streamlit's `st.help`, and our autogenerated API docs.
+
+But we never updated the `_wraps_with_cleaned_sig` decorator to appropriately the user-hidden `ui_value` argument from widget methods. So that's what I'm doing in this PR.
+
+In this PR, the actual fix was the introduction of the `num_args_to_remove` argument to the `_wraps_with_cleaned_sig` function. Everything else is just some cleanup and minor refactor, which should have no effect on actual logic.",tvst,690814,closed,False,2019-09-11T05:51:14+00:00,2019-09-19T00:21:35+00:00,2019-09-19T00:21:31+00:00,2019-09-19T00:21:31+00:00,b6734272dbc22cad24520be190d0554921d46e2a,unknown,35,63,2,47,3,0,kantuni,,
+streamlit/streamlit,316413195,91,"On a Mac, check if xcode installed before requiring watchdog","Issue #66 
+
+- Modify setup.py so we check whether xcode tools are available before making watchdog a dependency (only if the current system is a Mac, of course)
+- In LocalSourcesWatcher.py, when we fall back to the polling solution, print a message telling the user to install the watchdog module
+- Add config option to turn that message off: global.disableWatchdogWarning",jrhone,699897,closed,False,2019-09-11T12:02:29+00:00,2019-09-17T18:30:46+00:00,2019-09-17T18:30:45+00:00,2019-09-17T18:30:45+00:00,f38a7c530b5f4096d58283a741047d5536350c3b,unknown,42,3,5,6,15,0,arraydude;kantuni;tconkling,,
+streamlit/streamlit,316606547,92,Removing time dependent hashing tests,This PR fixes this : https://streamlit.slack.com/archives/C9FJJN8Q7/p1568229744005400,arraydude,631997,closed,False,2019-09-11T19:46:30+00:00,2019-09-17T02:38:44+00:00,2019-09-11T21:39:06+00:00,2019-09-11T21:39:06+00:00,a42260e982166af3777ad28880d5f4877e10c359,unknown,5,43,1,1,0,1,,,
+streamlit/streamlit,316775635,93,Update hamburger menu,"Issue #64 
+
+- Remove ""Share report"" menu item.
+- Add ""Community"", ""Report bug"", and ""Streamlit for teams""
+- Rearrange items, as shown below, the new menu should look like
+
+```
+Rerun
+Edit command
+Clear cache
+---
+Documentation  [links to streamlit.io/docs]
+Community  [links to discuss.streamlit.io]
+Streamlit for teams  [links to streamlit.io/teams]
+---
+Report a bug  [links to https://github.com/streamlit/streamlit/issues/new/choose]
+---
+Settings
+About
+```",jrhone,699897,closed,False,2019-09-12T07:50:59+00:00,2019-09-13T14:41:20+00:00,2019-09-13T14:41:17+00:00,2019-09-13T14:41:17+00:00,fd8948b70bfec4195735ae5e4d1bbdaeff3cdc01,unknown,57,10,5,5,2,2,kantuni;tconkling,,
+streamlit/streamlit,316779201,94,Magic enhancements,"- Turn on magic by default
+- Make magic not print variable name",jrhone,699897,closed,False,2019-09-12T08:01:12+00:00,2019-09-13T11:44:31+00:00,2019-09-13T11:44:28+00:00,2019-09-13T11:44:28+00:00,6acc7fc7b7e072501620e0f644ca97b0d7d11625,unknown,3,6,2,2,0,0,arraydude;kantuni;tconkling,,
+streamlit/streamlit,316797527,95,Escape html in markdown,https://github.com/streamlit/streamlit-old-private/issues/697,jrhone,699897,closed,False,2019-09-12T08:50:28+00:00,2019-09-13T11:43:46+00:00,2019-09-13T11:43:32+00:00,2019-09-13T11:43:32+00:00,4fc35f63a87be6711ae136a5225e878a3b0d3bf6,unknown,1,5,1,2,0,0,kantuni;arraydude;monchier;tconkling,,
+streamlit/streamlit,316805694,96,Sidebar z-index bug,Set z-index of BaseUI component layers to the z-index of Vega Lite popups,jrhone,699897,closed,False,2019-09-12T09:10:14+00:00,2019-09-13T20:10:51+00:00,2019-09-13T20:10:51+00:00,2019-09-13T20:10:51+00:00,407a9ae2ecb2ba5b885f5e762dd1667ecd6e00cb,unknown,3,1,1,2,1,0,arraydude;kantuni;monchier;tconkling,,
+streamlit/streamlit,317058442,97,Debounce the render function on the ReportView,"Test rendering performance with
+- `streamlit run examples/long_write.py`
+- `streamlit hello`",jrhone,699897,closed,False,2019-09-12T19:39:21+00:00,2019-09-28T14:08:05+00:00,2019-09-28T14:08:05+00:00,,dfb878e85b4eb22a82f58e7b352b476d69d1a7db,dirty,236,231,24,12,0,4,tvst,,
+streamlit/streamlit,317074786,98,[Docs] Fix st.slider API in tutorial,Quick update for the slider code i two places. Change from interactive report to interactive app.,erikhopf,15851084,closed,False,2019-09-12T20:25:28+00:00,2019-09-17T17:53:01+00:00,2019-09-17T17:53:01+00:00,2019-09-17T17:53:01+00:00,d855dfb21a65b85683d99b5b6c1fa0c915771bf9,unknown,3,3,1,2,2,4,,,
+streamlit/streamlit,317086632,99,Adding `streamlit run` by url,"We want to support `streamlit run <url>`
+
+This PR adds support for this usage of the `run` command. 
+- Added logic to recognize a url - we use `validators.url` for this. `http://somethign` is a url. `something` is not
+- Moved file validation from click to custom logic, since the first argument of `run` is now overloaded and can be file or url
+- Added cli unit tests",monchier,6821233,closed,False,2019-09-12T20:58:26+00:00,2019-09-16T17:06:44+00:00,2019-09-14T06:07:17+00:00,2019-09-14T06:07:17+00:00,c746d46c0b5f3892c0aa6734a28240f51bd5abd2,unknown,122,4,3,8,9,0,kantuni,,
+streamlit/streamlit,317131788,101,Fix bug where message is not initialized in the spinner code,"This is a fix for https://github.com/streamlit/streamlit/issues/53
+
+As we said, we will leave the issue open until we have confidence the bug is not showing up anymore",monchier,6821233,closed,False,2019-09-13T00:05:11+00:00,2019-09-13T19:11:12+00:00,2019-09-13T19:11:12+00:00,2019-09-13T19:11:12+00:00,26603fc89a8b9845feaa1092d98ece5de004b914,unknown,2,1,1,1,0,0,,,
+streamlit/streamlit,317270223,103,WIP Virtual lists,"Do not merge
+
+Use `window scroller` and `list` from `react-virtualized` to handle long lists.
+Use `cell measurer` to handle dynamic row heights (todo).",jrhone,699897,closed,False,2019-09-13T10:44:34+00:00,2019-09-28T14:25:42+00:00,2019-09-28T14:25:42+00:00,,7d134d34db441657b5550bfb1b532be963411b4b,dirty,68,8,6,12,0,2,tvst,,
+streamlit/streamlit,317400641,104,Responsive layout,Sidebar should be visible at all screen sizes down to 800px width (i.e. not mobile),arraydude,631997,closed,False,2019-09-13T16:32:53+00:00,2019-09-19T19:23:38+00:00,2019-09-19T19:23:35+00:00,2019-09-19T19:23:35+00:00,d4dced8bd41af8b296838a94df9b5d98fe73c760,unknown,194,139,7,10,4,7,,,
+streamlit/streamlit,317412006,105,Fixed broken websocket when reconnect,,arraydude,631997,closed,False,2019-09-13T17:09:09+00:00,2019-09-13T23:41:52+00:00,2019-09-13T23:41:49+00:00,2019-09-13T23:41:49+00:00,55d443e316d09def37bc35d5f922cffe97ce1855,unknown,43,30,1,2,3,0,,,
+streamlit/streamlit,317447364,106,Check version on startup,"Occasionally check the installed streamlit version against the latest in PyPI, and show a notice if there's a new version available.
+
+The check runs randomly with a 5% chance, so that we're not spamming the user frequently.
+
+I used `requests` (instead of urllib) for this, which entailed adding it as an explicit dependency in our Pipfile. All the other places in streamlit that used urllib for fetching over HTTP have been replaced with requests. (And there are some additional tests that didn't previously exist.)
+
+Fixes #65 ",tconkling,709022,closed,False,2019-09-13T19:03:50+00:00,2019-09-13T22:44:16+00:00,2019-09-13T22:44:09+00:00,2019-09-13T22:44:08+00:00,c74227ac25b35b06f13216bdbf902cb7e636ee42,unknown,456,205,16,16,5,0,,,
+streamlit/streamlit,317448175,107,Sidebar exceptions,,arraydude,631997,closed,False,2019-09-13T19:06:20+00:00,2019-09-17T17:52:08+00:00,2019-09-17T17:52:05+00:00,2019-09-17T17:52:05+00:00,2255a84f80c2e32df2b8c963f44cfac708c83120,unknown,106,20,2,6,3,0,,,
+streamlit/streamlit,317510436,109,Fixed marshalling images with Alpha channel,,arraydude,631997,closed,False,2019-09-13T23:22:26+00:00,2019-09-16T19:18:52+00:00,2019-09-16T19:18:48+00:00,2019-09-16T19:18:48+00:00,c66b54878ac477f75e0e505d02831673ad3060c8,unknown,39,5,6,5,2,0,,,
+streamlit/streamlit,317913224,110,Fixing unbound local variable,,arraydude,631997,closed,False,2019-09-16T14:36:36+00:00,2019-09-17T11:37:29+00:00,2019-09-17T11:37:26+00:00,2019-09-17T11:37:26+00:00,39150ae78686f585d6aaa8381f639249939c4fdd,unknown,10,11,3,4,0,0,tconkling,,
+streamlit/streamlit,318079968,117,Fix hashing if the object has a name but the name is not a string.,Fixes #115 ,domoritz,589034,closed,False,2019-09-16T21:58:41+00:00,2019-09-17T00:22:29+00:00,2019-09-17T00:22:24+00:00,2019-09-17T00:22:24+00:00,ee4c4fad1e77f1e2205a7fa82b8d3c253ca92823,unknown,14,2,2,3,0,0,treuille;kantuni,,
+streamlit/streamlit,318085108,118,Support hashing dataframes with unhashable objects. Gracefully f…,Fixes #111. Merge #117 first. ,domoritz,589034,closed,False,2019-09-16T22:16:57+00:00,2019-09-17T03:31:37+00:00,2019-09-17T03:31:36+00:00,2019-09-17T03:31:36+00:00,1d7f6cff6acc7643a6b1f24f2c502f365c4af193,unknown,153,119,2,4,9,1,kantuni,,
+streamlit/streamlit,318467153,125,Cypress test for escaping html in markdown,Tests for https://github.com/streamlit/streamlit/pull/95,jrhone,699897,closed,False,2019-09-17T18:24:12+00:00,2019-09-18T07:57:01+00:00,2019-09-18T07:56:57+00:00,2019-09-18T07:56:57+00:00,e11188a7348ed6a9e037606bb62b19b87b1bb3c4,unknown,16,8,2,1,0,0,,,
+streamlit/streamlit,318482905,126,Rename/report2app,Replace the word “report” with “app” in user-visible parts of the code.,arraydude,631997,closed,False,2019-09-17T19:05:58+00:00,2019-09-18T21:33:15+00:00,2019-09-18T21:33:12+00:00,2019-09-18T21:33:12+00:00,c377908f4dc555ab783b078f66b06e6039e2b959,unknown,316,284,30,6,4,0,,,
+streamlit/streamlit,318543739,128,Removing the uber demo from the streamlit repository,Mostly cosmetic changes. Moved charts to the sidebar. Changed the graphs to altair charts,monchier,6821233,closed,False,2019-09-17T22:01:33+00:00,2019-09-20T23:00:50+00:00,2019-09-20T23:00:29+00:00,,28d3763d2d494f72358b23c63602b49b57c68489,unknown,0,56,1,1,0,1,treuille;kantuni,,
+streamlit/streamlit,318768685,131,Tests for z-index of date input popover in sidebar,Tests for https://github.com/streamlit/streamlit/pull/96,jrhone,699897,closed,False,2019-09-18T11:42:32+00:00,2019-09-18T17:18:35+00:00,2019-09-18T17:18:29+00:00,2019-09-18T17:18:28+00:00,b51fa3185d436daccf139a5fc9548bad5812a654,unknown,21,5,5,1,0,0,,,
+streamlit/streamlit,318906966,133,"Test running streamlit commands ""bare""","- Adds a new test step to CircleCI: ""Run Integration Tests"", and an associated Make rule `make integration-tests`
+- This runs `scripts/run_bare_integration_tests.py`, which runs all the e2e tests in ""bare"" mode - that is, via `python script.py` instead of `streamlit run script.py`. The test script ensures that all the e2e scripts exit with a zero exit code.
+- Streamlit detects if it's running in bare mode via a new global, `_is_running_with_streamlit`. This defaults to false, and gets set to true by the `streamlit run` CLI command.
+- When running in bare mode, streamlit does not show ""missing ReportContext"" warnings.
+- This PR also pins the streamlit numpy dependency to < 1.17 when installed in a Python 2 environment; numpy 1.17 dropped support for Py2.
+
+Fixes #122, #108 ",tconkling,709022,closed,False,2019-09-18T16:48:56+00:00,2019-09-18T18:20:03+00:00,2019-09-18T18:19:59+00:00,2019-09-18T18:19:59+00:00,86df5a4d6afc7c1ee25e5fb445dca014885fbefc,unknown,260,127,13,19,5,2,kantuni,,
+streamlit/streamlit,318916780,134,Updates to LP and sidebar,"@tvst + @kellyamanda - This PR covers two things: 
+* Updates to the Landing Page per Amanda's doc
+* Updates to the Support section of the sidebar
+  * Added link to GitHub
+  * Added link to Community forum
+  * Removed Slack
+
+### Open questions:
+* Do we want to rename the interactive report tutorial. If yes, we should update the filename as well. 
+* I know that we want to change report to app throughout the docs. I did a global search on the repo, this also contains references in code and the API reference, but there are ~986 instances of the word report. How do we want to address this? It's not going to be as easy as a global find and replace. Should we start by targeting the docs? Maybe: 
+  * P0 - Documentation (Concepts)
+  * P1 - API Ref
+  * P2 - Code comments",erikhopf,15851084,closed,False,2019-09-18T17:16:35+00:00,2019-09-18T17:52:41+00:00,2019-09-18T17:52:41+00:00,2019-09-18T17:52:41+00:00,0486171a37cae0060d3cf5a8a589571475483326,unknown,10,32,1,1,0,0,,,
+streamlit/streamlit,318955710,136,"Fix error ""connection error"" error message","- Renamed old `commandLine` proto field of `NewReport` to `args`. This could be more exhaustive and I didn't propagate to method names and local variables. It may worth to do so for clarity or be aggressive and remove the old `commandLine` and related code.
+- Added a new `commandLine` proto field for an ""immutable"" command line as string. This is supposed to be a command line the user can type and run
+- Added logic in python to pass the command line string to the `NewReport`message. The command line is computed in `cli.py` and propagated to `ReportSession._enqueue_new_report_message`
+- Added logic in client to handle the command line passed in the proto and show it in the error message when the server disconnects
+- Added logic to parse the `name` passed to the client using the command line. The command line is stored in `SessionInfo` and it is set when a `NewReport` message is received.",monchier,6821233,closed,False,2019-09-18T19:01:09+00:00,2019-09-26T20:13:42+00:00,2019-09-26T20:13:28+00:00,2019-09-26T20:13:28+00:00,3468fedca4f30580e0ed12c6a87bc5602c2da25d,unknown,125,156,21,15,31,4,tconkling,,
+streamlit/streamlit,318963103,137,Fullscreen button to expand tables and charts,"*Added new component FullScreenWrapper
+
+<img width=""1680"" alt=""Screen Shot 2019-09-18 at 4 00 03 PM (2)"" src=""https://user-images.githubusercontent.com/22157341/65178969-460c3000-da30-11e9-86bc-b7975bef66c1.png"">
+<img width=""1680"" alt=""Screen Shot 2019-09-18 at 4 00 10 PM (2)"" src=""https://user-images.githubusercontent.com/22157341/65178972-473d5d00-da30-11e9-9225-8d4adfffe997.png"">
+<img width=""1680"" alt=""Screen Shot 2019-09-18 at 4 00 20 PM (2)"" src=""https://user-images.githubusercontent.com/22157341/65178977-499fb700-da30-11e9-876c-6cf3789ba63b.png"">
+<img width=""1680"" alt=""Screen Shot 2019-09-18 at 4 00 23 PM (2)"" src=""https://user-images.githubusercontent.com/22157341/65178984-4c021100-da30-11e9-9036-3ab2d720e798.png"">
+",dcaminos,22157341,closed,False,2019-09-18T19:21:27+00:00,2019-10-08T20:50:55+00:00,2019-10-08T20:50:50+00:00,2019-10-08T20:50:50+00:00,ed9dd3674e8f5d89017856ab8f3bafee65dec0e9,unknown,2227,183,38,28,58,9,arraydude;kantuni,,
+streamlit/streamlit,318989944,138,Magic fixes,"- Magic supports `while`, `async with`, `async for` statements, and async functions
+- Ignore `yield` and `yield from` statements (these were previously being magicked, which resulted in random-seeming ""None"" values being st.written to the report).
+- I also created an `examples/magic.py` file for easy visual testing of these things, which I used while debugging. (The magic unit tests also verify these fixes.)
+
+Fixes #135 ",tconkling,709022,closed,False,2019-09-18T20:37:58+00:00,2019-09-23T17:04:56+00:00,2019-09-20T21:48:28+00:00,2019-09-20T21:48:28+00:00,f39a6a7d35c2d2e47755a511c2752acc5b3df094,unknown,190,3,3,7,4,1,monchier,,
+streamlit/streamlit,319022513,140,Rotate server port if current one is taken,"When running `streamlit` it starts up the server listening to `server.port`, in case the user has not set the port explicitly the server will add 1 to the port number and try to run the server in that port, in order to be able to have several `streamlit` projects running simultaneously.
+
+Please review if the message set in `_set_option` third parameter is appropriate.
+Please advise if you think there should be tests for this and what to test.
+
+to test locally with `make all-devel` make sure to have the following settings
+```
+developmentMode=false
+useNode=false
+```
+
+After having those config keys set up just run `streamlit hello` in more than one terminals and see the report pop up in the browser over a different port.
+
+resolves #116 ",dnuske,934511,closed,False,2019-09-18T22:19:55+00:00,2019-09-26T19:58:29+00:00,2019-09-26T19:58:29+00:00,2019-09-26T19:58:29+00:00,b22810a7485571f0c0a64270b4809a95c233086e,unknown,119,1,2,9,31,1,tconkling;dcaminos;erikhopf;kantuni;kellyamanda;monchier;treuille;jrhone;arraydude,,
+streamlit/streamlit,319039090,141,"Publish docs to both /docs and /secret/docs, until we deprecate /secret/docs in January.",Turns out this is way simpler than setting up a Lambda just to redirect from secret/docs/ to docs/,tvst,690814,closed,False,2019-09-18T23:35:40+00:00,2019-09-18T23:44:34+00:00,2019-09-18T23:44:34+00:00,2019-09-18T23:44:34+00:00,a0dc4037e9d3e85acfa499ffda22cbb8059aa442,unknown,15,6,1,43,0,0,,,
+streamlit/streamlit,319321537,144,Fix bug for startup under windows,"Fixed bug that hinders the startup under windows by using platform specific SIGQUIT signal.
+
+[x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.",felixnext,6040909,closed,False,2019-09-19T14:56:39+00:00,2019-09-19T19:53:04+00:00,2019-09-19T19:53:04+00:00,2019-09-19T19:53:04+00:00,670de52f1f10afca228da22c97e56b1356e5172b,unknown,4,1,1,1,0,2,,,
+streamlit/streamlit,319474498,148,New streamlit hello,"**Issue:** #147
+
+**Decription:** New `streamlit hello`. This is a new demo composed by 5 small demos, some of them interactive that the user can choose via a selectbox. Once the user has chosen a demo, she can see the source code and execute the demo.
+
+---
+* [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",monchier,6821233,closed,False,2019-09-19T21:43:37+00:00,2019-09-28T19:06:07+00:00,2019-09-28T19:06:07+00:00,2019-09-28T19:06:07+00:00,c33e19ef5659d16d3c5cc05c7a77d8ab37001021,unknown,221,35,2,39,24,5,treuille;kantuni,,
+streamlit/streamlit,319501110,149,[docs] Add analytics; redirect /secret/docs; fix compilation problem,,tvst,690814,closed,False,2019-09-19T23:39:23+00:00,2019-09-19T23:40:24+00:00,2019-09-19T23:40:21+00:00,2019-09-19T23:40:21+00:00,9d049f65dd8ce69353283adb5d4907a124098f6d,unknown,21,11,6,47,0,0,,,
+streamlit/streamlit,319730026,151,"Stop react-markdown from converting ""[foo]"" to a link.","**Issue:** 
+
+#150 
+
+**Decription:**
+
+Stop react-markdown from converting `""[foo]""` to a link. 
+
+- added a renderer to `ReactMarkdown` for link-references that detects a missing url and doesn't convert to a link.
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",jrhone,699897,closed,False,2019-09-20T13:46:54+00:00,2019-09-24T10:41:41+00:00,2019-09-24T10:41:41+00:00,2019-09-24T10:41:41+00:00,1c35e834c72a2482abab84f9742df126d455bedf,unknown,45,22,3,6,2,0,,,
+streamlit/streamlit,319848879,154,add format option for slider widget and return texts for display values,"https://github.com/streamlit/streamlit-old-private/issues/1100
+
+*Added new field to Slider proto definition:
+  -string format = 7;
+*Overridden ThumbValue and Tick subcomponents from UISlider component
+
+---
+![Screen Shot 2019-09-20 at 3 59 18 PM](https://user-images.githubusercontent.com/22157341/65352880-2573df80-dbc2-11e9-8f53-b71ce6341529.png)
+<img width=""1680"" alt=""Screen Shot 2019-09-20 at 3 59 27 PM (2)"" src=""https://user-images.githubusercontent.com/22157341/65352888-27d63980-dbc2-11e9-959e-18ec902289a2.png"">
+---
+
+- [ ] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",dcaminos,22157341,closed,False,2019-09-20T19:18:16+00:00,2019-09-24T20:44:58+00:00,2019-09-24T20:44:35+00:00,2019-09-24T20:44:35+00:00,d3e7dda1fd8ccf836d11eed685f85d06f6d15f0e,unknown,887,591,8,5,16,0,jrhone;kantuni,,
+streamlit/streamlit,319904910,159,Removing uber demo from streamlit repo,"**Decription:** Remove the uber demo since we added it in its own repo
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",monchier,6821233,closed,False,2019-09-20T23:02:13+00:00,2019-09-23T20:25:56+00:00,2019-09-23T20:25:56+00:00,2019-09-23T20:25:56+00:00,7d0805db80bf6416a69e4f27ce9c47d61a6ea9a1,unknown,0,56,1,1,0,0,tvst;kantuni,,
+streamlit/streamlit,320098438,170,Release 0.46.0,"Improvements:
+- Rename multiselectbox to multiselect
+- Make bash line in dialog more easily copy/paste-able
+- Talk about magic in docs.
+- Fix update_version.py since black changed quote formats.
+- Remove code to share static apps publicly.
+- Fix clear-cache dialog alignment
+- Move items around in main menu.
+- Rename examples/widgets.py to interactive_widgets.py to avoid collisi… …
+- Remove examples/saving.py since public saving is not a thing anymore.
+- Fix mnist-cnn.py so it works with the latest keras.
+- Fix #152: Implement unsafe_allow_html stopgap in st.write and st.mark… …
+- Prettified user-visible print statements. Nicer colors, mostly.
+- Only import Plotly libraries when needed
+- Update screenshots
+- Remove conda from docs",tvst,690814,closed,False,2019-09-23T00:36:08+00:00,2019-09-23T07:09:59+00:00,2019-09-23T07:07:46+00:00,2019-09-23T07:07:45+00:00,648b30dd1dd1aab085b9fd868316d6b9d5bd9bdf,unknown,418,429,134,66,0,0,,,
+streamlit/streamlit,320391704,172,e2e test for magic,Re-implements the `examples/magic.py` from https://github.com/streamlit/streamlit/pull/138 as an e2e test.,tconkling,709022,closed,False,2019-09-23T17:02:23+00:00,2019-09-24T18:49:00+00:00,2019-09-24T18:48:57+00:00,2019-09-24T18:48:56+00:00,46bebe6d0ae494cbcca73d61bf1445bc58706e63,unknown,184,133,5,6,2,0,jrhone,,
+streamlit/streamlit,320406598,174,Pedantic CircleCI cleanup,"- Capitalize first letter of step names
+- Remove period from end of step names
+- Rename some confusing job names
+
+@tvst - is there any reason to keep the conda-related logic in this file? Should I remove that as well?
+
+- [X] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",tconkling,709022,closed,False,2019-09-23T17:44:27+00:00,2019-09-24T16:08:47+00:00,2019-09-24T16:08:43+00:00,2019-09-24T16:08:43+00:00,d84f857039e5ce6648cf218bba7bb6f66ab03187,unknown,38,72,1,2,0,2,,,
+streamlit/streamlit,320524434,178,Merge ForwardMsg caching into develop ,"Implements ForwardMsg caching on the client and server.
+
+## Server
+
+- `ForwardMsg.hash` is calculated on every outgoing ForwardMsg
+- The server caches all messages whose size is >= 10k in its `MessageCache` instance. (These cached message are never evicted - this will come in a future PR.) Each entry in the cache contains the cached message, and also a (weak-referenced) set of all ReportSessions for which that message has already been delivered.
+- Cached ForwardMsgs have the `metadata.cacheable` flag set. When the client receives a ForwardMsg with `cacheable == true`, it also caches it.
+- If the server believes that a client has cached a given ForwardMsg (because the cache has an entry for that message+session), it instead sends a ""reference"" message that points to the original message via `ForwardMsg.ref_hash`.
+- The server also exposes a new HTTP endpoint, `/message`, from which clients can request messages that they have received a `ref_hash` message for, but are missing in that client's local cache. (This should not happen frequently! If clients are getting a bunch of local cache misses, then the server is not maintaining its cache properly.)
+
+## Client
+
+- `WebsocketConnection` has a new `ForwardMsgCache` member
+- All incoming `ForwardMsgs` are passed through this cache (via `ForwardMsgCache.processMessage`):
+  - If the ForwardMsg is *not* a reference message, it is cached locally and nothing more is done
+  - If the ForwardMsg *is* a reference message, the client checks to see if it has the original message in its cache; if so, it gets returned
+  - If the reference message is missing from the client's cache, it is requested from the server's `/message` endpoint, and then cached.
+
+## Cache expiration
+
+- The `global.maxCachedMessageAge` config value specifies the maximum age of a message in the cache. The age of a message is defined by the number of times a referencing report has finished running since the message was accessed by that report. So when a report finishes running for the first time, the age of all its cached messages is 1.
+- Our default maxCachedMessageAge is 2, which means that messages will remain cached even after not having been referenced for a report run.
+- To determine the age of messages in its cache, the server tracks a `report_run_count` alongside each `ReportSession` in its websocket->reportsession dictionary. The server increments this value each time it processes a `report_finished` ForwardMsg message for a report.
+- When the server increments `report_finished`, it also asks the cache to remove any expired messages. I haven't done anything fancy here - the cache just iterates through all its entries, does an age check, and deletes them if they're expired.
+- Similarly, when the client receives a `report_finished` ForwardMsg, it performs the same cache expiration step. This means that the server and client's caches should stay in sync. (I haven't thought hard enough about whether it's possible for them to get briefly out of sync, but if they do, we have the new `/message` endpoint as a fallback.)
+- If a report fails to run due to a compilation error, neither the server nor the client will increment the `report_run_count` for that session. (The run-count incrementing is conditional on the status value of the `report_finished` message, which is set to `FINISHED_WITH_COMPILE_ERROR` when that happens.)
+
+
+There are client and server tests for all this new logic. But the easiest way to see the expiration in action is to run something like `examples/core/message_deduping.py` and watch the debug output on the server and the client. (You'll see logs for cache hits and misses - you should never see a miss! - on the client; and logs for sending cached message refs on the server.)
+- This example just creates a big dataframe and sends it twice
+- The first time the report is run, the message will only be delivered to the client once.
+- If you rerun the report, the message won't be delivered at all because it'll be cached.
+- If you remove the `st.dataframe()` calls and rerun the report, the dataframe will *not* be removed from the cache because it won't be old enough. Re-adding those calls and rerunning the report should confirm this.
+- If you remove the dataframe calls and re-run the report _twice_ with them missing, they will then be expired from the cache. Re-adding them should result in the message being resent to the client.",tconkling,709022,closed,False,2019-09-23T23:46:04+00:00,2019-09-24T19:34:05+00:00,2019-09-24T19:27:06+00:00,2019-09-24T19:27:06+00:00,fbe5c3840d4777005a67a41dad6d5c60072b5653,unknown,1561,142,25,14,0,1,,,
+streamlit/streamlit,320529305,179,Bart example update,"Upadate to Bart and Bikes demo as per @treuille request.
+",monchier,6821233,closed,False,2019-09-24T00:09:17+00:00,2019-09-24T18:41:46+00:00,2019-09-24T18:41:46+00:00,2019-09-24T18:41:46+00:00,b9128f857a8d3c5aba33d21b4fa7af614ccfdffe,unknown,4,3,1,2,2,0,treuille,,
+streamlit/streamlit,320539717,180,Text changes in ☰ menu and several CLI prompts,"Fixes #113 
+Fixes #176 ",tvst,690814,closed,False,2019-09-24T01:06:45+00:00,2019-09-24T22:21:45+00:00,2019-09-24T22:21:40+00:00,2019-09-24T22:21:39+00:00,97e8e0f188c8d1968a3e69071254dc3f948fdf3d,unknown,18,40,5,55,0,0,tconkling,,
+streamlit/streamlit,320630461,181,Fix overwriting elements in the sidebar,"**Issue:** 
+
+#182 
+
+**Description:** 
+
+- Pass the `container` into the newly created Delta Generator when enqueuing a new element delta
+- Python and Cypress tests
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",jrhone,699897,closed,False,2019-09-24T07:44:37+00:00,2019-09-24T15:08:38+00:00,2019-09-24T15:07:58+00:00,2019-09-24T15:07:57+00:00,735ecb58769902f157c91ca9896a33ca1ba7943c,unknown,22,3,5,2,1,0,,,
+streamlit/streamlit,320731849,183,Update vega lite chart snapshot,"Generating linux snapshots from docker for failed test snapshots in https://circleci.com/gh/streamlit/streamlit/697 
+
+@tvst Only vega lite generated a different snapshot. Both main-menu and multi-select had no changes.
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",jrhone,699897,closed,False,2019-09-24T12:00:21+00:00,2019-09-24T14:58:34+00:00,2019-09-24T14:58:34+00:00,2019-09-24T14:58:34+00:00,259c97a6c18437e3187cb0865e5f5daf6d569bed,unknown,0,0,1,1,0,0,,,
+streamlit/streamlit,320968107,185,Warn when calling st.foo from within st.cache,"When a script calls a `st.foo` from within a cached function, show an st.warning telling the user that they probably don't want to do that.
+
+You can do `st.cache(supress_st_warning=True)` to suppress the warning.
+
+This PR adds a thread local that contains some information about whether we're inside a cached function. There's some additional complexity around suppressing warnings in places where st calls can happen automatically (e.g. `st.cache`'s wrapper function can call `st.spinner`).
+
+Fixes #139
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.",tconkling,709022,closed,False,2019-09-24T21:20:27+00:00,2019-10-01T15:19:36+00:00,2019-09-27T00:37:50+00:00,2019-09-27T00:37:50+00:00,78f9b977da3ef25ef9cbc2d14007facdc4f23482,unknown,368,92,12,11,8,0,monchier,,
+streamlit/streamlit,321080846,186,Support cli parameters,"issue: https://github.com/streamlit/streamlit-old-private/issues/670
+
+### Brief
+Fetches all config options available and exposes them as click cmd option params.
+
+### Description
+You can do things such as `streamlit run --server.port 4031 examples/reference.py` now
+To see all available options call `streamlit run --help`. 
+<img width=""614"" alt=""Screen Shot 2019-09-25 at 6 10 02 PM"" src=""https://user-images.githubusercontent.com/934511/65640009-b7fbf080-dfbf-11e9-9d4d-66a51d365da7.png"">
+👆I don't consider it looks great, I'd prefer it to have a break line after every option, but wasn't able to find a way to format the description for an option in click.
+
+## Things that keep this away from being perfect:
+ - we can add a nice error when type casting fails (like when sending `--server.port ""asd""`)
+ - better format to `streamlit run --help`
+
+# Weird behavior
+ - something that seems unusual to me is that calling `config._set_option` only works when the option is not existing in the config file! 🤔
+",dnuske,934511,closed,False,2019-09-25T06:25:19+00:00,2019-10-07T19:31:53+00:00,2019-10-07T19:31:46+00:00,2019-10-07T19:31:46+00:00,2bbb67a176f8c9eb873e1a420727851ec78e5959,unknown,220,82,29,15,13,0,kantuni;monchier;arraydude;dcaminos;jrhone;tconkling;treuille,,
+streamlit/streamlit,321348791,187,"Black, Prettier fixes","Some quality of life improvements for code formatting.
+
+- Added new make rules `make pyformat` and `make jsformat`, which run Black/Prettier on all source files. (These aren't used in any precommit hooks or CircleCI jobs, but I've found myself wanting to run the commands manually sometimes.)
+- `scripts/format.sh` no longer tries to format deleted Python files (previously, if you had a deleted file in staged files, format.sh would fail).",tconkling,709022,closed,False,2019-09-25T17:04:37+00:00,2019-09-25T18:49:12+00:00,2019-09-25T18:49:08+00:00,2019-09-25T18:49:08+00:00,ffaedfc879ac8983ac6a202f5abd0916f187889f,unknown,35,9,2,2,0,0,tvst,,
+streamlit/streamlit,321401290,188,LocalSourcesWatcher: blacklist venv and hidden folders,"LocalSourcesWatcher blacklists conda folders (anaconda2/3, miniconda2/3) and any folder whose name starts with a `.`.
+
+For simplicity, the blacklist syntax now supports Unix glob patterns.
+
+(Also, there are a few unrelated tests that I cleaned up while I was fixing the new tests that were written for this PR.)
+
+Fixes #129",tconkling,709022,closed,False,2019-09-25T19:26:11+00:00,2019-09-27T00:55:59+00:00,2019-09-27T00:55:12+00:00,2019-09-27T00:55:12+00:00,ccad93f23fe2e8d8075928a03ca17a500e1eb557,unknown,136,67,4,5,2,1,kantuni,,
+streamlit/streamlit,321476993,190,Fix Matplotlib crash on OS X,"Fixes #177, but in a way that makes @tvst sad :)
+
+I wrote longer notes in the issue (#177) about what needs to happen to avoid importing `matplotlib` here - but the tl;dr is that `bootstrap.run` is called after matplotlib is indirectly imported elsewhere. Since matplotlib only reads MPLBACKEND on import, bootstrap gets there too late to have its environment variable override have any effect.",tconkling,709022,closed,False,2019-09-25T23:26:39+00:00,2019-10-01T15:20:17+00:00,2019-09-27T04:36:00+00:00,2019-09-27T04:35:59+00:00,4bf7e6806e768639f442d3d0a9544c511aaa856f,unknown,62,10,5,8,3,1,arraydude,,
+streamlit/streamlit,321744404,191,Fix login flow crashes for an invalid Credentials.toml file,"**Issue:**
+
+#175 
+
+**Description:**
+
+- Fix credentials reset by only initializing credentials singleton once
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",jrhone,699897,closed,False,2019-09-26T14:16:52+00:00,2019-09-26T22:40:52+00:00,2019-09-26T22:40:52+00:00,2019-09-26T22:40:51+00:00,404987da8199097b2cbbdf40fc97f05d1b95dc85,unknown,11,6,2,2,0,1,,,
+streamlit/streamlit,321849143,192,Fix #173 - ChunkLoadError alert,"**Issue:** #173 
+**Decription:** Catching ChunkLoadError and showing a cleaner message.
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",arraydude,631997,closed,False,2019-09-26T18:25:38+00:00,2019-09-27T18:56:31+00:00,2019-09-27T18:56:28+00:00,2019-09-27T18:56:27+00:00,a42765dc59a700cff50b3c7fd1a5a1afa6b43f82,unknown,118,7,19,8,2,0,treuille;monchier,,
+streamlit/streamlit,321897897,193,Batch state updates,"POC for tackling large number of st.writes
+",jrhone,699897,closed,False,2019-09-26T20:38:23+00:00,2019-09-26T20:51:45+00:00,2019-09-26T20:51:34+00:00,,860c3857835a4d4ecde53f9c6ef9d7370915bfc4,unknown,274,246,26,13,0,0,tvst,,
+streamlit/streamlit,321902365,194,Batch updates to report elements in the App state,"Batch every 10 ms of updates to `elements` in the App state.
+
+- upon receiving a new delta msg, wait 10ms for other delta msgs to arrive and add all of them to the state at once.
+- a new delta msg received after this batch will start it's own 10ms batch upon arrival.
+",jrhone,699897,closed,False,2019-09-26T20:51:33+00:00,2019-10-04T10:05:47+00:00,2019-10-04T10:05:47+00:00,2019-10-04T10:05:47+00:00,f7a3a6aa7bebdcf7bf2c3414407c416970d2311a,unknown,54,22,1,8,4,1,,,
+streamlit/streamlit,321914224,195,"Stop react-markdown from converting ""[foo]"" to a link","**Issue:** #151
+ 
+**Decription:** Reverting lost changes
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",arraydude,631997,closed,False,2019-09-26T21:25:50+00:00,2019-09-26T21:50:15+00:00,2019-09-26T21:50:10+00:00,2019-09-26T21:50:10+00:00,28e614c1c04c0d37cad6c7fe5a090ad55c638b13,unknown,23,5,1,1,0,0,tvst,,
+streamlit/streamlit,321926142,196,Sidebar experiment,"**Issue:** Sidebar should be usable on **mobile**
+
+**Decription:** 
+- Toggling Sidebar component from a button
+- On Mobile the sidebar will hide
+- Dark Colors
+- Removed streamlit logo
+
+---
+
+- [x] By checking this box, I agree that all contributions to this project are made under the Apache 2.0 license.
+",arraydude,631997,closed,True,2019-09-26T22:06:20+00:00,2020-02-05T20:42:02+00:00,2019-10-01T09:54:47+00:00,,c1bf321824e60048df322cd274d57beba86e6dae,unknown,311,116,11,17,0,1,tvst,,

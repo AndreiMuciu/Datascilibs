@@ -1,0 +1,217 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+datasciencemasters/go,8816605,1,Addition of the Caltech's ML course by Professor Yaser S.Abu-Mostafa,,Dawny33,4637008,closed,False,2013-10-03T18:34:13+00:00,2013-10-18T18:13:20+00:00,2013-10-18T18:13:20+00:00,2013-10-18T18:13:20+00:00,5b37bede31a36949cfbf7d2781e54ae39016df2a,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,10791370,2,"added metacademy to ""Further Study Resources"" in the readme",,cjrd,1455579,closed,False,2013-12-13T01:13:58+00:00,2013-12-31T03:44:16+00:00,2013-12-31T03:44:16+00:00,2013-12-31T03:44:16+00:00,921ecfce67bdc5b80f0f3dfbd51f05be5d8b1ce7,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,10802507,3,Update README.md,"A new book has been added to the Math section (Think Stats (Allen Downey))
+",ghost,10137,closed,False,2013-12-13T11:54:17+00:00,2013-12-31T03:45:16+00:00,2013-12-31T03:45:16+00:00,2013-12-31T03:45:16+00:00,051babc280704946aea811ab80dc16ff7d9298bd,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,11065981,4,Added Data visualization links,,srinify,801507,closed,False,2013-12-24T01:37:29+00:00,2013-12-31T03:45:55+00:00,2013-12-31T03:45:55+00:00,2013-12-31T03:45:55+00:00,2ff264f2764e1f7ae227d18647043b4bab7951c7,unknown,6,0,1,2,0,0,,,
+datasciencemasters/go,11076085,5,Update README.md,"Added SQLZOO to the Databases section. It has more exercises to go through.
+",seakun,686984,closed,False,2013-12-24T15:18:22+00:00,2014-06-26T23:56:46+00:00,2013-12-31T03:46:21+00:00,2013-12-31T03:46:21+00:00,393d903da9e67197842bb6257d65db4e2d4abcff,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,11399590,6,add R part,"R (Learning) and R (Libraries)
+",niangaotuantuan,1471330,closed,False,2014-01-10T13:05:49+00:00,2014-01-16T20:00:23+00:00,2014-01-16T20:00:23+00:00,2014-01-16T20:00:23+00:00,b13eb404b86080f94065509cb335aad6d2155cc8,unknown,17,0,1,1,0,0,,,
+datasciencemasters/go,11578911,9,Adding think python to the python section,,GeorgeMac,1253326,closed,False,2014-01-16T14:07:37+00:00,2014-01-16T19:32:49+00:00,2014-01-16T19:32:49+00:00,2014-01-16T19:32:48+00:00,ac183ee0c92b939c725d0e28f667bcc3cf8df1e1,unknown,1,1,1,2,0,0,,,
+datasciencemasters/go,11596707,10,Added link to online version of NLP with Python,"Added a link to the free, web based version of the NLP with Python book licensed under the Creative Commons Attribution Noncommercial No-Derivative-Works 3.0 US License.
+",anoras,160063,closed,False,2014-01-16T21:07:20+00:00,2014-07-22T20:41:41+00:00,2014-01-17T20:17:04+00:00,2014-01-17T20:17:04+00:00,202be245dd1a0606b3c11aa81157216ff66e1a0f,unknown,1,1,1,1,0,0,,,
+datasciencemasters/go,11601063,11,Some (very minor) fixes.,,StevenMaude,3818079,closed,False,2014-01-16T22:49:57+00:00,2014-07-20T12:18:12+00:00,2014-01-17T20:14:45+00:00,2014-01-17T20:14:45+00:00,aae8de8435881712e8fa3dbece4f7199315f14ad,unknown,2,2,1,2,0,0,,,
+datasciencemasters/go,11632150,12,I added Kaggle and a Tutorial to learn R,,ssaeger,1192254,closed,False,2014-01-17T18:50:03+00:00,2014-07-17T05:06:56+00:00,2014-01-17T20:07:19+00:00,2014-01-17T20:07:19+00:00,5c712d03827050fc9be793eefc24cddc0f61ac26,unknown,4,0,1,2,0,0,,,
+datasciencemasters/go,11656410,14,Add MIT's Python-based introductory CS course.,"Course uses Python. It starts from scratch and covers some algorithms and computational complexity, matplotlib, Monte Carlo simulations, clustering and graphs, so a pretty relevant starter course. (It taught me to code :+1:)
+",StevenMaude,3818079,closed,False,2014-01-19T14:36:56+00:00,2014-06-15T03:53:08+00:00,2014-01-20T17:48:38+00:00,2014-01-20T17:48:38+00:00,4e209cf57c219b890cf1581fbcee6358d3dba67d,unknown,1,1,1,1,0,0,,,
+datasciencemasters/go,11682646,15,Link to the actual learning from data course,,Omnipresent,115446,closed,False,2014-01-20T17:18:13+00:00,2014-07-07T12:14:59+00:00,2014-01-20T17:47:46+00:00,2014-01-20T17:47:46+00:00,5428c6ed661c02a711c9e22842859fc35687aaec,unknown,1,1,1,1,0,0,,,
+datasciencemasters/go,11723877,16,Added Hinton's Neural Networking course / link to /r/MachineLearning,,shaunmccarthy,745126,closed,False,2014-01-21T18:02:55+00:00,2014-01-21T20:11:51+00:00,2014-01-21T20:11:51+00:00,2014-01-21T20:11:51+00:00,8de94c4675e69d6aa6ec854cb5b5beb60209ed5d,unknown,2,0,1,2,0,0,,,
+datasciencemasters/go,11799562,18,Added some links to MIT OpenCourseWare courses,"Added some links to MIT OpenCourseWare courses.
+",alinoz77,6086331,open,False,2014-01-23T12:46:32+00:00,2014-11-26T19:16:52+00:00,,,7f1a2060d9d0489f13ac0fe9e3f6145a960b60a4,dirty,4,0,1,1,3,1,,,
+datasciencemasters/go,11871766,19,Update ReadMe,"added Wikibooks link under Further Study Resources
+",joshuaburkhow,1016310,closed,False,2014-01-25T06:12:40+00:00,2014-05-31T18:13:51+00:00,2014-05-31T18:13:51+00:00,,6d05697b764d044dc5964c4dc9a7d3d17c4314dd,unknown,1,0,1,1,0,1,,,
+datasciencemasters/go,11873563,20,add 2 classical datasets repo,"UCI and NIPS
+",niangaotuantuan,1471330,closed,False,2014-01-25T12:28:48+00:00,2014-01-27T05:31:20+00:00,2014-01-27T05:31:20+00:00,2014-01-27T05:31:20+00:00,264c6abefc1519e27dc77aa3f6e5b8df211be96e,unknown,4,0,1,2,0,1,,,
+datasciencemasters/go,12022480,22,added 2 datasets resources. added syracuse R course. editing for clarity...,"### Changes
+
+1 add to R - Syracuse's Intro to Data Science
+2 add to datasets - Time Series Data Library, US Congress Voting Records
+3 formatting tweaks for readability. removed redundant links.
+",stefsy,1234226,closed,False,2014-01-30T04:09:39+00:00,2014-06-19T00:36:45+00:00,2014-01-30T22:12:45+00:00,2014-01-30T22:12:45+00:00,f5a3021aee74f18995fdd9f352ffb6baa4a9117a,unknown,13,8,1,1,0,1,,,
+datasciencemasters/go,12119021,24,Added new R learning resource,"GitHub repo for the book can be found here https://github.com/johnmyleswhite/ML_for_Hackers
+",eljhkrr,4529018,closed,False,2014-02-02T23:04:06+00:00,2014-08-17T18:25:14+00:00,2014-05-31T18:13:31+00:00,,639fe74d340593428f8b6686325c319cbb75f066,dirty,1,0,1,1,0,4,,,
+datasciencemasters/go,12131732,25,Update README.md,"Add Data Science Specialization courses to be offered in April 2014 on Coursera - https://www.coursera.org/specialization/jhudatascience/1/courses
+",ahmad-luqman,1522464,closed,False,2014-02-03T12:57:35+00:00,2014-07-10T02:29:56+00:00,2014-05-08T14:15:16+00:00,,83239c46f51fd576a14e56634e3adf01e21f66a7,unknown,2,0,1,1,0,3,,,
+datasciencemasters/go,12264743,27,added Machine Learning / Python resource and dataset collection,"Building Machine Learning Systems with Python is a great
+resource. In addition to introducing key machine learning methods and
+algorithms it is a great introduction to scikit-learn and explains how
+to setup a ML infrastructure (cross-validation, grid testing, ...)
+",statistikR,3819087,closed,False,2014-02-06T12:21:10+00:00,2014-06-12T04:42:40+00:00,2014-05-31T18:12:55+00:00,,,dirty,2,0,1,1,0,2,,,
+datasciencemasters/go,12584511,28,"Added sklearn, statsmodels, Rdatasets, and mldata.org dataset resources","source: http://redd.it/1xsx9n#cfeccln
+",westurner,50891,closed,False,2014-02-15T16:41:35+00:00,2014-07-10T01:10:32+00:00,2014-05-15T14:50:45+00:00,,de395ca4913aead92aac50a8f6b100c0cc0bb294,dirty,4,0,1,1,0,3,,,
+datasciencemasters/go,12584518,29,"Added links to Python Tutorials, Scipy-lectures, Anaconda, Canopy, and fixed IPython capitalization",,westurner,50891,closed,False,2014-02-15T16:42:14+00:00,2014-06-17T15:33:40+00:00,2014-05-31T18:06:28+00:00,2014-05-31T18:06:28+00:00,7dc970d7467c7cbbc9231df237b41b887bb714a2,unknown,7,1,1,1,0,2,,,
+datasciencemasters/go,12712379,30,Added Harvard CS 109 course,,abhibond,1435575,closed,False,2014-02-19T18:58:18+00:00,2014-06-12T08:23:24+00:00,2014-05-15T15:02:40+00:00,2014-05-15T15:02:40+00:00,1c67eccca9deb8507a7a19ae50ea389ba28cb2da,unknown,2,0,1,2,0,1,,,
+datasciencemasters/go,13269198,31,More python libraries + Weka,"Added python libraries
+Added weka framework
+Added Torch7
+Added new section: Websites, Blogs, Newsletters
+",ghost,10137,closed,False,2014-03-06T16:35:26+00:00,2014-06-12T09:10:38+00:00,2014-05-31T18:12:29+00:00,,ed259121f084f803bb24b62ae451cb4e6c7ce318,dirty,38,2,1,6,8,7,,,
+datasciencemasters/go,13327331,32,Added link to Stanford StatLearning MOOC,"Lectures by Trevor Hastie and Rob Tibshirani, authors of Elements of Statistical Learning.
+Also has a companion PDF textbook that's a somewhat simplified version of ESL. The text follows along with the lectures well.
+",aaronjbecker,5902533,closed,False,2014-03-07T20:23:30+00:00,2014-06-12T22:48:51+00:00,2014-03-11T23:04:56+00:00,2014-03-11T23:04:56+00:00,c669e1f2481dc076a5f0a29547f3861f802bb155,unknown,1,0,1,1,0,2,,,
+datasciencemasters/go,13352118,33,Add Quandl to the list of data sources.,"Quandl is a nice site with a lot of data that is very easy to use.
+",gnperdue,1294053,closed,False,2014-03-09T16:43:25+00:00,2014-03-11T23:01:49+00:00,2014-03-11T22:50:58+00:00,2014-03-11T22:50:58+00:00,5f2e739e98a209e5e3ab3b2bff53b348a7e9019f,unknown,1,0,1,1,0,2,,,
+datasciencemasters/go,13353540,34,Updates the Mining the Social Web book link and adds its blog link,"Updates the Mining the Social Web book link and adds its blog link
+",ptwobrussell,98668,closed,False,2014-03-09T19:32:42+00:00,2014-06-24T18:28:29+00:00,2014-03-11T22:56:24+00:00,2014-03-11T22:56:24+00:00,6f7343521f404a516e38cc779496486594ffac35,unknown,1,1,1,2,0,1,,,
+datasciencemasters/go,15231712,36,"Updating with recent Udacity, Coursera and Edx courses, tutorials on Git...","Adding links to Coursera and Udacity Data Science specializations, recent EdX and Coursera courses, Data Journalism and Web scraping, and some other good introductory Python resources.
+
+I have worked with many of these resources. 
+",butlermh,756867,closed,False,2014-04-28T11:17:50+00:00,2020-03-24T22:35:01+00:00,2020-03-24T22:35:01+00:00,,93030f623a0b76dcbf6072ac493ef11f93575e8a,dirty,36,1,1,1,0,8,,,
+datasciencemasters/go,15481733,37,added books and courses to r-resources.md,"specifics: added data science specialization course from coursera, machine learning
+course from coursera and a book on machine learning for hackers.
+",orthodoc,302414,closed,False,2014-05-05T06:55:47+00:00,2014-07-01T08:59:48+00:00,2014-05-05T07:00:50+00:00,,e24567358f3bfc0d911c773bf1a486f981a157e4,unknown,3,0,1,1,0,2,,,
+datasciencemasters/go,15725046,38,Added Statistics One - Princeton/Coursera,"A beginner friendly yet comprehensive introduction to statistics
+",eduardkoller,1189197,closed,False,2014-05-09T22:12:56+00:00,2014-07-24T07:56:57+00:00,2014-05-12T14:59:28+00:00,2014-05-12T14:59:28+00:00,ee203f7cdb2e104172fbeeecc8cdcf56e4a07ce9,unknown,1,0,1,1,0,1,,,
+datasciencemasters/go,15739609,39,https://twitter.com/clarecorthell/status/464549361830350848,"Solid intro book on data analysis.  Good for beginners as well as more seasoned folks.
+- as well as some bits and pieces on database querying, and codebase testing.  
+
+cheers,
+Mike
+",mminar,1657100,closed,False,2014-05-11T04:17:38+00:00,2014-06-18T05:42:44+00:00,2014-05-31T17:21:55+00:00,2014-05-31T17:21:55+00:00,b7146a4b24b6c1a74be264aba322d3acac7982c1,unknown,10,0,3,3,1,3,,,
+datasciencemasters/go,16090838,40,Added two blogs.,,Dawny33,4637008,closed,False,2014-05-20T06:23:11+00:00,2014-06-18T04:30:30+00:00,2014-05-21T15:20:30+00:00,2014-05-21T15:20:30+00:00,7d088d7d12116f1d1f20e2f1f7e21d683d6694fc,unknown,2,0,1,1,0,4,,,
+datasciencemasters/go,16310420,41,adding lg transcript,,lgeorge,3769973,closed,False,2014-05-25T01:01:39+00:00,2014-06-21T23:35:24+00:00,2014-05-28T00:37:01+00:00,,743bee60ca211c411c15c7cec5359a948bae685a,unknown,50,0,1,2,0,8,,,
+datasciencemasters/go,16578661,42,"add ""Doing Data Science"" book","This book is a high-level overview of the data science discipline, with many references to further resources. It's mostly about R, but it also has some Python code that uses numpy.
+",nathantypanski,1385140,closed,False,2014-06-01T19:45:17+00:00,2014-06-17T15:28:34+00:00,2014-06-17T15:27:30+00:00,2014-06-17T15:27:30+00:00,8de27d6edab6e91c3712f3497ea77832e1a2d075,unknown,1,0,1,1,0,2,,,
+datasciencemasters/go,17296046,44,Update blogs-n-media.md,"added ajourneyintodatascience.com
+",nunoskew,5649591,closed,False,2014-06-18T14:22:45+00:00,2014-06-21T23:34:46+00:00,2014-06-21T23:34:46+00:00,2014-06-21T23:34:46+00:00,fde4644077f39bfe2c0ff3a9d2dffda842443b20,unknown,1,0,1,1,0,4,,,
+datasciencemasters/go,17421748,45,Update blogs-n-media.md,"A blog on machine learning implementation using python and data analysis
+",harjotsinghparmar,3833303,closed,False,2014-06-20T18:52:24+00:00,2014-06-21T23:45:26+00:00,2014-06-21T23:45:26+00:00,,8c80c1c20a01d58da6095156951d833ddf4fa939,dirty,1,0,1,1,0,3,,,
+datasciencemasters/go,17426516,46,LGeorge transcript,"thanks!
+",lgeorge,3769973,closed,False,2014-06-20T20:38:22+00:00,2014-06-21T23:33:08+00:00,2014-06-21T23:33:08+00:00,2014-06-21T23:33:08+00:00,9cd6424779ce1fb403157dfd12fbafdf1a88ffb8,unknown,51,0,1,5,0,1,,,
+datasciencemasters/go,17427722,47,Update r-resources.md,"A very good web application framework which does not require knowledge of HTML,CSSS or JAVA
+",harjotsinghparmar,3833303,closed,False,2014-06-20T21:03:44+00:00,2014-06-21T23:35:46+00:00,2014-06-21T23:35:46+00:00,2014-06-21T23:35:46+00:00,46c9de1476d11b343df3f664d0dc2b2a00d33326,unknown,2,0,1,1,0,1,,,
+datasciencemasters/go,18432453,48,added personal blog,"As per request in the following tweet: https://twitter.com/clarecorthell/status/478924192755097600
+",tonyfischetti,1426723,closed,False,2014-07-15T20:25:39+00:00,2014-09-02T22:05:35+00:00,2014-09-02T22:05:34+00:00,2014-09-02T22:05:34+00:00,aa313274fe4fb2e32b09bf0534057b217a9135f0,unknown,1,0,1,1,0,1,,,
+datasciencemasters/go,19833766,50,Merge pull request #1 from datasciencemasters/master,"update
+",necatikartal,5748430,closed,False,2014-08-15T08:18:18+00:00,2014-08-15T08:18:58+00:00,2014-08-15T08:18:58+00:00,,29d7457a8fe014f5f0d0d051ebade2ca5b1fcfab,unknown,0,0,0,1,0,0,,,
+datasciencemasters/go,19939378,51,Update README.md,"Testing a pull request - Data sciences and github newbie.
+",ghost,10137,closed,False,2014-08-18T19:33:26+00:00,2014-09-02T22:03:58+00:00,2014-09-02T22:03:58+00:00,,ea6a56b0100023e610af092cfbc73df880f17695,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,20399957,53,Create janitorial.md,"Cleanup is hard - only one example so far, but a useful set of links and tools to solve cleanup/normalization/etc would be handy.
+",kressaty,289165,closed,False,2014-08-27T20:32:57+00:00,2014-09-03T01:57:34+00:00,2014-09-02T22:02:45+00:00,2014-09-02T22:02:45+00:00,339f9013e9d028432435d9ec1b1915b0c790ffbf,unknown,5,0,1,1,0,3,,,
+datasciencemasters/go,20805685,55,Update README.md,"Including public domain resource
+",scientistsdata,8363681,open,False,2014-09-05T12:50:17+00:00,2014-09-06T23:39:06+00:00,,,,dirty,1,0,1,1,0,1,,,
+datasciencemasters/go,21202491,56,Add IPython notebooks and books about data science,"Added links to notebooks and books about IPython: IPython mini-book (April 2013) and IPython cookbook (to be released in Sept. 2014).
+",rossant,1942359,open,False,2014-09-14T10:05:38+00:00,2014-09-14T10:07:22+00:00,,,6a1285058641386cd56a1060dadd1b0358033641,dirty,7,0,1,2,0,0,,,
+datasciencemasters/go,21438119,57,added datasmart book,"Metacademy suggests DataSmart at the beginner book for data science (http://www.metacademy.org/roadmaps/cjrd/level-up-your-ml)
+
+Its overall a great book and introduction.  It allows people to play with the data right away using exel
+",mrandrewandrade,4616028,closed,False,2014-09-18T14:45:06+00:00,2016-04-26T23:41:09+00:00,2016-04-26T23:41:09+00:00,,11c7fb4a8e4ac6dc8829431443236a50495a91cf,dirty,23,30,1,2,0,1,,,
+datasciencemasters/go,22619371,59,Save email from piles of spam,"I made it use the reCAPTCHA Mailhide service to hopefully prevent some bots from picking up on your email address.
+",CoolOppo,1498177,closed,False,2014-10-12T19:47:41+00:00,2014-10-16T01:06:19+00:00,2014-10-15T20:59:58+00:00,2014-10-15T20:59:57+00:00,5d76868367c99784f0779d2c10588de33a8cd1f0,unknown,1,1,1,1,0,3,,,
+datasciencemasters/go,22636219,60,replaced dead link with 2014 course page link,"...or you might want to update the bit.ly link :)
+",orbanbalage,285574,closed,False,2014-10-13T10:22:06+00:00,2014-10-24T05:25:23+00:00,2014-10-24T05:25:22+00:00,2014-10-24T05:25:22+00:00,48ee718f7cb48911df518395b3f53fc93ea6b7ce,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,24626093,62,Fraser and Sabine Transcript,"The open source data science courses we studied. Like your repo, glad to contribute.
+",crevoisiersabine,4775551,open,False,2014-11-18T16:55:05+00:00,2016-04-26T23:43:11+00:00,,,f59cc1f2c8a11cc989e73af90f8201e779f0df5e,clean,53,0,1,9,0,1,,,question
+datasciencemasters/go,24843563,63,Added more info on deep learning in python,"Added link to NoLearn and an example usage.
+",eoinhurrell,1713235,closed,False,2014-11-21T14:39:43+00:00,2025-04-16T14:31:11+00:00,2025-04-16T14:31:11+00:00,,6bcd3a2ca2997b81a83cc50a5fe9bb78499715fe,dirty,1,0,1,1,0,0,,,
+datasciencemasters/go,25552252,64,adding pylearn2 and theano to python resources list,,ajkl,4917183,open,False,2014-12-05T06:35:32+00:00,2017-01-31T18:35:39+00:00,,,562fd93dd7066f3c850beec298d690782176db48,dirty,2,0,1,3,2,1,,,
+datasciencemasters/go,26014901,65,Add Neural Network Related Resource - Ng's tutorial,"Ng's tutorial is the most well-written one I've ever seen about Deep Learning. It should definitely be included. 
+",firstprayer,2390732,open,False,2014-12-13T01:39:49+00:00,2017-01-31T18:35:39+00:00,,,,dirty,36,1,3,3,0,1,,,
+datasciencemasters/go,26491924,66,Create zakir-siddiqi-2014.md,"creating zakir data science transcript
+",zsiddiq,8083704,closed,False,2014-12-23T01:42:30+00:00,2016-04-26T23:44:16+00:00,2016-04-26T23:44:16+00:00,,10a2c32d676e18f8885b8e8775d36f70bdf91ae2,unknown,1,0,1,1,0,1,,,
+datasciencemasters/go,26840445,67,Update README.md,"Update typo error
+",rajeshwerkushwaha,4745639,closed,False,2015-01-05T18:14:41+00:00,2015-01-09T04:49:58+00:00,2015-01-09T04:49:58+00:00,2015-01-09T04:49:58+00:00,40517ddae86a514a74f231664a3befb5d05d3b14,unknown,1,1,1,1,0,0,,,
+datasciencemasters/go,28436956,68,Update specializations.md,,SandeepReddyVanga,4413833,closed,False,2015-02-01T20:54:01+00:00,2015-02-01T20:55:35+00:00,2015-02-01T20:55:15+00:00,,add5efd8908150ef124fe00d91a035c32fef484d,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,28437433,69,Adding Data Mining Specialization,"provided by UIUC and Coursera
+",SandeepReddyVanga,4413833,open,False,2015-02-01T21:24:17+00:00,2017-01-31T18:35:39+00:00,,,d914c6876a000fe5c4be450230764511359e7e23,dirty,3,0,1,1,0,1,,,
+datasciencemasters/go,29918004,71,Spelling fixes,"A few minor spelling fixes
+",mm-,1653413,closed,False,2015-02-24T17:30:37+00:00,2015-03-30T03:31:47+00:00,2015-03-30T03:31:43+00:00,2015-03-30T03:31:43+00:00,fceec79b5d09a172ea922c4adb17a0347dfea651,unknown,4,4,3,1,0,1,,,
+datasciencemasters/go,29978698,72,Update r-resources.md,"I added link to Manning's book ""Practical Data Science with R"".
+",Aleks-d,10939038,closed,False,2015-02-25T11:15:38+00:00,2015-03-09T04:17:18+00:00,2015-03-09T04:17:18+00:00,2015-03-09T04:17:18+00:00,e7ea784c50f666ac5b52fae5c9b9631f50657c22,unknown,1,0,1,1,0,0,,,
+datasciencemasters/go,30817354,73,Adding in the link for (free) Analytics Handbook,"Free 40+ Data Science industry interviews including Data Scientists, CEOs, and Academics (Peter Norvig, Hal Varian, Top Davenport and more).
+",tristantao,1359922,open,False,2015-03-10T02:12:01+00:00,2017-01-31T18:35:39+00:00,,,69c11b0c53e797ec471fa82bc6a4a7edbda290c8,dirty,9,9,1,4,0,2,,,
+datasciencemasters/go,31121158,74,fix broken bit.ly link: interactive-data-viz-web,,aeharding,2166114,closed,False,2015-03-13T12:20:12+00:00,2015-03-30T03:32:06+00:00,2015-03-30T03:32:06+00:00,2015-03-30T03:32:06+00:00,dcd055792502fa15a574f9cf19a7eb31697ec2d5,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,34740965,75,"added 4 books, 1 class, and seaborn","I added two data visualization books, two analysis books, Harvard's data visualization class, and Seaborn, a python plotting library. 
+",Bcohn,4257046,closed,False,2015-05-05T16:16:41+00:00,2023-04-18T01:27:14+00:00,2023-04-18T01:27:14+00:00,,01dea55f41b2b5a61213cbe47fc7797084dc8ece,dirty,249,2,2,1,0,1,,,
+datasciencemasters/go,36090712,76,Adding media and blogs,"The following media outlets have been added:
+R-bloggers - A blog aggregator that aggregates content from bloggers who write about R
+Flowing Data- A site that publishes data visualizations on a wide range of topics
+KDnuggets - A news outlet that covers business analytics, big data, data mining and data science.
+FiveThirtyEight - A data driven news outlet that Nate Silver founded
+Probably Overthinking It - Allen Downey's personal blog
+Talking Machines - A podcast where the hosts talk about machine learning and interview machine learning experts
+Partially Derivative - A podcast where two data science professionals give their commentary on 10 data science stories every episode.
+
+If anything about this PR should be changed, please let me know!
+",genagain,7481098,closed,False,2015-05-23T17:26:37+00:00,2015-05-26T21:48:16+00:00,2015-05-26T21:48:16+00:00,2015-05-26T21:48:16+00:00,dce4f2d6c095f25c5858ada2c9dfdc6959d230d3,unknown,11,0,1,3,0,1,,,
+datasciencemasters/go,37428373,77,Update datasets.md,"Added labelled data for Sentiment Analysis.
+",acquayefrank,3867246,closed,False,2015-06-11T04:34:00+00:00,2015-06-22T22:23:17+00:00,2015-06-22T22:23:17+00:00,2015-06-22T22:23:17+00:00,2f2ac47d4a3a2f179281ca181f9ddf599226f04f,unknown,5,0,1,1,0,1,,,
+datasciencemasters/go,39158275,78,Add awesome repositories with awesome resources,,davidgasquez,1682202,closed,False,2015-07-03T09:10:33+00:00,2015-10-19T16:13:00+00:00,2015-10-19T16:13:00+00:00,,418ef64554f50f61434362d42e1d06fc1ff6bf85,dirty,2,0,1,1,0,0,,,
+datasciencemasters/go,39198479,79,"Added video lectures for Maths, Algorithms and ML",,mccajm,3830784,closed,False,2015-07-03T22:39:10+00:00,2016-04-18T00:50:05+00:00,2016-04-18T00:50:05+00:00,,03087997cd26c16d827d8461b0dda8cf990055f1,dirty,10,0,1,1,0,4,,,
+datasciencemasters/go,42774131,80,Nick Byrne transcript initialisation,"Initial commit to kick off nick-byrne-transcript.md
+
+Thanks for all your work! 
+",byrnenick,3001356,closed,False,2015-08-19T03:43:03+00:00,2015-08-19T06:12:23+00:00,2015-08-19T05:42:42+00:00,2015-08-19T05:42:42+00:00,48ea8b6f3d5c9cbfbce8f61ea574a79fd368cdce,unknown,82,0,1,3,0,4,,,
+datasciencemasters/go,42881352,82,Linear Algebra: Coding the Matrix,"Added a course that teaches python and linear algebra at once. This way all your learning is applied! This course is offered at Coursera from Brown University.
+",CleverProgrammer,8461930,open,False,2015-08-20T00:55:08+00:00,2017-01-31T18:35:39+00:00,,,b865ed659f21f4e0c19fa976020bf740d17c4c6a,dirty,1,0,1,1,0,1,,,
+datasciencemasters/go,46110879,85,add Udacity - andrew-cockerham-transcript.md,"I added the Udacity Data Analyst Nanodegree to the README and the Udacity Intro to Comp Sci course to the learn-python.md 
+",andrewcockerham,836593,closed,False,2015-09-27T22:52:30+00:00,2016-04-18T00:46:12+00:00,2016-04-18T00:46:12+00:00,,f7877569faf195baab4096386860e1b238e13398,dirty,267,8,3,1,0,2,,,
+datasciencemasters/go,46475431,86,Update blogs-n-media.md,"Spelling typo of the title Partially Derivative under Podcasts
+",mikezawitkowski,773195,closed,False,2015-10-01T01:03:37+00:00,2016-04-18T00:41:58+00:00,2016-04-18T00:41:57+00:00,2016-04-18T00:41:57+00:00,6be5960102b40676aed9904b81652a148e65648d,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,46705918,87,Updated README.md,"Changed link to datasets
+",devtur,2761370,closed,False,2015-10-03T13:52:41+00:00,2015-11-24T05:34:24+00:00,2015-11-24T05:34:24+00:00,,694bcd836baf6d9de3e0343dc7d2b92c9feaecfb,dirty,1,1,1,1,0,1,,,
+datasciencemasters/go,53762971,89,"added data science resources - books, podcasts","Also removed extraneous whitespace.
+",Edderic,2751152,closed,False,2015-12-15T21:13:41+00:00,2016-04-18T00:41:33+00:00,2016-04-18T00:41:33+00:00,,136ccd57bb9e432af1d5af2712568239afc73eff,dirty,16,8,1,1,0,1,,,
+datasciencemasters/go,58082804,91,Learn Python - adding DataCamp,,nmakiya,1389896,closed,False,2016-02-03T02:27:32+00:00,2016-04-18T00:36:45+00:00,2016-04-18T00:36:45+00:00,,e2573b64eac4ba4335c72cc7b50334c599347ba9,dirty,1,0,1,1,0,1,,,
+datasciencemasters/go,60947299,92,Update README.md,"Added Spacy.io an industrial strength nlp tool for python
+",acquayefrank,3867246,closed,False,2016-02-27T11:33:07+00:00,2023-07-18T14:30:44+00:00,2023-07-18T14:30:44+00:00,,b17fba2d46327297dd53549a3a4ebbe2b5503e4c,unknown,1,0,1,1,0,1,,,
+datasciencemasters/go,63262372,93,Added missing link to the videos of Statistics I from Princeton/Coursera,"The video lectures from Statistics I are currently not available on coursera. However, they can be found on youtube.
+",florianbuetow,2320560,open,False,2016-03-17T17:35:00+00:00,2017-01-31T18:35:40+00:00,,,09e5f513eb0a33a4e46615260ee2af475d0b4fa1,dirty,5142,230,76,37,0,2,,,
+datasciencemasters/go,63989660,95,scott-davis-transcript-2016,"My data science curriculum, studied and/or in progress.  Great repo.  Happy to contribute.
+",scdavis50,8449776,closed,False,2016-03-24T04:48:00+00:00,2023-04-18T01:28:24+00:00,2023-04-18T01:28:24+00:00,2023-04-18T01:28:24+00:00,5be9ca753b0e8ef2bec174b04d79dfd96d066f1e,unknown,271,0,2,26,0,5,,,
+datasciencemasters/go,66595098,96,use archive.org link for hmason's list of datasets,,AlJohri,2790092,closed,False,2016-04-15T06:19:38+00:00,2016-04-21T13:55:03+00:00,2016-04-18T00:36:31+00:00,,d8af32cd34ce11cbcb07ce9a6c52be2c9fc41c9c,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,71813920,101,Updated link for 2nd Ed. of 'Think Stats',"The bit.ly link in the current repository leads to [here](http://greenteapress.com/thinkstats/) , a page which encourages visitors switch to the second edition, to be found at [this page](http://greenteapress.com/thinkstats2/index.html)
+
+Ideally, the old bit.ly url (bit.ly/ebook-thinkstats) should be pointed to the 2nd edition, but I believe only the owner of that bit.ly account can do this.
+",KitN,10526961,open,False,2016-05-28T23:15:23+00:00,2017-01-31T18:35:40+00:00,,,de4298ee2885b156e915efe7a44f446c74e5612d,dirty,1,1,1,2,0,0,,,
+datasciencemasters/go,75747598,103,Added updated course videos link,"As discussed in #102 , I have updated the link to the course videos.
+",Dawny33,4637008,open,False,2016-06-30T01:27:55+00:00,2017-12-19T11:10:34+00:00,,,22899718e45c86f44f5b4fa0cc46484cd50bfdf3,dirty,1,1,1,1,0,1,,,
+datasciencemasters/go,77770213,104,update link to opencampus - free source ware,"Opencampus - Largest resource library on professional certifications like big data, hadoop and many other
+",manideepami,11766966,open,False,2016-07-18T07:52:54+00:00,2017-01-31T18:35:40+00:00,,,2911913495febb18bbed61e50142e1800327f689,dirty,1,0,1,1,0,0,,,
+datasciencemasters/go,77918963,105,Links to some Leanpub Books,"Hi,
+
+This is a great initiative. I've added some links to Leanpub books about Git and R.
+
+Thanks,
+Andrew.
+",datawookie,6134409,closed,False,2016-07-19T05:18:06+00:00,2022-07-16T04:18:23+00:00,2022-07-16T04:18:23+00:00,,e511a8a48a58d2d1ed6e553b94bb68d3ebf89b87,unknown,5,1,2,2,0,1,,,
+datasciencemasters/go,78169366,106,Harvard ggplot tutorial,"I particularly liked this ggplot2 tutorial when I was learning R. Prior to using this tutorial, I would just hack until I get the graph I wanted. The tutorial helped me understand the concepts more fully.
+
+I also updated the README to indicate that the UW Intro to Data Science course is no longer free. 
+",hueykwik,707311,open,False,2016-07-20T15:35:50+00:00,2017-01-31T18:35:40+00:00,,,6490c4f85985e8f40fa4f08f4ea191e6ce3176a8,dirty,2,1,2,4,0,0,,,
+datasciencemasters/go,80006798,107,fix/master/contributing,"Fixes #98 
+",ghost,10137,open,False,2016-08-04T01:48:04+00:00,2017-01-31T18:35:40+00:00,,,08fa872c45c5db1cb39aa9072d70ccec15810f21,dirty,27,1,2,2,0,0,,,
+datasciencemasters/go,80339263,109,Some R resources added,"I have add some resources in r - resources file
+",ghost,10137,open,False,2016-08-06T12:38:20+00:00,2017-01-31T18:35:40+00:00,,,be4d150d1c2576234fc197bc4b97256f2c7a2b96,dirty,6,2,1,1,0,0,,,
+datasciencemasters/go,84544477,110,Added some entries,"Hey, I added some entries.
+Some of them are a bit more math heavy.
+",datajanko,11876547,closed,False,2016-09-08T20:06:14+00:00,2018-01-10T10:29:10+00:00,2018-01-10T10:29:10+00:00,,18e877a4a148dfccabbe486545d02d3b9a1d04c8,dirty,16,9,1,1,0,0,,,
+datasciencemasters/go,84757150,112,Linked Table of Contents,"Adds a table of contents. Each line in the table links to the appropriate section of the README.md file for easier navigation. 
+",NathanEpstein,3989198,closed,False,2016-09-10T14:32:41+00:00,2017-01-31T23:12:34+00:00,2017-01-31T18:50:19+00:00,2017-01-31T18:50:19+00:00,3bd2eb5d3d4e2d47c36733c0d826c8016044a4da,unknown,34,8,1,4,0,2,,,
+datasciencemasters/go,84758695,113,Additional Materials,"- Linear Algebra - MIT OCW (particularly popular offering of theirs)
+- Calculus - MIT OCW for single and multivariable calculus (there's no other resources on the page about foundational calculus). 
+- Spark - some introductory materials from Stanford and Apache (there's no other dedicated Spark materials).
+",NathanEpstein,3989198,closed,False,2016-09-10T15:29:10+00:00,2023-04-18T01:12:08+00:00,2023-04-18T01:12:07+00:00,,0be6823fc16c2ba322bcec11fd53d29b0f100692,unknown,13,8,1,2,0,1,,,
+datasciencemasters/go,85821588,115,Create statistics-review.md,"I have started a statistics review file for whoever need it.
+",siyaoxu,7561995,closed,False,2016-09-19T16:02:33+00:00,2017-01-31T18:47:42+00:00,2017-01-31T18:44:05+00:00,2017-01-31T18:44:04+00:00,fce3a500b7704006c18756666e65ae93f9b13dfc,unknown,6,0,1,1,0,1,,,
+datasciencemasters/go,85834108,116,Adds 4 Linear Algebra links (Better Explained).,"Adds 4 links to Kalid Azad's articles on Linear Algebra topics, from his website Better Explained https://betterexplained.com
+",fauria,742022,closed,False,2016-09-19T17:19:51+00:00,2017-01-31T18:41:54+00:00,2017-01-31T18:41:45+00:00,2017-01-31T18:41:45+00:00,f6da220df0ee5f462367d27fbebe0d607aef4cae,unknown,4,0,1,1,0,1,,,
+datasciencemasters/go,87114737,117,[convex opt] added book link,,kmonsoor,1219418,closed,False,2016-09-28T13:00:07+00:00,2017-01-31T18:30:35+00:00,2017-01-31T18:30:35+00:00,2017-01-31T18:30:35+00:00,6c185b19f79a74eb03d1134546ecb9a33ac7e107,unknown,1,1,1,1,0,1,,,
+datasciencemasters/go,87592527,118,Added New Blog ,"Analytics Vidhya provides great articles on basics of data science and is one of the leading data science platforms.
+",thakursc1-zz,8618041,open,False,2016-10-01T05:35:37+00:00,2017-01-31T18:39:56+00:00,,,1896c7535fdbef6ce545fdc3c1de244137381795,dirty,1,0,1,2,0,1,,,
+datasciencemasters/go,89397688,119,Added Cheat Sheets,,Kacawi-zz,8349123,open,False,2016-10-14T14:46:45+00:00,2017-02-10T11:32:21+00:00,,,eaf8450da2c6bc911bdf5fbf143e231f199584c8,dirty,7,0,2,2,0,4,,,
+datasciencemasters/go,96654498,120,Added Linear Algebra by Gilbert Strang,"Added Linear Algebra by Gilbert Strang Great Video materials freely available from MIT.
+https://github.com/datasciencemasters/go/compare/master...sriharshams:master#diff-04c6e90faac2675aa89e2176d2eec7d8",sriharshams,1791206,open,False,2016-12-06T03:26:08+00:00,2017-01-31T19:31:33+00:00,,,60d7599bea6ea23e17ad83943a595cf0b0aa202e,dirty,1,0,1,1,0,2,,,
+datasciencemasters/go,104661399,122,Add a book and a read by Congyang Wang,"book: Algorithms for Data Science
+read: The Data Science Weekly Newsletter",genki3ng,4596255,open,False,2017-02-04T13:33:59+00:00,2017-04-14T21:44:29+00:00,,,7da316d45bb9f742aeb45624162bc7042c98b470,dirty,4,0,1,1,0,1,,,
+datasciencemasters/go,104681187,123,Four free python resources,"Added four additional free resources. Three courses focused on Python for data science, one course focused on python programming. 
+
+Thank you for the resource. ",martijnsublime,6278308,open,False,2017-02-05T00:05:18+00:00,2017-04-14T23:45:45+00:00,,,aa2aa9fecb2a4025b95b062bf36ae70dccb98945,dirty,4,0,1,2,0,2,,,
+datasciencemasters/go,116078364,124,Added two comprehensive neural networks tutorials,"Added two neural networks tutorials - one for beginners from scratch - http://adventuresinmachinelearning.com/neural-networks-tutorial/, the other introducing TensorFlow and NNs: http://adventuresinmachinelearning.com/python-tensorflow-tutorial/",adventuresinML,26499075,open,False,2017-04-17T01:04:59+00:00,2017-04-17T01:04:59+00:00,,,97efd405fe3a49c26db8b6fef5fb0de0c8ded002,dirty,2,0,1,1,0,0,,,
+datasciencemasters/go,116412384,125,adding tidy data links to README,,oldjacket-zz,9246141,closed,False,2017-04-18T20:22:06+00:00,2019-02-21T16:14:05+00:00,2019-02-21T16:14:05+00:00,,f701ec0d8110a07ec7f7bfa84751e74b51b61ea1,unknown,4,1,1,1,0,2,,,
+datasciencemasters/go,124352522,126,Updated Specialisations.md's Machine Learning,Added this specialisation from University Of Michigan On Coursera. It's free if you do an audit per course of the specialisation.,adityalahiri,21020094,closed,False,2017-06-07T07:26:25+00:00,2023-04-18T00:00:27+00:00,2023-04-18T00:00:26+00:00,,945973f88bd482393358d762f67d2bb16220fc8e,dirty,1,0,1,1,0,1,,,
+datasciencemasters/go,125936878,127,Add Coursera Stats with R course,,missaugustina,101733,open,False,2017-06-16T00:12:17+00:00,2017-06-16T00:12:17+00:00,,,fb627ccad58a5e6300a6ed964281d030aac5ba7b,clean,1,0,1,1,0,0,,,
+datasciencemasters/go,125937545,128,Added a link to the Data Scientist Workbench,,missaugustina,101733,closed,False,2017-06-16T00:19:39+00:00,2023-04-18T01:19:01+00:00,2023-04-18T01:19:01+00:00,,561177a0e6bbb6e18093a91a8d5345bea662bb6d,dirty,1,1,1,1,0,1,,,
+datasciencemasters/go,128535544,129,"""Zipfian Academy's List of Resources"" link is dead",This link leads to a dead site; Zipfian was acquired by another company and their domain appears to be empty.,telarmago,29348877,closed,False,2017-07-02T21:55:58+00:00,2023-04-16T21:16:57+00:00,2023-04-16T21:16:56+00:00,,42e78790b6336f0f983da41dc0eb489bb3122db8,dirty,0,1,1,1,0,0,,,
+datasciencemasters/go,129276860,130,Fix broken link,This fixes a broken link in the README.,biglovisa,10555255,closed,False,2017-07-06T20:42:56+00:00,2018-08-13T16:56:07+00:00,2018-08-13T16:56:07+00:00,,8c227be8f5675805fda8f2657a50bb4f1bb2887e,dirty,1,2,1,1,0,0,,,

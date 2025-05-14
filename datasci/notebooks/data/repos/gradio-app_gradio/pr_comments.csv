@@ -1,0 +1,723 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+gradio-app/gradio,2514139619,2085168635,abidlabs,1778297,2025-05-12T17:51:00+00:00,2025-05-12T17:51:00+00:00,Use the `|` syntax instead of `Union`,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085171151,abidlabs,1778297,2025-05-12T17:52:52+00:00,2025-05-12T17:52:52+00:00,Can you explain what this if/else is handling?,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085332826,dawoodkhan82,12725292,2025-05-12T19:41:39+00:00,2025-05-12T19:41:39+00:00,"checks for value prop of the component. But the else is redundant, will fix.",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085407750,abidlabs,1778297,2025-05-12T20:31:11+00:00,2025-05-12T20:31:11+00:00,This can be a static method,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085409090,abidlabs,1778297,2025-05-12T20:31:40+00:00,2025-05-12T20:31:40+00:00,"Instead of checking if it has a ""get_config"" attribute, why not just check if it's an instance of Component?",False,,,,1,1,0,0,0,0,0
+gradio-app/gradio,2514139619,2085409751,abidlabs,1778297,2025-05-12T20:31:55+00:00,2025-05-12T20:31:55+00:00,What is this try/except designed to handle? ,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085412686,abidlabs,1778297,2025-05-12T20:32:53+00:00,2025-05-12T20:32:53+00:00,"This casting is not ideal as it'll mask any typing issues, would be better if we ensured that make_serializable returned a list[MessageDict].",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085562395,dawoodkhan82,12725292,2025-05-12T21:34:19+00:00,2025-05-12T21:34:19+00:00,"To fix this, changed the `make_serializable` method to return `any`. Since it's recursive and has to to return other the other types (messagedict, component) as well",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085563700,dawoodkhan82,12725292,2025-05-12T21:34:59+00:00,2025-05-12T21:34:59+00:00,"Lmk if this is better, than `cast`",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085567221,dawoodkhan82,12725292,2025-05-12T21:36:47+00:00,2025-05-12T21:37:11+00:00,I can make it static but since its recursive I would have to call itself using `ChatInterface._make_serializable` instead of using self. opted not to since we don't do that anywhere else. ,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085574774,abidlabs,1778297,2025-05-12T21:40:12+00:00,2025-05-12T21:40:18+00:00,"you could just call it with its name `make_serializable()` from within the function, no?",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085580162,abidlabs,1778297,2025-05-12T21:42:21+00:00,2025-05-12T21:42:21+00:00,"This is ok but I think the better approach would be for `make_serializable` to have the correct return type, but inside `make_serializable`, you have an inner function that is called recursively. That way, you still get the guarantees of type checking.",False,,,,1,1,0,0,0,0,0
+gradio-app/gradio,2514139619,2085582151,dawoodkhan82,12725292,2025-05-12T21:43:19+00:00,2025-05-12T21:43:19+00:00,"No, it's not defined",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085586724,abidlabs,1778297,2025-05-12T21:47:22+00:00,2025-05-12T21:47:22+00:00,"Ok but if you do the inner recursive function approach suggested below, that should definitely work, right? ",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085595630,dawoodkhan82,12725292,2025-05-12T21:56:32+00:00,2025-05-12T21:56:32+00:00,yeah fixed it,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085632301,abidlabs,1778297,2025-05-12T22:40:19+00:00,2025-05-12T22:40:28+00:00,"I think:
+```suggestion
+    def serialize_conversation(conversation: list[MessageDict]) -> list[MessageDict]:
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085633037,abidlabs,1778297,2025-05-12T22:41:14+00:00,2025-05-12T22:41:15+00:00,"nit: might be clearer name:
+```suggestion
+    def serialize_cocomponents(conversation: Any) -> list[MessageDict]:
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085168635,abidlabs,1778297,2025-05-12T17:51:00+00:00,2025-05-12T17:51:00+00:00,Use the `|` syntax instead of `Union`,True,gradio/components/browser_state.py,,"@@ -4,7 +4,7 @@
+ 
+ import secrets
+ import string
+-from typing import Any
++from typing import Any, Union",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085171151,abidlabs,1778297,2025-05-12T17:52:52+00:00,2025-05-12T17:52:52+00:00,Can you explain what this if/else is handling?,True,gradio/components/browser_state.py,,"@@ -61,9 +61,24 @@ def postprocess(self, value: Any) -> Any:
+         Parameters:
+             value: Value to store in local storage
+         Returns:
+-            Passes value through unchanged
++            Value converted to JSON-serializable format
+         """"""
+-        return value
++        return self.make_serializable(value)
++
++    def make_serializable(self, obj: Any) -> Union[dict, list, str, Any]:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++                else:
++                    return str(obj)",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085332826,dawoodkhan82,12725292,2025-05-12T19:41:39+00:00,2025-05-12T19:41:39+00:00,"checks for value prop of the component. But the else is redundant, will fix.",True,gradio/components/browser_state.py,,"@@ -61,9 +61,24 @@ def postprocess(self, value: Any) -> Any:
+         Parameters:
+             value: Value to store in local storage
+         Returns:
+-            Passes value through unchanged
++            Value converted to JSON-serializable format
+         """"""
+-        return value
++        return self.make_serializable(value)
++
++    def make_serializable(self, obj: Any) -> Union[dict, list, str, Any]:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++                else:
++                    return str(obj)",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085407750,abidlabs,1778297,2025-05-12T20:31:11+00:00,2025-05-12T20:31:11+00:00,This can be a static method,True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085409090,abidlabs,1778297,2025-05-12T20:31:40+00:00,2025-05-12T20:31:40+00:00,"Instead of checking if it has a ""get_config"" attribute, why not just check if it's an instance of Component?",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):",1,1,0,0,0,0,0
+gradio-app/gradio,2514139619,2085409751,abidlabs,1778297,2025-05-12T20:31:55+00:00,2025-05-12T20:31:55+00:00,What is this try/except designed to handle? ,True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++            except Exception:
++                return str(obj)",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085412686,abidlabs,1778297,2025-05-12T20:32:53+00:00,2025-05-12T20:32:53+00:00,"This casting is not ideal as it'll mask any typing issues, would be better if we ensured that make_serializable returned a list[MessageDict].",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++            except Exception:
++                return str(obj)
++        return obj
++
+     def _save_conversation(
+         self,
+         index: int | None,
+         conversation: list[MessageDict],
+         saved_conversations: list[list[MessageDict]],
+     ):
+         if self.save_history:
++            serializable_conversation = self.make_serializable(conversation)
+             if index is not None:
+-                saved_conversations[index] = conversation
++                saved_conversations[index] = cast(",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085562395,dawoodkhan82,12725292,2025-05-12T21:34:19+00:00,2025-05-12T21:34:19+00:00,"To fix this, changed the `make_serializable` method to return `any`. Since it's recursive and has to to return other the other types (messagedict, component) as well",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++            except Exception:
++                return str(obj)
++        return obj
++
+     def _save_conversation(
+         self,
+         index: int | None,
+         conversation: list[MessageDict],
+         saved_conversations: list[list[MessageDict]],
+     ):
+         if self.save_history:
++            serializable_conversation = self.make_serializable(conversation)
+             if index is not None:
+-                saved_conversations[index] = conversation
++                saved_conversations[index] = cast(",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085563700,dawoodkhan82,12725292,2025-05-12T21:34:59+00:00,2025-05-12T21:34:59+00:00,"Lmk if this is better, than `cast`",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++            except Exception:
++                return str(obj)
++        return obj
++
+     def _save_conversation(
+         self,
+         index: int | None,
+         conversation: list[MessageDict],
+         saved_conversations: list[list[MessageDict]],
+     ):
+         if self.save_history:
++            serializable_conversation = self.make_serializable(conversation)
+             if index is not None:
+-                saved_conversations[index] = conversation
++                saved_conversations[index] = cast(",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085567221,dawoodkhan82,12725292,2025-05-12T21:36:47+00:00,2025-05-12T21:37:11+00:00,I can make it static but since its recursive I would have to call itself using `ChatInterface._make_serializable` instead of using self. opted not to since we don't do that anywhere else. ,True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085574774,abidlabs,1778297,2025-05-12T21:40:12+00:00,2025-05-12T21:40:18+00:00,"you could just call it with its name `make_serializable()` from within the function, no?",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085580162,abidlabs,1778297,2025-05-12T21:42:21+00:00,2025-05-12T21:42:21+00:00,"This is ok but I think the better approach would be for `make_serializable` to have the correct return type, but inside `make_serializable`, you have an inner function that is called recursively. That way, you still get the guarantees of type checking.",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:
++        if isinstance(obj, list):
++            return [self.make_serializable(item) for item in obj]
++        elif isinstance(obj, dict):
++            return {k: self.make_serializable(v) for k, v in obj.items()}
++        elif hasattr(obj, ""get_config""):
++            try:
++                if hasattr(obj, ""value""):
++                    return obj.value
++            except Exception:
++                return str(obj)
++        return obj
++
+     def _save_conversation(
+         self,
+         index: int | None,
+         conversation: list[MessageDict],
+         saved_conversations: list[list[MessageDict]],
+     ):
+         if self.save_history:
++            serializable_conversation = self.make_serializable(conversation)
+             if index is not None:
+-                saved_conversations[index] = conversation
++                saved_conversations[index] = cast(",1,1,0,0,0,0,0
+gradio-app/gradio,2514139619,2085582151,dawoodkhan82,12725292,2025-05-12T21:43:19+00:00,2025-05-12T21:43:19+00:00,"No, it's not defined",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085586724,abidlabs,1778297,2025-05-12T21:47:22+00:00,2025-05-12T21:47:22+00:00,"Ok but if you do the inner recursive function approach suggested below, that should definitely work, right? ",True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085595630,dawoodkhan82,12725292,2025-05-12T21:56:32+00:00,2025-05-12T21:56:32+00:00,yeah fixed it,True,gradio/chat_interface.py,,"@@ -461,18 +461,36 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    def make_serializable(self, obj: Any) -> dict | list | str:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085632301,abidlabs,1778297,2025-05-12T22:40:19+00:00,2025-05-12T22:40:28+00:00,"I think:
+```suggestion
+    def serialize_conversation(conversation: list[MessageDict]) -> list[MessageDict]:
+```",True,gradio/chat_interface.py,14.0,"@@ -461,18 +461,32 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    @staticmethod
++    def serialize_conversation(conversation: Any) -> list[MessageDict]:",0,0,0,0,0,0,0
+gradio-app/gradio,2514139619,2085633037,abidlabs,1778297,2025-05-12T22:41:14+00:00,2025-05-12T22:41:15+00:00,"nit: might be clearer name:
+```suggestion
+    def serialize_cocomponents(conversation: Any) -> list[MessageDict]:
+```",True,gradio/chat_interface.py,14.0,"@@ -461,18 +461,32 @@ def _generate_chat_title(self, conversation: list[MessageDict]) -> str:
+             title = title[:40] + ""...""
+         return title or ""Conversation""
+ 
++    @staticmethod
++    def serialize_conversation(conversation: Any) -> list[MessageDict]:",0,0,0,0,0,0,0
+gradio-app/gradio,2498689027,2085212572,abidlabs,1778297,2025-05-12T18:21:48+00:00,2025-05-12T18:21:48+00:00,"I think we can be more specific:
+```suggestion
+    except ValueError:
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2498689027,2085212572,abidlabs,1778297,2025-05-12T18:21:48+00:00,2025-05-12T18:21:48+00:00,"I think we can be more specific:
+```suggestion
+    except ValueError:
+```",True,gradio/utils.py,,"@@ -1308,7 +1308,10 @@ def get_function_params(func: Callable) -> list[tuple[str, bool, Any, Any]]:
+     Excludes *args and **kwargs, as well as args that are Gradio-specific, such as gr.Request, gr.EventData, gr.OAuthProfile, and gr.OAuthToken.
+     """"""
+     params_info = []
+-    signature = inspect.signature(func)
++    try:
++        signature = inspect.signature(func)
++    except Exception:",0,0,0,0,0,0,0
+gradio-app/gradio,2498639141,2073446019,freddyaboulton,41651716,2025-05-05T13:25:32+00:00,2025-05-05T13:25:32+00:00,switch from tuples to lists. Tuples are not json-able so they get converted to lists downstream anyways.,False,,,,1,1,0,0,0,0,0
+gradio-app/gradio,2498639141,2073446019,freddyaboulton,41651716,2025-05-05T13:25:32+00:00,2025-05-05T13:25:32+00:00,switch from tuples to lists. Tuples are not json-able so they get converted to lists downstream anyways.,True,gradio/utils.py,5.0,"@@ -1262,35 +1262,42 @@ def compare_objects(obj1, obj2, path=None):
+             return edits
+ 
+         if type(obj1) is not type(obj2):
+-            edits.append((""replace"", path, obj2))
++            edits.append([""replace"", path, obj2])",1,1,0,0,0,0,0
+gradio-app/gradio,2494205689,2070971194,abidlabs,1778297,2025-05-02T00:54:10+00:00,2025-05-02T00:54:10+00:00,unrelated follow up from https://github.com/gradio-app/gradio/pull/11103,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2494205689,2070971194,abidlabs,1778297,2025-05-02T00:54:10+00:00,2025-05-02T00:54:10+00:00,unrelated follow up from https://github.com/gradio-app/gradio/pull/11103,True,guides/04_additional-features/14_view-api-page.md,4.0,"@@ -56,4 +56,6 @@ The API page also includes instructions on how to use the Gradio app as an Model
+ 
+ For the MCP sever, each tool, its description, and its parameters are listed, along with instructions on how to integrate with popular MCP Clients. Read more about Gradio's [MCP integration here](https://www.gradio.app/guides/building-mcp-server-with-gradio).
+ 
++## OpenAPI Specification",0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068769838,freddyaboulton,41651716,2025-04-30T14:20:41+00:00,2025-04-30T14:22:22+00:00,Can we build a version of this and ship with gradio? e.g. `mcp/inspect` ?,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068774629,freddyaboulton,41651716,2025-04-30T14:23:13+00:00,2025-04-30T14:23:13+00:00,Maybe we should do this at the gradio mcp-server level so that developers don't have to code with mcp in mind from the start.,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068790545,abidlabs,1778297,2025-04-30T14:31:37+00:00,2025-04-30T14:31:38+00:00,"I think it's better to point users to the official debugger. I don't think we should be maintaining a rapidly-evolving inspector tool ourselves (and if there are issues with the inspector tool, then that could complicate debugging -- is the issue with our inspector tool or with the developer's code? What we could do instead is mention the `gradio_api/mcp/schema` route as an intermediate way to inspect your endpoint's schema",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068822001,abidlabs,1778297,2025-04-30T14:44:47+00:00,2025-04-30T14:44:47+00:00,"Yeah I was thinking that as well, but I think this is a temporary issue with some MCP clients. Coercing to a str and then back to a specific type might have some side effects",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068769838,freddyaboulton,41651716,2025-04-30T14:20:41+00:00,2025-04-30T14:22:22+00:00,Can we build a version of this and ship with gradio? e.g. `mcp/inspect` ?,True,guides/10_other-tutorials/building-mcp-server-with-gradio.md,72.0,"@@ -209,3 +206,82 @@ To use this MCP Server with Claude Desktop (as MCP Client):
+ Now, when you ask Claude about generating an image or transcribing audio, it can use your Gradio-powered tools to accomplish these tasks.
+ 
+ 
++## Troubleshooting your MCP Servers
++
++The MCP protocol is still in its infancy and you might see issues connecting to an MCP Server that you've built. We generally recommend using the [MCP Inspector Tool](https://github.com/modelcontextprotocol/inspector) to try connecting and debugging your MCP Server.",0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068774629,freddyaboulton,41651716,2025-04-30T14:23:13+00:00,2025-04-30T14:23:13+00:00,Maybe we should do this at the gradio mcp-server level so that developers don't have to code with mcp in mind from the start.,True,guides/10_other-tutorials/building-mcp-server-with-gradio.md,93.0,"@@ -209,3 +206,82 @@ To use this MCP Server with Claude Desktop (as MCP Client):
+ Now, when you ask Claude about generating an image or transcribing audio, it can use your Gradio-powered tools to accomplish these tasks.
+ 
+ 
++## Troubleshooting your MCP Servers
++
++The MCP protocol is still in its infancy and you might see issues connecting to an MCP Server that you've built. We generally recommend using the [MCP Inspector Tool](https://github.com/modelcontextprotocol/inspector) to try connecting and debugging your MCP Server.
++
++Here are some things that may help:
++
++**1. Ensure that you've provided type hints and valid docstrings for your functions**
++
++As mentioned earlier, Gradio reads the docstrings for your functions and the type hints of input arguments to generate the description of the tool and parameters. A valid function and docstring looks like this:
++
++```py
++def image_orientation(image: Image.Image) -> str:
++    """"""
++    Returns whether image is portrait or landscape.
++
++    Args:
++        image (Image.Image): The image to check.
++    """"""
++    return ""Portrait"" if image.height > image.width else ""Landscape""
++```
++
++Note the ""Args:"" block with indented parameter names underneath.
++
++**2. Try accepting input arguments as `str`**",0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068790545,abidlabs,1778297,2025-04-30T14:31:37+00:00,2025-04-30T14:31:38+00:00,"I think it's better to point users to the official debugger. I don't think we should be maintaining a rapidly-evolving inspector tool ourselves (and if there are issues with the inspector tool, then that could complicate debugging -- is the issue with our inspector tool or with the developer's code? What we could do instead is mention the `gradio_api/mcp/schema` route as an intermediate way to inspect your endpoint's schema",True,guides/10_other-tutorials/building-mcp-server-with-gradio.md,72.0,"@@ -209,3 +206,82 @@ To use this MCP Server with Claude Desktop (as MCP Client):
+ Now, when you ask Claude about generating an image or transcribing audio, it can use your Gradio-powered tools to accomplish these tasks.
+ 
+ 
++## Troubleshooting your MCP Servers
++
++The MCP protocol is still in its infancy and you might see issues connecting to an MCP Server that you've built. We generally recommend using the [MCP Inspector Tool](https://github.com/modelcontextprotocol/inspector) to try connecting and debugging your MCP Server.",0,0,0,0,0,0,0
+gradio-app/gradio,2491479718,2068822001,abidlabs,1778297,2025-04-30T14:44:47+00:00,2025-04-30T14:44:47+00:00,"Yeah I was thinking that as well, but I think this is a temporary issue with some MCP clients. Coercing to a str and then back to a specific type might have some side effects",True,guides/10_other-tutorials/building-mcp-server-with-gradio.md,93.0,"@@ -209,3 +206,82 @@ To use this MCP Server with Claude Desktop (as MCP Client):
+ Now, when you ask Claude about generating an image or transcribing audio, it can use your Gradio-powered tools to accomplish these tasks.
+ 
+ 
++## Troubleshooting your MCP Servers
++
++The MCP protocol is still in its infancy and you might see issues connecting to an MCP Server that you've built. We generally recommend using the [MCP Inspector Tool](https://github.com/modelcontextprotocol/inspector) to try connecting and debugging your MCP Server.
++
++Here are some things that may help:
++
++**1. Ensure that you've provided type hints and valid docstrings for your functions**
++
++As mentioned earlier, Gradio reads the docstrings for your functions and the type hints of input arguments to generate the description of the tool and parameters. A valid function and docstring looks like this:
++
++```py
++def image_orientation(image: Image.Image) -> str:
++    """"""
++    Returns whether image is portrait or landscape.
++
++    Args:
++        image (Image.Image): The image to check.
++    """"""
++    return ""Portrait"" if image.height > image.width else ""Landscape""
++```
++
++Note the ""Args:"" block with indented parameter names underneath.
++
++**2. Try accepting input arguments as `str`**",0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069288878,abidlabs,1778297,2025-04-30T19:04:27+00:00,2025-04-30T19:04:27+00:00,I don't think there was any reference to the API Recorder anywhere in our docs before this!,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069731854,aliabd,9021060,2025-05-01T01:10:12+00:00,2025-05-01T01:16:18+00:00,"fixes the broken link
+```suggestion
+This will add and document the endpoint `/addition/` to the automatically generated API page. Read more about the [API page here](./view-api-page).
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069733141,aliabd,9021060,2025-05-01T01:11:24+00:00,2025-05-01T01:16:18+00:00,"```suggestion
+You can use almost any Gradio app programmatically via the built-in API! In the footer of any Gradio app, you'll see a ""Use via API"" link. Clicking on the link opens up a detailed documentation page for the API that Gradio generates based on the function signatures in your Gradio app.
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069736891,aliabd,9021060,2025-05-01T01:15:37+00:00,2025-05-01T01:16:18+00:00,"its mentioned in the python/js client pages, but not in detail ",False,,,,1,1,0,0,0,0,0
+gradio-app/gradio,2490252348,2069288878,abidlabs,1778297,2025-04-30T19:04:27+00:00,2025-04-30T19:04:27+00:00,I don't think there was any reference to the API Recorder anywhere in our docs before this!,True,guides/04_additional-features/14_view-api-page.md,45.0,"@@ -0,0 +1,59 @@
++# API Page
++
++You can use almost any Gradio app programmatically via the built-in an API! In the footer of any Gradio app, you'll see a ""Use via API"" link. Clicking on the link opens up a detailed documentation page for the API that Gradio generates based on the function signatures in your Gradio app.
++
++![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/view-api-animated.gif)
++
++## Configuring the API Page
++
++**API endpoint names**
++
++When you create a Gradio application, the API endpoint names are automatically generated based on the function names. You can change this by using the `api_name` parameter in `gr.Interface` or `gr.ChatInterface`. If you are using Gradio `Blocks`, you can name each event listener, like this:
++
++```python
++btn.click(add, [num1, num2], output, api_name=""addition"")
++```
++
++**Hiding API endpoints**
++
++When building a complex Gradio app, you might want to hide certain API endpoints from appearing on the view API page, e.g. if they correspond to functions that simply update the UI. You can set the  `show_api` parameter to `False` in any `Blocks` event listener to achieve this, e.g. 
++
++```python
++btn.click(add, [num1, num2], output, show_api=False)
++```
++
++**Disabling API endpoints**
++
++Hiding the API endpoint doesn't disable it. A user can still programmatically call the API endpoint if they know the name. If you want to disable an API endpoint altogether, set `api_name=False`, e.g. 
++
++```python
++btn.click(add, [num1, num2], output, api_name=False)
++```
++
++Note: setting an `api_name=False` also means that downstream apps will not be able to load your Gradio app using `gr.load()` as this function uses the Gradio API under the hood.
++
++
++## The Clients
++
++This API page not only lists all of the endpoints that can be used to query the Gradio app, but also shows the usage of both [the Gradio Python client](https://gradio.app/guides/getting-started-with-the-python-client/), and [the Gradio JavaScript client](https://gradio.app/guides/getting-started-with-the-js-client/). 
++
++For each endpoint, Gradio automatically generates a complete code snippet with the parameters and their types, as well as example inputs, allowing you to immediately test an endpoint. Here's an example showing an image file input and `str` output:
++
++![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/view-api-snippet.png)
++
++
++## The API Recorder 🪄",0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069731854,aliabd,9021060,2025-05-01T01:10:12+00:00,2025-05-01T01:16:18+00:00,"fixes the broken link
+```suggestion
+This will add and document the endpoint `/addition/` to the automatically generated API page. Read more about the [API page here](./view-api-page).
+```",True,guides/04_additional-features/07_sharing-your-app.md,,"@@ -176,13 +176,13 @@ This is a page that lists the endpoints that can be used to query the Gradio app
+ 
+ ![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/view-api.png)
+ 
+-The endpoints are automatically created when you launch a Gradio `Interface`. If you are using Gradio `Blocks`, you can also set up a Gradio API page, though we recommend that you explicitly name each event listener, such as
++The endpoints are automatically created when you launch a Gradio application. If you are using Gradio `Blocks`, you can also name each event listener, such as
+ 
+ ```python
+ btn.click(add, [num1, num2], output, api_name=""addition"")
+ ```
+ 
+-This will add and document the endpoint `/api/addition/` to the automatically generated API page. Otherwise, your API endpoints will appear as ""unnamed"" endpoints.
++This will add and document the endpoint `/addition/` to the automatically generated API page. Read more about the [API page here](/guides/additional-features/view-api-page).",0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069733141,aliabd,9021060,2025-05-01T01:11:24+00:00,2025-05-01T01:16:18+00:00,"```suggestion
+You can use almost any Gradio app programmatically via the built-in API! In the footer of any Gradio app, you'll see a ""Use via API"" link. Clicking on the link opens up a detailed documentation page for the API that Gradio generates based on the function signatures in your Gradio app.
+```",True,guides/04_additional-features/14_view-api-page.md,,"@@ -0,0 +1,59 @@
++# API Page
++
++You can use almost any Gradio app programmatically via the built-in an API! In the footer of any Gradio app, you'll see a ""Use via API"" link. Clicking on the link opens up a detailed documentation page for the API that Gradio generates based on the function signatures in your Gradio app.",0,0,0,0,0,0,0
+gradio-app/gradio,2490252348,2069736891,aliabd,9021060,2025-05-01T01:15:37+00:00,2025-05-01T01:16:18+00:00,"its mentioned in the python/js client pages, but not in detail ",True,guides/04_additional-features/14_view-api-page.md,45.0,"@@ -0,0 +1,59 @@
++# API Page
++
++You can use almost any Gradio app programmatically via the built-in an API! In the footer of any Gradio app, you'll see a ""Use via API"" link. Clicking on the link opens up a detailed documentation page for the API that Gradio generates based on the function signatures in your Gradio app.
++
++![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/view-api-animated.gif)
++
++## Configuring the API Page
++
++**API endpoint names**
++
++When you create a Gradio application, the API endpoint names are automatically generated based on the function names. You can change this by using the `api_name` parameter in `gr.Interface` or `gr.ChatInterface`. If you are using Gradio `Blocks`, you can name each event listener, like this:
++
++```python
++btn.click(add, [num1, num2], output, api_name=""addition"")
++```
++
++**Hiding API endpoints**
++
++When building a complex Gradio app, you might want to hide certain API endpoints from appearing on the view API page, e.g. if they correspond to functions that simply update the UI. You can set the  `show_api` parameter to `False` in any `Blocks` event listener to achieve this, e.g. 
++
++```python
++btn.click(add, [num1, num2], output, show_api=False)
++```
++
++**Disabling API endpoints**
++
++Hiding the API endpoint doesn't disable it. A user can still programmatically call the API endpoint if they know the name. If you want to disable an API endpoint altogether, set `api_name=False`, e.g. 
++
++```python
++btn.click(add, [num1, num2], output, api_name=False)
++```
++
++Note: setting an `api_name=False` also means that downstream apps will not be able to load your Gradio app using `gr.load()` as this function uses the Gradio API under the hood.
++
++
++## The Clients
++
++This API page not only lists all of the endpoints that can be used to query the Gradio app, but also shows the usage of both [the Gradio Python client](https://gradio.app/guides/getting-started-with-the-python-client/), and [the Gradio JavaScript client](https://gradio.app/guides/getting-started-with-the-js-client/). 
++
++For each endpoint, Gradio automatically generates a complete code snippet with the parameters and their types, as well as example inputs, allowing you to immediately test an endpoint. Here's an example showing an image file input and `str` output:
++
++![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/gradio-guides/view-api-snippet.png)
++
++
++## The API Recorder 🪄",1,1,0,0,0,0,0
+gradio-app/gradio,2489896162,2069128922,abidlabs,1778297,2025-04-30T17:10:33+00:00,2025-04-30T17:10:33+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2489896162,2069128922,abidlabs,1778297,2025-04-30T17:10:33+00:00,2025-04-30T17:10:33+00:00,"```suggestion
+```",True,gradio/routes.py,,"@@ -1425,6 +1425,7 @@ async def sse_stream(request: fastapi.Request):
+                             message = {""msg"": ""done""}
+                             is_done = True
+                         else:
++                            print(""not done"")",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2066932706,freddyaboulton,41651716,2025-04-29T16:29:07+00:00,2025-04-29T16:33:35+00:00,Use camel case for the function name to be consistent,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2066938959,freddyaboulton,41651716,2025-04-29T16:33:19+00:00,2025-04-29T16:33:35+00:00,"You can just use `is_valid_file` instead of implementing a new filter function
+
+```js
+		const files_to_load = Array.from(e.dataTransfer.files).filter(is_valid_file);
+```",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2067182692,pngwn,12937446,2025-04-29T19:17:09+00:00,2025-04-29T19:17:09+00:00,Did you mean snake?,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2067374783,freddyaboulton,41651716,2025-04-29T20:29:44+00:00,2025-04-29T20:29:44+00:00,Yea lol,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2068555444,Martim-Rito,134000281,2025-04-30T12:24:33+00:00,2025-04-30T12:24:33+00:00,I think it is done.,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2068556237,Martim-Rito,134000281,2025-04-30T12:24:59+00:00,2025-04-30T12:24:59+00:00,I think it is done.,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2066932706,freddyaboulton,41651716,2025-04-29T16:29:07+00:00,2025-04-29T16:33:35+00:00,Use camel case for the function name to be consistent,True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2066938959,freddyaboulton,41651716,2025-04-29T16:33:19+00:00,2025-04-29T16:33:35+00:00,"You can just use `is_valid_file` instead of implementing a new filter function
+
+```js
+		const files_to_load = Array.from(e.dataTransfer.files).filter(is_valid_file);
+```",True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {
++		dragging = false;
++		if (!e.dataTransfer?.files) return;
++		const files_to_load = Array.from(e.dataTransfer.files).filter((file) => {",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2067182692,pngwn,12937446,2025-04-29T19:17:09+00:00,2025-04-29T19:17:09+00:00,Did you mean snake?,True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2067374783,freddyaboulton,41651716,2025-04-29T20:29:44+00:00,2025-04-29T20:29:44+00:00,Yea lol,True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2068555444,Martim-Rito,134000281,2025-04-30T12:24:33+00:00,2025-04-30T12:24:33+00:00,I think it is done.,True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {",0,0,0,0,0,0,0
+gradio-app/gradio,2488808612,2068556237,Martim-Rito,134000281,2025-04-30T12:24:59+00:00,2025-04-30T12:24:59+00:00,I think it is done.,True,js/upload/src/Upload.svelte,,"@@ -240,6 +240,39 @@
+ 			dispatch(""load"", files_to_load);
+ 		}
+ 	}
++
++	export async function loadFilesFromDrop(e: DragEvent): Promise<void> {
++		dragging = false;
++		if (!e.dataTransfer?.files) return;
++		const files_to_load = Array.from(e.dataTransfer.files).filter((file) => {",0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2054491354,abidlabs,1778297,2025-04-22T16:51:05+00:00,2025-04-22T16:51:06+00:00,We don't need to make these changes if we are only testing a single version of Python. Would you mind reverting?,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2055398131,abidlabs,1778297,2025-04-23T07:12:31+00:00,2025-04-23T07:12:31+00:00,why did you remove the line about the license @reneleonhardt? Gradio is Apache 2 licensed: https://github.com/gradio-app/gradio/blob/main/LICENSE,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2055502795,reneleonhardt,65483435,2025-04-23T08:14:28+00:00,2025-04-23T08:14:28+00:00,"Did you double-check your classifiers?
+https://github.com/gradio-app/gradio/blob/main/pyproject.toml#L13
+```
+license = ""Apache-2.0""
+```
+https://packaging.python.org/en/latest/guides/licensing-examples-and-user-scenarios/
+
+Your license is `Apache License, Version 2.0` not the old `Apache Software License, version 1.1`
+https://opensource.org/licenses?ls=apache
+",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2056699929,abidlabs,1778297,2025-04-23T18:49:19+00:00,2025-04-23T18:49:19+00:00,got it thanks,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2054491354,abidlabs,1778297,2025-04-22T16:51:05+00:00,2025-04-22T16:51:06+00:00,We don't need to make these changes if we are only testing a single version of Python. Would you mind reverting?,True,.github/workflows/test-python.yml,1.0,,0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2055398131,abidlabs,1778297,2025-04-23T07:12:31+00:00,2025-04-23T07:12:31+00:00,why did you remove the line about the license @reneleonhardt? Gradio is Apache 2 licensed: https://github.com/gradio-app/gradio/blob/main/LICENSE,True,pyproject.toml,4.0,"@@ -27,14 +27,13 @@ keywords = [""machine learning"", ""reproducibility"", ""visualization""]
+ 
+ classifiers = [
+   'Development Status :: 5 - Production/Stable',
+-  'License :: OSI Approved :: Apache Software License',",0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2055502795,reneleonhardt,65483435,2025-04-23T08:14:28+00:00,2025-04-23T08:14:28+00:00,"Did you double-check your classifiers?
+https://github.com/gradio-app/gradio/blob/main/pyproject.toml#L13
+```
+license = ""Apache-2.0""
+```
+https://packaging.python.org/en/latest/guides/licensing-examples-and-user-scenarios/
+
+Your license is `Apache License, Version 2.0` not the old `Apache Software License, version 1.1`
+https://opensource.org/licenses?ls=apache
+",True,pyproject.toml,4.0,"@@ -27,14 +27,13 @@ keywords = [""machine learning"", ""reproducibility"", ""visualization""]
+ 
+ classifiers = [
+   'Development Status :: 5 - Production/Stable',
+-  'License :: OSI Approved :: Apache Software License',",0,0,0,0,0,0,0
+gradio-app/gradio,2470598604,2056699929,abidlabs,1778297,2025-04-23T18:49:19+00:00,2025-04-23T18:49:19+00:00,got it thanks,True,pyproject.toml,4.0,"@@ -27,14 +27,13 @@ keywords = [""machine learning"", ""reproducibility"", ""visualization""]
+ 
+ classifiers = [
+   'Development Status :: 5 - Production/Stable',
+-  'License :: OSI Approved :: Apache Software License',",0,0,0,0,0,0,0
+gradio-app/gradio,2468673836,2051177226,pngwn,12937446,2025-04-18T22:15:25+00:00,2025-04-18T22:15:29+00:00,I think we can just dispatch clear in the `remove_image` event handler without adding the other clear event to the Controls component. ,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2468673836,2054531639,freddyaboulton,41651716,2025-04-22T17:18:15+00:00,2025-04-22T17:18:16+00:00,Will modify!,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2468673836,2051177226,pngwn,12937446,2025-04-18T22:15:25+00:00,2025-04-18T22:15:29+00:00,I think we can just dispatch clear in the `remove_image` event handler without adding the other clear event to the Controls component. ,True,js/imageeditor/shared/ImageEditor.svelte,,"@@ -605,6 +605,7 @@
+ 				on:set_zoom={(e) => handle_zoom_change(e.detail)}
+ 				on:zoom_in={() => zoom_in_out(""in"")}
+ 				on:zoom_out={() => zoom_in_out(""out"")}
++				on:clear={() => dispatch(""clear"")}",0,0,0,0,0,0,0
+gradio-app/gradio,2468673836,2054531639,freddyaboulton,41651716,2025-04-22T17:18:15+00:00,2025-04-22T17:18:16+00:00,Will modify!,True,js/imageeditor/shared/ImageEditor.svelte,,"@@ -605,6 +605,7 @@
+ 				on:set_zoom={(e) => handle_zoom_change(e.detail)}
+ 				on:zoom_in={() => zoom_in_out(""in"")}
+ 				on:zoom_out={() => zoom_in_out(""out"")}
++				on:clear={() => dispatch(""clear"")}",0,0,0,0,0,0,0
+gradio-app/gradio,2465940157,2049179814,hannahblair,15165908,2025-04-17T15:17:46+00:00,2025-04-17T15:17:46+00:00,"wasn't causing an issue, just adding this for type safety",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465940157,2049179814,hannahblair,15165908,2025-04-17T15:17:46+00:00,2025-04-17T15:17:46+00:00,"wasn't causing an issue, just adding this for type safety",True,js/utils/src/utils.ts,,"@@ -221,7 +221,7 @@ type component_loader = (args: Args) => {
+ 
+ const is_browser = typeof window !== ""undefined"";
+ 
+-export type I18nFormatter = any;
++export type I18nFormatter = (x: string) => string;",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2054523098,hannahblair,15165908,2025-04-22T17:12:10+00:00,2025-04-22T17:12:10+00:00,we need to audit other components that need this syntax fixed,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056312476,hannahblair,15165908,2025-04-23T15:26:05+00:00,2025-04-23T15:26:05+00:00,is values the right word? 🤔 ,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056842699,abidlabs,1778297,2025-04-23T20:40:17+00:00,2025-04-23T20:40:17+00:00,"This approach of using a factory method to create an internal class works, but a more standard approach would be to just have `i18n` as a class that a user instantiates directly, like this:
+```
+class i18n:
+    def __init__(self, **translations: dict[str, str]):
+```
+
+Benefit of this, besides being simpler, is that we'll want to update all of the typing for all the parameters for all of components that can also accept i18n objects, and we can reference this class directly. So for example, in `Textbox`, the parameter
+
+```
+label: str | None = None,
+```
+
+should now be:
+
+```
+label: str | i18n | None = None,
+```",False,,,,1,1,0,0,0,0,0
+gradio-app/gradio,2465784474,2056843516,abidlabs,1778297,2025-04-23T20:40:55+00:00,2025-04-23T20:40:56+00:00,"""strings""?",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056844110,abidlabs,1778297,2025-04-23T20:41:29+00:00,2025-04-23T20:41:29+00:00,Is  __call__ actually used? My understanding is that the .translations attribute is just passed into the frontend directly,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2085900404,abidlabs,1778297,2025-05-13T04:33:24+00:00,2025-05-13T04:33:25+00:00,Could we give this class a name like `I18nData` instead of `TranslationMetadata`? Only because this is visible to users in the docs and I think we should choose a name that they assiociate with `gr.I18n()`,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2085901540,abidlabs,1778297,2025-05-13T04:34:58+00:00,2025-05-13T04:34:59+00:00,"For Markdown, `value` can also be i18n-ed?",False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2054523098,hannahblair,15165908,2025-04-22T17:12:10+00:00,2025-04-22T17:12:10+00:00,we need to audit other components that need this syntax fixed,True,js/number/Index.svelte,,"@@ -71,7 +72,7 @@
+ 		on:clear_status={() => gradio.dispatch(""clear_status"", loading_status)}
+ 	/>
+ 	<label class=""block"" class:container>
+-		<BlockTitle {root} {show_label} {info}>{label}</BlockTitle>
++		<BlockTitle {root} {show_label} {info}>{$_(label)}</BlockTitle>",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056312476,hannahblair,15165908,2025-04-23T15:26:05+00:00,2025-04-23T15:26:05+00:00,is values the right word? 🤔 ,True,gradio/blocks.py,,"@@ -2471,6 +2473,7 @@ def launch(
+             strict_cors: If True, prevents external domains from making requests to a Gradio server running on localhost. If False, allows requests to localhost that originate from localhost but also, crucially, from ""null"". This parameter should normally be True to prevent CSRF attacks but may need to be False when embedding a *locally-running Gradio app* using web components.
+             ssr_mode: If True, the Gradio app will be rendered using server-side rendering mode, which is typically more performant and provides better SEO, but this requires Node 20+ to be installed on the system. If False, the app will be rendered using client-side rendering mode. If None, will use GRADIO_SSR_MODE environment variable or default to False.
+             pwa: If True, the Gradio app will be set up as an installable PWA (Progressive Web App). If set to None (default behavior), then the PWA feature will be enabled if this Gradio app is launched on Spaces, but not otherwise.
++            i18n: An I18n instance containing custom translations, which are used to translate values in our components. This feature can only be used to translate static text in the frontend, not values in the backend.",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056842699,abidlabs,1778297,2025-04-23T20:40:17+00:00,2025-04-23T20:40:17+00:00,"This approach of using a factory method to create an internal class works, but a more standard approach would be to just have `i18n` as a class that a user instantiates directly, like this:
+```
+class i18n:
+    def __init__(self, **translations: dict[str, str]):
+```
+
+Benefit of this, besides being simpler, is that we'll want to update all of the typing for all the parameters for all of components that can also accept i18n objects, and we can reference this class directly. So for example, in `Textbox`, the parameter
+
+```
+label: str | None = None,
+```
+
+should now be:
+
+```
+label: str | i18n | None = None,
+```",True,gradio/__init__.py,,"@@ -240,3 +241,27 @@
+     ""update"",
+     ""DeepLinkButton"",
+ ]
++
++
++def i18n(**kwargs) -> _I18n:
++    """"""Create an i18n instance with translations. Use this function to define
++    translation dictionaries for different locales.
++
++    Args:
++        **kwargs: Each keyword argument should be a locale code (e.g., ""en"", ""fr"") with a
++        dictionary value, which maps translation keys to translated strings.
++
++    Returns:
++        An I18n instance with the specified translations.
++
++    Example:
++        i18n = gr.i18n(
++            en={""greeting"": ""Hello""},
++            es={""greeting"": ""Hola""}
++        )
++        with gr.Blocks() as demo:
++            gr.Textbox(label=i18n(""greeting""))
++
++        demo.launch(i18n=i18n)
++    """"""
++    return _I18n(translations=kwargs)",1,1,0,0,0,0,0
+gradio-app/gradio,2465784474,2056843516,abidlabs,1778297,2025-04-23T20:40:55+00:00,2025-04-23T20:40:56+00:00,"""strings""?",True,gradio/blocks.py,,"@@ -2471,6 +2473,7 @@ def launch(
+             strict_cors: If True, prevents external domains from making requests to a Gradio server running on localhost. If False, allows requests to localhost that originate from localhost but also, crucially, from ""null"". This parameter should normally be True to prevent CSRF attacks but may need to be False when embedding a *locally-running Gradio app* using web components.
+             ssr_mode: If True, the Gradio app will be rendered using server-side rendering mode, which is typically more performant and provides better SEO, but this requires Node 20+ to be installed on the system. If False, the app will be rendered using client-side rendering mode. If None, will use GRADIO_SSR_MODE environment variable or default to False.
+             pwa: If True, the Gradio app will be set up as an installable PWA (Progressive Web App). If set to None (default behavior), then the PWA feature will be enabled if this Gradio app is launched on Spaces, but not otherwise.
++            i18n: An I18n instance containing custom translations, which are used to translate values in our components. This feature can only be used to translate static text in the frontend, not values in the backend.",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2056844110,abidlabs,1778297,2025-04-23T20:41:29+00:00,2025-04-23T20:41:29+00:00,Is  __call__ actually used? My understanding is that the .translations attribute is just passed into the frontend directly,True,gradio/i18n.py,,"@@ -0,0 +1,44 @@
++from __future__ import annotations
++
++
++class _I18n:
++    """"""
++    Handles internationalization (i18n) for Gradio applications.
++
++    Stores translation dictionaries and provides a method to retrieve translation keys.
++    The translation lookup happens on the frontend based on the browser's locale
++    and the provided translation dictionaries.
++    """"""
++
++    def __init__(self, translations: dict[str, dict[str, str]] | None = None):
++        """"""
++        Initializes the I18n class.
++
++        Args:
++            translations: A dictionary where keys are locale codes (e.g., ""en"", ""es"")
++                          and values are dictionaries mapping translation keys to translated strings.
++                          Example: {""en"": {""greeting"": ""Hello""}, ""es"": {""greeting"": ""Hola""}}
++        """"""
++        self.translations = translations or {}
++
++    def __call__(self, key: str) -> str:",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2085900404,abidlabs,1778297,2025-05-13T04:33:24+00:00,2025-05-13T04:33:25+00:00,Could we give this class a name like `I18nData` instead of `TranslationMetadata`? Only because this is visible to users in the docs and I think we should choose a name that they assiociate with `gr.I18n()`,True,gradio/_simple_templates/simpledropdown.py,14.0,"@@ -23,8 +24,8 @@ def __init__(
+         choices: list[str | int | float | tuple[str, str | int | float]] | None = None,
+         *,
+         value: str | int | float | Callable | None = None,
+-        label: str | None = None,
+-        info: str | None = None,
++        label: str | TranslationMetadata | None = None,",0,0,0,0,0,0,0
+gradio-app/gradio,2465784474,2085901540,abidlabs,1778297,2025-05-13T04:34:58+00:00,2025-05-13T04:34:59+00:00,"For Markdown, `value` can also be i18n-ed?",True,gradio/components/markdown.py,10.0,"@@ -34,7 +35,7 @@ def __init__(
+         self,
+         value: str | Callable | None = None,",0,0,0,0,0,0,0
+gradio-app/gradio,2464277033,2049431075,freddyaboulton,41651716,2025-04-17T18:03:45+00:00,2025-04-17T18:09:28+00:00,Nit but I think AppError should subclass `Exception` instead of `ValueError` ? ,False,,,,0,0,0,0,0,0,0
+gradio-app/gradio,2464277033,2049431550,freddyaboulton,41651716,2025-04-17T18:04:11+00:00,2025-04-17T18:09:28+00:00,Shouldn't it just be AppError if Error inherits from AppError?,False,,,,0,0,0,0,0,0,0

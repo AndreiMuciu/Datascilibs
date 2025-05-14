@@ -1,0 +1,1265 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+gradio-app/gradio,289435872,3,Fix unit tests,,dawoodkhan82,12725292,closed,False,2019-06-18T20:15:13+00:00,2019-06-21T08:16:16+00:00,2019-06-21T08:16:16+00:00,2019-06-21T08:16:16+00:00,c6a21d4e6cf8aab7354d760964b17daa4c26c934,unknown,70,71,7,3,0,1,,,
+gradio-app/gradio,296270238,4,Create LICENSE,,abidlabs,1778297,closed,False,2019-07-10T17:22:59+00:00,2019-07-10T17:23:06+00:00,2019-07-10T17:23:06+00:00,2019-07-10T17:23:06+00:00,3db972c11914c593c88ed00cd23afe1161446e49,unknown,339,0,1,1,0,0,,,
+gradio-app/gradio,297365136,5,Update interface.py,"The `preprocessed_input` may not has a `shape` attribute. Here is an example:
+
+```
+import gradio
+
+# A very simplistic function that capitalizes each letter in the given string
+def big(x):
+    return x.upper()
+
+io = gradio.Interface(inputs=""textbox"", outputs=""textbox"", model=big, model_type='pyfunc')
+io.launch(inline=True, share=True)
+```
+",badbye,3295865,closed,False,2019-07-14T04:00:20+00:00,2019-07-22T01:24:29+00:00,2019-07-22T01:24:29+00:00,2019-07-22T01:24:29+00:00,c6c71ee1f0b28860f83ad4a54dce0c71753ea601,unknown,1,2,1,2,0,0,,,
+gradio-app/gradio,297368414,7,set daemon=False,It not interactive if setting `daemon=True`. The server will quit immediately.,badbye,3295865,closed,False,2019-07-14T05:19:45+00:00,2019-07-22T01:23:04+00:00,2019-07-22T01:23:04+00:00,2019-07-22T01:23:04+00:00,64e3133bf4c8e91e920d136e1ea35360def679e8,unknown,5,2,2,4,0,0,,,
+gradio-app/gradio,300047419,8,Sample inputs functionality for sketchpad and textbook,,dawoodkhan82,12725292,closed,False,2019-07-22T21:32:09+00:00,2019-07-23T21:47:23+00:00,2019-07-23T21:47:23+00:00,2019-07-23T21:47:23+00:00,039fb2f69103cd15e5e5c53efe70198557023ea3,unknown,247,96,27,8,2,0,,,
+gradio-app/gradio,301300724,9,saliency and scripts,,aliabd,9021060,closed,False,2019-07-25T20:35:35+00:00,2019-07-26T06:46:42+00:00,2019-07-26T06:46:37+00:00,2019-07-26T06:46:37+00:00,0d0e373fcbdc02589591d81e48fd674184fb7246,unknown,309,26958,45,10,0,0,,,
+gradio-app/gradio,301421035,10,Aliabd/flag by default,,aliabd,9021060,closed,False,2019-07-26T07:04:43+00:00,2019-07-26T07:08:23+00:00,2019-07-26T07:08:14+00:00,2019-07-26T07:08:14+00:00,051f5772f50ee538469dfa48b04047bcd6136fc7,unknown,34,29,8,5,0,0,,,
+gradio-app/gradio,432332362,15,python backwards compatability,,aliabd,9021060,closed,False,2020-06-10T09:35:31+00:00,2020-06-11T08:10:25+00:00,2020-06-11T08:10:25+00:00,2020-06-11T08:10:25+00:00,20ba7e27b0db6360979df35daeafd48d6d322253,unknown,100,27,8,2,0,0,,,
+gradio-app/gradio,448026044,25,Fixed microphone shortcut and preprocessing,"* Added the missing `microphone` shortcut
+* Per docs:
+> By default, no pre-processing is applied to a microphone input file
+
+Thus fixed the preprocessing step to match docs and made MFCC feature extraction configurable
+* Sorted imports in inputs.py
+* Tested manually using the following variants:
+```python
+gr.Interface(fn=detect, inputs=gr.inputs.Microphone(preprocessing='mfcc'), outputs='label').launch()
+gr.Interface(fn=detect, inputs=gr.inputs.Microphone(preprocessing='invalid'), outputs='label').launch()
+gr.Interface(fn=detect, inputs='microphone', outputs='label').launch()
+```
+* No regression in unit tests",elgeish,6879673,closed,False,2020-07-13T04:24:12+00:00,2020-07-14T16:13:56+00:00,2020-07-14T16:13:56+00:00,2020-07-14T16:13:56+00:00,e1e42a6858ed9d0a145d58fa87d9956b4293f54a,unknown,26,11,1,1,0,1,,,
+gradio-app/gradio,451714390,29,Allow adaptive size inputs for images.,"Allows adaptive input sizes for images (e.g., for fully convolutional neural networks).",kailas-v,23610529,closed,False,2020-07-18T05:16:38+00:00,2020-07-18T18:13:29+00:00,2020-07-18T18:13:29+00:00,2020-07-18T18:13:29+00:00,df9f9fd8b44c3913e3c206f800e7245ee4203c3b,unknown,12,5,1,1,0,1,,,
+gradio-app/gradio,452054717,30,Abidlabs/configurable ports,"Allows user to set a port besides the default port of 7860 when instantiating the interface objects. Not guaranteed that this port will be used (since it might be occupied), but it will be the first port that's tried",abidlabs,1778297,closed,False,2020-07-18T17:53:08+00:00,2020-07-18T18:12:58+00:00,2020-07-18T18:12:58+00:00,2020-07-18T18:12:58+00:00,94dae6e7a6677cef0f66e005f5e0844856c153a3,unknown,14,12,2,4,1,0,,,
+gradio-app/gradio,457443635,37,Flagging,,aliabd,9021060,closed,False,2020-07-27T22:55:13+00:00,2020-08-05T17:43:21+00:00,2020-07-30T23:13:05+00:00,2020-07-30T23:13:05+00:00,480591ad2bde0e328984da0fe5ad1f1a2a419692,unknown,100,34,7,8,19,0,,,
+gradio-app/gradio,460792145,40,Fix key_values and a typo,"Fixing KeyValues to match Python code (`dict` instead of `List[Tuple[str, value]]`).
+Manually tested:
+![image](https://user-images.githubusercontent.com/6879673/89094486-517ef600-d379-11ea-88bf-82cc31b78c96.png)
+",elgeish,6879673,closed,False,2020-08-01T05:07:49+00:00,2020-08-05T18:22:50+00:00,2020-08-05T18:22:50+00:00,2020-08-05T18:22:50+00:00,ebb6449351306c277b3f88ba14e49bc265916276,unknown,5,5,2,4,0,1,,,
+gradio-app/gradio,466424828,44,Dawood/test fix,,dawoodkhan82,12725292,closed,False,2020-08-12T00:18:33+00:00,2022-02-15T05:07:07+00:00,2020-08-12T00:19:00+00:00,2020-08-12T00:19:00+00:00,edc10f0b910a18bfbc81cb59cec243eab2a7b5e6,unknown,38,42,4,6,0,0,,,
+gradio-app/gradio,475492296,48,Abidlabs/test launch,Adds the `Interface.test_launch()` method to the gradio library,abidlabs,1778297,closed,False,2020-08-28T16:02:32+00:00,2022-02-15T05:07:10+00:00,2020-08-30T21:21:28+00:00,2020-08-30T21:21:27+00:00,8af47c4321f272b51440e62a6a3872eda5957fba,unknown,165,80,17,8,6,0,,,
+gradio-app/gradio,488301413,52,Text & Image Interpretation,,dawoodkhan82,12725292,closed,False,2020-09-16T23:36:15+00:00,2020-09-21T21:02:52+00:00,2020-09-21T21:02:52+00:00,2020-09-21T21:02:51+00:00,f03c01f9a83afdb054c8f45960f4b7e46d0e7610,unknown,678,122,25,8,0,3,aliabid94,,
+gradio-app/gradio,490503553,57,Flask server and unit testing,"Replaced HTTPServer with Flask to serve web interface.
+Added unit tests to all interfaces. ",aliabid94,7870876,closed,False,2020-09-21T19:12:32+00:00,2022-02-15T05:07:11+00:00,2020-09-21T19:26:05+00:00,2020-09-21T19:26:05+00:00,a9540459b510847a14a0fd8056c5b1a1bf7b30fb,unknown,595,648,30,7,0,1,,,
+gradio-app/gradio,491011098,58,"fixed - io = gr.Interface(spectrogram, ""audio"", ""plot"")",,mriyank,48956758,closed,False,2020-09-22T15:10:13+00:00,2020-09-30T00:25:57+00:00,2020-09-30T00:25:57+00:00,2020-09-30T00:25:56+00:00,6942d2e44db1eba136f8f2d5103f0c0cf17e0289,unknown,1,1,1,1,0,0,,,
+gradio-app/gradio,497827099,66,Abidlabs/interpretation,Closes #64 and adds tests for interpretation,abidlabs,1778297,closed,False,2020-10-05T12:44:53+00:00,2020-10-06T13:58:09+00:00,2020-10-06T13:58:09+00:00,2020-10-06T13:58:09+00:00,99ad9619bfee8b97b859a72b63cdf518cd456e54,unknown,80,28,4,2,0,0,,,
+gradio-app/gradio,498272699,67,improve image output format,"Fix issue #65 
+
+Unittest passed - However, recommend to remove build/ folder.",jiayiliu,1511514,closed,False,2020-10-06T05:24:46+00:00,2020-10-06T13:53:15+00:00,2020-10-06T13:53:03+00:00,2020-10-06T13:53:15+00:00,4cc1cb3e04a6e214714f128a6f5f3b11042b5a5d,unknown,6,4,4,1,0,1,,,
+gradio-app/gradio,505183437,70,Pass server_name  to networking module to make app accessible on LAN.,PR for issue #69 .,MattPitlyk,7517280,closed,False,2020-10-17T03:23:33+00:00,2020-10-19T12:05:13+00:00,2020-10-19T12:05:13+00:00,2020-10-19T12:05:13+00:00,af0fbe5381ce8516d29478c4cb1a4357a875ef8f,unknown,4,3,2,1,0,1,,,
+gradio-app/gradio,505958055,71,changed to daemon thread,,abidlabs,1778297,closed,False,2020-10-19T13:14:47+00:00,2022-04-21T22:13:31+00:00,2020-10-19T13:14:56+00:00,2020-10-19T13:14:56+00:00,258726b0623633ea9ecfc826d419cf7a28f3fb42,unknown,13,9,2,1,0,0,,,
+gradio-app/gradio,507568789,72,End-to-end UI tests with Selenium,"Tests for four demos (`Image` to `Image` with `live=True`, `Textbox` to `Label`, multiple inputs, `HighlightedText`, `Dropdown`, `Radio`, `Checkbox`, `Slider`, `CheckboxGroup`)
+
+- A lot of the commits are just debugging Selenium with CircleCI
+- Will add more demo tests in a future PR",aliabd,9021060,closed,False,2020-10-21T13:53:22+00:00,2022-04-21T22:13:32+00:00,2020-10-23T14:28:31+00:00,2020-10-23T14:28:31+00:00,cedb0229f7290612050c76c57f7c018aaa8c2aeb,unknown,271,26,27,49,4,0,,,
+gradio-app/gradio,514157985,73,Add full interpretation,Added default interpretation support to all interfaces. Added legend to explain logic behind interpretation,aliabid94,7870876,closed,False,2020-11-02T16:01:20+00:00,2020-11-02T16:11:31+00:00,2020-11-02T16:11:27+00:00,2020-11-02T16:11:27+00:00,ecb536b7fc40d60035b2615dc06ec7161781092c,unknown,240,50,30,4,0,0,abidlabs,,
+gradio-app/gradio,515466829,74,Allow for bulk input from examples,,aliabid94,7870876,closed,False,2020-11-04T15:38:19+00:00,2020-11-04T15:40:24+00:00,2020-11-04T15:38:48+00:00,2020-11-04T15:38:48+00:00,3bef9756fdb67c9732abe6d98201447bf6273596,unknown,973,477,44,9,0,0,,,
+gradio-app/gradio,516388213,76,Update readme,"The get started link isn't working and it returns an error, so ic changed it tot the main home URL",Emekaborisama,24501919,closed,False,2020-11-05T22:56:07+00:00,2020-11-05T23:53:24+00:00,2020-11-05T23:53:23+00:00,,4327eb76d20a2b69668c45122a59821f06be39c2,unknown,2,2,1,1,0,1,,,
+gradio-app/gradio,518854406,77,predict example fix,"Quick fix, but I know you like to vet all static files changes",abidlabs,1778297,closed,False,2020-11-11T00:20:29+00:00,2022-04-21T22:13:38+00:00,2020-11-11T00:21:14+00:00,2020-11-11T00:21:14+00:00,eda553e0d7d335f2191f3709e11698b91d329112,unknown,8,0,1,1,0,0,aliabid94,,
+gradio-app/gradio,525751240,79,Abidlabs/similarity,"Adds embedding plot functionality in gradio library
+* Creates a ""view embedding plot"" for interface
+* Intelligently deduces what kind of labels are provided and colors the labels appropriately
+* Tracks changes as data is manipulated",abidlabs,1778297,closed,False,2020-11-23T13:59:21+00:00,2022-04-21T22:13:39+00:00,2020-11-23T20:16:59+00:00,2020-11-23T20:16:59+00:00,f8fa81efbb7c1791683ddb3b0f86b10ac9393344,unknown,621,1314,35,13,15,0,,,
+gradio-app/gradio,529207086,80,Add Requirements.txt,"Hey there, congratulations on the project! I was testing locally and decided to add a requirements.txt file using [pipreqs](https://pypi.org/project/pipreqs/). I am sending as PR as a suggestion however it is not perfect because it is specifying versions that I was using locally. 
+
+Cheers! ",WittmannF,5733246,closed,False,2020-11-30T00:17:04+00:00,2020-12-18T02:15:47+00:00,2020-12-18T02:15:47+00:00,,f8b315c50b86ca7844c43eafb50b3f77198c6ce7,unknown,21,0,1,2,0,1,,,
+gradio-app/gradio,545392214,92,add logic for flask hostname #69,Related to #69 providing `0.0.0.0` gives error at [this line](https://github.com/gradio-app/gradio/blob/master/gradio/interface.py#L386).,NaxAlpha,11090613,closed,False,2020-12-24T14:35:12+00:00,2021-01-22T01:17:05+00:00,2021-01-22T01:17:05+00:00,,65cdda0390c278c79dd5f34d5fffe59ee3e31505,dirty,5,1,2,2,0,3,abidlabs,,
+gradio-app/gradio,571005983,116,Update preprocess method in Video class,"In preprocess method of Video class, included ff.run() in the if body so that no conversion occurs if self.type is None.",FauzaanQureshi,42518372,closed,False,2021-02-10T10:48:36+00:00,2021-02-10T21:35:03+00:00,2021-02-10T21:35:03+00:00,2021-02-10T21:35:03+00:00,d5dee10c371f35d5b4d4c8e690e21f356e2cf53e,unknown,1,1,1,1,0,1,,,
+gradio-app/gradio,584469738,129,Fix output lengths,"By default, the Gradio interface was multiplying the outputs by the number of prediction functions.
+This isn't always the case however, since if a user passes their own outputs, then this operation is not necessary.",piraka9011,16828657,closed,False,2021-03-04T04:10:00+00:00,2021-04-04T19:32:42+00:00,2021-04-04T19:32:42+00:00,,dfc4eb31ebdd68b8cf00bf55b0fcc6f652a9d769,unknown,6,2,1,2,0,1,,,
+gradio-app/gradio,623556400,162,"fixed single file handling, added keepfilename","Fixed line in input.py for File input object causing bug in single file handling
+
+Added params to File input object to allow keepfilename=True or False to be passed
+When True, will prefix the safe filename generated upon upload with the original filename and a trailing '_' character 
+Thus accessing the file in gradio with f.name will now return 'originalfilenameabc_xxcyidfyudifd.png' or similar",jackneil,25892470,closed,False,2021-04-26T17:54:09+00:00,2021-04-30T04:33:27+00:00,2021-04-30T04:33:27+00:00,2021-04-30T04:33:27+00:00,dac5ce24c63c8d8dca2675b8292945475003e910,unknown,21,12,5,2,0,1,aliabid94,,
+gradio-app/gradio,626890515,164,Abidlabs/smaller,"Removed unnecessary dependencies: librosa, skimage, iPython, colorama",abidlabs,1778297,closed,False,2021-04-30T03:25:25+00:00,2021-04-30T03:25:46+00:00,2021-04-30T03:25:46+00:00,2021-04-30T03:25:46+00:00,f676273426efec3ddc8c7763302367c3f561fc45,unknown,308,25,7,5,0,0,,,
+gradio-app/gradio,631868536,167,Bump flask-cors from 3.0.8 to 3.0.9 in /demo/utils,"Bumps [flask-cors](https://github.com/corydolphin/flask-cors) from 3.0.8 to 3.0.9.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/corydolphin/flask-cors/releases"">flask-cors's releases</a>.</em></p>
+<blockquote>
+<h2>Release 3.0.9</h2>
+<h3>Security</h3>
+<ul>
+<li>Escape path before evaluating resource rules (thanks <a href=""https://github.com/praetorian-colby-morgan""><code>@​praetorian-colby-morgan</code></a>). Prior to this, flask-cors incorrectly
+evaluated CORS resource matching before path expansion. E.g. &quot;/api/../foo.txt&quot; would incorrectly match resources for
+&quot;/api/*&quot; whereas the path actually expands simply to &quot;/foo.txt&quot;</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/corydolphin/flask-cors/blob/master/CHANGELOG.md"">flask-cors's changelog</a>.</em></p>
+<blockquote>
+<h2>3.0.9</h2>
+<h3>Security</h3>
+<ul>
+<li>Escape path before evaluating resource rules (thanks to Colby Morgan). Prior to this, flask-cors incorrectly
+evaluated CORS resource matching before path expansion. E.g. &quot;/api/../foo.txt&quot; would incorrectly match resources for
+&quot;/api/*&quot; whereas the path actually expands simply to &quot;/foo.txt&quot;</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/91babb941e07a1f45636bdcb75675f13ce1503a2""><code>91babb9</code></a> Update Api docs for credentialed requests (<a href=""https://github-redirect.dependabot.com/corydolphin/flask-cors/issues/221"">#221</a>)</li>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/522d98936f3995480fe3132b55415d74298d6790""><code>522d989</code></a> Release version 3.0.9 (<a href=""https://github-redirect.dependabot.com/corydolphin/flask-cors/issues/273"">#273</a>)</li>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/67c4b2cc98ae87cf1fa7df4f97fd81b40c79b895""><code>67c4b2c</code></a> Fix request path normalization (<a href=""https://github-redirect.dependabot.com/corydolphin/flask-cors/issues/272"">#272</a>)</li>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/5c6e05e996f10be1df1f2ad178560e54a2f82f1b""><code>5c6e05e</code></a> docs: Fix simple typo, garaunteed -&gt; guaranteed</li>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/566aef21accd0a15cf127a41edbe14a40c80728c""><code>566aef2</code></a> Fixed over-indentation</li>
+<li><a href=""https://github.com/corydolphin/flask-cors/commit/8a4e6e7057924d124a39ec08f446345bc19e4c5b""><code>8a4e6e7</code></a> Update changelog to give proper kudos to <a href=""https://github.com/juanmaneo""><code>@​juanmaneo</code></a> and <a href=""https://github.com/jdevera""><code>@​jdevera</code></a></li>
+<li>See full diff in <a href=""https://github.com/corydolphin/flask-cors/compare/3.0.8...3.0.9"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=flask-cors&package-manager=pip&previous-version=3.0.8&new-version=3.0.9)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-05-06T20:28:43+00:00,2021-05-09T09:17:00+00:00,2021-05-09T09:16:49+00:00,2021-05-09T09:16:49+00:00,7b7f455dcad12d975e0f170d1b3b2161c4987e22,unknown,1,1,1,1,0,0,,,
+gradio-app/gradio,646685240,180,Update huggingface.scss,,gary149,3841370,closed,False,2021-05-18T11:59:35+00:00,2021-05-21T17:35:27+00:00,2021-05-21T17:35:27+00:00,,4f270bcb5d68f937280aa070637068a1ef9c03fd,dirty,26,26,1,1,0,1,,,
+gradio-app/gradio,646792637,181,[kitchen_sink] demo app with all supported input/output interfaces,"This makes it easy to e.g. style all possible elements on the same webpage/in the same demo.
+
+cc @gary149",julien-c,326577,closed,False,2021-05-18T14:08:51+00:00,2021-09-01T19:07:47+00:00,2021-05-23T18:08:06+00:00,2021-05-23T18:08:06+00:00,f03308ec9deb63f2bc4b768ba55727fbcceb623e,dirty,61,0,1,1,0,1,,,
+gradio-app/gradio,646841140,182,Add handling of default to Radio and CheckboxGroup,"maybe not the right way to do it, so let me know!",julien-c,326577,closed,False,2021-05-18T15:04:38+00:00,2021-05-23T18:08:44+00:00,2021-05-23T18:08:44+00:00,,595e214548717fd5f1e0ec6ff07163e27d105a3d,dirty,16,1,3,1,0,1,,,
+gradio-app/gradio,650134563,184,Abidlabs/external: ability to load external models (from Hugging Face and Gradio Hosted) ,,abidlabs,1778297,closed,False,2021-05-21T16:40:19+00:00,2022-04-21T22:13:42+00:00,2021-05-21T16:45:42+00:00,2021-05-21T16:45:42+00:00,9242b86c5c093cdbe80ff02262c9af6f4df2b5e3,unknown,340,15,7,27,0,0,,,
+gradio-app/gradio,651560121,189,Bump postcss from 7.0.35 to 8.2.10 in /frontend,"Bumps [postcss](https://github.com/postcss/postcss) from 7.0.35 to 8.2.10.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/postcss/postcss/releases"">postcss's releases</a>.</em></p>
+<blockquote>
+<h2>8.2.10</h2>
+<ul>
+<li>Fixed ReDoS vulnerabilities in source map parsing.</li>
+<li>Fixed webpack 5 support (by <a href=""https://github.com/barak007""><code>@​barak007</code></a>).</li>
+<li>Fixed docs (by <a href=""https://github.com/roelandmoors""><code>@​roelandmoors</code></a>).</li>
+</ul>
+<h2>8.2.9</h2>
+<ul>
+<li>Exported <code>NodeErrorOptions</code> type (by <a href=""https://github.com/realityking""><code>@​realityking</code></a>)</li>
+</ul>
+<h2>8.2.8</h2>
+<ul>
+<li>Fixed browser builds in webpack 5 (by <a href=""https://github.com/mattcompiles""><code>@​mattcompiles</code></a>).</li>
+</ul>
+<h2>8.2.7</h2>
+<ul>
+<li>Fixed browser builds in webpack 5 (by <a href=""https://github.com/mattcompiles""><code>@​mattcompiles</code></a>).</li>
+</ul>
+<h2>8.2.6</h2>
+<ul>
+<li>Fixed <code>Maximum call stack size exceeded</code> in <code>Node#toJSON</code>.</li>
+<li>Fixed docs (by <a href=""https://github.com/inokawa""><code>@​inokawa</code></a>).</li>
+</ul>
+<h2>8.2.5</h2>
+<ul>
+<li>Fixed escaped characters handling in <code>list.split</code> (by <a href=""https://github.com/nex3""><code>@​nex3</code></a>).</li>
+</ul>
+<h2>8.2.4</h2>
+<ul>
+<li>Added plugin name to <code>postcss.plugin()</code> warning (by <a href=""https://github.com/Alphy11""><code>@​Alphy11</code></a>).</li>
+<li>Fixed docs (by <a href=""https://github.com/billcolumbia""><code>@​billcolumbia</code></a>).</li>
+</ul>
+<h2>8.2.3</h2>
+<ul>
+<li>Fixed <code>JSON.stringify(Node[])</code> support (by <a href=""https://github.com/mischnic""><code>@​mischnic</code></a>).</li>
+</ul>
+<h2>8.2.2</h2>
+<ul>
+<li>Fixed CSS-in-JS support (by <a href=""https://github.com/43081j""><code>@​43081j</code></a>).</li>
+<li>Fixed plugin types (by <a href=""https://github.com/ludofischer""><code>@​ludofischer</code></a>).</li>
+<li>Fixed <code>Result#warn()</code> types.</li>
+</ul>
+<h2>8.2.1</h2>
+<ul>
+<li>Fixed <code>Node#toJSON()</code> and <code>postcss.fromJSON()</code> (by <a href=""https://github.com/mischnic""><code>@​mischnic</code></a>).</li>
+</ul>
+<h2>8.2 “Prince Orobas”</h2>
+<!-- raw HTML omitted -->
+<p>PostCSS 8.2 added a new API to serialize and deserialize CSS AST to JSON.</p>
+<pre lang=""js""><code>import { parse, fromJSON } from 'postcss'
+<p>let root = parse('a{}', { from: 'input.css' })
+let json = root.toJSON()
+// save to file, send by network, etc
+let root2 = fromJSON(json)
+</code></pre></p>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/postcss/postcss/blob/main/CHANGELOG.md"">postcss's changelog</a>.</em></p>
+<blockquote>
+<h2>8.2.10</h2>
+<ul>
+<li>Fixed ReDoS vulnerabilities in source map parsing.</li>
+<li>Fixed webpack 5 support (by Barak Igal).</li>
+<li>Fixed docs (by Roeland Moors).</li>
+</ul>
+<h2>8.2.9</h2>
+<ul>
+<li>Exported <code>NodeErrorOptions</code> type (by Rouven Weßling).</li>
+</ul>
+<h2>8.2.8</h2>
+<ul>
+<li>Fixed browser builds in webpack 4 (by Matt Jones).</li>
+</ul>
+<h2>8.2.7</h2>
+<ul>
+<li>Fixed browser builds in webpack 5 (by Matt Jones).</li>
+</ul>
+<h2>8.2.6</h2>
+<ul>
+<li>Fixed <code>Maximum call stack size exceeded</code> in <code>Node#toJSON</code>.</li>
+<li>Fixed docs (by inokawa).</li>
+</ul>
+<h2>8.2.5</h2>
+<ul>
+<li>Fixed escaped characters handling in <code>list.split</code> (by Natalie Weizenbaum).</li>
+</ul>
+<h2>8.2.4</h2>
+<ul>
+<li>Added plugin name to <code>postcss.plugin()</code> warning (by Tom Williams).</li>
+<li>Fixed docs (by Bill Columbia).</li>
+</ul>
+<h2>8.2.3</h2>
+<ul>
+<li>Fixed <code>JSON.stringify(Node[])</code> support (by Niklas Mischkulnig).</li>
+</ul>
+<h2>8.2.2</h2>
+<ul>
+<li>Fixed CSS-in-JS support (by James Garbutt).</li>
+<li>Fixed plugin types (by Ludovico Fischer).</li>
+<li>Fixed <code>Result#warn()</code> types.</li>
+</ul>
+<h2>8.2.1</h2>
+<ul>
+<li>Fixed <code>Node#toJSON()</code> and <code>postcss.fromJSON()</code> (by Niklas Mischkulnig).</li>
+</ul>
+<h2>8.2 “Prince Orobas”</h2>
+<ul>
+<li>Added <code>Node#toJSON()</code> and <code>postcss.fromJSON()</code> (by Niklas Mischkulnig).</li>
+</ul>
+<h2>8.1.14</h2>
+<ul>
+<li>Fixed parser performance regression.</li>
+</ul>
+<h2>8.1.13</h2>
+<ul>
+<li>Fixed broken AST after moving nodes in visitor API.</li>
+</ul>
+<h2>8.1.12</h2>
+<ul>
+<li>Fixed Autoprefixer regression.</li>
+</ul>
+<h2>8.1.11</h2>
+<ul>
+<li>Added PostCSS update suggestion on unknown event in plugin.</li>
+</ul>
+<!-- raw HTML omitted -->
+</blockquote>
+<p>... (truncated)</p>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/postcss/postcss/commit/8395d9f53efbaae5f3372b6b662a9e9b5b02360b""><code>8395d9f</code></a> Release 8.2.10 version</li>
+<li><a href=""https://github.com/postcss/postcss/commit/f2baaa7e3780bad669814df498e301a47b5307c3""><code>f2baaa7</code></a> Update ESLint config</li>
+<li><a href=""https://github.com/postcss/postcss/commit/b6f3e4d5a8d7504d553267f80384373af3a3dec5""><code>b6f3e4d</code></a> Fix unsafe regexp in getAnnotationURL() too</li>
+<li><a href=""https://github.com/postcss/postcss/commit/4bcd7276d19511ec9ae01d6471c6417533240668""><code>4bcd727</code></a> Merge pull request <a href=""https://github-redirect.dependabot.com/postcss/postcss/issues/1553"">#1553</a> from barak007/patch-2</li>
+<li><a href=""https://github.com/postcss/postcss/commit/7c2e97aeaaae1faa65f655c09798101b4bc00a44""><code>7c2e97a</code></a> Add covrage ignore on error paths</li>
+<li><a href=""https://github.com/postcss/postcss/commit/8c5843463041a9e76b9af2b76eb54db5faddde64""><code>8c58434</code></a> Apply suggestions from code review</li>
+<li><a href=""https://github.com/postcss/postcss/commit/ff2fd57f6632436426156be63e696529f5ba0504""><code>ff2fd57</code></a> add error for sourcePath</li>
+<li><a href=""https://github.com/postcss/postcss/commit/8f02bdcf62b820c8927a822fad02ffb6fec779d9""><code>8f02bdc</code></a> disable url based features</li>
+<li><a href=""https://github.com/postcss/postcss/commit/a54d0205ef4c4bb127ccd1eaa807498f0534cdcf""><code>a54d020</code></a> Fix browser bundling with webpack 5</li>
+<li><a href=""https://github.com/postcss/postcss/commit/8682b1e4e328432ba692bed52326e84439cec9e4""><code>8682b1e</code></a> Fix unsafe regexp</li>
+<li>Additional commits viewable in <a href=""https://github.com/postcss/postcss/compare/7.0.35...8.2.10"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=postcss&package-manager=npm_and_yarn&previous-version=7.0.35&new-version=8.2.10)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-05-24T19:09:20+00:00,2021-06-30T20:14:17+00:00,2021-06-30T20:14:15+00:00,,bc0e95e8db6574473fe77552ed29da2477126f0b,dirty,27704,15071,2,1,0,1,,,
+gradio-app/gradio,668427820,217,"Log ""Created From"" text to track Gradio usage in Comet ","This PR:
+
+Enables logging a message to the ""Other"" tab in a Comet Experiment that helps track whether an experiment was created from the Gradio integration.  
+
+Example shown here:
+https://www.comet.ml/team-comet-ml/gradio/ba385bd513df490d90c9f994147a5885?experiment-tab=other&viewId=LoEum7OL84ONyBkoUiX1BPsUX",DN6,7529846,closed,False,2021-06-11T18:21:52+00:00,2021-06-11T21:00:29+00:00,2021-06-11T21:00:29+00:00,2021-06-11T21:00:29+00:00,ff40d7e8a388a810738dd322444f63c58193568e,unknown,1,0,1,1,0,0,,,
+gradio-app/gradio,681203981,232,Bump postcss from 7.0.35 to 7.0.36 in /frontend,"Bumps [postcss](https://github.com/postcss/postcss) from 7.0.35 to 7.0.36.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/postcss/postcss/releases"">postcss's releases</a>.</em></p>
+<blockquote>
+<h2>7.0.36</h2>
+<ul>
+<li>Backport ReDoS vulnerabilities from PostCSS 8.</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/postcss/postcss/blob/main/CHANGELOG.md"">postcss's changelog</a>.</em></p>
+<blockquote>
+<h2>7.0.36</h2>
+<ul>
+<li>Backport ReDoS vulnerabilities from PostCSS 8.</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/postcss/postcss/commit/67e3d7b3402c5d3d036ab7c1e781f86910d6ca72""><code>67e3d7b</code></a> Release 7.0.36 version</li>
+<li><a href=""https://github.com/postcss/postcss/commit/54cbf3c4847eb0fb1501b9d2337465439e849734""><code>54cbf3c</code></a> Backport ReDoS vulnerabilities from PostCSS 8</li>
+<li>See full diff in <a href=""https://github.com/postcss/postcss/compare/7.0.35...7.0.36"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=postcss&package-manager=npm_and_yarn&previous-version=7.0.35&new-version=7.0.36)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-06-30T20:14:13+00:00,2021-07-14T22:05:43+00:00,2021-07-14T22:05:32+00:00,2021-07-14T22:05:32+00:00,4080b8cea21b48c85f4e5be469d28f0a300e0986,unknown,8,8,2,1,0,0,,,
+gradio-app/gradio,683153695,238,Adding Timestamps for logs.csv,"Since most of us use gradio during the development cycle. I thought it is essential to add Timestamps for our logs so that we could keep track of all the logs.
+Hence, I added the 'Timestamp' field to the csv file. I have tested and have run these changes locally.
+
+![gradio-logs-csv](https://user-images.githubusercontent.com/41704209/124382260-194c0a00-dce4-11eb-955b-d7646d857ae8.PNG)
+",harjyotbagga,41704209,closed,False,2021-07-04T10:54:36+00:00,2021-07-09T19:52:52+00:00,2021-07-09T19:08:41+00:00,2021-07-09T19:08:41+00:00,dd27ff01bba4d3d01b88f0ea0f3fddb0da15a51c,unknown,3,0,1,2,0,6,,,
+gradio-app/gradio,688044968,243,"added shap interpretation for text, image, and audio",,abidlabs,1778297,closed,False,2021-07-12T17:45:09+00:00,2022-04-21T22:13:46+00:00,2021-07-12T17:47:09+00:00,2021-07-12T17:47:09+00:00,389ee78cb3b42492ea5e0a77f89c3d8733430068,unknown,267,96,6,2,0,1,,,
+gradio-app/gradio,690238368,245,fixed selenium tests ,,aliabd,9021060,closed,False,2021-07-14T21:31:05+00:00,2022-04-21T22:13:47+00:00,2021-07-14T21:31:17+00:00,2021-07-14T21:31:16+00:00,72c2606cf3e82557003595653e145a633bab8986,unknown,5,4,5,2,0,0,,,
+gradio-app/gradio,717167827,261,Adds clauses for specific exceptions in version check,"When any exceptions occur in the ""try"" block of the code, it would handle it the same way regardless.
+In the `version_check`, there are 4 possibilities for an error to occur. These are as follows:
+
+1) Gradio package is installed improperly due to which the version information is inaccessible.
+2) JSON cannot be parsed from the Package version URL.
+3) JSON that is parsed from the URL does not contain version information.
+4) The Package URL is not accessible.
+
+Refactored method to handle these cases and provide appropriate messages.",1nF0rmed,21278205,closed,False,2021-08-21T15:26:26+00:00,2021-09-02T21:01:54+00:00,2021-09-02T21:01:52+00:00,2021-09-02T21:01:52+00:00,a25eaee1ecbb9499f78157159a4e8144df14a4e9,unknown,57,2,2,1,0,2,,,
+gradio-app/gradio,726209966,267,Add some pipeline types from huggingface,cc @osanseviero,julien-c,326577,closed,False,2021-09-02T19:16:23+00:00,2021-09-02T21:22:46+00:00,2021-09-02T21:01:28+00:00,2021-09-02T21:01:28+00:00,ce958c29846fc38ae3ab915d9af9862b31da03a4,unknown,52,10,3,4,0,2,,,
+gradio-app/gradio,733171047,273,Add dark theme for huggingface,"Decided to allow user to configure dark mode instead of browser preference, though this can be changed through the tailwind config file. Pass theme=""darkhuggingface"" or set os env var GRADIO_THEME=""darkhuggingface"" to use. Screenshot of kitchen sink with this theme:
+
+![image](https://user-images.githubusercontent.com/7870876/133165552-6049292c-6b39-4d61-adf2-735a668a6103.png)
+",aliabid94,7870876,closed,False,2021-09-13T22:40:44+00:00,2021-09-27T21:07:23+00:00,2021-09-27T21:07:18+00:00,2021-09-27T21:07:18+00:00,620fc1ffaa02b1f4f36e280c6e83093eaf6a2a96,unknown,122,101,7,3,0,2,,,
+gradio-app/gradio,737000268,277,Toggle on markdown support for fenced code blocks,"At the moment, quoting code between three backticks (i.e. [fenced code blocks](https://spec.commonmark.org/0.30/#fenced-code-blocks)) does not render correctly when passed to `article` in `gr.Interface`, which would come as a surprise to most users that are used to CommonMark and Github-flavoured Markdown. Apparently, `markdown2` does not support it by default, but requires toggling it on via an `extras` argument. 
+
+This PR introduces a small change to enable rendering fenced code blocks in text passed to `article` correctly.",tnwei,12769364,closed,False,2021-09-19T03:03:06+00:00,2021-09-20T12:33:35+00:00,2021-09-20T12:33:35+00:00,2021-09-20T12:33:35+00:00,17c9f2e7e4a1f86a297bb7f04d71343028a7cb42,unknown,17,4,2,2,0,1,,,
+gradio-app/gradio,755832810,297,Integration with Hugging Face Spaces,"The Gradio library can be used to load any interfaces from Hugging Face Spaces, e.g.
+
+```python
+io = gr.Interface.load(""spaces/nateraw/quickdraw"")
+io.launch()
+```
+This loads the UI locally (so that you can change how the UI looks) while calling the API from HF Spaces",abidlabs,1778297,closed,False,2021-10-12T05:38:40+00:00,2022-04-21T22:13:50+00:00,2021-10-12T05:46:19+00:00,2021-10-12T05:46:19+00:00,bc2e3b6e52da305677d76abf0bab30ccbe2a931e,unknown,89,5,6,1215,0,0,,,
+gradio-app/gradio,758027898,300,Wrote the skeleton for dag,"Want to get your input on this DAG idea I have for chaining together Interfaces in more complex ways.
+
+The idea is basically, being able to create a DAG which allows arbitrary connections between any of the outputs of one Interface to any of the connections of another interface. So you could for example do the following
+
+```python
+from gradio import *
+io1 = Interface(.., ""audio"", ""text"")
+io2 = Interface(.., [""image, ""text""], ""video"")
+
+d = DAG()
+d.connect((io1, 0), (io2, 1))  # the text output of io1 is piped as the 2nd input of io2
+d.launch()  # will create an [audio, image] --> [video] Interface
+```
+
+And there are some additional ideas if you want to fix the input value of an Interface to be constant (so it doesn't appear), or hide an output, you can do that as well. 
+
+Thoughts?",abidlabs,1778297,closed,False,2021-10-14T06:27:05+00:00,2022-04-21T22:14:10+00:00,2021-10-21T06:41:37+00:00,,68d1e7ea2a3ce7e7a938fba665d7c651a9274109,unknown,41,0,1,2,0,1,aliabid94,,
+gradio-app/gradio,761172338,303,"Ability to call() Interfaces, including those loaded from HF Hub & Spaces","You can now do cool things like this:
+
+![image](https://user-images.githubusercontent.com/1778297/137868926-7162f993-55b8-4ad8-8dc9-52f64a7cdcaf.png)
+
+You can of course launch the interfaces, but now you can also override input/output types:
+
+Changing the input image to be a webcam:
+
+![image](https://user-images.githubusercontent.com/1778297/137869075-adf1f581-ebf4-41bb-a9c3-ba39b16639c6.png)
+
+Text example:
+
+![image](https://user-images.githubusercontent.com/1778297/137869154-ec13ab96-e5af-4825-9b56-4c4d1f8d2e3e.png)
+
+It works for complex outputs too:
+
+![image](https://user-images.githubusercontent.com/1778297/137869213-86602e10-32e0-4b39-adc5-a1113fe616c0.png)
+
+And Spaces of course:
+
+![image](https://user-images.githubusercontent.com/1778297/137869667-66993863-1ce3-4983-afcc-efca59f40341.png)
+
+More complex Spaces, including calling it as a function:
+
+![image](https://user-images.githubusercontent.com/1778297/137869766-6529a4ab-8a8b-4bef-ae5b-4b4c1d326535.png)
+",abidlabs,1778297,closed,False,2021-10-19T08:11:16+00:00,2022-04-21T22:14:11+00:00,2021-10-22T12:07:59+00:00,2021-10-22T12:07:59+00:00,d5bc83b60e21fbdedcbb5fa41aa5724baec2c131,unknown,237,96,8,7,9,1,,,
+gradio-app/gradio,762553339,306,[HF Spaces] Darktheme from URL params,,cbensimon,11795593,closed,False,2021-10-20T17:14:24+00:00,2021-10-20T22:16:09+00:00,2021-10-20T22:16:09+00:00,2021-10-20T22:16:09+00:00,f26f2142ef5b2a97a548d7aa2b0e89fabd740c77,unknown,11,4,3,2,0,1,,,
+gradio-app/gradio,762558071,307,update test_utils,update tests for utils.py,AK391,81195143,closed,False,2021-10-20T17:21:06+00:00,2021-10-21T21:40:38+00:00,2021-10-21T21:40:38+00:00,2021-10-21T21:40:38+00:00,7653888c09faeb8c45b923ac8ae3a4051242624f,unknown,51,4,2,4,0,2,,,
+gradio-app/gradio,763648683,308,Piping errors,,dawoodkhan82,12725292,closed,False,2021-10-21T20:48:34+00:00,2022-04-21T22:14:10+00:00,2021-10-21T20:50:53+00:00,2021-10-21T20:50:53+00:00,65c4924f9eb2b9e3f67963bc2cf16b21cfbde126,unknown,14,2,2,3,0,0,,,
+gradio-app/gradio,763680475,309,Adding API docs to all interfaces,"Note: 
+* gradio static docs will need to change index now that 'Raw input/output' is added (better way to do this?) 
+* need to review/add 'Raw input' docs for all components. Many are currently placeholders. 
+* need to extend 'get random' to all components 
+* no way to support 'get random'  for some components (radio/choices/etc)
+* need help with styling 
+",aliabd,9021060,closed,False,2021-10-21T21:42:05+00:00,2022-04-21T22:14:12+00:00,2021-10-27T18:49:14+00:00,2021-10-27T18:49:14+00:00,9bf16c22115562a12d447a68a2388d5b35a747d0,unknown,784,47,22,30,0,6,,,
+gradio-app/gradio,765777940,313,[WIP] inferface.py tests,WIP tests for interface.py,AK391,81195143,closed,False,2021-10-25T19:32:50+00:00,2021-11-04T10:54:10+00:00,2021-11-04T10:54:10+00:00,2021-11-04T10:54:10+00:00,717d0ca826e8b5e0c39a6c3802d043e8eb818652,unknown,78,4,3,8,7,0,,,
+gradio-app/gradio,766960110,316,Editable audio,- Now audio can be edited from the frontend with cropping,aliabid94,7870876,closed,False,2021-10-27T01:19:44+00:00,2022-04-21T22:14:12+00:00,2021-10-27T01:26:05+00:00,2021-10-27T01:26:05+00:00,82b6e0586a5e1a179db8a6820d52c3d2c3429513,unknown,26962,150,14,5,0,0,,,
+gradio-app/gradio,768722922,322,Fixed video component's flagging method,"This fixes the issue when a Video Component is being flagged. Since the component's data is a dict, as compared to a Byte str for all other Input and Output components, the `save_flagged_file` method needs correction. The 'data' argument expects a Byte string, which is supplied in the fix by using the 'data' key in the Video Component dict.
+
+",shubham-goel-zefr,87732112,closed,False,2021-10-28T21:02:54+00:00,2021-10-29T00:29:05+00:00,2021-10-29T00:29:05+00:00,2021-10-29T00:29:05+00:00,79b58804739e575bfd5a7e4f76655186eb7890bb,unknown,105,57,10,3,0,3,,,
+gradio-app/gradio,769587145,326,Fixed node on windows; fixed label bug with HF theme,"Fixed the issue so that labels without class confidences show correctly with the `huggingface` theme:
+
+![image](https://user-images.githubusercontent.com/1778297/139508892-f86f258d-6943-4d64-8f43-807b64ca7584.png)
+
+Also made sure that the other themes work:
+
+![image](https://user-images.githubusercontent.com/1778297/139508818-dd49647f-af50-4a08-a053-0a922a6c572f.png)
+",abidlabs,1778297,closed,False,2021-10-29T22:43:52+00:00,2022-04-21T22:14:12+00:00,2021-11-02T19:40:17+00:00,2021-11-02T19:40:17+00:00,410593244347966f469c8a74328bcc4ab3728e86,unknown,235,26585,10,4,1,1,,,
+gradio-app/gradio,772761377,328,Website: WIP,"Complete reqrite of Gradio homepage. Main feature changes:
+- Integrated into Gradio library, so automatically changes in sync with library changes
+- All CSS done with Tailwind
+- Files compressed, minified, and tree-shaken in build
+- Generated files are all static - no server code needed",aliabid94,7870876,closed,False,2021-11-03T19:48:41+00:00,2022-04-21T22:14:23+00:00,2021-12-14T06:02:20+00:00,2021-12-14T06:02:20+00:00,b4d982540975f1215ab82c3b99a9b2ca3b6f53c1,unknown,8437,680,216,52,0,7,,,
+gradio-app/gradio,772795931,329,updated strings so that people reach out to us via email more,"Changed some messaging for `share=True`, see below:
+
+![image](https://user-images.githubusercontent.com/1778297/140188995-6e8422a5-9fb4-4262-9bb6-a960c89ad7d2.png)
+
+Also updated on the server so that this will apply to people who don't update `gradio` as well",abidlabs,1778297,closed,False,2021-11-03T20:38:36+00:00,2022-04-21T22:14:13+00:00,2021-11-03T21:10:01+00:00,2021-11-03T21:10:01+00:00,aa4ae294256a8c8fb825c14de4ece1a0866bc35d,unknown,44,13,4,2,0,1,aliabd,,
+gradio-app/gradio,772944514,330,"Tests for component.py, inputs.py and outputs.py","Still working on test_outputs.py 
+
+test_inputs.py ready for review
+
+
+",aliabd,9021060,closed,False,2021-11-04T01:10:53+00:00,2021-11-04T12:38:19+00:00,2021-11-04T12:38:19+00:00,2021-11-04T12:38:19+00:00,d259f3052b12d06d46eb27d2d0df77dab40b4c8b,unknown,509,69,10,10,0,2,abidlabs;aliabid94,,
+gradio-app/gradio,773234763,331,examples can handle non-nested list if single input interface,,abidlabs,1778297,closed,False,2021-11-04T11:27:37+00:00,2022-04-21T22:14:14+00:00,2021-11-04T11:27:54+00:00,2021-11-04T11:27:54+00:00,7d9f892bf9175130d8b66a85e067880abcacc18b,unknown,4,5,3,1,0,0,,,
+gradio-app/gradio,773661861,334,Expanding coverage on outputs.py,,aliabd,9021060,closed,False,2021-11-04T20:20:10+00:00,2022-04-21T22:14:15+00:00,2021-11-04T22:56:25+00:00,2021-11-04T22:56:25+00:00,1a438e522d42a97a6ad1ba3899eb138b7309c8d6,unknown,183,3,2,2,1,0,,,
+gradio-app/gradio,773809148,335,interface.py new tests ,more interface.py tests,AK391,81195143,closed,False,2021-11-05T00:00:39+00:00,2021-11-10T19:51:59+00:00,2021-11-10T13:33:36+00:00,2021-11-10T13:33:36+00:00,b3a7aec4f657f2762837f97bb9868e5bcbe259fa,unknown,104,2,1,7,7,3,,,
+gradio-app/gradio,774062246,336,[HF Spaces] Adjust dark background color,"cc @gary149
+
+(build not tested)",cbensimon,11795593,closed,False,2021-11-05T09:45:07+00:00,2021-11-07T16:11:56+00:00,2021-11-07T16:11:56+00:00,2021-11-07T16:11:56+00:00,c52a52d763ba71c6408c52331016df77e0a7f3f3,unknown,1,1,1,1,0,3,,,
+gradio-app/gradio,775899400,342,fixed tests to they pass on woindows Link T-6,,abidlabs,1778297,closed,False,2021-11-08T19:42:29+00:00,2022-04-21T22:14:17+00:00,2021-11-08T20:43:59+00:00,2021-11-08T20:43:59+00:00,9b2280c33d30520df2664115c24023eae0c9c2ce,unknown,160,130,3,1,0,2,aliabd,,
+gradio-app/gradio,776619553,345,Abidlabs/tests analytics fix,Fixed tests so they do not trigger our analytics,abidlabs,1778297,closed,False,2021-11-09T14:49:41+00:00,2021-11-09T18:11:21+00:00,2021-11-09T15:00:43+00:00,2021-11-09T15:00:43+00:00,eaa9699283156964397e067f1a8375d3beb6441a,unknown,85,35,12,2,10,2,,,
+gradio-app/gradio,776733245,346,Bump tmpl from 1.0.4 to 1.0.5 in /frontend,"Bumps [tmpl](https://github.com/daaku/nodejs-tmpl) from 1.0.4 to 1.0.5.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/daaku/nodejs-tmpl/commits/v1.0.5"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tmpl&package-manager=npm_and_yarn&previous-version=1.0.4&new-version=1.0.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-09T16:36:17+00:00,2021-11-10T13:32:05+00:00,2021-11-10T13:31:56+00:00,2021-11-10T13:31:56+00:00,17c49dd9ba238e0ac3925ef5f050be445caf9da0,unknown,6,6,1,1,0,2,,,
+gradio-app/gradio,776733271,347,Bump tar from 6.1.0 to 6.1.11 in /frontend,"Bumps [tar](https://github.com/npm/node-tar) from 6.1.0 to 6.1.11.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/npm/node-tar/commit/e573aeea19d4d650908b7f6bf0a1ad8dce9f1736""><code>e573aee</code></a> 6.1.11</li>
+<li><a href=""https://github.com/npm/node-tar/commit/edb8e9a3fa5869cfb935479a262f6f61b0a2ec57""><code>edb8e9a</code></a> fix: perf regression on hot string munging path</li>
+<li><a href=""https://github.com/npm/node-tar/commit/a9d9b05fc974425089922bf66e8e7751ea8bfbbc""><code>a9d9b05</code></a> chore(test): Avoid spurious failures packing node_modules/.cache</li>
+<li><a href=""https://github.com/npm/node-tar/commit/24b8bdadf37118182496ecf81fa7a872196fb38b""><code>24b8bda</code></a> fix(test): use posix path for testing path reservations</li>
+<li><a href=""https://github.com/npm/node-tar/commit/e5a223c6b293f1cb2ebb2dd97668f787e8983ca4""><code>e5a223c</code></a> fix(test): make unpack test pass on case-sensitive fs</li>
+<li><a href=""https://github.com/npm/node-tar/commit/188baddc1d0e6ef5140c7a788f03fc2a6c3df2ea""><code>188badd</code></a> 6.1.10</li>
+<li><a href=""https://github.com/npm/node-tar/commit/23312ce7db8a12c78d0fba96d7664a01619266a3""><code>23312ce</code></a> drop dirCache for symlink on all platforms</li>
+<li><a href=""https://github.com/npm/node-tar/commit/4f1f4a21fca64f3089da0e83ceea775c66b55052""><code>4f1f4a2</code></a> 6.1.9</li>
+<li><a href=""https://github.com/npm/node-tar/commit/875a37e3ec031186fc6599f6807341f56c584598""><code>875a37e</code></a> fix: prevent path escape using drive-relative paths</li>
+<li><a href=""https://github.com/npm/node-tar/commit/b6162c7fafe797f856564ef37f4b82747f051455""><code>b6162c7</code></a> fix: reserve paths properly for unicode, windows</li>
+<li>Additional commits viewable in <a href=""https://github.com/npm/node-tar/compare/v6.1.0...v6.1.11"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tar&package-manager=npm_and_yarn&previous-version=6.1.0&new-version=6.1.11)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-09T16:36:18+00:00,2021-11-10T13:31:54+00:00,2021-11-10T13:31:46+00:00,2021-11-10T13:31:46+00:00,deecd3eaca3cdad254b7b1a9ed292fc55755894f,unknown,6,6,1,1,0,2,,,
+gradio-app/gradio,776733298,348,Bump jsuites from 4.6.6 to 4.9.22 in /frontend,"Bumps [jsuites](https://github.com/jsuites/jsuites) from 4.6.6 to 4.9.22.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/jsuites/jsuites/releases"">jsuites's releases</a>.</em></p>
+<blockquote>
+<h2>v4.9.11</h2>
+<p>Security update and other fixes.</p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/jsuites/jsuites/commits"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=jsuites&package-manager=npm_and_yarn&previous-version=4.6.6&new-version=4.9.22)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-09T16:36:19+00:00,2021-11-10T13:31:41+00:00,2021-11-10T13:31:32+00:00,2021-11-10T13:31:32+00:00,3c8243bea65617df44a5824cab20819ff67c8d4e,unknown,6,6,1,1,0,2,,,
+gradio-app/gradio,776830224,349,fixed tests based on Ali's feedback,,abidlabs,1778297,closed,False,2021-11-09T18:32:42+00:00,2022-04-21T22:14:17+00:00,2021-11-09T18:34:15+00:00,2021-11-09T18:34:15+00:00,ca595329dae2ef22793acb7c4c343adad73a93f3,unknown,35,42,12,1,0,1,,,
+gradio-app/gradio,776845282,350,Abidlabs/api spaces,"Fixed ""/api"" link so that it works on Spaces!",abidlabs,1778297,closed,False,2021-11-09T18:51:25+00:00,2022-04-21T22:14:21+00:00,2021-11-09T18:55:22+00:00,2021-11-09T18:55:22+00:00,c1bae11b31119761dfada566671822d5bce370d9,unknown,36,24,6,12,0,1,,,
+gradio-app/gradio,777603576,351,Bump path-parse from 1.0.6 to 1.0.7 in /frontend,"Bumps [path-parse](https://github.com/jbgutierrez/path-parse) from 1.0.6 to 1.0.7.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/jbgutierrez/path-parse/commits/v1.0.7"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=path-parse&package-manager=npm_and_yarn&previous-version=1.0.6&new-version=1.0.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-10T13:33:02+00:00,2021-11-10T13:42:22+00:00,2021-11-10T13:42:12+00:00,2021-11-10T13:42:12+00:00,a5645232a09b50d80af0d5e2aaa81fae84795548,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,777603666,352,Bump ws from 6.2.1 to 6.2.2 in /frontend,"[//]: # (dependabot-start)
+⚠️  **Dependabot is rebasing this PR** ⚠️ 
+
+Rebasing might not happen immediately, so don't worry if this takes some time.
+
+Note: if you make any changes to this PR yourself, they will take precedence over the rebase.
+
+---
+
+[//]: # (dependabot-end)
+
+Bumps [ws](https://github.com/websockets/ws) from 6.2.1 to 6.2.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/websockets/ws/releases"">ws's releases</a>.</em></p>
+<blockquote>
+<h2>6.2.2</h2>
+<h1>Bug fixes</h1>
+<ul>
+<li>Backported 00c425ec to the 6.x release line (78c676d2).</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/websockets/ws/commit/9bdb58070d64c33a9beeac7c732aac0f4e7e18b7""><code>9bdb580</code></a> [dist] 6.2.2</li>
+<li><a href=""https://github.com/websockets/ws/commit/78c676d2a1acefbc05292e9f7ea0a9457704bf1b""><code>78c676d</code></a> [security] Fix ReDoS vulnerability</li>
+<li>See full diff in <a href=""https://github.com/websockets/ws/compare/6.2.1...6.2.2"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ws&package-manager=npm_and_yarn&previous-version=6.2.1&new-version=6.2.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-10T13:33:09+00:00,2021-11-10T13:42:21+00:00,2021-11-10T13:42:04+00:00,2021-11-10T13:42:04+00:00,f157875624c88a3d96140388125a775c043d06fe,unknown,6,6,1,1,0,1,,,
+gradio-app/gradio,777603681,353,Bump url-parse from 1.5.1 to 1.5.3 in /frontend,"Bumps [url-parse](https://github.com/unshiftio/url-parse) from 1.5.1 to 1.5.3.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/ad444931666a30bad11472d89a216461cf16cae2""><code>ad44493</code></a> [dist] 1.5.3</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/c7984617e235892cc22e0f47bb5ff1c012e6e39f""><code>c798461</code></a> [fix] Fix host parsing for file URLs (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/210"">#210</a>)</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/201034b8670c2aa382d7ec410ee750ac6f2f9c38""><code>201034b</code></a> [dist] 1.5.2</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/2d9ac2c94067742b2116332c1e03be9f37371dff""><code>2d9ac2c</code></a> [fix] Sanitize only special URLs (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/209"">#209</a>)</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/fb128af4f43fa17f351d50cf615c7598c751f50a""><code>fb128af</code></a> [fix] Use <code>'null'</code> as <code>origin</code> for non special URLs</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/fed6d9e338ea39de2d68bb66607066d71328c62f""><code>fed6d9e</code></a> [fix] Add a leading slash only if the URL is special</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/94872e7ab9103ee69b958959baa14c9e682a7f10""><code>94872e7</code></a> [fix] Do not incorrectly set the <code>slashes</code> property to <code>true</code></li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/81ab967889b08112d3356e451bf03e6aa0cbb7e0""><code>81ab967</code></a> [fix] Ignore slashes after the protocol for special URLs</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/ee22050a48a67409aa5f7c87947284156d615bd1""><code>ee22050</code></a> [ci] Use GitHub Actions</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/d2979b586d8c7751e0c77f127d9ce1b2143cc0c9""><code>d2979b5</code></a> [fix] Special case the <code>file:</code> protocol (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/204"">#204</a>)</li>
+<li>Additional commits viewable in <a href=""https://github.com/unshiftio/url-parse/compare/1.5.1...1.5.3"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=url-parse&package-manager=npm_and_yarn&previous-version=1.5.1&new-version=1.5.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-10T13:33:11+00:00,2021-11-10T13:42:05+00:00,2021-11-10T13:41:56+00:00,2021-11-10T13:41:56+00:00,7701fd5299360f4c7fd9917196dbb9d2ce9aaf26,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,777603715,354,Bump dns-packet from 1.3.1 to 1.3.4 in /frontend,"Bumps [dns-packet](https://github.com/mafintosh/dns-packet) from 1.3.1 to 1.3.4.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/ebdf849da5dc0d96836e87628349776c623c5be7""><code>ebdf849</code></a> 1.3.4</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/ac578722f2707310b841b65aae61d6332f8882a1""><code>ac57872</code></a> move all allocUnsafes to allocs for easier maintenance</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/c64c9507e51532c9e9a3cbefa146a134ecc025fd""><code>c64c950</code></a> 1.3.3</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/0598ba19d18da4568b32415e60a9629061b3c45c""><code>0598ba1</code></a> fix .. in encodingLength</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/010aedb33c1ee8c3f558db5249c1d46e2bd7a101""><code>010aedb</code></a> 1.3.2</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/0d0d593f8df4e2712c43957a6c62e95047f12b2d""><code>0d0d593</code></a> backport encodingLength fix to v1</li>
+<li>See full diff in <a href=""https://github.com/mafintosh/dns-packet/compare/v1.3.1...v1.3.4"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=dns-packet&package-manager=npm_and_yarn&previous-version=1.3.1&new-version=1.3.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-11-10T13:33:13+00:00,2021-11-10T13:41:54+00:00,2021-11-10T13:41:45+00:00,2021-11-10T13:41:45+00:00,bdae7994cb6e06383f2ad838b557a4fe8ebee73a,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,777939673,355,API Docs Fixes,"- Made footer responsive
+- Converted all img urls to svg in repo
+- Added auth info to interfaces w/ auth (except for js)
+- Disabled POST button on auth interfaces 
+- Fixed issue #384 (samples pull from examples first) 
+- Workaround for /+/ in spaces links
+Note: tests failing because of selenium screenshots / need to update static 
+
+screenshots:
+<img width=""299"" alt=""Screen Shot 2021-11-17 at 12 14 26 PM"" src=""https://user-images.githubusercontent.com/9021060/142275472-b9f317ef-7e26-4add-aac3-50f093f12bad.png"">
+<img width=""800"" alt=""Screen Shot 2021-11-17 at 12 16 08 PM"" src=""https://user-images.githubusercontent.com/9021060/142275810-4e59d949-0d82-4250-a453-8ddaa6cdad51.png"">
+<img width=""783"" alt=""Screen Shot 2021-11-17 at 12 16 20 PM"" src=""https://user-images.githubusercontent.com/9021060/142275806-8d066477-6148-4203-91bc-9cc29ab39843.png"">
+
+",aliabd,9021060,closed,False,2021-11-10T19:41:55+00:00,2022-04-21T22:14:24+00:00,2021-12-23T15:17:53+00:00,2021-12-23T15:17:53+00:00,49c5f8a07d91a3680e78a73c957e85a39a0ecdfc,unknown,137,24,9,9,1,3,aliabid94,,
+gradio-app/gradio,778200240,356,update interface.py tests,inline and example tests,AK391,81195143,closed,False,2021-11-11T03:42:20+00:00,2021-11-19T03:50:52+00:00,2021-11-11T22:20:11+00:00,2021-11-11T22:20:11+00:00,1ca74f1b01cb2b8a6b5994feb3cc1f07253c0d5a,unknown,35,16,5,1,0,3,,,
+gradio-app/gradio,779065096,358,tests for integration and fixes bug,update tests,AK391,81195143,closed,False,2021-11-12T03:46:29+00:00,2021-11-19T03:50:52+00:00,2021-11-12T15:12:54+00:00,2021-11-12T15:12:54+00:00,74f6649c7296f76a728a3d9c97a3c6eedd4e5514,unknown,54,1,2,1,0,2,,,
+gradio-app/gradio,779630039,362,Custom Flagging Callbacks & Flagging for Hugging Face Spaces,"Motivation
+-----
+We would like the FLAG button on Gradio interfaces to be flexible. In particular, on Hugging Face Spaces, the FLAG button should take the sample and save it to a Hugging Face Dataset. This can be useful for collecting data e.g. for building a crowd-sourced dataset of samples on which a machine learning demo makes mistakes.  
+
+Proposal
+-------
+We create a new `FlaggingCallback` abstract class whose subclasses must define the following two methods:
+* `setup(flagging_dir)`
+* `flag(self, interface, input_data, output_data, flag_option, flag_index, username)`
+
+The `setup()` method is called once when the `Interface` is launched and can do things like create a directory, while the `flag()` method is what is called when the button is actually called and can do things like append to a CSV file.
+
+The Interface object is constructed (through the `flagging_callback` parameter) with a `FlaggingCallback` object. The default callback is an object of a class known as `CSVLogger` which implements the current behavior of the FLAG button. We also define a `SimpleCSVLogger` for pedagogical reasons. 
+
+Most importantly, we define a new `HuggingFaceDatasetSaver` callback which a user can use to enable the behavior described above (save a flagged sample to a HuggingFace Dataset). In order to do this, a user simply needs to instantiate a `HuggingFaceDatasetSaver` with `hf_foken` (their Hugging Face token, which can be provided through Secrets), and `dataset_name`. The class will take care of the rest utilizing the `hub` API.
+
+This is work in progress -- feedback welcome.
+
+link T-34",abidlabs,1778297,closed,False,2021-11-12T18:11:27+00:00,2022-04-21T22:14:25+00:00,2021-12-24T17:41:54+00:00,2021-12-24T17:41:53+00:00,18a75e409c198676163956e11b094adec9803513,unknown,462,194,10,27,1,4,aliabd;aliabid94,,
+gradio-app/gradio,780529959,364,"Fix comparison of ""numpy"" and ""pil"" types in Image","The line
+
+```
+elif self.type == ""numpy"" or ""pil"":
+```
+
+is interpreted as
+
+```
+elif (self.type == ""numpy"") or (""pil""):
+```
+
+where `(""pil"")` is always evaluated as True. See https://stackoverflow.com/a/20002504/50065 for more info.
+
+The reason this wasn't caught by the tests is because they were written like:
+
+```
+  with self.assertRaises(ValueError):
+      wrong_type = gr.inputs.Image(type=""unknown"")
+      wrong_type.preprocess(img)
+      wrong_type.serialize(""test/test_files/bus.png"", False)
+```
+
+The line `wrong_type.preprocess(img)` would trigger a ValueError and the test would be markes as succeeded, but it obscures that the line `wrong_type.serialize(""test/test_files/bus.png"", False)` would fail with:
+
+```
+Traceback (most recent call last):
+  File ""/home/biogeek/github/gradio/test/test_inputs.py"", line 320, in test_as_component
+    wrong_type.serialize(""test/test_files/bus.png"", False)
+  File ""/home/biogeek/github/gradio/gradio/inputs.py"", line 768, in serialize
+    "".""+fmt.lower() if fmt is not None else "".png""))
+AttributeError: 'builtin_function_or_method' object has no attribute 'lower'
+```",BioGeek,59344,closed,False,2021-11-15T10:21:21+00:00,2021-11-15T13:04:08+00:00,2021-11-15T13:04:07+00:00,2021-11-15T13:04:07+00:00,18617f310ab5da601db27cb604d26b7c91b42c8a,unknown,3,1,2,2,0,2,,,
+gradio-app/gradio,780760684,365,Series working with external (T-93),Fixed #343 ,abidlabs,1778297,closed,False,2021-11-15T14:42:30+00:00,2022-04-21T22:14:22+00:00,2021-11-15T14:48:55+00:00,2021-11-15T14:48:55+00:00,397911d0d5d6c9e26ca9a9e3dddbea9757c8b695,unknown,29,6,2,1,0,2,,,
+gradio-app/gradio,781241184,368,change plotly to matplotlib,Out of the box plotly does not work with gradio.,discdiver,7703961,closed,False,2021-11-16T02:27:29+00:00,2021-11-16T22:35:38+00:00,2021-11-16T22:35:38+00:00,2021-11-16T22:35:38+00:00,e47cbd6988c0e1fa41aee06f1f6e05b1ebcf192b,unknown,1,1,1,1,0,3,,,
+gradio-app/gradio,782275896,376,add test for capture session,new test for interface.py,AK391,81195143,closed,False,2021-11-17T01:28:59+00:00,2021-11-19T06:31:05+00:00,2021-11-19T06:31:05+00:00,2021-11-19T06:31:05+00:00,868b49463f7011227628c80c428c42f585c8b764,unknown,10,3,1,1,0,2,,,
+gradio-app/gradio,787339524,386,Way to change page's tab title in interface,This is to partially solve #385 . Would you implement it this way?,charlielito,8033598,closed,False,2021-11-23T21:11:27+00:00,2023-12-15T21:31:18+00:00,2021-11-29T13:08:36+00:00,2021-11-29T13:08:36+00:00,dca3027bf8e73787e94ad1c32eec07bfa4c3ff36,unknown,1,1,1,4,0,8,,,
+gradio-app/gradio,788411752,389,Add title and favicon,,charlielito,8033598,closed,False,2021-11-25T00:51:57+00:00,2021-11-25T00:52:04+00:00,2021-11-25T00:52:04+00:00,,,dirty,25374,4,12,4,0,1,,,
+gradio-app/gradio,801990351,406,Fix arbitrary file reading vulnerabilities,"Use werkzeug.utils.secure_filename to fix arbitrary file reading vulnerabilities.
+
+From: https://github.com/gradio-app/gradio/issues/405",haby0,29876502,closed,False,2021-12-14T06:10:04+00:00,2021-12-15T03:18:08+00:00,2021-12-14T14:14:58+00:00,2021-12-14T14:14:58+00:00,94a5b745dbe8cca1e733f1b02c57c71ad2e3231a,unknown,3,0,1,1,0,1,,,
+gradio-app/gradio,802506542,407,"[WIP] Working on fixing issues related to server_name, server_port, and url_ok","Working on issues #399, #395, #382, #344, and the edge case where if you have a local interface & one on a remote notebook, then it can cause issues.",abidlabs,1778297,closed,True,2021-12-14T16:10:19+00:00,2021-12-15T00:39:38+00:00,2021-12-15T00:39:38+00:00,2021-12-15T00:39:38+00:00,0abfe9c60d35ef38ce7abcfc23b3c097cec84135,unknown,19,9,2,3,0,2,dawoodkhan82,,
+gradio-app/gradio,802554274,408,Fix url_ok check is not reaching host,"As discussed in #382 , this fixes the case if the `server_name` is set to `0.0.0.0`.
+
+I have introduced a new variable called `url_host_name`, which is used as host name for the url (not the flask server). The variable is set to either the defined `server_name` or `localhost`.",cansik,5220162,closed,False,2021-12-14T17:00:47+00:00,2021-12-15T00:40:05+00:00,2021-12-15T00:39:37+00:00,2021-12-15T00:39:37+00:00,b12ac1d935150111ae1f967c832b74320d6c5ac4,unknown,21,10,2,5,0,2,,,
+gradio-app/gradio,802944708,409,Cleaning up interface.py #407,"Cleaning up `interface.py` to make it easier for people to understand the code and contribute.
+* Deprecated outdated parameters to `Interface()` and rewrote code to need fewer parameters
+* Moved helper functions to `utils.py`
+* Miscellaneous fixes to improve readability",abidlabs,1778297,closed,False,2021-12-15T00:42:33+00:00,2022-04-21T22:14:23+00:00,2021-12-16T16:07:55+00:00,2021-12-16T16:07:55+00:00,8d5f55db18f459fba2f90eb425a61729931a3a7f,unknown,241,221,9,8,0,2,dawoodkhan82;aliabid94,,
+gradio-app/gradio,803001034,410,Bump tmpl from 1.0.4 to 1.0.5 in /frontend,"Bumps [tmpl](https://github.com/daaku/nodejs-tmpl) from 1.0.4 to 1.0.5.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/daaku/nodejs-tmpl/commits/v1.0.5"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tmpl&package-manager=npm_and_yarn&previous-version=1.0.4&new-version=1.0.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-15T02:54:10+00:00,2021-12-16T15:34:00+00:00,2021-12-16T15:33:48+00:00,2021-12-16T15:33:48+00:00,341d2ce7a9ffb6ede69403332e9069b10ec70874,unknown,3,3,1,1,0,2,,,
+gradio-app/gradio,803001042,411,Bump tar from 6.1.0 to 6.1.11 in /frontend,"Bumps [tar](https://github.com/npm/node-tar) from 6.1.0 to 6.1.11.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/npm/node-tar/commit/e573aeea19d4d650908b7f6bf0a1ad8dce9f1736""><code>e573aee</code></a> 6.1.11</li>
+<li><a href=""https://github.com/npm/node-tar/commit/edb8e9a3fa5869cfb935479a262f6f61b0a2ec57""><code>edb8e9a</code></a> fix: perf regression on hot string munging path</li>
+<li><a href=""https://github.com/npm/node-tar/commit/a9d9b05fc974425089922bf66e8e7751ea8bfbbc""><code>a9d9b05</code></a> chore(test): Avoid spurious failures packing node_modules/.cache</li>
+<li><a href=""https://github.com/npm/node-tar/commit/24b8bdadf37118182496ecf81fa7a872196fb38b""><code>24b8bda</code></a> fix(test): use posix path for testing path reservations</li>
+<li><a href=""https://github.com/npm/node-tar/commit/e5a223c6b293f1cb2ebb2dd97668f787e8983ca4""><code>e5a223c</code></a> fix(test): make unpack test pass on case-sensitive fs</li>
+<li><a href=""https://github.com/npm/node-tar/commit/188baddc1d0e6ef5140c7a788f03fc2a6c3df2ea""><code>188badd</code></a> 6.1.10</li>
+<li><a href=""https://github.com/npm/node-tar/commit/23312ce7db8a12c78d0fba96d7664a01619266a3""><code>23312ce</code></a> drop dirCache for symlink on all platforms</li>
+<li><a href=""https://github.com/npm/node-tar/commit/4f1f4a21fca64f3089da0e83ceea775c66b55052""><code>4f1f4a2</code></a> 6.1.9</li>
+<li><a href=""https://github.com/npm/node-tar/commit/875a37e3ec031186fc6599f6807341f56c584598""><code>875a37e</code></a> fix: prevent path escape using drive-relative paths</li>
+<li><a href=""https://github.com/npm/node-tar/commit/b6162c7fafe797f856564ef37f4b82747f051455""><code>b6162c7</code></a> fix: reserve paths properly for unicode, windows</li>
+<li>Additional commits viewable in <a href=""https://github.com/npm/node-tar/compare/v6.1.0...v6.1.11"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tar&package-manager=npm_and_yarn&previous-version=6.1.0&new-version=6.1.11)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-15T02:54:11+00:00,2021-12-16T15:33:43+00:00,2021-12-16T15:33:33+00:00,2021-12-16T15:33:33+00:00,6a9f2d9c72fa2755cf541c2a3ca6569d1cedfa63,unknown,3,3,1,1,0,2,,,
+gradio-app/gradio,803001045,412,Bump jsuites from 4.6.6 to 4.9.28 in /frontend,"Bumps [jsuites](https://github.com/jsuites/jsuites) from 4.6.6 to 4.9.28.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/jsuites/jsuites/releases"">jsuites's releases</a>.</em></p>
+<blockquote>
+<h2>v4.9.11</h2>
+<p>Security update and other fixes.</p>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/jsuites/jsuites/commits"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=jsuites&package-manager=npm_and_yarn&previous-version=4.6.6&new-version=4.9.28)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-15T02:54:11+00:00,2021-12-16T15:33:31+00:00,2021-12-16T15:33:21+00:00,2021-12-16T15:33:21+00:00,a422206e1f54d46652ce5028478cc95c51c110b8,unknown,3,3,1,1,0,2,,,
+gradio-app/gradio,804565493,415,Added hers to list of female words,"Added 'hers ' to pronouns list
+From this issue: https://github.com/gradio-app/gradio/issues/413 ",fiordiconio,47291922,closed,False,2021-12-16T15:24:11+00:00,2021-12-16T15:30:57+00:00,2021-12-16T15:24:51+00:00,2021-12-16T15:24:51+00:00,2a00d384a61365fe13a45b6caf9ba4765c021bc7,unknown,3,3,2,1,0,3,,,
+gradio-app/gradio,804580647,416,Bump dns-packet from 1.3.1 to 1.3.4 in /frontend,"Bumps [dns-packet](https://github.com/mafintosh/dns-packet) from 1.3.1 to 1.3.4.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/ebdf849da5dc0d96836e87628349776c623c5be7""><code>ebdf849</code></a> 1.3.4</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/ac578722f2707310b841b65aae61d6332f8882a1""><code>ac57872</code></a> move all allocUnsafes to allocs for easier maintenance</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/c64c9507e51532c9e9a3cbefa146a134ecc025fd""><code>c64c950</code></a> 1.3.3</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/0598ba19d18da4568b32415e60a9629061b3c45c""><code>0598ba1</code></a> fix .. in encodingLength</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/010aedb33c1ee8c3f558db5249c1d46e2bd7a101""><code>010aedb</code></a> 1.3.2</li>
+<li><a href=""https://github.com/mafintosh/dns-packet/commit/0d0d593f8df4e2712c43957a6c62e95047f12b2d""><code>0d0d593</code></a> backport encodingLength fix to v1</li>
+<li>See full diff in <a href=""https://github.com/mafintosh/dns-packet/compare/v1.3.1...v1.3.4"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=dns-packet&package-manager=npm_and_yarn&previous-version=1.3.1&new-version=1.3.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-16T15:35:01+00:00,2021-12-16T15:35:32+00:00,2021-12-16T15:35:23+00:00,2021-12-16T15:35:23+00:00,e5b57cd5ecb932be9bbae0e2d16c08173f284cd0,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,804582022,417,Bump url-parse from 1.5.1 to 1.5.3 in /frontend,"Bumps [url-parse](https://github.com/unshiftio/url-parse) from 1.5.1 to 1.5.3.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/ad444931666a30bad11472d89a216461cf16cae2""><code>ad44493</code></a> [dist] 1.5.3</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/c7984617e235892cc22e0f47bb5ff1c012e6e39f""><code>c798461</code></a> [fix] Fix host parsing for file URLs (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/210"">#210</a>)</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/201034b8670c2aa382d7ec410ee750ac6f2f9c38""><code>201034b</code></a> [dist] 1.5.2</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/2d9ac2c94067742b2116332c1e03be9f37371dff""><code>2d9ac2c</code></a> [fix] Sanitize only special URLs (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/209"">#209</a>)</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/fb128af4f43fa17f351d50cf615c7598c751f50a""><code>fb128af</code></a> [fix] Use <code>'null'</code> as <code>origin</code> for non special URLs</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/fed6d9e338ea39de2d68bb66607066d71328c62f""><code>fed6d9e</code></a> [fix] Add a leading slash only if the URL is special</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/94872e7ab9103ee69b958959baa14c9e682a7f10""><code>94872e7</code></a> [fix] Do not incorrectly set the <code>slashes</code> property to <code>true</code></li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/81ab967889b08112d3356e451bf03e6aa0cbb7e0""><code>81ab967</code></a> [fix] Ignore slashes after the protocol for special URLs</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/ee22050a48a67409aa5f7c87947284156d615bd1""><code>ee22050</code></a> [ci] Use GitHub Actions</li>
+<li><a href=""https://github.com/unshiftio/url-parse/commit/d2979b586d8c7751e0c77f127d9ce1b2143cc0c9""><code>d2979b5</code></a> [fix] Special case the <code>file:</code> protocol (<a href=""https://github-redirect.dependabot.com/unshiftio/url-parse/issues/204"">#204</a>)</li>
+<li>Additional commits viewable in <a href=""https://github.com/unshiftio/url-parse/compare/1.5.1...1.5.3"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=url-parse&package-manager=npm_and_yarn&previous-version=1.5.1&new-version=1.5.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-16T15:36:31+00:00,2021-12-16T15:37:52+00:00,2021-12-16T15:37:44+00:00,2021-12-16T15:37:44+00:00,ed1b2a3477634368fd956622f743fc99fe9b9b39,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,804582055,418,Bump path-parse from 1.0.6 to 1.0.7 in /frontend,"Bumps [path-parse](https://github.com/jbgutierrez/path-parse) from 1.0.6 to 1.0.7.
+<details>
+<summary>Commits</summary>
+<ul>
+<li>See full diff in <a href=""https://github.com/jbgutierrez/path-parse/commits/v1.0.7"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=path-parse&package-manager=npm_and_yarn&previous-version=1.0.6&new-version=1.0.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/gradio-app/gradio/network/alerts).
+
+</details>",dependabot[bot],49699333,closed,False,2021-12-16T15:36:33+00:00,2021-12-16T15:37:43+00:00,2021-12-16T15:37:35+00:00,2021-12-16T15:37:35+00:00,8c7ddea492144c71e775ffb94e058c430953dd6b,unknown,3,3,1,1,0,1,,,
+gradio-app/gradio,805521720,420,"Fixes port issue; deprecates server_port, server_name parameter",Fixes #419. Deprecates `server_port` and `server_name` in `Interface()` class because it was getting messy to support it. These are now parameters of the `launch()` method,abidlabs,1778297,closed,False,2021-12-17T16:44:31+00:00,2022-04-21T22:14:24+00:00,2021-12-21T20:58:27+00:00,2021-12-21T20:58:26+00:00,5b744d690c582ab6134896de07fd3671f774a16a,unknown,79,80,6,7,6,3,aliabid94;dawoodkhan82,,

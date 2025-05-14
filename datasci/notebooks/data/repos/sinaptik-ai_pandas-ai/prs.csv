@@ -1,0 +1,583 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+sinaptik-ai/pandas-ai,1332407128,2,Fix the import in README.md,,gventuri,15671184,closed,False,2023-04-28T21:17:25+00:00,2023-04-28T23:27:13+00:00,2023-04-28T21:17:48+00:00,2023-04-28T21:17:48+00:00,28f523e3411a5a084ae6df391c6ad49dda4793f2,unknown,1,1,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1332513551,3,FIX README.md,I just updated README.md to the working syntax.,mr-ZIAD,87137785,closed,False,2023-04-28T23:49:43+00:00,2023-04-29T00:19:29+00:00,2023-04-29T00:19:11+00:00,2023-04-29T00:19:11+00:00,3b64bb106a056e2fc00cdbe63999590e97808c90,unknown,4,4,1,1,0,1,,,
+sinaptik-ai/pandas-ai,1332729367,7,initial setup for dev suggestions,"In this PR I've made some contributions:
+
+- Added `poetry` as the dependency manager
+- Added `pre-commit` and `black` hooks formatter
+- Applied the `black` formatter on the entire project.
+
+All code changes are style-related.",HenriqueAJNB,54143210,closed,False,2023-04-29T10:36:09+00:00,2023-04-29T12:21:17+00:00,2023-04-29T12:21:17+00:00,2023-04-29T12:21:17+00:00,49f68b96ec23fe6095a1adad9d21d4639c8190b4,unknown,848,241,12,4,4,1,,,
+sinaptik-ai/pandas-ai,1332776859,8,added dependencies and custom exceptions,"# Proposed changes
+
+- Added `isort` to `pre-commit` and as a dev dependency
+- Added `openai` to dependencies.
+- Apply `isort` to the entire project (purely style).
+- Added a custom exception to API Key Not Found error.",HenriqueAJNB,54143210,closed,False,2023-04-29T14:19:55+00:00,2023-05-03T14:40:29+00:00,2023-05-03T01:37:00+00:00,,0630aaa22f5f4bade9257ef037ecf6738557e161,unknown,0,0,0,0,0,6,,,
+sinaptik-ai/pandas-ai,1332788701,10,Add CI,,FillerFree,36811252,closed,False,2023-04-29T15:12:50+00:00,2023-04-30T08:44:05+00:00,2023-04-30T08:44:05+00:00,2023-04-30T08:44:04+00:00,7883c741d3605d6f0123fc6a730b28a4003e5e9c,unknown,35,1,2,2,0,1,,,
+sinaptik-ai/pandas-ai,1333463248,16,Error Correcting Framework,"A couple of Changes:
+1. Changed the signature of giving the prompt to LLM. Have asked it to return the Python code surrounded by ""startCode"" and ""endCode"". Found out by experimenting that the LLM is good at giving the output in this format and it becomes easy to extract the required code.
+2. Added Error Correcting Framework With Max Retry of 3.
+
+",yzaparto,132240560,closed,False,2023-05-01T05:38:20+00:00,2023-05-01T22:30:22+00:00,2023-05-01T22:30:22+00:00,2023-05-01T22:30:22+00:00,ce303eeb3daf0622c90d4c88c15998eb02068bab,unknown,96,69,7,2,0,0,,,
+sinaptik-ai/pandas-ai,1334802627,19,Added show_code feature,"#15 
+
+If show_code is set to True, it will create a new cell and paste the code that was used to generate the answer.",johnson-52197,58318959,closed,False,2023-05-02T07:30:11+00:00,2023-05-02T23:09:06+00:00,2023-05-02T23:09:06+00:00,2023-05-02T23:09:06+00:00,1d77b8bc66053bd65a88d4faac8ac879a2a19349,unknown,361,8,6,8,2,10,,,
+sinaptik-ai/pandas-ai,1334993185,20,Add docstrings,,dSupertramp,48620457,closed,False,2023-05-02T10:05:23+00:00,2023-05-04T14:22:33+00:00,2023-05-02T13:14:29+00:00,2023-05-02T13:14:29+00:00,5cdab4497c87362b460ff0e4fb76acc9e7db5030,unknown,103,17,3,2,0,3,,,
+sinaptik-ai/pandas-ai,1335999072,25,Fix conversational answer function,"**[Before]**
+
+<img width=""325"" alt=""image"" src=""https://user-images.githubusercontent.com/132240560/235816839-5ce8dc49-1001-4909-a7ea-df411c251dad.png"">
+
+
+**[After]**
+
+<img width=""452"" alt=""image"" src=""https://user-images.githubusercontent.com/132240560/235816743-50fca8f1-d834-46e6-8362-9c611ddff674.png"">
+",yzaparto,132240560,closed,False,2023-05-03T01:14:32+00:00,2023-05-03T14:47:00+00:00,2023-05-03T14:46:34+00:00,2023-05-03T14:46:34+00:00,d15747b925e574e51bf9e085f23d0a1d5a540c1b,unknown,1,1,1,1,0,1,,,
+sinaptik-ai/pandas-ai,1337024361,29,Fix example,"Related to issue #22 , it fills up the example with realistic data 
+Sources (linked up in the readme):
+- https://ourworldindata.org/grapher/gross-domestic-product?tab=table
+- https://ftnnews.com/images/stories/documents/2020/WHR20.pdf
+- https://data.world/makeovermonday/2020w19-world-happiness-report-2020
+
+A disclaimer was added to explain the data used. Results were also changed to keep it concise.
+
+Changed the histogram too, and some example files that were using the old dataset. Tested it all on Colab and it worked like a charm. I couldn't change the Google Drive file.",Lorenzobattistela,70359945,closed,False,2023-05-03T16:42:51+00:00,2023-05-04T12:49:50+00:00,2023-05-04T12:49:49+00:00,2023-05-04T12:49:49+00:00,3c2e1e3658d5e6b197e822cc5071690ca41da92b,unknown,19,17,5,7,0,1,,,
+sinaptik-ai/pandas-ai,1338111341,33,interpret json when llm returns json code,fixed: #32,avelino,31996,closed,False,2023-05-04T09:34:57+00:00,2023-05-05T15:31:26+00:00,2023-05-04T23:19:35+00:00,2023-05-04T23:19:35+00:00,3f2c0d542210f874b57b663b5f292fd217192aa1,unknown,9,4,2,3,0,4,,,
+sinaptik-ai/pandas-ai,1338169209,34,Small refactorings,At this PR I've suggested some small changes for refactoring.,HenriqueAJNB,54143210,closed,False,2023-05-04T10:07:44+00:00,2023-05-04T23:22:40+00:00,2023-05-04T23:22:40+00:00,2023-05-04T23:22:40+00:00,d3484f1f852bed53748a2829f3c309351c6cab2d,unknown,63,35,14,11,2,1,,,
+sinaptik-ai/pandas-ai,1338214181,36,isort added to pre-commit (CI/CD),"@gventuri, I've preferred to open another PR just for adding `isort`. Better than solving those conflicts from PR #8 which has a mix of changes.
+
+This one:
+- Adds `isort` as a dev dependency
+- Apply `isort` with `black` profile in entire project
+- Adds `isort` to `pre-commit`
+- Suggests a reminder at `README.md` for installing `pre-commit` before contributing to follow our standards.
+",HenriqueAJNB,54143210,closed,False,2023-05-04T10:38:02+00:00,2023-05-05T01:45:55+00:00,2023-05-04T23:27:02+00:00,2023-05-04T23:27:02+00:00,9baf28fb0780e30519a6b0bddd851d350b37bd0e,unknown,8,0,1,6,0,5,,,
+sinaptik-ai/pandas-ai,1338428188,39,Feature/cohere LLM,Adding support for Cohere LLM,dSupertramp,48620457,closed,False,2023-05-04T13:13:14+00:00,2023-05-08T20:15:13+00:00,2023-05-08T20:15:12+00:00,,c0edfd4556ea318f38b45031941069613e62e469,dirty,834,225,29,52,3,2,,,
+sinaptik-ai/pandas-ai,1338443321,40,Fix English typos in docstrings,,AndreaPi,8233615,closed,False,2023-05-04T13:23:05+00:00,2023-05-04T13:58:48+00:00,2023-05-04T13:34:55+00:00,2023-05-04T13:34:55+00:00,e163f04d082a2778a4ef1ba61dd38b3e7c7a65a0,unknown,2,2,2,2,0,0,,,
+sinaptik-ai/pandas-ai,1338604767,44,ignore .DS_Store,,avelino,31996,closed,False,2023-05-04T14:52:12+00:00,2023-05-04T15:25:57+00:00,2023-05-04T14:58:57+00:00,2023-05-04T14:58:57+00:00,6029c555c77438cf7e0836a36f38643ee72a2dce,unknown,4,1,2,2,0,0,,,
+sinaptik-ai/pandas-ai,1338895117,48,feat: expose REST/Websocket APIs using langchain-serve,"## pandas-ai 🤝 [langchain-serve](https://github.com/jina-ai/langchain-serve)
+
+
+This PR adds a ton of features targeting to push `pandas-ai` production-readiness 🚀 (Fixes #21)
+
+- Enables interacting with pandas-ai as REST/WebSocket APIs using langchain-serve.
+- Introduces `pandas-ai` CLI with the following options 👉 [Documentation](https://github.com/deepankarm/pandas-ai#pandas-ai-cli-experimental)
+   - Expose APIs locally
+   - Expose APIs on Jina AI Cloud
+   - Upload DataFrames to Jina AI Cloud
+   - Converse playground to have real-time question/answers about dataframes both on local & on cloud
+ 
+## Demo for converse playground
+![converse](https://user-images.githubusercontent.com/9050737/236296259-be2163d8-9b25-46f2-8f54-d3d7e1cc9bfe.gif)
+
+
+### Known limitations 
+- Plotting graphs is not supported via the API yet.
+- Upload/Download of DataFrames is currently done using CSVs. More formats will be supported in the future.
+- Missing tests for the new APIs (to be added in the next PR)",deepankarm,9050737,closed,False,2023-05-04T18:34:00+00:00,2023-05-06T10:01:13+00:00,2023-05-06T09:47:23+00:00,,d6262cee3309f9fcbb46d4bd31e0d07249806b95,unknown,0,0,0,0,1,1,,,
+sinaptik-ai/pandas-ai,1340216452,54,security,"This PR adds improvements to the LLM-generated code execution code in Python. Added type checking and type conversion capabilities, as well as restricting access to modules and functions deemed unsafe through the use of Python's ast library. In addition, unit tests were performed to ensure the correct functioning of the code. These improvements are expected to increase the security and robustness of code generated by LLM in Python.",VictorGSoutoXP,106844175,closed,False,2023-05-05T18:01:22+00:00,2023-05-12T11:52:38+00:00,2023-05-12T11:52:38+00:00,,fad35f721fa9ed8477d8f9212c1cc5ed83c96a65,unknown,82,0,2,2,3,3,,,
+sinaptik-ai/pandas-ai,1340256147,55,Anonymized data frame head,"The main goal of this PR is to anonymize a few data (like email, phone numbers and credit cards) and shuffle the non-sensitive data. 
+
+The reason behind it is that we're sending a data frame head to a remote LLM (like OpenAI GPT) and we want to be sure that the info cannot be used by anyone in an unwanted way.",alfonsograziano,13763335,closed,False,2023-05-05T18:40:54+00:00,2023-05-06T15:10:58+00:00,2023-05-06T14:24:25+00:00,2023-05-06T14:24:25+00:00,6c3dff3fdc2d85b267307c9242fb1ca0c8b3571e,unknown,254,4,5,9,3,1,,,
+sinaptik-ai/pandas-ai,1340516744,61,"added support to oobabooga/text-generation-webui - fixed base.py to return error when ""no_code""","Added support to `oobabooga/text-generation-webui` through API.
+
+You can test starting text-generation-webui with:
+`python server.py --api --listen --no-stream --model-menu` 
+
+and the following code:
+
+```import pandas as pd
+from pandasai import PandasAI
+
+# Sample DataFrame
+df = pd.DataFrame({
+    ""country"": [""United States"", ""United Kingdom"", ""France"", ""Germany"", ""Italy"", ""Spain"", ""Canada"", ""Australia"", ""Japan"", ""China""],
+    ""gdp"": [19294482071552, 2891615567872, 2411255037952, 3435817336832, 1745433788416, 1181205135360, 1607402389504, 1490967855104, 4380756541440, 14631844184064],
+    ""happiness_index"": [6.94, 7.16, 6.66, 7.07, 6.38, 6.4, 7.23, 7.22, 5.87, 5.12]
+})
+
+from pandasai.llm.text_gen_webui import TextGenWebuiLLM
+llm = TextGenWebuiLLM()
+pandas_ai = PandasAI(llm, verbose=True)
+pandas_ai.run(df, prompt='Which are the 5 happiest countries?')
+```",RafaRed,28813496,closed,False,2023-05-06T00:24:02+00:00,2023-07-21T23:42:10+00:00,2023-07-21T23:42:10+00:00,,3f8975d190ffb26b6f603dc534944236b7a562ff,dirty,39,2,2,1,0,0,,,
+sinaptik-ai/pandas-ai,1340569736,63,possible solution to the security problem using `exec`,"The following pull request has a possible solution to the security problem using `exec`, mainly it adds a global vars dictionary and passes it to the exec function so exec's scope is limited to the variables and built-in functions defined in the dictionary.",victor-hugo-dc,45403940,closed,True,2023-05-06T02:41:39+00:00,2023-05-06T18:46:40+00:00,2023-05-06T18:46:40+00:00,,c7c137c3773c8a923c3835338bd636f540b3af44,unknown,24,5,1,4,0,0,,,
+sinaptik-ai/pandas-ai,1340614923,64,add requirements,* add requirements,jianboy,11532015,closed,False,2023-05-06T04:37:19+00:00,2023-05-06T22:35:46+00:00,2023-05-06T22:35:46+00:00,,302c30c218f600b9154bf48b7f6d2604845538d1,unknown,4,0,1,1,0,2,,,
+sinaptik-ai/pandas-ai,1340719894,65,docs: refer to pandas-ai api in langchain-serve,Closed https://github.com/gventuri/pandas-ai/pull/48 after a discussion with @gventuri and implemented the API layer in [langchain-serve](https://github.com/jina-ai/langchain-serve#panda_face-pandas-ai-as-a-service). This PR adds a link in the readme to the experimental APIs on lc-serve.,deepankarm,9050737,closed,False,2023-05-06T09:59:34+00:00,2023-05-12T11:51:55+00:00,2023-05-12T11:51:54+00:00,,63e9c5b4f053b8c799a4cd7221cc0f16b1cdf228,unknown,5,0,1,2,0,1,,,
+sinaptik-ai/pandas-ai,1340781981,67,feat: changed from built-in unittest to pytest framework,"This PR closes #26.
+
+I didn't add any structural modifications like inserting fixtures. I'll let this to @Lorenzobattistela.
+
+The only modification here was the replacement of the built-in unittest framework with pytest.",HenriqueAJNB,54143210,closed,False,2023-05-06T13:47:25+00:00,2023-05-06T22:35:21+00:00,2023-05-06T22:35:20+00:00,2023-05-06T22:35:20+00:00,de41a2d7e169d8d9e902c35e8dc96f23ff64eeba,unknown,41,41,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1340785195,69,move pylint config from `.pylintrc` file to `pyproject.toml`,"This PR closes #68. 
+
+The branch name in the `.pylintrc` file was `MASTER`, that's why the linting in tests was not ignored. 
+
+And I took this opportunity to move the `.pylintrc` config to `pyproject.toml`. ",HenriqueAJNB,54143210,closed,False,2023-05-06T13:58:47+00:00,2023-05-06T14:35:11+00:00,2023-05-06T14:35:10+00:00,2023-05-06T14:35:10+00:00,b6fd708120f4a79dc9ccc6abed8e9d39b45f40a2,unknown,3,2,2,2,0,1,,,
+sinaptik-ai/pandas-ai,1340833401,71,Add ChatGPT based on IntelligenzaArtificiale/Free-AUTO-GPT-with-NO-API,"How to use it:
+`llm = ChatGPT(conversation_id=""CHAT_ID"", api_token=""CHATGPT_API_TOKEN"")`
+
+conversation_id is the id on the chat url.
+CHATGPT_API_TOKEN can be found on the chatgpt cookies, with the name: __Secure-next-auth.session-token
+
+---
+
+use it at your own risk.",RafaRed,28813496,closed,False,2023-05-06T16:56:29+00:00,2023-07-21T23:42:05+00:00,2023-07-21T23:42:05+00:00,,b052c133d4cd21ec709498c2d691ec2c3d09c9f8,unknown,614,0,2,1,0,0,,,
+sinaptik-ai/pandas-ai,1341086958,76,Add: Issues & PR template,"- [x] closes #75 
+
+Enables users to add bug report with the minimal code they ran. 
+Enables users to propose new feature request
+Add PR template to link requests and issues and again reminding contributors to check mark all the pre-commit tests were run and additional tests were added",ambujpawar,19887541,closed,False,2023-05-07T10:51:44+00:00,2023-05-07T12:35:53+00:00,2023-05-07T12:35:52+00:00,2023-05-07T12:35:52+00:00,fc87b3d554029f1a94e04a39f3a04102d8b0c168,unknown,89,0,4,2,0,0,,,
+sinaptik-ai/pandas-ai,1341199302,79,refactor: use contextlib.redirect_stdout to capture the output,"Replaces manual capture of output with the nice function [capture_stdout](https://docs.python.org/3/library/contextlib.html#contextlib.redirect_stdout)  from contextlib
+
+",walison17,14242043,closed,False,2023-05-07T16:43:33+00:00,2023-05-08T14:27:38+00:00,2023-05-08T14:26:48+00:00,2023-05-08T14:26:48+00:00,5272ec61752720f7a28f67d9c6f435691952c410,unknown,29,33,1,1,0,3,,,
+sinaptik-ai/pandas-ai,1341224419,80,Fix contributing guildelines,"- [x] closes #77 
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+Things I did in the PR:
+- Add extra steps to check the linting and testing before submitting the PR.
+- Mark TODO: Contributing Guidelines as completed.
+- Mark poetry as  `poetry`  to be similar to  `pylint` and  `pytest` in the CONTRIBUTING.md
+",ambujpawar,19887541,closed,False,2023-05-07T18:02:57+00:00,2023-05-07T21:03:12+00:00,2023-05-07T21:03:12+00:00,2023-05-07T21:03:12+00:00,f2348d07eb1abd529cf0a6bf0a546659ea173021,unknown,9,3,2,2,0,0,,,
+sinaptik-ai/pandas-ai,1341300074,83,Fix code sanitization,"As mentioned in [this comment](https://github.com/gventuri/pandas-ai/issues/43#issuecomment-1537547533), it is currently possible to import libraries and execute arbitary code. This makes it safer by actually using the import free cleaned up code.
+
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",andodet,29178712,closed,False,2023-05-07T22:23:18+00:00,2023-05-07T22:29:31+00:00,2023-05-07T22:29:30+00:00,,,dirty,9,5,2,1,0,1,,,
+sinaptik-ai/pandas-ai,1341319092,84,Using pytest fixtures instead of multiple function calls,"- [x] closes #27 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+This code refactors `tests/test_pandasai.py` to use fixtures instead of multiple `setup()` calls.",Lorenzobattistela,70359945,closed,False,2023-05-07T23:22:59+00:00,2023-05-08T07:20:04+00:00,2023-05-08T07:20:04+00:00,2023-05-08T07:20:04+00:00,5f8851a0d629e42ca5af657ae78bdaea89c21940,unknown,68,93,1,1,0,2,,,
+sinaptik-ai/pandas-ai,1341882576,88,Refactor code for Cohere LLM (Need to improve it),"We actually don't have a response, so we should fix the response",dSupertramp,48620457,closed,False,2023-05-08T09:51:09+00:00,2023-07-21T23:38:03+00:00,2023-07-21T23:38:03+00:00,,9aae1593374138e0ef03de787ab80aa1a021008e,dirty,159,3,6,7,5,3,,,
+sinaptik-ai/pandas-ai,1342556576,92,Test coverage,"- [x] closes #89 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+Created tests for llms `base_hf`, `starcoder`, `openai`",Lorenzobattistela,70359945,closed,False,2023-05-08T17:58:49+00:00,2023-05-08T20:28:28+00:00,2023-05-08T20:07:44+00:00,2023-05-08T20:07:44+00:00,896ab62edf32c61157b7b311df5b169672acb02f,unknown,195,2,6,5,0,0,,,
+sinaptik-ai/pandas-ai,1343026222,93,"Automatically add plt.show() if missing, add error handling and fix bugs","Changelog:
+
+- Implemented the ability to add `plt.show()`, while plotting if it's not generated by llm.
+- Added error handling if the LLM fails to generate code even after using the `error_correcting_mechanism`
+- Fixes #91 ",yzaparto,132240560,closed,False,2023-05-09T02:24:55+00:00,2023-07-21T23:38:31+00:00,2023-07-21T23:38:31+00:00,,b3131513d4205caac53cdba95f4ec0191d0a2cfa,dirty,73,22,5,3,4,2,,,
+sinaptik-ai/pandas-ai,1343158891,95,Fix Randomly getting incomplete answers,"**Changelog**
+
+- Fixes #90 
+- Made Exec and Eval both use the same restricted builtins.",yzaparto,132240560,closed,False,2023-05-09T05:19:31+00:00,2023-07-21T23:40:16+00:00,2023-07-21T23:40:15+00:00,,d35a87882ec9db527f0b1d0458abe33d1f717a66,dirty,35,34,1,2,4,2,,,
+sinaptik-ai/pandas-ai,1343534472,98,Improve prompt,"Changelog 
+Fixes #97  ",yzaparto,132240560,closed,False,2023-05-09T10:08:18+00:00,2023-07-21T23:38:53+00:00,2023-07-21T23:38:53+00:00,,babb74385b20864808d6e3c44982b825f0b3ce95,dirty,3,1,1,1,0,2,,,
+sinaptik-ai/pandas-ai,1344514151,103,docs: added pre-commit to contributing.md,"- [x] closes #102
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",HenriqueAJNB,54143210,closed,False,2023-05-09T23:54:20+00:00,2023-06-17T23:21:46+00:00,2023-05-10T00:17:10+00:00,2023-05-10T00:17:10+00:00,1027468b228f8bd56fa782b67a0c00dc83dd58ad,unknown,8,0,1,1,0,0,gventuri,,
+sinaptik-ai/pandas-ai,1344551514,106,fix: removed fixed python version in pre-commit,"- [x] closes #105
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",HenriqueAJNB,54143210,closed,False,2023-05-10T00:48:46+00:00,2023-06-17T23:21:44+00:00,2023-05-10T00:50:44+00:00,2023-05-10T00:50:44+00:00,a3b3859727af5cf9f7bfd9bc88e919d50cb9d3ae,unknown,0,5,1,1,0,0,gventuri,,
+sinaptik-ai/pandas-ai,1344569916,107,CLI,"**Command-Line Interface Tool** 
+From #104, I took the liberty to design a simple CLI tool that handles a variety of file type inputs (not just .csv) and can either take in a users token in the command line or can pull from the `.env` file directly. For the best user experience, I have set the default output of pandasai to be verbose and made sure to implement various error checks that print out only a single line detailing what went wrong.
+
+<img width=""1030"" alt=""Screenshot 2023-05-10 at 7 45 59 PM"" src=""https://github.com/gventuri/pandas-ai/assets/45403940/2404d70d-b9b5-4617-bf7b-9aea389af1a3"">
+",victor-hugo-dc,45403940,closed,False,2023-05-10T01:23:11+00:00,2023-05-16T23:01:34+00:00,2023-05-16T23:01:33+00:00,2023-05-16T23:01:33+00:00,e0bcd2388a5f44a1bf580deef4279d7e622407b1,unknown,129,10,8,15,5,3,gventuri,,
+sinaptik-ai/pandas-ai,1345609472,112,feat: add auto pypi publish on new release,"- [X] closes #101
+- [X] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",TiansuYu,9974655,closed,False,2023-05-10T14:59:17+00:00,2023-05-16T07:01:45+00:00,2023-05-14T21:56:31+00:00,2023-05-14T21:56:31+00:00,ac6ed9343254b0b2dae05f95446c11bbe2e38f39,unknown,27,2,3,4,0,4,,,
+sinaptik-ai/pandas-ai,1346990937,115,Support for Azure Openai,"Hello,
+this PR aims at integrating Azure OpenAI API into pandasAI, addressing #96 .
+
+I went for separate implementation instead of adding the required changes to `openai.py` for the following two reasons:
+- keeping the latter cleaner, avoiding ambiguities between the model, the engine and the additional params Azure requires, which would be all ignored in the ""classical"" OpenAI version
+- it's not so straightforward in Azure OpenAI to extract the model name from the deployment name and to associate it to a completion or a chat model",mspronesti,44113430,closed,False,2023-05-11T12:12:54+00:00,2023-05-31T09:18:20+00:00,2023-05-14T21:51:59+00:00,2023-05-14T21:51:59+00:00,f02f31f60bc395037af4add15f461a1ac2f16f2d,unknown,392,133,9,7,5,26,,,
+sinaptik-ai/pandas-ai,1347336426,116,Update constants.py,"Add comments to explain the purpose and usage of the constants.
+
+Use snake_case for the variable names instead of camelCase for consistency.
+
+Use tuples instead of lists for the constant arrays to prevent accidental modification.
+
+Group related constants together and separate them with blank lines to improve readability.",ghost,10137,closed,False,2023-05-11T15:50:43+00:00,2023-05-11T17:15:34+00:00,2023-05-11T16:57:23+00:00,,433da292b8ecef36a878c6ea9e2ff096ad9133f8,unknown,16,71,1,1,10,0,,,
+sinaptik-ai/pandas-ai,1347346087,117,Update from_csv.py,"Add comments to explain the purpose and usage of the code.
+
+Use descriptive variable names to improve code readability.
+
+Use f-strings to format the output message.
+
+",ghost,10137,closed,False,2023-05-11T15:56:53+00:00,2023-05-11T17:49:56+00:00,2023-05-11T17:49:56+00:00,,cd66c172b1630995c800cbf86da48d13c1867e94,unknown,13,7,1,1,4,2,gventuri,,
+sinaptik-ai/pandas-ai,1347461665,118,Update show_chart.py,"The code is now wrapped in a main function, which makes it easier to reuse the code and test it.
+
+The main function is now called only if the script is being run directly (i.e., not being imported as a module).
+
+The dataframe variable is now loaded from an external module instead of being defined within the script. This makes the code more modular and easier to read.
+
+The query used to generate the chart is now defined in a separate variable, which makes it easier to modify the query without having to modify the pandas_ai.run call.
+
+",ghost,10137,closed,False,2023-05-11T17:21:26+00:00,2023-05-11T17:49:56+00:00,2023-05-11T17:49:56+00:00,,c7b7bf44113b64a4260ebd1f5b88ae606d57d311,unknown,18,12,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1349592150,120,added google sheets functionality,"Hello,
+this PR aims at integrating Google Sheets into pandasAI, addressing https://github.com/gventuri/pandas-ai/issues/53 .
+
+I wrote a file where the user sees an example of getting their sheetid and name as inputs, and can enter into into the sheets_input() function to use their sheets dataframe
+
+*used an environment variable for sheet_id as the spreadsheet is public and did not want any changes to be made, however it uses the same gdp data that is already used in the project
+",aryandgandhi,44215148,closed,False,2023-05-13T16:32:24+00:00,2023-07-21T23:42:30+00:00,2023-07-21T23:42:30+00:00,,bd15d45e7c0d86caab96d4ff91d60541f60d9038,dirty,118,3,8,13,11,8,,,
+sinaptik-ai/pandas-ai,1349762995,123,Fix bug using markdown format. print(df.head({rows_to_display})) ,"Fix bug using markdown format. If max_cols is exceeded, switch to truncate view.",zhenkaivip,8349186,closed,False,2023-05-14T10:43:06+00:00,2023-07-21T23:39:24+00:00,2023-07-21T23:39:24+00:00,,9ff02538276034fec6961d7fb5de68330b04ecd6,dirty,96,4,3,4,0,3,,,
+sinaptik-ai/pandas-ai,1351174301,125,refine prompt for generic data description,"- [ ] closes #28
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+```
+response = pandas_ai.run(df, ""what is this data about?"")
+Running PandasAI with openai LLM...
+Code generated:
+
+import pandas as pd
+data = {'country': ['Germany', 'United Kingdom', 'Italy', 'France', 'United States'],
+        'gdp': [1745433788416, 8168005282, 9078511891, 2508004266, 8484577247],
+        'happiness_index': [6.66, 7.07, 6.38, 7.07, 6.38]}
+df = pd.DataFrame(data)
+print(df.head(5))
+
+Answer:           country             gdp  happiness_index
+0   United States  19294482071552             6.94
+1  United Kingdom   2891615567872             7.16
+2          France   2411255037952             6.66
+3         Germany   3435817336832             7.07
+4           Italy   1745433788416             6.38
+
+```
+
+* with conversational answer:
+```
+response = pandas_ai.run(df, ""what is this data about?"", is_conversational_answer=True)
+Running PandasAI with openai LLM...
+Code generated:
+
+import pandas as pd
+data = {'country': ['United Kingdom', 'United States', 'Germany', 'Italy', 'France'],
+        'gdp': [1745433788416, 9632157905, 6986361634, 1076747270, 2860360093],
+        'happiness_index': [7.07, 6.38, 6.66, 6.38, 6.66]}
+df = pd.DataFrame(data)
+print(df.head(5))
+
+Answer:           country             gdp  happiness_index
+0   United States  19294482071552             6.94
+1  United Kingdom   2891615567872             7.16
+2          France   2411255037952             6.66
+3         Germany   3435817336832             7.07
+4           Italy   1745433788416             6.38
+Conversational answer: This data is about the GDP and happiness index of different countries, including the United States, United Kingdom, France, Germany, and Italy.
+```
+
+```
+response = pandas_ai.run(df, ""describe data?"", is_conversational_answer=True)
+Running PandasAI with openai LLM...
+Code generated:
+
+import pandas as pd
+# create dataframe
+data = {'country': ['Italy', 'Germany', 'United Kingdom', 'France', 'United States'],
+        'gdp': [3435817336832, 5540260089, 4634553596, 1131525958, 6212275854],
+        'happiness_index': [7.16, 6.66, 6.38, 6.38, 7.16]}
+df = pd.DataFrame(data)
+# print first 5 rows
+print(df.head(5))
+
+Answer:           country             gdp  happiness_index
+0   United States  19294482071552             6.94
+1  United Kingdom   2891615567872             7.16
+2          France   2411255037952             6.66
+3         Germany   3435817336832             7.07
+4           Italy   1745433788416             6.38
+Conversational answer: The data includes information about different countries' GDP and happiness index. It shows the United States has the highest GDP, while the United Kingdom has the highest happiness index among the listed countries. France, Germany, and Italy are also included in the data.
+```",sandiemann,36822600,closed,False,2023-05-15T17:27:56+00:00,2023-06-01T17:11:44+00:00,2023-05-15T18:03:40+00:00,2023-05-15T18:03:40+00:00,624302bff3b65d474ad41fd38b685e054738ce48,unknown,1,0,1,2,0,1,,,
+sinaptik-ai/pandas-ai,1351544938,126,Feat: Add Support for Google Palm,"This PR aims to add support for Google Palm API.
+
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",WaseemSabir,68365040,closed,False,2023-05-15T22:24:29+00:00,2023-05-19T22:43:04+00:00,2023-05-19T22:43:04+00:00,2023-05-19T22:43:04+00:00,baedcbcef2571bb55d85cefc090fe8de2429ecfa,unknown,506,2,6,6,4,1,gventuri,,
+sinaptik-ai/pandas-ai,1352042306,131,isort marks local module as third party on import: fix unresolved import warning,"- [x] closes #130 
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-05-16T08:20:14+00:00,2023-06-01T17:09:43+00:00,2023-05-16T22:54:23+00:00,2023-05-16T22:54:23+00:00,131f59221706b29ce6be3d6437640a29f8436b3c,unknown,42,53,9,3,0,0,,,
+sinaptik-ai/pandas-ai,1353257980,134,Prompt adjustment and manual removal of df overrides,Closes #114 ,victor-hugo-dc,45403940,closed,False,2023-05-16T23:39:48+00:00,2023-05-19T18:36:52+00:00,2023-05-16T23:41:20+00:00,,,dirty,19,3,2,2,0,0,,,
+sinaptik-ai/pandas-ai,1353374668,135,Feature/docs,"- [x]  #94  (#94 with the GitHub issue number)
+- [x] The recent release 0.2.13 is merged with this PR
+- [x] Documentation Set up added using `mkdocs` with `.md` support
+- [x] We have adopted `readthedocs` template.
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [ ] The base code is not touched. However, we have to have some refactoring of `docstrings` using Google Style Docstrings. 
+- [ ] The documentation will be hosted on `readthedocs` server from Release Branch.
+- [ ] Add Link to the Documentation Link and Badge to the main `README.md` file
+
+Happy to discuss the PR in details if needed. Please refer to #94 for more details and discussions.
+",amjadraza,18181323,closed,False,2023-05-17T02:53:32+00:00,2023-05-23T02:21:39+00:00,2023-05-23T02:21:39+00:00,,0ca402e7e634efff6e54d954498fd21c9dac2f66,dirty,2493,1808,52,7,0,5,,,
+sinaptik-ai/pandas-ai,1354693370,140,fix prompt with explicit df name,"- [ ] closes #139
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-05-17T18:53:33+00:00,2023-06-01T17:10:52+00:00,2023-05-18T14:57:58+00:00,,5d6a51874e458fcf22f2816108cd1248e9cc76a1,unknown,0,0,0,2,0,4,,,
+sinaptik-ai/pandas-ai,1354890836,141,Allow running with __call__,"Hello @gventuri,
+this minor PR introduces the simple functionality of running `PandasAI` with the functional operator, e.g.
+
+```py
+...
+pandas_ai = PandasAI(llm, conversational=False)
+result = pandasi(df, prompt)
+```
+
+`.run()` is however kept to guarantee retrocompatibilty. ",mspronesti,44113430,closed,False,2023-05-17T21:55:07+00:00,2023-05-18T00:22:51+00:00,2023-05-18T00:22:51+00:00,2023-05-18T00:22:51+00:00,1a5cd3986358a8214faf134b2008e0d4844bd357,unknown,22,3,2,1,0,0,,,
+sinaptik-ai/pandas-ai,1355831486,145,Replace `run` with `__call__` in examples,"This is just a left over from yesterday's PR. I replaced `run` with the functional operator in the README forgetting to do that in the examples. 
+",mspronesti,44113430,closed,False,2023-05-18T14:43:19+00:00,2023-05-18T20:58:38+00:00,2023-05-18T20:58:38+00:00,2023-05-18T20:58:38+00:00,a899d1a459bcb8d8c7f9b5f8d07cc17199493b51,unknown,4,4,4,1,0,0,,,
+sinaptik-ai/pandas-ai,1358011105,152,fix TypeError: Cannot setitem on a Categorical with a new category (#…,"…143)
+
+- [x] closes #143
+- [x] added test
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-05-20T17:53:36+00:00,2023-06-01T17:07:49+00:00,2023-05-21T20:29:35+00:00,2023-05-21T20:29:35+00:00,9026650bcd646f20980504c79066f6c9123cb354,unknown,38,1,2,5,0,4,,,
+sinaptik-ai/pandas-ai,1358252943,154,feat: add from_excel (#121),"Add from_excel function, a limited and easy-to-call pd.read_excel() wrapper.
+
+- [x] closes #121
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed]
+",jonbiemond,101326085,closed,False,2023-05-21T15:47:35+00:00,2023-05-25T00:59:56+00:00,2023-05-24T23:05:20+00:00,2023-05-24T23:05:20+00:00,53e0e66d2b888ca708aa76b9165379608a0eae2b,unknown,57,0,4,3,10,1,gventuri,,
+sinaptik-ai/pandas-ai,1358535298,157,feat: add support for Google Palm in the CLI tool,,victor-hugo-dc,45403940,closed,False,2023-05-22T04:55:42+00:00,2023-05-22T19:17:08+00:00,2023-05-22T19:17:07+00:00,2023-05-22T19:17:07+00:00,bb6f328a85d3e46aaa306d4e21e5766d51c9b8f2,unknown,6,2,1,3,0,0,,,
+sinaptik-ai/pandas-ai,1358950572,159,Fix Release v0.2.14,"- [x] closes #158 
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-05-22T10:08:46+00:00,2023-06-01T17:10:33+00:00,2023-05-22T19:16:01+00:00,,2263f8fce239f6bc0c36944c0db478ab0f43c793,unknown,1,1,1,1,0,2,,,
+sinaptik-ai/pandas-ai,1360488645,162,Following Features have been added,"# Documentation for `pandasai` using `mkdocs`
+
+@gventuri Please look at the fresh PR. There are currently no conflicts with `main` branch.
+- [x]  #94  (#94 with the GitHub issue number)
+- [x] The recent release 0.2.14 is merged with this PR
+- [x] Documentation Set up added using `mkdocs` with `.md` support
+- [x] We have adopted `readthedocs` template.
+- [ ] The base code is not touched.  
+- [ ] The documentation will be hosted on `readthedocs` server from Release Branch.
+- [ ] Add Link to the Documentation Link and Badge to the  `README.md` file when realsing.
+
+Happy to discuss the PR in details if needed. Please refer to #94 for more details and discussions.
+
+",amjadraza,18181323,closed,False,2023-05-23T02:42:14+00:00,2023-05-23T21:28:55+00:00,2023-05-23T21:28:55+00:00,2023-05-23T21:28:55+00:00,0747df4d1f675158931a77c6e3fd1d86c92a4a92,unknown,424,0,18,1,0,0,,,
+sinaptik-ai/pandas-ai,1363912960,165,chore: avoid traversing the code twice,"avoids traversing the code twice for unsafe imports and df overwrites.
+",victor-hugo-dc,45403940,closed,False,2023-05-24T23:53:41+00:00,2023-05-25T00:23:12+00:00,2023-05-25T00:23:12+00:00,2023-05-25T00:23:12+00:00,a5c449f9a386876fa6c2b447040c363bf1d002dc,unknown,20,26,2,3,0,0,,,
+sinaptik-ai/pandas-ai,1365204162,168,feat: multiple dataframes,I still need to fix up some things for pylint and add some tests for checking functionality. But this is the code for multiple dataframes support so far.,victor-hugo-dc,45403940,closed,False,2023-05-25T19:01:16+00:00,2023-05-27T20:12:32+00:00,2023-05-27T20:12:32+00:00,,6be79f32ee57f8d4d62c70c0b94b27375940e656,unknown,214,53,5,6,1,0,,,
+sinaptik-ai/pandas-ai,1365345803,170,fix: added entrypoint for cli access,"- [x] closes #169 
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).",sandiemann,36822600,closed,False,2023-05-25T21:14:02+00:00,2023-05-27T07:23:01+00:00,2023-05-27T07:23:01+00:00,2023-05-27T07:23:01+00:00,38405f75947cd8b97be69688e347cf8c121fc3f4,unknown,3,0,1,1,0,2,,,
+sinaptik-ai/pandas-ai,1365382005,171,chore(deps): make google-palm optional dep,"Hi @gventuri, 
+this PR aims at addressing #53. 
+
+- [X] closes #153
+- [X] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+## Changelog:
+- google-palm becomes an optional dep, installable via `poetry install --extras google` or `pip install pandasai[google]` or `poetry install --all-extras`. Reference: [poetry documentation](https://python-poetry.org/docs/pyproject/#extras)
+- the test workflow installs also the optional dependencies to appropriately run all the tests. A possible alternative would be to instead use `pytest.importskip`, which is the approach adopted in langchain. This would skip the tests of the optional deps. I let you decide what you prefer :)",mspronesti,44113430,closed,False,2023-05-25T21:59:34+00:00,2023-05-27T07:22:10+00:00,2023-05-27T07:22:10+00:00,2023-05-27T07:22:10+00:00,ba6224bf40140d54353a78f69bfd98eb45963d42,unknown,92,79,5,1,0,1,,,
+sinaptik-ai/pandas-ai,1365662547,172,Update pre-commit-config entry for pytest check,"Update CONTRIBUTING.md for running tests: pytest -> poetry run pytest
+Fix typehints
+
+For many, tests might fail necessarily when they run `pytest`,  `poetry run pytest` will ensure the right environment and dependencies are used and will avoid version mismatches.
+Updated the command in CONTRIBUTING.md and pre-commit-config.
+Fix some type hints mismatch after this [commit](https://github.com/gventuri/pandas-ai/commit/6862977169a3416ead856870d595eb21bb6a57d0)
+
+
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",navneetdesai,38139738,closed,False,2023-05-26T03:37:58+00:00,2023-05-27T07:24:36+00:00,2023-05-27T07:24:36+00:00,2023-05-27T07:24:35+00:00,85d171174b212b786c05d01f4ca3e58c5f5a9517,unknown,18,20,7,1,0,1,,,
+sinaptik-ai/pandas-ai,1367422869,179,fix(hf): wrong concatenation of prompt and suffix,"- [X] closes #178  
+- [X] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",mspronesti,44113430,closed,False,2023-05-27T17:07:16+00:00,2023-05-28T09:29:34+00:00,2023-05-28T09:29:34+00:00,2023-05-28T09:29:34+00:00,2c0a6f798793eb259893bdf084c3ea3a48313340,unknown,22,2,2,2,0,1,,,
+sinaptik-ai/pandas-ai,1367469359,180,Good Sheets Functionality Added,"Hey, for some reason I couldn't see the commits in the original pull request and it made a new one
+",aryandgandhi,44215148,closed,False,2023-05-27T18:42:57+00:00,2023-05-27T18:49:43+00:00,2023-05-27T18:49:43+00:00,,38bb8173ff754f5060e5dbe5fe2f42bd65e7259c,unknown,436,15,9,10,0,0,,,
+sinaptik-ai/pandas-ai,1367492203,181,feat: multiple dataframes,Support for multiple dataframes,victor-hugo-dc,45403940,closed,False,2023-05-27T20:12:20+00:00,2023-06-03T01:08:50+00:00,2023-05-28T21:13:07+00:00,2023-05-28T21:13:07+00:00,be4c717a9b0f07b88ee2aed729b637413df28a51,unknown,438,80,9,11,0,1,,,
+sinaptik-ai/pandas-ai,1367917631,185,Feature/refactor docs,"A refactor of Documentation to incorporate Google Style docstrings.
+
+The whole package is refactored using Google Style `docstring`. Also included is the documentation for the `prompts` and `pai` modules. 
+
+- [ ] closes #183  
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [ ] Review & Merge 
+- [x] Complete package Re-factored 
+- [x] Notebooks placeholder added
+- [x] Getting Started Notebook added 
+
+> Only edited the docstring parts of the files.
+
+",amjadraza,18181323,closed,False,2023-05-28T10:56:42+00:00,2023-05-29T12:50:53+00:00,2023-05-29T12:50:53+00:00,2023-05-29T12:50:52+00:00,f32aeba6f7b75712773fe6707b38f042ce28c0ea,unknown,768,181,31,14,1,3,,,
+sinaptik-ai/pandas-ai,1367993072,186,docs: update dependency install instructions,"Running `poetry install` does not install all dependencies required in tests. 
+Update instructions in CONTRIBUTING.md to include `--all-extras` flag. 
+Closes #182
+",jonbiemond,101326085,closed,False,2023-05-28T13:52:48+00:00,2023-05-28T21:34:05+00:00,2023-05-28T21:15:59+00:00,2023-05-28T21:15:59+00:00,06796f1538d0691498a98be4cbba7599ee6fda85,unknown,1,1,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1368170851,188,feat: add save_charts,"Add save_charts argument to init call of PandasAi.
+When set to True, a call to `plt.save_fig()` is injected before any calls to `plt.show_plot()` in the run code.
+Charts are saved to `exports/charts/<current date>` with a unique name.
+
+- [x] closes #174
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Integration tested using a modified example
+- [x] Integration tested using a Jupyter Notebook
+",jonbiemond,101326085,closed,False,2023-05-28T21:26:40+00:00,2023-05-29T13:05:17+00:00,2023-05-29T12:47:00+00:00,2023-05-29T12:47:00+00:00,7ae7f1d11c828cde4b6720f44b2d9b6376d79e1e,unknown,178,3,4,7,2,2,gventuri,,
+sinaptik-ai/pandas-ai,1371374909,193,feat: whitelist of optional dependencies,"Fixes bug by raising an exception when generated code contains an import for a library that isn't whitelisted.
+Adds a feature to include a whitelist of optional dependencies. When generated code contains an import for a library on the optional whitelist but is not installed, raise an ImportError with an instructional message. 
+
+- [x] 🐛 Raise exception when generated code contains an import for a library that isn't whitelisted.
+- [x] 🚀 Add whitelist of optional dependencies.
+- [x] closes #191 
+- [x]  closes #42
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",jonbiemond,101326085,closed,False,2023-05-31T02:32:56+00:00,2023-06-01T15:07:35+00:00,2023-06-01T09:39:53+00:00,2023-06-01T09:39:52+00:00,495f4c441ecfdd09982436994dc3dbc2ac2cfe92,unknown,642,97,13,5,0,1,,,
+sinaptik-ai/pandas-ai,1373892099,204,fix: pypi upload repo url,"- [x] closes #202
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+As mentioned in the pypi org [documentation](https://packaging.python.org/en/latest/guides/migrating-to-pypi-org/), the repository URL should be `https://upload.pypi.org/legacy/`
+",sandiemann,36822600,closed,False,2023-06-01T11:29:14+00:00,2023-06-19T12:13:03+00:00,2023-06-01T12:16:30+00:00,2023-06-01T12:16:30+00:00,4d0f98199babb83687ba4360695d92dd4cb764ff,unknown,1,1,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1374594596,206,docs: added cli access instructions,"- [x] related to #169
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+
+@gventuri adding these instructions would help to build & access the CLI tool. 
+
+P.S. also refer to the attached PR",sandiemann,36822600,closed,False,2023-06-01T18:44:24+00:00,2023-06-05T22:37:46+00:00,2023-06-01T22:51:43+00:00,2023-06-01T22:51:43+00:00,55178f873d3b3db6e98d1726a42c7f5b8aa89bc8,unknown,28,2,2,1,0,0,,,
+sinaptik-ai/pandas-ai,1376325504,211,add libs to whitelist,"- [ ] closes #210 
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-06-02T20:46:48+00:00,2023-06-05T22:38:31+00:00,2023-06-05T21:25:47+00:00,2023-06-05T21:25:47+00:00,b5e4bd4a060c01bcec9d8410ca9c45e3a0ff3432,unknown,2,2,1,7,18,2,gventuri,,
+sinaptik-ai/pandas-ai,1376646435,213,Return dataframe,"- [x] closes #201 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+As discussed in #201, when the model returns a data frame, we should return it to the user as a data frame for further operations. 
+Results that have a dataframe (with or without index) will be returned as dataframe instead of a string.
+
+country             gdp  happiness_index
+0   United States  19294482071552             6.94
+1  United Kingdom   2891615567872             7.16
+2          France   2411255037952             6.66
+3         Germany   3435817336832             7.07
+4           Italy   1745433788416             6.38
+5           Spain   1181205135360             6.40
+6          Canada   1607402389504             7.23
+7       Australia   1490967855104             7.22
+",navneetdesai,38139738,closed,False,2023-06-03T04:54:26+00:00,2023-06-15T10:57:10+00:00,2023-06-06T04:20:46+00:00,,a2372b43ed7ee0639ad5e93900d4ae36b0c23a4f,dirty,74,3,3,4,0,3,,,
+sinaptik-ai/pandas-ai,1376718537,214,fix: save charts dir path on unix,"- [ ] closes #212
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+The issue is due to the file separator because on windows, the separator is a backslash `\`, while on Unix-based systems it is a forward slash `/`",sandiemann,36822600,closed,False,2023-06-03T07:19:09+00:00,2023-06-04T21:34:16+00:00,2023-06-04T21:34:16+00:00,2023-06-04T21:34:16+00:00,8fd0ce76b699c8c4c0060743caf4e0c48aafb864,unknown,1,1,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1377514681,215,chore: add save_charts documentation and format docs,"chore: fix typehints
+fix: only create save_chart directory if there are calls to plt.show()
+
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",jonbiemond,101326085,closed,False,2023-06-04T03:42:41+00:00,2023-06-05T01:50:48+00:00,2023-06-04T22:15:08+00:00,2023-06-04T22:15:08+00:00,f22f5bb8799c09b017c952f65a549cfe4ee9fda8,unknown,54,25,3,2,0,0,,,
+sinaptik-ai/pandas-ai,1377644919,218,fixed documentation,"- [x] closes #217 (Replace xxxx with the GitHub issue number)
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",kishore25kumar,3241357,closed,False,2023-06-04T09:04:54+00:00,2023-06-04T22:11:58+00:00,2023-06-04T22:11:57+00:00,2023-06-04T22:11:57+00:00,e01b790eeadd86735bf3db52c731209a67cc2ac3,unknown,1,1,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1377899555,222,Update README.md,"fixed examples
+",prtolem,66413287,closed,False,2023-06-04T19:30:01+00:00,2023-06-04T21:16:22+00:00,2023-06-04T21:16:22+00:00,,8c72ee669cf9886d798b52f0e49ff0c3356bdd46,unknown,4,4,1,1,0,1,,,
+sinaptik-ai/pandas-ai,1377996489,223,Added example notebook for doing row-wise operation and return a dataframe ,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",MATRIX4284,20940800,closed,False,2023-06-04T23:46:29+00:00,2023-07-21T23:39:42+00:00,2023-07-21T23:39:42+00:00,,75cc71e55b050cb038be36792fa79b98807b54b1,unknown,339,0,1,2,0,0,,,
+sinaptik-ai/pandas-ai,1378226596,225,fix: remove matplotlib from whitelisted libraries,"`matplotlib` is added to the environment passed to `exec()`, it should not also be imported in the run code.
+Remove `matplotlib` from `WHITELISTED_LIBRARIES`, so imports are removed from the generated code.
+Add ENVIRONMENT_DEFAULTS variable to consolidate logic.
+
+- [x] closes #224 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Integration test.
+",jonbiemond,101326085,closed,False,2023-06-05T04:10:58+00:00,2023-06-06T00:33:35+00:00,2023-06-05T21:42:25+00:00,2023-06-05T21:42:25+00:00,95f74adc6b9808ccff29e808d30bfdf840161956,unknown,33,4,3,2,2,0,,,
+sinaptik-ai/pandas-ai,1378855677,227,fix: replace path string with os.path.join,"Replace hardcoded, Windows based, file path with a call to `os.path.join`. This way the path is valid on Unix machines as well.
+
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Integration test on Windows machine
+- [ ] Integration test on Unix machine
+
+Note: I don't have easy access to a Unix environment. If someone wouldn't mind doublechecking that would be helpful.
+",jonbiemond,101326085,closed,False,2023-06-05T11:57:34+00:00,2023-06-06T00:33:46+00:00,2023-06-05T19:35:15+00:00,,baad75e5ac06f833d472744ad651418491019d63,unknown,2,3,1,1,0,1,,,
+sinaptik-ai/pandas-ai,1379085135,229,fix: save chart path on unix,"- [x] closes #231  (Replace xxxx with the GitHub issue number)
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+
+The old [PR](https://github.com/gventuri/pandas-ai/pull/214) is closed ",sandiemann,36822600,closed,False,2023-06-05T14:08:39+00:00,2023-06-05T22:38:54+00:00,2023-06-05T21:49:58+00:00,2023-06-05T21:49:58+00:00,eaa78ea81e035646e7c7f57c18b5dcec266b293e,unknown,6,8,1,3,0,0,,,
+sinaptik-ai/pandas-ai,1379945004,232,fix: fix cache tests,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",gventuri,15671184,closed,False,2023-06-06T00:02:05+00:00,2023-06-17T23:21:19+00:00,2023-06-06T00:04:07+00:00,2023-06-06T00:04:07+00:00,01fcadb5b0adf394967f3c419e4e1deb0857394e,unknown,2,2,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1379982756,233,fix: revert pandas dependency to 1.5.3,"LLMs may not be trained on more recent versions of `pandas`, and could generate code that is deprecated since 2.0.0
+
+- [x] closes #226
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Integration test
+",jonbiemond,101326085,closed,False,2023-06-06T01:00:35+00:00,2023-06-06T01:11:13+00:00,2023-06-06T01:03:35+00:00,2023-06-06T01:03:35+00:00,4fc3c02a27ea635558a364cc7c0203618a0e543b,unknown,32,63,2,1,0,0,,,
+sinaptik-ai/pandas-ai,1380003108,234,feat: unique chart folder names,"Use a UUID to generate unique folders for each run of PandasAI to save charts to.
+Add the UUID as a prompt id attribute to PandasAI, and open up with an interface in `last_prompt_id()`.
+This allows projects built on top of PandasAI to easily retrieve charts generated.
+
+- [x] closes #230 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).",jonbiemond,101326085,closed,False,2023-06-06T01:33:13+00:00,2023-06-07T00:28:10+00:00,2023-06-06T22:08:59+00:00,2023-06-06T22:08:59+00:00,305af9b009b0f633f9d9ae9bfb7ff39a73e4ddb0,unknown,42,11,4,3,3,1,,,
+sinaptik-ai/pandas-ai,1380360073,236,Centered the Images in the Readme.md,Centered the Images in the Readme.md for Aesthetic Purposes.,muhammad-mobeen,70343951,closed,False,2023-06-06T07:57:15+00:00,2023-06-12T21:59:18+00:00,2023-06-12T21:59:17+00:00,,ad90bf65166b412d936d419eee204251c579e84c,unknown,6,2,1,2,0,2,,,
+sinaptik-ai/pandas-ai,1380601588,237,Optional installs instructions,"Playing around with Google PaLM, I run into an exception due to the missing dependency (I forgot we made it optional😄). I realized we never provided instructions on how to install it ""since the beginning"".  ",mspronesti,44113430,closed,False,2023-06-06T10:30:38+00:00,2023-06-07T09:47:17+00:00,2023-06-07T09:47:17+00:00,2023-06-07T09:47:17+00:00,2de30b257aab32af6c603e8fedb5cec35aeae0b2,unknown,9,1,1,2,0,7,,,
+sinaptik-ai/pandas-ai,1381161321,240,🐛 Add pd eval to cell value to correct bool evaluation,"- Closes #209 
+- Tests added and passed.
+- All code check passed.
+",alejohz,109233596,closed,False,2023-06-06T16:28:14+00:00,2023-06-07T01:05:39+00:00,2023-06-06T22:19:52+00:00,2023-06-06T22:19:52+00:00,68b6b9303eea793119017c13276ff4da8805d0b5,unknown,24,9,2,1,0,1,,,
+sinaptik-ai/pandas-ai,1381463599,244,fix: update cache.destroy() to remove all files,"Move cache file save directory to separate cache folder
+Use glob to identify and remove all files related to the Cache instance
+
+- [x] closes #243 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Test on Unix based system
+",jonbiemond,101326085,closed,False,2023-06-06T20:21:44+00:00,2023-06-07T00:27:58+00:00,2023-06-06T22:06:04+00:00,2023-06-06T22:06:04+00:00,a930ab2424626636cc74a1712698ff5bf9886e02,unknown,13,6,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1381661925,246,chore: update .gitignore with cache and exports directories,"Add cache and exports directories to .gitignore file.
+
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",jonbiemond,101326085,closed,False,2023-06-06T23:21:00+00:00,2023-06-07T00:27:52+00:00,2023-06-06T23:23:27+00:00,2023-06-06T23:23:27+00:00,5045acf7576401a6a3f0dd726a96d8e9877929a3,unknown,3,3,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1381834941,248,test: remove private method assertions,"- Refactor tests closer to the interface.
+- Remove unused imports and other linting.
+- Resolve type hint errors.
+- Add test for reading cache from file.
+
+Motivation: https://softwareengineering.stackexchange.com/questions/380287/why-is-unit-testing-private-methods-considered-as-bad-practice
+
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).",jonbiemond,101326085,closed,False,2023-06-07T03:19:39+00:00,2023-06-08T00:10:00+00:00,2023-06-08T00:06:47+00:00,2023-06-08T00:06:47+00:00,c0097e2c4b110be042ad7725339f4551fc53f329,unknown,66,49,14,2,2,0,gventuri,,
+sinaptik-ai/pandas-ai,1382752078,250,👷 Update pre commit hook and project dev requirements for ruff,"- Closes #247
+",alejohz,109233596,closed,False,2023-06-07T14:00:11+00:00,2023-06-09T15:40:45+00:00,2023-06-09T15:21:37+00:00,2023-06-09T15:21:37+00:00,3a82e9669897d5799da026119eb9946c32c59d38,unknown,144,361,27,9,4,12,,,
+sinaptik-ai/pandas-ai,1384890158,258,chore: refactor log method to use logging module,"- [ ] closes #255
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",sandiemann,36822600,closed,False,2023-06-08T17:44:07+00:00,2023-06-19T12:13:01+00:00,2023-06-08T22:32:39+00:00,2023-06-08T22:32:39+00:00,fdddf36a8810e7cb62bf2033a9e9b45e489ee739,unknown,21,3,2,5,3,2,,,
+sinaptik-ai/pandas-ai,1385908321,261,Update base.py,"- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [ ] Tests added and passed if fixing a bug or adding a new feature
+- [ ] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",fryfry33,133123951,closed,False,2023-06-09T10:03:38+00:00,2023-06-09T10:04:10+00:00,2023-06-09T10:04:05+00:00,,079338377c5038beeb05929b6722aa6448436c55,unknown,26,12,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1387204212,268,feat: move chart dir output to log,"Return the chart save directory to the user using the logging framework instead of adding a print statement to the run code. When `verbose=False`, print directory to the console.
+
+- [x] Closes #267 
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).",jonbiemond,101326085,closed,False,2023-06-10T16:40:24+00:00,2023-06-10T21:23:34+00:00,2023-06-10T21:23:34+00:00,2023-06-10T21:23:34+00:00,45f0ee1b6a26e7901ad8591c0a7091bf42706922,unknown,11,8,3,1,0,0,,,
+sinaptik-ai/pandas-ai,1387638020,270,Update __init__.py,"Converted the dataframe to json for lower token usage.
+
+- [ ] closes #xxxx (Replace xxxx with the GitHub issue number)
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",soumya1729,32342488,closed,False,2023-06-11T18:42:11+00:00,2023-06-25T08:59:06+00:00,2023-06-25T08:59:05+00:00,2023-06-25T08:59:05+00:00,09a41f07c4402a39660634f331825b3f6b14fcf6,unknown,11,8,2,3,0,3,,,
+sinaptik-ai/pandas-ai,1387680635,272,fix: add whitelisted imports to exec environment,"- Consolidate WHITELISTED_OPTIONAL_LIBRARIES into WHITELISTED_LIBRARIES
+- Add tests for different import scenarios
+- Update clean_code() to remove all imports
+- Refactor _is_unsafe_import() to _check_imports()
+
+- [x] closes #253, #245
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",jonbiemond,101326085,closed,False,2023-06-11T20:55:12+00:00,2023-06-12T15:29:56+00:00,2023-06-12T15:18:18+00:00,2023-06-12T15:18:18+00:00,ff69d3f8b24c2a0f5fbb58de96b7484c826a331c,unknown,215,151,10,5,3,0,,,
+sinaptik-ai/pandas-ai,1389331587,276,fix: remove non-optional dependencies from VERSIONS,"The package manager enforces the versions of non-optional dependencies.
+
+- [x] closes #275
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+- [x] Plot charts integration test
+",jonbiemond,101326085,closed,False,2023-06-12T19:44:00+00:00,2023-06-12T23:18:44+00:00,2023-06-12T21:31:30+00:00,2023-06-12T21:31:30+00:00,158326b1004a55947a5c0ddf4d3b6f317451e3c9,unknown,0,2,1,1,0,0,,,
+sinaptik-ai/pandas-ai,1394680963,290,fix: type hinting error,"Fix type hint for `data_frame` parameter across methods of `PandasAI` class. According to [L275 of `__init__.py`](https://github.com/gventuri/pandas-ai/blob/main/pandasai/__init__.py#L275) the parameter can be a list of `DataFrame` objects.
+
+- [x] Tests added and passed if fixing a bug or adding a new feature
+- [x] All [code checks passed](https://github.com/gventuri/pandas-ai#contributing).
+",nautics889,31508183,closed,False,2023-06-15T19:48:05+00:00,2023-07-03T16:46:18+00:00,2023-06-15T22:59:28+00:00,2023-06-15T22:59:28+00:00,d6cd30c439d404def0dc049cb268dfcc9f6cebcd,unknown,3,3,1,1,4,0,,,

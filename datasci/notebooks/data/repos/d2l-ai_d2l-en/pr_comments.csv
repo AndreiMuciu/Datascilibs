@@ -1,0 +1,632 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+d2l-ai/d2l-en,1476022738,1295075663,astonzhang,22279212,2023-08-15T20:26:23+00:00,2023-08-15T20:26:23+00:00,please revert this for now,False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295075830,astonzhang,22279212,2023-08-15T20:26:33+00:00,2023-08-15T20:26:33+00:00,remember to change it back :),False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295091658,AnirudhDagar,23621655,2023-08-15T20:42:25+00:00,2023-08-15T20:42:25+00:00,yes ofc!,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295191759,AnirudhDagar,23621655,2023-08-15T22:18:06+00:00,2023-08-15T22:18:06+00:00,done,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295256249,AnirudhDagar,23621655,2023-08-16T00:14:10+00:00,2023-08-16T00:14:10+00:00,done,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295075663,astonzhang,22279212,2023-08-15T20:26:23+00:00,2023-08-15T20:26:23+00:00,please revert this for now,True,d2l/__init__.py,,"@@ -9,4 +9,4 @@
+ 
+ """"""
+ 
+-__version__ = ""1.0.0-beta0""
++__version__ = ""1.0.0""",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295075830,astonzhang,22279212,2023-08-15T20:26:33+00:00,2023-08-15T20:26:33+00:00,remember to change it back :),True,.github/workflow_scripts/utils.sh,,"@@ -1,7 +1,7 @@
+ #!/bin/bash
+ 
+ # By default, all builds are cached
+-DISABLE_CACHE=false  # Eg. 'true' or 'false'
++DISABLE_CACHE=true  # Eg. 'true' or 'false'",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295091658,AnirudhDagar,23621655,2023-08-15T20:42:25+00:00,2023-08-15T20:42:25+00:00,yes ofc!,True,.github/workflow_scripts/utils.sh,,"@@ -1,7 +1,7 @@
+ #!/bin/bash
+ 
+ # By default, all builds are cached
+-DISABLE_CACHE=false  # Eg. 'true' or 'false'
++DISABLE_CACHE=true  # Eg. 'true' or 'false'",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295191759,AnirudhDagar,23621655,2023-08-15T22:18:06+00:00,2023-08-15T22:18:06+00:00,done,True,d2l/__init__.py,,"@@ -9,4 +9,4 @@
+ 
+ """"""
+ 
+-__version__ = ""1.0.0-beta0""
++__version__ = ""1.0.0""",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1476022738,1295256249,AnirudhDagar,23621655,2023-08-16T00:14:10+00:00,2023-08-16T00:14:10+00:00,done,True,.github/workflow_scripts/utils.sh,,"@@ -1,7 +1,7 @@
+ #!/bin/bash
+ 
+ # By default, all builds are cached
+-DISABLE_CACHE=false  # Eg. 'true' or 'false'
++DISABLE_CACHE=true  # Eg. 'true' or 'false'",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1387838350,1226593981,AnirudhDagar,23621655,2023-06-12T12:30:24+00:00,2023-06-12T12:32:11+00:00,"```suggestion
+        return jnp.maximum(1 - d2l.abs(x), 0)
+
+```
+
+Add an extra line to better format code.",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1387838350,1226593981,AnirudhDagar,23621655,2023-06-12T12:30:24+00:00,2023-06-12T12:32:11+00:00,"```suggestion
+        return jnp.maximum(1 - d2l.abs(x), 0)
+
+```
+
+Add an extra line to better format code.",True,chapter_attention-mechanisms-and-transformers/attention-pooling.md,,"@@ -90,10 +90,7 @@ if tab.selected('tensorflow'):
+ if tab.selected('jax'):
+     def epanechikov(x):
+         return jnp.maximum(1 - d2l.abs(x), 0)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1360470543,1202084438,AnirudhDagar,23621655,2023-05-23T11:04:22+00:00,2023-05-23T11:04:46+00:00,"```suggestion
+A good language model is able to predict with high-accuracy
+the most probable tokens that follow a given context.
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1360470543,1202335538,cx-olquinjica,50518346,2023-05-23T13:28:56+00:00,2023-05-23T13:29:48+00:00,That looks much better @AnirudhDagar ,False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1360470543,1202084438,AnirudhDagar,23621655,2023-05-23T11:04:22+00:00,2023-05-23T11:04:46+00:00,"```suggestion
+A good language model is able to predict with high-accuracy
+the most probable tokens that follow a given context.
+```",True,chapter_recurrent-neural-networks/language-model.md,,"@@ -171,8 +171,8 @@ in the rest of the chapter.
+ 
+ Next, let's discuss about how to measure the language model quality, which will be used to evaluate our models in the subsequent sections.
+ One way is to check how surprising the text is.
+-A good language model is able to predict with
+-high-accuracy tokens that what we will see next.
++A good language model is able to predict tokens with
++high accuracy. That what we will see next.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1360470543,1202335538,cx-olquinjica,50518346,2023-05-23T13:28:56+00:00,2023-05-23T13:29:48+00:00,That looks much better @AnirudhDagar ,True,chapter_recurrent-neural-networks/language-model.md,,"@@ -171,8 +171,8 @@ in the rest of the chapter.
+ 
+ Next, let's discuss about how to measure the language model quality, which will be used to evaluate our models in the subsequent sections.
+ One way is to check how surprising the text is.
+-A good language model is able to predict with
+-high-accuracy tokens that what we will see next.
++A good language model is able to predict tokens with
++high accuracy. That what we will see next.",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1241812306,1830258930,yunggiras,160676660,2024-11-06T00:56:07+00:00,2024-11-06T00:56:13+00:00,.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1241812306,1830258930,yunggiras,160676660,2024-11-06T00:56:07+00:00,2024-11-06T00:56:13+00:00,.,True,chapter_hyperparameter-optimization/hyperopt-intro.md,42.0,"@@ -258,7 +259,7 @@ While random search is very simple, it is the better alternative to grid
+ search, which simply evaluates a fixed set of hyperparameters. Random search
+ somewhat mitigates the curse of dimensionality :cite:`bellman-science66`, and
+ can be far more efficient than grid search if the criterion most strongly
+-depends on a small subset of the hyperparameters.
++depends on a small subset of the hyperparameters :cite:`bergstra-jmlr12a`.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1223034228,1092307411,astonzhang,22279212,2023-01-31T18:08:37+00:00,2023-01-31T18:08:53+00:00,:citet:,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1223034228,1092307411,astonzhang,22279212,2023-01-31T18:08:37+00:00,2023-01-31T18:08:53+00:00,:citet:,True,chapter_hyperparameter-optimization/hyperopt-intro.md,,"@@ -272,8 +273,8 @@ depends on a small subset of the hyperparameters.
+     3. Give a rough estimate of the number of floating point values you need to store during a forward pass on this graph. Hint: FashionMNIST has 60000 cases. Assume the required memory is dominated by the activations after each layer, and look up the layer widths in :numref:`sec_mlp-implementation`.
+     5. Apart from the sheer amount of compute and storage required, what other issues would gradient-based hyperparameter optimization run into? Hint: Re-read about vanishing and exploding gradients in :numref:`sec_numerical_stability`.
+     6. *Advanced*: Read :cite:`maclaurin-icml15` for an elegant (yet still somewhat unpractical) approach to gradient-based HPO.
+-3. Grid search is another HPO baseline, where we define an equi-spaced grid for each hyperparameter, then iterate over the (combinatorial) Cartesian product in order to suggest configurations.
+-    1. We stated above that random search can be much more efficient than grid search for HPO on a sizable number of hyperparameters, if the criterion most strongly depends on a small subset of the hyperparameters. Why is this? Hint: Read :cite:`bergstra2011algorithms`.
++3. Grid search is another HPO baseline, where we define an equispaced grid for each hyperparameter, then iterate over the (combinatorial) Cartesian product in order to suggest configurations.
++    1. We stated above that random search can be much more efficient than grid search for HPO on a sizable number of hyperparameters, if the criterion most strongly depends on a small subset of the hyperparameters. Why is this? Hint: Read :cite:`bergstra-jmlr12a`.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1167922394,1051498850,astonzhang,22279212,2022-12-17T23:42:46+00:00,2022-12-17T23:44:30+00:00,"```suggestion
+automatic differentiation 
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1167922394,1051498855,astonzhang,22279212,2022-12-17T23:43:06+00:00,2022-12-17T23:44:30+00:00,"```suggestion
+works backwards through this graph
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1167922394,1051498850,astonzhang,22279212,2022-12-17T23:42:46+00:00,2022-12-17T23:44:30+00:00,"```suggestion
+automatic differentiation 
+```",True,chapter_preliminaries/autograd.md,,"@@ -24,13 +24,13 @@ the framework builds a *computational graph*
+ that tracks how each value depends on others.
+ To calculate derivatives, 
+ automatic differentiation packages ",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1167922394,1051498855,astonzhang,22279212,2022-12-17T23:43:06+00:00,2022-12-17T23:44:30+00:00,"```suggestion
+works backwards through this graph
+```",True,chapter_preliminaries/autograd.md,,"@@ -24,13 +24,13 @@ the framework builds a *computational graph*
+ that tracks how each value depends on others.
+ To calculate derivatives, 
+ automatic differentiation packages 
+-then work backwards through this graph
++then works backwards through this graph",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047626768,astonzhang,22279212,2022-12-13T19:13:51+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+It provides convenient features to handle neural networks. For example, it handles the model parameters, provides the `nn.compact` decorator to simplify code, invokes the `__call__` method among other things.
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047627131,astonzhang,22279212,2022-12-13T19:14:12+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+Here we also redirect `__call__` to the `forward` method. We do this to make our code more similar to other framework implementations.
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047628044,astonzhang,22279212,2022-12-13T19:15:03+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+            # normalization section
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047626768,astonzhang,22279212,2022-12-13T19:13:51+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+It provides convenient features to handle neural networks. For example, it handles the model parameters, provides the `nn.compact` decorator to simplify code, invokes the `__call__` method among other things.
+```",True,chapter_linear-regression/oo-design.md,,"@@ -292,6 +292,12 @@ You may notice that `Module` is a subclass of `tf.keras.Model`, the base class o
+ It provides convenient features to handle neural networks. For example, it invokes the `call` method in the built-in `__call__` method. Here we redirect `call` to the `forward` function, saving its arguments as a class attribute. We do this to make our code more similar to other framework implementations.
+ :end_tab:
+ 
++:begin_tab:`jax`
++You may notice that `Module` is a subclass of `linen.Module`, the base class of neural networks in Flax.
++It provides convenient features to handle neural networks. For example, it handles the model parameters, provides `nn.compact` decorator to simplify code, invokes the `__call__` method among other things.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047627131,astonzhang,22279212,2022-12-13T19:14:12+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+Here we also redirect `__call__` to the `forward` method. We do this to make our code more similar to other framework implementations.
+```",True,chapter_linear-regression/oo-design.md,,"@@ -292,6 +292,12 @@ You may notice that `Module` is a subclass of `tf.keras.Model`, the base class o
+ It provides convenient features to handle neural networks. For example, it invokes the `call` method in the built-in `__call__` method. Here we redirect `call` to the `forward` function, saving its arguments as a class attribute. We do this to make our code more similar to other framework implementations.
+ :end_tab:
+ 
++:begin_tab:`jax`
++You may notice that `Module` is a subclass of `linen.Module`, the base class of neural networks in Flax.
++It provides convenient features to handle neural networks. For example, it handles the model parameters, provides `nn.compact` decorator to simplify code, invokes the `__call__` method among other things.
++Here we also redirect `__call__` to the `forward` function. We do this to make our code more similar to other framework implementations.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1163182055,1047628044,astonzhang,22279212,2022-12-13T19:15:03+00:00,2022-12-13T19:15:52+00:00,"```suggestion
+            # normalization section
+```",True,chapter_linear-regression/oo-design.md,,"@@ -369,13 +388,17 @@ class Trainer(d2l.HyperParameters):  #@save
+             else:
+                 batch_stats = {}
+ 
+-            # Flax uses optax under the hood for a single state obj TrainState
+-            # (more will be discussed later in the batch normalization section)
++            # Flax uses optax under the hood for a single state obj TrainState.
++            # More will be discussed later in the dropout and batch
++            # normalization section.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1158259505,1045189590,astonzhang,22279212,2022-12-11T08:08:29+00:00,2022-12-11T08:08:30+00:00,"```suggestion
+$||x-x_1||$, then the function values will be highly correlated. We can visualize the process of determining $f(x)$ from $f(x_1)$ both in the space of functions, and in the joint distribution over $f(x_1), f(x)$. Let's initially consider an $x$ such that $k(x,x_1) = 0.9$, and $k(x,x)=1$, meaning that the value of $f(x)$ is moderately correlated with the value of $f(x_1)$. In the joint distribution, the contours of constant probability will be relatively narrow ellipses.
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1158259505,1045189590,astonzhang,22279212,2022-12-11T08:08:29+00:00,2022-12-11T08:08:30+00:00,"```suggestion
+$||x-x_1||$, then the function values will be highly correlated. We can visualize the process of determining $f(x)$ from $f(x_1)$ both in the space of functions, and in the joint distribution over $f(x_1), f(x)$. Let's initially consider an $x$ such that $k(x,x_1) = 0.9$, and $k(x,x)=1$, meaning that the value of $f(x)$ is moderately correlated with the value of $f(x_1)$. In the joint distribution, the contours of constant probability will be relatively narrow ellipses.
+```",True,chapter_gaussian-processes/gp-intro.md,,"@@ -124,17 +126,28 @@ The off-diagonal expression $k(x,x_1) = k(x_1,x)$
+ tells us how correlated the function values will be --- how strongly determined $f(x)$
+ will be from $f(x_1)$. 
+ We've seen already that if we use a large length-scale, relative to the distance between $x$ and $x_1$, 
+-$||x-x_1||$, then the function values will be highly correlated. We can visualize the process of determining $f(x)$ from $f(x_1)$ both in the space of functions, and in the joint distribution over $f(x_1), f(x)$. Let's initially consider an $x$ such that $k(x,x_1) = 0.7$, and $k(x,x)=1$, meaning that the value of $f(x)$ is moderately correlated with the value of $f(x_1)$. In the joint distribution, the contours of constant probability will be relatively narrow ellipses.
++$||x-x_1||$, then the function values will be highly correlated. We can visualize the process of determining $f(x)$ from $f(x_1)$ both in the space of functions, and in the joint distribution over $f(x_1), f(x)$. Let's initially consider an $x$ such that $k(x,x_1) = 0.$9, and $k(x,x)=1$, meaning that the value of $f(x)$ is moderately correlated with the value of $f(x_1)$. In the joint distribution, the contours of constant probability will be relatively narrow ellipses.",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044661642,astonzhang,22279212,2022-12-09T17:17:29+00:00,2022-12-09T17:17:29+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12092)
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044661870,astonzhang,22279212,2022-12-09T17:17:47+00:00,2022-12-09T17:17:47+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12093)
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044662265,astonzhang,22279212,2022-12-09T17:18:19+00:00,2022-12-09T17:18:20+00:00,"Need this ID
+
+```suggestion
+[Discussions](https://discuss.d2l.ai/t/???)
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044662403,astonzhang,22279212,2022-12-09T17:18:31+00:00,2022-12-09T17:18:31+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12094)
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044661642,astonzhang,22279212,2022-12-09T17:17:29+00:00,2022-12-09T17:17:29+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12092)
+```",True,chapter_hyperparameter_optimization/hyperopt-api.md,,"@@ -253,10 +253,17 @@ quickly outperforms random search afterwards.
+ ![Example any-time performance plot to compare two algorithms A and B.](../img/example_anytime_performance.svg)
+ :label:`example_anytime_performance`
+ 
+-
+ ## Summary
+ 
+ This section laid out a simple, yet flexible interface to implement various HPO
+ algorithms that we will look at in this chapter. Similar interfaces can be found
+ in popular open-source HPO frameworks. We also looked at how we can compare HPO
+ algorithms, and potential pitfall one needs to be aware. 
++
++## Exercises
++
++
++
++:begin_tab:`pytorch`
++[Discussions](https://discuss.d2l.ai/t/hyperparameter-optimization-api/12092)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044661870,astonzhang,22279212,2022-12-09T17:17:47+00:00,2022-12-09T17:17:47+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12093)
+```",True,chapter_hyperparameter_optimization/rs-async.md,,"@@ -217,3 +218,8 @@ become available, and, hence, ensures that all workers are busy at any point in
+ time. While random search is easy to distribute asynchronously and does not
+ require any change of the actual algorithm, other methods require some additional
+ modifications.
++
++
++:begin_tab:`pytorch`
++[Discussions](https://discuss.d2l.ai/t/asynchronous-random-search/12093)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044662265,astonzhang,22279212,2022-12-09T17:18:19+00:00,2022-12-09T17:18:20+00:00,"Need this ID
+
+```suggestion
+[Discussions](https://discuss.d2l.ai/t/???)
+```",True,chapter_hyperparameter_optimization/sh-async.md,,"@@ -229,3 +231,8 @@ configurations as quickly as possible to the next rung level, even if this means
+ promoting some wrong ones. In practice, this usually does not hurt much, and the
+ gains of asynchronous versus synchronous scheduling are usually much higher
+ than the loss of the suboptimal decision making.
++
++
++:begin_tab:`pytorch`
++[Discussions](https://discuss.d2l.ai/t/asynchronous-successive-halving/???)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1155858064,1044662403,astonzhang,22279212,2022-12-09T17:18:31+00:00,2022-12-09T17:18:31+00:00,"```suggestion
+[Discussions](https://discuss.d2l.ai/t/12094)
+```",True,chapter_hyperparameter_optimization/sh-intro.md,,"@@ -262,3 +262,8 @@ computation of the HPO instead of just reducing the wall-clock time.
+ 
+ We implemented and evaluated successive halving, a simple yet efficient
+ multi-fidelity HPO algorithm.
++
++
++:begin_tab:`pytorch`
++[Discussions](https://discuss.d2l.ai/t/multi-fidelity-hyperparameter-optimization/12094)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043886750,astonzhang,22279212,2022-12-08T22:33:35+00:00,2022-12-08T22:33:36+00:00,"```suggestion
+from d2l import jax as d2l  # Use Jax as the backend
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043892846,astonzhang,22279212,2022-12-08T22:43:29+00:00,2022-12-08T22:43:30+00:00,"```suggestion
+    # Each column/row corresponds to each query/key
+    k = d2l.astype(kernel(dists), d2l.float32)
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043894427,astonzhang,22279212,2022-12-08T22:46:15+00:00,2022-12-08T22:46:15+00:00,"```suggestion
+x = jax.random.normal(key1, (10,))  # Dummy input
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043894507,astonzhang,22279212,2022-12-08T22:46:23+00:00,2022-12-08T22:46:23+00:00,"```suggestion
+params = net.init(key2, x)  # Initialization call
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043912799,astonzhang,22279212,2022-12-08T23:20:08+00:00,2022-12-08T23:20:09+00:00,"```suggestion
+# Any call of a random function in JAX requires a key to be 
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043913160,astonzhang,22279212,2022-12-08T23:20:57+00:00,2022-12-08T23:20:57+00:00,"```suggestion
+# JAX arrays are immutable. `jax.numpy.ndarray.at` index
+# update operators create a new array with the corresponding
+# modifications made
+```",False,,,,1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043886750,astonzhang,22279212,2022-12-08T22:33:35+00:00,2022-12-08T22:33:36+00:00,"```suggestion
+from d2l import jax as d2l  # Use Jax as the backend
+```",True,d2l/__init__.py,,"@@ -5,6 +5,7 @@
+ from d2l import mxnet as d2l  # Use MXNet as the backend
+ from d2l import torch as d2l  # Use PyTorch as the backend
+ from d2l import tensorflow as d2l  # Use TensorFlow as the backend
++from d2l import jax as d2l # Use Jax as the backend",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043892846,astonzhang,22279212,2022-12-08T22:43:29+00:00,2022-12-08T22:43:30+00:00,"```suggestion
+    # Each column/row corresponds to each query/key
+    k = d2l.astype(kernel(dists), d2l.float32)
+```",True,chapter_attention-mechanisms-and-transformers/attention-pooling.md,,"@@ -122,26 +138,32 @@ Recall attention pooling in :eqref:`eq_attention_pooling`. Let each validation f
+ %%tab all
+ def nadaraya_watson(x_train, y_train, x_val, kernel):
+     dists = d2l.reshape(x_train, (-1, 1)) - d2l.reshape(x_val, (1, -1))
+-    k = kernel(dists)  # Each column/row corresponds to each query/key
+-    attention_w = k / k.sum(0)  # Normalization over keys for each query
++    k = d2l.astype(kernel(dists), d2l.float32)  # Each column/row corresponds to each query/key",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043894427,astonzhang,22279212,2022-12-08T22:46:15+00:00,2022-12-08T22:46:15+00:00,"```suggestion
+x = jax.random.normal(key1, (10,))  # Dummy input
+```",True,chapter_builders-guide/use-gpu.md,,"@@ -434,17 +508,31 @@ with strategy.scope():
+         tf.keras.layers.Dense(1)])
+ ```
+ 
++```{.python .input}
++%%tab jax
++net = nn.Sequential([nn.Dense(1)])
++
++key1, key2 = jax.random.split(jax.random.PRNGKey(0))
++x = jax.random.normal(key1, (10,)) # Dummy input",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043894507,astonzhang,22279212,2022-12-08T22:46:23+00:00,2022-12-08T22:46:23+00:00,"```suggestion
+params = net.init(key2, x)  # Initialization call
+```",True,chapter_builders-guide/use-gpu.md,,"@@ -434,17 +508,31 @@ with strategy.scope():
+         tf.keras.layers.Dense(1)])
+ ```
+ 
++```{.python .input}
++%%tab jax
++net = nn.Sequential([nn.Dense(1)])
++
++key1, key2 = jax.random.split(jax.random.PRNGKey(0))
++x = jax.random.normal(key1, (10,)) # Dummy input
++params = net.init(key2, x) # Initialization call",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043912799,astonzhang,22279212,2022-12-08T23:20:08+00:00,2022-12-08T23:20:09+00:00,"```suggestion
+# Any call of a random function in JAX requires a key to be 
+```",True,chapter_preliminaries/ndarray.md,,"@@ -295,6 +317,14 @@ torch.randn(3, 4)
+ tf.random.normal(shape=[3, 4])
+ ```
+ 
++```{.python .input}
++%%tab jax
++# any call of a random function in JAX requires a key to be ",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154799550,1043913160,astonzhang,22279212,2022-12-08T23:20:57+00:00,2022-12-08T23:20:57+00:00,"```suggestion
+# JAX arrays are immutable. `jax.numpy.ndarray.at` index
+# update operators create a new array with the corresponding
+# modifications made
+```",True,chapter_preliminaries/ndarray.md,,"@@ -369,6 +404,15 @@ X_var[1, 2].assign(9)
+ X_var
+ ```
+ 
++```{.python .input}
++%%tab jax
++# JAX arrays are immutable
++# `jax.numpy.ndarray.at` index update operators create
++# a new array with the corresponding modifications made",1,1,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043421380,AnirudhDagar,23621655,2022-12-08T14:32:44+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043421628,AnirudhDagar,23621655,2022-12-08T14:32:57+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043422991,AnirudhDagar,23621655,2022-12-08T14:34:14+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043423801,AnirudhDagar,23621655,2022-12-08T14:34:56+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043425443,AnirudhDagar,23621655,2022-12-08T14:36:22+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043427052,AnirudhDagar,23621655,2022-12-08T14:37:48+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043427255,AnirudhDagar,23621655,2022-12-08T14:37:59+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043434700,AnirudhDagar,23621655,2022-12-08T14:44:40+00:00,2022-12-08T14:44:41+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043435224,AnirudhDagar,23621655,2022-12-08T14:45:09+00:00,2022-12-08T14:45:10+00:00,@astonzhang changes made to this file.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043421380,AnirudhDagar,23621655,2022-12-08T14:32:44+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_attention-mechanisms-and-transformers/attention-pooling.md,2.0,"@@ -1,21 +1,22 @@
+-# Attention Pooling
++# Attention Pooling by Similarity",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043421628,AnirudhDagar,23621655,2022-12-08T14:32:57+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_attention-mechanisms-and-transformers/attention-cues.md,1.0,"@@ -1,255 +0,0 @@
+-```{.python .input}",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043422991,AnirudhDagar,23621655,2022-12-08T14:34:14+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_attention-mechanisms-and-transformers/queries-keys-values.md,1.0,"@@ -0,0 +1,138 @@
++```{.python .input  n=1}",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043423801,AnirudhDagar,23621655,2022-12-08T14:34:56+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_convolutional-modern/cnn-design.md,1.0,"@@ -6,140 +6,52 @@ tab.interact_select(['mxnet', 'pytorch', 'tensorflow', 'jax'])
+ # Designing Convolution Network Architectures",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043425443,AnirudhDagar,23621655,2022-12-08T14:36:22+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_multilayer-perceptrons/mlp-implementation.md,4.0,"@@ -65,6 +65,27 @@ one weight matrix and one bias vector.
+ As always, we allocate memory
+ for the gradients of the loss with respect to these parameters.
+ 
++:begin_tab:`mxnet`",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043427052,AnirudhDagar,23621655,2022-12-08T14:37:48+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_recurrent-modern/gru.md,40.0,"@@ -236,18 +236,27 @@ except that the update equations are more complex.
+ %%tab pytorch, mxnet, tensorflow
+ @d2l.add_to_class(GRUScratch)
+ def forward(self, inputs, H=None):
++    if H is None:",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043427255,AnirudhDagar,23621655,2022-12-08T14:37:59+00:00,2022-12-08T14:40:55+00:00,@astonzhang changes made to this file.,True,chapter_recurrent-modern/lstm.md,5.0,"@@ -330,13 +330,27 @@ returns the final state and the stacked outputs as expected.
+ %%tab pytorch, mxnet, tensorflow
+ @d2l.add_to_class(LSTMScratch)
+ def forward(self, inputs, H_C=None):
+-    H, C = None, None if H_C is None else H_C
++    if H_C is None:",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043434700,AnirudhDagar,23621655,2022-12-08T14:44:40+00:00,2022-12-08T14:44:41+00:00,@astonzhang changes made to this file.,True,static/build.yml,6.0,"@@ -8,8 +8,8 @@ dependencies:
+     - -f https://download.pytorch.org/whl/torch_stable.html
+     - torchvision==0.13.0+cu102
+     - -f https://download.pytorch.org/whl/torch_stable.html
+-    - tensorflow==2.9.1
+-    - tensorflow-probability==0.17.0
++    - tensorflow==2.11.0",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1154171499,1043435224,AnirudhDagar,23621655,2022-12-08T14:45:09+00:00,2022-12-08T14:45:10+00:00,@astonzhang changes made to this file.,True,chapter_recurrent-modern/bi-rnn.md,14.0,"@@ -118,7 +118,7 @@ from d2l import jax as d2l
+ from jax import numpy as jnp
+ ```
+ 
+-### Implementation from Scratch
++## Implementation from Scratch",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902074,astonzhang,22279212,2022-12-08T04:03:12+00:00,2022-12-08T04:06:15+00:00,redundant?,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902800,astonzhang,22279212,2022-12-08T04:05:13+00:00,2022-12-08T04:06:15+00:00,redundant?,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902916,astonzhang,22279212,2022-12-08T04:05:38+00:00,2022-12-08T04:06:15+00:00,tab all? tab.selected('jax') is used below,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1043179000,AnirudhDagar,23621655,2022-12-08T10:17:34+00:00,2022-12-08T10:17:34+00:00,What is redundant?,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1043185724,AnirudhDagar,23621655,2022-12-08T10:21:22+00:00,2022-12-08T10:21:22+00:00,"Ohh, i see, somehow a couple of tabs were copied. Turns out the final commit doesn't include the final state of the saved notebook on my local machine. Sorry my bad.",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902074,astonzhang,22279212,2022-12-08T04:03:12+00:00,2022-12-08T04:06:15+00:00,redundant?,True,chapter_recurrent-modern/seq2seq.md,,"@@ -453,11 +527,35 @@ where the last dimension of the tensor stores the predicted token distribution.
+ ```{.python .input}
+ %%tab all
+ decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
+-state = decoder.init_state(encoder(X))
+-outputs, state = decoder(X, state)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
+ 
+ d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
+-if tab.selected('mxnet', 'pytorch'):
++if tab.selected('mxnet', 'pytorch', 'jax'):
++    d2l.check_shape(state, (num_layers, batch_size, num_hiddens))
++if tab.selected('tensorflow'):
++    d2l.check_len(state, num_layers)
++    d2l.check_shape(state[0], (batch_size, num_hiddens))
++```
++
++```{.python .input}
++%%tab all
++decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
++
++d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
++if tab.selected('mxnet', 'pytorch', 'jax'):",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902800,astonzhang,22279212,2022-12-08T04:05:13+00:00,2022-12-08T04:06:15+00:00,redundant?,True,chapter_recurrent-modern/seq2seq.md,,"@@ -522,32 +637,75 @@ of any irrelevant prediction
+ with zero equals to zero.
+ 
+ ```{.python .input}
+-%%tab all
++%%tab pytorch, mxnet, tensorflow
+ @d2l.add_to_class(Seq2Seq)
+ def loss(self, Y_hat, Y):
+     l = super(Seq2Seq, self).loss(Y_hat, Y, averaged=False)
+     mask = d2l.astype(d2l.reshape(Y, -1) != self.tgt_pad, d2l.float32)
+     return d2l.reduce_sum(l * mask) / d2l.reduce_sum(mask)
+ ```
+ 
++```{.python .input}
++%%tab jax
++@d2l.add_to_class(Seq2Seq)
++@partial(jax.jit, static_argnums=(0, 5))
++def loss(self, params, X, Y, state, averaged=False):
++    Y_hat = state.apply_fn({'params': params}, *X,
++                           rngs={'dropout': jax.random.PRNGKey(0)})
++    Y_hat = d2l.reshape(Y_hat, (-1, Y_hat.shape[-1]))
++    Y = d2l.reshape(Y, (-1,))
++    fn = optax.softmax_cross_entropy_with_integer_labels
++    l = fn(Y_hat, Y)
++    mask = d2l.astype(d2l.reshape(Y, -1) != self.tgt_pad, d2l.float32)
++    return d2l.reduce_sum(l * mask) / d2l.reduce_sum(mask), {}
++```
++
+ ## [**Training**]
+ :label:`sec_seq2seq_training`
+ 
+ Now we can [**create and train an RNN encoder-decoder model**]
+ for sequence to sequence learning on the machine translation dataset.
+ 
+ ```{.python .input}
+-%%tab all
++%%tab pytorch, tensorflow, mxnet
++data = d2l.MTFraEng(batch_size=128, num_steps=10)
++embed_size, num_hiddens, num_layers, dropout = 128, 128, 2, 0.2
++if tab.selected('mxnet', 'pytorch', 'jax'):
++    encoder = Seq2SeqEncoder(
++        len(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)
++    decoder = Seq2SeqDecoder(
++        len(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)
++    model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab['<pad>'],
++                    lr=0.01)
++    trainer = d2l.Trainer(max_epochs=50, gradient_clip_val=1, num_gpus=1)
++if tab.selected('tensorflow'):
++    with d2l.try_gpu():
++        encoder = Seq2SeqEncoder(
++            len(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)
++        decoder = Seq2SeqDecoder(
++            len(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)
++        model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab['<pad>'],
++                        lr=0.001)
++    trainer = d2l.Trainer(max_epochs=50, gradient_clip_val=1)
++trainer.fit(model, data)
++```
++
++```{.python .input}
++%%tab jax
+ data = d2l.MTFraEng(batch_size=128) 
+ embed_size, num_hiddens, num_layers, dropout = 256, 256, 2, 0.2
+-if tab.selected('mxnet', 'pytorch'):
++if tab.selected('mxnet', 'pytorch', 'jax'):
+     encoder = Seq2SeqEncoder(
+         len(data.src_vocab), embed_size, num_hiddens, num_layers, dropout)
+     decoder = Seq2SeqDecoder(
+         len(data.tgt_vocab), embed_size, num_hiddens, num_layers, dropout)
++if tab.selected('mxnet', 'pytorch'):
+     model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab['<pad>'],
+                     lr=0.001)
+-    trainer = d2l.Trainer(max_epochs=50, gradient_clip_val=1, num_gpus=1)
++if tab.selected('jax'):
++    model = Seq2Seq(encoder, decoder, tgt_pad=data.tgt_vocab['<pad>'],
++                    lr=0.001, training=True)
++    trainer = d2l.Trainer(max_epochs=70, gradient_clip_val=1, num_gpus=1)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1042902916,astonzhang,22279212,2022-12-08T04:05:38+00:00,2022-12-08T04:06:15+00:00,tab all? tab.selected('jax') is used below,True,chapter_recurrent-modern/seq2seq.md,,"@@ -522,32 +637,75 @@ of any irrelevant prediction
+ with zero equals to zero.
+ 
+ ```{.python .input}
+-%%tab all
++%%tab pytorch, mxnet, tensorflow
+ @d2l.add_to_class(Seq2Seq)
+ def loss(self, Y_hat, Y):
+     l = super(Seq2Seq, self).loss(Y_hat, Y, averaged=False)
+     mask = d2l.astype(d2l.reshape(Y, -1) != self.tgt_pad, d2l.float32)
+     return d2l.reduce_sum(l * mask) / d2l.reduce_sum(mask)
+ ```
+ 
++```{.python .input}
++%%tab jax
++@d2l.add_to_class(Seq2Seq)
++@partial(jax.jit, static_argnums=(0, 5))
++def loss(self, params, X, Y, state, averaged=False):
++    Y_hat = state.apply_fn({'params': params}, *X,
++                           rngs={'dropout': jax.random.PRNGKey(0)})
++    Y_hat = d2l.reshape(Y_hat, (-1, Y_hat.shape[-1]))
++    Y = d2l.reshape(Y, (-1,))
++    fn = optax.softmax_cross_entropy_with_integer_labels
++    l = fn(Y_hat, Y)
++    mask = d2l.astype(d2l.reshape(Y, -1) != self.tgt_pad, d2l.float32)
++    return d2l.reduce_sum(l * mask) / d2l.reduce_sum(mask), {}
++```
++
+ ## [**Training**]
+ :label:`sec_seq2seq_training`
+ 
+ Now we can [**create and train an RNN encoder-decoder model**]
+ for sequence to sequence learning on the machine translation dataset.
+ 
+ ```{.python .input}
+-%%tab all
++%%tab pytorch, tensorflow, mxnet",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1043179000,AnirudhDagar,23621655,2022-12-08T10:17:34+00:00,2022-12-08T10:17:34+00:00,What is redundant?,True,chapter_recurrent-modern/seq2seq.md,,"@@ -453,11 +527,35 @@ where the last dimension of the tensor stores the predicted token distribution.
+ ```{.python .input}
+ %%tab all
+ decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
+-state = decoder.init_state(encoder(X))
+-outputs, state = decoder(X, state)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
+ 
+ d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
+-if tab.selected('mxnet', 'pytorch'):
++if tab.selected('mxnet', 'pytorch', 'jax'):
++    d2l.check_shape(state, (num_layers, batch_size, num_hiddens))
++if tab.selected('tensorflow'):
++    d2l.check_len(state, num_layers)
++    d2l.check_shape(state[0], (batch_size, num_hiddens))
++```
++
++```{.python .input}
++%%tab all
++decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
++
++d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
++if tab.selected('mxnet', 'pytorch', 'jax'):",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1152931073,1043185724,AnirudhDagar,23621655,2022-12-08T10:21:22+00:00,2022-12-08T10:21:22+00:00,"Ohh, i see, somehow a couple of tabs were copied. Turns out the final commit doesn't include the final state of the saved notebook on my local machine. Sorry my bad.",True,chapter_recurrent-modern/seq2seq.md,,"@@ -453,11 +527,35 @@ where the last dimension of the tensor stores the predicted token distribution.
+ ```{.python .input}
+ %%tab all
+ decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
+-state = decoder.init_state(encoder(X))
+-outputs, state = decoder(X, state)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
+ 
+ d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
+-if tab.selected('mxnet', 'pytorch'):
++if tab.selected('mxnet', 'pytorch', 'jax'):
++    d2l.check_shape(state, (num_layers, batch_size, num_hiddens))
++if tab.selected('tensorflow'):
++    d2l.check_len(state, num_layers)
++    d2l.check_shape(state[0], (batch_size, num_hiddens))
++```
++
++```{.python .input}
++%%tab all
++decoder = Seq2SeqDecoder(vocab_size, embed_size, num_hiddens, num_layers)
++if tab.selected('mxnet', 'pytorch', 'tensorflow'):
++    state = decoder.init_state(encoder(X))
++    outputs, state = decoder(X, state)
++if tab.selected('jax'):
++    state = decoder.init_state(encoder.init_with_output(d2l.get_key(), X)[0])
++    (outputs, state), _ = decoder.init_with_output(d2l.get_key(), X, state)
++
++
++d2l.check_shape(outputs, (batch_size, num_steps, vocab_size))
++if tab.selected('mxnet', 'pytorch', 'jax'):",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1151162586,1042851725,astonzhang,22279212,2022-12-08T02:05:00+00:00,2022-12-08T02:05:20+00:00,"```suggestion
+**Pratik Chaudhari** (*University of Pennsylvania and Amazon*), **Rasool Fakoor** (*Amazon*), and **Kavosh Asadi** (*Amazon*)
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1151162586,1042851725,astonzhang,22279212,2022-12-08T02:05:00+00:00,2022-12-08T02:05:20+00:00,"```suggestion
+**Pratik Chaudhari** (*University of Pennsylvania and Amazon*), **Rasool Fakoor** (*Amazon*), and **Kavosh Asadi** (*Amazon*)
+```",True,chapter_reinforcement-learning/index.md,,"@@ -1,7 +1,14 @@
+ # Reinforcement Learning
+ :label:`chap_reinforcement_learning`
+ 
+-Reinforcement learning (RL) refers to techniques by which an agent learns a policy that optimizes a given performance metric from a sequence of interactions with an environment.  Each of the agent's actions effects the state of the environment which the agent observes. After executing an action, the agent will also receive some scalar value which is called reward. Using this feedback, the agent has to determine which action to take in order to maximize the rewards obtained through the interaction with the environment. By maximizing rewards, the agent can determine the optimal policy. It is worth noting that in contrast to other classes of machine learning methods, like Supervised learning in which a training set has been provided, an RL agent should act in the environment in order to explore its actions' effects and maximize the reward. More importantly, in interactive problems, it is often infeasible to collect data that represent all the cases in which the agent has to act.
++
++**Pratik Chaudhari** (*University of Pennsylvania and Amazon*), **Rasool Fakoor** (*Amazon*), and **‪Kavosh Asadi‬** (*Amazon*)",0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041056101,AnirudhDagar,23621655,2022-12-06T14:35:11+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041056377,AnirudhDagar,23621655,2022-12-06T14:35:24+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041056682,AnirudhDagar,23621655,2022-12-06T14:35:38+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041057721,AnirudhDagar,23621655,2022-12-06T14:36:29+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041057949,AnirudhDagar,23621655,2022-12-06T14:36:41+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041058205,AnirudhDagar,23621655,2022-12-06T14:36:52+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041058472,AnirudhDagar,23621655,2022-12-06T14:37:06+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041058939,AnirudhDagar,23621655,2022-12-06T14:37:31+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041062608,AnirudhDagar,23621655,2022-12-06T14:40:32+00:00,2022-12-06T15:21:20+00:00,"Instead of implementing and saving AlexNet here, let's reuse the implementation from conv modern alexnet chapter.
+You can mark this line with the save annotation:
+https://github.com/d2l-ai/d2l-en/blob/29ad7cc8ce5e47f13a031207d80ee1fc94c3cf12/chapter_convolutional-modern/alexnet.md?plain=1#L319",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041066013,AnirudhDagar,23621655,2022-12-06T14:43:15+00:00,2022-12-06T15:21:20+00:00,"Also, I see that the CI is [timing out](http://ci.d2l.ai/blue/organizations/jenkins/d2l-en/detail/PR-2372/9/pipeline#step-12-log-1270) on for hyperopt-intro section. That is because we have a upper limit of 20 minutes for evaluation of a notebook. If the notebook takes longer than 20 minutes, I'd suggest using a simpler model instead of AlexNet for the same purpose. That should reduce the time.",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041068998,AnirudhDagar,23621655,2022-12-06T14:45:45+00:00,2022-12-06T15:21:20+00:00,Even for hyperopt-api section you can [see](http://ci.d2l.ai/blue/organizations/jenkins/d2l-en/detail/PR-2372/9/pipeline#step-12-log-1023) that it takes 15minutes which is probably the longest compared to other notebooks. So if possible it would be useful to consider a simpler model.,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041070363,AnirudhDagar,23621655,2022-12-06T14:46:47+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+%%tab pytorch
+def objective(batch_size, learning_rate, max_epochs=8):  #@save
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041071503,AnirudhDagar,23621655,2022-12-06T14:47:44+00:00,2022-12-06T15:21:20+00:00,"All code blocks should be annotated with the framework name or all if it is generic, this might apply to other places below as well.",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041072320,AnirudhDagar,23621655,2022-12-06T14:48:24+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041072675,AnirudhDagar,23621655,2022-12-06T14:48:41+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041074633,AnirudhDagar,23621655,2022-12-06T14:50:15+00:00,2022-12-06T15:21:20+00:00,We can reuse this from SoftmaxRegression concise section. You can add save annotation in https://github.com/d2l-ai/d2l-en/blob/29ad7cc8ce5e47f13a031207d80ee1fc94c3cf12/chapter_linear-classification/softmax-regression-concise.md?plain=1#L66-L82,False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041079456,AnirudhDagar,23621655,2022-12-06T14:54:07+00:00,2022-12-06T15:21:20+00:00,"```suggestion
+```",False,,,,0,0,0,0,0,0,0
+d2l-ai/d2l-en,1147230754,1041081533,AnirudhDagar,23621655,2022-12-06T14:55:41+00:00,2022-12-06T15:21:20+00:00,Not a big deal but might be useful to consider naming this to something else because we already have a validation_step function which calculates val loss but we can better name this to validation_error or something like that to be more explicit for the readers.,False,,,,0,0,0,0,0,0,0

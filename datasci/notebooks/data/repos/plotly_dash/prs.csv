@@ -1,0 +1,1147 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+plotly/dash,35483389,1,Refactor,,chriddyp,1280389,closed,False,2015-05-15T04:08:07+00:00,2019-07-17T18:39:28+00:00,2015-05-15T04:08:12+00:00,2015-05-15T04:08:12+00:00,f22a42f7c642813fbf4f1db2d2ddb541de11eb66,unknown,3603,436,35,5,0,0,,,
+plotly/dash,35554868,2,Adding pandas,"Handles exception with timestamps
+",msund,5034604,closed,False,2015-05-15T22:01:15+00:00,2015-05-15T22:02:00+00:00,2015-05-15T22:02:00+00:00,2015-05-15T22:02:00+00:00,ea89f69ea86b6390a6e6f40755222a1d3d7a704e,unknown,1,0,1,1,0,1,,,
+plotly/dash,52714373,4,minor bugfixes,"Examples now work, and checkboxes return the correct name.
+",rthompsonj,543053,closed,False,2015-12-04T20:02:08+00:00,2015-12-06T16:39:48+00:00,2015-12-06T16:39:48+00:00,2015-12-06T16:39:48+00:00,a9ce4acffa5effd3c3ba15d4e456a407ff9f7aab,unknown,2,2,2,1,0,1,,,
+plotly/dash,56983035,5,Python 3 compatibility,,mariusvniekerk,73973,closed,False,2016-01-23T18:36:43+00:00,2017-05-05T03:27:27+00:00,2017-05-05T03:27:27+00:00,,8fbb67289a167da4f3e0d97dfe31ebbb8653caf2,dirty,14,5,4,1,0,1,,,
+plotly/dash,57238675,6,make dash examples work w/ python 3,"@chriddyp little change to `components.py` and the `print` s in 2 examples so these work with python 3
+",cldougl,2789078,closed,False,2016-01-26T16:56:12+00:00,2019-09-25T10:02:39+00:00,2016-01-27T18:09:43+00:00,2016-01-27T18:09:43+00:00,38c96787c75e0b5959a9862146560c217b193cb4,unknown,5,5,3,1,0,0,,,
+plotly/dash,67056342,9,[WIP] [DO NOT MERGE] React,"This PR refactors Dash to use React under the hood.  It will also change the API to be more symmetric to the DOM structure it represents. i.e.
+
+``` python
+div([
+    h2('hello dash')
+])
+```
+
+would be represented by something roughly resembling
+
+``` html
+<div>
+  <h2>hello dash</h2>
+</div>
+```
+
+@chriddyp I pulled your commits from https://github.com/chriddyp/messin.git because I think there's a lot of good work there!  Also, I need to give credit where credit is due.  I'm opening this PR so you can keep track of what I'm doing as I go along and interject along the way if you need to.
+
+cc @jackparmer 
+",jdfreder,3292874,closed,False,2016-04-19T17:18:01+00:00,2016-04-20T01:31:15+00:00,2016-04-20T01:31:15+00:00,,3bda2cf9c7984fa2c5d481e5f099b503e87faf77,dirty,2012,4695,58,71,0,2,,,
+plotly/dash,67132151,10,Dash 2.0 Announcement ,"FYI @jdfreder, @jackparmer @cldougl - updating the README to announce the next phase of development and the future of dash!
+",chriddyp,1280389,closed,False,2016-04-20T05:56:21+00:00,2016-04-20T20:21:46+00:00,2016-04-20T20:21:44+00:00,2016-04-20T20:21:44+00:00,baa6f295f53ecef66711b6e7af553fb896307394,unknown,144,2,1,3,0,0,,,
+plotly/dash,126777251,13,Dash 2.0,fixes #11 😉 ,chriddyp,1280389,closed,False,2017-06-21T14:25:05+00:00,2017-06-21T14:25:28+00:00,2017-06-21T14:25:20+00:00,2017-06-21T14:25:20+00:00,d2ebc837aaf20b8b63b2cb4e844b56fe1cd7b118,unknown,3956,4825,63,294,0,0,,,
+plotly/dash,126820744,17,Default to `debug=False`,"Require users to explicitly set `debug=True` so that they are better aware of the security implications.
+
+Partially fixes #16. ",chriddyp,1280389,closed,False,2017-06-21T17:38:51+00:00,2017-06-22T21:00:25+00:00,2017-06-22T21:00:22+00:00,2017-06-22T21:00:22+00:00,a8fc53ba880d26e3c131f7849795d173596405ec,unknown,1,1,1,1,0,0,,,
+plotly/dash,126824661,18,Updated requirements.txt for development,"> ## Heads up! Edited on October 24, 2018
+> This issue comes up on google searches when folks haven't installed the necessary packages to run Dash.
+> If you find yourself here, then **please visit the official installation instructions here:** https://dash.plot.ly/installation
+> Thank you 🙇 
+
+Should work for both 2.x and 3.x",jackluo,11511652,closed,False,2017-06-21T17:59:12+00:00,2018-10-24T19:09:42+00:00,2017-06-22T21:30:03+00:00,,addf87dc44410b3843c5e84a1c1f9228b96482f1,unknown,14,34,1,2,0,2,chriddyp,,
+plotly/dash,126839979,20,Update circleci,Update python versions for the default circleci image (https://circleci.com/docs/1.0/build-image-trusty/#python). Other possibility would be to update the circleci config to install the missing python versions.,esaezgil,9342125,closed,False,2017-06-21T19:16:35+00:00,2017-09-05T22:36:00+00:00,2017-09-05T22:36:00+00:00,,1a2acd78a8a916facc5e87ff0b372b9164f5c120,dirty,1,1,1,1,0,1,,,
+plotly/dash,126915681,23,Fix unicode error on Py3.6.1 during install,"Fix a unicode handling error during installation
+on Python 3.6.1 by forcing Py27 and Py3 to use
+the compatible io.open method on both versions.",xnoder,22950829,closed,False,2017-06-22T06:07:26+00:00,2017-06-22T16:01:46+00:00,2017-06-22T16:01:46+00:00,2017-06-22T16:01:46+00:00,d8c41cfa4de4a3d6703791edbd01387c1eec770d,unknown,2,1,1,1,0,1,,,
+plotly/dash,127131503,32,"Falsey values ("""", 0, [], {},  False) are as bad as None","In these instances, all other falsey values ("""", 0, [], {},  False, etc.) are just as dangerous as `None` so we should treat them as if they were `None`.
+
+This approach replaces an empty `name` with 'dash' even if the caller provides a `server`.",cclauss,3709715,closed,False,2017-06-23T04:13:44+00:00,2017-12-11T21:14:45+00:00,2017-12-11T21:14:45+00:00,,6c5fff1aa343df40b4b645f1c12191616ad9ce75,unknown,3,8,1,1,0,2,,,
+plotly/dash,127310983,39,Replace all illegal characters in environment variable,,teddykoker,11153048,closed,False,2017-06-24T01:13:35+00:00,2017-06-27T14:02:59+00:00,2017-06-27T14:02:58+00:00,2017-06-27T14:02:58+00:00,8cc1ed9d10e6f2c224c0944f511919c802edce75,unknown,3,2,1,1,0,1,,,
+plotly/dash,127700097,48,add missing import json (?),,latorrefabian,10054991,closed,False,2017-06-27T13:53:42+00:00,2017-06-27T13:55:43+00:00,2017-06-27T13:55:43+00:00,2017-06-27T13:55:43+00:00,a2c0e8c33747b4bb8d27d9772d29b44bcd163363,unknown,1,0,1,1,0,1,,,
+plotly/dash,129014386,69,A patch proposal for multi-app setups,"This patch address my question on SO
+https://stackoverflow.com/questions/44744709/how-to-organise-a-plotly-dash-project
+
+In order to serve multiple apps with one interpreter, I am using a DispatcherMiddleware from werkzeug.wsgi:
+http://flask.pocoo.org/docs/0.12/patterns/appdispatch/
+
+I'd like to avoid running multiple gunicorns on different ports, as this will complicate the setup unnecessary, IMO.
+
+So my structure is as follows:
+
+`run.py`
+
+```
+from werkzeug.serving import run_simple
+from werkzeug.wsgi import DispatcherMiddleware
+
+# importing apps
+from index_app import app as app_ix
+from app1 import app as app1
+from app2 import app as app2
+from app3 import app as app3
+
+application = DispatcherMiddleware(app_ix, {
+    '/app1': app1.server,
+    '/app2': app2.server,
+    '/app3': app3.server
+})
+
+# local debug
+if __name__ == '__main__':
+    run_simple('localhost', 5001, application)
+```
+
+and `app1.py`
+
+```
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+
+from dash.dependencies import Input, Output
+app = dash.Dash(app_path='/{}'.format(__name__))
+...
+```
+
+Without my changes, however, individual apps don't know that they are served on a separate URL path and couldn't find resources, such as layout, etc.
+
+Let me know if there is a better way to build a multi-page dash apps.",Volodymyrk,5244286,closed,False,2017-07-05T17:22:45+00:00,2017-12-08T21:29:01+00:00,2017-12-08T21:29:01+00:00,,4a8b50032bd62ca7df312a25702fe0bec4eda9df,dirty,4,2,1,1,0,1,,,
+plotly/dash,129030622,70,Dash App with Multiple Flask Routes,"Modified flask endpoints to allow for multiple routes to be added to the Flask server, such as serving multiple Dash apps, or additional content.  Simple example below.
+
+```
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.graph_objs as go
+from flask import Flask
+
+server = Flask(""my app"")
+
+app2 = dash.Dash(name='place1', sharing=True, server=server, url_base_pathname='/test1')
+
+app2.layout = html.Div([
+        html.H1('This is a test1')
+    ])
+
+app3 = dash.Dash(name='place2', sharing=True, server=server, url_base_pathname='/test2')
+
+app3.layout = html.Div([
+        html.H1('This is test2')
+    ])
+
+server.run(port=80, host='0.0.0.0')
+```",rc1405,13261087,closed,False,2017-07-05T18:51:52+00:00,2018-12-03T05:00:34+00:00,2017-07-10T18:37:12+00:00,2017-07-10T18:37:12+00:00,81dcb12fd2940a77c361ed277417657da18935fe,unknown,19,6,1,1,0,13,,,
+plotly/dash,133109370,104,Draft aria-* and data-* additions for Bootstrap,Pull request to discuss implementation of aria-* and data-* options for bootstrap and other uses.  Proposed solution to #78 ,rc1405,13261087,closed,False,2017-07-29T22:57:28+00:00,2017-12-11T20:58:41+00:00,2017-12-11T20:58:41+00:00,,aace7fee92048bd30b20cbe9e3ec58f2775fb40a,dirty,7,3,1,3,3,3,,,
+plotly/dash,133578129,107,Always sort `prop_ names`,"It's hard to find the property you want in the unsorted dict key so always sort the names before printing them. E.g. `rel` is not in the place I would expect here - I expected it before `spellCheck`:
+
+```
+Traceback (most recent call last):
+  File ""app.py"", line 31, in <module>
+    html.Link(rel=""shortcut icon"", href=""favicon.ico"", type=""image/x-icon"")
+  File ""<string>"", line 45, in __init__
+  File ""/Users/olgabot/anaconda3/envs/maca-dash/lib/python3.6/site-packages/dash/development/base_component.py"", line 23, in __init__
+    ', '.join(self._prop_names)
+Exception: Unexpected keyword argument `type`
+Allowed arguments: children, crossOrigin, href, hrefLang, integrity, media, rel, sizes, accessKey, className, contentEditable, contextMenu, dir, draggable, hidden, lang, spellCheck, style, tabIndex, title, id
+```",olgabot,806256,closed,False,2017-08-01T21:38:41+00:00,2017-08-07T17:45:24+00:00,2017-08-07T17:45:24+00:00,2017-08-07T17:45:24+00:00,4f1d6531e94403a2c2729999f90cf76d7e4235a4,unknown,3,2,1,2,0,2,,,
+plotly/dash,135573964,112,added id to KeyError for get and set on Components,"When building up a Component tree layout using an id setter (eg `layout['some-id'] = some_component`), this propagates the missing id value into the traceback, making debugging much easier",ned2,2831640,closed,False,2017-08-14T11:01:04+00:00,2022-12-11T05:41:14+00:00,2017-08-14T12:11:44+00:00,2017-08-14T12:11:44+00:00,064c811dc46e9cb28f51a55886e58d610286b37b,unknown,1,1,1,1,0,1,,,
+plotly/dash,139424385,127,Fix CircleCI Tests and Other Improvements,,chriddyp,1280389,closed,False,2017-09-05T21:23:02+00:00,2017-09-05T22:21:04+00:00,2017-09-05T22:21:01+00:00,2017-09-05T22:21:01+00:00,60e828e4cdb7c88c81c843c3115fb6f194fd666a,unknown,160,761,20,18,0,1,,,
+plotly/dash,139835767,128,Remove excessive calls to `layout()` ,"fixes #116 
+
+If `app.layout` is a function, then it is now only called once on startup and once for the requests",chriddyp,1280389,closed,False,2017-09-07T15:25:10+00:00,2017-09-07T15:37:09+00:00,2017-09-07T15:37:04+00:00,2017-09-07T15:37:04+00:00,b890bd8184fcf82ced88f313cf834e0f07592298,unknown,17,12,4,3,0,1,,,
+plotly/dash,140059337,130,Multiple Flask Routes,Adding https://github.com/plotly/dash/pull/70 back,chriddyp,1280389,closed,False,2017-09-08T15:05:16+00:00,2017-09-08T15:39:05+00:00,2017-09-08T15:39:02+00:00,2017-09-08T15:39:02+00:00,3581b98d02bffbead3e04293ce377ea5f24b5399,unknown,28,23,3,3,0,0,,,
+plotly/dash,140116975,131,"dict-based config, routes fix, allow independent configs on multiple apps","# 0.18.3rc1 - 2017-09-08
+## Added
+- `app.config` is now a `dict` instead of a class. You can set config variables with
+  `app.config['suppress_callback_exceptions'] = True` now. The previous class-based
+  syntax (e.g. `app.config.suppress_callback_exceptions`) has been maintained for
+  backwards compatability
+
+## Fixed
+- 0.18.2 introduced a bug that removed the ability for dash to serve the app on
+  any route besides `/`. This has been fixed.
+- 0.18.0 introduced a bug with the new config variables when used in a multi-app setting.
+  These variables would be shared across apps. This issue has been fixed.
+  Originally reported in https://community.plot.ly/t/flask-endpoint-error/5691/7
+- The config setting `supress_callback_exceptions` has been renamed to
+  `suppress_callback_exceptions`. Previouslly, `suppress` was spelled wrong.
+  The original config variable is kept for backwards compatability.
+",chriddyp,1280389,closed,False,2017-09-08T20:16:05+00:00,2017-09-08T20:23:33+00:00,2017-09-08T20:23:31+00:00,2017-09-08T20:23:31+00:00,d058dde022444fb999a71614e26509f2419a2e00,unknown,83,22,4,7,0,0,,,
+plotly/dash,142901207,138,To make dash support Flask-Login,Add one configure parameter to indicate whether to support Flask-Login. ,imkfyao,29162104,closed,False,2017-09-25T14:41:25+00:00,2018-10-08T17:26:26+00:00,2017-12-11T21:00:52+00:00,,550d2731774fa15427c02b683384faf92da7605c,dirty,10,9,1,1,0,12,,,
+plotly/dash,144790036,140,[wip] previous state support,"depends on https://github.com/plotly/dash-renderer/pull/25
+
+experimental usage
+```python
+# -*- coding: utf-8 -*-
+import dash
+from dash.dependencies import Input, Output, PrevInput
+import dash_html_components as html
+import dash_core_components as dcc
+
+app = dash.Dash()
+app.scripts.config.serve_locally = True
+
+app.layout = html.Div([
+    html.Button('Button 1', id='button-1', n_clicks=0),
+    html.Button('Button 2', id='button-2', n_clicks=0),
+    html.Pre(id='output')
+])
+
+
+@app.callback(
+    Output('output', 'children'),
+    [Input('button-1', 'n_clicks'), Input('button-2', 'n_clicks')],
+    prev_inputs=[
+        PrevInput('button-1', 'n_clicks'),
+        PrevInput('button-2', 'n_clicks')
+    ])
+def update_output(b1, b2, prev_b1, prev_b2):
+    s = '''
+        Button 1 was clicked {} → {} times and
+        Button 2 was clicked {} → {} times
+    '''.format(prev_b1, b1, prev_b2, b2)
+    if b1 > prev_b1:
+        s += '\nWhich means that Button 1 was clicked'
+    elif b2 > prev_b2:
+        s += '\nWhich means that Button 2 was clicked'
+    return s
+
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+```
+
+![previous-state](https://user-images.githubusercontent.com/1280389/31202577-2209d536-a931-11e7-8f84-239f948a5674.gif)
+",chriddyp,1280389,closed,False,2017-10-04T22:22:12+00:00,2019-02-04T18:01:55+00:00,2019-02-04T18:01:50+00:00,,a22ce0fb4e1ced7ccf44aeab4d2012c3cd6c6337,dirty,47,15,2,1,0,10,,,
+plotly/dash,146922883,146,Rm csrf protection,"fixes #141. `app.server.secret_key` is no longer required! Previously, if you didn't specify `app.server.secret_key` then you would see a 
+> 403 error (CSRF token missing or incorrect) 
+
+whenever you would run your app on multiple processes or ports. You will not see this error anymore and you no longer need to set `app.server.secret_key`",chriddyp,1280389,closed,False,2017-10-17T01:13:56+00:00,2017-10-17T02:04:24+00:00,2017-10-17T02:04:21+00:00,2017-10-17T02:04:21+00:00,4ee769d3593d5297602c2bb6faca0eb63884d480,unknown,27,27,4,2,0,0,,,
+plotly/dash,155078488,163,Standardise HTML link tags to use the HTML5 format as shown here:,"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link  as this
+project uses a HTML5 DOCTYPE.",jbampton,418747,closed,False,2017-11-28T14:00:17+00:00,2017-11-28T16:08:07+00:00,2017-11-28T15:30:37+00:00,2017-11-28T15:30:37+00:00,bb349fbe3d5a9afb214c4c905247870c0a0ec959,unknown,2,2,2,1,0,2,,,
+plotly/dash,155102090,164,Removing outdated reference to NYC masterclass,"Now that the masterclass has been and gone, I'm suggesting removing the reference to it from the README (I got confused and tried to sign up because I didn't read the dates on the link in the README carefully enough).",ravintpillai,1099475,closed,False,2017-11-28T15:27:49+00:00,2017-11-28T15:31:57+00:00,2017-11-28T15:31:57+00:00,2017-11-28T15:31:57+00:00,4e146bcfc41a522839a54d8dca359775d84ac807,unknown,0,6,1,2,0,1,,,
+plotly/dash,155169635,165,Fix position of HTML footer tag to be inside the HTML body tag.  ,You can see the error at https://validator.w3.org/ when validating a Dash app.,jbampton,418747,closed,False,2017-11-28T20:02:30+00:00,2017-11-28T20:32:25+00:00,2017-11-28T20:32:25+00:00,2017-11-28T20:32:25+00:00,f7416257f7224de915e23275c8c042e9f819d884,unknown,4,5,1,1,0,2,,,
+plotly/dash,155190011,166,Fix HTML meta tag to be HTML5 compliant by removing the closing slash…,"… as seen on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+
+Also HTML5 meta tags can be seen  here: https://www.w3schools.com/tags/tag_meta.asp",jbampton,418747,closed,False,2017-11-28T21:38:54+00:00,2017-11-28T21:58:20+00:00,2017-11-28T21:58:20+00:00,2017-11-28T21:58:20+00:00,45a165bbbb781ef4f9add4e0746c8811bbe70463,unknown,1,1,1,1,0,2,,,
+plotly/dash,155220970,167,"Standard import ""import io"" should be placed before  ""from setuptools…","… import setup, find_packages"" (wrong-import-order). Also fix continued line indentation.  These issues are found from using Pylint https://www.pylint.org/",jbampton,418747,closed,False,2017-11-29T00:35:48+00:00,2017-11-29T02:58:53+00:00,2017-11-29T02:49:09+00:00,2017-11-29T02:49:09+00:00,ec9057882156e834a47f87de38dbeb58e7cddf0b,unknown,21,20,4,5,0,2,,,
+plotly/dash,155242472,168,Patch 3 - Update Python code to further follow Pylint standards,Mostly putting the import statements in the correct order.,jbampton,418747,closed,False,2017-11-29T03:40:10+00:00,2017-11-29T21:07:22+00:00,2017-11-29T17:57:30+00:00,2017-11-29T17:57:30+00:00,811acb6b07bcef63471513fe2c78c82ef04ec296,unknown,22,22,6,6,0,1,,,
+plotly/dash,155459615,169,"Standard imports ""unittest, os, collections"" should be placed before …","…""import plotly"" (wrong-import-order).  Remove used variable ""i""",jbampton,418747,closed,False,2017-11-29T21:39:20+00:00,2017-11-30T20:42:49+00:00,2017-11-30T16:41:30+00:00,2017-11-30T16:41:30+00:00,c60aa5502dedda1d27e8350e44476b18a90348db,unknown,2,2,1,1,0,1,,,
+plotly/dash,155715083,171,allow optional header and footer,"This PR depends on html components having a HTML serializer, see
+https://github.com/plotly/dash-html-components/pull/29
+
+This PR simplifies adding custom JavaScript and CSS to Dash apps - a more flexible and declarative alternative to `app.css.append_css` and `app.scripts.append_script`
+
+Example usage:
+```python
+app.head = [
+    html.Link(
+        href='https://codepen.io/chriddyp/pen/bWLwgP.css',
+        rel='stylesheet'
+    ),
+    ('''
+    <style type=""text/css"">
+    html {
+        font-size: 50px;
+    }
+    </style>
+    '''),
+    html.Title(path)
+]
+
+app.footer = [
+    html.Script(type='text/javascript', children='alert(""hello world"")')
+]
+```
+
+`app.head` and `app.footer` can also be functions, which enables setting variables dynamically based off of the URL (i.e. unique page titles)
+
+```python
+def head():
+    path = request.path
+    return html.Title(path)
+
+app.head = head
+```
+
+Unlike `app.layout`, `app.head` and `app.footer` are templated directly into the HTML (as HTML!) rather than generated in Dash’s front-end. This allows the components to be rendered immediately on page load rather than after page load (required for things like page title and meta descriptions and for preventing a “Flash of Unstyled Content” https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+
+ This makes the components in `app.head` and `app.footer` different than the components in `app.layout`. In particular:
+- Callbacks can’t be applied to components rendered in `app.head` or `app.footer`
+- Only `dash_html_components` can be applied to the `app.head` and `app.footer` as these are the only valid HTML tags (a `dash_core_components.Graph is not a valid HTML tag, it’s a rich component generated by React.js with dynamic javascript and CSS)
+
+Fixes #https://github.com/plotly/dash/issues/170 and several issues brought up in the dash community forum (https://community.plot.ly/c/dash)",chriddyp,1280389,closed,False,2017-11-30T20:47:41+00:00,2020-03-18T13:15:58+00:00,2018-06-08T01:32:27+00:00,,931964a8032dfdbefea3eae0e20466810427c388,unknown,50,6,1,2,1,23,,,
+plotly/dash,155726691,172,Remove unnecessary parens - (),,jbampton,418747,closed,False,2017-11-30T21:42:53+00:00,2017-12-01T00:29:29+00:00,2017-12-01T00:03:52+00:00,2017-12-01T00:03:52+00:00,12f9b50e442541c3b614de201b3fb9d1b8a7f722,unknown,6,10,1,2,0,1,,,
+plotly/dash,155762160,173,Consistently use single quotes,,jbampton,418747,closed,False,2017-12-01T01:27:01+00:00,2017-12-01T23:32:09+00:00,2017-12-01T17:05:01+00:00,2017-12-01T17:05:01+00:00,3e988622a2e6ec994e0ac3a012506edc6fb6fb53,unknown,17,16,5,3,0,1,,,
+plotly/dash,156029940,174,Import submodules into __init__.py for IDE code completion,"Fix for #144, but only for the dash library itself.
+
+I was also looking to add IDE completion for [dash-core-components](https://github.com/plotly/dash-core-components), but this seems a bit more difficult as component data is loaded from `metadata.json`.
+
+```python
+import dash_core_components as dcc
+print(dir(dcc))
+```
+We see all the core components in the namespace (and, therefore, in IPython), but they do not show up in the IDE. Hardcoding `__all__` is a workaround, but not something I want to do.
+
+@chriddyp do you have any thoughts on this?",alysivji,4369343,closed,False,2017-12-02T20:30:17+00:00,2017-12-12T17:51:52+00:00,2017-12-12T17:51:52+00:00,2017-12-12T17:51:52+00:00,b61f0d371239ee5a6286ce539fab24d2d3de432a,unknown,3,0,1,2,2,5,,,
+plotly/dash,157671815,176,fix #32,reapplying the commits from https://github.com/plotly/dash/pull/32/,chriddyp,1280389,closed,False,2017-12-11T21:07:16+00:00,2017-12-11T21:14:47+00:00,2017-12-11T21:14:44+00:00,2017-12-11T21:14:44+00:00,3cd6a78ee21620c77ccdbdf2724c995872383666,unknown,2,6,1,1,0,0,,,
+plotly/dash,159922412,181,add pylint to tests,inspired by @jbampton 's latest PRs 😺 ,chriddyp,1280389,closed,False,2017-12-22T19:30:46+00:00,2018-01-03T21:48:38+00:00,2018-01-03T21:48:36+00:00,2018-01-03T21:48:36+00:00,59809803f3363a9b2a3f712fc1251cb99b551ac3,unknown,559,65,9,6,0,0,,,
+plotly/dash,160590453,183,Enable custom response support for callback functions,"Based on issue #182 (Set a cookie from callback function).
+
+With the following functionality callback function can return not only Dash components tree, but a customizable DashResponse with cookies, headers etc. 
+
+```
+from dash import DashResponse
+...
+
+@app.callback(
+    dash.dependencies.Output('content-block', 'children'),
+    [dash.dependencies.Input('comparison-filter', 'value')])
+def on_filter_change(comparison_value):
+    response = DashResponse(html.Div('foo', className=""test""))
+    response.set_cookie('bar', 'baz')
+    return response
+```",oryba,34271984,closed,False,2017-12-30T14:14:21+00:00,2018-12-14T14:57:36+00:00,2018-12-14T14:57:36+00:00,,5110b35b849de137f91f25a0306c97cc70bb3c73,unknown,41,0,3,1,2,7,,,
+plotly/dash,160837736,184,integration tests,"Most of Dash’s integration tests are in Dash’s front-end library: https://github.com/plotly/dash-renderer.
+
+This PR adds an integration test framework to this repository and a simple integration test. This enables future Python functionality that affects the front-end and backend, like https://github.com/plotly/dash/pull/183, to be tested.",chriddyp,1280389,closed,False,2018-01-03T02:06:12+00:00,2018-01-03T03:17:46+00:00,2018-01-03T03:17:42+00:00,2018-01-03T03:17:42+00:00,dcaad50f48856e17b1e044d9dd20977eae43c4c1,unknown,258,5,4,3,0,0,,,
+plotly/dash,160897229,185,Pylint pep8 fixes,,jbampton,418747,closed,False,2018-01-03T12:00:02+00:00,2018-01-11T08:16:47+00:00,2018-01-03T18:23:59+00:00,2018-01-03T18:23:59+00:00,56a7e8f5b0232adaba80512bd544bfff3754e7ca,unknown,7,23,3,4,0,3,,,
+plotly/dash,161045500,186,Pylint pep8 fixes,,jbampton,418747,closed,False,2018-01-04T03:20:07+00:00,2018-01-04T03:49:57+00:00,2018-01-04T03:33:22+00:00,2018-01-04T03:33:22+00:00,6c6ced1da09428c211f4c7c3303b20a583dd30b1,unknown,56,56,2,2,0,0,,,
+plotly/dash,161268658,190,added PreventUpdate exception and attached handler to Flask server,"create a new exception `PreventUpdate` for use when a callback needs to be aborted without updating the state of the client.
+
+This exception is registered with the Flask server using an `errorhandler` such that on catching this exception Flask will print any message included in the exception to standard error and then return an empty 204 NO CONTENT response.  ",ned2,2831640,closed,False,2018-01-05T04:14:53+00:00,2022-12-11T05:41:17+00:00,2018-01-19T16:00:35+00:00,2018-01-19T16:00:35+00:00,a79e7b26703daec4ac0344fb4b24be2275258ef8,unknown,61,0,3,5,0,7,,,
+plotly/dash,161384664,191,fix https://github.com/plotly/dash/issues/189,cc @ned2 ,chriddyp,1280389,closed,False,2018-01-05T17:07:03+00:00,2018-01-09T00:02:38+00:00,2018-01-09T00:02:35+00:00,2018-01-09T00:02:35+00:00,308579660b8791296f437bdcd060dc89a42f2b07,unknown,1,1,1,2,0,1,,,
+plotly/dash,161504886,193,For HTML5 script tags you can omit the type attribute when its value …,"…is JavaScript. From MDN -> https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script - Omitted or a JavaScript MIME type: For HTML5-compliant browsers this indicates the script is JavaScript. HTML5 specification urges authors to omit the attribute rather than provide a redundant MIME type.
+
+Example from MDN:
+HTML4 and (x)HTML
+<script type=""text/javascript"" src=""javascript.js""></script>
+HTML5
+<script src=""javascript.js""></script>
+  
+ https://www.w3.org/TR/2011/WD-html5-20110405/scripting-1.html#script",jbampton,418747,closed,False,2018-01-07T02:21:14+00:00,2018-01-08T17:18:06+00:00,2018-01-08T17:16:29+00:00,2018-01-08T17:16:29+00:00,94ab1e7b1bf3d56d21a57220de7309b0d19c4ca9,unknown,2,2,2,1,0,1,,,
+plotly/dash,162342298,196,Fix undefined reference to __version__ in setup.py and remove '# noqa…,…: F821 pylint: disable=undefined-variable'. You can test this fix by changing the 'version' in version.py and then running from the command line: python3 setup.py --version,jbampton,418747,closed,False,2018-01-11T10:19:39+00:00,2018-01-22T23:17:07+00:00,2018-01-22T18:13:57+00:00,2018-01-22T18:13:57+00:00,39d614d2458637c968d9138cb4de5606a8da09bf,unknown,4,3,2,1,0,0,,,
+plotly/dash,164029031,199,v0.20.0,Changelog and version updates,chriddyp,1280389,closed,False,2018-01-19T17:44:42+00:00,2018-01-19T19:37:14+00:00,2018-01-19T19:37:11+00:00,2018-01-19T19:37:11+00:00,fd2f353814cbccc8fc9df378d780ebc96d7c136f,unknown,13,1,2,1,0,0,,,
+plotly/dash,164160605,200,Improve callback decorator,"The function objects stored in a `Dash` instance's `callback_map` are currently not useful for introspecting:
+
+```
+>>> app.callback_map['dash-container.children']['callback'].__name__
+'add_context'
+```
+
+The `functools.wraps` decorator passes various attributes of a decorated function onto the resulting function object, making introspection work as expected:
+
+```
+>>> app.callback_map['dash-container.children']['callback'].__name__
+'my_callback'
+```
+
+The `callback_map` can now be used for more useful profiling of all registered callbacks in an app. 
+
+
+",ned2,2831640,closed,False,2018-01-21T05:28:54+00:00,2022-12-11T05:41:05+00:00,2018-01-22T16:49:02+00:00,2018-01-22T16:49:02+00:00,9a4c50c415d77f68f4b19ab7e25836b8e5c3683a,unknown,6,4,1,2,0,1,,,
+plotly/dash,164429804,203,Add a 'compress' param to Dash class's __init__(),"Adding a `compress` param provides the ability to opt out of automatically having all responses gzipped.
+
+This is desirable because it is less efficient to be doing compression within the Python process than for the web server to handle it. Dash apps that care about scalability can now opt out.
+
+Addresses #202 ",ned2,2831640,closed,False,2018-01-22T22:08:22+00:00,2018-01-23T02:14:06+00:00,2018-01-23T02:05:19+00:00,2018-01-23T02:05:19+00:00,bdb5db7a179d9fec9723d889538ce0ee4ac4aead,unknown,5,2,1,2,0,1,,,
+plotly/dash,166009581,206,2018 not 2017,fixes https://github.com/plotly/dash/issues/205,chriddyp,1280389,closed,False,2018-01-30T15:17:37+00:00,2018-01-30T15:17:47+00:00,2018-01-30T15:17:44+00:00,2018-01-30T15:17:44+00:00,149cd2e80e9366b931b1c5e8f8ad3c88e39b50dc,unknown,1,1,1,1,0,0,,,
+plotly/dash,166117703,207,187 support flow types,"### Description
+Supports creating docstrings using `react-docgen` for Dash components written _solely_ with Flow type annotations. This is a non-breaking change.
+
+The new logic, as determined in discussion in #187 is:
+1. If a Dash component has `PropTypes`-generated typing, the docstring uses the `PropTypes`, _regardless of whether the component also has Flow types (current behavior)._
+2. Otherwise if a Dash component has Flow types but _not `PropTypes`_, the docstring now uses the objects generated by `react-docgen` from the Flow types (**new behavior**).
+ 
+### Implementation
+There are no breaking changes, and all pre-existing tests for the `base_component` suite still pass. Unit tests were added by @coralvanda for the docstrings generated by Flow. The unit tests only added another `metadata.json` file for a Flow-generated `metadata.json` test example, and a [`TestFlowMetaDataConversions` `TestCase`](https://github.com/plotly/dash/blob/20f4b042948282d93dee559084c1c383bf5a65d7/tests/development/test_base_component.py#L760). 
+
+As an example, the new Flow support on the Python `dict` in [this gist](https://gist.github.com/mjclawar/f108ca3d5d3f9ad55016816e6edf202b) will create this docstring:
+```python
+""""""
+A MyComponent component.
+test description
+
+Keyword arguments:
+- requiredUnion (string | number; required)
+- optionalString (string; optional): A string that isn't required.
+- optionalBoolean (boolean; optional): A boolean test
+- optionalArray (list; optional): An array test with a particularly 
+long description that covers several lines. It includes the newline character 
+and should span 3 lines in total.
+- requiredString (string; required): A required string
+- optionalSignature(shape) (optional): This is a test of an object's shape. optionalSignature(shape) has the following type: dict containing keys 'checked', 'children', 'customData', 'disabled', 'label', 'primaryText', 'secondaryText', 'style', 'value'.
+  Those keys have the following types: 
+  - checked (boolean; optional)
+  - children (a list of or a singular dash component, string or number; optional)
+  - customData (bool | number | str | dict | list; required): A test description
+  - disabled (boolean; optional)
+  - label (string; optional)
+  - primaryText (string; required): Another test description
+  - secondaryText (string; optional)
+  - style (dict; optional)
+  - value (bool | number | str | dict | list; required)
+- requiredNested (required): . requiredNested has the following type: dict containing keys 'customData', 'value'.
+  Those keys have the following types: 
+  - customData (required): . customData has the following type: dict containing keys 'checked', 'children', 'customData', 'disabled', 'label', 'primaryText', 'secondaryText', 'style', 'value'.
+    Those keys have the following types: 
+    - checked (boolean; optional)
+    - children (a list of or a singular dash component, string or number; optional)
+    - customData (bool | number | str | dict | list; required)
+    - disabled (boolean; optional)
+    - label (string; optional)
+    - primaryText (string; required)
+    - secondaryText (string; optional)
+    - style (dict; optional)
+    - value (bool | number | str | dict | list; required)
+  - value (bool | number | str | dict | list; required)
+- optionalNode (a list of or a singular dash component, string or number; optional): A node test
+""""""
+``` 
+
+Thanks to @coralvanda, this now also supports nested object definitions for Flow, e.g. this section:
+```
+- requiredNested (required): . requiredNested has the following type: dict containing keys 'customData', 'value'.
+  Those keys have the following types: 
+  - customData (required): . customData has the following type: dict containing keys 'checked', 'children', 'customData', 'disabled', 'label', 'primaryText', 'secondaryText', 'style', 'value'.
+    Those keys have the following types: 
+    - checked (boolean; optional)
+    - children (a list of or a singular dash component, string or number; optional)
+    - customData (bool | number | str | dict | list; required)
+    - disabled (boolean; optional)
+    - label (string; optional)
+    - primaryText (string; required)
+    - secondaryText (string; optional)
+    - style (dict; optional)
+    - value (bool | number | str | dict | list; required)
+  - value (bool | number | str | dict | list; required)
+```
+which is pulled recursively from the `requiredNested` prop found [here in the gist](https://gist.github.com/mjclawar/f108ca3d5d3f9ad55016816e6edf202b#file-dash-metadata-with-flow-example-py-L265).
+
+### Related issue
+Closes #187 
+Bumps version to 0.20.1, assuming this is appropriate. ",mjclawar,16123745,closed,False,2018-01-30T22:39:59+00:00,2018-02-22T15:57:04+00:00,2018-02-22T01:54:39+00:00,2018-02-22T01:54:39+00:00,8478942fd4a20774bc9ff7612b871f883f2a785b,unknown,914,163,5,49,1,12,,,
+plotly/dash,170633053,212,Flow integration test,screenshot integration tests for #207 ,chriddyp,1280389,closed,False,2018-02-22T01:15:16+00:00,2018-02-22T02:15:09+00:00,2018-02-22T02:15:02+00:00,2018-02-22T02:15:02+00:00,44ac465425a50acbb3c4c7779237011159126e99,unknown,49,9,2,7,0,0,,,
+plotly/dash,174473387,222,Circle 2.0,Migrate to Circle 2.0,chriddyp,1280389,closed,False,2018-03-12T19:37:52+00:00,2021-07-28T17:18:15+00:00,2018-08-20T15:50:52+00:00,,74b19f297d2b7661a8d9c4b442850ac7e3e031b4,dirty,63,43,5,4,0,0,,,
+plotly/dash,177273819,233,update minimum versions for other dash packages in dev-requirements.txt,"I found out recently that tox was running the Dash tests with somewhat older versions of the other Dash packages. I had assumed that tox created fresh virtualenvs, pulling down the latest versions of the needed packages. Turns out that the default behaviour is to reuse the existing virtualenvs without updating packages if the minimum version requirements are met.
+
+I might just get into the habit of using `tox -r` which forces re-creation of the virtualenvs. I wonder if it would be worth making this the default. Seems like not doing this leaves open the possibility of running against older Dash packages when the dev-requirements.txt is not updated. ",ned2,2831640,closed,False,2018-03-25T05:32:34+00:00,2018-08-24T07:02:12+00:00,2018-08-24T07:02:12+00:00,,883d3b64621fffa8513aed5c8f830820cb88793f,unknown,0,0,0,0,0,2,,,
+plotly/dash,178485550,237,"Support for wildcard attributes, implement data-* attribute","Adds the data-* html attributes, like so:
+```
+>>> import dash_html_components as html
+>>> html.Div(id=""my-id"", **{'data-foo': 'foo', 'data-bar': 'bar'})
+Div(id='my-id', data-foo='foo', data-bar='bar')
+```
+
+Tested using Tox, however I
+  1. removed the `python -m unittest tests.test_react` test, since this is broken in #236 and #232 
+  2. added the `python -m unittest tests.development.test_base_component` and `python -m unittest tests.development.test_component_loader` tests, since only running `tox` was not causing these tests to run (or are are these tests generally invoked in another way?)
+",rmarren1,10272301,closed,False,2018-03-30T03:07:03+00:00,2020-06-18T11:37:45+00:00,2018-04-23T22:39:12+00:00,2018-04-23T22:39:12+00:00,3dfa941fbba79efafc397360520f5a8e964236f6,unknown,261,22,11,5,6,17,,,
+plotly/dash,178662356,238,Enhance default support for custom static assets,"This is a proposal for adding better support for custom static assets to that addresses a couple of current friction points.
+
+I've noticed on the Dash forums that a question that keeps arising is how to add custom CSS assets. Besides from adding them to the app, they also need to be configured to be served by Flask. Currently, the way to set this up with is not particularly intuitive and there is at least one potential gotcha. The most straightforward way to make Flask serve static assets is for users to create a folder such as 'static' in the same directory as their Dash app, and then initialize their app like this:
+
+`app = dash.Dash(__name__, static_folder='static')`
+
+As discussed in #198, confusingly, this will not work if users omit the initial `name` param, or supply an incorrect value for it. This is because this param becomes the `import_name` param to the `Flask` instance, which it uses to for deriving the location of your static folder. So the default value of `dash` is not useful here (however this does mean you could serve a static folder from your installed Dash package in eg site-packages).
+
+My proposal is to firstly make the default value of `static_folder` to be `static`, which brings it inline with Flask's default and then secondly make the default value of the `name` param be `__main__`, which is the value it will take when a script is being run from the command line, which I suspect corresponds to most frequently used layout of a Dash app. Most users will then simply be able to create a `static` directory in the same directory as their app and static assets will served (although they still need to be added to the app itself). For users with more complex apps they will need to ensure they specify the name param correctly. The documentation can also be enhanced to make the significance of the `name` param to the `static_folder` clear.
+
+Perhaps there is an argument to only change the static_folder param, however by making name optional and providing a default value, there will inevitably be some contexts where the value is incorrect for the Flask `import_name`. So I guess my suggestion is to choose a default that is more likely to be right most of the time for users. ",ned2,2831640,closed,False,2018-03-31T02:42:00+00:00,2018-12-28T12:51:34+00:00,2018-04-03T15:41:18+00:00,2018-04-03T15:41:18+00:00,a85426ec02c7b86967508036fbaf762f0f0db2b0,unknown,2,2,1,1,0,3,,,
+plotly/dash,180906811,243,Updated index method,"Add additional members on index, ie update/change html metadata",mmphego,7910856,closed,False,2018-04-11T13:38:47+00:00,2018-06-08T04:59:57+00:00,2018-06-08T02:30:01+00:00,,098e94d7e283f69872367232c7abc8d618685772,unknown,3,2,1,1,0,1,,,
+plotly/dash,184867939,251,Update tests for Flask 1.0,"`threaded` is now `True` by default in flask 1.0 and `threaded=True` can’t
+be set if `processes>1`",chriddyp,1280389,closed,False,2018-04-30T01:53:43+00:00,2018-04-30T02:09:22+00:00,2018-04-30T02:09:19+00:00,2018-04-30T02:09:19+00:00,25c97d1b3efd99bb7e3f0aa807abb7ebc2712a6b,unknown,2,1,1,1,0,0,,,
+plotly/dash,185544443,252,setuptools installation fixes,"- Added dash_renderer as a dependency in setup.py.
+- Added the LICENSE to MANIFEST.in.
+
+Came across these when packaging for conda forge: https://github.com/conda-forge/dash-feedstock",moorepants,276007,closed,False,2018-05-02T19:57:05+00:00,2018-05-04T20:54:12+00:00,2018-05-04T20:54:12+00:00,2018-05-04T20:54:12+00:00,6a1809fc619671f8bf7e1294d12ef1180e90df6b,unknown,3,1,2,1,0,1,,,
+plotly/dash,185881600,254,[WIP] encrypted_ props,"This PR is definitely incomplete but shows a possible direction for built-in support for server-side encrypted props: basically transparently encrypting and decrypting any prop whose name starts with `encrypted_`. This would go hand in hand with a new `dcc.Store` component which would accept `encrypted_*` props and render into the DOM as `null`, as a safer replacement for using hidden `<div>` elements to store data on the client. The current downsides of using hidden `<div>`s are that 1) data is sent to the client in the clear which developers might not want clients to have access to and 2) data can be manipulated by the client to trick the app into doing undesirable things. Encrypting/signing the data solves both of these problems.
+
+If any prop is to be encrypted, the user will need to provide either an `encryption_keystring` which is used to generate a `fernet_key` *or* specify the `fernet_key` directly if the built-in KDF is somehow insufficient.
+
+Major limitations of this PR today:
+
+* no encryption of initial layout result
+* no tests
+* no exception handling for data that has been tampered with
+
+I'm submitting it here for feedback on the implementation direction (the idea of providing a generic mechanism for encryption, this specific mechanism, the implications for specifying keys etc) rather than the quality of the implementation :) If the direction isn't good, I won't invest more time in finishing it! 
+",nicolaskruchten,203523,closed,False,2018-05-04T02:38:08+00:00,2022-01-27T16:53:43+00:00,2018-05-30T13:08:21+00:00,,55ed0e4c23d743dedbede8491beba1737e78ae3b,unknown,44,0,1,1,0,2,chriddyp,,
+plotly/dash,186982327,256,Remove duplicate key/value pair from Python dictionary.  Minor Pylint…,… indentation fixes.,jbampton,418747,closed,False,2018-05-09T17:00:28+00:00,2018-08-24T18:38:55+00:00,2018-08-10T20:00:09+00:00,2018-08-10T20:00:09+00:00,cc0599b80f82af81c9f70875ef162bedf3fc8d4c,unknown,9,10,3,1,0,2,,,
+plotly/dash,194558265,271,Generate Dash components at buildtime rather than runtime (#150),"This roughly follows the suggestions in (#150) to create dash components at build-time via importing from an intermediary python class file rather than at creating them all at runtime.
+
+### Summary of changes:
+
+##### In `dash/development/base_component.py`
+* Added a function `generate_class_string` which generates the intermediary class string which was previously created in `generate_class`. This does not change `generate_class` as it just moves some work to a subroutine.
+* Added a function `generate_class_file` which prepends the proper import statement (`from dash.development.base_component import Component`) to the class string from `generate_class_string` and writes to file.
+
+##### In `dash/development/component_loader.py`
+* Moved the metadata loading step to a subroutine `_get_metadata`
+* Added a function `generate_classes` which consumes a `metadata.json` at a filepath and writes all the classes within to file in an output directory. The filepath and output directory are 'lib/metadata.json' and 'lib' respectively making the no-arguments call work in the components libraries.
+
+##### In `tests/development/metadata_test.py`
+* Added this new file to compare to in test cases.
+
+##### In `tests/development/test_base_component.py`
+* Added tests for the `generate_class_string` and `generate_class_file` functions.
+
+##### In `tests/development/test_component_loader.py`
+* Added tests for the new `generate_classes` function, specifically that the build-time generate classes produce the same objects as the run-time classes by comparing their `repr`s.",rmarren1,10272301,closed,False,2018-06-13T11:43:26+00:00,2018-07-27T00:35:34+00:00,2018-07-27T00:35:34+00:00,,d4141e7cbf12841a013c2d9177c12771603a366b,unknown,0,0,0,0,0,8,,,
+plotly/dash,195360905,273,Give a more informative error for JSON not serializable. (#269),"Fix for #269 
+when a non JSON serializable object is returned from a dash callback, the following exception is raised:
+```
+dash.exceptions.ReturnValueNotJSONSerializable:
+Callback for property `<property>` from component id `<id>`
+returned a value `<value>` of type `<type>`,
+which is not JSON serializable.
+```
+
+an example app:
+```
+import dash
+import dash_html_components as html
+from dash.dependencies import Input, Output
+
+app = dash.Dash("""")
+
+app.layout = html.Div([
+    html.Div(id='output'),
+    html.Button(id='button')
+])
+
+
+@app.callback(Output('output', 'children'),
+              [Input('button', 'n_clicks')])
+def test(n_clicks):
+    if n_clicks:
+        return dash
+    return ""HELLO WORLD""
+
+
+app.run_server()
+```
+results in:
+```
+dash.exceptions.ReturnValueNotJSONSerializable:
+Callback for property `children` from component id `output`
+returned a value `<module 'dash' from '/home/ryan/Dash/dash/dash/__init__.py'>` of type `module`,
+which is not JSON serializable.
+```
+
+when the button is clicked (and returns the dash module rather than a value).",rmarren1,10272301,closed,False,2018-06-17T04:30:12+00:00,2018-08-01T14:46:39+00:00,2018-08-01T14:46:39+00:00,2018-08-01T14:46:39+00:00,30353a9911bfad40b3f41a119b9ed86f52c28ad6,unknown,149,10,4,8,5,14,,,
+plotly/dash,196444477,275,Improves cross-browser compatibility,Adds meta tags recommended by [Bootstrap 3.3 basic template](https://getbootstrap.com/docs/3.3/getting-started/#template) for cross-browser compatibility. Relates to #170 ,amarvin,10762127,closed,False,2018-06-21T13:02:27+00:00,2018-08-16T20:53:10+00:00,2018-08-01T22:14:59+00:00,,538ab8b46650877a339bc90b853909f35c81fa2c,unknown,2,0,1,2,1,15,,,
+plotly/dash,198182287,276,IDE support,"This builds on https://github.com/plotly/dash/pull/271 and adds explicit arguments to generated dash component python class `__init__` functions (rather than `**kwargs`), which improves experience in an IDE.
+
+### Atom example
+![atom](https://user-images.githubusercontent.com/10272301/42038964-3c418344-7aba-11e8-99d2-171bea28366d.gif)
+
+### Pycharm example
+![pycharm](https://user-images.githubusercontent.com/10272301/42039009-5ad7064e-7aba-11e8-9884-19d598e9e093.gif)
+
+### Jupyter Notebook example
+![jupyter](https://user-images.githubusercontent.com/10272301/42040884-b0dde5a4-7abe-11e8-8384-e8ed7407fede.gif)
+
+##### Notes
+* If `dash_html_components` or `dash_core_components` are updated build using this version of the `dash` module, a user must also update `dash` since a new function `_explicitize_args` is added to `dash.development.base_component`. There are workarounds for this (putting the new function in the archetype generator or into the __init__.py file, or any shared file in a component module), but I think they are messy since it separates base component code into multiple repositories. I will add an exception to both of the `dash-*-components` packages that say to download the new `dash` version.
+* Autocomplete functions which rely on the `inspect` would not work for python2. They work for python 3 since we are able to change the function signature of `Component.__init__` to be correct even though it is actually `(*args, **kwargs)` after the `_explicitize_args` decorator is applied. This did not matter for Atom and PyCharm, but it seems Jupyter uses the inspect module to perform autocomplete.
+* Installing this new `dash` version and keeping old `dash_*_components` modules auto-magically adds the auto-complete functionality to Jupyter notebooks, but not Atom or PyCharm.
+
+
+
+",rmarren1,10272301,closed,False,2018-06-28T23:50:50+00:00,2018-10-11T10:33:56+00:00,2018-08-01T20:33:33+00:00,2018-08-01T20:33:33+00:00,8a9820c484d987fef5bfe0f5e9b8d51bcc0e5fc1,unknown,463,26,7,15,2,9,,,
+plotly/dash,200773138,286,Assets files & index customizations,"## Assets includes & index customization
+
+Solution for #265 Proposal for Offline CSS and JS and Customizable `index.html`
+
+#### Assets include
+
+Dash will now look for a folder named `assets` on the current work directory, if one is found, it will walk that directory and include js and css files on the index.
+
+Related configs:
+
+```python
+import dash
+
+app = dash.Dash()
+
+# default values
+app.config.assets_folder = 'assets'     # The path to the assets folder.
+app.config.include_asset_files = True   # Include the files in the asset folder
+app.config.assets_external_path = ''    # The external prefix if serve_locally == False
+app.config.assets_url_path = '/assets'  # the local url prefix ie `/assets/*.js`
+```
+
+Supported files:
+
+- `.js`, javascript files will be included after the components libs and before the dash-render.
+- `.css`, stylesheets will be included as a `<link>` in the head.
+- `favicon.ico`, include as a `<link>` in the head.
+
+The files are included in alphabetic order.
+The directories can be nested.
+
+Advanced use:
+
+To host your assets content externally:
+
+- set `app.scripts.config.serve_locally = False`
+- `app.config.assets_external` to your base host url, ie `http://bucket.s3.amazonaws.com/`
+- `app.config.include_asset_files` must still be set to `True` for the files to be indexed by dash.
+- Duplicate the file structure in your assets folder to your file hoster and the files will be loaded from there instead. 
+
+#### Index customization
+
+##### Meta tags
+
+It is now possible to add meta tags to the index of dash.
+
+Example:
+```python
+import dash
+
+metas = [
+    {'name': 'description', 'content': 'My description'}
+]
+
+app = dash.Dash(meta_tags=metas)
+
+# alternatively
+app.add_meta_tag({'http-equiv': 'X-UA-Compatible', 'content': 'IE=edge'})
+```
+
+##### Customizing the index
+
+Add an `index_string` to change the default index dash use.
+
+```python
+import dash
+
+app = dash.Dash()
+app.index_string = '''
+<!DOCTYPE html>
+<html>
+    <head>
+        {%metas%}
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        <div>My Custom header</div>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+        </footer>
+        <div>My Custom footer</div>
+    </body>
+</html>
+'''
+```
+
+The `{%key%}`s will be formatted like in the default index.
+
+Available keys:
+```
+{%metas%}        # optional - The registered meta tags.
+{%favicon%}      # optional - A favicon link tag if found in `assets`.
+{%css%}          # optional - link tags to css resources.
+{%config%}       # required - Config generated by dash for the renderer.
+{%app_entry%}    # required - The container where dash react components are rendered.
+{%scripts%}      # required - Collected dependencies scripts tags.
+```
+
+Also added `interpolate_index` method on Dash, override it to get the context values of the index before rendering.
+
+```python
+import dash
+
+class CustomDash(dash.Dash):
+    def interpolate_index(self,
+                          metas, title, css, config,
+                          scripts, app_entry, favicon):
+        return '''
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>My App</title>
+            </head>
+            <body>
+                
+                <div id=""custom-header"">My custom header</div>
+                {}
+                {}
+                <div id=""custom-footer"">My custom footer</div>
+            </body>
+        </html>
+        '''.format(app_entry, scripts)
+```
+
+I added tests for the meta keys and index customization. For the assets, I made a test in an external project to test if the files are included in that project, @plotly/dash I need help to integrate that test to run with the other tests.
+",T4rk1n,9417722,closed,False,2018-07-11T17:28:03+00:00,2023-10-11T10:54:50+00:00,2018-07-25T16:45:43+00:00,2018-07-25T16:45:43+00:00,54ca4a376ec349639da5140f1e2c42a739815626,unknown,414,33,17,28,34,20,,,
+plotly/dash,201270009,288,IDE with defaults,"Adds default arguments to build-time generated python files.
+
+In this PR:
+* `None` replaces the javascript `null`
+* `Component._NO_DEFAULT_ARG` is given for properties with no default argument
+* The python `True, False` are in place of the javascript `true, false`
+* Javascript objects are converted to python dictionaries
+
+Example:
+```
+class Graph(Component):
+    """"""docstring'""""""
+    @_explicitize_args
+    def __init__(self, id=Component._NO_DEFAULT_ARG, clickData=None, hoverData=None, clear_on_unhover=False, selectedData=None, relayoutData=None, figure={'data': [], 'layout': {}}, style=Component._NO_DEFAULT_ARG, className=Component._NO_DEFAULT_ARG, animate=False, animation_options={'frame': {'redraw': False}, 'transition': {'duration': 750, 'ease': 'cubic-in-out'}}, config={'staticPlot': False, 'editable': False, 'edits': {'annotationPosition': False, 'annotationTail': False, 'annotationText': False, 'axisTitleText': False, 'colorbarPosition': False, 'colorbarTitleText': False, 'legendPosition': False, 'legendText': False, 'shapePosition': False, 'titleText': False}, 'autosizable': False, 'queueLength': 0, 'fillFrame': False, 'frameMargins': 0, 'scrollZoom': False, 'doubleClick': 'reset+autosize', 'showTips': True, 'showAxisDragHandles': True, 'showAxisRangeEntryBoxes': True, 'showLink': False, 'sendData': True, 'linkText': 'Edit chart', 'showSources': False, 'displayModeBar': 'hover', 'modeBarButtonsToRemove': [], 'modeBarButtonsToAdd': [], 'modeBarButtons': False, 'displaylogo': True, 'plotGlPixelRatio': 2, 'topojsonURL': 'https://cdn.plot.ly/', 'mapboxAccessToken': None}, **kwargs):
+        
+```
+
+see also:
+https://github.com/plotly/dash-core-components/pull/234
+https://github.com/plotly/dash-html-components/pull/51
+",rmarren1,10272301,closed,False,2018-07-13T11:56:53+00:00,2019-02-27T21:50:37+00:00,2019-02-27T21:50:36+00:00,,8e37d510c352c1779e0ec62a82f63634250aac4b,dirty,513,41,8,13,0,3,,,
+plotly/dash,201793361,294,Error when no layout is present.,"Fixes https://github.com/plotly/dash/issues/220, https://github.com/plotly/dash/issues/287",rmarren1,10272301,closed,False,2018-07-17T00:17:36+00:00,2018-07-24T17:15:46+00:00,2018-07-24T17:15:46+00:00,2018-07-24T17:15:46+00:00,ca570d7a3378b8e42f484ed93a1265006fbd0d77,unknown,14,1,3,3,2,7,,,
+plotly/dash,204200698,305,Add `external_js/css_urls` to dash init.,"Solution for #302.
+
+Add two keywords arguments to `Dash.__init__`:
+
+- `external_scripts_urls` to include javascript files.  
+- `external_css_urls` to include stylesheets.
+
+They are both list of urls:
+
+```python
+import dash
+
+external_js = [
+    'https://www.google-analytics.com/analytics.js',
+    'https://cdn.polyfill.io/v2/polyfill.min.js'
+]
+
+external_css = [
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+    'https://codepen.io/chriddyp/pen/bWLwgP.css'
+]
+
+app = dash.Dash(
+    external_script_urls=external_js, 
+    external_css_urls=external_css)
+```
+",T4rk1n,9417722,closed,False,2018-07-26T16:37:42+00:00,2018-08-14T16:39:09+00:00,2018-08-02T15:27:54+00:00,2018-08-02T15:27:54+00:00,1f27bac61fc30f0480f585bebbc43c861cb5adb3,unknown,78,12,5,6,2,10,,,
+plotly/dash,204660359,307,[WIP] Dash Dev Tools -- backend,"This solution uses the flask `got_request_exception` method to call a block of code before an exception is raised in the Dash backend when `debug=True`. In this block of code, we use socket.io (Flask-SocketIO) to emit an 'error' event from the namespace `/{prefix}_dash-errors` endpoint which includes error information like the Exception name, message, and traceback.
+
+Still need to figure out:
+* socket.io prints logs every couple of seconds which is annoying, can't figure out how to turn them off.
+* does wrapping the server in a SocketIO instance in this line: `socketio = SocketIO(self.server)` break anything in servers which use Dash plus some other Flask plugins?",rmarren1,10272301,closed,False,2018-07-29T20:40:19+00:00,2018-08-02T02:10:22+00:00,2018-08-02T02:10:22+00:00,,250e41776c3b7269c68515a9478cf962eb24e710,unknown,28,2,3,4,0,1,,,
+plotly/dash,205175659,309,Bust the assets cache on modification.,"Append time modified as query string to assets urls to trick the cache to refresh the file.
+
+cc @plotly/dash
+
+Resolves #303 ",T4rk1n,9417722,closed,False,2018-07-31T16:45:33+00:00,2018-08-10T21:04:23+00:00,2018-08-10T20:32:08+00:00,2018-08-10T20:32:08+00:00,7d847c6e25885bb5b02b769ccfefe5aef9ad724f,unknown,17,6,4,2,0,7,,,
+plotly/dash,205474679,314,Update changelog and version for #273,forgot :roll_eyes: ,rmarren1,10272301,closed,False,2018-08-01T16:01:40+00:00,2018-08-01T16:25:24+00:00,2018-08-01T16:24:48+00:00,2018-08-01T16:24:48+00:00,a7005b29b7fd622821df8ab4b84ccac8480a5bc2,unknown,5,1,2,1,0,1,,,
+plotly/dash,205556047,316,Add meta http-equiv for ie compatibility to the index by default.,"As discussed in #275, add `<meta http-equiv=""X-UA-Compatible"" content=""IE=8"">` to the index if it's not specified in the `meta_tags`.
+
+Should the meta tags be closed with '`/>` or just `>`  ? The HTML5 specification says it doesn't need it but it's needed by `xhtml`. We have `<!DOCTYPE html>` by default, but if someone changes it to something else it might needs it.",T4rk1n,9417722,closed,False,2018-08-01T21:16:56+00:00,2018-10-02T13:38:19+00:00,2018-08-01T21:59:35+00:00,2018-08-01T21:59:35+00:00,e3a5486126189628b4099fe08ca944b769de54d7,unknown,14,9,2,1,2,4,,,
+plotly/dash,205794498,318,"Add `assets_ignore` init keyword, regex filter for the assets files.","Resolves #306, add a regex ignore filter to the assets auto include on the index. 
+
+```python
+import dash
+
+app = dash.Dash(assets_ignore='.*ignored.*')
+```
+
+The ignored assets are still available from a request context (a callback):
+
+`flask.url_for('assets', filename='ignored.css')`
+
+They won't work with #309 .",T4rk1n,9417722,closed,False,2018-08-02T16:35:27+00:00,2018-09-07T18:29:43+00:00,2018-08-20T19:48:19+00:00,2018-08-20T19:48:18+00:00,e5f7d20e898e328fc66970b281750c0e73b0dd1b,unknown,19,5,5,2,0,4,,,
+plotly/dash,205874161,320,Disallow duplicate component ids.,"Fix #299.
+Raise `DuplicateIdError` if there is more than one component with the same id before rendering the first request.",T4rk1n,9417722,closed,False,2018-08-02T22:03:25+00:00,2018-08-13T16:49:14+00:00,2018-08-13T16:48:59+00:00,2018-08-13T16:48:59+00:00,a5b75920b160f925cb73f16e285797976000c4dc,unknown,27,8,4,3,0,3,chriddyp;rmarren1,,
+plotly/dash,206112423,322,Pathname prefix from environ variables.,"Fixes:
+
+- Take `requests_pathname_prefix` config when creating scripts tags.
+
+Added:
+
+- configs from init or from environ.
+  - If init is supplied, take that value, if not take from environ or default.
+  -  Dash environ variables starts with `DASH_` (eg: `DASH_ROUTES_PATHNAME_PREFIX`) 
+- `routes/requests_pathname_prefix` evaluation and checks.
+  - defaults to `'/'`
+  - `routes_pathname_prefix` must start/end with `/`.
+  - Cannot supply both `url_base_pathname` and `routes/requests_pathname_prefix`.
+  - `requests_pathname_prefix` must ends with `routes_pathname_prefix`
+  - If no other options is supplied and `DASH_APP_NAME` is in `os.environ`, format `requests_pathname_prefix` as `/{DASH_APP_NAME}{routes_pathname_prefix}`",T4rk1n,9417722,closed,False,2018-08-03T18:57:14+00:00,2018-08-14T14:57:07+00:00,2018-08-14T14:54:13+00:00,2018-08-14T14:54:13+00:00,7361db52690810891c5f68501eda1d71043cb777,unknown,247,9,7,6,7,7,,,
+plotly/dash,206846780,324,"Fix #321, add test case for prop-less components.","* Fix #321 
+* Add test case to make sure Dash can import prop-less components, using `dash_dangerously_set_inner_html.DangerouslySetInnerHTML` as the test component.",rmarren1,10272301,closed,False,2018-08-07T22:42:34+00:00,2018-08-10T19:36:18+00:00,2018-08-10T19:36:18+00:00,,ca722f292e2a374bed6212e8722f9340bb6eaf3e,unknown,20,3,5,1,1,2,chriddyp,,
+plotly/dash,207033532,325,Fix bugs in 0.23.1,"* Fix #321
+* Add test case to make sure Dash can import prop-less components, using dash_dangerously_set_inner_html.DangerouslySetInnerHTML as the test component.
+
+* Fix https://github.com/plotly/dash-html-components/issues/54
+* Add test case to make sure Dash can import components which use arguments that are Python keywords",rmarren1,10272301,closed,False,2018-08-08T14:46:43+00:00,2018-08-11T00:06:32+00:00,2018-08-11T00:06:32+00:00,2018-08-11T00:06:32+00:00,211558cf50cb6adb93a54f581b81593f84e6730a,unknown,38,8,8,5,1,0,,,
+plotly/dash,208161375,330,Check to make sure children are not nested lists. Fix plotly/dash-renderer#23,"Proposed fix to https://github.com/plotly/dash-renderer/issues/23
+
+This solution borrows heavily from https://github.com/plotly/dash/pull/273. Basically the same except instead of checking if values in the tree are a member of a valid set, we just check if the value is not a nested list.
+
+A major difference is that this check if performed before _each_ callback rather than being called only if `json.dumps` fails. In this case, `json.dumps` succeeds since nested arrays are valid JSON.
+
+Examples:
+```
+dash.exceptions.InvalidCallbackReturnValue: 
+The callback for property `children` of component `output`
+returned a tree with one value having type `list`
+which is not JSON serializable.
+
+The value in question is located at
+[*] list 
+
+
+and has string representation
+`['nested']`
+
+In general, Dash properties can only be
+dash components, strings, dictionaries, numbers, None,
+or un-nested lists of those.
+
+```
+```
+dash.exceptions.InvalidCallbackReturnValue: 
+The callback for property `children` of component `output`
+returned a tree with one value having type `list`
+which can not be serialized by Dash.
+
+The value in question is located at
+[*] Div 
+
+
+and has string representation
+`[['nested']]`
+
+In general, Dash properties can only be
+dash components, strings, dictionaries, numbers, None,
+or un-nested lists of those.
+```",rmarren1,10272301,closed,False,2018-08-14T03:45:56+00:00,2018-08-17T15:56:45+00:00,2018-08-17T15:56:44+00:00,,ae750f5079683972f652c77979fa2862cb449237,dirty,169,105,2,1,0,2,,,
+plotly/dash,208382715,333,PyPi README markdown setting added to setup.py.,"Fixes #180
+
+This adds the new setting to setup.py so that PyPi will render the
+markdown formatted README.",moorepants,276007,closed,False,2018-08-14T19:16:08+00:00,2018-08-20T18:42:34+00:00,2018-08-20T18:42:34+00:00,2018-08-20T18:42:34+00:00,936bd6a2285693b70848c0ddd65dbb013e5c1cea,unknown,1,0,1,1,0,1,,,
+plotly/dash,208425071,335,CSS/JS external resources loaded before the assets,"Ensure CSS/JS external resources are loaded before the assets, Fix #331.",T4rk1n,9417722,closed,False,2018-08-14T22:11:23+00:00,2018-09-09T11:51:34+00:00,2018-08-20T15:37:08+00:00,2018-08-20T15:37:07+00:00,4d93652e40b55eb94c75359f5d47013051839ecf,unknown,70,19,8,3,0,4,rmarren1,,
+plotly/dash,208447114,336,Change _validate_layout to accept functions that return layouts.,Fix https://github.com/plotly/dash/issues/334,rmarren1,10272301,closed,False,2018-08-15T00:42:30+00:00,2018-08-26T20:12:50+00:00,2018-08-26T20:12:50+00:00,2018-08-26T20:12:50+00:00,8d1c9cef22030420d2e256fcc9c7466781110807,unknown,21,4,6,7,2,4,,,
+plotly/dash,208948756,338,Update circle 2,"- Update the circle configs to use version 2.
+- Removed tox.
+- Add python 3.7 test environment.
+
+It's mostly the same as #222 but with python 3.7 tests. Pylint for python 3.7 has changed some rules naming so I created another .pylintrc for that one.",T4rk1n,9417722,closed,False,2018-08-16T18:41:13+00:00,2018-08-17T20:31:09+00:00,2018-08-17T20:26:44+00:00,2018-08-17T20:26:44+00:00,5fc998a117fadccc5eabbdd60b1afcf37376abbc,unknown,654,48,6,5,1,2,rmarren1,,
+plotly/dash,209142072,340,Validate component properties #264,"PR for #264 
+#### Current Prerelease
+```
+pip install dash==0.29.0rc8
+pip install dash-renderer==0.15.0rc1
+pip install dash-core-components==0.31.0rc2
+pip install dash-html-components==0.14.0rc3
+```
+
+Validation is on by default. To turn it off, you can set `app.config.disable_component_validation = True`
+
+#### Test Cases to run for demo
+```
+import dash
+import dash_html_components as html
+import dash_core_components as dcc
+import plotly.graph_objs as go
+from dash.dependencies import Input, Output
+
+app = dash.Dash()
+app.scripts.config.serve_locally=True
+
+app.layout = html.Div([
+    html.Button(id='click1', children='click to return bad Div children'),
+    html.Div(id='output1', **{'data-cb': 'foo'}),
+    html.Button(id='click2', children='click to return a bad figure'),
+    dcc.Graph(id='output2', figure={'data': [], 'layout': {}}),
+    html.Button(id='click3', children='click to return a bad radio'),
+    dcc.RadioItems(id='output3', options=[{'value': 'okay', 'label': 'okay'}]),
+    html.Button(id='click4', children='click to make a figure with no id'),
+    html.Div(id='output4'),
+])
+
+
+
+@app.callback(Output('output1', 'children'),
+              [Input('click1', 'n_clicks')])
+def crash_it1(clicks):
+    if clicks:
+        return [[]]
+    return clicks
+
+@app.callback(Output('output2', 'figure'),
+              [Input('click2', 'n_clicks')])
+def crash_it2(clicks):
+    if clicks:
+        return {'data': {'x': [1, 2, 3], 'y': [1, 2, 3], 'type': 'scatter'}, 'layout': {}}
+    return go.Figure(data=[go.Scatter(x=[1,2,3], y=[1,2,3])], layout=go.Layout()) 
+
+@app.callback(Output('output3', 'options'),
+              [Input('click3', 'n_clicks')])
+def crash_it3(clicks):
+    if clicks:
+        return [{'value': {'not okay': True}, 'labl': 'not okay'}]
+    return [{'value': 'okay', 'label': 'okay'}]
+
+@app.callback(Output('output4', 'children'),
+              [Input('click4', 'n_clicks')])
+def crash_it4(clicks):
+    if clicks:
+        return dcc.Graph()
+    return dcc.Graph(id='hi')
+
+app.run_server(debug=True, port=8050)
+```
+
+#### Example Error Messages
+```
+CallbackOutputValidationError: 
+
+
+A Dash Callback produced an invalid value!
+
+Dash tried to update the `figure` prop of the
+`Graph` with id `output2` by calling the
+`crash_it2` function with `(1)` as arguments.
+
+This function call returned `{'layout': {}, 'data': {'y': [1, 2, 3], 'x': [1, 2, 3], 'type': 'scatter'}}`, which did not pass
+validation tests for the `Graph` component.
+
+The expected schema for the `figure` prop of the
+`Graph` component is:
+
+***************************************************************
+{'validator': 'plotly_figure'}
+***************************************************************
+
+The errors in validation are as follows:
+
+* figure	<- Invalid Plotly Figure:
+
+
+    Invalid value of type '__builtin__.dict' received for the 'data' property of 
+        Received value: {'y': [1, 2, 3], 'x': [1, 2, 3], 'type': 'scatter'}
+
+    The 'data' property is a tuple of trace instances
+    that may be specified as:
+      - A list or tuple of trace instances
+        (e.g. [Scatter(...), Bar(...)])
+      - A list or tuple of dicts of string/value properties where:
+        - The 'type' property specifies the trace type
+            One of: ['mesh3d', 'splom', 'scattercarpet',
+                     'scattergl', 'scatterternary', 'pie',
+                     'surface', 'histogram', 'ohlc', 'heatmapgl',
+                     'cone', 'scatterpolar', 'table',
+                     'scatterpolargl', 'histogram2d', 'contour',
+                     'carpet', 'box', 'violin', 'bar',
+                     'contourcarpet', 'area', 'choropleth',
+                     'candlestick', 'streamtube', 'parcoords',
+                     'heatmap', 'barpolar', 'scattermapbox',
+                     'scatter3d', 'pointcloud',
+                     'histogram2dcontour', 'scatter', 'scattergeo',
+                     'sankey']
+
+        - All remaining properties are passed to the constructor of
+          the specified trace type
+
+        (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
+
+```
+```
+CallbackOutputValidationError: 
+
+
+A Dash Callback produced an invalid value!
+
+Dash tried to update the `options` prop of the
+`RadioItems` with id `output3` by calling the
+`crash_it3` function with `(1)` as arguments.
+
+This function call returned `[{'value': {'not okay': True}, 'labl': 'not okay'}]`, which did not pass
+validation tests for the `RadioItems` component.
+
+The expected schema for the `options` prop of the
+`RadioItems` component is:
+
+***************************************************************
+{'schema': {'allow_unknown': False,
+            'nullable': False,
+            'schema': {'disabled': {'type': 'boolean'},
+                       'label': {'type': 'string'},
+                       'value': {'type': 'string'}},
+            'type': 'dict'},
+ 'type': 'list'}
+***************************************************************
+
+The errors in validation are as follows:
+
+* options
+ * 0
+  * value	<- must be of string type
+  * labl	<- unknown field
+
+```
+```
+ComponentInitializationValidationError: 
+
+
+A Dash Component was initialized with invalid properties!
+
+Dash tried to create a `RadioItems` component with the
+following arguments, which caused a validation failure:
+
+***************************************************************
+{'id': 'output3', 'options': [{'label': 'okay', 'value': {}}]}
+***************************************************************
+
+The expected schema for the `RadioItems` component is:
+
+***************************************************************
+{'className': {'type': 'string'},
+ 'dashEvents': {'allowed': ['change'], 'type': ('string', 'number')},
+ 'fireEvent': {},
+ 'id': {'type': 'string'},
+ 'inputClassName': {'type': 'string'},
+ 'inputStyle': {'type': 'dict'},
+ 'labelClassName': {'type': 'string'},
+ 'labelStyle': {'type': 'dict'},
+ 'options': {'schema': {'allow_unknown': False,
+                        'nullable': False,
+                        'schema': {'disabled': {'type': 'boolean'},
+                                   'label': {'type': 'string'},
+                                   'value': {'type': 'string'}},
+                        'type': 'dict'},
+             'type': 'list'},
+ 'setProps': {},
+ 'style': {'type': 'dict'},
+ 'value': {'type': 'string'}}
+***************************************************************
+
+The errors in validation are as follows:
+
+
+* options
+ * 0
+  * value	<- must be of string type
+
+```
+
+#### PropTypes to Cerberus reference
+| PropType  | Cerberus Schema Validated Against | Known Current Limitations |
+| ---------- | ------------------------------------ | -------------------------- |
+| `array`     | `{'type': 'list'}` | |
+| `bool`      | `{'type': 'boolean'}` | |
+| `func`      | `{}` | No validation occurs. |
+| `object`      | `{'type': 'dict'}` | Validates that input is explicitly a `dict` object. We cannot be more general (e.g. `collections.abc.Mapping`) since the core `Component` is an instance of that.|
+| `string`    | `{'type': 'string'}`  | |
+| `symbol`    | `{}`  | No validation occurs |
+| `node`    | `{'anyof': [{'type': 'component'}, {'type': 'boolean'}, {'type': 'number'}, {'type': 'string'}, {'type': 'list', 'schema': {'anyof': [{'type': 'component'}, {'type': 'boolean'}, {'type': 'number'}, {'type': 'string'}]}}]}`  | |
+| `instanceOf(Object)`    | `{}`  | No validation occurs |
+| `oneOf(['val1', 2])`    | `{'allowed': [None, 'val1', 2]}`  | Strings will have `'` characters stripped off each end. This is because `metadata.json` generation serializes the literal values as json, so for example `PropTypes.oneOf(['News', 'Photos'])` serializes to `[""'News'"", ""'Photos'""]`.  https://github.com/reactjs/react-docgen/issues/57 |
+| `oneOfType( [ PropTypes.string, PropTypes.bool ] )`    | `{'anyof': [{'type': 'string', 'type': 'boolean'}]}`  |  If one of the types is a `PropType` that cannot be validated individually (e.g. `PropType.func`), no validation will occur and the schema will effectively be `{}` |
+| `arrayOf( PropTypes.number )`    | `{'type': 'list', 'schema': {'type': 'number'}}`  |  |
+| `objectOf( PropTypes.number )`    | `{'type': 'dict', 'valueschema': {'type': 'number'}}`  |  |
+| `shape( { k1: PropTypes.string, k2: PropTypes.number } )`    | `{'type': 'dict', 'allow_unknown': False, 'schema': {'k1': {'type': 'string}, 'k2': {'type': 'number'}}}`  |  |
+| `any`    | `{'type': ('boolean', 'number', 'string', 'dict', 'list')}`  |  |
+
+",rmarren1,10272301,closed,False,2018-08-17T13:05:27+00:00,2018-11-08T20:03:44+00:00,2018-11-08T20:03:43+00:00,,7355ec283c0168dbdfd350c2befee12821172ba7,dirty,1258,145,19,96,40,37,,,
+plotly/dash,209581733,343,Only create an assets blueprint if it's not registered.,"Only register the assets blueprint once per flask server, fix #342.",T4rk1n,9417722,closed,False,2018-08-20T16:50:32+00:00,2018-08-27T14:59:09+00:00,2018-08-27T14:59:02+00:00,2018-08-27T14:59:02+00:00,2c1d39f8b2fa2883857aa30bbb4245e0fe2a64e0,unknown,10,5,3,2,0,0,rmarren1,,
+plotly/dash,210711607,346,Make `Dash` instances use `name` attr of Flask server if one is provided,Fixes #345,ned2,2831640,closed,False,2018-08-24T11:16:31+00:00,2022-12-11T05:40:32+00:00,2018-08-25T06:19:41+00:00,2018-08-25T06:19:41+00:00,0543e3d546ec26918dd59606d238352570f2cab3,unknown,1,0,1,1,0,1,,,
+plotly/dash,210833209,350,Use HTML5 syntax for the meta tag,"Examples of the HTML5 meta tags here -> https://www.w3schools.com/tags/tag_meta.asp
+shows that it does not have an ending slash.
+",jbampton,418747,closed,False,2018-08-24T19:50:55+00:00,2018-09-20T22:46:45+00:00,2018-09-20T22:10:32+00:00,2018-09-20T22:10:32+00:00,e725e707e9bad9ae6875c0d375ec55154ab1d88f,unknown,1,1,1,1,0,1,,,
+plotly/dash,210843822,351,Prefix assets with `requests_pathname_prefix`.,"Fix #349, the assets were not prefixed with the `requests_pathname_prefix` resulting in 404 on the dash deployment server.
+
+- Add `get_asset_url` method to dash, retrieve the url of an asset by it's filename (eg: `app.get_asset_url('style.css')` will return `/assets/style.css`), it is automatically prefixed with `requests_pathname_prefix`.",T4rk1n,9417722,closed,False,2018-08-24T20:41:15+00:00,2018-08-27T21:05:09+00:00,2018-08-27T21:03:40+00:00,2018-08-27T21:03:40+00:00,7219b3d9f827e95bbbace801aa955b8c21ff8ffe,unknown,46,4,5,2,0,3,michaelbabyn,,
+plotly/dash,210847677,352,Pylint and Flake8 enabled for the tests folder,"Remove duplicate key value pair from python dictionary.  Order imports.
+
+Pylint testing now added for the 'tests' folder with 5 rules enabled.
+
+duplicate-key (W0109):
+ Duplicate key %r in dictionary Used when a dictionary expression binds the same key multiple times.
+
+multiple-imports (C0410):
+ Multiple imports on one line (%s) Used when import statement importing multiple modules is detected.
+
+wrong-import-order (C0411): Used when PEP8 import order is not respected (standard imports first, then third-party libraries, then local imports)
+
+wrong-import-position (C0413):
+ Import “%s” should be placed at the top of the module Used when code and imports are mixed
+
+ungrouped-imports (C0412):
+Imports from package %s are not grouped Used when imports are not grouped by packages
+
+Flake8 rules have all been added as well.
+
+https://lintlyci.github.io/Flake8Rules/",jbampton,418747,closed,False,2018-08-24T20:59:40+00:00,2018-11-08T14:22:51+00:00,2018-11-08T14:14:43+00:00,2018-11-08T14:14:43+00:00,3533073d1e2de5ad208a278d604822afbb9c57fa,unknown,11,10,7,1,0,8,,,
+plotly/dash,212493225,362,Hot reload,"**Available with the following versions:**
+- `dash==0.29.0rc4`
+- `dash-renderer==0.15.0rc2`
+
+Reload the browser when files are changed.
+
+- Use the flask debug reloader to reset the hash on python file change.
+- Watch the assets files and change the hash on assets modified.
+- Add a route to serve the reload hash.
+
+Dev tools params (in `app.run_server` or `app.enable_dev_tools`
+
+- `dev_tools_hot_reload`, bool set to true to enable hot reload (default=False).
+- `dev_tools_hot_reload_interval`, int, interval at which the renderer will request the reload hash (default=3000).
+- `dev_tools_hot_reload_watch_interval`, float, The delay between each walk of the assets folder to detect file changes.
+- `dev_tools_silence_routes_logging`, disable the route logging.
+
+Hot reload is activated by default when `debug=True` !!
+
+Need plotly/dash-renderer#73.
+
+Resolves #66.
+Fix #341.",T4rk1n,9417722,closed,False,2018-08-31T21:01:30+00:00,2018-11-15T00:34:19+00:00,2018-11-14T21:06:24+00:00,2018-11-14T21:06:24+00:00,f590166be2ca476c8970512fd9b23aaf26541ae8,unknown,306,29,8,29,25,21,ned2;chriddyp,,
+plotly/dash,213015189,365,Fix url_base_pathname init configs,"- Set `url_base_pathname` to None in `dash.__init__` Fix #364 .
+- Fix circleci bad cache key (was the same key for both python 3.6 and python 2.7 causing issues).",T4rk1n,9417722,closed,False,2018-09-04T15:21:50+00:00,2018-09-07T18:29:33+00:00,2018-09-06T17:27:00+00:00,2018-09-06T17:27:00+00:00,78b84cada4927bfa02bc53c44cb765880eafe2c5,unknown,14,6,6,4,0,1,ned2,,
+plotly/dash,213336913,367,Standalone dash renderer (for custom hooks) - March 1,"This enables the `dash-renderer` to be called as a standalone class, so that we can pass config objects to it. 
+
+Depends on [this PR that enables dash-renderer to be a standalone class](https://github.com/plotly/dash-renderer/pull/75) to be merged (also see this PR for an example of how to use a custom `DashRenderer` instance).",valentijnnieman,6509622,closed,False,2018-09-05T15:29:46+00:00,2019-03-01T03:13:14+00:00,2019-02-28T16:27:52+00:00,2019-02-28T16:27:52+00:00,f22973d260474eadca9fe36fec07d64c97fa57ee,unknown,215,8,2,37,24,2,,,
+plotly/dash,213698040,369,Add unminified components bundle support.,"Add support for serving unminified component bundles. Resolves #313.
+
+Enable with:
+
+```python
+app = dash.Dash(__name__, dev_tools_serve_dev_bundles=True)
+```
+
+The components libs needs a new key in the their `_js_dist`: `dev_package_path`.
+
+- [x] dash-html-components
+- [x] dash-core-components
+- [x] dash-renderer
+",T4rk1n,9417722,closed,False,2018-09-06T17:45:18+00:00,2019-02-01T02:41:38+00:00,2018-09-21T01:30:59+00:00,2018-09-21T01:30:59+00:00,f94991be2db9a3a640ea680c2cf872611f857eb6,unknown,79,16,7,13,1,10,rmarren1,,
+plotly/dash,213997587,372,Only run percy on 2.7.,"Only enable percy build on a single test container.
+
+#370",T4rk1n,9417722,closed,False,2018-09-07T17:51:30+00:00,2018-09-07T20:28:18+00:00,2018-09-07T20:28:13+00:00,2018-09-07T20:28:13+00:00,cc85eb4299a1dd70f541ca54f0340d4667f41a0b,unknown,2,0,1,2,0,3,valentijnnieman;rmarren1,,
+plotly/dash,214023648,374,Use `assets_url_path` in `get_asset_url`.,"Fix #373, use `assets_url_path` in `get_asset_url`.
+",T4rk1n,9417722,closed,False,2018-09-07T19:50:33+00:00,2018-09-10T15:35:42+00:00,2018-09-10T15:35:24+00:00,2018-09-10T15:35:24+00:00,dbcb2a128ddec239842d9d61ffcb20c9a7fb3198,unknown,25,9,6,2,0,1,michaelbabyn,,
+plotly/dash,214114164,377,Move add_url function definition out of Dash.__init__(),"First of all, thanks for a great tool!
+
+This PR moves the `add_url` utility function out of the `__init__` method of the `Dash` class. This change makes it easier to subclass `Dash`. 
+
+My use case is adding authentication via [flask_login](https://flask-login.readthedocs.io/en/latest/). Pulling `add_url` out lets me subclass like so:
+
+```
+  class MyDash(Dash):                                                                                                                                                     
+                                                               
+      def add_url(self, name, view_func, methods=('GET',)):                                                                                                               
+          self.server.add_url_rule(                                                                                                                                       
+              name,                                                                                                                                                       
+              view_func=login_required(view_func),                                                                                                                        
+              endpoint=name,                                                                                                                                              
+              methods=list(methods)                                                                                                                                       
+          )  
+```
+Note that each `view_func` is wrapped by `login_required` so all my dash pages now require authentication.
+
+I think this addresses some of the comments in #214.",hinnefe2,10620443,closed,False,2018-09-08T20:56:37+00:00,2018-10-08T02:40:17+00:00,2018-10-08T02:15:51+00:00,2018-10-08T02:15:51+00:00,71fb742a34c3e63434202c9676ec9f6191909027,unknown,28,20,3,11,1,9,,,
+plotly/dash,214392008,379,Create CONTRIBUTING.md,"Just noticed we did not have one of these for Dash. I added a few checklists for our own use, I use these before making any permanent changes like merging a PR and releasing a package
+
+I added the `git tag` step since a few people in the community have requested we do this.",rmarren1,10272301,closed,False,2018-09-10T17:45:55+00:00,2019-09-25T10:02:52+00:00,2018-10-02T02:51:42+00:00,2018-10-02T02:51:41+00:00,99867f5b2e6d845dd6e8588b65698f0d7075ec24,unknown,99,0,1,13,12,3,,,
+plotly/dash,215348536,387,Add cache control header and cache busting urls to components suites.,"Fix #380.
+
+- Add `Cache-Control` header to files served by `serve_component_suites`.
+- Append a time modified query parameter to the components suites urls.",T4rk1n,9417722,closed,False,2018-09-13T16:54:56+00:00,2019-02-01T02:41:39+00:00,2018-09-19T14:36:54+00:00,2018-09-19T14:36:54+00:00,4a3fd72729407ec810e9f7ba25331af66f8b056a,unknown,30,6,4,2,0,1,rmarren1,,

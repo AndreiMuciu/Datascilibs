@@ -1,0 +1,343 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+fastai/fastbook,381699770,2,"Add missing ""layer""","Currently:   The gradients of every are calculated for us by PyTorch
+Should be: The gradients of every **layer** are calculated for us by PyTorch",somnathrakshit,12930218,closed,False,2020-02-29T02:51:16+00:00,2020-02-29T18:31:27+00:00,2020-02-29T18:31:27+00:00,2020-02-29T18:31:27+00:00,e7b472064774ce7147f99a11a1fcf067a5be27c9,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,381775353,3,minor spelling tweaks,,brettkoonce,11281814,closed,False,2020-02-29T06:18:38+00:00,2020-02-29T20:00:33+00:00,2020-02-29T18:31:10+00:00,2020-02-29T18:31:10+00:00,5ca8bf280f5081406078b6c719a7d46a5e08e789,unknown,52,52,17,1,0,3,,,
+fastai/fastbook,381845623,7,Hyperlink DOI to preferred resolver,See diff & https://www.doi.org/doi_handbook/3_Resolution.html#3.8 ;-),katrinleinweber,9948149,closed,False,2020-02-29T12:46:04+00:00,2020-02-29T18:30:23+00:00,2020-02-29T18:30:23+00:00,2020-02-29T18:30:23+00:00,32f5baae738317978dcdbd82e705219909ad5bfb,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,381853063,8,add requirements.txt,May be helpful for newbies. Just looked at `utils.py` --- did I miss anything?,tzekid,6037154,closed,False,2020-02-29T13:38:33+00:00,2020-02-29T18:30:00+00:00,2020-02-29T18:30:00+00:00,2020-02-29T18:30:00+00:00,27ca0ff04c7048d09863ccd2771b0a6830380abc,unknown,11,0,1,1,0,0,,,
+fastai/fastbook,382065098,11,cosmetic fixes 01,"I'll do this one and check in before happily looking at more
+
+it wasn't self evident how readers are already in a jupyter notebook and running import and gpu cells, but the material to select a cloud server GPU and get to the notebook was provided to them already / elsewhere?
+
+I haven't edited some candidates for this, but : can i check if its a significant goal to assist 2nd language readers? If so, we can edit out contractions e.g. We'll changes to we will . I found contractions ridiculously hard when I learnt my other languages. the other guides that help are - really long sentences as a red flag and also try to put active sentences with the important things first. sorry - I know you and Sylvain have written lots and know this - but I'm picturing an overseas high school student, not even a US based grad student from overseas.",bradsaracik,35494318,closed,False,2020-03-01T16:32:45+00:00,2020-03-04T13:58:46+00:00,2020-03-03T14:14:01+00:00,,59acd3fc3c8fa322f5bfeff0eccb6e33c46e21b3,unknown,105,54,150,16,1,8,,,
+fastai/fastbook,382067079,12,spelling - The to They,**They** realised that a simplified model of a real neuron could be represented using simple addition and thresholding.,anshuljoshi,5634928,closed,False,2020-03-01T16:50:55+00:00,2020-03-02T20:10:27+00:00,2020-03-02T20:10:27+00:00,2020-03-02T20:10:27+00:00,d5a9996f5a8ca4203e8ad363db6011af804c44dd,unknown,2,2,1,1,0,1,,,
+fastai/fastbook,382071659,13,Fix spelling in 21_learner.ipynb,"What we really saying is
+
+now
+
+What we are really saying is",gnyami01,24321616,closed,False,2020-03-01T17:32:55+00:00,2020-03-02T20:10:48+00:00,2020-03-02T20:10:48+00:00,2020-03-02T20:10:48+00:00,e5e21c0f1359f354436f054d71fc3af3151fffcb,unknown,2,2,1,1,0,1,,,
+fastai/fastbook,382083455,14,"Spelling, fixing from ""transform twhich will"" to ""transform which will""",,AliceSum,21982975,closed,False,2020-03-01T19:21:32+00:00,2020-03-02T20:11:17+00:00,2020-03-02T20:11:17+00:00,2020-03-02T20:11:17+00:00,2b504ff971d195ae521b0fa4ec196e51ea2c23ed,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,382087753,15,"In 01_intro.ipynb: Corrected ""edit"" mode to ""command"" for kernel restart.","Corrected the mode for restarting kernel.
+In ""command"" mode, pressing `0` twice will restart the *kernel* instead of In ""edit mode"".",alephthoughts,35725314,closed,False,2020-03-01T20:05:20+00:00,2020-03-02T20:12:00+00:00,2020-03-02T20:12:00+00:00,,4a1a9876657468f63c3bfcd0d2111cecc28d9304,dirty,2,2,1,1,0,2,,,
+fastai/fastbook,382410756,16,cosmetic fixes 02,"Notebook 02 proofread. I've had a go at helping bridge the start which wasn't feeling right. hopefully thats in the direction you want
+
+note : contractions not removed as suggested in prev PR",bradsaracik,35494318,closed,False,2020-03-02T14:20:02+00:00,2020-03-04T13:58:46+00:00,2020-03-03T14:19:58+00:00,,354349a8e891c6067eac8b5bad264122929a546a,dirty,31,25,1,1,5,3,,,
+fastai/fastbook,382423456,17,lossless PNG compression,"used ImageOptim 1.8.8, Extra to Insane settings.",petecooper,226578,closed,False,2020-03-02T14:43:37+00:00,2020-03-02T19:58:09+00:00,2020-03-02T19:58:09+00:00,2020-03-02T19:58:09+00:00,273aa07b95d54c4136d6bfe73ca6d601e859be0a,unknown,0,0,147,1,0,2,,,
+fastai/fastbook,382609107,18,minor copy edits,,pfcrowe,49303905,closed,False,2020-03-02T21:09:30+00:00,2020-03-03T14:35:37+00:00,2020-03-03T14:35:36+00:00,,,dirty,96,48,1,1,1,2,,,
+fastai/fastbook,382760486,19,Quick proofread of chapter 14,"Went through and briefly proofread chapter 14 on deeper convnets; all changes are related to grammar.
+
+The final sentence in the chapter, which lies in the **Further research** subsection, doesn't actually have an action item attached to it:
+> Batch normalization isn't defined for a batch size of one, since the standard deviation isn't defined for a single item. 
+
+Should there be an invitation to explore alternate ideas, e.g., [Group Normalization](https://arxiv.org/abs/1803.08494)?
+",jwuphysics,3582121,closed,False,2020-03-03T06:00:47+00:00,2020-03-03T14:37:01+00:00,2020-03-03T14:29:15+00:00,2020-03-03T14:29:15+00:00,974c693de2afdb82fd46136ddf9dc242d46f1694,unknown,6,6,1,1,0,2,,,
+fastai/fastbook,383068033,20,fix minor typo,"replaces ""model model"" with ""model""",Vijayabhaskar96,17958636,closed,False,2020-03-03T17:01:43+00:00,2020-03-03T17:11:01+00:00,2020-03-03T17:11:01+00:00,2020-03-03T17:11:01+00:00,70a0b2d6faa16f238b043965fdfb28a725559009,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,383098549,21,proofread and minor changes to tabular,,bradsaracik,35494318,closed,False,2020-03-03T18:08:47+00:00,2020-03-06T12:35:48+00:00,2020-03-03T23:18:33+00:00,,aeb5284f70167fa2712673d23482b0af3ae2c12d,dirty,55,41,1,1,7,4,,,
+fastai/fastbook,383101891,22,Fixed Conclusion Ch. typos,,gregbruss,32633343,closed,False,2020-03-03T18:16:37+00:00,2020-03-03T23:19:13+00:00,2020-03-03T23:19:13+00:00,2020-03-03T23:19:13+00:00,83a4b5cedcb3eab4c71a1d9eb5cbdad470dcbf21,unknown,15,3,1,1,0,1,,,
+fastai/fastbook,383155387,23,typo,,pfcrowe,49303905,closed,False,2020-03-03T20:21:46+00:00,2020-03-03T23:22:27+00:00,2020-03-03T23:22:27+00:00,2020-03-03T23:22:27+00:00,5e7a4bae9c50e18e6f72ee4df9789175e57c90d7,unknown,1,1,1,3,0,1,,,
+fastai/fastbook,383156981,24,Fix typos in 1st half of 01_intro.ipynb,"01_intro.ipynb - minor spelling changes in first half of notebook
+people are smarter than today s 
+now
+people are smarter than today's 
+
+how modern neural networks handle each of these requirement
+now
+how modern neural networks handle each of these requirements
+
+Pres and chief scientist 
+Now 
+President and Chief Scientist
+
+place after you got more context from parts
+Now 
+place after you get more context from parts
+
+trying moving on anyway and make a note to come back to it later.
+Now
+try moving on anyway and make a note to come back to it later.
+
+we define the `Transform`s 
+Now
+we define the `Transforms`
+
+many pre-defined `Transform`s
+Now 
+many pre-defined `Transforms`",gnyami01,24321616,closed,False,2020-03-03T20:25:51+00:00,2020-03-03T23:22:00+00:00,2020-03-03T23:21:59+00:00,,,dirty,6,6,1,1,0,2,,,
+fastai/fastbook,383530037,25,"""In order to""","Changed ""other"" for  ""order"" in: ""The program's inputs are values that it processes in other to products its results""",alvarotap,61787129,closed,False,2020-03-04T12:41:29+00:00,2020-03-04T20:07:40+00:00,2020-03-04T20:07:40+00:00,2020-03-04T20:07:40+00:00,60f2d1056c3680401f02d33550ce0792953e1de4,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,383599006,26,Some typos,Some typos in chapter 1.,alvarotap,61787129,closed,False,2020-03-04T14:38:05+00:00,2020-03-04T20:05:29+00:00,2020-03-04T20:05:28+00:00,2020-03-04T20:05:28+00:00,bfb7cf584ca6740a298909d64cb160b9dc97985b,unknown,4,4,1,1,0,1,,,
+fastai/fastbook,383667540,27,Add missing requirement,,jrdi,67608,closed,False,2020-03-04T16:00:31+00:00,2020-03-04T20:01:48+00:00,2020-03-04T19:58:48+00:00,2020-03-04T19:58:48+00:00,47274faffcae9452bfea9deb2b5de9711bd5ff32,unknown,1,0,1,1,0,0,,,
+fastai/fastbook,383667984,28,Fix nlp minor typo,,jrdi,67608,closed,False,2020-03-04T16:01:12+00:00,2020-03-04T20:01:39+00:00,2020-03-04T19:58:23+00:00,2020-03-04T19:58:23+00:00,3eba99d9c0261f493d8793433caaffcf9ba737cb,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,383884030,29,fix the OR operator,"This is to define the training index as described in the book:
+""So we will define a narrower training dataset which consists only of the Kaggle training data from before November 2011 ...""
+
+I think the correct operator might be & instead of | below:
+cond = (df.saleYear<2011) | (df.saleMonth<10)",DavidykZhao,37813116,closed,False,2020-03-04T21:15:23+00:00,2020-03-05T21:37:39+00:00,2020-03-05T20:06:03+00:00,,7215e03400ec9990f9c1638528aa8108af45dcff,unknown,2,2,1,1,0,2,,,
+fastai/fastbook,384380218,30,proofread ethics,"Other note on the content:
+
+In the section on Representational Bias : the quote from the paper says ""may compound these imbalances""  - I wondered if this is then feedback or some other mechanism. The next lines are such that I think it is distinct - but I've not understood whats happening? I think the y axis is such that a 45degree slope would mean balanced predictions - is that right?
+
+
+positive examples on increasing diversity are always great- here's one in the software industry : https://research.curtin.edu.au/projects-expertise/institutes-centres/autism/",bradsaracik,35494318,closed,False,2020-03-05T16:35:27+00:00,2020-03-07T11:45:53+00:00,2020-03-05T20:11:17+00:00,2020-03-05T20:11:17+00:00,1d091931b55724d4b3e427ed166409c9a0b56a5e,unknown,30,55,1,1,0,2,,,
+fastai/fastbook,384526178,31,A small typo in 09_tabular,,DavidykZhao,37813116,closed,False,2020-03-05T22:10:58+00:00,2020-03-06T02:23:15+00:00,2020-03-06T02:23:15+00:00,2020-03-06T02:23:15+00:00,7de2389531b0314f76b8336511e6272f26ae27a6,unknown,2,2,1,1,0,1,,,
+fastai/fastbook,384567549,32,Small typo in 01_intro.ipynb,"And by the way, is this the right way to correct typos in notebooks?",lawwu,9869041,closed,False,2020-03-06T00:23:27+00:00,2020-03-06T02:22:52+00:00,2020-03-06T02:22:42+00:00,,24ac7d5a6064852fe28486c2d9dcb39d2f0290fc,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,384877803,33,proofread convolutions,"I'm sleepy for this one, so sure I missed stuff.
+
+Is it an accident that left_edge is [-1,1,0] not [-1,0,1] rows like top_edge'? I considered changing it, or even leaving both (maybe even a 3rd case with -2,0,2 in the middle) for reader to play - so thats an idea for you to consider
+
+I gotta ask - I think some of these are using color others colour. math and maths etc go Aussie :)
+
+The final further research item #4 reads as a statement - there's no variance for a batch size 1. what was the intended research?",bradsaracik,35494318,closed,False,2020-03-06T15:22:26+00:00,2020-03-15T19:10:10+00:00,2020-03-15T19:09:36+00:00,2020-03-15T19:09:36+00:00,57c5dad7c094607afc2fec5bc355ff1d47492e22,unknown,16,16,1,1,0,2,,,
+fastai/fastbook,385007545,34,copy edit,some minor corrections to ch2,pfcrowe,49303905,closed,False,2020-03-06T20:28:11+00:00,2020-03-06T20:35:39+00:00,2020-03-06T20:35:39+00:00,,1e046f64b8c0aff04a4aac02c4af1042f7e8456a,unknown,24,24,1,2,0,1,,,
+fastai/fastbook,385010987,35,copy edit,"minor corrections ch2, 3, 4",pfcrowe,49303905,closed,False,2020-03-06T20:37:16+00:00,2020-03-16T18:39:26+00:00,2020-03-16T18:39:25+00:00,,21b99ffb9dcc2ae8b4d064043aabb86685276d86,dirty,70,70,3,7,0,7,,,
+fastai/fastbook,385150499,36,proofread ResNet,"query on the questionaire - is adaptive pooling covered in the text? My reading was more - we want to do average pooling and there's some pytorch thing to handle different sizes that we're not too worried about it. then i saw the question - so maybe I'm missing something there
+
+the 1x1 convolution - I think the approach here would work great in a course - but not sure in the book. If someone doesnt try it out or know what a dot product is, I think they'll just skim by and not really understand the question at the end of chapter. 
+
+another exercise that might be nice - suggest the reader print out what you have created and said is a resnet 18 and a resnet 50 and they can try count the layers...",bradsaracik,35494318,closed,False,2020-03-07T14:35:44+00:00,2020-03-15T19:08:21+00:00,2020-03-15T19:08:21+00:00,2020-03-15T19:08:21+00:00,b7a23bddc4acc7898a33f3151458de61d56c0365,unknown,20,34,1,1,0,1,,,
+fastai/fastbook,385196434,37,s/malignent/malignant,,rahimnathwani,891558,closed,False,2020-03-07T21:43:32+00:00,2020-03-15T19:07:52+00:00,2020-03-15T19:07:52+00:00,2020-03-15T19:07:52+00:00,2d242fef1e1fe02c242ea7b382f1311b0ea33b67,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,385269820,38,Fixed minor typos,Corrected 2 spellings and updated learning rate value in prose to match with code.,alephthoughts,35725314,closed,False,2020-03-08T13:59:29+00:00,2020-03-15T19:07:42+00:00,2020-03-15T19:07:41+00:00,2020-03-15T19:07:41+00:00,9e21e87fd10732974234b60463227f737051792e,unknown,3,3,1,1,0,2,,,
+fastai/fastbook,385273145,39,Merge pull request #1 from fastai/master,pr,rbunn80110,7494507,closed,False,2020-03-08T14:31:19+00:00,2020-03-09T16:12:47+00:00,2020-03-09T16:12:47+00:00,,20c5f267c6d34e0875977a5de65219c408d09219,unknown,0,0,0,1,0,0,,,
+fastai/fastbook,385281764,40,proofread mnist,"I havent touched them - but I'll mention the mix of math/maths, color/colour, check/cheque which are in here. US/Intl to be handled later?
+
+an option under broadcasting is to mention if the reader ever used Matlab, they likely are familiar with it.
+
+unless i missed it, I don't think this notebook set a seed?
+
+the quadratic function solver used LR 1E-5. there was a previous line that suggested 1E-3 is a common lower bound. not sure if you want to mention it. I see anything larger explodes. maybe a further research option at the end of the chapter to test other values on that example?
+
+def batch_accuracy(xb, yb) uses sigmoid. the above cell doesn't and the reader who understood the difference between metric and loss may be confused why you transformed this here. it won't affect the result, but something to review if its worth making consistent
+
+Q1 - I don't think colo(u)r was touched on in this notebook. leave the second part here anyway? ",bradsaracik,35494318,closed,False,2020-03-08T15:50:10+00:00,2020-03-17T12:56:10+00:00,2020-03-17T12:56:10+00:00,2020-03-17T12:56:10+00:00,ffd80923f9242cc6d4b7d085e9f5443464a4ffaa,unknown,22,22,2,3,0,2,,,
+fastai/fastbook,385291760,41,Minor Typos Chp 1,Fixed minor typos in Chp 1,jekriske-lilly,16085156,closed,False,2020-03-08T17:28:13+00:00,2020-03-15T19:05:36+00:00,2020-03-15T19:05:35+00:00,2020-03-15T19:05:35+00:00,0c79ec6c06317021b937b241cbd6ae76e6cfdaa9,unknown,7,7,1,1,0,1,,,
+fastai/fastbook,385294160,42,proofreading ch5,,AliceSum,21982975,closed,False,2020-03-08T17:54:32+00:00,2020-03-15T19:05:23+00:00,2020-03-15T19:05:22+00:00,2020-03-15T19:05:22+00:00,64a82f6cc889a09dfc2fea2b0f867619237d6b1d,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,385295081,43,proofreading ch5,,AliceSum,21982975,closed,False,2020-03-08T18:04:09+00:00,2020-03-15T19:05:14+00:00,2020-03-15T19:05:13+00:00,2020-03-15T19:05:13+00:00,1dae7ad7dd5d1b4b02bdded6bb5f9e7876a2bf56,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,385310849,44,Correct link to terminal tutorial,,miwojc,32404415,closed,False,2020-03-08T20:36:57+00:00,2020-03-15T19:05:04+00:00,2020-03-15T19:05:03+00:00,2020-03-15T19:05:03+00:00,7fbeb816f613514c494ed9c8f4b0db7dffa4f474,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,385680290,45,"proofreading(missing word in ""we don't to consider"")","proofreading(changing from ""we don't to consider"" to be""we don't need to consider"" )",AliceSum,21982975,closed,False,2020-03-09T16:13:08+00:00,2020-03-15T19:04:48+00:00,2020-03-15T19:04:48+00:00,2020-03-15T19:04:48+00:00,cde5341aa9dce1dc935e2e524974b2db72691ee3,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,385783106,47,Correct two spelling errors in 04_mnist_basics,"replace ""very"" with ""vary"" to correct meaning
+replace ""at"" with ""add"" to indicate summing correctly",StevenBorg,1395294,closed,False,2020-03-09T19:44:40+00:00,2020-03-15T19:04:37+00:00,2020-03-15T19:04:37+00:00,2020-03-15T19:04:37+00:00,84cad354e2ba337ec8e6959c7a77579cfa0caa4d,unknown,3,3,2,2,0,3,,,
+fastai/fastbook,386168333,48,Some typos,,alvarotap,61787129,closed,False,2020-03-10T14:31:13+00:00,2020-03-15T19:04:04+00:00,2020-03-15T19:04:04+00:00,2020-03-15T19:04:04+00:00,f1a4406d68e2d77f8322857067e715e0c1827e84,unknown,2,2,1,1,0,1,,,
+fastai/fastbook,386869438,49,chapter 12 typo errors,,rubensmau,4109821,closed,False,2020-03-11T19:06:14+00:00,2020-03-11T19:06:37+00:00,2020-03-11T19:06:37+00:00,,22992bff16a470ea55522af2196b30fd4b30056d,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,386870488,50,chapter 12 typo errors,,rubensmau,4109821,closed,False,2020-03-11T19:08:49+00:00,2020-03-15T19:03:53+00:00,2020-03-15T19:03:53+00:00,2020-03-15T19:03:52+00:00,2704f258e7d3aea14f49182d0de2669ca63aa5ee,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,388746931,53,fix typo,fix inofmration to information,Vijayabhaskar96,17958636,closed,False,2020-03-15T15:48:29+00:00,2020-03-15T19:03:11+00:00,2020-03-15T19:03:11+00:00,2020-03-15T19:03:11+00:00,800689a590cb6ed227366658a69e58468ee0b63c,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,388850193,54,Minor Typos Chp2,May conflict with #35 ,jekriske-lilly,16085156,closed,False,2020-03-15T22:14:49+00:00,2020-03-16T18:25:46+00:00,2020-03-16T18:25:46+00:00,2020-03-16T18:25:45+00:00,0bbc1ceea0fbefc7138364ca78e30faf2a03f085,unknown,27,27,1,1,0,1,,,
+fastai/fastbook,389933142,55,Correct spelling 15_arch_details - transfert to transfer,"Replace ""transfert learning"" with ""transfer learning""",StevenBorg,1395294,closed,False,2020-03-17T16:11:54+00:00,2020-03-22T20:02:33+00:00,2020-03-22T20:02:31+00:00,2020-03-22T20:02:31+00:00,492b9caf47c27f37023d8d6b899389084dc80f95,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,390410399,58,Some minor typos in chapter 04,,alvarotap,61787129,closed,False,2020-03-18T12:36:55+00:00,2020-03-22T20:00:10+00:00,2020-03-22T20:00:04+00:00,2020-03-22T20:00:04+00:00,b93eda8ec1a2594eaff3d41f2699e0296e07db50,unknown,4,4,1,1,0,2,,,
+fastai/fastbook,390596992,59,typos fixed in ch15 and ch16,,rubensmau,4109821,closed,False,2020-03-18T18:25:46+00:00,2020-03-22T19:57:53+00:00,2020-03-22T19:57:48+00:00,2020-03-22T19:57:48+00:00,07fd07476bcd401fdfaf3b635537b9c4fff73eb4,unknown,62,4,2,1,0,2,,,
+fastai/fastbook,391678317,60,Merge pull request #1 from fastai/master,20200311_updated,piushvaish,13156678,closed,False,2020-03-20T18:21:48+00:00,2020-03-20T18:28:12+00:00,2020-03-20T18:26:27+00:00,,6d5bffe456395c59ba76c671bb063bec1d05d224,unknown,0,0,0,1,0,0,,,
+fastai/fastbook,391957301,62,add widget import,"Without the import, you see `name 'widgets' is not defined`",muralimadhu,5248108,closed,False,2020-03-22T04:59:38+00:00,2020-03-22T22:04:19+00:00,2020-03-22T19:57:01+00:00,,3286675db61ebab5dc7df4d4981012af2f0ad6f3,unknown,1,0,1,1,0,6,,,
+fastai/fastbook,392391151,63,typos fixed in ch17 and ch18,"were included also changes ""version"": ""3.7.4""	   ""version"": ""3.7.3""",rubensmau,4109821,closed,False,2020-03-23T13:38:58+00:00,2020-03-24T12:44:22+00:00,2020-03-24T12:44:22+00:00,2020-03-24T12:44:21+00:00,06cda7eb4075af4dfad8964a5f777a10653ff9d3,unknown,2,2,2,1,0,2,,,
+fastai/fastbook,392798249,64,fixed two typos in chap11,,DavidykZhao,37813116,closed,False,2020-03-24T06:14:58+00:00,2020-03-25T18:08:40+00:00,2020-03-24T12:44:36+00:00,2020-03-24T12:44:36+00:00,c27d51b7b24d90961de5198314980a079336278b,unknown,14,2,1,1,0,3,,,
+fastai/fastbook,393339621,65,fixed a typo in chap11,Should call .setup() instead of .setups(),DavidykZhao,37813116,closed,False,2020-03-25T01:47:20+00:00,2020-03-25T13:45:10+00:00,2020-03-25T13:45:07+00:00,2020-03-25T13:45:07+00:00,fff12c800a3adad4fb85686ea9d1f9d502ddaed9,unknown,2,2,1,1,0,2,,,
+fastai/fastbook,393455033,66,change from weights to parameters - Jeremy mentioned in lesson 2,,slee5777,28886668,closed,False,2020-03-25T08:38:12+00:00,2020-03-25T13:51:00+00:00,2020-03-25T13:50:55+00:00,2020-03-25T13:50:55+00:00,52ab3b69ce89b889118e417ec9f9898a4f97d86f,unknown,61,11,1,1,0,2,,,
+fastai/fastbook,395038657,68,fixes typo,,lgvaz,16520544,closed,False,2020-03-28T03:12:15+00:00,2020-03-29T18:06:44+00:00,2020-03-29T18:05:15+00:00,2020-03-29T18:05:15+00:00,a31c5f62d956aec2e2c06dcbe7562800ba9cd08d,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,395592654,71,Some typos,"Also, I think these phrases need a revision:
+
+""Often, data scientists work with data with which they are not familiar as domain experts me""
+
+""we first have to understand what the actual data and activations that are loss function is seen look like""",alvarotap,61787129,closed,False,2020-03-30T11:36:23+00:00,2020-03-31T00:59:59+00:00,2020-03-31T00:59:54+00:00,2020-03-31T00:59:54+00:00,057090775204de1d8b2f3bb0b9955c475b8f6da1,unknown,15,15,1,1,0,2,,,
+fastai/fastbook,395830254,72,"Expand ""NLP"" into ""Natural language processing""","Since the following point was ""Computer vision"", and not ""CV"" :slightly_smiling_face:",niazangels,2761491,closed,False,2020-03-30T18:44:40+00:00,2020-03-31T00:51:50+00:00,2020-03-31T00:51:44+00:00,2020-03-31T00:51:44+00:00,e590b60cb38f1cc02f233857f7feedd606e98ee6,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,396448652,74,fixes typos,,lgvaz,16520544,closed,False,2020-03-31T16:27:28+00:00,2020-03-31T23:15:04+00:00,2020-03-31T23:15:02+00:00,2020-03-31T23:15:02+00:00,9336fd7438826b32d760d4f5bd4a9b23c0eb909e,unknown,3,3,1,1,0,2,,,
+fastai/fastbook,396452205,75,fixes typos,,lgvaz,16520544,closed,False,2020-03-31T16:33:49+00:00,2020-03-31T23:17:22+00:00,2020-03-31T23:17:19+00:00,2020-03-31T23:17:19+00:00,b09aedf10172af6c13203ab9fc8924a3bb0a0a57,unknown,4,4,1,1,0,2,,,
+fastai/fastbook,396466143,76,Some minor typos.,,alvarotap,61787129,closed,False,2020-03-31T16:58:27+00:00,2020-03-31T23:19:49+00:00,2020-03-31T23:19:46+00:00,2020-03-31T23:19:46+00:00,a034acee9a71ea76b2b6e5b378b00738ce85867c,unknown,5,5,1,1,0,2,,,
+fastai/fastbook,396506368,77,Chapter 1 intro minor correction,"Original:
+>There a number of powerful concepts embedded in this short statement:
+
+After:
+There **are** a number of powerful concepts embedded in this short statement:",hiromis,5401333,closed,False,2020-03-31T18:12:11+00:00,2020-03-31T23:20:32+00:00,2020-03-31T23:20:26+00:00,2020-03-31T23:20:26+00:00,5e94735ff08e54d9d88bb03225acff5e5cd9258c,unknown,2,2,1,1,0,2,,,
+fastai/fastbook,396510034,78,ch2 typos,"error 
+1) subject verb agreement: types of image -> types of images
+2) subject verb agreement: classify is sounds -> classify are sounds
+
+I'm new to pull requests, I was not sure how to remove the python edit note.",Datadote,30182852,closed,False,2020-03-31T18:18:27+00:00,2020-03-31T23:23:06+00:00,2020-03-31T23:23:06+00:00,,59e9dca5ae5e8b0b680d6e1024406fe79a820309,dirty,3,3,1,1,0,3,,,
+fastai/fastbook,396891328,79,Some minor typos in chapter 7,,alvarotap,61787129,closed,False,2020-04-01T10:03:09+00:00,2020-04-01T12:50:48+00:00,2020-04-01T12:49:57+00:00,2020-04-01T12:49:57+00:00,a909a8cb5b639f8d225cd68b5a0bf49b3bec4478,unknown,3,3,1,1,0,2,,,
+fastai/fastbook,397546036,81,Some minor typos in chapter 8,,alvarotap,61787129,closed,False,2020-04-02T12:26:36+00:00,2020-04-03T15:29:11+00:00,2020-04-03T15:29:08+00:00,2020-04-03T15:29:08+00:00,758e182a2e7f07258f3faea52bb4713e8926f085,unknown,12,12,1,1,0,2,,,
+fastai/fastbook,397556936,82,Update 01_intro.ipynb,"Add the word ""Ctrl"".",Shuyib,12908522,closed,False,2020-04-02T12:48:34+00:00,2020-04-02T13:00:48+00:00,2020-04-02T13:00:41+00:00,,bb1288217ab2490e7f7dcdd289d59819c9625114,unknown,1,1,1,1,0,1,,,
+fastai/fastbook,397726082,83,more ch2 typos,"Hi, 
+
+Here are some more recommendationsI found. Is it easier to have 1 long list, or split into separate ~5 change requests?
+
+1) I think ""rigourous"" is not a real word. Did a quick Google search
+org: We are not aware of any rigourous work done
+chg: We are not aware of any **rigorous** work done
+
+2) added a ""w"", and also fixed the link
+org: they have as this book as written
+chg: they have **was** this book as written
+
+org: on the http://book.fast.ai[book website]
+on the **[book website](http://book.fast.ai)**
+
+3) stretch -> stretched, and added an as
+org: If we squished or stretch the images then they end up unrealistic shapes,
+chg: If we squished or **stretched** the images then they end up **as** unrealistic shapes,
+
+4) ""to"" to ""on""
+org: To tell fastai we want to use these transforms to a batch
+chg: To tell fastai we want to use these transforms **on** a batch
+
+Regards,
+Daniel Lam",Datadote,30182852,closed,False,2020-04-02T17:46:35+00:00,2020-04-03T15:32:37+00:00,2020-04-03T15:32:37+00:00,2020-04-03T15:32:37+00:00,af98c0c4dccd5c660e5898760c1b023c602242cf,unknown,22,10,2,2,0,2,,,
+fastai/fastbook,397806331,84,fixes typos,,lgvaz,16520544,closed,False,2020-04-02T21:08:25+00:00,2020-04-03T15:41:25+00:00,2020-04-03T15:41:25+00:00,2020-04-03T15:41:25+00:00,7f71c3b593da0d78cef5b3332416fcb8fce7974f,unknown,8,8,1,3,0,3,,,
+fastai/fastbook,398672050,86,more ch2 chgs,"Hello, here are some recommendations:
+
+1) added ""the""
+org: how loss is calculated and used in training process
+chg: how loss is calculated and used in **the** training process
+
+2) typo, predicitions -> predictions
+
+3) matching plurals (reasons). there's -> there are
+org: There's a few reasons for this:
+chg: There **are** a few reasons for this
+
+4) matching plurals (reasons). there is -> there are
+org: There is quite a few upsides to this approach. 
+chg: There are quite a few upsides to this approach. 
+
+5) Two changes.
+i) org: ... building not only the models (fun!) but infrastructure to ensure ...
+i) chg: ... building not only the models (fun!) but **also the** infrastructure to ensure ...
+
+ii) org: ... what you personally find it easy to do.
+ii) chg: ... what you personally find **is** easy to do.",Datadote,30182852,closed,True,2020-04-04T18:24:39+00:00,2020-04-04T18:29:23+00:00,2020-04-04T18:29:23+00:00,,3d31a80a28b7d614cccdde08b7e2651bf888136d,unknown,5,5,1,2,0,1,,,
+fastai/fastbook,398674762,87,chp2 recommendations,"Hello, here are some recommendations.
+
+1) added ""the""
+org: how loss is calculated and used in training process
+chg: how loss is calculated and used in **the** training process
+
+2) typo, predicitions -> predictions
+
+3) matching plurals (reasons). there's -> there are
+org: There's a few reasons for this:
+chg: There **are** a few reasons for this
+
+4) matching plurals (reasons). there is -> there are
+org: There is quite a few upsides to this approach. 
+chg: There are quite a few upsides to this approach. 
+
+5) Two changes.
+i) org: ... building not only the models (fun!) but infrastructure to ensure ...
+i) chg: ... building not only the models (fun!) but **also the** infrastructure to ensure ...
+
+ii) org: ... what you personally find it easy to do.
+ii) chg: ... what you personally find **is** easy to do.
+",Datadote,30182852,closed,False,2020-04-04T18:31:22+00:00,2020-04-06T14:40:09+00:00,2020-04-06T14:40:06+00:00,2020-04-06T14:40:06+00:00,9c47253dbfcaee4ff8fa9bb19001c3e13ee36096,unknown,5,5,1,2,0,2,,,
+fastai/fastbook,401210216,90,s/Is/It/,tiny typo.,philtrade,19887230,closed,False,2020-04-09T05:03:50+00:00,2020-04-09T12:39:12+00:00,2020-04-09T12:38:22+00:00,2020-04-09T12:38:22+00:00,98ef7adc154a36a50576f041f6e260931d7e32b4,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,401336034,91,Update 01_intro.ipynb,"Add ""s"" to the different words.",Shuyib,12908522,closed,False,2020-04-09T10:16:02+00:00,2020-04-09T12:41:37+00:00,2020-04-09T12:41:34+00:00,2020-04-09T12:41:34+00:00,118ff351fe72d689b710a32262ef350049bda64e,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402115663,93,ch 4 recommendations,"1) add ""to""
+org : we will use calculate a metric
+chg : we will use **to** calculate a metric
+
+2) There's -> There are
+org: There's a couple of important points
+chg: There **are** a couple of important points
+
+3) Split run-on sentence into two complete sentences
+org: This is just a performance optimisation, we would get exactly the same results
+chg: This is just a performance optimisation**. W**e would get exactly the same results
+
+4) a -> an
+org: using a *optimiser step*
+chg: using **an** *optimiser step*
+
+5) space -> speed
+org: You want to build a model of how the space changes over time.
+chg: You want to build a model of how the **speed** changes over time.
+
+6) ""that we feed"" -> ""and feed them""
+org: To do this, we take a few data items (such as images) that we feed to our model.
+chg: To do this, we take a few data items (such as images) **and feed them** to our model.
+
+7) peak -> peek
+org: in your excitement to peak under the hood?
+chg: in your excitement to **peek** under the hood?",Datadote,30182852,closed,False,2020-04-11T00:46:39+00:00,2020-04-15T12:34:01+00:00,2020-04-15T12:34:01+00:00,2020-04-15T12:34:01+00:00,6b0199ecf0fcf8adf14918aec50ef68ce7fcb57f,unknown,19,7,1,2,0,2,,,
+fastai/fastbook,402186959,95,lstm hidden state typo,Correct typo on the hidden state definition of the LModel6,tcapelle,18441985,closed,False,2020-04-11T12:57:57+00:00,2020-04-15T12:36:35+00:00,2020-04-15T12:36:35+00:00,,2e33b431d3286b7a18ea440abdc781174a550fe0,dirty,167,179,1,2,0,2,,,
+fastai/fastbook,402212000,96,Update 05_pet_breeds.ipynb,"Changing from
+
+ ""as you might want your model to sometimes tell you it doesn't recognize any of the classes is has seen during training, and not pick a class because it has a slightly bigger activation score.""
+
+to
+
+""as you might want your model to sometimes tell you it doesn't recognize any of the classes that it has seen during training, and not pick a class because it has a slightly bigger activation score.""",AliceSum,21982975,closed,False,2020-04-11T16:15:21+00:00,2020-04-15T12:37:49+00:00,2020-04-15T12:37:47+00:00,2020-04-15T12:37:47+00:00,419ac062285a4ae3e1cdf80089df1d994255f9e9,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402651118,99,"Remove unnecessary word ""them"" in 01_intro.ipynb, line 160","""Them"" should be removed from ""This is what you will learn how to build **them** in this book.""",joe-bender,20362667,closed,False,2020-04-13T13:44:53+00:00,2020-04-15T16:13:12+00:00,2020-04-15T12:38:37+00:00,2020-04-15T12:38:37+00:00,f0d3f29b4397c628060c35fc0ecb8995f1f98db0,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402659055,100,"Remove unnecessary word ""rather"", 01_intro.ipynb, line 220","The second ""rather"" is not needed in ""somebody who would rather get their hands dirty building stuff **rather** than spend years learning abstract concepts""",joe-bender,20362667,closed,False,2020-04-13T14:04:04+00:00,2020-04-15T16:15:16+00:00,2020-04-15T12:40:32+00:00,2020-04-15T12:40:32+00:00,7c025163c04909bd79c858b57782cd6052ea1022,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402665144,101,"Change ""that's if"" to ""that if"" in 01_intro.ipynb, line 266","The 's should be removed from ""That means **that's** if you're teaching baseball""",joe-bender,20362667,closed,False,2020-04-13T14:18:00+00:00,2020-04-15T16:15:23+00:00,2020-04-15T12:42:34+00:00,2020-04-15T12:42:34+00:00,7911545db1c134a126bbec3bad5609727b2b67be,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402676249,102,"Change ""got"" to ""get"" in 01_intro.ipynb, line 288","In ""Sometimes things click into place after you **got** more context from parts down the road"", ""get"" would make more sense grammatically. ",joe-bender,20362667,closed,False,2020-04-13T14:43:18+00:00,2020-04-15T16:15:30+00:00,2020-04-15T12:41:54+00:00,2020-04-15T12:41:54+00:00,22639c8dc05b034b581bc19eebbd142352adf2cd,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402690177,103,"Capitalize ""s"" for Sylvain's sidebar, 01_intro.ipynb, line 398","The ""J: "" and ""S: "" before all the other sidebars from Jeremy and Sylvain are capitalized, so this one should be too, instead of ""s: ""
+Or maybe that lowercase s stands for ""sidebar"", in which case this change is invalid.",joe-bender,20362667,closed,False,2020-04-13T15:13:28+00:00,2020-04-15T16:15:36+00:00,2020-04-15T12:41:16+00:00,,510864fc2897b30c1e8c7ec4f2c1cd4f555af48a,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402711322,104,"Remove unnecessary word ""like"" in 01_intro.ipynb, line 391","The ""like"" should be removed from ""it's not as hard as it looks **like**""",joe-bender,20362667,closed,False,2020-04-13T16:01:54+00:00,2020-04-15T16:15:41+00:00,2020-04-15T12:43:27+00:00,2020-04-15T12:43:27+00:00,36c73b5cddb7565b3e3b71e02f0f10a96169d3da,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402729793,105,"Change ""change"" to ""changes"" in 01_intro.ipynb, line 426","In ""The best _choice_ for GPU servers for use with this book **change** over time"", the choice is what is changing, so it should be **changes**",joe-bender,20362667,closed,False,2020-04-13T16:44:29+00:00,2020-04-15T16:15:47+00:00,2020-04-15T12:43:52+00:00,2020-04-15T12:43:52+00:00,e590c4d27b3630acc1d4ecfe04a3f5c109264e32,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402745684,106,"Remove extra word ""containing"" in 01_intro.ipynb, line 511","""containing"" should be removed from ""A dataset **containing** called the Oxford-IIT Pet Dataset that contains 7,349 images""",joe-bender,20362667,closed,False,2020-04-13T17:20:43+00:00,2020-04-15T16:15:53+00:00,2020-04-15T12:44:39+00:00,2020-04-15T12:44:39+00:00,6473f942b45f5158671135a149e9e86c5c206ecf,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,402750675,107,"Fix Pet Dataset name typo, 01_intro.ipynb, line 511 (related to issue #92)","Change ""Oxford-IIT Pet Dataset"" to ""Oxford-IIIT Pet Dataset"" (three ""I""s). This can be verified at the linked url (http://www.robots.ox.ac.uk/~vgg/data/pets/)",joe-bender,20362667,closed,False,2020-04-13T17:31:30+00:00,2020-04-15T16:15:59+00:00,2020-04-15T12:45:52+00:00,2020-04-15T12:45:51+00:00,3fdf8c070b04c876ee949c69e0c7a9d01e18df2f,unknown,1,1,1,2,0,2,,,
+fastai/fastbook,403657917,109,s/m/m2/,tiny typo.,philtrade,19887230,closed,False,2020-04-15T09:53:57+00:00,2020-04-15T12:52:02+00:00,2020-04-15T12:52:01+00:00,,f73287edfd682ebf026a467839d69e1f4575a915,dirty,1107,1193,34,3,0,3,,,
+fastai/fastbook,403666337,110,change from std to var as mentioned by Jeremy in Lesson 4,,slee5777,28886668,closed,False,2020-04-15T10:11:01+00:00,2020-04-15T12:12:08+00:00,2020-04-15T12:12:08+00:00,,6353447f89dcf7149249a002269d367d4b5cd30b,unknown,42,1,1,1,0,2,,,
+fastai/fastbook,403746288,111,tiny typo n edit,a tiny typo and a potential small text edit.,philtrade,19887230,closed,False,2020-04-15T13:03:10+00:00,2020-04-16T13:06:35+00:00,2020-04-16T13:06:32+00:00,2020-04-16T13:06:32+00:00,9c621ea56c61f339c82750b60dd68071ed599dc4,unknown,2,2,2,2,0,2,,,
+fastai/fastbook,403840421,112,Some typos in chapter 10,,alvarotap,61787129,closed,False,2020-04-15T15:43:44+00:00,2020-04-16T13:08:25+00:00,2020-04-16T13:08:22+00:00,2020-04-16T13:08:22+00:00,f37af7f8fb73ec51c419b6fcbe645cd7fccf078a,unknown,16,4,1,1,0,2,,,
+fastai/fastbook,403912632,113,"Change ""revisit ... into"" to ""revisit ... using"", 01_intro.ipynb","The wording of ""_revisit_ our image classification problem _into_ Samuel's framework"" doesn't work because it basically says ""_revisit_ something _into_ something"". It makes more sense to say ""_revisit_ our problem _using_ the framework"", but other words would also work in the place of _using_",joe-bender,20362667,closed,False,2020-04-15T18:12:18+00:00,2020-04-18T14:48:31+00:00,2020-04-16T13:09:16+00:00,2020-04-16T13:09:16+00:00,51e16eab79b5a8ba70b1677b5b7f19f3ca6f61e1,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,403919122,114,ch5 chgs,"1) were -> we're
+org: how to extract the breed of each pet from each image were going to need to 
+chg: how to extract the breed of each pet from each image **we're** going to need to
+
+2) out -> our
+org: the first two columns are out activations
+chg: the first two columns are **our** activations
+
+3) add ""are""
+org: find what the losses afterwards, and then
+chg: find what the losses **are** afterwards, and then
+
+4) add ""few""
+org: the first layers encode very general concepts such as finding gradients and edges
+chg: the first **few** layers encode very general concepts such as finding gradients and edges
+
+5) removed ""than""
+org: Our challenge **than** when fine tuning is to replace the random weights
+chg: Our challenge when fine tuning is to replace the random weights
+
+6) this -> these
+org: As we are writing this words
+chg: As we are writing **these** words
+
+7) everything -> every
+org: is used in nearly everything classification model
+chg: is used in nearly **every** classification model
+
+8) past -> passed
+org: How is a Python slice object interpreted when past as a learning rate
+chg: How is a Python slice object interpreted when **passed** as a learning rate",Datadote,30182852,closed,False,2020-04-15T18:27:08+00:00,2020-04-16T13:12:36+00:00,2020-04-16T13:12:32+00:00,2020-04-16T13:12:32+00:00,5ddb5892966646f8b223ba38d4e87837c8b6e54a,unknown,20,8,1,1,0,2,,,
+fastai/fastbook,404453137,115,"Change `fit` to `fine_tune`, 01_intro.ipynb","I'm not sure, but it looks like this sentence should refer to `fine_tune` because it is walking through the previous code.",joe-bender,20362667,closed,False,2020-04-16T15:14:55+00:00,2020-04-20T18:24:27+00:00,2020-04-16T15:18:23+00:00,,5ecead2f0cba9ab8bc059d9c81cbf98776ac54ad,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,404727726,116,"Writing and formatting fixes, 01_intro.ipynb","Line 1578: comma isn't needed
+Line 1718: ""higher levels"" to ""higher-level""
+Line 1778: ""it worked so well that *had* led"" -> ""it worked so well that *it* led""
+Line 1875: remove space after terms
+Line 2191: remove extra set of parentheses around link so it works
+I can explain the other changes too if needed.",joe-bender,20362667,closed,False,2020-04-16T21:01:38+00:00,2020-04-18T14:47:42+00:00,2020-04-18T12:14:49+00:00,2020-04-18T12:14:49+00:00,17c1ba2c33ecd4890c41d88fa168e876e3b6762e,unknown,12,12,1,1,0,2,,,
+fastai/fastbook,404905389,117,Update 01_intro.ipynb,"remove ""s"" in example.",Shuyib,12908522,closed,False,2020-04-17T03:47:49+00:00,2020-04-19T08:56:19+00:00,2020-04-18T12:09:31+00:00,2020-04-18T12:09:31+00:00,6161b25947f36878b6f969ad4e51f889eac17911,unknown,1,1,1,1,0,2,,,
+fastai/fastbook,404907278,118,grammar changes,"1) your -> you
+org: the vast majority of the datasets your work with
+chg: the vast majority of the datasets **you** work with
+
+2) added ,
+org: When we see it in that format looks a bit boring;
+chg: When we see it in that format**,** it looks a bit boring;
+
+3) deepest -> shallowest
+org: The deepest layers of our pretrained model might not need as high a learning rate as the last ones
+chg: The **shallowest** layers of our pretrained model might not need as high a learning rate as the last ones",Datadote,30182852,closed,False,2020-04-17T03:56:40+00:00,2020-04-18T12:08:42+00:00,2020-04-18T12:08:07+00:00,2020-04-18T12:08:07+00:00,689bc2f5c4a4c2282289c9189797b30bf843f788,unknown,15,3,1,1,0,2,,,
+fastai/fastbook,405012772,119,Update 05_pet_breeds.ipynb,Grammar change: that we working with -->> that we are working with,surhargev00,8417764,closed,False,2020-04-17T09:04:12+00:00,2020-04-18T12:33:02+00:00,2020-04-18T12:06:38+00:00,2020-04-18T12:06:38+00:00,f97c80366c572966c78a61d23f3a75f3fb76dc61,unknown,1,1,1,1,0,3,,,
+fastai/fastbook,405049579,120,Some minor typos in chapter 11,,alvarotap,61787129,closed,False,2020-04-17T10:21:54+00:00,2020-04-18T12:05:47+00:00,2020-04-18T12:05:44+00:00,2020-04-18T12:05:44+00:00,3c103420525c3535858f6e7b031d316781cd9fcc,unknown,4,27,1,1,0,2,,,
+fastai/fastbook,405201573,121,Updating underscore,,DineshChauhan,7365359,closed,False,2020-04-17T15:33:09+00:00,2020-04-18T12:16:23+00:00,2020-04-18T12:16:23+00:00,,b023bb1fd83f90839d19f2027d88d247d050b7d5,unknown,1,1,1,2,0,2,,,
+fastai/fastbook,405298614,122,Update 05_pet_breeds.ipynb Small Typos and spacing.,"Changed typos:
+
+- and then an_character -->> and then an _ character
+
+- same linguist Noam Chomskey -->> same linguist Noam Chomsky",surhargev00,8417764,closed,False,2020-04-17T19:18:24+00:00,2020-04-18T12:32:07+00:00,2020-04-18T12:17:30+00:00,2020-04-18T12:17:29+00:00,3a869940ee44821be9b15f32ac2a917bc21d22c6,unknown,2,2,1,1,0,3,,,
+fastai/fastbook,405357470,123,bitofjargonedits,"Clarify ""A Bit of Deep Learning Jargon""",PomoML,39171678,closed,False,2020-04-17T21:53:45+00:00,2020-04-18T12:21:03+00:00,2020-04-18T12:21:03+00:00,,87eb94c8eb1c35d41e1d574e539988d4c9cf7b45,unknown,21,7,1,1,0,2,,,
+fastai/fastbook,405378980,124,Editsfirsthalf,"Edits of first half: unclear referents, grammar, rhythm & flow, transitions.
+[edit1Note.txt](https://github.com/fastai/fastbook/files/4495634/edit1Note.txt)
+",PomoML,39171678,closed,False,2020-04-17T23:17:32+00:00,2020-04-18T23:48:18+00:00,2020-04-18T12:33:57+00:00,,f0ec5d99fa26a30321b3848475b5b237363f4d90,dirty,178,141,1,2,0,3,,,
+fastai/fastbook,405492762,125,Update 05_pet_breeds.ipynb Small typos and grammar,"Small changes: 
+
+- the first chapter, we didn't specified -->> the first chapter, we didn't specify
+
+- were looking for the validation loss -->> we're looking for the validation loss",surhargev00,8417764,closed,False,2020-04-18T12:31:48+00:00,2020-04-24T15:51:27+00:00,2020-04-19T14:10:25+00:00,2020-04-19T14:10:25+00:00,67b917389eff42181bdf040319c07aedb1836140,unknown,2,2,1,1,0,3,,,

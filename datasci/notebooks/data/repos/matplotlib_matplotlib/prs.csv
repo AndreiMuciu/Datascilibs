@@ -1,0 +1,635 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+matplotlib/matplotlib,76738,1,Fix autofmt_xdate() when using in conjunction with twinx(),"Hi
+
+This patch fixes the problem reported here http://sourceforge.net/mailarchive/message.php?msg_id=26618642
+
+Cheers,
+Scott
+",scottza,122792,closed,False,2011-02-19T08:37:09+00:00,2014-10-03T11:50:39+00:00,2011-05-24T23:45:23+00:00,,26ed5dd6109cd7fc50492499989c5fc7302edc87,dirty,4981,2580,289,222,4,12,,,
+matplotlib/matplotlib,76859,2,Svn2git,"Remove references to svn, or changed them to refer to the new git repositories.
+",ddale,169586,closed,False,2011-02-19T17:23:00+00:00,2014-07-15T15:35:05+00:00,2011-02-22T12:46:23+00:00,2011-02-22T12:46:23+00:00,,dirty,1041,464,45,4,2,3,,,
+matplotlib/matplotlib,76869,3,Updated docs to refer to git,"I updated most of the documentation to point to git (not svn).  I also added gitwash and removed some redundant information about version control.
+",jarrodmillman,123428,closed,False,2011-02-19T17:59:44+00:00,2014-07-10T18:28:56+00:00,2011-02-21T01:48:32+00:00,,,dirty,982,309,34,4,29,4,,,Documentation
+matplotlib/matplotlib,77131,4,Fixing osx makefile,"I updated a couple of links for fetch and added some stray files to clean. I'm also making a couple of suggestions regarding requiring PYVERSION in the command line and dropping the PREFIX from mpl_install. For this last one, I'm assuming that the dependencies are compile-time and matplotlib will work correctly from the relevant site-packages (I haven't seen any problems yet, although I've kept the dependencies in the PREFIX), but I welcome any comments or corrections.
+",fgb,604073,closed,False,2011-02-20T09:46:22+00:00,2014-07-17T05:08:52+00:00,2011-02-23T07:13:41+00:00,,,dirty,994,922,30,15,0,4,,,
+matplotlib/matplotlib,77245,5,Merge maintenance branches into master,"It seems that the svn2git transition has not picked up all merges or at least has not turned them into git merges (perhaps this is impossible in the general case, as you can do cherry-picking with svnmerge that does not translate into clean git merges). If we want to use a merge workflow where we merge feature/bugfix branches first into the current maintenance branch and then into master, we should start with a maintenance branch that merges cleanly into master without causing changes in master, and this commit does that using the `--strategy=ours` merge option.
+
+(I guess it would really be sufficient to merge only v1_0_x into master, if we are never going to touch the older branches again, but it doesn't hurt to include them.)
+",jkseppan,92814,closed,False,2011-02-20T16:58:39+00:00,2014-07-06T17:35:51+00:00,2011-02-20T20:31:10+00:00,,a7f47733d9c85819ef24cd2898103f076622f3b0,dirty,0,0,0,325,0,8,,,
+matplotlib/matplotlib,77326,6,Merge v0.91.x into v0.98.x,"This is the first of the recursive maintenance branch merges as suggested by Darren in response to pull request #5.
+",jkseppan,92814,closed,False,2011-02-20T20:33:25+00:00,2014-07-07T23:36:30+00:00,2011-02-20T20:50:31+00:00,2011-02-20T20:50:31+00:00,,dirty,0,0,0,136,0,0,,,
+matplotlib/matplotlib,77327,7,Merge v0.98.x into v0.99.x,"This is another recursive maintenance branch merge as suggested by Darren in response to pull request #5.
+",jkseppan,92814,closed,False,2011-02-20T20:34:56+00:00,2014-06-30T20:09:03+00:00,2011-02-20T20:51:02+00:00,2011-02-20T20:51:02+00:00,,dirty,34179,42729,417,664,0,0,,,
+matplotlib/matplotlib,77332,8,Merge v0.99.x into v1.0.x,"This is another recursive maintenance branch merge as suggested by Darren in response to pull request #5.
+",jkseppan,92814,closed,False,2011-02-20T20:36:28+00:00,2014-06-18T09:24:43+00:00,2011-02-20T20:51:17+00:00,2011-02-20T20:51:17+00:00,,dirty,134169,47862,918,1010,0,0,,,
+matplotlib/matplotlib,77334,9,Merge all maintenance branches,"This is the final merge of all maintenance branches to master, done recursively as suggested by Darren in response to pull request #5. If I did this right, the history of each request should contain the previous requests, so that git will believe that each branch contains all the commits of the preceding branches.
+",jkseppan,92814,closed,False,2011-02-20T20:39:14+00:00,2014-07-13T22:54:09+00:00,2011-02-20T20:52:49+00:00,,,dirty,4715,2170,169,219,0,1,,,
+matplotlib/matplotlib,77377,10,V0.91.x,"This is the first in a series of pull requests to add .gitattributes and .gitignore files and cleanup whitespace on all the maintenance and master branches.
+",ddale,169586,closed,False,2011-02-20T22:20:19+00:00,2014-06-25T16:00:27+00:00,2011-02-20T22:35:37+00:00,,334720ae65b09034f719d2863dab814b2e7639de,dirty,1511,1429,22,1,0,1,,,
+matplotlib/matplotlib,77378,11,V0.98.x,"second in series of git metadata and whitespace cleanups
+",ddale,169586,closed,False,2011-02-20T22:22:16+00:00,2014-07-20T12:42:17+00:00,2011-02-20T22:36:06+00:00,,75b68c648d8045742aa4b37f870bc153f1de422b,dirty,1958,1876,17,2,0,1,,,
+matplotlib/matplotlib,77379,12,V0.99.x,"update git metadata and perform whitespace cleanup
+",ddale,169586,closed,False,2011-02-20T22:23:17+00:00,2014-06-20T18:04:51+00:00,2011-02-20T22:36:28+00:00,,815075f6210bf8440fe2e972d52078d0593fafcd,dirty,1584,1507,20,4,0,1,,,
+matplotlib/matplotlib,77380,13,V1.0.x,"git metadata and whitespace cleanup
+",ddale,169586,closed,False,2011-02-20T22:24:08+00:00,2014-07-02T02:17:26+00:00,2011-02-20T22:36:47+00:00,,,dirty,945,867,17,5,0,1,,,
+matplotlib/matplotlib,77444,14,V1.0.x,"Adds .gitignore and .gitattributes, cleans up whitespace. First of two pull requests, next pulls these changes into master.
+",ddale,169586,closed,False,2011-02-21T02:01:47+00:00,2014-07-06T18:44:26+00:00,2011-02-21T02:24:39+00:00,2011-02-21T02:24:39+00:00,,dirty,910,867,17,1,0,0,,,
+matplotlib/matplotlib,77446,15,git metadata and whitespace cleanup,"adds .gitattributes and .gitignore, cleans up whitespace and CRLF
+",ddale,169586,closed,False,2011-02-21T02:03:12+00:00,2014-06-26T17:32:55+00:00,2011-02-21T02:26:08+00:00,,,dirty,4715,2170,169,220,0,0,,,
+matplotlib/matplotlib,79019,16,Fixing OSX makefile,"I updated a couple of links for fetch and added some stray files to clean. I'm also making a couple of suggestions regarding requiring PYVERSION in the command line and dropping the PREFIX from mpl_install. For this last one, I'm assuming that the dependencies are compile-time and matplotlib will work correctly from the relevant site-packages (I haven't seen any problems yet, although I've kept the dependencies in the PREFIX), but I welcome any comments or corrections.
+",fgb,604073,closed,False,2011-02-23T08:17:48+00:00,2014-07-15T15:38:29+00:00,2011-02-23T08:18:16+00:00,,49fcd0262d2f0c8108a523c0ebb80bee6a19b546,dirty,8,8,2,5,0,0,,,
+matplotlib/matplotlib,79021,17,Fixing OSX makefile,"I updated a couple of links for fetch and added some stray files to clean. I'm also making a couple of suggestions regarding requiring PYVERSION in the command line and dropping the PREFIX from mpl_install. For this last one, I'm assuming that the dependencies are compile-time and matplotlib will work correctly from the relevant site-packages (I haven't seen any problems yet, although I've kept the dependencies in the PREFIX), but I welcome any comments or corrections.
+",fgb,604073,closed,False,2011-02-23T08:20:41+00:00,2014-06-28T01:12:12+00:00,2011-03-26T20:07:03+00:00,2011-03-26T20:07:03+00:00,,dirty,65,57,2,8,3,4,,,
+matplotlib/matplotlib,79188,18,Timezone bug in plot_date,"This is the patch is sent last week to the developers-list.
+It fixes bug 3176823: ""plot_date does not respect timezone""
+(bug id from sourceforge bugtracker)
+
+kind regards,
+maximilian
+",faucon,625342,closed,False,2011-02-23T14:03:53+00:00,2014-07-06T17:24:17+00:00,2011-05-16T00:38:03+00:00,,,dirty,4750,2182,172,227,2,3,,,
+matplotlib/matplotlib,79228,19,Mathtext font tests,"Some of the tables that map characters to STIX font glyphs were out-of-date with the version of the STIX fonts we have.  This fixes those tables, and adds a new set of regression tests to check for this kind of thing.
+",mdboom,38294,closed,False,2011-02-23T15:13:54+00:00,2014-07-07T23:07:04+00:00,2011-02-25T18:19:19+00:00,,,dirty,9508,16,11,1,1,2,,,
+matplotlib/matplotlib,80020,21,Mathtext font tests,,mdboom,38294,closed,False,2011-02-24T14:32:45+00:00,2014-07-10T01:12:10+00:00,2011-02-25T20:54:10+00:00,,,dirty,9508,16,11,1,0,6,,,
+matplotlib/matplotlib,80597,22,Bugfix/anim3d example,"Something in numpy must have changed recently to break the poorly done old code.  This approach is correct.
+",WeatherGod,291576,closed,False,2011-02-25T04:05:55+00:00,2014-07-23T12:55:04+00:00,2011-02-26T11:14:26+00:00,2011-02-26T03:01:02+00:00,,dirty,2,2,1,1,0,5,,,topic: mplot3d
+matplotlib/matplotlib,80904,23,Newfeats/mplot3d ticklabels,"Added some get_z?() and set_z?() methods to the Axes3D class for completeness.  Particularly those relating to the ticks.
+",WeatherGod,291576,closed,False,2011-02-25T16:01:42+00:00,2014-07-23T12:55:09+00:00,2011-02-26T23:36:05+00:00,2011-02-26T23:36:05+00:00,,dirty,39,5,1,1,0,1,,,topic: mplot3d
+matplotlib/matplotlib,81537,24,Gitwash clarifications,"I'm struggling with my early experience with git and these instructions here.  I'm trying to clarify these instructions to avoid confusion and future mistakes for others, but I'm not 100% certain these changes are correct.
+
+Additionally, there are some questions in here as comments where I'm not sure how things should be filled in.
+",mdboom,38294,closed,False,2011-02-26T13:25:51+00:00,2014-06-27T15:02:28+00:00,2011-04-04T16:26:46+00:00,2011-04-04T16:26:46+00:00,,dirty,103,18,2,4,27,6,,,
+matplotlib/matplotlib,84214,26,Legend refactor,"This is to improve the functionality of legend.
+The two biggest changes are
+- Drawing of legend is delegated to ""legend handlers"".
+- Introduces a new ""Container"" class. This is primarily to support
+  legend of complex plots (e.g., bar, errorbar, etc).
+
+Some more details can be found in the updated legend guide.
+
+http://goo.gl/DhGej
+",leejjoon,95962,closed,False,2011-03-02T13:21:52+00:00,2014-07-06T17:12:17+00:00,2011-03-17T04:12:41+00:00,2011-03-17T04:12:41+00:00,,dirty,1008,212,9,9,0,8,,,
+matplotlib/matplotlib,85402,27,Bugfix/remove conditional,"Recent commit introduced a conditional expression into the code.  Because we still support python 2.4, this has to be removed.
+",WeatherGod,291576,closed,False,2011-03-03T22:40:52+00:00,2014-07-23T12:55:40+00:00,2011-03-04T18:38:05+00:00,2011-03-04T18:38:05+00:00,,dirty,4,1,1,1,0,1,,,
+matplotlib/matplotlib,85792,28,Doc cleanup,"Cleans up the output directories a little when building HTML documentation.
+",mdboom,38294,closed,False,2011-03-04T13:59:47+00:00,2014-07-17T04:40:10+00:00,2011-03-04T20:24:00+00:00,2011-03-04T20:24:00+00:00,,dirty,7,74,2,2,0,1,,,
+matplotlib/matplotlib,86745,30,Overhaul make.osx in master,"This is the master branch counterpart to pull request #17, which fixes some problems in make.osx on the v1.0.x maintenance branch. In addition to the changes on that branch, this pull request updates zlib, freetype and libpng to new versions.
+",jkseppan,92814,closed,False,2011-03-06T07:42:04+00:00,2017-01-02T10:59:11+00:00,2011-06-16T22:30:40+00:00,,caf7f6eaf102a1d42abc0e9bfd5cb6b7fb99f494,dirty,95,72,2,6,0,9,,,
+matplotlib/matplotlib,86872,31,Standalone test script,"Fix minor documentation bugs while documenting the script.
+
+This is so I can use standard nosetests command-line arguments, e.g. --with-coverage.
+",jkseppan,92814,closed,False,2011-03-06T15:50:38+00:00,2014-07-16T23:42:02+00:00,2011-03-07T16:33:06+00:00,2011-03-07T16:33:06+00:00,,dirty,40,8,2,1,0,2,,,
+matplotlib/matplotlib,87577,32,Bugfix/legend windowcall,"Fix the legend object's get_window_extent() call signature to match everyone else's get_window_extent() call signature.  This will allow for legend() to be passed into bbox_extra_artists kwarg for savefig().
+",WeatherGod,291576,closed,False,2011-03-07T17:49:36+00:00,2014-07-23T12:55:41+00:00,2011-03-07T20:13:40+00:00,2011-03-07T20:13:40+00:00,,dirty,2,2,1,1,0,4,,,
+matplotlib/matplotlib,87724,33,Bugfix/qt4 savefile,"This is an attempt to support the change in the PyQt4 API of getSaveFileName().  There is now a _getSaveFileName variable that gets conditionally assigned either the old getSaveFileName method or a lambda function that wraps a call to the new getSaveFileNameAndFilter().  The lambda function was necessary so that only the filename part of the tuple returned by getSaveFileNameAndFilter() gets returned by the call to _getSaveFileName().
+
+I have only tested the case where sip.getapi(""QString"") returns 1.  I would greatly appreciate if others with different versions of PyQt4 test to make sure this works.
+",WeatherGod,291576,closed,False,2011-03-07T21:06:33+00:00,2014-07-23T12:55:43+00:00,2011-03-08T15:45:06+00:00,2011-03-08T15:45:06+00:00,,dirty,18,2,1,1,0,1,,,
+matplotlib/matplotlib,88751,35,"Fix issue 34: set_rubberband: integer argument expected, got float","Like a few others, the MacOSX backend is responsible for casting it's arguments to int .  See the backtrace in
+
+  https://github.com/matplotlib/matplotlib/issues/34
+",radford,55631,closed,False,2011-03-08T23:14:49+00:00,2014-07-01T05:15:59+00:00,2011-03-10T20:20:39+00:00,,f86ed6a5cb63afa6a7748ac49158418bee7ec0b6,dirty,1,1,1,1,0,1,,,
+matplotlib/matplotlib,89277,37,Pytz update,"The version of pytz included in matplotlib is somewhat outdated (version 2010o). The latest version of pytz (version 2011c) includes updates to the timezone database and fixes that make pytz compatible with Python 3.1 and 3.2.
+
+(Issue https://github.com/matplotlib/matplotlib/issues#issue/36 was an unintentional duplicate).
+",hodgestar,165551,closed,False,2011-03-09T15:17:32+00:00,2014-07-04T15:20:56+00:00,2011-03-10T18:40:50+00:00,,,dirty,408,243,22,1,0,2,,,
+matplotlib/matplotlib,89286,39,Issue38,"Fix for https://github.com/matplotlib/matplotlib/issues/#issue/38
+",drnlm,642056,closed,False,2011-03-09T15:28:31+00:00,2014-07-06T17:40:41+00:00,2011-03-09T16:05:23+00:00,,e25fc794b0f4063d16e2fa7508f62e6c55961ffd,dirty,2,1,1,1,0,2,,,
+matplotlib/matplotlib,89323,40,Issue38 v1.0.1,"Same fix as previous pull request, just targeting the v1.0.x branch as asked.
+",drnlm,642056,closed,False,2011-03-09T16:04:56+00:00,2014-07-22T00:39:02+00:00,2011-03-09T19:52:15+00:00,2011-03-09T19:52:15+00:00,,dirty,2,1,1,1,0,0,,,
+matplotlib/matplotlib,89949,41,Fixes bug 3165422: color cycles even if kwarg 'color' is set,"Hi there,
+i send a patch to matplotlib-devel last week. As there was no reaction, i now send it again as an pull request.
+
+-maximilian
+",faucon,625342,closed,False,2011-03-10T08:12:26+00:00,2014-06-28T01:34:40+00:00,2011-03-23T19:04:44+00:00,2011-03-23T19:04:44+00:00,,dirty,1,1,1,1,0,3,,,
+matplotlib/matplotlib,92165,44,Remove -Wstrict-prototypes,"The strict-prototypes warning is pointless for C++ code, and adds needless noise to the compilation. Remove this option before building matplotlib.
+
+(a fix from the CTPUG matplotlib porting sprint that is also relevant to matplotlib trunk).
+",drnlm,642056,closed,False,2011-03-13T20:32:59+00:00,2014-06-30T10:49:12+00:00,2011-03-14T15:43:05+00:00,2011-03-14T15:43:05+00:00,,dirty,15,1,2,1,0,1,,,
+matplotlib/matplotlib,92872,45,Docfix/improve description,"My work so far to improve the documentation in various places.  This is far from complete and I hope someone else can contribute more improvements.
+
+Of particular focus were grammatical and spelling errors, descriptions of how to use matplotlib (including differences between pylab and pyplot), expanded discussion of the show() command, and improvements to the docs for mplot3d.
+
+I have also worked to eliminate some of the sphinx warning messages, but I have not addressed any of the plot directive errors.
+",WeatherGod,291576,closed,False,2011-03-14T20:09:22+00:00,2014-07-23T12:55:53+00:00,2011-03-28T13:48:36+00:00,2011-03-28T13:48:35+00:00,,dirty,267,112,10,13,3,8,,,
+matplotlib/matplotlib,92894,46,Yafli,"The qt4 plot options editor uses some PyQt features that were not available in <PyQt4-4.3. This patch prevents this constraint from rendering the entire Qt4 backend unusable on older platforms (like RHEL5). It should be merged into both v1.0.x and master.
+",ddale,169586,closed,False,2011-03-14T20:27:37+00:00,2014-07-20T15:47:44+00:00,2011-03-29T20:16:29+00:00,2011-03-29T20:16:29+00:00,,dirty,38,30,1,1,0,0,,,
+matplotlib/matplotlib,93837,47,Fix dateutil.zoneinfo,"Fix typo in setup.py
+",drnlm,642056,closed,False,2011-03-15T21:15:47+00:00,2014-06-16T06:25:21+00:00,2011-03-24T17:47:47+00:00,2011-03-24T17:47:47+00:00,,dirty,1,1,1,1,0,1,,,
+matplotlib/matplotlib,94662,48,Ft2font type pun,"Fixes a type-pun warning in ft2font.cpp, where the current matplotlib code looks wrong.
+
+See https://github.com/CTPUG/matplotlib-py3/commit/04b41e86b088c7ca2da2455603cb907445e5108f for some relevant discussion.
+",drnlm,642056,closed,False,2011-03-16T20:38:43+00:00,2014-07-04T22:25:44+00:00,2011-03-22T18:27:11+00:00,2011-03-22T18:27:11+00:00,,dirty,14,2,2,2,0,0,,,
+matplotlib/matplotlib,97527,49,Legend refactor II : stem plot,"Added support for stem plot.
+
+Check 
+
+examples/pylab_examples/legend_demo4.py
+
+Any suggestion on how the legend handles should look?
+
+-JJ
+",leejjoon,95962,closed,False,2011-03-21T07:07:43+00:00,2014-07-17T05:09:08+00:00,2011-06-16T11:52:40+00:00,,af466e1f167cf8ca8ebacd4dfbcbd14c6be7ffad,dirty,5912,2400,177,264,0,4,,,
+matplotlib/matplotlib,98767,50,Chdir import path fixes,"In some situations, the matplotlib package seems to be imported for a relative module path. Since much of the backend wrangling involves importing submodules in functions, this means that a chdir() before calling one of these functions can raise confusing ImportErrors. The test framework performs such a chdir() in the image_comparison() decorator that many of the tests use, which causes spurious test errors.
+",mdboom,38294,closed,False,2011-03-22T18:17:05+00:00,2014-07-08T18:55:35+00:00,2012-06-01T15:34:27+00:00,,ae2701a9e6c593ac98344a11bfd960f3434e8c8c,dirty,4,0,1,1,0,4,,,
+matplotlib/matplotlib,99656,51,Iterable,"See ""matplotlib.cbook.iterable"" thread on mailing list.
+",mdboom,38294,closed,False,2011-03-23T17:45:56+00:00,2014-07-05T02:43:20+00:00,2011-03-23T18:59:41+00:00,2011-03-23T18:59:41+00:00,,dirty,4,2,1,1,0,0,,,
+matplotlib/matplotlib,99993,52,Math crash,"The mathtext parser was crashing when using a space command within sized delimiters.  Fixes Sage bug #8125: http://trac.sagemath.org/sage_trac/ticket/8125
+
+Supported by Sage Days 29
+",mdboom,38294,closed,False,2011-03-23T23:47:47+00:00,2014-06-14T21:25:14+00:00,2011-03-24T17:52:37+00:00,2011-03-24T17:52:37+00:00,,dirty,562,523,11,1,0,1,,,
+matplotlib/matplotlib,100061,53,Math prime,"http://trac.sagemath.org/sage_trac/ticket/10717
+",mdboom,38294,closed,False,2011-03-24T01:27:10+00:00,2014-07-10T00:40:55+00:00,2011-03-24T01:27:40+00:00,,bb300887b1737b0b0acbe716ddd5e820f4eff958,dirty,2,2,2,1,0,0,,,
+matplotlib/matplotlib,100064,54,Math prime,"http://trac.sagemath.org/sage_trac/ticket/10717
+",mdboom,38294,closed,False,2011-03-24T01:30:25+00:00,2014-06-28T01:34:40+00:00,2011-03-28T14:06:25+00:00,2011-03-28T14:06:25+00:00,,dirty,2,2,2,1,0,2,,,
+matplotlib/matplotlib,100065,55,Script m,"For all those who've been using the script ""M"" character, now it works!
+",mdboom,38294,closed,False,2011-03-24T01:32:56+00:00,2014-07-11T06:21:59+00:00,2011-03-24T17:57:23+00:00,2011-03-24T17:57:23+00:00,,dirty,46,44,10,1,0,1,,,
+matplotlib/matplotlib,100201,56,scrub kwarg and use one figure for all of the tests,"The changes here fix a substantial memory leak in the test suite which was caused by generating a new figure for every test but never closing any of them. The memory usage for the test suite went from being monotonically increasing ramp that goes up to ~800MB with each test, to being a much more reasonable ~100MB. 
+
+To implement this, all of the tests which created new figures now just use one particular figure -- figure(1) -- which is also cleared just before the test. 
+
+Previously, clearing a figure removed all of the artists but kept around the state of the subplotpars, which caused problems for all tests that ran after a change to subplot parameters was made in the test suite, so I added a 'scrub' keyword argument to clf to also reset the subplot parameters, and also added a rcParam['figure.autoscrub'] to control the behavior of when clf is called without explicitly specifying 'scrub'.
+
+These new tests were documented in both the CHANGELOG and in docs/api/api_changes, and the docs built fine (with all of the links and format working as intended)
+
+ok, i'm closing this one in favor of https://github.com/matplotlib/matplotlib/pull/96
+",ivanov,118211,closed,False,2011-03-24T08:43:49+00:00,2014-06-28T02:42:54+00:00,2011-04-26T20:07:29+00:00,,,dirty,151,65,14,6,9,8,,,
+matplotlib/matplotlib,100496,57,Wx image,"In the Wx (non wxAgg) backend, images are misaligned
+",mdboom,38294,closed,False,2011-03-24T16:47:57+00:00,2014-07-02T03:03:30+00:00,2011-03-31T18:14:33+00:00,2011-03-31T18:14:33+00:00,,dirty,1,1,1,1,0,1,,,
+matplotlib/matplotlib,101765,58,Include test_text in default_test_modules,"I added a pull request for this two line change just in case there was a specific reason to _exclude_ test_text from the test modules. 
+
+For instance, right now, I get one failure in the test suite if I include it. The failure is in test_text:test_font_styles, but this has been the case for a while, it's just that these tests weren't running before.
+
+Any developers want to chime in on this?
+
+By the way, this was the source of discrepancy between running via nosetests and matplotlib.test() as was described [here] [1]
+
+[1]: http://old.nabble.com/matplotlib.test%28%29-no-errors%2C-but-%24nosetest-matplotlib.tests--%3E-errors-%09and-failure--td29257062.html#a29257062 ""here"".
+",ivanov,118211,closed,False,2011-03-26T01:02:46+00:00,2014-06-26T19:33:28+00:00,2011-03-28T13:52:02+00:00,,,dirty,2,1,1,1,0,2,,,
+matplotlib/matplotlib,101774,59,Fix 3187521 - crash due to unescaped fontpaths,"Some paths were improperly being interpreted as a regular expression, leading to errors.
+",ivanov,118211,closed,False,2011-03-26T01:31:23+00:00,2014-07-18T12:34:58+00:00,2011-03-28T13:54:21+00:00,,,dirty,4,2,2,1,0,3,,,
+matplotlib/matplotlib,102033,60,Simplify and unify font finding,"My take on pull request #59
+
+Use cbook.listFiles to match files recursively, obviating the need to recurse over OSX and X11 font directories separately. Fixes sourceforge bug [#3187521](http://sourceforge.net/tracker/?func=detail&aid=3187521&group_id=80706&atid=560720) by avoiding globbing over directory names that may contain metacharacters.
+",jkseppan,92814,closed,False,2011-03-26T16:32:43+00:00,2014-07-16T10:36:50+00:00,2011-03-28T13:53:39+00:00,2011-03-28T13:53:39+00:00,,dirty,20,57,1,1,0,1,,,
+matplotlib/matplotlib,103986,63,Lots of minor changes to docs to reduce Sphinx warnings.,,mdboom,38294,closed,False,2011-03-29T12:51:05+00:00,2015-03-03T18:44:10+00:00,2011-04-08T17:49:36+00:00,2011-04-08T17:49:36+00:00,,dirty,565,955,32,19,0,2,,,
+matplotlib/matplotlib,104162,64,wraps cbook.ViewVCCachedServer class definition in a factory,"This class inherits from HTTPSHandler, which is not defined if
+python was built without support for SSL. Closes #62.
+",ddale,169586,closed,False,2011-03-29T15:40:20+00:00,2014-06-27T15:31:28+00:00,2011-03-29T19:09:33+00:00,2011-03-29T19:09:33+00:00,,dirty,204,183,2,2,0,1,,,
+matplotlib/matplotlib,106353,65,Ignore some doc-generated files,"A simple update to the .gitignore file
+",mdboom,38294,closed,False,2011-03-31T18:19:31+00:00,2014-07-23T16:33:50+00:00,2011-04-02T13:50:59+00:00,2011-04-02T13:50:59+00:00,,dirty,6,0,1,1,0,0,,,
+matplotlib/matplotlib,106463,66,Plot directive,"This is a manually-intensive merge of the features Numpy's version of plot_directive that were missing from matplotlib's version.  This allows the Numpy documentation to be build using matplotlib's plot_directive and addresses Numpy bug #1074:
+
+http://projects.scipy.org/numpy/ticket/1074
+",mdboom,38294,closed,False,2011-03-31T20:02:56+00:00,2014-07-06T20:25:49+00:00,2011-04-04T13:06:33+00:00,,a2d63860b374a263a6a8a10be9b1ec83b3089e70,dirty,627,419,4,11,2,4,,,
+matplotlib/matplotlib,107242,67,Add pngsuite test to regression framework,"This is an old regression test testing the PNG reading code that has been around for a while, but wasn't included in the regression testing framework.
+",mdboom,38294,closed,False,2011-04-01T16:20:31+00:00,2014-07-16T23:44:43+00:00,2011-04-02T13:12:04+00:00,2011-04-02T13:12:04+00:00,,dirty,667,29,21,2,0,0,,,
+matplotlib/matplotlib,107247,68,Remove old files,"Removes a number of unnecessary, deprecated or orphaned files.
+",mdboom,38294,closed,False,2011-04-01T16:23:54+00:00,2014-07-06T18:58:00+00:00,2011-04-01T21:08:26+00:00,2011-04-01T21:08:26+00:00,,dirty,11,8119,20,7,0,0,,,
+matplotlib/matplotlib,107248,69,Use sphinx inheritance diagram,"Sphinx has incorporated and much-improved the inheritance_diagram directive that began life in matplotlib.  As it now exists in released versions of Sphinx, there's no reason to keep our local fork around anymore.
+",mdboom,38294,closed,False,2011-04-01T16:25:14+00:00,2014-07-04T15:21:03+00:00,2011-04-01T21:23:20+00:00,2011-04-01T21:23:20+00:00,,dirty,1,408,2,2,0,0,,,
+matplotlib/matplotlib,108074,71,"bugfix in testing: mark ImageComparisonFailure as FAIL, not ERROR","solves:
+https://github.com/matplotlib/matplotlib/issues/70
+",efiring,85125,closed,False,2011-04-02T22:05:14+00:00,2014-07-02T03:04:06+00:00,2011-04-03T00:11:52+00:00,2011-04-03T00:11:52+00:00,,dirty,1,1,1,1,0,1,,,
+matplotlib/matplotlib,108565,72,Bugfix: enable picking of AsteriskCollection instances,"A primary use of these is in scatter, where they provide + and x
+symbols.
+
+This fixes the problem reported here:
+http://article.gmane.org/gmane.comp.python.matplotlib.devel/10069
+
+The present commit is a fairly minimal solution to the problem; it makes the symbols pickable without breaking anything that I know of.  It does change default behavior in that filled symbols from scatter (i.e., collections) now obey the pickradius--the cursor can be outside the symbol if self._pickradius or self._picker is non-zero.  This could be addressed by setting different default _pickradius falues for different types of symbol; the filled types could default to zero, or at least to a smaller value than the default for unfilled types, and this can then be overridden by the picker kwarg if the user so chooses.  I would be willing to add this change to the present branch, if others think it a good idea; I am neutral on doing it here and now.
+
+Note that all this leaves an inconsistency between collections and Line2D objects.  In the former, picking is based on the object path after stroking with a line of pickradius thickness; in the latter picking is based on datapoint locations and pickradius alone, with no account taken of the marker size.  If any of this is to be smoothed out, I am inclined to do it in master, not v1.0.x.  
+",efiring,85125,closed,False,2011-04-04T00:32:53+00:00,2014-07-08T18:45:32+00:00,2011-04-13T01:23:56+00:00,2011-04-13T01:23:56+00:00,,dirty,33,8,2,1,1,0,,,
+matplotlib/matplotlib,108979,73,Write out the results of tests that don't yet have baseline images.,"A new test that did not yet have baseline images would fail before the results of the test were generated.  This commit changes things so it writes out the results, then fails, thereby creating new files that can be copied to the source directory as new baseline images.
+",mdboom,38294,closed,False,2011-04-04T16:01:30+00:00,2015-03-03T18:44:49+00:00,2011-04-12T17:35:12+00:00,2011-04-12T17:35:11+00:00,,dirty,6,7,1,2,0,0,,,
+matplotlib/matplotlib,109160,74,Test reorg,"Moves many tests from the unit/ directory into the automated regression test framework.
+",mdboom,38294,closed,False,2011-04-04T19:36:23+00:00,2015-03-03T18:44:39+00:00,2011-04-12T17:35:12+00:00,2011-04-12T17:35:12+00:00,,dirty,4243,441,38,13,0,0,,,
+matplotlib/matplotlib,109283,75,add common font paths to font_manager,"just a few simple additions for common font paths on OS X
+",ddale,169586,closed,False,2011-04-04T21:17:24+00:00,2014-07-14T03:22:36+00:00,2011-04-05T13:42:53+00:00,2011-04-05T13:42:53+00:00,,dirty,5,1,1,1,0,0,,,
+matplotlib/matplotlib,109831,76,Split mathtext tests,"Splits the mathtext tests into individual files.
+",mdboom,38294,closed,False,2011-04-05T13:14:20+00:00,2015-03-03T18:44:29+00:00,2011-04-15T14:04:36+00:00,2011-04-15T14:04:36+00:00,,dirty,23048,13436,1145,3,0,0,,,
+matplotlib/matplotlib,113848,77,"add ""|-|"" to annnotation_guide table with options widthA,widthB","this patch adds a bit of documentation for the barAB arrowstyle to the annotations_guide + a small comment fix. 
+",kaufman,640895,closed,False,2011-04-10T02:04:37+00:00,2014-07-11T06:22:20+00:00,2011-04-12T14:28:16+00:00,2011-04-12T14:28:16+00:00,,dirty,2,1,2,1,0,2,,,
+matplotlib/matplotlib,113850,78,"add ""legend.frameon"" to rcParams",,kaufman,640895,closed,False,2011-04-10T02:16:49+00:00,2014-07-07T23:36:44+00:00,2011-06-16T13:16:51+00:00,,9dc3b306c8f1a221f941caae54960b452099a2ec,dirty,7296,11963,245,325,4,2,,,
+matplotlib/matplotlib,114249,79,"add ""axis='xy'"" option to grid() for independent control of each axis' grid","allows independent control from the pyplot interface.
+",kaufman,640895,closed,False,2011-04-10T20:28:44+00:00,2014-07-06T17:41:08+00:00,2011-04-15T14:01:56+00:00,2011-04-15T14:01:55+00:00,,dirty,12,6,2,1,0,1,,,
+matplotlib/matplotlib,114531,80,PySide backend support,"Hi,
+I've modified the Qt backend to switch between PySide and PyQt using the same environment variable as IPython.  
+
+There are a couple of outstanding bugs in PySide that are apparent in matplotlib:
+489 - temporary work around in qt.py that can be removed when PySide fixes the bug. Fixed in source.
+819 - temporary work around in qt.py that can be removed when PySide fixes the bug. Default file filter isn't set.
+736 - Only affects the subplot configuration tool. Fixed in PySide 1.0.1.
+
+I also removed the 'hackish' fix for the bug in early version of PyQt 4.6.x - it could be added to qt.py if it was felt necessary. 
+
+I've added a Qt slot to the FigureManagerQT class that passes straight through to the status bar - this seemed to fix a segfault that may or may not be a bug in PySide.  I haven't been able to separately reproduce it and PySide isn't really suppose to support the old style slots/signals.
+
+I've modified formlayout to use getColor instead of getRgba as PySide does not have the later function.  I also had to alias all of the Qt names used by formlayout as you can't double import things.
+
+Regards,
+Gerald.
+",gstorer,716633,closed,False,2011-04-11T07:54:18+00:00,2015-11-04T23:11:57+00:00,2011-06-16T14:48:25+00:00,2011-06-16T14:48:25+00:00,c4858ed96436dfaa55000ec212759fbfdffa4e23,dirty,153,73,7,14,17,11,,,
+matplotlib/matplotlib,115978,82,New svg,"Refactoring of the SVG backend to pave the way for an interactive SVG backend down the road.  Uses an XMLWriter class to keep the code simpler and more likely to produce valid XML.  Numerical precision of text placement is much better.  Paths are now generated in C, resulting in a significant speed-up.  All text (math and otherwise) is produced using the textpath.py module.
+",mdboom,38294,closed,False,2011-04-12T17:34:01+00:00,2015-03-03T18:44:13+00:00,2011-05-16T13:23:13+00:00,2011-05-16T13:23:13+00:00,8ac37daaae9d80dd7f3ce75102b8f4d2ff29e706,dirty,367511,65669,400,23,0,6,,,
+matplotlib/matplotlib,119256,84,Math image,"Adds a function to convert any math expression to a single image file in any of the output formats matplotlib supports.  Probably generally useful, but particularly useful for IPython.
+",mdboom,38294,closed,False,2011-04-15T19:22:25+00:00,2014-07-03T17:56:37+00:00,2011-04-18T17:52:48+00:00,2011-04-18T17:52:48+00:00,,dirty,42,0,1,2,0,2,,,
+matplotlib/matplotlib,120383,86,"BUG: in qt4 backend, ignore auto-repeat keyboard events.","This makes constrained zoom/pan work. I don't see any need
+to support keyboard auto-repeat in mpl.
+
+The bug was reported here: 
+http://thread.gmane.org/gmane.comp.python.matplotlib.devel/10134
+",efiring,85125,closed,False,2011-04-17T21:12:19+00:00,2014-07-08T18:45:42+00:00,2011-04-18T07:42:06+00:00,2011-04-18T07:42:06+00:00,,dirty,10,0,2,1,0,0,,,
+matplotlib/matplotlib,120497,87,gs distiller now uses pstoeps but does not replace the bbox,"This is to fix issue 85.
+",leejjoon,95962,closed,False,2011-04-18T01:37:54+00:00,2014-06-26T19:32:35+00:00,2011-05-09T06:55:20+00:00,,3fcbca3680726e20edddc7b8bb61afac9ade0bde,dirty,34646,25898,1428,352,0,2,,,
+matplotlib/matplotlib,124107,89,Fixes a memory leak where each spines' path was a view of the spine path ,"Fixes a memory leak where each spines' path was a view of the spine path of the previous run.
+
+The following code (simplified to its essence from an example by Caleb Constantine) leaks memory very slowly -- detectable only using valgrind.  It turns out that if the axes are cleared and reused rather than deleted, each spine's path is created as a view based on the spine's path in the previous draw.  This creates a long reference chain rather than freeing the previous draw's path view.  
+
+This pull request fixes the leak, but @astraw may want to have a look at the fix...  I'm not entirely sure why the copy is needed at all -- it hasn't actually been creating a copy all this time any way.  Perhaps an alternative solution is just to remove the copy and the assignment (marked with the comment ""# replace"") altogether?
+
+<pre>
+import numpy
+import matplotlib
+matplotlib.use(""Agg"")
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+figure = Figure(dpi=None)
+canvas = FigureCanvas(figure)
+axes = figure.add_subplot(1,1,1)
+
+def draw(channel, seconds):
+    axes.clear()
+    axes.plot(channel, seconds)
+    canvas.print_figure('test.png')
+
+channel = numpy.sin(numpy.arange(1000))
+seconds = numpy.arange(len(channel))
+
+for i in range(10):
+    draw(channel, seconds)
+</pre>
+",mdboom,38294,closed,False,2011-04-21T16:34:18+00:00,2015-03-03T18:44:29+00:00,2011-04-25T22:26:29+00:00,2011-04-25T22:26:29+00:00,71a8803103782109cdcbce45f781d5fe48b1bc4b,dirty,1,2,1,2,0,0,,,
+matplotlib/matplotlib,125754,90,	change 'xy' axis option to 'both' to maintain consistency with other functions.,"```
+see subject.
+```
+",kaufman,640895,closed,False,2011-04-23T22:09:47+00:00,2014-06-29T07:33:41+00:00,2011-04-24T03:25:40+00:00,2011-04-24T03:25:40+00:00,,dirty,6,6,2,1,0,3,,,
+matplotlib/matplotlib,125856,91,"	allow kwargs `transform` to work for axvspan, axhspan, axvline, axhline","This patch removes the prohibition on using the 'transform' option for axhline and axvline and changes the code order so that a user-passed transform option will work with axhspan and axvspan.
+",kaufman,640895,closed,False,2011-04-24T02:05:51+00:00,2014-06-14T20:39:59+00:00,2011-05-17T18:59:14+00:00,,11938d10c27e41fc56d310b1058679eb6b6c73e7,dirty,7314,11979,244,323,2,1,,,
+matplotlib/matplotlib,126312,92,gs distiller (of ps backend) uses ps2write device,"With gs version 9 and later, the gs distiller (which currently uses ""pswrite"" device) produces very large file when image is included. This can be simply solved if we use ""ps2write"" device. Furthermore, ""ps2write"" device seems to be recommended.
+
+http://www.cups.org/str.php?L3766
+
+This patch checks the gs version, and uses ""ps2write"" device if appropriate.
+
+However, using ""ps2write"" seems to result in an incorrect bbox.
+
+https://github.com/matplotlib/matplotlib/issues/85#issuecomment-1039065
+
+The patch also fixes it.
+",leejjoon,95962,closed,False,2011-04-25T06:12:21+00:00,2014-07-05T02:43:43+00:00,2011-05-09T06:44:21+00:00,2011-05-09T06:44:21+00:00,a98f2e003b407b1f38341d5ca985cd6406332068,dirty,34819,25935,1428,364,1,1,,,
+matplotlib/matplotlib,127204,93,Fixed warning message relating to interpolation='none' setting,"Before this patch, if using `interpolation='none'` and a backend that doesn't support it, the warning was:
+
+```
+The backend (<type 'instance'>) does not support interpolation='none'. The image will be interpolated with 'nearest` mode.
+```
+
+With the current patch, it is:
+
+```
+The backend (matplotlib.backends.backend_macosx.RendererMac) does not support interpolation='none'. The image will be interpolated with 'nearest` mode.
+```
+",astrofrog,314716,closed,False,2011-04-26T02:57:07+00:00,2014-07-10T00:41:19+00:00,2011-04-26T15:13:02+00:00,2011-04-26T15:13:02+00:00,d87cb97e808e0da15dd8a788884d01835d2cc364,dirty,1,1,1,1,0,0,,,
+matplotlib/matplotlib,127819,95,Fix backend_pdf test,"The backend_pdf test had a side effect that was causing subsequent tests to fail.
+",mdboom,38294,closed,False,2011-04-26T16:29:45+00:00,2015-03-03T18:43:22+00:00,2011-04-26T16:29:51+00:00,2011-04-26T16:29:51+00:00,951f08b8e5333c19d950d796a4ee853f03f26ed2,dirty,11,5,1,1,0,0,,,
+matplotlib/matplotlib,128105,96,Close figs,"this is the alternative to https://github.com/matplotlib/matplotlib/pull/56
+
+closes every figure after each test.
+
+memory usage stays at a steady 120Mb on my machine.
+
+please kick the tires on this one
+",ivanov,118211,closed,False,2011-04-26T20:06:36+00:00,2014-06-26T08:11:17+00:00,2011-05-02T19:35:18+00:00,,847177573174bd50589542aa4372f5a83a440f72,dirty,65,3,12,5,0,2,,,
+matplotlib/matplotlib,129000,97,Faster image comparison decorator,"This is a riff on the ideas in the comments on the pull requests by Paul @ivanov to reduce memory consumption when running the regression tests.  See:
+
+https://github.com/matplotlib/matplotlib/pull/96
+
+and 
+
+https://github.com/matplotlib/matplotlib/pull/56
+
+This is different from the other two in that it:
+1. Calls the test code to generate the figure object only once, and then calls savefig three times on the same figure -- this results in an ~ 12% speedup.
+2. Automatically closes all figures and restores rcParams and the unit registry after every test.  The latter prevents some nasty side effect problems presented by some tests.  This also revealed a memory leak in pyplot.close('all').  This saves massive amounts of memory vs. the current master, but it roughly equivalent to Paul's approach in pull request 96.
+3. Runs Inkscape in ""shell"" mode so that a single inkscape process is fired up and re-used to convert each SVG to PNG.  This results in an additional ~ 32% speedup.
+",mdboom,38294,closed,False,2011-04-27T14:08:52+00:00,2014-07-16T23:44:43+00:00,2011-04-27T19:39:38+00:00,2011-04-27T19:39:38+00:00,2c09346052a153e2f844423b8d5c1892d9155346,dirty,901,182,17,3,3,10,,,
+matplotlib/matplotlib,129412,98,Faster image comparison decorator,"This is a riff on the ideas in the comments on the pull requests by Paul @ivanov to reduce memory consumption when running the regression tests.  See:
+
+https://github.com/matplotlib/matplotlib/pull/96
+
+and 
+
+https://github.com/matplotlib/matplotlib/pull/56
+
+This is different from the other two in that it:
+1. Calls the test code to generate the figure object only once, and then calls savefig three times on the same figure -- this results in an ~ 12% speedup.
+2. Automatically closes all figures and restores rcParams and the unit registry after every test.  The latter prevents some nasty side effect problems presented by some tests.  This also revealed a memory leak in pyplot.close('all').  This saves massive amounts of memory vs. the current master, but it roughly equivalent to Paul's approach in pull request 96.
+3. Runs Inkscape in ""shell"" mode so that a single inkscape process is fired up and re-used to convert each SVG to PNG.  This results in an additional ~ 32% speedup.
+",mdboom,38294,closed,False,2011-04-27T20:17:08+00:00,2014-07-07T23:36:43+00:00,2011-05-02T19:34:13+00:00,2011-05-02T19:34:13+00:00,1b7e06013893c3365eb72f67677ac766964965a6,dirty,882,181,17,11,0,8,,,
+matplotlib/matplotlib,130746,100,new feature: named figures,"I will add some test to support the proposed new feature.
+
+I've not implemented plt.close(""today""), because I'm unsure whether it is absolutely required.
+
+PS: It doesn't seem possible to attach a pull request to an existing issue ?
+",butterw,408915,closed,False,2011-04-28T20:55:35+00:00,2014-07-06T18:35:22+00:00,2011-06-17T20:41:31+00:00,2011-06-17T20:41:31+00:00,6b5b5954d4cc505606e5b7c8587b17e680623428,dirty,0,0,0,0,0,5,,,
+matplotlib/matplotlib,132378,102,More documentation fixes,"Came across some glaring errors in the installation docs.  So how about we start up a new pull request that would be responsible for the many little typos that are in the docs, and take care of them all in one merge?
+
+Let's see what else we can find!
+",WeatherGod,291576,closed,False,2011-04-30T19:16:25+00:00,2014-06-20T21:56:06+00:00,2011-06-03T15:00:19+00:00,,1c4e745e7bdf1c99018647608cb73c0e362746c0,dirty,354,250,35,18,0,2,,,
+matplotlib/matplotlib,133403,103,Agg clipping rectangle bug,"Fix bug in clipping rectangle in Agg backend whereby if the clipping rectangle is outside the bounds of the image _everything_ gets clipped.
+",mdboom,38294,closed,False,2011-05-02T16:04:50+00:00,2015-03-03T18:43:18+00:00,2011-05-02T19:34:42+00:00,2011-05-02T19:34:42+00:00,2f044851ab568fa5602cad27a53353765e87cf79,dirty,4,2,1,1,0,0,,,
+matplotlib/matplotlib,137680,104,0.99.x documentation build failure fix (plot_directive formats can be unicode),"A build failure appeared in Debian sid (which still has 0.99.3) 
+http://bugs.debian.org/625150
+
+It appears that ""formats"" may be unicode. Not quite sure why this happens. This code has completely changed in 1.x, so I don't expect it to be an issue in master.
+
+```
+(sid-amd64)sbuild@dvorak:/build/matplotlib-jD7Xkb/matplotlib-0.99.3/doc$ MATPLOTLIBDATA=../lib/matplotlib/mpl-data/ PYTHONPATH=../build/lib.linux-x86_64-2.6 ./make.py --small all
+Running Sphinx v1.0.7
+WARNING: extension 'math_symbol_table' has no setup() function; is it really a Sphinx extension module?
+loading pickled environment... done
+animation, api, axes_grid, event_handling, misc, mplot3d, pngsuite, pylab_examples, tests, units, user_interfaces, widgets,
+building [html]: targets for 286 source files that are out of date
+updating environment: [config changed] 467 added, 0 changed, 0 removed
+reading sources... [  0%] api/afm_api
+reading sources... [  0%] api/api_changes
+reading sources... [  0%] api/artist_api
+/build/matplotlib-jD7Xkb/matplotlib-0.99.3/doc/sphinxext/inheritance_diagram.py:312: DeprecationWarning: xfileref_role is deprecated, use XRefRole
+  'class', ':class:`%s`' % name, name, 0, state)
+...Exception occurred while building, starting debugger:
+Traceback (most recent call last):
+  File ""/usr/lib/pymodules/python2.6/sphinx/cmdline.py"", line 188, in main
+    app.build(force_all, filenames)
+  File ""/usr/lib/pymodules/python2.6/sphinx/application.py"", line 207, in build
+    self.builder.build_update()
+  File ""/usr/lib/pymodules/python2.6/sphinx/builders/__init__.py"", line 198, in build_update
+    'out of date' % len(to_build))
+  File ""/usr/lib/pymodules/python2.6/sphinx/builders/__init__.py"", line 218, in build
+    purple, length):
+  File ""/usr/lib/pymodules/python2.6/sphinx/builders/__init__.py"", line 120, in status_iterator
+    for item in iterable:
+  File ""/usr/lib/pymodules/python2.6/sphinx/environment.py"", line 519, in update_generator
+    self.read_doc(docname, app=app)
+  File ""/usr/lib/pymodules/python2.6/sphinx/environment.py"", line 664, in read_doc
+    pub.publish()
+  File ""/usr/lib/pymodules/python2.6/docutils/core.py"", line 203, in publish
+    self.settings)
+  File ""/usr/lib/pymodules/python2.6/docutils/readers/__init__.py"", line 69, in read
+    self.parse()
+  File ""/usr/lib/pymodules/python2.6/docutils/readers/__init__.py"", line 75, in parse
+    self.parser.parse(self.input, document)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/__init__.py"", line 157, in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 170, in run
+    input_source=document['source'])
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2940, in text
+    self.section(title.lstrip(), source, style, lineno + 1, messages)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 329, in section
+    self.new_subsection(title, lineno, messages)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 398, in new_subsection
+    node=section_node, match_titles=1)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 284, in nested_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2706, in underline
+    self.section(title, source, style, lineno - 1, messages)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 329, in section
+    self.new_subsection(title, lineno, messages)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 398, in new_subsection
+    node=section_node, match_titles=1)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 284, in nested_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2281, in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2293, in explicit_construct
+    return method(self, expmatch)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2035, in directive
+    directive_class, match, type_name, option_presets)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2086, in run_directive
+    result = directive_instance.run()
+  File ""/usr/lib/pymodules/python2.6/sphinx/ext/autodoc.py"", line 1194, in run
+    nested_parse_with_titles(self.state, self.result, node)
+  File ""/usr/lib/pymodules/python2.6/sphinx/util/nodes.py"", line 32, in nested_parse_with_titles
+    return state.nested_parse(content, 0, node, match_titles=1)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 284, in nested_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2283, in explicit_markup
+    self.explicit_list(blank_finish)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2314, in explicit_list
+    match_titles=self.state_machine.match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 321, in nested_list_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2587, in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2293, in explicit_construct
+    return method(self, expmatch)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2035, in directive
+    directive_class, match, type_name, option_presets)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2086, in run_directive
+    result = directive_instance.run()
+  File ""/usr/lib/pymodules/python2.6/sphinx/domains/__init__.py"", line 193, in run
+    return BaseDirective.run(self)
+  File ""/usr/lib/pymodules/python2.6/sphinx/directives/__init__.py"", line 164, in run
+    self.state.nested_parse(self.content, self.content_offset, contentnode)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 284, in nested_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2283, in explicit_markup
+    self.explicit_list(blank_finish)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2314, in explicit_list
+    match_titles=self.state_machine.match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 321, in nested_list_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2587, in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2293, in explicit_construct
+    return method(self, expmatch)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2035, in directive
+    directive_class, match, type_name, option_presets)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2086, in run_directive
+    result = directive_instance.run()
+  File ""/usr/lib/pymodules/python2.6/sphinx/domains/__init__.py"", line 193, in run
+    return BaseDirective.run(self)
+  File ""/usr/lib/pymodules/python2.6/sphinx/directives/__init__.py"", line 164, in run
+    self.state.nested_parse(self.content, self.content_offset, contentnode)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 284, in nested_parse
+    node=node, match_titles=match_titles)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 195, in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 233, in run
+    context, state, transitions)
+  File ""/usr/lib/pymodules/python2.6/docutils/statemachine.py"", line 454, in check_line
+    return method(match, context, next_state)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2281, in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2293, in explicit_construct
+    return method(self, expmatch)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2035, in directive
+    directive_class, match, type_name, option_presets)
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/states.py"", line 2086, in run_directive
+    result = directive_instance.run()
+  File ""/usr/lib/pymodules/python2.6/docutils/parsers/rst/__init__.py"", line 370, in run
+    self.state, self.state_machine)
+  File ""/build/matplotlib-jD7Xkb/matplotlib-0.99.3/build/lib.linux-x86_64-2.6/matplotlib/sphinxext/plot_directive.py"", line 331, in plot_directive
+    os.path.join(destdir, outname + ""."" + format))
+  File ""/usr/lib/python2.6/shutil.py"", line 50, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: u'/build/matplotlib-jD7Xkb/matplotlib-0.99.3/doc/build/plot_directive/mpl_examples/pylab_examples/findobj_demo.('
+> /usr/lib/python2.6/shutil.py(50)copyfile()
+-> with open(src, 'rb') as fsrc:
+(Pdb) u
+> /build/matplotlib-jD7Xkb/matplotlib-0.99.3/build/lib.linux-x86_64-2.6/matplotlib/sphinxext/plot_directive.py(331)plot_directive()
+-> os.path.join(destdir, outname + ""."" + format))
+(Pdb) p formats
+u""[('png', 80)]""
+```
+",stefanor,442117,closed,False,2011-05-05T23:36:57+00:00,2014-06-26T16:52:11+00:00,2011-05-06T19:06:19+00:00,2011-05-06T19:06:19+00:00,1e06d8fb6f0354d94c5043a0df074ea154e40b56,dirty,1,1,1,1,0,1,,,
+matplotlib/matplotlib,138237,105,Gtk crash,,mdboom,38294,closed,False,2011-05-06T14:15:22+00:00,2014-07-14T03:06:52+00:00,2011-05-06T14:15:29+00:00,,df0642329002bbbbf9e796234c810ed1da6b236e,dirty,6,3,2,3,0,0,,,
+matplotlib/matplotlib,138238,106,Gtk crash,"Fix for atexit crash when running GtkAgg backend but not actually showing any windows.
+",mdboom,38294,closed,False,2011-05-06T14:15:55+00:00,2015-03-03T18:43:49+00:00,2011-05-13T15:02:35+00:00,2011-05-13T15:02:35+00:00,406b1f0fdb28a920e7c5c85a2c3bd76a5d41d866,dirty,7,4,1,3,0,7,,,
+matplotlib/matplotlib,139399,107,search in more paths for tcl/tkConfig.sh,"The location of tcl/tkConfig.sh has changed in debian testing and ubuntu natty.
+https://launchpad.net/ubuntu/+source/tcl8.5/8.5.9-2
+the new locations are:
+/usr/lib/tcl8.5/
+/usr/lib/tk8.5/
+
+this means setupext.py does not find the files anymore and fails to build the _tkagg.so extension in some circumstances.
+
+This is the same patch as posted in the sourceforge tracker:
+https://sourceforge.net/tracker/?func=detail&aid=3279844&group_id=80706&atid=560720
+",juliantaylor,542663,closed,False,2011-05-07T19:57:48+00:00,2014-06-26T16:52:20+00:00,2011-05-09T13:51:43+00:00,,fbf18b84da6222fd5bd747dee0d118cc8baa64fb,dirty,13,8,1,1,0,1,,,
+matplotlib/matplotlib,139402,108,Unbundle pycxx,"This is a copy of this message to the -devel list:
+https://sourceforge.net/mailarchive/message.php?msg_id=27434164
+
+many GNU/Linux distributions discourage to bundle other software like matplotlib
+does with PyCXX.
+It is understandable you may not want additionally support each new version
+of the bundled software.
+But you should give the distribution package maintainers an easy way to use
+the version available in the system should they wish to do so.
+
+With the current build system this is not possible without rather large modifications.
+To allow maintainers to use the system files the bundled CXX must be moved from the
+matplotlib root to a subfolder, e.g. CXX -> external/CXX, so gcc will not unintentionally use the bundled headers.
+
+Attached patch makes use of this move and modifies setupext.py to search for the PyCXX
+sources in a list of possible folder pairs. The first folder where files are found is chosen.
+The found sources and include path have been added to all CXX uses I found.
+
+To prefer the system installed version put the paths to the front of the lists and
+it will fall back to the bundled version if they are unavailable.
+E.g. for debian:
+_pycxx_src_paths = [""/usr/share/python{0}.{1}/"".format(_sys.version_info[:2]), ""external/""]
+_pycxx_h_paths = [""/usr/include/python{0}.{1}/"".format(_sys.version_info[:2]), ""external/""]
+
+Btw, I also saw you patched CXX for sparc
+http://sourceforge.net/tracker/?func=detail&aid=3022815&group_id=80706&atid=560720
+has this bug and patch been forwarded to pycxx?
+It is not been applied to trunk yet, was it rejected?
+",juliantaylor,542663,closed,False,2011-05-07T20:03:31+00:00,2014-06-30T10:32:31+00:00,2012-11-04T15:13:03+00:00,,d51ade2f68613a57b96194cb5c70ccbd2ebc0746,dirty,36,29,42,2,0,11,,,New feature
+matplotlib/matplotlib,142462,111,Added missing set_sort_zpos method for Line3DCollection objects.,"adding missing method to make mplot3d more feature-complete and sane...
+",WeatherGod,291576,closed,False,2011-05-10T21:26:50+00:00,2014-07-23T12:55:59+00:00,2011-05-11T14:35:08+00:00,2011-05-11T14:35:08+00:00,03810cccee32522477cdbad4fbda118c36940226,dirty,4,0,1,1,0,0,,,topic: mplot3d
+matplotlib/matplotlib,142857,112,textpath tries the adobe standard encoding as a default for fonts,"I found that the textpath module was not able to handle glyphs like ""fi"", ""fl"" and etc for TeX text.
+For example,
+
+ rcParams[""text.usetex""]=True
+ t = text(0.5, 0.5, ""field"", size=50)
+ from matplotlib.patheffects import withStroke
+ t.set_path_effects([withStroke(foreground=""red"", linewidth=5)])
+
+and ""fi"" is not displayed.
+
+The patch tries to convert the glyph id reported by the dviread module to the proper glyph id for the font to be used using the encoding information.
+
+By the way, I'm hardly an expert on this subject and I hope some one more knowledgeable than me review the patch and see if I get this right.
+
+-JJ
+",leejjoon,95962,closed,False,2011-05-11T05:42:55+00:00,2014-06-25T16:29:09+00:00,2011-07-07T19:04:10+00:00,2011-07-07T19:04:10+00:00,004694db7b8dc837cdbc62568aa726151b647291,dirty,37,8,1,1,0,3,,,
+matplotlib/matplotlib,144702,114,Add some tests for the Delaunay code to the regression test suite.,"Moves some of the existing Delaunay tests into the test suite so they will automatically be tested.
+
+This generated ~90MB of data for PNG, SVG, and PDF.  Since we're only testing triangulation here and not backend differences, this instead generates PNG only, which is around ~20MB.
+
+@jswhit, as the author of the triangulation code, probably should verify all looks well here.
+",mdboom,38294,closed,False,2011-05-12T15:06:46+00:00,2015-03-03T18:43:31+00:00,2011-05-27T15:15:15+00:00,2011-05-27T15:15:15+00:00,6b8bf457deb5c88d8723a1cba11dc14db7d245c6,dirty,188,0,61,1,0,0,,,
+matplotlib/matplotlib,146032,115,Ps tests,"This adds tests to test the PS backend in the regression test framework.
+
+Since both PDF and PS are use the same renderer (in this case ghostscript) it's actually possible to use the PDF baseline images to check the PS output for _most_ of the image comparison tests.  The exception to this is when using a feature that Postscript doesn't support: alpha-blending.  So, rather than adding a ton of new baseline images for PS, this will use the PDF ones when no EPS one is provided.  This has the added benefit of automatically checking that the PDF and PS output is very close to identical, as it should be by design.  
+
+This also removes the mathfont tests for SVG and PDF since (a) they weren't testing anything backend-specific, (b) they took a significant portion of testing time and (c) the small differences between font rendering in PDF and PS were causing some false negatives when testing PS.
+
+Ditto for the png_suite test.
+
+Also fixes one minor font rendering bug in the PS backend uncovered by adding the regression tests.
+",mdboom,38294,closed,False,2011-05-13T14:05:46+00:00,2015-03-03T18:44:21+00:00,2011-05-27T15:13:11+00:00,2011-05-27T15:13:11+00:00,25f0ebe85734086b0dee63ed2fd632e544cf0f58,dirty,40,15416,369,2,0,0,,,
+matplotlib/matplotlib,148002,116,"Bugfix: propagate timezone info in plot_date, xaxis_date, etc.","The tz kwarg was being ignored in these axes methods, and
+DateConverter.default_units was not supplying the timezone
+when available from its input argument.
+
+This is a modification of https://github.com/matplotlib/matplotlib/pull/18; unlike the latter, it does not change the definition of ""unit"" in DateConverter.  Also, github seems to have gotten confused regarding pull 18; it is showing it as involving 227 commits, so it seems better to start from scratch.
+
+I have also tried to clarify a few docstrings and comments.
+",efiring,85125,closed,False,2011-05-16T00:34:49+00:00,2014-06-26T17:04:13+00:00,2011-05-19T08:28:58+00:00,,0b668e4d8b5c9021ce6110b65f842452cbb91420,dirty,60,24,4,1,0,1,,,
+matplotlib/matplotlib,151053,119,Fix bug where there was a thin semitransparent line on the upper and left,"Fix bug where there was a thin semitransparent line on the upper and left edge of the image in the Agg backend.  Closes #117.
+",mdboom,38294,closed,False,2011-05-18T12:41:25+00:00,2015-03-03T18:43:36+00:00,2011-05-18T12:41:33+00:00,2011-05-18T12:41:33+00:00,7cea900193905554825b6cc12ecd9a3fa3aebbef,dirty,7,2,2,1,0,0,,,
+matplotlib/matplotlib,152439,120,BUG: backends/svg: ensure that the font-style property is lowercase,"The SVG backend should produce SVG files in which the value of the font-style property is in lowercase. This is required by the SVG standard [1], and for example Inkscape refuses to render ""font-style: Italic"", but accepts ""font-style: italic"".
+
+[1] http://www.w3.org/TR/SVG/styling.html#CaseSensitivity
+",pv,35046,closed,False,2011-05-19T11:38:47+00:00,2014-06-28T01:56:17+00:00,2011-05-19T12:18:14+00:00,2011-05-19T12:18:14+00:00,fa246f762ca80206be48c560f983e84818eda56e,dirty,3,3,1,1,0,0,,,
+matplotlib/matplotlib,153094,121,Fixed traceback importing font_manager.py on japanese windows xp,"Japanese Windows XP with python-2.7 will produce a MemoryError from a failed Registry query - 
+
+so I added a continue statement for a MemoryError in addition to a WindowsError. Since we already caught this exception and continue, just added another type of exception to continue on.
+",torcolvin,249263,closed,False,2011-05-19T20:05:53+00:00,2014-07-06T18:44:20+00:00,2011-05-27T15:14:56+00:00,2011-05-27T15:14:56+00:00,2019ef739195f3b9fc180bc9a139fbc6b44953d9,dirty,2,1,1,1,0,0,,,
+matplotlib/matplotlib,155458,122,"	add LinearMinorLocator, a locator for a fixed number of minor ticks","```
+Also add top-level helptext for AutoMinorLocator and add the class to __all__
+```
+",kaufman,640895,closed,False,2011-05-22T16:10:06+00:00,2015-11-04T23:12:49+00:00,2011-07-07T18:52:33+00:00,,8e61043da4def376c3688e4e13d57688978a8017,dirty,59,1,2,2,0,3,,,
+matplotlib/matplotlib,155775,123,Fix a small typo in mlab.specgram's docstring.,,npinto,41171,closed,False,2011-05-23T03:23:30+00:00,2014-07-11T05:37:42+00:00,2011-06-04T17:54:32+00:00,,35af858fa6b67384b897f1733ed26c6349c26bf0,dirty,1,1,1,1,0,3,,,

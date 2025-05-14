@@ -1,0 +1,71 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+eugeneyan/applied-ml,1238049635,1111266807,eugeneyan,6831355,2023-02-19T15:58:12+00:00,2023-02-19T15:58:13+00:00,Could you order this paper chronologically please?,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111266833,eugeneyan,6831355,2023-02-19T15:58:22+00:00,2023-02-19T15:58:22+00:00,Ditto.,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111267111,eugeneyan,6831355,2023-02-19T16:00:03+00:00,2023-02-19T16:00:03+00:00,"We don't need separate links if they're they same link. Also, could you fix the spelling error please?",False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111268804,eugeneyan,6831355,2023-02-19T16:00:42+00:00,2023-02-19T16:00:42+00:00,Ditto.,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111276771,R-Mahmoudi,108347344,2023-02-19T16:48:22+00:00,2023-02-19T16:48:22+00:00,"@eugeneyan  Yes, Sure. Thank you, I will do it.",False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111266807,eugeneyan,6831355,2023-02-19T15:58:12+00:00,2023-02-19T15:58:13+00:00,Could you order this paper chronologically please?,True,README.md,4.0,"@@ -602,6 +602,11 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 25. [Didact AI: The anatomy of an ML-powered stock picking engine](https://principiamundi.com/posts/didact-anatomy/?utm_campaign=Data_Elixir&utm_source=Data_Elixir_407/) `Didact AI` `2022`
+ 26. [Deployment for Free - A Machine Learning Platform for Stitch Fix's Data Scientists](https://multithreaded.stitchfix.com/blog/2022/07/14/deployment-for-free/) `Stitch Fix` `2022`
+ 27. [Machine Learning Operations (MLOps): Overview, Definition, and Architecture](https://arxiv.org/abs/2205.02302) ([Paper](https://arxiv.org/ftp/arxiv/papers/2205/2205.02302.pdf)) `IBM` `2022`
++28. [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://research.google/pubs/pub46555/) ([Paper](https://static.googleusercontent.com/media/research.google.com/cs//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)) `Google` `2017`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111266833,eugeneyan,6831355,2023-02-19T15:58:22+00:00,2023-02-19T15:58:22+00:00,Ditto.,True,README.md,5.0,"@@ -602,6 +602,11 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 25. [Didact AI: The anatomy of an ML-powered stock picking engine](https://principiamundi.com/posts/didact-anatomy/?utm_campaign=Data_Elixir&utm_source=Data_Elixir_407/) `Didact AI` `2022`
+ 26. [Deployment for Free - A Machine Learning Platform for Stitch Fix's Data Scientists](https://multithreaded.stitchfix.com/blog/2022/07/14/deployment-for-free/) `Stitch Fix` `2022`
+ 27. [Machine Learning Operations (MLOps): Overview, Definition, and Architecture](https://arxiv.org/abs/2205.02302) ([Paper](https://arxiv.org/ftp/arxiv/papers/2205/2205.02302.pdf)) `IBM` `2022`
++28. [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://research.google/pubs/pub46555/) ([Paper](https://static.googleusercontent.com/media/research.google.com/cs//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)) `Google` `2017`
++29. [hidden technical debt in machine learning systems](https://arxiv.org/abs/2103.10510) ([Paper](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)) `Google` `2015`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111267111,eugeneyan,6831355,2023-02-19T16:00:03+00:00,2023-02-19T16:00:03+00:00,"We don't need separate links if they're they same link. Also, could you fix the spelling error please?",True,README.md,7.0,"@@ -602,6 +602,11 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 25. [Didact AI: The anatomy of an ML-powered stock picking engine](https://principiamundi.com/posts/didact-anatomy/?utm_campaign=Data_Elixir&utm_source=Data_Elixir_407/) `Didact AI` `2022`
+ 26. [Deployment for Free - A Machine Learning Platform for Stitch Fix's Data Scientists](https://multithreaded.stitchfix.com/blog/2022/07/14/deployment-for-free/) `Stitch Fix` `2022`
+ 27. [Machine Learning Operations (MLOps): Overview, Definition, and Architecture](https://arxiv.org/abs/2205.02302) ([Paper](https://arxiv.org/ftp/arxiv/papers/2205/2205.02302.pdf)) `IBM` `2022`
++28. [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://research.google/pubs/pub46555/) ([Paper](https://static.googleusercontent.com/media/research.google.com/cs//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)) `Google` `2017`
++29. [hidden technical debt in machine learning systems](https://arxiv.org/abs/2103.10510) ([Paper](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)) `Google` `2015`
++30. [MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) ([Blog](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)) `Google` `2021`
++31. [Design Patterns in Machine Learning for MLOps](https://towardsdatascience.com/design-patterns-in-machine-learning-for-mlops-a3f63f745ce4) ([Blog](https://towardsdatascience.com/design-patterns-in-machine-learning-for-mlops-a3f63f745ce4)) `Meduim` `2022`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111268804,eugeneyan,6831355,2023-02-19T16:00:42+00:00,2023-02-19T16:00:42+00:00,Ditto.,True,README.md,17.0,"@@ -625,7 +630,7 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 19. [Automatic Retraining for Machine Learning Models: Tips and Lessons Learned](https://building.nubank.com.br/automatic-retraining-for-machine-learning-models/) `Nubank` `2022`
+ 20. [RecSysOps: Best Practices for Operating a Large-Scale Recommender System](https://netflixtechblog.medium.com/recsysops-best-practices-for-operating-a-large-scale-recommender-system-95bbe195a841) `Netflix` `2022`
+ 21. [ML Education at Uber: Frameworks Inspired by Engineering Principles](https://www.uber.com/en-PL/blog/ml-education-at-uber/) `Uber` `2022`
+-
++22. [MLOps Best Practices for Data Scientists](https://towardsdatascience.com/mlops-practices-for-data-scientists-dbb01be45dd8)`Meduim` `2021`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1238049635,1111276771,R-Mahmoudi,108347344,2023-02-19T16:48:22+00:00,2023-02-19T16:48:22+00:00,"@eugeneyan  Yes, Sure. Thank you, I will do it.",True,README.md,4.0,"@@ -602,6 +602,11 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 25. [Didact AI: The anatomy of an ML-powered stock picking engine](https://principiamundi.com/posts/didact-anatomy/?utm_campaign=Data_Elixir&utm_source=Data_Elixir_407/) `Didact AI` `2022`
+ 26. [Deployment for Free - A Machine Learning Platform for Stitch Fix's Data Scientists](https://multithreaded.stitchfix.com/blog/2022/07/14/deployment-for-free/) `Stitch Fix` `2022`
+ 27. [Machine Learning Operations (MLOps): Overview, Definition, and Architecture](https://arxiv.org/abs/2205.02302) ([Paper](https://arxiv.org/ftp/arxiv/papers/2205/2205.02302.pdf)) `IBM` `2022`
++28. [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://research.google/pubs/pub46555/) ([Paper](https://static.googleusercontent.com/media/research.google.com/cs//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf)) `Google` `2017`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269567,eugeneyan,6831355,2023-02-19T16:04:40+00:00,2023-02-19T16:04:40+00:00,This is more of a general resource than an example of ML applied in industry. Could you exclude this please?,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269676,eugeneyan,6831355,2023-02-19T16:05:11+00:00,2023-02-19T16:05:11+00:00,This is more of an overview than an example of ML applied in industry. Could you exclude this please?,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269871,eugeneyan,6831355,2023-02-19T16:06:19+00:00,2023-02-19T16:06:20+00:00,This is more of a general resource than an example of ML applied in industry. Could you exclude this please?,False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269567,eugeneyan,6831355,2023-02-19T16:04:40+00:00,2023-02-19T16:04:40+00:00,This is more of a general resource than an example of ML applied in industry. Could you exclude this please?,True,README.md,,"@@ -56,6 +56,7 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 6. [Data Validation for Machine Learning](https://research.google/pubs/pub47967/) ([Paper](https://mlsys.org/Conferences/2019/doc/2019/167.pdf)) `Google` `2019`
+ 6. [An Approach to Data Quality for Netflix Personalization Systems](https://www.youtube.com/watch?v=t7vHpA39TXM) `Netflix` `2020`
+ 7. [Improving Accuracy By Certainty Estimation of Human Decisions, Labels, and Raters](https://research.fb.com/blog/2020/08/improving-the-accuracy-of-community-standards-enforcement-by-certainty-estimation-of-human-decisions/) ([Paper](https://research.fb.com/wp-content/uploads/2020/08/CLARA-Confidence-of-Labels-and-Raters.pdf)) `Facebook` `2020`
++8. [How to test categorical data drift (article and code)](https://www.giskard.ai/knowledge/how-to-test-ml-models-2-n-categorical-data-drift) `Giskard` `2022`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269676,eugeneyan,6831355,2023-02-19T16:05:11+00:00,2023-02-19T16:05:11+00:00,This is more of an overview than an example of ML applied in industry. Could you exclude this please?,True,README.md,,"@@ -546,6 +547,7 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 47. [Comparing quantiles at scale in online A/B-testing](https://engineering.atspotify.com/2022/03/comparing-quantiles-at-scale-in-online-a-b-testing) `Spotify` `2022`
+ 48. [Accelerating our A/B experiments with machine learning](https://dropbox.tech/machine-learning/accelerating-our-a-b-experiments-with-machine-learning-xr) `Dropbox` `2023`
+ 49. [Supercharging A/B Testing at Uber](https://www.uber.com/blog/supercharging-a-b-testing-at-uber/) `Uber` 
++50. [How to test ML models? Metamorphic testing (article and code)](https://www.giskard.ai/knowledge/how-to-test-ml-models-4-metamorphic-testing) `Giskard` `2022`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,1237700657,1111269871,eugeneyan,6831355,2023-02-19T16:06:19+00:00,2023-02-19T16:06:20+00:00,This is more of a general resource than an example of ML applied in industry. Could you exclude this please?,True,README.md,,"@@ -564,8 +566,9 @@ P.P.S, Looking for guides and interviews on applying ML? 👉[`applyingML`](http
+ 1. [Building Inclusive Products Through A/B Testing](https://engineering.linkedin.com/blog/2020/building-inclusive-products-through-a-b-testing) ([Paper](https://arxiv.org/pdf/2002.05819.pdf)) `LinkedIn` `2020`
+ 2. [LiFT: A Scalable Framework for Measuring Fairness in ML Applications](https://engineering.linkedin.com/blog/2020/lift-addressing-bias-in-large-scale-ai-applications) ([Paper](https://arxiv.org/pdf/2008.07433.pdf)) `LinkedIn` `2020`
+ 3. [Introducing Twitter’s first algorithmic bias bounty challenge](https://blog.twitter.com/engineering/en_us/topics/insights/2021/algorithmic-bias-bounty-challenge) `Twitter` `2021`
+-3. [Examining algorithmic amplification of political content on Twitter](https://blog.twitter.com/en_us/topics/company/2021/rml-politicalcontent) `Twitter` `2021`
+-3. [A closer look at how LinkedIn integrates fairness into its AI products](https://engineering.linkedin.com/blog/2022/a-closer-look-at-how-linkedin-integrates-fairness-into-its-ai-pr) `LinkedIn` `2022`
++4. [Examining algorithmic amplification of political content on Twitter](https://blog.twitter.com/en_us/topics/company/2021/rml-politicalcontent) `Twitter` `2021`
++5. [A closer look at how LinkedIn integrates fairness into its AI products](https://engineering.linkedin.com/blog/2022/a-closer-look-at-how-linkedin-integrates-fairness-into-its-ai-pr) `LinkedIn` `2022`
++6. [How to test the fairness of ML models? The 80% rule to measure the disparate impact](https://www.giskard.ai/knowledge/how-to-test-ml-models-5-the-80-rule-to-measure-disparity) `Giskard` `2023`",0,0,0,0,0,0,0
+eugeneyan/applied-ml,444433988,449898490,eugeneyan,6831355,2020-07-05T17:07:13+00:00,2020-07-05T17:13:56+00:00,"Could you remove the newline introduced please?
+```suggestion
+- [E-commerce in Your Inbox: Product Recommendations at Scale](https://arxiv.org/abs/1606.07154) `Yahoo`
+```",False,,,,0,0,0,0,0,0,0
+eugeneyan/applied-ml,444433988,449898490,eugeneyan,6831355,2020-07-05T17:07:13+00:00,2020-07-05T17:13:56+00:00,"Could you remove the newline introduced please?
+```suggestion
+- [E-commerce in Your Inbox: Product Recommendations at Scale](https://arxiv.org/abs/1606.07154) `Yahoo`
+```",True,README.md,,"@@ -52,7 +52,8 @@ Have a favourite piece you're not seeing here? Want to contribute? Make a [pull
+ - [Session-based Recommendations with Recurrent Neural Networks](https://arxiv.org/abs/1511.06939) `Telefonica`
+ - [Deep Neural Networks for YouTube Recommendations](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45530.pdf) `YouTube`
+ - [Personalized Recommendations for Experiences Using Deep Learning](https://www.tripadvisor.com/engineering/personalized-recommendations-for-experiences-using-deep-learning/) `TripAdvisor`
+-- [E-commerce in Your Inbox:Product Recommendations at Scale](https://arxiv.org/abs/1606.07154) `Yahoo`
++- [E-commerce in Your Inbox:",0,0,0,0,0,0,0

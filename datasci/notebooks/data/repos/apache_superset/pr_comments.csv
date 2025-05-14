@@ -1,0 +1,3111 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+apache/superset,2515147575,2085694841,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-13T00:20:45+00:00,"### Excessive Base Wait Time in Backoff Strategy <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The base wait time of 60 seconds in the exponential backoff is unnecessarily long for HTTP 429 rate limit retries.
+
+###### Why this matters
+With a 60-second base wait time and exponential backoff (2^n), subsequent retries will wait for 60s, 120s, 240s, 480s - leading to extremely long total wait times that could significantly impact performance.
+
+###### Suggested change ∙ *Feature Preview*
+Reduce the base wait time to a more reasonable value like 1-5 seconds. This still provides adequate spacing between retries while maintaining responsiveness:
+```python
+wait_seconds: float = 2.0,
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:c8467b9e-04d5-40da-9e56-2a5dcc9530f8 -->
+
+
+[](c8467b9e-04d5-40da-9e56-2a5dcc9530f8)",False,,,,0,0,0,0,0,0,0
+apache/superset,2515147575,2085694846,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-12T23:46:05+00:00,"### Fragmented string formatting in retry message <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Using concatenated print statements makes the retry message harder to read and maintain. The f-strings are split unnecessarily across multiple lines.
+
+###### Why this matters
+Split string formatting makes the message structure harder to follow and introduces potential formatting inconsistencies. Single f-string would be clearer.
+
+###### Suggested change ∙ *Feature Preview*
+```python
+print(f""HTTP 429 received from {url}. Retrying in {sleep_time:.1f}s (attempt {attempt}/{max_attempts})..."")
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:aa4ab7b4-1121-408b-802c-bca06e289402 -->
+
+
+[](aa4ab7b4-1121-408b-802c-bca06e289402)",False,,,,0,0,0,0,0,0,0
+apache/superset,2515147575,2085694848,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-13T00:36:49+00:00,"### Incorrect Data Source for Airports <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The airports data is being loaded from the wrong file. It's using 'flight_data.csv.gz' instead of 'airports.csv.gz'.
+
+###### Why this matters
+This will cause incorrect data to be loaded for airports, leading to wrong lat/long information when joining with the flights data. The subsequent join operations will produce invalid results.
+
+###### Suggested change ∙ *Feature Preview*
+Use the correct file name for loading airports data:
+```python
+airports = read_example_csv(
+    ""airports.csv.gz"", encoding=""latin-1"", compression=""gzip""
+)
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:c4aa6c08-587c-4b87-8186-49aa8f45644e -->
+
+
+[](c4aa6c08-587c-4b87-8186-49aa8f45644e)",False,,,,0,0,0,0,0,0,0
+apache/superset,2515147575,2085694841,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-13T00:20:45+00:00,"### Excessive Base Wait Time in Backoff Strategy <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The base wait time of 60 seconds in the exponential backoff is unnecessarily long for HTTP 429 rate limit retries.
+
+###### Why this matters
+With a 60-second base wait time and exponential backoff (2^n), subsequent retries will wait for 60s, 120s, 240s, 480s - leading to extremely long total wait times that could significantly impact performance.
+
+###### Suggested change ∙ *Feature Preview*
+Reduce the base wait time to a more reasonable value like 1-5 seconds. This still provides adequate spacing between retries while maintaining responsiveness:
+```python
+wait_seconds: float = 2.0,
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/500ea470-02b5-4a35-bf32-1c9520c44f05)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:c8467b9e-04d5-40da-9e56-2a5dcc9530f8 -->
+
+
+[](c8467b9e-04d5-40da-9e56-2a5dcc9530f8)",True,superset/examples/helpers.py,21.0,"@@ -119,3 +123,41 @@ def get_example_url(filepath: str) -> str:
+     paths like ``datasets/examples/slack/messages.csv``.
+     """"""
+     return f""{BASE_URL}{filepath}""
++
++
++def read_example_csv(
++    filepath: str,
++    max_attempts: int = 5,
++    wait_seconds: float = 60,",0,0,0,0,0,0,0
+apache/superset,2515147575,2085694846,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-12T23:46:05+00:00,"### Fragmented string formatting in retry message <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Using concatenated print statements makes the retry message harder to read and maintain. The f-strings are split unnecessarily across multiple lines.
+
+###### Why this matters
+Split string formatting makes the message structure harder to follow and introduces potential formatting inconsistencies. Single f-string would be clearer.
+
+###### Suggested change ∙ *Feature Preview*
+```python
+print(f""HTTP 429 received from {url}. Retrying in {sleep_time:.1f}s (attempt {attempt}/{max_attempts})..."")
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/4c206eb8-4cae-4772-893c-0bcbf25d43b4)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:aa4ab7b4-1121-408b-802c-bca06e289402 -->
+
+
+[](aa4ab7b4-1121-408b-802c-bca06e289402)",True,superset/examples/helpers.py,,"@@ -119,3 +123,41 @@
+     paths like ``datasets/examples/slack/messages.csv``.
+     """"""
+     return f""{BASE_URL}{filepath}""
++
++
++def read_example_csv(
++    filepath: str,
++    max_attempts: int = 5,
++    wait_seconds: float = 60,
++    **kwargs: Any,
++) -> pd.DataFrame:
++    """"""
++    Load a CSV from the Superset example data mirror with retry/backoff on HTTP 429.
++
++    Args:
++        filepath: Relative path within the examples repo (e.g. ""datasets/foo.csv"").
++        max_attempts: Max number of retry attempts.
++        wait_seconds: Base wait time in seconds, will be multiplied
++          exponentially per attempt.
++        **kwargs: Passed directly to pandas.read_csv().
++
++    Returns:
++        pd.DataFrame
++    """"""
++
++    url = get_example_url(filepath)
++
++    for attempt in range(1, max_attempts + 1):
++        try:
++            return pd.read_csv(url, **kwargs)
++        except HTTPError as e:
++            if e.code == 429 and attempt < max_attempts:
++                sleep_time = wait_seconds * (2 ** (attempt - 1))
++                print(
++                    f""HTTP 429 received from {url}. "",
++                    f""Retrying in {sleep_time:.1f}s "",
++                    ""(attempt {attempt}/{max_attempts})..."",
++                )",0,0,0,0,0,0,0
+apache/superset,2515147575,2085694848,korbit-ai[bot],131444098,2025-05-12T23:46:05+00:00,2025-05-13T00:36:49+00:00,"### Incorrect Data Source for Airports <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The airports data is being loaded from the wrong file. It's using 'flight_data.csv.gz' instead of 'airports.csv.gz'.
+
+###### Why this matters
+This will cause incorrect data to be loaded for airports, leading to wrong lat/long information when joining with the flights data. The subsequent join operations will produce invalid results.
+
+###### Suggested change ∙ *Feature Preview*
+Use the correct file name for loading airports data:
+```python
+airports = read_example_csv(
+    ""airports.csv.gz"", encoding=""latin-1"", compression=""gzip""
+)
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/ab7f23f5-1c2d-4d29-beed-78df10891c0b)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:c4aa6c08-587c-4b87-8186-49aa8f45644e -->
+
+
+[](c4aa6c08-587c-4b87-8186-49aa8f45644e)",True,superset/examples/flights.py,,"@@ -37,12 +37,14 @@ def load_flights(only_metadata: bool = False, force: bool = False) -> None:
+         table_exists = database.has_table(Table(tbl_name, schema))
+ 
+         if not only_metadata and (not table_exists or force):
+-            flight_data_url = get_example_url(""flight_data.csv.gz"")
+-            pdf = pd.read_csv(flight_data_url, encoding=""latin-1"", compression=""gzip"")
++            pdf = read_example_csv(
++                ""flight_data.csv.gz"", encoding=""latin-1"", compression=""gzip""
++            )
+ 
+             # Loading airports info to join and get lat/long
+-            airports_url = get_example_url(""airports.csv.gz"")
+-            airports = pd.read_csv(airports_url, encoding=""latin-1"", compression=""gzip"")
++            airports = read_example_csv(
++                ""flight_data.csv.gz"", encoding=""latin-1"", compression=""gzip""
++            )",0,0,0,0,0,0,0
+apache/superset,2514517609,2085305712,korbit-ai[bot],131444098,2025-05-12T19:21:13+00:00,2025-05-12T21:03:58+00:00,"### Overly Complex Type Extraction <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Complex type extraction using Parameters and NonNullable makes the code harder to read and understand at a glance.
+
+###### Why this matters
+The nested type utility operations obscure the actual type being used, making it difficult for developers to quickly understand what type of parameter info should be.
+
+###### Suggested change ∙ *Feature Preview*
+```typescript
+// Create a dedicated type at the top of the file or in types.ts
+type TreeDropInfo = Parameters<NonNullable<TreeProps<FlatLayerDataNode>['onDrop']>>[0];
+
+// Then use it in the function
+onDrop = (info: TreeDropInfo) => {
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2c3d1e01-582a-429a-b543-781c8ccbb9ff -->
+
+
+[](2c3d1e01-582a-429a-b543-781c8ccbb9ff)",False,,,,0,0,0,0,0,0,0
+apache/superset,2514517609,2085305712,korbit-ai[bot],131444098,2025-05-12T19:21:13+00:00,2025-05-12T21:03:58+00:00,"### Overly Complex Type Extraction <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Complex type extraction using Parameters and NonNullable makes the code harder to read and understand at a glance.
+
+###### Why this matters
+The nested type utility operations obscure the actual type being used, making it difficult for developers to quickly understand what type of parameter info should be.
+
+###### Suggested change ∙ *Feature Preview*
+```typescript
+// Create a dedicated type at the top of the file or in types.ts
+type TreeDropInfo = Parameters<NonNullable<TreeProps<FlatLayerDataNode>['onDrop']>>[0];
+
+// Then use it in the function
+onDrop = (info: TreeDropInfo) => {
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/cc90ede1-f3c5-4dcd-a770-eee533cfdbd5)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2c3d1e01-582a-429a-b543-781c8ccbb9ff -->
+
+
+[](2c3d1e01-582a-429a-b543-781c8ccbb9ff)",True,superset-frontend/src/explore/components/controls/LayerConfigsControl/FlatLayerTree.tsx,19.0,"@@ -120,7 +118,9 @@ export const FlatLayerTree = forwardRef<HTMLDivElement, FlatLayerTreeProps>(
+ 
+     const treeData = layerConfigsToTreeData(layerConfigs);
+ 
+-    const onDrop: TreeProps['onDrop'] = info => {
++    const onDrop = (
++      info: Parameters<NonNullable<TreeProps<FlatLayerDataNode>['onDrop']>>[0],",0,0,0,0,0,0,0
+apache/superset,2513234086,2084224233,korbit-ai[bot],131444098,2025-05-12T09:17:39+00:00,2025-05-12T10:00:33+00:00,"### Incorrect Time Series Flag Logic <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The is_timeseries flag is incorrectly tied to the presence of aggregation, when it should be based on whether an X-axis is set (as in the first query object).
+
+###### Why this matters
+This could cause incorrect data processing for time series data when no aggregation is selected, potentially leading to visualization errors or data misrepresentation.
+
+###### Suggested change ∙ *Feature Preview*
+The is_timeseries flag should maintain the same logic as the first query object:
+```typescript
+      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:75dc8d09-d748-4e67-bf96-cce6394a188d -->
+
+
+[](75dc8d09-d748-4e67-bf96-cce6394a188d)",False,,,,0,0,0,0,0,0,0
+apache/superset,2513234086,2084224239,korbit-ai[bot],131444098,2025-05-12T09:17:39+00:00,2025-05-12T09:17:39+00:00,"### Missing Essential Post-Processing <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+When aggregation is disabled, all post-processing operations are skipped, including pivoting which might still be necessary for proper data transformation.
+
+###### Why this matters
+This could result in incorrectly structured data when pivoting is required but aggregation is not selected, leading to visualization failures.
+
+###### Suggested change ∙ *Feature Preview*
+Separate the pivot operation from the aggregation condition:
+```typescript
+      post_processing: [
+        pivotOperator(formData, baseQueryObject),
+        ...(formData.aggregation ? [aggregationOperator(formData, baseQueryObject)] : []),
+      ],
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:94b9b312-ed06-4d0d-9c84-4ddc8b957ff8 -->
+
+
+[](94b9b312-ed06-4d0d-9c84-4ddc8b957ff8)",False,,,,0,0,0,0,0,0,0
+apache/superset,2513234086,2084430777,LevisNgigi,111055098,2025-05-12T11:02:15+00:00,2025-05-12T11:02:15+00:00,"Thanks! I tried separating pivotOperator, but without aggregation, the time column is removed, which causes pivot to fail. So I kept it conditional to avoid data errors when the time column isn’t present. Also, not all post-processing is skipped, only the aggregation step is skipped when no aggregation method is selected.",False,,,,0,0,0,0,0,0,0
+apache/superset,2513234086,2084431377,korbit-ai[bot],131444098,2025-05-12T11:02:41+00:00,2025-05-12T11:02:41+00:00,That makes sense - I understand now that pivot requires the time column which is only present with aggregation. Thanks for explaining the technical constraint.,False,,,,0,0,0,0,0,0,0
+apache/superset,2513234086,2084224233,korbit-ai[bot],131444098,2025-05-12T09:17:39+00:00,2025-05-12T10:00:33+00:00,"### Incorrect Time Series Flag Logic <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The is_timeseries flag is incorrectly tied to the presence of aggregation, when it should be based on whether an X-axis is set (as in the first query object).
+
+###### Why this matters
+This could cause incorrect data processing for time series data when no aggregation is selected, potentially leading to visualization errors or data misrepresentation.
+
+###### Suggested change ∙ *Feature Preview*
+The is_timeseries flag should maintain the same logic as the first query object:
+```typescript
+      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/526a4bc5-4e0c-409a-8916-83a32dae1c19)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:75dc8d09-d748-4e67-bf96-cce6394a188d -->
+
+
+[](75dc8d09-d748-4e67-bf96-cce6394a188d)",True,superset-frontend/plugins/plugin-chart-echarts/src/BigNumber/BigNumberWithTrendline/buildQuery.ts,17.0,"@@ -52,15 +52,19 @@ export default function buildQuery(formData: QueryFormData) {
+     {
+       ...baseQueryObject,
+       columns: [
+-        ...(isXAxisSet(formData)
+-          ? ensureIsArray(getXAxisColumn(formData))
++        ...(formData.aggregation
++          ? isXAxisSet(formData)
++            ? ensureIsArray(getXAxisColumn(formData))
++            : []
+           : []),
+       ],
+-      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+-      post_processing: [
+-        pivotOperator(formData, baseQueryObject),
+-        aggregationOperator(formData, baseQueryObject),
+-      ],
++      is_timeseries: !!formData.aggregation,",0,0,0,0,0,0,0
+apache/superset,2513234086,2084224239,korbit-ai[bot],131444098,2025-05-12T09:17:39+00:00,2025-05-12T09:17:39+00:00,"### Missing Essential Post-Processing <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+When aggregation is disabled, all post-processing operations are skipped, including pivoting which might still be necessary for proper data transformation.
+
+###### Why this matters
+This could result in incorrectly structured data when pivoting is required but aggregation is not selected, leading to visualization failures.
+
+###### Suggested change ∙ *Feature Preview*
+Separate the pivot operation from the aggregation condition:
+```typescript
+      post_processing: [
+        pivotOperator(formData, baseQueryObject),
+        ...(formData.aggregation ? [aggregationOperator(formData, baseQueryObject)] : []),
+      ],
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6f1fe1b8-933f-4b7d-aad1-60a025293765)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:94b9b312-ed06-4d0d-9c84-4ddc8b957ff8 -->
+
+
+[](94b9b312-ed06-4d0d-9c84-4ddc8b957ff8)",True,superset-frontend/plugins/plugin-chart-echarts/src/BigNumber/BigNumberWithTrendline/buildQuery.ts,23.0,"@@ -52,15 +52,19 @@
+     {
+       ...baseQueryObject,
+       columns: [
+-        ...(isXAxisSet(formData)
+-          ? ensureIsArray(getXAxisColumn(formData))
++        ...(formData.aggregation
++          ? isXAxisSet(formData)
++            ? ensureIsArray(getXAxisColumn(formData))
++            : []
+           : []),
+       ],
+-      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+-      post_processing: [
+-        pivotOperator(formData, baseQueryObject),
+-        aggregationOperator(formData, baseQueryObject),
+-      ],
++      is_timeseries: !!formData.aggregation,
++      post_processing: formData.aggregation
++        ? [
++            pivotOperator(formData, baseQueryObject),
++            aggregationOperator(formData, baseQueryObject),
++          ]
++        : [],",0,0,0,0,0,0,0
+apache/superset,2513234086,2084430777,LevisNgigi,111055098,2025-05-12T11:02:15+00:00,2025-05-12T11:02:15+00:00,"Thanks! I tried separating pivotOperator, but without aggregation, the time column is removed, which causes pivot to fail. So I kept it conditional to avoid data errors when the time column isn’t present. Also, not all post-processing is skipped, only the aggregation step is skipped when no aggregation method is selected.",True,superset-frontend/plugins/plugin-chart-echarts/src/BigNumber/BigNumberWithTrendline/buildQuery.ts,23.0,"@@ -52,15 +52,19 @@
+     {
+       ...baseQueryObject,
+       columns: [
+-        ...(isXAxisSet(formData)
+-          ? ensureIsArray(getXAxisColumn(formData))
++        ...(formData.aggregation
++          ? isXAxisSet(formData)
++            ? ensureIsArray(getXAxisColumn(formData))
++            : []
+           : []),
+       ],
+-      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+-      post_processing: [
+-        pivotOperator(formData, baseQueryObject),
+-        aggregationOperator(formData, baseQueryObject),
+-      ],
++      is_timeseries: !!formData.aggregation,
++      post_processing: formData.aggregation
++        ? [
++            pivotOperator(formData, baseQueryObject),
++            aggregationOperator(formData, baseQueryObject),
++          ]
++        : [],",0,0,0,0,0,0,0
+apache/superset,2513234086,2084431377,korbit-ai[bot],131444098,2025-05-12T11:02:41+00:00,2025-05-12T11:02:41+00:00,That makes sense - I understand now that pivot requires the time column which is only present with aggregation. Thanks for explaining the technical constraint.,True,superset-frontend/plugins/plugin-chart-echarts/src/BigNumber/BigNumberWithTrendline/buildQuery.ts,23.0,"@@ -52,15 +52,19 @@
+     {
+       ...baseQueryObject,
+       columns: [
+-        ...(isXAxisSet(formData)
+-          ? ensureIsArray(getXAxisColumn(formData))
++        ...(formData.aggregation
++          ? isXAxisSet(formData)
++            ? ensureIsArray(getXAxisColumn(formData))
++            : []
+           : []),
+       ],
+-      ...(isXAxisSet(formData) ? {} : { is_timeseries: true }),
+-      post_processing: [
+-        pivotOperator(formData, baseQueryObject),
+-        aggregationOperator(formData, baseQueryObject),
+-      ],
++      is_timeseries: !!formData.aggregation,
++      post_processing: formData.aggregation
++        ? [
++            pivotOperator(formData, baseQueryObject),
++            aggregationOperator(formData, baseQueryObject),
++          ]
++        : [],",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321958,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:46:26+00:00,"### Unclear build process documentation <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The comment only explains what the --build flag does, but not why two different Docker Compose commands are being used or why --no-cache is needed.
+
+###### Why this matters
+Without understanding the purpose of using both commands and the --no-cache flag, maintainers might inadvertently remove or modify these important build steps.
+
+###### Suggested change ∙ *Feature Preview*
+# Rebuild all images from scratch (--no-cache) to ensure latest dependencies
+# Then start containers with updated images
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:d8ca08aa-d5a8-418d-b265-2ee6acf89153 -->
+
+
+[](d8ca08aa-d5a8-418d-b265-2ee6acf89153)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321959,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:18:25+00:00,"### Poor Code Structure with Multiple Empty Lines <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Multiple empty lines between commands reduce code readability and violate clean code principles.
+
+###### Why this matters
+Poor code formatting makes the script harder to maintain and understand, violating the KISS principle.
+
+###### Suggested change ∙ *Feature Preview*
+Remove extra empty lines between commands to maintain clean and consistent formatting.
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2c1f15fb-1aa5-40ef-9ff2-313cf9e2aedc -->
+
+
+[](2c1f15fb-1aa5-40ef-9ff2-313cf9e2aedc)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321964,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:26:26+00:00,"### Inconsistent Error Message Format <sub>![category Logging](https://img.shields.io/badge/Logging-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Inconsistent error message format. The script uses [ERROR] in one place and 'Error:' in another, lacking a standardized logging format.
+
+###### Why this matters
+Inconsistent error message formats make it harder to parse logs and create monitoring rules. This impacts log aggregation and automated error detection.
+
+###### Suggested change ∙ *Feature Preview*
+Standardize error message format throughout the script:
+```bash
+echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
+# ...
+echo ""[ERROR] 'docker compose' is not available. Please install Docker Compose v2.""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:5e3e621d-c84b-41b9-b737-9b8d82a97c6d -->
+
+
+[](5e3e621d-c84b-41b9-b737-9b8d82a97c6d)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321966,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T01:46:25+00:00,"### Missing Success Logging <sub>![category Logging](https://img.shields.io/badge/Logging-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Missing informational logging about the script's progress and successful operations.
+
+###### Why this matters
+Without success logs, it's difficult to track the script's execution flow and verify successful operations in production environments.
+
+###### Suggested change ∙ *Feature Preview*
+Add informational logging for key operations:
+```bash
+echo ""[INFO] Checking Docker daemon status...""
+if ! pgrep -x dockerd > /dev/null 2>&1; then
+  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
+  exit 1
+fi
+echo ""[INFO] Docker daemon is running""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:4063b577-6680-4e05-acbc-8b7e036429c1 -->
+
+
+[](4063b577-6680-4e05-acbc-8b7e036429c1)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321968,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:54:29+00:00,"### Inconsistent Docker Compose Version Usage <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The script mixes 'docker-compose' (v1) and 'docker compose' (v2) commands, and runs both build commands redundantly.
+
+###### Why this matters
+This will cause confusion and unnecessary rebuilds, doubling the build time and potentially causing conflicts between the two versions.
+
+###### Suggested change ∙ *Feature Preview*
+Choose one version of Docker Compose and use it consistently:
+```bash
+if docker compose version > /dev/null 2>&1; then
+  docker compose up --build
+else
+  echo ""Error: 'docker compose' is not available. Please install Docker Compose v2.""
+  exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:9423dadd-2a74-473c-8faa-930d26b93752 -->
+
+
+[](9423dadd-2a74-473c-8faa-930d26b93752)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321971,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:38:24+00:00,"### Incorrect Version Check <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The script checks for 'docker-compose' (v1) but suggests installing Docker Compose v2 in the error message.
+
+###### Why this matters
+Users might have v2 installed (docker compose) but the script will fail because it's checking for v1 (docker-compose), leading to false negative errors.
+
+###### Suggested change ∙ *Feature Preview*
+Update the version check to look for Docker Compose v2:
+```bash
+if ! docker compose version > /dev/null 2>&1; then
+  echo ""Error: 'docker compose' is not available. Please install Docker Compose v2.""
+  exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:02934ba8-9f57-4b90-997a-743aec90363c -->
+
+
+[](02934ba8-9f57-4b90-997a-743aec90363c)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321972,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-10T23:48:25+00:00,"### Incorrect HOME directory reference in sudo command <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The $HOME variable in this command will resolve to the root user's home directory instead of the dockeruser's home directory when executed with sudo.
+
+###### Why this matters
+This will cause the Docker rootless setup to fail as it will look for the setup script in the wrong directory.
+
+###### Suggested change ∙ *Feature Preview*
+Replace `$HOME` with `/home/$USERNAME` to ensure the correct home directory is used:
+```bash
+sudo -u ""$USERNAME"" bash -c ""/home/$USERNAME/bin/dockerd-rootless-setuptool.sh install""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:1c535b31-c4c3-4192-a3e3-1db06f76c7b9 -->
+
+
+[](1c535b31-c4c3-4192-a3e3-1db06f76c7b9)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321977,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:58:27+00:00,"### Silent failure in Docker installation <sub>![category Error Handling](https://img.shields.io/badge/Error%20Handling-ea580c)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The '|| true' silently ignores any installation failures, which could lead to an incomplete or failed Docker installation without proper error notification.
+
+###### Why this matters
+The script will continue executing even if the Docker installation fails, potentially causing issues in subsequent steps that depend on a successful installation.
+
+###### Suggested change ∙ *Feature Preview*
+Remove the '|| true' and add proper error handling:
+```bash
+if ! sudo -u ""$USERNAME"" bash -c ""curl -fsSL $DOCKER_INSTALL_URL | sh""; then
+    echo ""❌ Docker installation failed""
+    exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2e3e531c-8457-4825-a418-a68eedfeb34b -->
+
+
+[](2e3e531c-8457-4825-a418-a68eedfeb34b)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321978,korbit-ai[bot],131444098,2025-05-10T23:47:41+00:00,2025-05-11T00:58:20+00:00,"### Undocumented package dependencies <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The purpose of each required package should be documented.
+
+###### Why this matters
+Future maintainers may remove packages they think are unnecessary without understanding their purpose.
+
+###### Suggested change ∙ *Feature Preview*
+# Required packages:
+# - uidmap: For user namespace mapping
+# - dbus-user-session: For systemd user service management
+# - curl: For downloading Docker installation script
+REQUIRED_PKGS=(uidmap dbus-user-session curl)
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:b638ad45-bbb2-4a96-9e7d-56029ab9ba09 -->
+
+
+[](b638ad45-bbb2-4a96-9e7d-56029ab9ba09)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321980,korbit-ai[bot],131444098,2025-05-10T23:47:41+00:00,2025-05-11T01:14:25+00:00,"### Hardcoded configuration value <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The username is hardcoded in the script, limiting flexibility and reusability.
+
+###### Why this matters
+The script cannot be easily adapted for different installation scenarios where a different username might be preferred.
+
+###### Suggested change ∙ *Feature Preview*
+Make the username configurable through a command-line argument with a default value:
+```bash
+USERNAME=${1:-""dockeruser""}
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:aa14f08b-4a2d-47d4-8ac9-762207e60744 -->
+
+
+[](aa14f08b-4a2d-47d4-8ac9-762207e60744)",False,,,,0,0,0,0,0,0,0
+apache/superset,2511788720,2083321958,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:46:26+00:00,"### Unclear build process documentation <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The comment only explains what the --build flag does, but not why two different Docker Compose commands are being used or why --no-cache is needed.
+
+###### Why this matters
+Without understanding the purpose of using both commands and the --no-cache flag, maintainers might inadvertently remove or modify these important build steps.
+
+###### Suggested change ∙ *Feature Preview*
+# Rebuild all images from scratch (--no-cache) to ensure latest dependencies
+# Then start containers with updated images
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9e0d9d4a-f252-478e-b40c-04244dadb2fb)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:d8ca08aa-d5a8-418d-b265-2ee6acf89153 -->
+
+
+[](d8ca08aa-d5a8-418d-b265-2ee6acf89153)",True,loonar/install-superset.sh,14.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then
++  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
++  exit 1
++fi
++
++# The --build argument ensures all the layers are up-to-date
++if command -v docker-compose > /dev/null 2>&1; then
++  docker-compose build --no-cache
++  
++  
++  docker compose up --build",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321959,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:18:25+00:00,"### Poor Code Structure with Multiple Empty Lines <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Multiple empty lines between commands reduce code readability and violate clean code principles.
+
+###### Why this matters
+Poor code formatting makes the script harder to maintain and understand, violating the KISS principle.
+
+###### Suggested change ∙ *Feature Preview*
+Remove extra empty lines between commands to maintain clean and consistent formatting.
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/b7919ebe-c9a0-4d2b-adda-642fa330304d)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2c1f15fb-1aa5-40ef-9ff2-313cf9e2aedc -->
+
+
+[](2c1f15fb-1aa5-40ef-9ff2-313cf9e2aedc)",True,loonar/install-superset.sh,14.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then
++  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
++  exit 1
++fi
++
++# The --build argument ensures all the layers are up-to-date
++if command -v docker-compose > /dev/null 2>&1; then
++  docker-compose build --no-cache
++  
++  
++  docker compose up --build",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321964,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:26:26+00:00,"### Inconsistent Error Message Format <sub>![category Logging](https://img.shields.io/badge/Logging-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Inconsistent error message format. The script uses [ERROR] in one place and 'Error:' in another, lacking a standardized logging format.
+
+###### Why this matters
+Inconsistent error message formats make it harder to parse logs and create monitoring rules. This impacts log aggregation and automated error detection.
+
+###### Suggested change ∙ *Feature Preview*
+Standardize error message format throughout the script:
+```bash
+echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
+# ...
+echo ""[ERROR] 'docker compose' is not available. Please install Docker Compose v2.""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/87ae8938-4e2c-462d-b269-affacda89383)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:5e3e621d-c84b-41b9-b737-9b8d82a97c6d -->
+
+
+[](5e3e621d-c84b-41b9-b737-9b8d82a97c6d)",True,loonar/install-superset.sh,5.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then
++  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321966,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T01:46:25+00:00,"### Missing Success Logging <sub>![category Logging](https://img.shields.io/badge/Logging-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Missing informational logging about the script's progress and successful operations.
+
+###### Why this matters
+Without success logs, it's difficult to track the script's execution flow and verify successful operations in production environments.
+
+###### Suggested change ∙ *Feature Preview*
+Add informational logging for key operations:
+```bash
+echo ""[INFO] Checking Docker daemon status...""
+if ! pgrep -x dockerd > /dev/null 2>&1; then
+  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
+  exit 1
+fi
+echo ""[INFO] Docker daemon is running""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5ca1a364-2174-4a46-83c7-3d8a96b84ced)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:4063b577-6680-4e05-acbc-8b7e036429c1 -->
+
+
+[](4063b577-6680-4e05-acbc-8b7e036429c1)",True,loonar/install-superset.sh,4.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321968,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:54:29+00:00,"### Inconsistent Docker Compose Version Usage <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The script mixes 'docker-compose' (v1) and 'docker compose' (v2) commands, and runs both build commands redundantly.
+
+###### Why this matters
+This will cause confusion and unnecessary rebuilds, doubling the build time and potentially causing conflicts between the two versions.
+
+###### Suggested change ∙ *Feature Preview*
+Choose one version of Docker Compose and use it consistently:
+```bash
+if docker compose version > /dev/null 2>&1; then
+  docker compose up --build
+else
+  echo ""Error: 'docker compose' is not available. Please install Docker Compose v2.""
+  exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c7cfaabc-7000-4e2a-8f11-388940e550e6)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:9423dadd-2a74-473c-8faa-930d26b93752 -->
+
+
+[](9423dadd-2a74-473c-8faa-930d26b93752)",True,loonar/install-superset.sh,14.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then
++  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
++  exit 1
++fi
++
++# The --build argument ensures all the layers are up-to-date
++if command -v docker-compose > /dev/null 2>&1; then
++  docker-compose build --no-cache
++  
++  
++  docker compose up --build",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321971,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:38:24+00:00,"### Incorrect Version Check <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The script checks for 'docker-compose' (v1) but suggests installing Docker Compose v2 in the error message.
+
+###### Why this matters
+Users might have v2 installed (docker compose) but the script will fail because it's checking for v1 (docker-compose), leading to false negative errors.
+
+###### Suggested change ∙ *Feature Preview*
+Update the version check to look for Docker Compose v2:
+```bash
+if ! docker compose version > /dev/null 2>&1; then
+  echo ""Error: 'docker compose' is not available. Please install Docker Compose v2.""
+  exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/dcf3a62a-8850-4ddd-9df2-f84cef5838c5)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:02934ba8-9f57-4b90-997a-743aec90363c -->
+
+
+[](02934ba8-9f57-4b90-997a-743aec90363c)",True,loonar/install-superset.sh,10.0,"@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# Ensure Docker daemon is running before running compose
++if ! pgrep -x dockerd > /dev/null 2>&1; then
++  echo ""[ERROR] Docker daemon is not running. Please start Docker with: sudo systemctl start docker""
++  exit 1
++fi
++
++# The --build argument ensures all the layers are up-to-date
++if command -v docker-compose > /dev/null 2>&1; then",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321972,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-10T23:48:25+00:00,"### Incorrect HOME directory reference in sudo command <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The $HOME variable in this command will resolve to the root user's home directory instead of the dockeruser's home directory when executed with sudo.
+
+###### Why this matters
+This will cause the Docker rootless setup to fail as it will look for the setup script in the wrong directory.
+
+###### Suggested change ∙ *Feature Preview*
+Replace `$HOME` with `/home/$USERNAME` to ensure the correct home directory is used:
+```bash
+sudo -u ""$USERNAME"" bash -c ""/home/$USERNAME/bin/dockerd-rootless-setuptool.sh install""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3d93b8c8-574d-4388-97b4-a61dc1bfca7b)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:1c535b31-c4c3-4192-a3e3-1db06f76c7b9 -->
+
+
+[](1c535b31-c4c3-4192-a3e3-1db06f76c7b9)",True,loonar/install-docker-rootless.sh,67.0,"@@ -0,0 +1,90 @@
++#!/bin/bash
++
++# This script sets up Docker in rootless mode for improved security.
++# Rootless Docker allows a non-root user to run containers without requiring elevated privileges,
++# reducing the risk of system compromise in case of container breakout.
++
++set -e
++
++USERNAME=""dockeruser""
++DOCKER_INSTALL_URL=""https://get.docker.com/rootless""
++
++# Check if the user already exists
++if id ""$USERNAME"" &>/dev/null; then
++  echo ""👤 User $USERNAME already exists. Skipping creation.""
++else
++  echo ""👤 Creating user $USERNAME...""
++  useradd -m -s /bin/bash ""$USERNAME""
++fi
++
++# Check if dependencies are already installed
++REQUIRED_PKGS=(uidmap dbus-user-session curl)
++MISSING_PKGS=()
++for pkg in ""${REQUIRED_PKGS[@]}""; do
++  dpkg -s ""$pkg"" &>/dev/null || MISSING_PKGS+=(""$pkg"")
++done
++if [ ${#MISSING_PKGS[@]} -eq 0 ]; then
++  echo ""📦 Dependencies already installed.""
++else
++  echo ""📦 Installing dependencies: ${MISSING_PKGS[*]}...""
++  apt update && apt install -y ""${MISSING_PKGS[@]}""
++fi
++
++# Check if rootless Docker is already installed
++if sudo -u ""$USERNAME"" test -x ""/home/$USERNAME/bin/dockerd-rootless-setuptool.sh""; then
++  echo ""🐳 Rootless Docker already installed for $USERNAME.""
++else
++  echo ""🐳 Installing rootless Docker for $USERNAME...""
++  sudo -u ""$USERNAME"" bash -c ""curl -fsSL $DOCKER_INSTALL_URL | sh || true""
++fi
++
++# Check if rootlesskit failed due to AppArmor restriction
++if grep -q ""apparmor_restrict_unprivileged_userns"" /home/$USERNAME/.docker/rootlesskit.log 2>/dev/null || \
++   grep -q ""permission denied"" /home/$USERNAME/.docker/rootlesskit.log 2>/dev/null; then
++  echo ""⚠️ Detected AppArmor restriction. Applying AppArmor exception for rootlesskit...""
++
++  APPARMOR_FILE=""/etc/apparmor.d/home.$USERNAME.bin.rootlesskit""
++  if [ -f ""$APPARMOR_FILE"" ]; then
++    echo ""🔒 AppArmor profile already exists. Skipping creation.""
++  else
++    cat <<EOT | sudo tee ""$APPARMOR_FILE""
++# ref: https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces
++abi <abi/4.0>,
++include <tunables/global>
++
++/home/$USERNAME/bin/rootlesskit flags=(unconfined) {
++  userns,
++
++  # Site-specific additions and overrides. See local/README for details.
++  include if exists <local/home.$USERNAME.bin.rootlesskit>
++}
++EOT
++  fi
++
++  sudo systemctl restart apparmor.service
++  echo ""🔁 AppArmor profile applied and reloaded.""
++  echo ""🔄 Re-running rootless Docker setup...""
++  sudo -u ""$USERNAME"" bash -c ""$HOME/bin/dockerd-rootless-setuptool.sh install""",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321977,korbit-ai[bot],131444098,2025-05-10T23:47:40+00:00,2025-05-11T02:58:27+00:00,"### Silent failure in Docker installation <sub>![category Error Handling](https://img.shields.io/badge/Error%20Handling-ea580c)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The '|| true' silently ignores any installation failures, which could lead to an incomplete or failed Docker installation without proper error notification.
+
+###### Why this matters
+The script will continue executing even if the Docker installation fails, potentially causing issues in subsequent steps that depend on a successful installation.
+
+###### Suggested change ∙ *Feature Preview*
+Remove the '|| true' and add proper error handling:
+```bash
+if ! sudo -u ""$USERNAME"" bash -c ""curl -fsSL $DOCKER_INSTALL_URL | sh""; then
+    echo ""❌ Docker installation failed""
+    exit 1
+fi
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/9245104e-59fd-4574-80f8-26fbfb43c277)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:2e3e531c-8457-4825-a418-a68eedfeb34b -->
+
+
+[](2e3e531c-8457-4825-a418-a68eedfeb34b)",True,loonar/install-docker-rootless.sh,38.0,"@@ -0,0 +1,90 @@
++#!/bin/bash
++
++# This script sets up Docker in rootless mode for improved security.
++# Rootless Docker allows a non-root user to run containers without requiring elevated privileges,
++# reducing the risk of system compromise in case of container breakout.
++
++set -e
++
++USERNAME=""dockeruser""
++DOCKER_INSTALL_URL=""https://get.docker.com/rootless""
++
++# Check if the user already exists
++if id ""$USERNAME"" &>/dev/null; then
++  echo ""👤 User $USERNAME already exists. Skipping creation.""
++else
++  echo ""👤 Creating user $USERNAME...""
++  useradd -m -s /bin/bash ""$USERNAME""
++fi
++
++# Check if dependencies are already installed
++REQUIRED_PKGS=(uidmap dbus-user-session curl)
++MISSING_PKGS=()
++for pkg in ""${REQUIRED_PKGS[@]}""; do
++  dpkg -s ""$pkg"" &>/dev/null || MISSING_PKGS+=(""$pkg"")
++done
++if [ ${#MISSING_PKGS[@]} -eq 0 ]; then
++  echo ""📦 Dependencies already installed.""
++else
++  echo ""📦 Installing dependencies: ${MISSING_PKGS[*]}...""
++  apt update && apt install -y ""${MISSING_PKGS[@]}""
++fi
++
++# Check if rootless Docker is already installed
++if sudo -u ""$USERNAME"" test -x ""/home/$USERNAME/bin/dockerd-rootless-setuptool.sh""; then
++  echo ""🐳 Rootless Docker already installed for $USERNAME.""
++else
++  echo ""🐳 Installing rootless Docker for $USERNAME...""
++  sudo -u ""$USERNAME"" bash -c ""curl -fsSL $DOCKER_INSTALL_URL | sh || true""",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321978,korbit-ai[bot],131444098,2025-05-10T23:47:41+00:00,2025-05-11T00:58:20+00:00,"### Undocumented package dependencies <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The purpose of each required package should be documented.
+
+###### Why this matters
+Future maintainers may remove packages they think are unnecessary without understanding their purpose.
+
+###### Suggested change ∙ *Feature Preview*
+# Required packages:
+# - uidmap: For user namespace mapping
+# - dbus-user-session: For systemd user service management
+# - curl: For downloading Docker installation script
+REQUIRED_PKGS=(uidmap dbus-user-session curl)
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/6e06d117-251e-4e07-b624-d5b3ebd897e1)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:b638ad45-bbb2-4a96-9e7d-56029ab9ba09 -->
+
+
+[](b638ad45-bbb2-4a96-9e7d-56029ab9ba09)",True,loonar/install-docker-rootless.sh,21.0,"@@ -0,0 +1,90 @@
++#!/bin/bash
++
++# This script sets up Docker in rootless mode for improved security.
++# Rootless Docker allows a non-root user to run containers without requiring elevated privileges,
++# reducing the risk of system compromise in case of container breakout.
++
++set -e
++
++USERNAME=""dockeruser""
++DOCKER_INSTALL_URL=""https://get.docker.com/rootless""
++
++# Check if the user already exists
++if id ""$USERNAME"" &>/dev/null; then
++  echo ""👤 User $USERNAME already exists. Skipping creation.""
++else
++  echo ""👤 Creating user $USERNAME...""
++  useradd -m -s /bin/bash ""$USERNAME""
++fi
++
++# Check if dependencies are already installed
++REQUIRED_PKGS=(uidmap dbus-user-session curl)",0,0,0,0,0,0,0
+apache/superset,2511788720,2083321980,korbit-ai[bot],131444098,2025-05-10T23:47:41+00:00,2025-05-11T01:14:25+00:00,"### Hardcoded configuration value <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The username is hardcoded in the script, limiting flexibility and reusability.
+
+###### Why this matters
+The script cannot be easily adapted for different installation scenarios where a different username might be preferred.
+
+###### Suggested change ∙ *Feature Preview*
+Make the username configurable through a command-line argument with a default value:
+```bash
+USERNAME=${1:-""dockeruser""}
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d0dcc85c-7a84-4ad9-97bf-0663099b2022)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:aa14f08b-4a2d-47d4-8ac9-762207e60744 -->
+
+
+[](aa14f08b-4a2d-47d4-8ac9-762207e60744)",True,loonar/install-docker-rootless.sh,9.0,"@@ -0,0 +1,90 @@
++#!/bin/bash
++
++# This script sets up Docker in rootless mode for improved security.
++# Rootless Docker allows a non-root user to run containers without requiring elevated privileges,
++# reducing the risk of system compromise in case of container breakout.
++
++set -e
++
++USERNAME=""dockeruser""",0,0,0,0,0,0,0
+apache/superset,2507724992,2080186719,korbit-ai[bot],131444098,2025-05-08T17:50:51+00:00,2025-05-08T20:00:11+00:00,"### Inefficient Owner Name Transformation <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+String splitting and joining operations are performed unnecessarily on every save operation to transform owner names back to the redux format.
+
+###### Why this matters
+This transformation could be expensive for large sets of owners and is being performed every time the chart properties are saved, when it could be handled once during initial data loading or maintained in the correct format throughout.
+
+###### Suggested change ∙ *Feature Preview*
+Store owners in the desired format from the beginning or create a mapping when owners are first fetched. Example:
+```typescript
+const ownerMap = chart?.owners?.reduce((acc, owner) => {
+  acc[owner.id] = {
+    first_name: owner.first_name,
+    last_name: owner.last_name
+  };
+  return acc;
+}, {});
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:f3e3c061-054f-46bc-9d99-d9de244e5a4c -->
+
+
+[](f3e3c061-054f-46bc-9d99-d9de244e5a4c)",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080186722,korbit-ai[bot],131444098,2025-05-08T17:50:51+00:00,2025-05-08T21:58:18+00:00,"### Unsafe Name Splitting Logic <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The code assumes that the owner's name always has at least a first name and last name, and splits the name based on spaces. This can cause issues with names that don't follow this format.
+
+###### Why this matters
+Names that contain only one word, or names with special characters (like hyphens or apostrophes) could be incorrectly parsed, leading to incorrect owner information in the redux state.
+
+###### Suggested change ∙ *Feature Preview*
+Add validation and fallback handling for different name formats:
+```typescript
+const nameParts = owner.label.split(' ');
+const first_name = nameParts[0] || '';
+const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+return {
+  id: owner.value,
+  first_name,
+  last_name,
+};
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:bf412400-eb0a-4e39-ba46-40b2c8dbd5b1 -->
+
+
+[](bf412400-eb0a-4e39-ba46-40b2c8dbd5b1)",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080210495,korbit-ai[bot],131444098,2025-05-08T18:08:11+00:00,2025-05-08T20:32:05+00:00,"### Embedded Name Parsing Logic <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The owner name parsing logic is directly embedded in the submit handler, making it difficult to reuse and test. This logic should be extracted into a separate utility function.
+
+###### Why this matters
+Having business logic directly in event handlers reduces code reusability and makes it harder to maintain or modify the name parsing logic if it needs to be used elsewhere.
+
+###### Suggested change ∙ *Feature Preview*
+Extract the logic into a separate utility function:
+```typescript
+const parseOwnerName = (owner: { label: string; value: number }) => {
+  const nameParts = owner.label.split(' ');
+  return {
+    id: owner.value,
+    first_name: nameParts[0] || '',
+    last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+  };
+};
+
+// Usage in component
+const newOwners = selectedOwnersArray.map(parseOwnerName);
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:d9e444ca-2cf2-4fdc-958f-d869452f076b -->
+
+
+[](d9e444ca-2cf2-4fdc-958f-d869452f076b)",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080210496,korbit-ai[bot],131444098,2025-05-08T18:08:11+00:00,2025-05-08T18:12:24+00:00,"### Complex Name Parsing Without Types <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The name parsing logic is complex and lacks a clear type definition for the owner parameter, making the transformation from label to first/last name hard to follow.
+
+###### Why this matters
+Without proper typing and a dedicated function, this name parsing logic is brittle and its purpose isn't immediately clear to future maintainers.
+
+###### Suggested change ∙ *Feature Preview*
+```typescript
+interface Owner {
+  label: string;
+  value: number;
+}
+
+function parseOwnerName(owner: Owner): { first_name: string; last_name: string } {
+  const nameParts = owner.label.split(' ');
+  return {
+    first_name: nameParts[0] || '',
+    last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+  };
+}
+
+const newOwners = selectedOwnersArray.map((owner: Owner) => ({
+  id: owner.value,
+  ...parseOwnerName(owner)
+}));
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:a57ef742-4b39-475b-9e70-1d8d5ddf1145 -->
+
+
+[](a57ef742-4b39-475b-9e70-1d8d5ddf1145)",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080224863,ethan-l-geotab,165913720,2025-05-08T18:19:07+00:00,2025-05-08T18:19:07+00:00,"I think it's a pretty specific case where this one component handles owners in a specific way which when trying to update redux, the ""shape"" of the object is different, so i have to translate it back to the same shape which originally existed.",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080228625,korbit-ai[bot],131444098,2025-05-08T18:21:49+00:00,2025-05-08T18:21:49+00:00,"I see - since this is specifically about matching the Redux state shape in this component, keeping the transformation logic local makes sense. Thanks for clarifying the context.",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080230511,rusackas,812905,2025-05-08T18:23:02+00:00,2025-05-08T18:23:02+00:00,"This is probably OK, but I'm _slightly_ nervous about things like middle names. This would mean if we have Michael J. Fox sign up, it'd be ""Michael"" ""J. Fox"" instead of ""Michael J."" ""Fox.""
+
+Is there other first/last name logic currently in place, or is this a new concept?",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080233094,korbit-ai[bot],131444098,2025-05-08T18:24:55+00:00,2025-05-08T18:24:55+00:00,"Valid concern about middle name handling. Before suggesting changes, could you clarify if there's existing first/last name parsing logic elsewhere in the codebase we should match? If so, we should reuse that pattern instead of introducing a new one.",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080355064,ethan-l-geotab,165913720,2025-05-08T19:35:31+00:00,2025-05-08T19:35:31+00:00,"I thought about that too actually. ""Updating"" only happens around user ID's. As for display, I'm on the same line as you where it's ""probably okay"". 
+
+There is no real existing ""full_name"" split. I tried checking out how dashboards/dataset list handles it, but they're both different :(. 
+
+I dont think there is a true way of doing it unless we retrieve it from the backend.
+
+I have tried doing something like this in the backend to ""pass ownership data"" along with the put request 
+and then just removing the modification to the owner field and using just the returned owner from the put request, but I'm not sure that's the best design either...
+<img width=""701"" alt=""image"" src=""https://github.com/user-attachments/assets/04b2e056-4ed4-4914-bfe3-8c37a0d77ebc"" />
+<img width=""544"" alt=""image"" src=""https://github.com/user-attachments/assets/1562c78e-a209-4cfa-9b94-4b66ce3fe8fb"" />
+ 
+I've also tried seeing if I could sort of ""cache"" the load options and see if it was split there when im getting the eligible users to add as owners, but that won't work either because it's only `item.text` and makes no differentiation of first and last names.",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2082152322,rusackas,812905,2025-05-09T17:31:26+00:00,2025-05-09T17:31:26+00:00,"> There is no real existing ""full_name"" split. I tried checking out how dashboards/dataset list handles it, but they're both different :(.
+
+This is what I was worried about. If there's any logic to be DRY'd up (moved to a util or something) that would be preferable than implementing another bit of inline logic.",False,,,,0,0,0,0,0,0,0
+apache/superset,2507724992,2080186719,korbit-ai[bot],131444098,2025-05-08T17:50:51+00:00,2025-05-08T20:00:11+00:00,"### Inefficient Owner Name Transformation <sub>![category Performance](https://img.shields.io/badge/Performance-4f46e5)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+String splitting and joining operations are performed unnecessarily on every save operation to transform owner names back to the redux format.
+
+###### Why this matters
+This transformation could be expensive for large sets of owners and is being performed every time the chart properties are saved, when it could be handled once during initial data loading or maintained in the correct format throughout.
+
+###### Suggested change ∙ *Feature Preview*
+Store owners in the desired format from the beginning or create a mapping when owners are first fetched. Example:
+```typescript
+const ownerMap = chart?.owners?.reduce((acc, owner) => {
+  acc[owner.id] = {
+    first_name: owner.first_name,
+    last_name: owner.last_name
+  };
+  return acc;
+}, {});
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3509b88c-43b2-496a-95a3-5d955a6c3566)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:f3e3c061-054f-46bc-9d99-d9de244e5a4c -->
+
+
+[](f3e3c061-054f-46bc-9d99-d9de244e5a4c)",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,22 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const [first_name, ...last_name_parts] = owner.label.split(' ');
++        return {
++          id: owner.value,
++          first_name,
++          last_name: last_name_parts.join(' '),
++        };
++      });",0,0,0,0,0,0,0
+apache/superset,2507724992,2080186722,korbit-ai[bot],131444098,2025-05-08T17:50:51+00:00,2025-05-08T21:58:18+00:00,"### Unsafe Name Splitting Logic <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The code assumes that the owner's name always has at least a first name and last name, and splits the name based on spaces. This can cause issues with names that don't follow this format.
+
+###### Why this matters
+Names that contain only one word, or names with special characters (like hyphens or apostrophes) could be incorrectly parsed, leading to incorrect owner information in the redux state.
+
+###### Suggested change ∙ *Feature Preview*
+Add validation and fallback handling for different name formats:
+```typescript
+const nameParts = owner.label.split(' ');
+const first_name = nameParts[0] || '';
+const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+return {
+  id: owner.value,
+  first_name,
+  last_name,
+};
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/3978e966-ac14-4e9e-9b88-70edcc7d19a1)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:bf412400-eb0a-4e39-ba46-40b2c8dbd5b1 -->
+
+
+[](bf412400-eb0a-4e39-ba46-40b2c8dbd5b1)",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,22 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const [first_name, ...last_name_parts] = owner.label.split(' ');",0,0,0,0,0,0,0
+apache/superset,2507724992,2080210495,korbit-ai[bot],131444098,2025-05-08T18:08:11+00:00,2025-05-08T20:32:05+00:00,"### Embedded Name Parsing Logic <sub>![category Design](https://img.shields.io/badge/Design-0d9488)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The owner name parsing logic is directly embedded in the submit handler, making it difficult to reuse and test. This logic should be extracted into a separate utility function.
+
+###### Why this matters
+Having business logic directly in event handlers reduces code reusability and makes it harder to maintain or modify the name parsing logic if it needs to be used elsewhere.
+
+###### Suggested change ∙ *Feature Preview*
+Extract the logic into a separate utility function:
+```typescript
+const parseOwnerName = (owner: { label: string; value: number }) => {
+  const nameParts = owner.label.split(' ');
+  return {
+    id: owner.value,
+    first_name: nameParts[0] || '',
+    last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+  };
+};
+
+// Usage in component
+const newOwners = selectedOwnersArray.map(parseOwnerName);
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5e46bad0-2e9a-456d-b8e0-6bd3e7b7c71c)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:d9e444ca-2cf2-4fdc-958f-d869452f076b -->
+
+
+[](d9e444ca-2cf2-4fdc-958f-d869452f076b)",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
++        return {
++          id: owner.value,
++          first_name,
++          last_name,
++        };
++      });",0,0,0,0,0,0,0
+apache/superset,2507724992,2080210496,korbit-ai[bot],131444098,2025-05-08T18:08:11+00:00,2025-05-08T18:12:24+00:00,"### Complex Name Parsing Without Types <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The name parsing logic is complex and lacks a clear type definition for the owner parameter, making the transformation from label to first/last name hard to follow.
+
+###### Why this matters
+Without proper typing and a dedicated function, this name parsing logic is brittle and its purpose isn't immediately clear to future maintainers.
+
+###### Suggested change ∙ *Feature Preview*
+```typescript
+interface Owner {
+  label: string;
+  value: number;
+}
+
+function parseOwnerName(owner: Owner): { first_name: string; last_name: string } {
+  const nameParts = owner.label.split(' ');
+  return {
+    first_name: nameParts[0] || '',
+    last_name: nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''
+  };
+}
+
+const newOwners = selectedOwnersArray.map((owner: Owner) => ({
+  id: owner.value,
+  ...parseOwnerName(owner)
+}));
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/8dc4544e-e622-477b-9a61-6e1b7e850401)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:a57ef742-4b39-475b-9e70-1d8d5ddf1145 -->
+
+
+[](a57ef742-4b39-475b-9e70-1d8d5ddf1145)",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';",0,0,0,0,0,0,0
+apache/superset,2507724992,2080224863,ethan-l-geotab,165913720,2025-05-08T18:19:07+00:00,2025-05-08T18:19:07+00:00,"I think it's a pretty specific case where this one component handles owners in a specific way which when trying to update redux, the ""shape"" of the object is different, so i have to translate it back to the same shape which originally existed.",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
++        return {
++          id: owner.value,
++          first_name,
++          last_name,
++        };
++      });",0,0,0,0,0,0,0
+apache/superset,2507724992,2080228625,korbit-ai[bot],131444098,2025-05-08T18:21:49+00:00,2025-05-08T18:21:49+00:00,"I see - since this is specifically about matching the Redux state shape in this component, keeping the transformation logic local makes sense. Thanks for clarifying the context.",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
++        return {
++          id: owner.value,
++          first_name,
++          last_name,
++        };
++      });",0,0,0,0,0,0,0
+apache/superset,2507724992,2080230511,rusackas,812905,2025-05-08T18:23:02+00:00,2025-05-08T18:23:02+00:00,"This is probably OK, but I'm _slightly_ nervous about things like middle names. This would mean if we have Michael J. Fox sign up, it'd be ""Michael"" ""J. Fox"" instead of ""Michael J."" ""Fox.""
+
+Is there other first/last name logic currently in place, or is this a new concept?",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';",0,0,0,0,0,0,0
+apache/superset,2507724992,2080233094,korbit-ai[bot],131444098,2025-05-08T18:24:55+00:00,2025-05-08T18:24:55+00:00,"Valid concern about middle name handling. Before suggesting changes, could you clarify if there's existing first/last name parsing logic elsewhere in the codebase we should match? If so, we should reuse that pattern instead of introducing a new one.",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';",0,0,0,0,0,0,0
+apache/superset,2507724992,2080355064,ethan-l-geotab,165913720,2025-05-08T19:35:31+00:00,2025-05-08T19:35:31+00:00,"I thought about that too actually. ""Updating"" only happens around user ID's. As for display, I'm on the same line as you where it's ""probably okay"". 
+
+There is no real existing ""full_name"" split. I tried checking out how dashboards/dataset list handles it, but they're both different :(. 
+
+I dont think there is a true way of doing it unless we retrieve it from the backend.
+
+I have tried doing something like this in the backend to ""pass ownership data"" along with the put request 
+and then just removing the modification to the owner field and using just the returned owner from the put request, but I'm not sure that's the best design either...
+<img width=""701"" alt=""image"" src=""https://github.com/user-attachments/assets/04b2e056-4ed4-4914-bfe3-8c37a0d77ebc"" />
+<img width=""544"" alt=""image"" src=""https://github.com/user-attachments/assets/1562c78e-a209-4cfa-9b94-4b66ce3fe8fb"" />
+ 
+I've also tried seeing if I could sort of ""cache"" the load options and see if it was split there when im getting the eligible users to add as owners, but that won't work either because it's only `item.text` and makes no differentiation of first and last names.",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';",0,0,0,0,0,0,0
+apache/superset,2507724992,2082152322,rusackas,812905,2025-05-09T17:31:26+00:00,2025-05-09T17:31:26+00:00,"> There is no real existing ""full_name"" split. I tried checking out how dashboards/dataset list handles it, but they're both different :(.
+
+This is what I was worried about. If there's any logic to be DRY'd up (moved to a util or something) that would be preferable than implementing another bit of inline logic.",True,superset-frontend/src/explore/components/PropertiesModal/index.tsx,,"@@ -185,12 +185,24 @@ function PropertiesModal({
+         body: JSON.stringify(payload),
+       });
+       // update the redux state
++      // convert the tags to the format used in the selectOwners back to original redux format
++      const selectedOwnersArray = ensureIsArray(selectedOwners);
++      const newOwners = selectedOwnersArray.map((owner: any) => {
++        const nameParts = owner.label.split(' ');
++        const first_name = nameParts[0] || '';
++        const last_name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';",0,0,0,0,0,0,0
+apache/superset,2505910089,2078805430,korbit-ai[bot],131444098,2025-05-08T02:59:31+00:00,2025-05-08T05:06:24+00:00,"### Incomplete ValidationError Documentation <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The docstring doesn't explain when this error is raised or what conditions trigger it.
+
+###### Why this matters
+Without context about when this error occurs, developers may have difficulty troubleshooting or properly handling this exception.
+
+###### Suggested change ∙ *Feature Preview*
+class MultiCatalogDisabledValidationError(ValidationError):
+    """"""
+    Validation error raised when attempting to use a non-default catalog
+    in a database connection where multi-catalog support is disabled.
+    """"""
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:6474a029-cd2c-4b59-b12a-f2e7c5dd4b16 -->
+
+
+[](6474a029-cd2c-4b59-b12a-f2e7c5dd4b16)",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078805431,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T05:02:30+00:00,"### Unclear Error Message for Catalog Selection <sub>![category Error Handling](https://img.shields.io/badge/Error%20Handling-ea580c)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The error message 'Only the default catalog is supported for this connection' may be too vague for users to understand what action they need to take.
+
+###### Why this matters
+Users may not understand what a 'default catalog' is or how to correct their selection, leading to confusion and potential support tickets.
+
+###### Suggested change ∙ *Feature Preview*
+Enhance the error message to be more specific and actionable:
+```python
+class MultiCatalogDisabledValidationError(ValidationError):
+    def __init__(self) -> None:
+        super().__init__(
+            [_('Multi-catalog support is disabled. Please use the default catalog or enable multi-catalog support in your database configuration.')],
+            field_name='catalog',
+        )
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:f82026d2-d4c6-4294-8d67-31fae16f2f2f -->
+
+
+[](f82026d2-d4c6-4294-8d67-31fae16f2f2f)",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078805433,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T03:15:41+00:00,"### Missing Catalog Persistence <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The catalog value is assigned but not stored in self._properties, causing potential inconsistency between the local variable and the properties dict.
+
+###### Why this matters
+This could lead to the catalog value not being properly persisted during the update operation, which contradicts the intended functionality.
+
+###### Suggested change ∙ *Feature Preview*
+Store the catalog value in properties:
+```python
+elif ""catalog"" not in self._properties:
+    catalog = self._properties[""catalog""] = self._model.catalog
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:357699ca-06c8-4f74-9ac1-ef011a10150d -->
+
+
+[](357699ca-06c8-4f74-9ac1-ef011a10150d)",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078805435,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T05:14:29+00:00,"### Unclear method name and redundant type casting comment <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The comment 'we know we have a valid model' is redundant with the type casting, and the method name doesn't clearly indicate it handles catalog and database configuration.
+
+###### Why this matters
+Unclear method naming and redundant comments make the code harder to understand at a glance.
+
+###### Suggested change ∙ *Feature Preview*
+Rename method to be more specific and remove redundant comment:
+```python
+def _validate_database_and_catalog_config(self, exceptions: list[ValidationError]) -> None:
+    self._model = cast(SqlaTable, self._model)
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:6c9f03c2-f4cd-492e-a789-15e65473862a -->
+
+
+[](6c9f03c2-f4cd-492e-a789-15e65473862a)",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078805830,Vitor-Avila,96086495,2025-05-08T03:00:13+00:00,2025-05-08T03:00:14+00:00,"Not entirely sure why we didn't want to allow a DB re-map here. This validation was not really working tho since `database_id` here would never get a value (as it was reading from `database` as opposed to `database_id`). 
+
+That said, I know there are valid use-cases to re-map datasets to other connections and since it's currently possible, I've removed this check.",False,,,,1,1,0,0,0,0,0
+apache/superset,2505910089,2078806564,Vitor-Avila,96086495,2025-05-08T03:01:21+00:00,2025-05-08T03:01:22+00:00,didn't want to do `if not catalog` as technically `catalog` can be `None`.,False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078806867,Vitor-Avila,96086495,2025-05-08T03:01:55+00:00,2025-05-08T03:01:55+00:00,"same here, supporting `schema = None`",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078815334,Vitor-Avila,96086495,2025-05-08T03:15:35+00:00,2025-05-08T03:15:35+00:00,"That's not really needed. The `update()` logic would only update keys present in `self._properties`. There's no need to include `self._properties[""catalog""]` in this case, since its value is already what's in the object.
+
+I'm just assigning the value to the local `catalog` variable to validate uniqueness after.",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078815620,korbit-ai[bot],131444098,2025-05-08T03:16:06+00:00,2025-05-08T03:16:06+00:00,"I see, makes sense. The local catalog variable is sufficient for validation and storing it in properties would be redundant. Thanks for clarifying.",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078816489,Vitor-Avila,96086495,2025-05-08T03:17:47+00:00,2025-05-08T03:17:47+00:00,"I'd say that `validate_dataset_source` makes sense, as these configs appear in the **Source** tab of the dataset editor. But I'll keep this open to hear from others too :) ",False,,,,1,1,0,0,0,0,0
+apache/superset,2505910089,2078816947,Vitor-Avila,96086495,2025-05-08T03:18:29+00:00,2025-05-08T03:18:29+00:00,Seems to be in accordance to other `Exceptions` we have.,False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078817132,korbit-ai[bot],131444098,2025-05-08T03:18:46+00:00,2025-05-08T03:18:46+00:00,You're right - the documentation style is consistent with the other exceptions in this file. The brief docstring works in this context.,False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078817599,Vitor-Avila,96086495,2025-05-08T03:19:31+00:00,2025-05-08T03:19:31+00:00,np!,False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078817823,korbit-ai[bot],131444098,2025-05-08T03:19:56+00:00,2025-05-08T03:19:56+00:00,"Got it, thanks for explaining the rationale! 👍",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2079686796,betodealmeida,1534870,2025-05-08T13:09:11+00:00,2025-05-08T13:27:53+00:00,"What happens if we pass `null` as the catalog, wouldn't the backend also use the default catalog? Then you can just do:
+
+```js
+catalog: datasource.database?.allow_multi_catalog ? datasource.catalog : null,
+```",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2079688003,betodealmeida,1534870,2025-05-08T13:09:53+00:00,2025-05-08T13:27:53+00:00,This would have to be updated depending on the answer to my question above.,False,,,,1,1,0,0,0,0,0
+apache/superset,2505910089,2079690033,betodealmeida,1534870,2025-05-08T13:11:08+00:00,2025-05-08T13:27:53+00:00,❤️,False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2079706349,betodealmeida,1534870,2025-05-08T13:20:32+00:00,2025-05-08T13:27:53+00:00,"Yeah, we should be able to do this, there's valid use cases.",False,,,,1,0,0,0,0,0,1
+apache/superset,2505910089,2080079470,Vitor-Avila,96086495,2025-05-08T16:36:35+00:00,2025-05-08T16:36:35+00:00,"hmm I think that wouldn't work properly. Let's say you're remapping a dataset to a BQ connection that has `allow_multi_catalog` disabled. `get_default_catalog` for this connection would return the project ID from the service account, and then if we're passing `null` this check would fail:
+``` python
+if (
+    ""catalog"" in self._properties
+    and catalog != default_catalog
+    and not db.allow_multi_catalog
+):
+    exceptions.append(MultiCatalogDisabledValidationError())
+```
+
+I think it makes sense to have this check at the API layer as `catalog=None` is technically valid.",False,,,,0,0,0,0,0,0,0
+apache/superset,2505910089,2078805430,korbit-ai[bot],131444098,2025-05-08T02:59:31+00:00,2025-05-08T05:06:24+00:00,"### Incomplete ValidationError Documentation <sub>![category Documentation](https://img.shields.io/badge/Documentation-7c3aed)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The docstring doesn't explain when this error is raised or what conditions trigger it.
+
+###### Why this matters
+Without context about when this error occurs, developers may have difficulty troubleshooting or properly handling this exception.
+
+###### Suggested change ∙ *Feature Preview*
+class MultiCatalogDisabledValidationError(ValidationError):
+    """"""
+    Validation error raised when attempting to use a non-default catalog
+    in a database connection where multi-catalog support is disabled.
+    """"""
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d5ea4df9-fdf4-4865-95b6-c1be7d1dd8c3)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:6474a029-cd2c-4b59-b12a-f2e7c5dd4b16 -->
+
+
+[](6474a029-cd2c-4b59-b12a-f2e7c5dd4b16)",True,superset/commands/dataset/exceptions.py,,"@@ -33,6 +33,18 @@ def get_dataset_exist_error_msg(table: Table) -> str:
+     return _(""Dataset %(table)s already exists"", table=table)
+ 
+ 
++class MultiCatalogDisabledValidationError(ValidationError):
++    """"""
++    Validation error for using a non-default catalog when multi-catalog is disabled
++    """"""",0,0,0,0,0,0,0
+apache/superset,2505910089,2078805431,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T05:02:30+00:00,"### Unclear Error Message for Catalog Selection <sub>![category Error Handling](https://img.shields.io/badge/Error%20Handling-ea580c)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The error message 'Only the default catalog is supported for this connection' may be too vague for users to understand what action they need to take.
+
+###### Why this matters
+Users may not understand what a 'default catalog' is or how to correct their selection, leading to confusion and potential support tickets.
+
+###### Suggested change ∙ *Feature Preview*
+Enhance the error message to be more specific and actionable:
+```python
+class MultiCatalogDisabledValidationError(ValidationError):
+    def __init__(self) -> None:
+        super().__init__(
+            [_('Multi-catalog support is disabled. Please use the default catalog or enable multi-catalog support in your database configuration.')],
+            field_name='catalog',
+        )
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/c5727bd4-1c6f-470a-b04b-3d35fdc04621)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:f82026d2-d4c6-4294-8d67-31fae16f2f2f -->
+
+
+[](f82026d2-d4c6-4294-8d67-31fae16f2f2f)",True,superset/commands/dataset/exceptions.py,5.0,"@@ -33,6 +33,18 @@
+     return _(""Dataset %(table)s already exists"", table=table)
+ 
+ 
++class MultiCatalogDisabledValidationError(ValidationError):",0,0,0,0,0,0,0
+apache/superset,2505910089,2078805433,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T03:15:41+00:00,"### Missing Catalog Persistence <sub>![category Functionality](https://img.shields.io/badge/Functionality-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The catalog value is assigned but not stored in self._properties, causing potential inconsistency between the local variable and the properties dict.
+
+###### Why this matters
+This could lead to the catalog value not being properly persisted during the update operation, which contradicts the intended functionality.
+
+###### Suggested change ∙ *Feature Preview*
+Store the catalog value in properties:
+```python
+elif ""catalog"" not in self._properties:
+    catalog = self._properties[""catalog""] = self._model.catalog
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/268f8793-a7d0-45eb-b6e6-b9854e1f1bab)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:357699ca-06c8-4f74-9ac1-ef011a10150d -->
+
+
+[](357699ca-06c8-4f74-9ac1-ef011a10150d)",True,superset/commands/dataset/update.py,114.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog",0,0,0,0,0,0,0
+apache/superset,2505910089,2078805435,korbit-ai[bot],131444098,2025-05-08T02:59:32+00:00,2025-05-08T05:14:29+00:00,"### Unclear method name and redundant type casting comment <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The comment 'we know we have a valid model' is redundant with the type casting, and the method name doesn't clearly indicate it handles catalog and database configuration.
+
+###### Why this matters
+Unclear method naming and redundant comments make the code harder to understand at a glance.
+
+###### Suggested change ∙ *Feature Preview*
+Rename method to be more specific and remove redundant comment:
+```python
+def _validate_database_and_catalog_config(self, exceptions: list[ValidationError]) -> None:
+    self._model = cast(SqlaTable, self._model)
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/aec1573a-4769-4026-af64-7ed2824a7fd7)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:6c9f03c2-f4cd-492e-a789-15e65473862a -->
+
+
+[](6c9f03c2-f4cd-492e-a789-15e65473862a)",True,superset/commands/dataset/update.py,85.0,"@@ -128,15 +106,68 @@
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)",0,0,0,0,0,0,0
+apache/superset,2505910089,2078805830,Vitor-Avila,96086495,2025-05-08T03:00:13+00:00,2025-05-08T03:00:14+00:00,"Not entirely sure why we didn't want to allow a DB re-map here. This validation was not really working tho since `database_id` here would never get a value (as it was reading from `database` as opposed to `database_id`). 
+
+That said, I know there are valid use-cases to re-map datasets to other connections and since it's currently possible, I've removed this check.",True,superset/commands/dataset/update.py,67.0,"@@ -86,38 +90,12 @@ def validate(self) -> None:
+         if not self._model:
+             raise DatasetNotFoundError()
+ 
+-        # Check ownership
++        # Check permission to update the dataset
+         try:
+             security_manager.raise_for_ownership(self._model)
+         except SupersetSecurityException as ex:
+             raise DatasetForbiddenError() from ex
+ 
+-        database_id = self._properties.get(""database"")
+-
+-        catalog = self._properties.get(""catalog"")
+-        if not catalog:
+-            catalog = self._properties[""catalog""] = (
+-                self._model.database.get_default_catalog()
+-            )
+-
+-        table = Table(
+-            self._properties.get(""table_name""),  # type: ignore
+-            self._properties.get(""schema""),
+-            catalog,
+-        )
+-
+-        # Validate uniqueness
+-        if not DatasetDAO.validate_update_uniqueness(
+-            self._model.database,
+-            table,
+-            self._model_id,
+-        ):
+-            exceptions.append(DatasetExistsValidationError(table))
+-
+-        # Validate/Populate database not allowed to change
+-        if database_id and database_id != self._model:
+-            exceptions.append(DatabaseChangeValidationError())",1,1,0,0,0,0,0
+apache/superset,2505910089,2078806564,Vitor-Avila,96086495,2025-05-08T03:01:21+00:00,2025-05-08T03:01:22+00:00,didn't want to do `if not catalog` as technically `catalog` can be `None`.,True,superset/commands/dataset/update.py,105.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())",0,0,0,0,0,0,0
+apache/superset,2505910089,2078806867,Vitor-Avila,96086495,2025-05-08T03:01:55+00:00,2025-05-08T03:01:55+00:00,"same here, supporting `schema = None`",True,superset/commands/dataset/update.py,120.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog
++
++        schema = (
++            self._properties[""schema""]
++            if ""schema"" in self._properties
++            else self._model.schema
++        )",0,0,0,0,0,0,0
+apache/superset,2505910089,2078815334,Vitor-Avila,96086495,2025-05-08T03:15:35+00:00,2025-05-08T03:15:35+00:00,"That's not really needed. The `update()` logic would only update keys present in `self._properties`. There's no need to include `self._properties[""catalog""]` in this case, since its value is already what's in the object.
+
+I'm just assigning the value to the local `catalog` variable to validate uniqueness after.",True,superset/commands/dataset/update.py,114.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog",0,0,0,0,0,0,0
+apache/superset,2505910089,2078815620,korbit-ai[bot],131444098,2025-05-08T03:16:06+00:00,2025-05-08T03:16:06+00:00,"I see, makes sense. The local catalog variable is sufficient for validation and storing it in properties would be redundant. Thanks for clarifying.",True,superset/commands/dataset/update.py,114.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog",0,0,0,0,0,0,0
+apache/superset,2505910089,2078816489,Vitor-Avila,96086495,2025-05-08T03:17:47+00:00,2025-05-08T03:17:47+00:00,"I'd say that `validate_dataset_source` makes sense, as these configs appear in the **Source** tab of the dataset editor. But I'll keep this open to hear from others too :) ",True,superset/commands/dataset/update.py,85.0,"@@ -128,15 +106,68 @@
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)",1,1,0,0,0,0,0
+apache/superset,2505910089,2078816947,Vitor-Avila,96086495,2025-05-08T03:18:29+00:00,2025-05-08T03:18:29+00:00,Seems to be in accordance to other `Exceptions` we have.,True,superset/commands/dataset/exceptions.py,,"@@ -33,6 +33,18 @@ def get_dataset_exist_error_msg(table: Table) -> str:
+     return _(""Dataset %(table)s already exists"", table=table)
+ 
+ 
++class MultiCatalogDisabledValidationError(ValidationError):
++    """"""
++    Validation error for using a non-default catalog when multi-catalog is disabled
++    """"""",0,0,0,0,0,0,0
+apache/superset,2505910089,2078817132,korbit-ai[bot],131444098,2025-05-08T03:18:46+00:00,2025-05-08T03:18:46+00:00,You're right - the documentation style is consistent with the other exceptions in this file. The brief docstring works in this context.,True,superset/commands/dataset/exceptions.py,,"@@ -33,6 +33,18 @@ def get_dataset_exist_error_msg(table: Table) -> str:
+     return _(""Dataset %(table)s already exists"", table=table)
+ 
+ 
++class MultiCatalogDisabledValidationError(ValidationError):
++    """"""
++    Validation error for using a non-default catalog when multi-catalog is disabled
++    """"""",0,0,0,0,0,0,0
+apache/superset,2505910089,2078817599,Vitor-Avila,96086495,2025-05-08T03:19:31+00:00,2025-05-08T03:19:31+00:00,np!,True,superset/commands/dataset/update.py,114.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog",0,0,0,0,0,0,0
+apache/superset,2505910089,2078817823,korbit-ai[bot],131444098,2025-05-08T03:19:56+00:00,2025-05-08T03:19:56+00:00,"Got it, thanks for explaining the rationale! 👍",True,superset/commands/dataset/update.py,114.0,"@@ -128,15 +106,68 @@ def validate(self) -> None:
+         except ValidationError as ex:
+             exceptions.append(ex)
+ 
++        self._validate_dataset_source(exceptions)
+         self._validate_semantics(exceptions)
+ 
+         if exceptions:
+             raise DatasetInvalidError(exceptions=exceptions)
+ 
+-    def _validate_semantics(self, exceptions: list[ValidationError]) -> None:
++    def _validate_dataset_source(self, exceptions: list[ValidationError]) -> None:
+         # we know we have a valid model
+         self._model = cast(SqlaTable, self._model)
++        database_id = self._properties.pop(""database_id"", None)
++        catalog = self._properties.get(""catalog"")
++        new_db_connection: Database | None = None
++
++        if database_id and database_id != self._model.database.id:
++            if new_db_connection := DatasetDAO.get_database_by_id(database_id):
++                self._properties[""database""] = new_db_connection
++            else:
++                exceptions.append(DatabaseNotFoundValidationError())
++        db = new_db_connection or self._model.database
++        default_catalog = db.get_default_catalog()
++
++        # If multi-catalog is disabled, and catalog provided is not
++        # the default one, fail
++        if (
++            ""catalog"" in self._properties
++            and catalog != default_catalog
++            and not db.allow_multi_catalog
++        ):
++            exceptions.append(MultiCatalogDisabledValidationError())
++
++        # If the DB connection does not support multi-catalog,
++        # use the default catalog
++        elif not db.allow_multi_catalog:
++            catalog = self._properties[""catalog""] = default_catalog
++
++        # Fallback to using the previous value if not provided
++        elif ""catalog"" not in self._properties:
++            catalog = self._model.catalog",0,0,0,0,0,0,0
+apache/superset,2505910089,2079686796,betodealmeida,1534870,2025-05-08T13:09:11+00:00,2025-05-08T13:27:53+00:00,"What happens if we pass `null` as the catalog, wouldn't the backend also use the default catalog? Then you can just do:
+
+```js
+catalog: datasource.database?.allow_multi_catalog ? datasource.catalog : null,
+```",True,superset-frontend/src/components/Datasource/DatasourceModal.tsx,143.0,"@@ -120,71 +120,83 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
+   const [isEditing, setIsEditing] = useState<boolean>(false);
+   const dialog = useRef<any>(null);
+   const [modal, contextHolder] = Modal.useModal();
+-  const buildPayload = (datasource: Record<string, any>) => ({
+-    table_name: datasource.table_name,
+-    database_id: datasource.database?.id,
+-    sql: datasource.sql,
+-    filter_select_enabled: datasource.filter_select_enabled,
+-    fetch_values_predicate: datasource.fetch_values_predicate,
+-    schema:
+-      datasource.tableSelector?.schema ||
+-      datasource.databaseSelector?.schema ||
+-      datasource.schema,
+-    description: datasource.description,
+-    main_dttm_col: datasource.main_dttm_col,
+-    normalize_columns: datasource.normalize_columns,
+-    always_filter_main_dttm: datasource.always_filter_main_dttm,
+-    offset: datasource.offset,
+-    default_endpoint: datasource.default_endpoint,
+-    cache_timeout:
+-      datasource.cache_timeout === '' ? null : datasource.cache_timeout,
+-    is_sqllab_view: datasource.is_sqllab_view,
+-    template_params: datasource.template_params,
+-    extra: datasource.extra,
+-    is_managed_externally: datasource.is_managed_externally,
+-    external_url: datasource.external_url,
+-    metrics: datasource?.metrics?.map((metric: DatasetObject['metrics'][0]) => {
+-      const metricBody: any = {
+-        expression: metric.expression,
+-        description: metric.description,
+-        metric_name: metric.metric_name,
+-        metric_type: metric.metric_type,
+-        d3format: metric.d3format || null,
+-        currency: !isDefined(metric.currency)
+-          ? null
+-          : JSON.stringify(metric.currency),
+-        verbose_name: metric.verbose_name,
+-        warning_text: metric.warning_text,
+-        uuid: metric.uuid,
+-        extra: buildExtraJsonObject(metric),
+-      };
+-      if (!Number.isNaN(Number(metric.id))) {
+-        metricBody.id = metric.id;
+-      }
+-      return metricBody;
+-    }),
+-    columns: datasource?.columns?.map(
+-      (column: DatasetObject['columns'][0]) => ({
+-        id: typeof column.id === 'number' ? column.id : undefined,
+-        column_name: column.column_name,
+-        type: column.type,
+-        advanced_data_type: column.advanced_data_type,
+-        verbose_name: column.verbose_name,
+-        description: column.description,
+-        expression: column.expression,
+-        filterable: column.filterable,
+-        groupby: column.groupby,
+-        is_active: column.is_active,
+-        is_dttm: column.is_dttm,
+-        python_date_format: column.python_date_format || null,
+-        uuid: column.uuid,
+-        extra: buildExtraJsonObject(column),
+-      }),
+-    ),
+-    owners: datasource.owners.map(
+-      (o: Record<string, number>) => o.value || o.id,
+-    ),
+-  });
++  const buildPayload = (datasource: Record<string, any>) => {
++    const payload: Record<string, any> = {
++      table_name: datasource.table_name,
++      database_id: datasource.database?.id,
++      sql: datasource.sql,
++      filter_select_enabled: datasource.filter_select_enabled,
++      fetch_values_predicate: datasource.fetch_values_predicate,
++      schema:
++        datasource.tableSelector?.schema ||
++        datasource.databaseSelector?.schema ||
++        datasource.schema,
++      description: datasource.description,
++      main_dttm_col: datasource.main_dttm_col,
++      normalize_columns: datasource.normalize_columns,
++      always_filter_main_dttm: datasource.always_filter_main_dttm,
++      offset: datasource.offset,
++      default_endpoint: datasource.default_endpoint,
++      cache_timeout:
++        datasource.cache_timeout === '' ? null : datasource.cache_timeout,
++      is_sqllab_view: datasource.is_sqllab_view,
++      template_params: datasource.template_params,
++      extra: datasource.extra,
++      is_managed_externally: datasource.is_managed_externally,
++      external_url: datasource.external_url,
++      metrics: datasource?.metrics?.map(
++        (metric: DatasetObject['metrics'][0]) => {
++          const metricBody: any = {
++            expression: metric.expression,
++            description: metric.description,
++            metric_name: metric.metric_name,
++            metric_type: metric.metric_type,
++            d3format: metric.d3format || null,
++            currency: !isDefined(metric.currency)
++              ? null
++              : JSON.stringify(metric.currency),
++            verbose_name: metric.verbose_name,
++            warning_text: metric.warning_text,
++            uuid: metric.uuid,
++            extra: buildExtraJsonObject(metric),
++          };
++          if (!Number.isNaN(Number(metric.id))) {
++            metricBody.id = metric.id;
++          }
++          return metricBody;
++        },
++      ),
++      columns: datasource?.columns?.map(
++        (column: DatasetObject['columns'][0]) => ({
++          id: typeof column.id === 'number' ? column.id : undefined,
++          column_name: column.column_name,
++          type: column.type,
++          advanced_data_type: column.advanced_data_type,
++          verbose_name: column.verbose_name,
++          description: column.description,
++          expression: column.expression,
++          filterable: column.filterable,
++          groupby: column.groupby,
++          is_active: column.is_active,
++          is_dttm: column.is_dttm,
++          python_date_format: column.python_date_format || null,
++          uuid: column.uuid,
++          extra: buildExtraJsonObject(column),
++        }),
++      ),
++      owners: datasource.owners.map(
++        (o: Record<string, number>) => o.value || o.id,
++      ),
++    };
++    // Handle catalog based on database's allow_multi_catalog setting
++    // If multi-catalog is disabled, don't include catalog in payload
++    // The backend will use the default catalog
++    // If multi-catalog is enabled, include the selected catalog
++    if (datasource.database?.allow_multi_catalog) {
++      payload.catalog = datasource.catalog;
++    }",0,0,0,0,0,0,0
+apache/superset,2505910089,2079688003,betodealmeida,1534870,2025-05-08T13:09:53+00:00,2025-05-08T13:27:53+00:00,This would have to be updated depending on the answer to my question above.,True,superset-frontend/src/features/datasets/types.ts,4.0,"@@ -62,6 +62,7 @@ export type DatasetObject = {
+   filter_select_enabled?: boolean;
+   fetch_values_predicate?: string;
+   schema?: string;
++  catalog?: string;",1,1,0,0,0,0,0
+apache/superset,2505910089,2079690033,betodealmeida,1534870,2025-05-08T13:11:08+00:00,2025-05-08T13:27:53+00:00,❤️,True,superset/commands/dataset/update.py,4.0,"@@ -14,6 +14,8 @@
+ # KIND, either express or implied.  See the License for the
+ # specific language governing permissions and limitations
+ # under the License.
++from __future__ import annotations",0,0,0,0,0,0,0
+apache/superset,2505910089,2079706349,betodealmeida,1534870,2025-05-08T13:20:32+00:00,2025-05-08T13:27:53+00:00,"Yeah, we should be able to do this, there's valid use cases.",True,superset/commands/dataset/update.py,67.0,"@@ -86,38 +90,12 @@ def validate(self) -> None:
+         if not self._model:
+             raise DatasetNotFoundError()
+ 
+-        # Check ownership
++        # Check permission to update the dataset
+         try:
+             security_manager.raise_for_ownership(self._model)
+         except SupersetSecurityException as ex:
+             raise DatasetForbiddenError() from ex
+ 
+-        database_id = self._properties.get(""database"")
+-
+-        catalog = self._properties.get(""catalog"")
+-        if not catalog:
+-            catalog = self._properties[""catalog""] = (
+-                self._model.database.get_default_catalog()
+-            )
+-
+-        table = Table(
+-            self._properties.get(""table_name""),  # type: ignore
+-            self._properties.get(""schema""),
+-            catalog,
+-        )
+-
+-        # Validate uniqueness
+-        if not DatasetDAO.validate_update_uniqueness(
+-            self._model.database,
+-            table,
+-            self._model_id,
+-        ):
+-            exceptions.append(DatasetExistsValidationError(table))
+-
+-        # Validate/Populate database not allowed to change
+-        if database_id and database_id != self._model:
+-            exceptions.append(DatabaseChangeValidationError())",1,0,0,0,0,0,1
+apache/superset,2505910089,2080079470,Vitor-Avila,96086495,2025-05-08T16:36:35+00:00,2025-05-08T16:36:35+00:00,"hmm I think that wouldn't work properly. Let's say you're remapping a dataset to a BQ connection that has `allow_multi_catalog` disabled. `get_default_catalog` for this connection would return the project ID from the service account, and then if we're passing `null` this check would fail:
+``` python
+if (
+    ""catalog"" in self._properties
+    and catalog != default_catalog
+    and not db.allow_multi_catalog
+):
+    exceptions.append(MultiCatalogDisabledValidationError())
+```
+
+I think it makes sense to have this check at the API layer as `catalog=None` is technically valid.",True,superset-frontend/src/components/Datasource/DatasourceModal.tsx,143.0,"@@ -120,71 +120,83 @@ const DatasourceModal: FunctionComponent<DatasourceModalProps> = ({
+   const [isEditing, setIsEditing] = useState<boolean>(false);
+   const dialog = useRef<any>(null);
+   const [modal, contextHolder] = Modal.useModal();
+-  const buildPayload = (datasource: Record<string, any>) => ({
+-    table_name: datasource.table_name,
+-    database_id: datasource.database?.id,
+-    sql: datasource.sql,
+-    filter_select_enabled: datasource.filter_select_enabled,
+-    fetch_values_predicate: datasource.fetch_values_predicate,
+-    schema:
+-      datasource.tableSelector?.schema ||
+-      datasource.databaseSelector?.schema ||
+-      datasource.schema,
+-    description: datasource.description,
+-    main_dttm_col: datasource.main_dttm_col,
+-    normalize_columns: datasource.normalize_columns,
+-    always_filter_main_dttm: datasource.always_filter_main_dttm,
+-    offset: datasource.offset,
+-    default_endpoint: datasource.default_endpoint,
+-    cache_timeout:
+-      datasource.cache_timeout === '' ? null : datasource.cache_timeout,
+-    is_sqllab_view: datasource.is_sqllab_view,
+-    template_params: datasource.template_params,
+-    extra: datasource.extra,
+-    is_managed_externally: datasource.is_managed_externally,
+-    external_url: datasource.external_url,
+-    metrics: datasource?.metrics?.map((metric: DatasetObject['metrics'][0]) => {
+-      const metricBody: any = {
+-        expression: metric.expression,
+-        description: metric.description,
+-        metric_name: metric.metric_name,
+-        metric_type: metric.metric_type,
+-        d3format: metric.d3format || null,
+-        currency: !isDefined(metric.currency)
+-          ? null
+-          : JSON.stringify(metric.currency),
+-        verbose_name: metric.verbose_name,
+-        warning_text: metric.warning_text,
+-        uuid: metric.uuid,
+-        extra: buildExtraJsonObject(metric),
+-      };
+-      if (!Number.isNaN(Number(metric.id))) {
+-        metricBody.id = metric.id;
+-      }
+-      return metricBody;
+-    }),
+-    columns: datasource?.columns?.map(
+-      (column: DatasetObject['columns'][0]) => ({
+-        id: typeof column.id === 'number' ? column.id : undefined,
+-        column_name: column.column_name,
+-        type: column.type,
+-        advanced_data_type: column.advanced_data_type,
+-        verbose_name: column.verbose_name,
+-        description: column.description,
+-        expression: column.expression,
+-        filterable: column.filterable,
+-        groupby: column.groupby,
+-        is_active: column.is_active,
+-        is_dttm: column.is_dttm,
+-        python_date_format: column.python_date_format || null,
+-        uuid: column.uuid,
+-        extra: buildExtraJsonObject(column),
+-      }),
+-    ),
+-    owners: datasource.owners.map(
+-      (o: Record<string, number>) => o.value || o.id,
+-    ),
+-  });
++  const buildPayload = (datasource: Record<string, any>) => {
++    const payload: Record<string, any> = {
++      table_name: datasource.table_name,
++      database_id: datasource.database?.id,
++      sql: datasource.sql,
++      filter_select_enabled: datasource.filter_select_enabled,
++      fetch_values_predicate: datasource.fetch_values_predicate,
++      schema:
++        datasource.tableSelector?.schema ||
++        datasource.databaseSelector?.schema ||
++        datasource.schema,
++      description: datasource.description,
++      main_dttm_col: datasource.main_dttm_col,
++      normalize_columns: datasource.normalize_columns,
++      always_filter_main_dttm: datasource.always_filter_main_dttm,
++      offset: datasource.offset,
++      default_endpoint: datasource.default_endpoint,
++      cache_timeout:
++        datasource.cache_timeout === '' ? null : datasource.cache_timeout,
++      is_sqllab_view: datasource.is_sqllab_view,
++      template_params: datasource.template_params,
++      extra: datasource.extra,
++      is_managed_externally: datasource.is_managed_externally,
++      external_url: datasource.external_url,
++      metrics: datasource?.metrics?.map(
++        (metric: DatasetObject['metrics'][0]) => {
++          const metricBody: any = {
++            expression: metric.expression,
++            description: metric.description,
++            metric_name: metric.metric_name,
++            metric_type: metric.metric_type,
++            d3format: metric.d3format || null,
++            currency: !isDefined(metric.currency)
++              ? null
++              : JSON.stringify(metric.currency),
++            verbose_name: metric.verbose_name,
++            warning_text: metric.warning_text,
++            uuid: metric.uuid,
++            extra: buildExtraJsonObject(metric),
++          };
++          if (!Number.isNaN(Number(metric.id))) {
++            metricBody.id = metric.id;
++          }
++          return metricBody;
++        },
++      ),
++      columns: datasource?.columns?.map(
++        (column: DatasetObject['columns'][0]) => ({
++          id: typeof column.id === 'number' ? column.id : undefined,
++          column_name: column.column_name,
++          type: column.type,
++          advanced_data_type: column.advanced_data_type,
++          verbose_name: column.verbose_name,
++          description: column.description,
++          expression: column.expression,
++          filterable: column.filterable,
++          groupby: column.groupby,
++          is_active: column.is_active,
++          is_dttm: column.is_dttm,
++          python_date_format: column.python_date_format || null,
++          uuid: column.uuid,
++          extra: buildExtraJsonObject(column),
++        }),
++      ),
++      owners: datasource.owners.map(
++        (o: Record<string, number>) => o.value || o.id,
++      ),
++    };
++    // Handle catalog based on database's allow_multi_catalog setting
++    // If multi-catalog is disabled, don't include catalog in payload
++    // The backend will use the default catalog
++    // If multi-catalog is enabled, include the selected catalog
++    if (datasource.database?.allow_multi_catalog) {
++      payload.catalog = datasource.catalog;
++    }",0,0,0,0,0,0,0
+apache/superset,2504434481,2077751365,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T17:14:40+00:00,"### Missing Error Handling in API Registration <sub>![category Error Handling](https://img.shields.io/badge/Error%20Handling-ea580c)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Multiple sequential API registrations are performed without error handling, which could fail silently if an API is already registered or if registration fails.
+
+###### Why this matters
+If API registration fails, the application might continue with partially initialized views, leading to inconsistent application state and potential security vulnerabilities.
+
+###### Suggested change ∙ *Feature Preview*
+```python
+def init_views(self) -> None:
+    try:
+        # Adds api for roles
+        appbuilder.add_api(SupersetSecurityManager.role_api)
+        appbuilder.add_api(SupersetSecurityManager.permission_api)
+        appbuilder.add_api(SupersetSecurityManager.user_api)
+        appbuilder.add_api(SupersetSecurityManager.view_menu_api)
+        appbuilder.add_api(SupersetSecurityManager.permission_view_menu_api)
+        super().init_views()
+    except Exception as e:
+        # Log the specific error with context
+        logger.error(f'Failed to initialize Superset views: {str(e)}')
+        raise RuntimeError(f'Failed to initialize Superset views: {str(e)}') from e
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5bd5e4bb-696d-42a5-af90-09990037fa97/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5bd5e4bb-696d-42a5-af90-09990037fa97?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5bd5e4bb-696d-42a5-af90-09990037fa97?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5bd5e4bb-696d-42a5-af90-09990037fa97?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/5bd5e4bb-696d-42a5-af90-09990037fa97)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:6baa02b0-587d-437c-8ba7-2ada26bd4d21 -->
+
+
+[](6baa02b0-587d-437c-8ba7-2ada26bd4d21)",False,,,,0,0,0,0,0,0,0
+apache/superset,2504434481,2077751371,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T17:42:45+00:00,"### Unconditional exposure of sensitive security APIs <sub>![category Security](https://img.shields.io/badge/Security-e11d48)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Security-sensitive APIs are unconditionally exposed despite the comment suggesting they should be optional.
+
+###### Why this matters
+Exposing all security APIs by default could lead to increased attack surface and potential security vulnerabilities when these endpoints are not needed.
+
+###### Suggested change ∙ *Feature Preview*
+Move the sensitive API endpoints behind a configuration flag or environment variable:
+```python
+from superset.app import SupersetAppInitializer
+from superset.extensions import appbuilder
+from superset.security import SupersetSecurityManager
+
+
+class MySupsersetAppInitializer(SupersetAppInitializer):
+    def init_views(self) -> None:
+        # Adds api for roles
+        appbuilder.add_api(SupersetSecurityManager.role_api)
+
+        # Optional APIs controlled by configuration
+        if app.config.get('ENABLE_SECURITY_APIS', False):
+            appbuilder.add_api(SupersetSecurityManager.permission_api)
+            appbuilder.add_api(SupersetSecurityManager.user_api)
+            appbuilder.add_api(SupersetSecurityManager.view_menu_api)
+            appbuilder.add_api(SupersetSecurityManager.permission_view_menu_api)
+
+        super().init_views()
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/0a040184-fed9-43f4-8c29-35f761ee8c3c/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/0a040184-fed9-43f4-8c29-35f761ee8c3c?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/0a040184-fed9-43f4-8c29-35f761ee8c3c?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/0a040184-fed9-43f4-8c29-35f761ee8c3c?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/0a040184-fed9-43f4-8c29-35f761ee8c3c)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:103bb622-4f29-4a1b-b454-996885117dd0 -->
+
+
+[](103bb622-4f29-4a1b-b454-996885117dd0)",False,,,,0,0,0,0,0,0,0
+apache/superset,2504434481,2077751374,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T17:38:43+00:00,"### Exposed AWS Account ID <sub>![category Security](https://img.shields.io/badge/Security-e11d48)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+AWS Account ID is hardcoded directly in the script
+
+###### Why this matters
+Exposing AWS Account IDs in code can aid attackers in targeting specific AWS resources and should be treated as sensitive information
+
+###### Suggested change ∙ *Feature Preview*
+Move the AWS Account ID to a secure environment variable or configuration management system:
+```bash
+AWS_ACCOUNT_ID=""${AWS_ACCOUNT_ID:?'AWS_ACCOUNT_ID environment variable is required'}""
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/f1e9c816-e1ef-4251-b9ec-786f1152d476/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/f1e9c816-e1ef-4251-b9ec-786f1152d476?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/f1e9c816-e1ef-4251-b9ec-786f1152d476?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/f1e9c816-e1ef-4251-b9ec-786f1152d476?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/f1e9c816-e1ef-4251-b9ec-786f1152d476)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:25ae2f95-2ab2-4ff4-b477-1efe326308ac -->
+
+
+[](25ae2f95-2ab2-4ff4-b477-1efe326308ac)",False,,,,0,0,0,0,0,0,0
+apache/superset,2504434481,2077751382,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T16:54:20+00:00,"### Obsolete comment with typo <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+The comment is obsolete since the code below it is already uncommented, and contains a typo ('ect' instead of 'etc').
+
+###### Why this matters
+Obsolete comments create confusion and cognitive overhead for developers trying to understand the code's current state.
+
+###### Suggested change ∙ *Feature Preview*
+Remove the obsolete comment since the APIs are already enabled.
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d1f01190-43bc-4beb-8b15-62ec4c0c6d5e/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d1f01190-43bc-4beb-8b15-62ec4c0c6d5e?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d1f01190-43bc-4beb-8b15-62ec4c0c6d5e?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d1f01190-43bc-4beb-8b15-62ec4c0c6d5e?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/d1f01190-43bc-4beb-8b15-62ec4c0c6d5e)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:332d238a-2e62-4edd-85c9-b4576cabeba7 -->
+
+
+[](332d238a-2e62-4edd-85c9-b4576cabeba7)",False,,,,0,0,0,0,0,0,0
+apache/superset,2504434481,2077751386,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T16:06:23+00:00,"### Class name typo <sub>![category Readability](https://img.shields.io/badge/Readability-0284c7)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Class name contains a typo ('Supserset' instead of 'Superset') which affects readability and searchability.
+
+###### Why this matters
+Typos in class names can make the code harder to find through searches and may cause confusion when referenced in documentation or logs.
+
+###### Suggested change ∙ *Feature Preview*
+Rename the class to `MySuperset AppInitializer`
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/1e05c720-37c1-44db-a169-d1f8319444b3/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/1e05c720-37c1-44db-a169-d1f8319444b3?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/1e05c720-37c1-44db-a169-d1f8319444b3?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/1e05c720-37c1-44db-a169-d1f8319444b3?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/1e05c720-37c1-44db-a169-d1f8319444b3)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:e8b08625-5360-43a8-829c-ec44efef51f2 -->
+
+
+[](e8b08625-5360-43a8-829c-ec44efef51f2)",False,,,,0,0,0,0,0,0,0
+apache/superset,2504434481,2077751389,korbit-ai[bot],131444098,2025-05-07T14:21:30+00:00,2025-05-07T17:02:22+00:00,"### Unverified Git Source Code Pull <sub>![category Security](https://img.shields.io/badge/Security-e11d48)</sub>
+
+<details>
+  <summary>Tell me more</summary>
+
+###### What is the issue?
+Unvalidated git pull from master branch without verifying source or commit integrity
+
+###### Why this matters
+Automatically pulling from git without verification could allow injection of malicious code if the repository is compromised
+
+###### Suggested change ∙ *Feature Preview*
+Add commit verification and specific commit/tag pulling:
+```bash
+git fetch origin master
+git verify-commit HEAD
+git reset --hard origin/master
+```
+
+
+###### Provide feedback to improve future suggestions
+[![Nice Catch](https://img.shields.io/badge/👍%20Nice%20Catch-71BC78)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/7f15762e-245e-4c39-b585-b150329b1900/upvote) [![Incorrect](https://img.shields.io/badge/👎%20Incorrect-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/7f15762e-245e-4c39-b585-b150329b1900?what_not_true=true)  [![Not in Scope](https://img.shields.io/badge/👎%20Out%20of%20PR%20scope-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/7f15762e-245e-4c39-b585-b150329b1900?what_out_of_scope=true) [![Not in coding standard](https://img.shields.io/badge/👎%20Not%20in%20our%20standards-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/7f15762e-245e-4c39-b585-b150329b1900?what_not_in_standard=true) [![Other](https://img.shields.io/badge/👎%20Other-white)](https://app.korbit.ai/feedback/aa91ff46-6083-4491-9416-b83dd1994b51/7f15762e-245e-4c39-b585-b150329b1900)
+</details>
+
+<sub>
+
+💬 Looking for more details? Reply to this comment to chat with Korbit.
+</sub>
+
+<!--- korbi internal id:014f2b94-756d-4539-9213-fe1c0dc8c8ef -->
+
+
+[](014f2b94-756d-4539-9213-fe1c0dc8c8ef)",False,,,,0,0,0,0,0,0,0

@@ -1,0 +1,410 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+explosion/spaCy,27992996,2,Update index.rst,"Fix two broken links.
+
+Couldn't find link to repo in the [docs](http://honnibal.github.io/spaCy/) => went to check the source, found the spaCy link at the top didn't render.
+
+Similarly, the link to commercial license lead to http://honnibal.github.io/spaCy/license.rst which is a 404.
+",piskvorky,610412,closed,False,2015-01-25T14:59:38+00:00,2015-01-25T16:06:18+00:00,2015-01-25T15:29:33+00:00,2015-01-25T15:29:33+00:00,a0b7442df61afb7cb0626842de9236eaf6601ee3,unknown,2,2,1,1,0,1,,,
+explosion/spaCy,27994434,3,docs: Added missing cosine declaration,"- Added missing cosine declaration to code listing that already included
+  imports for `dot` and `norm` function it uses.
+
+Signed-off-by: mr.Shu mr@shu.io
+
+---
+
+@honnibal Thanks a ton for a great library! 
+
+While reading the index document I kind of skipped the previous declarations of `cosine`. It seemed strange not to find them here since the imports were already in place.
+",mrshu,461491,closed,False,2015-01-25T16:55:51+00:00,2015-01-25T17:52:40+00:00,2015-01-25T17:52:40+00:00,2015-01-25T17:52:40+00:00,1587ac933136e80da218126aa7b5426384fefe3c,unknown,1,0,1,1,0,3,,,
+explosion/spaCy,27994639,4,docs: Change `postags` to `parts_of_speech`,"- It seems that the docs use `spacy.postags` but the actual module that
+  can be found in `spacy/` is `parts_of_speech`.
+
+Signed-off-by: mr.Shu mr@shu.io
+
+---
+
+@honnibal I am sorry if you would like to move `parts_of_speech` to `postags` but the sample code in `index.rst` was not working for me. These changes make it functional.
+",mrshu,461491,closed,False,2015-01-25T17:12:13+00:00,2015-01-26T12:33:04+00:00,2015-01-26T12:33:04+00:00,,b24cc31114ecfb9768ad0312b5c4b471907a1cdc,dirty,2,2,1,3,0,3,,,
+explosion/spaCy,27995720,5,Bug fix on the documentation,,MatthieuBizien,173090,closed,False,2015-01-25T18:30:57+00:00,2015-01-25T18:32:43+00:00,2015-01-25T18:32:43+00:00,2015-01-25T18:32:43+00:00,5107e7d73261cc44dbf1d368e54d91cd1767c9c3,unknown,2,2,1,1,0,0,,,
+explosion/spaCy,27999357,6,Make the accuracy table show up,"It was previously commented out because it wasn't below the `..table` directive.  I'm not sure if this was intentional, but the text ""The table above"" was very confusing without the table.
+",dan-blanchard,976345,closed,False,2015-01-25T22:31:59+00:00,2015-01-26T13:55:06+00:00,2015-01-25T23:08:48+00:00,2015-01-25T23:08:48+00:00,8e7ac797490b41a04ad2b4afb98b99dfafb910d4,unknown,2,2,1,1,0,0,,,
+explosion/spaCy,28052429,8,fix: it creates file named 'data' but it should be directory,,osmanbaskaya,222624,closed,False,2015-01-26T19:21:34+00:00,2015-08-20T22:55:54+00:00,2015-08-20T22:55:54+00:00,,8178963183d9b36e2d99dc684f3e978071fdcc59,dirty,7,0,1,1,0,0,,,
+explosion/spaCy,28856805,21,Add rokenizer test for zero length string,"This tests for what I assume is the correct behaviour for empty strings. Related to Issue #19 
+",leofidus,4348296,closed,False,2015-02-07T02:06:11+00:00,2015-02-10T13:19:38+00:00,2015-02-10T13:19:38+00:00,2015-02-10T13:19:38+00:00,21215d1e738ea3dffedaf76bdc020404ea041a5e,unknown,4,0,1,1,0,0,,,
+explosion/spaCy,30904319,33,Unicode trouble with lemma_,,rsomeon,11413685,closed,False,2015-03-10T23:50:36+00:00,2015-03-26T10:31:04+00:00,2015-03-26T10:31:04+00:00,,ccbb88951b5166df6645ada75df8ade2296ff9dc,dirty,17,1,2,2,0,0,,,
+explosion/spaCy,31073113,34,Fix import typo in docs,"spact -> spacy
+",viksit,198669,closed,False,2015-03-12T20:13:54+00:00,2015-06-26T14:14:10+00:00,2015-06-26T14:14:10+00:00,2015-06-26T14:14:10+00:00,1c9e14c8a7c6bdbfe6dd01f7b48dcabe7c4b60bc,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,33615895,55,Misc. improvements in style and consistency,,suchow,613981,closed,False,2015-04-19T09:14:39+00:00,2015-04-20T16:14:47+00:00,2015-04-20T16:14:47+00:00,2015-04-20T16:14:47+00:00,ab59cdf68010534e2e5f7074b889b7580d5c50b2,unknown,298,227,94,7,0,0,,,
+explosion/spaCy,36823735,66,add downloaded data for the tokenizer,,pjankiewicz,130572,closed,False,2015-06-03T11:44:28+00:00,2015-06-03T11:45:45+00:00,2015-06-03T11:44:51+00:00,,efc0bba155a07f856911196545c110a228116c44,unknown,747119,0,7,1,0,0,,,
+explosion/spaCy,38941321,73,fixed pizza example,,kylemcdonald,157106,closed,False,2015-07-01T01:39:10+00:00,2015-08-20T22:55:45+00:00,2015-08-20T22:55:45+00:00,,e7a4ee21e0bdd1972a8a916bbd29ee6ce7e0b996,dirty,4,4,1,1,0,0,,,
+explosion/spaCy,43096160,85,Add a script to generate the specials.json file,"Takes care of handling uppercase and missing apostrophe contractions.
+Allows for adding exceptions to the generation of particular token + contraction cases.
+When run, overwrites the specials.json file.
+This has added new specials to the json file (only new uppercase / no apostrophe versions, I didn't add any entirely new words, although it is certainly possible). Please look over the specials it has generated and edit the generator as necessary to add / remove ones you want.
+
+I also added some comments in for various tokens wondering why they don't have POS tags or lemmas in certain instances.
+",NSchrading,1214475,closed,False,2015-08-22T02:46:02+00:00,2015-09-06T23:05:19+00:00,2015-09-06T23:05:19+00:00,2015-09-06T23:05:19+00:00,34a4d4ceb79050dcd8c7230e83dc96bfba9610bc,unknown,512,647,3,3,0,1,,,
+explosion/spaCy,43157510,86,Correctly pass link_args in c_ext() in setup.py,"`c_ext()` incorrectly passed `compile_args` twice, both to `extra_compile_args` and to `extra_link_args`. This pull request fixes that.
+",vsolovyov,1250501,closed,False,2015-08-24T09:55:07+00:00,2015-08-24T10:19:31+00:00,2015-08-24T10:18:49+00:00,2015-08-24T10:18:49+00:00,1ae5eb42539e4741d393aa2bf2b066c4888fd9ee,unknown,96,1,2,2,0,2,,,
+explosion/spaCy,45616513,99,Force SSL for downloading English language data.,"It would also be nice to have a checksum for this.
+",rw,21367,closed,False,2015-09-22T00:26:10+00:00,2015-09-28T07:46:26+00:00,2015-09-28T07:46:26+00:00,2015-09-28T07:46:26+00:00,a574f44be9dbabec76fc9c72a17ca60130e856e5,unknown,1,1,1,1,0,1,,,
+explosion/spaCy,45645409,101,basic german rules,"Some (incomplete) German rules for improving tokenization.
+
+Still open for discussion:
+- how to model complex morphology for (possessive) pronouns (https://deutsch.lingolia.com/de/grammatik/pronomen/possessivpronomen)
+- how to deal typographically correct punctuation in contractions, e.g., ‘ vs. '
+- how to avoid asymmetric splits on quotes: „ | Beste | Unternehmensmarke“ or "" | Kommersant""-Bericht
+- soft hyphens (unicode) - is this responsibility of spacy?
+- wrong punctuation assignments, e.g.: DM.
+",henningpeters,166570,closed,False,2015-09-22T10:03:51+00:00,2015-09-22T11:50:26+00:00,2015-09-22T11:50:26+00:00,2015-09-22T11:50:26+00:00,73426c4727c96e952d6ff05a24834d8775b1c88a,unknown,1376,148,5,2,0,0,,,
+explosion/spaCy,45880979,104,Create README.md for /website/,,bittlingmayer,11457984,closed,False,2015-09-24T10:24:01+00:00,2015-09-24T10:57:39+00:00,2015-09-24T10:57:12+00:00,2015-09-24T10:57:12+00:00,40547480696818a8ecc0379862d6d1dee21a00cf,unknown,30,0,1,1,0,1,,,
+explosion/spaCy,46113030,107,doctests for website: 'home'-section,"btw:
+- some tests are failing
+- let's also consider adding asserts for those tests/examples that currently don't have any
+",henningpeters,166570,closed,False,2015-09-28T00:45:14+00:00,2015-09-28T07:46:52+00:00,2015-09-28T07:46:52+00:00,2015-09-28T07:46:52+00:00,09fac78e26f6213defffa007c3586c20f40fe709,unknown,247,114,5,6,0,0,,,
+explosion/spaCy,46150130,110,add doctests for website 'api'-section,,henningpeters,166570,closed,False,2015-09-28T12:23:08+00:00,2015-09-28T12:23:24+00:00,2015-09-28T12:23:24+00:00,,,dirty,227,136,5,1,0,0,,,
+explosion/spaCy,46151339,111,add doctests for website 'api'-section,,henningpeters,166570,closed,False,2015-09-28T12:37:07+00:00,2015-09-28T12:40:48+00:00,2015-09-28T12:40:48+00:00,2015-09-28T12:40:48+00:00,74de4c953e4282f6f03bbdd0ef7b4511e626438b,unknown,225,138,6,3,0,1,,,
+explosion/spaCy,46436568,117,Changing deprecated codecs.open to io.open,"@honnibal I am looking for `goodfirstbug` to fix in spaCy as I am picking cython and reading Kurt Smith's book. I caught the deprecated `codecs.open` from the .py code. But if there are any other `goodfirstbug` to fix, esp. from the .pyx code, I will be glad to help out.
+
+P/S: Also, it's great to see that @nltk is replacing the outdated maxent tagger with your perceptron tagger.
+",alvations,1050316,closed,False,2015-09-30T18:14:36+00:00,2015-10-10T03:13:39+00:00,2015-10-10T03:13:39+00:00,2015-10-10T03:13:39+00:00,d1c75b3a683b852a3bd53062f57bcc6e8cdcfd4c,unknown,21,21,10,3,0,1,,,
+explosion/spaCy,46882189,126,Improve slicing support for both Doc and Span,"Due to data being missing from the repository, I could not run some of the tests.
+
+These changes are tested with: `py.test tests/tokens/test_tokens_api.py::test_getitem --models`
+",tomtung,513210,closed,False,2015-10-06T09:51:02+00:00,2015-10-10T03:14:57+00:00,2015-10-10T03:14:57+00:00,2015-10-10T03:14:57+00:00,c096041cf727fcea158dfca746fb0c7bfcc39f78,unknown,102,15,4,8,0,5,,,
+explosion/spaCy,46950099,127,fix website tests,,henningpeters,166570,closed,False,2015-10-06T19:59:47+00:00,2015-10-09T14:41:11+00:00,2015-10-09T14:41:11+00:00,,55ca8b2a57ddab40ff44f90a05fa969153508e74,dirty,1,1,1,1,0,0,,,
+explosion/spaCy,47057685,129,Fix size of allocation when creating a pattern,"Each pattern object currently contains two AttrValues rather than just one.
+
+Found this while using spacy in a setting that uses tcmalloc, then building/running with sanitize flags.
+
+No unit tests are included, unfortunately. 
+",chrisdubois,1958804,closed,False,2015-10-07T17:35:22+00:00,2015-10-08T01:04:41+00:00,2015-10-08T01:04:41+00:00,2015-10-08T01:04:41+00:00,32a609761136b9ff2d10966400dccff172875840,unknown,96,1,2,2,0,2,,,
+explosion/spaCy,47135351,133,Fix typo,"I know that first pull request need a  CLA, but that was the easiest way to say ""here's a typo"". Please apply this yourself if this is possible?
+",pquentin,42327,closed,False,2015-10-08T10:23:57+00:00,2015-10-08T10:47:06+00:00,2015-10-08T10:47:05+00:00,2015-10-08T10:47:04+00:00,8a65445f0a3ccaa6984e72fb39263f53cc852120,unknown,1,1,1,1,0,1,,,
+explosion/spaCy,47235174,135,remove compile warning noise,,henningpeters,166570,closed,False,2015-10-09T05:24:02+00:00,2015-10-09T14:40:15+00:00,2015-10-09T14:40:15+00:00,2015-10-09T14:40:15+00:00,b5029034b86a2914ef20d0d0504a102f417ff8b8,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,47276262,136,cleanup,"looks like this file was accidentally added
+",henningpeters,166570,closed,False,2015-10-09T14:12:01+00:00,2015-10-09T14:40:00+00:00,2015-10-09T14:40:00+00:00,2015-10-09T14:40:00+00:00,8beae1ac2e84fb9d2c5f923b98c21538dd5b3ed9,unknown,0,83,1,1,0,0,,,
+explosion/spaCy,47278965,137,push version and add spacy channel,,henningpeters,166570,closed,False,2015-10-09T14:35:25+00:00,2015-10-09T14:40:29+00:00,2015-10-09T14:40:29+00:00,2015-10-09T14:40:29+00:00,1e4333d38f62416eae2d15f894f4d304f36425a0,unknown,7,2,2,2,0,0,,,
+explosion/spaCy,47527678,138,Python 2.7 Win64 automatic build with appveyor,"- Build scripts 
+  - .appveyor.yml
+  - appveyor subdirectory
+- setup.py
+  - Compiler options management through build_ext subclassing. This may be a kind of heavy-weighted but it is the only MinGW\cygwin 100% friendly method that I know
+- Readme to support Windows manual build
+- Changes to .gitignore to make Windows life easier
+",maxirmx,2081498,closed,False,2015-10-13T12:41:56+00:00,2015-10-15T09:46:32+00:00,2015-10-14T15:49:11+00:00,2015-10-14T15:49:11+00:00,b7d56691cab2a6839339cfecb8e0b61625267b87,unknown,554,16,8,49,0,5,,,
+explosion/spaCy,47633125,140,Fix docs to match code (like_number),"s/like_num/like_number
+
+It should match language.py.
+
+Also, `is_oov()` is not actually accessible yet, is it?
+
+If it is implemented, then I can add it to language.py.  Otherwise I can rm it from the docs in this PR.
+",bittlingmayer,11457984,closed,False,2015-10-14T08:59:07+00:00,2015-11-08T12:43:05+00:00,2015-11-08T12:43:05+00:00,,0f76ffbf7f073c9d2b2d2a6328e870235a359027,dirty,3,3,2,2,0,3,,,
+explosion/spaCy,48005888,143,"add custom download tool (uget), replace wget with uget","get rid of wget dependency (and its pypi/conda naming confusion)
+uget supports partial downloads and checksums
+by default dest_dir is not remove anymore (see --force flag)
+",henningpeters,166570,closed,False,2015-10-18T10:39:48+00:00,2015-10-18T10:48:42+00:00,2015-10-18T10:48:42+00:00,2015-10-18T10:48:42+00:00,3366f26208d78cb5e774d1d68a539cff07f257b9,unknown,269,17,4,1,0,0,,,
+explosion/spaCy,48230223,145,"better error reporting, cleanup",,henningpeters,166570,closed,False,2015-10-20T17:12:25+00:00,2015-10-22T16:45:47+00:00,2015-10-22T16:45:47+00:00,2015-10-22T16:45:47+00:00,f231c69b15fa4c56aebbf08d7d51734f83ac5598,unknown,24,26,1,3,0,1,,,
+explosion/spaCy,48319544,147,"add __repr__  print text default for doc, token, and span","Not sure this is a feature everyone needs - I usually play around a lot in ipython when working with a new library, so I made these simple changes clearly for fast visualization purposes based on what str and unicode returned for each of the text representation classes. Text just seems like a reasonable default - it's better than printing an id string for the class.
+
+Example usage from within ipython
+
+``` python
+>> from spacy.en import English
+>> nlp = English()
+>> doc = nlp(u'Craig Robinson was denied a sentence. '
+              'At least so it seemed until Lara Croft came along')
+>> doc[0]
+Craig
+>> doc[0:5]
+Craig Robinson was denied a
+>> doc.ents
+(Craig Robinson, Lara Croft)
+>> for sent in doc.sents:
+>>     print(sent)
+Craig Robinson was denied a sentence.
+At least so it seemed until Lara Croft came along
+>>doc.sents
+TypeError: object of type 'getset_descriptor' has no len()
+```
+
+Downside from what I understand is that cython generators don't have a **repr** from what it seems so doc.sents and doc.noun_chunks raises an error - but the rest seemed to work fine
+
+Would like to grab this opportunity to say thank you for publishing this code, very nice work :+1: 
+",andreasgrv,3082972,closed,False,2015-10-21T11:38:24+00:00,2015-10-22T10:45:41+00:00,2015-10-22T10:45:41+00:00,2015-10-22T10:45:41+00:00,4b32fb4ceb21b8385af4df3f68c904f5b3a021cf,unknown,12,0,3,1,0,1,,,
+explosion/spaCy,48395659,148,Utf8 encoding for lemma_rules.json,"https://github.com/honnibal/spaCy/issues/141 fix
+",maxirmx,2081498,closed,False,2015-10-21T22:18:07+00:00,2015-10-22T10:46:28+00:00,2015-10-22T10:46:28+00:00,2015-10-22T10:46:28+00:00,000df139dd442119bd3f61d696868fe1c4a96c61,unknown,19,4,3,20,0,0,,,
+explosion/spaCy,48649405,149,Add __reduce__ to Tokenizer so that English pickles.,"- Add tests to test_pickle and test_tokenizer that save to tempfiles.
+",chrisdubois,1958804,closed,False,2015-10-24T05:35:26+00:00,2015-10-25T05:45:41+00:00,2015-10-25T04:30:31+00:00,2015-10-25T04:30:31+00:00,971c3f92b2aa32346f5b61f29758687b15cfcd3a,unknown,40,4,4,1,0,0,,,
+explosion/spaCy,48651634,150,add travis ci build status,,henningpeters,166570,closed,False,2015-10-24T08:28:57+00:00,2015-10-25T13:32:00+00:00,2015-10-25T13:32:00+00:00,2015-10-25T13:32:00+00:00,881faae8061bf703043cac0e14c3bf5717d512bb,unknown,2,2,1,1,0,0,,,
+explosion/spaCy,48686513,151,Appveyor reusable code,"This request includes change to spaCy-appveyor-toolkit submodule which contains reusable scripts shared across all projects
+",maxirmx,2081498,closed,False,2015-10-25T20:07:08+00:00,2015-10-26T00:54:39+00:00,2015-10-26T00:54:39+00:00,2015-10-26T00:54:39+00:00,a2352fc1abc24100265c76a4c0c6056e1ce31501,unknown,17,414,7,15,0,0,,,
+explosion/spaCy,48846087,153,"promote ""official"" spacy channel",,henningpeters,166570,closed,False,2015-10-27T09:31:30+00:00,2015-10-27T23:34:23+00:00,2015-10-27T23:34:23+00:00,2015-10-27T23:34:23+00:00,c4e3773856dd7bc29664cbd56750442f86424e2a,unknown,1,5,1,1,0,0,,,
+explosion/spaCy,49423134,159,fixed error when printing unicode,"Corrected **str** and **repr** to return bytes - error was raised when printing strings that actually contained unicode characters - example: café . Added doctests to check printing for doc, span and token.
+",andreasgrv,3082972,closed,False,2015-11-02T11:54:21+00:00,2015-11-02T12:08:49+00:00,2015-11-02T12:08:49+00:00,,b11fff8317e3dca96130414c084f54ff6818d700,dirty,103,5,4,1,0,3,,,
+explosion/spaCy,49469819,161,fixed error in python2 when printing unicode,"Should now be py[23] compatible - tested it locally. Used six to check python versions.
+",andreasgrv,3082972,closed,False,2015-11-02T18:51:09+00:00,2015-11-03T02:36:13+00:00,2015-11-03T02:36:13+00:00,2015-11-03T02:36:13+00:00,0442f0cf0cb038cfdf7b7f768a269d85849b28e7,unknown,118,8,4,1,0,1,,,
+explosion/spaCy,49727144,167,Update spans automatically after each merge,"Used some of the existing tests + added a few simple ones. Not sure what more to check - would be wise to add some more tests about subtree - lefts and rights to make sure merging doesn't do something bad. However, I haven't really changed much in doc.pyx merge function, apart from assigning to token.lex later on and moving the beginning into another function. Not sure what else could go wrong now.
+
+PS.
+I think you used something like s/spans/span/g and meddled with setup.py tests/spans in setup.py ^_^
+",andreasgrv,3082972,closed,False,2015-11-04T18:35:54+00:00,2015-11-05T12:08:23+00:00,2015-11-05T11:23:28+00:00,,44fef28d9279ece7f71d13e34fae1fa0811d750b,dirty,105,19,5,11,0,4,,,
+explosion/spaCy,49848147,168,Update spans automatically after each merge,"Couldn't get the rebase to work nicely - So worked on a new fork - will try and keep it tidy this time. Need to dive deeper into git. Fixed bug, should be ok now.
+
+PS.
+
+Shouldn't line 166 in setup.py be:
+ 'spacy.tests.spans',
+instead of 
+'spacy.tests.span'
+?
+",andreasgrv,3082972,closed,False,2015-11-05T16:40:39+00:00,2015-11-07T14:34:32+00:00,2015-11-07T14:34:31+00:00,,369e33ee9dea2c04047c5dabffa3f4f40b86d442,dirty,110,17,4,3,0,2,,,
+explosion/spaCy,50066039,173,Add force flag to installation page.,"Hi all,
+
+I was just doing a clean install of spaCy via pip on a linux VM as well as on my local system, and in both cases, I found that the pip command would install some of the downloads right off the bat.  As a result, I kept getting an error saying the data was already installed when I ran 'python -m spacy.en.download all'!
+
+To fix this for future installs, I went ahead and updated the website tutorial to default to the --force command, which will download everything right off the bat.  Hope this helps!  Spacy is great!
+
+-Kevin Meurer
+",nataliemeurer,6578839,closed,False,2015-11-08T18:15:25+00:00,2015-11-19T09:58:42+00:00,2015-11-19T09:58:42+00:00,2015-11-19T09:58:42+00:00,08c7574ca068ae4c098ed40124cdaf058d671abc,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,50746980,180,push version,,henningpeters,166570,closed,False,2015-11-15T13:58:03+00:00,2015-11-29T04:37:14+00:00,2015-11-29T04:37:14+00:00,2015-11-29T04:37:14+00:00,443e26a2d95e2a2c690884eb64a1b4cd01ecbd8a,unknown,2,2,1,1,0,0,,,
+explosion/spaCy,50747042,181,fix pytest path,,henningpeters,166570,closed,False,2015-11-15T14:01:12+00:00,2015-11-19T09:58:14+00:00,2015-11-19T09:58:14+00:00,2015-11-19T09:58:14+00:00,ae0364100bd7493c487ef349175d695284ab7a63,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,51112949,185,integrate sputnik,,henningpeters,166570,closed,False,2015-11-18T17:11:57+00:00,2015-11-19T09:59:10+00:00,2015-11-19T09:59:09+00:00,2015-11-19T09:59:09+00:00,63ee6eb688d6410a7de0eb09973f0d3ee0f3eeec,unknown,34,45,4,6,0,0,,,
+explosion/spaCy,51215826,186,"website build was broken for me, fixed it",,henningpeters,166570,closed,False,2015-11-19T12:26:06+00:00,2015-11-29T04:36:52+00:00,2015-11-29T04:36:52+00:00,2015-11-29T04:36:52+00:00,cc9ffdfcdfbc36fd576fff9c1ca953350e452a08,unknown,40,1343,20,10,0,1,,,
+explosion/spaCy,51702063,189,avoid redirect,,henningpeters,166570,closed,False,2015-11-24T19:01:53+00:00,2015-11-29T04:35:37+00:00,2015-11-29T04:35:37+00:00,2015-11-29T04:35:37+00:00,dbd89beb51d10df378201689cd20f8ba94d66e57,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,51758761,190,Python 3.5 is out,,hugovk,1324225,closed,False,2015-11-25T06:58:09+00:00,2015-11-29T06:55:30+00:00,2015-11-29T04:35:08+00:00,2015-11-29T04:35:08+00:00,7c431a6be85620dc66547683dacb4001323b6264,unknown,2,0,2,2,0,0,,,
+explosion/spaCy,52058089,195,fix broken link,,henningpeters,166570,closed,False,2015-11-29T09:08:54+00:00,2015-11-29T10:35:17+00:00,2015-11-29T10:35:17+00:00,2015-11-29T10:35:17+00:00,89e54bcf491419ca6b3fc1e942f15d7bc8952dc2,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,52393590,198,http -> https for api.spacy.io,,henningpeters,166570,closed,False,2015-12-02T13:13:18+00:00,2015-12-02T13:14:57+00:00,2015-12-02T13:14:57+00:00,2015-12-02T13:14:57+00:00,cb185b78ef70238c3795e2c6d42b8ae1b62bf52f,unknown,8,8,4,1,0,0,,,
+explosion/spaCy,52582219,200,website improvements,,henningpeters,166570,closed,False,2015-12-03T19:44:43+00:00,2015-12-13T14:58:37+00:00,2015-12-13T14:58:37+00:00,2015-12-13T14:58:37+00:00,e9d37c8a209d92e977d94c5b7893011b286636b3,unknown,72,36,22,9,0,0,,,
+explosion/spaCy,52806437,202,access model via sputnik,,henningpeters,166570,closed,False,2015-12-07T05:12:48+00:00,2015-12-27T16:29:53+00:00,2015-12-27T16:29:53+00:00,2015-12-27T16:29:53+00:00,3a0df6b379aab05ca20a8f1da04224171992bf3d,unknown,258,221,24,13,1,11,,,
+explosion/spaCy,53500579,207,replace headers_workaround,"This PR aims to fix the headers_workaround kludge:
+- setup.py now follows closely numpy/scipy setup (should work with distutils and setuptools)
+- setup.py doesn't import cython anymore (see bin/cythonize.py)
+- headers for native dependencies (numpy, murmurhash) are now shipped as fallback
+- add build.sh and tox for CI
+- adds versioning mechanism (from numpy/scipy)
+
+Building spaCy is now more clearly separated between 1) creating an sdist including cythonizing the source (typically performed by the maintainer) and 2) building/compiling the package (typically performed by the user).
+
+Headers from numpy and murmurhash (copied from sdist build-time environment) are now shipped in the sdist (see package ./include dir) and used during installation in case they couldn't be found on the system.
+
+Note that for creating an sdist or running tox you already need a python environment with all dependencies from requirements.txt, otherwise cython cannot build the sources. Take a look at build.sh for a sample setup.
+
+Overall setup.py behaves now more standard-like: `python setup.py develop` or `pip install -e .` should work now. `python setup.py build_ext --inplace` is now deprecated.
+
+The versioning automation is a leftover from numpy/scipy setup.py, but I thought it might serve as a good starting point. Obviously this part could be easily left out/replaced.
+
+So far only limited testing took place: Mac/Linux 64 bit latest setuptools py27/py34
+
+Sorry, I had to delete some files that were currently not cython-compiling (_nn, _theano, senses) or didn't run (test_de).
+",henningpeters,166570,closed,False,2015-12-13T14:06:33+00:00,2015-12-27T16:46:32+00:00,2015-12-27T16:46:32+00:00,2015-12-27T16:46:32+00:00,48e989e4566f49a066ad3095c2c9d0ba5daf0f12,unknown,120,75,10,17,12,7,,,
+explosion/spaCy,53823109,209,add website trailing-slash redirects,,henningpeters,166570,closed,False,2015-12-16T10:28:07+00:00,2015-12-16T10:29:17+00:00,2015-12-16T10:29:17+00:00,2015-12-16T10:29:17+00:00,8f7b47e3f6a0e2cb208d2e378ef5dd6b981eae42,unknown,11,0,1,1,0,0,,,
+explosion/spaCy,53882423,210,avoid writing to /tmp (not cross-platform compatible),"need a better solution for cleaning up after `test_efficient_binary_serialization()`, but at least tests pass. See build error here: https://ci.spacy.io/builders/win64-0/builds/28/steps/shell_1/logs/stdio
+",henningpeters,166570,closed,False,2015-12-16T18:54:43+00:00,2015-12-18T11:28:24+00:00,2015-12-17T10:34:44+00:00,2015-12-17T10:34:44+00:00,ca3df2e24fa7e19d7b4178f21a08c73aa436250a,unknown,21,14,3,2,0,0,,,
+explosion/spaCy,54653906,215,fix model download,,henningpeters,166570,closed,False,2015-12-28T13:06:54+00:00,2015-12-28T13:17:20+00:00,2015-12-28T13:17:20+00:00,2015-12-28T13:17:20+00:00,ee7ef2630bd4b78f480fbddab7b51a3d39118133,unknown,3,3,3,2,0,0,,,
+explosion/spaCy,55939535,222,integrate with sputnik,"Sputnik now includes a new DirPackage class that offers a Package interface around a model directory. You can now instantiate spaCy as follows:
+
+```
+1) default
+nlp = spacy.en.English()
+
+2) model directory without dealing with packages (e.g., for development)
+nlp = spacy.en.English('my/directory')
+nlp = spacy.en.English(data_dir='my/directory')
+
+3) with a different model
+nlp = spacy.en.English('fr_default')
+
+4) with a relocated package base
+nlp = spacy.en.English(model='en_default', data_dir='new/root')
+
+5) with an existing package
+package = sputnik.package(<app_name>, <app_version>, 'my_model >=1.0.0', data_path='packages')
+nlp = spacy.en.English(package)
+```
+
+Tokenizer/Tagger/Vocab/etc load() accepts string, directory or package
+
+```
+```
+",henningpeters,166570,closed,False,2016-01-13T18:56:11+00:00,2016-01-15T14:23:39+00:00,2016-01-15T14:23:39+00:00,2016-01-15T14:23:39+00:00,33a14390a4e7862f7cb503a98c35f1a3a1284ff6,dirty,62,106,12,4,0,4,,,
+explosion/spaCy,56194562,223,"refactored data_dir->via, add zip_safe, add spacy.load()","```
+a model can be specified:
+
+1) by calling a Language subclass
+  - spacy.en.English()
+
+2) by calling a Language subclass with via (previously: data_dir)
+  - spacy.en.English('my/model/root')
+  - spacy.en.English(via='my/model/root')
+
+3) by package name
+  - spacy.load('en_default')
+  - spacy.load('en_default==1.0.0')
+
+4) by package name with a relocated package base
+  - spacy.load('en_default', via='/my/package/root')
+  - spacy.load('en_default==1.0.0', via='/my/package/root')
+```
+",henningpeters,166570,closed,False,2016-01-15T17:02:19+00:00,2016-01-16T15:12:48+00:00,2016-01-16T15:12:48+00:00,2016-01-16T15:12:48+00:00,7fbcffe4c59908349269224fa23dd66d107c7dbe,dirty,149,177,18,11,0,1,,,
+explosion/spaCy,56255636,224,Revise the way data is downloaded and installed. Includes some API changes to loading methods.,,honnibal,8059750,closed,False,2016-01-16T15:14:37+00:00,2016-09-30T10:54:08+00:00,2016-01-16T15:20:59+00:00,2016-01-16T15:20:59+00:00,,unknown,221,223,22,30,0,0,,,
+explosion/spaCy,56775219,234,remove package version constraint,,henningpeters,166570,closed,False,2016-01-21T16:41:21+00:00,2016-01-21T16:48:12+00:00,2016-01-21T16:48:12+00:00,2016-01-21T16:48:12+00:00,a694776d80db3d70e16222cdb1ff139e5db399b8,unknown,4,4,3,1,0,0,,,
+explosion/spaCy,57542053,240,remove unnecessary compiler flags (see #237),,henningpeters,166570,closed,False,2016-01-28T18:12:54+00:00,2016-02-05T13:27:46+00:00,2016-02-05T13:27:46+00:00,,0089924bcdc8aa5adc89a7d58445847c4e40382f,dirty,677,454,27,47,0,0,,,
+explosion/spaCy,58436162,248,Cythonize,,henningpeters,166570,closed,False,2016-02-05T14:37:57+00:00,2016-02-05T14:44:42+00:00,2016-02-05T14:44:42+00:00,2016-02-05T14:44:42+00:00,e8ece1114e326500013c3226d9d1fe1319a7a5f7,unknown,94,138,1,8,0,0,,,
+explosion/spaCy,58444346,249,Cythonize,,henningpeters,166570,closed,False,2016-02-05T15:41:18+00:00,2016-02-05T15:41:50+00:00,2016-02-05T15:41:50+00:00,2016-02-05T15:41:50+00:00,ef285ef8334f71dcce6ef9b48c9b8f3553043b6f,unknown,3,2,1,2,0,0,,,
+explosion/spaCy,58890659,255,py26 compatibility,,henningpeters,166570,closed,False,2016-02-10T13:33:47+00:00,2016-02-10T16:24:52+00:00,2016-02-10T16:24:52+00:00,2016-02-10T16:24:52+00:00,e3b02159931dc30b51ec47a4240acaba1b3bc23c,unknown,2,6,2,1,0,0,,,
+explosion/spaCy,59297298,263,"upgrade spuntik, enforce data api via model version constraints",,henningpeters,166570,closed,False,2016-02-14T15:05:49+00:00,2016-02-19T12:30:56+00:00,2016-02-19T12:30:56+00:00,2016-02-19T12:30:56+00:00,548ba88c1f484e5d9e148327069b6af10c16298b,unknown,11,11,6,4,0,0,,,
+explosion/spaCy,59795969,265,"add tokenizer files for German, add/change code to train German tagger","- add files to specify rules for German tokenization
+- change generate_specials.py to generate from an external file (abbrev.de.tab)
+- copy gazetteer.json from lang_data/en/
+- init_model.py
+  - change doc freq threshold to 0
+- add train_german_tagger.py
+  - expects conll09-formatted input
+",wbwseeker,10152538,closed,False,2016-02-18T13:09:26+00:00,2016-05-03T12:29:37+00:00,2016-03-03T16:27:43+00:00,2016-03-03T16:27:43+00:00,257fe8d3b9f6fd23bd25555213ce7496a4cac80a,unknown,1290,52,10,1,0,1,,,
+explosion/spaCy,60465108,275,remove text-unidecode dependency,,henningpeters,166570,closed,False,2016-02-24T07:02:52+00:00,2016-02-24T17:10:45+00:00,2016-02-24T17:10:45+00:00,2016-02-24T17:10:45+00:00,30f2b3cf9e0274b24b0668f8689a16ca9a7de913,unknown,1,33,4,1,0,0,,,
+explosion/spaCy,61239564,278,replace codecs.open with io.open,,elyase,1175888,closed,False,2016-03-01T13:10:59+00:00,2016-03-01T13:41:23+00:00,2016-03-01T13:41:23+00:00,2016-03-01T13:41:23+00:00,6a995fbc8bfa2a1e37e12ff2f0ac5fea47a223c5,unknown,1,2,1,1,0,1,,,
+explosion/spaCy,61569231,280,German parser,"This adds functionality to deal with non-projective dependency structures.
+It implements the pseudo-projective parsing idea from Nivre & Nilsson 2005.
+This enables the parser to be trained on non-projective treebanks.
+",wbwseeker,10152538,closed,False,2016-03-03T14:48:08+00:00,2016-05-03T12:29:36+00:00,2016-03-03T16:27:42+00:00,2016-03-03T16:27:42+00:00,81fe33d417d8197ba482b50ef9eb8826a66cce95,unknown,1687,134,20,6,0,1,,,
+explosion/spaCy,61691505,282,initial proposal for ability to switch vectors,"In case vec.bin is independent of the rest of the models we can simply distribute alternate vec.bin as independent packages. I quickly wired up some code how this could look like, use cases:
+
+1) you only install the ""en"" package, you'll get the default vec.bin that's included
+
+2) you want to change to alternative vectors (e.g., glove), you install the en_glove_vectors package. The included vec.bin has precedence over the default one shipped via en package.
+
+Now, I haven't fully understood if sth. in vec.bin depends on anything else in spaCy or its models in which case this of course wouldn't work.
+
+Also, don't judge the idea by the API design, I didn't give much thought on this.
+",henningpeters,166570,closed,False,2016-03-04T10:14:30+00:00,2016-03-08T14:39:41+00:00,2016-03-08T14:39:41+00:00,2016-03-08T14:39:41+00:00,a1cbb2a03a5de28c5c482cce54e14b003048fad7,unknown,19,13,6,4,0,0,,,
+explosion/spaCy,62332152,284,Added reloadable English() example for inventory counting,"Added an example of reusing the English() object through using module reloading. On top of that, added an example of determining inventory counts for a few test sentences, and the way to interact with Doc objects, finding wether they're a noun with descriptive compound objects ('fresh ground beef' VS 'beef')
+",olegzd,641867,closed,False,2016-03-10T02:54:05+00:00,2016-03-24T22:48:47+00:00,2016-03-24T22:48:47+00:00,2016-03-24T22:48:47+00:00,9cd21ad5b5aa664642a2e17925cd7b39eacb9aa9,unknown,167,1,5,1,0,4,,,
+explosion/spaCy,62465626,286,added batch_size as keyword argument,"There's probably a better default value....
+",gushecht,2095663,closed,False,2016-03-10T22:16:47+00:00,2016-03-10T22:46:36+00:00,2016-03-10T22:46:36+00:00,2016-03-10T22:46:36+00:00,00964db78059a22bf38108861b162e9e6a30b321,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,62570313,287,add function to Token for setting head and dep (and dep_) ,"change PseudoProjectivity.deprojectivize to use these functions
+
+previously, the deprojectivization was using Doc.from_array to change the head of tokens.
+Doc.from_array calls set_children_from_head() which introduces sentence boundaries.
+however, this function assumes projective trees which is not true anymore, so it was introducing
+incorrect sentence boundaries.
+Token.head and Token.dep (and Token.dep_) can now be set from the outside.
+deprojectivize doesn't call from_array anymore. from_array is still unsafe if the tree is non-projective.
+",wbwseeker,10152538,closed,False,2016-03-11T16:50:16+00:00,2016-05-03T12:29:34+00:00,2016-03-24T22:47:45+00:00,2016-03-24T22:47:45+00:00,4a37fdcee1d7a435a37c128be748045379792e41,unknown,183,9,4,2,0,2,,,
+explosion/spaCy,63207436,296,make use of log_smooth_count,,elyase,1175888,closed,False,2016-03-17T11:20:10+00:00,2016-03-18T19:50:30+00:00,2016-03-18T19:50:30+00:00,2016-03-18T19:50:30+00:00,50dcc89a014927733435510fd3f4adf9c895dfac,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,64013846,305,multiple langs in download script,,henningpeters,166570,closed,False,2016-03-24T10:20:38+00:00,2016-03-26T10:54:59+00:00,2016-03-26T10:54:59+00:00,2016-03-26T10:54:59+00:00,8c77a994c6ecd19c2165f4a15e485202123f1630,unknown,89,61,8,5,0,12,,,
+explosion/spaCy,64039020,306,add German noun chunk functionality,"This adds an iterator to provide noun chunks also for German.
+To make this work with multiple languages, the vocab object now has a lang property that comes from the respective language class that was used to create the vocab object.
+The parser uses the lang property to set the appropriate noun chunk iterator when a document is being parsed.
+
+Because of this change, this version is not compatible to the current English model anymore, which will need to be retrained. We probably want to wait with a merge until this is done. (also all the test fail that presuppose the English model)
+
+While I was at it, I also implemented is_bracket, is_quote, is_left_punct, and is_right_punct in orth.pyx and added the respective constants to attrs.pxd. I think this doesn't actually have an effect just yet because these features aren't being used. I think they will help us predict better sentence boundaries around punctuations symbols like quotes and brackets.
+
+oh, and I undid the changes I introduced to init_model.py in a previous PR. It should now work as it used to.
+",wbwseeker,10152538,closed,False,2016-03-24T14:12:35+00:00,2016-05-03T12:29:26+00:00,2016-04-07T14:54:24+00:00,2016-04-07T14:54:24+00:00,872695759d504d6f39131748030222520a5c91f7,unknown,232,167,16,6,0,1,,,
+explosion/spaCy,64040752,307,remove internal redundancy and overhead from StringStore,"This should generally speed up the `StringStore` class, both for loading and for general usage. It does not change anything about the strings file format, nor does it remove the load/store via JSON.
+",scoder,491659,closed,False,2016-03-24T14:24:48+00:00,2016-03-29T01:59:52+00:00,2016-03-29T01:59:52+00:00,2016-03-29T01:59:52+00:00,8c7a1908ee632351eb689d2d2a71bdaa59c42961,unknown,45,42,2,2,0,2,,,
+explosion/spaCy,64302469,312,add restrictions to L-arc and R-arc to prevent space heads,"Proposal for additional restrictions for LeftArc and RightArc that should prevent the parser from predicting space tokens as heads of other tokens.
+
+I think there shouldn't be any weird interactions between the transitions. 
+First, I thought several space tokens at the end might be a problem. If there are several space tokens at the end of the buffer, this could get the parser into a dead end because it may get into a situation where it is not allowed to shift but also cannot introduce arcs. But I think this won't happen because there can't be consecutive space tokens, they would be merged into one. And even if this was so, unshift could fix it.
+Can you think of any boundary case where additional restrictions may lead to desaster?
+
+Can there be any interaction with the cost scheme or arc reachability? I think not because the heads of space tokens aren't specified in the training data and as such have no influence on the costs.
+",wbwseeker,10152538,closed,False,2016-03-28T08:52:02+00:00,2016-05-03T12:29:29+00:00,2016-04-15T10:36:03+00:00,2016-04-15T10:36:03+00:00,c0909afe227b7f942ab14fcc8f70cd3ed16eeb06,unknown,250,30,7,4,0,3,,,
+explosion/spaCy,65894422,329,Enable OpenMP compiler option for MSVC,"Enable OpenMP compiler option for MSVC to support Multi-Threading for nlp.pipe(). Without this option multi-threading done in pipe() method will not work on Windows. MSVC [supports](https://msdn.microsoft.com/en-us/library/fw509c3b.aspx) OpenMP 2.0 which will be enabled by passing this argument to the compiler. 
+",sjjpo2002,8649062,closed,False,2016-04-09T22:25:13+00:00,2016-04-10T21:44:56+00:00,2016-04-10T07:45:08+00:00,2016-04-10T07:45:08+00:00,13a6899fc6aa8fc83a775ff31e18a0163eb4f847,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,67368444,346,introduce sentence boundaries for additional root tokens,"added the one line that @honnibal suggested to fix issue #322 
+",wbwseeker,10152538,closed,False,2016-04-21T14:56:29+00:00,2016-05-03T12:28:51+00:00,2016-04-25T10:31:27+00:00,2016-04-25T10:31:27+00:00,feb65fcaa149c2ae601a6620e42c0ce41845a76f,unknown,157,19,3,5,0,4,,,
+explosion/spaCy,68560233,357,German ner,"changed gold.pyx:read_json_file so it doesn't expect any annotation levels when reading in data files
+",wbwseeker,10152538,closed,False,2016-05-02T13:32:10+00:00,2016-05-03T12:29:04+00:00,2016-05-02T13:39:34+00:00,2016-05-02T13:39:34+00:00,6e1f1c4b9e378d1b4e0942aaa866080d11618143,unknown,3,3,1,3,0,0,,,
+explosion/spaCy,68576508,358,German lemmatizer dummy,"overwrites the default_vocab function in `class German` to install a dummy lemmatizer until a proper one is built
+",wbwseeker,10152538,closed,False,2016-05-02T15:35:38+00:00,2016-05-03T12:28:43+00:00,2016-05-02T21:38:26+00:00,2016-05-02T21:38:26+00:00,377a6240461a3f90ba3967d7fd2ed38d7e90faee,unknown,8,2,2,3,0,0,,,
+explosion/spaCy,68720340,359,Fix German noun chunker,"This merges from a branch where I actually redo the tests, but I found a bug in the German noun chunker that I fixed. The merge also includes tests for the noun chunker behaviour and some small changes to the tests.
+",wbwseeker,10152538,closed,False,2016-05-03T15:02:40+00:00,2016-05-04T08:15:18+00:00,2016-05-04T08:15:18+00:00,2016-05-04T08:15:18+00:00,1822bb4ff1e6ceee76fe5e43de4345fab168e65b,unknown,240,34,8,6,0,0,,,
+explosion/spaCy,68988352,363,"User sbd, re Issue #235","Work in progress on Issue #235 . Discuss solutions and concepts in that issue. Keep discussion here about the implementation and TODOs.
+
+Note that because this patch adds a symbol, it'll make the current models incompatible. This is a good example of the symbol problem, which should be discussed separately.
+",honnibal,8059750,closed,False,2016-05-05T10:15:27+00:00,2017-05-23T16:55:04+00:00,2016-10-22T15:21:14+00:00,,679e6866b0b6c4b394db727b9a0dad6b2f1e3c06,dirty,65,2,9,5,0,0,,,
+explosion/spaCy,70266438,384,Fix get_lang_class parsing,"We want the get_lang_class to return ""en"" for both ""en"" and ""en_glove_cc_300_1m_vectors"". Changed the split rule to ""_"" so that this happens. See https://github.com/spacy-io/spaCy/issues/338 for details
+",daylen,738194,closed,False,2016-05-16T21:41:43+00:00,2016-05-16T22:06:20+00:00,2016-05-16T21:52:22+00:00,2016-05-16T21:52:22+00:00,9bd3c316c9a498e082d8da9f08db8155977721ad,unknown,1,1,1,2,0,2,,,
+explosion/spaCy,70269623,385,"Revert ""Fix get_lang_class parsing""","Reverts spacy-io/spaCy#384
+",honnibal,8059750,closed,False,2016-05-16T22:04:35+00:00,2016-10-20T21:55:19+00:00,2016-05-16T22:04:45+00:00,2016-05-16T22:04:44+00:00,88538b339eaa913caa6177d963427c52108be197,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,70279731,386,Fix get_lang_class parsing (take 2),"This is the proper fix for get_lang_class parsing. Previous PR: https://github.com/spacy-io/spaCy/pull/384
+
+Value for `lang` given `en>=1.1.0,<1.2.0`: `en`
+Value for `lang` given `en_glove_cc_300_1m_vectors`: `en`
+
+Output from `python -m pytest spacy`: `187 passed, 98 skipped, 5 xfailed, 2 xpassed in 253.32 seconds`
+",daylen,738194,closed,False,2016-05-16T23:45:06+00:00,2016-05-17T13:15:57+00:00,2016-05-17T13:15:47+00:00,2016-05-17T13:15:47+00:00,2d25339c4787185f5ba8d566cf2493cae5a1f152,unknown,1,1,1,1,0,1,,,
+explosion/spaCy,73369318,422,plac version in requirements,"current new version of plac(0.9.3) is creating problem but it is working <0.9.3
+",RahulKulhari,1268006,closed,False,2016-06-10T12:57:30+00:00,2016-07-04T08:09:39+00:00,2016-06-18T13:19:03+00:00,2016-06-18T13:19:03+00:00,b1d06ff9e9393d0aec901082b335e42ce26fffef,unknown,1,1,1,1,0,1,,,
+explosion/spaCy,76429323,447,fixed sense2vec blog post code,"it was not working - variable `tokens` does not exist; now it is fine
+",stared,1001610,closed,False,2016-07-06T13:10:01+00:00,2016-08-09T19:17:12+00:00,2016-08-09T19:17:12+00:00,2016-08-09T19:17:12+00:00,8c24fd2928fa47ab97fb4f462799c499bbe0c9f4,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,77378352,454,Exit code 0 for when downloading a model that already was downloaded,"This very simple PR encompasses the following proposal:
+
+When trying to download data models that already exist locally, the exit code should not be 1 ('error').
+This is more inline with other packages which support post-install data download steps, such as NLTK.
+
+This issue came up for me when trying to use spaCy in a production environment: using AWS CodeDeploy with a AfterInstall application lifecycle hook that calls 'python -m spacy.en.download' as part of deployment should succeed the first time, and on subsequent deployments it would be ideal if it would just be a 'no-op' (e.g behave in a more idempotent manner, which is friendlier towards automation generally speaking)
+",adamhadani,139888,closed,False,2016-07-13T23:26:22+00:00,2016-07-13T23:52:57+00:00,2016-07-13T23:52:57+00:00,2016-07-13T23:52:57+00:00,d9fcf9b79e7b4713cf5cecb0fb4a93d6e4153760,unknown,1,1,1,1,0,0,,,
+explosion/spaCy,79450528,465,Fix doc,"This PR changes the `str`s to `unicode`s because `str`s throw the following error:
+
+```
+TypeError: Argument 'x' has incorrect type (expected unicode, got str)
+```
+",izeye,1059363,closed,False,2016-07-30T07:10:52+00:00,2016-08-10T01:00:38+00:00,2016-08-09T19:17:22+00:00,2016-08-09T19:17:22+00:00,cccadbf2a2b2d82c06c507e831d62864fa362176,unknown,4,4,1,1,0,0,,,
+explosion/spaCy,85233958,501,Add parameter to download(),"Add parameter to download() for application to not exit if a Model exists. The default behavior is unchanged.
+",lababidi,495399,closed,False,2016-09-14T14:05:31+00:00,2016-09-14T21:35:15+00:00,2016-09-14T21:35:15+00:00,2016-09-14T21:35:15+00:00,2f7ef4b150d2ed055b97f47dfd7fb75eabc926f6,unknown,5,4,1,1,0,0,,,
+explosion/spaCy,89516218,526,"Added Gitter badge, alt text for all badges to README.rst","Out of curiosity, I wonder if there's any sort of preferred grammar for alt text when it comes to accessibility.
+
+Like, would someone using a screen reader prefer ""Our Gitter chat room"" or ""Click here for our Gitter"" over ""spaCy on Gitter""?
+
+Just a random thought.
+
+Possibly fixes #487 (though may make sense to open a separate issue for connecting Gitter to Slack/IRC, if so)
+",crawfordcomeaux,921386,closed,False,2016-10-16T05:07:39+00:00,2016-10-16T19:51:27+00:00,2016-10-16T19:51:27+00:00,2016-10-16T19:51:27+00:00,7d5d2c81b22cb302c5d39d9967fcdfe8c60b9bc7,unknown,10,2,1,1,0,1,,,
+explosion/spaCy,89534198,528,Add `parse_tree` Language method,"Implement a high level method in the `Language` class to compose the ASCII dependency parse tree as per #520 
+- [x] add `parse_tree` in `Language`, separate from `Language.__call__` to prevent lowering its efficiency. (Note that it needs the parsed doc.) Thus, to get the parse tree, one needs to do `trees = nlp.parse_tree('Bob brought Alice the pizza. Alice ate the pizza.')`. This will use `self.__call__` to get the doc, then use that doc to compose the parse tree as needed. Return type is a JSON (dict).
+- [x] add examples in the comment body. **Doc not updated yet, left to author to decide**
+- [x] add test for the method
+
+Full usage example:
+
+```
+>>> from spacy.en import English
+>>> nlp = English()
+>>> trees = nlp.parse_tree('Bob brought Alice the pizza.')
+[{'modifiers': [{'modifiers': [], 'NE': 'PERSON', 'word': 'Bob', 'arc': 'nsubj', 'POS_coarse': 'PROPN', 'POS_fine': 'NNP', 'lemma': 'Bob'}, {'modifiers': [], 'NE': 'PERSON', 'word': 'Alice', 'arc': 'dobj', 'POS_coarse': 'PROPN', 'POS_fine': 'NNP', 'lemma': 'Alice'}, {'modifiers': [{'modifiers': [], 'NE': '', 'word': 'the', 'arc': 'det', 'POS_coarse': 'DET', 'POS_fine': 'DT', 'lemma': 'the'}], 'NE': '', 'word': 'pizza', 'arc': 'dobj', 'POS_coarse': 'NOUN', 'POS_fine': 'NN', 'lemma': 'pizza'}, {'modifiers': [], 'NE': '', 'word': '.', 'arc': 'punct', 'POS_coarse': 'PUNCT', 'POS_fine': '.', 'lemma': '.'}], 'NE': '', 'word': 'brought', 'arc': 'ROOT', 'POS_coarse': 'VERB', 'POS_fine': 'VBD', 'lemma': 'bring'}]
+```
+",kengz,8209263,closed,False,2016-10-16T18:25:58+00:00,2017-05-13T01:21:55+00:00,2017-05-13T01:21:55+00:00,2017-05-13T01:21:55+00:00,73a38bd4d1cfa0f3ab780abd9e1931d03db4024d,unknown,72,0,3,5,4,4,,,
+explosion/spaCy,89537015,529,Add a Gitter chat badge to README.rst,"### explosion/spaCy now has a Chat Room on Gitter
+
+@ines has just created a chat room. You can visit it here: [https://gitter.im/explosion/spaCy](https://gitter.im/explosion/spaCy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&content=body_link).
+
+This pull-request adds this badge to your README.rst:
+
+[![Gitter](https://badges.gitter.im/explosion/spaCy.svg)](https://gitter.im/explosion/spaCy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+
+If my aim is a little off, please [let me know](https://github.com/gitterHQ/readme-badger/issues).
+
+Happy chatting.
+
+PS: [Click here](https://gitter.im/settings/badger/opt-out) if you would prefer not to receive automatic pull-requests from Gitter in future.
+",gitter-badger,8518239,closed,False,2016-10-16T19:46:29+00:00,2016-10-16T19:47:35+00:00,2016-10-16T19:47:35+00:00,,4c48c8dca0f770e7bab4c72cc3b5a27924570113,dirty,4,0,1,1,0,0,,,
+explosion/spaCy,90180052,538,Fixed train_ner examples when model_dir isn't None,"While trying out the save functionality of `train_ner.py` in the `examples` folder, it had some runtime errors. Just thought I'd fix those typos to aid anyone trying out the examples.
+- [x] `pathlb` -> `pathlib`
+- [x] `isdir()` -> `is_dir()`
+- [x] `'wb'` (write binary) -> `'w'` (write) (Can't write JSON to binary file)
+",kendricktan,9071748,closed,False,2016-10-20T11:16:50+00:00,2016-10-20T12:43:34+00:00,2016-10-20T12:38:45+00:00,2016-10-20T12:38:45+00:00,7e4e46f3c1d0d43a9ccd7ce7b9138047fa6b3218,unknown,3,3,1,1,0,4,,,
+explosion/spaCy,90203122,540,Fixed train_parser examples when model_dir isn't None,"So after pushing #538 I went around playing with trainer_parser.py, which had the same problem. Thought I'd make a pull request to fix it as well.
+- [x] `pathlb` -> `pathlib`
+- [x] `isdir()` -> `is_dir()`
+- [x] `'wb'` (write binary) -> `'w'` (write) (Can't write JSON to binary file)
+",kendricktan,9071748,closed,False,2016-10-20T13:42:52+00:00,2016-10-20T13:49:40+00:00,2016-10-20T13:49:39+00:00,2016-10-20T13:49:39+00:00,1e3c1d60442a872382453dbdd5c84aeac38f8431,unknown,3,3,1,1,0,0,,,
+explosion/spaCy,90289010,545,added ujson dependency to setup.py,"Noticed after updating to latest spaCy I got breakage due to missing ujson - added this dependency in setup.py here
+",adamhadani,139888,closed,False,2016-10-20T21:58:14+00:00,2016-10-20T21:59:18+00:00,2016-10-20T21:58:48+00:00,2016-10-20T21:58:48+00:00,fd0587d3698103972bf1c406aa54d5350df74aa6,unknown,2,1,1,1,0,2,,,
+explosion/spaCy,90479086,551,Add Windows Compiler installation instructions,"The ReadMe currently says that Windows Spacy Users should install a full Visual Studio version in order to compile Spacy. Some might prefer to only install the compiler provided by Microsoft (or MinGW if this is confirmed to work?). I added a link to the Wiki that points to the various Microsoft downloads, as these are quite difficult to find otherwise.
+",sixhobbits,2641205,closed,False,2016-10-22T11:28:39+00:00,2016-10-22T13:30:00+00:00,2016-10-22T12:03:57+00:00,2016-10-22T12:03:57+00:00,8356a2893af8bfca6f5ac0ebf72874692fda647c,unknown,5,0,1,1,0,4,,,

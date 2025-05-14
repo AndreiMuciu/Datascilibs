@@ -1,0 +1,2502 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+qax-os/excelize,89561671,7,Make readme highlight code,,aldidana,6572635,closed,False,2016-10-17T05:14:05+00:00,2023-02-16T08:16:59+00:00,2016-10-17T07:48:20+00:00,2016-10-17T07:48:20+00:00,051fc18a3adfeb583f064d61a817933ede2d5905,unknown,4,4,1,1,0,2,,,size/XS
+qax-os/excelize,89722565,8,Update README.md,"Adding more realistic error handling in examples.
+",schigh,1137201,closed,False,2016-10-17T23:33:32+00:00,2023-02-16T08:16:52+00:00,2016-10-18T01:41:53+00:00,2016-10-18T01:41:53+00:00,a481045770808b4d42e3d7702716edd6d8bbf5fb,unknown,8,1,1,1,0,1,,,size/XS
+qax-os/excelize,89733311,9,"Revert ""Update README.md""","Reverts #8 Sorry, I find out some missing import package in demo code.
+",xuri,2809468,closed,False,2016-10-18T01:44:22+00:00,2023-02-16T08:16:46+00:00,2016-10-18T01:46:10+00:00,2016-10-18T01:46:10+00:00,ea11b501059eda7d4deaa3e9eca9d9407a7ef719,unknown,1,8,1,1,0,0,,,size/XS
+qax-os/excelize,89828376,10,Update README.md,"added missing imports.
+Sorry about that.
+",schigh,1137201,closed,False,2016-10-18T14:34:24+00:00,2023-02-16T08:16:38+00:00,2016-10-19T03:24:44+00:00,2016-10-19T03:24:44+00:00,e50690dce0fb842e5e5408b645cfd9411997938c,unknown,4,0,1,1,0,1,,,size/XS
+qax-os/excelize,91593380,11,looping on rows columns functionality,"I've added a looping functionality on rows and columns, this will ease when scanning over a table for ex.
+
+let the code talk :+1: 
+
+```go
+package main
+
+import (
+	""fmt""
+	""github.com/NaySoftware/excelize""
+	""os""
+)
+
+func main() {
+	xlsx, err := excelize.OpenFile(""WorkBook.xlsx"")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	rows, err := xlsx.GetRows(""Sheet1"")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, row := range rows {
+		for _, colCell := range row.C {
+			val, _ := colCell.GetValueFrom(xlsx)
+			fmt.Print(val, ""\t\t"")
+		} // cols
+		fmt.Println()
+	} // rows
+
+	fmt.Println()
+} // main
+
+
+```",NaySoftware,6752928,closed,False,2016-10-31T11:27:43+00:00,2023-02-16T08:12:43+00:00,2016-11-02T04:57:04+00:00,2016-11-02T04:57:04+00:00,b4f7e72353c4c699770f5f1849c1f3b3d96db2ff,unknown,50,0,4,2,0,3,,,size/M
+qax-os/excelize,91936007,12,looping on rows columns functionality [Updated],"
+
+as the golint recommends : 
+1. exported xlsxRow
+2. change the receiver from a generic name   ",NaySoftware,6752928,closed,False,2016-11-02T09:40:26+00:00,2023-02-16T08:12:54+00:00,2016-11-03T00:35:47+00:00,,,dirty,13,11,7,2,0,3,,,size/S
+qax-os/excelize,101134337,15,Setter function to set raw values into a cell,"I did not want to meddle much with your code, but I recently needed to insert a float number into the sheet and wasn't able to use SetCellStr, because it escapes the value with an appostrophe. I needed to do some calculations with the floats
+
+The PR adds a new function SetCellDefault which is exaclty what SetCellInt does, but accepts a string instead
+It also modifies the behaviour of SetCellValue for float32 and float64 values and converts the float number to a string before calling SetCellDefault",Sharsie,17074367,closed,False,2017-01-11T19:48:44+00:00,2023-02-16T08:13:03+00:00,2017-01-12T01:44:11+00:00,2017-01-12T01:44:11+00:00,53d8c4bb3aca921d7dd0a4ac3233887208513bfb,unknown,32,3,2,2,0,3,,,size/M
+qax-os/excelize,104265292,18,Add SetRowHeight function,"Needed this function for one of my projects, but didn't find it in your lib, so I decided to contribute. Tell me if any change is needed.
+
+Ps: Thanks for this great lib! It's helping me a lot",nikolvs,7471341,closed,False,2017-02-02T02:36:09+00:00,2023-02-16T08:13:09+00:00,2017-02-06T01:46:41+00:00,2017-02-06T01:46:41+00:00,94dc0da329a645ed8956e9d688cdc722ddd79f23,unknown,38,0,2,1,0,3,,,size/M
+qax-os/excelize,106586977,22,Standard io.Reader and io.Writer capabilities,"Referring to #2 and what @stengaard suggested I have implemented io.Reader and io.Writer interfaces.
+
+The existing API hasn't changed at all, there are now additional options for reading and writing the files.
+
+We now have:
+```
+func OpenReader(r io.Reader) (*File, error)
+
+func (f *File) Write(w io.Writer) error
+```",jfyne,400281,closed,False,2017-02-16T18:35:14+00:00,2023-02-16T08:13:15+00:00,2017-02-17T06:20:50+00:00,2017-02-17T06:20:50+00:00,83410317edfb5cb7d278dda4788effed729bddab,unknown,55,47,4,3,0,2,,,size/M
+qax-os/excelize,129089454,79,SHEET.GO: Fix small typo,"Adds a '{' to the example for sheet.GetSheetMap()
+
+Signed-off-by: Mark Stenglein <mark@stengle.in>",ocelotsloth,9255772,closed,False,2017-07-06T02:01:36+00:00,2023-02-16T08:16:09+00:00,2017-07-06T02:11:27+00:00,2017-07-06T02:11:27+00:00,346622b3a4b39d24c8543c7669a8c41032999fb3,unknown,1,1,1,1,0,1,,,size/XS
+qax-os/excelize,133117989,90,"Add extra argument ""Linktype"" to SetCellHyperLink","it support ""External"" and ""Location""",y103kim,30484666,closed,False,2017-07-30T06:24:15+00:00,2023-02-16T08:16:04+00:00,2017-07-30T07:05:41+00:00,2017-07-30T07:05:41+00:00,1d54bd4df6542edcce1f820c0b29e2cc00f10563,unknown,31,17,2,1,0,3,,,size/M
+qax-os/excelize,133150536,91,Fix round-off error in representation of date and time values,"Hi, it is an attempt to fix a round-off error of date and time valued cells set in time.Time. The following snippet demonstrates how to reproduce to the issue. Thanks!
+
+```
+package main
+
+import (
+	""github.com/xuri/excelize""
+	""log""
+	""time""
+)
+
+func main() {
+	xlsx := excelize.NewFile()
+	// 1970/01/01 1:00:00, but rounded off to 1970/1/1 0:59:02
+	xlsx.SetCellValue(""Sheet1"", ""A1"", time.Date(1970, time.January, 1, 1, 0, 0, 0, time.UTC))
+	err := xlsx.SaveAs(""test.xlsx"")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+```
+",takayuki,131603,closed,False,2017-07-31T01:00:40+00:00,2023-02-16T08:15:56+00:00,2017-07-31T01:54:09+00:00,2017-07-31T01:54:09+00:00,b327eb54dcbf3013dba29a598b87481921fff39a,unknown,1,1,1,1,0,1,,,size/XS
+qax-os/excelize,135482286,103,Conut and trim sheet name in UTF-8,"I'm not sure what exactly the specification says, if any, but the recent versions of Excel seem to be counting the length of sheet names based on not the number of bytes but the number of characters in Unicode. Note that len(name) is equal to the length of bytes representing the string.
+
+Although this patch will be able to fix a possibly incorrectly truncated UTF-8 sequence at the tail of a string quickly, you would like to elaborate it further (and exactly define what the length of a string is). Read also https://blog.golang.org/normalization.",takayuki,131603,closed,False,2017-08-13T05:07:21+00:00,2023-02-16T08:15:49+00:00,2017-08-13T06:35:28+00:00,2017-08-13T06:35:28+00:00,58e2caff33906df86cd51446acb74be833aee140,unknown,4,7,1,1,0,1,,,size/XS
+qax-os/excelize,135861645,107,move 'format' to own package to allow struct usage and prevent name pollution,,plandem,1381366,closed,False,2017-08-15T18:29:23+00:00,2023-02-16T08:15:42+00:00,2017-08-22T17:04:57+00:00,,ad1deda3cba2f8fb09c0d67878ddd6ad17c7e18f,unknown,1242,507,32,14,0,2,,,size/XXL
+qax-os/excelize,136479851,108,Add a test wich proves there is a issue with copySheet method,,rodrigorm,23070,closed,False,2017-08-18T13:30:59+00:00,2023-02-16T08:15:32+00:00,2017-08-21T16:56:27+00:00,,fc0ff09b1fec4eb15e8ec3bd972c272473dd18cb,unknown,17,0,15,1,0,4,,,size/S
+qax-os/excelize,139283951,113,change the TitleToNumber function,change the TitleToNumber function .It can convert the  column title containing lower letter to int.,lichaofei,6094050,closed,False,2017-09-05T10:02:30+00:00,2023-02-16T08:15:26+00:00,2017-09-05T10:03:37+00:00,,aab292949897c1118cd724a0c325ddf2a9909a30,unknown,7,1,1,1,0,1,,,size/XS
+qax-os/excelize,139298075,114,change the TitleToNumber function,change the TitleToNumber function so that can convert the lower-case  letter to int .,lichaofei,6094050,closed,False,2017-09-05T11:17:45+00:00,2023-02-16T08:15:21+00:00,2017-09-06T04:17:58+00:00,2017-09-06T04:17:58+00:00,cf1077dc9f85593d0d0da55a1c5e5728d1f2f181,unknown,8,3,1,4,0,1,,,size/XS
+qax-os/excelize,143099872,126,travis: update go versions,,dvrkps,4771727,closed,False,2017-09-26T10:47:51+00:00,2023-02-16T08:15:11+00:00,2017-09-27T02:14:59+00:00,2017-09-27T02:14:59+00:00,d4df70bd9fa671d20a5e000d20e621ca69451274,unknown,3,3,1,1,0,1,,,size/XS
+qax-os/excelize,147173615,135,Activating Open Collective,"This pull request adds backers and sponsors from your Open Collective https://opencollective.com/excelize ❤️
+  
+  It adds two badges at the top to show the latest number of backers and sponsors. It also adds placeholders so that the avatar/logo of new backers/sponsors can automatically be shown without having to update your README.md. [[more info](https://github.com/opencollective/opencollective/wiki/Github-banner)]. See how it looks on [this repo](https://github.com/apex/apex#backers).
+You can also add a ""Donate"" button to your website and automatically show your backers and sponsors there with our widgets. Have a look here: https://opencollective.com/widgets
+
+  P.S: As with any pull request, feel free to comment or suggest changes. The only thing ""required"" are the placeholders on the README because we believe it's important to acknowledge the people in your community that are contributing (financially or with code!).
+
+  Thank you for your great contribution to the open source community. You are awesome! 🙌
+  And welcome to the open collective community! 😊
+
+  Come chat with us in the #opensource channel on https://slack.opencollective.com - great place to ask questions and share best practices with other open source sustainers!
+  ",asood123,6106941,closed,False,2017-10-17T22:58:39+00:00,2023-02-16T08:15:05+00:00,2018-05-07T06:28:00+00:00,,670d405a2f7bad4f54a952bd95f8c7644ea01248,dirty,68,2,3,3,0,1,,,size/M
+qax-os/excelize,149200182,141,fix OpenReader no sheet error,"Example code
+```go
+xlsx, err = excelize.OpenReader(file)
+sheet1 := xlsx.GetSheetName(1)
+rows := xlsx.GetRows(sheet1) //len(rows)==0
+```",WingGao,1698794,closed,False,2017-10-27T14:13:21+00:00,2023-02-16T08:14:59+00:00,2017-11-03T02:31:48+00:00,2017-11-03T02:31:48+00:00,a4ffb4fbfc9048998345e979577dab2a81bf57ff,unknown,5,4,1,1,0,1,,,size/XS
+qax-os/excelize,151612342,149,Add SetSheetViewOptions(),"I have implemented #145 (""Add support for setting SheetView.showGridLines"") by adding two new methods:
+- `SetSheetViewOptions(sheetName string, viewIndex int, opts ...SheetViewOption) error`
+- `GetSheetViewOptions(sheetName string, viewIndex int, opts ...SheetViewOptionPtr) error`
+
+The options value are given by the user through types that have privates methods that implement the private `SheetViewOption` and `SheetViewOptionPtr` interfaces:
+- `DefaultGridColor(bool)`
+- `RightToLeft(bool)`
+- `ShowFormulas(bool)`
+- `ShowGridLines(bool)`
+- `ShowRowColHeaders(bool)`
+
+Examples:
+```go
+err := xl.SetSheetViewOptions(""Sheet1"", -1, excelize.ShowGridLines(true))
+```
+```go
+var showGridLines excelize.ShowGridLines
+err := xl.GetSheetViewOptions(""Sheet1"", -1, &showGridLines)
+```",dolmen,129536,closed,False,2017-11-09T10:22:51+00:00,2023-02-16T08:14:52+00:00,2017-11-17T01:33:51+00:00,2017-11-17T01:33:51+00:00,90998bfb4daac6e38346c03f41cb3c4e78b1ef7a,unknown,275,3,4,1,0,5,,,size/L
+qax-os/excelize,152952046,153,Rename import path to github.com/360EntSecGroup-Skylar/excelize,Seems like we need to change import path to `github.com/360EntSecGroup-Skylar/excelize`?,jinzhu,6843,closed,False,2017-11-16T05:03:02+00:00,2023-02-16T08:14:44+00:00,2017-12-01T08:50:08+00:00,2017-12-01T08:50:08+00:00,443695732ea878986db320b0b008070ed3f895a2,unknown,19,19,6,1,0,2,,,size/S
+qax-os/excelize,153271762,154,"Add {G,S}etSheetPrOptions() to allow to set FitToPage for printing","**TL;DR** The major feature added is to allow to set the `FitToPage` option that tells Excel to scale the sheet to fit the page.
+
+The implementation is similar to #149 in which I added `{S,G}etSheetViewOptions().`
+Details below.
+
+---
+
+New functions SetSheetPrOptions and GetSheetPrOptions to allow to set options on
+`<sheetPr>` and `<pageSetUpPr>`.
+
+The following options are implemented:
+- CodeName (string)
+- EnableFormatConditionsCalculation (bool)
+- Published (bool)
+- **FitToPage (bool)**
+- AutoPageBreaks (bool)",dolmen,129536,closed,False,2017-11-17T11:08:41+00:00,2023-02-16T08:14:37+00:00,2017-11-21T03:07:00+00:00,2017-11-21T03:07:00+00:00,130eb453f4c38f4c69790adffce58f73c94bde2a,unknown,294,1,3,1,0,2,,,size/L
+qax-os/excelize,153282251,155,CopySheet() using reflect instead of encoding/gob,"Use [github.com/mohae/deepcopy](https://godoc.org/github.com/mohae/deepcopy#Copy) (license MIT) to deep copy worksheets with package `reflect` instead of the internal [`deepcopy` function](https://github.com/360EntSecGroup-Skylar/excelize/blob/88e48e079a91191e05f32a232f8dec4454b25238/lib.go#L114L123) that was using `encoding/gob` serialization and
+deserialization.",dolmen,129536,closed,False,2017-11-17T12:05:13+00:00,2023-02-16T08:14:02+00:00,2018-06-17T13:38:15+00:00,2018-06-17T13:38:15+00:00,5db716d849d51b630822571c8a0aa4edd7cc8365,unknown,7,22,3,1,0,6,,,size/S
+qax-os/excelize,153388728,156,SheetViewOptionPtr: document that it is a superset of SheetViewOption,"Document in type system (not just in text for humans) that all SheetViewOptionPtr are also SheetViewOption (well, if not `nil`).
+This improves documentation visible with godoc but this simple change also allows more flexibility to manipulate SheetViewOption programatically such as saving and restoring values as a `SheetViewOptionPtr` can now be used both with `SetSheetViewOption` as well as with `GetSheetView`:
+
+```go
+var opt excelize.ShowFormulas
+opt = new(excelize.ShowFormulas)
+_ = xl.GetSheetViewOptions(sheet, -1, opt)
+_ = xl.SetSheetViewOptions(sheet, -1, opt)
+```",dolmen,129536,closed,False,2017-11-17T20:37:25+00:00,2023-02-16T08:13:53+00:00,2017-11-21T03:08:28+00:00,2017-11-21T03:08:28+00:00,3d231cb549a3be2754a1681b158731d381e9f600,unknown,7,0,2,1,0,2,,,size/XS
+qax-os/excelize,154017326,161,Add Stacked Bar Chart,"![barstacked](https://user-images.githubusercontent.com/1130495/33100029-8ad28046-ced8-11e7-8348-917d395746fd.png)
+
+Haven't updated documentation. Let me know, and I'll update README and go docs.",rohanthewiz,1130495,closed,False,2017-11-21T22:27:08+00:00,2023-02-16T08:13:44+00:00,2017-11-24T17:34:26+00:00,,aaa5ab8cb662186793056511ab4ff3b2f0124ae3,unknown,109,73,4,3,0,3,,,size/L
+qax-os/excelize,154590877,162,Add stacked bar chart,"![stackedbarchart](https://user-images.githubusercontent.com/1130495/33220192-f5e0b922-d10b-11e7-8233-dac666ef191f.png)
+",rohanthewiz,1130495,closed,False,2017-11-24T17:40:29+00:00,2023-02-16T08:13:33+00:00,2017-11-25T14:26:54+00:00,2017-11-25T14:26:54+00:00,2dc385431d3b50bf3b83799dc8a822b8ef870577,unknown,91,71,3,1,0,2,,,size/M
+qax-os/excelize,163927785,180,"make SetCellStyle quicker by skipping conversions in checkCellInArea,…","… and skipping area checks when we are sure the cell can't be before or past the current row/col
+
+Hi,
+I had some performance problems on the XLSX file I was trying to generate. I analysed the time spent in various places and found out that most of the time was spent in SetCellStyle, and that the slowness was caused by checkCellInArea.
+
+I rewrote checkCellInArea. Among the changes:
+- avoid all the conversions of cell/row/col that were not needed
+- replace the part responsible for extracting the cell's col/row (e.g. ""BC42"" -> col ""BC"" and row ""42"") by not using strings.Map and stopping as soon as a digit is found
+I added tests for the new checkCellInArea. I also modified SetCellStyle to skip checks when it's sure that the cell cannot belong to a current col/row being looped on.
+I you have any question on my changes, feel free to ask me :).
+
+As an example of the speed bonus that the changes got me, I had to generate an XLSX of 1400+ rows and 7 cols. It went from 1m40s to 3s after the changes. But this example is quite extreme because there was a lot of heavy styling involved in that excel file.",mbresson,1840201,closed,False,2018-01-19T09:58:55+00:00,2023-02-16T08:13:26+00:00,2018-01-19T12:58:26+00:00,2018-01-19T12:58:26+00:00,541d29f3b2bfc62c05813a8d8725fca0a628bc81,unknown,159,18,5,1,0,1,,,size/L
+qax-os/excelize,165176924,183,xlsx.SetCellValue() now supports bool value,Here's a pull request addressing issue #182 ,pvelder,3102,closed,False,2018-01-25T17:12:36+00:00,2023-02-16T08:13:20+00:00,2018-01-26T08:53:17+00:00,2018-01-26T08:53:17+00:00,4aadca6db8851fb6630f5b37946a70d1396acd37,unknown,46,0,2,1,0,3,,,size/M
+qax-os/excelize,165657242,184,Speedup setcellstyle more,"The recent improvement to `SetCellStyle` still loops over all the rows, this is more concise and faster.
+
+Since the area check is now done by the loop, the inner loop check `checkCellInArea` is no longer needed.",martinal,378115,closed,False,2018-01-29T09:48:01+00:00,2023-02-16T08:11:57+00:00,2018-01-29T12:00:40+00:00,2018-01-29T12:00:40+00:00,12760a7ee6d0256c44da0a16a0da1c8730517ee3,unknown,4,21,1,1,0,3,,,size/S
+qax-os/excelize,175229569,196,Prevent corrupting the excel file by recreating the default sheet,,cemremengu,1297759,closed,False,2018-03-15T12:04:31+00:00,2023-02-16T08:11:48+00:00,2018-03-16T02:08:24+00:00,,f3c9135dfddec4ed59af3f5a85b9e1486b6597b6,unknown,4,0,1,1,0,2,,,size/XS
+qax-os/excelize,180284835,209,#208,"Support the ""inlineStr"" cell type",schbook,3991705,closed,False,2018-04-09T11:36:39+00:00,2023-02-16T08:11:42+00:00,2018-04-09T11:49:29+00:00,,ccea819ca07ecb6e6426029653a511d1031736ab,dirty,3,0,2,1,0,1,,,size/XS
+qax-os/excelize,181717738,211,Added ZoomScale SheetViewOption,"Added ZoomScale SheetViewOption
+Accessible value between 10 - 400
+
+Used as:
+xlsx.SetSheetViewOptions(sheet, 0, excelize.ZoomScale(75))",OloloevReal,38255298,closed,False,2018-04-15T20:01:44+00:00,2023-02-16T08:11:28+00:00,2018-05-07T07:50:12+00:00,2018-05-07T07:50:12+00:00,761d47f45a06cb18ef346ec2955f4ca23cf705ff,unknown,52,0,2,4,0,2,,,size/M
+qax-os/excelize,186140854,218,Add iterator method for rows,"This pull request adds a new method for sheet `Rows(sheetname)`, it will return an iterator object. Then you can retrieve rows one by one. For example:
+
+```Go
+rows, err := xlsx.Rows(""Sheet1"")
+
+for rows.Next() {
+        for _, colCell := range rows.Columns() {
+            fmt.Print(colCell, ""\t"")
+        }
+        fmt.Println()
+}
+``` ",lunny,81045,closed,False,2018-05-05T05:37:05+00:00,2023-02-16T08:11:16+00:00,2018-05-07T07:48:58+00:00,2018-05-07T07:48:58+00:00,3746ba6a50be963673e0972596f37310ccaa9662,unknown,138,0,2,1,0,1,,,size/L
+qax-os/excelize,186182959,219,Added helper functions to set the chart size.,"Just a nice addition to set the chart size upon inserting. 
+
+It's rather too small and insignificant to create an enhancement issue for it first.",jdevelop,141402,closed,False,2018-05-06T01:06:17+00:00,2022-07-13T10:37:00+00:00,2018-05-10T01:50:31+00:00,2018-05-10T01:50:31+00:00,b5655ce121d4cca68423035ff77c2d833478a868,unknown,85,9,4,2,0,8,,,size/M
+qax-os/excelize,186283674,220,save bytes on memory instead of string,,lunny,81045,closed,False,2018-05-07T08:13:24+00:00,2022-07-13T10:37:07+00:00,2018-05-07T08:44:03+00:00,2018-05-07T08:44:03+00:00,038e34250f3ff827d85434b65cbba86a95724318,unknown,64,44,12,2,0,1,,,size/M
+qax-os/excelize,186433425,221,Added functions to set and get outline level for columns and rows.,,srdolor,22814060,closed,False,2018-05-07T18:54:58+00:00,2022-07-13T10:36:53+00:00,2018-05-09T02:40:01+00:00,2018-05-09T02:40:01+00:00,18aa606ffe0f5be5c7b77b2b99e261d9a093174b,unknown,80,0,2,1,0,1,,,size/M
+qax-os/excelize,187628565,223,Added documentation for the chart dimension style option.,,jdevelop,141402,closed,False,2018-05-12T16:21:31+00:00,2022-07-13T10:36:46+00:00,2018-05-22T02:08:03+00:00,,393cf5488e851e2b4907c0da9cc9f5f5ebf047f1,unknown,5,0,1,1,0,2,,,size/XS
+qax-os/excelize,194039605,233,Update documentation and add sample file,"Documentation:
+* Add information about return value of NewSheet()
+* Minor documentation language fixes
+Samples:
+* Added sample go file for dumping a XLSX file to the console",sewi-cpan,2063104,closed,False,2018-06-11T16:43:32+00:00,2022-07-13T10:37:26+00:00,2018-09-27T15:40:33+00:00,2018-09-27T15:40:33+00:00,f0234e6c08f77d23499945e2720a900306a12e95,unknown,8,8,1,3,0,2,,,size/XS
+qax-os/excelize,194928783,234,Extract WriteTo method (see io.WriterTo) to expose bytes written,Add a `WriteTo()` method (see [io.WriterTo](https://golang.org/pkg/io/#WriterTo)) that exposes the count of bytes written and rewrite `Write()` to use it.,dolmen,129536,closed,False,2018-06-14T15:17:15+00:00,2022-07-13T10:36:40+00:00,2018-06-29T01:53:58+00:00,2018-06-29T01:53:58+00:00,d80d6aa318e787397eb75835b3a17e15001a4b9c,unknown,10,8,1,1,0,1,,,size/S
+qax-os/excelize,195731379,236,Add support for format 176 and fix excel time precision,,lunny,81045,closed,False,2018-06-19T07:13:51+00:00,2022-07-13T10:36:23+00:00,2018-09-27T15:34:43+00:00,,782b5448224b3e6be686c1937826752c0710dd6b,dirty,71,65,2,1,0,1,,,size/M
+qax-os/excelize,195810392,237,Ability to parse dates further in future,"Golangs time.Duration uses nanoseconds, thus it is limited to approximately 290 years.
+",liepumartins,2070205,closed,False,2018-06-19T12:29:49+00:00,2022-07-13T10:36:17+00:00,2018-06-20T07:53:31+00:00,2018-06-20T07:53:31+00:00,3a91b28ddbca53d09b46612fa4c2c29a65d42e41,unknown,64,1,2,1,0,4,,,size/M
+qax-os/excelize,196897460,241,improved comment formatting,fix for #238 ,nad2000,177266,closed,False,2018-06-23T11:36:28+00:00,2022-07-13T10:36:09+00:00,2018-06-28T02:05:57+00:00,2018-06-28T02:05:57+00:00,07d568aa442f49d5d59703945319cd444154466e,unknown,19,7,1,2,2,1,,,size/S
+qax-os/excelize,197424414,243,Restore date 32bit compatibility,"Do not use large int64 constants that are not available in GOARCH=386
+Fix #239",liepumartins,2070205,closed,False,2018-06-26T13:33:50+00:00,2022-07-13T10:35:30+00:00,2018-06-27T06:03:06+00:00,2018-06-27T06:03:06+00:00,13cf7a3b0316f7ca0f7554d22b0f06b53b41a168,unknown,6,5,1,1,0,1,,,size/XS
+qax-os/excelize,198207753,245,"changes:   1) fix bug, when formatSet string is empty, json unmarshal…","changes:   
+1) fix bug, when formatSet string is empty, json unmarshal error.
+2) Add method AddPictureWith , support maxWidth and maxHeight, scale the pictrue to the max.",pobearm,13976397,closed,False,2018-06-29T03:43:13+00:00,2022-07-13T10:35:21+00:00,2018-06-29T04:13:10+00:00,,68daa2d0f0111bfc09e3bcafbede0dc724ad500f,unknown,28,1,1,1,0,1,,,size/S
+qax-os/excelize,198470995,246,added retrieval of worksheet comments,"I ran into a case where I needed to get all comments. 
+I reckon it could be useful for the others. ",nad2000,177266,closed,False,2018-06-30T10:40:25+00:00,2022-07-13T10:35:13+00:00,2018-07-10T02:10:39+00:00,2018-07-10T02:10:39+00:00,58a7b23d11ef36156af6f694a1753715df8ae2fc,unknown,22,0,2,2,0,3,,,size/S
+qax-os/excelize,203864631,253,Use min/mid/max value for 2 and 3 color scale conditional formatting,"Fixes #252 
+
+Please let me know if there's another preferred approach for these additional unit tests. I needed to access internal methods and structs to write the tests the way I have, but I did not readily see another approach in existing tests.
+
+I have maintained existing behavior if `mid_value`, `max_value`, or `min_value` are omitted, but these changes could impact any existing code where these values were provided in format strings as they previously had no effect.",alex-whitney,2528474,closed,False,2018-07-25T14:53:09+00:00,2022-07-13T10:35:03+00:00,2018-07-26T01:46:26+00:00,2018-07-26T01:46:26+00:00,cddcf852c282e4212bc2e90720ed55640fb86847,unknown,151,4,3,2,0,2,,,size/L
+qax-os/excelize,212543659,267,Valiationdata,"# PR Details
+
+Support excel data data valiation 
+
+
+## Description
+
+You can use data validation to restrict the type of data or the values that users enter into a cell. One of the most common data validation uses is to create a drop-down list.
+But  there is no way to get the format of the existing unit data validtion.
+eg:
+Digital range range error
+
+![image](https://user-images.githubusercontent.com/3955934/44945667-0670a700-ae21-11e8-9e11-7c223d4baa0a.png)
+
+Input prompt
+![image](https://user-images.githubusercontent.com/3955934/44945670-15eff000-ae21-11e8-8e5a-e1e60f90604d.png)
+
+
+
+
+Down list
+
+![image](https://user-images.githubusercontent.com/3955934/44945671-1f795800-ae21-11e8-8284-60a7a0a3e489.png)
+
+
+
+## Motivation and Context
+
+
+
+## How Has This Been Tested
+
+I wrote a unit test with restrictions on the range of numbers and implementation drop-down lists. Enter prompts and test tips
+
+
+
+## Types of changes
+
+
+
+## Checklist
+
+",rentiansheng,3955934,closed,False,2018-09-01T11:58:39+00:00,2022-07-13T10:34:39+00:00,2018-09-01T15:48:00+00:00,2018-09-01T15:48:00+00:00,b691e617d00589f5af3f14f62c61e576254d16c3,unknown,260,6,3,4,0,2,,,size/L
+qax-os/excelize,213592075,270,data validation drop-down list use sqref cell  issue #268,"# PR Details
+
+data validation drop-down list use sqref cell 
+
+## Description
+
+I think SetDropList only uses the current situation. SetSqrefDropList is used to indicate that the cell in the current sheet or other sheet is referenced.
+
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",rentiansheng,3955934,closed,False,2018-09-06T11:57:44+00:00,2022-07-13T10:36:02+00:00,2018-09-06T12:10:01+00:00,2018-09-06T12:10:01+00:00,99c9d04f67c0c835b5d884ac229b1883afbb9d03,unknown,20,0,2,1,0,1,,,size/S
+qax-os/excelize,215252949,271,"Add AddxxxFromBytes, to enable adding images from bytes rather than path","# PR Details
+
+Add functions to enable adding an image from a slice of bytes.
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",martskins,4250565,closed,False,2018-09-13T11:39:12+00:00,2022-07-13T10:34:41+00:00,2018-09-13T16:24:56+00:00,,872c1eb01d4e7c3330ee7dd01a161554bc394c13,unknown,96,0,1,2,0,1,,,size/M
+qax-os/excelize,221141737,275,Add Support for WriteTo Buffer,"# PR Details
+
+export a new function that people can get byte.buffer with all of file content
+
+## Description
+
+In some situation, we have to save the excel to a cloud storage service such as the Ali OSS. Some of the SDK that is supported by the cloud doesn't support write action. So we need to give it a reader that can read all of the excel file's content.
+
+
+## Related Issue
+
+## Motivation and Context
+
+## How Has This Been Tested
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",Zheaoli,7054676,closed,False,2018-10-08T14:39:16+00:00,2022-07-13T10:34:45+00:00,2018-10-12T02:36:20+00:00,2018-10-12T02:36:20+00:00,d8a34af384d2fa2493e80bf0259454043b3ff54e,unknown,16,8,2,1,7,5,,,size/S
+qax-os/excelize,226274084,278,"New function: `SearchSheet()`, relate issue #277","# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",peng,26745086,closed,False,2018-10-27T06:40:13+00:00,2022-07-13T10:34:48+00:00,2018-10-27T06:47:55+00:00,2018-10-27T06:47:55+00:00,b917466c71a51877cc34f9c1997b59196b06fddd,unknown,51,0,1,1,0,2,,,size/M
+qax-os/excelize,226300154,280,Add testing case for the function `SearchSheet()`,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",covv,40845445,closed,False,2018-10-27T14:56:26+00:00,2022-07-13T10:34:52+00:00,2018-10-30T02:30:20+00:00,2018-10-30T02:30:20+00:00,30122d0346dc751b01c9865af3febb1f99e1f5e0,unknown,13,0,1,2,0,1,,,size/S
+qax-os/excelize,226301883,281,fix unknown option in JSON struct tag,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",tvso,12095519,closed,False,2018-10-27T15:22:23+00:00,2020-03-06T14:33:30+00:00,2018-10-27T16:01:16+00:00,2018-10-27T16:01:16+00:00,7bff8c6386ceca6c182925f77abae31c75f2ab61,unknown,2,2,1,1,0,1,,,size/XS
+qax-os/excelize,227960090,285,"new feature: protect sheet support, relate issue #273","# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [x] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",HcySunYang,14146560,closed,False,2018-11-02T14:47:40+00:00,2020-03-06T14:33:18+00:00,2018-11-02T15:08:32+00:00,2018-11-02T15:08:32+00:00,4dbc78ce0a0d40be189b4c77207cdbb598846c73,unknown,123,20,5,2,0,2,,,size/L
+qax-os/excelize,228182906,287,New function `UnprotectSheet()` has been added,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",q523591,4652700,closed,False,2018-11-04T15:17:09+00:00,2020-03-06T14:36:57+00:00,2018-11-04T15:28:40+00:00,2018-11-04T15:28:40+00:00,2aca340f5d8358828f2d6c889d50fd34693ecfe7,unknown,20,2,2,1,0,1,,,size/S
+qax-os/excelize,229241808,291,fix issue #290,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",peiqi111,18396700,closed,False,2018-11-08T03:46:36+00:00,2020-03-06T14:37:13+00:00,2018-11-08T04:37:43+00:00,2018-11-08T04:37:43+00:00,507fc5307d17194203046321534244a8fe6215ed,unknown,4,3,1,1,0,1,,,size/XS
+qax-os/excelize,233320130,300,"resolve #297, fix GetSheetMap() failed","Change-Id: I585a4a017867b89bd39cb6e711467a46eaa757be
+
+# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [x] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",taomin597715379,16162179,closed,False,2018-11-24T13:32:23+00:00,2020-03-06T14:37:33+00:00,2018-11-24T13:38:40+00:00,2018-11-24T13:38:40+00:00,724ed5f9f3835c317ca9b8b52c30d3cea8754a5b,unknown,3,2,1,1,0,2,,,size/XS
+qax-os/excelize,237529161,303,Fix comments according to best practices by effective go,"Use [CodeLingo](https://codelingo.io) to automatically fix function comments following the
+[effective go guidelines](https://golang.org/doc/effective_go.html#commentary) in [CONTRIBUTING.md](https://github.com/360EntSecGroup-Skylar/excelize/blob/master/CONTRIBUTING.md).
+
+This patch was generated by running the CodeLingo Rewrite Flow over the ""[comment-first-word-as-subject](https://github.com/codelingo/codelingo/blob/master/tenets/codelingo/effective-go/comment-first-word-as-subject/codelingo.yaml)"" Tenet. Note: the same Tenet can be used to automate PR reviews and generate contributor docs by [Installing](https://github.com/apps/codelingo) the CodeLingo GitHub app. Learn more at [codelingo.io](https://codelingo.io).",CodeLingoBot,45469328,closed,False,2018-12-11T02:17:57+00:00,2020-03-06T14:37:48+00:00,2018-12-11T03:41:21+00:00,2018-12-11T03:41:21+00:00,4094e0019f08bb771eb45ee90b1ae119c71a0f3a,unknown,5,5,3,1,0,1,,,size/XS
+qax-os/excelize,238438157,306,migrate to go module,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+[Migration to go module #305](https://github.com/360EntSecGroup-Skylar/excelize/issues/305)
+## Description
+
+<!--- Describe your changes in detail -->
+I added a go.mod file for migration to go module. As the project is not using any third party library, it should be sufficient for the migration.
+## Related Issue
+https://github.com/360EntSecGroup-Skylar/excelize/issues/305
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+As I am building a project in go module and excelize is used, I have to fork the library for it to work. I hope I can go back using the official one asap.
+<!--- Why is this change required? What problem does it solve? -->
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+",wcsiu,5212960,closed,False,2018-12-13T15:50:44+00:00,2020-03-06T14:38:21+00:00,2018-12-14T04:09:31+00:00,2018-12-14T04:09:31+00:00,62fbc216a7caa7e2932062c0f3554713dafe4c82,unknown,1,0,1,1,0,2,,,size/XS
+qax-os/excelize,238498532,307,Add support to flip outline summaries,"Closes #304
+
+# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+This allows setting a sheet PR to show outline summary expand boxes above instead of below.
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+Added a new sheet pr type `OutlineSummaryBelow` and added that to the sheet serialization. Updated the respective tests.
+
+## Related Issue
+#304 
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+My users think the summary groupers look better this way.
+
+## How Has This Been Tested
+I generated an excel document with nested summary levels and verified that the groupers appeared above instead of below. I also updated unit tests.
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2018-12-13T19:06:49+00:00,2020-03-06T14:38:38+00:00,2018-12-16T03:15:51+00:00,2018-12-16T03:15:51+00:00,d166d2e06fd7faf116a5d8ef9ec035a5a05799c5,unknown,35,0,3,1,0,3,,,size/M
+qax-os/excelize,239814643,313,Add GetMergeCells,"# PR Details
+Closes https://github.com/360EntSecGroup-Skylar/excelize/issues/312
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+Currently, there is no way to get all merged cells from a worksheet currently,
+so added the function to do it.
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+https://github.com/360EntSecGroup-Skylar/excelize/issues/143 https://github.com/360EntSecGroup-Skylar/excelize/issues/78
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+I want to get merged cell axis from the sheet, but there is no way.
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+Added excel file which contains merged cells, and executed the new unit test with it.
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",sairoutine,6726054,closed,False,2018-12-19T12:14:05+00:00,2020-03-06T14:39:02+00:00,2018-12-19T15:32:13+00:00,2018-12-19T15:32:13+00:00,3ca3156d453076d5423b15cb47bfc8f027ebe95d,unknown,93,0,3,1,1,3,,,size/M
+qax-os/excelize,240348813,315,CodeLingo Setup,"Thanks for accepting @CodeLingoBot's [Pull Request](https://github.com/360EntSecGroup-Skylar/excelize/pull/303), I hope it was helpful.
+
+We can also code up Tenets based on any project specific principles or guidelines you may have. In addition to fixing the bugs, CodeLingoBot can also catch issues in Pull Requests and keep your contributor docs in sync with the encoded Tenets.
+
+We're happy to do all this for your project for free if you're happy to give some feedback on the service. Other than accepting this PR and installing the app to automatically catch pull request issues, [literally two clicks](https://github.com/apps/codelingo), you don't have to do anything and can stop the service anytime you like. It's like having a free QA team helping you reach continuous higher standards!
+
+Happy Coding!
+CodeLingo Team",CodeLingoBot,45469328,closed,False,2018-12-21T01:33:03+00:00,2020-03-06T14:39:12+00:00,2018-12-21T16:02:24+00:00,2018-12-21T16:02:24+00:00,e7a96da2db1850d6cef5c2f9f199615edc752121,unknown,476,0,3,1,0,1,,,size/L
+qax-os/excelize,240847457,316,Add RegSearchSheet,"Add a regular expression to the search method
+
+Since the return value is returned by MAP,
+ it is convenient when you want to search by regular expression and obtain multiple cell coordinates
+
+PS:
+I am using translation, I'm sorry in dirty English :(",r-uchino,46125593,closed,False,2018-12-25T08:13:19+00:00,2020-03-06T14:39:23+00:00,2018-12-26T05:30:59+00:00,2018-12-26T05:30:59+00:00,9b8baf75ad7613dba24635b4c66791e404c6b7d5,unknown,65,0,2,3,3,5,,,size/M
+qax-os/excelize,240881975,317,Duplicate row,"# PR Details
+
+`File.DuplicateRow(sheet, row)` method added
+
+## Description
+
+`File.DuplicateRow(sheet, row)` method added, it is similar to `File.InsertRow(sheet, row)` but copies specified row values and styles. (Just like copy/paste in Excel).
+
+Also subpart of code of `File.adjustRowDimensions()` method was extracted to separate method `File.ajustSingleRowDimensions()` and was reused in `DuplicateRow()`
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/83
+
+## Motivation and Context
+
+Motivation already described by another people in issue https://github.com/360EntSecGroup-Skylar/excelize/issues/83 — This enchantment required to use pre-created xlsx file as template.
+
+## How Has This Been Tested
+
+Related unit test added https://github.com/360EntSecGroup-Skylar/excelize/compare/master...albenik:duplicate_row?expand=1#diff-bd370461fa2f33b420b2ab991d34fa2cR1034 with subtests
+
+`github.com/stretchr/testify` import introduced in test file, but this dependency where already preset as dependency in project. (Just run `G111MODULE=on go mod tidy` on master branch)
+
+## Types of changes
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation. (But only autogenerated docs, same as for InsertRow() which not manually documented)
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2018-12-25T15:35:16+00:00,2020-03-06T14:39:49+00:00,2018-12-26T05:33:41+00:00,2018-12-26T05:33:41+00:00,7b7ca99f5d570c30f7eee92c38c5e632b7815239,unknown,132,9,5,2,0,2,,,size/L
+qax-os/excelize,241033175,319,#195: proposed resolution to the issue,"# PR Details
+
+This PR fix the issue #195.
+
+## Description
+
+It checks if there's N (defined by the user) empty lines in sequence in the sheet, and if so, it stops the GetRows function. I also had a more than 1 million empty lines sheet.
+
+## How Has This Been Tested
+
+It was created a unit test that covers all code created. The overall coverage of the project still roughly the same, and it's all passing.
+
+It was also made many api tests in an in house project, with different files. A simple file created by hand with few rows, and with a large file (~40k rows) from a real client.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [X] Bug fix (non-breaking change which fixes an issue)
+- [X] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [X] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [X] I have updated the documentation accordingly.
+- [X] I have read the **CONTRIBUTING** document.
+- [X] I have added tests to cover my changes.
+- [X] All new and existing tests passed.
+",rafaelmiti,6079888,closed,False,2018-12-26T20:35:04+00:00,2020-03-06T14:40:09+00:00,2019-01-01T10:18:42+00:00,2019-01-01T10:18:42+00:00,dea7ba0ec43a4c29a6642d02b6edc73b8b0369f0,unknown,870,686,45,3,0,2,,,size/XL
+qax-os/excelize,241132944,323,Tests refactoring,"# PR Details
+
+Tests refactored.
+All custom check replaced  with `github.com/stretchr/testify/assert`.
+Temporary maped dependency to `github.com/stretchr/testify@master` as of error fixed.
+
+## Description
+
+This commit is not ideal but necessary (IMHO)
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/322
+
+## Motivation and Context
+
+Primary motivation: Avoid statefull tests with not ignorable git file tree changes.
+Multiple tests reads and overwrites single file for own needs.
+Multiple tests reads and overwrites file `Book1.xlsx` under version control.
+
+Secondary motivation: Minimal tests logic aligment, separate error expectation
+and not error expectation tests. Introduce sub-test over test data sets and so far.
+
+## How Has This Been Tested
+
+Simple run `go test ./...` and checks `git status`
+
+## Types of changes
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2018-12-27T11:22:47+00:00,2020-03-06T14:40:19+00:00,2018-12-29T16:18:34+00:00,2018-12-29T16:18:34+00:00,45ab95a4a118ed3ffa101cfe76eb8ba5c051aac5,unknown,810,642,12,1,0,2,,,size/XL
+qax-os/excelize,241494357,326,Add license scan report and status,"Your FOSSA integration was successful! Attached in this PR is a badge and license report to track scan status in your README.
+
+Below are docs for integrating FOSSA license checks into your CI:
+
+- [CircleCI](https://docs.fossa.io/docs/circleci)
+- [TravisCI](https://docs.fossa.io/docs/travisci)
+- [Jenkins](https://github.com/fossas/fossa-jenkins-plugin)
+- [Other](https://github.com/fossas/fossa-cli)",fossabot,29791463,closed,False,2018-12-30T14:41:09+00:00,2020-03-06T14:40:28+00:00,2018-12-30T16:05:34+00:00,2018-12-30T16:05:34+00:00,34ee74b72a909da32d3b7362176905457fe2469d,unknown,5,1,1,1,0,2,,,size/XS
+qax-os/excelize,242478157,330,"Resolve #318, add new functions `SetPageLayout` and `GetPageLayout`","# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",zhangleijlu,10664950,closed,False,2019-01-06T06:14:39+00:00,2020-03-06T14:40:38+00:00,2019-01-06T16:04:04+00:00,2019-01-06T16:04:04+00:00,055d3fadf289f98a1f3cae3fe5177ccc5ea3509d,unknown,248,430,6,1,0,2,,,size/L
+qax-os/excelize,243370116,332,Do not create a blank fill if no fill is specified in the style format,"# PR Details
+
+Do not create a blank fill if no fill is specified in the style format
+
+## Description
+
+setFills returns nil if type is not gradient or pattern.  NewStyle checks for nil and only adds fill / sets fillID if not nil.
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/331
+
+## Motivation and Context
+
+Setting a cell style on a cell that is part of a table overrides the table fill format regardless if there is a fill specified in the style format or not.  This only sets a fill on the style if provided a fill format in the call to NewStyle.
+
+## How Has This Been Tested
+
+Unit test added to styles_test.go for both a fill specified and fill not specified.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [X] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [X] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [X] I have read the **CONTRIBUTING** document.
+- [X] I have added tests to cover my changes.
+- [X] All new and existing tests passed.
+",mmitton,624699,closed,False,2019-01-09T15:19:19+00:00,2020-03-06T14:40:48+00:00,2019-01-10T02:56:07+00:00,2019-01-10T02:56:07+00:00,b0ed4c12d2cced29d82e8a4af47f7b42f555ca8c,unknown,41,3,2,1,0,2,,,size/M
+qax-os/excelize,243654385,334,New feature: File.DuplicateRowTo() duplicate row to specified row position,"# PR Details
+
+New feature: File.DuplicateRowTo() duplicate row to specified row position
+
+## Description
+
+DuplicateRowTo() is similar to DuplicateRow() but copies specified row not just after specified source row
+but to any other specified position below or above source row.
+
+Also I made minor modifications of tests: using filepath.Join() instead of direct unix-way paths strings
+to avoid possible tests fails on other OS.
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/333
+
+## Motivation and Context
+
+Described in https://github.com/360EntSecGroup-Skylar/excelize/issues/333
+
+## How Has This Been Tested
+
+`go test ./...`
+
+## Types of changes
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2019-01-10T11:36:17+00:00,2020-03-06T14:41:02+00:00,2019-01-11T03:24:54+00:00,2019-01-11T03:24:54+00:00,7f1323f7ac7037670848fb8ab103ace59748c28e,unknown,434,173,6,1,0,2,,,size/L
+qax-os/excelize,244280884,337,The function SetPageLayout support set paper size,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",kkxkkxkkgh,24431147,closed,False,2019-01-13T14:01:27+00:00,2020-03-06T09:07:22+00:00,2019-01-17T02:35:45+00:00,2019-01-17T02:35:45+00:00,0c5c99e2ad1478499e634d3cc42c9c261e89bba0,unknown,160,4,3,1,0,2,,,size/L
+qax-os/excelize,246982727,340,"fix: datavalidation list error, formula > 255 issue #339","# PR Details
+
+close #339 
+
+## Description
+datavalidation list error, formula > 255, not set formula value 
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [-] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [-] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",rentiansheng,3955934,closed,False,2019-01-23T14:12:28+00:00,2020-03-06T09:07:08+00:00,2019-01-24T01:27:07+00:00,2019-01-24T01:27:07+00:00,36fc39feb6283ef8e130898fbacc250144d342f8,unknown,12,4,2,1,0,2,,,size/S
+qax-os/excelize,249627707,343,Faster TitleToNumber,"## Description
+
+Simplify TitleToNumber implementation:
+- add a few more test cases in `TestTitleToNumber`
+- use pure integer computation (drop use of `math.Pow`)
+- remove unnecessary casts to `int` 
+
+## Motivation and Context
+
+Faster TitleToNumber.
+
+## How Has This Been Tested
+
+Increased code coverage thanks to more test cases.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",dolmen,129536,closed,False,2019-02-01T14:49:35+00:00,2020-03-06T09:06:36+00:00,2019-02-02T03:05:02+00:00,2019-02-02T03:05:02+00:00,e780e41e0222517caa9c69030b5955ab2b458a49,unknown,10,7,2,3,0,2,,,size/S
+qax-os/excelize,255686677,347,"Resolve #325, performance optimization for add comments","# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",BluesJhao,9133918,closed,False,2019-02-24T14:13:21+00:00,2020-03-06T09:06:12+00:00,2019-02-24T16:29:58+00:00,2019-02-24T16:29:58+00:00,1427027e38d6db46d441243f00d6989c2f53e7ce,unknown,120,60,3,1,0,1,,,size/L
+qax-os/excelize,258668378,350,Implement consistent row addressing by Excel row number starting with 1,"# PR Details
+
+Implement consistent row addressing by Excel row number starting with 1
+
+## Description
+
+1. Added second versions for all row manipulation methods with zero-based row addressing.
+2. Fixed methods documentation to explicitly describe which row addressing used in method.
+3. Added WARNING to README.md.
+4. Cosmetic change: All row test moved to file `rows_test.go`.
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/349
+
+## Motivation and Context
+
+Yet another entropy fix :)
+I spent a much time to find bugs is my program related to different row numbering logic with different methods.
+
+## How Has This Been Tested
+
+Unit tests has been updated and succeed.
+
+## Types of changes
+
+- [x] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2019-03-06T10:48:38+00:00,2020-03-06T09:05:19+00:00,2019-03-06T13:40:46+00:00,2019-03-06T13:40:46+00:00,12c1e2481e3f9f3c3c12a938484f04b12d5dede8,unknown,573,471,5,4,0,5,,,size/XL
+qax-os/excelize,258995795,351,update README and functions docs,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",Kimxu,11692575,closed,False,2019-03-07T07:02:35+00:00,2020-03-06T09:04:58+00:00,2019-03-07T07:13:33+00:00,2019-03-07T07:13:33+00:00,164a3e126aafd1b5652d9da60ae2ba2240d412eb,unknown,13,9,3,2,0,2,,,size/S
+qax-os/excelize,259012702,352,update go test and function docs,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",caozhiyi,16552520,closed,False,2019-03-07T08:15:39+00:00,2020-03-06T09:04:22+00:00,2019-03-07T08:26:15+00:00,2019-03-07T08:26:15+00:00,092f16c744c40e85be5cf6128dfb35c96e7df78b,unknown,8,1,3,1,0,1,,,size/XS
+qax-os/excelize,262112392,356,Huge refactorig for consistent col/row numbering,"# PR Details
+
+Huge refactorig for consistent col/row numbering
+
+## Description
+
+Started from simply changing ToALphaString()/TitleToNumber() logic and related fixes.
+But have to go deeper, do fixes, after do related fixes and again and again.
+
+Major improvements:
+
+1. Tests made stronger again (But still be weak).
+2. ""Empty"" returns for incorrect input replaces with panic.
+3. Check for correct col/row/cell naming & addressing by default.
+4. Removed huge amount of duplicated code.
+5. Removed ToALphaString(), TitleToNumber() and it helpers functions at all,
+and replaced with SplitCellName(), JoinCellName(), ColumnNameToNumber(), ColumnNumberToName(), CellNameToCoordinates(), CoordinatesToCellName().
+6. Minor fixes for internal variable naming for code readability (ex. col, row for input params, colIdx, rowIdx for slice indexes etc).
+7. Excel time conversion bug fixed.
+
+## Related Issue
+
+https://github.com/360EntSecGroup-Skylar/excelize/issues/349
+
+## Motivation and Context
+
+Only consistent cell addressing was target. But I have a domino effect.
+
+## How Has This Been Tested
+
+New unit test written for any new functions.
+Old test updated for edge cases.
+
+All passed.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [x] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2019-03-18T15:42:26+00:00,2020-03-06T09:03:28+00:00,2019-03-19T16:14:41+00:00,2019-03-19T16:14:41+00:00,dc01264562e6e88d77a28042408029770ea32df4,unknown,1647,1334,23,2,5,3,,,size/XXL
+qax-os/excelize,262244351,358,SetCellFloat to avoid numeric warnings in Excel,"# PR Details
+
+Excel will warn you if a string field holds a numeric value, this
+allows the developer to avoid that warning.
+
+Also removed duplicate type assertions in SetCellValue and
+setCellIntValue.
+
+## Related Issue
+
+#357 
+
+## Motivation and Context
+
+My users were complaining about the little warning Excel gives if you put numeric values into a cell
+as strings. This allowed me to properly set floating point values. Also, removing the duplicate type assertions should help performance.
+
+## How Has This Been Tested
+
+I added a unit test to make sure the value could still be retrieved using `GetCellValue`. I also integrated this change into my application using `gohack` and ensured it generated a valid xlsx document. I unzipped the document to make sure the xml looked like I would expect.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-03-18T22:07:44+00:00,2020-03-06T09:00:49+00:00,2019-03-19T19:32:13+00:00,,bc3d4c1dd5e841f76ca38e4a871acd899d29c82f,dirty,52,22,4,1,0,3,,,size/M
+qax-os/excelize,262645380,361,SetCellFloat for floats with specific precision,"# PR Details
+
+## Description
+
+This allows the user to set a floating point value into a
+cell with a specific number of places after the decimal.
+
+## Related Issue
+
+#357 
+
+## Motivation and Context
+
+This allows people to cleanly put floating point values with the desired amount of precision into
+a cell without having to round them manually.
+
+## How Has This Been Tested
+
+Added unit tests and integrated the changes into my application.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-03-19T21:51:49+00:00,2020-03-06T09:00:41+00:00,2019-03-21T03:41:47+00:00,2019-03-21T03:41:47+00:00,b2c12d784e94bfb14da800962c769f5a0f6f783e,unknown,49,2,2,1,2,2,,,size/M
+qax-os/excelize,263060924,363,Added SetRowOutlineRangeLevel for range of rows,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+Having an option for specifying the range of row numbers to be grouped in the same outline level.
+
+## Related Issue
+
+#362 
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+It would allow users to specify the range of row numbers for the outline level to be applied instead of specifying it for every row.
+
+## How Has This Been Tested
+
+Tested it out locally.
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",suryateja619,13191755,closed,False,2019-03-20T22:30:05+00:00,2020-03-06T09:00:34+00:00,2019-03-22T06:40:11+00:00,,f041743cc269661ad19daf4c03e241298752ea89,unknown,12,0,1,1,0,1,,,size/S
+qax-os/excelize,263172561,365,Fixed PR #356 regression RemoveCol() broken,"# PR Details
+
+Fixed PR #356 regression RemoveCol() broken
+
+## Description
+
+After PR #356 `RemoveCol()` call leads to a broken excel file.
+Also minor code style changes done to made `RemoveCol` & `RemoveRow` code style identical.
+
+## Related Issue
+
+PR #356 
+
+## Motivation and Context
+
+Bugfix
+
+## How Has This Been Tested
+
+Check resulting xslx file by hands in real-word project.
+
+## Types of changes
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",albenik,1047425,closed,False,2019-03-21T10:00:36+00:00,2020-03-06T08:56:47+00:00,2019-03-21T10:44:31+00:00,2019-03-21T10:44:31+00:00,7d197c6d8963c4d7b6ba12b1f37c4bf1c9d0dade,unknown,9,7,2,1,0,1,,,size/XS
+qax-os/excelize,263612824,367,Add benchmark for adding images to sheet,"# PR Details
+
+Benchmark image adding
+
+## Description
+
+This should help track performance regressions in future changes. I didn't want to start code to
+reduce image duplication until I had a performance baseline.
+
+Current output looks like this:
+`BenchmarkAddPictureFromBytes-8   	   10000	   2205294 ns/op	  373361 B/op	   20358 allocs/op`
+
+## Related Issue
+
+#359 
+
+## Motivation and Context
+
+This is a first step towards future changes to this functionality.
+
+## How Has This Been Tested
+
+This is a test :)
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-03-22T13:31:01+00:00,2020-03-06T08:57:00+00:00,2019-03-23T08:09:49+00:00,2019-03-23T08:09:49+00:00,2874d75555102b8266477cdda2966ff37dde6b12,unknown,36,11,3,2,0,3,,,size/M
+qax-os/excelize,264086386,369,fix: SetCellVal before using NewSheet will destroy the excel file,"# PR Details
+
+SetCellVal before using NewSheet will destroy the excel file
+
+## Description
+
+like below
+
+## Motivation and Context
+
+## How Has This Been Tested
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+
+close #370",exfly,22613193,closed,False,2019-03-25T11:44:37+00:00,2020-03-06T08:58:13+00:00,2019-04-15T03:23:01+00:00,,f9889cf1346fb94116f815956a3a9d62c51e4b7c,unknown,4,2,1,1,0,3,,,size/XS
+qax-os/excelize,264234908,371,Do not save duplicate images,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+Adding the same image should create a drawing referencing the
+already stored copy of the image.
+
+## Related Issue
+
+#359 
+
+## Motivation and Context
+
+This reduces the overall file size if an image is reused. For example, a header might be used frequently in a number of sheets and if the same logo is used this change will make it so only one copy of that logo is saved.
+
+## How Has This Been Tested
+
+Added a unit test, verified there was no performance regression in the benchmark, and generated
+some documents with several repeated images.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-03-25T18:17:42+00:00,2020-03-06T08:59:30+00:00,2019-03-26T03:09:39+00:00,2019-03-26T03:09:39+00:00,eca66180f191ba1209e5d50859be51eec7954281,unknown,35,7,3,1,0,2,,,size/M
+qax-os/excelize,267354976,379,fix calc object position  for addPicture,"# PR Details
+
+Fix calc object position for addPicture.
+
+## Description
+
+The target cell for calclator the width and height 
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+I wanted to fix one of the factors that caused the size of the inserted image to be incorrect.
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+Verified by local excel()
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",yoshhiide,8830451,closed,False,2019-04-04T09:01:57+00:00,2020-03-06T08:59:37+00:00,2019-04-12T03:32:27+00:00,2019-04-12T03:32:27+00:00,8fff533b40111085f936075d7da12490be4a46a2,unknown,2,2,1,3,0,6,,,size/XS
+qax-os/excelize,268778160,381,Fix two bugs related to Formula,"# PR Details
+
+
+
+## Description
+
+### Bug 1
+
+Out of range panic when removing formula.
+
+#### Reproduction Steps
+
+1. Download [input.xlsx](https://github.com/360EntSecGroup-Skylar/excelize/files/3059522/input.xlsx)
+2. run following code.
+```go
+package main
+
+import ""github.com/360EntSecGroup-Skylar/excelize""
+
+func main() {
+	f, err := excelize.OpenFile(""input.xlsx"")
+	if err != nil {
+		panic(err)
+	}
+	f.SetCellFormula(""Sheet1"", ""A1"", """")
+	if err := f.SaveAs(""panic.xlsx""); err != nil {
+		panic(err)
+	}
+}
+```
+
+#### Actual Behavior
+```
+panic: runtime error: slice bounds out of range
+
+goroutine 1 [running]:
+github.com/360EntSecGroup-Skylar/excelize.(*File).deleteCalcChain(0xc0000c61e0, 0x115c7d1, 0x2)
+	/Users/aplulu/go/pkg/mod/github.com/360!ent!sec!group-!skylar/excelize@v1.4.2-0.20190407060441-4e7d93a77796/calcchain.go:41 +0x574
+github.com/360EntSecGroup-Skylar/excelize.(*File).SetCellFormula(0xc0000c61e0, 0x115d631, 0x7, 0x115c7d1, 0x2, 0x0, 0x0, 0x10f5c9c, 0xc0000aff88)
+	/Users/aplulu/go/pkg/mod/github.com/360!ent!sec!group-!skylar/excelize@v1.4.2-0.20190407060441-4e7d93a77796/cell.go:238 +0x108
+main.main()
+	/Users/aplulu/projects/excelize/test/bug/bug1.go:10 +0xa0
+exit status 2
+```
+
+### Bug 2
+
+If the deleted sheet contains Formula, file will be corrupted.
+
+#### Reproduction Steps
+1. Download [input.xlsx](https://github.com/360EntSecGroup-Skylar/excelize/files/3059522/input.xlsx)
+2. Run following code.
+3. Open the generated corrupt.xlsx in Excel.
+
+```go
+package main
+
+import ""github.com/360EntSecGroup-Skylar/excelize""
+
+func main() {
+	f, err := excelize.OpenFile(""input.xlsx"")
+	if err != nil {
+		panic(err)
+	}
+	f.DeleteSheet(""Sheet2"")
+	if err := f.SaveAs(""corrupt.xlsx""); err != nil {
+		panic(err)
+	}
+}
+```
+
+#### Actual Behavior
+![Screen Shot 2019-04-09 at 23 58 12](https://user-images.githubusercontent.com/20220680/55810997-651ea180-5b23-11e9-9437-0a10a2b8c302.png)
+
+```
+<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+<recoveryLog xmlns=""http://schemas.openxmlformats.org/spreadsheetml/2006/main""><logFileName>Repair Result to corrupt0.xml</logFileName><summary>Errors were detected in file '/Users/aplulu/projects/excelize/test/bug/corrupt.xlsx'</summary><removedRecords summary=""Following is a list of removed records:""><removedRecord>Removed Records: Formula from /xl/calcChain.xml part (Calculation properties)</removedRecord></removedRecords></recoveryLog>
+```
+
+### Environement
+
+* Excelize master branch
+* go version go1.12.3 darwin/amd64
+* Microsoft Excel for Mac version 16.23
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",aplulu,20220680,closed,False,2019-04-09T14:59:28+00:00,2020-03-06T08:59:45+00:00,2019-04-13T02:45:02+00:00,2019-04-13T02:45:02+00:00,031ae303fd37b43f687c57edbf58cad7f354f8c7,unknown,18,7,3,1,0,2,,,size/S
+qax-os/excelize,269843541,383,Rewrite prepareSheetXML to scale linearly,"# PR Details
+
+## Description
+
+We don't need to backfill columns into every row for most purposes
+Provided makeContiguousColumns for setting styles where we do
+need it for a specific region.
+
+Added a benchmark to monitor progress. For 50,000 rows this went
+from about 11 seconds to 1 second. The improvements are more
+dramatic as the row/column count increases.
+
+## Related Issue
+
+#382 
+
+## Motivation and Context
+
+This allows writing much larger files, quickly.
+
+## How Has This Been Tested
+
+This should be transparent but I made sure all the tests pass, added a benchmark, and
+created some files to make sure they saved correctly.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-04-12T01:36:57+00:00,2020-03-06T08:59:52+00:00,2019-04-16T06:50:16+00:00,2019-04-16T06:50:16+00:00,0f9170a03b9fe19c1c22687fba8bcbdfd69a6347,unknown,35,13,5,2,0,1,,,size/M
+qax-os/excelize,271585091,385,refactoring for merge cells.,"# PR Details
+
+Refactoring for merge cells functions.
+
+## Description
+
+Move mergedcell related functions coded in `excelize.go` to `cellmerged.go`.
+
+## Related Issue
+
+None
+
+## Motivation and Context
+
+If add some functions related to merge cell, it causes enlargement of excelize.go.
+Also, I want to extend the function, but at that time I need to add the function related to the merged cell.
+
+## How Has This Been Tested
+
+runs unit test.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",yoshhiide,8830451,closed,False,2019-04-18T07:51:29+00:00,2020-03-06T09:00:05+00:00,2019-05-01T08:00:00+00:00,2019-05-01T08:00:00+00:00,8b4acf9a1e2d543463f1c058b07cc8dad13cbb28,unknown,102,93,4,2,0,2,,,size/L
+qax-os/excelize,273598183,391,Add the ability to change the default font,"## Description
+
+This allows users to change the default font of the workbook. I also removed the `scheme` stuff since the library doesn't have an API for themes in it yet and without that they don't appear to impact anything.
+
+In the template I removed the theme reference from the default font and changed the default style name to `Normal` although I don't think that name change was necessary if you preferred the old name.
+
+## Related Issue
+
+Closes #390 
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+My users want something other than Calibri so I figured I would add the change back to the main repo.
+
+## How Has This Been Tested
+
+I added some unit tests and generated some documents with this branch.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-04-25T16:29:45+00:00,2020-03-06T09:00:12+00:00,2019-05-24T01:48:15+00:00,2019-05-24T01:48:15+00:00,623375780586cbd323dc899e17d7235ac610505f,unknown,65,14,5,1,0,8,,,size/M
+qax-os/excelize,282393228,410,resize the insert image to fit the cell,"# PR Details
+
+resize the insert image to fit the cell.
+
+## Description
+
+Added ""autofit"" option to ""AddPicture"".
+Resize the image to the size of a single cell or merged cell.
+
+
+example)
+```
+xlsx.AddPicture(""Sheet1"", ""A30"", ""./image1.jpg"", {""autofit"": true})
+xlsx.AddPicture(""Sheet1"", ""B30"", ""./image1.jpg"", {""autofit"": true, ""x_offset"": 10, ""y_offset"": 10})
+```
+
+result)
+<img width=""310"" alt=""TestAddPicture_xlsx"" src=""https://user-images.githubusercontent.com/8830451/58401451-d5b05c00-8098-11e9-89fd-4963d7e42775.png"">
+_""B30: C33"" is a merged cell_
+
+## Related Issue
+
+#384 
+
+## Motivation and Context
+
+I want to reduce manual editing by automatic image resizing.
+
+## How Has This Been Tested
+
+I added a test code to `picture_test.go` and verified it.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [x] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [x] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",yoshhiide,8830451,closed,False,2019-05-27T07:11:39+00:00,2020-05-17T09:42:01+00:00,2020-05-17T09:37:17+00:00,,36ff6652715e86793a45eec989c72f49b79a85a4,dirty,223,4,6,5,0,4,,,size/L
+qax-os/excelize,299559756,440,#386 regression test added,"# PR Details
+adds regression test for #386 issue
+
+Edit: issue resolved
+
+## Description
+adds tests/OverflowNumericCell.xlsx with test data
+adds cell_test.go/TestOverflowNumericCell func
+
+Edit: changed styles.go/formatToInt func
+
+## Related Issue
+
+#386
+
+## Motivation and Context
+https://github.com/360EntSecGroup-Skylar/excelize/issues/386#issuecomment-513436170
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+tests/OverflowNumericCell.xlsx contains sheet with name ""Лист1"" (""Sheet1"" in Russian)
+i don\`t know  how it works on another locales, and can\`t change xlsx file - bug not reproduced
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [х] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",sevkin,18633,closed,False,2019-07-20T12:17:33+00:00,2020-03-06T08:51:16+00:00,2019-09-01T04:30:15+00:00,2019-09-01T04:30:15+00:00,1fc4bc52fb8a0160eb624e7a24619d8c0e47e540,unknown,14,1,3,2,0,2,,,size/S
+qax-os/excelize,301127421,447,Fix #443,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",dongkai16z,26813765,closed,False,2019-07-25T12:46:00+00:00,2020-03-06T08:45:16+00:00,2019-07-26T01:21:26+00:00,2019-07-26T01:21:26+00:00,b5f7d4a78e295af80963a61e5b82f25b913df7cb,unknown,1,0,1,1,0,2,,,size/XS
+qax-os/excelize,301127527,448,Fix #442,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",Sustainedhhh,20462046,closed,False,2019-07-25T12:46:15+00:00,2020-03-06T08:45:06+00:00,2019-07-25T15:06:55+00:00,2019-07-25T15:06:55+00:00,da7001fcf111faf308371441fc803f6aa6073f45,unknown,6,1,1,1,0,1,,,size/XS
+qax-os/excelize,304102705,456,Fix 439,"## Description
+
+We were parsing the entire sheet twice which was leading to extra memory consumption and parsing time when reading an excel sheet with `Rows()` and `GetRows()`
+
+## Related Issue
+
+#439 
+
+## Motivation and Context
+
+This effectively halves the read time for spreadsheets.
+
+## How Has This Been Tested
+
+All tests continue to pass, and I added a benchmark to validate the performance improvement.
+Before:
+BenchmarkRows-8   	     500	   2434130 ns/op	  888380 B/op	    8612 allocs/op
+OnlyOnce:
+BenchmarkRows-8   	    1000	   2123277 ns/op	  811150 B/op	    7173 allocs/op
+
+When run against the data sheet used in #439 the read time went from ~6.4 seconds on my machine to ~3.8 seconds.
+
+## Important!
+
+The one thing I did change is that if you declare a blank Rows struct and immediately call Columns on it you will get an index out of bounds error since you'll be trying to access nothing. However, this didn't seem realistic since users should be getting the rows struct by calling `file.Rows(""someSheet"")` and it works correctly under those conditions. I deleted the part of the test that looked for this behavior. I can add a bounds check to `Columns()` if you prefer but it seems unnecessary to me.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [x] My change requires a change to the documentation.
+- [x] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-08-04T23:16:44+00:00,2020-03-06T08:44:55+00:00,2019-08-05T14:18:32+00:00,2019-08-05T14:18:31+00:00,451e6e384acad96d858f4561271cd6830331a778,unknown,36,124,2,1,0,4,,,size/L
+qax-os/excelize,304516702,458,Update comments,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",zhaov,20121461,closed,False,2019-08-06T01:51:46+00:00,2020-03-06T08:44:43+00:00,2019-08-07T01:07:15+00:00,2019-08-07T01:07:15+00:00,d8df51098f11eaa520112c6d043509b893bf0097,unknown,39,28,1,1,0,1,,,size/M
+qax-os/excelize,304518397,459,Bugfix #454,"# PR Details
+
+<!--- Provide a general summary of your changes in the Title above -->
+
+## Description
+
+<!--- Describe your changes in detail -->
+
+## Related Issue
+
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+
+<!--- Why is this change required? What problem does it solve? -->
+
+## How Has This Been Tested
+
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [ ] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [ ] I have read the **CONTRIBUTING** document.
+- [ ] I have added tests to cover my changes.
+- [ ] All new and existing tests passed.
+",WuXu1995,49405879,closed,False,2019-08-06T02:00:46+00:00,2020-03-06T08:44:34+00:00,2019-08-06T02:30:13+00:00,2019-08-06T02:30:13+00:00,3599b24c9594acaa8449d38745993d8be29c6af9,unknown,16,16,1,1,0,1,,,size/S
+qax-os/excelize,304904121,461,Further improve read performance,"## Description
+
+Instead of re-encoding the full sheet to change the namespaces
+in the encoded bytes, read the sheet again and do the byte
+replacements there.
+
+In this case, file access ends up being more performant than
+marshaling the sheet back to XML.
+
+In the `SharedStrings` test, ensure the strings are actually read.
+
+I actually think this entire operation is unnecessary since we shouldn't be modifying anything on a read but doing the change this way ensures my PR is fully passive in case anyone was relying on the behavior.
+
+## Related Issue
+
+ #439
+
+## Motivation and Context
+
+This further improves the read performance.
+
+Before
+BenchmarkRows-8   	    1000	   2177328 ns/op	  811432 B/op	    7173 allocs/op
+After
+BenchmarkRows-8   	    1000	   2035770 ns/op	  768284 B/op	    6883 allocs/op
+
+On the test file I was using before this reduced the read time from ~3.8 seconds to ~2.5 seconds.
+
+## How Has This Been Tested
+
+I ran (and updated) all the unit tests and ran it against the same test files as before.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-08-06T21:52:59+00:00,2020-03-06T08:44:24+00:00,2019-08-08T01:47:01+00:00,2019-08-08T01:47:01+00:00,448f5524a8ea621fd40978dcc518ff6d9bbcdf83,unknown,7,3,2,1,0,1,,,size/XS
+qax-os/excelize,305162806,463,Get sheet names based on index,"## Description
+
+SheetID only seems to indicate the file name for the sheet.
+Check the sheets list based on index instead. Reordering sheets in Excel changes the order they appear in that list.
+
+## Related Issue
+
+Fixes #457
+
+## Motivation and Context
+
+Using SheetID is not a reliable way to get a sheet's name based on index.
+
+## How Has This Been Tested
+
+Verified with the test file given in #457, and against the existing files in the test directory of this project. I added unit tests to ensure the expected matches.
+
+## Types of changes
+
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+
+- [ ] Docs change / refactoring / dependency upgrade
+- [x] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to change)
+
+## Checklist
+
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+
+- [x] My code follows the code style of this project.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.
+- [x] I have read the **CONTRIBUTING** document.
+- [x] I have added tests to cover my changes.
+- [x] All new and existing tests passed.
+",mlh758,4331955,closed,False,2019-08-07T13:57:12+00:00,2020-03-06T08:44:17+00:00,2019-08-09T01:23:29+00:00,2019-08-09T01:23:28+00:00,e6b7ac9a03556fcf3b9c59abb93bfa9e3dd2dbcb,unknown,27,9,2,1,0,6,,,size/S

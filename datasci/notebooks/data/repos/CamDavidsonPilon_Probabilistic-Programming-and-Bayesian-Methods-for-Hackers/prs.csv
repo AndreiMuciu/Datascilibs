@@ -1,0 +1,440 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4028462,1,Added instructions to Chapter 1 for consideration,"If you feel that it's a nice addition, I can try and update all the chapters with the same info
+",bigsnarfdude,2282364,closed,False,2013-02-07T02:07:58+00:00,2014-06-22T15:37:40+00:00,2013-02-07T12:51:13+00:00,2013-02-07T12:51:13+00:00,944b5065e53b7986045fdfc3ccd2afeca312336c,unknown,19,0,2,4,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4062489,2,Updated the README and Screenshot for Chapter 2,"Thanks
+",bigsnarfdude,2282364,closed,False,2013-02-08T19:33:07+00:00,2014-07-03T19:37:34+00:00,2013-02-08T19:34:35+00:00,2013-02-08T19:34:35+00:00,5727c0cba565d852f20406a1252f31d815e9a6ef,unknown,20,1,4,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4062685,3,I updated the title of Heading for the screenshot from Chapter 1 to Chapter 2,"I missed this one on updating. I need a consistency checker for VIM...
+",bigsnarfdude,2282364,closed,False,2013-02-08T19:42:39+00:00,2014-06-18T14:42:36+00:00,2013-02-08T19:44:49+00:00,2013-02-08T19:44:49+00:00,255c875f465c6dc0a0e6060a48328f7aeb7d6bd7,unknown,1,1,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4228649,4,Fixes,"A typo and a file that shouldn't be there.
+",larsmans,335383,closed,False,2013-02-20T11:14:27+00:00,2014-06-21T20:22:35+00:00,2013-02-20T12:56:21+00:00,2013-02-20T12:56:21+00:00,8405c5a28a06373a9ab299d01435926031b13e4b,unknown,4,3,4,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4284564,6,Minor editorial tweaks to Chap 1,"Spelling corrections, deleted a stray word here or there, very minor
+sentence restructuring in a few places.
+",pmagwene,1003418,closed,False,2013-02-22T22:29:22+00:00,2014-06-24T09:39:57+00:00,2013-02-23T15:35:42+00:00,2013-02-23T15:35:42+00:00,5f607e1813758591dc25e13ab0f2c941de75a9ac,unknown,15,15,2,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4293077,7,Stress that Bayesian statistics is about information,"The word ""information"" occurs only once in chapter 1, while I believe that notion to be critical to understanding how belief comes about in a Bayesian framework. Without it, Bayesian statistics might as well be a religion.
+",larsmans,335383,closed,False,2013-02-24T10:54:07+00:00,2014-07-03T20:18:04+00:00,2013-02-24T15:30:17+00:00,2013-02-24T15:30:16+00:00,5b78209622d29ed6c7bd721d3356e2ffcb89dc93,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4294469,9,\case deprecated use \begin\end{case},"Hi ! 
+
+I'm working on nbconvert pdf export. 
+I got the warning/error that \case was deprecated, to replace with \begin/\end{case}
+
+Just in case you wish to check that the html is unchanged : [nbviewer link](http://nbviewer.ipython.org/urls/raw.github.com/Carreau/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/fix-case/Chapter1_Introduction/Chapter1_Introduction.ipynb)
+
+With this patch I was able to compile [this pdf](http://elacave.lmdb.eu/~carreau/Chapter1_Introduction.pdf) from the first chapter.... This is still work in progress :-)
+",Carreau,335567,closed,False,2013-02-24T18:20:24+00:00,2014-07-03T20:17:33+00:00,2013-02-24T18:27:30+00:00,2013-02-24T18:27:30+00:00,3c9a040c4daeeed1ebc9df39ade56af44db869a2,unknown,2,2,1,1,0,4,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4306032,10,fork => clone,"By ""forking"" I think you mean ""cloning"" in GIT. Forking has especially a
+different meaning on Github, and I don't think that's what we are
+referring to here.
+",JensRantil,730342,closed,False,2013-02-25T16:11:56+00:00,2014-06-22T07:27:01+00:00,2013-02-25T16:16:49+00:00,2013-02-25T16:16:49+00:00,696aa4bda0a3920483a41076b614f2db25b723f5,unknown,4,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4462783,14,Minor typographical corrections to Chapter 1,,crmccreary,357355,closed,False,2013-03-06T02:52:05+00:00,2014-07-03T20:06:56+00:00,2013-04-17T22:22:45+00:00,,8534a44bb7eefa04e6edb51820e16e8ed3f59120,dirty,133,152,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4562990,15,Fixed some typos,"I didn't like the wording in some parts.
+
+There are more substantial changes that would want to make but don't want to mess up the voice of the document.
+
+Namely:
+
+1) Highlight MCMC is just a means of performing  Bayesian Inference. There are other algorithms for doing it that are beyond the scope of the book.
+
+2) MCMC roughly moves towards regions of high probability, but the goal is not to find the Maximum A-Posterior point. MH moves are designed so as to make sure our samples are still from the target distribution.
+
+3) The mixture models example will have an exponential number of peaks, but because they are all isomorphic to each other, sampling around any of them is not a big deal.
+
+I am including this here more to clarify how much detail do you believe is appropriate for this book.
+",zaxtax,8529,closed,False,2013-03-12T06:51:15+00:00,2014-07-03T19:21:20+00:00,2013-03-12T12:38:41+00:00,2013-03-12T12:38:41+00:00,74f59c0fab5ce4c508060e8e42c921696c41100a,unknown,2,2,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4657899,16,CH1: misc fixes,"Hi,
+
+I've read through CH1 and here are some suggested fixed.
+You're welcome to take or drop whatever you like, ofcourse.
+The inlined plots for the posteriors don't seem to match the code
+anymore, rerunning the code produced poor results.
+I made some tweaks, and I hope you'll merge at least that in:
+
+![am](https://f.cloud.github.com/assets/1820866/268164/6f8650a0-8f0f-11e2-90c2-18c01fbdcbab.png)
+
+I omitted the image data, so changes won't show up until the cells are rerun.
+
+Thank you so much for making this available,  really looking forward to CH2.
+",ghost,10137,closed,False,2013-03-17T14:34:02+00:00,2014-07-03T20:14:01+00:00,2013-03-18T01:28:11+00:00,2013-03-18T01:28:11+00:00,7f1f085383e4bb00663ff7add6b85770296a5e3c,unknown,40,18,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4659453,17,CH2: misc fixes,"Here's chapter2. Again, please throw away any changes you don't like.
+
+I revamped the tricky ""density scatter plot"", so it's easier to grasp and 
+much faster to compute. not as pretty though IMO.
+
+There's a trick you might not be aware of, if you append a semicolon
+to the last line in a cell, the output will be supressed, but any plots will
+be displayed, so you can get rid of the ""noise"" arising from the output of the last
+command (usually a label or similar).
+
+I had trouble with the density plot when using ipnb with a sympy profile,
+not sure what that was all about.
+
+in the section ""Including observations in the Model"" , you elided (somewhat) the difference 
+between assigning a value vs. an array of values to a stochastic variable,
+I would have appreciated a bit more contex at that point, although it becomes
+clearer later.
+
+Thanks again for all your work and making it freely available,
+chapter3 will be along presently.
+
+Yoval.
+",ghost,10137,closed,False,2013-03-17T20:19:12+00:00,2014-07-03T20:14:31+00:00,2013-03-18T01:43:32+00:00,2013-03-18T01:43:32+00:00,129b635cdb2f0c36525be62301ecbe57d19d5f92,unknown,30,36,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4710273,20,Just spelling and grammar from Chapter 1,"I read the first chapter this evening, and I quite liked your presentation of the material. Definitely approachable. For a book about Bayesian inference, misspelling ""probability"" and ""occurring"" multiple times seemed a bit off-putting. So I fixed it!
+
+Also, I'd remove the stuff about your girlfriend and english class girl. Gender neutrality is probably (h/t) for the best.
+",etano,868962,closed,False,2013-03-20T08:16:16+00:00,2014-06-18T16:17:27+00:00,2013-03-20T11:00:07+00:00,2013-03-20T11:00:07+00:00,7162858309279c4cddb2388a148abf9f02426b61,unknown,24,24,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4777973,25,Style: fix json file to match matplotlibrc,"It looks like I used a style subtly different from yours.
+I regenerated a file from your matplotlibrc, but that caused
+matplotlib to stop inlining plots for an unknown reason.
+
+Here's another blob, which only contains the difference between
+the default scheme and your mplrc.
+The ch1 graphs regenerate perfectly for me ( it might not for other people).
+
+Also, there's a typo in the instructions on loading the json
+style. it should be `rcParams` not `RcParams` - fix included.
+",ghost,10137,closed,False,2013-03-23T13:59:14+00:00,2014-07-03T20:12:29+00:00,2013-03-23T14:54:31+00:00,2013-03-23T14:54:31+00:00,c891bc97a95af9d8979810b43e8955b7c8cedde9,unknown,22,96,2,2,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4779383,27,CH3: various tweaks,"Hi cam, 
+
+Just read through ch3, here are my notes.
+as always, please accept what you like and disregard the rest.
+
+Some notes as a reader:
+- re the introduction discussing ""space"" and ""surface"", IIUC, an important
+  role of the prior is to assign **zero** probability to some areas and thereby
+  forbid the MCMC from entering that region. That also explains the concept
+  of a ""surface"" in the space, in that the limited extent of the ""surface"" corresponds
+  to the finite area of p(x)>0 in the example.
+  I suggest that the ""0 probablity there"" role of the prior be  touched upon in the intro.
+- quote ""This is not as trivial as it may appear."" - actually does not appear trivial at all.
+- there's a comment in a code cell ""# notice the size"", which directs my attention
+  but does not explain what exactly is the point of that param.
+-  in the ""Algorithms to perform MCMC"" section
+  1. step 3 is really the algorithmic counterpoint to the observation data  ""stretching and shaping"" analogy you gave in the intro, it would be good to make that connection at that point.
+  2. the pseudo code doesn't describe the ""else"" clause, what happens when we
+     reject a step.
+  3. quote: 
+
+```
+In the pseudo-code algorithm of MCMC above, the only position that matters 
+is the current position. Thus it is fine to halt an MCMC algorithm and inspect 
+its progress, with the intention of starting it up again later
+```
+
+It's unclear if this a property shared by all MCMC algorithms, an implementation
+detail of pyMC's chosen algorithm. is the random walk process always memoryless?
+- will definitly try my hand atn interactive webGL visualization of the ""mountain
+  as function of sample size"" visualization. what a wonderful example.
+- couldn't reproduce the 2x2 cluster plots, I just get blank plots
+  maybe the ylim is off?
+- can't reproduce the first mixture model grap, I get a blank screen
+- I reworded the paragraph about choosing a best point estimate of the gaussian
+  parameters, since it stated it couldn't be done and then proceeded to do so. :)
+- fixed a code error in the ""Important: Values in a sample "" section, misnamed
+  variable
+- I'm note sure I understood this section. is the point you were making that since
+  various rvs are related, you can't mix and match samples from different indices?
+  that's what was intended by the ""indexing correctly"" remark? you state that exactly
+  after the example, but I found this a bit hard to read.
+-  in the ""Diagnosing Convergence"" section, quote
+  `Earlier I mentioned that the autocorrelation`, I believe that's actually
+  the first time autocorrelation is mentioned in the document, perhaps
+  previously edited out?
+- there seems to be a spurious markdown cell right below the ""thinning"" section
+- `pymc.Matplot.plot()` section, the second cell suggests there ought to be a
+  figure there, demonstrating the use of  `pymc.Matplot.plot()`, it seems to be missing.
+
+That's it, a bit long I know.
+
+Gorgeous, gorgeous graphs!
+",ghost,10137,closed,False,2013-03-23T19:44:11+00:00,2014-06-22T15:55:40+00:00,2013-03-24T16:25:05+00:00,2013-03-24T16:25:05+00:00,3f4881056de24b36584d44f4d2acde3c8bed2b10,unknown,17,30,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4904242,31,Corrected minor typos,"Great job! Found some typos while reading Chapter 1.
+",matrig,4016834,closed,False,2013-04-01T02:25:26+00:00,2014-07-03T20:00:20+00:00,2013-04-01T18:18:06+00:00,2013-04-01T18:18:06+00:00,bc025eeb9e367f36617abdd3a92692e4a56d2fa1,unknown,8,7,2,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,4938221,32,(Minor) Update to Chapter1_Introduction.ipynb,"Fixed a few typos and made a couple of minor corrections that I'm pretty sure reflect what you meant to say.
+",colibius,2992988,closed,False,2013-04-02T19:37:13+00:00,2014-06-23T04:33:03+00:00,2013-04-02T19:41:07+00:00,2013-04-02T19:41:07+00:00,ba78c53b65f3b9c3ad2c749e407f2e9f831b0b22,unknown,3,3,1,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5017071,33,Some typos fixed,"I have started reading the first three chapters of your book and I like them very much. I am going to recommend it to the more computationally interested among my students. While reading, I fixed some minor typos that I noticed. 
+",gustavdelius,1340713,closed,False,2013-04-06T17:14:13+00:00,2014-07-03T20:09:27+00:00,2013-04-06T17:33:25+00:00,2013-04-06T17:33:25+00:00,e2f1b2c3bab108a235bb40d7b092f7ae9814f926,unknown,40,40,4,4,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5177165,35,fixed typo in readme,"1 character change
+",mathisonian,1074773,closed,False,2013-04-16T01:33:09+00:00,2014-07-03T20:07:56+00:00,2013-04-16T02:03:35+00:00,2013-04-16T02:03:35+00:00,bc4da647ee5eb13bb804db2e0593ebc0c08c1cce,unknown,1,1,1,1,0,4,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5252539,37,Typos and such,"Hi Cam,
+
+Here are a bunch of typos I noticed while reading your book.  I separated most of the changes out into separate commits with the most controversial later so that you could easily take the first few or cherry-pick as you like.
+
+Thanks for making this book available.  It's just what I was looking for.  I really appreciated the IPython notebook format.  I also learned as much about how to make nice looking figures in matplotlib as I did about MCMC.
+
+-Jim
+",radford,55631,closed,False,2013-04-19T03:49:19+00:00,2014-07-03T20:06:25+00:00,2013-04-19T17:05:16+00:00,2013-04-19T17:05:16+00:00,10c79765a9f5b4865a31cd9672f7e6b90bfc9162,unknown,33,32,6,14,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5385286,39,Fixed typos in section Probability Distribution: Three Classifications,"Section: Probability Distribution (three types)
+constnatly -> continuously
+is is -> it is
+",nisanharamati,3074526,closed,False,2013-04-26T06:15:12+00:00,2014-07-03T20:04:53+00:00,2013-04-28T17:08:14+00:00,2013-04-28T17:08:14+00:00,5a2a1caa0e1163c1a1caa13af7a9f027acc00814,unknown,3,3,1,2,0,5,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5411755,40,Text revision for Chapter 2,"Hi @CamDavidsonPilon, just fixed some typos for the Chapter 2.
+",bani,33391,closed,False,2013-04-28T06:01:48+00:00,2014-07-03T20:05:54+00:00,2013-04-28T14:34:48+00:00,2013-04-28T14:34:48+00:00,911d1dc0628d685720ee2dd5177851f1202cef9f,unknown,13,13,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5412702,41,Fixed a couple of minor typos.,,thomasbratt,1155660,closed,False,2013-04-28T11:22:11+00:00,2014-07-03T20:05:24+00:00,2013-04-28T14:36:29+00:00,2013-04-28T14:36:29+00:00,cb58c49c77615a03b8e2241c63f0324b6901b513,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5633045,44,"replace ""there"" with ""their"" in README",,bgrant,624123,closed,False,2013-05-09T23:35:00+00:00,2014-07-03T20:04:23+00:00,2013-05-10T01:57:45+00:00,2013-05-10T01:57:45+00:00,047d39339c034a799a2550a3b5a492a79820077f,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5656566,45,minor typos,,yarikoptic,39889,closed,False,2013-05-11T03:26:23+00:00,2014-06-13T14:21:41+00:00,2013-05-11T03:28:38+00:00,2013-05-11T03:28:38+00:00,b5eeb8194a30fdb4c022f18f6183cc615c18881f,unknown,8,9,2,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5687729,46,Fixed two typo in chapter 4,"Two small typo.
+",alexgarel,144788,closed,False,2013-05-13T22:31:50+00:00,2014-07-03T20:03:22+00:00,2013-05-14T12:43:07+00:00,2013-05-14T12:43:07+00:00,148d8873efae527ef3414eb02af88b037a783ebd,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5688040,47,precise what phi means in appendix,"For non statistician like me, Phi at the end seems to appear from nowhere. Just add a note to explain what it is.
+",alexgarel,144788,closed,False,2013-05-13T22:49:56+00:00,2014-07-03T20:02:52+00:00,2013-05-14T14:00:13+00:00,2013-05-14T14:00:13+00:00,1d38716d474cc27424b09c80ea1d97dc764bf79d,unknown,2,0,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5688126,48,define CDF in chapter 4,"As we first use CDF in chapter 4, define acronym.
+",alexgarel,144788,closed,False,2013-05-13T22:54:58+00:00,2014-07-03T20:02:21+00:00,2013-05-14T14:00:55+00:00,2013-05-14T14:00:55+00:00,b8caab15569698fcbeaa09e070ed4ad9ec8de1d1,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5885292,53,Chapter 2 fixes,"Fixed typos and minor code formatting
+",sash-ko,220472,closed,False,2013-05-23T11:04:44+00:00,2014-07-03T19:48:11+00:00,2013-05-23T13:01:28+00:00,2013-05-23T13:01:28+00:00,fa485b7aeba317306982897a6272a28be515b307,unknown,18,14,1,5,2,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5925486,54,Fixed few typos.,"Thank you for wonderful text, it was a pleasure to read it. I found few typos, here's a commit that corrects them.
+",liori,789385,closed,False,2013-05-24T21:15:11+00:00,2014-07-01T19:50:26+00:00,2013-05-26T20:49:48+00:00,2013-05-26T20:49:48+00:00,eef400b602284b03f173769e81e611a58a5690f1,unknown,29,29,7,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5961839,55,Fixed a couple of typos.,"I fixed a couple of some basic typos.
+",ducky427,83426,closed,False,2013-05-28T12:40:34+00:00,2014-07-03T20:00:50+00:00,2013-05-28T12:42:14+00:00,2013-05-28T12:42:14+00:00,17bf462a008e1f2bb3f30b95daeaf6390912a471,unknown,2,2,1,1,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6008269,56,I think we draw variates and not variables,"we draw a particular outcome of a random variable, which is a random variate (https://en.wikipedia.org/wiki/Random_variate).
+
+Thanks for a great book! 
+",ahane,1842457,closed,False,2013-05-30T01:59:45+00:00,2014-07-03T19:59:49+00:00,2013-05-30T03:22:00+00:00,2013-05-30T03:22:00+00:00,1db632f379f625186f0a628d9c41111c82be4629,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6064199,57,Fix typos in Chapter 2,"- catagory -> category
+- assesing -> assessing
+- Determinstic -> Deterministic
+- implicity -> implicitly
+- determinsitic -> deterministic
+- intial -> initial
+- probablistic -> probabilistic
+- amoung -> among
+- explict -> explicit
+- implicity -> implicitly
+- paramters -> parameters
+- Farhenhit -> Fahrenheit
+- ocuring -> occurring
+- probabilties -> probabilities
+- specificed -> specified
+- artifical -> artificial
+",pablooliveira,499257,closed,False,2013-06-02T06:56:04+00:00,2014-06-17T11:00:06+00:00,2013-06-02T15:24:00+00:00,2013-06-02T15:24:00+00:00,6adc0ef44e0ff9438d99c0fe121f72253b21e8da,unknown,21,21,1,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6064401,58,Fix typos in Chapter 3,"- positerior -> posterior
+- ontop -> on top
+- postive -> positive
+- modelling -> modeling
+- determinsitic -> deterministic
+- assingment -> assignment
+- aboves -> above
+- re-reun -> re-run
+- opimization -> optimization
+- attemps -> attempts
+- Tt is -> It is
+- retured -> returned
+- paramter -> parameter
+- esimate -> estimate
+- algoithms -> algorithms
+- specifing -> specifying
+",pablooliveira,499257,closed,False,2013-06-02T08:13:37+00:00,2014-06-18T16:16:43+00:00,2013-06-02T15:23:24+00:00,2013-06-02T15:23:24+00:00,44c6c52b56fef48b0754b9820e831da0dfab8d0c,unknown,13,13,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6072046,60,Fixed first example in Chapter 5,"The legend was not being shown properly for the 3 subplots in the first example. It looks like plt.fill_between() wont work with a normal legend() call. 
+
+Thus, I tweaked the code a bit following the suggestion in this SO thread:
+http://stackoverflow.com/questions/14534130/legend-not-showing-up-in-matplotlib-stacked-area-plot
+
+Hope this makes sense!
+Also, this is my first ever contribution on github. This is so cool!!!
+",sergeyfogelson,561006,closed,False,2013-06-03T08:50:46+00:00,2014-06-26T05:24:07+00:00,2013-06-03T12:15:13+00:00,2013-06-03T12:15:13+00:00,50624f841f9668753026f7ebb9218bcb65731151,unknown,17,8,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6084333,61,"Typo fixes in Chapters 1,4","Here are some more typo fixes. Your book is really nice, thanks for making it freely available !
+
+As a side note, to review the git diffs of these patches I found the following git command helpful:
+git diff --word-diff=porcelain, since it breaks the very long ipynb lines and outlines the changed words :)
+",pablooliveira,499257,closed,False,2013-06-03T18:09:04+00:00,2014-07-03T19:57:18+00:00,2013-06-03T18:15:26+00:00,2013-06-03T18:15:26+00:00,58727c27847eabccf0f616bbef4711dc849a1f86,unknown,17,17,2,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6085592,62,Fixes chapters 5 and 6,"The last fixes for chapters 5 and 6 :)
+",pablooliveira,499257,closed,False,2013-06-03T18:54:02+00:00,2014-06-26T06:20:03+00:00,2013-06-03T19:09:48+00:00,2013-06-03T19:09:48+00:00,50079bccc635d00d9a053096619ef4dd3eac947a,unknown,70,70,2,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6094963,65,fixed minor typos,"fixed minor typos like some sums running from i=0 to i=N (in which case there would be N+1 summands), instead of i=1 to i=N.
+",matrig,4016834,closed,False,2013-06-04T03:21:56+00:00,2014-06-18T10:57:28+00:00,2013-06-04T03:32:40+00:00,2013-06-04T03:32:40+00:00,,unknown,257,264,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6102858,66,Pull request for grammar fix,"Hello,
+
+Great book!  I made a trivial grammar fix.
+
+Thanks,
+
+Zach
+",zachmullen,555959,closed,False,2013-06-04T12:34:37+00:00,2014-07-03T19:55:16+00:00,2013-06-04T20:23:53+00:00,2013-06-04T20:23:53+00:00,770b58928377c09f6b8e204cdbe688fcf17f7613,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6106886,67,Fix typos in README.md,"Some minor typo fixes.
+",jet-sun,3181436,closed,False,2013-06-04T15:03:34+00:00,2014-07-03T19:55:46+00:00,2013-06-04T15:12:01+00:00,2013-06-04T15:12:01+00:00,6c230d771e131f658c9a72084dfe2e76477a2ab4,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6115999,70,Update README.md,"Minor typo s/loss/lose/
+",floppya,152022,closed,False,2013-06-04T20:38:24+00:00,2014-07-03T19:54:46+00:00,2013-06-04T20:40:34+00:00,2013-06-04T20:40:34+00:00,a81aa72358050df977316e1508eb6500a6fda4c9,unknown,1,1,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6134376,73,"Ch4, Ex.1: Explicitly name the scale argument in stats.expon()","In scipy 0.12.0, the first unnamed argument to stats.expon() becomes the location of the distribution. As such, the starter code gives the reader an Exp(1) distribution starting at x=4.
+",mbauman,154641,closed,False,2013-06-05T14:57:15+00:00,2014-06-17T11:17:59+00:00,2013-06-05T14:59:58+00:00,2013-06-05T14:59:58+00:00,9b07f5326fdc9b403011c44d19ce7d863bdc8df6,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6135505,74,A first-round of proofreading,"In README.md, I've corrected a few comma errors and properly formatted some nouns (e.g., correcting ""Scipy"" to ""SciPy"" or italicizing a television show name), thus making the text impervious to assaults from other grammarians. 
+
+I'll do this for additional sections, if there's a need.
+",ajduberstein,2204757,closed,False,2013-06-05T15:35:07+00:00,2014-07-03T19:52:14+00:00,2013-06-05T15:37:27+00:00,2013-06-05T15:37:27+00:00,406842e1d74ed478b829a1a409c95410279ea3cc,unknown,15,15,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6137309,76,Ch5: Fix python code in Priceline showdown example,"Name the ""sp3"" plot so it may be referenced in the label.
+Fix indexing assignment error in showdown_loss() by creating a ""close_mask""
+intermediate boolean indexing variable.
+Fix risk assignment -- values over by less than $250 were not being assigned the risk value. Ensure this happens by assigning loss[ix] = risk last.
+Outputs and plots are not changed.
+",mbauman,154641,closed,False,2013-06-05T16:36:55+00:00,2014-06-17T10:46:09+00:00,2013-06-05T16:57:25+00:00,2013-06-05T16:57:25+00:00,674cb4816cff143950635c92f332f124991485c9,unknown,4,3,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6189342,80,requirements.txt,"These should work for OS X 10.7
+
+I haven't verified that every notebook in the book works; just Chapters 1 and 2
+",xcthulhu,168675,closed,False,2013-06-07T15:23:14+00:00,2014-06-27T20:55:01+00:00,2013-06-07T15:30:46+00:00,2013-06-07T15:30:46+00:00,c1130f3901619f2983da3296287b7b403b3d2632,unknown,8,0,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6208869,82,Chandra Photon Counts,"So I wrote something that downloads some data from the Harvard Smithsonian and grabs the photon arrival times.
+
+This makes for an example of a naturally occurring Poisson distribution with much lower variance than the other examples.
+
+I also added praw into requirements.txt
+",xcthulhu,168675,open,False,2013-06-09T14:21:56+00:00,2014-06-12T10:11:01+00:00,,,cc560bb12e7b09a6f8dd26c42f8432a65f836194,dirty,2368,24,9,7,0,9,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6336085,85,Minor fix to equation in LawOfLargeNumbers.ipynb,"add sqrt to the D(n) equation
+",isofer,368583,closed,False,2013-06-14T20:32:32+00:00,2014-06-22T15:25:00+00:00,2013-06-16T00:47:59+00:00,2013-06-16T00:47:59+00:00,2e2f5a19734a81f62c15559ffec217bfbce5dee4,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6371978,86,Fix minor typo.,"s/prolouge/prologue/
+",fperez,57394,closed,False,2013-06-17T21:45:59+00:00,2014-06-22T15:24:34+00:00,2013-06-19T22:31:07+00:00,2013-06-19T22:31:07+00:00,0a5f497e7e82c4548161d7dfb06fc654db7bfd1e,unknown,2,2,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6484302,89,Fixing typo,"Changes `Simpley` to `simply`
+",KartikTalwar,461702,closed,False,2013-06-22T00:25:33+00:00,2014-07-03T19:46:10+00:00,2013-06-24T01:54:46+00:00,2013-06-24T01:54:46+00:00,4231a81eeb8012ed451738152f1ac66c07e48eaa,unknown,2,2,1,2,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6539254,90,Fix some grammatical errors in Chapter 4,"there/their
+equally as/equally
+sample_size= 10000/sample_size = 10000
+",jvns,817739,closed,False,2013-06-25T18:09:31+00:00,2014-07-03T19:45:09+00:00,2013-06-27T01:13:41+00:00,2013-06-27T01:13:41+00:00,1e823140364f62c6bd9ddc83c4d495fd8be80470,unknown,3,3,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6664206,92,Fix error in posterior graphs for text data,"Label on first x-axis was wrong. Both of the graphs were labeled with lambda_2.
+
+![screen shot 2013-07-01 at 5 19 43 pm](https://f.cloud.github.com/assets/684965/733660/cf888a66-e2a4-11e2-93aa-719f5d0b889e.png)
+",joehand,684965,closed,False,2013-07-01T23:20:49+00:00,2014-07-03T19:42:37+00:00,2013-07-03T22:19:41+00:00,2013-07-03T22:19:41+00:00,79c60334eda9b915d1b3faa5df89c32cca0fae6d,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6708636,93,Some small fixes,"See comments for details.
+",p-e-w,2702526,open,False,2013-07-03T15:41:11+00:00,2014-06-12T10:10:19+00:00,,,5fbe2e31f9ad58e8ea804f4650037892afe8f912,dirty,19,14,2,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6719863,94,fixed whitespace,,djv,263148,closed,False,2013-07-03T22:56:50+00:00,2014-07-03T19:43:08+00:00,2013-07-05T00:08:47+00:00,2013-07-05T00:08:47+00:00,7d0577e09a628647297632ac2058c1436a5cbf33,unknown,3,3,1,1,0,7,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6720454,95,fix incorrect inequality,,djv,263148,closed,False,2013-07-03T23:32:35+00:00,2014-07-03T19:43:38+00:00,2013-07-04T00:49:43+00:00,2013-07-04T00:49:43+00:00,5935ffc33e5c3c2867fbfc804fd27ff378115234,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6726356,96,Small spelling and grammar fixes in Chapter 2,,psinger,1677826,closed,False,2013-07-04T08:52:08+00:00,2014-07-03T19:42:07+00:00,2013-07-04T23:58:32+00:00,2013-07-04T23:58:32+00:00,2a3f43fc38344a54e55b80747d9f45a416846aaa,unknown,9,9,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6776189,97,Grammar fix.,,pushmatrix,190692,closed,False,2013-07-08T12:16:25+00:00,2014-07-03T19:41:37+00:00,2013-07-14T02:31:20+00:00,2013-07-14T02:31:20+00:00,6fc1589befcce44e3af9796b855d9ea4f84b01ae,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6787068,98,Minor spelling/grammar in chapter 2,,gbenmartin,1299691,closed,False,2013-07-08T19:18:51+00:00,2014-07-03T19:26:55+00:00,2013-07-14T02:30:40+00:00,2013-07-14T02:30:40+00:00,4ca11d491d7fde9bb1ff36143f907b946e51b016,unknown,3,3,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,6888988,100,Spelling / Grammar chapter 3,"not sure about:
+
+maximum a posterior --> maximum a posteriori (did not include that in this commit)
+",psinger,1677826,closed,False,2013-07-12T11:12:21+00:00,2014-07-03T19:41:06+00:00,2013-07-14T02:32:41+00:00,2013-07-14T02:32:41+00:00,d6d642013d0a9ec96b03c2dee1fe2781790d9f87,unknown,3,3,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7121646,101,some minor typos in later chapters,"Most fixes are just minor spelling/grammar/typo fixes. One equation in LossFunctions.ipynb wasn't rendering because of \* characters. One reference to step 'A' that should be step '1'.
+",gbenmartin,1299691,closed,False,2013-07-23T21:44:38+00:00,2014-07-03T19:27:26+00:00,2013-07-24T02:15:54+00:00,2013-07-24T02:15:54+00:00,e7d5fd5bd45daabdba4e4c95924050abcf74eaae,unknown,36,36,5,3,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7154926,102,Some typos and wording changes,"Fixed some spelling errors and awkward wording. Also made Ch6 title
+look consistant with earlier titles.
+
+Also, THIS BOOK IS AWESOME. THANKS SO MUCH FOR MAKING IT!
+
+(this is my first Pull Request ever, so forgive me if I've done something wrong...)
+",tom-christie,5084541,closed,False,2013-07-25T00:22:55+00:00,2014-06-17T11:00:26+00:00,2013-07-25T00:40:20+00:00,2013-07-25T00:40:20+00:00,3af3a326d07ebe79a140fb8c16e67dbdd03380be,unknown,25,27,3,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7162136,103,Update MorePyMC.ipynb,"fixed a typo of probability for Ber(p) for X is 0
+",bclow,951032,closed,False,2013-07-25T09:46:17+00:00,2014-07-03T19:40:06+00:00,2013-07-25T11:48:09+00:00,2013-07-25T11:48:09+00:00,b80e88da4dfd3febf3eb495c7c47a302a15f6030,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7191541,105,Fix typo,"Hi, just spotted a small typo.
+
+Thanks for all your work, this is a great book!
+",sjp,207329,closed,False,2013-07-26T09:48:28+00:00,2014-06-18T14:58:45+00:00,2013-07-29T09:41:06+00:00,2013-07-29T09:41:06+00:00,9b16d131d38ea0b6efc6d9cf2a11c381472f160e,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7195509,106,"Spelling fix, CH1 compliment -> complement","I believe the intention of the changed sentence is to communicate that
+Bayesian methods can be viewed as complementary to frequentist methods.
+",bobjansen,311522,closed,False,2013-07-26T13:24:39+00:00,2014-07-03T19:29:58+00:00,2013-07-29T09:40:31+00:00,2013-07-29T09:40:31+00:00,a19df2d0d428f85566cc6ae3ac30c5c53e0382d9,unknown,7,7,1,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7218520,108,Fix typesetting mistakes,"’I've noticed that the book isn't the top of the art when it comes to typesetting. I've fixed the most obvious one (use of straight ASCII quotes instead of the correct markdown supported curly once [’, “, ”]) and the most awkward one (use of pipe instead of midline when denoting conditional probability; that is `p(a|b)` as opposed to `p(a | b)`).
+
+There are a few more,
+- The use of html-escapes instead of markdown-supported unicodes (`&mdash;` instead of simply instering a ""—"").
+- None hyperlinked footnotes and citations.
+- Manually inserted line-height parameters (`\\[5pt]`) doesn't render correctly in markdown (although that is more of a _bug_ than wrong typesetting).
+- Use of `\sim` to denote negation, `~\sim` will leave whitespace intact (though personally I think ¬A `\neg A` is more beautiful than ~A)
+
+I'm sure there are more, and I will probably be working my self on this PR.
+",runarberg,3984600,open,False,2013-07-28T11:43:45+00:00,2014-06-22T15:12:57+00:00,,,b20f2a9bfe5d6980e9a186ef48d0591cdd4b0489,dirty,50,50,1,2,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7367960,109,Copy editing: chapter 1,"Thanks for this terrific resource! This is way more informative than most of the closed-form math texts on Bayesian analysis, and it's great to see the information presented in this interactive format as well.
+
+I made some copy edits in Chapter 1 for flow, language, and continuity. If you find these useful, I can do more in later chapters as well.
+
+Nothing substantive has been changed except that I added short blurbs about the physical interpretations of the Poisson and exponential distributions. I understand that they're used mostly as a basis for a discussion of their form, but knowing what they represent may help spark readers' intuition.
+",GarthSnyder,443181,closed,False,2013-08-03T03:15:37+00:00,2014-07-03T19:37:04+00:00,2013-08-03T22:56:02+00:00,2013-08-03T22:56:02+00:00,84819e1175f686a9216129366ece5636dad76be3,unknown,54,45,1,2,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7371678,110,PEP8 fixes for Chapter 1,"I made a bit of a mess with Git but I think it's an overall improvement of the code. Maybe best to cherry-pick only commit e98d9b1, and leave the changes of Jul 30.
+
+Also I fixed the barchart comparing the two priors and posteriors.
+",bobjansen,311522,closed,False,2013-08-03T21:25:47+00:00,2014-06-18T21:15:41+00:00,2013-08-03T22:49:26+00:00,2013-08-03T22:49:26+00:00,,unknown,346,260,6,8,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7374756,111,PEP8 fixes for Chapter 2,,bobjansen,311522,closed,False,2013-08-04T15:25:38+00:00,2014-06-22T15:57:32+00:00,2013-08-07T18:48:52+00:00,2013-08-07T18:48:52+00:00,199501406eb80d80b716f915f93147bbecfd6a38,unknown,485,551,1,3,0,2,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7448740,113,Fixed typo,,elpres,408526,closed,False,2013-08-07T15:16:04+00:00,2014-06-18T13:40:22+00:00,2013-08-07T18:48:55+00:00,2013-08-07T18:48:55+00:00,13867c37a5b1201dab8acd25f35d511884c9b009,unknown,2,2,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7469178,114,Confusion:  Fix bernoulli distribution,"Is this what you meant?  A Berrnoulli distribution takes value 0 with probability q = 1 - p.
+",Kleptine,1078792,closed,False,2013-08-08T07:32:21+00:00,2014-06-22T15:57:35+00:00,2013-08-08T13:06:31+00:00,2013-08-08T13:06:31+00:00,0ccddf825a2bb34d488671a8d371822f7426121f,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7472243,115,Cleaned up a sentence,,elpres,408526,closed,False,2013-08-08T10:22:31+00:00,2014-06-22T15:57:37+00:00,2013-08-08T13:07:09+00:00,2013-08-08T13:07:09+00:00,debcd216ba8aefcedfc9ab3c3331af6b34a0404d,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7475427,116,Wrong choice of quantiles for CI?,"Between the 5% and 95% quantiles there are 90% of the distribution, not 95%, right? So it should be 2.5% and 97.5% instead.
+",elpres,408526,closed,False,2013-08-08T13:10:06+00:00,2014-06-22T15:57:39+00:00,2013-08-08T13:13:51+00:00,2013-08-08T13:13:51+00:00,5ac293ad82f6318f8b24de16c64b314d0e047f42,unknown,4,4,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7487922,117,Further fixes for Chapter 2,"The graphs in the example were lost, added those back. Also some minor things.
+",bobjansen,311522,closed,False,2013-08-08T20:17:44+00:00,2014-06-22T15:57:43+00:00,2013-08-08T20:59:24+00:00,2013-08-08T20:59:24+00:00,54242c9d8ede128314b191b36e94cd658b4d0ed7,unknown,217,62,1,4,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7530082,119,Fixes minor grammar error,,slayton,39421,closed,False,2013-08-11T23:01:47+00:00,2014-06-19T16:15:48+00:00,2013-08-12T00:10:13+00:00,2013-08-12T00:10:13+00:00,778181057633405439472008b967387a86ce1a2f,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7565916,120,Fixed a typo and some whitespace inconsistencies,,elpres,408526,closed,False,2013-08-13T10:15:06+00:00,2014-06-14T21:43:06+00:00,2013-08-13T12:53:25+00:00,2013-08-13T12:53:25+00:00,1c551a116b3811de0cb13215c52be03a9e543e68,unknown,4,4,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7587994,121,Fix wrong reference to p_B instead of delta,"I've made a small fix: in the text there was a $p_B = 0$ where it should be $\text{delta} = 0$.
+
+This is the first time I do a pull request so bear with me if I did something wrong ;).
+",tritemio,4156237,closed,False,2013-08-13T23:49:50+00:00,2014-06-22T15:57:51+00:00,2013-08-14T12:57:50+00:00,2013-08-14T12:57:50+00:00,7835e1911082305e0e0677162361c304d6698265,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7684150,122,Update Chapter 1,"Hi,
+
+I fixed two small typos in chapter 1.
+Thank you for such a great interactive book!
+## 
+
+Kind regards,
+Vitaly
+",vsl9,4344862,closed,False,2013-08-18T19:55:38+00:00,2014-06-22T15:57:55+00:00,2013-08-18T20:12:26+00:00,2013-08-18T20:12:26+00:00,022a1d13562046392c693b442a8768797693bc7d,unknown,3,3,1,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7687340,123,Correct comment on what code actually does,,JensRantil,730342,closed,False,2013-08-19T05:03:29+00:00,2014-06-22T15:57:57+00:00,2013-08-19T13:20:38+00:00,2013-08-19T13:20:38+00:00,74e3d480740d1471ebfbb7c95e690b19ba51b230,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7797174,125,CH3: 4 minor changes,,haraldschilly,207405,closed,False,2013-08-22T17:29:40+00:00,2014-06-22T15:58:03+00:00,2013-08-22T22:32:33+00:00,2013-08-22T22:32:32+00:00,b8f0af19e765e72252c0cd0786d7624c1ad73ba9,unknown,6,6,1,4,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7839483,126,PEP8 fixes for Chapter 3,"Changes to make Chapter 3 PEP8 compliant.
+
+PEP8 still gives two complaints:
+
+92:80: E501 line too long (89 > 79 characters)
+182:33: E126 continuation line over-indented for hanging indent
+
+but I like it as it is.
+",bobjansen,311522,closed,False,2013-08-24T14:37:10+00:00,2014-06-22T15:58:07+00:00,2013-08-27T12:57:08+00:00,2013-08-27T12:57:08+00:00,0aff0d806630b6bc4e6d61491869e1c16281c224,unknown,212,206,1,1,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7865848,127,CH2: Correct Bernoulli failure probability,"This was fixed in 3fe9939b38dbfd3547f15080232ae49caf262cec but unrelated
+changes in 16c6a7778792088cf15d63836c359133d5cded7f reverted the fix.
+",kyleam,1297788,closed,False,2013-08-26T18:54:15+00:00,2014-06-21T14:57:56+00:00,2013-08-27T12:56:40+00:00,2013-08-27T12:56:40+00:00,3e5c7eb84f2ea7774a805eeb606b75937b5b6962,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,7970914,130,Fixed several misspellings of 'occurrence' in chapter 2,,eamartin,287200,closed,False,2013-08-29T23:13:59+00:00,2014-06-18T10:58:44+00:00,2013-08-30T02:25:41+00:00,2013-08-30T02:25:41+00:00,9aacebc59de5936667d36cedc459e9e953dc19f5,unknown,8,8,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8096701,131,Fixing small spelling mistake,"$lambda$ to $\lambda$
+",Inconditus,711857,closed,False,2013-09-05T06:54:07+00:00,2014-06-22T15:58:18+00:00,2013-09-05T20:07:08+00:00,2013-09-05T20:07:08+00:00,7c26f949282af53404318cba45f7eb646f35b9eb,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8138350,132,Small grammar fix,"“it's” -> “its”
+",elpres,408526,closed,False,2013-09-06T14:24:40+00:00,2014-06-22T15:58:21+00:00,2013-09-07T18:28:59+00:00,2013-09-07T18:28:59+00:00,72cddeb3bd97e7a08b1c26b9092d404127d0cb36,unknown,2,2,1,2,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8231344,133,non-fundamentelness of probabilities,"Since there are no units for these graphs, it is unclear whether they are histograms with counts along the y-axes or probability mass functions with probabilties along the y-axes.
+
+In the later case, I found it slightly confusing that there could be probabilities on both axes, so I added this note to explain that the text is referring to the x-axis probabilities.
+",tlevine,10280,open,False,2013-09-11T02:07:29+00:00,2014-06-12T10:11:24+00:00,,,7afca6ec70427053ea62655ecad4172797d3b395,dirty,2,0,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8301219,134,Typo on your website,"Hello, just as a heads up on the third paragraph of your website 
+
+""Bayesian inference is the destination, then mathematical analysis is a particular path to towards it."" 
+
+you added an extra ""to"".  
+",matthew-boyer,768940,closed,False,2013-09-13T04:11:24+00:00,2014-07-03T19:22:51+00:00,2013-09-21T22:08:29+00:00,,,dirty,940,31,14,29,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8340703,135,Update MorePyMC.ipynb,"Probably a typo since the code uses `N_B = 750`
+",hackaugusto,310139,closed,False,2013-09-15T23:58:31+00:00,2014-06-22T15:58:23+00:00,2013-09-16T03:21:18+00:00,2013-09-16T03:21:18+00:00,889f37c7e761309b3072bf0be0e9e0bb2c7ff55b,unknown,2,2,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8378179,136,Histogram was not visible due to incorrect ylims.,"A quick fix for a non-visible histogram due to incorrect automatic setting of y-limits.
+(Versions: ipython: git master branch, matplotlib 1.2.1)
+",michaf,979988,closed,False,2013-09-17T08:54:25+00:00,2014-06-22T15:58:25+00:00,2013-09-17T13:10:27+00:00,2013-09-17T13:10:27+00:00,4af10f86b6174ba59d9180314bfa54cae2b1a1fc,unknown,1,0,1,1,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8578741,137,Corrections of typos,"Some typos, and also request [133](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/pull/133) because I had been rudely developing on master
+
+(I can remove the part that duplicates 133 if you prefer.)
+",tlevine,10280,open,False,2013-09-25T00:06:50+00:00,2014-06-12T10:09:52+00:00,,,0b1830737ff2411c387f6bf830479ed060cc8811,dirty,11,9,4,8,0,0,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,8705781,138,I found some typo in Chapter2_MorePyMC/MorePyMC.ipynb.,"1. In the section [A and B Together],
+   ""$\text{delta}=0$ =0$"" should be ""$\text{delta}=0$""
+2. In the section [Initializing Stochastic variables],
+   ""where 0, 4 are the DiscreteUniform-specific upper and lower""
+   should be ""where 0, 4 are the DiscreteUniform specific lower and upper""
+3. In the section [Normal distributions],
+   ""$\sigma^{2}$ instead of $\tau$"" should be ""$\sigma^{2}$ instead of $\tau^{-1}$
+",yaboo-oyabu,1643282,closed,False,2013-09-30T14:08:48+00:00,2014-06-22T15:58:28+00:00,2013-09-30T14:45:16+00:00,2013-09-30T14:45:16+00:00,52df4469c4186c5dfc5df6c6e8a6e95ac23303cf,unknown,4,4,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9205238,140,recieved -> received,,matkoniecz,899988,closed,False,2013-10-18T11:31:49+00:00,2014-07-03T19:20:50+00:00,2013-10-18T11:33:04+00:00,,a2e730404f38164f009db6947a68b5b5d0f9e0a1,dirty,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9205454,141,recieved -> received,,matkoniecz,899988,closed,False,2013-10-18T11:42:26+00:00,2014-06-22T15:58:31+00:00,2013-10-18T14:23:44+00:00,2013-10-18T14:23:44+00:00,d0fb1598f7514c08b1f9aa47f3aceccc9d23d490,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9892335,148,`mc` -> `pm` and a bunch of typos,"Currently done with Chapters 2,3,4 Will update this PR while reading the book to the end. You can merge when I'm done.
+- [x] chapter 2
+- [x] chapter 3
+- [x] chapter 4
+- [x] chapter 5
+- [x] chapter 6
+
+fixes #144
+- As pymc is now imported as pm, what about pymc.plot as mcplot? should it be pmplot now?
+- Also found that the last headline in chapter 3 has no content. ""Covariance matrices and eliminating parameters"" Bug? or just not finished?
+",cebe,189796,closed,False,2013-11-12T18:31:00+00:00,2014-07-03T19:14:40+00:00,2013-11-20T01:21:22+00:00,2013-11-20T01:21:22+00:00,a894dcd3525999545626046c79fc653d1473a533,unknown,52,52,4,4,0,4,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9941748,149,Minor editing changes on Chapter 2,"Minor changes -- a few spelling typos and a phrasing change.
+
+Please accept my apologies if this pull request is too minor or I should have batched together more commits; this is my first use of Github so I am still feeling my way.
+",williamscott,5918360,closed,False,2013-11-13T22:36:48+00:00,2014-06-22T15:58:37+00:00,2013-11-13T22:59:30+00:00,2013-11-13T22:59:30+00:00,a511468247dc6c82774acf32363c9dafbb2af641,unknown,4,4,1,4,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9958778,151,Minor editing changes to chapters 2 and 3,"A few minor typo corrections to the text of Chapters 2 and 3.
+",williamscott,5918360,closed,False,2013-11-14T12:27:50+00:00,2014-06-22T15:58:43+00:00,2013-11-14T23:27:49+00:00,2013-11-14T23:27:49+00:00,4fa7b7db1dd40f7ddab87c2f0bf9de72b14ab3f1,unknown,8,9,3,4,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,9994588,152,Delete superfluous row in table,"Superfluous row in income by programming language table
+",williamscott,5918360,closed,False,2013-11-15T10:21:38+00:00,2014-06-22T15:58:46+00:00,2013-11-15T13:28:05+00:00,2013-11-15T13:28:05+00:00,e360818e398feb10a61f9dae234fff66adab639a,unknown,0,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10021977,153,Typos and phrasing changes,"Replace ""more clear be"" with ""more clear by""
+Remove full stop between $X$ and :
+Replace ""computational-intensive"" with ""computationally-intensive""
+",williamscott,5918360,closed,False,2013-11-16T03:29:53+00:00,2014-06-22T15:58:49+00:00,2013-11-17T01:26:42+00:00,2013-11-17T01:26:42+00:00,1fada4c5af8b5499f2e29e34cd42d0ed75c3fc19,unknown,6,6,2,3,0,3,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10029425,154,fix recent typos causing invalid JSON,"recent commit (dfc565c1561bb05b71a316d2073efeb7c6f50e66) edited Chapter 1, introducing typos and making it invalid JSON. This fixes those typos.
+",minrk,151929,closed,False,2013-11-17T04:22:26+00:00,2014-06-22T15:58:51+00:00,2013-11-17T04:33:27+00:00,2013-11-17T04:33:27+00:00,8e5c64c0e57e68e9e52764e263a3dd671d6d31f0,unknown,1,1,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10043711,156,Update ClusteringWithGaussians.py,"A typo has been corrected
+",ghost,10137,closed,False,2013-11-18T10:18:57+00:00,2014-06-21T01:42:27+00:00,2013-11-19T02:31:16+00:00,2013-11-19T02:31:16+00:00,18943c042f99561c0f770fcb1f08496513d306db,unknown,2,3,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10208824,157,Update separation_plot.py,"A typo has been corrected.
+",ghost,10137,closed,False,2013-11-22T13:23:22+00:00,2014-06-17T20:05:58+00:00,2013-11-22T14:36:43+00:00,2013-11-22T14:36:43+00:00,900da55bce6df1f794465ef05b44fbc8ea9e65ff,unknown,2,2,1,1,0,1,,,
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10238099,158,Typo + code fix to Poisson example in chapter 1,"Many thanks for the great book!
+",georgemarrows,5624098,closed,False,2013-11-23T21:51:15+00:00,2014-06-14T19:09:10+00:00,2013-11-23T22:52:10+00:00,2013-11-23T22:52:10+00:00,edfc964918447e83e3d884e0b1c51d910bf6d344,unknown,2,1,1,2,0,1,,,

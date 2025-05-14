@@ -1,0 +1,852 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+scikit-learn/scikit-learn,2515165706,2085708996,tylerjereddy,7903078,2025-05-13T00:08:00+00:00,2025-05-13T00:10:01+00:00,"Replacing `_tree` itself was *much* messier, so I tried to keep this scoped for prototyping.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2515165706,2085709667,tylerjereddy,7903078,2025-05-13T00:09:14+00:00,2025-05-13T00:10:01+00:00,Needing to call `query_ball_point` above and `query` here is a demonstration of API differences in `KDTree` between our libraries causing awkwardness in substituted workflows.,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2515165706,2085710151,tylerjereddy,7903078,2025-05-13T00:09:57+00:00,2025-05-13T00:10:01+00:00,"Different handling of ragged data structures and `inf`/invalid values also seems to be present, requiring these additional shims.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2515165706,2085708996,tylerjereddy,7903078,2025-05-13T00:08:00+00:00,2025-05-13T00:10:01+00:00,"Replacing `_tree` itself was *much* messier, so I tried to keep this scoped for prototyping.",True,sklearn/neighbors/_base.py,15.0,"@@ -694,6 +695,10 @@ def _fit(self, X, y=None):
+                     ""try algorithm='ball_tree' ""
+                     ""or algorithm='brute' instead.""
+                 )
++            self._sp_tree = spKDTree(
++                X,
++                self.leaf_size,
++            )",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2515165706,2085709667,tylerjereddy,7903078,2025-05-13T00:09:14+00:00,2025-05-13T00:10:01+00:00,Needing to call `query_ball_point` above and `query` here is a demonstration of API differences in `KDTree` between our libraries causing awkwardness in substituted workflows.,True,sklearn/neighbors/_base.py,54.0,"@@ -1278,6 +1283,53 @@ class from an array representing our data set and ask who's
+                 delayed_query(X[s], radius, return_distance, sort_results=sort_results)
+                 for s in gen_even_slices(X.shape[0], n_jobs)
+             )
++            if return_distance:
++                neigh_ind, neigh_dist = tuple(zip(*chunked_results))
++                results = np.hstack(neigh_dist), np.hstack(neigh_ind)
++            else:
++                results = np.hstack(chunked_results)
++        elif self._fit_method == ""kd_tree"":
++            if issparse(X):
++                raise ValueError(
++                    ""%s does not work with sparse matrices. Densify the data, ""
++                    ""or set algorithm='brute'"" % self._fit_method
++                )
++
++            n_jobs = effective_n_jobs(self.n_jobs)
++            delayed_query = delayed(self._sp_tree.query_ball_point)
++            chunked_results = Parallel(n_jobs, prefer=""threads"")(
++                delayed_query(X[s], radius, return_sorted=sort_results)
++                for s in gen_even_slices(X.shape[0], n_jobs)
++            )
++            nn_vals = []
++            for sub_arr in chunked_results[0]:
++                nn_vals.append(len(sub_arr))
++            if return_distance:
++                dd, ii = self._sp_tree.query(X, k=max(nn_vals), distance_upper_bound=radius)",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2515165706,2085710151,tylerjereddy,7903078,2025-05-13T00:09:57+00:00,2025-05-13T00:10:01+00:00,"Different handling of ragged data structures and `inf`/invalid values also seems to be present, requiring these additional shims.",True,sklearn/neighbors/_base.py,63.0,"@@ -1278,6 +1283,53 @@ class from an array representing our data set and ask who's
+                 delayed_query(X[s], radius, return_distance, sort_results=sort_results)
+                 for s in gen_even_slices(X.shape[0], n_jobs)
+             )
++            if return_distance:
++                neigh_ind, neigh_dist = tuple(zip(*chunked_results))
++                results = np.hstack(neigh_dist), np.hstack(neigh_ind)
++            else:
++                results = np.hstack(chunked_results)
++        elif self._fit_method == ""kd_tree"":
++            if issparse(X):
++                raise ValueError(
++                    ""%s does not work with sparse matrices. Densify the data, ""
++                    ""or set algorithm='brute'"" % self._fit_method
++                )
++
++            n_jobs = effective_n_jobs(self.n_jobs)
++            delayed_query = delayed(self._sp_tree.query_ball_point)
++            chunked_results = Parallel(n_jobs, prefer=""threads"")(
++                delayed_query(X[s], radius, return_sorted=sort_results)
++                for s in gen_even_slices(X.shape[0], n_jobs)
++            )
++            nn_vals = []
++            for sub_arr in chunked_results[0]:
++                nn_vals.append(len(sub_arr))
++            if return_distance:
++                dd, ii = self._sp_tree.query(X, k=max(nn_vals), distance_upper_bound=radius)
++                dd_new = []
++                ii_new = []
++                for i in range(len(dd)):
++                    finite_indices = ii[i][np.isfinite(dd[i])]
++                    finite_dists = dd[i][np.isfinite(dd[i])]
++                    if sort_results:
++                        sort_inds = np.argsort(finite_indices)
++                        sorted_inds = finite_indices[sort_inds]
++                        sorted_dists = finite_dists[sort_inds]",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2510721961,2083297871,tylerjereddy,7903078,2025-05-10T22:03:13+00:00,2025-05-10T22:03:13+00:00,"Here and elsewhere in this diff, we can do even better (see below). It seems that the two APIs have effectively developed via convergent evolution to offer similar options with different names.
+
+```diff
+     kd = KDTree(y)
+-    ny = kd.query_ball_point(y, radius, p=np.inf)
+-    ny = [len(sub_list) for sub_list in ny]
++    ny = kd.query_ball_point(y, radius, p=np.inf, return_length=True)
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2510721961,2083297871,tylerjereddy,7903078,2025-05-10T22:03:13+00:00,2025-05-10T22:03:13+00:00,"Here and elsewhere in this diff, we can do even better (see below). It seems that the two APIs have effectively developed via convergent evolution to offer similar options with different names.
+
+```diff
+     kd = KDTree(y)
+-    ny = kd.query_ball_point(y, radius, p=np.inf)
+-    ny = [len(sub_list) for sub_list in ny]
++    ny = kd.query_ball_point(y, radius, p=np.inf, return_length=True)
+```",True,sklearn/feature_selection/_mutual_info.py,,"@@ -62,12 +63,14 @@ def _compute_mi_cc(x, y, n_neighbors):
+ 
+     # KDTree is explicitly fit to allow for the querying of number of
+     # neighbors within a specified radius
+-    kd = KDTree(x, metric=""chebyshev"")
+-    nx = kd.query_radius(x, radius, count_only=True, return_distance=False)
++    kd = KDTree(x)
++    nx = kd.query_ball_point(x, radius, p=np.inf)
++    nx = [len(sub_list) for sub_list in nx]
+     nx = np.array(nx) - 1.0
+ 
+-    kd = KDTree(y, metric=""chebyshev"")
+-    ny = kd.query_radius(y, radius, count_only=True, return_distance=False)
++    kd = KDTree(y)
++    ny = kd.query_ball_point(y, radius, p=np.inf)
++    ny = [len(sub_list) for sub_list in ny]",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2510006934,2083712232,lucyleeow,23182829,2025-05-12T02:08:25+00:00,2025-05-12T02:08:25+00:00,"```suggestion
+      numpy 2.2.5 is the most recent version, its upper bound should be set to <2.3.0.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2510006934,2083712232,lucyleeow,23182829,2025-05-12T02:08:25+00:00,2025-05-12T02:08:25+00:00,"```suggestion
+      numpy 2.2.5 is the most recent version, its upper bound should be set to <2.3.0.
+```",True,doc/developers/maintainer.rst.template,,"@@ -162,6 +165,17 @@ Reference Steps
+     - In the release branch, change the version number `__version__` in
+       `sklearn/__init__.py` to `{{ version_full }}`.
+ 
++    {% if key == ""rc"" %}
++    - Still in the release branch, set or update the upper bound on the build
++      dependencies in the `[build-system]` section of `pyproject.toml`. The goal is to
++      prevent future backward incompatible releases of the dependencies to break the
++      build in the maintenance branch.
++      
++      The upper bounds should match the latest already-released minor versions of the
++      dependencies and should allow future micro (bug-fix) versions. For instance, if
++      numpy 2.2.5 is the most rencent version, its upper bound should be set <2.3.0.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081523092,betatim,1448859,2025-05-09T12:00:00+00:00,2025-05-09T12:00:01+00:00,Setting this means that the C extensions that come with scikit-learn are marked as working with free threaded Python right? One question I've had about marking extensions as compatible: how do we know? With the GIL there are a lot of things you could do that without the GIL enabled are bugs because they lead to race conditions. How the heck would we find all of them?,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081593593,ogrisel,89061,2025-05-09T12:43:58+00:00,2025-05-09T21:10:48+00:00,"> How the heck would we find all of them?
+
+We do not need to find them all to declare that as a project we would consider such race conditions as bugs that we are willing to get fixed.
+
+But I agree, it's better to try to catch as many as possible ahead of time. In the past (e.g. #30007) we started to take a look at pytest extensions that should help us catch those bugs before making a release. We need to give those tools a second look to see which one is the easiest to adopt for scikit-learn, either for manual checks of a particular submodule or automated check on the CI for the full code base.",False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081624279,betatim,1448859,2025-05-09T13:03:31+00:00,2025-05-09T13:03:31+00:00,"True, we don't have to find all of them ahead of time. We could attach a note to free-threaded usage mentioning that it is not yet ready for production use?
+
+I'll take a look at #30007. ",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081817713,ogrisel,89061,2025-05-09T14:34:24+00:00,2025-05-09T14:34:24+00:00,"> We could attach a note to free-threaded usage mentioning that it is not yet ready for production use?
+
+It would be a good idea to include such a note in the release notes for 1.7. cc @jeremiedbb.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081944978,thomasjpfan,5402633,2025-05-09T15:33:46+00:00,2025-05-09T15:36:10+00:00,"Reading the docs for `freethreading_compatible=True`: https://docs.cython.org/en/latest/src/userguide/freethreading.html#status it states:
+
+> When you specify this directive, importing the module will not cause the interpreter to re-enable the GIL. The directive itself does not do anything to ensure compatibility - it is simply a way for you to indicate that you have tested your module and are confident that it works.
+
+If we are not confident enough that it works, I do not see the value in setting the flag. It could even be a regression:
+
+- Currently, with `freethreading_compatible=False` means the GIL is reenabled. So the code works today.
+- If we change it to `freethreading_compatible=True` and the module is not compatible with free threading, then it could break.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2082507395,ogrisel,89061,2025-05-09T21:14:42+00:00,2025-05-09T21:14:42+00:00,"But we cannot run such tests if we do not release the GIL when importing the native extension modules, right?",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2082512839,ogrisel,89061,2025-05-09T21:17:44+00:00,2025-05-09T21:17:44+00:00,Maybe we should finalize and merge #30041 to main and then resync that branch with `main` to actually be able to run such tests using `pytest-run-parallel`.,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081523092,betatim,1448859,2025-05-09T12:00:00+00:00,2025-05-09T12:00:01+00:00,Setting this means that the C extensions that come with scikit-learn are marked as working with free threaded Python right? One question I've had about marking extensions as compatible: how do we know? With the GIL there are a lot of things you could do that without the GIL enabled are bugs because they lead to race conditions. How the heck would we find all of them?,True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081593593,ogrisel,89061,2025-05-09T12:43:58+00:00,2025-05-09T21:10:48+00:00,"> How the heck would we find all of them?
+
+We do not need to find them all to declare that as a project we would consider such race conditions as bugs that we are willing to get fixed.
+
+But I agree, it's better to try to catch as many as possible ahead of time. In the past (e.g. #30007) we started to take a look at pytest extensions that should help us catch those bugs before making a release. We need to give those tools a second look to see which one is the easiest to adopt for scikit-learn, either for manual checks of a particular submodule or automated check on the CI for the full code base.",True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081624279,betatim,1448859,2025-05-09T13:03:31+00:00,2025-05-09T13:03:31+00:00,"True, we don't have to find all of them ahead of time. We could attach a note to free-threaded usage mentioning that it is not yet ready for production use?
+
+I'll take a look at #30007. ",True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081817713,ogrisel,89061,2025-05-09T14:34:24+00:00,2025-05-09T14:34:24+00:00,"> We could attach a note to free-threaded usage mentioning that it is not yet ready for production use?
+
+It would be a good idea to include such a note in the release notes for 1.7. cc @jeremiedbb.",True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2081944978,thomasjpfan,5402633,2025-05-09T15:33:46+00:00,2025-05-09T15:36:10+00:00,"Reading the docs for `freethreading_compatible=True`: https://docs.cython.org/en/latest/src/userguide/freethreading.html#status it states:
+
+> When you specify this directive, importing the module will not cause the interpreter to re-enable the GIL. The directive itself does not do anything to ensure compatibility - it is simply a way for you to indicate that you have tested your module and are confident that it works.
+
+If we are not confident enough that it works, I do not see the value in setting the flag. It could even be a regression:
+
+- Currently, with `freethreading_compatible=False` means the GIL is reenabled. So the code works today.
+- If we change it to `freethreading_compatible=True` and the module is not compatible with free threading, then it could break.",True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2082507395,ogrisel,89061,2025-05-09T21:14:42+00:00,2025-05-09T21:14:42+00:00,"But we cannot run such tests if we do not release the GIL when importing the native extension modules, right?",True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2509425856,2082512839,ogrisel,89061,2025-05-09T21:17:44+00:00,2025-05-09T21:17:44+00:00,Maybe we should finalize and merge #30041 to main and then resync that branch with `main` to actually be able to run such tests using `pytest-run-parallel`.,True,sklearn/meson.build,,"@@ -1,6 +1,9 @@
+ fs = import('fs')
+ 
+ cython_args = []
++if cython.version().version_compare('>=3.1.0')
++  cython_args += ['-Xfreethreading_compatible=True']",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2506460829,2079215201,lucyleeow,23182829,2025-05-08T08:52:43+00:00,2025-05-08T08:52:44+00:00,"The other main question is whether we need to allow the user to set this, even when `scoring_function` does not take a `pos_label` parameter?
+
+I *think* we should have this, because `pos_label` is passed to `_threshold_scores_to_class_labels`, and a user should be able to control this.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2506460829,2079215201,lucyleeow,23182829,2025-05-08T08:52:43+00:00,2025-05-08T08:52:44+00:00,"The other main question is whether we need to allow the user to set this, even when `scoring_function` does not take a `pos_label` parameter?
+
+I *think* we should have this, because `pos_label` is passed to `_threshold_scores_to_class_labels`, and a user should be able to control this.",True,sklearn/metrics/_decision_threshold.py,78.0,"@@ -0,0 +1,130 @@
++""""""Metric per threshold curve to assess binary classification performance.
++
++Given threshold grid, one can undestand the behaviour of threshold-dependent
++metrics when changing the threshold. In imbalanced scenarios or
++cost-sensitive learning, a 0.5 threshold may not be optimal and tools like
++this can help you visualize how the performance changes.
++""""""
++
++# Authors: The scikit-learn developers
++# SPDX-License-Identifier: BSD-3-Clause
++
++from numbers import Integral, Real
++
++from ..utils._param_validation import Interval, Options, validate_params
++
++
++@validate_params(
++    {
++        ""scoring_function"": [callable],
++        ""y_true"": [""array-like""],
++        ""y_score"": [""array-like""],
++        ""thresholds"": [
++            Interval(Integral, 2, None, closed=""left""),
++            ""array-like"",
++        ],
++        ""sign"": Options(Real, {0, 1}),
++        ""labels"": [""array-like"", None],
++        ""pos_label"": [Real, str, ""boolean"", None],
++    },
++    prefer_skip_nested_validation=True,
++)
++def decision_threshold_curve(
++    scoring_function,
++    y_true,
++    y_score,
++    # Should below 2 have a default value?
++    thresholds=20,
++    sign=1,
++    labels=None,
++    pos_label=None,
++    **kwargs,
++):
++    """"""Compute threshold-dependent metric of interest per threshold.
++
++    Note: this implementation is restricted to the binary classification task.
++
++    Read more in the :ref:`User Guide <metric_threshold_curve>`.
++
++    .. versionadded:: 1.8
++
++    Parameters
++    ----------
++    scoring_function : callable
++        The score function to use. It will be called as
++        `score_func(y_true, y_pred, **kwargs)`.
++        TODO: decided on `scoring_function` as term also used in forest estimators
++
++    y_true : array-like of shape (n_samples,)
++        Ground truth (correct) target labels.
++
++    y_score : array-like of shape (n_samples,)
++        Continuous response scores.
++
++    thresholds : int or array-like, default=20
++        Specifies number of decision thresholds to compute score for. If an integer,
++        it will be used to generate `thresholds` thresholds uniformly distributed
++        between the minimum and maximum of `y_score`. If an array-like, it will be
++        used as the thresholds.
++
++    sign : int, default=1
++        Either 1 or -1. Score is computed as `sign * score_func(estimator, X, y)`.
++        Thus, `sign` defines whether higher scores are better or worse.
++
++    labels: array-like, default=None
++        Class labels. If `None`, inferred from `y_true`.
++
++    pos_label : int, float, bool or str, default=None",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2078431394,jeremiedbb,34657725,2025-05-07T20:19:15+00:00,2025-05-07T20:19:16+00:00,"upper bound the build dependencies in release branch. See discussions in #31183
+
+I used the same policy as scipy, i.e upper bound to the last major/minor release at the time (allow future bug-fix releases).
+
+cc/ @thomasjpfan @ogrisel @glemaitre @lesteve @betatim @adrinjalali ",False,,,,3,3,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2078565214,thomasjpfan,5402633,2025-05-07T22:11:18+00:00,2025-05-07T22:11:19+00:00,"I'm okay with using the SciPy approach. (We'll need to add this policy to the release checklist)
+
+Given this is a build dependency in `pyproject.toml`, distro packages can still choose to ignore them.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2079903972,jeremiedbb,34657725,2025-05-08T15:01:44+00:00,2025-05-08T15:01:44+00:00,"I fixed the cython upper bound in [9f3dd26](https://github.com/scikit-learn/scikit-learn/pull/31335/commits/9f3dd26d833e599f1372ecbad94d09c650a504a3), because I previously used a x.y.z version, not following the policy I just mentioned...
+
+>  (We'll need to add this policy to the release checklist)
+
+I'll make a PR to main when the rc is out.",False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081167047,jeremiedbb,34657725,2025-05-09T08:14:33+00:00,2025-05-09T08:14:34+00:00,"```suggestion
+    ""Cython>=3.0.10,<3.2.0"",
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081299952,jeremiedbb,34657725,2025-05-09T09:28:35+00:00,2025-05-09T09:28:36+00:00,"So I had to modify the cython upper bound again because we need a pre-release for free-threading for now.
+The current official releease is ``3.0.12`` so the upper bound should be ``3.1.0``.
+But free-threading support is only available in ``3.1.Zrc1``, so I set the upper bound to ``3.2.0``.",False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081538338,ogrisel,89061,2025-05-09T12:10:11+00:00,2025-05-09T12:10:12+00:00,"Since the nightly builds are now green with 3.1.0rc1, I think it's fine.",False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2078431394,jeremiedbb,34657725,2025-05-07T20:19:15+00:00,2025-05-07T20:19:16+00:00,"upper bound the build dependencies in release branch. See discussions in #31183
+
+I used the same policy as scipy, i.e upper bound to the last major/minor release at the time (allow future bug-fix releases).
+
+cc/ @thomasjpfan @ogrisel @glemaitre @lesteve @betatim @adrinjalali ",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.0.13"",
++    ""numpy>=2,<2.3.0"",
++    ""scipy>=1.8.0,<1.16.0"",
+ ]",3,3,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2078565214,thomasjpfan,5402633,2025-05-07T22:11:18+00:00,2025-05-07T22:11:19+00:00,"I'm okay with using the SciPy approach. (We'll need to add this policy to the release checklist)
+
+Given this is a build dependency in `pyproject.toml`, distro packages can still choose to ignore them.",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.0.13"",
++    ""numpy>=2,<2.3.0"",
++    ""scipy>=1.8.0,<1.16.0"",
+ ]",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2079903972,jeremiedbb,34657725,2025-05-08T15:01:44+00:00,2025-05-08T15:01:44+00:00,"I fixed the cython upper bound in [9f3dd26](https://github.com/scikit-learn/scikit-learn/pull/31335/commits/9f3dd26d833e599f1372ecbad94d09c650a504a3), because I previously used a x.y.z version, not following the policy I just mentioned...
+
+>  (We'll need to add this policy to the release checklist)
+
+I'll make a PR to main when the rc is out.",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.0.13"",
++    ""numpy>=2,<2.3.0"",
++    ""scipy>=1.8.0,<1.16.0"",
+ ]",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081167047,jeremiedbb,34657725,2025-05-09T08:14:33+00:00,2025-05-09T08:14:34+00:00,"```suggestion
+    ""Cython>=3.0.10,<3.2.0"",
+```",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.1.0"",",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081299952,jeremiedbb,34657725,2025-05-09T09:28:35+00:00,2025-05-09T09:28:36+00:00,"So I had to modify the cython upper bound again because we need a pre-release for free-threading for now.
+The current official releease is ``3.0.12`` so the upper bound should be ``3.1.0``.
+But free-threading support is only available in ``3.1.Zrc1``, so I set the upper bound to ``3.2.0``.",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.0.13"",
++    ""numpy>=2,<2.3.0"",
++    ""scipy>=1.8.0,<1.16.0"",
+ ]",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2505387311,2081538338,ogrisel,89061,2025-05-09T12:10:11+00:00,2025-05-09T12:10:12+00:00,"Since the nightly builds are now green with 3.1.0rc1, I think it's fine.",True,pyproject.toml,,"@@ -97,10 +97,10 @@ maintenance = [""conda-lock==2.5.7""]
+ build-backend = ""mesonpy""
+ # Minimum requirements for the build system to execute.
+ requires = [
+-    ""meson-python>=0.16.0"",
+-    ""Cython>=3.0.10"",
+-    ""numpy>=2"",
+-    ""scipy>=1.8.0"",
++    ""meson-python>=0.16.0,<0.19.0"",
++    ""Cython>=3.0.10,<3.0.13"",
++    ""numpy>=2,<2.3.0"",
++    ""scipy>=1.8.0,<1.16.0"",
+ ]",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2504089045,2077418544,adrinjalali,1663864,2025-05-07T11:28:57+00:00,2025-05-07T11:29:39+00:00,We also talked about expanding this error message to include a hint on how to handle this with `catch_warnings`,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2504089045,2077456944,StefanieSenger,91849487,2025-05-07T11:53:42+00:00,2025-05-07T11:53:43+00:00,"Yes, I've expanded the UndefinedMetricWarning messages to mention `warnings.catch_warnings()`.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2504089045,2077418544,adrinjalali,1663864,2025-05-07T11:28:57+00:00,2025-05-07T11:29:39+00:00,We also talked about expanding this error message to include a hint on how to handle this with `catch_warnings`,True,sklearn/metrics/_classification.py,61.0,"@@ -2220,28 +2213,11 @@ class are present in `y_true`): both likelihood ratios are undefined.
+         ""`UndefinedMetricWarning` will always be raised in case of a division by zero ""
+         ""and the value set with the `replace_undefined_by` param will be returned.""",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2504089045,2077456944,StefanieSenger,91849487,2025-05-07T11:53:42+00:00,2025-05-07T11:53:43+00:00,"Yes, I've expanded the UndefinedMetricWarning messages to mention `warnings.catch_warnings()`.",True,sklearn/metrics/_classification.py,61.0,"@@ -2220,28 +2213,11 @@ class are present in `y_true`): both likelihood ratios are undefined.
+         ""`UndefinedMetricWarning` will always be raised in case of a division by zero ""
+         ""and the value set with the `replace_undefined_by` param will be returned.""",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077345599,glemaitre,7454015,2025-05-07T10:43:53+00:00,2025-05-07T10:46:41+00:00,"you should not need the `--doctest-modules` since it is already set in the `pyproject.toml` from the project, isn't it?",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077348141,glemaitre,7454015,2025-05-07T10:45:47+00:00,2025-05-07T10:46:41+00:00,I would instead redirect to this section from the `numpydoc` documentation: https://numpydoc.readthedocs.io/en/latest/format.html#sections,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077349316,glemaitre,7454015,2025-05-07T10:46:36+00:00,2025-05-07T10:46:41+00:00,We could even say that we want to keep this section as brief as possible.,False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077513784,StefanieSenger,91849487,2025-05-07T12:28:57+00:00,2025-05-07T12:29:16+00:00,"```suggestion
+    would test its docstring compliance:
+```
+
+Just a little typo nit.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077556927,ArturoAmorQ,86408019,2025-05-07T12:51:38+00:00,2025-05-07T12:52:53+00:00,"At least in my setup I do seem to need the flag (else pytest collects 0 items), but maybe I am missing something?",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078031981,glemaitre,7454015,2025-05-07T16:27:18+00:00,2025-05-07T16:27:18+00:00,"Uhm, you are right. Apparently, it is something that we have in some other project (`skrub` or `imbalanced-learn`) but not in `scikit-learn`.
+
+I assume it makes sense to not have it as a default because it might be to costly. So this proposal seems good then.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078754696,lucyleeow,23182829,2025-05-08T01:41:28+00:00,2025-05-08T01:42:44+00:00,"For my education; are ""Notes"" sections limited to ""class/classmethod/method"" ? e.g., could they be added to a attributes section or functions?",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078755185,lucyleeow,23182829,2025-05-08T01:42:16+00:00,2025-05-08T01:42:44+00:00,Maybe we should add that the code should be runable as is - i.e. should include all required imports?,False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079370753,ArturoAmorQ,86408019,2025-05-08T09:56:04+00:00,2025-05-08T09:56:04+00:00,"For info, adding a ""Notes"" section using markdown inside an attribute
+```
+Notes
+-----
+```
+would raise an `ERROR: Error in ""rubric"" directive: no content permitted.` during build, but not during numpydoc validation.
+`",False,,,,1,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079374283,lucyleeow,23182829,2025-05-08T09:57:16+00:00,2025-05-08T09:57:16+00:00,"Interesting, it makes sense its limited to the above list",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079376472,lucyleeow,23182829,2025-05-08T09:58:00+00:00,2025-05-08T09:58:02+00:00,"Who raises the error? autodoc, sphinx...?",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079394065,ArturoAmorQ,86408019,2025-05-08T10:04:46+00:00,2025-05-08T10:04:47+00:00,"Not sure, I think it's sphinx right after reading the sources. Here is the traceback from my local experiment:
+```
+writing output... 
+building [html]: targets for 45 source files that are out of date
+updating environment: 0 added, 49 changed, 0 removed
+reading sources... [100%] modules/generated/sklearn.model_selection.TunedThresholdClassifierCV
+/home/arturo/scikit-learn/sklearn/model_selection/_classification_threshold.py:docstring of sklearn.model_selection._classification_threshold.TunedThresholdClassifierCV:126: ERROR: Error in ""rubric"" directive:
+no content permitted.
+
+.. rubric:: Notes
+
+    Only defined if the underlying estimator exposes such an attribute when
+    fit. [docutils]
+looking for now-outdated files... none found
+```",False,,,,1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077345599,glemaitre,7454015,2025-05-07T10:43:53+00:00,2025-05-07T10:46:41+00:00,"you should not need the `--doctest-modules` since it is already set in the `pyproject.toml` from the project, isn't it?",True,doc/developers/contributing.rst,10.0,"@@ -726,6 +726,16 @@ We are glad to accept any sort of documentation:
+ 
+ .. dropdown:: Guidelines for writing docstrings
+ 
++  * You can use `pytest` to test docstrings, e.g. assuming the
++    `RandomForestClassifier` docstring has been modified, the following command
++    would test it's docstring compliance:
++
++    .. prompt:: bash
++
++      pytest --doctest-modules sklearn/ensemble/_forest.py -k RandomForestClassifier",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077348141,glemaitre,7454015,2025-05-07T10:45:47+00:00,2025-05-07T10:46:41+00:00,I would instead redirect to this section from the `numpydoc` documentation: https://numpydoc.readthedocs.io/en/latest/format.html#sections,True,doc/developers/contributing.rst,,"@@ -726,6 +726,16 @@ We are glad to accept any sort of documentation:
+ 
+ .. dropdown:: Guidelines for writing docstrings
+ 
++  * You can use `pytest` to test docstrings, e.g. assuming the
++    `RandomForestClassifier` docstring has been modified, the following command
++    would test it's docstring compliance:
++
++    .. prompt:: bash
++
++      pytest --doctest-modules sklearn/ensemble/_forest.py -k RandomForestClassifier
++
++  * The correct order of sections is: Parameters, Returns, See Also, Notes, Examples",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077349316,glemaitre,7454015,2025-05-07T10:46:36+00:00,2025-05-07T10:46:41+00:00,We could even say that we want to keep this section as brief as possible.,True,doc/developers/contributing.rst,,"@@ -791,7 +801,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method
++
++  * Add one or two **snippets** of code in ""Example"" section to show how it can
++    be used.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077513784,StefanieSenger,91849487,2025-05-07T12:28:57+00:00,2025-05-07T12:29:16+00:00,"```suggestion
+    would test its docstring compliance:
+```
+
+Just a little typo nit.",True,doc/developers/contributing.rst,,"@@ -726,6 +726,16 @@ We are glad to accept any sort of documentation:
+ 
+ .. dropdown:: Guidelines for writing docstrings
+ 
++  * You can use `pytest` to test docstrings, e.g. assuming the
++    `RandomForestClassifier` docstring has been modified, the following command
++    would test it's docstring compliance:",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2077556927,ArturoAmorQ,86408019,2025-05-07T12:51:38+00:00,2025-05-07T12:52:53+00:00,"At least in my setup I do seem to need the flag (else pytest collects 0 items), but maybe I am missing something?",True,doc/developers/contributing.rst,10.0,"@@ -726,6 +726,16 @@ We are glad to accept any sort of documentation:
+ 
+ .. dropdown:: Guidelines for writing docstrings
+ 
++  * You can use `pytest` to test docstrings, e.g. assuming the
++    `RandomForestClassifier` docstring has been modified, the following command
++    would test it's docstring compliance:
++
++    .. prompt:: bash
++
++      pytest --doctest-modules sklearn/ensemble/_forest.py -k RandomForestClassifier",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078031981,glemaitre,7454015,2025-05-07T16:27:18+00:00,2025-05-07T16:27:18+00:00,"Uhm, you are right. Apparently, it is something that we have in some other project (`skrub` or `imbalanced-learn`) but not in `scikit-learn`.
+
+I assume it makes sense to not have it as a default because it might be to costly. So this proposal seems good then.",True,doc/developers/contributing.rst,10.0,"@@ -726,6 +726,16 @@ We are glad to accept any sort of documentation:
+ 
+ .. dropdown:: Guidelines for writing docstrings
+ 
++  * You can use `pytest` to test docstrings, e.g. assuming the
++    `RandomForestClassifier` docstring has been modified, the following command
++    would test it's docstring compliance:
++
++    .. prompt:: bash
++
++      pytest --doctest-modules sklearn/ensemble/_forest.py -k RandomForestClassifier",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078754696,lucyleeow,23182829,2025-05-08T01:41:28+00:00,2025-05-08T01:42:44+00:00,"For my education; are ""Notes"" sections limited to ""class/classmethod/method"" ? e.g., could they be added to a attributes section or functions?",True,doc/developers/contributing.rst,,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2078755185,lucyleeow,23182829,2025-05-08T01:42:16+00:00,2025-05-08T01:42:44+00:00,Maybe we should add that the code should be runable as is - i.e. should include all required imports?,True,doc/developers/contributing.rst,31.0,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.
++
++  * Add one or two **snippets** of code in ""Example"" section to show how it can",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079370753,ArturoAmorQ,86408019,2025-05-08T09:56:04+00:00,2025-05-08T09:56:04+00:00,"For info, adding a ""Notes"" section using markdown inside an attribute
+```
+Notes
+-----
+```
+would raise an `ERROR: Error in ""rubric"" directive: no content permitted.` during build, but not during numpydoc validation.
+`",True,doc/developers/contributing.rst,,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.",1,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079374283,lucyleeow,23182829,2025-05-08T09:57:16+00:00,2025-05-08T09:57:16+00:00,"Interesting, it makes sense its limited to the above list",True,doc/developers/contributing.rst,,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079376472,lucyleeow,23182829,2025-05-08T09:58:00+00:00,2025-05-08T09:58:02+00:00,"Who raises the error? autodoc, sphinx...?",True,doc/developers/contributing.rst,,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2503680126,2079394065,ArturoAmorQ,86408019,2025-05-08T10:04:46+00:00,2025-05-08T10:04:47+00:00,"Not sure, I think it's sphinx right after reading the sources. Here is the traceback from my local experiment:
+```
+writing output... 
+building [html]: targets for 45 source files that are out of date
+updating environment: 0 added, 49 changed, 0 removed
+reading sources... [100%] modules/generated/sklearn.model_selection.TunedThresholdClassifierCV
+/home/arturo/scikit-learn/sklearn/model_selection/_classification_threshold.py:docstring of sklearn.model_selection._classification_threshold.TunedThresholdClassifierCV:126: ERROR: Error in ""rubric"" directive:
+no content permitted.
+
+.. rubric:: Notes
+
+    Only defined if the underlying estimator exposes such an attribute when
+    fit. [docutils]
+looking for now-outdated files... none found
+```",True,doc/developers/contributing.rst,,"@@ -791,7 +804,11 @@ We are glad to accept any sort of documentation:
+       SelectKBest : Select features based on the k highest scores.
+       SelectFpr : Select features based on a false positive rate test.
+ 
+-  * Add one or two snippets of code in ""Example"" section to show how it can be used.
++  * The ""Notes"" section is optional. It is meant to provide information on
++    specific behavior of the class/classmethod/method.",1,1,0,0,0,0,0
+scikit-learn/scikit-learn,2501476538,2075705362,ArturoAmorQ,86408019,2025-05-06T15:17:23+00:00,2025-05-06T15:22:56+00:00,"LearningCurveDisplay.from_model doesn't exit
+
+```suggestion
+    See also
+    --------
+    LearningCurveDisplay.from_estimator : Plot a learning curve using an
+        estimator and data.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2501476538,2084174308,ArturoAmorQ,86408019,2025-05-12T08:53:07+00:00,2025-05-12T08:53:07+00:00,"```suggestion
+    See Also
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2501476538,2075705362,ArturoAmorQ,86408019,2025-05-06T15:17:23+00:00,2025-05-06T15:22:56+00:00,"LearningCurveDisplay.from_model doesn't exit
+
+```suggestion
+    See also
+    --------
+    LearningCurveDisplay.from_estimator : Plot a learning curve using an
+        estimator and data.
+```",True,sklearn/model_selection/_validation.py,,"@@ -1929,6 +1929,13 @@ def learning_curve(
+         Times spent for scoring in seconds. Only present if ``return_times``
+         is True.
+ 
++    See also:
++    --------
++    LearningCurveDisplay.from_estimator : Create a learning curve
++        display from an estimator
++
++    LearningCurveDisplay.from_model : Learn Curve visualization",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2501476538,2084174308,ArturoAmorQ,86408019,2025-05-12T08:53:07+00:00,2025-05-12T08:53:07+00:00,"```suggestion
+    See Also
+```",True,sklearn/model_selection/_validation.py,,"@@ -1929,6 +1929,11 @@ def learning_curve(
+         Times spent for scoring in seconds. Only present if ``return_times``
+         is True.
+ 
++    See also",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075098176,ogrisel,89061,2025-05-06T09:36:06+00:00,2025-05-06T09:36:06+00:00,"```suggestion
+    assert ""lbfgs failed to converge after 1 iteration(s)"" in warn_msg
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075691207,Copilot,175728472,2025-05-06T15:10:14+00:00,2025-05-06T15:10:14+00:00,"Consider ensuring that 'max_iter' does not become negative after subtracting 'self.iteration'. For example, using max(1, self.max_iter - self.iteration) can safeguard the value passed to _check_optimize_result.
+```suggestion
+        max_iter = max(1, self.max_iter - self.iteration)
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075691229,Copilot,175728472,2025-05-06T15:10:14+00:00,2025-05-06T15:14:57+00:00,"[nitpick] Consider adding an inline comment explaining why the recommendation to increase iterations is appended only when n_iter_i equals max_iter. This can help improve the maintainability and clarity of the warning logic.
+```suggestion
+            )
+            # Append a recommendation to increase iterations only when the
+            # number of iterations reaches the maximum allowed (max_iter),
+            # as this suggests the optimization may have been prematurely
+            # terminated due to the iteration limit.
+            #
+            # Furthermore, this recommandation should only be displayed
+            # when max_iter is provided hence assumed settable by the
+            # user-facing API.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075702334,ogrisel,89061,2025-05-06T15:15:59+00:00,2025-05-06T15:15:59+00:00,"I don't think this kind of overly defensive coding is needed, unless we find a bug in a dependency that mandates it.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2076510685,thomasjpfan,5402633,2025-05-06T23:14:45+00:00,2025-05-06T23:18:05+00:00,"Nit: I think the first part of the comment is enough.
+
+```suggestion
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075098176,ogrisel,89061,2025-05-06T09:36:06+00:00,2025-05-06T09:36:06+00:00,"```suggestion
+    assert ""lbfgs failed to converge after 1 iteration(s)"" in warn_msg
+```",True,sklearn/linear_model/tests/test_logistic.py,,"@@ -444,7 +444,7 @@ def test_logistic_regression_path_convergence_fail():
+ 
+     assert len(record) == 1
+     warn_msg = record[0].message.args[0]
+-    assert ""lbfgs failed to converge"" in warn_msg
++    assert ""lbfgs failed to converge after 1 iteration(s) toto"" in warn_msg",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075691207,Copilot,175728472,2025-05-06T15:10:14+00:00,2025-05-06T15:10:14+00:00,"Consider ensuring that 'max_iter' does not become negative after subtracting 'self.iteration'. For example, using max(1, self.max_iter - self.iteration) can safeguard the value passed to _check_optimize_result.
+```suggestion
+        max_iter = max(1, self.max_iter - self.iteration)
+```",True,sklearn/linear_model/_glm/_newton_solver.py,4.0,"@@ -178,21 +178,22 @@ def fallback_lbfgs_solve(self, X, y, sample_weight):
+             - self.coef
+             - self.converged
+         """"""
++        max_iter = self.max_iter - self.iteration",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075691229,Copilot,175728472,2025-05-06T15:10:14+00:00,2025-05-06T15:14:57+00:00,"[nitpick] Consider adding an inline comment explaining why the recommendation to increase iterations is appended only when n_iter_i equals max_iter. This can help improve the maintainability and clarity of the warning logic.
+```suggestion
+            )
+            # Append a recommendation to increase iterations only when the
+            # number of iterations reaches the maximum allowed (max_iter),
+            # as this suggests the optimization may have been prematurely
+            # terminated due to the iteration limit.
+            #
+            # Furthermore, this recommandation should only be displayed
+            # when max_iter is provided hence assumed settable by the
+            # user-facing API.
+```",True,sklearn/utils/optimize.py,21.0,"@@ -352,25 +352,33 @@ def _check_optimize_result(solver, result, max_iter=None, extra_warning_msg=None
+     """"""
+     # handle both scipy and scikit-learn solver names
+     if solver == ""lbfgs"":
+-        if result.status != 0:
+-            result_message = result.message
++        if max_iter is not None:
++            # In scipy <= 1.0.0, nit may exceed maxiter for lbfgs.
++            # See https://github.com/scipy/scipy/issues/7854
++            n_iter_i = min(result.nit, max_iter)
++        else:
++            n_iter_i = result.nit
+ 
++        if result.status != 0:
+             warning_msg = (
+-                ""{} failed to converge (status={}):\n{}.\n\n""
+-                ""Increase the number of iterations (max_iter) ""
+-                ""or scale the data as shown in:\n""
++                f""{solver} failed to converge after {n_iter_i} iteration(s) ""
++                f""(status={result.status}):\n""
++                f""{result.message}\n""
++            )",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2075702334,ogrisel,89061,2025-05-06T15:15:59+00:00,2025-05-06T15:15:59+00:00,"I don't think this kind of overly defensive coding is needed, unless we find a bug in a dependency that mandates it.",True,sklearn/linear_model/_glm/_newton_solver.py,4.0,"@@ -178,21 +178,22 @@ def fallback_lbfgs_solve(self, X, y, sample_weight):
+             - self.coef
+             - self.converged
+         """"""
++        max_iter = self.max_iter - self.iteration",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2500976992,2076510685,thomasjpfan,5402633,2025-05-06T23:14:45+00:00,2025-05-06T23:18:05+00:00,"Nit: I think the first part of the comment is enough.
+
+```suggestion
+```",True,sklearn/utils/optimize.py,,"@@ -352,25 +352,41 @@ def _check_optimize_result(solver, result, max_iter=None, extra_warning_msg=None
+     """"""
+     # handle both scipy and scikit-learn solver names
+     if solver == ""lbfgs"":
+-        if result.status != 0:
+-            result_message = result.message
++        if max_iter is not None:
++            # In scipy <= 1.0.0, nit may exceed maxiter for lbfgs.
++            # See https://github.com/scipy/scipy/issues/7854
++            n_iter_i = min(result.nit, max_iter)
++        else:
++            n_iter_i = result.nit
+ 
++        if result.status != 0:
+             warning_msg = (
+-                ""{} failed to converge (status={}):\n{}.\n\n""
+-                ""Increase the number of iterations (max_iter) ""
+-                ""or scale the data as shown in:\n""
++                f""{solver} failed to converge after {n_iter_i} iteration(s) ""
++                f""(status={result.status}):\n""
++                f""{result.message}\n""
++            )
++            # Append a recommendation to increase iterations only when the
++            # number of iterations reaches the maximum allowed (max_iter),
++            # as this suggests the optimization may have been prematurely
++            # terminated due to the iteration limit.
++            #
++            # Furthermore, this recommandation should only be displayed
++            # when max_iter is provided hence assumed settable by the
++            # user-facing API.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2074998138,ogrisel,89061,2025-05-06T08:38:07+00:00,2025-05-06T08:46:26+00:00,"I would just directly link to `ValidationCurveDisplay.from_estimator` and not to the `ValidationCurveDisplay` class itself, as using the class constructor is not recommended to link to use the constructor.
+
+```suggestion
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2075012607,ogrisel,89061,2025-05-06T08:45:31+00:00,2025-05-06T08:46:26+00:00,"This method does not exist in the code. If you use an LLM-based coding assistant, please always double-check the correctness of the suggested output.
+
+```suggestion
+```
+
+In this case I spotted the mistake by checking the rendered HTML in the CI report (the ""Check the rendered docs here!"" link in particular).
+
+![image](https://github.com/user-attachments/assets/fd3334cb-130c-493c-8798-a82551f5cfe7)
+
+You can see that the second item is not rendered as a link by sphinx because the API target does not exist.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2075069856,TheAyos,34219939,2025-05-06T09:19:05+00:00,2025-05-06T09:19:05+00:00,"Hey ! Thank you for the feedback. I do not use an LLM-based coding assistant, I actually just added the second reference after attending a workshop (UNAITE x :probabl. yesterday), where it was mentioned that the goal for this See Also section was to mirror the one in [confusion_matrix](https://github.com/scikit-learn/scikit-learn/blob/98ed9dc73a86f5f11781a0e21f24c8f47979ec67/sklearn/metrics/_classification.py#L301-L307).
+That said, I should have double-checked whether the method actually existed!",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2074998138,ogrisel,89061,2025-05-06T08:38:07+00:00,2025-05-06T08:46:26+00:00,"I would just directly link to `ValidationCurveDisplay.from_estimator` and not to the `ValidationCurveDisplay` class itself, as using the class constructor is not recommended to link to use the constructor.
+
+```suggestion
+```",True,sklearn/model_selection/_validation.py,,"@@ -2383,6 +2383,14 @@ def validation_curve(
+ 
+         .. versionadded:: 1.6
+ 
++    See Also
++    --------
++    ValidationCurveDisplay.from_estimator : Plot the validation curve
++        given an estimator, the data, and the parameter to vary.
++    ValidationCurveDisplay.from_predictions : Plot the validation curve
++        given the training and test scores.
++    ValidationCurveDisplay : Validation curve visualization.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2075012607,ogrisel,89061,2025-05-06T08:45:31+00:00,2025-05-06T08:46:26+00:00,"This method does not exist in the code. If you use an LLM-based coding assistant, please always double-check the correctness of the suggested output.
+
+```suggestion
+```
+
+In this case I spotted the mistake by checking the rendered HTML in the CI report (the ""Check the rendered docs here!"" link in particular).
+
+![image](https://github.com/user-attachments/assets/fd3334cb-130c-493c-8798-a82551f5cfe7)
+
+You can see that the second item is not rendered as a link by sphinx because the API target does not exist.",True,sklearn/model_selection/_validation.py,,"@@ -2383,6 +2383,14 @@ def validation_curve(
+ 
+         .. versionadded:: 1.6
+ 
++    See Also
++    --------
++    ValidationCurveDisplay.from_estimator : Plot the validation curve
++        given an estimator, the data, and the parameter to vary.
++    ValidationCurveDisplay.from_predictions : Plot the validation curve
++        given the training and test scores.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499716934,2075069856,TheAyos,34219939,2025-05-06T09:19:05+00:00,2025-05-06T09:19:05+00:00,"Hey ! Thank you for the feedback. I do not use an LLM-based coding assistant, I actually just added the second reference after attending a workshop (UNAITE x :probabl. yesterday), where it was mentioned that the goal for this See Also section was to mirror the one in [confusion_matrix](https://github.com/scikit-learn/scikit-learn/blob/98ed9dc73a86f5f11781a0e21f24c8f47979ec67/sklearn/metrics/_classification.py#L301-L307).
+That said, I should have double-checked whether the method actually existed!",True,sklearn/model_selection/_validation.py,,"@@ -2383,6 +2383,14 @@ def validation_curve(
+ 
+         .. versionadded:: 1.6
+ 
++    See Also
++    --------
++    ValidationCurveDisplay.from_estimator : Plot the validation curve
++        given an estimator, the data, and the parameter to vary.
++    ValidationCurveDisplay.from_predictions : Plot the validation curve
++        given the training and test scores.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2074989720,ogrisel,89061,2025-05-06T08:33:04+00:00,2025-05-06T08:33:46+00:00,"```suggestion
+    sklearn.calibration.CalibrationDisplay : Calibration curve visualization
+    based on matplotlib.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075020635,ogrisel,89061,2025-05-06T08:50:21+00:00,2025-05-06T08:50:21+00:00,"Actually, rather than linking to the class itself, I think we should directly link to the `sklearn.calibration.CalibrationDisplay.from_estimator` and `from_predictions` factory methods.",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075559967,metlouf,107807424,2025-05-06T14:05:55+00:00,2025-05-06T14:05:55+00:00,"I modified as suggested, I copied the sklearn.calibration.CalibrationDisplay.from_estimator and from_predictions description from another function for consistency, waiting for test to get approved",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075677562,metlouf,107807424,2025-05-06T15:03:01+00:00,2025-05-06T15:03:02+00:00,"![image](https://github.com/user-attachments/assets/8b4dd095-fb81-461a-b614-c6a1706c617a)
+Here it is !",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2074989720,ogrisel,89061,2025-05-06T08:33:04+00:00,2025-05-06T08:33:46+00:00,"```suggestion
+    sklearn.calibration.CalibrationDisplay : Calibration curve visualization
+    based on matplotlib.
+```",True,sklearn/calibration.py,,"@@ -1005,6 +1005,10 @@ def calibration_curve(
+     prob_pred : ndarray of shape (n_bins,) or smaller
+         The mean predicted probability in each bin.
+ 
++    See Also
++    --------
++    sklearn.calibration.CalibrationDisplay : Calibration curve visualization.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075020635,ogrisel,89061,2025-05-06T08:50:21+00:00,2025-05-06T08:50:21+00:00,"Actually, rather than linking to the class itself, I think we should directly link to the `sklearn.calibration.CalibrationDisplay.from_estimator` and `from_predictions` factory methods.",True,sklearn/calibration.py,,"@@ -1005,6 +1005,10 @@ def calibration_curve(
+     prob_pred : ndarray of shape (n_bins,) or smaller
+         The mean predicted probability in each bin.
+ 
++    See Also
++    --------
++    sklearn.calibration.CalibrationDisplay : Calibration curve visualization.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075559967,metlouf,107807424,2025-05-06T14:05:55+00:00,2025-05-06T14:05:55+00:00,"I modified as suggested, I copied the sklearn.calibration.CalibrationDisplay.from_estimator and from_predictions description from another function for consistency, waiting for test to get approved",True,sklearn/calibration.py,,"@@ -1005,6 +1005,10 @@ def calibration_curve(
+     prob_pred : ndarray of shape (n_bins,) or smaller
+         The mean predicted probability in each bin.
+ 
++    See Also
++    --------
++    sklearn.calibration.CalibrationDisplay : Calibration curve visualization.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499633401,2075677562,metlouf,107807424,2025-05-06T15:03:01+00:00,2025-05-06T15:03:02+00:00,"![image](https://github.com/user-attachments/assets/8b4dd095-fb81-461a-b614-c6a1706c617a)
+Here it is !",True,sklearn/calibration.py,,"@@ -1005,6 +1005,10 @@ def calibration_curve(
+     prob_pred : ndarray of shape (n_bins,) or smaller
+         The mean predicted probability in each bin.
+ 
++    See Also
++    --------
++    sklearn.calibration.CalibrationDisplay : Calibration curve visualization.",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499509256,2077934845,ArturoAmorQ,86408019,2025-05-07T15:35:02+00:00,2025-05-07T15:35:02+00:00,"This should fix the failing CI.
+```suggestion
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499509256,2077934845,ArturoAmorQ,86408019,2025-05-07T15:35:02+00:00,2025-05-07T15:35:02+00:00,"This should fix the failing CI.
+```suggestion
+```",True,sklearn/metrics/_plot/det_curve.py,,"@@ -96,7 +99,12 @@ def from_estimator(
+     ):
+         """"""Plot DET curve given an estimator and data.
+ 
+-        Read more in the :ref:`User Guide <det_curve>`.
++        Plot DET curve given an estimator and data.
++",0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499472518,2077921409,ArturoAmorQ,86408019,2025-05-07T15:27:39+00:00,2025-05-07T15:29:44+00:00,"```suggestion
+    :ref:`Model Evaluation Guide <confusion_matrix>`.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499472518,2077922021,ArturoAmorQ,86408019,2025-05-07T15:27:59+00:00,2025-05-07T15:29:44+00:00,"```suggestion
+        :ref:`Model Evaluation Guide <confusion_matrix>`.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499472518,2077923816,ArturoAmorQ,86408019,2025-05-07T15:28:53+00:00,2025-05-07T15:29:44+00:00,"```suggestion
+        :ref:`Model Evaluation Guide <confusion_matrix>`.
+```",False,,,,0,0,0,0,0,0,0
+scikit-learn/scikit-learn,2499472518,2077921409,ArturoAmorQ,86408019,2025-05-07T15:27:39+00:00,2025-05-07T15:29:44+00:00,"```suggestion
+    :ref:`Model Evaluation Guide <confusion_matrix>`.
+```",True,sklearn/metrics/_plot/confusion_matrix.py,,"@@ -21,7 +21,10 @@ class ConfusionMatrixDisplay:
+     create a :class:`ConfusionMatrixDisplay`. All parameters are stored as
+     attributes.
+ 
+-    Read more in the :ref:`User Guide <visualizations>`.
++    For general information regarding `scikit-learn` visualization tools, see
++    the :ref:`Visualization Guide <visualizations>`.
++    For guidance on interpreting these plots, refer to the
++    :ref:`Confusion Matrix Guide <confusion_matrix>`.",0,0,0,0,0,0,0

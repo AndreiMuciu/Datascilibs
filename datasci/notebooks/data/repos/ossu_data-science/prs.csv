@@ -1,0 +1,159 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+ossu/data-science,74368558,1,Update README.md,"Add initial structure
+",royshouvik,5521768,closed,False,2016-06-19T17:13:33+00:00,2016-06-19T17:13:50+00:00,2016-06-19T17:13:44+00:00,2016-06-19T17:13:44+00:00,d0f46c52ffbded4c58165025d4c20c78f0d16ed0,unknown,185,0,1,1,0,0,,,
+ossu/data-science,75213718,2,Add a Gitter chat badge to README.md,"### open-source-society/data-science now has a Chat Room on Gitter
+
+@ericdouglas has just created a chat room. You can visit it here: [https://gitter.im/open-source-society/data-science](https://gitter.im/open-source-society/data-science?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&content=body_link).
+
+This pull-request adds this badge to your README.md:
+
+[![Gitter](https://badges.gitter.im/open-source-society/data-science.svg)](https://gitter.im/open-source-society/data-science?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+
+If my aim is a little off, please [let me know](https://github.com/gitterHQ/readme-badger/issues).
+
+Happy chatting.
+
+PS: [Click here](https://gitter.im/settings/badger/opt-out) if you would prefer not to receive automatic pull-requests from Gitter in future.
+",gitter-badger,8518239,closed,False,2016-06-25T20:27:22+00:00,2016-06-25T20:28:09+00:00,2016-06-25T20:28:09+00:00,,d44cf1828b16316f5963c0ed862deda753c40530,unknown,2,0,1,1,0,0,,,
+ossu/data-science,75452236,4,correct typo,,sidgupta234,8859981,closed,False,2016-06-28T10:17:18+00:00,2016-06-28T10:56:01+00:00,2016-06-28T10:55:50+00:00,2016-06-28T10:55:50+00:00,8068d16a8785ed3a9e9b18595b251e025ae430e2,unknown,1,1,1,1,0,1,,,
+ossu/data-science,76081075,5,Removal of Paid Courses / Time investement fixes,"Dates were taken from each of their individual sites.
+Specializations removed as they were paid courses, conflicting with the **free** nature of OSS. 
+",johnaoss,14227035,closed,False,2016-07-03T05:05:58+00:00,2016-07-08T18:01:08+00:00,2016-07-08T17:35:52+00:00,,1a623236233ae2624e1cf6fe3ec26f767b308c97,dirty,4,28,1,2,0,5,,,
+ossu/data-science,76787355,6,Create specializations.md,"For future specializations.
+",johnaoss,14227035,closed,False,2016-07-08T17:36:42+00:00,2016-07-08T21:49:56+00:00,2016-07-08T21:49:43+00:00,2016-07-08T21:49:43+00:00,85d4dd0fb1fa3e508c1be1c345bdbc1248d3dbd6,unknown,48,0,1,1,0,1,,,
+ossu/data-science,79514565,8,Add New Statistics Courses,,tawfiq9009,4282575,closed,False,2016-08-01T05:20:47+00:00,2016-08-01T09:05:38+00:00,2016-08-01T09:05:08+00:00,2016-08-01T09:05:08+00:00,6f81aeead7471257c4934a9f45615ada325cbab6,unknown,2,0,1,1,0,1,,,
+ossu/data-science,79515385,9,Add two Data Science specializations,,tawfiq9009,4282575,closed,False,2016-08-01T05:32:49+00:00,2016-08-19T07:21:00+00:00,2016-08-19T04:36:14+00:00,,352bc4a41c4fe15e631e25e1e3174d2265b5fa9d,dirty,2,0,1,1,0,3,,,
+ossu/data-science,79713028,10,Move specializations from Readme.md to specializations.md,,tawfiq9009,4282575,closed,False,2016-08-02T10:40:24+00:00,2016-08-03T15:57:08+00:00,2016-08-03T15:56:50+00:00,2016-08-03T15:56:50+00:00,654b8fa0a954fab08533b65dee14eaec4278788a,unknown,13,0,1,1,0,1,,,
+ossu/data-science,81256701,11,Updated a Link in README.md,"Fixed a broken link in the ""How to use this guide - Order of the classes"" section: it now links to the Linear Algebra section.
+",Torrontogosh,17753309,closed,False,2016-08-14T22:39:42+00:00,2016-08-19T04:37:16+00:00,2016-08-19T04:37:05+00:00,2016-08-19T04:37:05+00:00,821d5cb15befef1cf7c624aa10df86cea4996a90,unknown,1,1,1,2,0,1,,,
+ossu/data-science,87169169,12,Added duration for Deep Learning and Convex optimization,"Deep Learning says that their course length is Approx. 3 months so 12 weeks.
+Convex optimization course went from Jan 21, 2014 to Mar 26, 2014 which is approx 9 weeks.
+",arnas,13507001,closed,False,2016-09-28T17:57:48+00:00,2016-11-09T14:15:12+00:00,2016-11-09T14:14:56+00:00,2016-11-09T14:14:56+00:00,220bed4f0b3f75a91fd8ac99f39b57760649d990,unknown,2,2,1,1,0,1,,,
+ossu/data-science,89748410,13,Redirecting to extras in data-science rather than computer-science repo,"Typo
+",raincrash,9132273,closed,False,2016-10-18T05:18:03+00:00,2016-11-09T14:20:21+00:00,2016-11-09T14:20:21+00:00,2016-11-09T14:20:21+00:00,82f3544ca79b74a6095fe539859a51d6754330dd,unknown,1,1,1,2,0,0,,,
+ossu/data-science,95442364,16,Update README.md,Fix #14 ,royshouvik,5521768,closed,False,2016-11-28T05:59:49+00:00,2016-11-28T06:00:12+00:00,2016-11-28T06:00:04+00:00,2016-11-28T06:00:04+00:00,4db51565b1b2ba79eeff0cac0a77fd970a17f6c6,unknown,1,1,1,1,0,0,,,
+ossu/data-science,95455096,17,"Create PROJECTS.md for data-science path, solves #15","Hi,
+
+I just put empty tables under the coursers, see if that suffices or should I add anything else?
+
+#15 ",mdibaiee,2807772,closed,False,2016-11-28T08:26:14+00:00,2016-12-16T05:41:06+00:00,2016-12-16T05:40:36+00:00,2016-12-16T05:40:36+00:00,f7c40fc9a99d9462e68bf2abe2c06747c4eb6529,unknown,71,0,1,1,0,1,,,
+ossu/data-science,98407773,19,Updated a new workshop,,Rogerh91,5214999,closed,False,2016-12-16T21:44:14+00:00,2017-08-19T17:40:32+00:00,2017-08-19T17:40:32+00:00,,bd778b7b5529fb92cbd642df813b96dbe43640dd,unknown,8,0,1,1,0,1,,,
+ossu/data-science,98434472,20,Fix: link to projects file,,mdibaiee,2807772,closed,False,2016-12-17T05:50:37+00:00,2017-01-22T11:34:45+00:00,2017-01-22T11:34:45+00:00,2017-01-22T11:34:45+00:00,75beeb912d528e16a4ad43b024091885c0856207,unknown,1,1,1,1,0,0,,,
+ossu/data-science,98434501,21,projects: add slope-field,,mdibaiee,2807772,closed,False,2016-12-17T05:51:48+00:00,2017-01-22T11:34:26+00:00,2017-01-22T11:34:26+00:00,2017-01-22T11:34:26+00:00,bb6e58993032a25ca2e7404f762ab80835b4cff2,unknown,1,1,1,1,0,0,,,
+ossu/data-science,99665656,22,Update README.md,"providing another link to the course ""learning from data"" as the course is closed on edx",ahmedabbas11,7805418,closed,False,2016-12-29T15:10:07+00:00,2017-01-22T11:33:41+00:00,2017-01-22T11:33:13+00:00,2017-01-22T11:33:13+00:00,e36161725ffa75fffce6bd89efc05d214db6615f,unknown,1,1,1,1,0,1,,,
+ossu/data-science,102618518,24,Use CS224D for Natural Language Processing,,mdibaiee,2807772,closed,False,2017-01-22T12:06:42+00:00,2017-01-24T08:21:28+00:00,2017-01-24T08:21:21+00:00,2017-01-24T08:21:21+00:00,2dea58100a5f52b09a0e4e1cf93e5f3e11c92f2a,unknown,1,1,1,1,0,1,,,
+ossu/data-science,102667815,25,update readme with data wrangling course,updated readme with data wrangling course,akshat02,9974065,closed,False,2017-01-23T07:14:13+00:00,2017-01-24T08:21:48+00:00,2017-01-24T08:21:40+00:00,2017-01-24T08:21:40+00:00,ba454baa8a2ac1013fbc8c0349cbef6cc72f5e5c,unknown,6,0,1,1,0,1,,,
+ossu/data-science,114952690,30,fixes open-source-society/data-science#29,,abhinav1592,2583022,closed,False,2017-04-08T17:00:26+00:00,2019-01-10T17:11:20+00:00,2019-01-10T17:11:20+00:00,,8bb178f4898eefdae85b3e2038f4bbdff575b348,unknown,0,0,0,2,0,1,,,
+ossu/data-science,117444217,32,Fix grammar,,hirejohnsalcedo,17956698,closed,False,2017-04-25T09:49:32+00:00,2018-12-25T22:15:55+00:00,2018-12-25T22:15:55+00:00,,e01b28acb3e71b2476a4d3268152937a207c7677,dirty,1,1,1,1,0,0,,,
+ossu/data-science,127628222,33,Added books and new courses,,PramodShenoy,14936214,closed,False,2017-06-27T07:30:42+00:00,2021-03-06T06:08:40+00:00,2021-03-06T06:08:40+00:00,,993077b3da54b322c855ea4ff285915cd56e036f,unknown,51,1,3,4,0,6,,,
+ossu/data-science,128044395,34,Create knn_clustering_hadoop,,eyuptkknt,29763960,closed,False,2017-06-28T23:56:17+00:00,2020-08-18T07:14:39+00:00,2020-08-18T07:14:39+00:00,,2fd55e681465c24e91ca61fa4979a3ba87f8449f,unknown,1,0,1,1,0,0,,,
+ossu/data-science,141669253,38,Fixed probability link,Section and link had different names so the link didn't work. Fixed them.,meboler,3528094,closed,False,2017-09-18T18:15:52+00:00,2017-09-29T08:02:26+00:00,2017-09-29T08:02:09+00:00,2017-09-29T08:02:09+00:00,bc9d77970aa919fd4500ec3c3eb3028786e8c452,unknown,1,1,1,1,0,1,,,
+ossu/data-science,143841625,39,Add patreon badge,,ericdouglas,4119931,closed,False,2017-09-29T09:15:16+00:00,2017-09-29T09:16:07+00:00,2017-09-29T09:15:57+00:00,2017-09-29T09:15:57+00:00,56fc8e5082c55f4e585d3b272cec799ef90cde0b,unknown,7,1,1,1,0,0,,,
+ossu/data-science,144302331,40,Add link to newsletter,,ericdouglas,4119931,closed,False,2017-10-02T22:51:57+00:00,2017-10-09T09:40:33+00:00,2017-10-09T09:40:30+00:00,2017-10-09T09:40:30+00:00,9f9837336d02fd2bff9928fc3ca80b4bae0a8aa4,unknown,2,0,1,1,0,0,royshouvik,,
+ossu/data-science,145515625,41,Add new forum and code of conduct,,ericdouglas,4119931,closed,False,2017-10-09T18:12:12+00:00,2017-10-09T18:21:48+00:00,2017-10-09T18:21:45+00:00,2017-10-09T18:21:45+00:00,c6588ccce55daee131cc9a6d6114ac64d64cd4cb,unknown,7,5,1,1,0,0,,,
+ossu/data-science,175684636,43,Delete reference to application that is no longer maintained,"The firebase app currently reflects version 6 of the Computer Science curriculum. The current CS curriculum is version 8.0.0.
+
+Furthermore, the firebase app does not reflect the data science curriculum at all.
+
+Reference to the app should be removed until it is adequately updated.",waciumawanjohi,18407643,closed,False,2018-03-17T05:34:53+00:00,2020-08-18T07:14:20+00:00,2020-08-18T07:14:20+00:00,,52058069abd8e6fb1a563a7889fc6df6f2c3d73a,unknown,0,15,1,1,0,0,,,
+ossu/data-science,222654976,47,"Added the text ""My Changes""",,pk231594,44117634,closed,False,2018-10-13T14:57:49+00:00,2020-08-18T07:13:09+00:00,2020-08-18T07:13:09+00:00,,f1218916b09a268d8726cc965f0679b6213a5dd6,unknown,1,0,1,1,0,0,,,
+ossu/data-science,290415147,51,Grammar correction - ps: to P.S.,,dalbhat,30812429,closed,False,2019-06-20T23:42:08+00:00,2020-08-18T07:12:47+00:00,2020-08-18T07:12:47+00:00,,548d0e5f5c192af6b7db724bf24084e620c1560a,unknown,1,1,1,1,0,0,,,
+ossu/data-science,367068662,52,Update books.md,add a new books in linear algebra and machine learning,Alymostafa,34445689,closed,False,2020-01-25T00:48:35+00:00,2021-03-06T06:06:58+00:00,2021-03-06T06:06:57+00:00,,3bc2b8708efab569594867f7854c7de56edd8b45,unknown,15,1,1,1,0,2,,,
+ossu/data-science,465323400,60,V2,,waciumawanjohi,18407643,closed,False,2020-08-10T07:12:44+00:00,2020-09-03T06:40:17+00:00,2020-09-03T06:40:17+00:00,2020-09-03T06:40:17+00:00,2847aa7d9653f924a7ea68b78017e008fc5b3977,unknown,56,205,2,7,2,1,,,
+ossu/data-science,479727024,66,Update courses.md,Add in Amazon Web Service Course Material,jromani-ds,26752255,closed,False,2020-09-04T14:16:09+00:00,2021-11-15T01:38:07+00:00,2021-11-15T01:38:07+00:00,,1fb25fa71e1563d0f94e77361a225924158782e2,unknown,5,0,1,1,0,1,,,
+ossu/data-science,495675634,68,Update README.md,,sehdevkumar,55868273,closed,False,2020-09-30T17:46:10+00:00,2020-09-30T19:08:48+00:00,2020-09-30T19:08:48+00:00,,95dc063d954729c62ef98ab339432e9e5cbb1ba3,unknown,1,0,1,1,0,0,,,
+ossu/data-science,495958573,69,I have added a Data Science Interview Questions and answers PDF... Please merge it into your Repo,,PNSuchismita,66131472,closed,False,2020-10-01T05:10:13+00:00,2020-10-02T03:35:02+00:00,2020-10-02T03:35:01+00:00,,1e54a35abc00d92407a199b2e3d5dc5f76ee1308,unknown,0,0,1,1,0,1,,,
+ossu/data-science,496044885,70,Update README.md,Added some free courses and paid courses links.,AjaySinghPanwar,64411148,closed,False,2020-10-01T07:48:23+00:00,2020-10-01T07:49:45+00:00,2020-10-01T07:49:45+00:00,,13c246a41e9c1126e9f63c959b4539498feac2bd,unknown,12,0,1,1,0,0,,,
+ossu/data-science,496046994,71,Update Readme.md,Added some free courses and paid courses links in machine learning and added deep learning courses link,AjaySinghPanwar,64411148,closed,False,2020-10-01T07:51:39+00:00,2020-10-02T03:48:13+00:00,2020-10-02T03:48:13+00:00,,ba5b81a2e57357875a5777ef04e1714f80fd333b,unknown,12,0,1,2,1,1,,,
+ossu/data-science,496465205,72,"change the ""###"" with numbers.md",,nikhiljain123,40821710,closed,False,2020-10-01T18:31:19+00:00,2020-10-02T02:34:17+00:00,2020-10-02T02:34:17+00:00,,655bb912720daf201f655f0d0df7904560b3d239,unknown,7,10,1,1,0,0,,,
+ossu/data-science,579236263,76,Add HS math pre-requisite from guidelines,"The [Curriculum Guidelines](https://www.amstat.org/asa/files/pdfs/EDU-DataScienceGuidelines.pdf) state the following:
+
+> To be prepared for the data science curriculum, students should
+>  * Be calculus ready (i.e., have a good precalculus course)
+>  * Have an understanding of basic matrix algebra (solving systems of linear equations)
+>  * Understand the basics of a relationship between variables, including scatterplots, the idea of correlation, and the line of best fit
+>  * Have experience with descriptive statistics: notions of center, spread, and skew
+
+I have found that the current curriculum, starting at MIT 6.000.1x, certainly reflects those prerequisites. Moreover, the previous Readme file included an unused ""Prerequisite"" link in its index, which has now been fixed.
+
+I have also fixed a typo in the ""Community"" section.",Elahi-cs,67738959,closed,False,2021-02-24T11:43:40+00:00,2021-03-06T06:03:48+00:00,2021-03-06T06:03:48+00:00,2021-03-06T06:03:48+00:00,28930ad383d3a60d758a11532f0180abf4cf1496,unknown,6,2,1,1,0,1,,,
+ossu/data-science,721173296,82,vikas,viksa,motabhai-144,37713758,closed,False,2021-08-27T09:27:32+00:00,2021-08-27T16:42:31+00:00,2021-08-27T16:42:31+00:00,,67b86e05ec5ee87505fac8cb6bca75fcc2babd61,unknown,0,0,2,1,0,0,,,
+ossu/data-science,794922922,86,Enhanced layout," changed the `Data Structures and Algorithms` section to be the same as CS OSSU.
+Added duration, effort, prerequisites, discussion(only for the ones that are available in CS OSSU) to each course, and organized them into tables.
+also added `Topics covered` to each section.",ghost,10137,closed,False,2021-12-03T21:22:27+00:00,2022-03-02T06:04:18+00:00,2022-03-02T06:04:17+00:00,,80ba5989454ee008face72e102ec57bbc7a54fae,unknown,173,68,1,5,9,2,,,
+ossu/data-science,800770729,87,Create LICENSE.md,"Adding license per issue 67
+
+https://github.com/ossu/data-science/issues/67
+
+https://creativecommons.org/licenses/by-sa/4.0/",jromani-ds,26752255,closed,False,2021-12-13T00:27:27+00:00,2021-12-13T03:08:08+00:00,2021-12-13T03:08:08+00:00,2021-12-13T03:08:08+00:00,c7bf83b6c84dc714e640cc953e6991a23d49e885,unknown,1,0,1,4,0,2,,,
+ossu/data-science,987759864,94,solves #92,,daniel-web-developer,107224353,closed,False,2022-07-05T19:12:34+00:00,2022-08-02T18:51:43+00:00,2022-08-02T18:51:43+00:00,2022-08-02T18:51:43+00:00,d4223b3df6b0f698759a3dae9a797886393752ad,unknown,2,2,1,1,0,0,,,
+ossu/data-science,1104843860,100,change made by Deep,,Deep838,94040857,closed,False,2022-10-31T05:14:26+00:00,2022-10-31T05:58:31+00:00,2022-10-31T05:56:08+00:00,,0353f1ad4a7cc5dfc5107b7bb5dbeaf2c38b924d,unknown,4,0,1,1,0,1,,,
+ossu/data-science,1340167603,105,dfgf,slk,reevdonatusben789,106050175,closed,False,2023-05-05T17:11:13+00:00,2023-05-05T20:43:13+00:00,2023-05-05T20:43:13+00:00,,abbcd0ee3f356df5402d183e777d7df5d9e39235,unknown,1,0,1,1,0,0,,,
+ossu/data-science,1346154906,107,Fix #106 Update README.md,"Fix faulty calculus link #106
+Changed link to a working calculus course link. ",yoavami,92380289,closed,False,2023-05-10T23:50:54+00:00,2023-05-11T23:41:56+00:00,2023-05-11T23:41:56+00:00,,7364fda4d378e39b7bc04dec729577190b3d18d4,unknown,1,5,1,1,0,1,,,
+ossu/data-science,1346620101,108,replace MIT edx calaculas links with MIT open library,,Zayd-R,90765041,closed,False,2023-05-11T08:03:34+00:00,2023-05-12T17:07:09+00:00,2023-05-12T17:07:08+00:00,2023-05-12T17:07:08+00:00,f97a0a5045a06e789d3adf27f7aec79efeefa483,unknown,3,3,1,1,0,0,,,
+ossu/data-science,1426395020,109,My os contribution,hey you can ignore this pr. just learning,shreyathakurst,139054952,closed,False,2023-07-09T18:21:13+00:00,2024-01-04T16:44:38+00:00,2024-01-04T16:44:38+00:00,,f965e5e1b2c4efc894ecc594760c7200afd3e996,unknown,1,0,1,1,0,0,,,
+ossu/data-science,1575526287,114,removed unnecessary separation line in README,,tuskydev,52723004,closed,False,2023-10-26T20:15:55+00:00,2023-11-13T06:42:46+00:00,2023-11-13T06:42:46+00:00,2023-11-13T06:42:46+00:00,cda3c493a8e4f348e395c3cdcaf02be057a1401a,unknown,0,2,1,2,0,0,,,
+ossu/data-science,1616712776,115,Added ISL course recommendation,"This pull request proposes the addition of the ""Introduction to Statistical Learning"" course to the Open Source Society University (OSSU) Data Science curriculum. This course provides a comprehensive introduction to statistical learning methods and is essential for students pursuing a career in data science.
+
+Rationale:
+
+Relevance to Data Science: Statistical learning is a fundamental aspect of data science, providing the necessary tools for data analysis and interpretation.
+
+Complement Existing Curriculum: This course fills gaps in the current curriculum by offering a focused study on statistical learning techniques.
+
+Quality of Instruction: The course is taught by renowned experts in the field and is well-received by learners for its clarity and depth. Anyone who wants to intelligently analyze complex data should own this book.” Larry Wasserman, Professor, Department of Statistics and Department of Machine Learning, CMU and author of All of Statistics
+
+Accessibility: It's freely available online in EdX Mooc (R) or PDF download for Python or R
+
+Practicality: The course includes hands-on exercises and real-world examples, enhancing practical understanding.",Smcgb,6243581,closed,False,2023-11-25T22:00:10+00:00,2024-02-25T22:50:08+00:00,2024-02-25T22:50:08+00:00,2024-02-25T22:50:08+00:00,31e49209719c1986dc3c282464715ba8f2423d41,unknown,2,0,1,2,0,1,,,
+ossu/data-science,1733780224,117,Update README.md,"Updated Data Science curriculum README
+
+Added new courses to the Data Science curriculum, including: 1 - CS50’s Introduction to Programming with Python (https://cs50.harvard.edu/python/2022/)
+
+2 - CS50’s Introduction to Databases with SQL
+(https://cs50.harvard.edu/sql/2024/)
+
+3 - Learn Linear Algebra
+(https://www.khanacademy.org/math/linear-algebra)
+
+Keeping the curriculum up-to-date and enhancing user experience.
+
+Special thanks to the OSSU community for their valuable contributions.",Bassamejlaoui,130122304,closed,False,2024-02-20T01:26:12+00:00,2024-08-11T17:33:08+00:00,2024-08-11T17:33:08+00:00,,36f4c10db951df15b61c2049690c08aa1e69658c,unknown,6,0,1,1,0,2,,,
+ossu/data-science,1734059651,119,Add Intro-programming coursepage,"Added the intro-programming course page highlighting both Py4E and CS50P and inviting volunteers to do both courses and provide their analysis.
+
+Similar to ossu/computer-science#1177
+Related RFC: ossu/computer-science#1164",pulkitkrishna00,72264063,closed,False,2024-02-20T07:09:26+00:00,2024-02-26T06:52:06+00:00,2024-02-26T06:52:06+00:00,2024-02-26T06:52:06+00:00,ba183182625dc8382da32f9f8938465e4a6cc69f,unknown,89,1,2,2,0,0,,,
+ossu/data-science,1848416399,122,Replacing Princeton’s DSA with GT’s!,,tuskydev,52723004,closed,False,2024-04-30T17:04:49+00:00,2024-05-02T01:31:34+00:00,2024-05-02T00:59:44+00:00,2024-05-02T00:59:44+00:00,bb8c9f6879a3401bd5bff259517c5fb0ceee2b31,unknown,6,2,1,2,0,2,,,
+ossu/data-science,1859642986,124,"Bring recent changes from CS repo, improve organization and add info about Final Project","This PR does the following things:
+
+- Remove outdated materials like Trello board and add warning about them
+- Remove newsletter link
+-  Mark the Py4E course link as link and fix CS50P discord link
+- Add Intro CS coursepage
+- Remove PROJECTS.md file (which was not linked in the README in this repo)
+- Add information about final project and what to do after completing this curriculum (taken from CS repo)
+- Improve the organization of the README, modelling it after the CS curriculum README.",pulkitkrishna00,72264063,closed,False,2024-05-08T07:31:01+00:00,2024-05-21T04:19:04+00:00,2024-05-21T04:19:04+00:00,,ec447686c702133a44719732748c7c7c3ab3b65e,unknown,109,108,4,6,0,4,,,
+ossu/data-science,1876947094,125,Chore: Added free web book alt to StatLearning,"In RFC 118, the alternate link mentioned for the free textbook course version was left off.",Smcgb,6243581,closed,False,2024-05-18T22:45:37+00:00,2024-08-11T17:29:37+00:00,2024-08-11T17:29:37+00:00,2024-08-11T17:29:37+00:00,1473cb585ca9f02a69c7be44cb1d5a4069c93f54,unknown,1,1,1,2,1,3,,,
+ossu/data-science,1883706713,127,"Bring recent changes from CS repo, improve organization and add info about Final Project","- Remove outdated materials like Trello board and add warning about them
+- Remove newsletter link
+-  Mark the Py4E course link as link and fix CS50P discord link
+- Add Intro CS coursepage
+- Remove PROJECTS.md file (which was not linked in the README in this repo)
+- Add information about final project and what to do after completing this curriculum (taken from CS repo)
+- Improve the organization of the README, modelling it after the CS curriculum README.",pulkitkrishna00,72264063,closed,False,2024-05-23T04:27:02+00:00,2024-05-28T19:54:30+00:00,2024-05-28T19:54:30+00:00,2024-05-28T19:54:30+00:00,5cb0af2d1e11078edc91f16db2d6d904cf7d37d2,unknown,119,108,4,6,3,2,,,
+ossu/data-science,1934498482,128,Add links to other courses from DeepLearning.AI specialization,"According to discussion here https://discord.com/channels/744385009028431943/744388942635204610/1254522570661822504, all three courses of the DeepLearning.AI specialization on Coursera are part of the curriculum, but only link to the first course was given in this repo. This PR adds the links of the rest of the courses.",pulkitkrishna00,72264063,closed,False,2024-06-24T02:49:25+00:00,2024-07-06T09:10:29+00:00,2024-07-06T09:10:24+00:00,2024-07-06T09:10:24+00:00,bd7f590563165980944169d596fc2dae38ab0f24,unknown,5,1,1,1,0,2,,,
+ossu/data-science,1946061155,129,Added one useful resource,"Added the Career Transition to Data Science: A Complete Guide  URL to the Introduction to Data Science section, providing useful insights to aspiring tech professionals.
+
+Please let me know if further changes are required.
+
+Thank you",Paras-96,169983983,closed,False,2024-06-30T19:54:53+00:00,2024-08-11T17:32:21+00:00,2024-08-11T17:32:21+00:00,,744e23981eb3f66f347707577e36b88f84573aac,unknown,2,0,1,1,0,2,,,
+ossu/data-science,2016009672,130,Update Math Course Links from OpenLearningLibrary to MITx Online,"OSSU currently lists math courses on OpenLearningLibrary, but the same courses are available on MITx Online, which includes problem sets that enhance the learning experience. This issue means the current links do not fully leverage the available resources that better align with OSSU's curricular guidelines, especially in providing rigorous and comprehensive course material.",Ad7amstein,102502789,closed,False,2024-08-12T23:09:24+00:00,2024-09-30T09:20:20+00:00,2024-09-30T09:20:20+00:00,2024-09-30T09:20:20+00:00,c8408ed31e88c49f25ac34ec7f1443fea7e05690,unknown,3,3,1,2,1,1,,,
+ossu/data-science,2022397608,132,Fix link to Statistics & Probability,,FantasqueX,46747123,closed,False,2024-08-16T06:50:56+00:00,2024-08-25T10:36:29+00:00,2024-08-25T10:36:29+00:00,2024-08-25T10:36:29+00:00,8c4d42db4402e2646b434f37782cc136e3642c01,unknown,1,1,1,1,0,0,,,
+ossu/data-science,2134709440,135,"Correction the link of the course ""MongoDB for Developers Learning Path""","Correct the link of the course **MongoDB for Developers Learning Path**
+Link: https://learn.mongodb.com/pages/mongodb-developer-learning-paths
+",TinhToQuang,12286785,closed,False,2024-10-20T19:27:01+00:00,2024-10-21T05:54:34+00:00,2024-10-21T05:54:34+00:00,2024-10-21T05:54:34+00:00,9cae467d43f2aca5f1a9327a1959f45075936c34,unknown,1,1,1,1,0,0,,,
+ossu/data-science,2456515209,136,Replace link to FAQ with Pre-College Math,Update resource for High School Math prerequisites.,Flomza,83545712,closed,False,2025-04-14T03:33:40+00:00,2025-05-13T02:19:48+00:00,2025-05-13T02:19:48+00:00,2025-05-13T02:19:48+00:00,ccb52fe046fe3b61696083596278b36516fdb80b,unknown,1,1,1,1,0,0,,,
+ossu/data-science,2488386207,137,fix: Updated broken link for Statistical Learning with Python,Fix: Update broken link for Statistical Learning with Python EdX course,sugaulee,86834637,closed,False,2025-04-29T10:15:17+00:00,2025-04-30T05:07:39+00:00,2025-04-30T05:07:39+00:00,2025-04-30T05:07:39+00:00,b0dbaa09a63a4e6d8e2cb2cc5e72ef90d9d3eaea,unknown,1,1,1,1,0,0,,,
+ossu/data-science,2497293854,138,My os contribution,"Hey you can ignore this PR
+i did this just to teach my students how to raise PR",ghost,10137,closed,False,2025-05-04T12:29:18+00:00,2025-05-04T14:18:38+00:00,2025-05-04T14:18:08+00:00,,8f720b365737246086c0d15568e5aa3ddefe5ea8,unknown,1,0,1,1,0,1,,,

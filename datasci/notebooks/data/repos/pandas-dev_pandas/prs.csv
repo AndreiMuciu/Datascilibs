@@ -1,0 +1,495 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+pandas-dev/pandas,78217,35,Added hist method and added auto_x argument to plot method.,"I have added hist method to frame.py and series.py, and added auto_x argument to plot method, which can be useful for the cases where the index does not consist of numeric values. 
+
+-Joon
+",ghost,10137,closed,False,2011-02-22T08:07:35+00:00,2011-02-27T05:17:56+00:00,2011-02-25T01:41:56+00:00,,,dirty,54,5,3,1,0,2,,,
+pandas-dev/pandas,86643,37,added describe and scoreatpercentile in frame.py,"Added two methods in frame.py: describe, which returns a DataFrame with summary statistics of each columns of the original DataFrame (with index=columns), and scoreatpercentile, which calculate the score at the given percentile.
+
+When I play around with a dataset I use this describe thing a lot so I thought it would be convenient to have this with DataFrame.
+
+I think this is crudely implemented so if you think there is a better way please let me know!
+
+-Joon
+",ghost,10137,closed,False,2011-03-06T01:35:53+00:00,2014-07-03T19:26:14+00:00,2011-03-18T20:00:26+00:00,2011-03-18T20:00:26+00:00,,dirty,56,0,1,1,0,4,,,
+pandas-dev/pandas,98828,38,changed _pfixed in common.py to add a leading space to positive numbers,"So the results of DataFrame.toString() without any float_format argument is aligned around the period. I think it looks much better. :)
+",ghost,10137,closed,False,2011-03-22T19:27:42+00:00,2011-03-22T23:47:23+00:00,2011-03-22T20:01:36+00:00,2011-03-22T20:01:36+00:00,,dirty,3,0,1,1,0,2,,,
+pandas-dev/pandas,201967,55,Minor change to CleanCommand so build works with stdeb,"Hi Wes, i've been following your pandas work for a while, and regularly install it on my ubuntu based systems.  I generally use the stdeb (https://github.com/astraw/stdeb) package for creating .deb files from python packages.  Unfortunately, some of your recent changes in setup.py in pandas caused a problem with building using stdeb.  Essentially the problem is that debhelper tries to run ""python setup.py clean -a"" at some point, which doesn't work because the customized clean command does not have a ""-a"" option.  I just added a dummy argument ""--all, -a"" argument that has no effect.
+
+No worries if you'd rather not merge it, just wanted to check.
+
+thanks
+",dieterv77,453086,closed,False,2011-06-29T00:59:24+00:00,2011-06-29T02:07:07+00:00,2011-06-29T02:06:48+00:00,2011-06-29T02:06:47+00:00,2a90dec28be0595be0391459eb6e86e0bb9d5c20,dirty,2,1,1,1,0,1,,,
+pandas-dev/pandas,258234,89,Fix for issue #80,"Starting small...
+
+It looks like the .h5 files in pandas/io/tests were getting copied okay, but the xls and csv files weren't in the package-data, so I added them.
+",jberka,921960,closed,False,2011-08-06T08:02:19+00:00,2014-07-17T17:26:50+00:00,2011-08-07T16:15:41+00:00,2011-08-07T16:15:41+00:00,aaa30900230b80c7d79512bdb7fb5ea355c17ade,dirty,3,1,1,1,0,1,,,
+pandas-dev/pandas,279820,105,README updated for better Github output,"Syntax errors in the README are fixed, so that the
+presentation in Github is as good as could be. Other
+changes include some minor changes to wording and
+added hyperlinks.
+",timClicks,27889,closed,False,2011-08-19T08:20:15+00:00,2013-12-04T00:40:17+00:00,2011-08-19T20:25:29+00:00,,b120639980d9d14f95b0bc56dbb596ea382ebb9e,dirty,41,36,1,1,0,2,,,
+pandas-dev/pandas,299346,117,Added baseball.csv,"This seems to work. Was that what you had in mind? 
+",chrisjordansquire,788080,closed,False,2011-08-30T20:09:28+00:00,2014-07-26T13:07:57+00:00,2011-09-13T00:03:55+00:00,,6256bb393f216e4819abfc2f63a66f3321e3b6d6,dirty,14,3,2,1,0,4,,,
+pandas-dev/pandas,313150,129,"Added function to pull data from Yahoo! finance, FRED, and Ken French's website.","The goal is to make it easy to pull in data off the web from various different sources using the same consistent framework.
+
+As an example:
+
+from pandas.io.data import DataReader
+gs = DataReader(""GS"", ""yahoo"")
+",smc77,133543,closed,False,2011-09-07T02:04:13+00:00,2011-09-08T02:24:19+00:00,2011-09-07T20:15:43+00:00,,e7030021274b65e3f7b87d60c359476d8c94361f,dirty,156,0,1,6,0,4,,,
+pandas-dev/pandas,317409,130,ENH: Add join to Panel,"This joins on indices only. It doesn't look like Panel._data.join_on a key is set up to handle multiple indices. You may want to implement it higher up in NDFrame, but this worked for my use case.
+",jseabold,296164,closed,False,2011-09-08T18:10:15+00:00,2014-07-03T14:26:20+00:00,2011-09-09T05:03:47+00:00,,90980ad77470b6e9856e0ed53a2a44ff900b6e3f,dirty,96,0,1,1,0,1,,,
+pandas-dev/pandas,326855,136,minor: just removed pasting of import of datetime into version.py,"so to avoid change of file while doing setup.py operations, removing pasting of the import
+of datetime into version.py
+",yarikoptic,39889,closed,False,2011-09-13T15:37:44+00:00,2014-07-02T21:11:05+00:00,2011-09-17T01:35:07+00:00,,cc38ab88ca70511cb19f0f6c82e130ebae92a91c,dirty,0,2,1,1,0,2,,,
+pandas-dev/pandas,327847,137,Enh tests compat pytables 2.1,"unfortunately on Debian systems we still have pytables 2.1; but it still would be nice to have pandas' unittests to pass with skips but without an error or failure -- major incompatibility is absense of blosc compressor.   This changes make those tests conditional on the version of pytables being at least 2.2 to test blosc
+",yarikoptic,39889,closed,False,2011-09-13T21:08:05+00:00,2014-06-16T08:10:47+00:00,2011-09-17T01:31:25+00:00,,4211693df5237790c0fd15bc478a63bf7f4bc88d,dirty,83,4,2,2,0,3,,,
+pandas-dev/pandas,330312,139,Removed warnings when compiling using MSVC/Mingw under 64bit Windows,"BUG: changed index types to Py_ssize_t to use 64-bit indexes on 64 bit machines.
+
+Compiles on Windows-7 64bit with just a few warnings remaining (of initially hundreds) that I cannot fix since they seem to be upstream in cython.
+
+C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\BIN\amd64\cl.exe /c /nologo /Ox /MD /W3 /GS- /DNDEBUG -ID:\Python27\lib\site-packages\numpy\core\include -ID:\Python27\include -ID:\Python27\PC /Tcpandas\src\tseries.c /Fobuild\temp.win-amd64-2.7\Release\pandas\src\tseries.obj
+tseries.c
+pandas\src\tseries.c(13717) : warning C4244: '+=' : conversion from 'Py_ssize_t' to 'long', possible loss of data
+pandas\src\tseries.c(13727) : warning C4244: '+=' : conversion from 'Py_ssize_t' to 'long', possible loss of data
+pandas\src\tseries.c(17890) : warning C4244: 'function' : conversion from 'Py_ssize_t' to 'int', possible loss of data
+pandas\src\tseries.c(23257) : warning C4244: 'function' : conversion from '__int64' to 'long', possible loss of data
+pandas\src\tseries.c(26305) : warning C4267: '=' : conversion from 'size_t' to 'char', possible loss of data
+pandas\src\tseries.c(26316) : warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\BIN\amd64\link.exe /DLL /nologo /INCREMENTAL:NO /LIBPATH:D:\Python27\libs /LIBPATH:D:\Python27\PCbuild\amd64 /EXPORT:init_tseries build\temp.win-amd64-2.7\Release\pandas\src\tseries.obj /OUT:build\lib.win-amd64-2.7\pandas_tseries.pyd /IMPLIB:build\temp.win-amd64-2.7\Release\pandas\src_tseries.lib /MANIFESTFILE:build\temp.win-amd64-2.7\Release\pandas\src_tseries.pyd.manifest
+tseries.obj : warning LNK4197: export 'init_tseries' specified multiple times; using first specification
+   Creating library build\temp.win-amd64-2.7\Release\pandas\src_tseries.lib and object build\temp.win-amd64-2.7\Release\pandas\src_tseries.exp
+C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\x64\mt.exe -nologo -manifest build\temp.win-amd64-2.7\Release\pandas\src_tseries.pyd.manifest -outputresource:build\lib.win-amd64-2.7\pandas_tseries.pyd;2
+cythoning pandas\src\sparse.pyx to pandas\src\sparse.c
+building 'pandas._sparse' extension
+C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\BIN\amd64\cl.exe /c /nologo /Ox /MD /W3 /GS- /DNDEBUG -ID:\Python27\lib\site-packages\numpy\core\include -ID:\Python27\include -ID:\Python27\PC /Tcpandas\src\sparse.c /Fobuild\temp.win-amd64-2.7\Release\pandas\src\sparse.obj
+sparse.c
+pandas\src\sparse.c(4846) : warning C4244: '+=' : conversion from 'Py_ssize_t' to 'long', possible loss of data
+pandas\src\sparse.c(7557) : warning C4244: '+=' : conversion from 'Py_ssize_t' to 'long', possible loss of data
+pandas\src\sparse.c(16613) : warning C4244: 'function' : conversion from '__int64' to 'long', possible loss of data
+pandas\src\sparse.c(19732) : warning C4267: '=' : conversion from 'size_t' to 'char', possible loss of data
+pandas\src\sparse.c(19743) : warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\BIN\amd64\link.exe /DLL /nologo /INCREMENTAL:NO /LIBPATH:D:\Python27\libs /LIBPATH:D:\Python27\PCbuild\amd64 /EXPORT:init_sparse build\temp.win-amd64-2.7\Release\pandas\src\sparse.obj /OUT:build\lib.win-amd64-2.7\pandas_sparse.pyd /IMPLIB:build\temp.win-amd64-2.7\Release\pandas\src_sparse.lib /MANIFESTFILE:build\temp.win-amd64-2.7\Release\pandas\src_sparse.pyd.manifest
+",bergtholdt,204942,closed,False,2011-09-14T18:29:55+00:00,2011-09-17T01:50:54+00:00,2011-09-14T18:38:51+00:00,,,dirty,101,92,8,1,0,2,,,
+pandas-dev/pandas,330896,140,ENH: Add panel_index convenience function,"The convenience function I've been using. Don't know if it belongs in pandas or where.
+",jseabold,296164,closed,False,2011-09-14T21:43:18+00:00,2014-08-02T09:06:16+00:00,2011-09-17T01:41:13+00:00,,596e95e548c98428cd6a178d595ba45542ee267e,dirty,60,0,1,1,0,1,,,
+pandas-dev/pandas,331147,141,ENH: Allow to sort on index level by name,"Trying to implement the easy items on my wishlist. Allows sorting by the name of the level in the Index as well as its index.
+",jseabold,296164,closed,False,2011-09-14T23:17:01+00:00,2014-06-16T22:03:18+00:00,2011-09-17T01:47:28+00:00,,e05861194f4b0fafa8b4054063a472d73a19f0ca,dirty,9,1,1,2,0,1,,,
+pandas-dev/pandas,331234,142,ENH: Allow unstacking by level name,"More low-hanging fruit. Anywhere the indices have names, might as well be able to use them.
+",jseabold,296164,closed,False,2011-09-14T23:59:36+00:00,2014-06-14T02:28:14+00:00,2011-09-17T01:52:24+00:00,,8fe64164bc0f76d0e31dcc07641fab36a12d4bbd,dirty,8,2,1,1,0,1,,,
+pandas-dev/pandas,334822,146,Minor change to csv reading,"Hi Wes
+
+Firstly, congrats on such an amazing project! I love prototyping in python / numpy / ipython, but I always envy some of R's features. I tried pandas out about 9 months ago and although it was interesting, it seemed very rough around the edges. Now, however, it is looking really polished and I've been using it for prototyping and testing some trading models, and everything works extremely well. I hope it keeps growing, together with the integration with scikits statsmodels/timeseries and maybe even scikits.learn in future ...
+
+Anyway, as I was starting to dive into the code, I came across the <code>read_csv</code> functions and noticed that there was full duplication in <code>read_table</code>. The <code>csv</code> module in python actually has full support for arbitrary delimiters, so there is no need for the duplication. Also, there is <code>csv.Sniffer().sniff(sample)</code> that attempts to sniff out the delimiter automatically. This commit tries to ""magically"" handle any arbitrary CSV file without needing to specify a separator, whether separated by blank spaces, tabs, commas, semicolons or other weird separators (I have a file at work with ""^"" separators :). If it doesn't work, one can fall back on specifying the separator (so <code>read_csv</code> looks more like <code>read_table</code>). In future it could make sense to simply have one <code>read_data</code> or <code>read_table</code> function.
+
+Incidentally, the <code>csv.Sniffer()</code> also tries to sniff out other things like quote escaping and double quoting, but this commit effectively only uses it for the delimiter. If problems with quote / string escaping crop up with users one could always let the sniffer try to figure out the full dialect.
+",MLnick,1036807,closed,False,2011-09-16T09:32:28+00:00,2014-06-16T01:22:51+00:00,2011-09-17T01:44:08+00:00,,8917796f677f3406b942ec8f2ac79e2d00f51870,dirty,21,23,1,3,0,1,,,
+pandas-dev/pandas,337437,151,ENH: improve DataFrame read_csv / to_csv for Index/MultiIndex,"2 issues for DataFrame.to_csv
+
+1 ) If header and index are True, you should write something for an index header, even if index_level is None.
+2) If given a MultiIndex, don't want to just call str() on each element.
+
+Also fixed read_csv to take an iterable for index_col so that I could write tests.
+
+I haven't looked at the similar methods in Series or the other to_\* methods yet. This is all I needed at the moment.
+
+Aside: it looks like in test_frame setUp isn't a classmethod and is called for each test method. Not a big deal, but might be a little heavy in the test suite.
+",jseabold,296164,closed,False,2011-09-17T17:56:07+00:00,2014-06-19T05:29:22+00:00,2011-09-22T14:03:03+00:00,,8b580e35886dee0b3030725c3d65482002a95485,dirty,113,27,3,1,0,1,,,
+pandas-dev/pandas,383195,200,Python 3 compatibility,"No doubt there are ways this could be improved, but this gets it installing, importing, and _almost_ passing the test suite.
+
+There's one test failure left, and I think that's something odd with numpy, specifically the `ndarray.searchsorted()` method. It returns seemingly random results when it's called in `panel.get_axis_dummies()` - but I can't replicate those results calling searchsorted on identical arrays interactively.
+
+It doesn't add any failures to the Python 2 test suite (one test is failing for me in master), but I've only checked this with Python 2.7.
+",takluyver,327925,closed,False,2011-10-06T18:53:36+00:00,2014-06-13T05:01:26+00:00,2011-10-09T03:13:19+00:00,,,dirty,210,90,20,10,0,11,,,
+pandas-dev/pandas,388116,206,Use stdlib csv module to write csv,"I noticed while using pandas that data with commas in the fields wasn't getting escaped properly when written to CSV (data in biology often has bits of text as well as numbers). This causes the data to spread out over extra columns. This commit uses the `csv` module from the standard library to write out CSV 'properly'.
+
+I've also added a simple test for this case.
+",takluyver,327925,closed,False,2011-10-08T23:00:37+00:00,2014-06-13T12:02:14+00:00,2011-10-09T00:03:16+00:00,,51eddb60e6fd36e769e1f221c66ce14036732d34,dirty,22,15,3,1,0,2,,,
+pandas-dev/pandas,388655,209,Series methods isnull and notnull,"Fulfils enhancement #203: isnull and notnull methods for series (especially for use with columns in dataframes).
+
+I've also slipped in a couple of other small tweaks - fixing a bug with writing series CSV, and adding trove classifiers to indicate Python 3 compatibility.
+",takluyver,327925,closed,False,2011-10-09T16:02:04+00:00,2014-06-16T16:14:10+00:00,2011-10-09T16:56:36+00:00,,273e41d3e2b613417a331df8ae93368344a46375,dirty,18,1,3,3,0,1,,,
+pandas-dev/pandas,390835,213,Add simple attribute access to DataFrame columns,"This one might need some discussion, but I think it makes sense.
+
+If a column name in a dataframe is a valid Python name and doesn't conflict with any DataFrame attributes, this lets you type `df.MyColumn` than `df['MyColumn']`. That's much handier for interactive use, especially because IPython will tab complete `df.MyColumn.<tab>`, while it won't by default tab complete `df['MyColumn'].<tab>`.
+
+This doesn't interfere with accessing columns through the dictionary interface.
+",takluyver,327925,closed,False,2011-10-10T17:43:25+00:00,2014-06-14T22:58:54+00:00,2011-10-13T03:22:13+00:00,,c94704190ffa4f6f9a51a4bcb9c92b512ae9d038,dirty,12,0,2,1,0,3,,,
+pandas-dev/pandas,398211,228,Update docs on reading CSV files.,"This does the essential reworking of the documentation for `read_csv` and `read_table` for #227. I'm happy to do more doc updates.
+
+I also think the autosummary API documentation isn't particularly good - it doesn't seem to handle classes at all. I'll see if I can copy what IPython uses (example output is [here](http://ipython.org/ipython-doc/stable/api/generated/IPython.testing.tools.html#tempfilemixin)).
+",takluyver,327925,closed,False,2011-10-12T20:37:50+00:00,2014-08-02T14:51:00+00:00,2011-10-13T03:15:03+00:00,,71183f64843039bdc5e295f3706eaf4a06ee3c5a,dirty,44,620,4,4,0,2,,,
+pandas-dev/pandas,401467,233,Add columns to IPython tab completions of DataFrame attributes,"This addresses #230.
+
+I'm not entirely happy about how we check whether IPython is imported, but it's the best option I could see, and I don't think we should unconditionally import IPython and dependent modules just because it's installed.
+",takluyver,327925,closed,False,2011-10-13T20:26:39+00:00,2014-06-22T02:51:22+00:00,2011-10-14T04:14:05+00:00,,4f9fc9390a6852b8f1cbafc0a6b040b2ef922e1a,dirty,31,2,2,2,0,11,,,
+pandas-dev/pandas,406551,241,.describe() for series of objects,"See #210.
+
+I don't know if `series.dtype == object` is the best way to check for non-numeric data, but it appears to work.
+
+At present, I've used fields 'count', 'unique', 'top' (i.e. most common) and 'freq' (i.e. count of the most common). These seem like obvious things for a summary.
+
+I also noticed a problem doing `df.describe()` if df has integer columns, so I copied some code from series to fix that.
+",takluyver,327925,closed,False,2011-10-16T18:06:10+00:00,2014-06-14T07:05:34+00:00,2011-10-19T20:34:41+00:00,,8aadf9c93be9a9a1cdad583fe165c1bb64206cc4,dirty,20,8,4,4,0,5,,,
+pandas-dev/pandas,407767,244,Support different delimiters for to_csv,"This pull requests implements delimter support into to_csv. A number of analysis tools expects TSV files rather than CSV files, and this is a simple solution to the problem.
+
+The delimiter parameter is by default "","", hence there are no side effects with existing code.
+",lbeltrame,25192,closed,False,2011-10-17T12:33:49+00:00,2014-06-14T10:26:54+00:00,2011-10-19T20:23:20+00:00,,d526fdad540e9072b70f1e5ef17dd72589bc70e3,dirty,4,2,1,3,0,2,,,
+pandas-dev/pandas,413165,254,fixed #251,,aman-thakral,617870,closed,False,2011-10-18T21:38:22+00:00,2014-06-20T19:27:37+00:00,2011-10-19T20:28:53+00:00,,1ae316ba35fe081c9234987a667c98857b5a2039,dirty,4,2,1,2,1,3,,,
+pandas-dev/pandas,416681,259,Counter class for Python < 2.7,"Copied verbatim from Python 2.7 collections module. Tested in Python 2.6, but not in 2.5, although I've checked the docs, and it shouldn't rely on anything that's not in 2.5.
+",takluyver,327925,closed,False,2011-10-19T21:23:56+00:00,2011-10-19T21:29:49+00:00,2011-10-19T21:29:48+00:00,,07a7fb0694f82aee97ef8891036be33cfa4fbe83,dirty,297,2,2,2,0,1,,,
+pandas-dev/pandas,419188,264,Fix for IPython completion with non-string column names.,"As discussed on #233.
+",takluyver,327925,closed,False,2011-10-20T16:52:16+00:00,2011-10-20T23:04:00+00:00,2011-10-20T23:04:00+00:00,,6b2fa1bfaa123cf99326ec178c32cb4654ace081,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,425219,278,Update install docs now that pandas works on Python 3,"I realised I'd forgotten to update the docs when I did the Python 3 support. Feel free to tweak the wording, and let me know if there are other bits of the docs I should update.
+",takluyver,327925,closed,False,2011-10-22T22:51:18+00:00,2014-08-03T14:51:51+00:00,2011-10-23T02:12:04+00:00,,b9fa57e0cac3a59f6233055f53e353aadf95c07d,dirty,3,3,1,1,0,1,,,
+pandas-dev/pandas,430877,286,"ENH: Adding argmin, argmax to Series and DataFrame.","Hi Wess,
+
+Pull request to let you know that i added argmin and argmax methods to Series and DataFrame.
+I also included unit tests. It`s not that much work/code, but anyway an interesting enhancement i think.
+
+some examples:
+In [23]: s
+Out[23]:
+a    0.80015881463
+b    0.983432892599
+c    0.965122593504
+d    0.81910825442
+e    0.726239458506
+Name: None, Length: 5
+
+In [24]: s.argmin()
+Out[24]: 'e'
+
+In [25]: s[s.argmax()] == s.max()
+Out[25]: True
+
+In [26]: df
+Out[26]:
+               A       B       C        D       E
+one two three
+a   b   10    -0.6155  1.237   1.371    1.24   -0.7725
+p   q   20     1.14   -0.3743  0.5251   0.2426  1.81
+x   y   30     0.6626  2.004  -0.01327  1.587   0.3524
+
+In [27]: df.argmax(axis=0)
+Out[27]:
+A    ('p', 'q', 20)
+B    ('x', 'y', 30)
+C    ('a', 'b', 10)
+D    ('x', 'y', 30)
+E    ('p', 'q', 20)
+Name: None, Length: 5
+
+In [28]: df.argmin(axis=1)
+Out[28]:
+a  b  10    E
+p  q  20    B
+x  y  30    C
+Name: None, Length: 3
+
+What do you think?
+
+Wouter
+",lodagro,1094464,closed,False,2011-10-25T11:46:37+00:00,2014-06-13T12:03:28+00:00,2011-11-14T07:22:04+00:00,,fef0642eb7076f19f06b44f15d635ad46651285b,dirty,195,1,4,1,0,3,,,
+pandas-dev/pandas,431189,287,ENH: Adding DataFrame.boxplot(),"Added DataFrame.boxplot() in similar way as DataFrame.plot() and DataFrame.hist().
+Some syntactic sugar ;-)
+
+Thinking about adding DataFrameGroupBy.boxplot(), now this call is transfered to DataFrame.boxplot().
+But i would prefer the behavior to be different. When groupby is used i`m interested to see in a single plot boxplots for one particular column for all groupby keys and not in one plot to have boxpots for all columns for one groupby key. An input argument can be used to so both ways of boxplotting can be used.
+",lodagro,1094464,closed,False,2011-10-25T13:42:51+00:00,2014-07-25T01:41:23+00:00,2011-11-14T08:31:05+00:00,,479c027b4f45374a9a544864d092b2fbcaeeecce,dirty,19,0,1,1,0,4,,,
+pandas-dev/pandas,435337,296,add .head() and .tail() to Series,"These methods are convenient when working with DataFrame. For consistency and convenience, it would be nice to have them on Series as well.
+",hammer,15233,closed,False,2011-10-26T14:52:55+00:00,2014-06-14T19:39:53+00:00,2011-11-02T04:37:04+00:00,,1b4ff3fdea9d29d8d721240eb5f27abab9b5d8c9,dirty,14,0,2,1,0,1,,,
+pandas-dev/pandas,453211,313,ENH: Added the level arguments to the series and frame math operations,"such as sum, etc.
+",adamklein,869232,closed,False,2011-11-01T18:17:20+00:00,2014-06-13T04:48:31+00:00,2011-11-02T05:03:50+00:00,,7b0a00310100968b299a7df1cf484331d66b3591,dirty,193,31,4,1,4,7,,,
+pandas-dev/pandas,456853,321,Added a QuarterEnd class to datetools module.,"Wes,
+
+Hoping to get this in to the public version so we don't have to keep a separate local copy.  If its, a no go, just let me know and we'll work around.
+
+Thanks,
+
+Nathan Pinger
+YCharts.com
+",npinger,334118,closed,False,2011-11-02T16:50:06+00:00,2014-06-13T11:06:15+00:00,2011-11-03T21:41:40+00:00,,bc4835f2e6351ec19b345f1dbc89250cb4672c30,dirty,48,0,1,1,0,1,,,
+pandas-dev/pandas,461918,330,ENH: small corrections to Series repr,"Issue #317
+",adamklein,869232,closed,False,2011-11-03T21:27:35+00:00,2014-06-26T22:25:05+00:00,2011-11-03T21:38:50+00:00,,c2e643e5df89f0bb7c1639ae81f915796eed4934,dirty,18,2,2,1,0,1,,,
+pandas-dev/pandas,465224,334,ENH: Print hierarchical index names in Series.__repr__,"Issue 305
+",adamklein,869232,closed,False,2011-11-04T19:43:08+00:00,2014-06-17T07:23:41+00:00,2011-11-04T22:22:59+00:00,,019af311260a1a474beaed7f1464e90256acbb05,dirty,31,1,2,2,0,1,,,
+pandas-dev/pandas,469916,345,Quarterend,"Wes,
+
+Thanks for taking the QuarterEnd class as-is.  Here are the accompanying unit tests you wanted, along with the original commit.
+
+Best,
+
+Nathan
+",npinger,334118,closed,False,2011-11-07T16:26:06+00:00,2011-11-07T16:31:03+00:00,2011-11-07T20:12:02+00:00,,dc76c6cedf18fb2f1cfb69ce6ff59912a84a663d,dirty,158,1,2,2,0,1,,,
+pandas-dev/pandas,472005,348,Add kind='line' or 'bar' argument to DataFrame.plot,"This is just a first stab at it, comments are very welcome, plus feel free to say you'd rather not add it at all.
+",dieterv77,453086,closed,False,2011-11-08T01:59:02+00:00,2014-06-14T08:07:19+00:00,2011-11-14T00:57:16+00:00,,fe9c814a17b1d00023ca8b309c10d9a8862c0a71,dirty,46,16,1,1,0,2,,,
+pandas-dev/pandas,482627,355,Vectorize pandas.Series.apply,"When profiling my code I noticed that numpy.vectorize was a bit faster than pandas.Series.apply.  
+
+Execution Times:
+numpy.vectorize: 3.3 seconds
+pandas.Series.apply: 4.4 seconds.
+",aman-thakral,617870,closed,False,2011-11-10T16:33:30+00:00,2014-06-14T16:19:02+00:00,2011-11-11T21:05:56+00:00,,9b934f6eed935606bb05592796cbafe740a72633,dirty,2,2,1,5,0,4,,,
+pandas-dev/pandas,489833,362,Issues #194 (cov function) and #92 (multi-column sort),"Added:
+1. Series.cov
+2. DataFrame.cov
+3. test_cov in test_series.py
+4. test_cov in test_frame.py
+
+Modified:
+1. DataFrame.sort
+2. DataFrame.sort_index
+3. test_sort in test_frame.py
+",changhiskhan,759245,closed,False,2011-11-13T15:45:22+00:00,2014-06-12T09:19:59+00:00,2011-11-13T17:51:58+00:00,,76d11fddf530acd268966d19a9aa437a9d1b8667,dirty,112,25,4,6,1,3,,,
+pandas-dev/pandas,498526,369,Fix graphics tests under Python 3,"A simple switch from `string.letters` to `string.ascii_letters`. The latter is present on Python 2 as well, so nothing clever is needed.
+",takluyver,327925,closed,False,2011-11-16T01:28:01+00:00,2014-07-02T22:17:37+00:00,2011-11-18T17:39:18+00:00,,3810a511b03458b17a685972fdda9979c8a83296,dirty,3,3,1,1,0,1,,,
+pandas-dev/pandas,507695,385,resolve issue 368,"two commits to resolve [issue#368](https://github.com/wesm/pandas/issues/368)
+",lodagro,1094464,closed,False,2011-11-18T09:21:29+00:00,2014-07-04T00:18:53+00:00,2011-11-18T17:35:29+00:00,2011-11-18T17:35:29+00:00,2e2fa06edacd4dad1d92e7e7909a9807475cf09f,dirty,24,7,2,2,0,3,,,
+pandas-dev/pandas,507772,387,DataFrame.to_html(),"DataFrame.to_html() -- Render a DataFrame to a html table.
+",lodagro,1094464,closed,False,2011-11-18T09:53:38+00:00,2014-06-17T21:46:53+00:00,2011-11-18T17:44:30+00:00,,22d8187d47f2bc29d88279c9da45a2f77f86f2a0,dirty,166,8,2,1,0,2,,,
+pandas-dev/pandas,517326,396,Handle masked arrays in DataFrame constructor,"If passing a masked array to DataFrame constructor, my expectation was that the masked entries would end up as NAN's in the DataFrame.  This does not appear to be the case.  The commits in the pull request try toe address that.
+
+as always, comments welcome.
+
+thanks
+",dieterv77,453086,closed,False,2011-11-22T03:55:50+00:00,2014-06-15T04:55:39+00:00,2011-11-23T17:20:01+00:00,,358c92a676146c1f3cdb33eeeb8c038b95884082,dirty,66,0,2,2,0,2,,,
+pandas-dev/pandas,532537,420,Change Series default float formatter.,"Series now uses _pandas.core.common._float_format()_ as default float formatter instead of _str()_.
+_pandas.core.common._float_format()_ is also default float formatter for DataFrame.
+",lodagro,1094464,closed,False,2011-11-28T07:49:49+00:00,2014-06-13T03:10:18+00:00,2011-12-02T20:14:52+00:00,,9ad54dbf66c59dea356eff31d07eaaf3aeb0a362,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,542115,424,Pass Series.hist **kwds on to plotting function.,"Pass Series.hist() **kwds on to plotting function, as mentioned in the documentation.
+",lodagro,1094464,closed,False,2011-11-30T11:19:12+00:00,2014-07-06T07:54:44+00:00,2011-12-02T20:15:03+00:00,,0f8f73315e51b6c5e5ea0768a787562377987e71,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,544450,425,more momery efficient describe() for DataFrame,"reindex() in describe() in DataFrame was making copy of the data. I changed describe() so it processes one column at a time instead of get all columns with reindex(). It seems to be a better implementation (much less memory usage).
+",joonro,1063143,closed,False,2011-11-30T20:37:32+00:00,2014-06-19T17:58:55+00:00,2011-12-02T00:55:34+00:00,,ee45aa58b00d0547a392b02d1193ec637716a8ba,dirty,13,11,1,1,0,2,,,
+pandas-dev/pandas,545675,427,Bugfix for issue 419 and .gitignore fixup,"Two different things fixed.
+",ralphbean,331338,closed,False,2011-12-01T00:43:31+00:00,2014-06-12T07:55:58+00:00,2011-12-02T00:48:12+00:00,,ab5ecccef649ace31b7ab9f446a575d626122d4f,dirty,4,7,2,3,0,1,,,
+pandas-dev/pandas,553584,435,Using pandas with PyQt,"I've written a simple data model for showing pandas DataFrame in a QDataTable. It is all in the sandbox, qtpandas.py. This file can be run stand-alone as an example.
+",sjev,1168324,closed,False,2011-12-02T21:19:22+00:00,2014-06-15T08:06:37+00:00,2011-12-08T02:58:43+00:00,,a376e6a84144a336c397cbf06414e40162754abc,dirty,117,1,3,5,0,4,,,
+pandas-dev/pandas,555928,442,Minor fix for simpler indexing syntax in array of subplots.,"`plt.subplots()` returns a numpy array, so it's OK to use the more compact/familiar/efficient `a[i,j]` indexing syntax instead of `a[i][j]`.
+",fperez,57394,closed,False,2011-12-04T06:55:39+00:00,2011-12-05T02:39:44+00:00,2011-12-05T02:39:44+00:00,,a0896b0eeec3a0c8d0666ab0bb0716656f7489ec,dirty,4,4,1,1,0,2,,,
+pandas-dev/pandas,563381,453,"Series/DataFrame, make decision between full and short __repr__ configurable","Extending pandas.set_printoptions() with two extra arguments: _max_rows_ and _max_columns_.
+These two numbers impact `pandas.Series.__repr__()` and `pandas.DataFrame.__repr__()`.
+Decision between a short representation or a full one is now configurable. Default values are set to the current ones, so the change is transparent.
+
+When using DataFrames with large number of columns, i got tired of typing `print df.to_string()` all the time :-)
+
+``` python
+set_printoptions(precision=None, column_space=None, max_rows=None,
+           max_columns=None)
+    Alter default behavior of DataFrame.toString
+
+    precision : int
+        Floating point output precision
+    column_space : int
+        Default space for DataFrame columns, defaults to 12
+    max_rows : int
+    max_columns : int
+        max_rows and max_columns are used in __repr__() methods to decide if
+        to_string() or info() is used to render an object to a string.
+```
+",lodagro,1094464,closed,False,2011-12-06T15:48:18+00:00,2014-06-20T00:27:24+00:00,2011-12-08T04:33:25+00:00,,3df60f50883ac7575fb298238bda168c37ef4d8d,dirty,155,11,4,3,0,4,,,
+pandas-dev/pandas,570378,463,Yahoo quote,"I've added a get_quote_yahoo function to io.data.py. The function returns a DataFrame of the current yahoo data for a set of symbols
+",sjev,1168324,closed,False,2011-12-07T23:29:01+00:00,2014-06-13T03:17:37+00:00,2011-12-07T23:35:54+00:00,,add9edee804eed408232fd55b6d5a7cefa3e32e2,dirty,158,1,4,7,0,2,,,
+pandas-dev/pandas,586708,482,Add Series.from_csv with some tests,"Just a convenience method to mirror the one in DataFrame.
+",dieterv77,453086,closed,False,2011-12-13T03:53:34+00:00,2014-06-25T08:10:46+00:00,2011-12-13T18:51:27+00:00,,ec3bd4ff9832ea77e48a71e303d506953ea3568a,dirty,44,0,2,1,0,1,,,
+pandas-dev/pandas,598105,493,"Series.to_string() no longer adds length, reflect this change also in unittest","Since Series.to_string no longer adds length field by default, unittest needs to reflect this.
+",lodagro,1094464,closed,False,2011-12-15T14:05:50+00:00,2011-12-15T14:09:04+00:00,2011-12-15T14:09:04+00:00,,13a995d93f42fa68038392e5ea92d4dbb8a38b17,dirty,6,13,1,1,0,1,,,
+pandas-dev/pandas,598134,494,Series.to_string() unittest fix,"Since Series.to_string no longer adds length field by default, unittest needs to reflect this.
+",lodagro,1094464,closed,False,2011-12-15T14:14:14+00:00,2011-12-15T17:06:47+00:00,2011-12-15T17:06:47+00:00,,bd809ea0f067547d989483e6aceac001eb4d47a3,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,618130,515,various HDFStore fixes regarding tables,"commit d1f439c: added optional keyword argument 'itemsize' to HDFStore.put and HDFStore.append to control string length; default 255
+
+it sets the string length of strings in the index and columns for the table (rather than the previous behavior, which was to take the max string length from the longest index/column string in the dataset that is used to create the table). Default is 255.
+
+commit 2b13848: nicer error message for store.put('ccc', DataFrame(['hi'], ['a'], ['col']), table=True); also fixes a bug in d1f439
+
+commit 2bce685: before this commit, the following would discard column1:
+store.put('eee', DataFrame([0], ['a'], ['column1'])); store.append('eee', DataFrame([1], ['a'], ['column2'])); store['eee']
+even with this commit, strings such as column names which are longer than ""itemsize"" and which are .appended in the future will be silently truncated. I recommend that a warning be raised when this happens, but i didn't add that myself because i couldn't easily find the place where the truncation occurs, or how to extract the current string length.
+
+i'm having trouble building so i won't be able to try writing unit tests. however, here are tests for these commits:
+
+from pandas import *; store = HDFStore('test.h5')
+
+store.put('ccc', DataFrame(['hi'], ['a'], ['col']), table=True); 
+ # should raise ""TypeError: At this time, Pandas HDFStore tables only support floating point values.""
+
+store.put('fff', DataFrame(['0'], ['a'], ['column1'])); store.append('fff', DataFrame([1], ['a'], ['column2'])); 
+ # should raise ""ValueError: Can only append to Tables""
+
+store.put('fff', DataFrame([0], ['a'], ['column1']), table=True); store.append('fff', DataFrame([1], ['a'], ['column2'])); store['fff']
+ # should yield
+ #    column1  column2
+ # a  0        1  
+ #   (this was true even before the present commits)
+
+store.append('j', DataFrame([0], ['a'], ['column1'])); store.append('j', DataFrame([1], ['a'], ['column2'])); store['j'] 
+ # should yield:
+ #    column1  column2
+ # a  0        1  
+ #   (this was true even before the present commits)
+",bshanks,586225,closed,False,2011-12-21T07:58:45+00:00,2014-07-03T05:02:23+00:00,2012-09-08T21:27:14+00:00,,e266740fe377f12126fb2bdbb0a87dbe43edda85,dirty,33,21,1,3,2,5,,,
+pandas-dev/pandas,620716,518,#517 friendlier setup message with no numpy,"If there is a nicer way to do this, I am all ears :)
+",gregglind,163983,closed,False,2011-12-21T20:07:42+00:00,2014-06-18T18:02:34+00:00,2011-12-25T05:07:36+00:00,,b952923fad0406efd4f3bc3fffac2e1de1900ea6,dirty,8,2,1,1,0,1,,,
+pandas-dev/pandas,621169,520,Autodep,"still need numpy for setup, but at least we get the right version of `python-dateutil`
+",gregglind,163983,closed,False,2011-12-21T21:43:35+00:00,2012-01-04T16:13:54+00:00,2012-01-04T16:13:54+00:00,,9ced2c7b775d8e7770ef020bc62bbf2f3a3aef48,dirty,7,3,2,2,3,2,,,
+pandas-dev/pandas,621374,521,"(1) add a get() method like dicts have, (2) throw KeyError, not Exception, when a column isn't found",,bshanks,586225,closed,False,2011-12-21T22:31:35+00:00,2014-06-13T12:41:35+00:00,2011-12-26T02:42:00+00:00,,6c8b5f33cc931779c1161e571b3c91002e92baa4,dirty,8,1,1,1,1,1,,,
+pandas-dev/pandas,624041,524,More 0.5.0 documentation,"Added more v0.5.0 docs
+",adamklein,869232,closed,False,2011-12-22T16:27:09+00:00,2011-12-22T21:35:28+00:00,2011-12-22T21:35:28+00:00,,7c2545cbcb3eb31679908dba776e2059bb2c6558,dirty,270,90,8,3,0,1,,,
+pandas-dev/pandas,627149,532,Doc: fix keyerror in ipython session demonstrating console output formatting.,,lodagro,1094464,closed,False,2011-12-23T14:17:25+00:00,2011-12-25T05:08:42+00:00,2011-12-25T05:08:42+00:00,,5836ab3bcffe584daacb8a834d67efb37082a2ee,dirty,2,2,1,1,0,1,,,
+pandas-dev/pandas,627290,533,Doc: indexing correct swaplevels --> swaplevel.,"Fix error in ipython session demonstrating `DataFrame.swaplevel()`
+
+Maybe the paragraph where i did this correction can be removed, it is very similar to paragraph **Swapping levels with swaplevel** a bit higher.
+",lodagro,1094464,closed,False,2011-12-23T15:13:21+00:00,2011-12-25T04:44:41+00:00,2011-12-25T04:44:41+00:00,,2f1320debfbe25f9da7aa0d4a7f22df5b8a0b434,dirty,2,2,1,1,0,1,,,
+pandas-dev/pandas,627351,534,adding DataFrame.reorder_levels(),"Convenience method to reorder the levels of a DataFrame hierarchical axis.
+It uses `MultiIndex.reorder_levels()`. Neither of them can work with levels referenced by key, in contrast to _swaplevel()_ method.
+",lodagro,1094464,closed,False,2011-12-23T15:38:51+00:00,2014-06-12T20:15:44+00:00,2011-12-26T02:32:15+00:00,,0f7381a7d6055cd061c2bc64502eccc059635e3b,dirty,26,0,1,1,0,1,,,
+pandas-dev/pandas,629026,539,DOC: Fixed typo in dsintro.rst.,,twiecki,674200,closed,False,2011-12-24T16:26:31+00:00,2011-12-25T04:40:57+00:00,2011-12-25T04:40:57+00:00,,7800922228e0dfdfc0323e7435d3eaf234833728,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,634755,552,LongPanel removal,"Got rid of deprecated LongPanel class and added a bunch of new features to DataFrame and elsewhere to make up for its absence
+",wesm,329591,closed,False,2011-12-28T16:16:20+00:00,2014-06-15T20:58:33+00:00,2011-12-28T16:28:08+00:00,,d883b7a4b615dccec785163c4b2f94c3882ec00b,dirty,813,870,30,12,0,0,,,
+pandas-dev/pandas,637454,554,"Add get_attr behavior for Panel, similar to DataFrame","Also support IPython tab completion for Panel items
+
+Obviously nothing important here, just some syntactic sugar to facilitate interactive access.
+
+thanks!
+",dieterv77,453086,closed,False,2011-12-29T15:09:19+00:00,2014-06-12T16:08:38+00:00,2012-01-02T20:18:11+00:00,,b19e0d15204f444a26ab409e203cd69e5ed4fbb7,dirty,31,0,2,1,0,1,,,
+pandas-dev/pandas,639325,559,Docs,"Added a whole bunch of docs and cross-references for v0.6.0
+",adamklein,869232,closed,False,2011-12-30T03:17:53+00:00,2014-06-15T04:11:21+00:00,2011-12-30T03:25:53+00:00,,07e3ff461ee555d6aa04c3702e6266f7c4baeab7,dirty,379,99,12,5,0,0,,,
+pandas-dev/pandas,642450,562,Test coverage improvements,"- a few modules up to 100%
+- a few small bugfixes on non-obvious codepaths
+",adamklein,869232,closed,False,2011-12-31T22:23:45+00:00,2012-01-02T02:06:43+00:00,2012-01-02T01:58:03+00:00,2012-01-02T01:58:03+00:00,050e2524563d1a8753635c96783d6eb412cfb7bc,dirty,155,52,9,10,0,3,,,
+pandas-dev/pandas,643233,563,"Add support for MaskedArray in Series constructor, with test","See GH #556
+",dieterv77,453086,closed,False,2012-01-02T02:13:25+00:00,2014-06-12T20:23:22+00:00,2012-01-03T19:56:02+00:00,,72e60328287a356b622dd97b37f480d7aac18ec6,dirty,20,0,2,1,0,1,,,
+pandas-dev/pandas,645089,565,More testcoverage -,"Got a few more modules to 100%
+",adamklein,869232,closed,False,2012-01-02T22:33:42+00:00,2012-01-02T22:33:42+00:00,2012-01-03T06:16:54+00:00,,49ee089f82de1d8280627a0de035beb1095afab2,dirty,49,32,6,4,0,0,,,
+pandas-dev/pandas,648887,569,More release docs for v0.7,"Whats new section, cross-referenced with additional docs for version 0.7
+",adamklein,869232,closed,False,2012-01-03T22:51:35+00:00,2014-07-17T01:41:49+00:00,2012-01-03T23:23:05+00:00,,06cd08286f93375e8c6dab7b2cf17f58acb5a539,dirty,351,39,12,6,0,1,,,
+pandas-dev/pandas,651486,572,more changes to setup.py,"Maybe consider just making people use either `setuptools` or `distribute`?
+",gregglind,163983,closed,False,2012-01-04T16:22:59+00:00,2014-06-12T23:43:47+00:00,2012-01-06T05:24:07+00:00,,9a11e23ea0ba848cd80b574e742531b679f040ab,dirty,27,17,1,1,0,7,,,
+pandas-dev/pandas,653408,574,implemented description property,"Hi,
+
+This is a basic implementation of description and unit properties in DataFrame. 
+https://github.com/wesm/pandas/issues/39
+
+I used dict to store both description and unit. I thought about using tuples but dict would be better if a user wants to modify individual descripition/unit. 
+
+One can directly access description/unit, and also DataFrame.info() will print out those if they exist.
+
+I haven't touched at the storing part yet so it is very rudimentary now (no way to save the descriptions), but I wanted to know what you think. Please let me know.
+
+And also, is this (topic branch) right way to submit a pull request? I'm still learning about git. :)
+
+Happy new year!
+-Joon
+",joonro,1063143,closed,False,2012-01-04T23:07:19+00:00,2012-09-09T01:09:58+00:00,2012-09-09T01:09:58+00:00,,c0b48a8a721275812ad66100aa6c7fc4fadddee0,dirty,60,3,1,1,0,3,,,
+pandas-dev/pandas,656753,576,"ENH: closing issues #395, #449, #570, #571","Fix column string formatting; index and header options to to_string; decorator for docstrings; floating point prettier printing. Also added to release notes & documentation. Address #395, #449, #570, #571
+",adamklein,869232,closed,False,2012-01-05T18:49:06+00:00,2014-06-13T05:52:41+00:00,2012-01-06T05:34:24+00:00,,,dirty,561,334,15,7,2,2,,,
+pandas-dev/pandas,657808,578,ENH: setup.py fixes incorporating PR #572,"Also hopefully closing GH #192
+",adamklein,869232,closed,False,2012-01-05T22:27:37+00:00,2014-06-12T05:19:33+00:00,2012-01-06T05:23:26+00:00,,57c2bca3181a3fba73db547eaba81dbdae808128,dirty,334,28,6,2,0,1,,,
+pandas-dev/pandas,658672,580,closing tag of 'tbody' was 'body',,theandygross,1308430,closed,False,2012-01-06T03:05:30+00:00,2012-01-06T05:43:24+00:00,2012-01-06T05:43:24+00:00,,f2568e88ef0c6c18967fad53d3a2bb8f8aae786f,dirty,1,1,1,1,0,1,,,
+pandas-dev/pandas,660184,582,"FIX: corner case(s) of #395, added test",,adamklein,869232,closed,False,2012-01-06T15:33:36+00:00,2012-01-06T16:09:16+00:00,2012-01-06T16:09:16+00:00,2012-01-06T16:09:16+00:00,11e3bb7f7ee7df157c6dc355031c4224bf0cb5c7,dirty,10,10,2,5,0,0,,,
+pandas-dev/pandas,661706,585,"FIX, ENH: #395 got float formatting working",,adamklein,869232,closed,False,2012-01-06T21:08:19+00:00,2014-08-13T07:28:34+00:00,2012-01-09T22:49:21+00:00,,99c397a652c8d62e741f166634ad0a6673bddd00,dirty,150,68,6,2,0,2,,,
+pandas-dev/pandas,662035,588,DOC: added stack/unstack docstrings per #531,"Updated the docstrings. Did not change unstack behavior in case of single-level index, which is to raise AttributeError. Thoughts on whether to allow full unstacking to Series representing first row of dataframe?
+",adamklein,869232,closed,False,2012-01-06T22:20:42+00:00,2014-07-22T17:20:55+00:00,2012-01-09T22:44:14+00:00,,d181af9e229a9cc3e0839067a27db41b2066b90b,dirty,25,5,1,1,0,1,,,
+pandas-dev/pandas,668281,597,ENH: enable unstack to create Series (#477),"Should close #477
+",adamklein,869232,closed,False,2012-01-09T19:45:19+00:00,2014-07-26T10:10:54+00:00,2012-01-09T22:40:14+00:00,,9caa557e58c377351edf1526122a8d639e5afbdb,dirty,28,1,2,1,0,0,,,
+pandas-dev/pandas,668701,598,"ENH: #593, add col header justification option","Also refactored globals into a single global class instance of format config parameters. Maybe first step to externalizing into config file?
+",adamklein,869232,closed,False,2012-01-09T21:10:59+00:00,2012-01-09T22:33:12+00:00,2012-01-09T22:33:12+00:00,2012-01-09T22:33:12+00:00,c2dc30f99be57a4c97b72246106f147a62060574,dirty,60,28,5,2,0,1,,,
+pandas-dev/pandas,670662,604,Use new GlobalPrintConfig also when setting engineering float formatter.,"Before, the following global variables in pandas.core.common were used to store print options:
+- _float_format
+- _column_space
+- _precision
+- _max_rows
+- _max_columns
+
+Now these are stored in pandas.core.common.GlobalPrintConfig, when setting the engineering float formatter it should alter GlobalPrintConfig and not the above variables (which i commented out by the way sine i think they are no longer used). Otherwise it has no effect.
+",lodagro,1094464,closed,False,2012-01-10T09:03:42+00:00,2014-06-16T01:04:25+00:00,2012-01-10T14:27:45+00:00,,0304a07dda45551667f4c86e070923ce99b4f706,dirty,9,9,1,1,0,0,,,
+pandas-dev/pandas,671714,605,DOC: added justify docs,"For column alignment. And release note for it.
+",adamklein,869232,closed,False,2012-01-10T14:38:07+00:00,2012-01-10T14:49:57+00:00,2012-01-10T14:49:57+00:00,2012-01-10T14:49:57+00:00,e68c99841fa94f9d274be0af437004415de24914,dirty,4,0,2,1,0,0,,,
+pandas-dev/pandas,671799,606,Several minor doc updates/changes.,,lodagro,1094464,closed,False,2012-01-10T14:59:10+00:00,2012-01-10T21:27:28+00:00,2012-01-10T15:32:00+00:00,,6aee7c08a72b6c3a16662f40677fc3c12531cb31,dirty,32,11,3,4,2,0,,,
+pandas-dev/pandas,676855,607,ENH/TST: eng float formatter,,lodagro,1094464,closed,False,2012-01-11T15:10:25+00:00,2012-01-11T18:40:16+00:00,2012-01-11T18:40:16+00:00,,214eba3e3dcb005d8aba1738a89a964284fb96bf,dirty,166,6,2,2,0,1,,,
+pandas-dev/pandas,677851,608,DOC: added a note for behavior of append,"it took me some time to realize what is happening since my python-oriented mind was expecting operation in-place on the original dataframe like Python does on lists...  imho it is worth a note in documentation.  unfortunately blunt attempt to build docs failed, so I don't know if it builds nicely, and may be utilizes intersphinx to point to list.append doc.  Here is what I get upon make.py:
+
+```
+$> cd doc 
+build/  data/  make.py*  plots/  source/  sphinxext/
+3 41392.....................................:Wed 11 Jan 2012 01:23:38 PM EST:.
+(git)novo:~exppsy/pandas[enh/doc-append]doc
+$> ./make.py 
+Running Sphinx v1.0.8
+Exception occurred while building, starting debugger:
+Traceback (most recent call last):
+  File ""/usr/lib/pymodules/python2.7/sphinx/cmdline.py"", line 187, in main
+    warningiserror, tags)
+  File ""/usr/lib/pymodules/python2.7/sphinx/application.py"", line 116, in __init__
+    self.setup_extension(extension)
+  File ""/usr/lib/pymodules/python2.7/sphinx/application.py"", line 253, in setup_extension
+    err)
+ExtensionError: Could not import extension ipython_directive (exception: cannot import name Config)
+> /usr/lib/pymodules/python2.7/sphinx/application.py(253)setup_extension()
+-> err)
+(Pdb) 
+
+```
+
+quick grepping didn't help in my attempt to find how to build docs correctly (I think I recall some discussion on the list a while ago but don't remember details now), and 
+
+```
+$> python setup.py build_sphinx
+setup.py:26: UserWarning: Module paste was already imported from None, but /usr/lib/python2.7/dist-packages is being added to sys.path
+  import pkg_resources
+running build_sphinx
+creating build/sphinx
+creating build/sphinx/doctrees
+creating build/sphinx/html
+Running Sphinx v1.0.8
+Traceback (most recent call last):
+  File ""setup.py"", line 402, in <module>
+    **setuptools_kwargs)
+  File ""/usr/lib/python2.7/distutils/core.py"", line 152, in setup
+    dist.run_commands()
+  File ""/usr/lib/python2.7/distutils/dist.py"", line 953, in run_commands
+    self.run_command(cmd)
+  File ""/usr/lib/python2.7/distutils/dist.py"", line 972, in run_command
+    cmd_obj.run()
+  File ""/usr/lib/pymodules/python2.7/sphinx/setup_command.py"", line 136, in run
+    freshenv=self.fresh_env)
+  File ""/usr/lib/pymodules/python2.7/sphinx/application.py"", line 116, in __init__
+    self.setup_extension(extension)
+  File ""/usr/lib/pymodules/python2.7/sphinx/application.py"", line 253, in setup_extension
+    err)
+sphinx.errors.ExtensionError: Could not import extension ipython_directive (exception: cannot import name Config)
+```
+
+gives the same result
+",yarikoptic,39889,closed,False,2012-01-11T18:25:07+00:00,2014-06-14T18:06:16+00:00,2012-01-11T18:30:05+00:00,,287e1d590fd0d11fdc19fdbe4716199e9929cd06,dirty,6,0,1,1,0,4,,,
+pandas-dev/pandas,680763,617,Make sure not to use bottleneck when it is not installed.,"I don`t have bottleneck, this little change allows me to import trunk again
+nosetests running fine
+",lodagro,1094464,closed,False,2012-01-12T09:36:26+00:00,2012-01-12T14:59:58+00:00,2012-01-12T14:59:58+00:00,,ceb4e6cfda49e0a6503acd909ebc0d4976efb2c4,dirty,2,1,1,1,0,1,,,
+pandas-dev/pandas,688564,624,DOC: added a bit more docs for 0.7 release,,adamklein,869232,closed,False,2012-01-13T20:31:36+00:00,2012-01-13T22:49:57+00:00,2012-01-13T22:49:57+00:00,,42972b47a8a695da3b50f03951a5af5e0c9039ac,dirty,69,0,5,1,0,1,,,
+pandas-dev/pandas,688856,625,Make _get_terminal_size_linux() work inside Emacs,"I'm using ipython inside Emacs. Detection of the console width and height is not working with the current implementation. ioctl seems to return (0,0). Therefore, performing an explicit check for cr == (0,0) (in addition to the check for not cr) before falling back to environment variables is a quick fix that I think shouldn't make any negative impact on non-emacs users.
+I've also added the import of os.environ line since env previously wasn't defined.
+",gwtaylor,993736,closed,False,2012-01-13T21:32:16+00:00,2014-07-06T10:27:56+00:00,2012-01-13T22:52:29+00:00,,c0b8c95a20a620e4d4ba9c3063288e076f41ea9c,dirty,3,2,1,1,0,1,,,
+pandas-dev/pandas,695019,635,ENH: ipython_directive to warning on exceptions when building docs,"Addresses issue #568
+",adamklein,869232,closed,False,2012-01-16T16:46:33+00:00,2012-01-16T19:49:05+00:00,2012-01-17T18:14:57+00:00,,c01906a58c4c8cf2118190db02beb2fae2b7c6c6,dirty,33,20,8,5,0,0,,,
+pandas-dev/pandas,700081,639,FIX: multiindex error #636,"Closes issue #636
+",adamklein,869232,closed,False,2012-01-17T17:24:34+00:00,2012-01-17T17:25:14+00:00,2012-01-17T18:39:21+00:00,,ba8f9ef45ec0c82cb01c3afffe9195ea2573f58f,dirty,6,0,2,2,0,0,,,
+pandas-dev/pandas,710889,651,Pass figsize into _grouped_plot -- please review,"To still allow default matplotlib size for the figure I added handling of figsize=""default""... may be altogether it should just drop custom default size here?
+
+also another commit on **kwds -- depends on what was intended, but at least figsize should be passed 
+",yarikoptic,39889,closed,False,2012-01-19T16:59:07+00:00,2013-09-30T16:17:12+00:00,2012-01-19T20:53:50+00:00,,673bcc429b76ff3c2adbf7d6ce1cdab2ab425a44,dirty,21,10,2,2,0,4,,,
+pandas-dev/pandas,713710,653,special handling for radd for any numpy < 1.6,"pre-evaluated numpy version condition for ""efficiency"" ;-)
+",yarikoptic,39889,closed,False,2012-01-20T03:18:28+00:00,2013-09-30T16:17:12+00:00,2012-01-20T03:45:54+00:00,,435b2e8b4c0a1ab4e240baf7204cffa9eebbf03f,dirty,3,1,1,1,0,2,,,
+pandas-dev/pandas,715668,655,DOC: CSS fix for the reference documentation headers,"Could not stand it any more ;)
+",ogrisel,89061,closed,False,2012-01-20T15:13:15+00:00,2012-01-20T16:20:12+00:00,2012-01-20T15:57:20+00:00,2012-01-20T15:57:20+00:00,374bb70c00d9e1f9fc0752387e42f9d30bdb9a1d,dirty,4,0,1,1,0,2,,,
+pandas-dev/pandas,720284,664,BUG: week as top-level iterator overwrites week instance,"week is defined above as week = Week(). Using it as the iterator here was overwriting this.
+",jseabold,296164,closed,False,2012-01-22T04:56:02+00:00,2012-01-22T04:56:02+00:00,2012-01-22T19:33:20+00:00,,7873742fca6aa16e0287170ad4ae8a2e1bdee22f,dirty,3,3,1,1,0,0,,,
+pandas-dev/pandas,720623,665,BUG: resolve left/right key names overlap in merge,"Here is an attempt at fully resolving name conflict in merges when `left_on` or `right_on` keys are passed explicitly.
+
+I am not sure my fix is correct but I include a new non-regression test to highlight the issue and the resolution does not introduce any regression findable by running `nosetests`.
+",ogrisel,89061,closed,False,2012-01-22T13:39:45+00:00,2012-02-05T19:45:43+00:00,2012-01-25T21:16:25+00:00,,f46290861ec9ac72a4b8f36c5b1087b83c966599,dirty,17,3,2,2,3,2,,,
+pandas-dev/pandas,728785,675,BUG: fix arithmetic between DataFrame and non-indexed array-like #672,,adamklein,869232,closed,False,2012-01-24T13:57:41+00:00,2014-07-01T10:50:32+00:00,2012-01-24T17:35:00+00:00,,c8f71fd16f53c22a614332d88496da79c4a26e9c,dirty,46,0,3,3,0,1,,,
+pandas-dev/pandas,735638,684,ENH: Allow Series.to_csv to ignore the index.,,jseabold,296164,closed,False,2012-01-25T17:13:30+00:00,2014-06-13T02:46:17+00:00,2012-01-26T17:32:06+00:00,,9f904e3ebe6c9f48ed54d4245f01ba145de16944,dirty,9,4,1,1,0,1,,,
+pandas-dev/pandas,736335,685,Fixes for tests on Python 3,"This fixes up the unicode situation on Python 3.
+",takluyver,327925,closed,False,2012-01-25T19:14:36+00:00,2012-01-26T20:02:04+00:00,2012-01-26T19:46:42+00:00,,3a15c56f1f93b6871d965eb189eec59bbae99395,dirty,14,5,2,1,0,2,,,
+pandas-dev/pandas,737601,688,updated license and credits for overview,"In LICENSE, I updated the copyright notice & policy for 2012, as well as added a description of copyright holder. In the docs overview I clarified the development team, getting support, and credits, and included the LICENSE file.
+",joshklein,251088,closed,False,2012-01-25T22:45:04+00:00,2012-01-25T22:59:57+00:00,2012-01-25T23:17:04+00:00,,3259a98301b5bbd4ea4645952b28342a50c28940,dirty,82,14,2,1,0,0,,,

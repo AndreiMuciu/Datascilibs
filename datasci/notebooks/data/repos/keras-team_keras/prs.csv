@@ -1,0 +1,700 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+keras-team/keras,32157449,1,Update README.md,"Typo fix.
+",vasili-zolotov,468223,closed,False,2015-03-28T02:02:41+00:00,2015-03-28T02:05:16+00:00,2015-03-28T02:05:16+00:00,2015-03-28T02:05:16+00:00,29b2b99f43e4137c6a3ba2f7c5b89916bd54ba45,unknown,1,1,1,1,0,0,,,
+keras-team/keras,32163355,2,Typo fixes,,cosmith,1194749,closed,False,2015-03-28T11:48:41+00:00,2015-03-28T17:39:28+00:00,2015-03-28T17:04:56+00:00,2015-03-28T17:04:56+00:00,2886b967142132cf0bf9b3558bc929008131e817,unknown,2,2,1,1,0,0,,,
+keras-team/keras,32172889,5,Fix untar,"data_utils did not untar.
+",nagadomi,287255,closed,False,2015-03-28T22:55:10+00:00,2015-03-29T00:59:16+00:00,2015-03-29T00:37:02+00:00,2015-03-29T00:37:02+00:00,a5f075b7309497cb805a1c46e33ae4f846a28d2e,unknown,1,1,1,1,0,0,,,
+keras-team/keras,32175202,6,Various typo fixes,"Thanks for the awesome library! This pull request is just for minor typo fixes.
+",vinhkhuc,914887,closed,False,2015-03-29T02:20:17+00:00,2015-03-29T02:27:29+00:00,2015-03-29T02:27:29+00:00,2015-03-29T02:27:29+00:00,50523edb519a3d16b23daf736b6effce9e0bf1d0,unknown,5,7,3,1,0,0,,,
+keras-team/keras,32192335,9,Fix categorical_crossentropy/binary_crossentropy with NaN value,"`T.nnet.categorical_crossentropy(np.zeros(N), np.ones(N))` returns `inf`.
+I got this issue in `examples/cifar10_cnn.py`.
+",nagadomi,287255,closed,False,2015-03-30T01:09:54+00:00,2015-03-30T04:29:20+00:00,2015-03-30T03:46:35+00:00,2015-03-30T03:46:35+00:00,b93d7c84ead99d351d04b0ac30286335afade918,unknown,5,1,1,1,0,1,,,
+keras-team/keras,32196600,10,"Added PReLU activation, with a constant coefficient of .25","The coefficient should be learned, and not set as a constant.
+",patyork,1304633,closed,False,2015-03-30T03:54:15+00:00,2015-03-30T04:00:32+00:00,2015-03-30T04:00:32+00:00,,ca8924fa1ea84022754785e1011e912d307a52f3,dirty,4,1,1,2,0,1,,,
+keras-team/keras,32197021,11,Added Leaky ReLU and Parametric ReLU (with a fixed coefficient of .25),"The coefficient for PReLU should become a learnable parameter in the future.
+",patyork,1304633,closed,False,2015-03-30T04:09:55+00:00,2015-04-04T19:16:31+00:00,2015-03-30T04:49:01+00:00,,0cb2be8fa3566e49c57b9f2deb59c0465a769422,dirty,7,1,1,1,0,2,,,
+keras-team/keras,32206918,13,Improved setup.py,"- using setuptools if available
+- specified required and optional dependencies, as listed in read me. `scipy` could probably be made optional because all of its usages in `np_utils.py` can be replaced with `numpy`, and the remaining usages are all image-related.
+",mbatchkarov,937114,closed,False,2015-03-30T08:37:56+00:00,2015-03-31T05:21:42+00:00,2015-03-31T05:21:42+00:00,2015-03-31T05:21:42+00:00,a9c3ddca4cd7c12deda06d9f496da2c103d4f50a,unknown,14,7,1,3,0,0,,,
+keras-team/keras,32292284,19,"Revert ""Improved setup.py""","Data directory permission issue. Revert until figured out
+",fchollet,710255,closed,False,2015-03-31T05:32:19+00:00,2015-04-15T22:19:17+00:00,2015-03-31T05:32:26+00:00,2015-03-31T05:32:26+00:00,02ebd819d4947fd4ba61cf1dccc82a30e3a16262,unknown,7,14,1,1,0,2,,,
+keras-team/keras,32292724,20,Add the shuffle option to Sequential.fit,"When `fit(shuffle=True)`, shuffle data before each epoch. `True` by default.
+",nagadomi,287255,closed,False,2015-03-31T05:44:50+00:00,2015-03-31T06:44:14+00:00,2015-03-31T05:56:19+00:00,2015-03-31T05:56:19+00:00,31afaba9b6babf829477b6b782a5f68db35a84a6,unknown,8,4,1,1,0,0,,,
+keras-team/keras,32338888,22,Simple BRNN,"Added a layer in the style of SimpleRNN called SimpleBRNN. This is a fully connected Bidirectional recurrent layer.
+
+My only issue with this implementation is that the initialization looks like so:
+
+``` python
+model.add(SimpleBRNN(5, output_dim=2*10, activation='sigmoid', return_sequences=True))
+```
+
+The `output_dim=2*10` is meant to imply that the forward recurrence has 10 outputs and the backwards recurrence has 10 outputs. These are concatenated, and the output of the SimpleBRNN layer would be 2x10=20 outputs at each time step, for each sample (batch_size, time_steps, 20).
+",patyork,1304633,closed,False,2015-03-31T16:17:01+00:00,2015-04-01T13:57:22+00:00,2015-04-01T03:30:43+00:00,,46302bc1c0b43d49ccb96ae87529ff7c30a1af1c,dirty,70,0,1,2,6,5,,,
+keras-team/keras,32349075,23,Python3 compatibility changes,"This PR makes Keras work under Python3. Essentially I just ran the whole codebase through [python-modernize](https://github.com/mitsuhiko/python-modernize), and tuned a few things by hand. All examples run through under both Python2 and Python3, so I assume everything is in working order.
+",untom,3627551,closed,False,2015-03-31T18:06:08+00:00,2015-04-16T21:14:40+00:00,2015-04-02T17:33:22+00:00,,db49138d116c2fa258d0169bcef133d40381a535,dirty,147,108,21,2,0,6,,,
+keras-team/keras,32368176,24,"List Index fix, validation split in fit() and fit_chunked() for large datasets","Hi,
+I made a few changes to your code, maybe you want to reuse them.
+They are:
+1) Fixed an error ""List indices must be integers, not list."" that appeared whenever a list was called with a list of integers as the index. Google indicated that only Scipy seems to support that...? It required quite some changes to model.py. My tests indicated that everything still works.
+2) I added a validation_split option to fit() in models.py to easily split of a part of the dataset for validation (e. g. validation_loss=0.2 to split of 20%). At the end of each epoch it calculates the loss on the validation set and prints it next to the loss on the training set, e. g.:
+    Epoch 0
+    2500000/2500000 [==============================] - 612s - loss: 0.1012 - val. loss: 0.1213
+    Epoch 1
+    2500000/2500000 [==============================] - 602s - loss: 0.0549 - val. loss: 0.0702
+3) I added fit_chunked() to models.py which is designed to perform more easily a fit() on datasets that are too big for the GPU RAM or main memory. Basically instead of a dataset you provide a function that can be called to create a new generator for the dataset. That function is called at the start of each epoch to create a new generator and then the data is loaded from the generator in chunks that are small enough for the RAM. Then essentially the normal fit() is run on the chunk. That is repeated until all chunks from the dataset have been processed. Then the next epoch starts and the generator is ""reset"" by creating a new one.
+",aleju,11698516,closed,False,2015-03-31T21:32:19+00:00,2015-04-02T16:24:54+00:00,2015-04-01T22:15:06+00:00,,9ce43575c4bbaf7b84813e8b9eafe466140da4b1,dirty,178,22,1,4,0,4,,,
+keras-team/keras,32377309,25,Added support for Activation layers over tensor3 inputs,"Added a check in the Activation layer for a tensor3 input. If so, the tensor is reshaped into a matrix.
+
+Assumed shape transformation: `(nb_samples, time, nb_outputs)` --> `(nb_samples * time, nb_outputs)`
+
+The activation (including softmax) can then be done correctly.
+",patyork,1304633,closed,False,2015-03-31T23:46:53+00:00,2015-04-04T19:11:59+00:00,2015-04-04T18:26:15+00:00,,ac518d29731f7e8d23e61307e1ac619ea6cc57dc,dirty,4,0,1,1,0,11,,,
+keras-team/keras,32418077,27,Change the learning rate annealing schedule in SGD,"The new formula is compatible with torch.
+and might be fix  https://github.com/fchollet/keras/issues/21
+",nagadomi,287255,closed,False,2015-04-01T13:23:36+00:00,2015-04-01T14:15:52+00:00,2015-04-01T13:35:31+00:00,2015-04-01T13:35:31+00:00,4bab5c76375396131b89498193e7f179c5e86077,unknown,3,4,2,1,0,0,,,
+keras-team/keras,32505867,29,Add new initializations,"This PR adds two new initialization methods:
+-  The method from ""Understanding the difficulty of training deep feedforward neural networks"", Glorot & Bengio, AISTATS 2010. This works very well for sigmoid/tanh activation functions. This is known as the ""xavier"" initialization in [Caffe](http://caffe.berkeleyvision.org/), where it is the default initialization method for dense layers.
+- The improvements on the above method made by [He et. al](http://arxiv.org/abs/1502.01852), which they showed works much better when using ReLU activation functions. 
+",untom,3627551,closed,False,2015-04-02T12:13:15+00:00,2015-04-02T18:32:58+00:00,2015-04-02T17:27:05+00:00,,5e6607f92146519c269330560ca30af664d870db,dirty,13,1,1,1,1,3,,,
+keras-team/keras,32594312,31,add support for larger dimensional tensors and SharedDense Layer,"Outputs from RNNs have a 3 dimensional shape: 
+(nb_sample, time, output_dim)
+- Added support in predict_proba and predict_classes for a 3 dimensional output.
+- Added a SharedDense Layer ( a dense layer applied to each output of the time dimension ).
+
+I wanted to do a more general Layer that applies the next Layer to each element of the time dimension, but couldn't figure out how to without destroying the architecture.
+",charlesollion,10595147,closed,False,2015-04-03T15:08:03+00:00,2015-04-10T15:02:23+00:00,2015-04-10T15:02:23+00:00,,82d336e7bf0e20d9245b7798f85ba497f93e92c7,dirty,41,4,2,1,0,4,,,
+keras-team/keras,32611132,32,generalization to ndim for predict_proba and predict_classes,"as mentioned in previous PR: generalization of predict_proba and predict_classes to number of dimension > 2
+",charlesollion,10595147,closed,False,2015-04-03T19:38:07+00:00,2015-04-03T20:37:46+00:00,2015-04-03T20:37:46+00:00,2015-04-03T20:37:46+00:00,8f869d552e02da3723dbd411dfc42e0882b189b4,unknown,7,4,1,1,0,0,,,
+keras-team/keras,32637845,33,Added Time Distributed Softmax to allow softmax activation over 3D inputs,"Allows softmax activation over tensor3 values. Given output A from this activation, `sum(A[i][j][:])==1.0`
+
+Impetus: Output from RNNs is generally considered of size `(nb_samples, time_steps, values)`. This activation allows for softmax over this tensor3, where the softmax is applied over a vector of size `(values, )` which corresponds to the softmax of one sample at one time step.
+
+Example:
+
+``` python
+model = Sequential()
+model.add(SimpleRNN(2, 3, return_sequences=True))
+model.add(Activation('time_distributed_softmax'))
+
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer='sgd')
+A = model._predict(np.asarray([[[1,1],[2,2]], [[3,3], [4,4]]]))
+
+print A
+print np.sum(A[0][0][:])
+```
+
+Yields
+
+``` python
+[[[ 0.32846826  0.33231813  0.33921361]
+  [ 0.32311559  0.33156598  0.34531844]]
+
+ [[ 0.31882143  0.33012739  0.35105121]
+  [ 0.31376582  0.32922304  0.35701114]]]
+1.0
+```
+",patyork,1304633,closed,False,2015-04-04T18:51:19+00:00,2015-04-05T06:16:27+00:00,2015-04-04T19:08:57+00:00,2015-04-04T19:08:57+00:00,da1011a6e7bcef6e48c9bc1359e684883a45c95d,unknown,5,0,1,1,0,4,,,
+keras-team/keras,32645318,34,Fixed logic to determine the number of batches per epoch,"Fixed a bug wherein the number of batches that was calculated would be too large when `Num_Examples % batch_size == 0`
+",patyork,1304633,closed,False,2015-04-05T07:16:11+00:00,2015-04-05T17:53:54+00:00,2015-04-05T17:51:46+00:00,2015-04-05T17:51:46+00:00,c0b8b74eb71b75b33de3710edf04e91423abef4d,unknown,1,1,1,1,0,0,,,
+keras-team/keras,32652278,35,Fixed incorrect datatype in range function from the last commit,"Apologies, the `nb_batch` size fix from last time resulted in an unsuitable datatype for the `range` function - I missed that in the tests as I was working in another branch and just happen to notice the `nb_batch` bug.
+",patyork,1304633,closed,False,2015-04-05T18:24:42+00:00,2015-04-05T18:31:53+00:00,2015-04-05T18:30:45+00:00,2015-04-05T18:30:45+00:00,5375804de3a8c650be97a060f75042159822d383,unknown,1,1,1,1,0,2,,,
+keras-team/keras,32652873,36,Advanced Reshape Layer,"I've added a bit of an architecture change, as well as a new layer to allow Advanced Reshaping.
+
+Basically, to allow reshapes involving the first dimension, the number of samples in the current batch (`current_batch_size`) must be available to the AdvancedReshape layer. The easiest way that I could see to allow that is to throw a new parameter (`current_batch_size`) to the `Layer.output` function. This recursively passes the current number of samples in the batch to each layer, so that it has it available if it is necessary. This required touching every layer.
+
+The AdvancedReshape layer takes a lambda expression for the initialization parameter. This lambda should take 2 arguments: current_batch_size and current_shape (can be seen below). From these parameters, it is possible to reshape between 1D, 2D, 3D (and possibly to ND, although I am unsure on that). _This lambda should return a tuple._
+
+Below is an example in which the current_batch_size changes on the pass over the last batch. It is simplistic and not overly useful, but it shows that AdvancedReshape can correctly reshape from 2D -> 3D and then from 3D -> 2D without breaking over the toughest example:
+
+``` python
+model = Sequential()
+model.add(Dense(2,1, activation='sigmoid'))
+
+# Reshape to 3D: (number of sample in current batch, elements in each sample, values)
+model.add(AdvancedReshape(new_shape_fn=lambda current_batch_size, current_shape: (current_batch_size, current_shape[0]/current_batch_size, current_shape[1])))
+# Reshape back to 2D ((number of sample in current batch * elements in each sample, values))
+model.add(AdvancedReshape(new_shape_fn=lambda current_batch_size, current_shape: (current_batch_size * current_shape[1], current_shape[2])))
+
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer='sgd')
+
+X = np.zeros((3,2))
+Y = np.zeros((3,1))
+model.fit(X, Y, batch_size=2, nb_epoch=1)
+```
+
+```
+Epoch 0
+2/3 [===================>..........] - ETA: 0s - loss: 0.2500
+3/3 [==============================] - 0s - loss: 0.2497
+```
+",patyork,1304633,closed,False,2015-04-05T19:12:00+00:00,2018-01-20T14:28:07+00:00,2015-04-08T15:11:58+00:00,,353cb9d6f5fa9b8dce6a1517a0ff914e2ff5c7cb,dirty,55,36,6,7,0,9,,,
+keras-team/keras,32654988,37,Added Clip layer for clipping of outputs,"**DON'T MERGE - LET ME KNOW IF MERGE #36 IS USED - Either way, there is an additional commit that will need to be applied.**
+
+This provides the ability to apply a clipping to a Layer. Clipping is sometimes used to defend against output saturation and vanishing gradient.
+
+EX:
+
+``` python
+model = Sequential()
+model.add(Dense(2,1, activation='sigmoid', init='example_normal')) # this example_normal is an additional PR
+model.add(Clip(high=.32, low=.20))
+
+
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer='sgd')
+
+A = model._predict(np.asarray([[1,1],[2,2]]))
+print A
+```
+
+Yields
+
+```
+[[ 0.31999999]
+ [ 0.2       ]]
+```
+",patyork,1304633,closed,False,2015-04-05T21:46:41+00:00,2016-11-14T05:08:28+00:00,2015-04-08T15:11:16+00:00,,1cf2b31ac25d93cb17fab227c8c6da2967cd5c44,dirty,15,0,1,2,0,1,,,
+keras-team/keras,32655018,38,Added an Example initialization such that example code can provide consistent outputs,"I've added two initialization schemas that allow for the consistent generation of weights.
+
+In theory, coupled with setting `shuffle=False` in `model.fit()`, this should allow for example code to be run and achieve the same output.
+
+This may also be useful for automated testing in the future.
+",patyork,1304633,closed,False,2015-04-05T21:49:25+00:00,2015-04-06T17:14:22+00:00,2015-04-06T17:14:17+00:00,,e526bfbbf1d11134c21636e8f7f82c3d257d24f4,dirty,8,0,1,1,0,2,,,
+keras-team/keras,33026380,42,added TimeSharedDense layer,"TimeSharedDense layer adds a dense layer useful after recurrent layers output with 'return_sequence=True'
+",charlesollion,10595147,closed,False,2015-04-10T08:16:57+00:00,2015-04-10T20:33:55+00:00,2015-04-10T18:18:08+00:00,2015-04-10T18:18:08+00:00,370edfbab4b4724f1472917e4cba42a48e76a8d6,unknown,61,0,2,2,1,8,,,
+keras-team/keras,33038301,43,New initializations,"This PR adds two new initialization methods:
+-    The method from ""Understanding the difficulty of training deep feedforward neural networks"", Glorot & Bengio, AISTATS 2010. This works very well for sigmoid/tanh activation functions. This is known as the ""xavier"" initialization in Caffe, where it is the default initialization method for dense layers.
+-    The improvements on the above method made by He et. al, which they showed works much better when using ReLU activation functions.
+
+This time, care was taken that everything runs under Py2, and also works with convolutional layers.
+",untom,3627551,closed,False,2015-04-10T11:22:32+00:00,2015-04-10T15:00:32+00:00,2015-04-10T15:00:32+00:00,2015-04-10T15:00:32+00:00,20c20373f36157fbce61ab4122b29e515410b408,unknown,19,2,2,2,0,0,,,
+keras-team/keras,33394289,48,Fixed standardize_y to allow using classes that emulate ndarray API,"Fixed standardize_y to allow using classes that emulate ndarray API and also replaces lists by slices in the case of sequential samples. 
+",jfsantos,5733,closed,False,2015-04-15T20:42:38+00:00,2015-04-15T21:09:44+00:00,2015-04-15T21:09:43+00:00,2015-04-15T21:09:43+00:00,94c5296850886035009fb9f3af78c4fa71975c59,unknown,6,2,1,2,0,3,,,
+keras-team/keras,33398552,49,Added helper class to use data in HDF5 datasets,"This class enables one to use slices of datasets in an HDF5 file as matrices for training/testing algorithms in keras.
+
+Usage example:
+
+```
+X_train = HDF5Matrix(datapath, 'features', train_start, train_start+n_training_examples, normalizer=normalize_data)
+y_train = HDF5Matrix(datapath, 'targets', train_start, train_start+n_training_examples)
+```
+
+The arguments are:
+`datapath`: path to HDF5 file
+`dataset`: name of the dataset in the HDF5 from which to take the data
+`start` and `end`: indices to slice the given dataset
+`normalizer`: function to be applied to the data coming from the dataset on-the-fly. Can be used for centering/standardizing/scaling data, but cannot change the dimensions of the data in any way.
+",jfsantos,5733,closed,False,2015-04-15T21:30:38+00:00,2015-04-15T22:17:27+00:00,2015-04-15T22:17:27+00:00,2015-04-15T22:17:27+00:00,5cf1919d526be13ea27b7bfe058072af95b678ed,unknown,52,0,1,1,0,1,,,
+keras-team/keras,33578443,57,fix verbose=2?,"Hey I made what I think is a fix for this (it crashed for me when I tried verbose=2)
+",capybaralet,4379720,closed,False,2015-04-17T20:16:46+00:00,2015-04-17T20:20:47+00:00,2015-04-17T20:20:47+00:00,2015-04-17T20:20:47+00:00,0ab47f2765f91d4b5ba652bbfb6fd87f3c6aada0,unknown,1,1,1,1,0,0,,,
+keras-team/keras,33609459,58,Fix Adam,"Use decaying betas to update m_t and v_t and change relative weighting to match paper
+",the-moliver,144949,closed,False,2015-04-18T21:58:46+00:00,2015-04-23T00:02:29+00:00,2015-04-18T23:10:38+00:00,2015-04-18T23:10:38+00:00,9f0be2b2733fec6c7a3e1e013f5fa6048664a184,unknown,2,2,1,1,0,1,,,
+keras-team/keras,33620457,62,Fixing data_utils to work with Python 2 and 3,"Using six to fix a difference in the urllib API between Python 2 and 3.
+",jfsantos,5733,closed,False,2015-04-19T15:25:12+00:00,2015-04-19T17:37:24+00:00,2015-04-19T17:37:24+00:00,2015-04-19T17:37:24+00:00,d578eac739086f81dd6200039aee164b20762da9,unknown,4,4,2,6,0,1,,,
+keras-team/keras,33624072,63,Adding save/load weights functionality to model weights,"This PR closes #59. The test is currently a script but will be turned into a function as soon as we start working on the test suite.
+",jfsantos,5733,closed,False,2015-04-19T19:12:34+00:00,2016-06-17T14:27:00+00:00,2015-04-19T19:26:31+00:00,2015-04-19T19:26:31+00:00,ac356efbaddaf9b16f0c472e21621acb69822a7c,unknown,66,2,2,2,0,1,,,
+keras-team/keras,33624152,64,Python3 compatibility,"This PR fixes two py3 compatibility issues
+1. It fixes a float<>integer division problem in the `Flatten` layer (This layer is broken in py3 without this fix)
+2. It makes sure that CIFAR10 can be loaded without re-pickling on Python 3: a fix was introduced today to make downloading possible, but the pickle file is still a bit tricky to load in py3. This PR fixes that.
+",untom,3627551,closed,False,2015-04-19T19:18:24+00:00,2015-04-19T19:26:56+00:00,2015-04-19T19:26:56+00:00,2015-04-19T19:26:56+00:00,b83df2e699048d6d6be4d22ff449bfbbef700d40,unknown,14,12,3,2,0,0,,,
+keras-team/keras,33629505,65,Added layer config info to exported HDF5 file,"Adding layer configuration info as attributes to the corresponding layer group in the HDF5 file exported by `model.save_weights`. For now this information is ignored when loading weights from a file, but it may be useful for reconstructing a model in case a user loses the corresponding source code.
+",jfsantos,5733,closed,False,2015-04-20T00:54:48+00:00,2015-04-20T01:52:04+00:00,2015-04-20T01:52:04+00:00,2015-04-20T01:52:04+00:00,1f01c079dca4d0a2b07e10308fd5b8aa483756b2,unknown,2,0,1,1,0,0,,,
+keras-team/keras,33652725,66,Make Progressbar work in IPython notebooks,"Currently, the Progressbar doesn't play nice within IPython-notebooks ( http://imgur.com/UOyIloR ). Using ""\r"" instead of  several ""\b"" works well (both on the shell and within notebooks). I tested it under Linux only, but PyMC's progressbar also uses ""\r"", so I assume this works on every plattform.
+",untom,3627551,closed,False,2015-04-20T10:28:05+00:00,2015-04-22T08:45:20+00:00,2015-04-20T16:07:11+00:00,2015-04-20T16:07:11+00:00,c0efc992a63e6141f8dbfb3043e4cd6b22326d7c,unknown,2,2,1,1,0,3,,,
+keras-team/keras,33658574,67,Added 1D Convolution and Pooling,"This was the best I could come up with, and its working.
+",pranv,8753078,closed,False,2015-04-20T11:57:51+00:00,2015-06-10T19:34:03+00:00,2015-06-10T19:34:03+00:00,2015-06-10T19:34:03+00:00,cfe13beae7146527b5ac8bd57d37b136787727a4,unknown,46,2,1,2,0,5,,,
+keras-team/keras,33768321,71,Remove the dot in the path,"`datadir = os.path.expanduser(""~/.keras/datasets"")`, the dot causes error when testing `cifar10.py` in Windows 7. After remove the dot in the path, it's ok.
+",willard-yuan,5379711,closed,False,2015-04-21T14:43:48+00:00,2015-04-23T14:43:35+00:00,2015-04-23T14:43:35+00:00,,7dee5ce67756f9d51f8483a522e6a759d9aaa139,dirty,1,1,1,1,0,8,,,
+keras-team/keras,33809777,72,Fix save_weights in models.py when None,"Hi,
+h5py cannot handle None, so when I call save_weights  on model with default parameters (for example image_shape in Conv) I got error. So I just ignored None values.
+",skrypka,10244928,closed,False,2015-04-21T22:24:52+00:00,2015-04-22T00:42:27+00:00,2015-04-21T22:42:53+00:00,2015-04-21T22:42:53+00:00,16b922783817ffb36dcfab75925724f003837e29,unknown,2,1,1,1,0,1,,,
+keras-team/keras,33915024,74,Add regularization and constraints to layers,"I went ahead and implemented layerwise regularization and constraints. They can be used as:
+
+from keras.layers.core import l1, l2, ident, maxnorm
+model.add(Dense(784, 1000,  regularizer=[l2(.05), ident], constraint=[maxnorm(2), ident]))
+
+The first term applies to the weights and the second to the bias. ident is just the identity function and is the default.
+",the-moliver,144949,closed,False,2015-04-23T00:39:32+00:00,2015-04-23T18:34:05+00:00,2015-04-23T18:34:05+00:00,,e96f3e8c5aba486d113d47e4241ebd05b66b1ff6,dirty,47,29,3,2,0,2,,,
+keras-team/keras,33956712,76,Fixed path concatenation for datasets,"Using `os.path.join` to generate paths according to the user's OS (i.e., using `\` as the file path separator on Windows and `/` on POSIX). This was tested on OS X and Windows 8, both with Python 2.7 and Python 3.4.
+",jfsantos,5733,closed,False,2015-04-23T13:48:10+00:00,2015-04-23T14:42:53+00:00,2015-04-23T14:42:53+00:00,2015-04-23T14:42:53+00:00,f2bdb7e246a1e9449ef9b35f14c68d482b1cf882,unknown,7,7,3,2,0,0,,,
+keras-team/keras,33985316,77,Layerwise constraints and regularization,"I've moved the functions to relevant modules which can be used as below. And I've separated the weight and bias regularizers for better clarity, with the defaults being no regularization or constraints.
+I don't think it makes sense to have the regularizers and constraints specified by strings, i.e. W_constraint='maxnorm' , since the user will usually want to specify the parameter and it's not clear how to do that with the string convention. It works fine when the defaults are probably fine, as with the initializations. But even in that case, how would one specify the scale for the initialization `init='normal'` if you wanted to change it? The way I have it below seems clearer and easier to work with and is similar to the way the dropout rate is specified. Let me know what you think and if you think I should change something.
+
+``` python
+from keras.constraints import maxnorm
+from keras.regularizers import l2
+
+model = Sequential()
+model.add(Dense(784, 1000, W_regularizer=l2(.05), W_constraint=maxnorm(2)))
+```
+",the-moliver,144949,closed,False,2015-04-23T18:54:32+00:00,2015-05-06T04:25:22+00:00,2015-05-04T17:36:50+00:00,2015-05-04T17:36:50+00:00,aa3c4adb20b85276b6c397d15d213a63c7937944,unknown,470,50,17,11,0,20,,,
+keras-team/keras,33994570,78,PReLU layer does not need to dump input_shape as a config parameter,"This was causing `model.save_weights` to break on models with a PReLU layer, as it does not store `input_shape` as an attribute. We do not need to save it, though, since this is just an activation layer.
+",jfsantos,5733,closed,False,2015-04-23T20:43:30+00:00,2015-04-24T15:10:06+00:00,2015-04-24T15:10:06+00:00,2015-04-24T15:10:06+00:00,643abf3b655814e5272f4f53a6a5d42f1e976fb8,unknown,2,1,1,2,0,3,,,
+keras-team/keras,34064335,82,Added function to compute activation statistics for BatchNormalization,"This adds a function, `set_activation_stats(model, X_train, batch_size, verbose)` that computes the activation mean and standard deviation for each BatchNormalization layer in a model and stores them as layer attributes. It also changes the BatchNormalization layer to use this information during test/inference. The only issue I see with this, which comes from using batch normalization and not from the implementation, is that in theory one needs to compute the activation statistics after each epoch if they want to check the validation or test performance. Otherwise, since they will not have these values, we don't have a way to normalize the data during testing.
+",jfsantos,5733,closed,False,2015-04-24T16:29:53+00:00,2015-05-12T20:14:02+00:00,2015-05-12T20:14:02+00:00,,755cdca2f287625f5f201d552a0eee62e71ef639,dirty,45,3,2,1,0,12,,,
+keras-team/keras,34091969,83,join function TypeError fixed,,mizdler,6818522,closed,False,2015-04-24T22:35:49+00:00,2015-04-24T23:45:22+00:00,2015-04-24T23:45:22+00:00,2015-04-24T23:45:22+00:00,6f4c192b7e872892ebc86d1bfc348527c87e5e38,unknown,1,1,1,1,0,0,,,
+keras-team/keras,34126205,84,Add dependencies and classifiers to setup file,,adelq,929309,closed,False,2015-04-26T17:10:13+00:00,2015-04-29T18:50:17+00:00,2015-04-27T05:33:12+00:00,,38665da1f36832d2b4ec21baeec501ebd4f88a05,dirty,6,1,1,2,0,3,,,
+keras-team/keras,34457684,92,Add new initializations to the docs,"Two new initializations: `glorot_uniform` and `he_uniform`
+",seiteta,5756228,closed,False,2015-04-30T13:09:38+00:00,2015-04-30T15:29:30+00:00,2015-04-30T15:29:30+00:00,2015-04-30T15:29:30+00:00,4461cdebf09946cdf2f59c1843fb875e5515b536,unknown,2,0,1,1,0,0,,,
+keras-team/keras,34664391,97,Noise module,"I moved dropout to a new noise.py module and added multiplicative Gaussian noise (from the Dropout paper) as well. According to the paper this ""Gaussian dropout"" actually works slightly better, and it seems to in the MNIST example. I updated all the docs and examples to comply with the changes.
+",the-moliver,144949,closed,False,2015-05-04T19:02:47+00:00,2015-06-17T17:26:37+00:00,2015-06-17T17:26:37+00:00,,d474af422dd2f414ff5c59832d933046d7035e89,dirty,110,52,12,5,0,2,,,
+keras-team/keras,34790004,99,NumPy Array <-> PIL Image conversion when image is grayscale,"Fixed conversion between NumPy Array and PIL Image object when input image is grayscale.
+
+Originally,
+- (Line 90: `array_to_img`) When NumPy Array `x` with one channel is passed to `array_to_img`, `Image.fromarray(x.astype(""uint8""), ""L"")` raised `ValueError: Too many dimensions: 3 > 2.`.
+- (Line 95: `img_to_array`) When grayscale image is passed to `img_to_array`, `x` becomes 2D array and `x = x.transpose(2, 0, 1)` raised `ValueError: axes don't match array` 
+- (Line 100: `load_img`) When grayscale image is loaded, but grayscale is set False, this function still returns the grayscale image. This behavior cause a problem when loading multiple images including both color and grayscale images. 
+",mthrok,855818,closed,False,2015-05-06T05:43:16+00:00,2015-05-06T16:07:01+00:00,2015-05-06T16:07:01+00:00,2015-05-06T16:07:01+00:00,67c30483ed086ab7cf2d119047dc2cf0b4220ede,unknown,10,2,1,2,0,0,,,
+keras-team/keras,35068920,105,fix typo,,floydwch,1651509,closed,False,2015-05-09T16:17:11+00:00,2015-05-09T17:04:41+00:00,2015-05-09T17:04:41+00:00,2015-05-09T17:04:41+00:00,51de573d9eff2bd319cf8098c5cb45b404c48bff,unknown,2,2,1,1,0,0,,,
+keras-team/keras,35080364,110,Fix a typo in the kaggle otto exmaple.,"The original file somehow works because `labels` is a global variable :)
+",weilinear,2232328,closed,False,2015-05-10T10:07:01+00:00,2015-05-11T06:05:22+00:00,2015-05-10T21:05:48+00:00,2015-05-10T21:05:48+00:00,7c781c0e560dcb7dff3727bb7f69d3efec09380b,unknown,1,1,1,1,0,0,,,
+keras-team/keras,35082742,111,Add L1-L2 (ElasticNet) regularization,"As far as W_regularizer can be equal only to a single function, one should be able to mix L1 and L2 regularizations
+",nizhib,340109,closed,False,2015-05-10T13:43:54+00:00,2015-05-10T21:06:50+00:00,2015-05-10T21:06:50+00:00,2015-05-10T21:06:50+00:00,277b1204827e31df2ae7fccd15eef04881b6e99a,unknown,8,0,2,1,0,0,,,
+keras-team/keras,35191497,118,Add predict() for Sequential models,"Moved logic to predict().  Predict_proba now calls predict and warns if output aren't valid probabilities.
+",dansbecker,1390442,closed,False,2015-05-12T03:59:55+00:00,2015-05-12T05:45:02+00:00,2015-05-12T05:45:02+00:00,2015-05-12T05:45:02+00:00,687de8dcccf623dec54949f9629775573d34853b,unknown,8,2,1,1,0,0,,,
+keras-team/keras,35257315,122,Early stopping in fit with KeyboardInterrupt,"Allow users to stop the `Sequential.fit(...)` method with a `KeyboardInterrupt` and still return the training history.
+",lukedeo,3826382,closed,False,2015-05-12T18:41:26+00:00,2017-02-14T13:09:56+00:00,2015-05-16T16:04:54+00:00,,edd37b2661f7555f1c7b3dda22e24e31d369abe4,unknown,42,0,1,7,0,5,,,
+keras-team/keras,35272237,123,fixed missing parenthesis in README,"As the title indicates the README had a missing parenthesis in a python code example.
+",alvarouc,7969170,closed,False,2015-05-12T21:23:48+00:00,2015-05-12T22:45:25+00:00,2015-05-12T22:45:25+00:00,2015-05-12T22:45:25+00:00,800104b4743cb6608fcf45d53f396bb55982a0ea,unknown,1,1,1,1,0,0,,,
+keras-team/keras,35309547,124,Add theano_mode argument to models.compile. ,"This allows to specify a theano.compile.mode.Mode instance to use, for example to use a MonitorMode
+with a post_func to debug nans.
+",julienr,506602,closed,False,2015-05-13T09:38:57+00:00,2015-05-13T19:18:15+00:00,2015-05-13T16:38:01+00:00,2015-05-13T16:38:01+00:00,ad23335391daf2212ac6437ef34c196db8ede8d2,unknown,9,8,2,1,0,1,,,
+keras-team/keras,35311222,125,Add inner_activation to get_config,"Add the printing of the inner activation to the recurrent models that have one
+",jramapuram,8204807,closed,False,2015-05-13T10:00:09+00:00,2015-05-13T16:35:36+00:00,2015-05-13T16:35:36+00:00,2015-05-13T16:35:35+00:00,aaeaa6de9fbea7c4b8c54603556733865284f148,unknown,3,0,1,1,0,0,,,
+keras-team/keras,35380081,127,"Edits in README MLP examples, and promote one of them to a file in examples dir.","See #126 
+",jmmcd,167942,closed,False,2015-05-13T23:07:34+00:00,2015-05-14T00:14:07+00:00,2015-05-14T00:14:07+00:00,,52aaaf398e0ea77d1d56c68d9ebdfd1df3c1f117,dirty,47,18,2,2,0,1,,,
+keras-team/keras,35574010,134,Created Maxout layer,"Let me know what you think -- really simple Maxout implementation using a tensor dot. 
+
+You can modify the MNIST example to be something like
+
+``` python
+model = Sequential()
+model.add(Maxout(784, 128, n_features=20))
+model.add(Dropout(0.2))
+model.add(Maxout(128, 64, n_features=20))
+model.add(Dropout(0.2))
+model.add(Dense(64, 10))
+model.add(Activation('softmax'))
+
+rms = RMSprop()
+model.compile(loss='categorical_crossentropy', optimizer=rms)
+```
+
+Here's how it does with all the same parameters. I made some learning curves for accuracy...
+
+![maxout-acc](https://cloud.githubusercontent.com/assets/3826382/7667119/034129f8-fbb2-11e4-9bbc-62ae9282db64.png)
+ ...and loss...
+![maxout-loss](https://cloud.githubusercontent.com/assets/3826382/7667121/10cd7e50-fbb2-11e4-8fae-8f8ead75fea5.png)
+
+Let me know what you think. If you like it, I can start writing up docs.
+",lukedeo,3826382,closed,False,2015-05-16T17:00:03+00:00,2016-05-25T18:32:55+00:00,2015-05-20T18:21:06+00:00,2015-05-20T18:21:06+00:00,74ffac479c03eeb4fe908c68016442055972220b,unknown,69,0,2,7,0,15,,,
+keras-team/keras,35583936,135,"Add support for custom function for activations, initializations, objectives","The modification would solve this issue: https://github.com/fchollet/keras/issues/117
+
+It allow more flexible in keras.
+Users can use string to select built-in function in keras or build their own function with their own risk.
+",trungnt13,1390402,closed,False,2015-05-17T08:45:08+00:00,2015-05-17T17:43:17+00:00,2015-05-17T17:16:17+00:00,,27afa40701457f18a34dd1b41ea559770ba410bf,dirty,71,6,5,1,0,1,,,
+keras-team/keras,35618458,136,fix imports in the LSTM example,,dragoon,490130,closed,False,2015-05-18T10:02:30+00:00,2015-05-18T16:22:56+00:00,2015-05-18T16:22:56+00:00,2015-05-18T16:22:56+00:00,88676887b05e1141d178d1788e9a670bb0669432,unknown,2,1,1,1,0,0,,,
+keras-team/keras,35672853,137,Pad the progress bar strings,"Pad the progress bars so formatting stays when going from 99 to 100, etc.
+
+Behavior before:
+
+```
+900/7228 [==>...........................] - ETA: 226s - loss: 0.4990
+1050/7228 [===>..........................] - ETA: 194s - loss: 0.4868
+```
+
+Behavior after:
+
+```
+ 900/7228 [==>...........................] - ETA: 226s - loss: 0.4990
+1050/7228 [===>..........................] - ETA: 194s - loss: 0.4868
+```
+",stephenroller,31896,closed,False,2015-05-18T20:58:18+00:00,2015-05-18T21:33:12+00:00,2015-05-18T21:33:12+00:00,2015-05-18T21:33:12+00:00,7b0f2be4ae751979d33de67c6c91c562c59184d6,unknown,3,1,1,1,0,0,,,
+keras-team/keras,35909443,140,Added cifar100 loading dataset,"It loads the same way CIFAR10 is loaded (leaving testing data aside) as the script is mostly based on cifar10.py
+",seba-1511,626253,closed,False,2015-05-21T08:13:19+00:00,2017-11-10T04:44:20+00:00,2015-05-31T05:11:14+00:00,,28aa7e9d0bfd35bab39e0d1877b0342787d69945,dirty,42,0,1,1,0,5,,,
+keras-team/keras,36041954,144,Format the code,"Following PEP8 errors were fixed:
+- PEP8 (W293): blank line contains whitespaces
+- PEP8 (W291): trailing space
+- PEP8 (E303): too many blank line
+- PEP8 (E231): missing white space ':'
+- PEP8 (E225): missing whitespace around operator
+
+I tested the code after re-format, it works ok. 
+Sorry for this inconvenience, I start working with keras and sublime just mark all this as error which is annoying for me.
+",trungnt13,1390402,closed,False,2015-05-22T15:29:08+00:00,2015-05-31T01:56:04+00:00,2015-05-31T01:56:04+00:00,,55440b8709bb219df82655314fdd6d09f61d4874,dirty,359,351,23,1,0,0,,,
+keras-team/keras,36062209,145,Updated example with new location of Embedding,,texttheater,19344,closed,False,2015-05-22T19:35:11+00:00,2015-05-23T17:27:43+00:00,2015-05-23T17:27:43+00:00,2015-05-23T17:27:43+00:00,9a1abfc9aff95cea730ff973662fb74d25a58494,unknown,3,2,1,1,0,0,,,
+keras-team/keras,36108949,151,Fix progress bar issue in screen where output clobbered previous output,"When running model.fit with verbose=1 inside screen, the progress bar currently prints out lines that scroll upward on the terminal. For instance, on the following test script:
+
+```
+from keras.utils.generic_utils import Progbar
+
+pb = Progbar(target=10, verbose=1)
+for i in range(1, 11):
+  pb.update(i, [('test', i)])
+```
+
+The output is:
+
+```
+10/10 [==============================] - 0s - test: 5.0000     
+me@test:~/tmp/kerastest$ ========>...] - ETA: 0s - test: 5.0000
+ 8/10 [=======================>......] - ETA: 0s - test: 4.0000
+ 7/10 [====================>.........] - ETA: 0s - test: 4.0000
+ 6/10 [=================>............] - ETA: 0s - test: 3.0000
+ 5/10 [==============>...............] - ETA: 0s - test: 3.0000
+ 4/10 [===========>..................] - ETA: 0s - test: 2.0000
+ 3/10 [========>.....................] - ETA: 0s - test: 2.0000
+ 2/10 [=====>........................] - ETA: 0s - test: 1.0000
+ 1/10 [==>...........................] - ETA: 0s - test: 1.0000
+```
+
+This clobbering of previous screen output also prevents previous epochs' results from being visible after the end of the call to fit.
+",strategist333,246351,closed,False,2015-05-24T21:44:40+00:00,2015-05-25T01:33:06+00:00,2015-05-25T01:32:39+00:00,2015-05-25T01:32:39+00:00,ba97d305c670a41c32da6c3076f8743638e872ed,unknown,1,1,1,1,0,1,,,
+keras-team/keras,36126511,153,remove duplicate calls to get_output in Model(),,SimonSuster,1826574,closed,False,2015-05-25T09:02:55+00:00,2015-05-25T19:21:55+00:00,2015-05-25T16:23:55+00:00,2015-05-25T16:23:55+00:00,83183d44dab85aa70ee473a5c902fa002135b852,unknown,0,3,1,1,0,0,,,
+keras-team/keras,36127266,154,Fix sampling table lookup in skipgrams,"`sampling_table` should be looked up with the index from the vocabulary, and not with the positional index from the sequence. 
+",SimonSuster,1826574,closed,False,2015-05-25T09:17:47+00:00,2015-05-25T19:21:50+00:00,2015-05-25T16:25:45+00:00,2015-05-25T16:25:45+00:00,e902abeb650cb29d9096272ce5ee59c122e1b0bd,unknown,1,1,1,1,0,1,,,
+keras-team/keras,36145764,155,Autoencoder model,"I added a relatively generic autoencoder model. It allows the encoding stage to be reused as a layer in subsequent networks, and it can be frozen using a trick I got from @kenterao in #56 . In order to make this concise, I had to modify the Merge layer to allow 'merging' a single model, so basically turning it into a container layer. Also happy to do this in a separate Container layer, but I think that would include some duplication.
+
+One thing that is typically done in autoencoders, which for now has to be done by hand, is tying of weights. I couldn't come up with a neat way of doing this, while allowing general encoders and decoders. So I left it up to the enduser to do this for now (see the test to see how it is done.)
+
+Let me know what you think, and I am happy to write documentation for this.
+",phreeza,123894,closed,False,2015-05-25T15:26:37+00:00,2015-07-17T10:58:27+00:00,2015-06-04T05:01:47+00:00,,811a5517f4ea9d17a32316068d9cf4f5cbf94bc5,dirty,92,3,3,2,0,7,,,
+keras-team/keras,36154025,157,Constraint and regularization in Embedding layer,"I've noticed that as of its current implementation, the Embedding layer doesn't support constraints and regularization. One type of constraint that we have found to be empirically useful (eg. better generalization, sometimes faster convergence) is constraining the embeddings to have unit norm. This technique is sometimes mentioned in embedding approaches [[1](http://www.aclweb.org/anthology/N13-1090), [2](http://www.cs.toronto.edu/~zemel/documents/nips2014_kiros.pdf)].
+
+I've made an attempt at implementing this here. Please let me know what you think :)
+
+Moreover, if you'd like me to make a finer grain unit test on `unitnorm` (eg. via Theano `function`), I can do that as well. Overall I think it may be nice to migrate to fine grain unit tests across the board with python `unittest` and only keep around a few integration tests. That way developers have an easier time checking against regression (eg. by running `python -m unittest discover`.
+",vzhong,1855260,closed,False,2015-05-25T19:08:08+00:00,2015-05-25T19:53:34+00:00,2015-05-25T19:53:34+00:00,2015-05-25T19:53:34+00:00,d298b7077d807eee146c60ff134e72885a4124b3,unknown,41,5,6,8,0,3,,,
+keras-team/keras,36166894,158,scikit-learn classifier wrapper,"Resolves issue #149
+
+Some quick notes/observations:
+- After a few design iterations, I opted to use a constructor that accepts a pre-defined (but not yet compiled) Keras model.  I'm reasonably sure this is the most sensible approach, but not 100% sure.  The advantage is that one can still build model definitions using the existing APIs, which are very fluid and expressive.  The disadvantage is that it's not possible to build a model using all default parameters, as one can do with the other scikit-learn estimators (I'm not sure this even makes sense for a neural net though).
+- In order to allow meta-estimators such as ensembles to make copies of the base estimator, I'm making a copy of the model definition in the fit method before compilation.  I don't think this will cause any problems, but I'm not positive.  I tested it on my ""Otto Group"" Kaggle script and was able to build an ensemble using the wrapper class and scikit-learn's bagging classifier.
+- I only created a classification wrapper.  It would probably make sense to pull most of this out into an abstract base class and create derived classes for classification and regression instead.  I'll leave that to a future enhancement though.
+",jdwittenauer,1591142,closed,False,2015-05-26T03:16:37+00:00,2015-05-27T17:22:20+00:00,2015-05-27T17:22:20+00:00,2015-05-27T17:22:20+00:00,a7ffdfc216a57a642a6338359d6c7711f59942fb,unknown,249,0,3,4,0,5,,,
+keras-team/keras,36242593,164,Add documentation for the MNIST dataset.,,phreeza,123894,closed,False,2015-05-26T20:33:25+00:00,2015-07-17T10:58:25+00:00,2015-05-26T20:55:15+00:00,2015-05-26T20:55:15+00:00,04e15025dccb97a58a9d1142c5d7b5c2b5f2bc48,unknown,21,0,1,1,0,0,,,
+keras-team/keras,36460814,171,Callbacks,"## Callbacks
+
+The logs and history given by `keras.models.Sequential().fit()` are great ways to easily debug your models. To provide new debugging tools in the future, I am introducing callbacks for easy access to inner loops inside the training procedure.
+- **Keep debug separated from the main code**: Using callbacks one can separate the training code in `fit()` from debug functions (history and logging) as they can be expressed as callbacks themselves. This improves readability and is safe for future changes.
+- **Access internal states and statistics of the model**: Callbacks allow you to access internal states of the model and statistics about training _while the training procedure is still running_. You have the choice to trigger functions at any stage of training, be it at the epoch level or the batch level.
+
+Here is an example of what you can do with callbacks, inspired by @Newmu's [tutorial](https://www.youtube.com/watch?v=S75EdAcXHKk):
+
+![cnn_activations](https://cloud.githubusercontent.com/assets/2018752/7866089/6378de1e-056d-11e5-96f9-68dabdd60bb4.gif)
+_Activation layers on a test example in a simple CNN during training on MNIST_
+#### Why callbacks?
+
+Callbacks are a flexible way to apply functions at any point of training. Here are some example of applications using callbacks:
+- Save statistics of the training procedure, similarly to `history` in `fit()`. This callback is already available as `keras.callbacks.History`.
+- Logging informations about the training procedure, depending on `verbose`. This callback is already available as `keras.callbacks.Logger` and is applied by default.
+- Create animations of the weight matrices or activation layers. See below a more in-depth example.
+- Get real-time informations, like the loss curve.
+- Programmatically stop training ; this can be a path towards a GUI manager.
+#### How to use callbacks?
+
+To create a callback to be called during the training procedure, you only have to extend the class `keras.callbacks.Callback` with your custom functions. It supports the following methods:
+- **on_train_begin**(): Method called at the beginning of training.
+- **on_train_end**(): Method called at the end of training.
+- **on_epoch_begin**(epoch): Method called at the beginning of epoch `epoch`.
+- **on_epoch_end**(epoch, val_loss, val_acc): Method called at the end of epoch `epoch`, with validation loss `val_loss` and accuracy `val_acc` (if applicable).
+- **on_batch_begin**(batch): Method called at the beginning of batch `batch`.
+- **on_batch_end**(batch, indices, loss, accuracy): Method called at the end of batch `batch`, given by the indices `indices`, with loss `loss` and accuracy `accuracy` (if applicable).
+
+In the spirit of #100 , one typical application of callbacks is to create visualizations to see how the model behaves during training. Here is an example of how you can use a callback to create an animation of a weight matrix as a function of time during training.
+
+``` python
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+class DrawWeights(keras.callbacks.Callback):
+
+    def __init__(self, figsize, layer_id=0, param_id=0, weight_slice=(slice(None), 0)):
+        self.layer_id = layer_id
+        self.param_id = param_id
+        self.weight_slice = weight_slice
+        # Initialize the figure and axis
+        self.fig = plt.figure(figsize=figsize)
+        self.ax = self.fig.add_subplot(1, 1, 1)
+
+    def on_train_begin(self):
+        self.imgs = []
+
+    def on_batch_end(self, batch, indices, loss, accuracy):
+        # Get a snapshot of the weight matrix every 5 batches
+        if batch % 5 == 0:
+            # Access the full weight matrix
+            weights = self.model.layers[self.layer_id].params[self.param_id].get_value()
+            # Create the frame and add it to the animation
+            img = self.ax.imshow(weights[self.weight_slice], interpolation='nearest')
+            self.imgs.append(img)
+
+    def on_train_end(self):
+        # Once the training has ended, display the animation
+        anim = animation.ArtistAnimation(self.fig, self.imgs, interval=10, blit=False)
+        plt.show()
+```
+
+To apply this callback to your training procedure, simply provide the list of callbacks as an argument of `fit()`. All the callbacks given in that list are applied sequentially.
+
+``` python
+draw_weights = DrawWeights(figsize=(4, 4), layer_id=0, \
+    param_id=0, weight_slice=(slice(None), 0))
+model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch, \
+    verbose=1, callbacks=[draw_weights])
+```
+
+Here is a sample animation obtained with this callback:
+
+![mlp_weight](https://cloud.githubusercontent.com/assets/2018752/7872862/e085df78-059b-11e5-9e12-6fbd90a374a8.gif)
+_Weight matrix of a MLP during training on MNIST_
+",tristandeleu,2018752,closed,False,2015-05-28T23:20:06+00:00,2017-02-15T15:21:08+00:00,2015-05-31T01:46:13+00:00,2015-05-31T01:46:13+00:00,8e5bd3071dc9c9154ab00e2f51a755a22e421642,unknown,444,50,6,12,2,10,,,
+keras-team/keras,36465828,172,Model structure visualization using dot,"Hey Francois,
+
+I wrote a small utility to visualize the network structure using `pydot`. For example, the follow code:
+
+``` python
+ent_lookup = Sequential()
+ent_lookup.add(Embedding(10, 2))
+ent_lookup.add(Flatten())
+
+rel_lookup = Sequential()
+rel_lookup.add(Embedding(20, 2))
+rel_lookup.add(Flatten())
+
+word_sequence = Sequential()
+word_sequence.add(Embedding(10, 5))
+word_sequence.add(GRU(5, 2))
+
+model = Sequential()
+model.add(Merge([word_sequence, ent_lookup, rel_lookup], mode='concat'))
+model.add(Activation('relu'))
+model.add(Dense(6, 2))
+model.add(Activation('softmax'))
+
+g = Grapher()
+g.plot(model, 'mymodel.png')
+```
+
+generates something like:
+
+![mymodel](https://cloud.githubusercontent.com/assets/1855260/7874389/b008cc76-0563-11e5-8be4-65c5cddcf7a5.png)
+
+Let me know if you want to merge this. If so, I can polish up the code, add comments and docs etc...
+",vzhong,1855260,closed,False,2015-05-29T01:04:21+00:00,2015-05-30T21:12:02+00:00,2015-05-30T20:50:21+00:00,2015-05-30T20:50:21+00:00,f6343081551d98110c286880376c5d9917720a6c,unknown,109,1,4,3,1,5,,,
+keras-team/keras,36491769,173,Loss visualization,"A simple utility module to add a visualization of the loss history over the epochs, as returned by the fit method of the Sequential model.
+
+If #171 is merged then a callback based animation of the loss curves would be possible.
+
+Example figure from the provided MNIST test case:
+
+![epochs](https://cloud.githubusercontent.com/assets/8267636/7880709/72addd64-05fc-11e5-8d36-301fb9db6427.png)
+",tdhd,8267636,closed,False,2015-05-29T10:19:01+00:00,2016-01-03T21:42:24+00:00,2015-05-30T21:06:10+00:00,,1f780a7a7e77056a6595113245501bb82cec8720,dirty,89,2,4,4,0,3,,,
+keras-team/keras,36566571,175,Overwrite parameter for keras.models.save_weights,"A patch for the FIXME (https://github.com/fchollet/keras/blob/df4e3a2d8d2195505ff2c744a37d1ecf467c2e9a/keras/models.py#L368) in the save_weights method.
+
+If overwrite is not changed to True the method will throw an IOError when the file already exists.
+",tdhd,8267636,closed,False,2015-05-30T14:45:21+00:00,2015-05-30T21:11:22+00:00,2015-05-30T21:05:13+00:00,2015-05-30T21:05:13+00:00,88f4e8391956d67cace2f9df6cbfa8d1ace4e268,unknown,7,4,2,1,0,1,,,
+keras-team/keras,36631620,180,add autoencoder and denoising autoencoder,"This implementation creates a base autoencoder class that should be inherited for all other implementations of autoencoders. Since we have added a get_hidden() method this can be used later on when we start stacking autoencoders. I.e. we can do something along the lines of:
+
+``` python
+    if isinstance(my_new_stacked_autoencoder_layer, AutoEncoder):
+        return previous_layer.get_hidden() # instead of .get_output()
+```
+
+A denoising autoencoder has also been added to demo how to inherit from AutoEncoder.
+I have tried to be consistent with your coding style. Let me know if there are any issues.
+",jramapuram,8204807,closed,False,2015-06-01T14:05:44+00:00,2015-12-15T15:48:57+00:00,2015-06-04T03:12:23+00:00,2015-06-04T03:12:23+00:00,eb8719218b8a0942512f26f9f9c9a1be17530a5d,unknown,260,0,2,5,0,14,,,
+keras-team/keras,36700231,182,typo - remove unnecessary backticks in example codes,,pcampr,289776,closed,False,2015-06-02T07:13:31+00:00,2015-06-02T17:14:27+00:00,2015-06-02T17:14:26+00:00,2015-06-02T17:14:26+00:00,ae4aaaf5b1faacacea1208ae3fbbc0f0998662f0,unknown,2,2,1,1,0,0,,,
+keras-team/keras,36848105,188,Classweights,"Picking up on #177 I added class weights to the `Sequential` model.
+
+It works by calling `fit` or `train` with a `class_weight` parameter which must be a dictionary mapping from class labels to class weights. Example taken from the added (MNIST) test case:
+
+``` python
+high_weight = 100
+class_weight = {0:1,1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:high_weight}
+```
+
+The class weights are used to calculate a weight vector to rescale the objective function.
+
+I chose to only add the weight vector to the training functions. Because of that there needs to be a check in the objective functions if the weight vector exists. Looking back at the code right now makes the optional parameter to the objectives look ugly. What do you think? An alternative would be to simply pass `np.ones` to the objective also at test time.
+
+I will clean up the code and add adapted implementations for the remaining objective functions if you want to merge it. At the moment I only added weights to `categorical_crossentropy` for the test case.
+
+Sample output from the test case (left with class weights, right with equal class weights):
+
+```
+Classification accuracies on test set:
+Digit 0: class_weight = 1 -> 0.941   class_weight = 1 -> 0.976
+Digit 1: class_weight = 1 -> 0.929   class_weight = 1 -> 1.000
+Digit 2: class_weight = 1 -> 0.871   class_weight = 1 -> 0.862
+Digit 3: class_weight = 1 -> 0.766   class_weight = 1 -> 0.841
+Digit 4: class_weight = 1 -> 0.882   class_weight = 1 -> 0.918
+Digit 5: class_weight = 1 -> 0.770   class_weight = 1 -> 0.885
+Digit 6: class_weight = 1 -> 0.908   class_weight = 1 -> 0.897
+Digit 7: class_weight = 1 -> 0.657   class_weight = 1 -> 0.939
+Digit 8: class_weight = 1 -> 0.685   class_weight = 1 -> 0.798
+Digit 9: class_weight = 100 -> 0.989     class_weight = 1 -> 0.819
+```
+",tdhd,8267636,closed,False,2015-06-03T15:55:47+00:00,2015-11-30T18:45:25+00:00,2015-06-17T17:25:34+00:00,2015-06-17T17:25:34+00:00,e34eee0905584b4e064cce58e62eadfe3390216e,unknown,232,24,4,18,2,19,,,
+keras-team/keras,36858017,189,Fix empty callbacks in fit,"Fix for #187.
+
+If `verbose=0` then callbacks.callbacks is empty and accessing the last element fails.
+
+The question is: Should the fit method really return no history when `verbose=0`?
+",tdhd,8267636,closed,False,2015-06-03T17:40:27+00:00,2015-06-04T15:37:52+00:00,2015-06-03T17:42:55+00:00,,e072384505eabe202a61039444e9a9a5beda0da3,dirty,3,2,1,1,0,2,,,
+keras-team/keras,36916892,190,add autoencoder to docs,"Add documentation for autoencoder models.
+",jramapuram,8204807,closed,False,2015-06-04T09:31:26+00:00,2015-06-09T05:12:22+00:00,2015-06-05T19:36:57+00:00,2015-06-05T19:36:57+00:00,66683c0a1c5e7ba21a020d5cc53c252b87ed0825,unknown,74,0,1,1,0,20,,,
+keras-team/keras,36930029,191,fix weight saving and loading,"Need to reference member variables.
+",jramapuram,8204807,closed,False,2015-06-04T12:41:33+00:00,2015-06-04T16:57:05+00:00,2015-06-04T16:57:05+00:00,2015-06-04T16:57:05+00:00,724806497b331c6a7d516f88166aebfbc2a78f0a,unknown,2,2,1,1,0,0,,,
+keras-team/keras,36947188,192,Loading weights with incompatible shape,"Hey François,
+
+I added a check for the shape of the current layer and the weights to be loaded in `keras.layers.Layer.set_weights`. Without that check it can happen that the weights alter the structure of the model. It raises an exception which is probably what should happen. Printing out a warning instead would work too, I guess.
+
+Negative test case:
+
+```
+from __future__ import absolute_import
+from __future__ import print_function
+from keras.models import Sequential
+from keras.layers.core import Dense, Activation, Merge
+
+def createModelA():
+    model = Sequential()
+    model.add(Dense(784, 50))
+    model.add(Activation('relu'))
+    model.add(Dense(50, 10))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+    return model
+
+def createModelB():
+    model = Sequential()
+    model.add(Dense(784, 50))
+    model.add(Activation('relu'))
+    model.add(Dense(25, 10))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+    return model
+
+def cleanup():
+    import os
+    os.remove('a.hdf5')
+    os.remove('b.hdf5')
+
+modelA = createModelA()
+modelB = createModelB()
+modelA.save_weights('a.hdf5', overwrite=True)
+modelB.save_weights('b.hdf5', overwrite=True)
+# should not cause an error
+modelA.load_weights('a.hdf5')
+modelB.load_weights('b.hdf5')
+
+#################
+# negative test #
+#################
+
+try:
+    modelA.load_weights('b.hdf5')
+except:
+    import sys
+    #print(""Expected error:"", sys.exc_info()[0])
+    print('Test passed, cleaning up')
+    cleanup()
+    sys.exit(0)
+
+cleanup()
+raise Exception('Test did not pass')
+```
+
+I can include the test case in the PR if needed.
+",tdhd,8267636,closed,False,2015-06-04T15:37:03+00:00,2015-06-17T19:12:51+00:00,2015-06-04T23:15:07+00:00,2015-06-04T23:15:07+00:00,13ef0ad6072200d6ae2e7f7f4a7742adde577d85,unknown,2,0,1,1,0,1,,,
+keras-team/keras,36985484,194,Update core.py,"concatenation should be on axis=1 instead of axis=-1
+",ghost,10137,closed,False,2015-06-04T22:36:32+00:00,2015-06-04T23:13:37+00:00,2015-06-04T23:13:37+00:00,,54e28f4398096cc94f5d7318f4a654d0c90c55d7,dirty,1,1,1,1,0,3,,,
+keras-team/keras,37022681,196,Modelcheckpoint callback to save model weights,"I found myself often training similar models over and over again only to find out from what epoch on the validation loss stopped decreasing.
+
+In a similar manner to `pylearn2.train_extensions.best_params.MonitorBasedSaveBest`, this callback stores the model weights either after each epoch or only if the validation loss improved in the current epoch compared to the last best epoch. This behaviour can be controlled with the `save_best_only` parameter.
+",tdhd,8267636,closed,False,2015-06-05T11:25:59+00:00,2015-06-17T19:13:11+00:00,2015-06-08T00:32:02+00:00,2015-06-08T00:32:02+00:00,c9c60a77107d9224d5e961c40fd66e1384768b53,unknown,132,2,3,1,0,2,,,
+keras-team/keras,37138818,202,Merged callback tests into one file,"Picking up on the issue in #196, I merged the two tests for `DrawActivations` and `ModelCheckpointer` into one test file and added the missing parameter `logs={}` to the `DrawActivations` class. Both now complete successfully.
+",tdhd,8267636,closed,False,2015-06-08T10:13:33+00:00,2015-06-18T07:14:43+00:00,2015-06-08T18:36:37+00:00,2015-06-08T18:36:37+00:00,d481409bbeb8c303dd53b048b6a264688ad485c8,unknown,80,77,2,2,0,0,,,
+keras-team/keras,37140220,203,"Renamed non-automatable tests as ""checks""","Moved tests into either manual or auto subdirectories.
+
+Hi all,
+
+There is no great need to accept this merge request, but it demonstrates a potential layout on disk allowing for both manual and automated tests. If this seems suitable, the next step is the improvement of the tests themselves. Getting the structure right beforehand seems useful, though.
+
+This structure can be run easily by either the unittest framework or the pytest framework.
+
+Cheers,
+-Tennessee
+",tleeuwenburg,60954,closed,False,2015-06-08T10:33:57+00:00,2015-06-25T23:44:02+00:00,2015-06-25T23:44:02+00:00,,2c553684ee97936ed9ecf810aca4b38e7036aaeb,unknown,0,0,9,1,0,2,,,
+keras-team/keras,37155434,204,Layers/Convolution2D: Add input_dim member as a function of image_sha…,"…pe to allow use with AutoEncoder
+",osh,850758,closed,False,2015-06-08T13:55:59+00:00,2015-06-10T19:58:58+00:00,2015-06-10T19:58:58+00:00,,2edbe2337fa81496c2641ac9662c43cff67b705c,dirty,1,0,1,2,0,4,,,
+keras-team/keras,37164961,205,Fixed python 2.x bug with input() in save_weights(),"Hey François,
+
+the `save_weights` method makes more trouble. :)
+
+For Python 2.x using `input()` does not work. Instead to reliably get the input in python 2/3 one needs to use different functions.
+",tdhd,8267636,closed,False,2015-06-08T15:26:04+00:00,2015-06-08T16:58:57+00:00,2015-06-08T16:58:57+00:00,2015-06-08T16:58:57+00:00,2584dc023b566853c57290018e789addaba61a26,unknown,6,2,1,1,0,0,,,
+keras-team/keras,37227656,207,Use the inner_init for internal weights in SimpleRNN,"It appears this was a bug in the implementation of SimpleRNN. The `init` initializer was being used for both sets of weights.
+",wxs,326559,closed,False,2015-06-09T07:53:24+00:00,2015-06-09T16:25:00+00:00,2015-06-09T16:25:00+00:00,2015-06-09T16:25:00+00:00,0a359c00dc2cb3612bc1efb05e2d51435cac0b9f,unknown,1,1,1,1,0,0,,,
+keras-team/keras,37233248,209,Updated callback docs for ModelCheckpoint,,tdhd,8267636,closed,False,2015-06-09T09:12:17+00:00,2015-06-17T19:12:32+00:00,2015-06-09T16:25:27+00:00,2015-06-09T16:25:27+00:00,e40954749af4cfe8098ed7a8d9f86e42084a0bd2,unknown,1,1,1,1,0,0,,,
+keras-team/keras,37454170,213,Add early stopping as proposed by tdhd and tristandeleu,,jramapuram,8204807,closed,False,2015-06-11T11:36:41+00:00,2015-06-12T21:49:26+00:00,2015-06-12T21:49:26+00:00,,2483118b4eabaad39c6c1ade76df7e62c6a28bd8,dirty,45,5,3,4,0,6,,,
+keras-team/keras,37517708,214,Update names of history attributes in reuters_mlp to remove errors,"What was previously referenced as loss and accuracy now appear to be called tot_loss and tot_accuracy.
+
+History object did not have validation_accuracy, so I removed that from the printed out.
+",dansbecker,1390442,closed,False,2015-06-11T22:59:37+00:00,2015-06-12T05:35:08+00:00,2015-06-12T05:35:08+00:00,,b3e03135bc083427589081b8724421a42923e38c,dirty,3,4,1,1,0,1,,,
+keras-team/keras,37555940,218,regularization and constraints for Convolution1D and Convolution2D,"fix for #170, including constraints. Nothing fancy, just copied the code from the dense layer, but I suppose it should work the same.
+",phreeza,123894,closed,False,2015-06-12T12:03:25+00:00,2015-06-12T18:07:22+00:00,2015-06-12T18:07:22+00:00,2015-06-12T18:07:22+00:00,951c27cccaedd10dddce52602e3d00b92cb6bb82,unknown,10,2,1,2,0,3,,,
+keras-team/keras,37564546,219,Callback <-> Model message passing,"Hi,
+
+this is the PR I mentioned in #213.
+
+A brief summary of what I did:
+- make https://github.com/ReactiveX/RxPY a dependency of keras (lightweight reactive extensions for python)
+- with `rx` I added a communication channel to every callback and the model class
+- these channels replace the callback logic which was implemented earlier
+- every object can now subscribe to certain events either from the callbacks or the model (or basically any object which has such a channel)
+- ported all existing callbacks to use the channel to subscribe and to publish messages
+
+To describe in a little more detail:
+
+`Model` now has `self.pub_stream` to which callbacks can subscribe, to receive messages like `TrainBegin` and so on. As before the `Model.fit` receives a list of callbacks. Inside `fit`, all passed callbacks are notified of the event source (which is `self.pub_stream` of `Model`) and in turn the model subscribes to events like `StopTraining` and `SaveModel`. These are currently the only events we had to include.
+To subscribe, take `callback.pub_stream` (the output channel of the callback), filter all messages down to a single type, for instance `StopTraining`, and then subscribe to the filtered stream of messages. All messages received are now of instance `StopTraining`.
+During the training the model emits the newly added messages from `messages.py` to it own channel by calling `on_next`. Since the callbacks are all subscribed to the messages they are interested in, they will be notified when the model publishes a message. In turn the model receives all events it needs to know about from the callbacks.
+In a GUI, events can be received and sent in the same manner as they are with the callbacks at the moment.
+
+With this, the model is decoupled a lot better from the callbacks than it was before. All of the callbacks, except for the `DrawActivations` one in `test_callbacks.py` (which I will probably fix) don't have a copy of the model object anymore. No methods of the model are called directly but are accessed through passed messages.
+
+In this PR I had to remove the performance measurements of the callbacks which were done by `CallbackList`, sorry. :) Maybe there is way to measure it with the streams too.
+
+About the docs: It would be a good idea to avoid referring to this as callbacks. They are not callbacks anymore. :) I can write up documentation for the current implementation.
+
+If you have any questions, please let me know.
+",tdhd,8267636,closed,False,2015-06-12T13:37:12+00:00,2015-06-21T11:55:22+00:00,2015-06-20T22:47:47+00:00,,7a2747850cc4a9729b1d8d8026adaced702d6f69,dirty,303,173,6,10,0,9,,,
+keras-team/keras,37565674,221,Remove duplicate link to Initializations in docs,,phreeza,123894,closed,False,2015-06-12T13:48:58+00:00,2015-07-17T10:58:07+00:00,2015-06-12T15:23:51+00:00,2015-06-12T15:23:51+00:00,fe4ec16b4bf3f0a6e01a6f1fb3c6fe1c2137200e,unknown,0,1,1,1,0,0,,,
+keras-team/keras,37817302,234,Added Convolution1D and MaxPooling1D to layers documentation,,iskandr,48441,closed,False,2015-06-16T16:59:28+00:00,2015-06-16T20:28:52+00:00,2015-06-16T20:28:52+00:00,2015-06-16T20:28:52+00:00,cf89a8e119bf6167e97709be49b66f0c61f7dbd9,unknown,22,1,1,1,0,0,,,
+keras-team/keras,37930037,238,Fix typo,,jfsantos,5733,closed,False,2015-06-17T18:11:31+00:00,2015-06-17T18:13:11+00:00,2015-06-17T18:13:11+00:00,2015-06-17T18:13:11+00:00,b0460e2c9355a5791c40b9bdde98356ac1be09e2,unknown,1,1,1,1,0,0,,,
+keras-team/keras,37956225,239,Time-Masked RNN,"This introduces a new mode to the SimpleRNN where it can be
+""time-masked"" in which case the input shape to the layer becomes doubled along the time
+dimension, with X[:,X.shape[1]//2:,0] becoming a mask vector which, when
+set to 0, compels the _scan function to simply copy its h_tm1 to the
+output.
+
+I've only added this to SimpleRNN. I know there's been some discussion in the issues here about masking so I think this could be helpful to some other people as well. I'm happy to discuss further if there are questions about this!
+
+My test fails sometimes, because depending on the initialization of the RNN it sometimes fails to learn the simple rule (copy input x_0 to get output). I am happy to discuss better testing approaches here, one approach could be to just train the unmasked model several times and ensure at least one converges.
+
+Incidentally I also added an empty `__init__.py` to the tests directory so that I could use it as a module
+",wxs,326559,closed,False,2015-06-17T22:58:19+00:00,2015-06-18T20:35:21+00:00,2015-06-18T20:35:21+00:00,,00b4a07bab4b7262a074413a2d9bad48d6713773,dirty,145,10,5,3,0,9,,,
+keras-team/keras,38002408,241,Activity regularization,"As discussed in #231 
+
+I added a way to add updates to the global cost function from a layer. This has the advantage that we can let theano calculate the gradient, unlike the way it is in the other regularizers right now where we need to supply the gradient. Maybe all regularizers could be handled like this in the future?
+
+I will work on an implementation of the sparse denoising autoencoder tomorrow, there is a trivial demo included already.
+",phreeza,123894,closed,False,2015-06-18T12:46:32+00:00,2015-07-17T10:58:18+00:00,2015-06-27T20:43:04+00:00,2015-06-27T20:43:04+00:00,e9e43c2303d8af42ceb09cac8df4dfc43c9548e4,unknown,230,131,8,21,26,11,,,
+keras-team/keras,38017122,243,Instance weights,"A follow up on #188.
+
+I renamed some variables and added a standardization for the newly added `instance_weight` parameter. Will add a unifying test case for class- and instance weights later.
+",tdhd,8267636,closed,False,2015-06-18T15:08:47+00:00,2015-06-29T06:57:57+00:00,2015-06-20T22:34:15+00:00,2015-06-20T22:34:15+00:00,d38f7e708f08a05b5e3efa45aa873980ab43e83c,unknown,139,15,3,5,1,9,,,

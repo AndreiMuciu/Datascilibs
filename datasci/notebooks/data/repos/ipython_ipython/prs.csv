@@ -1,0 +1,624 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+ipython/ipython,6007,149,Simple bug-fix,"The result_display hook was removed from the list of available hooks. My beautiful pretty extension was broken. It made me sad.
+",rkern,46135,closed,False,2010-09-17T22:40:51+00:00,2014-06-26T09:08:28+00:00,2010-09-21T00:54:28+00:00,,,dirty,368,100,9,5,0,12,,,
+ipython/ipython,6694,151,mk_object_info -> object_info,"This one was missed.
+",rkern,46135,closed,False,2010-09-20T17:51:53+00:00,2014-06-23T07:49:33+00:00,2010-09-22T06:48:57+00:00,2010-09-21T23:48:57+00:00,,dirty,2,3,1,1,0,1,,,
+ipython/ipython,7539,152,0.10.1 sge,"ssh now supports sending local environment variables over with the sshx.sh script. this may or may not be useful in all situations, but one thing we should try to determine while testing is whether this generates any security loopholes.
+",satra,184063,closed,False,2010-09-22T17:41:27+00:00,2014-06-19T02:15:24+00:00,2010-09-25T05:22:09+00:00,2010-09-24T22:22:09+00:00,,dirty,368,70,2,15,0,1,,,
+ipython/ipython,9806,155,Ready startup fix,"Is IPython.frontend.terminal.scripts.ipython just not yet written or would it be ok, to import the local IPython a bit differently?
+
+This commit does it differently, so starting the local ipython will work again
+",tomspur,303559,closed,False,2010-09-29T08:30:11+00:00,2014-06-26T01:02:10+00:00,2010-09-29T17:13:21+00:00,,aaf7a3f21af150c5fa88df5dee4619831ad98eb3,dirty,0,0,0,0,0,1,,,
+ipython/ipython,11920,158,Ready for merge,"This branch contains the following:
+- unbundling of external modules
+- removing of unneeded imports
+- adding of SHA1 and branch names to the version variable
+- updating tools section to be used by git
+- a fix for RH bug #628742: pycolor could crash
+
+Next time, I'll put them in different branches, and not put more than one topic into one branch...
+",tomspur,303559,closed,False,2010-10-05T08:20:04+00:00,2014-06-13T19:01:05+00:00,2010-10-26T22:28:42+00:00,,,dirty,207,113,33,6,0,6,,,
+ipython/ipython,11939,159,Ipy3 preparation,"This is my Python 2 branch to tidy up code for simpler automatic conversion to Python 3. It passes the test suite on my machine, although of course you may want to test it further.
+
+Most of the changes shouldn't affect how the code works. They consist largely of dropping compatibility with older versions of Python. Fernando indicated that we can target Python 2.6 for IPython 0.11. The exception is the import_item function, which I rewrote using __import__. I don't know if there's a case in which that wouldn't work.
+
+Thanks,
+Thomas
+",takluyver,327925,closed,False,2010-10-05T09:44:34+00:00,2014-06-23T12:04:39+00:00,2010-10-10T20:13:56+00:00,,6dd7f6d28d6b8ea94627386025424f44f4b0811c,dirty,0,0,0,0,0,5,,,
+ipython/ipython,13237,163,Execution refactor,"OK, this big puppy is ready for review so we can merge it!
+
+It's a ton of work in some of the ugliest parts of the code, but so far it looks good.  I tested the merge into trunk and all tests pass, and in all usage I haven't found any regressions.
+
+A few highlights:
+- logger does no history management
+- new history object
+- much cleaner run_cell
+
+much more...
+
+I think it's good progress on one of our worst parts.
+",fperez,57394,closed,False,2010-10-08T06:42:43+00:00,2014-06-19T15:14:52+00:00,2010-10-11T05:08:54+00:00,2010-10-10T22:08:54+00:00,,dirty,589,480,17,9,0,13,,,
+ipython/ipython,13579,164,Qt frontend shutdown behavior fixes and enhancements,"Ready for review.
+
+) fixed error when resetting pykernel (it still reset, but printed an error)
+2) fixed issue where closing a frontend, even secondary ones, always shutdown the kernel
+3) shutdown_reply now goes out on the pub socket, so all clients are notified
+   3.a) this means that all clients can (and do) refresh the screen when a reset is called, just like the master frontend
+4) kernel can stay alive after consoles are shutdown, and can be shutdown by any frontend at any point 
+   4.a) this means that a shutdown request from any frontend can close all open frontends and the kernel, even if the kernel is detached, leaving no processes zombified.
+   4.b) 4.a required that a 'reset' element be added to shutdown_request/reply messages to identify the difference between a real shutdown message and stage 1 of a reset.
+",minrk,151929,closed,False,2010-10-08T23:07:34+00:00,2014-06-17T18:08:22+00:00,2010-10-21T01:10:58+00:00,2010-10-10T06:55:24+00:00,,dirty,178,54,9,11,0,17,,,
+ipython/ipython,14058,167,Added HTML export,"This is my first pass at adding HTML export to ipython.  Here's the description that I'm
+sending to ipython-dev:
+
+I tried three approaches (available as three context menu options):
+
+1) Export HTML (external PNGs):
+   This mimics Firefox's ""Save as Web Page, complete"" behavior.
+   Saving ""mypath/test.htm"" gives an HTML file with links to PNGs in
+   ""mypath/test_files/"".  The PNGs are named relative to format.name()
+   to avoid collisions.
+
+   Works in Firefox 3.6.10, Konqueror 4.4.2/KHTML, and Konqueror 4.4.2/WebKit
+
+2) Export HTML (inline PNGs):
+   Saves a single HTML file with images as inline base64 PNGs
+   (c.f. http://en.wikipedia.org/wiki/Data_URI_scheme#HTML)
+
+   Works in Firefox 3.6.10, Konqueror 4.4.2/KHTML, and Konqueror 4.4.2/WebKit
+
+3) Export XHTML (inline SVGs):
+   Saves a single XHTML file with images as inline SVG.  The ""XML"" is generated
+   by overwriting the Qt-generated document header, so it is not guaranteed to
+   be valid XML (but Firefox does validate my test case).
+
+   Works in Firefox 3.6.10 and Konqueror 4.4.2/WebKit.
+   Image placement is incorrect for Konqueror 4.4.2/KHTML.
+
+(all tests run on a Dell Latitude D630 w/ Kubuntu Lucid:
+mvoorhie@virgil:~$ uname -a
+Linux virgil 2.6.32-24-generic #43-Ubuntu SMP Thu Sep 16 14:17:33 UTC 2010 i686 GNU/Linux)
+
+It may be possible to link external SVG images via an <embed> or <object> tag,
+but I couldn't find a clean/portable way to do this.
+
+Current issues:
+- I'm doing lots of string coercion in order to use re.sub on Qt's HTML.  I mostly
+  get away with it, but we wind up with a few bad character encodings in the
+  output (e.g., the tabs for multi-line inputs).  Would be good for someone who
+  knows more about unicode to take a look at this...
+- The file name generation for ""Export HTML (external PNGs)"" is a bit hacky.  Should
+  probably be rewritten to use os.path.
+- Haven't tested with anything other than the Qt front end.  In theory, other front
+  ends will export HTML with the images stripped, unless they implement their own
+  version of imagetag().
+
+Feel free to take/hack what you like and ditch the rest.
+
+Happy hacking,
+
+--Mark
+",markvoorhies,433907,closed,False,2010-10-11T03:30:16+00:00,2014-06-16T15:52:47+00:00,2010-10-14T07:01:54+00:00,,f48f1ea0473c161460be5191836216cf445fd4f9,dirty,208,1,2,5,0,5,,,
+ipython/ipython,15778,170,HTML Fixes,"Some small issues in the HTML code I noticed when I started playing with it.
+- only rich backends support toHtml, so the html/xhtml exports failed
+- modules were imported inside functions
+- relpath in image_tag was determined in platform-dependent way
+- save dialog strictly enforced non-standard '.htm' file extension
+- when selecting external PNG, the _files dir was always created, regardless of whether there were any images
+
+Fixes in this commit:
+- export options do not appear in non-rich widgets
+- module imports all at the top
+- relpath uses platform independent os.path
+- dialog uses standard '.html' by default, but allows any extension
+- no _files dir is created if no images are to be exported
+
+-MinRK
+",minrk,151929,closed,False,2010-10-15T00:18:58+00:00,2014-06-19T10:25:43+00:00,2010-10-22T14:48:02+00:00,,a13e00783122dfe71301c6c39ea06be7756ba8e3,dirty,172,87,2,6,0,8,,,
+ipython/ipython,15786,171,Expose Pygments styles as options,"IPythonWidget already supported using various pygments styles.  I just added some flags to ipythonqt, and tweaked the default style code, so that they can be set at launch:
+
+ipythonqt --dark will run IPython with the default dark theme
+ipythonqt --style <name> will run IPython using the specific style. Anything pygments accepts will work.
+e.g.
+    ipythonqt --style fruity
+
+The style code also guesses whether a theme is dark or light, and chooses the right stylesheet. This can be overridden if --dark is manually specified.
+
+If you want to use your own css stylesheet, you can pass that with --stylesheet.
+
+No logic was added to the widgets themselves, just the ipythonqt script and a styles file that sets up the defaults.
+",minrk,151929,closed,False,2010-10-15T00:33:47+00:00,2014-06-14T12:53:50+00:00,2010-10-23T00:48:20+00:00,,f2dd76bc295bd8ddd1c3374413f577ffd57b7592,dirty,207,34,4,3,0,4,,,
+ipython/ipython,16393,172,Fix del method exit test,"This fixes a recent test that __del__ methods, called on exit, are able to access built-in functions such as str(), so that the test will fail if that code is broken. It then reapplies Fernando's fix for the bug, which was removed by another commit in the meantime.
+",takluyver,327925,closed,False,2010-10-16T18:14:28+00:00,2014-06-12T12:49:58+00:00,2010-10-22T08:04:22+00:00,,c87d7f418d6d6d907e5564a2335ef87f54e06dc8,dirty,19,3,2,2,0,1,,,
+ipython/ipython,16990,174,Whitespace cleanup,"some files crept in with windows line endings. We should encourage people to add the following to their .gitconfig files:
+
+```
+[apply]
+    whitespace = fix
+[core]
+    autocrlf = input
+```
+",ddale,169586,closed,False,2010-10-18T18:45:16+00:00,2014-06-15T13:57:52+00:00,2010-10-30T22:57:33+00:00,2010-10-30T22:57:33+00:00,,dirty,65369,65368,10,2,0,12,,,
+ipython/ipython,18624,179,Html notebook,"Hi everyone,
+I've coded up a preliminary Javascript-based frontend for the new zmq kernel. Fernando helped me get my git set up for this, so a big kudos to him!
+
+I'm new at python setup scripts, but if I did this correctly, you can run this branch with ipython-http. If this did not work, you can try running ipythonhttp.py inside IPython/frontend/html/. As a note, you cannot run the file from the same directory, due to how it extracts the current directory name. Go to IPython/frontend, then run python html/ipythonhttp.py --pylab inline.
+
+As an overview of the architecture: 
+The HTTP server is just a default BaseHTTPServer, where the BaseHTTPHandler directly hooks into a module-level CometManager object. This object keeps track of any messages the kernel emits, and multiplexes the messages over HTTP to any all clients. The design of IPython.frontend.html.kernelmanager is nearly a direct copy from the qt version. ipythonhttp.py is also a direct copy from the qt.console.ipythonqt. In other words, it is possible to connect the http server to an existing kernel using the exact same commands as in ipython-qtconsole
+
+On the client side, Jquery was used to build most of the javascript objects. Unfortunately, the javascript is poorly tested, and may be fragile. Most of the XREQ and PUB features are supported. Messages on the PUB socket will be displayed by all web clients. This is accomplished with the ""Comet"" design pattern, where the client opens and maintains a long-living connection to the server in the form of a GET request. The server waits on the kernel for a message, which it immediately sends along. Anything on the PUB socket is transmitted via GET requests, and anything over XREQ is over POST requests. Multi-line inputs are supported with ctrl-enter, with shift-enter to submit. Inline SVGs are supported for pylab inline, and a notebook-like interface for interaction. Tab completion will open a selection window for candidates.
+
+Some known issues:
+Major security vulnerability: direct shell access on the internet. Make sure your firewall is secure!
+There are no tests for the javascript code
+If multiple web clients are connected, message numbers might be messed up
+Sometimes, the entry message may disappear without adding another
+Some responding ""output"" messages may get swallowed by the javascript manager (let me know if you can find a reproducible case)
+
+Please give me some feedback on this code!
+",jamesgao,22802,closed,False,2010-10-22T00:24:30+00:00,2014-06-14T09:25:07+00:00,2011-03-31T20:56:17+00:00,,,dirty,1397,1,18,36,0,23,,,
+ipython/ipython,18742,180,Cleanup old code,"Modernise a few bits of code, and remove a few imports.
+
+new.instancemethod --> types.MethodType
+string module --> string methods
+",takluyver,327925,closed,False,2010-10-22T09:53:00+00:00,2014-06-22T20:18:31+00:00,2010-10-23T00:54:53+00:00,2010-10-22T17:54:53+00:00,,dirty,14,24,5,4,0,2,,,
+ipython/ipython,19607,183,cleanup of exit/quit commands for qt console,"This implements Fernando's suggestion from the list of removing the exit/quit Quitter objects that were previously used in ipython (and moving the quitter to deathrow, as it's used nowhere else), in favor of only an updated %exit magic (still also aliased to quit, Exit, and Quit).  
+
+The re-worked exit magic tor the qtconsole also now bypasses the prompt about closing the kernel, and supports a ""-k"" option that leaves the kernel running but closes the qt window.  This also required making some changes for the pure python version of qtconsole, but exit() wasn't working at all previously - it was catching the SystemExit exception the builtin python quit/exit uses.
+
+I also tried merging this branch into another branch tracking the upstream trunk, and got a conflict due to some changes with the qtconsole exit prompt, although it's straightforward to merge.  I'm not clear on the correct procedure for the pull request, though - I gather from the mailing list that I'm not supposed to merge in the upstream trunk here, but my git-fu is not very strong, so I'm not sure how I am supposed to include this merged fix... Or do I leave that to whomever accepts the pull request?
+",eteq,346587,closed,False,2010-10-25T01:22:08+00:00,2014-06-15T17:14:38+00:00,2010-10-26T19:34:09+00:00,2010-10-26T19:34:09+00:00,,dirty,101,51,6,6,0,8,,,
+ipython/ipython,19613,184,Logo added to sphinx docs,"This pull request fixes issue ipython#144 - the logo.png was missing from the _static directory, and hence the sphinx documentation had the ugly no-image symbol in place of the correct documentation.  Now it correctly builds with the logo. I got this particular file from http://ipython.scipy.org/ipython-icons/IPy-transparent-120.png, although of course that can be easily changed.
+",eteq,346587,closed,False,2010-10-25T01:47:22+00:00,2014-06-26T09:48:08+00:00,2010-10-26T07:22:44+00:00,2010-10-26T07:22:44+00:00,,dirty,0,0,1,1,0,0,,,
+ipython/ipython,20479,187,Resolved Print shortcut collision with ctrl-P emacs binding,"Specifically check for a collision, in case of platform-specific Print command that doesn't collide with ctrl-P (e.g. OSX).
+",minrk,151929,closed,False,2010-10-26T21:28:03+00:00,2014-06-26T01:02:25+00:00,2010-10-26T21:37:46+00:00,2010-10-26T21:37:46+00:00,,dirty,6,1,1,1,0,0,,,
+ipython/ipython,20637,188,Version info: update our version management system to use git.,"Implement a number of improvements to version management and reporting, removed all bzr references.
+
+Now, we use a plain 0.11.dev version for all development code, but a new IPython.sys_info() provides detailed information including git SHA data.  This way we don't mess with ugly version strings all the time but there's an easy way to get it when needed (bug reports, etc).
+
+The sha is also used to tag (via git describe) auto-generated archives (git archive ones), so we'll know when anyone is running form a github download (as opposed to an official tarball).
+
+Along the way I also updated the copyright notices for the key entry points (setup/copying/**init**), since I was already there, and made a few other minor fixes related to the git machienry (.gitignore).
+",fperez,57394,closed,False,2010-10-27T07:23:51+00:00,2014-06-17T14:02:46+00:00,2010-10-30T03:32:24+00:00,2010-10-30T03:32:24+00:00,,dirty,357,240,20,9,0,2,,,
+ipython/ipython,21681,191,Unbundle external libraries,"This pull request contains an update to a new argparse and the unbundling of the libraries and nothing else anymore ( as requested )...
+
+I read something on the mailing list about ""git commit --amend"" and to add the # of this pull request, so github will automatically close this.
+
+Are there some notes how exactly that should look like? Or what exactly should I add there with --amend?
+",tomspur,303559,closed,False,2010-10-29T07:32:39+00:00,2014-06-12T15:17:27+00:00,2011-03-24T02:18:34+00:00,2011-03-24T02:18:34+00:00,,dirty,135,79,28,6,8,12,,,
+ipython/ipython,21684,192,Ready colorize bug,"When calling pycolor on a non-existent file, ipython crashes.
+This commit tells the user, that the file doesn't exist and exists properly.
+
+Reproducer, e.g. pycolor ""HI"" from the RH bug:
+https://bugzilla.redhat.com/show_bug.cgi?id=628742
+",tomspur,303559,closed,False,2010-10-29T07:39:37+00:00,2014-06-14T14:16:10+00:00,2010-11-03T06:58:47+00:00,,,dirty,5,1,1,1,0,5,,,
+ipython/ipython,21685,193,Make ipython cProfile-able,"To get a cProfile of ipython inside of the git repo you could run:
+""python -m cProfile ipython.py""
+
+Currently **file** is wrongly detected and it crashes, after this commit, you get a proper cProfile.
+",tomspur,303559,closed,False,2010-10-29T07:43:36+00:00,2014-06-15T20:42:49+00:00,2011-02-16T05:23:43+00:00,,6f44cff14f564e16c31d06539a581f007d7fabb0,dirty,1,1,1,1,0,5,,,
+ipython/ipython,22050,195,Formatters,"Here is the start of the formatter implementation. It defines a FormatterABC and implements a DefaultFormatter that uses pretty. The DefaultFormatter can be configured in ipython_config.py. I have extended the messaging spec to include a list of extra formats in the pyout message.
+
+Incidentally, I ported the _x_default() feature from Traits to traitlets. It's just too useful to not have. I also fixed a bug concerning the merging of the MetaHasTraits and MetaQObject metaclasses.
+",rkern,46135,closed,False,2010-10-29T23:25:04+00:00,2014-06-23T02:50:51+00:00,2010-11-03T11:46:02+00:00,2010-11-03T04:46:02+00:00,,dirty,364,315,12,14,0,6,,,
+ipython/ipython,23277,198,Windows workdir,"The IPython windows installer creates links in the start menu, but the working directory is not specified and defaults to something like C:\Windows . This small patch sets the default working directory to the current user's home directory.
+",ddale,169586,closed,False,2010-11-02T16:19:49+00:00,2014-06-26T08:18:45+00:00,2010-11-03T06:48:06+00:00,2010-11-03T06:48:06+00:00,,dirty,10,8,3,2,0,3,,,
+ipython/ipython,23556,199,Magic arguments,"Here are the magic arguments decorators. I haven't modified any of the existing magics.
+",rkern,46135,closed,False,2010-11-03T02:46:17+00:00,2014-06-17T20:47:43+00:00,2011-03-24T02:09:34+00:00,2011-03-24T02:09:34+00:00,,dirty,344,2,4,3,2,7,,,
+ipython/ipython,32095,203,Small typos in zmq/blockingkernelmanager.py,"I seem to have found a minor error.  There are two references to ""self.in_queue"" instead of the actual variable,  ""self._in_queue"".
+
+Thanks for the great work that you all do.
+",dwyde,303063,closed,False,2010-11-22T05:14:28+00:00,2014-06-15T21:18:22+00:00,2011-02-14T21:49:15+00:00,,f8a1d5cf7b4e06a66ef1b213478650a343d3e304,dirty,2,2,1,1,0,2,,,
+ipython/ipython,32132,204,Emacs completion bugfix,"Tab completion in ipython.el seems to have stopped working because it calls completer.IPCompleter.all_completions(), which is broken. IPCompleter.complete() now returns a list of all possible completions so it can be used instead of all_completions().
+",wilsaj,303866,closed,False,2010-11-22T08:25:35+00:00,2014-06-14T22:18:26+00:00,2011-03-24T01:38:16+00:00,,,dirty,5,16,1,3,0,5,,,bug
+ipython/ipython,43711,215,History fix,"while stripping trailing '\n' we didn't realize that this was helpful in the magic 'history'. this is now fixed.
+",satra,184063,closed,False,2010-12-17T05:07:55+00:00,2014-06-13T17:49:01+00:00,2010-12-17T07:38:04+00:00,2010-12-17T07:38:04+00:00,,dirty,1,1,1,1,0,0,,,
+ipython/ipython,44214,217,Doc magic lsmagic,"Added examples for %lsmagic as part of Scipy India sprint.
+",pasokan,527261,closed,False,2010-12-18T11:16:53+00:00,2014-06-26T19:13:33+00:00,2010-12-18T12:32:24+00:00,,cdb78866bfd78a6ecf11eaabe2910889d3751cf3,dirty,15,1,1,1,0,1,,,
+ipython/ipython,44215,218,Doc magic history,"Added example for %history -n as a part of Scipy Sprint 
+",sgvishnu777,527184,closed,False,2010-12-18T11:16:54+00:00,2014-06-14T21:21:49+00:00,2011-02-14T22:53:05+00:00,,,dirty,12,0,1,1,0,1,,,
+ipython/ipython,44216,219,Doc magic pycat,"Added some examples in %pycat and edit the documentation.
+i am a part of sprint in scipy.in 2010 India conference
+",ragupathyit,527194,closed,False,2010-12-18T11:17:14+00:00,2014-06-15T21:14:16+00:00,2011-02-15T23:59:36+00:00,,,dirty,24,1,1,1,0,2,,,
+ipython/ipython,44217,220,Doc magic edit,"Added examples for %edit as part scipy india sprint
+",srija,527211,closed,False,2010-12-18T11:17:32+00:00,2014-06-22T22:20:14+00:00,2011-02-13T16:44:25+00:00,,,dirty,13,1,1,1,0,1,,,
+ipython/ipython,44218,221,Doc magic alias,"added examples and reported a bug...
+",archana548,527201,closed,False,2010-12-18T11:17:35+00:00,2014-06-15T21:24:44+00:00,2011-02-15T23:59:15+00:00,,,dirty,41,7,1,1,3,1,,,
+ipython/ipython,44219,222,Doc magic timeit,"Added examples for %timeit as part of scipy India report
+",varshinireddy,527213,closed,False,2010-12-18T11:17:36+00:00,2014-06-15T20:27:25+00:00,2011-02-14T22:20:35+00:00,,,dirty,14,3,1,1,1,1,,,
+ipython/ipython,44220,223,Doc magic colors,"Added examples to ""%colors"" command as part of SciPy.in 2010 India sprint.
+",vsowjanya,527186,closed,False,2010-12-18T11:17:48+00:00,2014-06-26T01:02:57+00:00,2011-02-14T21:52:42+00:00,,,dirty,19,2,1,1,0,1,,,
+ipython/ipython,44221,224,Doc magic cpaste,"Added examples for %cpaste and %paste as part of Scipy India sprint
+",sathya5562,527195,closed,False,2010-12-18T11:17:49+00:00,2014-06-15T20:29:26+00:00,2011-02-15T19:35:44+00:00,,,dirty,21,39,1,1,0,2,,,
+ipython/ipython,44222,225,Doc magic save,"Added examples  for  %save part of scipy india sprint 
+",vjyothi,527222,closed,False,2010-12-18T11:17:59+00:00,2014-06-15T21:25:31+00:00,2011-02-14T22:29:17+00:00,,,dirty,32,2,1,1,0,1,,,
+ipython/ipython,44223,226,Doc magic pwd,"Added examples for %pwd as part of Scipy India 
+",08saikiranreddy,527220,closed,False,2010-12-18T11:18:03+00:00,2014-06-15T18:24:07+00:00,2011-02-14T22:53:34+00:00,,,dirty,27,4,1,1,2,1,,,
+ipython/ipython,44224,227,Doc magic logon,"Added examples for %logon as part of Scipy india sprint
+",vssvss,527203,closed,False,2010-12-18T11:18:11+00:00,2014-06-15T21:24:55+00:00,2011-02-14T16:20:46+00:00,,,dirty,47,2,1,1,0,1,,,
+ipython/ipython,44226,228,Doc magic who,"Added examples for magic commands who, who_ls, whos as part of sprint organized by Fernando Perez at SciPy.in 2010 Hyderabad on 18 Dec 2010.
+",ghost,10137,closed,False,2010-12-18T11:21:03+00:00,2014-06-15T21:16:04+00:00,2011-02-15T01:26:01+00:00,,fb3247668c3468e6c241a30c96c67c52868b884e,dirty,57,3,1,1,0,3,,,
+ipython/ipython,44227,229,Doc magic pdef,"Added examples to ""%pdef"" as part of SciPy.in 2010 lndia sprint 
+",vsowjanya,527186,closed,False,2010-12-18T11:24:09+00:00,2014-06-15T21:28:11+00:00,2011-02-15T19:14:53+00:00,,,dirty,32,3,1,2,3,1,,,
+ipython/ipython,44229,230,Doc magic edit,"Added Examples for %edit as part of scipy india sprint
+",srija,527211,closed,False,2010-12-18T11:29:08+00:00,2014-06-12T08:50:30+00:00,2011-02-15T23:58:31+00:00,,,dirty,13,1,1,1,0,2,,,
+ipython/ipython,44230,231,Doc magic reset,"given examples for logstart,shortcut to quit,reset example
+",sowmyabs,527207,closed,False,2010-12-18T11:30:08+00:00,2014-06-15T21:25:52+00:00,2011-02-14T22:37:46+00:00,,,dirty,22,2,1,1,1,1,,,
+ipython/ipython,44231,232,Doc magic profile,"worked on %profile with an example
+",Adish,527242,closed,False,2010-12-18T11:31:56+00:00,2014-06-15T21:08:05+00:00,2011-02-14T16:09:48+00:00,,,dirty,107,79,1,1,0,3,,,
+ipython/ipython,44232,233,Doc magic cd,"worked on %cdmagic with examples
+",Anuradha123,528362,closed,False,2010-12-18T11:36:07+00:00,2014-06-13T01:28:59+00:00,2011-02-14T22:54:06+00:00,,,dirty,100,66,1,1,0,1,,,
+ipython/ipython,44501,234,Timed history save,"Implemented autosave by spawning a thread which saves periodically. Thread spawned when core/InteractiveShell is initialized and is closed when ctrl+D is pressed. If the user presses 'n' when asked to exit the thread is spawned again.
+",mchandra,527239,closed,False,2010-12-19T14:52:32+00:00,2014-06-20T11:10:40+00:00,2010-12-26T09:01:47+00:00,,,dirty,30,1,3,4,0,9,,,
+ipython/ipython,46983,235,Fix history magic command's bugs wrt to full history and add -O option to display full history,"Hi Fernando, These are my patches for the history magic command's bugs we came across during SciPy.in 2010. I have also added -O option. I have tried my best to make sure that the input_hist_raw/_parsed variables are changed in all the relevant places where they must be changed. But more eyes, the merrier! Just drawing your attention towards it. As you had suggested, I will be adding tests to the changes I have made in the next few days. Sending this pull request before that, so that the patches get reviewed as I spend time writing tests.
+
+Also, would like to add credits to two guys who helped me show one of the bugs with -o option. Their names are '""Vinay Srinivas"" srinivasvinay.246@gmail.com' and '""Vishnu SG"" sgvishnu777@gmail.com'. I forgot to add their names in the commit. Is it possible to add them elsewhere?
+",madhusudancs,10183,closed,False,2010-12-25T21:08:25+00:00,2014-06-26T09:01:10+00:00,2011-03-24T18:33:51+00:00,,,dirty,68,28,3,3,0,4,,,
+ipython/ipython,47803,236,History minus p flag,"This is a very small change . I noticed that %history -p flag adds a newlines to all outputs. Example
+In[]: 2*3 
+6
+In[]: %history -p
+
+> > > 2_3
+> > >  Now however with this patch it will be
+> > > 2_3 
+> > > which is better formatted
+",dusual,433436,closed,False,2010-12-28T19:46:38+00:00,2014-06-14T17:17:53+00:00,2011-03-24T18:32:40+00:00,,,dirty,2,3,1,1,0,3,,,bug
+ipython/ipython,47989,237,Fix185 (take two),"The original issue was created by a portion of commit 3e84e9f446b752aef4c798b3a086084b5cdcb679 which I'll refer to as ""problematic commit"".
+
+My fix185 branch originally undid a portion of the problematic commit, and the outstanding issue relates to other portions of that same commit.
+
+What isn't clear to me is the purpose of the function check_gtk inside Shell.py, which was added in the problematic commit. For some reason, it unconditionally returns mode 'tkthread' if gtk was safely imported and hasattr 'set_interactive', regardless of what mode was passed to it. This ""functionality"" is not used with the -pylab flag, which is why original one line change did not fix the issue for ""ipython -gthread""
+
+I added another commit to the fix185 branch which removes check_gtk() altogether, and see no issues using ipython -gthread, ipython -gthread -pylab, or ipython -pylab. Additionally, the check_gtk() imported gtk regardless of what mode the user selected, and might also be what's been causing the ""Why is IPython using X11"" threads on the mailing list.
+
+also, I just want to note here that users will see this issue if they use e.g ""ipython -gthread"" but their matplotlib is set to some other backend by default (say ""WX"").
+",ivanov,118211,closed,False,2010-12-29T02:44:27+00:00,2014-06-15T21:11:12+00:00,2011-02-24T05:59:14+00:00,2011-02-23T21:59:14+00:00,,unknown,0,21,1,1,0,3,,,
+ipython/ipython,49400,239,Makefile command & script for GitHub Pages,"GitHub has support for a special `gh-pages` website repo.  You can use it to host Sphinx docs, and a sphinxtogithub extension is included to resolve small naming conflicts between sphinx and GitHub's use of jekyll.
+
+I wrote a script for pushing sphinx docs to GitHub, and added a `gh-pages` command to the Makefile, so simply running:
+
+```
+make gh-pages
+```
+
+will push the sphinx html docs to the gh-pages branch, which is accessible at <user_or_org>.github.com/<repo>.  For example: http://minrk.github.com/ipython has the output of running that in my fork.
+
+I know that with the current hosting, the official docs are frequently offline or at least super slow, so maybe this will help.
+",minrk,151929,closed,False,2011-01-03T00:11:11+00:00,2014-06-22T02:23:34+00:00,2011-01-23T00:03:52+00:00,2011-01-23T00:03:52+00:00,,dirty,419,2,5,2,0,1,,,
+ipython/ipython,52582,242,Fix terminal exit,"This fixes the failure to exit in IPython terminal interpreter.
+
+The problem was the history autosave thread: if a y/n confirmation of exiting was used (i.e. following Ctrl-D), the commands to stop the thread were called, but if ""exit"" was used, which doesn't require confirmation, they weren't.
+
+I've overcome this simply by setting the thread to daemon mode, which means that Python doesn't attempt to wait for it after the main thread has exited. At present, I've removed the code that stops the autosave thread on shutdown, as it seems superfluous.
+
+I've also refactored the sequence of commands used to stop it into a `.stop()` method on the thread object, although it's not currently used anywhere.
+",takluyver,327925,closed,False,2011-01-09T21:00:15+00:00,2014-06-17T12:26:39+00:00,2011-01-23T02:33:07+00:00,2011-01-23T02:33:07+00:00,,dirty,45,23,3,5,0,19,,,
+ipython/ipython,52612,243,New display system,"Hi,
+
+This series of commits is a refactor and enhancement of the display system in IPython. This takes the idea of ""display"" present in sys.displayhook and generalizes it to handle different MIME types.  The new display system has two parts:
+- DisplayFormatter, which is responsible for taking a python object and producing a dict that contains the display data.  This dict consists of key/value pairs, where the keys are MIME types and the values are the data for that MIME type.  The DisplayFormatter uses a set of Formatter classes.  Currently, we have formatters for text, html, svg, png, json, latex.  The qtconsole only handles svg, png, html and plain text.  Each of the formatters has a a special print method it looks for (**pretty**, **html**, etc.) as well as the pretty style API of printers.
+- DisplayPublisher, which takes the dict produced by the DisplayFormatter and publishes it to all frontends.  This is done using the PUB channel and a new message type ""display_data"".
+
+There are two situations that trigger the display machinery to be triggered:
+1. First, the IPython displayhook now calls these classes to do its main work.
+2. There are now top-level functions in IPython.core.display that users can use to trigger the display of objects (display, display_html, etc.)
+
+I have added display functions for matplotlib.figure.Figure which enables the displayhook and the display function to produce nice SVG output when fed a figure instance.  In addition, the sympy profile can not pretty print and latex->png sympy expressions.
+
+I will also post some nice qtconsole outputs that show examples of all of this.
+",ellisonbg,27600,closed,False,2011-01-09T22:14:54+00:00,2014-06-27T14:22:52+00:00,2011-01-24T13:31:28+00:00,2011-01-24T05:31:28+00:00,,dirty,1313,379,27,14,0,8,,,
+ipython/ipython,52794,244,My exit,"```
+Make exit work in terminal based IPython
+
+This bug was introduced in commit:
+46b78b3f4c5baf5704296c875e0e7f3d33d0c08e
+
+Also see:
+http://mail.scipy.org/pipermail/ipython-dev/2011-January/007051.html
+```
+",tomspur,303559,closed,False,2011-01-10T11:59:03+00:00,2014-06-13T03:43:29+00:00,2011-01-10T23:53:06+00:00,,,dirty,0,3,2,1,0,3,,,
+ipython/ipython,58670,249,Writing unicode characters to a log file. (IPython 0.10.2.git),"Example:
+
+When trying to log a statements like this during logging:
+
+<pre>
+In [2]: logstart -o logtest.py over
+In [3]: t = 'žćčšđ'
+...
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 5-9: ordinal not in range(128)
+</pre>
+
+
+The supplied patch fixes the problem. At least temporary.
+
+Also, changed the log header to contain the encoding definition for the source file. 
+Useful for rerunning the log file outside IPython.
+",TvrtkoM,551965,closed,False,2011-01-21T03:12:35+00:00,2014-06-15T21:27:53+00:00,2011-03-13T05:17:52+00:00,2011-03-13T05:17:52+00:00,,unknown,4,3,3,2,0,2,,,
+ipython/ipython,59286,250,always use Session.send,"This commit removes all explicit calls to socket.send/socket.recv, and replaces them with session.send/recv.  This allows for later expansion of the send/recv protocols, and eases eventual migration to StreamSession object developed in newparallel.
+
+Some adjustments were made to the Session to accomodate this:
+- Session.send can take a Message or dict to allow for multiple sending of the same message
+- Session.send returns a dict instead of wrapping it in a Message
+- Session.recv always returns a tuple of length two: (ident,msg), where ident is None if there was no identity prefix, and msg is None if EAGAIN was raised (indicating no message).
+
+Everything else should function the same.
+",minrk,151929,closed,False,2011-01-22T04:37:03+00:00,2014-06-17T12:29:36+00:00,2011-01-23T00:31:46+00:00,2011-01-23T00:31:46+00:00,,dirty,123,82,9,2,0,2,,,
+ipython/ipython,59681,251,Issue 129,"(https://github.com/ipython/ipython/issues/issue/129/)
+
+When a %psearch or equivalent search attempts to find the attributes of a dictionary, it instead looked at the items in the dictionary. This leads to unexpected results, and error messages if the dictionary has non-string keys. The simplest test case:
+
+```
+a = {1:""a""}
+%psearch a.*
+```
+
+This branch adds a unit test for this situation (which originally fails), then fixes it. I then also simplified the `IPython.utils.wildcard` module somewhat.
+",takluyver,327925,closed,False,2011-01-23T12:34:28+00:00,2014-06-15T21:25:23+00:00,2011-02-23T22:07:30+00:00,,a76866ea9dba294251afc840f25afadb57d26f96,dirty,105,109,2,6,0,6,,,
+ipython/ipython,61582,252,Unicode issues,"This branch fixes two particularly nasty unicode bugs:
+1. Entering code with non-ascii characters will fail immediately with a `UnicodeEncodeError`. This was due to code in compilerop attempting to do MD5 hashing without first encoding.
+2. Starting IPython when there are non-ascii characters in the .ipython/history.json file will fail. This was due to `readline.add_history`, which expects text to be encoded.
+
+I've started creating a test suite for unicode related issues. Unfortunately, this has to be run separately from the main test suite, as something in the test suite's initialisation causes it to change the default encoding from ascii to utf-8, in which situation neither of the problems above occur. This is, for now, in tools/unicode_tests.py.
+",takluyver,327925,closed,False,2011-01-26T19:05:56+00:00,2014-06-25T19:50:48+00:00,2011-03-24T23:56:23+00:00,2011-03-24T23:56:23+00:00,,dirty,121,41,12,15,9,13,,,important;bug
+ipython/ipython,63047,254,newparallel branch (add zmq.parallel submodule),"This shouldn't be merged for a while.  This is mainly to provide a venue for the review conversation.
+
+For the client API: zmq.parallel.client,view,remotefunction,asyncresult,dependency
+
+For the controller: zmq.parallel.controller,scheduler,heartmonitor
+
+For the engine: zmq.parallel.streamkernel,engine
+
+General: zmq.forward, zmq.tunnel, zmq.parallel.streamsession
+",minrk,151929,closed,False,2011-01-28T21:25:00+00:00,2014-06-17T17:16:25+00:00,2011-04-08T01:11:30+00:00,2011-04-08T01:11:30+00:00,,dirty,23864,68256,159,137,0,12,,,
+ipython/ipython,64247,255,Gitwash typo,"Fixed an annoying typo in the gitwash document.
+",rkern,46135,closed,False,2011-01-31T18:21:35+00:00,2014-06-17T20:09:03+00:00,2011-02-09T11:16:24+00:00,2011-02-09T03:16:24+00:00,,dirty,1,1,1,1,0,1,,,
+ipython/ipython,66448,259,Pyside support,"Adds a Qt bindings switcher to allow PyQt and PySide support. Because PySide only supports the new-style PyQt string API, a number of changes had to be made. Going forward, however, it should be easy to maintain support for both sets of bindings: just remember that implicit QString -> unicode, QByteArray -> str conversion is being performed. Incidentally, this should ease the Python 3 conversion, since PyQt in Python 3 only supports the new-style string API. 
+
+Note that even the most recent PySide beta 5 release will segfault sporadically. This is fixed in the PySide master branch and IPython will work with the upcoming RC 1 release.
+",epatters,316610,closed,False,2011-02-03T19:34:36+00:00,2014-06-15T21:24:50+00:00,2011-02-16T16:23:27+00:00,2011-02-16T16:23:27+00:00,,dirty,150,115,15,6,0,12,,,
+ipython/ipython,67588,260,Kernel crash with empty history,"Running iptest leaves a completely empty history, without the blank first item used to create an offset. Running ipython-qtconsole then causes the kernel to crash as it receives a history request from the console.
+
+In time, I'd like to do some more general work on the history code, but for now, this fixes the immediate issue so that the kernel doesn't fall over when loading an empty history.
+",takluyver,327925,closed,False,2011-02-05T18:19:28+00:00,2014-06-22T23:24:32+00:00,2011-02-05T23:29:56+00:00,,,dirty,5,2,1,1,0,1,,,
+ipython/ipython,67703,261,Adapt magic commands to new history system.,"This grew from issue ipython/ipython#245. Various magic commands weren't working properly with the new history system: %edit, %macro, and %hist.
+
+Among various minor troubles, selecting a range of lines (`%macro test 2-5`) numbered from the beginning of the history, so didn't match up with the current line numbers. I've approached this by adding a session_offset attribute to the history manager. This has the added benefit that we no longer need to store a blank history entry so we can count lines from 1.
+
+Along the way, I simplified and modernised parts of the code, including using `basestring` over `StringTypes` and `.isdigit()` over an equivalent regex.
+",takluyver,327925,closed,False,2011-02-05T23:25:20+00:00,2014-06-15T13:54:41+00:00,2011-03-24T18:31:59+00:00,,,dirty,151,127,11,9,4,13,,,
+ipython/ipython,69114,264,Kernel logging,"Implented logging in kernel to remove noise. It is needed to write the frontend in terminal without extra outputs.  
+",omazapa,275148,closed,False,2011-02-08T16:23:50+00:00,2014-06-15T21:17:14+00:00,2011-02-14T14:26:49+00:00,2011-02-14T06:26:49+00:00,,dirty,29,21,3,3,0,6,,,
+ipython/ipython,69338,265,Fix string input2,"Completes the fix started by Robert Kern for the execution of naked strings.  This fixes the case where the input is a multiline string.
+
+The actual fix was a trivial one-liner, but I took the opportunity to clean up some aspects of our test system to simplify them and remove some odd special casing that made testing harder.  This let me add some proper tests for this bug so it doesn't resurface, and there was a bit of cleanup in the process.
+",fperez,57394,closed,False,2011-02-08T20:48:26+00:00,2014-06-15T21:28:47+00:00,2011-02-09T10:11:09+00:00,2011-02-09T02:11:09+00:00,,dirty,91,148,8,5,0,3,,,
+ipython/ipython,70817,266,OSX-specific fixes to the Qt console,"Fixed a couple bugs reported by Darren Dale and MinRK on the mailing list.
+",epatters,316610,closed,False,2011-02-10T17:51:54+00:00,2014-06-15T18:23:41+00:00,2011-02-10T20:11:09+00:00,2011-02-10T20:11:09+00:00,,dirty,22,11,2,3,0,4,,,
+ipython/ipython,70946,267,GitHub Pages (again),"Per Fernando's concerns about growing the repo, and my failure to notice the '.nojekyll' file making `sphinxtoghpages` obsolete, I have adapted Fernando's datarray-doc approach to IPython, and scrubbed my previous script.
+
+Obviously a new ipython-doc repo needs to be made, but I don't have permissions to create a new repo in the IPython organization.  The first two commits of https://github.com/minrk/ipython-doc should initialize it (or three, to keep the first build of the docs themselves).
+
+This is the output: http://minrk.github.com/ipython-doc
+
+(I also put slightly harder edges on the logo I made a while ago, because it always felt slightly off to me)
+",minrk,151929,closed,False,2011-02-10T20:52:58+00:00,2014-06-14T21:18:53+00:00,2011-02-12T03:36:12+00:00,,,dirty,165,417,8,3,0,11,,,
+ipython/ipython,71931,268,PyZMQ >= 2.0.10,"Cleaner error if pyzmq is missing or pre-2.0.10.
+
+On import of IPython.zmq, an ImportError with a meaningful message will be raised if pyzmq is found to be older than the current dependency of 2.0.10.
+
+This could be changed to 2.0.10.1, which fixes a memory leak in 2.0.10 - thoughts?
+",minrk,151929,closed,False,2011-02-12T07:19:57+00:00,2014-06-22T23:05:02+00:00,2011-02-13T02:07:45+00:00,,3efa1815fbe5c397487c33005a26b0409737c1d5,dirty,25,0,1,2,0,5,,,
+ipython/ipython,73349,272,Magic examples,"This combines and cleans up some of the documentation pull requests from Scipy India. So far, #218, #226 and #223 are included (%history, %pwd and %cd, respectively).
+",takluyver,327925,closed,False,2011-02-14T22:52:20+00:00,2014-06-22T23:09:44+00:00,2011-02-16T04:46:21+00:00,2011-02-15T20:46:21+00:00,,dirty,62,6,3,8,0,10,,,
+ipython/ipython,73374,273,Docs build,"Based on my experience of building the docs, here's a brief description in the docs of how to do it (I've checked that it builds OK as html). I've also added a fallback to the gh-pages.py script, so it doesn't crash in the absence of a named tag.
+
+I think the main thing to check is: is the description of the process I've given in the docs sufficient? Is there anyone who's not previously built the docs who's willing to try following these instructions, to see if it's clear enough?
+",takluyver,327925,closed,False,2011-02-14T23:18:35+00:00,2014-06-19T00:00:20+00:00,2011-02-15T07:44:43+00:00,2011-02-14T23:44:43+00:00,,dirty,26,1,2,4,0,13,,,
+ipython/ipython,76994,275,inline pylab cuts off labels on log plots,"When using the inline pylab backend, the default figure size is set to 6x4.  This is too small if the fonts are left as 12pt, and x-labels get cut off if you use a log-scale.  This commit tweaks the default font size and bottom padding, so that labels fit.
+
+Adjustments: 
+- fontsize 12pt => 10pt
+- subplot.bottom .1 => .125
+
+Even though it's a tiny commit, I make this as a pull request rather than doing it directly on master because I imagine there may be some objection to overriding 3 matplotlib defaults instead of just one, and some may consider the font too small (If anything, I would like it still smaller). 
+
+There are also a thousand different ways to make this work, but I don't want to get into a debate of ideal styling, I just wanted to fix a basic error.
+
+Regular scaling of matplotlib 8x6, 12pt defaults by 75% would have:
+- figsize: 6x4.5
+- fontsize: 9pt
+
+So our figures have a wider aspect ratio being 6x4, and now even slightly wider since I increased the bottom padding a bit.
+
+Here's an after/before image of the two styles:
+<a href=""http://tinypic.com?ref=4rw389"" target=""_blank""><img src=""http://i51.tinypic.com/4rw389.jpg"" border=""0"" alt=""Image and video hosting by TinyPic""></a>
+",minrk,151929,closed,False,2011-02-19T23:49:09+00:00,2014-06-14T21:08:57+00:00,2011-02-23T02:59:24+00:00,,fff0e9eac625df58ffd43ee7f061d65e03d8efbc,dirty,17,3,1,3,0,8,,,
+ipython/ipython,77515,278,add basic XDG_CONFIG_HOME support,"This commit adds basic support for `XDG_CONFIG_HOME` (default `~/.config`), and tests to verify behavior.
+- For users who already have `~/.ipython`, this will have no effect until they manually create `~/.config/ipython` (or wherever their `$XDG_CONFIG_HOME` points).
+- new users will use `~/.config/ipython` if `~/.config` exists, else `~/.ipython`
+- If both exist, `~/.config/ipython` has priority over `~/.ipython`
+
+I could change it so that, if we want to keep using `~/.ipython` as the default, `XDG_CONFIG_HOME` is only used if it is explicitly specified, rather than defaulting to `~/.config`.
+
+This might close #48 and its duplicate, #246.  The reason it might not is that XDG recommends use of different directories for cache, runtime, and data, which would split the ipython dir.  I'm not sure that regular terminal IPython would have much use for these, but the parallel computing code does have PID files, etc. that could logically fall into other categories.
+",minrk,151929,closed,False,2011-02-21T06:04:54+00:00,2014-06-15T15:18:20+00:00,2011-02-23T03:10:46+00:00,,b34251de484af49649fb1f41ebfe89677b484adc,dirty,183,43,18,2,0,8,,,
+ipython/ipython,78078,280,Add %precision magic,"As requested in #190, this adds a magic `%precision`, which sets floating point precision for use in pretty printing.  Argument can be an integer or a raw format string. If it's an integer and numpy has been imported, numpy printing precision will also be set. If no argument is given, precision will be restored to defaults (repr for float, 8 for numpy).
+
+Examples:
+
+```
+    In [1]: from math import pi
+
+    In [2]: %precision 3
+
+    In [3]: pi
+    Out[3]: 3.142
+
+    In [4]: %precision %i
+
+    In [5]: pi
+    Out[5]: 3
+
+    In [6]: %precision %e
+
+    In [7]: pi**10
+    Out[7]: 9.364805e+04
+
+    In [8]: %precision
+
+    In [9]: pi**10
+    Out[9]: 93648.047476082982
+```
+",minrk,151929,closed,False,2011-02-22T00:43:27+00:00,2014-06-18T04:03:32+00:00,2011-02-23T00:13:38+00:00,,8ae911601e0c9ceba13292d2ae08646e838562df,dirty,169,6,4,4,4,11,,,
+ipython/ipython,81212,281,Refactored and improved Qt console's HTML export facility,"In an effort to reduce the size of ConsoleWidget, which has grown to behemoth proportions, I have moved most of the HTML exportation code into a separate file. Specifically, I have:
+- Made HTML exportation work again (I broke it while adding PySide support)
+- Fixed missing spacing in the HTML output. The exported HTML now looks almost identical to what is in the actual widget.
+- Removed the unnecessary check for the rich widget. QPlainTextEdit in fact supports HTML extraction, although this is not well advertised in the documentation.
+- Done some other minor cleanup
+",epatters,316610,closed,False,2011-02-25T21:59:48+00:00,2014-06-13T16:59:05+00:00,2011-03-12T01:01:34+00:00,2011-03-12T01:01:34+00:00,,dirty,0,0,0,0,2,6,,,
+ipython/ipython,81753,282,SQLite history,"This was discussed previously on the mailing list. The code will probably still need some refining, but I think it's working well enough to put it forward.
+
+There are two major changes involved:
+
+History is now stored on disk as an SQLite database. This replaces both the JSON history and the ""shadow history"" database. By default, the input is stored as each line is entered, but (as Fernando suggested), there is a configurable attribute, db_cache_size, which lets you determine how often (in number of commands) it will write to disk. Very large values will cause all input to be written when IPython quits. A separate configurable attribute, db_log_output, causes the plaintext repr of output to be written to a separate table in the file (Robert's suggestion).
+
+Secondly, whereas history was previously treated as one long stream of commands, it is now stored by ""sessions"", i.e. runs of IPython. So, if you are particularly fond of the fifth command you gave IPython in one session, the next time you start IPython, you can refer to the fifth command of the last session (the syntax for magic commands is `~1/5`). Sessions are consecutively numbered from when they start, so interleaved commands from two shells open at the same time will be kept separate.
+
+This requires somewhat more complicated interfaces. There are now four main interfaces to retrieve history from HistoryManager:
+- `get_history`: Retrieves specified ranges of history, either from the database, or the current session.
+- `get_hist_from_rangestr`: Is a convenience method for magic functions, which accepts the ""~1/3-6  12"" style range specifications.
+- `get_hist_tail`: Gets the last n items from the database, ordered by session and line. Used to populate readline (and the equivalent in the Qt console).
+- `get_hist_search`: Searches the database using glob style matching (i.e. wildcards, not regexen).
+
+All of these return iterators over 3-tuples, `(session, lineno, item)`. If asked for output, `item` will be a 2-tuple of `(input, output)`.
+
+I've also given `%hist` the same range specification parsing as `%save`, `%macro` and `%edit` (it would previously only accept one or two numbers separated by a space). A single numeric argument, such as `%hist 10` previously fetched the last 10 lines; now it gets the 10th line of the current session. So I've added a new option, `-l` (for last), which works with a single numeric argument. This is marginally less convenient if that's what you want, but I think the consistency among magic functions retrieving history is a good thing.
+",takluyver,327925,closed,False,2011-02-26T23:11:56+00:00,2014-06-26T01:02:25+00:00,2011-03-24T16:42:45+00:00,2011-03-24T16:42:45+00:00,,dirty,865,774,15,42,4,28,,,
+ipython/ipython,83505,283,Support for 256-color escape sequences in Qt console,"On a whim, I added support for the 256 color xterm-specific escape sequences. Although I did not fully re-implement XParseColor, I covered the more important cases. 
+
+This means that the output formatting that works in the common GUI terminal emulators is now supported by the Qt console. For example, Nicolas Rougier's ASCII imshow now works:
+
+http://www.loria.fr/~rougier/coding/software/numpy_imshow.py
+",epatters,316610,closed,False,2011-03-01T17:11:39+00:00,2014-06-20T12:25:02+00:00,2011-03-12T01:04:44+00:00,2011-03-12T01:04:44+00:00,,dirty,178,54,2,1,0,2,,,
+ipython/ipython,98141,292,Issue 31,"Issue #31 highlighted a couple of problems with the %whos command. I've fixed the info it gives on lists/dicts/tuples, and  removed Numeric from the comments. For now, I've left the code in that handles Numeric arrays: I don't know if anyone actually still uses it, or if it's even possible to use it - I can't find a version of Numeric to download.
+",takluyver,327925,closed,False,2011-03-21T23:01:43+00:00,2014-06-14T22:21:49+00:00,2011-03-25T00:09:35+00:00,2011-03-25T00:09:35+00:00,,dirty,5,6,1,1,0,3,,,
+ipython/ipython,98199,293,Issue 133,"Simple fix for the formatting bug reported in issue #133. I've tested a range of combinations, and all the output looks correctly formatted.
+",takluyver,327925,closed,False,2011-03-22T00:35:49+00:00,2014-06-14T15:02:20+00:00,2011-03-22T15:54:04+00:00,2011-03-22T15:54:04+00:00,,dirty,2,2,1,1,0,2,,,
+ipython/ipython,99139,294,Issue 290,"This changes when inputsplitter will ask for another line. In line mode, it now needs a blank line to end a block if there has been any dedent. So:
+
+```
+ a = (1,2,
+ 3)
+```
+
+Is still accepted without a blank line, but:
+
+```
+ def f():
+      pass
+```
+
+will need a blank line after it.
+",takluyver,327925,closed,False,2011-03-23T01:42:06+00:00,2014-06-22T20:27:01+00:00,2011-03-25T00:16:59+00:00,,e81a19f5443e3d039cb9b168a8acc3c4c00895ed,dirty,25,10,2,1,0,2,,,
+ipython/ipython,99242,295,Magic local scope,"I'm not sure if this is how we want to do this, or if we want to do it at all, but here it is for consideration.
+
+Sage bug 10933 (http://trac.sagemath.org/sage_trac/ticket/10933) highlighted that we couldn't use the %time magic command inside a function. This captures the stack frame which called magic_time, and uses its local namespace to evaluate or execute the code passed to %time. It could also be used by other magic functions, although so far I've only added it to magic_time.
+",takluyver,327925,closed,False,2011-03-23T05:06:56+00:00,2014-06-18T00:05:59+00:00,2011-03-28T20:59:24+00:00,2011-03-28T20:59:24+00:00,,dirty,23,3,3,3,1,3,,,
+ipython/ipython,101195,309,"Bug tests for GH Issues 238, 284, 306, 307. Skip module machinery if not installed. Known failures reported as 'K'","Three of the four currently fail on trunk, the one that passes is a test that the **In** variable is properly modified with every line (it was fixed by the Thomas' sqlite work). The failing tests have been marked with a skip_known_failure decorator which will provide a well defined ""entry point"" for newcomer developers: ""here's the bug, here's the test for it, remove the skip decorator and try to make the test pass""
+
+I refactored the numpy_not_available function to be module_not_available generator which can be used for checking availability of other modules (sympy, in this case). I'd appreciate feedback on that.
+
+i also added the necessary machinery from numpy.testing to make the KnownFailures reported as 'K' by nose
+",ivanov,118211,closed,False,2011-03-25T10:57:19+00:00,2014-06-28T15:36:38+00:00,2011-04-04T01:52:18+00:00,2011-04-04T01:52:18+00:00,,dirty,127,34,9,11,6,10,,,
+ipython/ipython,101372,310,allow Unicode Command-Line options,"This fixes a couple of unicode-related bugs from the command-line
+
+Of particular note is that (in config/loader.py) `argparse.parse_args` will now always get a list of `unicode` objects, and never `str`s.
+
+There is also a fix in `InteractiveShell._safe_exec_file`, where `execfile` (at least in 2.6.1) does not encode with the filesystemencoding, but rather the defaultencoding, so a unicode string will raise a UnicodeEncodeError.
+
+Things that should now work that did not before:
+
+<pre>
+ipython -p épsiløn
+ipython ømqtést.py
+</pre>
+",minrk,151929,closed,False,2011-03-25T16:13:25+00:00,2014-06-13T12:50:32+00:00,2011-03-25T18:48:29+00:00,,a7c28b5984c6a7cdd9899ddc0045b61813ac3b98,dirty,29,18,5,1,0,3,,,unicode;bug
+ipython/ipython,101373,311,Qtconsole exit,"Typing 'exit' at the Qt console had stopped working, although 'Exit' still worked. The prefilter system wasn't picking 'exit' up as an automagic, because of the presence of the builtin 'exit' function, which is removed before user code runs.
+
+This does the prefiltering inside our builtin_trap context manager, so it doesn't see the exit builtin, and detects it as an automagic instead.
+",takluyver,327925,closed,False,2011-03-25T16:15:11+00:00,2014-06-15T08:14:09+00:00,2011-03-25T16:56:06+00:00,,,dirty,68,60,1,1,0,1,,,
+ipython/ipython,101384,312,History memory,"Use a :memory: DB for history during testing.
+",rkern,46135,closed,False,2011-03-25T16:29:10+00:00,2014-06-13T22:22:26+00:00,2011-03-25T16:45:15+00:00,2011-03-25T16:45:14+00:00,,dirty,41,40,3,1,2,2,,,
+ipython/ipython,101417,313,Readline shortcuts,"Added Ctrl+H and Ctrl+U shortcuts to Qt console per issue 305.
+",epatters,316610,closed,False,2011-03-25T17:02:00+00:00,2014-06-23T11:02:44+00:00,2011-03-25T18:02:26+00:00,,,dirty,20,5,1,1,0,2,,,
+ipython/ipython,101660,315,Unicode magic args,"Unicode characters got translated to 8-bit strings on the way to magic functions, causing some problems with %history. This allows unicode to be passed through to magic functions, and fixes up the tests to expect unicode arguments to InteractiveShell.magic().
+",takluyver,327925,closed,False,2011-03-25T22:13:49+00:00,2014-06-13T23:51:35+00:00,2011-03-26T00:16:34+00:00,2011-03-26T00:16:34+00:00,,dirty,49,48,8,2,0,1,,,
+ipython/ipython,101949,316,Unicode win process,"This apparently fixes a bug with non-ascii characters on Windows for Jörgen. I don't know if it's going to work in all cases (it uses the encoding of the kernel's stdin - will that always match the encoding of the stdout of a subprocess?), but it does solve the problem at least in his configuration, and I can't easily test it. The change shouldn't affect kernels running on anything other than Windows.
+",takluyver,327925,closed,False,2011-03-26T13:27:50+00:00,2014-06-15T05:29:07+00:00,2011-04-07T23:32:54+00:00,2011-04-07T23:32:54+00:00,,dirty,7,0,2,2,1,6,,,
+ipython/ipython,102464,319,Rewrite code to restore readline history after an action,"The code to restore readline history (used for subprograms including %debug) called the save_history and reload_history methods, which were removed with my history refactoring. This replaces that code with a context manager, `ip.readline_no_history`, to do the same thing.
+
+Closes gh-318
+",takluyver,327925,closed,False,2011-03-27T17:02:12+00:00,2014-06-22T20:35:59+00:00,2011-04-03T03:14:12+00:00,2011-04-03T03:14:12+00:00,,dirty,133,111,2,4,0,15,,,
+ipython/ipython,105194,323,Add missing external.pexpect to packages,"Now that IPython.external.pexpect is a package, it needs to be in find_packages. (This bit me while building an egg for distribution.)
+
+This was originally filed against ipython-py3k:
+https://github.com/ipython/ipython-py3k/pull/5
+",npt,155174,closed,False,2011-03-30T15:14:43+00:00,2014-06-16T01:44:00+00:00,2011-03-31T12:31:55+00:00,2011-03-31T12:31:54+00:00,,dirty,1,0,1,1,0,1,,,
+ipython/ipython,105888,325,Removetwisted,"This pull request removes the Twisted based IPython.kernel.  I have tried to go through the entire codebase and remove all twisted/zope.interface/foolscap using code.  This includes the test suite and setup scripts, but not (yet) documentation or examples as we need to transition those to the new zmq parallel stuff.  I will add issues for that work.
+",ellisonbg,27600,closed,False,2011-03-31T06:26:22+00:00,2014-06-15T13:32:48+00:00,2011-04-06T20:40:52+00:00,,55036b25a0c7ec237f78596888dcbe50d963937b,dirty,7,20446,115,5,1,33,,,
+ipython/ipython,106966,329,Do not store file contents in history when running a .ipy file.,"Running a .ipy caused an error because it tried to insert the file's contents into the history database, leading to a clash of line number.
+
+closes gh-328
+",takluyver,327925,closed,False,2011-04-01T09:43:04+00:00,2014-06-20T03:46:24+00:00,2011-04-02T21:02:05+00:00,2011-04-02T21:02:05+00:00,,dirty,1,1,1,1,0,1,,,
+ipython/ipython,107593,330,Magic pastebin,"This started off with the simple idea of adding a %pastebin magic command. See http://paste.pocoo.org/show/364199/ for an example using that. You can select ranges from history, files, and string or macro objects. The URL is returned.
+
+I've opted to call the magic command ""pastebin"" - it could be shorter, but all the shorter ones (pbin, lodgeit, post) are unintuitive, at least to me.
+
+I've gone for the 'Lodge it' paste bin, run by Pocoo. It's got a convenient API (the API docs for gist are very incomplete) and a clean web interface (plus for bonus points it's open source and in Python). Of course, there could be multiple options, but I think that sort of complexity defeats the aim of a pastebin, and it would be more work to maintain, so I think it makes sense to pick a good default.
+
+Along the way, I abstracted some of the logic to grab the code, so now macros can be saved with `%save mm.py mymacro` and reloaded with `%macro mymacro mm.py`.
+",takluyver,327925,closed,False,2011-04-01T22:55:20+00:00,2014-06-14T13:21:26+00:00,2011-04-04T12:30:46+00:00,2011-04-04T12:30:45+00:00,,dirty,106,17,4,7,10,3,,,
+ipython/ipython,108049,331,Tweak config loader for PyPy compatibility.,"Antonio Cuni (user antocuni) has tested IPython on a trunk version of PyPy. Apparently this is the only change needed to get it working. See issue #327 for discussion of the patch.
+
+closes gh-327
+",takluyver,327925,closed,False,2011-04-02T21:21:11+00:00,2014-06-12T04:59:03+00:00,2011-04-03T15:51:36+00:00,2011-04-03T15:51:35+00:00,,dirty,6,1,1,1,0,1,,,
+ipython/ipython,109420,332,AST splitter,"I'm making a pull request as much so we can see the diff as for instant inclusion - I've modified quite a bit of the core stuff, so I imagine it might need some checking and polishing.
+
+So, in short, I've replaced our old technique of splitting input into blocks with a version that works with AST (abstract syntax tree) nodes. These are representations of pieces of Python code, and a node can be anything from an integer literal to an if-elif-else to a class definition. For our purposes, we work only with the top level of nodes we get when we parse some code; we don't consider the many child nodes of these.
+
+Specifically, run_cell will now:
+- With single line input, run it all in interactive mode; so `2*4; 3*3` produces two sets of output.
+- With multiline input, run only the last node in interactive mode. So if `2*4; 3*3` is the last line of a multiline cell, only the second result (`9`) is displayed.
+
+Along the way, I had to modify the CachingCompiler a bit, as it assumed that it would cache and compile source in one operation. It now has a `cache` method, which returns the cell name, (e.g. ""<ipython-input-1-15a9b1ff09e>""), which is passed back to the compilation step. The compilation step now has a call signature matching the built in `compile` function.
+",takluyver,327925,closed,False,2011-04-04T23:31:00+00:00,2014-06-12T15:17:43+00:00,2011-04-07T23:28:12+00:00,2011-04-07T23:28:12+00:00,,dirty,103,364,8,9,2,15,,,
+ipython/ipython,112038,334,Hard reset,"As requested in issue #49, this is a ""hard reset"", which should release any references we have to things, and completely reset the shell.
+
+I've implemented this with a -h option to %reset. I've left %reset just clearing the user namespace by default. If this was being written from scratch, I think I would make %reset do a hard reset by default, but a soft reset is consistent with what it was already doing.
+",takluyver,327925,closed,False,2011-04-07T18:41:25+00:00,2014-06-24T00:47:36+00:00,2011-04-07T23:38:49+00:00,2011-04-07T23:38:49+00:00,,dirty,44,13,4,4,0,4,,,
+ipython/ipython,112952,339,fix for issue 337: incorrect/phantom tooltips for magics,"Disables calltips (triggered by '(') if the object queried is a magic, and makes object_info requests aware of IPython's modifications to **builtins** by running inside the builtin_trap context manager.
+",dwf,60206,closed,False,2011-04-08T17:41:25+00:00,2014-06-17T12:26:45+00:00,2011-04-08T18:06:31+00:00,,,dirty,13,6,2,2,0,4,,,
+ipython/ipython,113299,343,make readline a dependency on OSX,"This commit makes readline a setuptools install dependency on OSX (so easy_installed ipython will always install it), and adds readline/pyreadline to the check_dependencies on OSX/Windows.
+
+If merged, this should probably close #20, unless we really do want to bundle readline.
+",minrk,151929,closed,False,2011-04-09T00:23:41+00:00,2014-06-22T19:20:41+00:00,2011-04-09T19:44:50+00:00,,,dirty,22,2,3,1,4,4,,,
+ipython/ipython,113301,344,restore auto debug behavior,"This restores the auto debug behavior of the '%pdb' magic.
+
+I'm not 100% sure this is the right way to do it, since the previous code looked weird, and I want to be sure I'm not doing something wrong.
+
+It definitely works for me, though.
+
+This will close #296
+",minrk,151929,closed,False,2011-04-09T00:25:49+00:00,2014-06-17T12:28:54+00:00,2011-04-09T19:04:01+00:00,,,dirty,4,6,1,1,0,2,,,
+ipython/ipython,113330,345,"Attempt to address (partly) issue ipython/#342 by rewriting quit(), exit(), etc.","This attempts to resolve the complaint about quit() and exit() and their capitalized counterparts, by explicitly checking for these forms and rewriting them as their corresponding magics. Of course, ""calling"" them arguments will still fail with a NameError, which is less than ideal, but it's a start.
+",dwf,60206,closed,False,2011-04-09T01:36:00+00:00,2014-06-26T00:41:19+00:00,2011-04-10T10:33:17+00:00,,,dirty,8,2,1,1,0,4,,,
+ipython/ipython,113413,346,Dedent prefix bugfix + tests: #142,"Re: issue #142, this expands the inputsplitter regex for 'dedentation' to correctly handle ignore lines such as ""passes += 1"", which should not dedent even though it begins with ""pass"". It's fine with arbitrary trailing whitespace and a few other wacky corner cases (return() is valid Python, as is return(0), same with raise(TypeError()), etc. -- these only dedent if you at least have a close paren after the open paren.)
+
+Also adds tests for these new behaviours.
+",dwf,60206,closed,False,2011-04-09T06:38:27+00:00,2014-06-19T12:15:09+00:00,2011-04-10T06:42:55+00:00,2011-04-10T06:42:55+00:00,,dirty,40,5,2,2,0,4,,,
+ipython/ipython,113672,347,Make ip.reset() work the same in interactive or non-interactive code.,"At present, ip.reset() sets execution_count to 0. If that's done interactively, it gets bumped up by 1 as it leaves run_cell, so the next prompt is 1. But in test code, we call ip.reset() outside of run_cell, so the next run_cell command executes as cell 0, leading to unexpected problems.
+
+This makes ip.reset() set execution_count to 1, and set a boolean flag so that run_cell doesn't increment it immediately afterwards.
+",takluyver,327925,closed,False,2011-04-09T18:50:05+00:00,2014-06-16T07:29:19+00:00,2011-04-09T21:59:08+00:00,,,dirty,10,3,1,1,0,7,,,

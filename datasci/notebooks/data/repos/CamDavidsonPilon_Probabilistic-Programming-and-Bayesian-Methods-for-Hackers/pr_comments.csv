@@ -1,0 +1,151 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,984583867,twiecki,674200,2022-09-30T13:18:54+00:00,2022-12-29T10:30:36+00:00,"<p>I don't think you have to pass tune, and does it reuqire that many samples?</p>
+<br/>
+
+ _Reply via <a href='https://app.reviewnb.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/pull/548/discussion/'>ReviewNB</a>_ <div id='ReviewNBCommentContext-DoNotDelete' style='display:none' data-state='RESOLVED' data-cellIndex='21'/>",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,1058713535,miemiekurisu,3900532,2022-12-29T03:47:27+00:00,2022-12-29T03:47:27+00:00,"<p>I'm not quite sure about the sample size, </p><p>because according to the PYMC2 and PYMC3 version, it samples one chain on 20000 samples and burned the 1/4 of 20000 (5000).</p><p> </p><p>I try to keep the code minimal modified with PYMC2 and PYMC3 version, maybe ""15000 sample/ one chain/5000 tune"" is more appropriate?</p><p> </p>",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,1058871221,twiecki,674200,2022-12-29T10:30:32+00:00,2022-12-29T10:30:33+00:00,<p>You can also just leave it.</p>,False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,984583867,twiecki,674200,2022-09-30T13:18:54+00:00,2022-12-29T10:30:36+00:00,"<p>I don't think you have to pass tune, and does it reuqire that many samples?</p>
+<br/>
+
+ _Reply via <a href='https://app.reviewnb.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/pull/548/discussion/'>ReviewNB</a>_ <div id='ReviewNBCommentContext-DoNotDelete' style='display:none' data-state='RESOLVED' data-cellIndex='21'/>",True,Chapter4_TheGreatestTheoremNeverTold/Ch4_LawOfLargeNumbers_PyMC_current.ipynb,1.0,"@@ -0,0 +1,1487 @@
++{",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,1058713535,miemiekurisu,3900532,2022-12-29T03:47:27+00:00,2022-12-29T03:47:27+00:00,"<p>I'm not quite sure about the sample size, </p><p>because according to the PYMC2 and PYMC3 version, it samples one chain on 20000 samples and burned the 1/4 of 20000 (5000).</p><p> </p><p>I try to keep the code minimal modified with PYMC2 and PYMC3 version, maybe ""15000 sample/ one chain/5000 tune"" is more appropriate?</p><p> </p>",True,Chapter4_TheGreatestTheoremNeverTold/Ch4_LawOfLargeNumbers_PyMC_current.ipynb,1.0,"@@ -0,0 +1,1487 @@
++{",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,1025604159,1058871221,twiecki,674200,2022-12-29T10:30:32+00:00,2022-12-29T10:30:33+00:00,<p>You can also just leave it.</p>,True,Chapter4_TheGreatestTheoremNeverTold/Ch4_LawOfLargeNumbers_PyMC_current.ipynb,1.0,"@@ -0,0 +1,1487 @@
++{",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,220945633,223492776,CamDavidsonPilon,884032,2018-10-08T20:48:12+00:00,2018-10-08T20:48:12+00:00,👍 ,False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,220945633,223492776,CamDavidsonPilon,884032,2018-10-08T20:48:12+00:00,2018-10-08T20:48:12+00:00,👍 ,True,Chapter6_Priorities/BanditsD3.html,5.0,"@@ -87,4 +87,4 @@
+    
+         </div>
+ 
+-<script type=""text/javascript"" src=""https://dl.dropbox.com/s/2qhdohtgzszp3yx/d3bandits.js""></script>
++<script type=""text/javascript"" src=""https://cdn.rawgit.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/master/Chapter6_Priorities/d3bandits.js""></script>",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,217526860,227878784,ysgit,898918,2018-10-24T17:06:31+00:00,2018-10-25T14:55:30+00:00,"the line is missing a closing `)`
+```suggestion
+axes.prop_cycle : cycler('color', ['348ABD', 'A60628', '7A68A6', '467821', 'D55E00', 'CC79A7', '56B4E9', '009E73', 'F0E442', '0072B2'])  # color cycle for plot lines
+```",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,217526860,228208499,michrzan,8075164,2018-10-25T14:55:53+00:00,2018-10-25T14:55:54+00:00,thanks,False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,217526860,227878784,ysgit,898918,2018-10-24T17:06:31+00:00,2018-10-25T14:55:30+00:00,"the line is missing a closing `)`
+```suggestion
+axes.prop_cycle : cycler('color', ['348ABD', 'A60628', '7A68A6', '467821', 'D55E00', 'CC79A7', '56B4E9', '009E73', 'F0E442', '0072B2'])  # color cycle for plot lines
+```",True,styles/matplotlibrc,,"@@ -237,7 +237,7 @@ axes.labelsize      : large  # fontsize of the x any y labels
+ #axes.unicode_minus  : True    # use unicode for the minus symbol
+                                # rather than hyphen.  See
+                                # http://en.wikipedia.org/wiki/Plus_and_minus_signs#Character_codes
+-axes.color_cycle    : 348ABD, A60628, 7A68A6, 467821,D55E00,  CC79A7, 56B4E9, 009E73, F0E442, 0072B2  # color cycle for plot lines
++axes.prop_cycle : cycler('color', ['348ABD', 'A60628', '7A68A6', '467821', 'D55E00', 'CC79A7', '56B4E9', '009E73', 'F0E442', '0072B2']  # color cycle for plot lines",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,217526860,228208499,michrzan,8075164,2018-10-25T14:55:53+00:00,2018-10-25T14:55:54+00:00,thanks,True,styles/matplotlibrc,,"@@ -237,7 +237,7 @@ axes.labelsize      : large  # fontsize of the x any y labels
+ #axes.unicode_minus  : True    # use unicode for the minus symbol
+                                # rather than hyphen.  See
+                                # http://en.wikipedia.org/wiki/Plus_and_minus_signs#Character_codes
+-axes.color_cycle    : 348ABD, A60628, 7A68A6, 467821,D55E00,  CC79A7, 56B4E9, 009E73, F0E442, 0072B2  # color cycle for plot lines
++axes.prop_cycle : cycler('color', ['348ABD', 'A60628', '7A68A6', '467821', 'D55E00', 'CC79A7', '56B4E9', '009E73', 'F0E442', '0072B2']  # color cycle for plot lines",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149567242,CamDavidsonPilon,884032,2017-11-08T03:30:04+00:00,2017-11-08T15:20:43+00:00,"does this mean strictly less than 2.7, so _not_ including 2.7?",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149683118,geoffharcourt,319471,2017-11-08T14:28:02+00:00,2017-11-08T15:20:43+00:00,"Yeah, I cribbed it from a blog post about this issue elsewhere. Maybe `< 3.0` is a better idea?",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149686144,CamDavidsonPilon,884032,2017-11-08T14:38:08+00:00,2017-11-08T15:20:43+00:00,I think so yea,False,,,,2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,153050450,geoffharcourt,319471,2017-11-25T17:26:49+00:00,2017-11-25T17:26:49+00:00,@CamDavidsonPilon I think this is now sorted and OK to merge.,False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149567242,CamDavidsonPilon,884032,2017-11-08T03:30:04+00:00,2017-11-08T15:20:43+00:00,"does this mean strictly less than 2.7, so _not_ including 2.7?",True,requirements.txt,,"@@ -5,6 +5,6 @@ pymc==2.3.4
+ pyzmq>=13.1.0
+ scipy>=0.12.0
+ tornado>=3.0.2
+-wsgiref>=0.1.2
++wsgiref>=0.1.2; python_version < '2.7'",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149683118,geoffharcourt,319471,2017-11-08T14:28:02+00:00,2017-11-08T15:20:43+00:00,"Yeah, I cribbed it from a blog post about this issue elsewhere. Maybe `< 3.0` is a better idea?",True,requirements.txt,,"@@ -5,6 +5,6 @@ pymc==2.3.4
+ pyzmq>=13.1.0
+ scipy>=0.12.0
+ tornado>=3.0.2
+-wsgiref>=0.1.2
++wsgiref>=0.1.2; python_version < '2.7'",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,149686144,CamDavidsonPilon,884032,2017-11-08T14:38:08+00:00,2017-11-08T15:20:43+00:00,I think so yea,True,requirements.txt,,"@@ -5,6 +5,6 @@ pymc==2.3.4
+ pyzmq>=13.1.0
+ scipy>=0.12.0
+ tornado>=3.0.2
+-wsgiref>=0.1.2
++wsgiref>=0.1.2; python_version < '2.7'",2,2,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,151275956,153050450,geoffharcourt,319471,2017-11-25T17:26:49+00:00,2017-11-25T17:26:49+00:00,@CamDavidsonPilon I think this is now sorted and OK to merge.,True,requirements.txt,,"@@ -5,6 +5,6 @@ pymc==2.3.4
+ pyzmq>=13.1.0
+ scipy>=0.12.0
+ tornado>=3.0.2
+-wsgiref>=0.1.2
++wsgiref>=0.1.2; python_version < '2.7'",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,89302834,83344464,CamDavidsonPilon,884032,2016-10-14T01:17:18+00:00,2016-10-14T01:17:18+00:00,"niiiice
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,89302834,83344464,CamDavidsonPilon,884032,2016-10-14T01:17:18+00:00,2016-10-14T01:17:18+00:00,"niiiice
+",True,to_latex_pdf.sh,10.0,"@@ -1,6 +1,4 @@
+-cd Chapter1_Introduction/ && ipython nbconvert Chapter1.ipynb --to latex --post PDF  --template article
+-cd ../Chapter2_MorePyMC/ && ipython nbconvert Chapter2.ipynb --to latex --post PDF --template article
+-cd ../Chapter3_MCMC/ && ipython nbconvert Chapter3.ipynb --to latex --post PDF --template article
+-cd ../Chapter4_TheGreatestTheoremNeverTold/ && ipython nbconvert Chapter4.ipynb --to latex --post PDF --template article
+-cd ../Chapter5_LossFunctions/ && ipython nbconvert Chapter5.ipynb --to latex --post PDF --template article
+-cd ../Chapter6_Priorities/ && ipython nbconvert Chapter6.ipynb --to latex --post PDF --template article
++find Prologue Chapter* -name ""*.ipynb"" | grep -v ""PyMC2"" | xargs ipython3 nbconvert --to pdf --template article
++
++# merge all files:
++pdfjoin Prologue.pdf Ch*.pdf DontOverfit.pdf MachineLearning.pdf",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,19615424,16078860,cebe,189796,2014-08-11T20:43:14+00:00,2014-08-11T20:43:14+00:00,":+1: 
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,19615424,16078860,cebe,189796,2014-08-11T20:43:14+00:00,2014-08-11T20:43:14+00:00,":+1: 
+",True,Chapter3_MCMC/IntroMCMC.ipynb,5.0,"@@ -992,7 +992,7 @@
+       ""\n"",
+       ""The MAP can also be used as a solution to the inference problem, as mathematically it  is the *most likely* value for the unknowns. But as mentioned earlier in this chapter,  this location ignores the uncertainty and doesn't return a distribution.\n"",
+       ""\n"",
+-      ""Typically, it is always a good idea, and rarely a bad idea, to prepend your call to `mcmc` with a call to `MAP(model).fit()`. The intermediate call to `fit` is hardly computationally intensive, and will save you time later due to a shorter burn-in period. \n"",
++      ""Most often it is a good idea, and rarely a bad idea, to prepend your call to `mcmc` with a call to `MAP(model).fit()`. The intermediate call to `fit` is hardly computationally intensive, and will save you time later due to a shorter burn-in period. \n"",",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,17922581,14495853,CamDavidsonPilon,884032,2014-07-03T03:37:18+00:00,2014-07-03T03:37:18+00:00,"nice!
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,17922581,14495853,CamDavidsonPilon,884032,2014-07-03T03:37:18+00:00,2014-07-03T03:37:18+00:00,"nice!
+",True,.gitignore,4.0,"@@ -2,3 +2,4 @@
+ *.pyc
+ *~
+ *.png
++**/.ipynb_checkpoints",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,13528700,10574781,cebe,189796,2014-03-13T17:13:41+00:00,2014-03-13T17:15:49+00:00,"?
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,13528700,10574850,pushmatrix,190692,2014-03-13T17:14:59+00:00,2014-03-13T17:15:49+00:00,"Alas, the price of removing one is to add another.
+
+Didn't see this one.
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,13528700,10574781,cebe,189796,2014-03-13T17:13:41+00:00,2014-03-13T17:15:49+00:00,"?
+",True,Chapter2_MorePyMC/MorePyMC.ipynb,,"@@ -8,7 +8,7 @@
+   {
+    ""cells"": [
+     {
+-     ""cell_type"": ""markdown"",
++     ""cell_type"": ""markdown"",wi",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,13528700,10574850,pushmatrix,190692,2014-03-13T17:14:59+00:00,2014-03-13T17:15:49+00:00,"Alas, the price of removing one is to add another.
+
+Didn't see this one.
+",True,Chapter2_MorePyMC/MorePyMC.ipynb,,"@@ -8,7 +8,7 @@
+   {
+    ""cells"": [
+     {
+-     ""cell_type"": ""markdown"",
++     ""cell_type"": ""markdown"",wi",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10889651,8401768,rolisz,426313,2013-12-17T13:43:56+00:00,2014-01-24T20:18:59+00:00,"""we talked about objective priors rarely are _objective_"" I think there is a word missing here.
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,10889651,8401768,rolisz,426313,2013-12-17T13:43:56+00:00,2014-01-24T20:18:59+00:00,"""we talked about objective priors rarely are _objective_"" I think there is a word missing here.
+",True,Chapter6_Priorities/Priors.ipynb,,"@@ -1393,7 +1393,17 @@
+       ""\n"",
+       ""## Jefferys Priors\n"",
+       ""\n"",
+-      ""TODO.""
++      ""Earlier, we talked about objective priors rarely are *objective*. Partly what we mean by this is that we want a prior that doesn't bias our posterior estimates. The flat prior seems like a reasonable choice as it assigns equal probability to all values. \n"",",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5885292,4359399,CamDavidsonPilon,884032,2013-05-23T12:36:47+00:00,2013-05-23T13:00:23+00:00,"What is happening here? Was this `jQuery...` peice auto-inserted or was it your choice? 
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5885292,4359625,sash-ko,220472,2013-05-23T12:49:57+00:00,2013-05-23T13:00:23+00:00,"Oh, it shouldn't be here. Probably auto-replace happened after I checked all my changes.
+",False,,,,0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5885292,4359399,CamDavidsonPilon,884032,2013-05-23T12:36:47+00:00,2013-05-23T13:00:23+00:00,"What is happening here? Was this `jQuery...` peice auto-inserted or was it your choice? 
+",True,Chapter2_MorePyMC/MorePyMC.ipynb,,"@@ -200,7 +200,7 @@
+       ""\n"",
+       ""`some_variable = mc.DiscreteUniform( \""discrete_uni_var\"", 0, 4 )`\n"",
+       ""\n"",
+-      ""where 0,4 are the `DiscreteUniform`-specific upper and lower bound on the random variable. The [PyMC docs](http://pymc-devs.github.com/pymc/distributions.html) contain the specific parameters for stochastic variables. (Or use `??` if you are using IPython!)\n"",
++      ""where 0,4 are the `DiscreteUniform`-specific upper and lower bound on the random variable. The [PyMC docs](http://pymc-devs.github.com/pymc/distributions.html) contain the specific parameters for stochastic variables. (Or use `jQuery17206780988641548902_1369305611013` if you are using IPython!)\n"",",0,0,0,0,0,0,0
+CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers,5885292,4359625,sash-ko,220472,2013-05-23T12:49:57+00:00,2013-05-23T13:00:23+00:00,"Oh, it shouldn't be here. Probably auto-replace happened after I checked all my changes.
+",True,Chapter2_MorePyMC/MorePyMC.ipynb,,"@@ -200,7 +200,7 @@
+       ""\n"",
+       ""`some_variable = mc.DiscreteUniform( \""discrete_uni_var\"", 0, 4 )`\n"",
+       ""\n"",
+-      ""where 0,4 are the `DiscreteUniform`-specific upper and lower bound on the random variable. The [PyMC docs](http://pymc-devs.github.com/pymc/distributions.html) contain the specific parameters for stochastic variables. (Or use `??` if you are using IPython!)\n"",
++      ""where 0,4 are the `DiscreteUniform`-specific upper and lower bound on the random variable. The [PyMC docs](http://pymc-devs.github.com/pymc/distributions.html) contain the specific parameters for stochastic variables. (Or use `jQuery17206780988641548902_1369305611013` if you are using IPython!)\n"",",0,0,0,0,0,0,0

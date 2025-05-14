@@ -1,0 +1,860 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+pandas-dev/pandas,2512205764,2085085493,mroeschke,10647082,2025-05-12T16:54:19+00:00,2025-05-12T16:54:19+00:00,"1. Can you combine these two installs?
+2. Can you include `--no-install-recommends`?",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2512205764,2085129184,huisman,23581164,2025-05-12T17:22:57+00:00,2025-05-12T17:22:57+00:00,"Yes, done. That saves another ~0.16 Gb.
+
+Do note that the --no-install-recommends could impact  'downstream' images based on this image, if they depend on having a recommended library installed. ",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2512205764,2085085493,mroeschke,10647082,2025-05-12T16:54:19+00:00,2025-05-12T16:54:19+00:00,"1. Can you combine these two installs?
+2. Can you include `--no-install-recommends`?",True,Dockerfile,,"@@ -1,16 +1,22 @@
+ FROM python:3.10.8
+ WORKDIR /home/pandas
+ 
+-RUN apt-get update && apt-get -y upgrade
+-RUN apt-get install -y build-essential bash-completion
++RUN apt-get update && \
++    apt-get -y upgrade && \
++    rm -rf /var/lib/apt/lists/*
+ 
+-# hdf5 needed for pytables installation
+-# libgles2-mesa needed for pytest-qt
+-RUN apt-get install -y libhdf5-dev libgles2-mesa-dev
++RUN apt-get update && apt-get install -y \",0,0,0,0,0,0,0
+pandas-dev/pandas,2512205764,2085129184,huisman,23581164,2025-05-12T17:22:57+00:00,2025-05-12T17:22:57+00:00,"Yes, done. That saves another ~0.16 Gb.
+
+Do note that the --no-install-recommends could impact  'downstream' images based on this image, if they depend on having a recommended library installed. ",True,Dockerfile,,"@@ -1,16 +1,22 @@
+ FROM python:3.10.8
+ WORKDIR /home/pandas
+ 
+-RUN apt-get update && apt-get -y upgrade
+-RUN apt-get install -y build-essential bash-completion
++RUN apt-get update && \
++    apt-get -y upgrade && \
++    rm -rf /var/lib/apt/lists/*
+ 
+-# hdf5 needed for pytables installation
+-# libgles2-mesa needed for pytest-qt
+-RUN apt-get install -y libhdf5-dev libgles2-mesa-dev
++RUN apt-get update && apt-get install -y \",0,0,0,0,0,0,0
+pandas-dev/pandas,2511107712,2085347364,mroeschke,10647082,2025-05-12T19:53:07+00:00,2025-05-12T19:53:07+00:00,Can you add a comment somewhere here about why we're pinning Cython? The we can take this out of draft and merge.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2511107712,2085347364,mroeschke,10647082,2025-05-12T19:53:07+00:00,2025-05-12T19:53:07+00:00,Can you add a comment somewhere here about why we're pinning Cython? The we can take this out of draft and merge.,True,.github/workflows/unit-tests.yml,5.0,"@@ -246,7 +246,7 @@ jobs:
+           . ~/virtualenvs/pandas-dev/bin/activate
+           python -m pip install --no-cache-dir -U pip wheel setuptools meson[ninja]==1.2.1 meson-python==0.13.1
+           python -m pip install numpy -Csetup-args=""-Dallow-noblas=true""
+-          python -m pip install --no-cache-dir versioneer[toml] cython python-dateutil pytest>=7.3.2 pytest-xdist>=3.4.0 hypothesis>=6.84.0
++          python -m pip install --no-cache-dir versioneer[toml] cython==3.0.10 python-dateutil pytest>=7.3.2 pytest-xdist>=3.4.0 hypothesis>=6.84.0",0,0,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083020363,nikaltipar,45468465,2025-05-10T08:15:16+00:00,2025-05-10T08:42:02+00:00,I would recommend you combine this into a common error to reduce repetition (bonus points for combining it with the pre-existing error just a few lines below),False,,,,1,1,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083028429,nikaltipar,45468465,2025-05-10T08:26:58+00:00,2025-05-10T08:42:02+00:00,Doesn't just `if not left_collisions.empty:` work? Same for a similar check below.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083031752,nikaltipar,45468465,2025-05-10T08:36:02+00:00,2025-05-10T08:42:02+00:00,"For new readers of this code, the comment might not be descriptive enough. While your code is supposed to find suffixes that are caused by duplicated would-be created columns across dataframes, there is an extra section that does a duplicate checking just below your new code (but would-be created columns due to duplicity within the same dataframe).",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083020363,nikaltipar,45468465,2025-05-10T08:15:16+00:00,2025-05-10T08:42:02+00:00,I would recommend you combine this into a common error to reduce repetition (bonus points for combining it with the pre-existing error just a few lines below),True,pandas/core/reshape/merge.py,,"@@ -3058,6 +3058,20 @@ def renamer(x, suffix: str | None):
+     llabels = left._transform_index(lrenamer)
+     rlabels = right._transform_index(rrenamer)
+ 
++    # Check for duplicates created by suffixes
++    left_collisions = llabels.intersection(right.difference(to_rename))
++    right_collisions = rlabels.intersection(left.difference(to_rename))
++    if len(left_collisions) > 0:
++        raise MergeError(
++            ""Passing 'suffixes' which cause duplicate columns ""
++            f""{set(left_collisions)} is not allowed""
++        )
++    if len(right_collisions) > 0:
++        raise MergeError(
++            ""Passing 'suffixes' which cause duplicate columns ""
++            f""{set(right_collisions)} is not allowed""
++        )",1,1,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083028429,nikaltipar,45468465,2025-05-10T08:26:58+00:00,2025-05-10T08:42:02+00:00,Doesn't just `if not left_collisions.empty:` work? Same for a similar check below.,True,pandas/core/reshape/merge.py,,"@@ -3058,6 +3058,20 @@ def renamer(x, suffix: str | None):
+     llabels = left._transform_index(lrenamer)
+     rlabels = right._transform_index(rrenamer)
+ 
++    # Check for duplicates created by suffixes
++    left_collisions = llabels.intersection(right.difference(to_rename))
++    right_collisions = rlabels.intersection(left.difference(to_rename))
++    if len(left_collisions) > 0:",0,0,0,0,0,0,0
+pandas-dev/pandas,2510727220,2083031752,nikaltipar,45468465,2025-05-10T08:36:02+00:00,2025-05-10T08:42:02+00:00,"For new readers of this code, the comment might not be descriptive enough. While your code is supposed to find suffixes that are caused by duplicated would-be created columns across dataframes, there is an extra section that does a duplicate checking just below your new code (but would-be created columns due to duplicity within the same dataframe).",True,pandas/core/reshape/merge.py,,"@@ -3058,6 +3058,20 @@ def renamer(x, suffix: str | None):
+     llabels = left._transform_index(lrenamer)
+     rlabels = right._transform_index(rrenamer)
+ 
++    # Check for duplicates created by suffixes",0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072371842,datapythonista,10058240,2025-05-03T10:54:59+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+    source : type or str
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072371862,datapythonista,10058240,2025-05-03T10:55:08+00:00,2025-05-03T11:10:22+00:00,Same as above,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072373898,datapythonista,10058240,2025-05-03T11:08:34+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+        The second dtype to compare.
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072374007,datapythonista,10058240,2025-05-03T11:09:08+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+    api.types.is_categorical_dtype : Check whether the provided array or dtype
+```
+
+Also for the others.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072422205,chilin0525,41913261,2025-05-03T16:12:12+00:00,2025-05-03T16:12:12+00:00,Resolved in [7ca7023](https://github.com/pandas-dev/pandas/pull/61394/commits/7ca7023d1803926cd3797af06522cb86f5004e4a).,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072371842,datapythonista,10058240,2025-05-03T10:54:59+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+    source : type or str
+```",True,pandas/core/dtypes/common.py,,"@@ -655,24 +655,38 @@ def is_dtype_equal(source, target) -> bool:
+ 
+     Parameters
+     ----------
+-    source : The first dtype to compare
+-    target : The second dtype to compare
++    source : dtype",0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072371862,datapythonista,10058240,2025-05-03T10:55:08+00:00,2025-05-03T11:10:22+00:00,Same as above,True,pandas/core/dtypes/common.py,,"@@ -655,24 +655,38 @@ def is_dtype_equal(source, target) -> bool:
+ 
+     Parameters
+     ----------
+-    source : The first dtype to compare
+-    target : The second dtype to compare
++    source : dtype
++        The first dtype to compare
++    target : dtype",0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072373898,datapythonista,10058240,2025-05-03T11:08:34+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+        The second dtype to compare.
+```",True,pandas/core/dtypes/common.py,,"@@ -655,24 +655,38 @@ def is_dtype_equal(source, target) -> bool:
+ 
+     Parameters
+     ----------
+-    source : The first dtype to compare
+-    target : The second dtype to compare
++    source : dtype
++        The first dtype to compare
++    target : dtype
++        The second dtype to compare",0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072374007,datapythonista,10058240,2025-05-03T11:09:08+00:00,2025-05-03T11:10:22+00:00,"```suggestion
+    api.types.is_categorical_dtype : Check whether the provided array or dtype
+```
+
+Also for the others.",True,pandas/core/dtypes/common.py,,"@@ -655,24 +655,38 @@ def is_dtype_equal(source, target) -> bool:
+ 
+     Parameters
+     ----------
+-    source : The first dtype to compare
+-    target : The second dtype to compare
++    source : dtype
++        The first dtype to compare
++    target : dtype
++        The second dtype to compare
+ 
+     Returns
+     -------
+     boolean
+         Whether or not the two dtypes are equal.
+ 
++    See Also
++    --------
++    pandas.api.types.is_categorical_dtype : Check whether the provided array or dtype",0,0,0,0,0,0,0
+pandas-dev/pandas,2496720626,2072422205,chilin0525,41913261,2025-05-03T16:12:12+00:00,2025-05-03T16:12:12+00:00,Resolved in [7ca7023](https://github.com/pandas-dev/pandas/pull/61394/commits/7ca7023d1803926cd3797af06522cb86f5004e4a).,True,pandas/core/dtypes/common.py,,"@@ -655,24 +655,38 @@ def is_dtype_equal(source, target) -> bool:
+ 
+     Parameters
+     ----------
+-    source : The first dtype to compare
+-    target : The second dtype to compare
++    source : dtype
++        The first dtype to compare
++    target : dtype",0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073825640,mroeschke,10647082,2025-05-05T17:04:38+00:00,2025-05-05T17:04:38+00:00,"```suggestion
+                    if not isinstance(self.subplots, bool):
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073826400,mroeschke,10647082,2025-05-05T17:05:16+00:00,2025-05-05T17:05:17+00:00,"```suggestion
+- Bug in :meth:`DataFrame.plot` where ``title`` would require extra tittles when plotting more than one column per subplot. (:issue:`61019`)
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073830586,mroeschke,10647082,2025-05-05T17:07:32+00:00,2025-05-05T17:07:32+00:00,"```suggestion
+                                f""The number of titles ({len(self.title)}) must equal the number ""
+                                f""of subplots ({len(self.subplots)}).""
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2076292195,mroeschke,10647082,2025-05-06T21:11:50+00:00,2025-05-06T21:11:50+00:00,"```suggestion
+```
+
+(This is redundant with the message below)",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073825640,mroeschke,10647082,2025-05-05T17:04:38+00:00,2025-05-05T17:04:38+00:00,"```suggestion
+                    if not isinstance(self.subplots, bool):
+```",True,pandas/plotting/_matplotlib/core.py,,"@@ -802,7 +802,16 @@ def _adorn_subplots(self, fig: Figure) -> None:
+         if self.title:
+             if self.subplots:
+                 if is_list_like(self.title):
+-                    if len(self.title) != self.nseries:
++                    if type(self.subplots) != bool:",0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073826400,mroeschke,10647082,2025-05-05T17:05:16+00:00,2025-05-05T17:05:17+00:00,"```suggestion
+- Bug in :meth:`DataFrame.plot` where ``title`` would require extra tittles when plotting more than one column per subplot. (:issue:`61019`)
+```",True,doc/source/whatsnew/v3.0.0.rst,,"@@ -800,6 +800,7 @@ Plotting
+ - Bug in :meth:`DataFrame.plot.bar` with ``stacked=True`` where labels on stacked bars with zero-height segments were incorrectly positioned at the base instead of the label position of the previous segment (:issue:`59429`)
+ - Bug in :meth:`DataFrame.plot.line` raising ``ValueError`` when set both color and a ``dict`` style (:issue:`59461`)
+ - Bug in :meth:`DataFrame.plot` that causes a shift to the right when the frequency multiplier is greater than one. (:issue:`57587`)
++- Bug in :meth:`DataFrame.plot` where ``title`` would require more titles than needed when graphing more than one column per subplot. (:issue:`61019`)",0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2073830586,mroeschke,10647082,2025-05-05T17:07:32+00:00,2025-05-05T17:07:32+00:00,"```suggestion
+                                f""The number of titles ({len(self.title)}) must equal the number ""
+                                f""of subplots ({len(self.subplots)}).""
+```",True,pandas/plotting/_matplotlib/core.py,,"@@ -802,7 +802,16 @@ def _adorn_subplots(self, fig: Figure) -> None:
+         if self.title:
+             if self.subplots:
+                 if is_list_like(self.title):
+-                    if len(self.title) != self.nseries:
++                    if type(self.subplots) != bool:
++                        if len(self.subplots) != len(self.title):
++                            raise ValueError(
++                                ""The length of `title` must equal the number ""
++                                ""of subplots if `title` of type `list` ""
++                                ""and subplots is iterable.\n""
++                                f""length of title = {len(self.title)}\n""
++                                f""number of subplots = {len(self.subplots)}""",0,0,0,0,0,0,0
+pandas-dev/pandas,2496447070,2076292195,mroeschke,10647082,2025-05-06T21:11:50+00:00,2025-05-06T21:11:50+00:00,"```suggestion
+```
+
+(This is redundant with the message below)",True,pandas/plotting/_matplotlib/core.py,,"@@ -802,7 +802,16 @@ def _adorn_subplots(self, fig: Figure) -> None:
+         if self.title:
+             if self.subplots:
+                 if is_list_like(self.title):
+-                    if len(self.title) != self.nseries:
++                    if not isinstance(self.subplots, bool):
++                        if len(self.subplots) != len(self.title):
++                            raise ValueError(
++                                ""The length of `title` must equal the number ""
++                                ""of subplots if `title` of type `list` ""
++                                ""and subplots is iterable.\n""",0,0,0,0,0,0,0
+pandas-dev/pandas,2492884558,2072660141,WillAyd,609873,2025-05-04T16:44:08+00:00,2025-05-04T16:44:08+00:00,Cool seems useful. Is there any discussion to add this natively to Meson instead of custom-coding this ourselves? ,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492884558,2072660141,WillAyd,609873,2025-05-04T16:44:08+00:00,2025-05-04T16:44:08+00:00,Cool seems useful. Is there any discussion to add this natively to Meson instead of custom-coding this ourselves? ,True,meson.build,5.0,"@@ -47,6 +47,24 @@ endif
+ cy = meson.get_compiler('cython')
+ if cy.version().version_compare('>=3.1.0')
+     add_project_arguments('-Xfreethreading_compatible=true', language: 'cython')
++
++    # Use shared utility code to reduce wheel sizes",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080044141,mroeschke,10647082,2025-05-08T16:13:45+00:00,2025-05-08T16:13:45+00:00,Do you know what version of pyiceberg stopped pinning fsspec?,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080053775,mroeschke,10647082,2025-05-08T16:20:26+00:00,2025-05-08T16:20:26+00:00,Does it make sense for this to be a pytest fixture? It could be parametrized over different catalog names by default and could use the `tmpdir` fixture to do the temporary directory stuff automatically,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080056110,mroeschke,10647082,2025-05-08T16:22:06+00:00,2025-05-08T16:22:06+00:00,Might be good to flag as `experimental` so if we revisit and implement the IO plugin model we can pivot this to that model a little quicker.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080081392,datapythonista,10058240,2025-05-08T16:38:05+00:00,2025-05-08T16:38:05+00:00,"0.7 is the last to have upper version for all the cloud fs packages, 0.8 removed them. But 0.8 isn't compatible with our minimum supported sqlalchemy",False,,,,1,1,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080086790,datapythonista,10058240,2025-05-08T16:41:33+00:00,2025-05-08T16:41:33+00:00,"That was my first implementation, but I couldn't make a fixture remove the files when the test finish. That's why I implemented it as a context manager.
+
+I'll check again, as I didn't try with the tmpdir fixture, but it may not be easy.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080087383,datapythonista,10058240,2025-05-08T16:41:58+00:00,2025-05-08T16:41:59+00:00,"Makes sense, thanks for all the feedback.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085098409,mroeschke,10647082,2025-05-12T17:01:46+00:00,2025-05-12T17:01:47+00:00,"Can this be written in the `tmp_path` too? Otherwise, I imagine after running the tests this will be leftover",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085098714,mroeschke,10647082,2025-05-12T17:02:03+00:00,2025-05-12T17:02:04+00:00,"```suggestion
+pytestmark = pytest.mark.single_cpu
+```
+
+Nit: Since there only 1 entry",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085109279,datapythonista,10058240,2025-05-12T17:09:51+00:00,2025-05-12T17:09:51+00:00,"This file is being removed in line 64: https://github.com/pandas-dev/pandas/pull/61383/files#diff-dc72941f90793049e0faeefb11e9e743bd46697b5d8b44be927c8c3961609914R64
+
+To be able to write it in `tmp_path` I need to set up an environment variable for pyiceberg to find it. I thought this was easier, but I can do that if you have a strong preference for it.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085118329,mroeschke,10647082,2025-05-12T17:15:37+00:00,2025-05-12T17:15:38+00:00,Ah sorry I missed this. What you have now is fine,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080044141,mroeschke,10647082,2025-05-08T16:13:45+00:00,2025-05-08T16:13:45+00:00,Do you know what version of pyiceberg stopped pinning fsspec?,True,ci/deps/actions-310-minimum_versions.yaml,5.0,"@@ -29,10 +29,10 @@ dependencies:
+   - blosc=1.21.3
+   - bottleneck=1.3.6
+   - fastparquet=2024.2.0
+-  - fsspec=2024.2.0
++  - fsspec=2023.12.2",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080053775,mroeschke,10647082,2025-05-08T16:20:26+00:00,2025-05-08T16:20:26+00:00,Does it make sense for this to be a pytest fixture? It could be parametrized over different catalog names by default and could use the `tmpdir` fixture to do the temporary directory stuff automatically,True,pandas/tests/io/test_iceberg.py,,"@@ -0,0 +1,148 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++from contextlib import contextmanager
++import importlib
++import pathlib
++import tempfile
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]
++
++pyiceberg = pytest.importorskip(""pyiceberg"")
++pyiceberg_catalog = pytest.importorskip(""pyiceberg.catalog"")
++pq = pytest.importorskip(""pyarrow.parquet"")
++
++
++@contextmanager
++def create_catalog(catalog_name_in_pyiceberg_config=None):",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080056110,mroeschke,10647082,2025-05-08T16:22:06+00:00,2025-05-08T16:22:06+00:00,Might be good to flag as `experimental` so if we revisit and implement the IO plugin model we can pivot this to that model a little quicker.,True,pandas/io/iceberg.py,22.0,"@@ -0,0 +1,89 @@
++from typing import (
++    Any,
++)
++
++from pandas.compat._optional import import_optional_dependency
++
++from pandas import DataFrame
++
++
++def read_iceberg(
++    table_identifier: str,
++    catalog_name: str | None = None,
++    catalog_properties: dict[str, Any] | None = None,
++    row_filter: str | None = None,
++    selected_fields: tuple[str] | None = None,
++    case_sensitive: bool = True,
++    snapshot_id: int | None = None,
++    limit: int | None = None,
++    scan_properties: dict[str, Any] | None = None,
++) -> DataFrame:
++    """"""
++    Read an Apache Iceberg table into a pandas DataFrame.",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080081392,datapythonista,10058240,2025-05-08T16:38:05+00:00,2025-05-08T16:38:05+00:00,"0.7 is the last to have upper version for all the cloud fs packages, 0.8 removed them. But 0.8 isn't compatible with our minimum supported sqlalchemy",True,ci/deps/actions-310-minimum_versions.yaml,5.0,"@@ -29,10 +29,10 @@ dependencies:
+   - blosc=1.21.3
+   - bottleneck=1.3.6
+   - fastparquet=2024.2.0
+-  - fsspec=2024.2.0
++  - fsspec=2023.12.2",1,1,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080086790,datapythonista,10058240,2025-05-08T16:41:33+00:00,2025-05-08T16:41:33+00:00,"That was my first implementation, but I couldn't make a fixture remove the files when the test finish. That's why I implemented it as a context manager.
+
+I'll check again, as I didn't try with the tmpdir fixture, but it may not be easy.",True,pandas/tests/io/test_iceberg.py,,"@@ -0,0 +1,148 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++from contextlib import contextmanager
++import importlib
++import pathlib
++import tempfile
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]
++
++pyiceberg = pytest.importorskip(""pyiceberg"")
++pyiceberg_catalog = pytest.importorskip(""pyiceberg.catalog"")
++pq = pytest.importorskip(""pyarrow.parquet"")
++
++
++@contextmanager
++def create_catalog(catalog_name_in_pyiceberg_config=None):",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2080087383,datapythonista,10058240,2025-05-08T16:41:58+00:00,2025-05-08T16:41:59+00:00,"Makes sense, thanks for all the feedback.",True,pandas/io/iceberg.py,22.0,"@@ -0,0 +1,89 @@
++from typing import (
++    Any,
++)
++
++from pandas.compat._optional import import_optional_dependency
++
++from pandas import DataFrame
++
++
++def read_iceberg(
++    table_identifier: str,
++    catalog_name: str | None = None,
++    catalog_properties: dict[str, Any] | None = None,
++    row_filter: str | None = None,
++    selected_fields: tuple[str] | None = None,
++    case_sensitive: bool = True,
++    snapshot_id: int | None = None,
++    limit: int | None = None,
++    scan_properties: dict[str, Any] | None = None,
++) -> DataFrame:
++    """"""
++    Read an Apache Iceberg table into a pandas DataFrame.",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085098409,mroeschke,10647082,2025-05-12T17:01:46+00:00,2025-05-12T17:01:47+00:00,"Can this be written in the `tmp_path` too? Otherwise, I imagine after running the tests this will be leftover",True,pandas/tests/io/test_iceberg.py,50.0,"@@ -0,0 +1,143 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++import collections
++import importlib
++import pathlib
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]
++
++pyiceberg = pytest.importorskip(""pyiceberg"")
++pyiceberg_catalog = pytest.importorskip(""pyiceberg.catalog"")
++pq = pytest.importorskip(""pyarrow.parquet"")
++
++Catalog = collections.namedtuple(""Catalog"", [""name"", ""uri""])
++
++
++@pytest.fixture
++def catalog(request, tmp_path):
++    # the catalog stores the full path of data files, so the catalog needs to be
++    # created dynamically, and not saved in pandas/tests/io/data as other formats
++    uri = f""sqlite:///{tmp_path}/catalog.sqlite""
++    warehouse = f""file://{tmp_path}""
++    catalog_name = request.param if hasattr(request, ""param"") else None
++    catalog = pyiceberg_catalog.load_catalog(
++        catalog_name or ""default"",
++        type=""sql"",
++        uri=uri,
++        warehouse=warehouse,
++    )
++    catalog.create_namespace(""ns"")
++
++    df = pq.read_table(
++        pathlib.Path(__file__).parent / ""data"" / ""parquet"" / ""simple.parquet""
++    )
++    table = catalog.create_table(""ns.my_table"", schema=df.schema)
++    table.append(df)
++
++    if catalog_name is not None:
++        config_path = pathlib.Path.home() / "".pyiceberg.yaml""",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085098714,mroeschke,10647082,2025-05-12T17:02:03+00:00,2025-05-12T17:02:04+00:00,"```suggestion
+pytestmark = pytest.mark.single_cpu
+```
+
+Nit: Since there only 1 entry",True,pandas/tests/io/test_iceberg.py,,"@@ -0,0 +1,143 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++import collections
++import importlib
++import pathlib
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085109279,datapythonista,10058240,2025-05-12T17:09:51+00:00,2025-05-12T17:09:51+00:00,"This file is being removed in line 64: https://github.com/pandas-dev/pandas/pull/61383/files#diff-dc72941f90793049e0faeefb11e9e743bd46697b5d8b44be927c8c3961609914R64
+
+To be able to write it in `tmp_path` I need to set up an environment variable for pyiceberg to find it. I thought this was easier, but I can do that if you have a strong preference for it.",True,pandas/tests/io/test_iceberg.py,50.0,"@@ -0,0 +1,143 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++import collections
++import importlib
++import pathlib
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]
++
++pyiceberg = pytest.importorskip(""pyiceberg"")
++pyiceberg_catalog = pytest.importorskip(""pyiceberg.catalog"")
++pq = pytest.importorskip(""pyarrow.parquet"")
++
++Catalog = collections.namedtuple(""Catalog"", [""name"", ""uri""])
++
++
++@pytest.fixture
++def catalog(request, tmp_path):
++    # the catalog stores the full path of data files, so the catalog needs to be
++    # created dynamically, and not saved in pandas/tests/io/data as other formats
++    uri = f""sqlite:///{tmp_path}/catalog.sqlite""
++    warehouse = f""file://{tmp_path}""
++    catalog_name = request.param if hasattr(request, ""param"") else None
++    catalog = pyiceberg_catalog.load_catalog(
++        catalog_name or ""default"",
++        type=""sql"",
++        uri=uri,
++        warehouse=warehouse,
++    )
++    catalog.create_namespace(""ns"")
++
++    df = pq.read_table(
++        pathlib.Path(__file__).parent / ""data"" / ""parquet"" / ""simple.parquet""
++    )
++    table = catalog.create_table(""ns.my_table"", schema=df.schema)
++    table.append(df)
++
++    if catalog_name is not None:
++        config_path = pathlib.Path.home() / "".pyiceberg.yaml""",0,0,0,0,0,0,0
+pandas-dev/pandas,2492583257,2085118329,mroeschke,10647082,2025-05-12T17:15:37+00:00,2025-05-12T17:15:38+00:00,Ah sorry I missed this. What you have now is fine,True,pandas/tests/io/test_iceberg.py,50.0,"@@ -0,0 +1,143 @@
++""""""
++Tests for the Apache Iceberg format.
++
++Tests in this file use a simple Iceberg catalog based on SQLite, with the same
++data used for Parquet tests (``pandas/tests/io/data/parquet/simple.parquet``).
++""""""
++
++import collections
++import importlib
++import pathlib
++
++import pytest
++
++import pandas as pd
++import pandas._testing as tm
++
++from pandas.io.iceberg import read_iceberg
++
++pytestmark = [pytest.mark.single_cpu]
++
++pyiceberg = pytest.importorskip(""pyiceberg"")
++pyiceberg_catalog = pytest.importorskip(""pyiceberg.catalog"")
++pq = pytest.importorskip(""pyarrow.parquet"")
++
++Catalog = collections.namedtuple(""Catalog"", [""name"", ""uri""])
++
++
++@pytest.fixture
++def catalog(request, tmp_path):
++    # the catalog stores the full path of data files, so the catalog needs to be
++    # created dynamically, and not saved in pandas/tests/io/data as other formats
++    uri = f""sqlite:///{tmp_path}/catalog.sqlite""
++    warehouse = f""file://{tmp_path}""
++    catalog_name = request.param if hasattr(request, ""param"") else None
++    catalog = pyiceberg_catalog.load_catalog(
++        catalog_name or ""default"",
++        type=""sql"",
++        uri=uri,
++        warehouse=warehouse,
++    )
++    catalog.create_namespace(""ns"")
++
++    df = pq.read_table(
++        pathlib.Path(__file__).parent / ""data"" / ""parquet"" / ""simple.parquet""
++    )
++    table = catalog.create_table(""ns.my_table"", schema=df.schema)
++    table.append(df)
++
++    if catalog_name is not None:
++        config_path = pathlib.Path.home() / "".pyiceberg.yaml""",0,0,0,0,0,0,0
+pandas-dev/pandas,2484334365,2062723059,mroeschke,10647082,2025-04-27T21:11:12+00:00,2025-04-27T21:11:12+00:00,"```suggestion
+        is the separator/delimiter to use between the two. Alternatively,
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484334365,2062723059,mroeschke,10647082,2025-04-27T21:11:12+00:00,2025-04-27T21:11:12+00:00,"```suggestion
+        is the separator/delimiter to use between the two. Alternatively,
+```",True,pandas/core/reshape/encoding.py,,"@@ -60,13 +60,15 @@ def get_dummies(
+     data : array-like, Series, or DataFrame
+         Data of which to get dummy indicators.
+     prefix : str, list of str, or dict of str, default None
+-        String to append DataFrame column names.
++        A string to be prepended to DataFrame column names.
+         Pass a list with length equal to the number of columns
+         when calling get_dummies on a DataFrame. Alternatively, `prefix`
+         can be a dictionary mapping column names to prefixes.
+-    prefix_sep : str, default '_'
+-        If appending prefix, separator/delimiter to use. Or pass a
+-        list or dictionary as with `prefix`.
++    prefix_sep : str, list of str, or dict of str, default '_'
++        Should you choose to prepend DataFrame column names with a prefix, this
++        is the separator/delimiter to use between the two. Alternatively, ",0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2062660932,tehunter,7980666,2025-04-27T15:34:59+00:00,2025-04-27T15:35:04+00:00,"When both arguments are False, should NaN come after non-observed groups? That seems more intuitive to me, especially for an ordered categorical",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2062662853,rhshadrach,45562402,2025-04-27T15:44:41+00:00,2025-04-27T15:44:41+00:00,No - if you do an operation like sum the order here matches the order in that result.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2063496521,tehunter,7980666,2025-04-28T11:48:36+00:00,2025-04-28T11:48:36+00:00,"This is what I'm getting on both main and 2.2.3.
+
+```
+>>> df = DataFrame(
+...         {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
+...         index=list(""xyz""),
+...     )
+>>> df[""val""] = [1, 2, 3]
+>>> g = df.groupby(""cat"", observed=False, dropna=False)
+>>> g.sum()
+     val
+cat
+a      4
+d      0
+b      0
+NaN    2
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2063511077,tehunter,7980666,2025-04-28T11:58:55+00:00,2025-04-28T11:58:55+00:00,"Ah, `tm.assert_dict_equal` appears to be order-invariant, so it doesn't matter for the test.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2064528596,rhshadrach,45562402,2025-04-28T20:30:42+00:00,2025-04-28T20:30:54+00:00,"Ah, I see now. I was correct in that the order was the same, but I failed to notice that the test added the groups in the incorrect order. I do wonder if `assert_dict_equal` should default to checking the order (perhaps with an argument to ignore order).",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2062660932,tehunter,7980666,2025-04-27T15:34:59+00:00,2025-04-27T15:35:04+00:00,"When both arguments are False, should NaN come after non-observed groups? That seems more intuitive to me, especially for an ordered categorical",True,pandas/tests/groupby/test_categorical.py,15.0,"@@ -506,6 +506,23 @@ def test_observed_groups(observed):
+     tm.assert_dict_equal(result, expected)
+ 
+ 
++def test_groups_na_category(dropna, observed):
++    # https://github.com/pandas-dev/pandas/issues/61356
++    df = DataFrame(
++        {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
++        index=list(""xyz""),
++    )
++    g = df.groupby(""cat"", observed=observed, dropna=dropna)
++
++    result = g.groups
++    expected = {""a"": Index([""x"", ""z""])}
++    if not dropna:
++        expected |= {np.nan: Index([""y""])}",0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2062662853,rhshadrach,45562402,2025-04-27T15:44:41+00:00,2025-04-27T15:44:41+00:00,No - if you do an operation like sum the order here matches the order in that result.,True,pandas/tests/groupby/test_categorical.py,15.0,"@@ -506,6 +506,23 @@ def test_observed_groups(observed):
+     tm.assert_dict_equal(result, expected)
+ 
+ 
++def test_groups_na_category(dropna, observed):
++    # https://github.com/pandas-dev/pandas/issues/61356
++    df = DataFrame(
++        {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
++        index=list(""xyz""),
++    )
++    g = df.groupby(""cat"", observed=observed, dropna=dropna)
++
++    result = g.groups
++    expected = {""a"": Index([""x"", ""z""])}
++    if not dropna:
++        expected |= {np.nan: Index([""y""])}",0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2063496521,tehunter,7980666,2025-04-28T11:48:36+00:00,2025-04-28T11:48:36+00:00,"This is what I'm getting on both main and 2.2.3.
+
+```
+>>> df = DataFrame(
+...         {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
+...         index=list(""xyz""),
+...     )
+>>> df[""val""] = [1, 2, 3]
+>>> g = df.groupby(""cat"", observed=False, dropna=False)
+>>> g.sum()
+     val
+cat
+a      4
+d      0
+b      0
+NaN    2
+```",True,pandas/tests/groupby/test_categorical.py,15.0,"@@ -506,6 +506,23 @@ def test_observed_groups(observed):
+     tm.assert_dict_equal(result, expected)
+ 
+ 
++def test_groups_na_category(dropna, observed):
++    # https://github.com/pandas-dev/pandas/issues/61356
++    df = DataFrame(
++        {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
++        index=list(""xyz""),
++    )
++    g = df.groupby(""cat"", observed=observed, dropna=dropna)
++
++    result = g.groups
++    expected = {""a"": Index([""x"", ""z""])}
++    if not dropna:
++        expected |= {np.nan: Index([""y""])}",0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2063511077,tehunter,7980666,2025-04-28T11:58:55+00:00,2025-04-28T11:58:55+00:00,"Ah, `tm.assert_dict_equal` appears to be order-invariant, so it doesn't matter for the test.",True,pandas/tests/groupby/test_categorical.py,15.0,"@@ -506,6 +506,23 @@ def test_observed_groups(observed):
+     tm.assert_dict_equal(result, expected)
+ 
+ 
++def test_groups_na_category(dropna, observed):
++    # https://github.com/pandas-dev/pandas/issues/61356
++    df = DataFrame(
++        {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
++        index=list(""xyz""),
++    )
++    g = df.groupby(""cat"", observed=observed, dropna=dropna)
++
++    result = g.groups
++    expected = {""a"": Index([""x"", ""z""])}
++    if not dropna:
++        expected |= {np.nan: Index([""y""])}",0,0,0,0,0,0,0
+pandas-dev/pandas,2484247240,2064528596,rhshadrach,45562402,2025-04-28T20:30:42+00:00,2025-04-28T20:30:54+00:00,"Ah, I see now. I was correct in that the order was the same, but I failed to notice that the test added the groups in the incorrect order. I do wonder if `assert_dict_equal` should default to checking the order (perhaps with an argument to ignore order).",True,pandas/tests/groupby/test_categorical.py,15.0,"@@ -506,6 +506,23 @@ def test_observed_groups(observed):
+     tm.assert_dict_equal(result, expected)
+ 
+ 
++def test_groups_na_category(dropna, observed):
++    # https://github.com/pandas-dev/pandas/issues/61356
++    df = DataFrame(
++        {""cat"": Categorical([""a"", np.nan, ""a""], categories=list(""adb""))},
++        index=list(""xyz""),
++    )
++    g = df.groupby(""cat"", observed=observed, dropna=dropna)
++
++    result = g.groups
++    expected = {""a"": Index([""x"", ""z""])}
++    if not dropna:
++        expected |= {np.nan: Index([""y""])}",0,0,0,0,0,0,0
+pandas-dev/pandas,2482707214,2064093797,mroeschke,10647082,2025-04-28T16:53:32+00:00,2025-04-28T16:53:32+00:00,"Can you replace other instances of `table[""schema""][""fields""]` below with `fields`?",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2482707214,2064094707,mroeschke,10647082,2025-04-28T16:54:14+00:00,2025-04-28T16:54:14+00:00,"```suggestion
+    if not all(isinstance(field[""name""], str) for field in fields):
+```
+
+NIt: IMO this reads a little clearer with me",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2482707214,2064093797,mroeschke,10647082,2025-04-28T16:53:32+00:00,2025-04-28T16:53:32+00:00,"Can you replace other instances of `table[""schema""][""fields""]` below with `fields`?",True,pandas/io/json/_table_schema.py,4.0,"@@ -372,6 +372,11 @@ def parse_table_schema(json, precise_float: bool) -> DataFrame:
+     pandas.read_json
+     """"""
+     table = ujson_loads(json, precise_float=precise_float)
++    fields = table[""schema""][""fields""]",0,0,0,0,0,0,0
+pandas-dev/pandas,2482707214,2064094707,mroeschke,10647082,2025-04-28T16:54:14+00:00,2025-04-28T16:54:14+00:00,"```suggestion
+    if not all(isinstance(field[""name""], str) for field in fields):
+```
+
+NIt: IMO this reads a little clearer with me",True,pandas/io/json/_table_schema.py,6.0,"@@ -372,6 +372,11 @@ def parse_table_schema(json, precise_float: bool) -> DataFrame:
+     pandas.read_json
+     """"""
+     table = ujson_loads(json, precise_float=precise_float)
++    fields = table[""schema""][""fields""]
++
++    if any(not isinstance(field[""name""], str) for field in fields):",0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2060726723,rhshadrach,45562402,2025-04-25T18:46:16+00:00,2025-04-25T18:46:23+00:00,"Doesn't rolling accept many more arguments, e.g. `window`?",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2061505943,rhshadrach,45562402,2025-04-26T17:39:15+00:00,2025-04-26T17:39:15+00:00,I opened #61361 just to be sure this doesn't get forgotten.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2062601844,rhshadrach,45562402,2025-04-27T11:30:09+00:00,2025-04-27T11:30:09+00:00,"This was incorrect, the signature is fine here.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2060726723,rhshadrach,45562402,2025-04-25T18:46:16+00:00,2025-04-25T18:46:23+00:00,"Doesn't rolling accept many more arguments, e.g. `window`?",True,pandas/core/groupby/groupby.py,14.0,"@@ -3809,19 +3809,26 @@ def rolling(
+         )
+ 
+     @final
+-    def expanding(self, *args, **kwargs) -> ExpandingGroupby:
++    def expanding(
++        self,
++        min_periods: int = 1,
++        method: str = ""single"",
++    ) -> ExpandingGroupby:
+         """"""
+         Return an expanding grouper, providing expanding functionality per group.
+ 
+-        Arguments are the same as `:meth:DataFrame.rolling` except that ``step`` cannot
+-        be specified.",0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2061505943,rhshadrach,45562402,2025-04-26T17:39:15+00:00,2025-04-26T17:39:15+00:00,I opened #61361 just to be sure this doesn't get forgotten.,True,pandas/core/groupby/groupby.py,14.0,"@@ -3809,19 +3809,26 @@ def rolling(
+         )
+ 
+     @final
+-    def expanding(self, *args, **kwargs) -> ExpandingGroupby:
++    def expanding(
++        self,
++        min_periods: int = 1,
++        method: str = ""single"",
++    ) -> ExpandingGroupby:
+         """"""
+         Return an expanding grouper, providing expanding functionality per group.
+ 
+-        Arguments are the same as `:meth:DataFrame.rolling` except that ``step`` cannot
+-        be specified.",0,0,0,0,0,0,0
+pandas-dev/pandas,2480421689,2062601844,rhshadrach,45562402,2025-04-27T11:30:09+00:00,2025-04-27T11:30:09+00:00,"This was incorrect, the signature is fine here.",True,pandas/core/groupby/groupby.py,14.0,"@@ -3809,19 +3809,26 @@ def rolling(
+         )
+ 
+     @final
+-    def expanding(self, *args, **kwargs) -> ExpandingGroupby:
++    def expanding(
++        self,
++        min_periods: int = 1,
++        method: str = ""single"",
++    ) -> ExpandingGroupby:
+         """"""
+         Return an expanding grouper, providing expanding functionality per group.
+ 
+-        Arguments are the same as `:meth:DataFrame.rolling` except that ``step`` cannot
+-        be specified.",0,0,0,0,0,0,0
+pandas-dev/pandas,2480172088,2059227775,tehunter,7980666,2025-04-24T21:02:31+00:00,2025-04-24T21:04:50+00:00,Is this a standard approach for a warning message that could be hit from two lines of code?,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2480172088,2059229975,tehunter,7980666,2025-04-24T21:04:31+00:00,2025-04-24T21:04:50+00:00,"I know the implementation is trivial, but this is redundant with `Grouper`. I'm not sure we can get around it while still being a class property, but should the default value be referenced as a constant defined just once?",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2480172088,2059227775,tehunter,7980666,2025-04-24T21:02:31+00:00,2025-04-24T21:04:50+00:00,Is this a standard approach for a warning message that could be hit from two lines of code?,True,pandas/core/groupby/grouper.py,30.0,"@@ -55,6 +61,13 @@
+     from pandas.core.generic import NDFrame
+ 
+ 
++_NULL_KEY_MESSAGE = (
++    ""`dropna` is not specified but grouper encountered null group keys. These keys ""
++    ""will be dropped from the result by default. To keep null keys, set `dropna=True`, ""
++    ""or to hide this warning and drop null keys, set `dropna=False`.""
++)",0,0,0,0,0,0,0
+pandas-dev/pandas,2480172088,2059229975,tehunter,7980666,2025-04-24T21:04:31+00:00,2025-04-24T21:04:50+00:00,"I know the implementation is trivial, but this is redundant with `Grouper`. I'm not sure we can get around it while still being a class property, but should the default value be referenced as a constant defined just once?",True,pandas/core/groupby/groupby.py,8.0,"@@ -486,6 +486,12 @@ def __repr__(self) -> str:
+         # TODO: Better repr for GroupBy object
+         return object.__repr__(self)
+ 
++    @property
++    def dropna(self) -> bool:
++        if self._dropna is lib.no_default:
++            return True
++        return self._dropna",0,0,0,0,0,0,0
+pandas-dev/pandas,2479520868,2080030446,mroeschke,10647082,2025-05-08T16:05:47+00:00,2025-05-08T16:05:48+00:00,"Can you just do `if obj.inferred_type == ""mixed""`? And everywhere below where you need to xfail this new index",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2479520868,2080032468,mroeschke,10647082,2025-05-08T16:06:47+00:00,2025-05-08T16:06:48+00:00,Can you use the `xfail` pattern you used above?,False,,,,1,1,0,0,0,0,0
+pandas-dev/pandas,2479520868,2080030446,mroeschke,10647082,2025-05-08T16:05:47+00:00,2025-05-08T16:05:48+00:00,"Can you just do `if obj.inferred_type == ""mixed""`? And everywhere below where you need to xfail this new index",True,pandas/tests/base/test_misc.py,,"@@ -147,6 +147,11 @@ def test_searchsorted(request, index_or_series_obj):
+     # See gh-12238
+     obj = index_or_series_obj
+ 
++    if any(isinstance(x, str) for x in obj) and any(isinstance(x, int) for x in obj):",0,0,0,0,0,0,0
+pandas-dev/pandas,2479520868,2080032468,mroeschke,10647082,2025-05-08T16:06:47+00:00,2025-05-08T16:06:48+00:00,Can you use the `xfail` pattern you used above?,True,pandas/tests/indexes/test_setops.py,,"@@ -248,12 +235,21 @@ def test_intersection_base(self, index):
+ 
+     @pytest.mark.filterwarnings(r""ignore:PeriodDtype\[B\] is deprecated:FutureWarning"")
+     def test_union_base(self, index):
++        if index.inferred_type in [""mixed"", ""mixed-integer""]:
++            pytest.skip(""Mixed-type Index not orderable; union fails"")",1,1,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059203229,rhshadrach,45562402,2025-04-24T20:43:36+00:00,2025-04-24T20:49:30+00:00,pandas documentation is quite consistent with using `NA` instead of `null`. Can you use `NA` throughout.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059204121,rhshadrach,45562402,2025-04-24T20:44:13+00:00,2025-04-24T20:49:30+00:00,"In addition, this line is incorrect as you can pass `skipna=False`.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059206074,rhshadrach,45562402,2025-04-24T20:45:44+00:00,2025-04-24T20:49:30+00:00,`GroupBy` is not public. Can you use `DataFrameGroupBy` instead.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059210782,rhshadrach,45562402,2025-04-24T20:49:16+00:00,2025-04-24T20:49:30+00:00,I think this page should only include documentation on `first`. Can you remove the use of other methods.,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059203229,rhshadrach,45562402,2025-04-24T20:43:36+00:00,2025-04-24T20:49:30+00:00,pandas documentation is quite consistent with using `NA` instead of `null`. Can you use `NA` throughout.,True,pandas/core/groupby/groupby.py,5.0,"@@ -3232,9 +3232,12 @@ def first(
+         self, numeric_only: bool = False, min_count: int = -1, skipna: bool = True
+     ) -> NDFrameT:
+         """"""
+-        Compute the first entry of each column within each group.
++        Compute the first non-null entry of each column within each group.",0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059204121,rhshadrach,45562402,2025-04-24T20:44:13+00:00,2025-04-24T20:49:30+00:00,"In addition, this line is incorrect as you can pass `skipna=False`.",True,pandas/core/groupby/groupby.py,5.0,"@@ -3232,9 +3232,12 @@ def first(
+         self, numeric_only: bool = False, min_count: int = -1, skipna: bool = True
+     ) -> NDFrameT:
+         """"""
+-        Compute the first entry of each column within each group.
++        Compute the first non-null entry of each column within each group.",0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059206074,rhshadrach,45562402,2025-04-24T20:45:44+00:00,2025-04-24T20:49:30+00:00,`GroupBy` is not public. Can you use `DataFrameGroupBy` instead.,True,pandas/core/groupby/groupby.py,31.0,"@@ -3251,15 +3254,15 @@ def first(
+         Returns
+         -------
+         Series or DataFrame
+-            First values within each group.
++            First non-null values within each group, selected independently per column.
+ 
+         See Also
+         --------
+-        DataFrame.groupby : Apply a function groupby to each row or column of a
+-            DataFrame.
+-        core.groupby.DataFrameGroupBy.last : Compute the last non-null entry
+-            of each column.
+-        core.groupby.DataFrameGroupBy.nth : Take the nth row from each group.
++        DataFrame.groupby : Group DataFrame using a mapper or by a Series of columns.
++        Series.groupby : Group Series using a mapper or by a Series of values.
++        GroupBy.nth : Take the nth row from each group.",0,0,0,0,0,0,0
+pandas-dev/pandas,2477066389,2059210782,rhshadrach,45562402,2025-04-24T20:49:16+00:00,2025-04-24T20:49:30+00:00,I think this page should only include documentation on `first`. Can you remove the use of other methods.,True,pandas/core/groupby/groupby.py,53.0,"@@ -3272,23 +3275,38 @@ def first(
+         ...     )
+         ... )
+         >>> df[""D""] = pd.to_datetime(df[""D""])
++
+         >>> df.groupby(""A"").first()
+-             B  C          D
++            B  C          D
+         A
+         1  5.0  1 2000-03-11
+         3  6.0  3 2000-03-13
++
++        >>> df.groupby(""A"").nth(0)
++            B  C          D
++        A
++        1  NaN  1 2000-03-11
++        3  6.0  3 2000-03-13",0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2056434703,mroeschke,10647082,2025-04-23T16:25:49+00:00,2025-04-23T16:26:04+00:00,"```suggestion
+        if self.subplots and self.stacked:
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2056456609,mroeschke,10647082,2025-04-23T16:32:12+00:00,2025-04-23T16:32:13+00:00,"```suggestion
+            for i, sub_plot in enumerate(self.subplots):
+                if len(sub_plot) <= 1:
+                    continue
+                for plot in sub_plot:
+                    _stacked_subplots_ind[int(plot)] = i
+                _stacked_subplots_offsets.append([0, 0])
+```",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2056465475,mroeschke,10647082,2025-04-23T16:34:29+00:00,2025-04-23T16:34:29+00:00,"```suggestion
+@pytest.fixture
+def BSS_data():
+    return np.random.default_rng(3).integers(0, 100, 5)
+
+
+@pytest.fixture
+def BSS_df(BSS_data) -> DataFrame:
+    return DataFrame(
+        {""A"": BSS_data, ""B"": BSS_data[::-1], ""C"": BSS_data[0], ""D"": BSS_data[-1]}
+    )
+```
+
+Also what's the BBS abbreviation? It would be better to use a clearer name",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2056466446,mroeschke,10647082,2025-04-23T16:34:45+00:00,2025-04-23T16:34:45+00:00,"```suggestion
+            assert (sliced_df[""y_coord""] == 0).all()
+```
+?",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2056467876,mroeschke,10647082,2025-04-23T16:35:12+00:00,2025-04-23T16:35:12+00:00,Could you remove the test class? We're moving away from using this style,False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2060837534,eicchen,63069720,2025-04-25T20:19:50+00:00,2025-04-25T20:34:25+00:00,"It was for Bar Stacked Subplots, I was worried it would be too long to use in every variable, I can change it to ""BarStackedSub"", although it will cause the formatting of the code to look weird due to the line word limit",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2060842211,eicchen,63069720,2025-04-25T20:24:21+00:00,2025-04-25T20:25:25+00:00,"There were some issues where the offset from stacking would be unintentionally carried over to other subplots causing the bars to not start at 0. This is now fixed with the new implementation, so this shouldn't be an issue. This is the check for that, I can remove it if it's deemed unnecessary though.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2060849685,eicchen,63069720,2025-04-25T20:32:27+00:00,2025-04-25T20:32:40+00:00,"So to clarify, just leave the functions as is? I'm not quite well versed on the pros and cons of class vs function-based testing frameworks, but would like to know more. Was just using the class as a grouping feature from pytest here.",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2060857095,eicchen,63069720,2025-04-25T20:38:27+00:00,2025-04-25T20:38:28+00:00,"Nvm, misunderstood the comment",False,,,,0,0,0,0,0,0,0
+pandas-dev/pandas,2474815739,2060913768,mroeschke,10647082,2025-04-25T21:40:40+00:00,2025-04-25T21:40:40+00:00,"```suggestion
+        if self.subplots and self.stacked:
+```",False,,,,0,0,0,0,0,0,0

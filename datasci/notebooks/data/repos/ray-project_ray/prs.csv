@@ -1,0 +1,337 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+ray-project/ray,90895976,1,"Move plasma, common, and photon into the Ray repository.",,robertnishihara,249517,closed,False,2016-10-25T21:31:59+00:00,2016-10-25T21:33:55+00:00,2016-10-25T21:33:51+00:00,2016-10-25T21:33:51+00:00,ed550ea8afbebdab5c19aaad174fe666adb76a7b,unknown,20798,3981,92,111,0,0,,,
+ray-project/ray,90905374,2,Fixes to make Travis pass.,,robertnishihara,249517,closed,False,2016-10-25T22:36:48+00:00,2016-10-26T05:30:00+00:00,2016-10-26T05:29:58+00:00,2016-10-26T05:29:58+00:00,9235c791773d3c8c01f49e57303245c6823d87d9,unknown,8740,185,59,7,0,0,,,
+ray-project/ray,90939137,3,Changes to make tests pass on Travis.,,robertnishihara,249517,closed,False,2016-10-26T05:33:57+00:00,2016-10-26T05:39:22+00:00,2016-10-26T05:39:21+00:00,2016-10-26T05:39:21+00:00,f83a98d71a2a63d2fb8bb8edd50e9ebda7ae4e5c,unknown,8740,185,59,7,0,0,,,
+ray-project/ray,90940149,4,Remove unnecessary files.,,robertnishihara,249517,closed,False,2016-10-26T05:47:18+00:00,2016-10-27T06:24:42+00:00,2016-10-27T06:24:40+00:00,2016-10-27T06:24:40+00:00,6ed641177dd71015548dbddad076fbea0e616109,unknown,0,605,6,1,0,0,,,
+ray-project/ray,90946188,5,[WIP] Fix valgrind tests.,,robertnishihara,249517,closed,False,2016-10-26T06:56:19+00:00,2016-10-27T06:23:48+00:00,2016-10-27T06:23:46+00:00,2016-10-27T06:23:46+00:00,6f75c738b5ca48f0c9a1d6bed6f18b59fb4241f1,unknown,21,10,4,3,0,0,,,
+ray-project/ray,91273470,6,[Plasma] Subscribe without polling,"This registers the file descriptor we write subscription events to only with the event loop if there is data to be written. Without this fix, the plasma store will invoke send_notifications whenever the socket is writable, which will lead to 100% cpu utilization.
+",pcmoritz,113316,closed,False,2016-10-27T20:22:11+00:00,2016-10-28T00:56:17+00:00,2016-10-28T00:56:16+00:00,2016-10-28T00:56:16+00:00,43aca17b5920f26ef1e7a070604cf6c364b5677e,unknown,15,4,2,3,0,0,,,
+ray-project/ray,91421179,7,Update .gitignore file.,,robertnishihara,249517,closed,False,2016-10-28T17:36:34+00:00,2016-10-31T18:37:28+00:00,2016-10-28T18:40:08+00:00,2016-10-28T18:40:08+00:00,5c50d9767075bae06c4dc0cf63d96cff1dead94c,unknown,14,2,1,1,0,0,,,
+ray-project/ray,91430917,8,Pip install numbuf.,,robertnishihara,249517,closed,False,2016-10-28T18:41:20+00:00,2016-10-31T18:37:27+00:00,2016-10-28T21:30:20+00:00,2016-10-28T21:30:20+00:00,09a3ff717377e3c11bf2fe8a0fdfd10116490682,unknown,12,11,4,1,0,0,,,
+ray-project/ray,91433319,9,Unit testing for the plasma manager.,,stephanie-wang,2560516,closed,False,2016-10-28T18:56:43+00:00,2016-10-28T19:42:47+00:00,2016-10-28T19:42:45+00:00,2016-10-28T19:42:45+00:00,c94f9613663e95765f8ae2b4a163b76b30a44fc5,unknown,609,110,9,1,0,0,,,
+ray-project/ray,91464686,10,Ion and Philipp's table retries,"Doing the pull request in the new repository.
+",istoica,1149505,closed,False,2016-10-28T22:48:58+00:00,2016-10-29T22:22:35+00:00,2016-10-29T22:22:33+00:00,2016-10-29T22:22:33+00:00,ee3718c80cd5e487418f6f3c6deb6b315a2586c9,unknown,1914,240,23,11,0,0,,,
+ray-project/ray,91473887,11,Let local clients connect with local manager via unix domain sockets,,pcmoritz,113316,closed,False,2016-10-29T01:20:21+00:00,2016-10-29T04:27:01+00:00,2016-10-29T04:26:55+00:00,2016-10-29T04:26:55+00:00,84c581cf475fbee72470cd5634dcd15c0bc562b6,unknown,108,68,8,4,0,0,,,
+ray-project/ray,91478364,12,Implement plasma.wait,,pcmoritz,113316,closed,False,2016-10-29T04:17:53+00:00,2016-10-30T00:30:36+00:00,2016-10-30T00:30:34+00:00,2016-10-30T00:30:34+00:00,e6319986ece3562c5daee33a6ea25bdd4a4409cf,unknown,355,46,8,6,0,0,,,
+ray-project/ray,91506655,13,Wait until data is ready to read in manager_tests.,"The following sometimes failed before, but it should work now.
+
+```
+cd src/plasma
+make test
+```
+
+pcmoritz: Also added printing backtraces in CHECK and CHECKM like so:
+
+```
+.[ERROR] (io.c:154: errno: Resource temporarily unavailable) Check failure: client_fd >= 0
+0   manager_tests                       0x0000000108429b05 accept_client + 213
+1   manager_tests                       0x000000010842015e new_client_connection + 30
+2   manager_tests                       0x0000000108415505 init_plasma_mock + 229
+3   manager_tests                       0x0000000108415ecc request_transfer_retry_test + 76
+4   manager_tests                       0x0000000108415736 plasma_manager_tests + 246
+5   manager_tests                       0x00000001084174e4 greatest_run_suite + 228
+6   manager_tests                       0x0000000108417227 main + 183
+7   libdyld.dylib                       0x00007fff9503f5ad start + 1
+8   ???                                 0x0000000000000001 0x0 + 1
+```
+",robertnishihara,249517,closed,False,2016-10-30T00:27:11+00:00,2016-10-30T02:25:44+00:00,2016-10-30T02:25:43+00:00,2016-10-30T02:25:43+00:00,a0049ffa48bfefd361ac65ff4e875b2bdf78266d,unknown,25,13,2,2,0,0,,,
+ray-project/ray,91509149,14,Build Ray with setup.py.,"The command below should work. However, it seems to hang when there is a problem. For example, I can get it to work if I put `sudo` in front, but without sudo it just hangs and doesn't print any error messages.
+
+```
+pip install --user --upgrade --verbose ""git+git://github.com/ray-project/ray-ng.git@setup#egg=ray&subdirectory=lib/python""
+```",robertnishihara,249517,closed,False,2016-10-30T02:46:06+00:00,2016-11-01T00:08:06+00:00,2016-11-01T00:08:03+00:00,2016-11-01T00:08:03+00:00,47851eeccc54828b571cf68ff0476a2fc9bfa6d5,unknown,291,175,18,6,0,0,,,
+ray-project/ray,91561151,15,Fix wait test timing on valgrind,This (should) fix a timing failure that we've only seen appear on valgrind.,pcmoritz,113316,closed,False,2016-10-31T06:14:15+00:00,2016-10-31T20:42:57+00:00,2016-10-31T20:42:56+00:00,2016-10-31T20:42:56+00:00,780bbd170acb78650a542685d2f33bf501947f35,unknown,1,1,1,1,0,0,,,
+ray-project/ray,91685959,16,Try again to start plasma manager if there is a port collision,This should fix some of the test errors on Travis,pcmoritz,113316,closed,False,2016-10-31T20:38:38+00:00,2016-10-31T22:00:17+00:00,2016-10-31T22:00:15+00:00,2016-10-31T22:00:15+00:00,695f23b2e06d56cbc0a8456681f106c4a6e276ec,unknown,35,26,3,1,0,0,,,
+ray-project/ray,91714498,17,[WIP] Object reconstruction,"Includes modifications to the state tables:
+- Object table has metadata about the object - the ID of the task that created it
+- Task table implementation",stephanie-wang,2560516,closed,False,2016-11-01T00:15:40+00:00,2016-11-11T02:30:01+00:00,2016-11-11T02:29:58+00:00,,5f362be467c75f2e3df253fe60484655f6f88016,dirty,1074,109,17,1,0,0,,,
+ray-project/ray,91750309,18,"Fix socket bind collisions in manager_tests, race condition bind/listen/subscribe and memory leaks",,pcmoritz,113316,closed,False,2016-11-01T08:58:25+00:00,2016-11-02T07:09:06+00:00,2016-11-02T07:09:04+00:00,2016-11-02T07:09:04+00:00,2068587af8054a86df0bc556d2e2200d54d71599,unknown,147,73,16,10,0,0,,,
+ray-project/ray,91885177,19,Update worker.py and services.py to use plasma and the local scheduler.,"This integrates the worker code with the object store, the local scheduler, and Redis. It should be possible to use the single-node Ray API now.
+
+Not in this PR:
+- Object eviction
+- Object reconstruction",robertnishihara,249517,closed,False,2016-11-01T23:39:26+00:00,2016-11-02T07:39:37+00:00,2016-11-02T07:39:35+00:00,2016-11-02T07:39:35+00:00,072f442c1f17d73cf093e2e0243beea82aa40abe,unknown,623,1208,20,9,0,0,,,
+ray-project/ray,91897243,20,Change license to Apache 2.,Copied verbatim from http://choosealicense.com/licenses/apache-2.0/.,robertnishihara,249517,closed,False,2016-11-02T02:02:10+00:00,2016-11-02T06:19:07+00:00,2016-11-02T06:19:06+00:00,2016-11-02T06:19:06+00:00,d56c1a0b9c444b0adb96c201216cbd08f1f45864,unknown,201,27,1,1,0,0,,,
+ray-project/ray,92024224,21,Remove unnecessary pip installs.,,robertnishihara,249517,closed,False,2016-11-02T18:02:45+00:00,2016-11-02T23:40:40+00:00,2016-11-02T23:40:37+00:00,2016-11-02T23:40:37+00:00,681ec570babeaf480c5814d12aa0f04dadfaf538,unknown,65,54,8,5,0,0,,,
+ray-project/ray,92049165,22,Add rudimentary support for persisting individual objects,"* Append object to file and record offset on persist_object()
+
+* Read object from file back into memory on get_persisted_object()
+
+* Reading assumes the caller allocated sufficient memory",ujvl,8576139,closed,False,2016-11-02T20:30:06+00:00,2019-09-23T10:01:29+00:00,2016-11-30T23:23:48+00:00,,08f21ba6c329d5643dcf88e4effc444fe2e7f22a,dirty,174,9,4,8,0,0,,,
+ray-project/ray,92063921,23,Causes build scripts to fail immediately if a single command fails.,"I would have made the same change to `install-dependencies.sh`, but on Travis on Mac OS X, brew throws an error when it tries to install boost because the boost libraries are already there.",robertnishihara,249517,closed,False,2016-11-02T21:59:13+00:00,2016-11-03T03:56:27+00:00,2016-11-03T03:56:25+00:00,2016-11-03T03:56:25+00:00,5dfd76e0f730ef669e5bee5a8052240607420c92,unknown,8,0,2,1,0,0,,,
+ray-project/ray,92074090,24,Various performance improvements,"- Switch from array to linked list for photon queue
+- Convert a CHECK that makes things slower in the case of lots of workers to a DCHECK
+- Make it possible to run photon, plasma store and plasma manager in a scheduler
+- Get rid of malloc in process_message (photon scheduler)",pcmoritz,113316,closed,False,2016-11-02T23:21:19+00:00,2016-11-04T07:41:21+00:00,2016-11-04T07:41:20+00:00,2016-11-04T07:41:20+00:00,90a2aa4bf7f8d8e785c82dcc846ea6b1139d3e8d,unknown,130,52,8,4,0,0,,,
+ray-project/ray,92087259,25,Merge sealed_objects and open_objects into a single hashmap,* Entry contains enum that determines whether it is open or closed,ujvl,8576139,closed,False,2016-11-03T02:03:45+00:00,2019-09-23T10:02:56+00:00,2016-11-04T00:33:54+00:00,2016-11-04T00:33:54+00:00,b370a1df57109032face7804df770bdaa5556d71,unknown,31,50,2,4,0,0,,,
+ray-project/ray,92089332,26,Add basic LRU eviction for the plasma store.,This enables the plasma store to evict objects when there is memory pressure. This also factors out the eviction policy in a separate header file. This eviction policy uses an LRU cache (doubly linked list plus hash table) to track the least recently used objects.,robertnishihara,249517,closed,False,2016-11-03T02:39:35+00:00,2016-11-06T04:34:13+00:00,2016-11-06T04:34:11+00:00,2016-11-06T04:34:11+00:00,efe8a295ea412e7982824938b8d92b3780de96cd,unknown,614,78,13,13,0,0,,,
+ray-project/ray,92266258,27,Fix whitespace.,,robertnishihara,249517,closed,False,2016-11-04T00:35:45+00:00,2016-11-04T00:36:58+00:00,2016-11-04T00:36:56+00:00,2016-11-04T00:36:56+00:00,1e2b3ceac9f06c4fd0d4989fcd889a4d616b9b62,unknown,1,1,1,1,0,0,,,
+ray-project/ray,92477881,28,Fix bug in which worker import counters were treated incorrectly.,,robertnishihara,249517,closed,False,2016-11-06T05:30:55+00:00,2016-11-07T06:24:41+00:00,2016-11-07T06:24:39+00:00,2016-11-07T06:24:39+00:00,90f88af902cdb04d8acd448c284f57b6728564eb,unknown,97,123,5,11,0,0,,,
+ray-project/ray,92477918,29,Keep objects in cache between tasks,"This PR changes the behavior so that if we get an object and let the object go out of scope, it will not unmap the object's memory immediately, only after a delay (i.e. after more objects went out of scope).
+This is an important optimization, because unmap flushes the cpu cache. If tasks reuse the same objects, the objects sho ld stay in the cpu cache between task boundaries. This optimization is especially important for iterative workloads.
+
+This illustrates the performance difference (it is ~2x slower without this PR).
+
+```python
+A = np.random.rand(5000, 5000)
+v = np.random.rand(5000)
+A_id = ray.put(A)
+v_id = ray.put(v)
+a = time.time()
+for i in range(100):
+  A.dot(v)
+b = time.time() - a
+c = time.time()
+for i in range(100):
+  ray.get(A_id).dot(ray.get(v_id))
+d = time.time() - c
+```",pcmoritz,113316,closed,False,2016-11-06T05:33:12+00:00,2016-11-07T01:38:54+00:00,2016-11-07T01:31:14+00:00,2016-11-07T01:31:14+00:00,1147c4d34b138d7167e8f8d067106e6637ed96b5,unknown,221,40,13,2,0,0,,,
+ray-project/ray,92538560,30,Merge task table and task log into a single table,"Each entry in the task log now includes the task spec and the current scheduling information. Updates to the task log set the scheduling information fields in the corresponding entry, instead of appending a new log entry.",stephanie-wang,2560516,closed,False,2016-11-07T08:04:01+00:00,2016-11-11T02:13:30+00:00,2016-11-11T02:13:27+00:00,2016-11-11T02:13:26+00:00,9d1e750e8fa55fcf8419510ff07023e7f7ff2eb8,unknown,1581,845,30,4,34,0,,,
+ray-project/ray,92664043,31,Compute task IDs and object IDs deterministically.,,robertnishihara,249517,closed,False,2016-11-07T21:06:51+00:00,2016-11-08T22:46:47+00:00,2016-11-08T22:46:34+00:00,2016-11-08T22:46:34+00:00,194bdb1d963d25a16791c925aa2ba15f9bff5b13,unknown,690,112,15,9,13,0,,,
+ray-project/ray,92895490,32,Integration of Webui with Ray,"To test, after calling `ray.init`, go to localhost:3000 in your web browser, and the webui should be displayed. If you are sshed into another machine, you will need to use the `-L 3000:localhost:3000` option when you ssh.",Wapaul1,14142309,closed,False,2016-11-09T02:10:28+00:00,2016-11-18T06:33:31+00:00,2016-11-18T06:33:29+00:00,2016-11-18T06:33:29+00:00,08707f940806e08734e31e4e8309e5f03c41e97e,unknown,693,4,16,8,0,0,,,
+ray-project/ray,93240463,33,"Implement repr, hash, and richcompare for ObjectIDs.",,robertnishihara,249517,closed,False,2016-11-10T22:07:11+00:00,2016-11-11T17:18:38+00:00,2016-11-11T17:18:36+00:00,2016-11-11T17:18:36+00:00,336a9044044671f041b726218e6ea0cf3a25ba20,unknown,127,87,8,3,0,0,,,
+ray-project/ray,93383530,34,Plasma C extensions,,pcmoritz,113316,closed,False,2016-11-11T19:22:09+00:00,2016-11-14T00:23:30+00:00,2016-11-14T00:23:28+00:00,2016-11-14T00:23:28+00:00,986ed5c9e86cf8763b52fd93ea10d2075d283e6c,unknown,482,131,15,3,15,0,,,
+ray-project/ray,93417636,35,fix bug in wait,,pcmoritz,113316,closed,False,2016-11-12T00:06:36+00:00,2016-11-12T01:05:48+00:00,2016-11-12T01:05:40+00:00,2016-11-12T01:05:40+00:00,b1083e92e911257e800ae8550c828010e5284be1,unknown,1,0,1,1,0,0,,,
+ray-project/ray,93419666,36,New plasma client api,,istoica,1149505,closed,False,2016-11-12T00:37:46+00:00,2016-12-01T07:19:47+00:00,2016-12-01T07:19:44+00:00,,f4ab461a98a071aa261ee22f1aa24cb0ebfcf5fc,dirty,2098,167,12,30,1,1,,,
+ray-project/ray,93424600,37,Fix bug in which gym environment could not be imported because of mod…,"…ule naming conflicts.
+
+Before this PR, the following would fail with Anaconda.
+
+```python
+import ray
+ray.init(start_ray_local=True, num_workers=1)
+
+@ray.remote
+def f():
+  import gym
+
+f.remote()
+```
+
+It would fail with the error like the following.
+
+```
+  File ""/home/ubuntu/anaconda2/lib/python2.7/pickle.py"", line 1388, in loads
+    return Unpickler(file).load()
+  File ""/home/ubuntu/anaconda2/lib/python2.7/pickle.py"", line 864, in load
+    dispatch[key](self)
+  File ""/home/ubuntu/anaconda2/lib/python2.7/pickle.py"", line 1139, in load_reduce
+    value = func(*args)
+  File ""/home/ubuntu/.local/lib/python2.7/site-packages/cloudpickle/cloudpickle.py"", line 660, in subimport
+    __import__(name)
+  File ""/home/ubuntu/anaconda2/lib/python2.7/site-packages/gym/__init__.py"", line 44, in <module>
+    sanity_check_dependencies()
+  File ""/home/ubuntu/anaconda2/lib/python2.7/site-packages/gym/__init__.py"", line 15, in sanity_check_dependencies
+    import requests
+  File ""/home/ubuntu/anaconda2/lib/python2.7/site-packages/requests/__init__.py"", line 60, in <module>
+    from .packages.urllib3.exceptions import DependencyWarning
+  File ""/home/ubuntu/anaconda2/lib/python2.7/site-packages/requests/packages/__init__.py"", line 29, in <module>
+    import urllib3
+ImportError: No module named urllib3
+```
+
+Note that `import gym` would work fine on the driver.
+
+I think the problem was that `default_worker.py`, which lives in `lib/python/ray` lived in the same directory as the module `lib/python/ray/array`. The name `array` also presumably appears somewhere along the codepath of `import requests`. And so when `f` was unpickled, it would try to import `requests` and would find the wrong version of `array` (or something like that).",robertnishihara,249517,closed,False,2016-11-12T02:24:00+00:00,2016-11-12T03:02:42+00:00,2016-11-12T03:02:40+00:00,2016-11-12T03:02:40+00:00,5c89a7ab4e8d26d290750492a59a01249982e956,unknown,1,1,3,1,0,0,,,
+ray-project/ray,93452941,38,Logging level,"Ability to set Ray's stdout logging level, using -DRAY_COMMON_LOG_LEVEL=level. The level value can be an integer from 0-4, where the levels are, in order, DEBUG, INFO, WARN, ERROR, FATAL.",stephanie-wang,2560516,closed,False,2016-11-12T21:40:34+00:00,2016-11-16T04:33:31+00:00,2016-11-16T04:33:29+00:00,2016-11-16T04:33:29+00:00,7babe0d22f7237c27ee1c1a021bcbd68375cdfd1,unknown,123,75,14,4,6,0,,,
+ray-project/ray,93459402,39,Install python package dependencies through setup.py.,"Ideally, we would only need to pip install ray, and we wouldn't need to pip install the other Python packages. However, the following problems were encountered.
+
+1. It is difficult to tell `setup.py` to install a specific commit of cloudpickle. This seems to be against the spirit of setuptools. This is why we have people install cloudpickle by hand. Hopefully the cloudpickle package will eventually be updated on PyPI and we can just require a sufficiently recent version.
+2. giving `setup.py` the URL of the numbuf repository with something like
+    ```python
+    setup(
+      dependency_links=[""https://github.com/ray-project/numbuf/tarball/d1974afbab9f0f1bcf8af15a8c476d868ad31aff#egg=numbuf""]
+    )
+    ```
+    doesn't seem to work reliably.
+3. In numbuf's `setup.py`, we can set `setup_requires=[""numpy""]`, and this attempts to install numpy, but it doesn't appear to succeed.
+4. Including `funcsigs` in `install_requires` in `setup.py` fails on Travis with the error
+    ```
+    Processing funcsigs-1.0.2.tar.gz
+    Writing /tmp/easy_install-7EOPah/funcsigs-1.0.2/setup.cfg
+    Running funcsigs-1.0.2/setup.py -q bdist_egg --dist-dir /tmp/easy_install-7EOPah/funcsigs-1.0.2/egg-dist-tmp-q5IF8e
+    error: Installed distribution setuptools 1.1.6 conflicts with requirement setuptools>=17.1
+    ```",robertnishihara,249517,closed,False,2016-11-13T02:15:18+00:00,2016-11-13T03:37:22+00:00,2016-11-13T03:37:20+00:00,2016-11-13T03:37:20+00:00,43aba4fc6dcc0e063b1aee34fa38e45a0f0d4c70,unknown,63,63,4,4,0,0,,,
+ray-project/ray,93460343,40,Remove out-of-date documentation.,,robertnishihara,249517,closed,False,2016-11-13T02:59:27+00:00,2016-11-13T03:34:24+00:00,2016-11-13T03:34:22+00:00,2016-11-13T03:34:22+00:00,28a80ca05814966ede3cb12acf9ec92746ffd11d,unknown,1,2,1,1,0,0,,,
+ray-project/ray,93483957,41,Get rid of old git submodule init calls.,,robertnishihara,249517,closed,False,2016-11-13T19:46:30+00:00,2016-12-01T07:28:31+00:00,2016-11-13T22:55:28+00:00,2016-11-13T22:55:28+00:00,ad6a4017408de00ee354d7ca076191d551f8ddd8,unknown,1,2,2,1,0,0,,,
+ray-project/ray,93629644,42,Quick workaround for ray.wait bug.,"Without this fix, you can reproduce the bug as follows (on Mac OS X).
+
+```python
+import ray
+ray.init(start_ray_local=True, num_workers=1)
+
+@ray.remote
+def f():
+  return 1
+
+ray.wait([f.remote()], timeout=(2 ** 60))
+```
+
+The last line just hangs.
+
+I've looked through the code, and the timeout is properly passed around as a 64 bit int (all the way to where the timer is added to the event loop). The hanging occurs because when the result of the task `f` is written to the object store, it calls `seal_object` in the plasma store (like it's supposed to), which calls `send_notifications` to notify the plasma manager (like it is supposed to), but the corresponding callback in the plasma manager (process_object_notification) never gets called (and that's the part that should cause wait to return).",robertnishihara,249517,closed,False,2016-11-14T19:21:57+00:00,2016-11-22T21:31:24+00:00,2016-11-22T21:31:22+00:00,2016-11-22T21:31:22+00:00,a93c6b7596678b2ae5eccc8a10679b9b6cfa0454,unknown,8,2,3,1,0,0,,,
+ray-project/ray,93895953,43,[WIP] Parameter Server methods,"Here are the `init`, `push`, and `pull` methods we've been working on.
+
+Currently `push` is still clobbering.
+
+Obviously this isn't ready for merging! Just wanted to push it up to have you guys take a look.",aykamko,2819026,closed,False,2016-11-16T03:35:50+00:00,2017-02-14T01:45:39+00:00,2017-02-14T01:45:39+00:00,,cd372b312476c4e2b65b1cd36ac86900f7974ba5,dirty,473,17,5,14,0,2,,,
+ray-project/ray,94030941,44,Move common C tests into shell script and properly cleanup the redis …,"…server started by the tests.
+
+Before this PR, pip install would hang, e.g., if you run
+```
+pip install --user --upgrade --verbose ""git+git://github.com/ray-project/ray.git#egg=ray&subdirectory=lib/python""
+```
+Then it almost finishes but seems to freeze.
+
+It looks like the reason is that during the testing that happens during installation, we start up a redis server and never kill it, and that prevents the pip install from finishing.
+
+This should be fixed now. Try pip installing from this branch, e.g.,
+```
+pip install --user --upgrade --verbose ""git+git://github.com/ray-project/ray.git@install#egg=ray&subdirectory=lib/python""
+```
+",robertnishihara,249517,closed,False,2016-11-16T19:16:23+00:00,2016-12-01T07:28:36+00:00,2016-11-24T05:16:13+00:00,,45cee79352619b47909488e59af23524ed6bc10d,dirty,52,22,4,1,0,0,,,
+ray-project/ray,94119079,45,Global scheduler skeleton,"**Things done in this PR:**
+- Enable subscribing to the ""local scheduler"" table.
+- Bare bones scheduler that subscribes to the local scheduler table and the task table, so it receives updates about all tasks that are scheduled and all new local schedulers that connect to Redis. When it receives a task, it immediately assigns it to a local scheduler (if no local schedulers have connected yet, we currently just fail).
+- Allow the local scheduler to start without connecting to Redis, in which case everything is done locally. If a Redis address is provided, then the local scheduler subscribes to updates to the task table that are assigned to it.
+
+
+**Things that can be done in a subsequent PR:**
+- For  calls to PUBLISH, check that the number of clients that received the message is what we expect
+- Replace concept of `node_id` with `client_id` or perhaps `db_client_id`.
+- Subscribe to updates from the **object table**.
+- Create some state managed by the global scheduling algorithm.
+- **Allow subscriptions to the various tables get everything that has already been placed in those tables.**
+
+**Notes:**
+- This PR makes the microbenchmark of just submitting as many tasks as quickly as possible slower (20us to 30us on my laptop (using 1 worker)). This may be because the load is increased on the local scheduler because most tasks get submitted to the local scheduler once by the driver and then again by the global scheduler. This could potentially be solved by more clever local/global scheduling algorithms.
+-We should have an option for always forwarding tasks to the global scheduler for benchmarking purposes.",robertnishihara,249517,closed,False,2016-11-17T08:04:41+00:00,2016-11-19T08:26:21+00:00,2016-11-19T03:57:51+00:00,2016-11-19T03:57:51+00:00,d77b685a90ea0b8c99b811e6c01c6ed7f349f5a1,unknown,1070,328,50,14,38,0,,,
+ray-project/ray,94279685,46,Object hashes,Compute hashes of object data so that we can detect nondeterministic task executions.,stephanie-wang,2560516,closed,False,2016-11-18T00:17:13+00:00,2016-12-09T20:12:09+00:00,2016-12-09T04:10:37+00:00,,716366514498d9fed129c3e446035f6c38f4238b,dirty,1690,79,19,7,18,5,,,
+ray-project/ray,94475415,47,Use sizeof(field) instead of sizeof(type) and other fixes.,,robertnishihara,249517,closed,False,2016-11-19T08:32:56+00:00,2016-11-19T20:19:52+00:00,2016-11-19T20:19:49+00:00,2016-11-19T20:19:49+00:00,c8c39831954049590b3687f39c06c723bbc2da1e,unknown,106,100,16,7,11,4,,,
+ray-project/ray,94494497,48,Numbuf integration,This PR integrates the numbuf repo and the ray repo. It also rebases ray onto the latest version of arrow.,pcmoritz,113316,closed,False,2016-11-19T20:31:45+00:00,2016-11-20T02:20:05+00:00,2016-11-20T02:10:53+00:00,2016-11-20T02:10:53+00:00,c9757a6fd0f26d65e4a4bb92e11a0ef2bd37a34c,unknown,1892,5,29,39,0,0,,,
+ray-project/ray,94499847,49,Improve case on Mac where cmake fails to find Python with the custom search path.,"CMake tries to find the Python libraries to use during compilation by searching near the Python executable. However, when the user is inside of a virtualenv, the executable is inside the virtual environment directory while the Python libraries are in their original location.
+
+However, (in the cases I tested) we can still find the Python include directories without trouble, by running the following.
+
+```
+python -c ""from distutils.sysconfig import *; print get_python_inc()""
+```
+
+That gives us a hint about where the Python libraries are. So if we can't find the libraries near the executable, we look for them near the include directories.
+
+This seems to address the virtualenv case (and hopefully most cases).",robertnishihara,249517,closed,False,2016-11-19T23:20:39+00:00,2016-11-20T03:00:49+00:00,2016-11-20T03:00:43+00:00,2016-11-20T03:00:43+00:00,f267da6aa84620f1e2a83098e921e77d950ab122,unknown,169,104,3,8,0,0,,,
+ray-project/ray,94510099,50,Plasma performance improvements,,pcmoritz,113316,closed,False,2016-11-20T07:32:56+00:00,2017-01-18T01:23:57+00:00,2017-01-18T01:23:55+00:00,,7f2fa6d619c402c46167b7187eac0ade12ae772e,dirty,283,115,10,4,4,0,,,
+ray-project/ray,94551942,51,Basic loading to/reloading from disk functionality,"Exactly what it says on the tin. Two new functions ""persist_object"" and ""get_persisted_object"", along with helper function ""object_id_to_persist_path"". Tested these functions in the basic-persistence branch, wherein these functions were functional (issues were caused by the eviction policy). 
+
+The hope is to integrate these 2 functions into the eviction policy once we better define the semantics of the LRU cache and eviction. ",justinyum,13102835,closed,False,2016-11-21T04:11:41+00:00,2019-09-23T10:01:37+00:00,2017-02-14T01:46:33+00:00,,a3c6fddd968806727f89d66e5362042d30554c5f,dirty,167,7,6,15,14,3,,,
+ray-project/ray,94552203,52,Fix pip install hanging by moving C tests out of build.sh.,,robertnishihara,249517,closed,False,2016-11-21T04:16:23+00:00,2016-11-21T05:02:56+00:00,2016-11-21T05:02:54+00:00,2016-11-21T05:02:54+00:00,9ed56c23dbbbfa005fd256ce94b4019ce3c4a6ce,unknown,10,4,3,2,0,0,,,
+ray-project/ray,94579116,53,Statically link arrow libraries when building numbuf,,pcmoritz,113316,closed,False,2016-11-21T09:27:58+00:00,2016-11-21T10:14:14+00:00,2016-11-21T10:14:13+00:00,2016-11-21T10:14:13+00:00,da6bcfcc70d1e4e36c8d8d37113d6a774f89a78a,unknown,12,24,2,3,0,0,,,
+ray-project/ray,94581507,54,Remove numbuf from requirements for setup.py.,,robertnishihara,249517,closed,False,2016-11-21T09:44:17+00:00,2016-11-21T22:30:20+00:00,2016-11-21T22:30:18+00:00,2016-11-21T22:30:18+00:00,4b00c029ac9e03134c2582e3c9fc3d7d02d7ffb6,unknown,3,4,3,2,0,0,,,
+ray-project/ray,94582958,55,Enable more warnings and fix usleep() issue,"Seems like we were getting ""lucky"" with the `usleep` call... it seemed to be undeclared on Ubuntu.",mehrdadn,523212,closed,False,2016-11-21T09:54:00+00:00,2016-11-22T08:29:31+00:00,2016-11-22T08:29:27+00:00,2016-11-22T08:29:27+00:00,35ce5f8001402f6d3fd2ce736739366a521b4664,unknown,14,4,6,2,2,1,,,
+ray-project/ray,94584916,56,Remove Redis version from Linux scripts,"Not required per se, but version numbers aren't necessary at all (and shouldn't need to be sprinkled across multiple scripts).",mehrdadn,523212,closed,False,2016-11-21T10:06:03+00:00,2016-11-21T23:02:42+00:00,2016-11-21T23:02:41+00:00,2016-11-21T23:02:40+00:00,371498409444fa4eaf804c87df287110b00fd97b,unknown,17,12,9,2,3,0,,,
+ray-project/ray,94585602,57,Windows compatibility,Contains changes required for Windows version to build correctly. (No tests have been run yet.),mehrdadn,523212,closed,False,2016-11-21T10:10:22+00:00,2017-06-06T07:31:13+00:00,2016-11-23T01:04:24+00:00,2016-11-23T01:04:24+00:00,7237ec41244d76cd193468543f2c8f3ec183a71e,unknown,2233,7126,65,4,10,2,,,
+ray-project/ray,94933532,59,Remove semicolon in macro.,,robertnishihara,249517,closed,False,2016-11-23T02:00:26+00:00,2016-11-23T08:54:09+00:00,2016-11-23T08:54:07+00:00,2016-11-23T08:54:07+00:00,1f9fce8e53ee6b778362e8ef4b2fb9b497ebf15e,unknown,2,2,1,1,0,0,,,
+ray-project/ray,94934302,60,Refactor plasma,"This PR introduces a number of methods to construct, send and receive plasma requests and replies:
+
+- `plasma_make_request` for allocating a request on the stack
+- `plasma_alloc_request` for allocating a (possibly variable size) request on the heap
+- `plasma_free_request` for freeing a variable size request from the heap
+- `plasma_request_size` for getting the size of a request
+- `plasma_send_request` for sending a request over a socket
+- `plasma_receive_request` for receiving a request over a socket",pcmoritz,113316,closed,False,2016-11-23T02:10:15+00:00,2016-11-24T05:13:21+00:00,2016-11-24T05:13:19+00:00,2016-11-24T05:13:19+00:00,8147b629643ac98454fb02c9ddc3493c3c91a90e,unknown,294,190,10,1,3,0,,,
+ray-project/ray,94934356,61,Redis Server started in tests now shutdowns at end of tests.,,Wapaul1,14142309,closed,False,2016-11-23T02:11:02+00:00,2016-11-24T05:47:55+00:00,2016-11-24T05:47:53+00:00,2016-11-24T05:47:53+00:00,800bf8deb3f08dcc5b5b05cd72d62bf40efde47c,unknown,4,0,1,4,0,0,,,
+ray-project/ray,95221412,62,Object table subscribe with new semantics,"This PR changes object_table subscribe such that if an object is already present, the object_available callback will be called immediately. This is to make the function robust against race conditions.",pcmoritz,113316,closed,False,2016-11-24T19:22:08+00:00,2016-11-28T08:20:10+00:00,2016-11-28T05:26:23+00:00,2016-11-28T05:26:23+00:00,c7073d623be904f1b865e72efdb1f4e9d246e6a6,unknown,197,16,2,11,1,0,,,
+ray-project/ray,95224134,63,Re-enable fetch tests.,,robertnishihara,249517,closed,False,2016-11-24T20:06:58+00:00,2016-11-25T00:27:19+00:00,2016-11-25T00:27:17+00:00,2016-11-25T00:27:17+00:00,bc1d7db9261bc688238dcdb8f00acc0e53c25e21,unknown,100,61,6,8,0,0,,,
+ray-project/ray,95454199,64,Plasma Optimizations,,pcmoritz,113316,closed,False,2016-11-28T08:17:36+00:00,2017-01-18T01:24:21+00:00,2017-01-18T01:24:19+00:00,,17cdd54d8a373ad12273bf5b695287502575b11c,dirty,255,102,8,3,0,0,,,
+ray-project/ray,95599806,65,Object reconstruction in Photon,"This exposes object reconstruction to the photon client. On a request for object reconstruction from the client, the photon local scheduler will try to resubmit the task that created the object for execution.",stephanie-wang,2560516,closed,False,2016-11-28T23:49:00+00:00,2016-12-13T07:17:23+00:00,2016-12-13T07:17:22+00:00,2016-12-13T07:17:22+00:00,4bdb9f7224d71c701236c505bbcafb511c4f9a0c,unknown,590,99,17,9,5,0,,,
+ray-project/ray,95601233,66,Make Redis script executable,,mehrdadn,523212,closed,False,2016-11-29T00:01:54+00:00,2016-11-29T22:33:22+00:00,2016-11-29T22:33:20+00:00,2016-11-29T22:33:20+00:00,4d327c571aef8ae45db83210498370a69c7fc38b,unknown,0,0,1,1,0,0,,,
+ray-project/ray,95642363,67,"When searching for Python with cmake, try custom tricks before using default cmake behavior.",,robertnishihara,249517,closed,False,2016-11-29T07:56:15+00:00,2016-11-29T22:32:56+00:00,2016-11-29T22:32:54+00:00,2016-11-29T22:32:54+00:00,2c639c05efb57124b3ccc868ae08dc28d21b74c6,unknown,123,138,3,2,0,0,,,
+ray-project/ray,95754516,68,add errno logging for fatal checks,,pcmoritz,113316,closed,False,2016-11-29T19:04:24+00:00,2016-11-30T06:40:03+00:00,2016-11-30T06:40:01+00:00,2016-11-30T06:40:01+00:00,a2692ead6ecf5117058d5d4d9a5be9c1327ce4ca,unknown,13,13,1,1,0,0,,,
+ray-project/ray,95764580,69,handling partial/interrupted I/O,"Updated read_bytes and write_bytes to handle EINTR and changed the flow a bit.
+
+EINTR is induced when a process is interrupted by a signal while doing I/O. It is not uncommon in asynchronous, event-driven code with callbacks. Different *Nix systems may handle EINTR differently, some automatically restart the syscall, some don't. It is best to handle it in all cases and manually restart the syscall, while accounting for the partial read/write.
+
+Plasma send/receive were updated to support partial fd reads/writes, in lieu of treating them as failed I/O.",atumanov,1316372,closed,False,2016-11-29T20:01:11+00:00,2016-11-30T07:14:39+00:00,2016-11-30T07:04:14+00:00,2016-11-30T07:04:13+00:00,1499834be1324349b7f0c0ea2d0dbcb3f6120e53,unknown,30,28,3,3,0,0,,,
+ray-project/ray,96000299,71,Introduce non-blocking Plasma API.,Pull requests after Robert's rebase.,istoica,1149505,closed,False,2016-12-01T00:05:14+00:00,2016-12-01T10:15:26+00:00,2016-12-01T10:15:21+00:00,2016-12-01T10:15:21+00:00,f89be9699c8ba8d3c519d5d15a52ec79bc0c1f00,unknown,2053,241,16,20,0,0,,,
+ray-project/ray,96015035,72,Fix bug in serializing arguments of tasks that are more complex objects,This addresses #70 by using Pickle instead of Marshal to serialize arguments that are added to the task struct.,pcmoritz,113316,closed,False,2016-12-01T02:28:07+00:00,2016-12-01T07:22:40+00:00,2016-12-01T07:21:53+00:00,2016-12-01T07:21:53+00:00,58e8bbcb341ae0214ac91228417e3735be21a0d2,unknown,66,10,6,7,1,3,,,
+ray-project/ray,96160489,73,Cache plasma object information on the plasma client,Cache information about the object pointer and size on the plasma client. This information will be evicted when the object is no longer in use.,stephanie-wang,2560516,closed,False,2016-12-01T20:05:56+00:00,2016-12-02T00:46:22+00:00,2016-12-02T00:46:17+00:00,2016-12-02T00:46:17+00:00,dadbcae17d729c18e93ff2f27b9bc091671aaba3,unknown,103,45,2,2,0,1,,,
+ray-project/ray,96165629,74,Use enums instead of ints for status and type in plasma.,,robertnishihara,249517,closed,False,2016-12-01T20:37:31+00:00,2016-12-01T22:56:17+00:00,2016-12-01T22:56:15+00:00,,c4057c30a00552b57911817a9d822cca2e035332,dirty,74,65,7,2,0,0,,,
+ray-project/ray,96188074,75,Bug fix and minor formatting fixes.,,robertnishihara,249517,closed,False,2016-12-01T22:56:35+00:00,2016-12-08T01:57:19+00:00,2016-12-08T01:57:17+00:00,,0d24a6e150b8589325873f090ad09c631780fb2c,dirty,16,14,4,1,0,0,,,
+ray-project/ray,96346051,77,Implement pubsub transfer and transfer subscribe,"This PR implements a publish and subscribe facility for the global state store, which can be used by the global scheduler to inform plasma managers to ship objects.",pcmoritz,113316,closed,False,2016-12-02T20:19:11+00:00,2017-02-22T06:18:40+00:00,2017-02-22T06:18:37+00:00,,9ac62f8468e32bff4209c2e04bbdaae792b0df1b,dirty,297,41,6,2,0,3,,,
+ray-project/ray,96346917,78,Replace direct calls to recv with read_bytes.,"There were a couple other instances of direct calls to `read` or `write` or `send` or `recv`.
+
+1. In `read_object_chunk` in `plasma_manager.c` (but there the logic seems to be pretty lenient with errors returned by `read`). https://github.com/ray-project/ray/blob/master/src/plasma/plasma_manager.c#L506
+2. In `send_notifications` in `plasma_store.c`. There the logic is a bit more complicated since we want a non-blocking send. We essentially want `send` to either successfully write the full amount or not write anything (how do we do this?). If it successfully writes some of the bytes we currently fail. We can revisit this if it's a problem. https://github.com/ray-project/ray/blob/master/src/plasma/plasma_store.c#L403
+
+There may be other instances as well.",robertnishihara,249517,closed,False,2016-12-02T20:25:17+00:00,2016-12-03T02:51:52+00:00,2016-12-03T02:51:50+00:00,2016-12-03T02:51:50+00:00,61755bc1680afaad45290e5ab6d3bff3dbd5b762,unknown,18,6,3,3,4,1,,,
+ray-project/ray,96367960,79,Allow fatal errors to produce core dumps.,"To produce a core dump, before starting Ray, run
+
+```
+ulimit -c unlimited
+```
+
+Then when there is a crash, cd to `/cores` and inspect the core dump (e.g., on Mac) with `lldb -c path/to/core`.",robertnishihara,249517,closed,False,2016-12-02T22:58:05+00:00,2016-12-02T23:10:39+00:00,2016-12-02T23:10:37+00:00,2016-12-02T23:10:37+00:00,de2dd1f50622d333a57711c8e44471378c74d5e4,unknown,1,1,1,1,0,0,,,
+ray-project/ray,96382556,80,Init_table_callback now takes ownership of passed in data,,Wapaul1,14142309,closed,False,2016-12-03T02:16:35+00:00,2016-12-03T21:49:10+00:00,2016-12-03T21:49:09+00:00,2016-12-03T21:49:09+00:00,9a513363f9085d78effc5b089c507ce46e2b2adc,unknown,40,43,16,9,0,0,,,
+ray-project/ray,96390722,81,Pack structs that are shipped over the wire,as suggested by Alexey,pcmoritz,113316,closed,False,2016-12-03T07:59:38+00:00,2016-12-20T21:24:31+00:00,2016-12-08T01:56:18+00:00,,5da29e058001333e6cab31d9a04113f17ce3e015,dirty,14,10,3,1,3,1,,,
+ray-project/ray,96413281,82,Change object table subscribe to also return payload,,pcmoritz,113316,closed,False,2016-12-03T22:37:11+00:00,2016-12-05T06:32:16+00:00,2016-12-05T06:32:07+00:00,,fdd85fa85196b81845354f5b677b1ab79de83340,dirty,121,105,10,6,0,0,,,
+ray-project/ray,96413497,83,Non-blocking fetch implementation.,,robertnishihara,249517,closed,False,2016-12-03T22:44:54+00:00,2016-12-04T03:09:07+00:00,2016-12-04T03:09:05+00:00,2016-12-04T03:09:05+00:00,2a3e9267f815efdc0693cf621911bb8b64a38e81,unknown,392,24,11,5,0,0,,,
+ray-project/ray,96451503,84,Remove scheduler_info.,,robertnishihara,249517,closed,False,2016-12-04T23:13:11+00:00,2016-12-04T23:51:05+00:00,2016-12-04T23:51:03+00:00,2016-12-04T23:51:03+00:00,35b9dedb48756eb2d4a68b1394482542c66407db,unknown,152,152,7,1,0,0,,,
+ray-project/ray,96452307,85,Build arrow without tests.,,robertnishihara,249517,closed,False,2016-12-04T23:35:10+00:00,2016-12-11T05:25:54+00:00,2016-12-11T05:25:52+00:00,2016-12-11T05:25:52+00:00,3d083c8b58acb9fa29013c258d000cedd91d11ec,unknown,1,1,1,1,0,0,,,
+ray-project/ray,96453034,86,Allow starting multiple local schedulers.,,robertnishihara,249517,closed,False,2016-12-04T23:54:02+00:00,2016-12-05T01:08:19+00:00,2016-12-05T01:08:17+00:00,2016-12-05T01:08:17+00:00,b5ed2f063db8e244d211f96d0ba13fce3248aee2,unknown,114,60,6,1,0,0,,,
+ray-project/ray,96468294,87,Enable fetching objects from remote object stores.,"The important changes are the following:
+1. The call to fetch in worker.py.
+2. The changes to photon_algorithm.c.
+3. The changes to plasma_manager.c.
+
+Note (pointed out by @mehrdadn): right now, when we fetch an object, we set a timer with callback `manager_timeout_handler`. When the object arrives, the callback `process_object_notification` is called, which removes the timer. We make the assumption that `manager_timeout_handler` never fires after `process_object_notification` runs. This should usually be the case, however, if the timer fires during the middle of `process_object_notification` it is possible that that assumption will be broken.",robertnishihara,249517,closed,False,2016-12-05T04:36:00+00:00,2016-12-06T23:47:33+00:00,2016-12-06T23:47:31+00:00,2016-12-06T23:47:31+00:00,b3c05655a05c6b0fac13b26387abb1ea8129bc8d,unknown,173,35,8,5,0,0,,,
+ray-project/ray,96468618,88,Change object table subscribe to also return payload,,pcmoritz,113316,closed,False,2016-12-05T04:42:00+00:00,2016-12-05T08:26:54+00:00,2016-12-05T08:26:53+00:00,2016-12-05T08:26:53+00:00,ba53e4a43a945ff1a844a0842b682f6266568988,unknown,137,120,12,7,0,0,,,
+ray-project/ray,96611461,89,Put object store memory on /dev/shm on linux,"On linux, /tmp is synchronized with the disk and if the disk is too small, the object store will get a sigbus error. The shared memory file system /dev/shm is not backed by disk as far as I am aware.
+
+By default, /dev/shm is limited to half the size of the available RAM, so we set the plasma store limit to 0.4 * size of available RAM for now. Making /dev/shm larger is possible, but there seems to be some concern that the OOM killer cannot operate well if it is too large.",pcmoritz,113316,closed,False,2016-12-05T21:20:59+00:00,2016-12-08T01:09:49+00:00,2016-12-06T08:31:47+00:00,2016-12-06T08:31:47+00:00,03324caffcdbf059f8daba3728fe0c9d296b78fb,unknown,11,1,2,3,0,1,,,
+ray-project/ray,96642097,90,End-to-end object size information passthrough,"* pass through object size information from Plasma store to Plasma manager to Redis. 
+* add object subscribe methods for schedulers to listen to object information. ",atumanov,1316372,closed,False,2016-12-06T01:07:16+00:00,2016-12-09T05:32:05+00:00,2016-12-09T05:32:05+00:00,,8fedd19538cec8a6d5f9ca449ddf813725efefc8,dirty,414,49,11,9,8,0,,,
+ray-project/ray,96671255,91,Fix bug in which we were running out of file descriptors.,"The important fix here is to `plasma_client.c`. We were leaking file descriptors in the case where `plasma_create` was called with an object ID that already existed.
+
+The test that I added to `test.py` causes a segfault without the change to `plasma_client.c`.",robertnishihara,249517,closed,False,2016-12-06T07:01:35+00:00,2016-12-06T07:45:52+00:00,2016-12-06T07:45:49+00:00,2016-12-06T07:45:49+00:00,dd39008532494fbf21238e30b737523ca242ac5d,unknown,25,3,4,1,0,0,,,
+ray-project/ray,96692170,92,Switch plasma message serialization from C structs to flatbuffers,,pcmoritz,113316,closed,False,2016-12-06T09:55:01+00:00,2016-12-20T21:24:16+00:00,2016-12-12T00:34:01+00:00,,de76a652cf01687a350d7836459f9b5a9d9fd9e9,dirty,494,76,16,4,0,1,,,
+ray-project/ray,96851568,93,Windows compatibility,"~Still incomplete, but if the tests pass, it'd be nice if this could be merged, since there are breaking changes with the codebase and I keep having to update the code every time.~
+
+~Note that this adds several submodules to the repository.~
+
+Updates regarding Windows compatibility.",mehrdadn,523212,closed,False,2016-12-07T03:16:41+00:00,2020-06-24T23:28:07+00:00,2020-06-24T18:27:29+00:00,2020-06-24T18:27:29+00:00,0487c250e84152a3d32630591fb8b7398307ab8f,unknown,47,3,1,10,3,9,,,
+ray-project/ray,96994865,94,Update gitignore.,,robertnishihara,249517,closed,False,2016-12-07T19:52:55+00:00,2016-12-07T19:56:21+00:00,2016-12-07T19:54:16+00:00,2016-12-07T19:54:16+00:00,02e8dd245d582b9ffd1e1829a1f294a603b3764d,unknown,16,0,1,1,0,0,,,
+ray-project/ray,97031490,95,drop GIL for plasma_get,,aykamko,2819026,closed,False,2016-12-07T23:42:24+00:00,2016-12-08T01:01:14+00:00,2016-12-08T01:01:14+00:00,2016-12-08T01:01:14+00:00,b695f2b7e440df438c6a49b35b044d545b2a013e,unknown,2,0,1,1,0,1,,,
+ray-project/ray,97033083,96,unify plasma_seal paths,"Plasma seal request now goes only to the store, which triggers the manager reactively to add the object to the Redis object table.",atumanov,1316372,closed,False,2016-12-07T23:55:56+00:00,2016-12-08T01:25:40+00:00,2016-12-08T01:25:40+00:00,2016-12-08T01:25:40+00:00,88206417cbc586eb82b2a3b5d92dd46f6c7e1681,unknown,13,18,2,1,2,0,,,
+ray-project/ray,97038389,97,Throw an exception if a Ray method is called from a thread that isn't…,"… the main thread.
+
+This is related to #95, as pointed out by @aykamko. The following code (or something like it) can cause a crash because it is not safe to use a plasma client (or photon client) from multiple threads (once we drop the GIL as in #95).
+
+```python
+import ray
+import threading
+
+ray.init(start_ray_local=True, num_workers=1)
+
+obj_id = ray.put(1)
+
+def f():
+  for _ in range(100):
+    ray.get(obj_id)
+
+t1 = threading.Thread(target=f, args=())
+t2 = threading.Thread(target=f, args=())
+
+t1.start()
+t2.start()
+```
+
+This throws an exception if certain Ray methods are called on a thread other than the main thread.",robertnishihara,249517,closed,False,2016-12-08T00:45:29+00:00,2016-12-11T05:24:52+00:00,2016-12-11T05:24:50+00:00,2016-12-11T05:24:50+00:00,0f7091099d514111dae8da64b37e178e8e7184fb,unknown,22,0,1,1,0,0,,,
+ray-project/ray,97185629,99,Cause plasma client tests failures to show up on travis.,,robertnishihara,249517,closed,False,2016-12-08T19:34:03+00:00,2016-12-09T03:32:27+00:00,2016-12-09T03:32:24+00:00,2016-12-09T03:32:24+00:00,4a62a3c5d7ab1c84c9af772864ad38b53ef2b508,unknown,5,1,2,2,0,0,,,
+ray-project/ray,97227527,101,Factoring out object_info structure for use in several Ray components,,atumanov,1316372,closed,False,2016-12-09T00:12:41+00:00,2016-12-09T03:14:10+00:00,2016-12-09T03:14:10+00:00,2016-12-09T03:14:10+00:00,1c946b2f6a26e1808e6112d8d46eff449b01cf38,unknown,99,38,9,7,1,0,,,
+ray-project/ray,97238994,102,"If no fail callback is provided, throw a fatal error when number of r…",…etries is used up.,robertnishihara,249517,closed,False,2016-12-09T02:08:11+00:00,2016-12-22T23:10:22+00:00,2016-12-22T23:10:19+00:00,,09406c58da28cafd167b48d588057c2d9fa0afa2,dirty,5,0,1,1,0,0,,,
+ray-project/ray,97247806,103,Object hashes (Stephanie),,pcmoritz,113316,closed,False,2016-12-09T04:01:10+00:00,2016-12-09T04:19:42+00:00,2016-12-09T04:19:42+00:00,,57ee8f522e0d448305d38e6b2329161b62a7f7dc,dirty,1713,93,22,13,0,1,,,
+ray-project/ray,97249164,104,Object hashes,Add object hashes to the object table to detect nondeterministic tasks.,stephanie-wang,2560516,closed,False,2016-12-09T04:22:42+00:00,2016-12-09T04:57:15+00:00,2016-12-09T04:57:08+00:00,2016-12-09T04:57:08+00:00,61904c4c3eb604950f73d44fb145a3cce704475f,unknown,1714,101,22,14,0,1,,,
+ray-project/ray,97253430,105,End-to-end object size information passthrough,"* pass through object size information from Plasma store to Plasma manager to Redis.
+* a separate hash table struct is created for storing object attribute information.
+* object attribute table subscribe methods for schedulers to listen to object information.
+* separate subscribe methods for object keyspace notifications and object attribute pub/sub channel.",atumanov,1316372,closed,False,2016-12-09T05:29:21+00:00,2016-12-09T08:51:46+00:00,2016-12-09T08:51:44+00:00,2016-12-09T08:51:44+00:00,0abbf5a1138ad8776d332dc888c8ff593cdf6607,unknown,256,41,8,6,2,1,,,

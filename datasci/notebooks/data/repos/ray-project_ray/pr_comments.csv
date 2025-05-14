@@ -1,0 +1,788 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+ray-project/ray,2514984359,2085586844,edoakes,9871461,2025-05-12T21:47:29+00:00,2025-05-12T21:47:30+00:00,bugfix mentioned in PR description,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2514984359,2085910377,jjyao,898023,2025-05-13T04:46:39+00:00,2025-05-13T04:46:39+00:00,Can we use both `start_cluster` and `start_cluster_shared` in the same test file?,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2514984359,2085586844,edoakes,9871461,2025-05-12T21:47:29+00:00,2025-05-12T21:47:30+00:00,bugfix mentioned in PR description,True,python/ray/util/client/worker.py,5.0,"@@ -654,12 +654,13 @@ def call_retain(self, id: bytes) -> None:
+     def close(self):
+         self._in_shutdown = True
+         self.closed = True
++        if self.channel:
++            self.channel.close()",0,0,0,0,0,0,0
+ray-project/ray,2514984359,2085910377,jjyao,898023,2025-05-13T04:46:39+00:00,2025-05-13T04:46:39+00:00,Can we use both `start_cluster` and `start_cluster_shared` in the same test file?,True,python/ray/tests/conftest.py,94.0,"@@ -855,7 +870,20 @@ def start_cluster(ray_start_cluster_enabled, request):
+     else:
+         address = cluster.address
+ 
+-    yield cluster, address
++    return cluster, address
++
++
++# Used to test both Ray Client and non-Ray Client codepaths.
++# Usage: In your test, call `ray.init(address)`.
++@pytest.fixture(scope=""function"", params=[""ray_client"", ""no_ray_client""])
++def start_cluster(ray_start_cluster_enabled, request):
++    yield _start_cluster(ray_start_cluster_enabled, request)
++
++
++# Same as `start_cluster` but module-scoped.
++@pytest.fixture(scope=""module"", params=[""ray_client"", ""no_ray_client""])
++def start_cluster_shared(ray_start_cluster_enabled_shared, request):",0,0,0,0,0,0,0
+ray-project/ray,2512520056,2085036410,jjyao,898023,2025-05-12T16:22:19+00:00,2025-05-12T16:22:19+00:00,Another follow-up is renaming ActorCounter to probably just SequenceNumber.,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2512520056,2085036410,jjyao,898023,2025-05-12T16:22:19+00:00,2025-05-12T16:22:19+00:00,Another follow-up is renaming ActorCounter to probably just SequenceNumber.,True,src/ray/core_worker/transport/actor_task_submitter.cc,4.0,"@@ -579,7 +579,7 @@ void ActorTaskSubmitter::PushActorTask(ClientQueue &queue,
+   request->mutable_task_spec()->CopyFrom(task_spec.GetMessage());
+ 
+   request->set_intended_worker_id(queue.worker_id);
+-  request->set_sequence_number(queue.actor_submit_queue->GetSequenceNumber(task_spec));",0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085287449,justinvyu,3887863,2025-05-12T19:07:15+00:00,2025-05-12T19:12:43+00:00,"Can you add a reference tag here (ex: `.. _forking-ray-processes-antipattern:`)?
+
+https://github.com/ray-project/ray/blob/master/doc/source/ray-core/patterns/fork-new-processes.rst#L1
+
+Then, just point to this in the note, and no need to go into so much detail about the specific case I ran into. 
+
+```suggestion
+.. note::
+    When using PyTorch DataLoader multiprocessing with Ray Train, you should set the process start method to be `forkserver` or `spawn` as
+    shown in the example above. :ref:`Forking Ray Actors and Tasks is an anti-pattern <forking-ray-processes-antipattern>` that
+    can lead to unexpected issues such as deadlocks.
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085290425,justinvyu,3887863,2025-05-12T19:09:40+00:00,2025-05-12T19:12:43+00:00,"I think this is the more common way to get the context:
+
+```suggestion
+                train_loader = DataLoader(train_data, batch_size=128, shuffle=True, multiprocessing_context=multiprocessing.get_context(""forkserver""))
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085291811,justinvyu,3887863,2025-05-12T19:10:44+00:00,2025-05-12T19:12:43+00:00,Can you also move this quickstart code to a tested doctest file?,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085287449,justinvyu,3887863,2025-05-12T19:07:15+00:00,2025-05-12T19:12:43+00:00,"Can you add a reference tag here (ex: `.. _forking-ray-processes-antipattern:`)?
+
+https://github.com/ray-project/ray/blob/master/doc/source/ray-core/patterns/fork-new-processes.rst#L1
+
+Then, just point to this in the note, and no need to go into so much detail about the specific case I ran into. 
+
+```suggestion
+.. note::
+    When using PyTorch DataLoader multiprocessing with Ray Train, you should set the process start method to be `forkserver` or `spawn` as
+    shown in the example above. :ref:`Forking Ray Actors and Tasks is an anti-pattern <forking-ray-processes-antipattern>` that
+    can lead to unexpected issues such as deadlocks.
+```",True,doc/source/train/getting-started-pytorch.rst,,"@@ -273,6 +275,14 @@ See :ref:`data-ingest-torch`.
+ 
+     See :ref:`data-ingest-torch` for more details.
+ 
++.. note::
++    When using PyTorch DataLoader multiprocessing with Ray Train, you should set the
++    ``multiprocessing_context`` to ``multiprocessing.context.ForkServerContext()`` as
++    shown in the example above. This is because Ray Train configures the global logger with
++    Ray-specific context like ``get_actor_id()``, which, when inherited by Torch Dataloader
++    subprocesses using ``fork``, can cause hangs during logging since these subprocesses
++    aren't Ray actors.",0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085290425,justinvyu,3887863,2025-05-12T19:09:40+00:00,2025-05-12T19:12:43+00:00,"I think this is the more common way to get the context:
+
+```suggestion
+                train_loader = DataLoader(train_data, batch_size=128, shuffle=True, multiprocessing_context=multiprocessing.get_context(""forkserver""))
+```",True,doc/source/train/getting-started-pytorch.rst,,"@@ -124,7 +126,7 @@ Compare a PyTorch training script with and without Ray Train.
+                 transform = Compose([ToTensor(), Normalize((0.28604,), (0.32025,))])
+                 data_dir = os.path.join(tempfile.gettempdir(), ""data"")
+                 train_data = FashionMNIST(root=data_dir, train=True, download=True, transform=transform)
+-                train_loader = DataLoader(train_data, batch_size=128, shuffle=True)
++                train_loader = DataLoader(train_data, batch_size=128, shuffle=True, multiprocessing_context=multiprocessing.context.ForkServerContext())",0,0,0,0,0,0,0
+ray-project/ray,2510779588,2085291811,justinvyu,3887863,2025-05-12T19:10:44+00:00,2025-05-12T19:12:43+00:00,Can you also move this quickstart code to a tested doctest file?,True,doc/source/train/getting-started-pytorch.rst,,"@@ -124,7 +126,7 @@ Compare a PyTorch training script with and without Ray Train.
+                 transform = Compose([ToTensor(), Normalize((0.28604,), (0.32025,))])
+                 data_dir = os.path.join(tempfile.gettempdir(), ""data"")
+                 train_data = FashionMNIST(root=data_dir, train=True, download=True, transform=transform)
+-                train_loader = DataLoader(train_data, batch_size=128, shuffle=True)
++                train_loader = DataLoader(train_data, batch_size=128, shuffle=True, multiprocessing_context=multiprocessing.context.ForkServerContext())",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085188933,edoakes,9871461,2025-05-12T18:05:06+00:00,2025-05-12T18:06:30+00:00,let's inline these message types in the same file... it's excessively verbose as-is,False,,,,1,1,0,0,0,0,0
+ray-project/ray,2510685905,2085190467,edoakes,9871461,2025-05-12T18:06:14+00:00,2025-05-12T18:06:30+00:00,"what is the existing `timestamp` type? and this is not a public API change, right?
+
+please also update the comment (not in ns anymore, but in protobuf-native timestamp format)",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085626802,MengjinYan,8065093,2025-05-12T22:32:50+00:00,2025-05-12T22:32:51+00:00,"This is not an API that is used publicly. 
+
+The exiting `timestamp` is a wrong type and I corrected it in this PR after the build file is updated. 
+
+Will make change to update the comment.",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085628541,kevin85421,20109646,2025-05-12T22:35:14+00:00,2025-05-12T22:44:03+00:00,"https://youtu.be/sImWl7JyK_Q?si=TAPfwzw1_opdjgRf
+
+The gRPC maintainer's talk mentions that setting a deadline or timeout is considered a best practice. It's not necessary to update it in this PR.",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085628898,kevin85421,20109646,2025-05-12T22:35:49+00:00,2025-05-12T22:44:03+00:00,"nit
+```suggestion
+    RAY_LOG(INFO) << ""Initiating the event aggregator client with address: "" << address
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085629498,kevin85421,20109646,2025-05-12T22:36:42+00:00,2025-05-12T22:44:03+00:00,"```suggestion
+                  << "" port: "" << port;
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085632774,kevin85421,20109646,2025-05-12T22:40:52+00:00,2025-05-12T22:44:03+00:00,remove this?,False,,,,1,1,0,0,0,0,0
+ray-project/ray,2510685905,2085695642,MengjinYan,8065093,2025-05-12T23:47:32+00:00,2025-05-12T23:47:33+00:00,Thanks for the reference! Will add a comment for the improvement in a future PR. ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085188933,edoakes,9871461,2025-05-12T18:05:06+00:00,2025-05-12T18:06:30+00:00,let's inline these message types in the same file... it's excessively verbose as-is,True,src/ray/protobuf/events/aggregator_service/event_aggregator_service.proto,57.0,"@@ -0,0 +1,26 @@
++// Copyright 2025 The Ray Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//  http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++syntax = ""proto3"";
++
++import ""src/ray/protobuf/events/aggregator_service/add_event_request.proto"";
++import ""src/ray/protobuf/events/aggregator_service/add_event_reply.proto"";
++
++package ray.rpc.events;
++
++// Service for adding events to the event aggregator.
++service EventAggregatorService {
++  // Add events to the event aggregator.
++  rpc AddEvents(AddEventRequest) returns (AddEventReply);",1,1,0,0,0,0,0
+ray-project/ray,2510685905,2085190467,edoakes,9871461,2025-05-12T18:06:14+00:00,2025-05-12T18:06:30+00:00,"what is the existing `timestamp` type? and this is not a public API change, right?
+
+please also update the comment (not in ns anymore, but in protobuf-native timestamp format)",True,src/ray/protobuf/events/base.proto,20.0,"@@ -62,7 +68,7 @@ message RayEvent {
+ 	// nested message.
+ 	EventType event_type = 3;
+ 	// Epoch timestamp in ns, captured when the event is created
+-	timestamp timestamp_ns = 4;
++	google.protobuf.Timestamp timestamp = 4;",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085626802,MengjinYan,8065093,2025-05-12T22:32:50+00:00,2025-05-12T22:32:51+00:00,"This is not an API that is used publicly. 
+
+The exiting `timestamp` is a wrong type and I corrected it in this PR after the build file is updated. 
+
+Will make change to update the comment.",True,src/ray/protobuf/events/base.proto,20.0,"@@ -62,7 +68,7 @@ message RayEvent {
+ 	// nested message.
+ 	EventType event_type = 3;
+ 	// Epoch timestamp in ns, captured when the event is created
+-	timestamp timestamp_ns = 4;
++	google.protobuf.Timestamp timestamp = 4;",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085628541,kevin85421,20109646,2025-05-12T22:35:14+00:00,2025-05-12T22:44:03+00:00,"https://youtu.be/sImWl7JyK_Q?si=TAPfwzw1_opdjgRf
+
+The gRPC maintainer's talk mentions that setting a deadline or timeout is considered a best practice. It's not necessary to update it in this PR.",True,src/ray/rpc/event_aggregator_client.h,68.0,"@@ -0,0 +1,76 @@
++// Copyright 2025 The Ray Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//  http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++#pragma once
++
++#include <grpcpp/grpcpp.h>
++
++#include <memory>
++#include <string>
++
++#include ""ray/rpc/grpc_client.h""
++#include ""ray/util/logging.h""
++#include ""src/ray/protobuf/event_aggregator_service.grpc.pb.h""
++#include ""src/ray/protobuf/event_aggregator_service.pb.h""
++
++namespace ray {
++namespace rpc {
++
++/// Client used for communicating with an event aggregator server in the dashboard
++/// agent.
++class EventAggregatorClient {
++ public:
++  virtual ~EventAggregatorClient() = default;
++
++  /// Report event to event aggregator.
++  ///
++  /// \param[in] request The request message.
++  /// \param[in] callback The callback function that handles reply.
++  virtual void AddEvents(const rpc::AddEventRequest &request,
++                         const ClientCallback<rpc::AddEventReply> &callback) = 0;
++};
++
++class EventAggregatorClientImpl : public EventAggregatorClient {
++ public:
++  /// Constructor.
++  ///
++  /// \param[in] address Address of the event aggregator server.
++  /// \param[in] port Port of the event aggregator server.
++  /// \param[in] client_call_manager The `ClientCallManager` used for managing requests.
++  EventAggregatorClientImpl(const std::string &address,
++                            const int port,
++                            ClientCallManager &client_call_manager) {
++    RAY_LOG(INFO) << ""Initiating the event aggregator client with address:"" << address
++                  << "" port:"" << port;
++    grpc_client_ = std::make_unique<GrpcClient<EventAggregatorService>>(
++        address, port, client_call_manager);
++  };
++
++  void AddEvents(const rpc::AddEventRequest &request,
++                 const ClientCallback<rpc::AddEventReply> &callback) override {
++    grpc_client_->CallMethod<rpc::AddEventRequest, rpc::AddEventReply>(
++        &EventAggregatorService::Stub::PrepareAsyncReceiveEvents,
++        request,
++        callback,
++        ""EventAggregatorService.grpc_client.AddEvents"",
++        /*timeout_ms*/ -1);",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085628898,kevin85421,20109646,2025-05-12T22:35:49+00:00,2025-05-12T22:44:03+00:00,"nit
+```suggestion
+    RAY_LOG(INFO) << ""Initiating the event aggregator client with address: "" << address
+```",True,src/ray/rpc/event_aggregator_client.h,,"@@ -0,0 +1,76 @@
++// Copyright 2025 The Ray Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//  http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++#pragma once
++
++#include <grpcpp/grpcpp.h>
++
++#include <memory>
++#include <string>
++
++#include ""ray/rpc/grpc_client.h""
++#include ""ray/util/logging.h""
++#include ""src/ray/protobuf/event_aggregator_service.grpc.pb.h""
++#include ""src/ray/protobuf/event_aggregator_service.pb.h""
++
++namespace ray {
++namespace rpc {
++
++/// Client used for communicating with an event aggregator server in the dashboard
++/// agent.
++class EventAggregatorClient {
++ public:
++  virtual ~EventAggregatorClient() = default;
++
++  /// Report event to event aggregator.
++  ///
++  /// \param[in] request The request message.
++  /// \param[in] callback The callback function that handles reply.
++  virtual void AddEvents(const rpc::AddEventRequest &request,
++                         const ClientCallback<rpc::AddEventReply> &callback) = 0;
++};
++
++class EventAggregatorClientImpl : public EventAggregatorClient {
++ public:
++  /// Constructor.
++  ///
++  /// \param[in] address Address of the event aggregator server.
++  /// \param[in] port Port of the event aggregator server.
++  /// \param[in] client_call_manager The `ClientCallManager` used for managing requests.
++  EventAggregatorClientImpl(const std::string &address,
++                            const int port,
++                            ClientCallManager &client_call_manager) {
++    RAY_LOG(INFO) << ""Initiating the event aggregator client with address:"" << address",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085629498,kevin85421,20109646,2025-05-12T22:36:42+00:00,2025-05-12T22:44:03+00:00,"```suggestion
+                  << "" port: "" << port;
+```",True,src/ray/rpc/event_aggregator_client.h,,"@@ -0,0 +1,76 @@
++// Copyright 2025 The Ray Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//  http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++#pragma once
++
++#include <grpcpp/grpcpp.h>
++
++#include <memory>
++#include <string>
++
++#include ""ray/rpc/grpc_client.h""
++#include ""ray/util/logging.h""
++#include ""src/ray/protobuf/event_aggregator_service.grpc.pb.h""
++#include ""src/ray/protobuf/event_aggregator_service.pb.h""
++
++namespace ray {
++namespace rpc {
++
++/// Client used for communicating with an event aggregator server in the dashboard
++/// agent.
++class EventAggregatorClient {
++ public:
++  virtual ~EventAggregatorClient() = default;
++
++  /// Report event to event aggregator.
++  ///
++  /// \param[in] request The request message.
++  /// \param[in] callback The callback function that handles reply.
++  virtual void AddEvents(const rpc::AddEventRequest &request,
++                         const ClientCallback<rpc::AddEventReply> &callback) = 0;
++};
++
++class EventAggregatorClientImpl : public EventAggregatorClient {
++ public:
++  /// Constructor.
++  ///
++  /// \param[in] address Address of the event aggregator server.
++  /// \param[in] port Port of the event aggregator server.
++  /// \param[in] client_call_manager The `ClientCallManager` used for managing requests.
++  EventAggregatorClientImpl(const std::string &address,
++                            const int port,
++                            ClientCallManager &client_call_manager) {
++    RAY_LOG(INFO) << ""Initiating the event aggregator client with address:"" << address
++                  << "" port:"" << port;",0,0,0,0,0,0,0
+ray-project/ray,2510685905,2085632774,kevin85421,20109646,2025-05-12T22:40:52+00:00,2025-05-12T22:44:03+00:00,remove this?,True,BUILD.bazel,,"@@ -184,13 +184,23 @@ ray_cc_library(
+     hdrs = [""src/ray/rpc/metrics_agent_client.h""],
+     deps = [
+         "":grpc_client"",
+-        ""//src/ray/common:status"",
+         ""//src/ray/protobuf:reporter_cc_proto"",
+         ""//src/ray/util:logging"",
+         ""@com_github_grpc_grpc//:grpc++"",
+     ],
+ )
+ 
++ray_cc_library(
++    name = ""event_aggregator_client"",
++    hdrs = [""src/ray/rpc/event_aggregator_client.h""],
++    deps = [
++        "":grpc_client"",
++        ""//src/ray/common:status"",",1,1,0,0,0,0,0
+ray-project/ray,2510685905,2085695642,MengjinYan,8065093,2025-05-12T23:47:32+00:00,2025-05-12T23:47:33+00:00,Thanks for the reference! Will add a comment for the improvement in a future PR. ,True,src/ray/rpc/event_aggregator_client.h,68.0,"@@ -0,0 +1,76 @@
++// Copyright 2025 The Ray Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//  http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++#pragma once
++
++#include <grpcpp/grpcpp.h>
++
++#include <memory>
++#include <string>
++
++#include ""ray/rpc/grpc_client.h""
++#include ""ray/util/logging.h""
++#include ""src/ray/protobuf/event_aggregator_service.grpc.pb.h""
++#include ""src/ray/protobuf/event_aggregator_service.pb.h""
++
++namespace ray {
++namespace rpc {
++
++/// Client used for communicating with an event aggregator server in the dashboard
++/// agent.
++class EventAggregatorClient {
++ public:
++  virtual ~EventAggregatorClient() = default;
++
++  /// Report event to event aggregator.
++  ///
++  /// \param[in] request The request message.
++  /// \param[in] callback The callback function that handles reply.
++  virtual void AddEvents(const rpc::AddEventRequest &request,
++                         const ClientCallback<rpc::AddEventReply> &callback) = 0;
++};
++
++class EventAggregatorClientImpl : public EventAggregatorClient {
++ public:
++  /// Constructor.
++  ///
++  /// \param[in] address Address of the event aggregator server.
++  /// \param[in] port Port of the event aggregator server.
++  /// \param[in] client_call_manager The `ClientCallManager` used for managing requests.
++  EventAggregatorClientImpl(const std::string &address,
++                            const int port,
++                            ClientCallManager &client_call_manager) {
++    RAY_LOG(INFO) << ""Initiating the event aggregator client with address:"" << address
++                  << "" port:"" << port;
++    grpc_client_ = std::make_unique<GrpcClient<EventAggregatorService>>(
++        address, port, client_call_manager);
++  };
++
++  void AddEvents(const rpc::AddEventRequest &request,
++                 const ClientCallback<rpc::AddEventReply> &callback) override {
++    grpc_client_->CallMethod<rpc::AddEventRequest, rpc::AddEventReply>(
++        &EventAggregatorService::Stub::PrepareAsyncReceiveEvents,
++        request,
++        callback,
++        ""EventAggregatorService.grpc_client.AddEvents"",
++        /*timeout_ms*/ -1);",0,0,0,0,0,0,0
+ray-project/ray,2510675686,2082583523,raulchen,2883335,2025-05-09T22:46:03+00:00,2025-05-09T22:46:13+00:00,let's use the whole `train/epoch` time,False,,,,1,1,0,0,0,0,0
+ray-project/ray,2510675686,2082583523,raulchen,2883335,2025-05-09T22:46:03+00:00,2025-05-09T22:46:13+00:00,let's use the whole `train/epoch` time,True,release/train_tests/benchmark/runner.py,20.0,"@@ -304,8 +304,7 @@ def get_metrics(self) -> Dict[str, float]:
+         num_workers = ray.train.get_context().get_world_size()
+         train_time = (
+             self._metrics[""train/step""].get()
+-            # Exclude the time it takes to get the first batch.
+-            # + self._metrics[""train/iter_first_batch""].get()
++            + self._metrics[""train/iter_first_batch""].get()
+             + self._metrics[""train/iter_batch""].get()",1,1,0,0,0,0,0
+ray-project/ray,2510525505,2082484063,matthewdeng,3967392,2025-05-09T20:55:17+00:00,2025-05-09T20:55:23+00:00,It looks like this is being (incorrectly) referenced in this link [here](https://github.com/ray-project/ray/blame/86c0958a5f051780e1f4cf08ad37bde942040774/doc/source/train/huggingface-accelerate.rst#L209). Can you update it to point to the persistent storage guide? ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510525505,2082602707,TimothySeah,5440944,2025-05-09T23:06:14+00:00,2025-05-09T23:06:14+00:00,Done and verified in `file:///Users/tseah/ray/doc/_build/html/index.html`,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510525505,2082484063,matthewdeng,3967392,2025-05-09T20:55:17+00:00,2025-05-09T20:55:23+00:00,It looks like this is being (incorrectly) referenced in this link [here](https://github.com/ray-project/ray/blame/86c0958a5f051780e1f4cf08ad37bde942040774/doc/source/train/huggingface-accelerate.rst#L209). Can you update it to point to the persistent storage guide? ,True,doc/source/train/user-guides/configuration-overview.rst,6.0,"@@ -1,32 +0,0 @@
+-:orphan:
+-
+-Configuration Overview
+-======================
+-
+-.. _train-run-config:",0,0,0,0,0,0,0
+ray-project/ray,2510525505,2082602707,TimothySeah,5440944,2025-05-09T23:06:14+00:00,2025-05-09T23:06:14+00:00,Done and verified in `file:///Users/tseah/ray/doc/_build/html/index.html`,True,doc/source/train/user-guides/configuration-overview.rst,6.0,"@@ -1,32 +0,0 @@
+-:orphan:
+-
+-Configuration Overview
+-======================
+-
+-.. _train-run-config:",0,0,0,0,0,0,0
+ray-project/ray,2510369657,2082363099,alexeykudinkin,428277,2025-05-09T19:08:41+00:00,2025-05-09T19:08:46+00:00,Please capitalize,False,,,,1,1,0,0,0,0,0
+ray-project/ray,2510369657,2082363099,alexeykudinkin,428277,2025-05-09T19:08:41+00:00,2025-05-09T19:08:46+00:00,Please capitalize,True,python/ray/data/_internal/datasource/torch_datasource.py,,"@@ -27,7 +27,9 @@ def get_read_tasks(self, parallelism):
+         assert parallelism == 1
+ 
+         meta = BlockMetadata(
+-            num_rows=len(self._dataset),
++            # note: avoid len(self._dataset) because it will trigger",1,1,0,0,0,0,0
+ray-project/ray,2510356649,2085407073,lanbochen-anyscale,103082133,2025-05-12T20:30:56+00:00,2025-05-12T20:30:57+00:00,"```suggestion
+flags:
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510356649,2085407531,lanbochen-anyscale,103082133,2025-05-12T20:31:05+00:00,2025-05-12T20:31:06+00:00,"```suggestion
+flags:
+```",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510356649,2085407073,lanbochen-anyscale,103082133,2025-05-12T20:30:56+00:00,2025-05-12T20:30:57+00:00,"```suggestion
+flags:
+```",True,release/train_tests/benchmark/compute_configs/compute_gpu_1x1_aws.yaml,,"@@ -1,6 +1,9 @@
+ cloud_id: {{env[""ANYSCALE_CLOUD_ID""]}}
+ region: us-west-2
+ 
++advanced_configurations_json:",0,0,0,0,0,0,0
+ray-project/ray,2510356649,2085407531,lanbochen-anyscale,103082133,2025-05-12T20:31:05+00:00,2025-05-12T20:31:06+00:00,"```suggestion
+flags:
+```",True,release/train_tests/benchmark/compute_configs/compute_gpu_1x1_multi_gpus_aws.yaml,,"@@ -1,6 +1,9 @@
+ cloud_id: {{env[""ANYSCALE_CLOUD_ID""]}}
+ region: us-west-2
+ 
++advanced_configurations_json:",0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085095056,jjyao,898023,2025-05-12T16:59:25+00:00,2025-05-12T16:59:26+00:00,"Does this work? For files inside `psutil`, if they import each other, will they import the public one instead of the `thirdparty_files` one?",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085113943,Bye-legumes,121425509,2025-05-12T17:13:07+00:00,2025-05-12T17:13:07+00:00,"we are testing and it should work, let me check. I just remove `psutil` as there are too many places that use this. If this work we can check if we should refactor all or some libs that into internal, i.e. numpy, traceback,, time. Or we just modify the libs that tends to easily have issues? What do you think?",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085147341,jjyao,898023,2025-05-12T17:35:45+00:00,2025-05-12T17:35:46+00:00,"Yea, I'm not sure if that works. The way I'm aware is checking in the source code directly and change the import path of all the files. Something like https://github.com/pradyunsg/vendoring does.",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085095056,jjyao,898023,2025-05-12T16:59:25+00:00,2025-05-12T16:59:26+00:00,"Does this work? For files inside `psutil`, if they import each other, will they import the public one instead of the `thirdparty_files` one?",True,python/ray/__init__.py,,"@@ -50,8 +50,26 @@ def _configure_system():
+     thirdparty_files = os.path.join(
+         os.path.abspath(os.path.dirname(__file__)), ""thirdparty_files""
+     )
++
++    # Temporarily add thirdparty_files to sys.path to import the libraries,
++    # but ensure we restore path and properly isolate the imports
++    original_sys_path = sys.path.copy()
+     sys.path.insert(0, thirdparty_files)
+ 
++    try:
++        # Import for Ray internal usage
++        import psutil
++        import setproctitle
++        import colorama
++
++        # Save the modules in Ray's private namespace
++        sys.modules[""ray._private.psutil""] = psutil
++        sys.modules[""ray._private.setproctitle""] = setproctitle
++        sys.modules[""ray._private.colorama""] = colorama",0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085113943,Bye-legumes,121425509,2025-05-12T17:13:07+00:00,2025-05-12T17:13:07+00:00,"we are testing and it should work, let me check. I just remove `psutil` as there are too many places that use this. If this work we can check if we should refactor all or some libs that into internal, i.e. numpy, traceback,, time. Or we just modify the libs that tends to easily have issues? What do you think?",True,python/ray/__init__.py,,"@@ -50,8 +50,26 @@ def _configure_system():
+     thirdparty_files = os.path.join(
+         os.path.abspath(os.path.dirname(__file__)), ""thirdparty_files""
+     )
++
++    # Temporarily add thirdparty_files to sys.path to import the libraries,
++    # but ensure we restore path and properly isolate the imports
++    original_sys_path = sys.path.copy()
+     sys.path.insert(0, thirdparty_files)
+ 
++    try:
++        # Import for Ray internal usage
++        import psutil
++        import setproctitle
++        import colorama
++
++        # Save the modules in Ray's private namespace
++        sys.modules[""ray._private.psutil""] = psutil
++        sys.modules[""ray._private.setproctitle""] = setproctitle
++        sys.modules[""ray._private.colorama""] = colorama",0,0,0,0,0,0,0
+ray-project/ray,2510271601,2085147341,jjyao,898023,2025-05-12T17:35:45+00:00,2025-05-12T17:35:46+00:00,"Yea, I'm not sure if that works. The way I'm aware is checking in the source code directly and change the import path of all the files. Something like https://github.com/pradyunsg/vendoring does.",True,python/ray/__init__.py,,"@@ -50,8 +50,26 @@ def _configure_system():
+     thirdparty_files = os.path.join(
+         os.path.abspath(os.path.dirname(__file__)), ""thirdparty_files""
+     )
++
++    # Temporarily add thirdparty_files to sys.path to import the libraries,
++    # but ensure we restore path and properly isolate the imports
++    original_sys_path = sys.path.copy()
+     sys.path.insert(0, thirdparty_files)
+ 
++    try:
++        # Import for Ray internal usage
++        import psutil
++        import setproctitle
++        import colorama
++
++        # Save the modules in Ray's private namespace
++        sys.modules[""ray._private.psutil""] = psutil
++        sys.modules[""ray._private.setproctitle""] = setproctitle
++        sys.modules[""ray._private.colorama""] = colorama",0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082092091,abrarsheikh,5113943,2025-05-09T16:44:30+00:00,2025-05-09T19:09:58+00:00,I am yet to figure out a way to get the docs_path attached to the application state.,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082671571,abrarsheikh,5113943,2025-05-10T00:05:51+00:00,2025-05-10T00:05:52+00:00,"simply refactored into a function, no change in logic",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082682185,abrarsheikh,5113943,2025-05-10T00:19:14+00:00,2025-05-10T00:19:14+00:00,"A problem here that is not critical but annoying, if there are 100 replicas, then we would be making 100 controller calls
+",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082092091,abrarsheikh,5113943,2025-05-09T16:44:30+00:00,2025-05-09T19:09:58+00:00,I am yet to figure out a way to get the docs_path attached to the application state.,True,python/ray/serve/api.py,,"@@ -236,8 +289,8 @@ async def __del__(self):
+                         cls.__del__(self)
+ 
+         ASGIIngressWrapper.__name__ = cls.__name__
+-        if hasattr(frozen_app, ""docs_url""):
+-            ASGIIngressWrapper.__fastapi_docs_path__ = frozen_app.docs_url
++        if hasattr(frozen_app_or_func, ""docs_url""):
++            ASGIIngressWrapper.__fastapi_docs_path__ = frozen_app_or_func.docs_url",0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082671571,abrarsheikh,5113943,2025-05-10T00:05:51+00:00,2025-05-10T00:05:52+00:00,"simply refactored into a function, no change in logic",True,python/ray/serve/_private/replica.py,65.0,"@@ -1390,18 +1419,7 @@ async def initialize_callable(self) -> Optional[ASGIApp]:
+             )
+ 
+             if isinstance(self._callable, ASGIAppReplicaWrapper):
+-                app: Starlette = self._callable.app
+-                # The reason we need to do this is because BackPressureError is a serve internal exception
+-                # and FastAPI doesn't know how to handle it, so it treats it as a 500 error.
+-                # With same reasoning, we are not handling TimeoutError because it's a generic exception
+-                # the FastAPI knows how to handle. See https://www.starlette.io/exceptions/
+-                def handle_exception(_: Request, exc: Exception):
+-                    return self.handle_exception(exc)
+-
+-                for exc in self.service_unavailable_exceptions:
+-                    app.add_exception_handler(exc, handle_exception)
+-
+-                await self._callable._run_asgi_lifespan_startup()",0,0,0,0,0,0,0
+ray-project/ray,2508655629,2082682185,abrarsheikh,5113943,2025-05-10T00:19:14+00:00,2025-05-10T00:19:14+00:00,"A problem here that is not critical but annoying, if there are 100 replicas, then we would be making 100 controller calls
+",True,python/ray/serve/_private/replica.py,22.0,"@@ -690,6 +694,14 @@ async def initialize(self, deployment_config: DeploymentConfig):
+                     self._user_callable_asgi_app = await asyncio.wrap_future(
+                         self._user_callable_wrapper.initialize_callable()
+                     )
++                    if self._user_callable_asgi_app:
++                        docs_path = self._user_callable_wrapper._callable.docs_path
++                        # Since it's possible for user to pass a builder function that returns a FastAPI app
++                        # we will not have a docs path on the ASGI app object untill initialize_callable is called
++                        # so we set the docs path on the controller in this case
++                        await self._controller_handle.set_docs_path.remote(
++                            self._deployment_id.app_name, docs_path
++                        )",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2082034513,omatthew98,22609193,2025-05-09T16:28:32+00:00,2025-05-09T16:48:37+00:00,Not sure if we need to add it to this or just `python/ray/dashboard/modules/metrics/dashboards/data_dashboard_panels.py`? There are a lot of metrics that we only show on the grafana dashboard. If others have strong opinions happy to defer to them.,False,,,,1,0,0,0,0,0,0
+ray-project/ray,2508331290,2082035761,omatthew98,22609193,2025-05-09T16:29:30+00:00,2025-05-09T16:48:37+00:00,"If this is just the mean time, let's include `mean` in the name of the metric.",False,,,,1,1,0,0,0,0,0
+ray-project/ray,2508331290,2082086883,omatthew98,22609193,2025-05-09T16:42:38+00:00,2025-05-09T16:48:37+00:00,"Nit: ""Mean time spent...""",False,,,,1,1,0,0,0,0,0
+ray-project/ray,2508331290,2085621315,iamjustinhsu,140442892,2025-05-12T22:27:12+00:00,2025-05-12T22:27:12+00:00,someone double check what the buckets should be,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085621595,iamjustinhsu,140442892,2025-05-12T22:27:35+00:00,2025-05-12T22:27:36+00:00,someone double check the query,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085641742,raulchen,2883335,2025-05-12T22:53:05+00:00,2025-05-12T22:55:47+00:00,"I don't think we need so many percentiles. 
+These are probably good enough: min, P50, P90, P99, max",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085642740,raulchen,2883335,2025-05-12T22:54:33+00:00,2025-05-12T22:55:47+00:00,"It looks weird to have a method that does completely different things in each subclass. 
+Can we just check the type on the stats.py side?",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085643596,raulchen,2883335,2025-05-12T22:55:43+00:00,2025-05-12T22:55:47+00:00,not familiar with this. but let's manually run a job and check the charts. ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085651428,alexeykudinkin,428277,2025-05-12T23:07:03+00:00,2025-05-12T23:08:35+00:00,"+1 to Hao comment
+
+P5, P50, P75, P99",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085652323,alexeykudinkin,428277,2025-05-12T23:08:31+00:00,2025-05-12T23:08:35+00:00,"+1 
+
+Let's make sure we call appropriate methods for every metric type (set for Gauge, inc for Counter, etc)",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508331290,2082034513,omatthew98,22609193,2025-05-09T16:28:32+00:00,2025-05-09T16:48:37+00:00,Not sure if we need to add it to this or just `python/ray/dashboard/modules/metrics/dashboards/data_dashboard_panels.py`? There are a lot of metrics that we only show on the grafana dashboard. If others have strong opinions happy to defer to them.,True,python/ray/dashboard/client/src/pages/metrics/Metrics.tsx,4.0,"@@ -304,6 +304,10 @@ const DATA_METRICS_CONFIG: MetricsSectionConfig[] = [
+         title: ""Task Submission Backpressure Time"",
+         pathParams: ""orgId=1&theme=light&panelId=37"",
+       },
++      {",1,0,0,0,0,0,0
+ray-project/ray,2508331290,2082035761,omatthew98,22609193,2025-05-09T16:29:30+00:00,2025-05-09T16:48:37+00:00,"If this is just the mean time, let's include `mean` in the name of the metric.",True,python/ray/data/_internal/execution/interfaces/op_runtime_metrics.py,92.0,"@@ -338,6 +338,11 @@ class OpRuntimeMetrics(metaclass=OpRuntimesMetricsMeta):
+         description=""Time spent in task submission backpressure."",
+         metrics_group=MetricsGroup.TASKS,
+     )
++    task_completion_time: float = metric_field(",1,1,0,0,0,0,0
+ray-project/ray,2508331290,2082086883,omatthew98,22609193,2025-05-09T16:42:38+00:00,2025-05-09T16:48:37+00:00,"Nit: ""Mean time spent...""",True,python/ray/data/_internal/execution/interfaces/op_runtime_metrics.py,,"@@ -338,6 +338,11 @@ class OpRuntimeMetrics(metaclass=OpRuntimesMetricsMeta):
+         description=""Time spent in task submission backpressure."",
+         metrics_group=MetricsGroup.TASKS,
+     )
++    task_completion_time: float = metric_field(
++        default=0,
++        description=""Time spent running all tasks to completion."",",1,1,0,0,0,0,0
+ray-project/ray,2508331290,2085621315,iamjustinhsu,140442892,2025-05-12T22:27:12+00:00,2025-05-12T22:27:12+00:00,someone double check what the buckets should be,True,python/ray/data/_internal/execution/interfaces/op_runtime_metrics.py,80.0,"@@ -338,6 +358,25 @@ class OpRuntimeMetrics(metaclass=OpRuntimesMetricsMeta):
+         description=""Time spent in task submission backpressure."",
+         metrics_group=MetricsGroup.TASKS,
+     )
++    histogram_buckets_s = [",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085621595,iamjustinhsu,140442892,2025-05-12T22:27:35+00:00,2025-05-12T22:27:36+00:00,someone double check the query,True,python/ray/dashboard/modules/metrics/dashboards/data_dashboard_panels.py,11.0,"@@ -431,6 +431,62 @@
+         fill=0,
+         stack=True,
+     ),
++    Panel(
++        id=38,
++        title=""(p50) Task Completion Time"",
++        description=""Time spent running tasks to completion."",
++        unit=""ms"",
++        targets=[
++            Target(
++                expr=""histogram_quantile(0.50, sum by (dataset, operator, le) (ray_data_task_completion_time_bucket{{{global_filters}}}))"",",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085641742,raulchen,2883335,2025-05-12T22:53:05+00:00,2025-05-12T22:55:47+00:00,"I don't think we need so many percentiles. 
+These are probably good enough: min, P50, P90, P99, max",True,python/ray/data/_internal/execution/interfaces/op_runtime_metrics.py,80.0,"@@ -338,6 +358,25 @@ class OpRuntimeMetrics(metaclass=OpRuntimesMetricsMeta):
+         description=""Time spent in task submission backpressure."",
+         metrics_group=MetricsGroup.TASKS,
+     )
++    histogram_buckets_s = [",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085642740,raulchen,2883335,2025-05-12T22:54:33+00:00,2025-05-12T22:55:47+00:00,"It looks weird to have a method that does completely different things in each subclass. 
+Can we just check the type on the stats.py side?",True,python/ray/util/metrics.py,4.0,"@@ -121,6 +121,13 @@ def _record(
+         self._validate_tags(final_tags)
+         self._metric.record(value, tags=final_tags)
+ 
++    def inc_set_or_observe(",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085643596,raulchen,2883335,2025-05-12T22:55:43+00:00,2025-05-12T22:55:47+00:00,not familiar with this. but let's manually run a job and check the charts. ,True,python/ray/dashboard/modules/metrics/dashboards/data_dashboard_panels.py,11.0,"@@ -431,6 +431,62 @@
+         fill=0,
+         stack=True,
+     ),
++    Panel(
++        id=38,
++        title=""(p50) Task Completion Time"",
++        description=""Time spent running tasks to completion."",
++        unit=""ms"",
++        targets=[
++            Target(
++                expr=""histogram_quantile(0.50, sum by (dataset, operator, le) (ray_data_task_completion_time_bucket{{{global_filters}}}))"",",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085651428,alexeykudinkin,428277,2025-05-12T23:07:03+00:00,2025-05-12T23:08:35+00:00,"+1 to Hao comment
+
+P5, P50, P75, P99",True,python/ray/data/_internal/execution/interfaces/op_runtime_metrics.py,80.0,"@@ -338,6 +358,25 @@ class OpRuntimeMetrics(metaclass=OpRuntimesMetricsMeta):
+         description=""Time spent in task submission backpressure."",
+         metrics_group=MetricsGroup.TASKS,
+     )
++    histogram_buckets_s = [",0,0,0,0,0,0,0
+ray-project/ray,2508331290,2085652323,alexeykudinkin,428277,2025-05-12T23:08:31+00:00,2025-05-12T23:08:35+00:00,"+1 
+
+Let's make sure we call appropriate methods for every metric type (set for Gauge, inc for Counter, etc)",True,python/ray/util/metrics.py,4.0,"@@ -121,6 +121,13 @@ def _record(
+         self._validate_tags(final_tags)
+         self._metric.record(value, tags=final_tags)
+ 
++    def inc_set_or_observe(",0,0,0,0,0,0,0
+ray-project/ray,2508198937,2080674770,raulchen,2883335,2025-05-09T00:35:37+00:00,2025-05-09T00:35:38+00:00,"this function will be called in a different process. 
+If we simply capture the `wrapper`. `init_fn` and `fn` will capture 2 different instances of the wrappers. 
+We need to pass the wrapper class to the map task. And `init_fn/fn` need to be defined in the wrapper and access the context with `self.map_actor_context`. ",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508198937,2080674770,raulchen,2883335,2025-05-09T00:35:37+00:00,2025-05-09T00:35:38+00:00,"this function will be called in a different process. 
+If we simply capture the `wrapper`. `init_fn` and `fn` will capture 2 different instances of the wrappers. 
+We need to pass the wrapper class to the map task. And `init_fn/fn` need to be defined in the wrapper and access the context with `self.map_actor_context`. ",True,python/ray/data/_internal/planner/plan_udf_map_op.py,,"@@ -266,8 +287,8 @@ def _parse_op_fn(op: AbstractUDFMap):
+             op_fn = make_callable_class_concurrent(op_fn)
+ 
+         def init_fn():
+-            if ray.data._map_actor_context is None:
+-                ray.data._map_actor_context = _MapActorContext(
++            if wrapper.map_actor_context is None:
++                wrapper.map_actor_context = _MapActorContext(",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080627660,MengjinYan,8065093,2025-05-08T23:29:34+00:00,2025-05-08T23:30:41+00:00,"Just curious, if we already make it a enum class and using it with scope, wondering do we still need to update the name of the items in the enum? ",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080631268,dayshah,85444498,2025-05-08T23:33:37+00:00,2025-05-08T23:33:37+00:00,"ya we do, i tried without the windows build fails",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080633080,dayshah,85444498,2025-05-08T23:34:39+00:00,2025-05-08T23:34:39+00:00,updated description a bit,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080639157,israbbani,7349323,2025-05-08T23:40:37+00:00,2025-05-08T23:40:37+00:00,Am I reading this right? `LabelSelector::IN` is broken in windows but `LabelSelectors::LABEL_IN` is not. The theory is that there's macro substitution happening with the keyword IN? ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080642182,dayshah,85444498,2025-05-08T23:44:15+00:00,2025-05-08T23:44:15+00:00,correct https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2059?view=msvc-170 this is the specific error I saw. And it compiled as LABEL_IN but not as IN even after the change to enum class 😃 ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080656501,israbbani,7349323,2025-05-09T00:05:33+00:00,2025-05-09T00:05:33+00:00,🤯 ,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080627660,MengjinYan,8065093,2025-05-08T23:29:34+00:00,2025-05-08T23:30:41+00:00,"Just curious, if we already make it a enum class and using it with scope, wondering do we still need to update the name of the items in the enum? ",True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080631268,dayshah,85444498,2025-05-08T23:33:37+00:00,2025-05-08T23:33:37+00:00,"ya we do, i tried without the windows build fails",True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080633080,dayshah,85444498,2025-05-08T23:34:39+00:00,2025-05-08T23:34:39+00:00,updated description a bit,True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080639157,israbbani,7349323,2025-05-08T23:40:37+00:00,2025-05-08T23:40:37+00:00,Am I reading this right? `LabelSelector::IN` is broken in windows but `LabelSelectors::LABEL_IN` is not. The theory is that there's macro substitution happening with the keyword IN? ,True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080642182,dayshah,85444498,2025-05-08T23:44:15+00:00,2025-05-08T23:44:15+00:00,correct https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2059?view=msvc-170 this is the specific error I saw. And it compiled as LABEL_IN but not as IN even after the change to enum class 😃 ,True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2508049657,2080656501,israbbani,7349323,2025-05-09T00:05:33+00:00,2025-05-09T00:05:33+00:00,🤯 ,True,src/ray/common/scheduling/label_selector.h,8.0,"@@ -22,11 +22,11 @@
+ 
+ namespace ray {
+ 
+-enum LabelSelectorOperator {
++enum class LabelSelectorOperator {
+   // This is to support equality or in semantics.
+-  IN = 0,
++  LABEL_IN = 0,",0,0,0,0,0,0,0
+ray-project/ray,2507948543,2080381134,pcmoritz,113316,2025-05-08T19:56:51+00:00,2025-05-08T19:56:52+00:00,I think we need to add this back like in the other endpoints (it is probably thrown by one of the wrappers?),False,,,,0,0,0,0,0,0,0
+ray-project/ray,2507948543,2080402319,thomasdesr,681004,2025-05-08T20:14:43+00:00,2025-05-08T20:14:43+00:00,"Whoops, fixing. Thanks!",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2507948543,2080381134,pcmoritz,113316,2025-05-08T19:56:51+00:00,2025-05-08T19:56:52+00:00,I think we need to add this back like in the other endpoints (it is probably thrown by one of the wrappers?),True,python/ray/util/state/state_cli.py,11.0,"@@ -1103,10 +1103,8 @@ def log_actor(
+         ```
+ 
+     Raises:
+-        :class:`RayStateApiException <ray.util.state.exception.RayStateApiException>`",0,0,0,0,0,0,0
+ray-project/ray,2507948543,2080402319,thomasdesr,681004,2025-05-08T20:14:43+00:00,2025-05-08T20:14:43+00:00,"Whoops, fixing. Thanks!",True,python/ray/util/state/state_cli.py,11.0,"@@ -1103,10 +1103,8 @@ def log_actor(
+         ```
+ 
+     Raises:
+-        :class:`RayStateApiException <ray.util.state.exception.RayStateApiException>`",0,0,0,0,0,0,0
+ray-project/ray,2507803464,2080255983,jjyao,898023,2025-05-08T18:31:24+00:00,2025-05-08T18:31:24+00:00,Do we plan to add `pydoclint` to pre-commit?,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2507803464,2080259840,thomasdesr,681004,2025-05-08T18:32:49+00:00,2025-05-08T18:32:49+00:00,"Yep, just doing a fast-pass on a lot of the big errors before we do so the set of ""exceptions"" is small enough to be vaguely sensible",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2507803464,2080255983,jjyao,898023,2025-05-08T18:31:24+00:00,2025-05-08T18:31:24+00:00,Do we plan to add `pydoclint` to pre-commit?,True,python/ray/_private/external_storage.py,2.0,"@@ -187,15 +187,14 @@ def _size_check(self, address_len, metadata_len, buffer_len, obtained_data_size)
+         """"""Check whether or not the obtained_data_size is as expected.
+ ",0,0,0,0,0,0,0
+ray-project/ray,2507803464,2080259840,thomasdesr,681004,2025-05-08T18:32:49+00:00,2025-05-08T18:32:49+00:00,"Yep, just doing a fast-pass on a lot of the big errors before we do so the set of ""exceptions"" is small enough to be vaguely sensible",True,python/ray/_private/external_storage.py,2.0,"@@ -187,15 +187,14 @@ def _size_check(self, address_len, metadata_len, buffer_len, obtained_data_size)
+         """"""Check whether or not the obtained_data_size is as expected.
+ ",0,0,0,0,0,0,0
+ray-project/ray,2506968451,2079693060,aslonnie,95255098,2025-05-08T13:12:56+00:00,2025-05-08T13:12:58+00:00,what is causing these kind of moves?,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2506968451,2079734312,MortalHappiness,47914085,2025-05-08T13:35:15+00:00,2025-05-08T13:36:01+00:00,"Because we set `known-local-folder = [""ray""]`
+
+https://pycqa.github.io/isort/docs/configuration/options.html#known-local-folder
+
+https://docs.astral.sh/ruff/settings/#lint_isort_known-local-folder
+
+So `ray` will be grouped with those `.` imports.",False,,,,0,0,0,0,0,0,0
+ray-project/ray,2506968451,2079693060,aslonnie,95255098,2025-05-08T13:12:56+00:00,2025-05-08T13:12:58+00:00,what is causing these kind of moves?,True,python/ray/data/_internal/execution/interfaces/execution_options.py,4.0,"@@ -1,11 +1,10 @@
+ import os
+ from typing import Dict, List, Optional, Union
+ 
++from .common import NodeIdStr",0,0,0,0,0,0,0
+ray-project/ray,2506968451,2079734312,MortalHappiness,47914085,2025-05-08T13:35:15+00:00,2025-05-08T13:36:01+00:00,"Because we set `known-local-folder = [""ray""]`
+
+https://pycqa.github.io/isort/docs/configuration/options.html#known-local-folder
+
+https://docs.astral.sh/ruff/settings/#lint_isort_known-local-folder
+
+So `ray` will be grouped with those `.` imports.",True,python/ray/data/_internal/execution/interfaces/execution_options.py,4.0,"@@ -1,11 +1,10 @@
+ import os
+ from typing import Dict, List, Optional, Union
+ 
++from .common import NodeIdStr",0,0,0,0,0,0,0
+ray-project/ray,2505706669,2078668767,kevin85421,20109646,2025-05-07T23:46:53+00:00,2025-05-07T23:46:53+00:00,`it->second.num_retries_left` and `it->second.num_oom_retries_left` are updated in L989 and L998.,False,,,,0,0,0,0,0,0,0
+ray-project/ray,2505706669,2078668927,kevin85421,20109646,2025-05-07T23:47:10+00:00,2025-05-07T23:47:10+00:00,This log prints wrong information.,False,,,,0,0,0,0,0,0,0

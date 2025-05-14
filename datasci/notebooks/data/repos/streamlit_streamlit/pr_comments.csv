@@ -1,0 +1,602 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+streamlit/streamlit,2512434329,2085846547,mayagbarnes,63436329,2025-05-13T03:12:17+00:00,2025-05-13T03:12:17+00:00,Removing this note as it is legacy from st version `0.47.0` (see [here](https://github.com/streamlit/streamlit/blob/0.47.0/frontend/src/components/core/Sidebar/Sidebar.tsx)). The `tabIndex` was removed in `0.48.0`,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2512434329,2085846547,mayagbarnes,63436329,2025-05-13T03:12:17+00:00,2025-05-13T03:12:17+00:00,Removing this note as it is legacy from st version `0.47.0` (see [here](https://github.com/streamlit/streamlit/blob/0.47.0/frontend/src/components/core/Sidebar/Sidebar.tsx)). The `tabIndex` was removed in `0.48.0`,True,frontend/app/src/components/Sidebar/Sidebar.tsx,65.0,"@@ -284,7 +284,6 @@ const Sidebar: React.FC<SidebarProps> = ({
+   // If header decoration visible, move sidebar down so decoration doesn't go below it
+   const sidebarAdjust = !isEmbedded && headerDecorationVisible()
+ 
+-  // The tabindex is required to support scrolling by arrow keys.",0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085032428,sfc-gh-lwilby,103002751,2025-05-12T16:19:42+00:00,2025-05-12T16:19:43+00:00,"These snapshot changes below are unexpected, but the difference in snapshots seems imperceptible to me. ",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085063823,graphite-app[bot],96075541,2025-05-12T16:39:43+00:00,2025-05-12T16:39:44+00:00,"The comment in the test case is incorrect - it states that columns receive a ""large"" gap arg, but this test is specifically for the ""none"" gap setting. The comment should be updated to:
+
+```
+# 4 elements will be created: 1 horizontal block, 3 columns, each receives
+# ""none"" gap arg
+```
+
+This will accurately reflect what the test is verifying.
+```suggestion
++        # 4 elements will be created: 1 horizontal block, 3 columns, each receives
++        # ""none"" gap arg
+```
+  
+
+*Spotted by [Diamond](https://app.graphite.dev/diamond/?org=streamlit&ref=ai-review-comment)*<i class='graphite__hidden'><br /><br />Is this helpful? React 👍 or 👎 to let us know.</i>",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085155875,sfc-gh-bnisco,178842601,2025-05-12T17:41:12+00:00,2025-05-12T22:07:26+00:00,"+1, seems like a slight letter rendering change, but nothing that is concerning/relevant ",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085604101,sfc-gh-bnisco,178842601,2025-05-12T22:06:16+00:00,2025-05-12T22:07:26+00:00,"**suggestion:** I believe the CSS `calc` is unnecessary here and thus this could be simplified:
+
+```suggestion
+        ? `${percentage}%`
+```",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085032428,sfc-gh-lwilby,103002751,2025-05-12T16:19:42+00:00,2025-05-12T16:19:43+00:00,"These snapshot changes below are unexpected, but the difference in snapshots seems imperceptible to me. ",True,e2e_playwright/__snapshots__/linux/st_columns_test/st_columns-nested_one_level[chromium].png,1.0,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085063823,graphite-app[bot],96075541,2025-05-12T16:39:43+00:00,2025-05-12T16:39:44+00:00,"The comment in the test case is incorrect - it states that columns receive a ""large"" gap arg, but this test is specifically for the ""none"" gap setting. The comment should be updated to:
+
+```
+# 4 elements will be created: 1 horizontal block, 3 columns, each receives
+# ""none"" gap arg
+```
+
+This will accurately reflect what the test is verifying.
+```suggestion
++        # 4 elements will be created: 1 horizontal block, 3 columns, each receives
++        # ""none"" gap arg
+```
+  
+
+*Spotted by [Diamond](https://app.graphite.dev/diamond/?org=streamlit&ref=ai-review-comment)*<i class='graphite__hidden'><br /><br />Is this helpful? React 👍 or 👎 to let us know.</i>",True,lib/tests/streamlit/elements/layouts_test.py,,"@@ -234,6 +238,52 @@ def test_columns_with_large_gap(self):
+                 GapSize.LARGE,
+             )
+ 
++    def test_columns_with_none_gap(self):
++        """"""Test that it works correctly with ""none"" gap argument""""""
++
++        st.columns(3, gap=""none"")
++
++        all_deltas = self.get_all_deltas_from_queue()
++
++        horizontal_container = all_deltas[0]
++        columns_blocks = all_deltas[1:4]
++
++        # 4 elements will be created: 1 horizontal block, 3 columns, each receives
++        # ""large"" gap arg",0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085155875,sfc-gh-bnisco,178842601,2025-05-12T17:41:12+00:00,2025-05-12T22:07:26+00:00,"+1, seems like a slight letter rendering change, but nothing that is concerning/relevant ",True,e2e_playwright/__snapshots__/linux/st_columns_test/st_columns-nested_one_level[chromium].png,1.0,,0,0,0,0,0,0,0
+streamlit/streamlit,2511567613,2085604101,sfc-gh-bnisco,178842601,2025-05-12T22:06:16+00:00,2025-05-12T22:07:26+00:00,"**suggestion:** I believe the CSS `calc` is unnecessary here and thus this could be simplified:
+
+```suggestion
+        ? `${percentage}%`
+```",True,frontend/lib/src/components/core/Block/styled-components.ts,,"@@ -99,7 +101,10 @@ export const StyledColumn = styled.div<StyledColumnProps>(
+     const { VerticalAlignment } = BlockProto.Column
+     const percentage = weight * 100
+     const gapWidth = translateGapWidth(gap, theme)
+-    const width = `calc(${percentage}% - ${gapWidth})`
++    const width =
++      gapWidth === theme.spacing.none
++        ? `calc(${percentage}%)`",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745825,Copilot,175728472,2025-05-09T01:41:37+00:00,2025-05-09T01:41:42+00:00,Corrected the typo from 'indentifying' to 'identifying'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745829,Copilot,175728472,2025-05-09T01:41:37+00:00,2025-05-09T01:41:42+00:00,Fixed the spelling mistake 'hexidecimal' to 'hexadecimal'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745830,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Fixed the repeated typo 'hexidecimal' to 'hexadecimal'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745832,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Corrected 'approriate' to 'appropriate'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745836,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Corrected 'accomodate' to 'accommodate'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745841,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Fixed the typo from 'soley' to 'solely'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745842,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Corrected 'behvior' to 'behavior'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745846,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Corrected 'precendence' to 'precedence'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745849,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Fixed the typo 'shoud' to 'should' in the test description.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745851,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,"Fixed the typo 'shoud' to 'should' in the test description.
+```suggestion
+  it(""should not update ui value if values are the same"", async () => {
+```",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745855,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,Corrected 'overlayed' to 'overlaid' in the comment.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745857,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,Corrected 'precendence' to 'precedence'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745858,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,"Corrected 'thats' to ""that's"" and 'usuable' to 'usable'.
+```suggestion
+        // 6rem was manually determined as the smallest size that's still somewhat usable:
+```",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745860,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:43+00:00,Corrected 'weired' to 'weird'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745862,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:43+00:00,Corrected 'alignes' to 'aligns' in the test description.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745866,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'programatically' to 'programmatically'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745869,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Fixed the typo 'shoud' to 'should' in the test description.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745872,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'absolut' to 'absolute'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745877,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'interals' to 'intervals'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745881,Copilot,175728472,2025-05-09T01:41:42+00:00,2025-05-09T01:41:43+00:00,Corrected 'substract' to 'subtract'.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080999287,mayagbarnes,63436329,2025-05-09T06:11:16+00:00,2025-05-09T06:11:16+00:00,Nit: think the correction should be `internals`,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081005201,mayagbarnes,63436329,2025-05-09T06:17:04+00:00,2025-05-09T06:17:05+00:00,Nit: think the correction should be `of`,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081006093,mayagbarnes,63436329,2025-05-09T06:17:56+00:00,2025-05-09T06:17:56+00:00,Nit: think the correction should be `dependent`,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081053893,co63oc,4617245,2025-05-09T06:57:58+00:00,2025-05-09T06:57:58+00:00,fixed,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081054224,co63oc,4617245,2025-05-09T06:58:11+00:00,2025-05-09T06:58:11+00:00,fixed,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081054477,co63oc,4617245,2025-05-09T06:58:22+00:00,2025-05-09T06:58:22+00:00,fixed,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745825,Copilot,175728472,2025-05-09T01:41:37+00:00,2025-05-09T01:41:42+00:00,Corrected the typo from 'indentifying' to 'identifying'.,True,lib/streamlit/elements/lib/image_utils.py,5.0,"@@ -360,7 +360,7 @@ def marshall_images(
+     Parameters
+     ----------
+     coordinates
+-        A string indentifying the images' location in the frontend.
++        A string identifying the images' location in the frontend.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745829,Copilot,175728472,2025-05-09T01:41:37+00:00,2025-05-09T01:41:42+00:00,Fixed the spelling mistake 'hexidecimal' to 'hexadecimal'.,True,lib/streamlit/elements/lib/column_types.py,5.0,"@@ -432,7 +432,7 @@ def NumberColumn(
+         - ``""engineering""``: Show the number in engineering notation (e.g. ""1.235E3"").
+         - printf-style format string: Format the number with a printf
+           specifier, like ``""%d""`` to show a signed integer (e.g. ""1234"") or
+-          ``""%X""`` to show an unsigned hexidecimal integer (e.g. ""4D2""). You
++          ``""%X""`` to show an unsigned hexadecimal integer (e.g. ""4D2""). You",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745830,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Fixed the repeated typo 'hexidecimal' to 'hexadecimal'.,True,lib/streamlit/elements/lib/column_types.py,14.0,"@@ -2007,7 +2007,7 @@ def ProgressColumn(
+         - ``""engineering""``: Show the number in engineering notation (e.g. ""1.235E3"").
+         - printf-style format string: Format the number with a printf
+           specifier, like ``""%d""`` to show a signed integer (e.g. ""1234"") or
+-          ``""%X""`` to show an unsigned hexidecimal integer (e.g. ""4D2""). You
++          ``""%X""`` to show an unsigned hexadecimal integer (e.g. ""4D2""). You",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745832,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Corrected 'approriate' to 'appropriate'.,True,lib/streamlit/elements/lib/built_in_chart_utils.py,5.0,"@@ -964,7 +964,7 @@ def _get_color_encoding(
+ 
+             return alt.ColorValue(to_css_color(cast(""Any"", color_value)))
+ 
+-        # If the color value is a list of colors of approriate length, return that.
++        # If the color value is a list of colors of appropriate length, return that.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745836,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Corrected 'accomodate' to 'accommodate'.,True,lib/streamlit/elements/code.py,5.0,"@@ -67,7 +67,7 @@ def code(
+             Desired height of the code block expressed in pixels. If ``height``
+             is ``None`` (default), Streamlit sets the element's height to fit
+             its content. Vertical scrolling within the element is enabled when
+-            the height does not accomodate all lines.
++            the height does not accommodate all lines.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745841,Copilot,175728472,2025-05-09T01:41:38+00:00,2025-05-09T01:41:42+00:00,Fixed the typo from 'soley' to 'solely'.,True,lib/streamlit/commands/navigation.py,5.0,"@@ -318,7 +318,7 @@ def _navigation(
+ 
+             script_hash = page._script_hash
+             if script_hash in pagehash_to_pageinfo:
+-                # The page script hash is soley based on the url path
++                # The page script hash is solely based on the url path",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745842,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Corrected 'behvior' to 'behavior'.,True,lib/streamlit/commands/execution_control.py,5.0,"@@ -70,7 +70,7 @@ def _new_fragment_id_queue(
+         # If st.rerun(scope=""fragment"") is called during a full script run, we raise an
+         # exception. This occurs, of course, if st.rerun(scope=""fragment"") is called
+         # outside of a fragment, but it somewhat surprisingly occurs if it gets called
+-        # from within a fragment during a run of the full script. While this behvior may
++        # from within a fragment during a run of the full script. While this behavior may",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745846,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Corrected 'precendence' to 'precedence'.,True,frontend/lib/src/util/utils.test.ts,5.0,"@@ -375,7 +375,7 @@ describe(""getLoadingScreenType"", () => {
+     expect(getLoadingScreenType()).toBe(LoadingScreenType.V2)
+   })
+ 
+-  it(""should give precendence to 'hide'"", () => {
++  it(""should give precedence to 'hide'"", () => {",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745849,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,Fixed the typo 'shoud' to 'should' in the test description.,True,frontend/lib/src/hooks/useUpdateUiValue.test.ts,5.0,"@@ -25,13 +25,13 @@ describe(""useUpdateUiValue"", () => {
+     await waitFor(() => expect(callback).toHaveBeenCalledWith(4))
+   })
+ 
+-  it(""shoud not update ui value if values are different and ui value is dirty"", async () => {
++  it(""should not update ui value if values are different and ui value is dirty"", async () => {",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745851,Copilot,175728472,2025-05-09T01:41:39+00:00,2025-05-09T01:41:42+00:00,"Fixed the typo 'shoud' to 'should' in the test description.
+```suggestion
+  it(""should not update ui value if values are the same"", async () => {
+```",True,frontend/lib/src/hooks/useUpdateUiValue.test.ts,12.0,"@@ -25,13 +25,13 @@ describe(""useUpdateUiValue"", () => {
+     await waitFor(() => expect(callback).toHaveBeenCalledWith(4))
+   })
+ 
+-  it(""shoud not update ui value if values are different and ui value is dirty"", async () => {
++  it(""should not update ui value if values are different and ui value is dirty"", async () => {
+     const callback = vi.fn()
+     renderHook(() => useUpdateUiValue(4, 2, callback, true))
+     await waitFor(() => expect(callback).not.toHaveBeenCalled())
+   })
+ 
+-  it(""shoud not update ui value if values are same"", async () => {
++  it(""should not update ui value if values are same"", async () => {",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745855,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,Corrected 'overlayed' to 'overlaid' in the comment.,True,frontend/lib/src/components/widgets/NumberInput/styled-components.ts,5.0,"@@ -31,7 +31,7 @@ export const StyledInputContainer = styled.div(({ theme }) => ({
+   transitionProperty: ""border"",
+   transitionTimingFunction: ""cubic-bezier(0.2, 0.8, 0.4, 1)"",
+   borderRadius: theme.radii.default,
+-  overflow: ""hidden"", // Fix rounded corner being overlayed with corner of internal input.
++  overflow: ""hidden"", // Fix rounded corner being overlaid with corner of internal input.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745857,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,Corrected 'precendence' to 'precedence'.,True,frontend/lib/src/components/widgets/Multiselect/Multiselect.tsx,5.0,"@@ -358,7 +358,7 @@ const Multiselect: FC<Props> = props => {
+                       // Using !important because the alternative would be
+                       // uglier: we'd have to put it under a selector like
+                       // ""&[role=""button""]:not(:disabled)"" in order to win in
+-                      // the order of the precendence.
++                      // the order of the precedence.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745858,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:42+00:00,"Corrected 'thats' to ""that's"" and 'usuable' to 'usable'.
+```suggestion
+        // 6rem was manually determined as the smallest size that's still somewhat usable:
+```",True,frontend/lib/src/components/widgets/DataFrame/styled-components.ts,5.0,"@@ -51,7 +51,7 @@ export const StyledResizableContainer =
+         // 19rem is the closest rem without decimals to the original size:
+         maxWidth: ""19rem"",
+         width: ""80%"",
+-        // 6rem was manually determined as the smallest size thats still somewhat usuable:
++        // 6rem was manually determined as the smallest size thats still somewhat usable:",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745860,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:43+00:00,Corrected 'weired' to 'weird'.,True,frontend/lib/src/components/widgets/DataFrame/styled-components.ts,14.0,"@@ -63,7 +63,7 @@ export const StyledResizableContainer =
+         },
+         ""& .gdg-search-progress"": {
+           // We are disabling the search progress bar since it
+-          // looks a bit weired in its current state and doesn't work
++          // looks a bit weird in its current state and doesn't work",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745862,Copilot,175728472,2025-05-09T01:41:40+00:00,2025-05-09T01:41:43+00:00,Corrected 'alignes' to 'aligns' in the test description.,True,frontend/lib/src/components/widgets/DataFrame/columns/NumberColumn.test.ts,5.0,"@@ -101,7 +101,7 @@ describe(""NumberColumn"", () => {
+     expect((mockCell as NumberCell).data).toEqual(1.234)
+   })
+ 
+-  it(""alignes numbers to the right"", () => {
++  it(""aligns numbers to the right"", () => {",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745866,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'programatically' to 'programmatically'.,True,frontend/lib/src/components/widgets/BaseWidget/WidgetLabel.tsx,5.0,"@@ -34,7 +34,7 @@ export interface LabelProps {
+   // Used to specify whether widget is visible or not.
+   labelVisibility?: LabelVisibilityOptions
+ 
+-  // Associates the label with the input field programatically. Makes it possible to focus input by clicking on label.
++  // Associates the label with the input field programmatically. Makes it possible to focus input by clicking on label.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745869,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Fixed the typo 'shoud' to 'should' in the test description.,True,frontend/lib/src/components/elements/GraphVizChart/GraphVizChart.test.tsx,5.0,"@@ -117,7 +117,7 @@ describe(""GraphVizChart Element"", () => {
+     expect(graphviz).toHaveBeenCalledTimes(1)
+   })
+ 
+-  it(""shoud render with height and width set to auto"", () => {
++  it(""should render with height and width set to auto"", () => {",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745872,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'absolut' to 'absolute'.,True,frontend/app/src/components/AppView/AppView.tsx,5.0,"@@ -283,7 +283,7 @@ function AppView(props: AppViewProps): ReactElement {
+           <Profiler id=""Bottom"">
+             {/* We add spacing here to make sure that the sticky bottom is
+            always pinned the bottom. Using sticky layout here instead of
+-           absolut / fixed is a trick to automatically account for the bottom
++           absolute / fixed is a trick to automatically account for the bottom",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745877,Copilot,175728472,2025-05-09T01:41:41+00:00,2025-05-09T01:41:43+00:00,Corrected 'interals' to 'intervals'.,True,frontend/app/src/App.test.tsx,,"@@ -3283,7 +3283,7 @@ describe(""App"", () => {
+       // make sure that no new messages were sent after switching the page
+       // despite advancing the timer. We could check whether clearInterval
+       // was called, but this check is more observing the behavior than checking
+-      // the exact interals.
++      // the exact intervals.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080745881,Copilot,175728472,2025-05-09T01:41:42+00:00,2025-05-09T01:41:43+00:00,Corrected 'substract' to 'subtract'.,True,e2e_playwright/st_expander_test.py,5.0,"@@ -52,7 +52,7 @@ def test_expander_collapses_and_expands(app: Page):
+     main_expanders = main_container.get_by_test_id(""stExpander"")
+     expect(main_expanders).to_have_count(
+         NUMBER_OF_EXPANDERS - 1
+-    )  # -1 to substract sidebar
++    )  # -1 to subtract sidebar",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2080999287,mayagbarnes,63436329,2025-05-09T06:11:16+00:00,2025-05-09T06:11:16+00:00,Nit: think the correction should be `internals`,True,frontend/app/src/App.test.tsx,,"@@ -3283,7 +3283,7 @@ describe(""App"", () => {
+       // make sure that no new messages were sent after switching the page
+       // despite advancing the timer. We could check whether clearInterval
+       // was called, but this check is more observing the behavior than checking
+-      // the exact interals.
++      // the exact intervals.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081005201,mayagbarnes,63436329,2025-05-09T06:17:04+00:00,2025-05-09T06:17:05+00:00,Nit: think the correction should be `of`,True,lib/tests/streamlit/elements/exception_test.py,,"@@ -317,7 +317,7 @@ def test_st_exception(self, show_error_details: bool):
+         """"""Test st.exception.""""""
+         # client.showErrorDetails has no effect on code that calls
+         # st.exception directly. This test should have the same result
+-        # regardless fo the config option.
++        # regardless to the config option.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081006093,mayagbarnes,63436329,2025-05-09T06:17:56+00:00,2025-05-09T06:17:56+00:00,Nit: think the correction should be `dependent`,True,lib/tests/streamlit/streamlit_test.py,,"@@ -192,7 +192,7 @@ def test_importtime_median_under_threshold():
+     and check if it's under a static threshold.
+     """"""
+     # Define an acceptable threshold for import time (in microseconds).
+-    # This value is also depenend a bit on the machine it's run on,
++    # This value is also depend a bit on the machine it's run on,",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081053893,co63oc,4617245,2025-05-09T06:57:58+00:00,2025-05-09T06:57:58+00:00,fixed,True,lib/tests/streamlit/streamlit_test.py,,"@@ -192,7 +192,7 @@ def test_importtime_median_under_threshold():
+     and check if it's under a static threshold.
+     """"""
+     # Define an acceptable threshold for import time (in microseconds).
+-    # This value is also depenend a bit on the machine it's run on,
++    # This value is also depend a bit on the machine it's run on,",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081054224,co63oc,4617245,2025-05-09T06:58:11+00:00,2025-05-09T06:58:11+00:00,fixed,True,lib/tests/streamlit/elements/exception_test.py,,"@@ -317,7 +317,7 @@ def test_st_exception(self, show_error_details: bool):
+         """"""Test st.exception.""""""
+         # client.showErrorDetails has no effect on code that calls
+         # st.exception directly. This test should have the same result
+-        # regardless fo the config option.
++        # regardless to the config option.",0,0,0,0,0,0,0
+streamlit/streamlit,2508411089,2081054477,co63oc,4617245,2025-05-09T06:58:22+00:00,2025-05-09T06:58:22+00:00,fixed,True,frontend/app/src/App.test.tsx,,"@@ -3283,7 +3283,7 @@ describe(""App"", () => {
+       // make sure that no new messages were sent after switching the page
+       // despite advancing the timer. We could check whether clearInterval
+       // was called, but this check is more observing the behavior than checking
+-      // the exact interals.
++      // the exact intervals.",0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080442806,raethlein,3775781,2025-05-08T20:45:36+00:00,2025-05-08T20:53:44+00:00,nit: Could we have a small comment here about why we use `-`? Something like `// we use the negative score here because we want the list to be reversed. We don't reverse it in the end because that can lead to UI shuffling.` (if I understood it correctly from your PR description),False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080445334,raethlein,3775781,2025-05-08T20:47:53+00:00,2025-05-08T20:53:44+00:00,"```suggestion
+    /* app/models/order is better than app/models/zrder  */
+```
+
+nit: Could you leave a comment here about the _why_ it is better? I assume its because the `o` in `order` comes before the `z` in `zrder`.",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080448999,raethlein,3775781,2025-05-08T20:51:15+00:00,2025-05-08T20:53:44+00:00,"nit: if these tests are copied 1:1 from fuzzy, I think we should mention it here",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080450207,raethlein,3775781,2025-05-08T20:52:15+00:00,2025-05-08T20:53:44+00:00,"if this is a substantial copy of the code, I think we should keep the MIT license notice or mention  the MIT-licensing here.",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080442806,raethlein,3775781,2025-05-08T20:45:36+00:00,2025-05-08T20:53:44+00:00,nit: Could we have a small comment here about why we use `-`? Something like `// we use the negative score here because we want the list to be reversed. We don't reverse it in the end because that can lead to UI shuffling.` (if I understood it correctly from your PR description),True,frontend/lib/src/components/shared/Dropdown/Selectbox.tsx,34.0,"@@ -68,9 +67,10 @@ export function fuzzyFilterSelectOptions(
+   const filteredOptions = options.filter((opt: SelectOption) =>
+     hasMatch(pattern, opt.label)
+   )
+-  return sortBy(filteredOptions, (opt: SelectOption) =>
+-    score(pattern, opt.label)
+-  ).reverse()
++  return sortBy(
++    filteredOptions,
++    (opt: SelectOption) => -score(pattern, opt.label, true)",0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080445334,raethlein,3775781,2025-05-08T20:47:53+00:00,2025-05-08T20:53:44+00:00,"```suggestion
+    /* app/models/order is better than app/models/zrder  */
+```
+
+nit: Could you leave a comment here about the _why_ it is better? I assume its because the `o` in `order` comes before the `z` in `zrder`.",True,frontend/lib/src/util/fuzzySearch.test.ts,,"@@ -0,0 +1,231 @@
++/**
++ * Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022-2025)
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++import * as fzy from ""./fuzzySearch""
++
++const score = fzy.score
++const positions = fzy.positions
++
++const SCORE_MIN = fzy.SCORE_MIN
++const SCORE_MAX = fzy.SCORE_MAX
++
++const SCORE_GAP_LEADING = fzy.SCORE_GAP_LEADING
++const SCORE_GAP_TRAILING = fzy.SCORE_GAP_TRAILING
++const SCORE_GAP_INNER = fzy.SCORE_GAP_INNER
++const SCORE_MATCH_CONSECUTIVE = fzy.SCORE_MATCH_CONSECUTIVE
++const SCORE_MATCH_SLASH = fzy.SCORE_MATCH_SLASH
++const SCORE_MATCH_CAPITAL = fzy.SCORE_MATCH_CAPITAL
++const SCORE_MATCH_DOT = fzy.SCORE_MATCH_DOT
++
++/* score(needle, haystack) */
++describe(""score"", () => {
++  it(""should prefer starts of words"", function () {
++    /* App/Models/Order is better than App/MOdels/zRder  */",0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080448999,raethlein,3775781,2025-05-08T20:51:15+00:00,2025-05-08T20:53:44+00:00,"nit: if these tests are copied 1:1 from fuzzy, I think we should mention it here",True,frontend/lib/src/util/fuzzySearch.test.ts,,"@@ -0,0 +1,231 @@
++/**
++ * Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022-2025)
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++",0,0,0,0,0,0,0
+streamlit/streamlit,2508015053,2080450207,raethlein,3775781,2025-05-08T20:52:15+00:00,2025-05-08T20:53:44+00:00,"if this is a substantial copy of the code, I think we should keep the MIT license notice or mention  the MIT-licensing here.",True,frontend/lib/src/util/fuzzySearch.ts,,"@@ -0,0 +1,231 @@
++/**
++ * Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022-2025)
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++// Thank you to fzy.js for the original implementation",0,0,0,0,0,0,0
+streamlit/streamlit,2507812247,2080433058,raethlein,3775781,2025-05-08T20:40:17+00:00,2025-05-08T20:41:56+00:00,nit: in which cases can the `id` not be set?,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2507812247,2080549924,kmcgrady,69432,2025-05-08T22:34:41+00:00,2025-05-08T22:34:54+00:00,"It should always be defined for use cases, but Virtual Dropdown is generic enough that I want to make sure it always works, so having the value as a fallback makes sense.
+
+I added a comment for clarity",False,,,,1,1,0,0,0,0,0
+streamlit/streamlit,2507812247,2080433058,raethlein,3775781,2025-05-08T20:40:17+00:00,2025-05-08T20:41:56+00:00,nit: in which cases can the `id` not be set?,True,frontend/lib/src/components/shared/Dropdown/VirtualDropdown.tsx,12.0,"@@ -120,9 +120,11 @@ const VirtualDropdown = React.forwardRef<any, any>((props, ref) => {
+         height={height}
+         itemCount={children.length}
+         itemData={children}
+-        itemKey={(index: number, data: { props: OptionListProps }[]) =>
+-          data[index].props.item.value
+-        }
++        itemKey={(index: number, data: { props: OptionListProps }[]) => {
++          const { id, value } = data[index].props.item
++
++          return id ?? value",0,0,0,0,0,0,0
+streamlit/streamlit,2507812247,2080549924,kmcgrady,69432,2025-05-08T22:34:41+00:00,2025-05-08T22:34:54+00:00,"It should always be defined for use cases, but Virtual Dropdown is generic enough that I want to make sure it always works, so having the value as a fallback makes sense.
+
+I added a comment for clarity",True,frontend/lib/src/components/shared/Dropdown/VirtualDropdown.tsx,12.0,"@@ -120,9 +120,11 @@ const VirtualDropdown = React.forwardRef<any, any>((props, ref) => {
+         height={height}
+         itemCount={children.length}
+         itemData={children}
+-        itemKey={(index: number, data: { props: OptionListProps }[]) =>
+-          data[index].props.item.value
+-        }
++        itemKey={(index: number, data: { props: OptionListProps }[]) => {
++          const { id, value } = data[index].props.item
++
++          return id ?? value",1,1,0,0,0,0,0
+streamlit/streamlit,2506789117,2080101093,kmcgrady,69432,2025-05-08T16:52:02+00:00,2025-05-08T16:52:03+00:00,Does it really need to be in React state? It feels like it's prone to continue to cause errors due to some of the async nature under the hood in React (especially with React 19). Might be easier as a flag of some sort?,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080111928,lukasmasuch,2852129,2025-05-08T16:59:31+00:00,2025-05-08T17:00:11+00:00,"> Does it really need to be in React state? It feels like it's prone to continue to cause errors due to some of the async nature under the hood in React (especially with React 19). Might be easier as a flag of some sort?
+
+Is there a good alternative that wouldn't require state? I think a more bulletproof solution could be to add some kind of identifiable information to the proto messages to check if a finish message is actually associated with the latest rerun triggered in the frontend. But even that would likely require keeping some info in frontend state, and I'm not too excited about adding more information to our protos. ",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080115913,lukasmasuch,2852129,2025-05-08T17:02:28+00:00,2025-05-08T17:02:29+00:00,"However, if we could associate messages with an initial rerun message, we could just ignore all incoming messages in the frontend that are not associated with the latest rerun. But that's likely a slightly bigger change.",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080121388,kmcgrady,69432,2025-05-08T17:05:35+00:00,2025-05-08T17:05:35+00:00,Would an instance variable be bad? It's like the equivalent of a ref? Or do you think that creates more opportunites to save the cache?,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080176157,lukasmasuch,2852129,2025-05-08T17:43:15+00:00,2025-05-08T17:43:15+00:00,"oh, yes... You are correct! Using an instance variable here is a lot better. Updated it 👍",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080101093,kmcgrady,69432,2025-05-08T16:52:02+00:00,2025-05-08T16:52:03+00:00,Does it really need to be in React state? It feels like it's prone to continue to cause errors due to some of the async nature under the hood in React (especially with React 19). Might be easier as a flag of some sort?,True,frontend/app/src/App.tsx,,"@@ -201,6 +201,11 @@ interface State {
+   appConfig: AppConfig
+   autoReruns: NodeJS.Timeout[]
+   inputsDisabled: boolean
++  // Whether we have received a NewSession message after the latest rerun request.
++  // This is used to ensure that we only increment the message cache run count after
++  // we have received a NewSession message after the latest rerun request.
++  // This will allow us to ignore finished messages from previous script runs.
++  hasReceivedNewSession: boolean",0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080111928,lukasmasuch,2852129,2025-05-08T16:59:31+00:00,2025-05-08T17:00:11+00:00,"> Does it really need to be in React state? It feels like it's prone to continue to cause errors due to some of the async nature under the hood in React (especially with React 19). Might be easier as a flag of some sort?
+
+Is there a good alternative that wouldn't require state? I think a more bulletproof solution could be to add some kind of identifiable information to the proto messages to check if a finish message is actually associated with the latest rerun triggered in the frontend. But even that would likely require keeping some info in frontend state, and I'm not too excited about adding more information to our protos. ",True,frontend/app/src/App.tsx,,"@@ -201,6 +201,11 @@ interface State {
+   appConfig: AppConfig
+   autoReruns: NodeJS.Timeout[]
+   inputsDisabled: boolean
++  // Whether we have received a NewSession message after the latest rerun request.
++  // This is used to ensure that we only increment the message cache run count after
++  // we have received a NewSession message after the latest rerun request.
++  // This will allow us to ignore finished messages from previous script runs.
++  hasReceivedNewSession: boolean",0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080115913,lukasmasuch,2852129,2025-05-08T17:02:28+00:00,2025-05-08T17:02:29+00:00,"However, if we could associate messages with an initial rerun message, we could just ignore all incoming messages in the frontend that are not associated with the latest rerun. But that's likely a slightly bigger change.",True,frontend/app/src/App.tsx,,"@@ -201,6 +201,11 @@ interface State {
+   appConfig: AppConfig
+   autoReruns: NodeJS.Timeout[]
+   inputsDisabled: boolean
++  // Whether we have received a NewSession message after the latest rerun request.
++  // This is used to ensure that we only increment the message cache run count after
++  // we have received a NewSession message after the latest rerun request.
++  // This will allow us to ignore finished messages from previous script runs.
++  hasReceivedNewSession: boolean",0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080121388,kmcgrady,69432,2025-05-08T17:05:35+00:00,2025-05-08T17:05:35+00:00,Would an instance variable be bad? It's like the equivalent of a ref? Or do you think that creates more opportunites to save the cache?,True,frontend/app/src/App.tsx,,"@@ -201,6 +201,11 @@ interface State {
+   appConfig: AppConfig
+   autoReruns: NodeJS.Timeout[]
+   inputsDisabled: boolean
++  // Whether we have received a NewSession message after the latest rerun request.
++  // This is used to ensure that we only increment the message cache run count after
++  // we have received a NewSession message after the latest rerun request.
++  // This will allow us to ignore finished messages from previous script runs.
++  hasReceivedNewSession: boolean",0,0,0,0,0,0,0
+streamlit/streamlit,2506789117,2080176157,lukasmasuch,2852129,2025-05-08T17:43:15+00:00,2025-05-08T17:43:15+00:00,"oh, yes... You are correct! Using an instance variable here is a lot better. Updated it 👍",True,frontend/app/src/App.tsx,,"@@ -201,6 +201,11 @@ interface State {
+   appConfig: AppConfig
+   autoReruns: NodeJS.Timeout[]
+   inputsDisabled: boolean
++  // Whether we have received a NewSession message after the latest rerun request.
++  // This is used to ensure that we only increment the message cache run count after
++  // we have received a NewSession message after the latest rerun request.
++  // This will allow us to ignore finished messages from previous script runs.
++  hasReceivedNewSession: boolean",0,0,0,0,0,0,0
+streamlit/streamlit,2505434874,2085080220,sfc-gh-bnisco,178842601,2025-05-12T16:50:49+00:00,2025-05-12T21:53:10+00:00,"**question:** Do we foresee there to be additional usages of `containerElement` in the future? If not, it would make sense to render the `StyleLayoutWrapper` in the return block of `node.deltaBlock.chatMessage` so we keep the variable scope contained in that block.",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2505434874,2085614412,sfc-gh-lwilby,103002751,2025-05-12T22:19:07+00:00,2025-05-12T22:19:30+00:00,"My plan is to wrap all of these containers with `StyleLayoutWrapper` eventually, and originally I made the change to all of them here, but then I decided to restrict it to just `st.chat_message` to start so I could validate the change for each of them individually along with adding the width/height properties. ",False,,,,1,1,0,0,0,0,0
+streamlit/streamlit,2505434874,2085080220,sfc-gh-bnisco,178842601,2025-05-12T16:50:49+00:00,2025-05-12T21:53:10+00:00,"**question:** Do we foresee there to be additional usages of `containerElement` in the future? If not, it would make sense to render the `StyleLayoutWrapper` in the return block of `node.deltaBlock.chatMessage` so we keep the variable scope contained in that block.",True,frontend/lib/src/components/core/Block/Block.tsx,33.0,"@@ -282,6 +290,8 @@ const BlockNodeRenderer = (props: BlockPropsWithoutWidth): ReactElement => {
+     />
+   )
+ 
++  let containerElement: ReactElement | undefined",0,0,0,0,0,0,0
+streamlit/streamlit,2505434874,2085614412,sfc-gh-lwilby,103002751,2025-05-12T22:19:07+00:00,2025-05-12T22:19:30+00:00,"My plan is to wrap all of these containers with `StyleLayoutWrapper` eventually, and originally I made the change to all of them here, but then I decided to restrict it to just `st.chat_message` to start so I could validate the change for each of them individually along with adding the width/height properties. ",True,frontend/lib/src/components/core/Block/Block.tsx,33.0,"@@ -282,6 +290,8 @@ const BlockNodeRenderer = (props: BlockPropsWithoutWidth): ReactElement => {
+     />
+   )
+ 
++  let containerElement: ReactElement | undefined",1,1,0,0,0,0,0
+streamlit/streamlit,2505322559,2078590292,github-advanced-security[bot],62310815,2025-05-07T22:43:16+00:00,2025-05-07T22:43:16+00:00,"## Useless conditional
+
+This constructor call to DateTimeFormat always evaluates to true.
+
+[Show more details](https://github.com/streamlit/streamlit/security/code-scanning/10118)",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2079668474,lukasmasuch,2852129,2025-05-08T12:58:48+00:00,2025-05-08T12:58:48+00:00,Directly using `navigator.languages` here might be even slightly better since it gives us a list of configured locales in the user browser ordered by priority. The number formatter iterates through those to match the first supported locale. ,False,,,,1,1,0,0,0,0,0
+streamlit/streamlit,2505322559,2082353471,lukasmasuch,2852129,2025-05-09T19:00:36+00:00,2025-05-09T19:00:37+00:00,"I think we might also need to apply the locales to the other formats using Intl.NumberFormat as well since those are also expected to be localized to the user's locale. 
+
+By the way, since catching all these errors could get a bit annoying, maybe we could also define `en` as a fallback in the locales array. Based on ChatGPT, `en` or `en-US` should be supported very broadly. 
+
+```typescript
+const locales = [...navigator.languages, ""en""] 
+
+...
+
+return new Intl.NumberFormat(locales).format(value)
+
+...
+
+return new Intl.NumberFormat(undefined, {
+      style: ""percent"",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(value)
+    
+```
+
+
+
+
+
+",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2082354294,Copilot,175728472,2025-05-09T19:01:20+00:00,2025-05-09T19:01:20+00:00,"[nitpick] The extraction of navigator.languages is repeated in both formatNumber and formatMoment; consider refactoring this into a shared helper to reduce duplication.
+```suggestion
+    const locales = getNavigatorLanguages()
+```",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2083447693,mayagbarnes,63436329,2025-05-11T08:10:39+00:00,2025-05-11T08:10:39+00:00,"Makes sense! Consolidated to helper to avoid a bunch of error catches - also asked which is the better fallback, passing `en-US` vs `undefined` and cursor said `undefined` vs adding en-US` to the locales array",False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2078590292,github-advanced-security[bot],62310815,2025-05-07T22:43:16+00:00,2025-05-07T22:43:16+00:00,"## Useless conditional
+
+This constructor call to DateTimeFormat always evaluates to true.
+
+[Show more details](https://github.com/streamlit/streamlit/security/code-scanning/10118)",True,frontend/lib/src/components/widgets/DataFrame/columns/utils.ts,,"@@ -613,10 +622,18 @@
+   momentKind: ""date"" | ""time"" | ""datetime"" = ""datetime""
+ ): string {
+   if (format === ""localized"") {
+-    return new Intl.DateTimeFormat(undefined, {
+-      dateStyle: momentKind === ""time"" ? undefined : ""medium"",
+-      timeStyle: momentKind === ""date"" ? undefined : ""medium"",
+-    }).format(momentDate.toDate())
++    const locale = getLocaleLanguage()
++    // If the locale is not supported, use the default locale as fallback
++    const date =
++      new Intl.DateTimeFormat(locale, {
++        dateStyle: momentKind === ""time"" ? undefined : ""medium"",
++        timeStyle: momentKind === ""date"" ? undefined : ""medium"",
++      }) ||",0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2079668474,lukasmasuch,2852129,2025-05-08T12:58:48+00:00,2025-05-08T12:58:48+00:00,Directly using `navigator.languages` here might be even slightly better since it gives us a list of configured locales in the user browser ordered by priority. The number formatter iterates through those to match the first supported locale. ,True,frontend/lib/src/components/widgets/DataFrame/columns/utils.ts,,"@@ -555,7 +559,17 @@ export function formatNumber(
+       trimMantissa: true,
+     })
+   } else if (format === ""localized"") {
+-    return new Intl.NumberFormat().format(value)
++    const locale = getLocaleLanguage()
++    try {
++      return new Intl.NumberFormat(locale).format(value)",1,1,0,0,0,0,0
+streamlit/streamlit,2505322559,2082353471,lukasmasuch,2852129,2025-05-09T19:00:36+00:00,2025-05-09T19:00:37+00:00,"I think we might also need to apply the locales to the other formats using Intl.NumberFormat as well since those are also expected to be localized to the user's locale. 
+
+By the way, since catching all these errors could get a bit annoying, maybe we could also define `en` as a fallback in the locales array. Based on ChatGPT, `en` or `en-US` should be supported very broadly. 
+
+```typescript
+const locales = [...navigator.languages, ""en""] 
+
+...
+
+return new Intl.NumberFormat(locales).format(value)
+
+...
+
+return new Intl.NumberFormat(undefined, {
+      style: ""percent"",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(value)
+    
+```
+
+
+
+
+
+",True,frontend/lib/src/components/widgets/DataFrame/columns/utils.ts,42.0,"@@ -555,7 +555,17 @@ export function formatNumber(
+       trimMantissa: true,
+     })
+   } else if (format === ""localized"") {
+-    return new Intl.NumberFormat().format(value)
++    const locales = navigator.languages
++    try {
++      return new Intl.NumberFormat(locales).format(value)
++    } catch (error) {
++      // If the locale is not supported, the above throws a RangeError
++      // In this case we use default locale as fallback
++      if (error instanceof RangeError) {
++        return new Intl.NumberFormat().format(value)
++      }
++      throw error
++    }
+   } else if (format === ""percent"") {",0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2082354294,Copilot,175728472,2025-05-09T19:01:20+00:00,2025-05-09T19:01:20+00:00,"[nitpick] The extraction of navigator.languages is repeated in both formatNumber and formatMoment; consider refactoring this into a shared helper to reduce duplication.
+```suggestion
+    const locales = getNavigatorLanguages()
+```",True,frontend/lib/src/components/widgets/DataFrame/columns/utils.ts,,"@@ -555,7 +555,17 @@ export function formatNumber(
+       trimMantissa: true,
+     })
+   } else if (format === ""localized"") {
+-    return new Intl.NumberFormat().format(value)
++    const locales = navigator.languages",0,0,0,0,0,0,0
+streamlit/streamlit,2505322559,2083447693,mayagbarnes,63436329,2025-05-11T08:10:39+00:00,2025-05-11T08:10:39+00:00,"Makes sense! Consolidated to helper to avoid a bunch of error catches - also asked which is the better fallback, passing `en-US` vs `undefined` and cursor said `undefined` vs adding en-US` to the locales array",True,frontend/lib/src/components/widgets/DataFrame/columns/utils.ts,42.0,"@@ -555,7 +555,17 @@ export function formatNumber(
+       trimMantissa: true,
+     })
+   } else if (format === ""localized"") {
+-    return new Intl.NumberFormat().format(value)
++    const locales = navigator.languages
++    try {
++      return new Intl.NumberFormat(locales).format(value)
++    } catch (error) {
++      // If the locale is not supported, the above throws a RangeError
++      // In this case we use default locale as fallback
++      if (error instanceof RangeError) {
++        return new Intl.NumberFormat().format(value)
++      }
++      throw error
++    }
+   } else if (format === ""percent"") {",0,0,0,0,0,0,0
+streamlit/streamlit,2502895623,2077367466,Copilot,175728472,2025-05-07T10:58:48+00:00,2025-05-07T10:58:48+00:00,Consider rate-limiting or sampling the error log to prevent potential log flooding if many authentication cookies exceed the size limit.,False,,,,0,0,0,0,0,0,0
+streamlit/streamlit,2502895623,2077367466,Copilot,175728472,2025-05-07T10:58:48+00:00,2025-05-07T10:58:48+00:00,Consider rate-limiting or sampling the error log to prevent potential log flooding if many authentication cookies exceed the size limit.,True,lib/streamlit/web/server/oauth_authlib_routes.py,6.0,"@@ -74,6 +74,13 @@ def redirect_to_base(self) -> None:
+ 
+     def set_auth_cookie(self, user_info: dict[str, Any]) -> None:
+         serialized_cookie_value = json.dumps(user_info)
++
++        # log error if cookie value is larger than 4096 bytes
++        if len(serialized_cookie_value.encode()) > 4096:",0,0,0,0,0,0,0

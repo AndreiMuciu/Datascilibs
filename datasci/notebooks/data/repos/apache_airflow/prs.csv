@@ -1,0 +1,438 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+apache/airflow,33710089,1,Improving the search functionality in the graph view,,mistercrunch,487433,closed,False,2015-04-20T21:52:31+00:00,2016-05-04T19:40:53+00:00,2015-04-20T21:52:33+00:00,2015-04-20T21:52:33+00:00,de39248486caaf079a6a9aad1448c408940a0cc1,dirty,5037,14,2,1,0,0,,,
+apache/airflow,33710281,2,Bring in more resolution to hivestats,,mistercrunch,487433,closed,False,2015-04-20T21:54:45+00:00,2016-05-04T19:40:53+00:00,2015-04-20T22:58:48+00:00,2015-04-20T22:58:48+00:00,cfe6a21b2164380dea1dffc3b3d74f7c77922155,dirty,30,8,2,3,0,0,,,
+apache/airflow,37054237,5,Misc spelling updates,"I was reading over the code to understand how everything works and ended up making minor spelling changes. None stopped functionality for me except a change in the iPython Notebook. I hope these changes might be useful.
+
+This is an extremely helpful utility and a cool use of DAGs.
+",eerwitt,1329385,closed,False,2015-06-05T17:50:46+00:00,2016-05-04T19:41:05+00:00,2015-06-07T07:55:22+00:00,2015-06-07T07:55:22+00:00,be0dba5ab1062fd2dd3799a86302a9d3ec81d2af,dirty,95,92,33,4,2,3,,,
+apache/airflow,37109286,10,Bugfix for when authenticate=false and airflow_login is present,"Only attempt to import airflow_login is authenticate is set to true
+",mistercrunch,487433,closed,False,2015-06-07T16:29:31+00:00,2016-05-04T19:40:53+00:00,2015-06-07T20:03:26+00:00,2015-06-07T20:03:26+00:00,c52321350fb45a7f23bbb12037d2b2804cc72822,dirty,13,8,1,1,0,0,,,
+apache/airflow,37113278,11,Bugfix when airflow.cfg boolean had inline comments would eval to none,,mistercrunch,487433,closed,False,2015-06-07T20:58:28+00:00,2016-05-04T19:40:53+00:00,2015-06-07T20:59:31+00:00,2015-06-07T20:59:31+00:00,17b7fec2fa8f9c304777a625ffb9b81daaab90c3,dirty,2,0,1,1,0,0,,,
+apache/airflow,37192446,14,Merge pull request #1 from airbnb/master,"Update to master
+",yffud,6361383,closed,False,2015-06-08T20:28:42+00:00,2016-05-04T19:41:17+00:00,2015-06-08T20:28:56+00:00,,0c58dedc4e41d47d38c33bdf6658838f71a60cb7,dirty,0,0,0,1,0,0,,,
+apache/airflow,37192577,15,Merge pull request #1 from airbnb/master,"Update to master
+",yffud,6361383,closed,False,2015-06-08T20:29:57+00:00,2016-05-04T19:41:17+00:00,2015-06-08T20:30:20+00:00,,0c58dedc4e41d47d38c33bdf6658838f71a60cb7,dirty,0,0,0,1,0,0,,,
+apache/airflow,37500820,19,Setting the default queue in BaseOperator,,mistercrunch,487433,closed,False,2015-06-11T19:41:24+00:00,2016-05-04T19:40:53+00:00,2015-06-11T19:41:28+00:00,2015-06-11T19:41:28+00:00,0c59b0019dbd21231920e947801cbd8445db3c79,dirty,1,1,1,1,0,0,,,
+apache/airflow,37603447,24,Fix run_unit_tests.sh,"I don't know if it's a mistake, but the airflow/www/static/coverage does not exist. So, if anyone want to try run_unit_tests.sh, he will have an error from rm and he will not able to use it.
+
+Moreover, in https://github.com/airbnb/airflow/blob/master/CONTRIBUTING.md#testing you don't specify to install nose so you can add it to your requierements.txt or specify it in your CONTRIBUTING.md
+
+To finish, are you interested by the output of the test ?
+",afarbos,7586111,closed,False,2015-06-12T20:55:38+00:00,2016-05-04T19:41:17+00:00,2015-06-16T03:53:42+00:00,,772308cf7f776e44522367b6059c9132c69e9229,dirty,2,1,2,2,0,4,,,
+apache/airflow,37632383,25,Tutorial improvements.,"Various suggested improvements to the tutorial for clarity.
+",statwonk,1160090,closed,False,2015-06-13T22:21:57+00:00,2016-05-04T19:41:04+00:00,2015-06-15T16:47:22+00:00,2015-06-15T16:47:22+00:00,b2269c562ffa1a729afccc9523429b76f1bb4525,dirty,24,25,2,7,2,5,,,
+apache/airflow,37632448,26,Backfill start_date to override the tasks's start_date,"This is important for depend_on_past tasks when running backfill.
+
+Without this feature backfill can only start depend_on_past tasks where start_date aligns, that can be confusing to people. Following this PR the start_date of the backfill overrides the start_date of the task
+",mistercrunch,487433,closed,False,2015-06-13T22:27:09+00:00,2016-05-04T19:40:53+00:00,2015-06-13T22:44:20+00:00,2015-06-13T22:44:20+00:00,c604ee5dec66a12d10c1112400711af176f73b34,dirty,18,1,4,1,0,0,,,
+apache/airflow,37636128,28,Centralizing logging level into settings.py file,,mistercrunch,487433,closed,False,2015-06-14T04:37:37+00:00,2016-05-04T19:40:53+00:00,2015-06-14T04:37:50+00:00,2015-06-14T04:37:50+00:00,c936dda67086b1c48d4b80324fa863ba8715e685,dirty,12,6,3,1,0,0,,,
+apache/airflow,37643698,29,Defining AirflowException in place of generic ones,"There's more work to be done here in defining more classes of exception but it's a step in the right direction.
+",mistercrunch,487433,closed,False,2015-06-14T15:55:11+00:00,2016-05-04T19:40:53+00:00,2015-06-14T19:21:18+00:00,2015-06-14T19:21:18+00:00,5ad1ee05c50eec2229a3476c74144e1a229d42ac,dirty,131,116,23,1,0,0,,,
+apache/airflow,37651216,31,"Revert ""Fixing referential integrity""","This reverts commit f27d20f48f60b3a4421e3676f32a8686bca8ff9a.
+
+This commit introduced a bug that can be see in in Issue https://github.com/airbnb/airflow/issues/27
+
+The bug happens when the `conn_id` is not passed to the back-end
+database.
+
+I'm not sure of the original reason for the change, so there may be a subsequent fix that needs to happen, but this revert appears to fix functionality with the web interface.
+",statwonk,1160090,closed,False,2015-06-15T00:03:38+00:00,2016-05-04T19:41:04+00:00,2015-06-16T04:38:47+00:00,,af9bca404e8a16178d4c695ad37f1cedcf3cb4f6,dirty,3,4,1,1,0,4,,,
+apache/airflow,37711561,32,A simple plugin system for Airflow,"Check out the docs entry for details
+",mistercrunch,487433,closed,False,2015-06-15T16:44:56+00:00,2016-05-04T19:40:53+00:00,2015-06-17T00:12:59+00:00,2015-06-17T00:12:59+00:00,277f7951e6fbf3cc5ef64c0313387d49fe7ea0e8,dirty,244,4,12,1,2,4,,,
+apache/airflow,37745163,33,adding option to remove previous run data instead of manual rm,"@mistercrunch 
+Following this : 
+http://nose.readthedocs.org/en/latest/plugins/cover.html
+This might solve the problem of having to remove the old files...
+",artwr,1518713,closed,False,2015-06-15T23:09:36+00:00,2016-05-04T19:41:07+00:00,2015-06-16T00:29:24+00:00,2015-06-16T00:29:24+00:00,803db9e4d5ea9a9757d52a4199d61b47e9250454,dirty,1,2,1,1,0,0,,,
+apache/airflow,37757414,34,Carry ignore_dependencies from backfill to run commands,"This only affected backfills using the -t (task regexp cutting out upstream tasks), task would just say ""Dependencies not met"" and dependencies would never run. This PR fixes this not-so-corner-case.
+",mistercrunch,487433,closed,False,2015-06-16T03:46:34+00:00,2016-05-04T19:40:53+00:00,2015-06-16T03:48:13+00:00,2015-06-16T03:48:13+00:00,ea5c8d60afe7088d0a598bcbff0b9c647d430a3f,dirty,9,4,3,1,0,0,,,
+apache/airflow,37759148,35,Removing explicit relationship between Connection and Chart models,,mistercrunch,487433,closed,False,2015-06-16T04:38:13+00:00,2016-05-04T19:40:53+00:00,2015-06-16T04:38:18+00:00,2015-06-16T04:38:18+00:00,5086bdba1abcfee9f1110a56c5ed843d90dd3bb2,dirty,9,5,2,1,0,0,,,
+apache/airflow,37826493,36,Adding support for catalog option to PrestoHook + refactor,,mistercrunch,487433,closed,False,2015-06-16T18:32:45+00:00,2016-05-04T19:40:53+00:00,2015-06-16T19:17:08+00:00,2015-06-16T19:17:08+00:00,239f36ae4910f6ce0187ae4b6e74ad46c97a32b2,dirty,40,52,3,1,0,2,,,
+apache/airflow,37901379,38,added plugins_folder key for plugins_folder configuration in DEFAULT_CONFIG,"Fix for issue : https://github.com/airbnb/airflow/issues/37
+",vi3k6i5,3116482,closed,False,2015-06-17T13:40:12+00:00,2016-05-04T19:41:12+00:00,2015-06-17T15:40:50+00:00,,27f47e0b3ff1519e6ae6440e878783d264f2e5df,dirty,1,1,1,1,0,1,,,
+apache/airflow,37963127,43,Take 2 on more explicit plugins,"This approach is much more explicit and contains less magic. It also supports plugging in flask blueprints, which is the right way to go to package `static` and `templates` folders.
+
+@askeys 
+",mistercrunch,487433,closed,False,2015-06-18T01:07:03+00:00,2016-05-04T19:40:53+00:00,2015-06-20T04:56:44+00:00,2015-06-20T04:56:43+00:00,8b9620dd5ea66475f95d28b2f5ce98eba500549a,dirty,123,76,7,1,0,1,,,
+apache/airflow,37971821,44,Adding a timeout Context object and using it when importing dags,,mistercrunch,487433,closed,False,2015-06-18T05:07:48+00:00,2016-05-04T19:40:53+00:00,2015-06-18T05:39:39+00:00,2015-06-18T05:39:39+00:00,07e0763d0ee36bd7e3bc6c4df04723f8892186c1,dirty,24,1,2,1,0,4,,,
+apache/airflow,38118528,49,Patching ExternalTaskSensor for non mysql DBs,"Proposed patch, date casting in SqlAlchemy may be behaving differently on different backends, this should address it.
+",mistercrunch,487433,closed,False,2015-06-19T15:25:27+00:00,2016-05-04T19:40:53+00:00,2015-06-19T16:59:22+00:00,2015-06-19T16:59:22+00:00,f6585bb8d9b5a0a707f64bf735fba73344bc0ded,dirty,2,0,1,2,0,3,,,
+apache/airflow,38162727,53,Passing context to BaseSensor poke method,,mistercrunch,487433,closed,False,2015-06-20T04:47:16+00:00,2016-05-04T19:40:53+00:00,2015-06-20T05:06:48+00:00,2015-06-20T05:06:48+00:00,b176d551b11fb47c52b770d48ded09846ecc71c1,dirty,11,15,1,1,0,0,,,
+apache/airflow,38163078,54,Typo in CONTRIBUTING.md,,akuhn,74872,closed,False,2015-06-20T05:26:43+00:00,2016-05-04T19:40:45+00:00,2015-06-20T06:38:10+00:00,2015-06-20T06:38:10+00:00,656e5ed84df598eb06f1abc50f2a8284514a043a,dirty,2,2,1,1,0,0,,,
+apache/airflow,38242665,60,Making HiveCliHook.run_cli return stdout,,mistercrunch,487433,closed,False,2015-06-22T15:17:55+00:00,2016-05-04T19:40:53+00:00,2015-06-22T15:17:59+00:00,2015-06-22T15:17:59+00:00,e9abe2dc9feb6c430228f6f352079cd1ca667067,dirty,4,0,1,1,0,0,,,
+apache/airflow,38278724,62,Adding ftp hook,"Really simple ftp hook functionality. 
+",martingrayson,870417,closed,False,2015-06-22T21:29:29+00:00,2016-05-04T19:41:03+00:00,2015-06-24T06:15:35+00:00,,9bf7305cf1729bfe4d8c7031dfeaaf0c77eec2e3,dirty,125,0,3,3,0,4,,,
+apache/airflow,38284874,64,Hive Metastore Browser plugin,"The first official Airflow plugin, it was mostly written as an example on how to build an Airflow plugin. 
+
+It allows you to browse the Hive metastore's metadata from the Airflow UI and see:
+- A list of the databases in the metastore,
+- For a database, a list of all tables
+- For each table:
+  - Column definition
+  - Sample data
+  - Partitions list
+  - Table attributes and params
+  - DDL
+  - ...
+
+![screen shot 2015-06-22 at 3 42 16 pm](https://cloud.githubusercontent.com/assets/487433/8294983/54af0eb2-18f5-11e5-9fc3-7b568877fc6c.png)
+",mistercrunch,487433,closed,False,2015-06-22T22:45:46+00:00,2016-05-04T19:40:53+00:00,2015-06-23T21:00:07+00:00,2015-06-23T21:00:07+00:00,623de363195dd88baf74ae47731177d3511a0774,dirty,406,37,7,1,0,0,,,
+apache/airflow,38287233,65,Added missing import in the plugins doc example,,gregorymfoster,4308672,closed,False,2015-06-22T23:21:57+00:00,2016-05-04T19:41:14+00:00,2015-06-22T23:24:32+00:00,2015-06-22T23:24:32+00:00,0b8117be94ec731b24e254444b7d63a91be35e0a,dirty,1,1,1,1,0,1,,,
+apache/airflow,38293008,67,Adding pre and post execute hooks to BaseOperator,"@gregorymfoster
+",mistercrunch,487433,closed,False,2015-06-23T01:16:10+00:00,2016-05-04T19:40:53+00:00,2015-06-23T18:55:05+00:00,2015-06-23T18:55:05+00:00,4ab09c7c8b4a164d805f8560d24dce9f9b256e16,dirty,20,3,1,1,0,0,,,
+apache/airflow,38355887,68,Fixing queue prioritization,"We noticed that lower priority tasks would sneak into the queue. This should address it.
+",mistercrunch,487433,closed,False,2015-06-23T16:26:49+00:00,2016-05-04T19:40:53+00:00,2015-06-23T17:34:19+00:00,2015-06-23T17:34:19+00:00,9b8fd6eee6379f9e8e00476efa0852c5b759935f,dirty,3,5,1,1,0,0,,,
+apache/airflow,38364774,69,add a simple index view to extend,"@mistercrunch adds a simple index page that can be extended to import airflows css into a plugin app.  It seems to work for my app.
+",askeys,2008048,closed,False,2015-06-23T18:00:33+00:00,2016-05-04T19:41:09+00:00,2015-06-23T20:43:32+00:00,2015-06-23T20:43:32+00:00,9500841a6c8e30035634c65c28f3835bff18be33,dirty,2,4,3,2,0,2,,,
+apache/airflow,38410446,71,HiveServer2 improvements,"Allowing for extra connection parameter `authMechanism`. Also refactoring using `get_conn` and `with` blocks.
+",mistercrunch,487433,closed,False,2015-06-24T06:10:26+00:00,2016-05-04T19:40:53+00:00,2015-06-24T23:58:56+00:00,2015-06-24T23:58:56+00:00,c45f970a4f13be241b0fb609f9d78fae830c283b,dirty,28,37,2,1,0,0,,,
+apache/airflow,38466140,74,Improvement in task documentation capabilities,"![screen shot 2015-06-24 at 10 25 06 am](https://cloud.githubusercontent.com/assets/487433/8336731/52831748-1a5b-11e5-89ff-d150f31ed349.png)
+",mistercrunch,487433,closed,False,2015-06-24T17:25:28+00:00,2016-05-04T19:40:53+00:00,2015-06-24T23:43:52+00:00,2015-06-24T23:43:52+00:00,064f3795e1515752f24e221808f1d4c2e2590907,dirty,47,29,3,1,2,1,,,
+apache/airflow,38494947,76,Minor exception message spacing fix,,woodlee,316636,closed,False,2015-06-24T22:31:36+00:00,2016-05-04T19:40:51+00:00,2015-06-24T22:51:43+00:00,2015-06-24T22:51:43+00:00,87cf0d3e5cd626c49b97ab3e38fef60b1d982c90,dirty,2,2,1,1,0,1,,,
+apache/airflow,38571121,78,Clarify the function of wait_for_downstream,"Hopefully I got this right based on a quick reading of the code. I was initially confused because the docs referred to the ""dependencies"" of the task being met, which would be more like waiting for the _upstream_.
+",woodlee,316636,closed,False,2015-06-25T17:16:40+00:00,2016-05-04T19:40:51+00:00,2015-06-26T00:48:56+00:00,2015-06-26T00:48:56+00:00,f1aa2992e1799b2f1f159bd82109fe67f3447edb,dirty,5,5,1,2,3,1,,,
+apache/airflow,38577681,79,Resolve 404s when trying to click through to the task instances view,"This should resolve the 404s that @james-woods was mentioning in https://github.com/airbnb/airflow/issues/73 (and that I was also experiencing).
+",woodlee,316636,closed,False,2015-06-25T18:26:18+00:00,2016-05-04T19:40:51+00:00,2015-06-26T00:54:55+00:00,2015-06-26T00:54:55+00:00,51b6b948340268c6805199c5f2ab84b47b9b7c35,dirty,5,5,1,1,0,4,,,
+apache/airflow,38609436,82,Use internal table. Using external was leading to duplicates.,"@mistercrunch 
+We were running into an interesting issue even with an insert overwrite which would not clear previous data. This should fix it. 
+",artwr,1518713,closed,False,2015-06-26T01:11:49+00:00,2016-05-04T19:41:07+00:00,2015-06-30T22:02:47+00:00,2015-06-30T22:02:47+00:00,04fe7174461304cedbe47c4407dd375e6ce531c5,dirty,1,1,1,1,0,4,,,
+apache/airflow,38675268,83,Adding the upstream_failed state to allow the scheduler to move forward,"This new task state `upstream_failed` allows the scheduler to move forward for dependencies of tasks that have failed. I made sure that it still respects the `depends_on_past` flag.
+
+This also means that the scheduler will now leave more holes that will need to get filled in. This is probably a call for the upcoming ""backfill wizard"" feature to be added to the UI.
+
+@askeys @artwr 
+
+![screen shot 2015-06-26 at 11 11 59 am](https://cloud.githubusercontent.com/assets/487433/8384192/34b4a4f8-1bf4-11e5-88e5-549f37edd51b.png)
+",mistercrunch,487433,closed,False,2015-06-26T18:16:43+00:00,2016-05-04T19:40:53+00:00,2015-06-29T15:47:11+00:00,2015-06-29T15:47:11+00:00,55e3218dc3db3721c30f8e4ac624746dac132a59,dirty,61,18,6,1,2,3,,,
+apache/airflow,38692527,84,draw logging_level from config file,"migrate logging_level from hard-coded value in code to hard-coded value in config file. Which is somehow better ;)
+",brantlee,2349592,closed,False,2015-06-26T21:47:08+00:00,2016-05-04T19:41:11+00:00,2015-07-29T15:22:09+00:00,,1cc1ff1b1b830fe0de971d4185631c284b3d1add,dirty,6,1,2,2,0,3,,,
+apache/airflow,38711317,85,Improved backfill progress logging info,,mistercrunch,487433,closed,False,2015-06-27T15:47:29+00:00,2016-05-04T19:40:53+00:00,2015-06-27T15:47:50+00:00,2015-06-27T15:47:50+00:00,bb463a99b2cb5a9ea71c7cda6f48a1aa9ecf18a3,dirty,16,13,1,1,0,0,,,
+apache/airflow,38733510,86,Various documentation spelling and grammar edits,"<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ ""License""); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ ""AS IS"" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->
+
+# Quarantined issues
+
+Please do not update status or list of the issues manually. It is automatically updated during
+Quarantine workflow, when the workflow executes in the context of Apache Airflow repository.
+This happens on schedule (4 times a day) or when a change has been merged or pushed
+to the relevant branch.
+
+You can update ""Comment"" column in the issue list - the update process will read and preserve this column.
+
+# Status update
+Last status update (UTC): 2020-08-03 23:42:33.457839
+
+# List of Quarantined issues
+
+| Test                                                                                                                                                                                                                                          | Last run   | Last 10 runs                                             | Status          | Comment         |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|----------------------------------------------------------|-----------------|-----------------|
+| [test_trigger_dag](https://github.com/apache/airflow/blob/master/tests/cli/commands/test_dag_command.py?test_id=tests.cli.commands.test_dag_command.TestCliDags::test_trigger_dag#L371)                                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_run_ignores_all_dependencies](https://github.com/apache/airflow/blob/master/tests/cli/commands/test_task_command.py?test_id=tests.cli.commands.test_task_command.TestCliTaskBackfill::test_run_ignores_all_dependencies#L357)           | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_local_run](https://github.com/apache/airflow/blob/master/tests/cli/commands/test_task_command.py?test_id=tests.cli.commands.test_task_command.TestCliTasks::test_local_run#L229)                                                        | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_cli_webserver_background](https://github.com/apache/airflow/blob/master/tests/cli/commands/test_webserver_command.py?test_id=tests.cli.commands.test_webserver_command.TestCliWebServer::test_cli_webserver_background#L307)            | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_integration](https://github.com/apache/airflow/blob/master/tests/executors/test_dask_executor.py?test_id=tests.executors.test_dask_executor.TestDaskExecutor::test_backfill_integration#L85)                                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_conf](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_conf#L287)                                                             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_depends_on_past](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_depends_on_past#L793)                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_depends_on_past_backwards](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_depends_on_past_backwards#L819)                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_examples](https://github.com/apache/airflow/blob/master/../../usr/local/lib/python3.6/site-packages/_pytest/mark/structures.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_examples#L252)              | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_examples_0_example_branch_operator](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_examples_0_example_branch_operator#L221) | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_examples_1_example_bash_operator](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_examples_1_example_bash_operator#L221)     | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_examples_2_example_skip_dag](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_examples_2_example_skip_dag#L221)               | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_examples_3_latest_only](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_examples_3_latest_only#L221)                         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_execute_subdag](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_execute_subdag#L1147)                                        | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_execute_subdag_with_removed_task](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_execute_subdag_with_removed_task#L1248)    | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_fill_blanks](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_fill_blanks#L1078)                                              | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_max_limit_check](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_max_limit_check#L914)                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_max_limit_check_complete_loop](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_max_limit_check_complete_loop#L1010)          | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_max_limit_check_no_count_existing](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_max_limit_check_no_count_existing#L982)   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_max_limit_check_within_limit](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_max_limit_check_within_limit#L894)             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_multi_dates](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_multi_dates#L170)                                               | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_ordered_concurrent_execute](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_ordered_concurrent_execute#L704)                 | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_pool_not_found](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_pool_not_found#L465)                                         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_pooled_tasks](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_pooled_tasks#L760)                                             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_rerun_failed_tasks](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_rerun_failed_tasks#L588)                                 | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_rerun_failed_tasks_without_flag](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_rerun_failed_tasks_without_flag#L667)       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_rerun_upstream_failed_tasks](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_rerun_upstream_failed_tasks#L627)               | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_respect_dag_concurrency_limit](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_respect_dag_concurrency_limit#L356)           | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_respect_default_pool_limit](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_respect_default_pool_limit#L407)                 | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_respect_pool_limit](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_respect_pool_limit#L487)                                 | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_respect_task_concurrency_limit](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_respect_task_concurrency_limit#L304)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_run_backwards](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_run_backwards#L1417)                                          | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_backfill_run_rescheduled](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_backfill_run_rescheduled#L548)                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_cli_receives_delay_arg](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_cli_receives_delay_arg#L856)                                           | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_dag_get_run_dates](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_dag_get_run_dates#L1389)                                                    | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_dag_run_with_finished_tasks_set_to_success](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_dag_run_with_finished_tasks_set_to_success#L117)   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_sub_set_subdag](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_sub_set_subdag#L1032)                                                          | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_subdag_clear_parentdag_downstream_clear](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_subdag_clear_parentdag_downstream_clear#L1192)        | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_controller_dag](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_trigger_controller_dag#L141)                                           | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_unfinished_dag_runs_set_to_failed](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_unfinished_dag_runs_set_to_failed#L96)                      | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_update_counters](https://github.com/apache/airflow/blob/master/tests/jobs/test_backfill_job.py?test_id=tests.jobs.test_backfill_job.TestBackfillJob::test_update_counters#L1292)                                                        | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_localtaskjob_maintain_heart_rate](https://github.com/apache/airflow/blob/master/tests/jobs/test_local_task_job.py?test_id=tests.jobs.test_local_task_job.TestLocalTaskJob::test_localtaskjob_maintain_heart_rate#L257)                  | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_mark_success_on_success_callback](https://github.com/apache/airflow/blob/master/tests/jobs/test_local_task_job.py?test_id=tests.jobs.test_local_task_job.TestLocalTaskJob::test_mark_success_on_success_callback#L362)                  | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_00](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_00#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_01](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_01#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_02](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_02#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_03](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_03#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_04](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_04#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_05](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_05#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_06](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_06#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_07](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_07#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_08](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_08#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_09](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_09#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_10](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_10#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_11](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_11#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_12](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_12#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_13](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_13#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_14](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_14#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_15](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_15#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_16](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_16#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_17](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_17#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_18](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_18#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_19](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_19#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_20](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_20#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_21](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_21#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_22](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_22#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_23](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_23#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_24](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_24#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_25](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_25#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_dags_queries_count_26](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_dags_queries_count_26#L1256)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :x:                | Flaky           | Flaky           |
+| [test_process_file_queries_count_00](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_00#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_01](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_01#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_02](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_02#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_03](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_03#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_04](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_04#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_05](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_05#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_06](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_06#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_07](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_07#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_08](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_08#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_09](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_09#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_10](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_10#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_11](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_11#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_12](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_12#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_13](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_13#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_14](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_14#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_15](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_15#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_16](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_16#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_process_file_queries_count_17](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestDagFileProcessorQueriesCount::test_process_file_queries_count_17#L1311)         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_change_state_for_tis_without_dagrun](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestSchedulerJob::test_change_state_for_tis_without_dagrun#L2148)             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_retry_still_in_executor](https://github.com/apache/airflow/blob/master/tests/jobs/test_scheduler_job.py?test_id=tests.jobs.test_scheduler_job.TestSchedulerJob::test_retry_still_in_executor#L2931)                                     | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_clear_multiple_external_task_marker](https://github.com/apache/airflow/blob/master/tests/sensors/test_external_task_sensor.py?test_id=tests.sensors.test_external_task_sensor::test_clear_multiple_external_task_marker#L606)           | Failed     | :x: :x: :x:                                              | Flaky           | Flaky           |
+| [test_timeout](https://github.com/apache/airflow/blob/master/tests/sensors/test_timeout_sensor.py?test_id=tests.sensors.test_timeout_sensor.TestSensorTimeout::test_timeout#L76)                                                              | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_default_impersonation](https://github.com/apache/airflow/blob/master/tests/test_impersonation.py?test_id=tests.test_impersonation.TestImpersonation::test_default_impersonation#L166)                                                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_impersonation](https://github.com/apache/airflow/blob/master/tests/test_impersonation.py?test_id=tests.test_impersonation.TestImpersonation::test_impersonation#L147)                                                                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_impersonation_subdag](https://github.com/apache/airflow/blob/master/tests/test_impersonation.py?test_id=tests.test_impersonation.TestImpersonation::test_impersonation_subdag#L177)                                                     | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_no_impersonation](https://github.com/apache/airflow/blob/master/tests/test_impersonation.py?test_id=tests.test_impersonation.TestImpersonation::test_no_impersonation#L156)                                                             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_impersonation_custom](https://github.com/apache/airflow/blob/master/tests/test_impersonation.py?test_id=tests.test_impersonation.TestImpersonationWithCustomPythonPath::test_impersonation_custom#L225)                                 | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_should_force_kill_process](https://github.com/apache/airflow/blob/master/tests/utils/test_process_utils.py?test_id=tests.utils.test_process_utils.TestKillChildProcessesByPids::test_should_force_kill_process#L144)                    | Succeeded  | :heavy_check_mark: :heavy_check_mark: :x:                | Flaky           | Flaky           |
+| [test_should_kill_process](https://github.com/apache/airflow/blob/master/tests/utils/test_process_utils.py?test_id=tests.utils.test_process_utils.TestKillChildProcessesByPids::test_should_kill_process#L129)                                | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_dag_button](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_dag_button#L2415)                                                                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_dag_button_normal_exist](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_dag_button_normal_exist#L2410)                                         | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_dag_conf](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_dag_conf#L2431)                                                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_dag_conf_malformed](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_dag_conf_malformed#L2449)                                                   | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_dag_form](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_dag_form#L2462)                                                                       | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |
+| [test_trigger_endpoint_uses_existing_dagbag](https://github.com/apache/airflow/blob/master/tests/www/test_views.py?test_id=tests.www.test_views.TestTriggerDag::test_trigger_endpoint_uses_existing_dagbag#L2470)                             | Succeeded  | :heavy_check_mark: :heavy_check_mark: :heavy_check_mark: | So far, so good | So far, so good |",woodlee,316636,closed,False,2015-06-28T22:59:08+00:00,2020-08-03T23:42:33+00:00,2015-06-28T23:20:04+00:00,2015-06-28T23:20:04+00:00,676592f4e08653e6c5de305357f87779a47ad366,dirty,183,184,11,1,0,1,,,
+apache/airflow,38798436,89,Fix args in tutorial docs,"@mistercrunch 
+This fixes #88 
+",artwr,1518713,closed,False,2015-06-29T17:42:57+00:00,2016-05-04T19:41:07+00:00,2015-06-29T21:27:00+00:00,2015-06-29T21:27:00+00:00,7f5d7128b97cc0a4bbec10111b5700668211ced8,dirty,38,25,1,3,1,2,,,
+apache/airflow,38832029,90,Explanation about the meaning of date parameter,"Proposal for updating the tutorial doc, related to issue #87 
+",gtoonstra,441978,closed,False,2015-06-30T00:26:36+00:00,2016-05-04T19:40:52+00:00,2015-07-01T16:51:29+00:00,2015-07-01T16:51:29+00:00,f69d7e5724dd6c5caf8dbdb21e436aabfdb70839,dirty,6,1,1,6,2,2,,,
+apache/airflow,38833734,91,Removing QUEUED from runnable states list,"This forces the execution of queued task instances to go through the prioritization process in all cases, except for force runs from the UI and/or CLI.
+",mistercrunch,487433,closed,False,2015-06-30T01:04:19+00:00,2016-05-04T19:40:53+00:00,2015-06-30T05:26:05+00:00,2015-06-30T05:26:05+00:00,05b3c7e8473d9571bcb9b476e9f0aebde62e5417,dirty,2,4,2,1,0,0,,,
+apache/airflow,38846328,94,Deleting queued up task where the task or DAG is gone,,mistercrunch,487433,closed,False,2015-06-30T06:31:24+00:00,2016-05-04T19:40:53+00:00,2015-06-30T06:31:31+00:00,2015-06-30T06:31:31+00:00,2d85f047a7b3ed5f27a1701f7f6b45df85fa9dbc,dirty,8,0,2,1,0,0,,,
+apache/airflow,38902908,96,Now supporting branching using a BranchPythonOperator,"![screen shot 2015-06-30 at 10 17 21 am](https://cloud.githubusercontent.com/assets/487433/8437070/8c486946-1f11-11e5-8ab9-43139e406de9.png)
+
+The BranchPythonOperator is much like the PythonOperator except that it expects a `python_callable` that returns a `task_id`. The `task_id` returned is followed, all other paths are skipped using the new `skipped` state. The `task_id` returned has to be referencing a task directly downstream from the BranchPythonOperator task.
+",mistercrunch,487433,closed,False,2015-06-30T17:24:43+00:00,2016-05-04T19:40:53+00:00,2015-06-30T19:51:22+00:00,2015-06-30T19:51:21+00:00,9210ecb5296ef780ad8dc17e8d6e2a569fbee59a,dirty,117,14,11,2,0,3,,,
+apache/airflow,38935220,97,add mark as success link to failure emails,"link format:
+https://airflow-brain.d.musta.ch/admin/airflow/action?action=success&task_id=<task name>&dag_id=<dag name>&execution_date=<exec ds>
+
+not final, just showing what I'm proposing. @mistercrunch feel free to just do it since I don't know the right variables here
+",patrickleotardif,787256,closed,False,2015-06-30T23:26:31+00:00,2016-05-04T19:41:02+00:00,2015-07-01T03:57:13+00:00,,637e7decca584d07e53f19dadd99ba51a78a1315,dirty,1,0,1,1,0,0,,,
+apache/airflow,38935872,98,Adding a link to Mark Success directly from the failure email,,mistercrunch,487433,closed,False,2015-06-30T23:38:35+00:00,2016-05-04T19:40:53+00:00,2015-06-30T23:47:02+00:00,2015-06-30T23:47:02+00:00,628e091bde0766fe10dca6b6145ad919045f0208,dirty,15,0,1,1,0,1,,,
+apache/airflow,38942889,99,Http protocol sensor,"This is the approach chosen for the HTTP hook and includes a very simple SimpleHttpOperator. This op only checks if the response status code is 20x or a failure. The sensor calls a simple GET and if the response code is 20x, it flows through. (regex is not implemented there, yet, to check on object status). 
+
+The most important bit is the hook, which is a wrapper around HTTP operations and which other, more complex operators can use to interact with other systems over HTTP. 
+
+The example http dag demonstrates how this appears to an end user.
+
+Gotcha: for the Simple operator, the code in the dag must ensure that the data is of the right type and the correct content-type header is included, or the request will fail. This is because it's not viable to parse the header and know how to work with the input data to make it sensible.
+
+If this simple interaction doesn't cut it, a specific operator for that system should be built. The simple op is not intended to be more generic nor clever than this, it probably serves more as an example of how to build your own http operators than useful in many use cases.
+
+Obviously, more specific operators would reduce the amount of input parameters in the task instance declaration.
+",gtoonstra,441978,closed,False,2015-07-01T02:21:01+00:00,2016-05-04T19:40:52+00:00,2015-07-03T00:32:43+00:00,,58af681c251033ebb0a13ec58337be5fe9464e8f,dirty,273,0,7,16,28,5,,,
+apache/airflow,38950513,100,"SLA can be set at task level, email notifications get sent","Note that the introduction of a new model forces people who update to this version to run `airflow initdb`
+",mistercrunch,487433,closed,False,2015-07-01T05:57:15+00:00,2016-05-04T19:40:53+00:00,2015-07-02T05:10:28+00:00,2015-07-02T05:10:28+00:00,53483e48c83eda4daff61ecad69b0d3db10b74cf,dirty,166,10,7,1,0,3,,,
+apache/airflow,38955367,101,Removed print statement from view,"I think this is statement inadvertently left
+",0x68,178881,closed,False,2015-07-01T07:33:18+00:00,2016-05-04T19:40:49+00:00,2015-07-01T16:46:45+00:00,2015-07-01T16:46:45+00:00,9c6d8294b5ddab91d0d0eb1bae1c09d3655a82af,dirty,0,1,1,1,0,1,,,
+apache/airflow,39071604,103,HTTP Operator and sensor,"New, clean pull request for issue #92 , not riddled with rebase artifacts.
+",gtoonstra,441978,closed,False,2015-07-02T11:11:08+00:00,2016-05-04T19:40:52+00:00,2015-07-09T20:17:17+00:00,2015-07-09T20:17:17+00:00,3e377bb8dec36b63aca4f6ffe1ac2f351339b0e9,dirty,383,1,10,4,4,9,,,
+apache/airflow,39195755,104,Task instances could be double triggered when using the --force,"This prevents it, a single task for a specific schedule should never have two instances running at the same time.
+",mistercrunch,487433,closed,False,2015-07-03T20:46:48+00:00,2016-05-04T19:40:53+00:00,2015-07-03T20:53:01+00:00,2015-07-03T20:53:01+00:00,ca526f63f4c1d63a616fe7f683126eb92daeb2d8,dirty,13,12,1,1,0,1,,,
+apache/airflow,39196224,105,Priority based on priority_weight + time in queue,,mistercrunch,487433,closed,False,2015-07-03T21:02:37+00:00,2016-05-04T19:40:53+00:00,2015-07-03T21:10:05+00:00,2015-07-03T21:10:05+00:00,fbef3ecd7766cf291664b8be953c359f3a34426c,dirty,1,1,1,1,0,0,,,
+apache/airflow,39203112,106,Moving from 100 to 1000 tasks per page,"Because screw dealing with pages.
+",mistercrunch,487433,closed,False,2015-07-04T05:41:15+00:00,2016-05-04T19:40:53+00:00,2015-07-04T05:41:29+00:00,2015-07-04T05:41:29+00:00,682cc9e67ea3cd73071f9ea2eebd15eb7733c68e,dirty,1,1,1,1,0,0,,,
+apache/airflow,39213099,107,Fixing a docstring typo,,adamhaney,1839452,closed,False,2015-07-04T21:22:17+00:00,2016-05-04T19:41:09+00:00,2015-07-04T22:27:10+00:00,2015-07-04T22:27:10+00:00,69fa5bba27ad352756e475060e490c48d8d8b095,dirty,1,1,1,1,0,1,,,
+apache/airflow,39339455,108,Adding support for beeline as part of HiveCliHook,"@askeys @artwr 
+
+beeline is a new lightweight Hive client that goes over JDBC to talk to HiveServer2 that is supposed to be able to replace the old Hive CLI.
+",mistercrunch,487433,closed,False,2015-07-07T06:43:44+00:00,2016-05-04T19:40:53+00:00,2015-07-11T14:58:05+00:00,2015-07-11T14:58:05+00:00,59f6e6bf34c5d404add252d2e967af2400d8f1de,dirty,49,19,2,1,0,2,,,
+apache/airflow,39489744,109,Adding a policy hook to allow setting up system-wide policy,,mistercrunch,487433,closed,False,2015-07-08T15:26:59+00:00,2016-05-04T19:40:54+00:00,2015-07-09T04:59:18+00:00,2015-07-09T04:59:18+00:00,13f32753b5f2886178b7e4def1f85ec8c4e772cb,dirty,38,4,2,1,0,0,,,
+apache/airflow,39534816,111,Use a bare raise so the original exception gets propagated.,"With this change I get full stack traces in the logs. Without it the exception appears to originate from the line with `raise e`.
+",jbalogh,57258,closed,False,2015-07-08T23:34:00+00:00,2016-05-04T19:40:44+00:00,2015-07-10T22:01:52+00:00,2015-07-10T22:01:52+00:00,7188f9894fd08d72c5365375ee2fb7a6cf9ee9f7,dirty,1,1,1,1,0,4,,,
+apache/airflow,39608707,114,Fixing a bad attr name in HiveToMySqlTransfer,,mistercrunch,487433,closed,False,2015-07-09T17:36:54+00:00,2016-05-04T19:40:54+00:00,2015-07-09T17:37:00+00:00,2015-07-09T17:37:00+00:00,91116d2dd15de279a1ba906c1cf50c15e6f28768,dirty,3,3,1,1,0,0,,,
+apache/airflow,39623677,117,Http operator sensor,,mistercrunch,487433,closed,False,2015-07-09T20:16:40+00:00,2016-05-04T19:40:54+00:00,2015-07-09T20:17:17+00:00,2015-07-09T20:17:17+00:00,5f1e00a4cf9cc9ca8a83ca40c2327ecc72065d5d,dirty,382,3,10,5,0,1,,,
+apache/airflow,39625898,118,Render python_callable source code in Task Details for PythonOperator,"![screen shot 2015-07-09 at 1 40 06 pm](https://cloud.githubusercontent.com/assets/487433/8606369/0d69231e-2640-11e5-8172-3af843887a43.png)
+",mistercrunch,487433,closed,False,2015-07-09T20:40:28+00:00,2016-05-04T19:40:54+00:00,2015-07-09T20:40:40+00:00,2015-07-09T20:40:40+00:00,059a2ce0e3059466b72de6faf1942f8881f353b4,dirty,3,0,1,1,0,0,,,
+apache/airflow,39752593,126,Carrying the ROOT filter through the DAG views,"Also added buttons to show and hide all series in the duration and landing times chart views.
+",mistercrunch,487433,closed,False,2015-07-11T21:30:27+00:00,2016-05-04T19:40:54+00:00,2015-07-11T21:31:37+00:00,2015-07-11T21:31:37+00:00,c0aad83efbbbce81f78daa5d97287c58f4082d4e,dirty,56,9,6,2,0,0,,,
+apache/airflow,39772203,127,Better datetime formating in list views,,mistercrunch,487433,closed,False,2015-07-13T00:41:18+00:00,2016-05-04T19:40:54+00:00,2015-07-13T00:41:27+00:00,2015-07-13T00:41:27+00:00,a14f93aed7b570e583d2cb4fc0ed572caa0319d4,dirty,6,0,1,1,0,0,,,
+apache/airflow,39786721,129,Adding headers to CRUD views,,mistercrunch,487433,closed,False,2015-07-13T07:56:25+00:00,2016-05-04T19:40:54+00:00,2015-07-13T07:56:32+00:00,2015-07-13T07:56:32+00:00,dabe19b43983af4e65d5f3cee17a6c86f8edf3d1,dirty,74,11,4,1,0,0,,,
+apache/airflow,39865401,131,Hive to druid,"@mvfast
+",mistercrunch,487433,closed,False,2015-07-13T22:48:42+00:00,2016-05-04T19:40:54+00:00,2015-07-20T16:58:16+00:00,2015-07-20T16:58:16+00:00,f64dfb00f83d2fcb0ad3ae072f8a9b58c2b9ada1,dirty,267,3,8,5,0,0,,,
+apache/airflow,39893165,132,Send custom message with email alerts.,"Added an option to send custom email message. This can be used to provide more context to the receivers of these emails, eg by giving them actionable instructions are by linking them to a help center page.
+
+Also, removed unused parameter.
+
+Test plan
+- Couldn't get my local changes to run (it would always run the pip-installed airflow instead) tested my changes by copypasting into ipython instead.
+",akuhn,74872,closed,False,2015-07-14T08:35:17+00:00,2016-05-04T19:40:45+00:00,2015-12-11T01:30:07+00:00,,1343fe5d5fb4f1e251d95c95d1690c3c29b3c2ba,dirty,7,3,1,1,0,5,,,
+apache/airflow,39977941,134,SLA bugfix,,mistercrunch,487433,closed,False,2015-07-15T00:33:28+00:00,2016-05-04T19:40:54+00:00,2015-07-15T00:33:33+00:00,2015-07-15T00:33:33+00:00,afef9145497f8fcf881aa76f3597dc536ded7d83,dirty,7,1,1,1,0,0,,,
+apache/airflow,40144877,141,Adding timeout param to BaseOperator,,mistercrunch,487433,closed,False,2015-07-16T15:53:39+00:00,2016-05-04T19:40:54+00:00,2015-07-16T18:02:42+00:00,2015-07-16T18:02:42+00:00,2693d5f2fefa40571798913d9076bc725d0a25b1,dirty,49,7,5,3,0,1,,,
+apache/airflow,40169424,143,fixing copypasta issue with prefix sensor + docs,"@mistercrunch 
+This should fix https://github.com/airbnb/airflow/issues/142
+
+This operator is still not as robust in its parsing as the key sensor, but prefixes are more tricky.
+",artwr,1518713,closed,False,2015-07-16T20:01:22+00:00,2016-05-04T19:41:07+00:00,2015-07-16T21:10:59+00:00,2015-07-16T21:10:59+00:00,01d8431b3cac434bb825b0d4c045e5a9cbf0d49d,dirty,4,6,1,1,0,1,,,
+apache/airflow,40186345,145,Uniform colors and more circle on the dashbaord,,mistercrunch,487433,closed,False,2015-07-16T23:14:38+00:00,2016-05-04T19:40:54+00:00,2015-07-16T23:14:41+00:00,2015-07-16T23:14:41+00:00,b41f8a5db0688a8eded5af8424097dabe0c5e431,dirty,26,16,6,1,0,0,,,
+apache/airflow,40189722,146,Generalize presto check operator to work for other backends,"This PR attempts to generalize the PrestoCheckOperator family so it can be used with other backends besides Presto.
+
+There are two parts to this...
+1. the first part creates a baseSqlHook to ensure that other hooks can easily be used in this CheckOperator
+2. the second part separates out the check implementation from presto.
+
+I decided to make the operators an abstract class so we can continue the pattern of not instantiating the hook until we are going to execute, rather than creating them in the constructor. Alternatively, I could have passed in a hook and a list of hook parameters but that felt pretty icky.
+
+I had some problems running the tests on my local machine -- I'm not sure if there are some other instructions that are needed but my hive tests and other external dependencies were failing.
+",smarden1,549155,closed,False,2015-07-17T00:14:11+00:00,2016-05-04T19:40:58+00:00,2015-07-23T16:41:08+00:00,2015-07-23T16:41:08+00:00,30e0f0ea23bd09916ea2047c9b3be05c410ee3d7,dirty,430,404,9,6,8,5,,,
+apache/airflow,40190359,147,move isinstance check outside of loop,"Moves the isinstance check to be outside of the loop
+",smarden1,549155,closed,False,2015-07-17T00:27:13+00:00,2016-05-04T19:40:58+00:00,2015-07-18T04:09:11+00:00,2015-07-18T04:09:11+00:00,487ae8252d3dd50c105c5f50f92b4d547d2cae5d,dirty,6,4,1,2,4,3,,,
+apache/airflow,40255089,151,Adding event callbacks to BaseOperator (all tasks)!,"This allows users to run arbitrary code on task success / retry / failure events.
+",mistercrunch,487433,closed,False,2015-07-17T17:51:56+00:00,2016-05-04T19:40:54+00:00,2015-07-18T01:13:55+00:00,2015-07-18T01:13:55+00:00,31f1ce510fe3d766cc8e8e84a900f9922a92b8f0,dirty,38,3,1,2,7,1,,,
+apache/airflow,40272426,152,Add inenv,"https://github.com/pnegahdar/inenv
+",pnegahdar,833067,closed,False,2015-07-17T21:18:04+00:00,2016-05-04T19:41:02+00:00,2015-07-17T21:53:35+00:00,,7184e77d9f4b2a085d3dde99329e2dd55c089241,dirty,4,0,3,1,0,1,,,
+apache/airflow,40283513,153,Fixing minor templating issue in HivePartitionSensor,,mistercrunch,487433,closed,False,2015-07-18T00:56:17+00:00,2016-05-04T19:40:54+00:00,2015-07-20T23:17:36+00:00,2015-07-20T23:17:36+00:00,eaa75ca88379949346eded37b2814fe5a0d122b7,dirty,3,3,1,1,0,0,,,
+apache/airflow,40288163,154,Added logic to allow for an embed parameter in the URL ,"Strips away the Nav bar, overrides some css to remove padding..,takes away everything from the charts view except the chart itself.
+
+@mistercrunch @artwr 
+",jeremyclover,1009552,closed,False,2015-07-18T07:12:49+00:00,2016-05-04T19:41:03+00:00,2015-07-18T23:17:25+00:00,2015-07-18T23:17:25+00:00,16cd92f13efcd4247997f24ee5e90fd68d4e043a,dirty,26,9,3,1,0,1,,,
+apache/airflow,40339625,155,Default retry,"Default retry parameters changed for:
+- SqlSensor
+- ExasolOperator
+",m1racoli,7921017,closed,False,2015-07-20T10:36:20+00:00,2016-05-04T19:41:18+00:00,2015-07-20T10:44:33+00:00,,cec49b713dbb92d34e2ce6f4eadaa67a16e30f29,dirty,143,1,9,8,1,3,,,
+apache/airflow,40369339,156,Remove some debug prints,"I think these were just for debugging? (https://github.com/airbnb/airflow/commit/b61dc2fd)
+",jbalogh,57258,closed,False,2015-07-20T16:14:43+00:00,2016-05-04T19:40:44+00:00,2015-07-20T21:03:25+00:00,2015-07-20T21:03:25+00:00,08cb7e7cf221164f61c01498ede44182b608b53b,dirty,0,2,1,1,0,1,,,
+apache/airflow,40402892,158,Making sure that SKIPPED task state don't run,,mistercrunch,487433,closed,False,2015-07-20T22:08:07+00:00,2016-05-04T19:40:54+00:00,2015-07-20T22:09:09+00:00,2015-07-20T22:09:09+00:00,c9e5dd66ea7fa9b56904cb770d8c143176ad075b,dirty,2,0,1,1,0,0,,,
+apache/airflow,40407052,159,Fix submodule label for Druid,"Fix for `NameError: name 'druid' is not defined` exception when installing with Pip via Git url.
+
+---
+
+```
+16:02 $ mkvirtualenv airflow
+New python executable in airflow/bin/python
+Installing Setuptools..............................................................................................................................................................................................................................done.
+Installing Pip.....................................................................................................................................................................................................................................................................................................................................done.
+pip install git+https://github.com/airbnb/airflow.git@master
+Downloading/unpacking git+https://github.com/airbnb/airflow.git@master
+  Cloning https://github.com/airbnb/airflow.git (to master) to /var/folders/sg/ncfblr6d6bzd0q3wyz7tf5vw0000gp/T/pip-zHt3UD-build
+remote: Counting objects: 5988, done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 5988 (delta 8), reused 0 (delta 0), pack-reused 5972
+Receiving objects: 100% (5988/5988), 5.20 MiB | 253.00 KiB/s, done.
+Resolving deltas: 100% (4157/4157), done.
+  Running setup.py egg_info for package from git+https://github.com/airbnb/airflow.git@master
+    Traceback (most recent call last):
+      File ""<string>"", line 16, in <module>
+      File ""/var/folders/sg/ncfblr6d6bzd0q3wyz7tf5vw0000gp/T/pip-zHt3UD-build/setup.py"", line 67, in <module>
+        'druid': druid,
+    NameError: name 'druid' is not defined
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+
+  File ""<string>"", line 16, in <module>
+
+  File ""/var/folders/sg/ncfblr6d6bzd0q3wyz7tf5vw0000gp/T/pip-zHt3UD-build/setup.py"", line 67, in <module>
+
+    'druid': druid,
+
+NameError: name 'druid' is not defined
+
+----------------------------------------
+Cleaning up...
+Command python setup.py egg_info failed with error code 1 in /var/folders/sg/ncfblr6d6bzd0q3wyz7tf5vw0000gp/T/pip-zHt3UD-build
+Storing complete log in /Users/robb/.pip/pip.log
+```
+",robbwagoner,989361,closed,False,2015-07-20T23:04:18+00:00,2016-05-04T19:41:03+00:00,2015-07-20T23:16:13+00:00,2015-07-20T23:16:13+00:00,48da935b10b7a6933e12b13d7d453f57875371f4,dirty,1,1,1,1,0,1,,,
+apache/airflow,40477066,160,add jdbc extension,"Allows connections via JdbcDrivers. Using JdbcOperator you can execute tasks on all kind of dbs.
+",jomar83,13132734,closed,False,2015-07-21T16:29:17+00:00,2016-05-04T19:41:20+00:00,2015-07-21T17:26:43+00:00,2015-07-21T17:26:43+00:00,7ba88c0c46e8376aaf46d9667d10d68dd5403548,dirty,152,0,8,1,0,1,,,
+apache/airflow,40516411,162,Add smtp_starttls flag to config,"I need to work with a mail server that does not support STARTTLS.  This PR adds a config file setting (defaulting to True) to decide when to activate STARTTLS.
+",seibert,425352,closed,False,2015-07-21T23:30:26+00:00,2016-05-04T19:40:52+00:00,2015-07-21T23:35:46+00:00,2015-07-21T23:35:46+00:00,192b081b53542647b8f1e746089b1ee4d16a3632,dirty,7,1,2,1,0,1,,,
+apache/airflow,40611335,164,Adding Agari to the list of companies using Airflow in the readme,,r39132,581734,closed,False,2015-07-22T21:02:58+00:00,2016-05-04T19:40:59+00:00,2015-07-22T21:16:00+00:00,2015-07-22T21:16:00+00:00,880ba0331efb8a37943cd0e0127c8945540cf2d1,dirty,1,1,1,1,0,1,,,
+apache/airflow,40622179,166,Fix context bug,"If the try block would fail before the assignment was made to `context`, the expect block would also fail, dawg.
+",mistercrunch,487433,closed,False,2015-07-22T23:11:30+00:00,2016-05-04T19:40:54+00:00,2015-07-22T23:11:43+00:00,2015-07-22T23:11:43+00:00,365348fc3b8ceb6f3572b46a15dde16c6e8f879e,dirty,2,1,1,1,0,0,,,
+apache/airflow,40634754,169,Adding conf dict to context,"as a solution to https://github.com/airbnb/airflow/issues/168
+",mistercrunch,487433,closed,False,2015-07-23T03:48:10+00:00,2016-05-04T19:40:54+00:00,2015-07-23T03:49:39+00:00,2015-07-23T03:49:38+00:00,706ee52b92017fc8a46d57d5f44de632a3804a55,dirty,9,4,2,1,1,3,,,
+apache/airflow,40646741,172,Adding Wooga to the list of companies using Airflow in the readme,,tkaymak,2235579,closed,False,2015-07-23T08:12:33+00:00,2016-05-04T19:41:10+00:00,2015-07-23T10:58:31+00:00,2015-07-23T10:58:31+00:00,b2cff41a304b55585a6c13b0e385744ce16682d1,dirty,1,0,1,1,0,1,,,
+apache/airflow,40661828,173,Smarden1 generalize check operator,"@mistercrunch @smarden1 
+New PR with conflicts taken care of. should be good to merge now.
+",artwr,1518713,closed,False,2015-07-23T11:28:22+00:00,2016-05-04T19:41:07+00:00,2015-07-23T16:41:07+00:00,2015-07-23T16:41:07+00:00,68ff1ac0dd32f9404a5e365f83a4cb3168745ec8,dirty,430,404,9,7,0,2,,,
+apache/airflow,40722597,175,Dict fix,,syvineckruyk,335167,closed,False,2015-07-23T21:51:10+00:00,2016-05-04T19:40:51+00:00,2015-07-24T06:12:38+00:00,2015-07-24T06:12:38+00:00,92296da785a9b4c834b20c13676d604e6562bffc,dirty,1,1,1,5,0,1,,,
+apache/airflow,40726362,176,microsoft sql hook and operators,"@mistercrunch let me know your first impressions and requirements ... I cherry picked this from my branch and so may have missed something
+",syvineckruyk,335167,closed,False,2015-07-23T22:38:57+00:00,2016-05-04T19:40:51+00:00,2015-07-24T06:26:07+00:00,,bc3c0d3e3d4afbbdd5020fde6f67387c180f1a5e,dirty,30,4,7,5,0,0,,,
+apache/airflow,40744684,177,A fix to make the conn_id handling backward compatible,,mistercrunch,487433,closed,False,2015-07-24T05:52:01+00:00,2016-05-04T19:40:54+00:00,2015-07-24T05:52:08+00:00,2015-07-24T05:52:08+00:00,87f861100b1db9f83deefdb95e1374ddd74bb3d8,dirty,13,11,5,1,0,0,,,
+apache/airflow,40754791,178,"[cli] improved datetime parsing for the ""clear"" command","Test plan:
+- Create a dag and a dummy task with schedule_interval 1 hour.
+- Let it run for a couple of hours
+- Clear tasks with the following command:
+  airflow clear test_dag -s ""2015-07-24 15:00"" -e ""2015-07-24 18:00""
+- Check that the tasks are cleared as expected.
+",hominot,811494,closed,False,2015-07-24T08:54:51+00:00,2016-05-04T19:41:02+00:00,2015-07-24T23:37:19+00:00,2015-07-24T23:37:19+00:00,846997706f38fb8b0ef8677076ea5a2a3376913c,dirty,2,2,1,1,0,1,,,
+apache/airflow,40770898,179,Make scheduler adhere to specific folder,"Scheduler started on a specific dag dir (--subdir) picks up all dags in dags_folder of conf file in regular collect_dags call (airflow/jobs.py:L471)
+",storpipfugl,449314,closed,False,2015-07-24T12:42:16+00:00,2016-05-04T19:40:52+00:00,2015-07-24T22:00:36+00:00,2015-07-24T22:00:36+00:00,60620b2d4cadfdecd617ac17bd81c266aa23ad7d,dirty,2,1,1,1,0,1,,,
+apache/airflow,40813883,180,Setting autocommit default,"@askeys 
+",mistercrunch,487433,closed,False,2015-07-24T20:43:47+00:00,2016-05-04T19:40:54+00:00,2015-07-24T20:43:50+00:00,2015-07-24T20:43:50+00:00,80dd74818bc55fdf1d654bb6ea9d659c1f308fd0,dirty,17,13,2,1,0,0,,,
+apache/airflow,40818375,181,add tags text field to known_events table,"@mistercrunch 
+
+Adds tags to the known event table as a simple text field.  This is flexible but maybe not super robust.  Since I modified the models very slightly, I bumped the minor version.
+",askeys,2008048,closed,False,2015-07-24T21:38:09+00:00,2016-05-04T19:41:09+00:00,2015-08-28T04:19:57+00:00,,d0dfeeb080c729694440f7a56d5bbfb165d4eafd,dirty,10,2,4,1,2,1,,,
+apache/airflow,40841706,183,Microsoft SQL Server hooks and operators,"Microsoft SQL Server Hook
+Microsoft SQL Server Operator
+SQL Server to Hive Operator
+",syvineckruyk,335167,closed,False,2015-07-25T19:09:52+00:00,2016-05-04T19:40:51+00:00,2015-07-29T00:47:09+00:00,2015-07-29T00:47:09+00:00,13c77541bc0d439d19e655f13a661cc790854e0f,dirty,210,13,13,9,4,8,,,
+apache/airflow,40852589,185,Extend jdbc functionality,"- Adjust web ui to allow definition of jdbc connections
+- Use host column for jdbc connection url
+- Use connection models extra for storing jdbc driver path and classname
+- Use connections extra_dejson to create the jdbc connection
+- Use DbApiHook as a base for JdbcHook
+- Make JdbcOperator consistent with other Db ops by using run
+",jomar83,13132734,closed,False,2015-07-26T12:35:11+00:00,2016-05-04T19:41:20+00:00,2015-07-28T17:30:22+00:00,2015-07-28T17:30:22+00:00,e41a646dd1cb841b40da2720a84460977142d815,dirty,95,74,8,8,2,8,,,
+apache/airflow,40858877,186,Stripe uses Airflow,"...and we're really happy with it!
+",jbalogh,57258,closed,False,2015-07-26T20:06:52+00:00,2016-05-04T19:40:44+00:00,2015-07-27T04:42:40+00:00,2015-07-27T04:42:40+00:00,e09e1fc0e6625ba718f5d3e087d44099882c29d8,dirty,1,0,1,1,0,1,,,
+apache/airflow,40935917,189,Correcting wrong reference in docs from `retry_interval ` to `retry_delay `,"I'm pushing a new version of the docs to address this.
+",mistercrunch,487433,closed,False,2015-07-27T18:48:25+00:00,2016-05-04T19:40:54+00:00,2015-07-27T18:49:38+00:00,2015-07-27T18:49:38+00:00,07c661c3f40f3723bb7b0ab637e43e9d1345017c,dirty,5,5,3,1,0,0,,,

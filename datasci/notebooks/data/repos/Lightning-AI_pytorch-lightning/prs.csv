@@ -1,0 +1,199 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+Lightning-AI/pytorch-lightning,267127810,6,"Add src, docs and other important folders","I don't think the `update.sh` should be in this repository. Maybe it should only be with you.
+
+Also, please let me know if the things mentioned in requirements.txt are compulsory requirements? ",shreyasbapat,24257914,closed,False,2019-04-03T16:42:33+00:00,2019-04-03T16:58:41+00:00,2019-04-03T16:53:12+00:00,2019-04-03T16:53:12+00:00,18eaa59c28c7e5d6a57bb24bb02198f446cdaacb,unknown,250,105,35,2,0,2,,,
+Lightning-AI/pytorch-lightning,267134393,8,Some more fixes,"Addresses #7 
+
+I will start adding CI and other services. Meanwhile, we would want to have our code upto PEP8 standards! ",shreyasbapat,24257914,closed,False,2019-04-03T17:03:03+00:00,2019-04-03T18:45:00+00:00,2019-04-03T18:29:11+00:00,2019-04-03T18:29:11+00:00,ea2f50f1a468662372053d18f8745e8628073e40,unknown,43,10,8,2,0,2,,,
+Lightning-AI/pytorch-lightning,267955845,9,Fix some link bugs in the README.md,"Hi there, this is a fantastic repo :+1: ! 
+
+I have fixed the link bugs in the README file. I would love to contribute to this project, and if there is anything that I could help, please let me know! Thanks!",Derek-Wds,26081991,closed,False,2019-04-05T20:31:31+00:00,2019-04-07T06:55:33+00:00,2019-04-07T06:55:33+00:00,2019-04-07T06:55:33+00:00,8eca3ffa417bb979714cf22f13aabd245d2ebc7b,unknown,3,3,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,297150952,11,trainer: module fix.,This fixes the is_function_implemented functionality.,cinjon,615351,closed,False,2019-07-12T17:01:19+00:00,2019-07-12T19:28:48+00:00,2019-07-12T19:28:48+00:00,2019-07-12T19:28:48+00:00,c1b21fb1e4bb62439b91d510c871157a994e1327,unknown,23,18,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,297151266,12,root_module: fix comma splits.,Quick fix on root module and splitting the gpu.,cinjon,615351,closed,False,2019-07-12T17:02:19+00:00,2019-07-12T17:13:58+00:00,2019-07-12T17:13:58+00:00,2019-07-12T17:13:57+00:00,56ac885f0355e26698c69717d1854594d64ae4c1,unknown,1,1,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,298128798,13,add a hook for on_tng_metrics so that users get access to the grad_no…,…rm and mem_map dicts.,cinjon,615351,closed,False,2019-07-16T16:54:08+00:00,2019-07-16T16:59:17+00:00,2019-07-16T16:59:17+00:00,2019-07-16T16:59:17+00:00,80192752b7564cfb304f99a9af74158660983ac9,unknown,9,5,2,1,0,0,,,
+Lightning-AI/pytorch-lightning,300564163,15,Support any lr_scheduler.,"As discussed in #14 ,
+this PR remove the `lr_scheduler_milestones` arguments in `Trainer`.
+
+Now any learning rate scheduler is supported through `Trainer` method `configure_optimizers(self)`.
+The return signature now expect a tuple of 2 lists, a list of at least 1 optimizer and a list of schedulers (can be empty).
+
+Limitation:
+Each schedulers is `step()` at the beginning of every epoch by the base `Trainer`.
+However some scheduler is expected to `step()` at every batch, such as [CyclicalLR](https://pytorch.org/docs/stable/optim.html#torch.optim.lr_scheduler.CyclicLR)",lkhphuc,12573521,closed,False,2019-07-24T05:24:14+00:00,2019-07-29T08:16:42+00:00,2019-07-28T13:48:48+00:00,2019-07-28T13:48:47+00:00,c7dab0d7856f7035d5c4bdd0b37e550d49428599,unknown,25,45,10,5,0,5,,,
+Lightning-AI/pytorch-lightning,300941852,16,Tests,,williamFalcon,3640001,closed,False,2019-07-25T00:41:04+00:00,2019-07-25T00:41:13+00:00,2019-07-25T00:41:13+00:00,2019-07-25T00:41:13+00:00,c263badbb563ea3f4e8dad3ab898e416527f7b45,unknown,1182,298,21,222,0,0,,,
+Lightning-AI/pytorch-lightning,300941996,17,added coverage badge,,williamFalcon,3640001,closed,False,2019-07-25T00:41:51+00:00,2019-07-25T00:41:58+00:00,2019-07-25T00:41:58+00:00,2019-07-25T00:41:58+00:00,2d3ab895a50f5e5afd51f4c1fec43815b4984fc7,unknown,23,1,2,1,0,0,,,
+Lightning-AI/pytorch-lightning,300943708,18,removed dep,,williamFalcon,3640001,closed,False,2019-07-25T00:54:36+00:00,2019-07-25T02:05:24+00:00,2019-07-25T00:54:43+00:00,2019-07-25T00:54:43+00:00,097a9d26179fec9e4c82de9aefdf63b90db82bc4,unknown,0,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,301596006,20,Test2,"add loading, saving tests on CPU",williamFalcon,3640001,closed,False,2019-07-26T15:53:32+00:00,2019-07-26T18:39:23+00:00,2019-07-26T16:47:14+00:00,2019-07-26T16:47:14+00:00,56d41eaa8cad740b1c7f5c73ce87ed1de55df533,unknown,87,2,2,7,0,0,,,
+Lightning-AI/pytorch-lightning,301708827,21,R,,williamFalcon,3640001,closed,False,2019-07-26T23:02:44+00:00,2019-07-26T23:11:02+00:00,2019-07-26T23:10:49+00:00,2019-07-26T23:10:49+00:00,baf2ccefeae217150960f0a6caa4f900239f74ba,unknown,4,1,2,3,0,1,,,
+Lightning-AI/pytorch-lightning,301728957,22,Loading,"added tests for loading and unloading models with 2 scenarios:
+1. trainer autosaves, user loads later using tags.
+2. hpc saves and hpc loads automatically without user intervention.
+
+Tests guarantee predictions are the same for models before and after saving.",williamFalcon,3640001,closed,False,2019-07-27T03:07:56+00:00,2019-07-27T18:53:11+00:00,2019-07-27T03:08:18+00:00,2019-07-27T03:08:18+00:00,cf898a6ecfce75dc5323930a597048ea71b605b0,unknown,163,282,8,24,0,0,,,
+Lightning-AI/pytorch-lightning,301828354,23,Lkhphuc lr sched,,williamFalcon,3640001,closed,False,2019-07-28T12:41:11+00:00,2019-07-28T14:02:12+00:00,2019-07-28T13:48:47+00:00,2019-07-28T13:48:46+00:00,b88307e927e5240f711ab199dc81054e65965f67,unknown,71,70,10,11,0,0,,,
+Lightning-AI/pytorch-lightning,301842543,24,Keys,,williamFalcon,3640001,closed,False,2019-07-28T16:11:41+00:00,2019-07-30T11:07:37+00:00,2019-07-28T16:11:50+00:00,2019-07-28T16:11:50+00:00,3ffeba4caabc8dda713378f221b8efb67a0eee39,unknown,10,7,2,2,0,0,,,
+Lightning-AI/pytorch-lightning,304037973,31,fixed drop prob import,,williamFalcon,3640001,closed,False,2019-08-04T02:49:26+00:00,2019-08-04T12:19:00+00:00,2019-08-04T03:03:14+00:00,2019-08-04T03:03:14+00:00,ea7c8e55d729dc8fb06246e8afb0592e02cd0436,unknown,1,0,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,304040100,32,fix typo in readme,,Separius,519177,closed,False,2019-08-04T03:53:05+00:00,2019-08-04T04:19:16+00:00,2019-08-04T04:19:16+00:00,2019-08-04T04:19:16+00:00,143844239f1617a230c16b0b5bb5816b1a8c39c5,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,304179904,38,Fixed typo in single_cpu_template,,astariul,43774355,closed,False,2019-08-05T07:44:02+00:00,2019-08-05T08:13:16+00:00,2019-08-05T08:13:01+00:00,,33bda8d3c90d723cd9806c1b91d70ad281ec6941,unknown,1,1,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,304204140,39,Cut-out examples,"Cutting out the examples from the main package
+Also, apply relative imports inside the package
+Related to #36",Borda,6035284,closed,False,2019-08-05T08:55:00+00:00,2019-08-06T16:02:26+00:00,2019-08-05T18:17:31+00:00,2019-08-05T18:17:31+00:00,c6a2544f9ce7db21bf7ed6770f130fbf8e338b7f,unknown,67,78,27,4,0,4,,,
+Lightning-AI/pytorch-lightning,304403549,42,fixed clip grad warning,,williamFalcon,3640001,closed,False,2019-08-05T18:00:13+00:00,2019-08-05T18:19:14+00:00,2019-08-05T18:18:58+00:00,2019-08-05T18:18:58+00:00,f915e3657feba3deb89a55db00b238669b05df7b,unknown,1,1,1,3,0,0,,,
+Lightning-AI/pytorch-lightning,304477206,44,Extend CI,"Extending actual CI and linked fixes/updates, reflecting #43  ",Borda,6035284,closed,False,2019-08-05T22:04:41+00:00,2019-08-07T13:07:27+00:00,2019-08-07T12:56:17+00:00,2019-08-07T12:56:17+00:00,04de15186065ba6b89843588016d91c282cc6d80,unknown,637,306,38,25,32,34,,,
+Lightning-AI/pytorch-lightning,304840380,48,Update README.md,,williamFalcon,3640001,closed,False,2019-08-06T18:36:54+00:00,2019-08-07T16:07:05+00:00,2019-08-07T13:03:06+00:00,2019-08-07T13:03:06+00:00,b4c14a4b77c0fa0728d4f95238eedf776b4b7612,unknown,25,3,1,3,0,0,,,
+Lightning-AI/pytorch-lightning,304992514,52,Rename `ptl` to `pl`,Closes #46.,alok,8325708,closed,False,2019-08-07T06:03:37+00:00,2019-08-07T13:09:16+00:00,2019-08-07T13:09:16+00:00,2019-08-07T13:09:16+00:00,549d0f66df7c058e76172fb247d1fbc171a9c69a,unknown,29,29,4,1,0,0,,,
+Lightning-AI/pytorch-lightning,305005834,53,Use `black` for autoformatting,"[`black`](https://github.com/python/black) has become popular enough for
+Python formatting that it was officially adopted by the PSF, and is
+being used to format the standard library. I like it because it makes
+code that's very consistent to read, which makes development ever so
+slightly easier for everyone.
+
+In case this PR is desired but the actual formatting changes interfere
+with other current branches, I can rebase to leave out the actual
+formatting for now.",alok,8325708,closed,False,2019-08-07T06:56:05+00:00,2020-02-15T09:20:21+00:00,2019-08-08T08:34:00+00:00,,c020b3498344b079715f6bd3f5188663fb9cc73d,dirty,990,620,27,2,0,9,,,
+Lightning-AI/pytorch-lightning,305098407,55,add training restore,Closes #27 ,williamFalcon,3640001,closed,False,2019-08-07T11:10:21+00:00,2019-08-07T16:07:04+00:00,2019-08-07T13:02:17+00:00,2019-08-07T13:02:17+00:00,35f23bbc825baa7ed5aafabbc8b0c31bfc84ca00,unknown,154,9,8,22,0,1,,,
+Lightning-AI/pytorch-lightning,305146099,60,fix req. in setup,"addressing missing numpy, #56",Borda,6035284,closed,False,2019-08-07T13:19:36+00:00,2019-08-08T00:49:20+00:00,2019-08-07T20:36:01+00:00,,c7454b924da1cd8de5f1f7970ce07e68abc25062,unknown,8,6,1,1,0,7,,,
+Lightning-AI/pytorch-lightning,305173126,62,Imports,,williamFalcon,3640001,closed,False,2019-08-07T14:19:29+00:00,2019-08-07T16:07:04+00:00,2019-08-07T14:37:18+00:00,2019-08-07T14:37:18+00:00,c12d1eef32c69623ca1db64f4210855e66d317af,unknown,13,15,6,2,0,1,,,
+Lightning-AI/pytorch-lightning,305205541,63,Fix typo in README.md,,sholalkere,44298843,closed,False,2019-08-07T15:29:21+00:00,2019-08-19T00:57:20+00:00,2019-08-07T18:24:13+00:00,2019-08-07T18:24:13+00:00,13df930f9a97b3700a7e368eb53e126687aba80c,unknown,1,1,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,305213534,64,added test model to do also,,williamFalcon,3640001,closed,False,2019-08-07T15:48:25+00:00,2019-08-07T18:19:26+00:00,2019-08-07T17:04:48+00:00,2019-08-07T17:04:48+00:00,0895a41fb9cf8487c6c459071e9c978a34748679,unknown,18,9,6,10,0,0,,,
+Lightning-AI/pytorch-lightning,305253236,66,No back,enables support for single gpu and 16 bit. doesn't use dp or ddp,williamFalcon,3640001,closed,False,2019-08-07T17:42:04+00:00,2019-08-07T19:50:12+00:00,2019-08-07T18:20:02+00:00,2019-08-07T18:20:02+00:00,6a1128410fd8ca60b20854d3910f99bed9c941f2,unknown,71,1,2,8,0,1,,,
+Lightning-AI/pytorch-lightning,305294377,67,Update setup.py,,williamFalcon,3640001,closed,False,2019-08-07T19:47:06+00:00,2019-08-07T20:06:05+00:00,2019-08-07T20:04:53+00:00,,ce13fdb3b7dbc0c7e3f59d8e70bd5141ec4ee13e,unknown,8,6,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,305300205,68,Update setup.py,,williamFalcon,3640001,closed,False,2019-08-07T20:05:14+00:00,2019-08-08T14:18:12+00:00,2019-08-07T20:34:26+00:00,2019-08-07T20:34:26+00:00,514cab131ec60f462ede5abccbe638f9c86cca20,unknown,8,6,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,305339606,69,fix appveyor,"there was a formatting issue which made it crash...
+TODO: provide mi with your badge link in MD format so I will update it here",Borda,6035284,closed,False,2019-08-07T22:14:48+00:00,2019-08-15T14:10:18+00:00,2019-08-15T13:54:30+00:00,2019-08-15T13:54:30+00:00,83b1646e457542ecde572fefc78252ec0e902464,unknown,6,8,2,2,0,9,,,
+Lightning-AI/pytorch-lightning,305446948,71,fix loading pkg while setup,"fix loading package while setup #56
+
+simple testing
+```bash
+virtualenv ~/Desktop/vEnv_tl -p python3
+source ~/Desktop/vEnv_tl/bin/activate
+pip install git+https://github.com/Borda/pytorch-lightning.git@fix-setup
+```",Borda,6035284,closed,False,2019-08-08T07:33:15+00:00,2019-08-08T10:02:19+00:00,2019-08-08T09:17:24+00:00,2019-08-08T09:17:24+00:00,d0ccbb8e1c512811af0ec7670056a677e3e856dc,unknown,26,35,2,7,0,11,,,
+Lightning-AI/pytorch-lightning,305471992,73,Update requirements.txt,requirements.txt is for dev deps,williamFalcon,3640001,closed,False,2019-08-08T08:47:24+00:00,2019-08-08T14:18:09+00:00,2019-08-08T12:33:37+00:00,,b5d7d8b18aa77f70d14567b5d369c85a6a9c8c24,unknown,4,2,1,1,0,2,,,
+Lightning-AI/pytorch-lightning,305481199,74,Load fix,Fixes #72 ,williamFalcon,3640001,closed,False,2019-08-08T09:11:53+00:00,2019-08-08T14:18:10+00:00,2019-08-08T10:00:05+00:00,2019-08-08T10:00:05+00:00,aa7245d9db227953b03b42344d54b37ac9195030,unknown,37,0,2,3,0,1,,,
+Lightning-AI/pytorch-lightning,305605440,77,make exp optional,,williamFalcon,3640001,closed,False,2019-08-08T14:28:54+00:00,2019-08-08T18:16:46+00:00,2019-08-08T14:59:16+00:00,2019-08-08T14:59:16+00:00,3d23a56ed23aa701a056c3f12568c0b7867f40c9,unknown,22,19,2,2,0,0,,,
+Lightning-AI/pytorch-lightning,305613279,78,removed reduce on non-loss outputs from dp,,williamFalcon,3640001,closed,False,2019-08-08T14:46:08+00:00,2019-08-08T18:16:45+00:00,2019-08-08T16:06:30+00:00,2019-08-08T16:06:30+00:00,8cd764a15149376a1829b8bfe056e1129bab3c65,unknown,31,9,2,5,0,1,,,
+Lightning-AI/pytorch-lightning,305680911,80,updated support for 1.2.0,,williamFalcon,3640001,closed,False,2019-08-08T17:42:21+00:00,2019-08-09T11:59:21+00:00,2019-08-08T18:05:03+00:00,2019-08-08T18:05:03+00:00,0c584a6a139ee6b9ed2762a4a28256cfcd83e525,unknown,2,2,1,1,0,2,,,
+Lightning-AI/pytorch-lightning,305817106,83,Update Checkpointing.md,Modified import for ModelCheckpoint.,lorenzoFabbri,22343884,closed,False,2019-08-09T03:00:43+00:00,2019-08-12T00:42:42+00:00,2019-08-09T19:02:36+00:00,2019-08-09T19:02:36+00:00,09d4475cc714f12ba88d7dc28c573a2680b889b7,unknown,3,3,1,2,1,0,,,
+Lightning-AI/pytorch-lightning,306040443,85,docs(trainer): fix gradient clipping entry,"I've just been reading through the documentation of this very promising library!
+
+I found a [copy-paste error](https://williamfalcon.github.io/pytorch-lightning/Trainer/Training%20Loop/#gradient-clipping) in the training loop part of the docs. I'm sure the documentation is going to get a lot more attention once the codebase gets a bit more mature, but I thought I would give a little help! This PR
+- replaces the copy and paste error
+- writes a very brief description of GC
+- adds link to pytorch docs for specific GC implementation
+- adds an example configuration **(please note I haven't tried it out yet**, but for a quick grok it looks it just calls the usual pytorch api so should be fine).
+
+Looking forward to trying the project out!",lewisacidic,2941720,closed,False,2019-08-09T15:36:07+00:00,2019-08-09T19:02:15+00:00,2019-08-09T19:02:14+00:00,2019-08-09T19:02:14+00:00,dd0db4aba295ec9f9a6b44b37c8ca2a05e2c0e36,unknown,7,4,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,306177547,88,fix accumulated grad norm fixes #87,,williamFalcon,3640001,closed,False,2019-08-10T02:09:55+00:00,2019-08-10T14:21:49+00:00,2019-08-10T12:32:46+00:00,2019-08-10T12:32:46+00:00,73d08557baffdc8ffbea7791bc7f8874e0f1ec33,unknown,5,7,1,7,0,0,,,
+Lightning-AI/pytorch-lightning,306224787,90,Update github url for new project template,Small edit. Previous url requested html,CodaP,2824453,closed,False,2019-08-10T16:48:54+00:00,2019-08-10T17:35:18+00:00,2019-08-10T17:35:18+00:00,2019-08-10T17:35:18+00:00,c1434f0a3ebb4fb261134828ba691f9ee4258133,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,306230474,91,Throw warning when using DDP without DistributedSampler,"Previously, we'd throw an exception. As described in #81, there are occasional reasons for wanting to use DDP without a DistributedSampler, such as non-standard batch construction. This PR converts the exception to a warning.
+
+Closes #81 ",neggert,1271014,closed,False,2019-08-10T18:25:43+00:00,2019-08-12T14:41:13+00:00,2019-08-10T19:58:13+00:00,2019-08-10T19:58:13+00:00,996b1f9a6de83c3344da2f4516de91d91b5655a9,unknown,7,4,2,1,0,1,,,
+Lightning-AI/pytorch-lightning,306255784,92,Update trainer.py,Moved `optimizer.step()` before `lr_scheduler.step()`.,lorenzoFabbri,22343884,closed,False,2019-08-11T04:36:27+00:00,2019-08-11T04:44:02+00:00,2019-08-11T04:44:02+00:00,,03aed79abfb1818347d9ca0946ff49ff3ec2b4d3,unknown,5,4,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,306274487,95,Optional val,,williamFalcon,3640001,closed,False,2019-08-11T11:37:32+00:00,2019-08-12T19:33:55+00:00,2019-08-11T14:01:58+00:00,2019-08-11T14:01:58+00:00,e5805bf8ffc6569bdae035215dd409b23080805c,unknown,609,53,8,29,0,1,,,
+Lightning-AI/pytorch-lightning,306279013,96,Create CODE_OF_CONDUCT.md,,williamFalcon,3640001,closed,False,2019-08-11T12:57:55+00:00,2019-08-12T19:33:57+00:00,2019-08-11T14:03:49+00:00,2019-08-11T14:03:49+00:00,46e27e38aae21227d0d0f1cab97ec10b8b8766c2,unknown,76,0,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,306287687,97,Support for multiple val_dataloaders,,sholalkere,44298843,closed,False,2019-08-11T15:16:38+00:00,2020-03-10T15:31:47+00:00,2019-08-12T19:23:12+00:00,2019-08-12T19:23:12+00:00,511f7ecb9a5472a2ef21de45d0f3879bfccd1efb,unknown,197,108,6,49,0,3,,,
+Lightning-AI/pytorch-lightning,306634362,103,LR scheduler + train refactor,,williamFalcon,3640001,closed,False,2019-08-12T19:45:55+00:00,2019-08-12T20:13:10+00:00,2019-08-12T20:07:43+00:00,2019-08-12T20:07:43+00:00,5d5968033f7c2477b2c8c19933ca6ed2be3adbd9,unknown,88,86,1,3,0,1,,,
+Lightning-AI/pytorch-lightning,306861792,107,added custom hook for user defined optimizer step,,williamFalcon,3640001,closed,False,2019-08-13T11:22:32+00:00,2019-08-14T11:24:59+00:00,2019-08-13T13:32:46+00:00,2019-08-13T13:32:46+00:00,905a2e5a126daed9a18d2a08c149d45cff380482,unknown,104,63,2,7,0,0,,,
+Lightning-AI/pytorch-lightning,306955912,108,Val idx optional in validation_step,,williamFalcon,3640001,closed,False,2019-08-13T15:18:02+00:00,2019-08-14T11:24:58+00:00,2019-08-13T15:37:37+00:00,2019-08-13T15:37:37+00:00,7f53e7bfb3c8c6090201691a02df459449c3e70b,unknown,48,34,6,3,0,0,,,
+Lightning-AI/pytorch-lightning,307034935,109,docs: enable syntax highlight,"Hi, thought it'd be better with highlight.
+More attempts with mkdocs-material extentions can be found [here](https://github.com/OI-wiki/OI-wiki/blob/master/mkdocs.yml#L392).
+
+upd: Oh btw, it would require `pymdown-extensions` installed, I'm new here and not sure where to add this.",Ir1d,10709657,closed,False,2019-08-13T18:56:54+00:00,2019-08-14T02:38:05+00:00,2019-08-13T20:19:59+00:00,2019-08-13T20:19:59+00:00,f0af138675f132dd141a2e7a201de3735b7d7bc1,unknown,5,0,1,1,0,2,,,
+Lightning-AI/pytorch-lightning,307059202,110,add batch types as List[torch.Tensor] and Dict[key: torch.Tensor],"Hi!
+Firstly I have to say thanks for great library. It is very useful and helps me on my researches but when I tried to create some custom batches like {'tokens': torch.Tensor, 'head_symbols': torch.Tensor, 'tail_symbols': torch.Tensor} I had error, so I tried to fix it.",c00k1ez,16941854,closed,False,2019-08-13T20:08:08+00:00,2019-08-18T23:09:50+00:00,2019-08-13T20:48:18+00:00,,1b23e6e44152ae1c2d70dd17ad7c8d56e3dce9c1,unknown,22,0,1,1,0,5,,,
+Lightning-AI/pytorch-lightning,307307236,114,enable returning only opt list,,williamFalcon,3640001,closed,False,2019-08-14T12:30:58+00:00,2019-08-14T13:02:41+00:00,2019-08-14T13:02:12+00:00,2019-08-14T13:02:12+00:00,2f984c9971fef84a46c09e5b47be290e3bc3d493,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,307308453,115,added gan template,,williamFalcon,3640001,closed,False,2019-08-14T12:34:25+00:00,2019-10-13T22:30:41+00:00,2019-08-14T12:38:50+00:00,2019-08-14T12:38:50+00:00,0d5da5f29bc6eb0866134196b464fadac0f73843,unknown,175,0,3,2,0,1,,,
+Lightning-AI/pytorch-lightning,307680747,120,enhanced optimizer return options,,williamFalcon,3640001,closed,False,2019-08-15T12:00:52+00:00,2019-08-16T14:39:33+00:00,2019-08-15T15:31:56+00:00,2019-08-15T15:31:56+00:00,a27fb5d54c7051777ecf00dd79575f52ec078fef,unknown,66,24,3,15,0,0,,,
+Lightning-AI/pytorch-lightning,307696891,121,enable recursive parsing for single gpu inputs,,williamFalcon,3640001,closed,False,2019-08-15T13:00:24+00:00,2021-09-27T19:51:12+00:00,2019-08-15T13:39:09+00:00,2019-08-15T13:39:09+00:00,db9254acbe61fbba97da5f9e886d4bac284b1b3f,unknown,57,6,2,7,0,1,,,
+Lightning-AI/pytorch-lightning,307744716,123,update Win CI req. #122,"Fixing bug with Appveyor CI  #122
+it failed because we were installing 1.1.0 directly but in `requirements.txt` is now required 1.2.0
+Seems that the fix is 
+```
+pip install -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
+```",Borda,6035284,closed,False,2019-08-15T15:13:26+00:00,2019-08-15T15:51:18+00:00,2019-08-15T15:45:04+00:00,2019-08-15T15:45:04+00:00,6f1d2c45fe72d7a8a637290c2e78973deb1637e0,unknown,1,3,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,307952792,124,Rename variables,,alok,8325708,closed,False,2019-08-16T06:12:42+00:00,2019-09-25T23:05:07+00:00,2019-09-25T23:05:07+00:00,2019-09-25T23:05:07+00:00,b0a0a47a0bd04d0ef7361a3f816f4259f9ec2c64,unknown,198,198,17,1,7,1,,,
+Lightning-AI/pytorch-lightning,308102257,127,allow loss to be used for early stopping,,williamFalcon,3640001,closed,False,2019-08-16T14:40:21+00:00,2019-08-16T15:58:45+00:00,2019-08-16T15:58:45+00:00,2019-08-16T15:58:45+00:00,308239cef078a7e4db02af66f9987a5fcb754651,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,308261881,128,change Checkpoint callback's `save_best_only` to `save_top_k`,"this pr should close #70 
+bringing `save_function` outside of `pytorch_lightning/callbacks/pt_callbacks.py` is really confusing, since in that case `pt_callbacks.py` cannot be run on its own :new_moon_with_face: 
+not sure where to add the tests, so I appended them at the end of the file.",Ir1d,10709657,closed,False,2019-08-17T03:07:10+00:00,2019-11-22T23:55:49+00:00,2019-11-19T23:43:35+00:00,2019-11-19T23:43:35+00:00,7324dd902b8d071f4889ab1274a4d4dc09de9a78,unknown,266,70,6,50,66,28,,,
+Lightning-AI/pytorch-lightning,308275476,129,fix typo in docs,,Ir1d,10709657,closed,False,2019-08-17T08:04:09+00:00,2019-08-17T11:48:33+00:00,2019-08-17T11:48:33+00:00,2019-08-17T11:48:33+00:00,24a97956e483b448c9b3ccc666e7cc80efcc6ff4,unknown,4,3,2,4,0,0,,,
+Lightning-AI/pytorch-lightning,308292195,132,elaborate on the correlation between overfit_pct and xxx_percent_check,,Ir1d,10709657,closed,False,2019-08-17T13:37:32+00:00,2019-08-17T14:23:26+00:00,2019-08-17T14:23:26+00:00,2019-08-17T14:23:26+00:00,48de39ed50fa1c215bff3cfbf9966e92a3908275,unknown,13,1,3,2,0,0,,,
+Lightning-AI/pytorch-lightning,308345867,135,use val_percent_check in validation step,"Looks like `val_percent_check` only used when calculating `self.total_batches` for progressbar limit, so when you set `val_percent_check=0.01` and run `trainer.fit(model)` full validation set will be used at the end of train epoch and tqdm progress bar will be corrupted (overflow):
+```112it [00:22,  7.21it/s, batch_nb=45, dice=0.0788, epoch=1, gpu=0, tng_loss=0.528, v_nb=33]  ```
+
+This patch fixes it, and only `val_percent_check` percent of validation set used in validation",cdump,449375,closed,False,2019-08-18T08:06:57+00:00,2019-08-18T23:09:33+00:00,2019-08-18T15:02:29+00:00,2019-08-18T15:02:29+00:00,e646d745da3973398455a6b2abd7005edd2103d2,unknown,2,2,1,1,0,2,,,
+Lightning-AI/pytorch-lightning,308370762,136,tensorboarX to tensorboardX,,sebftw,5397919,closed,False,2019-08-18T14:56:38+00:00,2019-08-18T22:17:06+00:00,2019-08-18T22:17:06+00:00,2019-08-18T22:17:06+00:00,b2a49197e4f40e005a6a38653f4fb9dbca19c776,unknown,1,1,1,2,0,0,,,
+Lightning-AI/pytorch-lightning,308384069,137,"F.cross_entropy(y_hat, y)(y_hat, y) typo.",This seems to be a typo. Throws TypeError: 'Tensor' object is not callable.,sebftw,5397919,closed,False,2019-08-18T18:28:32+00:00,2019-08-18T22:17:44+00:00,2019-08-18T22:17:44+00:00,2019-08-18T22:17:44+00:00,a7a14dadb696061a86d99035ead0781c7566cf79,unknown,2,2,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,308391425,140,Removed redundant line.,,sebftw,5397919,closed,False,2019-08-18T20:26:14+00:00,2019-08-18T22:16:31+00:00,2019-08-18T22:16:31+00:00,2019-08-18T22:16:31+00:00,23a4421595b13c707f42dc9e87d5d5dd01e9049b,unknown,0,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,308391758,141,Error if dataset size = 1 batch.,Fix for the bug mentioned in https://github.com/williamFalcon/pytorch-lightning/issues/139.,sebftw,5397919,closed,False,2019-08-18T20:32:08+00:00,2019-08-18T23:09:21+00:00,2019-08-18T22:15:58+00:00,2019-08-18T22:15:58+00:00,26d3f0dbea3ebb4d0db58f0f382fc633f275d067,unknown,1,0,1,1,0,2,,,
+Lightning-AI/pytorch-lightning,308419362,143,bug fix for #138,"Added ""self.val_dataloader is not None"" check in short-circuit eval fashion. ",ananyahjha93,7491256,closed,False,2019-08-19T02:14:12+00:00,2019-08-19T19:03:05+00:00,2019-08-19T19:03:05+00:00,2019-08-19T19:03:04+00:00,5b694c7e0ec5f83bf4ec93860d91a48757351265,unknown,22,21,1,2,0,0,,,
+Lightning-AI/pytorch-lightning,308490405,144,add Codecov info,add a comment to the `codecov.yaml` file so the validation won't vanish... #65,Borda,6035284,closed,False,2019-08-19T08:04:35+00:00,2019-08-19T11:10:52+00:00,2019-08-19T10:35:10+00:00,2019-08-19T10:35:10+00:00,dbbbba35c98f71f29270341b8ea10b39ff2bfaeb,unknown,4,2,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,308549078,145,Set val_check_interval default to 1.0.,See discussion in https://github.com/williamFalcon/pytorch-lightning/issues/139.,sebftw,5397919,closed,False,2019-08-19T10:41:16+00:00,2019-08-19T14:42:09+00:00,2019-08-19T14:42:09+00:00,2019-08-19T14:42:09+00:00,4bdb976284f12a5c5daee49209990ae7f36028b2,unknown,1,1,1,1,0,3,,,
+Lightning-AI/pytorch-lightning,308668721,148,Added pl.property to decorators.,"A solution for https://github.com/williamFalcon/pytorch-lightning/issues/142.
+Then users can use @pl.property on their LightningModules and be safe.",sebftw,5397919,closed,False,2019-08-19T15:38:45+00:00,2019-08-19T19:04:48+00:00,2019-08-19T19:04:47+00:00,,b38b53679010778e94de1f7de4b0202b5765bf3b,unknown,18,0,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,308794252,150,Gradient accumulation callback,The idea described here #149  ,stas6626,22225957,closed,False,2019-08-19T21:41:12+00:00,2019-08-30T14:56:15+00:00,2019-08-30T14:56:15+00:00,2019-08-30T14:56:15+00:00,73cf47112eefe440ecec31da94803aa6ec677c0e,unknown,122,3,4,34,10,4,,,
+Lightning-AI/pytorch-lightning,309144567,155,fixes #154,,williamFalcon,3640001,closed,False,2019-08-20T16:58:53+00:00,2019-08-21T12:16:44+00:00,2019-08-20T20:59:26+00:00,2019-08-20T20:59:26+00:00,55a804b7cfb9b2376ccaa1253a966dcaa9b6ab07,unknown,5,2,1,3,0,0,,,
+Lightning-AI/pytorch-lightning,309319988,158,bug fix for #157,"This PR is bug fix for #157.
+
+* Separate condition `isinstance(batch, list) or isinstance(batch, tuple)` into separated cases.
+* Add new test for tuple",eqs,11348982,closed,False,2019-08-21T04:38:52+00:00,2019-08-23T00:33:52+00:00,2019-08-21T14:22:52+00:00,2019-08-21T14:22:52+00:00,4a0b56755c7239e6a85b32a3d3e97cf7f9e39044,unknown,21,2,2,3,0,1,,,
+Lightning-AI/pytorch-lightning,309944870,161,Guard against AttributeError in dataloaders.,"A solution for https://github.com/williamFalcon/pytorch-lightning/issues/142.
+Since `hasattr` ""[calls getattr(object, name) to see whether it raises an AttributeError or not](https://docs.python.org/3/library/functions.html#hasattr)"", I replaced it with a single call to `getattr`. See also https://hynek.me/articles/hasattr/ for more in-depth info.",sebftw,5397919,closed,False,2019-08-22T12:49:54+00:00,2019-08-23T12:21:40+00:00,2019-08-23T12:21:40+00:00,2019-08-23T12:21:40+00:00,b31539f62e60e1ad370214e05003c214298d2431,unknown,10,3,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,310001441,162,train = False in test_dataloader,"A small change to the CoolModel example.
+Now test_dataloader returns the MNIST test dataset.",sebftw,5397919,closed,False,2019-08-22T14:53:19+00:00,2019-08-22T21:44:07+00:00,2019-08-22T21:44:07+00:00,2019-08-22T21:44:07+00:00,9fc66026f1c6031eba3bbad3439dc15e4b2bd3f7,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,310265210,163,Cleaned up val/tng/test nb batches,"Set all to be 0 instead of  None. 
+Cleaned up val batch",williamFalcon,3640001,closed,False,2019-08-23T07:32:48+00:00,2019-08-24T11:48:44+00:00,2019-08-23T11:42:18+00:00,2019-08-23T11:42:18+00:00,cbb9821d9b0673ab0c9874cbd9bffc62ef5172a5,unknown,7,9,1,1,1,0,,,
+Lightning-AI/pytorch-lightning,310369916,165,cleaned up progbar,,williamFalcon,3640001,closed,False,2019-08-23T12:40:33+00:00,2019-08-24T11:48:42+00:00,2019-08-24T01:23:27+00:00,2019-08-24T01:23:27+00:00,4104a0fc4726021142b520374e770c209e25d838,unknown,126,88,10,29,0,0,,,
+Lightning-AI/pytorch-lightning,310514257,166,fix python syntax in code blocks to be consistent,"Hi,
+
+A couple code blocks used ""{.python}"" instead of just ""python"" for the syntax highlighting, which doesn't render properly in GitHub markdown.
+
+Thanks,
+Ryan",rmccorm4,21284872,closed,False,2019-08-23T19:54:05+00:00,2019-08-24T01:24:19+00:00,2019-08-24T01:24:19+00:00,2019-08-24T01:24:19+00:00,b22e5918a9869b6457cb1a4bd8b0e8fbd2323a8f,unknown,2,2,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,310817667,168,move GH docs,Moving GitHub specific documentation to the `.github` folder,Borda,6035284,closed,False,2019-08-26T08:21:29+00:00,2019-08-27T11:43:04+00:00,2019-08-27T11:10:26+00:00,2019-08-27T11:10:26+00:00,cd89b4ef4362720e789b2e84ba75b135ec7d0b43,unknown,0,0,2,1,0,0,,,
+Lightning-AI/pytorch-lightning,311213310,170,enable highlight,,Ir1d,10709657,closed,False,2019-08-27T06:00:31+00:00,2019-08-27T11:09:47+00:00,2019-08-27T11:09:47+00:00,2019-08-27T11:09:47+00:00,6eb6daa27861c2a37d4426f1078af13e50b770d3,unknown,1,1,1,1,0,1,,,
+Lightning-AI/pytorch-lightning,311401905,171,docs: add repo_name in the upright corner,,Ir1d,10709657,closed,False,2019-08-27T14:04:34+00:00,2019-08-27T20:46:19+00:00,2019-08-27T20:46:19+00:00,2019-08-27T20:46:19+00:00,da4c1e3409213450c85168723bf442ccedac4d58,unknown,1,0,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,311463764,173,overcome OOM issues when restoring checkpoint,"This is a PyTorch issue. Testing some solutions.
+
+https://discuss.pytorch.org/t/gpu-memory-usage-increases-by-90-after-torch-load/9213",williamFalcon,3640001,closed,False,2019-08-27T16:18:36+00:00,2019-08-30T14:21:38+00:00,2019-08-27T20:46:06+00:00,,20e59e3e92660413a7d46d014cd0ffe32929776c,unknown,3,0,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,311560643,174,Update setup.py,,williamFalcon,3640001,closed,False,2019-08-27T20:45:58+00:00,2019-08-30T14:21:40+00:00,2019-08-27T22:07:33+00:00,2019-08-27T22:07:33+00:00,67c314272b38a0a8a0e9a5142ee888606f24ec65,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,311643024,175,Update setup.py,"make it the same with requirements.txt.
+On my server, we had cuda9, and pytorch1.2 couldn't be supported. :/",Ir1d,10709657,closed,False,2019-08-28T02:30:29+00:00,2019-08-28T10:38:49+00:00,2019-08-28T10:38:38+00:00,,e2a63234ff53b1a11948b4f92f52aadd9bd0eae8,unknown,1,1,1,1,0,3,,,
+Lightning-AI/pytorch-lightning,311753605,176,feat(val_sanity): enable skipping validation sanity ,when `self.nb_sanity_val_steps` is 0,Ir1d,10709657,closed,False,2019-08-28T09:37:02+00:00,2019-08-28T10:42:54+00:00,2019-08-28T10:41:31+00:00,2019-08-28T10:41:31+00:00,c2247350bb74f3397aad32cdcead16ecc49065f8,unknown,4,4,2,2,0,1,,,
+Lightning-AI/pytorch-lightning,312259732,178,Predict method for test set #89 [WIP],,expectopatronum,2265475,closed,True,2019-08-29T10:55:12+00:00,2019-08-30T22:56:20+00:00,2019-08-30T22:56:20+00:00,,19b890dc63b3831b39dea53af8aef747faf4d1d4,dirty,471,80,7,27,0,0,,,
+Lightning-AI/pytorch-lightning,312773441,180,Refactor test modules,"There was a lot of code duplication in the various test modules. This PR creates a base class that contains most of the duplicated code. Modules used for testing now inherit from that base class, then add extra methods via mixins, which eliminates most of the duplication. This should make maintaining and writing new test cases easier in the future.
+
+For example, if we want to test a `LightningModule` with`test_step` and `test_end` implemented, but no validation, we can just do
+
+```python
+class CurrentTestModel(LightningTestMixin, LightningTestModelBase):
+    pass
+model = CurrentTestModel(hparams)
+```
+
+A couple other minor changes along the way:
+* Modified how `Trainer.__is_overriden` works so that it functions correctly with more complicated inheritance. It now compares sub-class code to the original `LightingModule` code, rather than the sub-class's direct parent, which is what `super` gives you.
+* Found, fixed, and added a new test for a bug that would occur when calling `test` on a model with no `val_dataloader`",neggert,1271014,closed,False,2019-08-30T14:51:12+00:00,2019-09-04T17:25:47+00:00,2019-09-02T19:46:17+00:00,2019-09-02T19:46:17+00:00,64688e1e152709b3b257966159d9871d0cb2addc,unknown,481,614,8,18,0,4,,,
+Lightning-AI/pytorch-lightning,312800331,181,Expectopatronum implement #89,,williamFalcon,3640001,closed,False,2019-08-30T16:04:02+00:00,2019-08-30T16:09:25+00:00,2019-08-30T16:09:14+00:00,,7c56d1090269ea67fddce968810e533ef469ea41,unknown,491,80,8,28,0,0,,,
+Lightning-AI/pytorch-lightning,312802233,182,Expectopatronum implement #89,,williamFalcon,3640001,closed,False,2019-08-30T16:09:51+00:00,2019-09-05T16:42:07+00:00,2019-08-30T22:56:10+00:00,2019-08-30T22:56:10+00:00,f51b45933b8fd90302f5e5e7469d25902d2cd5df,unknown,706,146,8,123,0,7,,,
+Lightning-AI/pytorch-lightning,313049492,186,Fix incorrect warning for DistributedSampler.,Check whether `dataloader.sampler` is an instance of DistributedSampler instead of the `dataloader` itself.,sai-prasanna,3595526,closed,False,2019-09-01T17:00:23+00:00,2019-09-09T15:36:36+00:00,2019-09-09T15:36:36+00:00,,ebc9cee0d89fbedfcdfade1befceef7effdcfcb6,dirty,5,5,1,2,0,5,,,
+Lightning-AI/pytorch-lightning,313657776,190,Allow to deactivate GPU memory logging in Trainer,"Adds the flag `log_gpu_memory` to Trainer to deactivate logging of GPU
+memory utilization. On some servers logging the GPU memory usage can
+significantly slow down training.
+
+For further details see issue #189.",ExpectationMax,1303655,closed,False,2019-09-03T15:50:54+00:00,2019-09-04T14:43:47+00:00,2019-09-04T14:43:47+00:00,2019-09-04T14:43:47+00:00,dac41030d48acbfecdf7c083b8e7b00f3fd9be06,unknown,14,1,2,3,0,2,,,
+Lightning-AI/pytorch-lightning,313846694,192,[MRG] DOC Minor import fix,Small fix in the README. (Thank you for your talk at the AWS loft),thomasjpfan,5402633,closed,False,2019-09-04T03:55:21+00:00,2019-09-04T10:17:55+00:00,2019-09-04T10:17:55+00:00,2019-09-04T10:17:55+00:00,c7661677739c835a50e16e3e02390746180f3ce2,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,313956152,193,fix import in Tensorboard example,"minor things, just noticed that the import wos not working because of '-' instead of '_'",expectopatronum,2265475,closed,False,2019-09-04T10:02:34+00:00,2019-09-04T14:21:00+00:00,2019-09-04T14:20:59+00:00,2019-09-04T14:20:59+00:00,0872c321511a728bf029fccc1ec072cbcea4dd99,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,314002456,194,extend pip install info,,Borda,6035284,closed,False,2019-09-04T12:07:26+00:00,2019-09-06T11:37:36+00:00,2019-09-06T11:30:52+00:00,2019-09-06T11:30:52+00:00,447ed30716547ecd96637aa1b50c4a52ccb162f5,unknown,41,26,1,3,4,1,,,
+Lightning-AI/pytorch-lightning,314209944,197,[MRG] STY Minor flake8 fix,This PR fixes flake8 error on master.,thomasjpfan,5402633,closed,False,2019-09-04T20:19:56+00:00,2019-09-04T21:46:57+00:00,2019-09-04T21:46:57+00:00,2019-09-04T21:46:56+00:00,62252cee582383e0b638125e07aad8416015374e,unknown,1,1,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,314274724,198,Cpu load,Restores weights on CPU to avoid blowing out RAM when models are huge. Then Lightning takes care of putting on proper GPUs after.,williamFalcon,3640001,closed,False,2019-09-04T23:56:56+00:00,2019-09-09T13:40:02+00:00,2019-09-09T13:36:42+00:00,,44f815b9bdb4e46891dd8c4aced1ceb9673a4a7c,dirty,419,117,8,125,0,0,,,
+Lightning-AI/pytorch-lightning,314391871,200,Implement correct transfer to GPU for batches #195,Should work fine now and close #195 ,antvconst,3470616,closed,False,2019-09-05T08:48:36+00:00,2019-09-05T11:13:07+00:00,2019-09-05T11:13:07+00:00,2019-09-05T11:13:06+00:00,34b824a9d3d0fdd377da675e0398c66ab5e16e7b,unknown,5,2,1,1,0,0,,,
+Lightning-AI/pytorch-lightning,314577264,202,add osx to Travis,"adding macOS build to Travis CI, reaction to #199
+add testing with Conda would be nice...
+
+see: 
+* https://github.com/astrofrog/example-travis-conda/blob/master/.travis.yml
+* https://github.com/travis-ci/travis-ci/issues/9929#issuecomment-500073011
+* https://github.com/Anaconda-Platform/anaconda-project/blob/master/.travis.yml
+* https://github.com/automl/auto-sklearn/blob/master/ci_scripts/install_env.sh",Borda,6035284,closed,False,2019-09-05T15:41:36+00:00,2019-09-05T20:06:57+00:00,2019-09-05T19:08:19+00:00,2019-09-05T19:08:19+00:00,5ef6fa5608711d107b08019281617160e8084140,unknown,28,4,1,6,0,1,,,

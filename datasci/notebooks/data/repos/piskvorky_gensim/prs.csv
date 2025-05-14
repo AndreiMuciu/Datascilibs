@@ -1,0 +1,471 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+piskvorky/gensim,73894,1,BleiCorpus with an index,,Dieterbe,20774,closed,False,2011-02-15T17:11:05+00:00,2016-06-16T08:02:10+00:00,2011-02-17T00:50:12+00:00,,d300fc6202763930c16379b27380b30fbe2bde1c,unknown,75,0,1,1,0,3,,,
+piskvorky/gensim,78447,4,avoid expensive iteration in corpi where length is not explicit,"as requested
+",Dieterbe,20774,closed,False,2011-02-22T15:39:01+00:00,2016-06-16T08:02:10+00:00,2011-02-23T02:08:35+00:00,2011-02-23T02:08:35+00:00,,unknown,6,0,2,1,0,0,,,
+piskvorky/gensim,82415,6,big trailing whitespace cleanup,"this change cleans up all trailing whitespace.
+
+you can automatically keep it clean with something like this in your .vimrc:
+autocmd BufWritePre *.py  :%s/\s+$//e
+
+the ^M's, I'm not sure where those come from, maybe when you edit the files on a Windows machine? I've never seen any unix editor add them.
+",Dieterbe,20774,closed,False,2011-02-28T10:07:01+00:00,2016-06-16T08:02:10+00:00,2011-03-01T23:21:36+00:00,2011-03-01T15:21:36+00:00,,unknown,3289,3291,101,1,0,7,,,
+piskvorky/gensim,85776,11,rename all occurrences of `docFreq` to `dfs` for consistency,,Dieterbe,20774,closed,False,2011-03-04T13:33:12+00:00,2016-06-16T08:02:10+00:00,2011-03-05T17:02:48+00:00,,,dirty,19,19,6,1,0,1,,,
+piskvorky/gensim,90011,14,Log entropy model,"Hello Radim,
+
+I implemented a model for normalizing with the log entropy and also added some tests for it. 
+
+The second commit in the pull request changes the file properties of your old tests so that they will be discovered by nosetests.
+",dedan,196905,closed,False,2011-03-10T10:27:14+00:00,2016-06-16T08:02:12+00:00,2011-03-15T13:36:37+00:00,,,dirty,577,244,53,8,0,10,,,
+piskvorky/gensim,101990,18,Solution for issue 17,"Only in the master branch, thus far. What I have done:
+- introduced hierarchical logger names (package.file_name);
+- added a NullHandler class to gensim/**init**.py (for python versions < 2.7);
+- initialized the root gensim logger in gensim/**init**.py and attached a NullHandler to it.
+",DavidNemeskey,690386,closed,False,2011-03-26T14:56:00+00:00,2016-06-16T08:02:18+00:00,2011-03-27T15:07:30+00:00,,,dirty,111,70,21,5,0,2,,,
+piskvorky/gensim,108869,23,Fix a bug in the log_entropy_model ,"The previous implementation had the mistake that it divided by the context diversity of a term instead of the total number of documents. It happened because I read it from a paper where the notation was misleading. Of course it could not be like this because then all terms with a context diversity of 1 would lead to a division by zero. 
+
+For reference of the normalization see: 
+Pincombe, B. (2004). Comparison of human and LSA judgements of pairwise document similarities for a news corpus. dspace.dsto.defence.gov.au.
+
+also the tests are changed to fit the new implementation
+",dedan,196905,closed,False,2011-04-04T14:03:59+00:00,2016-06-16T08:02:12+00:00,2011-04-04T19:16:39+00:00,2011-04-04T19:16:39+00:00,,unknown,11,27,2,1,0,1,,,
+piskvorky/gensim,109168,24,Automated test to reproduce the results of Lee et al. (2005),"Lee et al. (2005) compares different models for semantic
+similarity and verifies the results with similarity judgements from humans.
+The main result is that semantic similarites modelled by LSA have a correlation
+of 0.6 with human similarity judgements.
+As a validation of the gensim implementation we reproduced the results
+of  Lee et al. (2005) in this test.
+
+Many thanks to Michael D. Lee (michael.lee@adelaide.edu.au) who provideded us
+with his corpus and similarity data.
+
+If you need to reference this dataset, please cite:
+
+Lee, M., Pincombe, B., & Welsh, M. (2005).
+An empirical evaluation of models of text document similarity.
+Proceedings of the 27th Annual Conference of the Cognitive Science Society
+",dedan,196905,closed,False,2011-04-04T19:45:15+00:00,2016-06-16T08:02:12+00:00,2011-04-24T22:12:28+00:00,,,dirty,520,1,5,1,0,2,,,
+piskvorky/gensim,136662,29,make the root gensim directory a module and add lower dim functionlity,"Hello Radim,
+
+sorry that I did not split this two things in two different branches with independent pull requests. I had this on a local branch and accidentally pushed it already and removing things on a public branch creates only more chaos. 
+
+So what I added in this two commits are all things we already discussed in emails. One thing is to make the top gensim directory a valid module. This is useful when one wants to link this file in the site-packages directory and not the src/gensim directory because the top directory can be checked for version control. 
+I checked this new **init** file. It does not break any tests nor the setup.py file
+
+The other thing is that numTopics can be set now to a value lower then the original one in order to evaluate a lower dimensional model. What I did is just a very simple implementation. Is this ok or do you think I should ad getter and setter stuff for numTopics with proper exception handling?
+
+let me know.
+",dedan,196905,closed,False,2011-05-05T07:51:44+00:00,2016-06-16T08:02:12+00:00,2011-05-20T14:06:13+00:00,,3e17927c00a374b8ba67cee7321c68a6a476ef4a,dirty,6,3,2,2,0,4,,,
+piskvorky/gensim,153858,32,removed the utf8 conversion in the wikicorpus parsing,"I had problems when I already had utf8 strings and I think this 
+should be done outside of the corpus
+",dedan,196905,closed,False,2011-05-20T12:31:52+00:00,2016-06-16T08:02:12+00:00,2011-05-20T13:47:08+00:00,,f6f9264fc838e36d176536ca61602812cc76aa8b,dirty,1,2,1,1,0,2,,,
+piskvorky/gensim,166708,35,bugfix: len(SimilarityABC) should not break when corpus is merely an iterable,"bugfix: len(SimilarityABC) should not break when corpus is merely an iterable
+
+The only requirements of a corpus is that is iterable.  Hence the
+attribute shape may not exist.
+",Dieterbe,20774,closed,False,2011-06-01T09:11:11+00:00,2016-06-16T08:02:10+00:00,2011-06-05T18:43:07+00:00,,1a3b2a7400992f864811af0ac3a7eb1bbf5dd814,dirty,1,1,1,1,0,4,,,
+piskvorky/gensim,193445,40,"Rename variable ""chunks"" to more sensible ""chunksize""","- all testcases return OK
+- I did not update documentation. I assume most of the documentation is generated from the source code?
+",Dieterbe,20774,closed,False,2011-06-22T15:55:53+00:00,2016-06-16T08:02:10+00:00,2011-06-22T16:10:26+00:00,2011-06-22T16:10:26+00:00,3d4eb5f5597788daec189e56ff9beb94ef581ee5,unknown,155,155,8,1,0,1,,,
+piskvorky/gensim,196602,42,Fix len() on [Sparse]MatrixSimilarity objects initialized without corpus,"The constructor of [Sparse]MatrixSimilarity allows creating objects without specifying a corpus.
+however, calling len() on these objects will abort with an AttributeError, this patch fixes that
+",Dieterbe,20774,closed,False,2011-06-24T14:42:28+00:00,2016-06-16T08:02:10+00:00,2011-08-03T18:26:51+00:00,,79d30aace6dca6bd6a7a4128d57169a15ac0989f,dirty,8,3,1,1,0,8,,,
+piskvorky/gensim,196897,43,Pyro -> Pyro4,"I changed references to ""Pyro""  to be ""Pyro4""  instead.
+
+I removed these lines:  ""Pyro.config.HOST = utils.get_my_ip()""   They seemed unnecessary.  
+
+I tested by running both distributed algos on the 9 document deerwester corpus with two workers on my local box.
+",josh-levy-dm,873603,closed,False,2011-06-24T18:41:39+00:00,2016-06-16T08:02:19+00:00,2011-08-03T18:23:07+00:00,,4132957607ccaf62946695204547d4c087d6686e,dirty,28,39,7,6,0,4,,,
+piskvorky/gensim,198729,44,fix the module import when linking to the git root instead of module,"for some application I need to link to the gensim folder which is also the root of the repository. This script helps python to find the actual sourcecode of the module and had to be changed because radim moved the source within the repo
+",dedan,196905,closed,False,2011-06-27T08:43:15+00:00,2016-06-16T08:02:13+00:00,2011-06-27T11:06:07+00:00,2011-06-27T11:06:07+00:00,4aec2c0609c93a80fe99faffbea233ff725bc51d,unknown,2,2,1,1,0,0,,,
+piskvorky/gensim,293817,50,show topics,"As discussed in issue #47, added alternative show_topic[s] methods for LSA and LDA model objects. These can now return arrays of array or array of strings, instead of logging formatted strings. Logging is still supported via `print_topics`, which is now an alias of `show_topics` with `log=True`. Should be 100% backward compatible.
+",strongh,147630,closed,False,2011-08-27T01:04:24+00:00,2016-06-16T08:02:12+00:00,2011-09-18T11:55:24+00:00,2011-09-18T11:55:24+00:00,97f7ce3dbd3c3952b97f36734168b3f767c7eb26,unknown,37,13,2,3,0,3,,,
+piskvorky/gensim,315283,52,Luca,"This is a small change that eliminates category names from the pages being analyzed. 
+With the previous analysis, if a page belonged e.g. to the categories Physics, Engineering, then these words would be added to the end of the text of the page, due to the way in which the link processing works. 
+I think this creates artificially strong (even though perhaps beneficial?) correlations between category names, and the words used in the articles belonging to the categories, and so, I eliminated the category links from the text passed for analysis. 
+My goal was to have text that was more similar to the text used in the description of something, rather than also all the organizational links. 
+I apologize for the wrong commit date of Aug 5.  It's a problem due to the date in the virtual machine where I run the tool being wrong. 
+",lucadealfaro,118022,closed,False,2011-09-07T21:21:03+00:00,2016-06-16T08:02:12+00:00,2011-09-10T21:17:16+00:00,2011-09-10T21:17:16+00:00,1f9f5ed5aabe05a9ecd5abfaa48633dfac84aaa7,unknown,20,14,1,2,0,1,,,
+piskvorky/gensim,362048,54,Fix easy_install instructions for Pyro to Pyro4,"Small typo in the docs. I think you want to point people to install Pyro4, judging by your setup.py.
+",jseabold,296164,closed,False,2011-09-28T14:53:29+00:00,2016-06-16T08:02:14+00:00,2011-09-28T16:39:13+00:00,2011-09-28T16:39:13+00:00,5639e572ab8d3095e555dd86e1c44e1afe616c9b,unknown,1,1,1,1,0,1,,,
+piskvorky/gensim,459402,62,Remove stale comment,"reusing a variable set in a loop is not a hack, merely good usage of
+python scope semantics.
+",Dieterbe,20774,closed,False,2011-11-03T09:09:43+00:00,2016-06-16T08:02:10+00:00,2011-11-03T17:43:11+00:00,2011-11-03T17:43:11+00:00,e96e17b0a67a4ebe6179d2b32bf7a2f07463aa48,unknown,1,1,1,1,0,1,,,
+piskvorky/gensim,459571,63,clarify the output format of index[query],"clarify the output format of index[query], wrt special cases such as 'empty vectors'
+
+I realise there's also some files in the docs folder which need updating, but you probably generate those? and I couldn't really figure out how.
+",Dieterbe,20774,closed,False,2011-11-03T10:32:27+00:00,2016-06-16T08:02:10+00:00,2011-11-03T17:39:20+00:00,2011-11-03T17:39:20+00:00,ec9323e17a8f7bc13e3c45d8ffa47f0460517912,unknown,5,1,1,1,0,0,,,
+piskvorky/gensim,501758,66,re #65: fixed the sharding bug,"- also made similarity unit tests more extensive
+",piskvorky,610412,closed,False,2011-11-16T21:05:08+00:00,2016-06-16T08:02:16+00:00,2011-11-23T02:33:57+00:00,2011-11-23T02:33:57+00:00,1c8a5bd8e8fa8acb841c12be6ca7de8889d693ac,unknown,59,45,2,1,0,0,,,
+piskvorky/gensim,511295,67,Added option for tf-length-normalization to models.TfidfModel,"See the discussion in the mailing list: http://groups.google.com/group/gensim/browse_thread/thread/11e19beedd70470c
+
+This implementation calculates the document length (not geometric length!) for each vector and applies the following division to each of the vector's components: `tf / document_length`.
+
+This is done before tf is multiplied with idf.
+",felixmiddendorf,115792,closed,False,2011-11-19T12:09:59+00:00,2016-06-16T08:02:12+00:00,2012-04-16T09:53:21+00:00,,35b17e7c9c93da45fb017fd8cab267b8d315513e,dirty,9,2,1,2,2,2,,,
+piskvorky/gensim,663606,71,"added models.HdpModel, corpora.UciCorpus","I added code for online variational HDP analysis, as well as reading/writing corpora in the UCI bag-of-words format. I hope you will consider adding it to gensim.
+",jesterhazy,505258,closed,False,2012-01-07T20:13:48+00:00,2016-06-16T08:02:15+00:00,2012-01-13T23:19:58+00:00,,91940076f047ab1145669dd5e3fb74fd811402e0,dirty,738,5,5,1,0,3,,,
+piskvorky/gensim,689310,72,UciCorpus,"UciCorpus from jesterhazy's [pull request](https://github.com/piskvorky/gensim/pull/71).
+
+I just added a unittest (passes OK after some minor changes I added in a separate commit).
+",piskvorky,610412,closed,False,2012-01-13T23:14:53+00:00,2016-06-16T08:02:16+00:00,2012-01-20T11:07:05+00:00,2012-01-20T11:07:05+00:00,bbb956b8a6f589bff35ef1d7f5ec02ffb6c8d75f,unknown,290,14,6,2,0,3,,,
+piskvorky/gensim,690777,73,Hierarchical Dirichlet Process,"jesterhazy's HDP code
+",piskvorky,610412,closed,False,2012-01-14T20:05:56+00:00,2017-11-10T08:23:43+00:00,2012-03-08T07:52:20+00:00,2012-03-08T07:52:20+00:00,34ab23c8daacc62c62b985541d85b39f755a0cdd,unknown,689,10,6,17,0,29,,,
+piskvorky/gensim,877759,77,Checking for documents in Dictionary constructor,"I think the check should use 'is not None' so iterables which do not have a truth value will be supported.
+",jtbates,609080,closed,False,2012-02-23T23:33:09+00:00,2016-06-16T08:02:16+00:00,2012-02-25T19:57:38+00:00,2012-02-25T19:57:38+00:00,4c3ebbf31ff0cff96ab1ec719fe6d934d34b0e76,unknown,1,1,1,1,0,3,,,
+piskvorky/gensim,880920,78,Fix import,"Scipy has deprecated the maxentropy module and it is now removed in master. Update import of logsumexp to its new location.
+
+Should I be making PRs against master or develop?
+",jseabold,296164,closed,False,2012-02-24T14:55:28+00:00,2016-06-16T08:02:14+00:00,2012-02-27T14:33:06+00:00,,4c04c255746c1fcacff936c8e5d0c2f383df3c5b,dirty,4,2,1,1,0,1,,,
+piskvorky/gensim,890443,79,Import logsumexp from its new home if necessary,"PR against develop branch.
+",jseabold,296164,closed,False,2012-02-27T14:37:14+00:00,2016-06-16T08:02:14+00:00,2012-02-27T14:51:10+00:00,2012-02-27T14:51:10+00:00,2ebff517cc989d40fd5ed6a1071cfd85d8dd3c80,unknown,4,2,1,1,0,0,,,
+piskvorky/gensim,940393,80,"updated hdp code, with iteration support and latest CW changes",,jesterhazy,505258,closed,False,2012-03-07T02:15:18+00:00,2016-06-16T08:02:15+00:00,2012-03-07T13:14:20+00:00,2012-03-07T13:14:20+00:00,684828b2abc74964a51c24b01e6984ffe2150b4f,dirty,73,46,3,6,3,0,,,
+piskvorky/gensim,1032001,81,Optindex,"Support code to fix simserver issue with optimized index, https://github.com/piskvorky/gensim-simserver/issues/2 .
+",piskvorky,610412,closed,False,2012-03-22T20:35:19+00:00,2016-06-16T08:02:16+00:00,2012-03-24T12:22:06+00:00,2012-03-24T12:22:06+00:00,2906c69cfb0323d4cd4fd8330c4b5744b7c0045d,unknown,18,10,3,5,0,0,,,
+piskvorky/gensim,1048976,83,Improve wikimedia markup filtering.,"I am improving the filtering of:
+1. Templates
+   The current implementation uses a regular expression. This is problematic when there are nested templates. I am replacing this by the function `remove_template`. This function find the location of the opening '{{' and closing '}}' for each template. Then it uses these locations to remove the templates from the text.
+2. 'File:'/'Image:' markup
+   The current regular expression used to filter these markups sometimes fails. I am replacing this by the function `remove_file`. This function first find all the 'File:'/'Image:' markups using a regular expression, and then replace each instance by their corresponding captions.
+",aweinstein,123405,closed,False,2012-03-26T18:01:55+00:00,2016-06-16T08:02:12+00:00,2012-03-27T17:57:21+00:00,2012-03-27T17:57:21+00:00,a4832bc01b6cff5051deb979bb2da127b8b4cd68,unknown,59,6,1,1,0,1,,,
+piskvorky/gensim,1465896,84,Gardening/Fix Dictionary load/save,"`corpora.dictionary.Dictionary` decodes/encodes data on load/save
+",andreypopp,30594,closed,False,2012-05-31T16:04:04+00:00,2016-06-16T08:02:10+00:00,2013-04-23T07:42:17+00:00,,47a62107677e95fce73a52a3f04ae679639a8c48,dirty,4,1,1,1,0,3,,,
+piskvorky/gensim,1797103,86,Optimize Porter stemming,"I took the liberty of optimizing the Porter stemmer, cleaning up the code as I went. The result is roughly 20% faster than the original, as measured by running the script
+
+```
+from gensim.parsing.preprocessing import PorterStemmer
+
+st = PorterStemmer()
+
+for ln in open(""/usr/share/dict/american-english-insane""):
+    st.stem(ln.strip())
+```
+
+where `american-english-insane` is the dictionary file from the Ubuntu package [`wamerican-insane`](http://packages.ubuntu.com/precise/wamerican-insane). When I add a print statement in the loop, results are exactly the same before and after optimization. The unit test also passes.
+
+I removed the option the stem a substring of a string; it wasn't being used by Gensim and doesn't really make sense. Callers can take a substring themselves.
+
+The stemmer now also does lowercasing itself.
+
+The comments have been stripped of references to pointers and NUL bytes that only made sense in the context of the original C implementation.
+
+(The code still isn't very Pythonic, but it's closer to that ideal now.)
+",larsmans,335383,closed,False,2012-07-14T18:51:27+00:00,2016-06-16T08:02:14+00:00,2012-07-14T20:21:29+00:00,2012-07-14T20:21:29+00:00,0d497a8994d0ec1d1cd2cd7084281e42339d38b7,unknown,205,252,3,2,0,2,,,
+piskvorky/gensim,1843198,87,Proper XML parser for Wikipedia dumps,"I've reworked the Wikipedia dump parser in `gensim.corpora.wikicorpus` to use a proper XML parser, instead of the line-oriented parser used now. Experiments on smaller versions of Wikipedia, such as the Norwegian one, show that parsing speed is roughly unchanged.
+
+The main benefit of this approach is that articles can be pruned earlier, e.g. based on the title or the namespace (a user may want to consider only articles from the main namespace, with titles not matching `^List of`, etc.). Also, error handling is improved as the parser checks whether what it gets is XML, and looks like a MediaWiki dump. I think there is also some more room for optimization.
+
+Please let me know what you think.
+",larsmans,335383,closed,False,2012-07-19T21:18:11+00:00,2016-06-16T08:02:14+00:00,2012-07-21T22:02:59+00:00,2012-07-21T22:02:59+00:00,6ef385a0c1a3d761bd68ef30771a91d0bc1bc426,unknown,169,100,2,2,0,7,,,
+piskvorky/gensim,1944245,88,Update gensim/corpora/indexedcorpus.py,"support for adding targets for svmlight
+",corradomonti,2077346,closed,False,2012-08-01T12:34:49+00:00,2016-06-16T08:02:23+00:00,2012-08-13T17:25:16+00:00,2012-08-13T17:25:16+00:00,fb72571bade56e9ba3ac2b5ac7ea29a5942a779c,unknown,8,2,1,1,0,0,,,
+piskvorky/gensim,1944275,89,Update gensim/corpora/indexedcorpus.py,"support for adding targets for svmlight
+",corradomonti,2077346,closed,False,2012-08-01T12:37:54+00:00,2016-06-16T08:02:23+00:00,2012-08-13T17:25:16+00:00,2012-08-13T17:25:16+00:00,19d36a6eb4a0133f84918e711b73001a4f434145,unknown,8,2,1,1,0,0,,,
+piskvorky/gensim,2033711,93,HashDictionary ,"This addresses issue #76 - I couldn't help taking a pass at it! (apologies to @raoshivani)
+
+The `HashDictionary` is based on `Dictionary` and is very similar. The tests are also based on the tests for `Dictionary`. There's a debug option which will keep track of collisions in the hash's range (as sets).
+
+The class `gensim.corpora.RestrictedHash` contains most the logic for imitating the `token2id` dict. The hash function is exposed as a construction argument. The default hash function is `zlib.adler32`, for no particularly good reason. Let me know if you have any feedback!
+",strongh,147630,closed,False,2012-08-11T05:54:54+00:00,2016-06-16T08:02:12+00:00,2012-08-20T13:49:24+00:00,2012-08-20T13:49:24+00:00,a8b6459dac9a07d188e0ab81e0929cf93cfc72da,unknown,150,154,6,7,9,9,,,
+piskvorky/gensim,2262937,95,Written function that creates dictionary from document term matrix,"Function takes roughly 1 minute on this corpus:
+MmCorpus(175315 documents, 592158 features, 24024123 non-zero entries)
+on i5 3570
+",buma,1055967,closed,False,2012-09-06T11:05:53+00:00,2016-06-16T08:02:20+00:00,2012-09-07T07:55:19+00:00,2012-09-07T07:55:19+00:00,02b56e4e4799859ae85f47e3c7599e7cf4fc96e9,unknown,67,1,2,6,0,0,,,
+piskvorky/gensim,2590880,96,Update gensim/corpora/dictionary.py,"Correct a bug in compactify() with id2token
+",ruiEnca,2522215,closed,False,2012-10-09T18:42:57+00:00,2016-06-16T08:02:23+00:00,2012-10-13T13:11:25+00:00,2012-10-13T13:11:25+00:00,f913599f695d22d3daaeee85ded4b1b8f671b65b,unknown,1,0,1,1,0,2,,,
+piskvorky/gensim,2946372,98,Update gensim/corpora/dictionary.py,"Line245: Quick fix added to refresh the num_docs attribute which is used in filter_extremes. Not setting this causes all docs to be filtered out.
+",salmoni,644538,closed,False,2012-11-09T16:05:34+00:00,2016-06-16T08:02:18+00:00,2013-01-12T17:45:57+00:00,,be266169e63733211fa60fe73667e5de9ae706d4,unknown,1,0,1,1,0,3,,,
+piskvorky/gensim,3337246,99,Ignore build dist,"Minor change. Ignore build files
+",luispedro,79334,closed,False,2012-12-12T13:47:17+00:00,2016-06-16T08:02:11+00:00,2012-12-26T10:26:19+00:00,2012-12-26T10:26:19+00:00,42ffb6f18dc8cfb7a90716106536d917a1eac51c,unknown,3,0,1,3,0,0,,,
+piskvorky/gensim,3337257,100,MIN Try harder to find vocab file,"Previous version would not work on fresh download of AP data.
+",luispedro,79334,closed,False,2012-12-12T13:48:09+00:00,2016-06-16T08:02:11+00:00,2012-12-26T10:29:14+00:00,2012-12-26T10:29:14+00:00,60ca0ff3cef2a0e007bfcbae7c23dbb073f7ed87,unknown,14,1,1,1,0,1,,,
+piskvorky/gensim,3376900,101,Bzip2 save,"Save wikipedia corpus in bz2 format directly
+",luispedro,79334,closed,False,2012-12-14T19:07:44+00:00,2016-06-16T08:02:11+00:00,2013-01-12T15:48:16+00:00,2013-01-12T15:48:16+00:00,6083c0a49279a7fc9d19c0a7dbf65600e1e76919,unknown,29,9,5,2,0,4,,,
+piskvorky/gensim,3584061,103,"Speedy lammatization, Reuters-21578 corpus and modified ESA model","I added a light flag for speedy lammatization. The flag lets the lemmatizer use a different algorithm from the pattern library.
+
+The request also includes a class to handle Reuters-21578 dataset as corpus. The class is not fully tested, yet. Also the SQL should be overlooked.
+The interface might change.
+
+I also added the implementation of my modified ESA model. It requires the selectkbest modul. For now I put it in the models folder.
+",jeschkies,2418440,closed,False,2013-01-08T12:06:02+00:00,2016-06-16T08:02:23+00:00,2013-01-27T20:33:22+00:00,,fd8edaa24cab7b8240930551814830649f238e04,dirty,1230,2,5,3,0,5,,,
+piskvorky/gensim,3858152,106,Added Reuters-21578 corpus. The corpus is not well tested.,,piskvorky,610412,closed,False,2013-01-27T20:31:58+00:00,2016-06-16T08:02:17+00:00,2013-12-26T12:34:09+00:00,,a93d64659ffa81b52351d1029347326a43e4d6f8,unknown,819,0,1,1,0,0,,,
+piskvorky/gensim,3858153,107,Experimental implementation of a modified ESA model.,,piskvorky,610412,closed,False,2013-01-27T20:32:15+00:00,2017-10-06T10:51:49+00:00,2016-01-24T09:43:36+00:00,,fe9d0cbaa27708c0cfead847196bf9d03464ca90,unknown,406,0,3,1,0,2,,,
+piskvorky/gensim,3960878,110,"Update rpmodel.py --> ""scipy.linalg.blas.fblas"" has been replaced by ""scipy.linalg.blas""","""scipy.linalg.blas.fblas"" has been replaced by ""scipy.linalg.blas""
+
+Fixes the following error when running the rpmodel.py:
+ERROR: AttributeError: 'module' object has no attribute 'fblas'
+
+Others have experience this error: https://github.com/Theano/Theano/issues/1144
+
+Changing as shown in the above in the .py and recompiling the .pyc worked for me!
+
+Thanks for a great package!
+
+Andrew
+",andrewjOc360,3011154,closed,False,2013-02-02T17:23:18+00:00,2016-06-16T08:02:24+00:00,2013-02-02T22:37:00+00:00,2013-02-02T22:37:00+00:00,6f65dee685b566af4fb189cce230cedabeec6ca4,unknown,1,1,1,1,0,1,,,
+piskvorky/gensim,6011175,116,Raise a KeyError if tokens are non-unique in a dictionary when loaded fr...,"From a discussion on Google Groups.  Raise a KeyError if non-unique tokens are encountered when loading a Dictionary from a text file.
+",prb,1231,closed,False,2013-05-30T07:06:46+00:00,2016-06-16T08:02:08+00:00,2013-06-01T13:27:26+00:00,2013-06-01T13:27:26+00:00,2261771610a818290760aa10475402879da56939,unknown,2,0,1,2,0,1,,,
+piskvorky/gensim,7066726,119,Fixing merge_with method in Dictionary with validation code (see extended summary),"# Code used for Validation
+## global represents the dict derived from the complete corpus analyzed at once
+
+dict_global = corpora.dictionary.Dictionary.load('global.dict')
+## dict_f/g represent the 2 dict derived from analyzing part of the complete corpus where f+g = complete corpus
+
+dict_f = corpora.dictionary.Dictionary.load('f.dict')
+dict_g = corpora.dictionary.Dictionary.load('g.dict'
+
+merge_with(dict_f, dict_g)
+dict_f.filter_extremes()
+dict_f.compactify()
+## CONSIDERING AFTER FILTERING/COMPACTIFY THE MERGED_DICT SHALL BE EQUIVALENT TO THE GLOBAL DICT (where filering/compactify was applied), NO ERROR MESSAGE SHOULD APPEAR ON SCREEN.
+
+for ids,token in dict_f.iteritems():
+    if dict_f.dfs[ids] != dict_global.dfs[dict_global.token2id[token]]:
+        ErrMsg = ""Error at ID "" + str(ids)
+        paste(ErrMsg)
+
+count = 0;
+for ids, token in dict_global.iteritems():
+    try:
+        dict_f.token2id[token]
+    except:
+        count = count + 1;
+        ErrMsg = ""Error "" +str(count) + "" -- Unpresent token : "" + token
+        print(ErrMsg)
+",florentchandelier,4007753,closed,False,2013-07-21T22:52:43+00:00,2014-07-16T16:52:07+00:00,2013-07-26T12:35:50+00:00,,2f0b54b7aa35dfa559758c8dbc8bc9692c567c04,dirty,14,30,1,1,0,1,,,
+piskvorky/gensim,8689865,124,Add two methods to Word2Vec for word-word similarity,"The first method returns the vector space representation of a word. It's a common task and not totally obvious unless you dig into the code source. The second method performs word-word similarity by computing the cosine distance between the representations of the given words.
+",GHamrouni,1172832,closed,False,2013-09-29T14:38:14+00:00,2016-06-16T08:02:20+00:00,2013-10-06T12:27:52+00:00,2013-10-06T12:27:52+00:00,cdb5dabd409f5efd4791d5b9c44aabbf2f4fc47a,unknown,39,0,1,2,0,5,,,
+piskvorky/gensim,8855271,125,Safe save,"Previously, if you attempted to serialize a corpus to the path ""`fname`"" used to generate it, you would erase the file located at `fname`.  Now, the serialization is aborted and an exception is raised.  Alternatively an error could be logged...but this is a serious mishap (when it occurs) so I think an exception is the right thing to do.
+### Changes to `corpora.indexedcorpus.py`
+- Added check/exception-raise to `.serialize()`
+",langmore,178152,closed,False,2013-10-04T22:06:52+00:00,2016-06-16T08:02:12+00:00,2013-10-06T12:39:37+00:00,2013-10-06T12:39:37+00:00,86ec2a340f13a8ad9c51a8f4eed8b7a2b9c65782,unknown,6,0,1,3,0,1,,,
+piskvorky/gensim,9310262,129,Added CsvCorpus.,"Corpus in CSV format. TODO: still serializes to SVMLight format, feel free to change this.
+",zygmuntz,1714767,closed,False,2013-10-22T21:32:17+00:00,2016-06-16T08:02:22+00:00,2013-10-27T19:23:37+00:00,2013-10-27T19:23:37+00:00,a3f7e1ea1aad00dfb18df885e6c0a538b67aabd7,unknown,67,1,2,5,0,0,,,
+piskvorky/gensim,9463605,133,storing labels,"changed 'labels' to 'has_labels' (bool), labels is a list now
+",zygmuntz,1714767,closed,False,2013-10-28T19:47:38+00:00,2016-06-16T08:02:22+00:00,2013-11-02T16:22:06+00:00,,5ed2694df06ce6b76be23185d0fedfbad31ab6f7,dirty,18,5,1,3,0,0,,,
+piskvorky/gensim,9807833,134,Word2vec compr,"I made LineSentence able to accept file objects as well as strings. This allows reading sentences from compressed files (among other things). I also added unit tests for LineSentence and updated its docstrings.
+",RadixSeven,733785,closed,False,2013-11-08T19:56:51+00:00,2016-06-16T08:02:18+00:00,2013-11-09T19:07:57+00:00,2013-11-09T19:07:57+00:00,7560c9820f998d425d46bc98ddc401b34677710b,unknown,52,5,2,2,0,1,,,
+piskvorky/gensim,9828474,135,Added phrase support,,sumitborar,2515003,closed,False,2013-11-10T15:10:45+00:00,2016-06-16T08:02:23+00:00,2014-11-03T18:09:15+00:00,,f2b1b1f2297bb2cb8fc2d6b43a4cd7f3e84d364e,dirty,138,37,1,2,2,17,,,
+piskvorky/gensim,9925345,138,Add DirOfPlainTextCorpus. This corpus takes a directory of plain text fi...,"...les and iterates over the sentences of all files in the directory
+",cleder,1218010,closed,False,2013-11-13T15:35:36+00:00,2016-06-16T08:02:20+00:00,2013-11-14T07:07:06+00:00,,f9ec71e4ba3a736fe4e69c11c728ce4c7bcf7889,dirty,20,0,1,1,2,4,,,
+piskvorky/gensim,9982522,139,word2vec: Change total_words count from a function to a count,"This speeds things up a lot when processing billions of total words.  The function was getting called every 10,000 tokens and iterates over every vocabulary item.  This change provides an equivalent calculation without the iteration over the vocab.
+",holopoj,1427868,closed,False,2013-11-14T23:16:11+00:00,2016-06-16T08:02:22+00:00,2013-11-15T00:23:33+00:00,2013-11-15T00:23:33+00:00,931df63c52ea7689f94e3f2028a3192e64135e84,unknown,4,3,1,1,0,1,,,
+piskvorky/gensim,10391812,142,Update lda_dispatcher.py,"tell the worker to release the connection to the pyro daemon
+",bfeeny,2887349,closed,False,2013-11-29T10:52:41+00:00,2016-06-16T08:02:24+00:00,2013-11-29T23:57:36+00:00,,050ad9737341e32ba6ae43f86a71161f06139d3f,unknown,1,0,1,1,0,0,,,
+piskvorky/gensim,10391841,143,Update lsi_dispatcher.py,"tell the worker to release the connection to the pyro daemon
+",bfeeny,2887349,closed,False,2013-11-29T10:54:01+00:00,2016-06-16T08:02:24+00:00,2013-11-29T23:57:14+00:00,,d2960df11863d60a9859f1b33dba38a26540e86d,unknown,1,0,1,1,0,2,,,
+piskvorky/gensim,10669979,145,Fixing example code overflow in documentation,"This tiny change should improve the display of [pages like this](http://radimrehurek.com/gensim/dist_lda.html) in the documentation. Right now, the long lines of code overflow their boundaries and this keeps them contained and adds a scroll bar to the offending block.
+",dfm,350282,closed,False,2013-12-10T01:41:28+00:00,2016-06-16T08:02:15+00:00,2013-12-10T08:05:18+00:00,2013-12-10T08:05:18+00:00,4758a21f64944392c4f7b2650dd195238fa67fc8,unknown,1,0,1,1,0,2,,,
+piskvorky/gensim,10837127,147,Fix memory error for big values of id_range,"Should fix https://github.com/piskvorky/gensim/issues/146
+",elyase,1175888,closed,False,2013-12-15T12:53:47+00:00,2016-06-16T08:02:20+00:00,2013-12-22T16:38:52+00:00,,13f42548ff3ef2ca76aee5b5ba297e998a5c246f,unknown,1,1,1,1,0,0,,,
+piskvorky/gensim,11021256,149,eat newline when present in binary dfformat,"fixes issue with binary models. Some models have a newline after the word vectors, some do not. 
+
+From the hexdump analysis on an older trained file (from a few weeks ago)
+
+1b bd 0a 73 65 76 65 6e  20 81 29 06 be 69 52 60  |...seven .)..iR`
+
+notice that before the new word there is indeed a newline (bold), yet in the freebase model 
+
+00001f70  00 00 cc 3c 2f 65 6e 2f  62 61 72 61 63 6b 5f 6f  |...</en/barack_o|
+
+there is no newline, the 2f is / - the first character of the new word. I looked at distance.c and the line
+
+```
+fscanf(f, ""%s%c"", &vocab[b * max_w], &ch);
+```
+
+fscanf (used in the word2vec c code) ignores leading and training whitespace, emulating this behavior in python fixes this issue.
+",darenr,5496117,closed,False,2013-12-20T18:55:24+00:00,2016-06-16T08:02:27+00:00,2013-12-21T00:01:46+00:00,2013-12-21T00:01:46+00:00,ab505aff1c922e2965be2f9ac79032f993910cc2,unknown,2,0,1,1,0,5,,,
+piskvorky/gensim,11031133,150,remove newline read,"fin.read is nolonger required and prevents the first character of a new style model from being read 
+",darenr,5496117,closed,False,2013-12-21T01:06:11+00:00,2016-06-16T08:02:27+00:00,2013-12-21T10:30:53+00:00,,4138bff70636ab5f54e05dde6411c79d9acfbd9b,dirty,1,1,1,1,0,3,,,
+piskvorky/gensim,11168875,152,Develop,"I have made slight changes in line2doc method and **iter** of SvmLightCorpus. With these changes, all the labels in SVMLight file could be accessed as a list through the attribute 'labels'.
+",riteshkrjnu,4920254,closed,False,2014-01-01T07:56:23+00:00,2016-06-16T08:02:26+00:00,2014-01-02T14:21:31+00:00,2014-01-02T14:21:31+00:00,413a7a6434a2ba85f3fbb7d2df0e7d662292ac90,unknown,7,3,2,1,3,8,,,
+piskvorky/gensim,11229933,153,added inference tooling to HDP as per implementation in LDA,"uses LDA equivalent topics (have been using this method in run_online_hdp from CW with good success)
+
+please note I haven't tested this code in gensim as I don't currently use gensim, but the technique has been tested extensively in my fork of the original Chong Wang code.
+",terramars,5115761,closed,False,2014-01-04T18:13:22+00:00,2016-06-16T08:02:27+00:00,2014-01-05T18:23:11+00:00,2014-01-05T18:23:11+00:00,73bec3dc0be27ffd9a8532b8f95dccfc0df911ed,unknown,52,4,1,3,3,5,,,
+piskvorky/gensim,11238047,154,Python 3 support (WIP),"Don't merge this just yet.
+
+This patch makes sure gensim can be imported in Python 3, although it still fails most of the tests. All tests pass on 2.7, though. See #122, ping @fotis007.
+",larsmans,335383,closed,False,2014-01-05T22:26:07+00:00,2016-06-16T08:02:14+00:00,2014-02-11T18:46:12+00:00,,ae48c0e4bd55afe186ba27263683678fcaa6fba0,dirty,126,89,31,1,7,2,,,
+piskvorky/gensim,11307791,155,fix to using eval_every=None and separate update,"This is a fix to a tiny bug - with the corpus specified in ""update"" and no perplexity calculation, the  eval_every \* self.numworkers \* chunksize is multiplying an integer with 'None' and crashing.
+",patcpsc,2098179,closed,False,2014-01-08T00:56:25+00:00,2016-06-16T08:02:23+00:00,2014-01-08T09:04:00+00:00,2014-01-08T09:04:00+00:00,ca453599b1ca4de4cc9ad0679000ce40894d5cd6,unknown,4,1,1,1,0,1,,,
+piskvorky/gensim,11838230,159,replaced all references to numpy.linalg.svd with scipy's version && replaces numpy.linalgLinAlgError with scipy.linalg.LinAlgError,"Hello Radim,
+
+as discussed on the mailing-list and referenced in [ISSUE #158](https://github.com/piskvorky/gensim/issues/158) - here my very first ever pull request. 
+
+Hope it is OK and will fulfill requirements. 
+
+Greetings Sven
+",sdoering,765204,closed,False,2014-01-24T09:55:30+00:00,2016-06-16T08:02:18+00:00,2014-01-24T20:55:28+00:00,2014-01-24T20:55:28+00:00,a5d069121b481f035bfc84af3d885b90549c8db0,unknown,9,6,2,3,0,4,,,
+piskvorky/gensim,12345478,162,W2v negsam,"added negative sampling to the python train_sentence function for the skipgram model and all additionally needed functions. in build_vocab, if negative sampling is used, there is a big table for the noise word distribution created, which is saved in model.table. this takes quite a bit of RAM and should probably be deleted before saving the model (it's only needed for training anyways).
+",cod3licious,1093567,closed,False,2014-02-08T21:24:47+00:00,2016-06-16T08:02:20+00:00,2014-05-10T08:54:15+00:00,2014-05-10T08:54:15+00:00,dff7f7b7b0ec206b7aea416b27ca554945961a5f,unknown,594,99,4,25,6,33,,,
+piskvorky/gensim,12422317,164,Adding norm_only parameter to load_word2vec_format,"When set to True, we only keep the normalised
+vectors in memory to save space. The normalised
+vectors will also be computed in place to save
+temporarily allocating large amounts of memory.
+",moustaki,2491,closed,False,2014-02-11T16:28:20+00:00,2016-06-16T08:02:09+00:00,2014-02-11T17:53:25+00:00,2014-02-11T17:53:25+00:00,26716a00a9463a172daf978376565440d5b0c943,unknown,22,4,2,1,0,0,,,
+piskvorky/gensim,12610300,168,closes #167: added __package__ name to run word2vec.py as script,"Ahoj Radim,
+
+this patch allows to run ``word2vec.py'' as a script while using relative imports.
+
+Čau,
+Arne
+",arne-cl,994109,closed,False,2014-02-17T12:57:32+00:00,2016-06-16T08:02:19+00:00,2014-03-12T09:57:19+00:00,,b5f1449800f46852f237f36982891535ee95ac9e,dirty,3,0,1,1,0,1,,,
+piskvorky/gensim,12626384,169,Create a dictionary that maps document id to some metadata of the original corpus,"This commit parses the Wikipedia Page id and title as metadata, and creates a Python dictionary that maps from gensim doc id to  to the metadata. It also changes the serialization so that the dictionary is stored in a pickle file. Other corpus classes can also be modified to support generating a metadata dictionary, but with the default argument the changes shouldn't effect corpus classes other than WikiCorpus. It also shouldn't effect the behavior of the WikiCorpus class if no additional parameters were specified.
+",josephcc,27548,closed,False,2014-02-17T20:23:44+00:00,2016-06-16T08:02:10+00:00,2014-03-12T09:54:20+00:00,2014-03-12T09:54:20+00:00,b350d347fa5edc41ce3e29d09dbebdbbbb4583b3,unknown,343,90,26,16,2,7,,,
+piskvorky/gensim,12628055,170,Filter wikipedia articles by their namespace,"Adds the ability to skip article with certain namespace in Wikipedia. These are Wikipedia entries that are images file, audio files, templates, user profiles, ..., etc. The full list can be found here: http://en.wikipedia.org/wiki/Wikipedia:Namespace .
+
+This commit does not change the currently behavior of the WikiCorpus class, unless the additional filter_namespaces argument is passed to the initializer.
+
+For example,
+
+WikiCorpus( inp, lemmatize=lemmatize, filter_namespaces=('0','2') )
+
+will only include main articles and user profile pages into the corpus, while 
+
+WikiCorpus( inp, lemmatize=lemmatize )
+
+will be the same as the current behavior, using all entries in the Wikipedia dump.
+",josephcc,27548,closed,False,2014-02-17T21:19:49+00:00,2016-06-16T08:02:10+00:00,2014-02-18T20:07:06+00:00,2014-02-18T20:07:06+00:00,84d5b0ea040c22979d5ef1fc3738ea26ead9d9fd,unknown,10,3,1,3,0,7,,,
+piskvorky/gensim,12695089,172,Enabling saving/loading vocabulary alongside word2vec dump,"Hello Radim,
+
+Curious to know what you think about the following patch. Right now the vocabulary counts loaded from a word2vec model in gensim are misleading. This patch enables the output of SaveVocab() in word2vec to be used to restore the 'right' counts for words in the vocabulary. It also enables save_word2vec_format to persist a vocabulary file alongside the model (with real counts).
+
+Best,
+y
+",moustaki,2491,closed,False,2014-02-19T12:14:34+00:00,2016-06-16T08:02:09+00:00,2014-03-02T23:12:52+00:00,2014-03-02T23:12:52+00:00,27258771385a36f867c4ebcba0d6a4013f6e7c7c,unknown,40,4,2,1,0,13,,,
+piskvorky/gensim,12834038,174,Parameterize LdaModel variational magic numbers,"This commit removes the VAR_MAXITER and VAR_THRESH constants from
+LdaModel and allows each to be set when a new model is made, or
+during a call to update(). They have been named iterations and
+gamma_threshold.
+
+Logging messages for the number of passes were changed to use the word
+""pass"" instead of ""iteration"", to avoid any confusion. Other logging
+messages were also updated to include these vars.
+
+This is a non-automatic fix for Issue #58.
+",cscorley,112752,closed,False,2014-02-23T18:19:40+00:00,2016-06-16T08:02:11+00:00,2014-03-02T10:54:10+00:00,2014-03-02T10:54:10+00:00,178d21afd694c0ee40115df4ae881aff2d81898d,unknown,24,15,1,1,0,2,,,
+piskvorky/gensim,13089954,175,[Word2Vec] Support for reading calculated skip ngrams,"This adds support for training from precompiled skip ngrams, instead of raw text. Each ``sentence"" from the corpus reader now consists of the following format ([str:word1, str:word2], int:distance, int:count). This is useful if you are trying to train a word2vec model from a ngram model, for example the Google Web1T dataset. Both the Python and Cython implementations were updated.
+
+New functionalities are controlled by the skip_ngram parameter, with the default value the behavior of existing functionalities should remain the same.
+
+I wasn't sure how to change the matrix manipulation part, so each skip ngrams with counts will update the matrix multiple times. This is likely to be very inefficient, and should be improved in the future.
+",josephcc,27548,closed,False,2014-03-02T06:38:10+00:00,2016-10-04T15:39:10+00:00,2016-10-04T15:39:10+00:00,,67e3b0b21e1fa2e096eb1abe31f2ddd4eafae1d4,dirty,125,36,2,4,0,3,,,
+piskvorky/gensim,13191725,176,CBOW,"I have added the CBOW functionality.
+
+It should replicate the original code by Mikolov et al., except that it combines context words by taking the average of the corresponding vectors instead of their sum. This is in agreement with the textual description of the CBOW model in [1](although Figure 1 in that paper says).
+
+Here are some baseline results on the Google analogy dataset (questions-words.txt) with the vocabulary restricted to the 30,000 most frequent words. The training corpora are the ""text8"" and ""fil9"" datasets found at ""http://mattmahoney.net/dc/textdata.html"". In all cases, I used vectors of dimension 640 and a window of size 10. The rest of the hyper-parameters take their default value.
+
+With ""text8"":
+
+Skip-gram: 29.3% correct
+CBOW: 15.5% (11.5% if I used the sum of the vectors instead of their average)
+
+With ""fil9"":
+
+Skip-gram: 52.5%
+CBOW: 46.2% (29.9% using the sum)
+
+Note: By default, my system always used ""Optimization 1"" during training. What would be the most efficient way to test the other optimizations before incorporating the changes into Gensim?
+
+---
+
+[1] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient Estimation of Word Representations in Vector Space. In Proceedings of Workshop at ICLR, 2013. 
+",sebastien-j,4449506,closed,False,2014-03-05T01:09:14+00:00,2016-06-16T08:02:26+00:00,2014-03-12T18:51:09+00:00,2014-03-12T18:51:09+00:00,ff2f8b930e7cc1826a98ca513d3903ae2addf439,unknown,279,17,3,4,0,7,,,
+piskvorky/gensim,13245632,177,add negative sampling method for skip-gram in the slower version,,jasonwbw,3417170,closed,False,2014-03-06T03:46:26+00:00,2016-06-16T08:02:25+00:00,2014-05-18T11:16:42+00:00,,3e428c84a27c3e148ee793db84cb22e388f4e6da,dirty,105,12,2,1,0,4,,,
+piskvorky/gensim,13535619,179,Add MalletCorpus format,,cscorley,112752,closed,False,2014-03-13T18:00:07+00:00,2016-06-16T08:02:11+00:00,2014-03-13T18:42:52+00:00,2014-03-13T18:42:52+00:00,8397f9cb32c133d31fa7003c05a9db4b5e0893c1,unknown,159,4,5,1,4,1,,,
+piskvorky/gensim,14016261,181,Fix CBOW bug (optimization 2),"I had made a small mistake in the cython code for CBOW (optimization 2).
+",sebastien-j,4449506,closed,False,2014-03-26T16:54:58+00:00,2016-06-16T08:02:26+00:00,2014-03-26T17:58:11+00:00,2014-03-26T17:58:11+00:00,b697edf10514ada9834efcb41bd24b9d4ea22a95,unknown,1,1,1,1,0,1,,,
+piskvorky/gensim,14446482,186,Python 3 Fixes,"Python 3 Fixes so all but one unit test, `gensim.test.test_word2vec.TestWord2VecModel` fails (I couldn't figure out why the unit test is failing).
+",simonzack,628500,closed,False,2014-04-07T13:03:15+00:00,2016-06-16T08:02:18+00:00,2014-04-21T10:06:40+00:00,,,dirty,231,196,41,12,0,2,,,
+piskvorky/gensim,14518291,188,Return topics in the right order,"Passing -1 or n, where n >= num_of_topics to show_topics() should return the topics in the right order. It currently returns the topics in the reverse order which is difficult to reason about.
+
+**Summary**
+`lda.show_topics(-1)[0]` should return the same string as `lda.show_topic(0)`
+
+I did not realise this bug until after going crazy for a week! :frowning:  There's probably a better way to solve this problem and I'm happy to update the PR if required.
+",fayimora,648684,closed,False,2014-04-08T19:37:24+00:00,2016-06-16T08:02:18+00:00,2014-04-09T11:27:19+00:00,2014-04-09T11:27:19+00:00,741d977eddcce4b7729f17d4f710239116068395,unknown,1,1,1,1,0,7,,,
+piskvorky/gensim,14663608,190,Fixed HdpModel.print_topics and added HdpModel.show_topics,"Fixes #189. 
+
+HdpModel.show_topics and HdpModel.print_topics now have the same functionality as LdaModel.show_topics and LdaModel.print_topics.
+",Tiepies,6851232,closed,False,2014-04-11T16:59:40+00:00,2016-06-16T08:02:28+00:00,2014-04-13T19:35:06+00:00,2014-04-13T19:35:06+00:00,6faad36d11186e0436c07d4dfe9bb3bbdccae8c6,unknown,15,1,1,3,0,2,,,
+piskvorky/gensim,14685280,191,fix Dictionary for Python 3,"@piskvorky, I hope this fixes the Dictionary issue. It uses the Mapping mixin rather than inheritance from dict. Open question is whether Dictionary should behave like a Py2 dict even in Py3; currently it doesn't and I think it would break the Py3 Mapping contract to do so.
+
+The new test passes in Py2 and 3.
+",larsmans,335383,closed,False,2014-04-12T12:53:59+00:00,2016-06-16T08:02:14+00:00,2014-04-19T12:22:35+00:00,2014-04-19T12:22:35+00:00,5e641338cf5d1e5c12c60c674f00636b4f1734bb,unknown,41,3,2,1,0,0,,,
+piskvorky/gensim,14760047,192,sorting dictionary text by decreasing word frequency. ,"useful when analysing dictionary quality
+",renaud,75369,closed,False,2014-04-15T09:16:29+00:00,2016-06-16T08:02:11+00:00,2014-04-22T16:46:23+00:00,2014-04-22T16:46:23+00:00,487fbe1c3044cf18034add4140966728c4d58500,unknown,289,83,29,29,2,3,,,
+piskvorky/gensim,14947741,196,Py3k,"All tests pass, but this is still work-in-progress, because all tutorials/docs need to be updated too (NOTE: look into ipy notebooks, #180 ).
+
+Changes aim to be backward compatible, but the new official gensim API will recommend **using unicode wherever strings are expected** (now: asks for utf8). Starting with Python 3.3, there's no longer a huge memory overhead to (mostly-ASCII) unicode strings. Python 2 will take a memory hit though.
+
+Highlights:
+- All I/O is binary, converted to unicode explicitly inside gensim (=not using the py3k `encoding` params to `open`&co). Uses `utils.smart_open()` consistently.
+- All internally stored tokens/keys are expected to be unicode now. Find bytestring/ambiguity => file a bug.
+- Need more backward compatibility tests = make sure utf8 inputs continue to work. Don't want the same migration drama py3 itself is having!
+- I think this warrants a full version bump => `0.10.0`
+
+Ping @larsmans @simonzack @moustaki can you please run `setup.py test` unit tests on your machines? I'll ping Steph for a Windows run too.
+",piskvorky,610412,closed,False,2014-04-19T22:32:03+00:00,2017-05-20T01:15:52+00:00,2014-04-22T11:49:15+00:00,2014-04-22T11:49:15+00:00,feb618939e5ce1e8274e059c56acf932a2fb34d2,unknown,316,232,27,9,2,3,,,
+piskvorky/gensim,14975394,197,"Unbundle Six and Cythonize setup by bulding an optional ""addons"" package","This pull request unbundles Six (available from pypi) and adds some extra options to setup.py, so there will be an additional ""addons""-package if Cython is installed on the user's system.  This ""addons""-package avoids the need for building the so-extension during runtime (although this probability is still available after the changes) .
+
+For a good reason I've removed the hashbang from libraries' files and also fixed the executable permissions on the files.  A lib should NOT have executable files NOR hashbangs, because the python-files are not intended to be called in ""script-like-style"", but from inside some python-code (which might be a script).
+",besser82,1271348,closed,False,2014-04-21T17:46:45+00:00,2016-06-16T08:02:21+00:00,2014-04-23T09:07:38+00:00,2014-04-23T09:07:38+00:00,0878c54843b5b85c54503fb789b11be3bfa6496c,unknown,0,0,0,1,3,15,,,
+piskvorky/gensim,15837191,199,gradients are not updated to model.syn0,"Looks like the gradients are not updated to model.syn0. This PR simply fixes it.
+",viirya,68855,closed,False,2014-05-13T17:59:44+00:00,2016-06-16T08:02:11+00:00,2014-05-14T15:06:32+00:00,,f45d335d78c0a583191c80c387164e6e0ebe297e,dirty,1,1,1,1,0,6,,,
+piskvorky/gensim,16047878,200,add `cython >= 0.20` as a dependency,"as mentioned in https://github.com/piskvorky/gensim/pull/197
+",besser82,1271348,closed,False,2014-05-19T11:08:15+00:00,2016-06-16T08:02:21+00:00,2014-07-30T19:03:33+00:00,,098317379d79d93168ea574510f4a6e5f30214b3,dirty,1,0,1,1,0,2,,,
+piskvorky/gensim,16119094,201,Fixed TypeError and standardized `num_topics` argument in `LdaModel.show...,"..._topics`
+
+Line 678 of gensim/models/ldamodel.py threw a TypeError under Python3+, because the single slash division syntax returns floats, which cannot be used as indices. I changed this line to use floor division instead. This does not break Python2 compatibility.
+
+Also solved Issue #115 by changing the `topics` argument of `LdaModel.show_topics` method to `num_topics`.
+",Tiepies,6851232,closed,False,2014-05-20T17:01:03+00:00,2016-06-16T08:02:28+00:00,2014-06-06T14:16:13+00:00,2014-06-06T14:16:13+00:00,f3a12733ecf9f94c42efedbab33cc128a9ce2a63,unknown,13,13,1,3,0,4,,,
+piskvorky/gensim,16309344,202,Fix textcorpus metadata,"Fixes TextCorpus not having proper metadata info. I've defaulted to returning the line number that a document appears on.
+",cscorley,112752,closed,False,2014-05-24T21:59:40+00:00,2016-06-16T08:02:11+00:00,2014-05-24T22:18:17+00:00,,9f514118113aa6559a408487b8757c23afaa2a00,dirty,42,5,3,5,0,3,,,
+piskvorky/gensim,16309465,203,Fixes TextCorpus not having proper metadata info (rebased),"I've defaulted to returning the line number that a document appears on
+",cscorley,112752,closed,False,2014-05-24T22:17:39+00:00,2016-06-16T08:02:11+00:00,2014-06-14T14:38:57+00:00,2014-06-14T14:38:57+00:00,9e59b4f0f88bcea9159aaf87192586dfa5b3eafa,unknown,52,6,3,2,1,5,,,
+piskvorky/gensim,16459985,205,"Added DTM wrapper, supports training on a corpus","## What is included
+- Initial implementation for the DTM wrapper. Made it look  like the Malletwrapper as much as possible (for consistency)
+- Included a test_dtm script  to test out the model. I thought of putting this in the unittest, but was not sure. 
+- Computes Influence Model by default
+- Computes on any corpus that can be transoformed to BleiCorpus and has len (currently a part of my own research corpus is used).
+## To Run the test_script
+- You just need to set the DTM_HOME variable or just supply the path to the binary.
+- You can get the binaries either by compiling them from the  [original](https://code.google.com/p/princeton-statistical-learning/downloads/detailname=dtm_release.tgz&can=2&q=) or a [fork](https://github.com/magsilva/dtm) ,which also has precompiled binaries for Linux and Windows.
+- Supply another corpus if you wish .
+## What is missing
+- Inference on a holdout corpus.
+- Tests
+- Some comments and parameter explanations
+
+P,S Still slightly new to the world of contributing with git. Please point out obvious mistakes.
+",Arttii,2163944,closed,False,2014-05-29T00:08:34+00:00,2016-06-16T08:02:23+00:00,2014-09-17T16:42:58+00:00,2014-09-17T16:42:58+00:00,c2783c47fdc4059b2f967bf982046b65872eb532,unknown,0,0,0,1,7,10,,,
+piskvorky/gensim,16687187,206,"[word2vec] 'sample' parameter, for frequent-word down-sampling","Implements 'sample' parameter for down-sampling of frequent words. Interpretation of parameter follows original C word2vec formula. (Word frequencies actually need to be about 2.6x the parameter before their odds-of-inclusion fall below 1.0.)
+
+When down-sampling is enabled, the 'total_words' value used for progress-estimation and alpha-updating is an estimate. (So, final progress update my indicate a value over 100%.) Sampling-probabilities for frequent words are precalculated and stored in the Vocab objects to avoid constant recalculation during training. 
+
+Un-sampled words are removed from the sentences, rather than replaced by `None`. Additionally, the handling of out-of-vocabulary words has been changed to remove such words, rather than replace them with `None`. In both cases, this matches my understanding of what the original C word2vec does, and a series of short trials using the 'text8' corpus shows slight accuracy improvements against the question-words.txt accuracy check.
+",gojomo,1641,closed,False,2014-06-04T01:10:08+00:00,2016-06-16T08:02:08+00:00,2014-06-06T14:30:13+00:00,2014-06-06T14:30:13+00:00,01bee4412fed5d468c0886bf28c49cd740c8ec97,unknown,31,9,1,5,3,3,,,
+piskvorky/gensim,16915543,208,Support for matrix-valued topic/word prior eta in LdaModel. ,"This allows topics to be seeded with specific words. (Or however you like, really. It could e.g. be used to impose a fixed background topic if you specify the prior for one topic to have a specific base measure and a really high concentration)
+
+This is quite a small patch, it looks like the only place which needs changing to handle a matrix for eta is the computation of the variational bound.
+
+Added a test for the seeding behaviour, although like the existing testTransform test it's just a high-level sanity check.
+",mjwillson,4502,closed,False,2014-06-09T23:55:20+00:00,2016-06-16T08:02:09+00:00,2014-07-30T19:02:21+00:00,2014-07-30T19:02:21+00:00,8f1f0db5d4db5a6d7a7da9fe30bf4069eb451521,unknown,49,2,2,1,3,8,,,
+piskvorky/gensim,17143623,209,Fix length for corpora on empty files,,cscorley,112752,closed,False,2014-06-14T14:12:23+00:00,2016-06-16T08:02:11+00:00,2014-06-14T17:29:34+00:00,2014-06-14T17:29:34+00:00,19b797ef684adaee3669219af44626740a2e4646,unknown,84,60,13,4,1,2,,,
+piskvorky/gensim,17153981,210,Refactor corpus tests,"Also ensures that all possible temp test files are removed
+
+Not a whole lot of changes here, mainly changing CorpusTester to be a concrete class. Needed to do this because some temporary test files were not being removed and could cause multiple test runs to fail.
+
+Just looking for comments & approval before merge.
+",cscorley,112752,closed,False,2014-06-15T16:28:45+00:00,2016-06-16T08:02:11+00:00,2014-06-15T23:49:57+00:00,2014-06-15T23:49:57+00:00,69f048c677b20f3bf2ca987636893e585744c6bf,unknown,48,49,1,1,0,1,,,
+piskvorky/gensim,17782189,216,Added ability to specify token map in Dictionary.from_corpus,"In cases where the BOW matrix is given along with an id -> token map,
+this feature allow for a perfect reconstruction of the dictionary
+object using the `from_corpus` method.
+",AndreasMadsen,505333,closed,False,2014-06-30T16:09:08+00:00,2016-06-16T08:02:15+00:00,2014-07-01T13:35:45+00:00,2014-07-01T13:35:45+00:00,780a001fbb93c694e95ac1a024bb9a34a6a2d342,unknown,34,15,2,4,3,5,,,
+piskvorky/gensim,18073901,218,Doc Fix: LSI --> LSA,"The title says it all.  
+",madisonmay,2645393,closed,False,2014-07-07T22:44:40+00:00,2016-06-16T08:02:23+00:00,2014-07-08T02:44:01+00:00,,2af97a78391b8c48d876fe5dd319815f3a746ed3,unknown,1,1,1,1,0,3,,,
+piskvorky/gensim,18249339,219,Adding the word2vect n_similarity method,"Everything should be in the code comments. This is pretty useful to compare n grams.
+",lechatpito,180606,closed,False,2014-07-10T22:01:03+00:00,2016-06-16T08:02:12+00:00,2014-07-16T10:09:27+00:00,2014-07-16T10:09:27+00:00,5c081d88afe0dd970482b22edda2d866758717b6,unknown,31,0,2,4,1,5,,,

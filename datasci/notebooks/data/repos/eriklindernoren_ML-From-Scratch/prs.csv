@@ -1,0 +1,113 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+eriklindernoren/ML-From-Scratch,139745188,19,use full module name for data_manipulation,"Hey Erik,
+
+I have to change the name before running 'python setup.py install' to make some examples work. I'm new to python, so feel free to close this PR and let me know if I missed something, thanks.
+
+FYI, I'm using python3 and on a Mac.",QiBaobin,7072,closed,False,2017-09-07T08:31:32+00:00,2017-09-08T00:56:04+00:00,2017-09-07T08:53:47+00:00,2017-09-07T08:53:47+00:00,ba370d2e3b39c09225b36d7557c20fc92a59b9ac,unknown,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,139746487,20,switched from progressbar to its Py3 compatible fork progressbar33,"Thanks for the great code, a small change to setup with python3.
+
+https://github.com/germangh/python-progressbar",QiBaobin,7072,closed,False,2017-09-07T08:38:28+00:00,2017-09-18T00:41:45+00:00,2017-09-15T18:41:18+00:00,2017-09-15T18:41:18+00:00,abf46ec9a707ef3d122813b5613bd742be368b67,unknown,2,2,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,140946076,21,Typo in variable name: titel --> title,,cclauss,3709715,closed,False,2017-09-13T22:38:47+00:00,2017-09-13T22:44:23+00:00,2017-09-13T22:42:03+00:00,2017-09-13T22:42:03+00:00,56b19fe47600fdc5c54778588cc7cc2634027bef,unknown,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,141148586,24,corrected minor typo,aphabetical -> alphabetical,bhageena,14236753,closed,False,2017-09-14T18:42:51+00:00,2017-09-15T08:47:29+00:00,2017-09-15T08:45:30+00:00,,1e4db31c3a4563efcb1574514d6d3aa5037f6479,unknown,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,141229608,25,Update README.md,File for Deep Reinforcement Learning already has already changed to deep_q_network.py.,ljch2018,22562546,closed,False,2017-09-15T05:09:15+00:00,2017-09-15T08:47:05+00:00,2017-09-15T08:45:31+00:00,,b4a441c3c09732be67a5751433f5dd4bab9e4b80,unknown,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,159375084,31,Fix typo in examples/recurrent_neural_network.py,,vn09,22481592,closed,False,2017-12-20T10:01:45+00:00,2017-12-23T20:24:26+00:00,2017-12-23T20:24:26+00:00,2017-12-23T20:24:26+00:00,0c1e547ea467cf977f40daed70b1696fbb200126,unknown,2,2,2,1,0,0,,,
+eriklindernoren/ML-From-Scratch,174242400,36,Create initializers.py,Add init methods to library,jefkine,271074,closed,False,2018-03-11T21:05:45+00:00,2018-03-11T21:27:04+00:00,2018-03-11T21:21:33+00:00,,aa6f61e6394f7473a7222882077fc127a1e2f2f6,unknown,278,0,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,174242533,37,"Add gru, lstm, weight initializers",Add gru.py to lib,jefkine,271074,closed,False,2018-03-11T21:08:30+00:00,2019-04-03T21:43:00+00:00,2019-04-03T21:43:00+00:00,,a6fcc0073012484e8a12f4092401e49a38a4b7ff,unknown,689,0,3,8,1,1,,,
+eriklindernoren/ML-From-Scratch,211569957,43,df.as_matrix has been deprecated since 0.23.0,Refs: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.as_matrix.html,miku,53705,closed,False,2018-08-28T21:55:50+00:00,2018-08-30T07:19:18+00:00,2018-08-30T07:19:18+00:00,2018-08-30T07:19:18+00:00,f27875199c87301c246ad208f4fdd01e9c52f5f7,unknown,14,14,7,1,0,0,,,
+eriklindernoren/ML-From-Scratch,212038820,47,make genetic_algorithm py3 compliant,"Made a small change to the genetic_algorithm to make the code python 3 compliant.
+Noticed this bug when trying out the genetic algorithm example.",tvturnhout,16676419,closed,False,2018-08-30T11:00:05+00:00,2018-09-02T08:58:28+00:00,2018-09-02T08:58:27+00:00,2018-09-02T08:58:27+00:00,a633c33c4763d6ed8ca124e43ab606250d04fa6c,unknown,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,225310105,50,Cleaned up imports and some changes,"1. Modify some misspelling of comment.
+2. The support number seems to be an integer.
+3. Suffix passing.
+4. Clean up unused imports",daviddwlee84,1515662,open,False,2018-10-24T08:31:11+00:00,2018-10-24T08:31:11+00:00,,,6509d08fd6d85318946ae7a5d01ee0024d8471a5,clean,5,8,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,227855675,51,Clean up import,standardize and calculate_correlation_matrix haven't been used,daviddwlee84,1515662,closed,False,2018-11-02T07:45:46+00:00,2019-01-23T19:22:24+00:00,2019-01-23T19:22:24+00:00,2019-01-23T19:22:24+00:00,6c5135d402f5a9e249780a2a322085c35b2528c1,unknown,1,2,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,276948040,53,update README,Explaining added for python3. The script does not be installed if you run it with pytonh3.x. Most OSs (including Ubuntu and MacOSX) comes with python2.x and trying to removing python2.x is so dangerous because OS uses python2.x itself.,EmreSURK,9450430,open,False,2019-05-08T10:48:48+00:00,2019-05-08T10:48:48+00:00,,,877381e56fc9f30556f9cfcf27af84625030d362,clean,5,0,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,286432099,54,"Added self.env.close() to ""play""","To avoid the following error ""ImportError: sys.meta_path is None, Python is likely shutting down"" when running the deep_q_network example.",ghost,10137,closed,False,2019-06-08T21:28:26+00:00,2019-06-09T02:22:06+00:00,2019-06-09T02:21:59+00:00,2019-06-09T02:21:59+00:00,40b52e4edf9485c4e479568f5a41501914fdc55c,unknown,1,0,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,296729321,56,mixture density network layer ,"Hey, I've added a mixture density network layer and an accompanying example under the name `mdn.py` in the examples' folder.",kirk86,2902390,open,False,2019-07-11T16:20:06+00:00,2019-07-11T16:20:06+00:00,,,8422ae66dfd33ad9e3982d861b16393915407880,clean,259,10,5,2,0,0,,,
+eriklindernoren/ML-From-Scratch,314760527,57,Fix default stride and padding in Pooling2D ,"Hello.
+
+Common Pooling2D examples use same pool_shape value for stride and default padding is 'valid'.
+I also added a CNN with MaxPooling example.",aidevnn,47622664,closed,False,2019-09-06T01:31:46+00:00,2019-09-18T08:33:39+00:00,2019-09-18T08:33:39+00:00,,891efbbcab425ecb6697e2c848cba08ce5972d0c,unknown,89,2,2,2,0,0,,,
+eriklindernoren/ML-From-Scratch,325068902,60,Init using np.zeros instead of np.empty to avoid overflow,"* Using `np.zeros` instead of `np.empty` for initialization
+* Resolve random overflow error:
+```
+Python/2.7/lib/python/site-packages/ipykernel_launcher.py:5: RuntimeWarning: overflow encountered in square
+```
+",DandilionLau,19463356,closed,False,2019-10-06T20:03:35+00:00,2019-10-18T21:42:17+00:00,2019-10-18T21:42:17+00:00,2019-10-18T21:42:17+00:00,a2806c6732eee8d27762edd6d864e0c179d8e9e8,unknown,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,333404938,63,Added support for Swish activation function.,Added activation function and updated options in other files to support Swish.,drake-smu,43159271,open,False,2019-10-29T02:35:15+00:00,2020-07-09T05:38:13+00:00,,,fc5d57eab81d2a504ce62591b95c918574d94197,clean,21,4,3,2,0,1,,,
+eriklindernoren/ML-From-Scratch,337100231,64,transposed V from svd in LinearRegression,"There's a mistake in the LinearRegression module.  
+
+You use the Moore-Penrose pseudoinverse on the values returned from np.linalg.svd().
+
+However, the values returned from Numpy's svd module are not the ones returned by traditional SVD.
+
+Normal SVD reduces to A = U @ S @ V.T, but Numpy's implementation is A = U @ S @ V.
+
+Basically, the V returned by Numpy's SVD is actually V.T.  
+
+However, when you implement the pseudoinverse you use this line:
+
+X_sq_reg_inv = V.dot(np.linalg.pinv(S)).dot(U.T).
+
+That's the doctrinaire way of the SVD-based pseudoinverse, but you need to transpose V here in order to get the correct results.
+
+I can provide more detail to demonstrate how this returns correct results, but right now your LinearRegression isn't correct as is.",JonathanBechtel,481696,closed,False,2019-11-06T00:29:01+00:00,2022-10-17T12:57:07+00:00,2022-04-12T15:27:28+00:00,,ed760692c323f7eb51523806dcdba2cad4ddafd8,clean,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,337139861,65,Update regression.py,,tangjackson,50070759,open,False,2019-11-06T02:48:59+00:00,2019-11-06T08:43:49+00:00,,,c9a9f0be9023e899260ea542d125e2efbc262648,clean,1,3,1,1,1,0,,,
+eriklindernoren/ML-From-Scratch,350256193,70,dbscan get_neighbors fix,"`i` is off by one for indexes after `sample_i`
+
+**Before**
+
+![before](https://user-images.githubusercontent.com/191903/70365961-f710b280-1848-11ea-8a91-9ca3a5286c89.png)
+
+Cluster count: 4-6
+
+**After**
+
+![after](https://user-images.githubusercontent.com/191903/70365965-fbd56680-1848-11ea-83e3-7c90966d4c30.png)
+
+Cluster count: 2-3",JesseAldridge,191903,closed,False,2019-12-07T00:57:22+00:00,2022-10-11T07:16:59+00:00,2022-04-26T22:54:46+00:00,,49c85645a9b5be286fe40b65f8b06bc277a78530,clean,5,2,2,1,0,3,,,
+eriklindernoren/ML-From-Scratch,358652376,73,Fix bug in gradient of ELU activation function,"First of all, Thanks for sharing this amazing library. 
+
+#### Bug
+There was a bug in the `gradient` calculation of `ELU` activation function.",ankishb,19225359,open,False,2020-01-02T13:04:24+00:00,2020-01-02T13:04:24+00:00,,,53da293b4885513db6280c68f9cb8128a6434905,clean,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,368688040,78,PR type: refactor divide_on_feature for decision tree,Speed up divide_on_feature by using numpy vectorization,Superhzf,10473662,closed,False,2020-01-29T17:50:41+00:00,2020-06-27T11:35:35+00:00,2020-06-27T11:35:35+00:00,,d4cd593047912f53a2a694b7d025ad3eb56c0624,clean,8,9,1,1,0,0,eriklindernoren,,
+eriklindernoren/ML-From-Scratch,468987569,81,Update data_operation.py,"Added Manhattan or City Block Distance (L1 distance), L-infinite norm, and p-th norm.",mohtashim-nawaz,35381380,open,False,2020-08-17T18:06:32+00:00,2020-08-17T18:24:08+00:00,,,f5fff64111180427b98ca72914690f7faa3f760f,clean,22,0,1,2,0,0,,,
+eriklindernoren/ML-From-Scratch,487903500,82,Update naive_bayes.py,"This pull request consists of adding the Bernoulli Naive Bayes to the Naive Bayes program which contains only the Gaussian Naive Bayes.
+I will add a combination of Bernoulli Naive Bayes and Gaussian Naive Bayes to be able to process with more precision datasets which contains categorical and continuous features.",yacth,71322097,open,False,2020-09-16T10:54:32+00:00,2021-06-11T02:11:50+00:00,,,d7a87f731b3d7e651c6e0534a8964e269985248e,clean,33,0,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,500111997,83,Update README.md,"produce
+    the user specified target string. This implementation calculates each
+    candidate's fitness based on the alphabetical distance between the candidate  ====
+produce the user-specified target string. This implementation calculates each candidate's fitness based on the alphabetical distance between the candidate and the target. A candidate is selected as a parent with probabilities proportional to the candidate's fitness. Reproduction is implemented as a single-point",ratan325,72519798,open,False,2020-10-08T18:37:03+00:00,2020-10-08T18:37:03+00:00,,,d06590c66474be4dfd382d4c51a84dbe562cba2e,clean,3,8,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,517072095,85,Loglikelihood calculation to prevent overflow.,,KiLJ4EdeN,57220509,open,False,2020-11-07T03:53:11+00:00,2020-11-07T03:53:11+00:00,,,7e08e054d0a6c3c5e5e324f792c0aa6120b34123,clean,13,9,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,543727148,86,"docs: fix simple typo, sampels -> samples","There is a small typo in mlfromscratch/supervised_learning/xgboost.py.
+
+Should read `samples` rather than `sampels`.
+
+
+Semi-automated pull request generated by
+https://github.com/timgates42/meticulous/blob/master/docs/NOTE.md",timgates42,47873678,open,False,2020-12-21T21:14:18+00:00,2020-12-21T21:14:18+00:00,,,6d4ef75fe2838bc70b5a3007efa50b3aa1102f42,clean,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,598631331,91,clean imports,"There where some unused imports, and set `np.cov(X, rowvar=False)` in place of `calculate_covariance_matrix(X)` to make the file more simple.",niektuytel,46424968,open,False,2021-03-23T07:52:00+00:00,2021-03-26T00:38:49+00:00,,,59dcca5fb62a6808dea2e8d2ef8364b206212c55,clean,2,7,1,1,0,2,,,
+eriklindernoren/ML-From-Scratch,626091553,92,Gradient Boosting: Added missing initial prediction value (mean of y) to y_pred,The initial prediction was missing inside the predict method.,TannerGilbert,36239763,open,False,2021-04-29T13:09:27+00:00,2021-04-29T13:09:27+00:00,,,c5bbbb0513c7a1756f2de2b3e81ef1615e8cfbbe,clean,3,2,2,1,0,0,,,
+eriklindernoren/ML-From-Scratch,646146076,93,Update README.md,,twicky99,75584250,open,False,2021-05-17T19:59:52+00:00,2021-05-17T20:03:22+00:00,,,3e2f0109852d83aac4ae1003b500ee8a1f37990a,clean,1,1,1,1,0,1,,,
+eriklindernoren/ML-From-Scratch,679082295,95,Add 4 Normalizing methods for data preprocessing and update Readme.md,"Add 4 Normalizing methods (MinMaxScaler,MaxAbsScale, StandardScaler, StandardScaler with selective mean and variance) for data preprocessing including add 1 newfolder + 5 py files and update Readme.md",m-abdollahi,75454418,open,False,2021-06-28T14:08:13+00:00,2021-06-28T14:08:13+00:00,,,8686dde74bc386a0429d39678ff41b4680287ef7,clean,62,0,6,1,0,0,,,
+eriklindernoren/ML-From-Scratch,919946521,100,(dbscan) Use valid index for neighbors,"The DBSCAN implementation was producing garbage results for me because the `_get_neighbors` function was returning the wrong indices for valid neighbors.
+
+If comparing a sample with higher index than the argument, the returned indices were off by 1.
+
+This change fixes it.
+
+PS thanks for this implementation! It's a better fit for my use-case, where speed is not important but avoiding `scipy` is very convenient.",ezheidtmann,1178915,open,False,2022-04-26T22:47:26+00:00,2022-04-26T22:47:26+00:00,,,4e47a2a1892d031d7300e0cc9d2876f22dd2b84b,clean,3,2,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,965982112,101,XGBOOST Example added,,faiqrasulov,107264725,open,False,2022-06-13T17:07:26+00:00,2022-06-13T17:07:26+00:00,,,38d8587827f27eb63ac05159fcf7ded6668f5760,clean,8130,0,2,1,0,0,,,
+eriklindernoren/ML-From-Scratch,1099774157,103,"Bug fix, use L1-norm instead of L2-norm for L1 regularization","The default norm for `np.linalg.norm` is the Frobenius norm or L2-norm. This needs to change to the L1 norm (Manhattan) to be correct.
+
+PS. This project is somewhat abandoned it seems, but I think it makes sense to have a PR for other people looking for things that might be incorrect. I spent some time trying to figure this one out :P ",klintan,3429513,open,False,2022-10-26T05:13:55+00:00,2022-10-26T05:13:56+00:00,,,f768ee0db2aa3d24d63a41b748d25ede115607f3,clean,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,1557307198,106,Update README.md,"<a href=""https://www.freecounterstat.com"" title=""counter for website""><img src=""https://counter6.optistats.ovh/private/freecounterstat.php?c=dp3ygaf2u5c3d18n5tygynykutw96gtd"" border=""0"" title=""counter for website"" alt=""counter for website""></a>",Sanjay0037,142281197,closed,False,2023-10-15T06:05:06+00:00,2023-10-15T08:47:25+00:00,2023-10-15T07:31:21+00:00,,f32c11f9c6d0552e24459f3ac42d6440bc4b30e2,clean,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,2300935516,112,Changed sklearn to scikit-learn in requirements.txt file.,"Closes #109 
+Simply changed the name of the package from `sklearn` to `scikit-learn` in the `requirements.txt` file.",paolobighignoli,157036732,open,False,2025-01-27T22:13:55+00:00,2025-01-27T22:13:55+00:00,,,4242bb2a11ecd47e875f239d0a443f094f33e52b,clean,1,1,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,2300951636,113,Remove useless (and wrong) import of class SquareLoss.,"Closes #111
+
+This PR fixes the issue described in issue #111, where the class `SquareLoss` was imported but not used, and the import was from an incorrect path, causing errors.
+
+",paolobighignoli,157036732,open,False,2025-01-27T22:26:16+00:00,2025-01-27T22:26:16+00:00,,,aad36ec42e171349d431806cf4b9d8968cd3c46d,clean,0,2,1,1,0,0,,,
+eriklindernoren/ML-From-Scratch,2312453961,114,Linear activation + requirements update,"Added a linear activation function, along with changing the deprecated ""sklearn"" it to ""scikit-learn"".",yazanmashal03,120487049,closed,False,2025-02-03T11:11:06+00:00,2025-02-06T10:14:30+00:00,2025-02-06T10:14:29+00:00,,a90a5ce0a7843d7a1a16c73ee2f109bcbaded909,clean,7,1,2,1,0,0,,,
+eriklindernoren/ML-From-Scratch,2465685043,115,added linear-regression-example to README.md,Added a simple linear regression code example using scikit-learn and matplotlib for visualization in README.md,student-dristi,179995836,open,False,2025-04-17T10:04:24+00:00,2025-04-17T10:04:24+00:00,,,7ba66dabb6e5e7333504d5cf7e5ab51abdd07a7d,clean,33,0,1,1,0,0,,,

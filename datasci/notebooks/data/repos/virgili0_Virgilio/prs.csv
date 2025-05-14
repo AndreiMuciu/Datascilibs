@@ -1,0 +1,215 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+virgili0/Virgilio,261233990,1,fixed wrong command usage,"In the ""install scikit"" section, the pip command was installing tensorflow instead of scikit-learn.",rodrigogiraoserrao,5621605,closed,False,2019-03-14T16:01:14+00:00,2019-03-14T16:17:37+00:00,2019-03-14T16:04:58+00:00,2019-03-14T16:04:58+00:00,468c9703ecf144125ca123fce92d238180a518b5,unknown,1,1,1,1,0,3,,,
+virgili0/Virgilio,261326720,2,Update README.md,Added website resource,3nomis,13481245,closed,False,2019-03-14T20:26:27+00:00,2019-03-15T08:07:05+00:00,2019-03-15T08:06:55+00:00,2019-03-15T08:06:55+00:00,83c6739e0d7ec13c8e5d91ad7d992c4ff238d007,unknown,2,1,1,1,0,1,,,
+virgili0/Virgilio,261755062,3,Fixed minor language issues.,"Fixed some typos, capitalized some ""i"" words, tried to correct possible grammar imperfections while keeping the style of the text.",rodrigogiraoserrao,5621605,closed,False,2019-03-16T07:20:25+00:00,2019-03-16T20:49:33+00:00,2019-03-16T11:45:42+00:00,2019-03-16T11:45:42+00:00,baa88978ef4baeae5767b2de7e5a563474c8c840,unknown,51,49,1,3,0,2,,,
+virgili0/Virgilio,262258437,4,Update README.md,"# Relative links issue 
+## [Machine Learning Career  --  ALREADY OUT (Career%20Paths/Machine%20Learning%20Engineer%20Career%20Path)  
+",khaledbay,13419469,closed,False,2019-03-18T23:11:27+00:00,2019-03-19T08:35:59+00:00,2019-03-19T08:35:59+00:00,2019-03-19T08:35:59+00:00,af3c5ba4fab8423d4b3b53dd66e9df7be1d6ffbc,unknown,1,1,1,1,0,1,,,
+virgili0/Virgilio,262572911,5,Some typos and errors,Hope you don't mind!,mindflayer,527325,closed,False,2019-03-19T18:09:43+00:00,2019-03-19T19:20:01+00:00,2019-03-19T19:20:01+00:00,2019-03-19T19:20:01+00:00,ccbc30d8d6bb772819105ec054465886f223a963,unknown,6,6,1,1,0,1,,,
+virgili0/Virgilio,262607916,6,Add two ML blogs,"I think it's worth adding Towards Data Science and Machine Learning Mastery as learning resources in the blog section. The former is useful for having a broader view of the Data Science field, while the latter one explains complex topics in a clear way (it was really useful for my B.Sc. thesis :) )",hechmik,32925901,closed,False,2019-03-19T19:56:21+00:00,2019-03-20T07:15:45+00:00,2019-03-20T07:15:45+00:00,2019-03-20T07:15:45+00:00,2049667e936bcb17e2ab64d73d29c35e47ec882c,unknown,2,0,1,1,0,1,,,
+virgili0/Virgilio,263329274,7,Latex Section,Added latex section and fixed some typos,damianoazzolini,24901681,closed,False,2019-03-21T17:15:44+00:00,2019-03-21T17:19:04+00:00,2019-03-21T17:19:04+00:00,2019-03-21T17:19:04+00:00,ae2a009417d90d1bc473e22abb60489a6640ec14,unknown,49,23,4,2,0,0,,,
+virgili0/Virgilio,263442641,8,Fix errors in README.md,"- Hedging 
+- Grammatical errors 
+    - Subject verb agreement
+    - Missing article
+- Changed sentence structure for conciseness and clarity
+- Improper capitalizing mid sentence",tdslinden,31021147,closed,False,2019-03-21T23:51:24+00:00,2019-03-22T00:26:42+00:00,2019-03-22T00:26:42+00:00,2019-03-22T00:26:42+00:00,412ed2a25bced1ab75004e8e2a24836372b049bf,unknown,11,11,1,1,0,1,,,
+virgili0/Virgilio,263480303,9,Fix errors in README.md,"- Grammatical errors
+- Typographical errors",Lulzx,22330483,closed,False,2019-03-22T04:11:14+00:00,2019-03-22T08:03:04+00:00,2019-03-22T08:03:04+00:00,2019-03-22T08:03:04+00:00,68aaf792d69f39ae5288f73a8e5ce005224ed2b6,unknown,10,10,1,3,0,0,,,
+virgili0/Virgilio,263532074,10,Fixed Grammatical Errors in README.md,"-Fixed Grammatical Errors in README.md of the root folder and the README.md file in Career Paths/Machine Learning Engineer Career Path.
+-Grammatical errors.
+-Nominalization of verbs and adjectives.
+-Sentences broken down for clarity.
+-Hedgings and redundancies removed.
+-Detailed explanation of revisions provided in document file below.
+[Edits.docx](https://github.com/clone95/Machine-Learning-Study-Path-March-2019/files/2995721/Edits.docx)
+",adnan7400,33067377,closed,False,2019-03-22T09:02:11+00:00,2019-03-22T13:09:41+00:00,2019-03-22T13:09:41+00:00,2019-03-22T13:09:41+00:00,c4d62374f0382e556c86eca6c5cbbd3fa1ebc4db,unknown,20,21,2,4,0,1,,,
+virgili0/Virgilio,263705251,12,Create WolframAlpha tool,,rodrigogiraoserrao,5621605,closed,False,2019-03-22T17:41:09+00:00,2019-03-22T18:40:04+00:00,2019-03-22T18:40:04+00:00,2019-03-22T18:40:04+00:00,1ef483d254d83c2d2bff931c04807e456601311b,unknown,97,10,4,8,0,1,,,
+virgili0/Virgilio,263733258,13,Add info about summations to WolframAlpha.md,,rodrigogiraoserrao,5621605,closed,False,2019-03-22T19:16:30+00:00,2019-03-22T19:46:20+00:00,2019-03-22T19:46:20+00:00,2019-03-22T19:46:20+00:00,9d079bf9bf78792268dd9499d90ce55c0a015dae,unknown,13,2,1,4,0,0,,,
+virgili0/Virgilio,263810658,14,README.md Revision ,Fix grammar errors and make the writing more concise,mshvarts,29274153,closed,False,2019-03-23T05:14:50+00:00,2019-03-23T10:07:29+00:00,2019-03-23T10:07:29+00:00,,05977815574e94294e705ea6b3edada8252592aa,unknown,20,23,1,7,1,2,,,
+virgili0/Virgilio,263842837,15,GeoGebra.md,"# GeoGebra
+[GeoGebra](https://www.geogebra.org) (GG) is a powerful dynamic mathematics application for all levels of education that combines geometry, algebra, spreadsheet, grapher, statistics and infinitesimal calculation into a single easy-to-use software. The GeoGebra community is growing exponentially with millions of users based in many countries. GeoGebra has become the leading provider of software for advanced mathematics, science support, technology, engineering and mathematics and innovations in teaching and learning around the world.
+
+## Installation
+GeoGebra applications can be used offline for [iOS](https://itunes.apple.com/us/app/geogebra-graphing-calculator/id1146717204), [Android](https://play.google.com/store/apps/details?id=org.geogebra.android), [Windows](https://www.geogebra.org/download), Mac, Chromebook and Linux.
+
+We also advise you that all installers are subject to the non-commercial license. If you intend to install GeoGebra on several devices, you may be interested in GeoGebra Mass Installation.
+
+
+## Features
+- Geometry, Algebra and Spreadsheet are connected and fully dynamic
+- Ease of use of the interface with many powerful features
+- Innovative tool for creating interactive learning resources in the form of web pages
+- Open source software freely usable by non-commercial users
+
+In the simplest way, you can make constructions containing points, vectors, segments, lines and conics as well as functions, which can then be modified dynamically with the mouse.
+
+## Mathematical representations of GeoGebra
+GeoGebra includes three different representations of mathematical objects: _a graphical representation, an algebraic representation and a spreadsheet representation_.
+These allow each of the three different representations of mathematical objects to be displayed: graphical (e. g. points, function curves), algebraic (e. g. point coordinates, equations), and in spreadsheet cells. 
+
+## GeoGebra applications
+We will demonstrate how easy it is to use GeoGebra applications by presenting:
+
+- [Scientific Calculator](#scientific-calculator)
+- [Graphing Calculator](#graphing-calculator)
+
+All GeoGebra applications are fully compatible because they are based on the same powerful GeoGebra math engine. Your GeoGebra folders will run in all applications and on all your devices.
+
+### Scientific Calculator
+The GeoGebra scientific calculator is available online via this [site](https://www.geogebra.org/calculator).
+GeoGebra is a scientific calculator that includes:
+- Calculations using fractions
+- Trigonometric functions: `sin`, `cos`, `tan`
+- Statistical functions
+- Exponential functions and logarithms
+- Mode examen pour les tests
+
+The GeoGebra scientific calculator consists of a header bar, an input bar and a scientific calculation keyboard. The scientific calculator consists of three different keyboards. The keyboards can be switched by selecting the one you want to use.
+-  _`123` keyboard_: provide keys for numbers and basic mathematical operations and symbols. Keys for numbers and basic arithmetic, trigonometric and logarithmic operators are available.
+- _`f(x)` keyboard_: provide statistical and other mathematical functions.  The keys are used to select other mathematical and statistical functions.
+- _`ABC` keyboard_: contains letter keys. It includes alphabetical keys 
+
+### Graphing Calculator
+The GeoGebra Graphing calculator is available online via this [site](https://www.geogebra.org/graphing). This graphing calculator gives you the possibility to draw functions and to explore equations.
+ 
+In or to create a new curve, please type your expression in the input field. The software then traces the representative curve of your expression as you type.
+For example, you can draw a simple line by typing this expression `y = 2x + 3`. In order to make the graph more dynamic, you can use parameters instead of constants (as an example, `y = ax + b`).
+Add cursors in the parameters by clicking on the relevant buttons or define them yourself by entering `a=2` and `b=3`. If you assign constant values to parameters such as `a` and `b`, you will automatically be able to adjust these values using cursors. 
+
+Graphing Calculator features include: 
+- Representing functions, polar and parametric curves
+- Solving equations with a powerful mathematical engine
+- Experimenting transformations with cursors
+- Calculating derivatives and integrals
+- Making statistics and regressions with fitting lines
+
+------------
+Created by Khaled Bayoudh. Contacts: [mail](mailto:khaled.isimm@gmail.com) [platform](http://deep-tech.cf)
+",khaledbay,13419469,closed,False,2019-03-23T16:12:34+00:00,2019-03-23T16:19:56+00:00,2019-03-23T16:19:56+00:00,2019-03-23T16:19:56+00:00,193f9be1e9784d23a105c7831ca3ee84eaacee50,unknown,61,0,1,1,0,0,,,
+virgili0/Virgilio,263845878,16,Update README.md,"# Tools
+## - [Latex](Tools/Latex.md) 
+## - [Wolfram Alpha](Tools/WolframAlpha.md)
+## - [GeoGebra](Tools/GeoGebra.md)  ",khaledbay,13419469,closed,False,2019-03-23T16:54:55+00:00,2019-03-23T17:20:08+00:00,2019-03-23T17:20:08+00:00,2019-03-23T17:20:08+00:00,3857c8dde64c150ebd22142e05595f69e3d5e854,unknown,1,1,1,1,0,1,,,
+virgili0/Virgilio,263944243,17,"Update Latex.md, WolframAlpha.md","Expand Latex.md with a couple of very useful tools online.
+Add the derivatives section to WolframAlpha.md.
+Update contact info on both.",rodrigogiraoserrao,5621605,closed,False,2019-03-24T23:02:41+00:00,2019-03-25T06:42:12+00:00,2019-03-25T06:42:12+00:00,2019-03-25T06:42:12+00:00,20cb9bb7fbb393a76cc84bb784ee21b7e600bcd8,unknown,27,3,2,5,0,0,,,
+virgili0/Virgilio,264000092,18,NEW,,Ghost-717,48902503,closed,False,2019-03-25T06:44:32+00:00,2019-03-25T08:25:25+00:00,2019-03-25T08:25:25+00:00,2019-03-25T08:25:25+00:00,87171e05f1163ba8f82b051f20ef12f281b01d0d,unknown,278,674,1,3,0,2,,,
+virgili0/Virgilio,264000483,19,errors fixed,,krishna0777,48902475,closed,False,2019-03-25T06:46:48+00:00,2019-03-25T18:46:53+00:00,2019-03-25T18:46:53+00:00,,66dee79b630d19466ee482278e70c1d26efca7a6,dirty,54,69,1,2,0,2,,,
+virgili0/Virgilio,264000517,20,errors fixed,,ajaysuresh7772,48902425,closed,False,2019-03-25T06:46:59+00:00,2019-03-29T11:14:14+00:00,2019-03-29T11:14:14+00:00,,c5f96bf309851ffbea4afbbbce0d38527525f4a1,dirty,283,674,1,3,0,1,,,on hold
+virgili0/Virgilio,264000575,21,Errors Fixed,,JackM742,48902456,closed,False,2019-03-25T06:47:21+00:00,2019-04-01T07:45:26+00:00,2019-04-01T07:45:26+00:00,,5faa4e851344559d4c499e44c37590eb7b6e1185,dirty,281,674,1,2,0,1,,,on hold
+virgili0/Virgilio,264001097,22,Update README.md,"I've made some grammar corrections. If you wanna make the changes for the main file, please do that.",p0intbl4nc,48901974,closed,False,2019-03-25T06:50:01+00:00,2019-03-29T11:14:04+00:00,2019-03-29T11:14:04+00:00,,b17efc71b66d26502e0c09b721802ecc2b74915d,dirty,56,69,1,1,0,3,,,on hold
+virgili0/Virgilio,264002386,23,TITLE,,Ghost-717,48902503,closed,False,2019-03-25T06:56:22+00:00,2019-04-01T07:45:50+00:00,2019-04-01T07:45:50+00:00,,305ba435b0b17ef2ad4267c28fab0cb1bf79a309,unknown,278,674,1,1,0,1,,,duplicate;on hold
+virgili0/Virgilio,264527008,24,Rename Contributing/README.md to docs/contributing.md,Make the contributing.md file to be compatible with GitHub standards,rodrigogiraoserrao,5621605,closed,False,2019-03-26T13:49:21+00:00,2019-03-26T13:55:53+00:00,2019-03-26T13:55:47+00:00,2019-03-26T13:55:47+00:00,ee6f7aed69ec682a79705026bd6163196e26388d,unknown,0,0,2,2,0,0,,,
+virgili0/Virgilio,264546311,25,grammatical error check,some grammatical error corrections,MareenaKunjachan,48902816,closed,False,2019-03-26T14:33:32+00:00,2019-04-01T07:46:11+00:00,2019-04-01T07:46:11+00:00,,bc2a2906509fc18bb9ca2b217db1cacd82e16755,dirty,4,5,1,1,0,0,,,on hold
+virgili0/Virgilio,264595117,26,"Changed link, edited headings, reworded sentence","Changes:
+
+1. Capitalized the first letters in the headings for more consistency. 
+2. Replaced the link because I thought it was more specific to Virgil. 
+3. Lastly, I slightly reworded a sentence for improved grammar.",mikeshatch,4390485,closed,False,2019-03-26T16:19:40+00:00,2019-03-26T18:05:08+00:00,2019-03-26T16:36:29+00:00,2019-03-26T16:36:29+00:00,1c9bbbd46fabc8afb54dbab5d09470c443c0c5f8,unknown,5,5,1,1,0,2,,,
+virgili0/Virgilio,264872140,27,Impactful presentations,,clone95,42007246,closed,False,2019-03-27T10:51:34+00:00,2019-03-27T12:33:25+00:00,2019-03-27T10:52:18+00:00,2019-03-27T10:52:18+00:00,5fa2ecedd5375afe0d43d10dc64468443d928242,unknown,138,0,3,15,0,0,,,
+virgili0/Virgilio,264916226,28,Update Latex.md,"Add description of _Mathpix Snipping Tool_ in section ""Tools to increase productivity"".",claude9493,10907166,closed,False,2019-03-27T13:03:28+00:00,2019-03-27T13:13:19+00:00,2019-03-27T13:10:19+00:00,2019-03-27T13:10:19+00:00,c5033d8cc3395c62cbce34a0d90bcc39cf5beb59,unknown,1,1,1,1,0,0,,,
+virgili0/Virgilio,265119931,29,Added useful packages," Wrote the ""useful packages"" section for the latex guide",laravignotto,18705347,closed,False,2019-03-27T22:11:55+00:00,2019-03-27T22:49:40+00:00,2019-03-27T22:49:40+00:00,2019-03-27T22:49:40+00:00,304782ecf243d5e1e7a20c678ad7de1a0609c9a7,unknown,30,1,1,4,0,3,,,
+virgili0/Virgilio,265406729,30,Dialogflow,,clone95,42007246,closed,False,2019-03-28T16:20:34+00:00,2019-03-29T14:13:40+00:00,2019-03-28T16:20:43+00:00,2019-03-28T16:20:43+00:00,44809182afd9c1246cc607191d7e06fc7f64f124,unknown,158,0,1,22,0,0,,,
+virgili0/Virgilio,265456342,31,Dialogflow,Désolé une fausse manip,HugoBotebol,48290460,closed,False,2019-03-28T18:35:43+00:00,2019-03-29T14:13:40+00:00,2019-03-28T19:13:57+00:00,,61873572a265e037169742bab16b5380b604bd28,dirty,159,1,2,24,0,1,,,
+virgili0/Virgilio,265518975,32,Add Regex guide to Tools.,Include the `Tools/Regex.ipynb` guide about **regex** and the `Tools/regex-bin/pi.txt` helper file.,rodrigogiraoserrao,5621605,closed,False,2019-03-28T22:01:21+00:00,2019-03-28T22:01:52+00:00,2019-03-28T22:01:46+00:00,2019-03-28T22:01:46+00:00,f258a4d052c39d17ae4db51f295c0c66750cc03d,unknown,1358,0,2,5,0,0,,,
+virgili0/Virgilio,265978776,33,Basic python,,clone95,42007246,closed,False,2019-03-31T00:34:32+00:00,2019-03-31T00:34:41+00:00,2019-03-31T00:34:38+00:00,2019-03-31T00:34:38+00:00,c313134343c46538d830822bd51e5c3a1f8cbb6f,unknown,544,1,3,9,0,0,,,
+virgili0/Virgilio,266437769,34,zh-CN translate,This is the first version of Simple Chinese translate. we need review. May take a day.,jiaxianhua,315101,closed,False,2019-04-01T23:31:57+00:00,2019-04-03T07:02:57+00:00,2019-04-03T07:02:57+00:00,2019-04-03T07:02:57+00:00,393be5a8a993359b6b98d1528a1346ec079fc132,unknown,5333,0,23,4,0,1,,,
+virgili0/Virgilio,266489673,35,Create README(Dawit).md,,Dawitworku,43158407,closed,False,2019-04-02T05:11:04+00:00,2019-04-08T08:16:59+00:00,2019-04-08T08:16:46+00:00,,4876228d49468b6958862aa627a02d6f13ca9ab2,unknown,101,0,1,1,0,3,,,
+virgili0/Virgilio,266994466,36,Translate Regex.ipynb,Translate Regex.ipynb to Simple Chinese.,jiaxianhua,315101,closed,False,2019-04-03T10:58:37+00:00,2019-04-03T13:34:36+00:00,2019-04-03T13:34:35+00:00,2019-04-03T13:34:35+00:00,d7ac1958fa671dc1c37d7b65b397fab5343e9f11,unknown,726,488,2,1,0,0,,,
+virgili0/Virgilio,267132254,37,How about Changing the Link of “官方 python 文档” in PythonBasic.md ,"- In the PythonBasic.md 
+- [**官方 Python 文档**](https://docs.python.org/3.7/) change into [**官方 Python 文档（中文）**](https://docs.python.org/zh-cn/3.7/#)
+- URL of the Python's Official Chinese document: ```https://docs.python.org/zh-cn/3.7/#```
+
+",S-HuaBomb,39048551,closed,False,2019-04-03T16:56:08+00:00,2019-04-10T06:56:54+00:00,2019-04-10T06:56:54+00:00,2019-04-10T06:56:54+00:00,3a5d3fe4411bce97d7529bb8fafeb06bf04bb762,unknown,2,2,1,1,0,0,,,
+virgili0/Virgilio,269034857,39,Translate Python Data Science,"1. Translate Python Data Science
+1. fix map png",jiaxianhua,315101,closed,False,2019-04-10T07:12:49+00:00,2019-04-10T08:09:04+00:00,2019-04-10T08:09:04+00:00,2019-04-10T08:09:04+00:00,e5b01fd17daab857d05904a82e4dda59c7b68293,unknown,3375,3391,8,2,0,0,,,
+virgili0/Virgilio,269070899,40,Create research.md,A guide that contains up-to-date reviews of state-of-the-art research papers.,kjaisingh,31686667,closed,False,2019-04-10T09:06:16+00:00,2019-04-10T10:37:38+00:00,2019-04-10T10:37:29+00:00,2019-04-10T10:37:29+00:00,cf0a7cd97ce280040193b3974beb12c4ff942766,unknown,110,0,1,1,0,1,,,
+virgili0/Virgilio,269220552,41,Translate Papers.md to zh-CN,"1. Translate Papers.md to zh-CN
+1. update zh-CN map.png",jiaxianhua,315101,closed,False,2019-04-10T15:41:18+00:00,2019-04-10T16:28:38+00:00,2019-04-10T16:28:38+00:00,2019-04-10T16:28:38+00:00,45d21996db0ed955b89694a88d3ef24af1fd6b5e,unknown,112,2,4,3,0,0,,,
+virgili0/Virgilio,269391714,42,Fixed the mistakes in the translation of WA.,Checked the translation file of the WA.md and fixed some mistakes to improve the reading experience in Chinese.,taotianli,30645445,closed,False,2019-04-11T01:35:37+00:00,2019-04-11T06:16:38+00:00,2019-04-11T06:16:38+00:00,2019-04-11T06:16:38+00:00,bdbfbf659815ef5ad1cd55c3202aaed5388fdfd7,unknown,32,15,1,3,0,1,,,
+virgili0/Virgilio,269396284,43,Modified some of the contents of the Chinese translation,"It seems like this page was translated by Google, I modified some content to make the article more fluent.",jiaoqiyuan,13357933,closed,False,2019-04-11T02:07:17+00:00,2019-04-11T06:17:12+00:00,2019-04-11T06:17:12+00:00,2019-04-11T06:17:12+00:00,1f4a5810112aa42759d8ebf9100ad1ff3d4f1ea8,unknown,10,10,1,1,0,4,,,
+virgili0/Virgilio,269849242,44, Modified the README and PythonBasic in Chinese version.,,taotianli,30645445,closed,False,2019-04-12T02:16:14+00:00,2019-04-12T08:51:32+00:00,2019-04-12T08:51:32+00:00,2019-04-12T08:51:32+00:00,df45ab87e2c7a43d56a4552e4f82bbde7956927c,unknown,39,34,2,3,0,2,,,
+virgili0/Virgilio,269977262,45,MLDemos,Introduce MLDemos and Translate to Chinese.,jiaxianhua,315101,closed,False,2019-04-12T11:36:26+00:00,2019-04-12T13:00:35+00:00,2019-04-12T13:00:34+00:00,2019-04-12T13:00:34+00:00,630dbcca3d799bc83a1c93199ee11cd6d43c0c36,unknown,535,1,8,2,0,0,,,
+virgili0/Virgilio,270189267,46, Checked and modefied the ML README in Chinese version.,,taotianli,30645445,closed,False,2019-04-13T00:48:37+00:00,2019-04-13T08:19:28+00:00,2019-04-13T08:19:28+00:00,2019-04-13T08:19:28+00:00,055723840412b10e6d33ebbf2db42780f22eed29,unknown,6,6,1,4,0,0,,,
+virgili0/Virgilio,272198944,47,fixed typo in readme,fixed typp in readme file,wuodland,4012431,closed,False,2019-04-21T07:21:20+00:00,2019-04-21T07:54:01+00:00,2019-04-21T07:54:01+00:00,2019-04-21T07:54:01+00:00,15a2a3bc8ce23026c5733d50b4f780b82a7874ef,unknown,1,1,1,1,0,1,,,
+virgili0/Virgilio,272556797,48,Merge pull request #1 from clone95/master,update,jiaoqiyuan,13357933,closed,False,2019-04-23T01:50:33+00:00,2019-04-23T01:50:47+00:00,2019-04-23T01:50:47+00:00,,9979d1ece7c90cc72520beee3f58fa42066c2983,unknown,0,0,0,1,0,0,,,
+virgili0/Virgilio,273833307,49,added deep learning in cloud,,zszazi,41579863,closed,False,2019-04-26T09:50:58+00:00,2019-04-26T09:51:34+00:00,2019-04-26T09:51:34+00:00,2019-04-26T09:51:33+00:00,9415ff90588ba60236e555985a0a2166236692c8,unknown,97,0,1,1,0,0,,,
+virgili0/Virgilio,273836453,50,Update README.md,removed emoticons and added my man,zszazi,41579863,closed,False,2019-04-26T10:00:14+00:00,2019-04-26T10:05:05+00:00,2019-04-26T10:05:05+00:00,,bb260f8fb61aa192690967f702d808ba04cb14c4,dirty,7,4,1,1,0,0,,,
+virgili0/Virgilio,276016759,54,Create R,This is a basic introduction to R Programming,KARAKI93,29580929,closed,False,2019-05-05T18:38:23+00:00,2019-05-05T18:39:33+00:00,2019-05-05T18:39:32+00:00,2019-05-05T18:39:32+00:00,ecc7f3e0002b2c8ad87ef130b374b7c6194110cf,unknown,109,0,1,1,0,0,,,
+virgili0/Virgilio,276438385,55,translate MLSystems.md to Chinese,"1. delete dump MLSystems.md in the root repo.
+1. update README.md.
+1. translate MLSystems.md to Chinese",jiaxianhua,315101,closed,False,2019-05-07T04:52:21+00:00,2019-05-07T05:32:43+00:00,2019-05-07T05:32:43+00:00,2019-05-07T05:32:43+00:00,cb9588560ba41a9e5f218248519c13df62e931a0,unknown,199,121,17,5,0,0,,,
+virgili0/Virgilio,276542980,56,Translate DataVisualization.md to Chinese,"1. Translate DataVisualization.md to Chinese
+1. update map.png
+1. add Tableau to zh-CN",jiaxianhua,315101,closed,False,2019-05-07T10:40:22+00:00,2019-05-07T10:42:43+00:00,2019-05-07T10:42:42+00:00,2019-05-07T10:42:42+00:00,5f933f098d5b57a9acd64f0113fe8821a049c279,unknown,327,3,6,5,0,0,,,
+virgili0/Virgilio,276915292,57, translate ANN.md to Chinese.,"1. translate ANN.md to Chinese.
+1. split long sentences into multiple lines.  Long sentences are difficult to read.",jiaxianhua,315101,closed,False,2019-05-08T09:10:41+00:00,2019-05-08T09:19:59+00:00,2019-05-08T09:19:59+00:00,2019-05-08T09:19:59+00:00,dce33736a38a7c3921da0a6d77322407c917c2cc,unknown,175,80,20,2,0,0,,,
+virgili0/Virgilio,280108471,58,translate 2 Low Level Topics to Chinese,"1. Topics/Demystification.md
+1. Topics/Deep learning in cloud/README.md",jiaxianhua,315101,closed,False,2019-05-18T15:34:23+00:00,2019-05-18T15:36:46+00:00,2019-05-18T15:36:46+00:00,2019-05-18T15:36:46+00:00,f87933b5ab75466880cd4fcbcc8989598824ab27,unknown,1958,2,6,4,0,0,,,
+virgili0/Virgilio,289868424,60,Rojer gs maths matrices,,rodrigogiraoserrao,5621605,closed,False,2019-06-19T20:33:40+00:00,2019-06-19T20:34:22+00:00,2019-06-19T20:34:15+00:00,2019-06-19T20:34:14+00:00,3380c186fbbfd062c99b179bc6f4f352b50afefb,unknown,3274,0,4,18,0,0,,,
+virgili0/Virgilio,290315962,61,What Do I need,,clone95,42007246,closed,False,2019-06-20T17:55:31+00:00,2019-06-26T12:14:26+00:00,2019-06-20T17:55:45+00:00,2019-06-20T17:55:45+00:00,d20fdf19aa4af3c21dd86d1deb5ebb4fced5be22,unknown,188,0,3,37,0,0,,,
+virgili0/Virgilio,293135399,62,Improving the texts across the different markdown files,"As promised long ago I finally got the chance to improve some of the text and add some of my own thoughts to the data section.
+
+Happy to discuss or amend the changes further.",neomatrix369,1570917,closed,False,2019-06-30T22:00:30+00:00,2019-12-18T16:01:07+00:00,2019-06-30T22:12:20+00:00,2019-06-30T22:12:20+00:00,1419a68bb5de782bc79973de3fcf7ed7901629e1,unknown,12,6,3,1,1,0,clone95,,enhancement
+virgili0/Virgilio,294602428,63,Use cases,,clone95,42007246,closed,False,2019-07-04T14:19:48+00:00,2019-07-04T14:20:09+00:00,2019-07-04T14:19:55+00:00,2019-07-04T14:19:55+00:00,4df9d8d1628b1615a49f3bb2ec6bc6c9dae0e37c,unknown,144,0,1,8,0,0,,,
+virgili0/Virgilio,297615989,64,Teaching,,clone95,42007246,closed,False,2019-07-15T13:17:51+00:00,2019-07-15T13:18:11+00:00,2019-07-15T13:17:58+00:00,2019-07-15T13:17:58+00:00,ebd808e150f09de89e9da81d6dce01718ce97d04,unknown,195,0,2,28,0,0,,,
+virgili0/Virgilio,306208561,65,Create ML_mindset.md,can you see it?,clone95,42007246,closed,False,2019-08-10T12:22:27+00:00,2019-08-15T13:59:23+00:00,2019-08-15T13:59:23+00:00,2019-08-15T13:59:23+00:00,65acad5009131045234cb628212dc58f40be902c,unknown,111,0,1,12,15,2,,,
+virgili0/Virgilio,308381755,66,Ds process,"Finished the guide which outlines the following Purgatorio sections and gives a big picture of the Data Science lifecycle process.
+
+A review will be appreciated 💃 ",clone95,42007246,closed,False,2019-08-18T17:50:23+00:00,2019-10-18T13:45:27+00:00,2019-08-20T12:13:44+00:00,2019-08-20T12:13:43+00:00,9a8bad440a3aa56c084b44f97fa98e1f659f5c54,unknown,162,0,1,10,12,1,,,
+virgili0/Virgilio,312376435,67,Types of problem,guide on framing the problem. ,clone95,42007246,closed,False,2019-08-29T15:31:32+00:00,2019-09-01T12:43:06+00:00,2019-09-01T12:35:29+00:00,2019-09-01T12:35:29+00:00,263fbba0330b528bde7441e2887ed10c5151ec38,unknown,153,0,1,8,19,1,,,
+virgili0/Virgilio,319151006,69,Update frame-the-problem.md,,clone95,42007246,closed,False,2019-09-19T08:17:13+00:00,2019-10-18T13:44:52+00:00,2019-10-18T13:43:14+00:00,2019-10-18T13:43:13+00:00,97b256abcb7c22357d433c7e54954ec9feec17e8,unknown,84,27,1,10,41,3,,,enhancement;Hacktoberfest
+virgili0/Virgilio,328177546,70,Clone95 patch 2,,clone95,42007246,closed,False,2019-10-15T09:47:30+00:00,2019-10-18T13:44:53+00:00,2019-10-15T09:47:36+00:00,2019-10-15T09:47:36+00:00,9c671bb76717328452c6c24030a3469ecc40908a,unknown,140,16,2,4,0,0,,,
+virgili0/Virgilio,332564485,71,Starting a data project,Ready to review,clone95,42007246,closed,False,2019-10-25T15:25:22+00:00,2019-11-18T13:50:17+00:00,2019-11-11T16:28:18+00:00,2019-11-11T16:28:17+00:00,129250e0d42ea3c789d5d4e973722208dd41ff9b,unknown,269,1,3,31,55,3,khaledbay,,
+virgili0/Virgilio,336544634,72,Math,"Asking for review of  the guide: 
+Purgatorio - Fundamentals - Math Fundamentals
+
+:-) ",clone95,42007246,closed,False,2019-11-05T00:37:06+00:00,2019-11-18T13:50:19+00:00,2019-11-18T11:35:49+00:00,2019-11-18T11:35:49+00:00,7a2395fe7e4607928945d45031eab5a81d340369,unknown,173,0,1,20,42,1,,,
+virgili0/Virgilio,338101815,73,Stats,Stats fundamentals - Ready for Review :-),clone95,42007246,closed,False,2019-11-07T15:37:08+00:00,2019-11-18T14:17:34+00:00,2019-11-18T14:04:38+00:00,2019-11-18T14:04:38+00:00,f8dde0246a4dbac8951c56b941ef602168786b4f,unknown,167,0,1,8,28,0,khaledbay,,
+virgili0/Virgilio,343980662,74,Python,"Hi guys, asking for a review of this article on ""Python Fundamentals"" :-)",clone95,42007246,closed,False,2019-11-21T11:26:27+00:00,2019-12-03T16:05:03+00:00,2019-12-03T16:02:42+00:00,2019-12-03T16:02:42+00:00,f2a78eb9a4b3b9778a411238aec1ea6a04a5c828,unknown,251,0,1,14,46,2,rodrigogiraoserrao;entropizza,,
+virgili0/Virgilio,346774952,75,Jupyter guide complete,,clone95,42007246,closed,False,2019-11-28T16:28:53+00:00,2019-12-18T16:01:32+00:00,2019-12-03T16:21:14+00:00,2019-12-03T16:21:14+00:00,3d1fcbdb05775d13256f4b578a83dcf2724b9201,unknown,168,0,2,11,20,2,,,
+virgili0/Virgilio,352954808,76,Revamp the landing page,This is ssooo much cleaner c:,avivace,14352721,closed,False,2019-12-13T16:14:45+00:00,2019-12-13T16:18:15+00:00,2019-12-13T16:18:15+00:00,2019-12-13T16:18:15+00:00,11996a55fcc79790bb84a555fa7754ce3fa50c99,unknown,129,100,1,3,0,0,clone95,,
+virgili0/Virgilio,353083626,77,ML use cases: fix name path,"Hi, the path to ML use case was .../use_case.md, I just changed it to use-case.md ",EthanITA,34515138,closed,False,2019-12-13T21:38:39+00:00,2019-12-14T08:43:44+00:00,2019-12-14T08:43:44+00:00,2019-12-14T08:43:44+00:00,3318e6f71605fcf796aa8ba48f5e3d8901670950,unknown,3,3,1,1,0,1,,,
+virgili0/Virgilio,354029047,78,Clean up articles and add a YAML front matter for metadata,,avivace,14352721,closed,False,2019-12-17T10:29:12+00:00,2019-12-17T10:29:25+00:00,2019-12-17T10:29:25+00:00,2019-12-17T10:29:25+00:00,6ed9f1f5da1433588906e8b061b2a51b6772c925,unknown,41,10,6,12,0,0,,,
+virgili0/Virgilio,354706964,79,Revamp landing,fixed link paths,clone95,42007246,closed,False,2019-12-18T16:38:27+00:00,2019-12-18T16:40:05+00:00,2019-12-18T16:40:05+00:00,2019-12-18T16:40:05+00:00,669034c406540ad79c9ad534aacfcd4cf32d555d,unknown,44,24,1,6,0,0,,,
+virgili0/Virgilio,354731606,80,Yaml fm - part 2,,avivace,14352721,closed,False,2019-12-18T17:37:02+00:00,2019-12-18T17:37:30+00:00,2019-12-18T17:37:13+00:00,2019-12-18T17:37:13+00:00,e28bb86511ab3ecb0aea3fe01c3d9b1a3fc06251,unknown,49,11,7,13,0,0,,,
+virgili0/Virgilio,354858598,81,New project structure,,avivace,14352721,closed,False,2019-12-18T23:01:06+00:00,2019-12-18T23:02:59+00:00,2019-12-18T23:02:59+00:00,2019-12-18T23:02:58+00:00,0fe00dd251c7a5d42ddcdf4710fc1e9fd16457f2,unknown,22,111,4,5,0,0,,,
+virgili0/Virgilio,355794567,82,Revamp landing,,clone95,42007246,closed,False,2019-12-20T16:12:27+00:00,2019-12-20T16:14:33+00:00,2019-12-20T16:12:33+00:00,2019-12-20T16:12:33+00:00,3cd00cb4458dfb61fcf5447e21de76eea2911105,unknown,276,798,8,8,0,0,,,
+virgili0/Virgilio,356689900,83,Landing enhancements,,clone95,42007246,closed,False,2019-12-24T19:10:39+00:00,2019-12-24T19:11:14+00:00,2019-12-24T19:11:14+00:00,,019ef84dd70b4c05614f4a0659983129be510f04,unknown,445,370,31,21,0,0,,,
+virgili0/Virgilio,356690141,84,Landing enhancements,,clone95,42007246,closed,False,2019-12-24T19:13:06+00:00,2020-04-05T12:50:26+00:00,2019-12-24T19:13:14+00:00,2019-12-24T19:13:14+00:00,402f8ebb3f687a3a39fef1dbb119ace97b5ecb76,unknown,446,370,31,22,0,0,,,
+virgili0/Virgilio,358501656,85,Deep learning,"to review:
+machine learning guide
+deep learning guide",clone95,42007246,closed,False,2020-01-01T16:39:29+00:00,2020-01-10T11:51:14+00:00,2020-01-09T22:04:15+00:00,,da3a47fda39dfe596bc29aa1eb236fe3a411647c,dirty,536,27,5,10,41,2,avivace,,
+virgili0/Virgilio,358740086,86,fix typos,,PulkitMishra,31157487,closed,False,2020-01-02T17:51:17+00:00,2020-01-03T09:10:46+00:00,2020-01-03T09:10:46+00:00,2020-01-03T09:10:46+00:00,94204898c5da1a2ba63f52a7a085ddd94e57d7f2,unknown,1,1,1,1,0,1,,,
+virgili0/Virgilio,392018133,89,Tools and libraries,,clone95,42007246,closed,False,2020-03-22T14:48:38+00:00,2020-04-17T18:09:19+00:00,2020-04-17T18:06:12+00:00,2020-04-17T18:06:12+00:00,6e5d5c0478d407356552e5ca911fdd93e777ccb9,unknown,384,2,2,12,70,3,avivace,,
+virgili0/Virgilio,396952627,90,Delete map.PNG,,clone95,42007246,closed,False,2020-04-01T12:06:25+00:00,2020-04-01T12:20:21+00:00,2020-04-01T12:20:21+00:00,2020-04-01T12:20:21+00:00,3c536ce2350a423131addbc6543d961fdf1029c8,unknown,30,0,7,3,0,1,,,
+virgili0/Virgilio,399062966,91,enhancements done,,clone95,42007246,closed,False,2020-04-05T12:36:52+00:00,2020-04-05T12:50:23+00:00,2020-04-05T12:36:59+00:00,2020-04-05T12:36:59+00:00,e6d05f0dee06e698d0b821e0828aa48324d947fd,unknown,7,12,4,1,0,0,,,
+virgili0/Virgilio,402064840,92,Evaluation and finetuning,,clone95,42007246,closed,False,2020-04-10T20:48:57+00:00,2020-04-12T18:46:25+00:00,2020-04-12T18:28:21+00:00,2020-04-12T18:28:21+00:00,7e128822ea54c654231235dfa39c24d583cc3e0d,unknown,176,2,2,6,18,1,avivace,,
+virgili0/Virgilio,412597801,93,Serving models,This is the finished draft for the deployment guide 👍 ,clone95,42007246,closed,False,2020-05-03T12:49:18+00:00,2020-05-03T22:41:58+00:00,2020-05-03T20:43:50+00:00,,e4cac9b3edfb6ad9c5292b71a9a60a4f57d370a8,unknown,157,2,1,5,0,1,neomatrix369;avivace,,
+virgili0/Virgilio,412663811,94,Serving models (2),"Same as #93 , but we need to merge on the `dev` branch, as master is now used for the HTML builds of the website.",avivace,14352721,closed,False,2020-05-03T20:43:29+00:00,2020-05-03T22:41:57+00:00,2020-05-03T22:41:38+00:00,,689aeea689c158fe2ee07a9aab08c94da4445da9,unknown,157,2,1,5,0,0,neomatrix369,,
+virgili0/Virgilio,412678146,95,Basic Vuepress configuration. Start the folder structure migration,,avivace,14352721,closed,False,2020-05-03T22:37:55+00:00,2020-05-03T22:38:21+00:00,2020-05-03T22:38:04+00:00,2020-05-03T22:38:04+00:00,08e4476bcdf95997ca52ef6267171de5cef5c0a4,unknown,2917,14802,112,8,0,0,,,
+virgili0/Virgilio,412846857,96,fixed structure,,clone95,42007246,closed,False,2020-05-04T09:48:37+00:00,2020-05-04T09:49:20+00:00,2020-05-04T09:49:20+00:00,,f9353d3819f23c4fe3371027187dfdfe02ba01a7,unknown,25,175,31,1,0,0,avivace,,
+virgili0/Virgilio,412848335,97,Structure fix,,clone95,42007246,closed,False,2020-05-04T09:51:25+00:00,2020-05-04T20:57:28+00:00,2020-05-04T10:30:18+00:00,2020-05-04T10:30:18+00:00,1cf15c3fad6f0344ce00da2dd83680c11eddd173,unknown,28,178,34,2,0,0,avivace,,
+virgili0/Virgilio,413773602,100,fixed grammatical mistakes and headlines formatting,,clone95,42007246,closed,False,2020-05-05T21:57:14+00:00,2020-05-09T12:09:23+00:00,2020-05-05T21:57:20+00:00,2020-05-05T21:57:20+00:00,1dff014f8cc7f43bcc49c51f0c3c3bd97d9c3c8d,unknown,117,126,6,1,0,0,,,
+virgili0/Virgilio,415605961,102,Paradiso cleaning,,clone95,42007246,closed,False,2020-05-09T17:30:45+00:00,2020-05-09T22:08:42+00:00,2020-05-09T17:49:52+00:00,2020-05-09T17:49:52+00:00,d6f951fd51e5188fd9f8aac3891deb87a8a19721,unknown,221,143,8,3,0,0,,,
+virgili0/Virgilio,415711034,103,fixed inferno notebooks titles,,clone95,42007246,closed,False,2020-05-10T12:08:02+00:00,2020-05-18T16:42:45+00:00,2020-05-10T12:22:27+00:00,2020-05-10T12:22:27+00:00,c115820640c2c0132604b1b4a279498e16ac5fc1,unknown,113,114,5,1,0,0,,,
+virgili0/Virgilio,425053772,104,Monitoring usage and behavior,,clone95,42007246,closed,False,2020-05-29T11:40:50+00:00,2020-07-19T12:45:53+00:00,2020-06-08T15:38:41+00:00,2020-06-08T15:38:41+00:00,e884e42edd99fc38ee57d89b787c9d462af76258,unknown,184,16,5,5,22,2,avivace,,
+virgili0/Virgilio,436538067,108,Automation and reproducibility,Here we are! Let's review this together :-) ,clone95,42007246,closed,False,2020-06-18T15:05:09+00:00,2020-07-19T12:45:57+00:00,2020-07-14T13:06:44+00:00,2020-07-14T13:06:44+00:00,068212bec86f687725d04d811af9eb786d33b099,unknown,246,2,2,6,31,0,,,
+virgili0/Virgilio,440531480,109,Merge pull request #1 from virgili0/master,To merge in changes from Vir,Nichevo,11561549,closed,False,2020-06-26T11:25:48+00:00,2020-06-26T11:26:05+00:00,2020-06-26T11:26:05+00:00,,d3c9ae222a7e6c52f16cb19e251a6217a53a05aa,unknown,0,0,0,1,0,0,,,
+virgili0/Virgilio,452540532,112,A messy real world,"Here we go, ready to review",clone95,42007246,closed,False,2020-07-19T12:35:45+00:00,2020-08-14T16:20:41+00:00,2020-07-28T15:33:02+00:00,2020-07-28T15:33:02+00:00,afba4b8ee9ed8b30f444d8ea5b78db9ce2919b13,unknown,192,2,4,5,17,0,avivace,,
+virgili0/Virgilio,452558237,113,Data collection: a draft guide now completed for review,"Data collection: a draft guide all sub-sections completed about data collection and where to look and start looking. What to do, etc...?
+
+- [x] complete the new sub-sections that have been marked accordingly
+- [x] review existing section once again to see all blends in well
+
+IGNORE: please ignore `data-collection-text-to-diagram-01.txt` this file is needed to generate the diagram I just created with this guide - we can use a new/better one in the future when we have them, but for now, I think this should help illustrate our points. So the file should stay with this PR.
+
+_The structure of this guide is based on the [Data Preparation guide](https://github.com/virgili0/Virgilio/blob/dev/content/purgatorio/collect-and-prepare-data/data-preparation.md). Although it's content will be Data Collection related only. Some resources might overlap as there is a fine line between these topics._",neomatrix369,1570917,closed,False,2020-07-19T13:14:39+00:00,2020-10-03T12:52:31+00:00,2020-07-28T15:31:17+00:00,2020-07-28T15:31:17+00:00,62f820e4cf60fe2c5c48824b2d70fd1f935a5850,unknown,229,0,3,10,41,3,avivace,,enhancement;data
+virgili0/Virgilio,453507566,114,Transfer learning,"Finished guide on Transfer Learning. The review work here is little I think, being it mostly links to resources more than a full-fledged guide. ",clone95,42007246,closed,False,2020-07-20T14:29:04+00:00,2020-08-14T16:20:42+00:00,2020-07-30T18:57:13+00:00,2020-07-30T18:57:13+00:00,d58b04d10d8dcd8cc887eed6074bc50e7daa7678,unknown,359,4,6,4,33,1,,,
+virgili0/Virgilio,468066746,115,Best practices,,clone95,42007246,closed,False,2020-08-14T16:10:23+00:00,2020-08-14T16:20:42+00:00,2020-08-14T16:17:33+00:00,2020-08-14T16:17:33+00:00,ce191e0664e67d6dff8f6938a7b1c61a48650634,unknown,117,6,2,3,0,0,,,
+virgili0/Virgilio,469183985,116,Updated existing and added new papers,,kjaisingh,31686667,closed,False,2020-08-18T03:56:12+00:00,2020-08-18T11:36:54+00:00,2020-08-18T11:36:54+00:00,2020-08-18T11:36:54+00:00,6125eac32d92669711170df0aa244ffc6e011180,unknown,139,41,1,1,0,0,,,
+virgili0/Virgilio,490930994,124,Overhaul,"Pushing into dev:
+- grammar fixes
+- style fixed 
+- added resources ",clone95,42007246,closed,False,2020-09-22T13:12:59+00:00,2020-09-22T13:24:40+00:00,2020-09-22T13:24:40+00:00,,e3125b4d41b479882dfe082c68aecbe68facbaa8,unknown,112,71,7,2,0,0,,,

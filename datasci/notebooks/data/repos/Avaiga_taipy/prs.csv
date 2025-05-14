@@ -1,0 +1,353 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+Avaiga/taipy,871792723,12,Add test on build,,florian-vuillemot,16242135,closed,False,2022-03-04T15:56:16+00:00,2022-03-04T16:49:51+00:00,2022-03-04T16:49:48+00:00,2022-03-04T16:49:48+00:00,7cd6b0dac6b92cff932596224583f19cec0a0daa,unknown,35,8,3,7,0,0,,,📈 Improvement;🖧 Devops
+Avaiga/taipy,875169346,13,Add taipy-rest package,"#8 
+
+Add taipy-rest as a package to install with Taipy.
+
+API on taipy-rest are not well defined. We should improve it before exposing them in `taipy.__init__.py` (https://app.zenhub.com/workspaces/taipy-613ef328affde6000ff77fb3/issues/avaiga/taipy-rest/19)",florian-vuillemot,16242135,closed,False,2022-03-09T10:54:29+00:00,2022-03-11T09:01:32+00:00,2022-03-11T09:01:05+00:00,2022-03-11T09:01:05+00:00,7f0b872e8928ad6670a445b3a486f0f254238db5,unknown,28,5,4,23,1,0,FabienLelaquais,,🖧 Devops
+Avaiga/taipy,889175428,16,Run GUI from REST server,,florian-vuillemot,16242135,closed,False,2022-03-25T07:18:51+00:00,2022-04-04T07:40:23+00:00,2022-04-04T07:40:20+00:00,2022-04-04T07:40:20+00:00,b1b1b1837c31ce54ef7dc8fe95718b52d1bb9a22,unknown,44,5,3,12,12,3,,,🖧 Devops
+Avaiga/taipy,900010985,21,Feature/#136 add license header,,joaoandre-avaiga,88906996,closed,False,2022-04-05T10:07:44+00:00,2022-04-06T09:51:29+00:00,2022-04-06T09:42:45+00:00,2022-04-06T09:42:45+00:00,f31dbae1221059467708a7fe3a3181dfb1cc9edc,unknown,74,0,4,3,0,0,,,
+Avaiga/taipy,900362984,22,make init file common on all repos,,jrobinAV,88036007,closed,False,2022-04-05T15:14:05+00:00,2022-04-06T09:34:25+00:00,2022-04-06T09:12:52+00:00,2022-04-06T09:12:51+00:00,4af3d3f88b985ded5eb42a96ee7bb7c4dc976bd0,unknown,25,5,2,2,2,0,dinhlongviolin1;khaitruong922;joaoandre-avaiga,,
+Avaiga/taipy,901356490,23,README.md,"- [x] README.md
+- [x] INSTALLATION.md
+- [x] CONTRIBUTING.md
+- [x] CODE_OF_CONDUCT.md",jrobinAV,88036007,closed,False,2022-04-06T11:00:53+00:00,2022-04-07T11:21:01+00:00,2022-04-07T11:20:58+00:00,2022-04-07T11:20:58+00:00,810ea8ac27f62c089c3b2b6055bb04141444cc25,unknown,524,0,5,10,0,0,FabienLelaquais;florian-vuillemot,,
+Avaiga/taipy,902619931,24,Feature - PyPI publish GitHub Actions,,khaitruong922,56820749,closed,False,2022-04-07T11:21:26+00:00,2023-12-04T06:44:47+00:00,2022-04-07T11:50:28+00:00,2022-04-07T11:50:27+00:00,e7be9c7cd17393bf45a55780808933ffe0251d29,unknown,39,0,1,1,0,0,florian-vuillemot,,🖧 Devops
+Avaiga/taipy,902749946,25,Update setup.py,,florian-vuillemot,16242135,closed,False,2022-04-07T13:28:14+00:00,2022-04-07T13:48:44+00:00,2022-04-07T13:48:41+00:00,2022-04-07T13:48:41+00:00,908d53dfc10739c39d2f1636aa555b67a4a8cd6a,unknown,9,11,2,3,0,0,,,
+Avaiga/taipy,915259010,37,Add the new release process,,florian-vuillemot,16242135,closed,False,2022-04-21T11:51:45+00:00,2022-04-21T13:50:58+00:00,2022-04-21T13:50:55+00:00,2022-04-21T13:50:54+00:00,cb808586d474dbbb03fc25c0dae43da0e31e767e,unknown,159,17,3,3,0,0,dinhlongviolin1,,🖧 Devops
+Avaiga/taipy,923888690,39,Create codeql-analysis.yml,,florian-vuillemot,16242135,closed,False,2022-04-29T14:15:20+00:00,2022-05-05T06:36:57+00:00,2022-05-05T06:36:54+00:00,2022-05-05T06:36:54+00:00,53b6b1f10110e251168ec2b17bb1931cdc88b117,unknown,38,0,1,1,0,0,jrobinAV,,🖧 Devops
+Avaiga/taipy,936529014,42,upd: black version on pre-commit,,joaoandre-avaiga,88906996,closed,False,2022-05-14T12:53:05+00:00,2022-05-16T00:06:35+00:00,2022-05-16T00:06:31+00:00,2022-05-16T00:06:31+00:00,e024a73210de8f2fc98530a01cf7245d98c7ab78,unknown,2,2,1,1,0,0,florian-vuillemot,,
+Avaiga/taipy,951619184,43,Update setup.py,,jrobinAV,88036007,closed,False,2022-05-31T07:47:37+00:00,2022-05-31T08:17:11+00:00,2022-05-31T08:17:08+00:00,2022-05-31T08:17:08+00:00,005be99148931f729ef2ae019c9258894f23f30f,unknown,3,3,1,2,0,0,,,
+Avaiga/taipy,963236693,50,Load taipy enterprise if present,,florian-vuillemot,16242135,closed,False,2022-06-09T19:01:03+00:00,2022-06-10T08:31:08+00:00,2022-06-10T08:31:05+00:00,2022-06-10T08:31:05+00:00,ed020e24841f056b3e12853c102bc836be921cf4,unknown,5,0,1,2,0,0,,,🖧 Devops
+Avaiga/taipy,970475717,51,change release GitHub action to add a title to the release.,,jrobinAV,88036007,closed,False,2022-06-17T10:36:07+00:00,2022-06-21T07:53:51+00:00,2022-06-21T07:53:49+00:00,2022-06-21T07:53:49+00:00,a39196873e36484f99efb100f6f7da2396cb5977,unknown,1,1,1,1,0,0,florian-vuillemot;FabienLelaquais,,
+Avaiga/taipy,975136581,55,Expose Flask app to webserver,#54 ,florian-vuillemot,16242135,closed,False,2022-06-22T13:51:17+00:00,2022-11-28T17:04:37+00:00,2022-06-23T09:17:41+00:00,2022-06-23T09:17:40+00:00,2999ec3b0db5456c9eb2d0bdc74418af557b960b,unknown,4,4,1,1,0,2,FabienLelaquais,,🟥 Priority: Critical;💥Malfunction
+Avaiga/taipy,977065479,56,Fix/flask,,jrobinAV,88036007,closed,False,2022-06-23T12:11:17+00:00,2022-06-23T12:44:26+00:00,2022-06-23T12:39:05+00:00,2022-06-23T12:39:05+00:00,8c5dbf78e5b43ba4b36343d73c8953296e42c378,unknown,6,6,3,3,0,0,florian-vuillemot,,
+Avaiga/taipy,1004333553,62,update init.py,,jrobinAV,88036007,closed,False,2022-07-21T15:06:46+00:00,2022-07-27T19:54:01+00:00,2022-07-27T19:53:57+00:00,2022-07-27T19:53:57+00:00,2a4d636a6bc659c48450fa0d92b8612723d8ed1b,unknown,17,12,2,1,0,0,dinhlongviolin1,,
+Avaiga/taipy,1018317628,65,Add running taipy-core as a service,,toan-quach,93168955,closed,False,2022-08-05T06:50:21+00:00,2022-08-09T09:22:24+00:00,2022-08-09T09:22:14+00:00,2022-08-09T09:22:14+00:00,ab179a5bdde46e308b03bd0d15ce89ed792de04c,unknown,5,0,1,2,0,0,,,
+Avaiga/taipy,1022197416,67,feature/#66 add pipenv env and unit tests,#66 ,toan-quach,93168955,closed,False,2022-08-10T04:09:22+00:00,2022-08-15T14:58:17+00:00,2022-08-15T14:56:23+00:00,2022-08-15T14:56:23+00:00,4564acaac2e8c29690aa0b64f72cbccaedc41db2,unknown,169,15,10,4,6,0,florian-vuillemot;joaoandre-avaiga;FabienLelaquais,,
+Avaiga/taipy,1090121444,73,Add Badges to repository Readme,"This PR adds the following badges:
+
+- Test status
+- Supported Python versions
+- Pypi package version
+
+Coverage will be added in the future together with any other badge that it may be suggested.",joaoandre-avaiga,88906996,closed,False,2022-10-18T01:50:57+00:00,2022-10-18T09:00:18+00:00,2022-10-18T09:00:14+00:00,2022-10-18T09:00:14+00:00,53372a036c1fa71a504e4ebbf7467f78fd1f2674,unknown,11,8,1,2,0,0,,,
+Avaiga/taipy,1122504573,75,attempt to fix package installation,,jrobinAV,88036007,closed,False,2022-11-15T08:07:40+00:00,2022-11-16T08:49:07+00:00,2022-11-16T08:39:39+00:00,2022-11-16T08:39:39+00:00,169f7f7b4b724a044405868bfd0f48da2d4bc494,unknown,3,3,1,1,0,0,,,
+Avaiga/taipy,1180763807,81,Feat/ Unify GUI and Core argument parser,"https://github.com/Avaiga/taipy/issues/80
+
+The `_GuiCLI` is on https://github.com/Avaiga/taipy-gui/pull/554
+The `_VersioningCLI` is on https://github.com/Avaiga/taipy-core/pull/388",trgiangdo,37588363,closed,False,2022-12-30T08:02:53+00:00,2023-01-19T16:45:10+00:00,2023-01-05T08:53:31+00:00,2023-01-05T08:53:31+00:00,357dffd3f44fcf81446af185daebe8c75b5514b6,unknown,7,0,1,1,0,0,FabienLelaquais,,
+Avaiga/taipy,1214361419,82,chore: update licence year,,joaoandre-avaiga,88906996,closed,False,2023-01-24T01:31:51+00:00,2023-01-24T08:59:11+00:00,2023-01-24T08:59:07+00:00,2023-01-24T08:59:07+00:00,f241fff04e89163c09065edb147271389cd741f6,unknown,9,8,8,1,0,0,,,
+Avaiga/taipy,1218711349,83,chore: add version information to init file,,joaoandre-avaiga,88906996,closed,False,2023-01-27T02:41:02+00:00,2023-01-28T14:24:46+00:00,2023-01-27T08:41:40+00:00,2023-01-27T08:41:40+00:00,c1bc2b32da63fae062ef9fc640c51425c62f185d,unknown,57,3,6,2,0,0,,,
+Avaiga/taipy,1218996590,84,"Revert ""chore: add version information to init file""",Reverts Avaiga/taipy#83,jrobinAV,88036007,closed,False,2023-01-27T09:05:02+00:00,2023-01-27T09:30:39+00:00,2023-01-27T09:30:08+00:00,,1d4c675b883acae81aa866d32a57cd1c93ca01ad,unknown,3,57,6,1,0,0,,,
+Avaiga/taipy,1226998446,85,fix typing for taipy.run,"The typing hints for the new `taipy.run()` were wrong.  It's not expecting a list.  Since the argument is `*apps`, you then specify the type of each element of `apps`.  So this updates the docs and the typing, and properly types the function `__typing_get()`
+
+In addition, the pre-commit stuff didn't work.  Had to copy over some files from `taipy-gui` and also update the `pre-commit` file to get correct versions.",Dr-Irv,15113894,closed,False,2023-02-02T17:58:42+00:00,2023-02-15T15:59:23+00:00,2023-02-15T13:43:31+00:00,2023-02-15T13:43:31+00:00,2c82477fe2a1539f06afa1edfe2a8986693b6eb0,unknown,63,12,8,7,12,1,,,
+Avaiga/taipy,1240698276,90,fix/decide-next-version,,jrobinAV,88036007,closed,False,2023-02-14T14:42:58+00:00,2023-02-14T15:27:21+00:00,2023-02-14T15:27:16+00:00,2023-02-14T15:27:16+00:00,592284647de2745517de16f1d69b1b3b1e7271a7,unknown,1,1,1,1,0,0,joaoandre-avaiga,,
+Avaiga/taipy,1241916477,92,Feature/ensure typing,Local test before https://github.com/Dr-Irv/taipy/tree/fix/run-typing gets integrated,FabienLelaquais,86590727,closed,True,2023-02-15T11:10:14+00:00,2023-02-15T13:55:10+00:00,2023-02-15T13:55:09+00:00,,3df5e900eebb583e963c51e7ca4a3450afe1c42f,unknown,62,11,7,7,0,0,,,🖧 Devops
+Avaiga/taipy,1297677109,113,Feature/#93 - Run GitHub action tests on Python 3.11 and add linter workflow,"https://github.com/Avaiga/taipy/issues/93
+
+In this PR:
+- Run GitHub action tests on Python 3.11
+- Add linter workflow",trgiangdo,37588363,closed,False,2023-03-31T12:26:00+00:00,2023-04-03T16:40:47+00:00,2023-04-03T16:40:37+00:00,2023-04-03T16:40:37+00:00,4576c3d858bac6692d98ce609d24c174c5815846,unknown,79,32,12,4,1,0,joaoandre-avaiga,,
+Avaiga/taipy,1308710124,114,Initial version of the ScenarioSelector implementation,Addresses #109.,pavle-avaiga,128134925,closed,False,2023-04-11T09:52:20+00:00,2023-04-20T14:05:24+00:00,2023-04-20T14:04:04+00:00,2023-04-20T14:04:04+00:00,32b9d299a730415f1e9bcab18d6df23f5844f08b,dirty,5756,4223,13,15,63,0,jrobinAV,,🖰 GUI;🟧 Priority: High;✨New feature
+Avaiga/taipy,1312820674,117,Change version to 2.2.0,Change version for the new release 2.2.0,jrobinAV,88036007,closed,False,2023-04-13T16:45:51+00:00,2023-04-13T16:50:27+00:00,2023-04-13T16:50:23+00:00,2023-04-13T16:50:23+00:00,f3ad99b97dca8fc25bed537840cd9c9e9ed070cb,unknown,5,5,3,1,0,0,dinhlongviolin1;FredLL-Avaiga,,
+Avaiga/taipy,1312852622,118,Change ubuntu version,update ubuntu version for releasing 2.2.0 ,jrobinAV,88036007,closed,False,2023-04-13T17:07:45+00:00,2023-04-13T17:13:30+00:00,2023-04-13T17:13:16+00:00,2023-04-13T17:13:16+00:00,9755557538342c38202bde18a54e62429e88dc86,unknown,7,7,4,2,0,0,florian-vuillemot;dinhlongviolin1;joaoandre-avaiga,,
+Avaiga/taipy,1318481128,120,README.md update,"README.md update
+remove INSTALLATION.md
+add README.md images",marisogo,120181423,closed,False,2023-04-18T14:40:25+00:00,2023-04-26T13:29:40+00:00,2023-04-26T13:27:09+00:00,2023-04-26T13:27:09+00:00,603b8e7ab1c5c07a8dfd026886f755662a5a9c93,unknown,222,49,9,3,34,0,jrobinAV,,
+Avaiga/taipy,1321632674,122,Dev 2.3,,FredLL-Avaiga,90181748,closed,False,2023-04-20T14:39:56+00:00,2023-04-20T15:48:29+00:00,2023-04-20T15:39:30+00:00,2023-04-20T15:39:30+00:00,4247c1c7da44da75f049172827251f8acac4d7ad,unknown,6014,7,18,27,16,1,,,🖰 GUI;🟧 Priority: High;✨New feature
+Avaiga/taipy,1321936767,123,#115 connect Gui to Core,"This works with this demo 
+Not finished (need to involve @JaufreyTpy )
+
+```
+import src.taipy
+
+from taipy.gui import Gui, State
+from taipy import Scope, Config, Frequency, Core, Scenario
+
+
+def replace(input_msg, template, name):
+    return input_msg.replace(template, name)
+
+def on_action(state: State, id, action: str, scenario: Scenario):
+    state.sc_id = scenario.id
+
+sc_id = None
+
+page = """"""
+## Test Scenario Selector
+<|toggle|theme|>
+
+### Scenarios Selector
+<|scenario_selector|>
+
+Selected: <|{sc_id}|>
+""""""
+
+# Gui.add_library(GuiCore())
+
+input_msg_cfg = Config.configure_data_node(id=""input_msg"", scope=Scope.GLOBAL, default_data=""Hello, today it's <TPL>!"")
+template_cfg = Config.configure_data_node(id=""template"", scope=Scope.GLOBAL, default_data=""<TPL>"")
+date_cfg = Config.configure_data_node(id=""date"")
+message_cfg = Config.configure_data_node(id=""msg"")
+
+replace_template_cfg = Config.configure_task(""replace"", replace, [input_msg_cfg, template_cfg, date_cfg], message_cfg)
+scenario_daily_cfg = Config.configure_scenario_from_tasks(
+    id=""scenario_daily_cfg"", task_configs=[replace_template_cfg], frequency=Frequency.DAILY
+)
+scenario_cfg = Config.configure_scenario_from_tasks(id=""scenario_cfg"", task_configs=[replace_template_cfg])
+
+Core().run()
+
+Gui(page).run(debug=True)
+
+
+```",FredLL-Avaiga,90181748,closed,False,2023-04-20T18:28:03+00:00,2023-05-09T07:22:00+00:00,2023-04-24T15:06:22+00:00,2023-04-24T15:06:22+00:00,8de76f561b0a3687ff1d9286364a9d37899e4ba6,unknown,368,535,6,10,19,1,,,🖰 GUI;🟧 Priority: High;✨New feature
+Avaiga/taipy,1322750069,127,"Feature/Core - `taipy version`, `taipy create`, and `taipy help` subcommand","https://github.com/Avaiga/taipy/issues/124
+https://github.com/Avaiga/taipy/issues/125
+https://github.com/Avaiga/taipy/issues/139
+
+TODO:
+- [x] Add `taipy create` test cases when a template is located inside the package or in a Git repo.",trgiangdo,37588363,closed,False,2023-04-21T08:44:59+00:00,2023-05-18T03:19:37+00:00,2023-05-18T03:19:33+00:00,2023-05-18T03:19:33+00:00,5941644fbededf8340cdd4bbde41784ab61f352f,unknown,314,3,15,16,1,0,FabienLelaquais,,
+Avaiga/taipy,1325506080,129,feat: #121 Edit scenarios feature,Addresses https://github.com/Avaiga/taipy/issues/121.,pavle-avaiga,128134925,closed,False,2023-04-24T13:53:51+00:00,2023-09-21T10:22:22+00:00,2023-05-02T10:23:52+00:00,2023-05-02T10:23:52+00:00,32328bcb21e9a2b46045e493a9934939557099e7,unknown,355,64,1,4,16,0,,,🖰 GUI;🟧 Priority: High;✨New feature
+Avaiga/taipy,1331593516,131,#119 aligning with taipy-gui,,FredLL-Avaiga,90181748,closed,False,2023-04-28T09:34:54+00:00,2023-04-28T10:50:59+00:00,2023-04-28T10:50:39+00:00,2023-04-28T10:50:39+00:00,7ec184e1354a6c07e9c90cdbb4e5dcf2a07de0d5,unknown,74,75,2,5,0,0,pavle-avaiga,,🟥 Priority: Critical;📈 Improvement;🖰 GUI
+Avaiga/taipy,1335458711,133,"#115 select, update and delete scenario","```
+import taipy
+
+from taipy.gui import Gui, State
+from taipy import Scope, Config, Frequency, Core, Scenario, Cycle
+
+
+def replace(input_msg, template, name):
+    return input_msg.replace(template, name)
+
+
+def on_action(state: State, id, action: str, scenario: Scenario):
+    state.sc_id = scenario.id
+
+
+sc_id = None
+selected_scenario = None
+
+def on_change(state: State, var_name: str, var_value: Scenario):
+    print(f""on_change(state: State, var_name: {var_name}, var_value: {var_value})"")
+    if var_name == ""selected_scenario"":
+        if isinstance(var_value, Scenario):
+            state.sc_id = f""Scenario {var_value.name}""
+        elif isinstance(var_value, Cycle):
+            state.sc_id = f""Cycle {var_value.name}""
+        elif isinstance(var_value, list) and len(var_value):
+            state.sc_id = "";"".join(x.name for x in var_value)
+
+page = """"""
+## Test Scenario Selector
+
+### Scenarios Selector
+<|{selected_scenario}|scenario_selector|>
+
+Selected: <|{sc_id}|>
+""""""
+
+# Gui.add_library(GuiCore())
+
+input_msg_cfg = Config.configure_data_node(id=""input_msg"", scope=Scope.GLOBAL, default_data=""Hello, today it's <TPL>!"")
+template_cfg = Config.configure_data_node(id=""template"", scope=Scope.GLOBAL, default_data=""<TPL>"")
+date_cfg = Config.configure_data_node(id=""date"")
+message_cfg = Config.configure_data_node(id=""msg"")
+
+replace_template_cfg = Config.configure_task(""replace"", replace, [input_msg_cfg, template_cfg, date_cfg], message_cfg)
+scenario_daily_cfg = Config.configure_scenario_from_tasks(
+    id=""scenario_daily_cfg"", task_configs=[replace_template_cfg], frequency=Frequency.DAILY
+)
+scenario_cfg = Config.configure_scenario_from_tasks(id=""scenario_cfg"", task_configs=[replace_template_cfg])
+
+Core().run()
+
+Gui(page).run()
+
+```",FredLL-Avaiga,90181748,closed,False,2023-05-02T15:47:33+00:00,2023-05-03T07:28:41+00:00,2023-05-03T07:27:48+00:00,2023-05-03T07:27:48+00:00,f1ad4df0d7582ce92c9321d28d38302bdcccba30,unknown,769,973,5,2,2,0,dinhlongviolin1;pavle-avaiga,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1337005930,134,update install script (#115),prepare scenario_visualizer backend,FredLL-Avaiga,90181748,closed,False,2023-05-03T16:28:18+00:00,2023-05-06T15:38:18+00:00,2023-05-06T15:38:13+00:00,2023-05-06T15:38:13+00:00,e4e730eab0e0f80610067ecaf95bc737c6a452b6,unknown,89,24,4,4,2,0,pavle-avaiga,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1338922180,135,feat: Scenario Vizualizer initial UI commit (#110),,pavle-avaiga,128134925,closed,False,2023-05-04T18:56:56+00:00,2023-06-01T17:50:26+00:00,2023-06-01T17:50:22+00:00,2023-06-01T17:50:21+00:00,327ae63d953d14eaac5fd23a9049a42fe8209610,unknown,702,3,5,21,80,2,,,
+Avaiga/taipy,1343348552,137,"art: README changes, corrects aspect ratios for images, corrects code for demos","Previously, images on the README had their width and height defined which would change their original aspect ratio.
+The values were defined in pixels which meant they would change size according to one's monitor resolution.
+
+Here we define image dimensions by only using `width=XX%` which both conserves the image's original aspect ratio and makes the image have the same size regardless of the screen used.
+
+Before:
+![image](https://user-images.githubusercontent.com/62465003/237033768-b25eeb55-b6ac-4aeb-965d-11a564d86111.png)
+
+After:
+![image](https://user-images.githubusercontent.com/62465003/237033879-37ef6c9c-cd22-4df5-94f6-34d09cac79f8.png)
+",AlexandreSajus,62465003,closed,False,2023-05-09T08:06:02+00:00,2023-05-11T16:26:48+00:00,2023-05-11T16:26:43+00:00,2023-05-11T16:26:43+00:00,8dabd5a5c25ea79372ea4cdd1957ede9dfda72cb,unknown,12,10,1,3,2,1,jrobinAV,,📄 Documentation
+Avaiga/taipy,1343798271,138,feat(ScenarioSelector): adjust and improve styles,Addresses the style part of #109 ,ghost,10137,closed,False,2023-05-09T13:50:58+00:00,2023-10-31T20:04:14+00:00,2023-05-16T09:06:36+00:00,2023-05-16T09:06:36+00:00,41469f5724dabb032a977f6d754036ed97365e23,unknown,689,428,9,11,16,0,pavle-avaiga,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1353243658,143,chore: force utf8 encoding when reading readme file,,joaoandre-avaiga,88906996,closed,False,2023-05-16T23:12:27+00:00,2023-05-17T09:30:51+00:00,2023-05-17T09:30:47+00:00,2023-05-17T09:30:47+00:00,260e2d6dc8f6c097fedda076a5cb73f7fcaec960,unknown,2,2,1,1,0,0,,,
+Avaiga/taipy,1354452367,145,Scenario graph,"Resolves #128.
+
+```
+use with 
+import src.taipy
+
+from taipy.gui import Gui, State
+from taipy import Scope, Config, Frequency, Core, Scenario, Cycle
+
+
+def replace(input_msg, template, name):
+    return input_msg.replace(template, name)
+
+
+def on_action(state: State, id, action: str, scenario: Scenario):
+    state.sc_id = scenario.id
+
+
+sc_id = None
+selected_scenario = None
+
+def on_change(state: State, var_name: str, var_value: Scenario):
+    print(f""on_change(state: State, var_name: {var_name}, var_value: {var_value})"")
+    if var_name == ""selected_scenario"":
+        if isinstance(var_value, Scenario):
+            state.sc_id = f""Scenario {var_value.name}""
+        elif isinstance(var_value, Cycle):
+            state.sc_id = f""Cycle {var_value.name}""
+        elif isinstance(var_value, list) and len(var_value):
+            state.sc_id = "";"".join(x.name for x in var_value)
+
+page = """"""
+## Test Scenario Selector
+
+### Scenarios Selector
+<|{selected_scenario}|scenario_selector|>
+
+Selected: <|{sc_id}|>
+
+<|{selected_scenario}|graph|>
+
+""""""
+
+# Gui.add_library(GuiCore())
+
+input_msg_cfg = Config.configure_data_node(id=""input_msg"", scope=Scope.GLOBAL, default_data=""Hello, today it's <TPL>!"")
+template_cfg = Config.configure_data_node(id=""template"", scope=Scope.GLOBAL, default_data=""<TPL>"")
+date_cfg = Config.configure_data_node(id=""date"")
+message_cfg = Config.configure_data_node(id=""msg"")
+
+replace_template_cfg = Config.configure_task(""replace"", replace, [input_msg_cfg, template_cfg, date_cfg], message_cfg)
+scenario_daily_cfg = Config.configure_scenario_from_tasks(
+    id=""scenario_daily_cfg"", task_configs=[replace_template_cfg], frequency=Frequency.DAILY
+)
+scenario_cfg = Config.configure_scenario_from_tasks(id=""scenario_cfg"", task_configs=[replace_template_cfg])
+
+Core().run()
+
+Gui(page).run(debug=True)
+```
+And get this
+![image](https://github.com/Avaiga/taipy/assets/90181748/dd51bb74-c83a-41f1-9b87-d035a269785c)
+
+",FredLL-Avaiga,90181748,closed,False,2023-05-17T16:00:02+00:00,2024-01-12T16:09:50+00:00,2023-05-19T09:50:32+00:00,2023-05-19T09:50:32+00:00,8d667b4a14527d82679aef26e9420a9f12be437e,unknown,1080,227,23,4,0,0,pavle-avaiga,,🖰 GUI;🟧 Priority: High;✨New feature
+Avaiga/taipy,1356497559,146,Feature - Add --version and -v option to print Taipy version,This PR adds `taipy --version` or `taipy -v` command to show Taipy version.,trgiangdo,37588363,closed,False,2023-05-19T02:24:59+00:00,2023-05-22T07:28:54+00:00,2023-05-22T07:28:51+00:00,2023-05-22T07:28:51+00:00,a6afd4d5ce81f825739accce8fe47925ee05fd56,unknown,37,7,3,3,0,0,toan-quach,,
+Avaiga/taipy,1359501672,149,#148 improve dag,"- Rename graph to dag
+- changed scenario implementation from dict to array
+- properties  added:
+  - show (dynamic bool)
+  - with_button (default true)
+  - width & height (if not defined and with button => dialog is full screen else default to 50vw & 50vh)",FredLL-Avaiga,90181748,closed,False,2023-05-22T15:54:38+00:00,2023-05-22T16:52:49+00:00,2023-05-22T16:52:46+00:00,2023-05-22T16:52:46+00:00,e10f21175fec6d301715a35d01bd09b3c571c29c,unknown,193,139,6,1,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1360832551,152,#151 manage unselect,"Manage scenario unselect in selector and dag
+update dynamic show variable in dag",FredLL-Avaiga,90181748,closed,False,2023-05-23T07:35:59+00:00,2023-05-23T07:59:03+00:00,2023-05-23T07:59:00+00:00,2023-05-23T07:58:59+00:00,407cd6c86119cefdddc81b5c72a4f2516ddfb57b,unknown,18,12,2,1,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1360962888,153,Fix taipy._run() signature (#150),"Addresses #150.
+",FabienLelaquais,86590727,closed,False,2023-05-23T08:58:10+00:00,2023-05-23T14:03:35+00:00,2023-05-23T14:03:31+00:00,2023-05-23T14:03:31+00:00,ea5efdcd2f3909dd261ae1455c7c27a6aa64f440,unknown,5,5,1,2,0,0,,,Core;🖰 GUI;Core: Rest API;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1361521652,155,#154 improve dag looks,"- remove the dots on the edges
+- change and align the port icons
+![image](https://github.com/Avaiga/taipy/assets/90181748/849b1f86-14be-4964-b27f-0383a2f71c00)
+",FredLL-Avaiga,90181748,closed,False,2023-05-23T14:23:48+00:00,2023-05-23T14:50:25+00:00,2023-05-23T14:50:21+00:00,2023-05-23T14:50:21+00:00,b909f5559f16bcf3921d8f71677f8f08e9b5e123,unknown,33,39,5,1,0,0,jrobinAV,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1361603086,156,#154 input vs output,,FredLL-Avaiga,90181748,closed,False,2023-05-23T15:12:15+00:00,2023-05-23T15:50:48+00:00,2023-05-23T15:50:45+00:00,2023-05-23T15:50:44+00:00,ec5fbe9d19da214416cbce010ae6e7b8aa312ffe,unknown,6,6,2,1,0,0,FabienLelaquais;pavle-avaiga,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1371778069,158,update github actions,add a release dev,FredLL-Avaiga,90181748,closed,False,2023-05-31T09:20:45+00:00,2023-06-01T07:53:29+00:00,2023-06-01T07:53:25+00:00,2023-06-01T07:53:25+00:00,d076a69ce84bc1dddddd4a67c7d178963ce28e04,unknown,77,16,6,1,0,0,,,📈 Improvement;🖧 Devops;🟨 Priority: Medium
+Avaiga/taipy,1373580700,159,do not use pipenv in build,,FredLL-Avaiga,90181748,closed,False,2023-06-01T08:20:50+00:00,2023-06-01T09:14:51+00:00,2023-06-01T09:14:48+00:00,2023-06-01T09:14:48+00:00,8f45bfdbc17ac5e6cdb0956606e4d678574a56ca,unknown,1,1,1,1,0,0,dinhlongviolin1,,🖧 Devops;🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1374424318,160,taipy-gui is needed to build this package,,FredLL-Avaiga,90181748,closed,False,2023-06-01T16:28:32+00:00,2023-06-02T08:33:35+00:00,2023-06-02T08:33:28+00:00,2023-06-02T08:33:28+00:00,bcde643af1b0945f8a5bf439f753ae17c59b3646,unknown,18,31,1,1,0,0,dinhlongviolin1,,📈 Improvement;🖧 Devops;🟧 Priority: High
+Avaiga/taipy,1379246306,170,Release/2.3.0.dev0,dependencies should not be git on release,FredLL-Avaiga,90181748,closed,False,2023-06-05T15:41:58+00:00,2023-06-05T16:11:26+00:00,2023-06-05T15:45:23+00:00,2023-06-05T15:45:23+00:00,8156221f58fc6e5e65cf05280422ce73b3446e3b,unknown,6,3,2,2,0,0,,,🟥 Priority: Critical;💥Malfunction
+Avaiga/taipy,1379324009,171,Prepare/for rel2.3.0.dev1,"dependency to ""taipy-gui>=2.3.0.dev0""",FredLL-Avaiga,90181748,closed,False,2023-06-05T16:31:09+00:00,2023-06-05T16:39:37+00:00,2023-06-05T16:38:40+00:00,2023-06-05T16:38:40+00:00,d445e9e6a6945edec0ab3ea63bb403f83a6e9dec,unknown,3,2,2,3,0,0,FabienLelaquais,,🟥 Priority: Critical;💥Malfunction
+Avaiga/taipy,1379442411,172,connect scenario viz (#163),"Addresses #163.
+
+Connects fields and actions (except properties for now)",FredLL-Avaiga,90181748,closed,False,2023-06-05T17:59:43+00:00,2023-06-07T14:51:08+00:00,2023-06-07T14:51:00+00:00,2023-06-07T14:51:00+00:00,5de42ddf9d198253f3318c5efbbde70232cd849e,unknown,816,493,11,13,7,0,pavle-avaiga,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1384342735,174,Create initial doc file for Core Elements,"Addresses [taipy-doc#408](https://github.com/Avaiga/taipy-doc/issues/408).
+
+- Create viselements.json for Core elements
+- Align __init__.py
+",FabienLelaquais,86590727,closed,False,2023-06-08T12:10:36+00:00,2023-06-08T12:55:04+00:00,2023-06-08T12:55:00+00:00,2023-06-08T12:55:00+00:00,870c3fc6cfd75a56354d57704bde979bf6ee3133,unknown,45,2,2,2,0,0,,,🖧 Devops;📄 Documentation;🖰 GUI
+Avaiga/taipy,1384856971,176,#157 DataNode selector,,pavle-avaiga,128134925,closed,False,2023-06-08T17:12:18+00:00,2023-06-09T12:07:11+00:00,2023-06-09T12:07:06+00:00,2023-06-09T12:07:06+00:00,25fa42e836c39fd2289108d56f06cbb106fa0815,unknown,237,2,4,6,13,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1385753339,178,Connecting DataNode Selector (#175),"use eslint
+is_deletable
+check instances are not deleted
+simplify comps",FredLL-Avaiga,90181748,closed,False,2023-06-09T08:27:46+00:00,2023-06-09T17:01:25+00:00,2023-06-09T17:01:21+00:00,2023-06-09T17:01:21+00:00,863d8a2ab24cda67f5df5c86ae560964ade8d177,unknown,1174,970,21,8,0,1,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1386337336,179,#157 fix: node selector build issue,,pavle-avaiga,128134925,closed,False,2023-06-09T14:55:15+00:00,2023-06-09T15:04:33+00:00,2023-06-09T15:04:26+00:00,,38498f07d121376402e6d1dc508099a87483f235,unknown,1,1,1,1,0,1,FabienLelaquais,,
+Avaiga/taipy,1388432575,180,Update Dev Release Process,,dinhlongviolin1,45910030,closed,False,2023-06-12T10:45:39+00:00,2023-06-12T14:23:05+00:00,2023-06-12T14:23:01+00:00,2023-06-12T14:23:01+00:00,e71c931af892971b8dcd28dad64bd4908ae77bbd,unknown,240,6,2,5,6,0,,,
+Avaiga/taipy,1389409966,185,limit treeview height (#183),,FredLL-Avaiga,90181748,closed,False,2023-06-12T20:33:45+00:00,2023-06-13T16:10:22+00:00,2023-06-13T16:10:18+00:00,2023-06-13T16:10:18+00:00,b89e48258c3a65110f347c0e5c56d4627ccaa6a9,unknown,1,0,1,1,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1389435652,186,Ignore pipeline if it has no DataNode (#182),Addresses #182.,FredLL-Avaiga,90181748,closed,False,2023-06-12T20:55:39+00:00,2023-06-13T08:46:22+00:00,2023-06-13T08:46:18+00:00,2023-06-13T08:46:18+00:00,2b7e0c7b2e4f6b0ed34b062de450cfc6d3f0ab95,unknown,8,5,1,4,0,0,,,📈 Improvement;🖰 GUI;🟨 Priority: Medium
+Avaiga/taipy,1390228915,191,Prevent Scenario from being pushed to the front-end (#190),"Adresses
+- #190 (no push of a Scenario to the FE)
+- #168 (use get_simple_label() instead of the Scenario's name)
+- #193",FredLL-Avaiga,90181748,closed,False,2023-06-13T09:36:30+00:00,2023-06-13T13:32:38+00:00,2023-06-13T13:32:29+00:00,2023-06-13T13:32:29+00:00,8d4d2277f56f46fecd577b33e9f3ce9cb1127c99,unknown,30,18,2,7,2,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1390381056,194,DAG comp (#192),"No Dialog
+No title
+Property : render & show_toolbar",FredLL-Avaiga,90181748,closed,False,2023-06-13T11:07:00+00:00,2023-06-13T14:08:53+00:00,2023-06-13T14:07:34+00:00,2023-06-13T14:07:34+00:00,17ecc011fc5aa05c02d5eba471244b50fc9c014a,unknown,327,151,8,2,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1391087159,195,add title to dev releases,It s better to specify the title otherwise the latest commit is used as release title.,jrobinAV,88036007,closed,False,2023-06-13T18:03:20+00:00,2023-06-14T16:10:44+00:00,2023-06-14T16:10:39+00:00,2023-06-14T16:10:39+00:00,99c5ac14f2bb4e0958b4f7e8d5cea350f88b01e8,unknown,1,1,1,1,0,0,dinhlongviolin1,,
+Avaiga/taipy,1391845554,196,Feature/#147 - Move templates to a separate repository,https://github.com/Avaiga/taipy/issues/147,trgiangdo,37588363,closed,False,2023-06-14T07:37:20+00:00,2023-06-15T02:57:27+00:00,2023-06-15T02:57:24+00:00,2023-06-15T02:57:24+00:00,9873188c70faf56b336c27a867dac8c689ad8991,unknown,2,91,8,3,0,0,,,
+Avaiga/taipy,1392554116,198,#197 dag toolbar core workaround,"hide dag toolbar when no scenario
+set read_entity_retry = 3 into config",FredLL-Avaiga,90181748,closed,False,2023-06-14T14:34:07+00:00,2023-06-14T15:29:15+00:00,2023-06-14T15:29:12+00:00,2023-06-14T15:29:12+00:00,23f84e3bd6c6cf7ba9abb22697a2c3eec0012a1d,unknown,18,10,2,2,0,0,,,🟥 Priority: Critical;🖰 GUI;💥Malfunction
+Avaiga/taipy,1392699825,199,job selector (#177),,pavle-avaiga,128134925,closed,False,2023-06-14T15:59:47+00:00,2023-07-03T08:02:32+00:00,2023-07-03T08:02:26+00:00,2023-07-03T08:02:26+00:00,9091f1b7b24c69b6cc746279ac3630bbc2a18d9f,unknown,1253,235,7,32,47,0,,,📈 Improvement;🖰 GUI;🟨 Priority: Medium
+Avaiga/taipy,1393403401,201,Feature - Add taipy-templates dependency to release workflows,"In this PR, `taipy-templates` is added to the release-dev workflow.
+
+I'm not sure if I need to update anywhere else, so please take a close look.",trgiangdo,37588363,closed,False,2023-06-15T04:25:37+00:00,2023-06-15T07:42:21+00:00,2023-06-15T07:42:18+00:00,2023-06-15T07:42:18+00:00,7f667e534aa9a439c7a6b3543f15358b4ee3917c,unknown,9,1,1,1,0,0,,,
+Avaiga/taipy,1393699941,202,Feature - Add more templates to Scaffold CLI,,trgiangdo,37588363,closed,False,2023-06-15T08:46:34+00:00,2023-06-15T14:59:58+00:00,2023-06-15T14:30:44+00:00,2023-06-15T14:30:44+00:00,f62921cfe5f9ed96d86dc68c211ac2ef97992a33,unknown,2,1,1,1,0,0,,,
+Avaiga/taipy,1393762911,204,DOC-Viselements,Resolves #203.,FredLL-Avaiga,90181748,closed,False,2023-06-15T09:25:25+00:00,2024-01-12T16:35:35+00:00,2023-06-16T07:25:48+00:00,2023-06-16T07:25:48+00:00,f6b9e883886719ec3098f0260481164fe9087973,unknown,249,243,1,4,8,0,,,📈 Improvement;📄 Documentation;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1395550938,206,Pipeline submit button does not behave properly.,"Resolves #205.
+
+- dag width default to 100%
+
+@FabienLelaquais Should this go into 2.3 ?",FredLL-Avaiga,90181748,closed,False,2023-06-16T11:44:00+00:00,2024-01-12T16:25:12+00:00,2023-06-16T14:16:28+00:00,2023-06-16T14:16:28+00:00,8faf6131b814e54c25834adda302da2aec74a1c8,unknown,9,3,3,1,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1396018734,207,Fix dependency on taipy-templates for 2.3,,jrobinAV,88036007,closed,False,2023-06-16T16:32:59+00:00,2024-01-12T16:23:39+00:00,2023-06-16T16:33:43+00:00,2023-06-16T16:33:43+00:00,75b8d452844fa5d614c0b3f3155a880dbf9a5924,unknown,1,1,1,1,0,0,,,🖧 Devops
+Avaiga/taipy,1396032845,208,Fix dependency on taipy-gui,,jrobinAV,88036007,closed,False,2023-06-16T16:45:56+00:00,2024-01-12T16:12:34+00:00,2023-06-16T16:53:05+00:00,2023-06-16T16:53:05+00:00,a82e33ac8e1793314aab8f154a57fa8e5d145382,unknown,2,2,1,1,0,0,FredLL-Avaiga,,🖧 Devops
+Avaiga/taipy,1397852874,212,Hide private classes from doc,,FredLL-Avaiga,90181748,closed,False,2023-06-19T09:19:53+00:00,2024-01-12T16:13:03+00:00,2023-06-19T14:53:35+00:00,2023-06-19T14:53:35+00:00,911e295c9daedd62cc2365b2719b1b237367f327,unknown,10,10,1,1,0,0,,,📄 Documentation;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1397858740,213,Backport to 2.3: hide private classes from doc,,FredLL-Avaiga,90181748,closed,False,2023-06-19T09:23:44+00:00,2024-01-12T16:11:47+00:00,2023-06-19T14:53:53+00:00,2023-06-19T14:53:53+00:00,e9e1942af8d9208674f938e355232fa12f03207b,unknown,10,10,1,1,0,0,,,📄 Documentation;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1398352721,217,Fix property loosing keyboard focus,"Resolves #216 (handle property key rename).
+Resolves #167 (tree item selection visual hint).
+
+Remove default scenario config",FredLL-Avaiga,90181748,closed,False,2023-06-19T14:29:11+00:00,2024-01-12T16:07:59+00:00,2023-06-19T15:37:51+00:00,2023-06-19T15:37:51+00:00,7054429536c0ed400307c9689d275a061d855cf5,unknown,38,36,3,4,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1398460544,218,Backport to 2.3 - property key tree item default scenario,"Resolves [taipy-gui/167](https://github.com/Avaiga/taipy-gui/issues/167).
+Resolves [taipy-gui/216](https://github.com/Avaiga/taipy-gui/issues/216).
+
+and prepare for 2.3.1",FredLL-Avaiga,90181748,closed,False,2023-06-19T15:43:21+00:00,2024-01-12T16:06:30+00:00,2023-06-19T15:51:29+00:00,2023-06-19T15:51:29+00:00,2e3023c55931b518478564f6bfa9cbee23ca6224,unknown,40,38,5,2,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1399138126,219,Fix/Core#635 - Wrong import in _run,https://github.com/Avaiga/taipy-core/issues/635,trgiangdo,37588363,closed,False,2023-06-20T03:56:26+00:00,2023-06-20T06:48:02+00:00,2023-06-20T06:47:28+00:00,2023-06-20T06:47:28+00:00,0d51c8b8b4c80b47c1fc06a3bf4f72c96a438fc3,unknown,9,1,2,2,0,1,,,
+Avaiga/taipy,1399142785,220,Hotfix2.3/Core635 - Wrong _CoreCLI import,https://github.com/Avaiga/taipy-core/issues/635,trgiangdo,37588363,closed,False,2023-06-20T04:00:17+00:00,2023-06-20T07:17:19+00:00,2023-06-20T07:17:15+00:00,2023-06-20T07:17:15+00:00,2de22def6016006c2edeb4dbb4eabcd04a8e3c3b,unknown,9,1,2,2,0,3,FabienLelaquais,,
+Avaiga/taipy,1401958964,223,Init values,Resolves #222.,FredLL-Avaiga,90181748,closed,False,2023-06-21T15:38:59+00:00,2024-01-12T15:56:40+00:00,2023-06-22T13:55:28+00:00,2023-06-22T13:55:28+00:00,de868bc61e0ce092386d71231922d03727b052c9,unknown,88,49,6,3,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1401962324,224,Backport: init values,Resolves #222.,FredLL-Avaiga,90181748,closed,False,2023-06-21T15:40:55+00:00,2024-01-12T15:55:58+00:00,2023-06-22T14:49:52+00:00,2023-06-22T14:49:52+00:00,f1c1c79f9237705d3dc51a5440db1c10a1ff3fae,unknown,87,48,5,3,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1402307082,225,propagate init file,#210 ,jrobinAV,88036007,closed,False,2023-06-21T19:20:37+00:00,2023-06-21T20:25:12+00:00,2023-06-21T20:25:08+00:00,2023-06-21T20:25:08+00:00,baecdde7aaab7108225c32c32ff6c96af490be6e,unknown,34,62,3,1,0,0,,,
+Avaiga/taipy,1402313505,226,propagate init file,#210 To be merged in release/2.3,jrobinAV,88036007,closed,False,2023-06-21T19:24:41+00:00,2023-06-22T09:36:15+00:00,2023-06-22T09:36:12+00:00,2023-06-22T09:36:11+00:00,f594b46b028c0a25760d8b1371306239edc39e20,unknown,34,62,3,1,0,0,,,
+Avaiga/taipy,1404829806,228,use is_promotable and is_submittable,,FredLL-Avaiga,90181748,closed,False,2023-06-23T10:13:53+00:00,2023-06-23T10:39:26+00:00,2023-06-23T10:39:22+00:00,2023-06-23T10:39:22+00:00,b7081d754a4c4dd7936c544362fbeea171315def,unknown,29,10,3,2,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1404843809,229,backport: use is_promotable and is_submittable,,FredLL-Avaiga,90181748,closed,False,2023-06-23T10:25:17+00:00,2023-06-23T10:33:31+00:00,2023-06-23T10:33:28+00:00,2023-06-23T10:33:28+00:00,7b56d9815c466c2e21680442f398957f30f1900b,unknown,36,10,3,1,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1405168381,231,Improve performances,"Resolves #215.
+
+Manage scenario expandable/default_expanded",FredLL-Avaiga,90181748,closed,False,2023-06-23T14:36:54+00:00,2024-01-12T15:50:19+00:00,2023-06-27T08:39:14+00:00,2023-06-27T08:39:14+00:00,38d78c1278b73c8d66d062698b6180658e2145e0,unknown,75,76,3,4,2,3,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1420595389,234,Adds a Discord invite link to the README,"![image](https://github.com/Avaiga/taipy/assets/62465003/2b983c9b-3bb9-4efe-8bf1-fe5d0f5d5d67)
+",AlexandreSajus,62465003,closed,False,2023-07-05T07:49:08+00:00,2023-10-06T14:14:27+00:00,2023-07-05T08:16:11+00:00,2023-07-05T08:16:11+00:00,757a50f292354b1fa0ce9590df2b79fd1bac9060,unknown,6,0,1,1,2,0,jrobinAV,,📄 Documentation
+Avaiga/taipy,1420622732,235,Feature/templates#14 - Auto-discover available templates,https://github.com/Avaiga/taipy-templates/issues/14,trgiangdo,37588363,closed,False,2023-07-05T08:08:37+00:00,2023-07-06T08:57:31+00:00,2023-07-06T08:57:27+00:00,2023-07-06T08:57:27+00:00,4fdd8d35a77743c79a6ea9a4e53aa98d30071d9f,unknown,12,8,1,4,9,0,FabienLelaquais,,📈 Improvement;🟨 Priority: Medium
+Avaiga/taipy,1423000312,239,Dags and pins in selector,"Resolves #236 (multiple dags, paper around dag, size management).
+Resolves #238 (pins in selector).",FredLL-Avaiga,90181748,closed,False,2023-07-06T14:27:43+00:00,2024-01-12T15:47:01+00:00,2023-07-06T17:09:32+00:00,2023-07-06T17:09:32+00:00,3e057f65c322029293d3786040142152dd586a43,unknown,877,802,8,4,0,0,,,🖰 GUI;🟧 Priority: High;✨New feature;📝Release Notes
+Avaiga/taipy,1424105672,240,#825 avoid parasite updates,Resolves [taipy-gui#825](https://github.com/Avaiga/taipy-gui/issues/825),FredLL-Avaiga,90181748,closed,False,2023-07-07T06:41:26+00:00,2024-01-12T15:41:52+00:00,2023-07-07T09:20:14+00:00,2023-07-07T09:20:14+00:00,5ee61525f3b6300d0399ba97a1762641ac4ef3de,unknown,6,6,2,1,0,0,,,🟥 Priority: Critical;🖰 GUI;💥Malfunction;📝Release Notes
+Avaiga/taipy,1424414265,241,Scenario viewer adjustments,"Resolves #230.
+
+-  Should be expanded by default
+-  Sub title custom properties is unnecessary
+-  Tags should be True by default
+-  cycle should be displayed with scenario.cycle.get_simple_label()
+-  expanded does not work
+-  expandable does not work",FredLL-Avaiga,90181748,closed,False,2023-07-07T10:19:33+00:00,2024-01-12T15:32:07+00:00,2023-07-07T10:22:49+00:00,2023-07-07T10:22:49+00:00,0f7ef12ebbe8aaf7d9d9cde490be03204c06c029,unknown,36,37,3,1,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1424449960,242,Scenario vizualization update,Resolves #230.,FredLL-Avaiga,90181748,closed,False,2023-07-07T10:42:01+00:00,2024-01-12T15:30:55+00:00,2023-07-10T12:25:52+00:00,2023-07-10T12:25:52+00:00,2b658097de93bdb65b861366aa6250329550f7e4,unknown,28,27,3,3,1,1,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1437548409,244,Preselect scenario config if it is unique,"Addresses #233.
+",FredLL-Avaiga,90181748,closed,False,2023-07-17T15:20:37+00:00,2023-07-17T16:34:46+00:00,2023-07-17T16:34:43+00:00,2023-07-17T16:34:43+00:00,d12a4754a686f1a58eb0ead599ec77ddb25f3e8d,unknown,347,259,3,1,0,0,,,📈 Improvement;🖰 GUI;🟧 Priority: High
+Avaiga/taipy,1438860372,245,fix: read_entity_retry is set in configure_core(),https://github.com/Avaiga/taipy-core/issues/666,trgiangdo,37588363,closed,False,2023-07-18T09:03:57+00:00,2023-07-19T10:00:45+00:00,2023-07-19T10:00:41+00:00,2023-07-19T10:00:41+00:00,fddc5feb0f422e2458dc71345cbd6a98e4a7af7d,unknown,0,2,1,2,5,0,jrobinAV,,
+Avaiga/taipy,1441057649,249,#247 declare globally the core gui variables,"What do you think @dinhlongviolin1 ?
+",FredLL-Avaiga,90181748,closed,False,2023-07-19T13:38:36+00:00,2023-07-19T14:16:25+00:00,2023-07-19T14:16:15+00:00,2023-07-19T14:16:15+00:00,346f7e2aaf2be4214bb3f479babe38f10ce71399,unknown,8,0,1,1,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1441144476,250,backport: declare globally the core gui variables (#247),,FredLL-Avaiga,90181748,closed,False,2023-07-19T14:22:10+00:00,2023-07-19T14:33:05+00:00,2023-07-19T14:33:01+00:00,2023-07-19T14:33:01+00:00,da54ee81458693ac52b094bf5fdd5a67d7a11f45,unknown,11,3,1,1,0,0,,,🖰 GUI;💥Malfunction;🟧 Priority: High
+Avaiga/taipy,1444317442,253,Simplify dev release,,dinhlongviolin1,45910030,closed,False,2023-07-21T10:58:44+00:00,2023-07-21T12:31:41+00:00,2023-07-21T12:31:38+00:00,2023-07-21T12:31:38+00:00,1f1824cfe6b89e2acab187eff1fab466284f4faf,unknown,6,37,2,1,0,0,,,

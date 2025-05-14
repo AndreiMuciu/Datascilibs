@@ -1,0 +1,55 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+FavioVazquez/ds-cheatsheets,240660508,1,Update README.md,Corrected the unsupervised learning URL,reedx8,29593134,closed,False,2018-12-23T01:21:36+00:00,2018-12-23T03:15:50+00:00,2018-12-23T03:15:50+00:00,2018-12-23T03:15:50+00:00,36fb50c82eaa1aa32e946a596625b7669154ac82,unknown,1,1,1,1,0,1,,,
+FavioVazquez/ds-cheatsheets,240673099,2,Ignore .DS_Store,"Thank you for great cheatsheets collection!
+
+`.DS_Store` is a file that stores custom attributes of its containing folder, such as the position of icons or the choice of a background image. It shouldn't be in repository.",orsinium,9638362,closed,False,2018-12-23T09:24:21+00:00,2018-12-23T10:35:29+00:00,2018-12-23T10:35:29+00:00,2018-12-23T10:35:29+00:00,605a447a445af6c81d62763327ffb7cc87d56edf,unknown,1,0,32,1,0,1,,,
+FavioVazquez/ds-cheatsheets,240682046,3,Data Transformation with Dplyr,"Hello Favio,
+
+Thank you for creating this list!
+
+I've noticed that the image for Data Transformation with Dplyr is the same as the one of Data Import with readr, this PR fixes the url to the correct image.",euljr,6294868,closed,False,2018-12-23T13:28:19+00:00,2018-12-23T17:43:45+00:00,2018-12-23T17:43:45+00:00,2018-12-23T17:43:45+00:00,7a68a0e0e99650182b4bd39f205bdf3acd16441d,unknown,1,1,1,1,0,1,,,
+FavioVazquez/ds-cheatsheets,240706205,5,Removed duplicate Keras (Python) pdf under Deep Learning / R category…,"…. Now, it is shown under only Python.
+
+Related to issue #4 ",zgrkpnr,10296457,closed,False,2018-12-23T23:57:17+00:00,2018-12-24T23:17:42+00:00,2018-12-24T23:17:42+00:00,2018-12-24T23:17:42+00:00,491d8d0f346f370f4728cfda89c489b7722e6a20,unknown,0,3,1,1,0,0,,,
+FavioVazquez/ds-cheatsheets,244150149,9,Added Business Science + RStudio submodules and updated Readme,"Business Science submodule: 
+- Added the Business Science repo as a submodule referencing the master branch
+- Retained the existing img folder for screenshots on README
+- Updated README links of PDF's to point towards the PDF's in the Business Science repo.
+
+RStudio submodule
+- Added RStudio's cheatsheet repo as a submodule referencing the master branch
+- Updated PDF links in README pointing to PDF's in RStudio's repo
+- Updated png links in README pointing to the pngs folder in the RStudio repo
+
+This is in line with the discussion in issue #8, and should hopefully enable the latest cheatsheets to be referenced via README or via fetching the latest commit in the submodules. 
+
+One disadvantage is that RStudio's cheatsheet repo is a relatively large download.",shrysr,11930484,closed,False,2019-01-11T21:09:58+00:00,2019-01-12T22:57:56+00:00,2019-01-12T22:57:56+00:00,2019-01-12T22:57:56+00:00,774a5aa2fb1b98dd7e94c356bd69875d1f06acff,unknown,71,61,79,5,0,0,,,
+FavioVazquez/ds-cheatsheets,244793337,10,Create suggestions_sayak.md,,sayakpaul,22957388,closed,False,2019-01-15T13:26:18+00:00,2019-01-16T03:43:12+00:00,2019-01-16T03:43:12+00:00,,8cbf8c01be6540e68e0b3516e0e43421c83cb5ff,unknown,1,0,1,1,0,1,,,
+FavioVazquez/ds-cheatsheets,245981010,13,"Added Cheatsheets for Emacs, Git, BASH","- Added cheatsheets for Emacs, GIT and BASH under General.
+- Updated README to include screenshots and PDF's. 
+",shrysr,11930484,closed,False,2019-01-18T21:42:25+00:00,2019-01-25T22:15:17+00:00,2019-01-25T22:15:17+00:00,2019-01-25T22:15:17+00:00,6e9084269c4e165dbf0022901b3a67eaf3080c95,unknown,24,0,13,5,0,1,,,
+FavioVazquez/ds-cheatsheets,247026389,14,Add probability cheatsheet by Joe Blitzstein and William Chen,,sayakpaul,22957388,closed,False,2019-01-23T16:10:36+00:00,2019-01-26T05:57:21+00:00,2019-01-26T05:57:21+00:00,,7d31600c79ae5b731147476b9a2de8192d4d21ef,unknown,0,0,1,2,0,2,,,
+FavioVazquez/ds-cheatsheets,247870409,15,Add the Probability Cheatsheet by Joe Blitzstein and William Chen,,sayakpaul,22957388,closed,False,2019-01-26T05:56:30+00:00,2019-03-02T19:11:37+00:00,2019-02-28T16:04:32+00:00,2019-02-28T16:04:32+00:00,d0b2ebf3cf3a3af74997bf5337775684c5ef2dd2,unknown,13,1,12,6,0,4,,,
+FavioVazquez/ds-cheatsheets,261712701,17,DVC Cheat Sheet,Added Cheat Sheet for DVC (Data Version Control),cwallaceh,4714229,closed,False,2019-03-15T22:07:27+00:00,2019-04-02T20:00:22+00:00,2019-04-02T20:00:22+00:00,2019-04-02T20:00:22+00:00,29179e03add6b0cac383bf65cca01e8069a6672b,unknown,4,0,3,2,0,1,,,
+FavioVazquez/ds-cheatsheets,264659957,18,Added python regex (Dataquest ) and BSU's regression and clustering cheatsheets,"As suggested in #16 : Added the PDF and PNG, and updated Readme to reflect. 
+
+Additionally :  
+- Added Business Science University (BSU) Clustering and segmentation cheatsheet to Machine Learning > Unsupervised.
+- Added BSU's Regression cheatsheet to Machine Learning > Supervised.",shrysr,11930484,closed,False,2019-03-26T19:17:22+00:00,2019-04-02T20:01:16+00:00,2019-04-02T20:01:16+00:00,2019-04-02T20:01:16+00:00,91024364b76f085ae430f4a21fc54c3de2c355b0,unknown,14,4,7,4,0,0,,,
+FavioVazquez/ds-cheatsheets,269224997,21,Fixed broken link to show DVC cheatsheet img,Fix for the issue #20 ,cwallaceh,4714229,closed,False,2019-04-10T15:52:25+00:00,2019-04-11T04:50:01+00:00,2019-04-11T04:49:54+00:00,2019-04-11T04:49:54+00:00,f83ef9cdc7bee38e99da69352000ea0a3dc80a2d,unknown,1,1,1,1,0,1,,,
+FavioVazquez/ds-cheatsheets,282694807,22,fixed small error,,0xflotus,26602940,closed,False,2019-05-28T07:09:27+00:00,2019-05-30T19:44:13+00:00,2019-05-30T19:44:13+00:00,2019-05-30T19:44:13+00:00,32b36380440b8e4a267de2a813079b411c4fbf87,unknown,2,2,1,2,0,1,,,
+FavioVazquez/ds-cheatsheets,296052289,25,Fixed typo error in Cheat Sheet,fixes #23 ,0xflotus,26602940,closed,False,2019-07-10T07:54:47+00:00,2019-07-12T07:11:00+00:00,2019-07-12T07:11:00+00:00,2019-07-12T07:10:59+00:00,45fb23e67c126338389d26fbb33006cdbbf336bc,unknown,2,2,3,2,0,0,,,
+FavioVazquez/ds-cheatsheets,324579653,26,R cheatsheet for plotting,This is a really good guide to plotting for those wanting to improve their plot outputs in R.,abbiesachapman,14160754,open,False,2019-10-04T08:55:55+00:00,2019-10-31T08:30:38+00:00,,,779b7faad890fe3ad92d5182a46d46c6dc463c70,clean,3,0,1,1,0,2,FavioVazquez,,enhancement
+FavioVazquez/ds-cheatsheets,330088959,27,Added content in table for better navigation,All PDF highlights are added in table of content for better navigation and to locate the required cheatsheet easily.,MexsonFernandes,22270770,closed,False,2019-10-20T06:38:12+00:00,2019-10-31T06:41:14+00:00,2019-10-31T06:41:14+00:00,2019-10-31T06:41:14+00:00,1ef986764cbd9d677fb56e9d6c0d1989bbaab108,unknown,79,1,1,2,2,2,,,enhancement
+FavioVazquez/ds-cheatsheets,886734689,29,Add files via upload,'Git' cheat sheet from 'GitHub'.,RANJUBISWAS,48774200,open,False,2022-03-23T04:03:05+00:00,2022-03-23T04:03:05+00:00,,,27557e54d82e05b822f9514888f72eef297b350f,clean,0,0,1,1,0,0,,,
+FavioVazquez/ds-cheatsheets,962526999,30,Add Engineering Practices for Data Scientists Cheatsheet,"Hey @FavioVazquez, I had a cheatsheet that might be interesting for the folks looking at this repo so I decided to do a PR.
+
+Let me know what you think. ",skogstrom,4202119,open,False,2022-06-09T07:46:52+00:00,2022-11-25T16:30:50+00:00,,,de715ebd74368c65c4898783b6771985198d8cdb,clean,6,0,3,2,1,0,,,
+FavioVazquez/ds-cheatsheets,1128641461,31,core Visualization Principle ,"this file has core details of visualization. 
+check once and merge 
+Read me file  also updated with refl ink
+one more suggestion
+giving URL as ref in readme not efficiency
+check my way of ref, its easy and better ",chandru1003,55582956,closed,False,2022-11-19T08:16:34+00:00,2022-11-21T12:59:54+00:00,2022-11-21T12:59:54+00:00,,4201788b47f91ea6c489afa16147e48d83576a35,clean,2,0,2,2,0,0,,,
+FavioVazquez/ds-cheatsheets,1824493330,33,Create ds-cheatsheets,,Genjutsugod,97380029,open,False,2024-04-16T03:23:36+00:00,2024-04-16T03:23:36+00:00,,,314dd88c1e7188dada74a08b39f3bfc0d2e1b273,clean,1,0,1,1,0,0,,,
+FavioVazquez/ds-cheatsheets,1974988930,36,test,test,LiChiLin,84316439,open,False,2024-07-18T03:38:14+00:00,2024-07-18T03:40:15+00:00,,,29aeafa1d23255654907df308398c2b2e01eae60,clean,2,0,3,3,0,0,,,

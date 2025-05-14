@@ -1,0 +1,609 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+scikit-learn/scikit-learn,654,2,more on LARS (we're getting there),,agramfort,161052,closed,False,2010-09-01T13:06:00+00:00,2014-06-13T07:54:53+00:00,2010-09-02T14:10:16+00:00,2010-09-02T14:10:16+00:00,,dirty,153,77,7,9,0,2,,,
+scikit-learn/scikit-learn,1139,3,Scaling and preprocessing,"this is just a draft but maybe a good start to think about this ticket:
+
+http://sourceforge.net/apps/trac/scikit-learn/ticket/117
+
+the scaling of data is either done by hand right now or handled
+by the different estimators in a non-uniform way.
+",agramfort,161052,closed,False,2010-09-02T17:13:55+00:00,2014-06-13T07:55:04+00:00,2010-10-23T15:44:33+00:00,,a90caf8b96482a94b4902f737c2aee7a309868c1,dirty,51,0,2,1,0,1,,,
+scikit-learn/scikit-learn,3136,4,Issue 77 sparse cd,"Implementation of CD for elastic net on scipy.sparse data.
+
+Missing: centered intercept, regularization path + example combining sparse and dense API at once
+",ogrisel,89061,closed,False,2010-09-09T16:03:53+00:00,2014-06-13T07:55:08+00:00,2010-09-14T13:00:43+00:00,2010-09-14T13:00:43+00:00,,dirty,6631,9,13,25,0,2,,,
+scikit-learn/scikit-learn,5047,6,Work on cross val and pipelines.,"Code review: I am interested in suggestions on how to make this code stink less, or criticism that finds problems or bugs with this code.
+# Enhancements
+- Cross validation in parallel (with several CPUs) works better.
+- The GridSearchCV stores its scores on the grid. I don't like the data structure that they are stored in. I think it 
+  is something that will need to be revisited at some point.
+- The score stored are now scaled even in the case iid=True. Alex, could you check that the code is right. You 
+  are the number one person who wants iid=True to work well.
+# Bug fixes
+- Make clone work on pipelines
+  
+  The clone code is fragile. I don't like it. The alternative is to add a '_clone' method to an object that would 
+  enable to override the clone behavior. I think that we need to keep this option in mind (the con is that it 
+  makes the estimator 'contract' heavier, the pro is that it makes this contract more explicit. I still think that we 
+  need the clone behavior in order to cross validate.
+- Make sure that classifiers are indeed recognized as so even when wrapped in CV or Pipeline objects
+  
+  I am very unhappy with this code (but I would still like it merged, because it gives a temporary solution). 
+  It raises the issue of how to recognize a classifier from a regressor. Finding the duck-typing signature for 
+  classifiers is partly the problem, because once we have found it, we need to find a good way to 'propagate' in 
+  the case of nested objects, as this commit shows.
+",GaelVaroquaux,208217,closed,False,2010-09-15T15:48:15+00:00,2014-06-13T07:55:14+00:00,2010-09-16T21:39:45+00:00,2010-09-16T21:39:45+00:00,,dirty,105,27,6,3,0,1,,,
+scikit-learn/scikit-learn,19466,9,Some cleanups,,ogrisel,89061,closed,False,2010-10-24T15:29:53+00:00,2014-06-13T07:55:26+00:00,2010-10-25T00:27:02+00:00,,52338e202a2a6530f66ca60a0fcda42cd6f7038b,dirty,12636,8,14,17,0,1,,,
+scikit-learn/scikit-learn,19548,10,broken doctests,,ogrisel,89061,closed,False,2010-10-24T21:34:16+00:00,2014-06-13T07:55:29+00:00,2010-10-24T21:34:40+00:00,,977c91260eefbececf480b762224dc2312f20c40,dirty,12701,8,14,22,0,0,,,
+scikit-learn/scikit-learn,22564,14,Kriging model class,"Hello list,
+
+I'd like to commit a new feature to the scikits-learn project.
+I implemented a kriging model class which is able to perform both regression and probabilistic classification.
+I will send an e-mail with a script that performs a demo.
+Since I have no clue where to put my contribution I simply created a single
+file named kriging.py with the class and other functions such as correlation 
+and regression models, and I added an import instruction to the main 
+**init**.py module of scikit.learn.
+
+I hope you'll enjoy this contribution.
+
+Vincent
+",dubourg,401766,closed,False,2010-10-31T23:02:42+00:00,2014-06-13T07:55:38+00:00,2010-11-25T03:06:54+00:00,2010-11-24T19:06:54+00:00,,dirty,1930,1,13,29,0,45,,,
+scikit-learn/scikit-learn,24864,15,Dense Stochastic Gradient Descent,"- new dense implementation of SGD (sgd/sgd_fast.pyx and sgd/sgd.py)
+- moved sparse extension module from sgd/sparse/src to sgd/
+- sgd/sgd_fast_sparse.pyx now imports declarations (LossFunctions) from sgd/sgd_fast.pxd
+- new example: examples/sgd/covertype_dense_sgd.py to showcase dense SGD. 
+",pprett,111730,closed,False,2010-11-05T17:55:29+00:00,2014-06-13T07:55:44+00:00,2010-11-07T21:28:38+00:00,2010-11-07T21:28:38+00:00,,dirty,2125,4779,20,10,0,0,,,
+scikit-learn/scikit-learn,27833,16,Untitled,"Sorry, just trying to undo a stupid mistake by which I override this commit ...
+",fabianp,277639,closed,False,2010-11-12T00:05:29+00:00,2014-06-12T17:07:42+00:00,2010-11-12T00:10:44+00:00,,6fb2e035858bcd1e57a6b7c0613a5d7b3ee90059,dirty,37,7,1,1,0,0,,,
+scikit-learn/scikit-learn,29117,17,Log proba,"here a quick attempt to support predict_log_proba for classifiers that support probabilistic outputs.
+
+See ticket :
+
+http://sourceforge.net/apps/trac/scikit-learn/ticket/157
+",agramfort,161052,closed,False,2010-11-15T17:56:32+00:00,2014-06-13T07:55:52+00:00,2010-12-02T19:55:33+00:00,,4b0fc6e87d397175e2e4f50d79ab0240d146cb8a,dirty,186,15,13,10,0,6,,,
+scikit-learn/scikit-learn,32491,19,SGD regression and class weights,"- changed SGD to ClassifierSGD and implemented RegressorSGD
+- I'm not overly convinced of the naming... if you have better ideas
+  please let me know.
+- importance (=class) weighting
+",pprett,111730,closed,False,2010-11-22T21:54:11+00:00,2014-06-13T07:56:03+00:00,2010-11-24T10:35:52+00:00,2010-11-24T10:35:52+00:00,,dirty,6020,7021,18,10,0,0,,,
+scikit-learn/scikit-learn,34618,22,Implementation of the power iteration method,"It's probably not needed, but in some experiments with a similar I did note a loss in quality when going to very large, very sparse matrices, so it can't hurt to have it there. Also a light refactoring to unify the sparsity testing.
+",alextp,5061,closed,False,2010-11-27T21:20:34+00:00,2014-06-13T07:56:10+00:00,2010-11-28T20:23:00+00:00,2010-11-28T12:23:00+00:00,,dirty,15,10,1,2,0,1,,,
+scikit-learn/scikit-learn,34814,23,Neighbor barycenter,"new estimator for k-NN based regression
++
+kneighbors_graph function to build the eventually weighted graph of neighbors
+",agramfort,161052,closed,False,2010-11-28T18:03:09+00:00,2014-06-13T07:56:13+00:00,2010-12-02T20:22:43+00:00,2010-12-02T20:22:43+00:00,,dirty,1291,995,9,10,0,38,,,
+scikit-learn/scikit-learn,35121,24,addition of r2_score function,,AnneLaureF,497836,closed,False,2010-11-29T14:57:21+00:00,2014-06-13T07:56:17+00:00,2010-12-10T14:01:58+00:00,,,dirty,39,14,7,5,0,4,,,
+scikit-learn/scikit-learn,35606,25,SGD module renaming,"Finalized the renaming of SGD module. 
+
+Moved sgd into linear_model.
+Renamed sgd to stochastic_gradient
+Renamed ClassifierSGD to SGDClassifier (same for Regressor and Base classes).
+
+Updated examples, docs, and build files. 
+",pprett,111730,closed,False,2010-11-30T11:18:17+00:00,2014-06-13T07:56:23+00:00,2010-12-01T11:15:26+00:00,,1272a61fbc9edea40efb28c5de14664c906f86ca,dirty,1124,1093,32,3,0,4,,,
+scikit-learn/scikit-learn,36755,26,Sgd rename,"- Moved sgd examples to examples/linear_model
+- Prefixed examples with sgd
+- Moved covertype example to benchmarks
+- Updated documentation (linear_model.rst, classes.rst)
+",pprett,111730,closed,False,2010-12-02T10:18:11+00:00,2014-06-13T07:56:26+00:00,2010-12-03T17:30:39+00:00,,28dc41bc98883de37b6b0e1c34cdde09155bd147,dirty,7213,5686,35,10,0,4,,,
+scikit-learn/scikit-learn,36841,27,addition of r2_score function (reworked),,AnneLaureF,497836,closed,False,2010-12-02T14:27:10+00:00,2014-06-13T07:56:29+00:00,2010-12-10T22:01:27+00:00,,,dirty,39,14,7,5,0,6,,,
+scikit-learn/scikit-learn,39594,28,Libsvm labels,"Sort labels by increasing order. This ensures that support vectors, coefs, etc. are also ordered in this fashion.
+
+Also added some test, one of them reconstructs the decision_function from the classifier.
+
+Due to convention in libsvm, original_decision function is the negative of our decision_function. For now i just invert the sign, although it should probably be fixed in libsvm, so that dual_coef_ is not the negative of what users expect.
+",fabianp,277639,closed,False,2010-12-08T14:54:38+00:00,2014-06-13T07:56:34+00:00,2011-02-27T19:45:06+00:00,,,dirty,86,36,4,7,0,12,,,
+scikit-learn/scikit-learn,40051,29,GaussianProcess score function,"Hi list,
+
+After a discussion with Alex (Gramfort) who reviewed the gaussian_process module, we decided to re-implement the score function so that it natively performs a leave-one-out estimate of the determination coefficient (as usually done with this kind of model) without exposing the internals to the user.
+(See https://github.com/agramfort/scikit-learn/commit/f068df4f62aae7febd0d9fc2319c100af4dd17df)
+
+There is an example of usage of this new score function in the plot_gp_diabetes_dataset.py example.
+
+Cheers,
+Vincent
+",dubourg,401766,closed,False,2010-12-09T07:55:35+00:00,2014-06-13T07:56:42+00:00,2010-12-13T10:10:30+00:00,2010-12-13T02:10:30+00:00,,dirty,185,187,7,4,0,3,,,
+scikit-learn/scikit-learn,40893,30,Extract randomized PCA impl in a dedicated toplevel class,"I wanted to make PCA able to handle sparse data (scipy.sparse matrices) using the fast_svd implementation. Since computing PCA for sparse dataset (with big n_features) is only feasable with truncated SVD the API of the existing PCA module (with automated ""mle"" strategy for finding n_components)  is not very well suited to such an evolution.
+
+I hence decided to wrap the fast_svd method in a dedicated RandomizedPCA that makes it explicit that it is able to handle both sparse and dense input provided that you are willing to truncate the singular spectrum to an arbitrary level.
+
+Here is a branch that does just that along with updated docstring, tests and examples along with a renaming of n_comp to n_components to be consistent with the overall scikit-learn naming conventions for dimension parameters.
+",ogrisel,89061,closed,False,2010-12-10T21:16:22+00:00,2014-06-13T07:56:57+00:00,2010-12-12T14:59:11+00:00,2010-12-12T14:59:11+00:00,,dirty,240,113,8,7,0,4,,,
+scikit-learn/scikit-learn,41497,31,Linear svc refit instability,"I open the pull request for tracking the resolution of this bug even though I don't have a fix for this right now. This is just a way to mark this as an issue in the github.com issue tracker.
+
+Here is the thread on the mailing list discussing this issue:
+
+ http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTim0sgVeo_uANDdOr%2BPJy591F7%2BBp3U%3D%3DC_sb%2BtM%40mail.gmail.com&forum_name=scikit-learn-general
+",ogrisel,89061,closed,False,2010-12-12T23:35:59+00:00,2014-06-13T07:57:12+00:00,2010-12-16T09:02:20+00:00,,,dirty,9,5,1,1,0,1,,,
+scikit-learn/scikit-learn,42263,33,_lmvnpdffull can result in overflow.,"Computing the determinant in _lmvnpdffull has a potential overflow problem (np.prod ( ...)).
+I suggest to pull the logarithm into the computation (which is done in line 566 currently)
+to resolve this problem.
+",osdf,193341,closed,False,2010-12-14T16:48:51+00:00,2014-06-13T07:57:17+00:00,2010-12-15T01:12:56+00:00,2010-12-14T17:12:56+00:00,,dirty,2,2,1,1,0,1,,,
+scikit-learn/scikit-learn,42461,34,liblinear bias/intercept handling,"As discussed on the mailing list
+
+PS: pls tell me if the pull request is correct. My git fu is embarassing :-)
+",paolo-losi,264906,closed,False,2010-12-14T22:28:56+00:00,2014-06-13T07:57:20+00:00,2010-12-16T04:10:46+00:00,,,dirty,100,17,7,23,0,7,,,
+scikit-learn/scikit-learn,53408,39,WIP : Self-Organizing Map,"i added the SOM clustering (using a square grid in 2 dimensions) in my branch : https://github.com/scampion/scikit-learn
+
+I also added the calinski_index mesure to evaluate clustering quality.
+
+I don't know if i made a mistake but I'm a bit surprised by the comparaison between KMeans and SOM using digits dataset in example.
+
+Self-Organizing Map done in 2.328s
+calinski index 16.19 | 94.18%
+
+KMeans done in 15.618s
+calinski index 9.02 | 90.02%
+
+Due to the SOM shape, i also use 16 clusters in the kmeans.
+I don't know if my implemention is good or not.
+
+At last, the unit test test_som.py produce a color map of the neurons as example.
+",scampion,554155,closed,False,2011-01-11T15:48:17+00:00,2014-06-13T07:57:35+00:00,2012-05-28T12:38:45+00:00,,,dirty,317,0,5,7,0,10,,,
+scikit-learn/scikit-learn,53423,40,k-means tweaks,"minor interface and performance improvements to kmeans
+",jaberg,171276,closed,False,2011-01-11T16:21:13+00:00,2014-06-13T07:57:45+00:00,2011-01-11T23:31:45+00:00,,d465ec1019f17332700b16fe8b5bfe3867dd03e9,dirty,35,9,1,4,0,0,,,
+scikit-learn/scikit-learn,53789,42,improvements to k-means (and one PCA thing),"Thanks for the feedback from the pull request I sent this afternoon - I made those changes and more, hopefully you like this set better.
+",jaberg,171276,closed,False,2011-01-12T03:38:01+00:00,2014-06-13T07:57:52+00:00,2011-01-14T08:30:15+00:00,2011-01-14T00:30:15+00:00,,dirty,120,28,4,19,0,2,,,
+scikit-learn/scikit-learn,53790,43,Permutations on cross val score,"Some code to test a cross val score with permutations in supervised settings.
+",agramfort,161052,closed,False,2011-01-12T03:38:36+00:00,2014-06-13T07:58:02+00:00,2011-01-12T21:01:20+00:00,,,dirty,215,3,5,3,0,5,,,
+scikit-learn/scikit-learn,54710,47,Manifold-light merge,"Four algorithms are available :
+- Laplacian Eigenmaps
+- Diffusion Maps
+- LLE
+- HessianMaps
+
+It uses now the code from Alexandre, which means that the number of lines is far shorter now. Some modifications are proposed for the neighbors code without any test failure. There is some **kwargs in some part of the code, it will be fixed in the second iteration (inclusion of Isomap, ...)
+
+Only the first two algorithms are optimized by using sparse matrices, LLE and Hessian Maps use dense matrices (I tried optimizing LLE, but I couldn't get something working, I hope the inclusion of this code inside master will help fix this issue).
+
+Documentation refers to the two examples as to the different publications. The next algorithms are also already in the documentation.
+",mbrucher,321752,closed,False,2011-01-13T18:57:18+00:00,2014-06-13T07:58:15+00:00,2011-01-16T02:37:07+00:00,,,dirty,1396,19,25,75,0,38,,,
+scikit-learn/scikit-learn,55852,48,code review SOM,,agramfort,161052,closed,False,2011-01-16T03:33:24+00:00,2014-06-13T07:58:22+00:00,2011-01-16T03:34:26+00:00,,,dirty,296,0,5,4,0,0,,,
+scikit-learn/scikit-learn,56099,49,Pull request: typos in the documentation,"Hello,
+
+I corrected a few (very few) typos in the documentation. 
+
+Cheers,
+
+Emmanuelle
+",emmanuelle,263366,closed,False,2011-01-16T21:37:11+00:00,2014-06-13T07:58:29+00:00,2011-01-16T21:59:46+00:00,,,dirty,2,2,2,1,0,1,,,
+scikit-learn/scikit-learn,56813,52,Small documentation update,,turian,65918,closed,False,2011-01-18T07:41:19+00:00,2014-06-13T07:58:36+00:00,2011-01-20T15:47:02+00:00,,,dirty,6,0,1,1,0,7,,,
+scikit-learn/scikit-learn,57001,53,FIX: removed obsolete entries and added current ones for top-level __all__ + added a unittest for such import,"Otherwise 'from scikits.learn import *' would fail
+",yarikoptic,39889,closed,False,2011-01-18T15:23:47+00:00,2014-06-13T07:58:39+00:00,2011-01-18T23:38:46+00:00,2011-01-18T15:38:46+00:00,,dirty,30,2,2,1,0,1,,,
+scikit-learn/scikit-learn,57245,54,Cross-val indices,"cv objects can now return integers indices (useful for sparse matrices)
+",agramfort,161052,closed,False,2011-01-18T22:15:53+00:00,2014-06-13T07:58:42+00:00,2011-01-19T23:58:56+00:00,2011-01-19T15:58:56+00:00,,dirty,108,26,4,5,0,2,,,
+scikit-learn/scikit-learn,57602,55,Fixes/kfoldchecks,"minor assertion checks
+",satra,184063,closed,False,2011-01-19T14:51:49+00:00,2014-06-13T07:58:51+00:00,2011-01-19T22:57:48+00:00,,14bb013444a9f7a3a820e6963f3b3facfeb3d037,dirty,2,2,1,1,0,3,,,
+scikit-learn/scikit-learn,58144,57,Ridge improvements,"- LabelBinarizer: easy and clean way to binarize the target vector using the transformer paradigm
+- RidgeLOO: Ridge regression with efficient built-in leave-one-out cross-val
+- RidgeClassifier: use ridge regression in a one-vs-all fashion
+- Sparse classes
+- A few additional tests
+
+I didn't implement fit_intercept for the sparse case yet but will do it later.
+",mblondel,233706,closed,False,2011-01-20T08:52:38+00:00,2014-06-13T07:58:56+00:00,2011-01-28T11:58:07+00:00,2011-01-28T03:58:07+00:00,,dirty,726,26,10,44,0,25,,,
+scikit-learn/scikit-learn,58189,59,Fix  a bug of affinity propagation,"This bug is caused by incorrect index usage.
+BTW, the illustrating examples should also be changed accordingly, since the result would probably be wrong
+",fannix,558596,closed,False,2011-01-20T11:11:01+00:00,2014-06-13T07:59:22+00:00,2011-01-20T15:46:21+00:00,,,dirty,1,1,1,1,0,2,,,
+scikit-learn/scikit-learn,63975,67,Neighbors refactoring,"Heavy refactoring in scikits.learn.neighbors: most of loops could be eliminated in kneighbors_graph, cleaner implementation.
+
+The patch is difficult to follow as it touches a lot of paths, most illuminating maybe to take a look into the resulting kneighbors_graph.
+
+The biggest change is that the output of kneighbors_graph is modified: now it always returns a sparse matrix with exactly n_neighbors \* n_samples nonzero coefficients. As a side-effect, drop_fist keyword is dropped and places where drop_first where used (NeighborBarycenter) now use the (improved) barycenter function.
+
+Detailed API changes:
+- barycenter_weights has been renamed to barycenters and accepts
+   now X as 2D array and 3D array Y. This way iteration happens
+   inside barycenters, rendering kneighbor_graph considerably
+   cleaner. Also, NeighborRegressor directly uses barycenters
+   instead of kneighbor_graph. Apart from being conceptually
+   clearer, this lets us drop keyword drop_first in kneighbor_graph,
+   making the output of kneighbor_graph more consistent.
+- weight keyword was renamed to mode. This is in the spirit of some
+   scipy function (qr) that perform slightly different algorithms
+   based on that keyword.
+- added keyword eps to control how much regularization is
+   needed. Better names, anyone ?
+- dropped keyword drop_first. By default, the first is not used on
+   'distance' and 'barycenter', so that exactly n_neighbors are
+   nonzero on each row. This is what is expected in my opinion and
+   makes API simpler.
+",fabianp,277639,closed,False,2011-01-31T08:47:25+00:00,2014-06-13T07:59:38+00:00,2011-02-17T17:39:48+00:00,,,dirty,392,324,9,12,4,10,,,
+scikit-learn/scikit-learn,64027,68,PLS Partial least square,"PLS class implements :
+- regression PLS: PLS2 (multidimensional response), PLS1 (one dimensional response)
+- canonical PLS (PLS CA) with symetric deflations
+
+We also add a simple PLS_SVD (not fully tested yet)
+",duchesnay,344402,closed,False,2011-01-31T11:43:01+00:00,2014-06-13T08:00:01+00:00,2011-03-26T11:57:31+00:00,2011-03-09T14:29:55+00:00,,dirty,1211,3,13,36,0,22,,,
+scikit-learn/scikit-learn,64559,69,Hierarchical clustering and feature agglomeration,"here is the result of our efforts to provide a simple though efficient
+hierarchical clustering in the scikit. One key feature is it's ability
+to get clusters of connected samples (regions of images etc...)
+This patch also provided a way to achieve dimensionality
+reduction using feature agglomeration rather than feature
+selection.
+",agramfort,161052,closed,False,2011-02-01T03:20:51+00:00,2014-06-13T08:00:06+00:00,2011-02-22T02:26:28+00:00,,a8c50949ef59fb5e165ae7341f9d5fffb215a2b0,dirty,5846,31,19,30,0,28,,,
+scikit-learn/scikit-learn,64742,70,Patch for order as well as liblinear test,"This is essentially the same as what I did previously ... but now starting with the updated repo. 
+",yamins81,231307,closed,False,2011-02-01T13:48:10+00:00,2014-06-13T08:00:11+00:00,2011-02-01T23:01:17+00:00,,,dirty,83,5,2,4,0,1,,,
+scikit-learn/scikit-learn,64909,71,Simplified SVM prediction function,"I was able to simplify the SVM prediction function. 
+
+More important, though I realized what was ""really going on"" --- the coef_ matrix is situated wrong.  (See email over list.)
+",yamins81,231307,closed,False,2011-02-01T18:05:14+00:00,2014-06-13T08:00:16+00:00,2011-02-01T18:42:49+00:00,,,dirty,79,5,2,8,0,1,,,
+scikit-learn/scikit-learn,64951,72,Same pull request as before,"The previous pull request got closed before it was accepted ... 
+
+I fixed ALL the pep8 errors in the file so that I could see what was going wrong in my code section, and now everything is pep8-compliant !!!!  Yay!   (Ok, I know it's important.)
+.    
+",yamins81,231307,closed,False,2011-02-01T18:52:59+00:00,2014-06-13T08:00:21+00:00,2011-02-02T05:40:15+00:00,,,dirty,99,23,2,10,0,2,,,
+scikit-learn/scikit-learn,66910,74,Fortran ordering stuff,"used explicit fortran ordering in various places to correct problems. 
+
+Various files in my commit don't pass pep8 (like base.py )  but I these had many pep8 errors before I began working on them ... I can fix all the errors later today, if that's required...
+",yamins81,231307,closed,False,2011-02-04T13:26:11+00:00,2014-06-13T08:00:31+00:00,2011-02-08T10:25:53+00:00,,,dirty,1881,1683,7,15,2,6,,,
+scikit-learn/scikit-learn,77565,84,Improve performance of GMM sampling,"Patch contributed by f0k: 
+
+http://sourceforge.net/apps/trac/scikit-learn/ticket/164
+
+The patch looks good to me, but variable names should be more explicit
+",fabianp,277639,closed,False,2011-02-21T09:33:30+00:00,2014-06-13T08:00:53+00:00,2011-02-27T20:09:35+00:00,,,dirty,45,29,2,4,2,6,,,
+scikit-learn/scikit-learn,77587,85,Dataset API for loading the labeled faces datasets,"Hi all,
+
+Here is a preliminary request for comments for a new dataset loader for the Labeled Faces in the Wild dataset that download the original data (the jpeg files tarball and the labels text files and official CV splits).
+
+I use joblib to memoize the result of the jpeg extraction (using scipy.misc.imread) in a folder that is a subfolder of ""~/scikit_learn_data/lfw_home/"" that also keep a cached copy of the original data.
+
+I am willing to write some doc and tests for this but running the doc and tests will imply downloading ~230MB the first time. Is this acceptable? Is there a way to implement a global switch to skip tests that would require such a heavy network access? Especially how to implement such a switch so as not to pollute the doctests in the documentation.
+
+Edit: there is no example for the useage of the `load_lfw_pairs` function that is used for the official face verification task. I plan to use it with another feature extractor that will arrive later with it's own pull request.
+",ogrisel,89061,closed,False,2011-02-21T10:21:06+00:00,2014-06-13T08:00:59+00:00,2011-02-28T04:24:35+00:00,2011-02-27T20:24:35+00:00,,dirty,54,79,3,5,0,16,,,
+scikit-learn/scikit-learn,78128,86,Hcluster v2,"Hi folks,
+
+I've update the current hierarchial clustering with the changes in master.
+
+A quick update on the status (I hope I did not forget anything from previous comments):
+## done
+- pipeline and GridSearchCV have been cleaned
+- feat agglo inherits from TransformerMixin
+- s / n_comp / n_components
+## todo
+- s / memory / cache ?
+- check cython inertia necessary
+- scipy comparison and auto select best implementation
+- rst doc for feature agglomeration. Where should it appear?
+",agramfort,161052,closed,False,2011-02-22T02:28:15+00:00,2014-06-13T08:01:06+00:00,2011-04-01T16:43:24+00:00,2011-04-01T16:43:24+00:00,,dirty,246,721,9,11,0,8,,,
+scikit-learn/scikit-learn,78402,89,make Neighbors* faster in high dimensional spaces,"I get some 10x speedup in high dimensional (500 features) spaces. For this, added keyword strategy={'auto', 'btree', 'brute', 'inplace'} to Neighbors*.
+
+This implements the possibility of using a brute-force algorithm when
+the ambient space becomes too big. It also implements a strategy='auto'
+that uses a simple heuristic to use the best method.
+",fabianp,277639,closed,False,2011-02-22T14:35:51+00:00,2014-06-13T08:01:42+00:00,2011-02-23T09:57:05+00:00,,,dirty,130,96,5,8,2,4,,,
+scikit-learn/scikit-learn,78487,90,Changes to cross_val and new algorithm,"Hi all,
+
+I've made a small change to LeaveOneLabelOut in cross_val.  I just included the name of the label in the yield line of the **iter** method.  I'm writing some automated reports and I thought it would be useful to know the performance of the cross_validation based on the label being used.
+
+Also,  I've written a Projection to Latent Structures (aka Partial Least Squares) algorithm that I have been using in my work.  
+
+Please have a look, and let me know what you think.
+
+Best Regards,
+Aman
+",aman-thakral,617870,closed,False,2011-02-22T16:27:41+00:00,2014-06-13T08:01:54+00:00,2011-02-28T01:02:01+00:00,,,dirty,530,1,3,2,1,7,,,
+scikit-learn/scikit-learn,82438,92,20newsgroups dataset,"Hi all here is some work on the dataset loader, this time factoring the boilerplate from the examples + some function renaming and more documentation improvements.
+
+BTW, if someone knows the official citation reference for this dataset please, specify it in the comments or directly add it to the comments. I gave the link to the most official website I could find but there is no official bibtex AFAIK.
+",ogrisel,89061,closed,False,2011-02-28T10:47:53+00:00,2014-06-13T08:02:12+00:00,2011-03-05T17:08:40+00:00,2011-03-05T17:08:40+00:00,,dirty,313,100,13,21,3,3,,,
+scikit-learn/scikit-learn,82489,93,Py3k,"This should add the basic infrastructure to support py3k. Only the Joblib part [0] lacks this support, but It should first be done upstream.
+
+[0] https://github.com/joblib/joblib/pull/2
+",fabianp,277639,closed,False,2011-02-28T13:09:17+00:00,2014-06-13T08:02:35+00:00,2011-04-01T14:39:48+00:00,,,dirty,117,24,5,1,0,3,,,
+scikit-learn/scikit-learn,83359,94,Grid search,"This branch implements a more aggressive parallel dispatching of the jobs in the GridSearchCV
+",GaelVaroquaux,208217,closed,False,2011-03-01T14:14:58+00:00,2014-06-13T08:02:42+00:00,2011-04-01T14:39:29+00:00,,,dirty,105,75,1,5,0,2,,,
+scikit-learn/scikit-learn,84299,97,WIP : Add functionality to gp,"Hi to all! This is my first commit to scikit-learn
+
+As detailed in the description of my commit I added some functionality to the GP framework:
+*) Calculate the predictive covariance matrix for a given set of evaluation points
+*) Draw a number of sample functions from a fitted GP distribution
+
+The support for batch processing (as done in the predict method) still needs to be added.
+
+Best to you all!
+D
+",demianw,272705,closed,False,2011-03-02T15:53:41+00:00,2014-06-13T08:02:54+00:00,2012-05-28T13:06:55+00:00,,fa5cd2d2cfcf10d788d79b5ba702bef4fb126201,dirty,294,51,3,26,3,34,,,
+scikit-learn/scikit-learn,85558,99,Replacement for wrong k-means++ initialization,"As noted in Issue scikit-learn/scikit-learn#98, the k-means++ initialization in scikits.learn is based on a widespread implementation for k-means++ in Python which is short and simple, but wrong (i.e. it is not k-means++).
+
+I have now ported and optimized the original C++ implementation of the authors of the 2007 k-means++ paper. This does not only correctly implement k-means++, it also reduces the computational complexity from O(k \* n_samples**2) to O(k \* n_samples \* numLocalTries).
+I therefore removed the max_samples parameter -- it is now fast enough even with large data sets (on my system it takes around a minute to choose 64 centers for 1e6 data points). Alternatively, we could just leave it there (with a high default value) for backwards compatibility.
+As scikits.learn depends on scipy anyway, I am using scipy.spatial.distances.cdist for distance calculations. It is a lot faster than scikits.learn.metrics.pairwise.euclidean_distances -- it may pay to make _e_step() use cdist() as well.
+",f0k,629706,closed,False,2011-03-04T02:48:20+00:00,2014-06-13T08:03:15+00:00,2011-03-06T14:15:45+00:00,,,dirty,92,50,1,3,10,12,,,
+scikit-learn/scikit-learn,89222,102,add converged_ attribute to GMM,"as discussed in the ML, I have added an attribute 'converged_' to GMM (in mixture.py) to indicate whether the fit() method ended in convergence or not (max_iter reached). The attribute is initialized to False at class initialization, and set to True if convergence is reached in GMM.fit(). It is reset to False when calling fit() again.
+",vincentschut,659645,closed,False,2011-03-09T14:07:55+00:00,2014-06-13T08:03:27+00:00,2011-03-09T21:25:09+00:00,2011-03-09T21:25:09+00:00,,dirty,11,1,1,4,1,2,,,
+scikit-learn/scikit-learn,90963,103,LDA improvements,"Here's a pull request which does the following:
+- implement transform
+- properly implement predict_log_proba
+- plot PCA vs LDA
+
+I don't fully understand the code in fit so I would like someone to check the commit that implements ""transform"".
+
+Usually the text book way to implement LDA is:
+1) Centers the data
+2) Compute Sw (within covariance matrix) and Sb (between covariance matrix)
+3) Compute the pseudo inverse Sw^-1 by the SVD method (and take care of near-zero singular values)
+4) Compute weight matrix W = eig(Sw^-1 Sb)
+
+By using Scaler and the covariance module for 1) and 2) this could make the code really short.
+
+However, I guess the current implementation has some numerical advantages. Can someone document them?
+",mblondel,233706,closed,False,2011-03-11T13:33:06+00:00,2014-06-13T08:03:30+00:00,2011-04-04T06:17:43+00:00,2011-04-04T06:17:43+00:00,,dirty,65,28,2,9,0,12,,,
+scikit-learn/scikit-learn,97134,105,Fix to the sparse SVM 'poly' kernel implementation,"Fixes the bug that I reported in issue 104.
+Includes a fix to the test_parse.py test.
+
+Amit
+",amitibo,664667,closed,False,2011-03-20T11:24:38+00:00,2014-06-13T08:03:39+00:00,2011-03-20T12:58:45+00:00,2011-03-20T12:58:45+00:00,,dirty,2,2,2,1,0,1,,,
+scikit-learn/scikit-learn,97528,106,Sgdsampleweight,"Features: 
+- Added sample weights to SGDClassifier and SGDRegressor classes. 
+- Major refactoring in SGD module. 
+- More test cases for class and sample weights. 
+
+See examples/linear_model/plot_sgd_weighted_samples.py for sample weight example.
+",pprett,111730,closed,False,2011-03-21T07:10:27+00:00,2014-06-13T08:03:42+00:00,2011-03-21T19:20:46+00:00,2011-03-21T19:20:46+00:00,,dirty,3868,3153,12,6,0,3,,,
+scikit-learn/scikit-learn,98065,107,Added Multinomial Naive Bayes classifier.,"Added Multinomial Naive Bayes classifier. Updated the documents and tests.
+
+Amit
+",amitibo,664667,closed,False,2011-03-21T21:12:45+00:00,2014-06-12T14:16:56+00:00,2011-05-22T16:39:09+00:00,,,dirty,844,236,12,11,6,11,,,
+scikit-learn/scikit-learn,106602,109,NMF,"Hi,
+Here is my pull request containing:
+Non-negative matrix factorization
+Two initialization methods (NNDSVD and CRO based hierarchical clustering) apart from random initialization
+For those who have been watching my local code, NNDSVD has been updated according to the reference MATLAB implementation from the author's homepage. It now has 3 variants of its own.
+
+Tests are incomplete, benchmark needs to be extended to compare init methods, and to consider sparsity (see next paragraph)
+
+NMF sparseness constraints seem to work at a glance, but rigurous evaluation has not been made yet. It seems to keep error low enough while indeed setting more values to zero in the corresponding factor.
+
+Best,
+Vlad
+",vene,241745,closed,False,2011-03-31T22:19:40+00:00,2014-06-13T08:03:52+00:00,2011-04-02T10:53:20+00:00,,e97e3e08cd882dca28ac061abfd0cecf011d1e78,dirty,920,1,5,41,13,8,,,
+scikit-learn/scikit-learn,107006,112,Kernel PCA,"This pull request implements the following:
+- linear_kernel, polynomial_kernel and rbf_kernel (in pairwise module)
+- KernelCenterer (in preprocessing module)
+- KernelPCA (in pca module)
+- inverse_transform (""pre-image"")
+- minimal documentation
+- plot_kpca example
+",mblondel,233706,closed,False,2011-04-01T11:10:50+00:00,2014-06-13T08:04:21+00:00,2011-04-04T14:50:34+00:00,2011-04-04T14:50:34+00:00,,dirty,141,59,4,14,9,32,,,
+scikit-learn/scikit-learn,107061,113,SPRINT: Doc Pull request,"Small pull request to improved install doc on Ubuntu
+",yml,125902,closed,False,2011-04-01T12:42:51+00:00,2014-06-13T08:04:36+00:00,2011-04-01T12:46:39+00:00,2011-04-01T12:46:39+00:00,,dirty,12,1,1,1,0,0,,,
+scikit-learn/scikit-learn,107062,114,SPRINT: Doc Pull request,"Update the installation doc
+",yml,125902,closed,False,2011-04-01T12:44:44+00:00,2014-06-13T08:04:39+00:00,2011-04-01T12:46:39+00:00,2011-04-01T12:46:39+00:00,,dirty,13,2,2,2,0,0,,,
+scikit-learn/scikit-learn,107095,116,Variational infinite gmm,"This implementation seems to work.
+
+The DP variational GMM has the following advantages:
+1. You don't need to specify a priori the number of components (just an upper bound on its value)
+2. The covariance matrix never diverges, so the full model is safe even with one or two examples per cluster
+3. All estimates are regularized
+
+It has the following disadvantages:
+1. It tends to create uneven distributions between the clusters
+2. It might take longer than EM
+3. Intializing is harder (the components are not exchangeable), so restarts might be a good idea.
+
+Right now I'd like:
+1. comments on code quality
+2. suggestions for things to test
+",alextp,5061,closed,False,2011-04-01T13:35:09+00:00,2014-06-13T08:04:44+00:00,2011-07-18T09:37:52+00:00,2011-07-18T09:37:52+00:00,5b5daceabd2bfd3263a629df3ec50f96cb938149,dirty,2050,248,17,122,10,158,,,
+scikit-learn/scikit-learn,107118,117,Initial implementation of cross validated SVC,"Ok, this still needs some work. This pull request is just to share some ideas and because of the 'lookie what I did' factor.
+
+On the API I'm still not sure that it's a great idea to pass multiple parameters as lists or tuples, which is how it's implemented right now. It's handy, but might give some conflicts in the long run:
+
+```
+>>> clf = SVCCV(C=[1., 2.])
+>>> clf.fit(X, y)
+```
+",fabianp,277639,closed,False,2011-04-01T14:06:15+00:00,2014-06-13T08:05:01+00:00,2011-04-08T17:06:34+00:00,2011-04-01T14:28:44+00:00,,dirty,11,1,1,1,0,2,,,
+scikit-learn/scikit-learn,107137,118,Refactor text feature extraction,"Hi everybody,
+
+After discussion with Olivier, Mathieu, Gaël and Nicolas, we propose the following pull request,
+that refactor the feature_extraction/text module in a single text.py file.
+
+We also remove the dense version and keep only the sparse version of each method. This allows to remove some abstract classes, e.g BaseCountVectorizer to keep only CountVectorizer.
+
+We are also planning to refactor some functions to expose a simple API.
+
+Vincent
+",vmichel,295195,closed,False,2011-04-01T14:20:58+00:00,2014-06-13T08:05:04+00:00,2011-04-01T14:47:14+00:00,,,dirty,5885,0,12,1,0,1,,,
+scikit-learn/scikit-learn,107140,119,[feature_extraction] Refactor text/* to text.py,"Hi everybody,
+
+After discussion with Olivier, Mathieu, Gaël and Nicolas, we propose the following pull request,
+that refactor the feature_extraction/text module in a single text.py file.
+
+We also remove the dense version and keep only the sparse version of each method. This allows to remove some abstract classes, e.g BaseCountVectorizer to keep only CountVectorizer.
+
+We are also planning to refactor some functions to expose a simple API.
+
+Vincent
+",vmichel,295195,closed,False,2011-04-01T14:23:08+00:00,2014-06-13T08:05:07+00:00,2011-04-03T02:05:08+00:00,2011-04-03T02:05:08+00:00,,dirty,69,252,4,1,1,6,,,
+scikit-learn/scikit-learn,107163,120,Wrapped BallTree in Cython.,"Note that this wrapper does not include the BruteForceNeighbors()
+function from BallTree.h
+",thouis,473043,closed,False,2011-04-01T14:52:31+00:00,2014-06-13T08:05:17+00:00,2011-04-01T15:51:38+00:00,2011-04-01T15:04:55+00:00,,dirty,5958,1000,7,2,0,0,,,
+scikit-learn/scikit-learn,107268,121,"Completed task ""Multiple figures in documentation examples"".",,mike-perdide,351073,closed,False,2011-04-01T16:56:50+00:00,2014-06-13T08:05:20+00:00,2011-04-01T16:59:07+00:00,,,dirty,80,21,5,3,0,0,,,
+scikit-learn/scikit-learn,107276,122,"Completed task ""Multiple figures in documentation examples"".","Yes I did.
+",mike-perdide,351073,closed,False,2011-04-01T17:01:17+00:00,2014-06-13T08:05:27+00:00,2011-04-02T14:53:59+00:00,2011-04-02T14:53:59+00:00,,dirty,89,42,12,2,0,5,,,
+scikit-learn/scikit-learn,107445,123,NMF lite branch,"I created a branch with all of the NMF code except for CRO hierarchical clustering, which is slow and impractical at the moment.
+",vene,241745,closed,False,2011-04-01T20:17:33+00:00,2014-06-13T08:05:37+00:00,2011-04-03T01:29:36+00:00,2011-04-03T01:29:36+00:00,,dirty,943,1,7,71,12,33,,,
+scikit-learn/scikit-learn,107540,124,more pep8 safe files,"not much here... sorry I came in late to the sprint
+",npinto,41171,closed,False,2011-04-01T21:49:44+00:00,2014-06-13T08:06:04+00:00,2011-04-02T09:21:19+00:00,2011-04-02T09:21:19+00:00,,dirty,178,170,13,11,0,1,,,
+scikit-learn/scikit-learn,107556,125,logger utility for scikit learn.,"This is made to fit where 'print' is used.
+Should imho be extended as written in docstring
+",feth,554384,closed,False,2011-04-01T22:08:56+00:00,2014-06-13T08:06:29+00:00,2011-04-04T16:10:08+00:00,,9c41592308969a67f7dbcb99aeee642b4247e991,dirty,123,0,1,1,0,3,,,
+scikit-learn/scikit-learn,108705,127,FIX: very confusing internal naming in NMF,"Minor fix that fixes some weird internal naming in my code that did not affect the interface.
+(n_features <-> n_samples in fit_transform)
+",vene,241745,closed,False,2011-04-04T08:56:38+00:00,2014-06-13T08:06:36+00:00,2011-04-04T11:35:11+00:00,2011-04-04T11:35:11+00:00,,dirty,7,7,1,1,0,1,,,
+scikit-learn/scikit-learn,108857,128,Covariance,"Refactoring of the covariance module:
+- Basic (MLE) covariance --> covariance_.py
+- Shrunk covariances (Ledoit-Wolf, OAS) --> shrunk_covariance_.py
+- Examples --> examples/covariance
+
+Novelties:
+- OAS (shrinkage type) (see Chen et al. paper ""Shrinkage Algorithm for MMSE Covariance Estimation"")
+- New example (Ledoit-Wolf and OAS comparison = replication of a Chen's experiment, can be seen as a test)
+
+I wanted to have only two commits, one for refactoring, one for adding OAS, but git wished for four... ;)
+",VirgileFritsch,263280,closed,False,2011-04-04T13:45:22+00:00,2014-06-13T08:06:39+00:00,2011-04-27T07:50:39+00:00,2011-04-27T07:50:39+00:00,8026250b4ee5de69fc1d3b6a5401aa229aa18fab,dirty,967,338,11,11,15,31,,,
+scikit-learn/scikit-learn,108876,129,Decomposition,"Here it is, I think I fixed every reference except in an old changelog that I don't think is appropriate to touch.
+
+As for the components_ shape and the PEP8 of decomposition/test/test_pca.py, I am waiting for the merge of @mblondel 's Kernel PCA.
+",vene,241745,closed,False,2011-04-04T14:20:22+00:00,2014-06-13T08:06:48+00:00,2011-04-07T16:27:48+00:00,2011-04-07T16:27:48+00:00,,dirty,122,124,22,13,2,7,,,
+scikit-learn/scikit-learn,108992,130,WIP : logger utility for scikit learn.,"This is made to fit where 'print' is used and allows for several loggers.
+(rework of https://github.com/scikit-learn/scikit-learn/pull/125 )
+
+2 examples of how this could be used : 
+- https://github.com/feth/scikit-learn/commit/e32c54372875c83deaa84a8129839bdcb93eb0cf (simple)
+- and https://github.com/feth/scikit-learn/commit/b744f8cc97f32ddf0a81df2431c9d6ba6c65adc4 (more elaborate) -what do you think?
+
+As suggested by Gael Varoquaux, there is the ""drop in"" replacement for print : log(), but this leaves room for people who want to fine tune their logging (domain, criticity and threshold), or benefit of the string formatting being performed late.
+",feth,554384,closed,False,2011-04-04T16:09:09+00:00,2014-06-13T08:07:06+00:00,2012-01-16T20:55:39+00:00,2011-04-08T10:24:25+00:00,,dirty,432,25,4,9,0,39,,,
+scikit-learn/scikit-learn,110663,131,Update docstring in linear_model.logistic,,fannix,558596,closed,False,2011-04-06T08:16:38+00:00,2014-06-13T08:07:21+00:00,2011-04-07T10:30:31+00:00,,,dirty,1,1,1,4,0,5,,,
+scikit-learn/scikit-learn,112156,132,Minibatch k-means,"I haven't written documentations yet, but I would appreciate feedback on the code.
+
+This patch implements the minibatch k-means (or fast k-means) of : http://www.eecs.tufts.edu/~dsculley/papers/fastkmeans.pdf
+
+I implemented a new class, MiniBatchKMeans, that inherits from KMeans, and takes an extra arguments: chunk. This arguments sets the size of the sample data (in the article, chosen randomly among the data) .
+
+I've modified the function k_means to take two extra arguments: chunk and batch (thought we might want to set chunk to 0 per default, and get rid of batch, and use the batch k means step computation only when chunk is not set to 0). The kmeans algorithm now computes the step differently whether it is a batch k-means or the Lloyd's one.
+
+The data from the example is a bit small IMO to run the batch k-means algorithm, but we still have some interesting results (here is the results of the example file: http://bpaste.net/show/15236/).
+
+Thanks,
+
+EDIT: OG: I fixed the confusing name of the pull request
+",NelleV,184798,closed,False,2011-04-07T20:31:02+00:00,2014-06-13T08:07:24+00:00,2011-05-17T22:46:35+00:00,2011-05-17T22:46:35+00:00,df39cb4e3af3b85dd3fae1645f8afdaca707b025,dirty,5375,3294,92,100,24,31,,,
+scikit-learn/scikit-learn,112418,133,Enh/randomforest,"first pass at decision tree and random forest classifier derived from milk. i'm sort of working on this in spare moments, so just let me know what else i should take care of before a merge to master can be done (i.e. docs, tests, etc.,.). 
+",satra,184063,closed,False,2011-04-08T01:30:12+00:00,2014-06-13T08:07:41+00:00,2011-07-30T15:47:54+00:00,,7f5b007ebe278b2001d965b022885f4fcae9fe3c,dirty,8826,26,20,19,12,15,,,
+scikit-learn/scikit-learn,112558,134,"Decision Trees, AdaBoost, and Bagging","I have implemented decision trees from scratch in C++ which is interfaced with Cython.
+AdaBoost and bagging are implemented in a new module ""scikits.learn.ensemble"". An implementation of gradient boosting will come soon.
+
+For preliminary tests/sample usage see:
+scikit-learn/scikits/learn/decisiontree/tests/test_decisiontree.py
+",ndawe,202816,closed,False,2011-04-08T07:00:07+00:00,2014-06-13T08:07:47+00:00,2011-04-10T03:09:11+00:00,,f4e12d59a65f4d4991c88cc2200a168e1b6063fd,dirty,6296,0,16,41,0,23,,,
+scikit-learn/scikit-learn,115610,135,L1 logreg min c,"the minimum value for C that yields a ""not null"" model.
+
+You can find the calculation on [1].
+
+The advantage of having a lower bound on C
+obviously allows for an easier search on the parameter
+space.
+
+PS: Thanks Alexandre and Oliver for the review.
+
+[1] https://docs.google.com/leaf?id=0B71d1mificKaNWY3NDY5YzktOTkzYi00ZmYyLWFmMzYtMTMwNTEzZjIwMTE4
+",paolo-losi,264906,closed,False,2011-04-12T09:49:52+00:00,2014-06-13T08:07:53+00:00,2011-04-26T08:19:01+00:00,2011-04-26T08:19:01+00:00,a093d07b5ac7a3d947274a1f9b83f8705fd86317,dirty,178,13,8,63,6,43,,,
+scikit-learn/scikit-learn,116653,136,Refactoring in ridge.py,"I'd like to expose the computational routines behind Ridge\*  as they might be useful in some manifold routines (among others). Also minor changes, like lazy import of scipy.sparse and docstring changes.
+
+As a future note, it might be useful to add the 'auto' to {'cg', 'default'} as keywords for solve, and rename 'default' to something more explicit like 'cholesky' or 'dense'. 
+",fabianp,277639,closed,False,2011-04-13T09:47:20+00:00,2014-06-13T08:08:07+00:00,2011-06-25T22:01:31+00:00,,5d62ee559d5e2c548bf8afb6a84a4b874b65b27b,dirty,115,76,2,2,0,13,,,
+scikit-learn/scikit-learn,119738,137,Removed typo from nearest neighbours example,"The nearest neighbours example seems to have been copied from the SVM example.
+There were some references to SVMs and support vectors in this example which I removed.
+Cheers,
+Andy
+",amueller,449558,closed,False,2011-04-16T12:46:03+00:00,2014-06-13T08:08:15+00:00,2011-04-16T13:41:16+00:00,2011-04-16T13:41:16+00:00,,dirty,3,5,1,1,0,1,,,
+scikit-learn/scikit-learn,126637,138,WIP: Power Iteration Clustering,"Here is an early pull request, far from being ready for merging to master (lacks tests, docs, and a class that implements the estimator public API).
+
+The goal is to let other developers know about some ongoing work to implement Power Iteration Clustering, a ""variant"" of Spectral Clustering that is supposed to be more scalable (according to the authors of the reference paper).
+
+In practice I am not so sure about the tradeoff speed / robustness of the results. We need to implement better clustering metrics (as mentioned in the paper) so as to be able to do a principled comparison and evaluate the performance of the algorithm.
+
+Edit: here is a direct link to the reference paper: http://www.cs.cmu.edu/~wcohen/postscript/icml2010-pic-final.pdf 
+
+Feedback greatly appreciated.
+## Status / TODO before merging
+- <del>find a way to quantitatively evaluate the quality of the clusters</del>(implemented v-measure and adjusted Rand index now in master)
+- investigate with the dependency on the value of the `tol` hyperparameter
+- write documentation
+- write tests
+- cleanup the convergence plot code (or find a non intrusive, generic API to deal with such convergence monitoring, maybe using callbacks)
+- reproduce convergence results of the paper on the 20 newsgroups dataset
+",ogrisel,89061,closed,False,2011-04-25T16:57:19+00:00,2016-10-25T20:03:38+00:00,2016-10-25T20:03:38+00:00,,a1cc54f6b112b83a23d690667298c9b38e93606e,dirty,14386,7176,124,164,0,24,,,New Feature
+scikit-learn/scikit-learn,129990,140,Do not open file write file until download is complete.,"@ogrisel: is this OK?
+
+This way we avoid (or more precisely minimize) the need to deal with
+partially downloaded files and the errors that arise when you
+Control-C a started download.
+",fabianp,277639,closed,False,2011-04-28T09:02:50+00:00,2014-06-13T08:08:28+00:00,2011-04-29T12:12:21+00:00,2011-04-29T12:12:21+00:00,b9b71d73c3cf4bb30b055ed1772a9ddf86533069,dirty,5,2,1,1,0,5,,,
+scikit-learn/scikit-learn,130191,141,Fixed a whole load of memory leaks in libsvm/liblinear interface,"Hi,
+
+I caught a bunch of potential memory leaks in the C and C++ code that interfaces with liblinear and libsvm, and fixed them. I also took the liberty of cleaning that code while I was at it.
+
+Regards,
+Lars Buitinck
+Scientific programmer, University of Amsterdam.
+",larsmans,335383,closed,False,2011-04-28T13:42:52+00:00,2014-06-13T08:08:31+00:00,2011-05-02T08:25:16+00:00,2011-05-02T08:25:16+00:00,8474133fdd3406edc07574f984da3fa9dd5bd82f,dirty,6,3,2,3,5,5,,,
+scikit-learn/scikit-learn,133139,143,"Cleanup lib{linear,svm} C helper routines","I deleted my repo and reapplied my changes in proper order. Here's two patch to the lib{linear,svm} helper routines, and the actual codebase of liblinear.
+",larsmans,335383,closed,False,2011-05-02T08:53:19+00:00,2014-06-13T08:08:37+00:00,2012-07-27T10:07:21+00:00,,88f1fb551405aad09d900309ca624f0d6ed8aa4b,dirty,375,297,7,2,0,11,,,
+scikit-learn/scikit-learn,133182,144,Make ball tree code safer and 64-bit clean,"Use size_t instead of a mixture of int/long int. On most 64 bit platforms,
+size_t is 64 bits while int is 31 bits + sign. The size of long int differs
+per platform, even among 64 bit ones.
+
+Rebuilt with cython --cplus ball_tree.pyx
+",larsmans,335383,closed,False,2011-05-02T09:57:56+00:00,2014-06-13T08:09:08+00:00,2011-05-02T17:34:43+00:00,2011-05-02T17:34:43+00:00,3a546367e43efe67d1a4733e0648ac59814fd27f,dirty,256,260,3,1,0,1,,,
+scikit-learn/scikit-learn,134368,147,Copy editing in developers' docs,"Some really minor stuff.
+",larsmans,335383,closed,False,2011-05-03T13:02:41+00:00,2014-06-13T08:09:44+00:00,2011-05-03T13:08:58+00:00,2011-05-03T13:08:58+00:00,6760ed5b827b394fe94a6d3b2710a0df0a2073c1,dirty,20,20,1,1,0,1,,,
+scikit-learn/scikit-learn,134555,148,RF: use joblib.logger submodule itself while accessing its function in grid_search,"That would make it easier to allow using system-wide installed joblib on Debian
+installations which provide only rudimentary externals/joblib/**init**.py
+
+Please cherry-pick into 0.8.X
+",yarikoptic,39889,closed,False,2011-05-03T16:07:51+00:00,2014-06-13T08:09:48+00:00,2011-05-03T16:12:49+00:00,2011-05-03T16:12:49+00:00,c29053be0d92b5af58601a8d558231f8959b83fc,dirty,2,3,1,1,0,2,,,
+scikit-learn/scikit-learn,134742,149,Learningrate,"Different learning rate schedules for SGD module. 
+
+Features:
+  'constant': via parameter eta0
+  'optimal': the schedule that was currently used (similar to Leon Bottou's sgd and PEGASOS)
+  'invscaling': inverse scaling, schedule used by vowpal wabit
+
+For classification 'optimal' is default, for regression 'invscaling' is default. 
+sgd.rst includes some documentation in `Math formulation`. 
+",pprett,111730,closed,False,2011-05-03T18:43:28+00:00,2014-06-13T08:09:51+00:00,2011-05-03T18:48:50+00:00,,26d2c3c10dee53ab1c7d24309362529aabd1e316,dirty,1982,1366,44,43,0,1,,,
+scikit-learn/scikit-learn,134792,150,Learningrate,"Different learning rate schedules for SGD module.
+
+Features:
+- 'constant': via parameter eta0
+- 'optimal': the schedule that was currently used (similar to Leon Bottou's sgd and PEGASOS)
+- 'invscaling': inverse scaling, schedule used by vowpal wabit
+
+For classification 'optimal' is default, for regression 'invscaling' is default. 
+sgd.rst includes some documentation in Math formulation.
+",pprett,111730,closed,False,2011-05-03T19:28:59+00:00,2014-06-13T08:09:56+00:00,2011-05-05T10:14:57+00:00,2011-05-05T10:14:57+00:00,eabca390a9abe7c7f48f80cb269dde0cb2bacafc,dirty,1757,1208,10,10,0,17,,,
+scikit-learn/scikit-learn,135390,151,Allow methods that don't implement transform (but do implement a fit_transoform) in Pipeline,"I think this is just a bug in the `__init__` logic. Someone with more experience in the Pipeline can hopefully tell.
+",fabianp,277639,closed,False,2011-05-04T07:44:54+00:00,2014-06-13T08:09:59+00:00,2011-05-04T08:26:11+00:00,,61dc0bb21d76e9845433f850f32dc60318092b19,dirty,3,3,1,1,0,10,,,
+scikit-learn/scikit-learn,135440,152,prevent SEGV when BallTree initialization fails.,"Fixes #146.
+",thouis,473043,closed,False,2011-05-04T09:05:23+00:00,2014-06-13T08:10:02+00:00,2011-05-04T10:03:43+00:00,,3eb0a0faf99fecfaafca1c463b34e00f6e540384,dirty,568,330,2,1,0,2,,,
+scikit-learn/scikit-learn,135474,153,Initial implementation of Locally Linear Embedding.,"First method in the manifold module.
+
+Some things are still not implemented 
+- LocallyLinearEmbedding does not implement a predict method yet. First, because it will take me time, but also because it involves refactoring some other methods in neighbors and I think it's easier to review if those changes are kept separate.
+
+Others would need improvement:
+- Image from plot_swissroll is a bit too flat. Maybe someone with more matplotlib experience can fix that.
+- Olivier suggested to try fast_svd as sparse eigensolver. I didn't try it. Also, I'm interested only in the smallest nonzero eigenvalues, it is not immediately obvious how to get that information with fast_svd.
+",fabianp,277639,closed,False,2011-05-04T09:48:47+00:00,2014-06-13T08:10:05+00:00,2011-05-30T08:54:11+00:00,2011-05-30T08:54:11+00:00,045af68c6ee15ef667c701ca70c17b9e46c3ccff,dirty,465,8,13,21,3,42,,,
+scikit-learn/scikit-learn,135639,154,small typo in docs,,larsmans,335383,closed,False,2011-05-04T13:12:46+00:00,2014-06-13T08:10:20+00:00,2011-05-04T13:25:20+00:00,2011-05-04T13:25:20+00:00,01bda064630804906878dca26ad9f1b42153c218,dirty,1,1,1,1,0,0,,,
+scikit-learn/scikit-learn,135902,155,ROC fixes for trivial classifiers (always predict one class) and input ch,"ROC fixes for trivial classifiers (always predict one class) and input checks (raise ValueError in case of multi-class).
+
+metrics.roc_curve now always returns arrays of size at least 3. That is, in the case of decision classifiers (classifiers which do not return confidence scores or probability estimates) (0,0) and (1,1) are included to ensure that metrics.auc gives right results. 
+
+Additional tests for AUC.
+
+Tested AUC values agains SIGKDD evaluation tool perf [1] -> give same results on test data supplied by perf + other boundary cases.
+
+[1] http://www.sigkdd.org/kddcup/index.php?section=2004&method=soft
+",pprett,111730,closed,False,2011-05-04T16:58:39+00:00,2014-06-13T08:10:23+00:00,2011-05-05T10:43:50+00:00,2011-05-05T10:43:50+00:00,c150b2114bd8b84427b4e224a190019fdb1610ea,dirty,99,26,2,4,13,2,,,
+scikit-learn/scikit-learn,136708,157,FIX: joblib paths.,"Think it's trivial, but I don't know if @GaelVaroquaux uses some script to change the import paths in which case it should be fixed there.
+
+Also I wonder why this wasn't triggered before
+",fabianp,277639,closed,False,2011-05-05T09:17:31+00:00,2014-06-13T08:10:32+00:00,2011-05-05T11:40:20+00:00,2011-05-05T11:40:20+00:00,5e5bdada80cc27d99aa163efae2a8ad0a6a93283,dirty,2,2,1,1,0,3,,,
+scikit-learn/scikit-learn,138291,160,Updated README.rst,"Separate build and install for Unix to prevent directories cluttered with root-owned object files.
+",larsmans,335383,closed,False,2011-05-06T15:03:18+00:00,2014-06-13T08:10:39+00:00,2011-05-06T15:04:58+00:00,2011-05-06T15:04:58+00:00,f4e0ae62eecafb5165de532349aedf25a899c50d,dirty,7,2,1,1,0,0,,,
+scikit-learn/scikit-learn,139750,161,"V-Measure, homogeneity and completeness clustering metrics","Hi all, I have implemented entropy based clustering metrics from the following paper:
+
+V-Measure: A conditional entropy-based external cluster evaluation measure by Andrew Rosenberg and Julia Hirschberg, 2007
+
+http://acl.ldc.upenn.edu/D/D07/D07-1043.pdf
+
+Test coverage is 100%, some existing clustering examples have been updated to use the new metrics, I wrote a short summary of the paper in the clustering documentation emphasizing the pros and cons and pep8 is happy. 
+",ogrisel,89061,closed,False,2011-05-08T12:26:34+00:00,2014-06-13T08:10:41+00:00,2011-05-17T09:32:27+00:00,2011-05-17T09:32:27+00:00,e2bd246255edcc11e6ca8707700e0ab72de97bf8,dirty,681,36,8,26,1,25,,,

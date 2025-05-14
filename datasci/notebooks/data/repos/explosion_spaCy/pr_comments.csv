@@ -1,0 +1,1983 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+explosion/spaCy,2305294132,1934447930,ljvmiranda921,12949683,2025-01-29T19:17:02+00:00,2025-01-29T19:17:03+00:00,"```suggestion
+        }
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,2305294132,1934447930,ljvmiranda921,12949683,2025-01-29T19:17:02+00:00,2025-01-29T19:17:03+00:00,"```suggestion
+        }
+```",True,website/meta/universe.json,,"@@ -5669,7 +5669,46 @@
+                 ""nlp"",
+                 ""spacy""
+             ]
+-        }
++        },
++        {
++            ""id"": ""calamanCy"",
++            ""slogan"": ""NLP Pipelines for Tagalog"",
++            ""description"": ""calamanCy is a Tagalog natural language preprocessing framework made with spaCy. Its goal is to provide pipelines and datasets for downstream NLP tasks."",
++            ""github"": ""ljvmiranda921/calamanCy"",
++            ""pip"": ""calamanCy"",
++            ""code_example"": [
++                ""import calamancy"",
++                ""nlp = calamancy.load('tl_calamancy_md-0.1.0')"",
++                ""doc = nlp('Ako si Juan de la Cruz')"",
++                """",
++                ""for ent in doc.ents:"",
++                ""    print(f'Text: {ent.text} -> Entity: {ent.label_}')"",
++            ],
++            ""code_language"": ""python"",
++            ""url"": ""https://github.com/ljvmiranda921/calamanCy"",
++            ""thumb"": ""https://github.com/ljvmiranda921/calamanCy/raw/master/logo.png?raw=True"",
++            ""image"": ""https://github.com/ljvmiranda921/calamanCy/raw/master/logo.png?raw=True"",
++            ""author"": ""Lester James V. Miranda"",
++            ""author_links"": {
++                ""twitter"": ""ljvmiranda"",
++                ""github"": ""ljvmiranda921"",
++                ""website"": ""https://ljvmiranda921.github.io"",
++            },
++            ""category"": [
++              ""pipeline"",
++              ""training"",
++              ""research"",
++              ""standalone"",
++              ""models""
++            ],
++            ""tags"": [
++              ""nlp"",
++              ""spacy"",
++              ""multilingual"",
++              ""filipino"",
++              ""tagalog""
++            ]
++        },",0,0,0,0,0,0,0
+explosion/spaCy,1898282365,1751838510,ines,13643239,2024-09-10T12:18:02+00:00,2024-09-10T12:18:02+00:00,"```suggestion
+            ""slogan"": ""Normalizer for contemporary French"",
+            ""description"": ""Normalizer for French with focus on online and informal communication, _peùUUUt-èTRE_ becomes _peut-être_, _voilaaaa_ becomes _voilà_. it also harmonizes inclusive language (the user can chose how): by default, _auteur-rice-s-x et relecteur.xrices_ becomes _auteur·ricexs et relecteur·ricexs_."",
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1898282365,1751838510,ines,13643239,2024-09-10T12:18:02+00:00,2024-09-10T12:18:02+00:00,"```suggestion
+            ""slogan"": ""Normalizer for contemporary French"",
+            ""description"": ""Normalizer for French with focus on online and informal communication, _peùUUUt-èTRE_ becomes _peut-être_, _voilaaaa_ becomes _voilà_. it also harmonizes inclusive language (the user can chose how): by default, _auteur-rice-s-x et relecteur.xrices_ becomes _auteur·ricexs et relecteur·ricexs_."",
+```",True,website/meta/universe.json,,"@@ -4517,6 +4517,31 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""presque"",
++            ""title"": ""presque"",
++            ""slogan"": ""normalizer for contemporary french."",
++            ""description"": ""normalizer for french with focus on online and informal communication, _peùUUUt-èTRE_ becomes _peut-être_, _voilaaaa_ becomes _voilà_. it also harmonizes inclusive language (the user can chose how): by default, _auteur-rice-s-x et relecteur.xrices_ becomes _auteur·ricexs et relecteur·ricexs_."",",0,0,0,0,0,0,0
+explosion/spaCy,1898209962,1751835219,ines,13643239,2024-09-10T12:15:41+00:00,2024-09-10T12:15:41+00:00,"```suggestion
+            ""slogan"": ""Tokenizer for contemporary French"",
+            ""description"": ""A tokenizer for French that handles inword parentheses like in _(b)rouille_, inclusive language (won't split _relecteur.rice.s_,but will split _mais.maintenant_), hyphens (split _peut-on_, or _pouvons-vous_ but not _tubulu-pimpant_), apostrophes (split _j'arrive_ or _j'arrivons_, but not _aujourd'hui_ or _r'garder_), emoticons, text-emoji (_:happy:_), urls, mails and more."",
+            ""github"": ""thjbdvlt/quelquhui"",
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1898209962,1751835219,ines,13643239,2024-09-10T12:15:41+00:00,2024-09-10T12:15:41+00:00,"```suggestion
+            ""slogan"": ""Tokenizer for contemporary French"",
+            ""description"": ""A tokenizer for French that handles inword parentheses like in _(b)rouille_, inclusive language (won't split _relecteur.rice.s_,but will split _mais.maintenant_), hyphens (split _peut-on_, or _pouvons-vous_ but not _tubulu-pimpant_), apostrophes (split _j'arrive_ or _j'arrivons_, but not _aujourd'hui_ or _r'garder_), emoticons, text-emoji (_:happy:_), urls, mails and more."",
+            ""github"": ""thjbdvlt/quelquhui"",
+```",True,website/meta/universe.json,,"@@ -4517,6 +4517,26 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""quelquhui"",
++            ""title"": ""quelquhui"",
++            ""slogan"": ""tokenizer for contemporary french"",
++            ""description"": ""A tokenizer for french that handles inword parentheses like in _(b)rouille_, inclusive language (won't split _relecteur.rice.s_,but will split _mais.maintenant_), hyphens (split _peut-on_, or _pouvons-vous_ but not _tubulu-pimpant_), apostrophes (split _j'arrive_ or _j'arrivons_, but not _aujourd'hui_ or _r'garder_), emoticons, text-emoji (_:happy:_), urls, mails, ..."",
++            ""github"": ""thjbdvlt/quelquhui"",",0,0,0,0,0,0,0
+explosion/spaCy,1843858239,1626310806,svlandeg,8796347,2024-06-04T16:34:53+00:00,2024-06-04T16:37:58+00:00,"```suggestion
+The `sentiment` attribute is removed from the `Token`, `Span`, `Doc` and `Lexeme`
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1843858239,1626311639,svlandeg,8796347,2024-06-04T16:35:32+00:00,2024-06-04T16:37:58+00:00,"```suggestion
+candidates. The batching is by doc since the [`Span`](/api/span) objects in a
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1843858239,1626310806,svlandeg,8796347,2024-06-04T16:34:53+00:00,2024-06-04T16:37:58+00:00,"```suggestion
+The `sentiment` attribute is removed from the `Token`, `Span`, `Doc` and `Lexeme`
+```",True,website/docs/usage/v4.mdx,,"@@ -0,0 +1,191 @@
++---
++title: What's New in v4.0
++teaser: New features and how to upgrade
++menu:
++  - ['New Features', 'features']
++  - ['Upgrading Notes', 'upgrading']
++---
++
++## New features {id=""features"",hidden=""true""}
++
++spaCy v4.0 supports more flexible learning rates and adds experimental support
++for model distillation. This release also fixes some long-standing issues that
++require minor API changes.
++
++spaCy v4.0 drops support for Python 3.7 and 3.8.
++
++### Flexible learning rates {id=""learn-rate""}
++
++Thinc 9 adds support for more flexible learning rates that can use the step,
++parameter names, and results from prior evaluations. spaCy v4 makes use of these
++flexible learning rates by passing the aggregate score of the most recent
++evaluation to the learning rate schedule. This makes it possible for schedules
++like [`plateau`](https://thinc.ai/docs/api-schedules#plateau) to adjust the
++learning rate when training is stagnant.
++
++### Experimental support for model distillation {id=""distillation""}
++
++spaCy v4 lays the groundwork for model distillation. Distillation trains a
++_student_ model on the predictions of a _teacher_ model using an unannotated
++corpus. One of the more exciting applications of distillation is extracting
++small, task-focused models from large, pretrained transformer models.
++
++Support for distillation support consists of several parts:
++
++- [`TrainablePipe`](/api/pipe) now provides a [`distill`](/api/pipe#distill)
++  method. This can be used to perform a distillation step, where a student is
++  updated to mimick the outputs of the teacher.
++- A configuration section called `distilation` for configuring various
++  distillation settings.
++- The distillation loop.
++- The [`distill`](/api/cli#distill) subcommand to run distillation from the
++  command-line.
++
++Most of the trainable pipeline components are updated to support distillation.
++
++### Saving activations {id=""save-activation""}
++
++Trainable pipes can now save the pipe's model activations for a document in the
++[`Doc.activations`](/api/doc#attributes) dictionary. You can use this
++functionality to get programmatic access to e.g. the probability distibution of
++a pipe's classifier.
++
++The following activations are currently available:
++
++- `EditTreeLemmatizer`: `probabilities` and `tree_ids`
++- `EntityLinker`: `ents` and `scores`
++- `Morphologizer`: `probabilities` and `label_ids`
++- `SentenceRecognizer`: `probabilities` and `label_ids`
++- `SpanCategorizer`: `indices` and `scores`
++- `Tagger`: `probabilities` and `label_ids`
++- `TextCategorizer`: `probabilities`
++
++> #### Example
++>
++> ```python
++> import spacy
++> nlp = spacy.load(""de_core_news_lg"")
++> nlp.get_pipe(""tagger"").save_activations = True
++> doc = nlp(""Hallo Welt!"")
++> assert ""tagger"" in doc.activations
++> assert ""probabilities"" in doc.activations[""tagger""]
++> ```
++
++### Additional features and improvements {id=""additional-features-and-improvements""}
++
++- The `--code` option that is used by several CLI subcommands now accepts
++  multiple files to load by separating them with a comma.
++- `spacy download` does not redownload models that are already installed.
++- When modifying a `Span` that was retrieved through a `SpanGroup`, the change
++  is now reflected in the `SpanGroup`.
++- Lookups can now be downloaded from a URL using
++  `spacy.LookupsDataLoaderFromURL.v1`.
++
++## Notes about upgrading from v3.7 {id=""upgrading""}
++
++This release drops support for Python 3.7 and 3.8. Most configuration files from
++spaCy 3.7 can be used with spaCy 4.0 without any modifications (excepting
++configurations that use `EntityLinker.v1`, see below). However, spaCy 4.0
++introduces some (minor) API changes that are discussed in the remainder of this
++section.
++
++### Removal of the `EntityRuler` class
++
++The `EntityRuler` class is removed. The entity ruler is implemented as a special
++case of the `SpanRuler` component.
++
++See the [migration guide](/api/entityruler#migrating) for differences between
++the v3 `EntityRuler` and v4 `SpanRuler` implementations of the `entity_ruler`
++component.
++
++### Renamed language codes: `is` -> `isl` and `xx` to `mul`
++
++The language code for Icelandic has been changed from `is` to `isl` to avoid
++incompatibilities with the Python `is` keyword. The language code for
++multilingual models has been changed from `xx` to `mul`. Existing code that uses
++these language codes should be adjusted accordingly.
++
++### Removal of the `sentiment` attribute
++
++The `sentiment` attribute is removed the `Token`, `Span`, `Doc` and `Lexeme`",0,0,0,0,0,0,0
+explosion/spaCy,1843858239,1626311639,svlandeg,8796347,2024-06-04T16:35:32+00:00,2024-06-04T16:37:58+00:00,"```suggestion
+candidates. The batching is by doc since the [`Span`](/api/span) objects in a
+```",True,website/docs/usage/v4.mdx,,"@@ -0,0 +1,191 @@
++---
++title: What's New in v4.0
++teaser: New features and how to upgrade
++menu:
++  - ['New Features', 'features']
++  - ['Upgrading Notes', 'upgrading']
++---
++
++## New features {id=""features"",hidden=""true""}
++
++spaCy v4.0 supports more flexible learning rates and adds experimental support
++for model distillation. This release also fixes some long-standing issues that
++require minor API changes.
++
++spaCy v4.0 drops support for Python 3.7 and 3.8.
++
++### Flexible learning rates {id=""learn-rate""}
++
++Thinc 9 adds support for more flexible learning rates that can use the step,
++parameter names, and results from prior evaluations. spaCy v4 makes use of these
++flexible learning rates by passing the aggregate score of the most recent
++evaluation to the learning rate schedule. This makes it possible for schedules
++like [`plateau`](https://thinc.ai/docs/api-schedules#plateau) to adjust the
++learning rate when training is stagnant.
++
++### Experimental support for model distillation {id=""distillation""}
++
++spaCy v4 lays the groundwork for model distillation. Distillation trains a
++_student_ model on the predictions of a _teacher_ model using an unannotated
++corpus. One of the more exciting applications of distillation is extracting
++small, task-focused models from large, pretrained transformer models.
++
++Support for distillation support consists of several parts:
++
++- [`TrainablePipe`](/api/pipe) now provides a [`distill`](/api/pipe#distill)
++  method. This can be used to perform a distillation step, where a student is
++  updated to mimick the outputs of the teacher.
++- A configuration section called `distilation` for configuring various
++  distillation settings.
++- The distillation loop.
++- The [`distill`](/api/cli#distill) subcommand to run distillation from the
++  command-line.
++
++Most of the trainable pipeline components are updated to support distillation.
++
++### Saving activations {id=""save-activation""}
++
++Trainable pipes can now save the pipe's model activations for a document in the
++[`Doc.activations`](/api/doc#attributes) dictionary. You can use this
++functionality to get programmatic access to e.g. the probability distibution of
++a pipe's classifier.
++
++The following activations are currently available:
++
++- `EditTreeLemmatizer`: `probabilities` and `tree_ids`
++- `EntityLinker`: `ents` and `scores`
++- `Morphologizer`: `probabilities` and `label_ids`
++- `SentenceRecognizer`: `probabilities` and `label_ids`
++- `SpanCategorizer`: `indices` and `scores`
++- `Tagger`: `probabilities` and `label_ids`
++- `TextCategorizer`: `probabilities`
++
++> #### Example
++>
++> ```python
++> import spacy
++> nlp = spacy.load(""de_core_news_lg"")
++> nlp.get_pipe(""tagger"").save_activations = True
++> doc = nlp(""Hallo Welt!"")
++> assert ""tagger"" in doc.activations
++> assert ""probabilities"" in doc.activations[""tagger""]
++> ```
++
++### Additional features and improvements {id=""additional-features-and-improvements""}
++
++- The `--code` option that is used by several CLI subcommands now accepts
++  multiple files to load by separating them with a comma.
++- `spacy download` does not redownload models that are already installed.
++- When modifying a `Span` that was retrieved through a `SpanGroup`, the change
++  is now reflected in the `SpanGroup`.
++- Lookups can now be downloaded from a URL using
++  `spacy.LookupsDataLoaderFromURL.v1`.
++
++## Notes about upgrading from v3.7 {id=""upgrading""}
++
++This release drops support for Python 3.7 and 3.8. Most configuration files from
++spaCy 3.7 can be used with spaCy 4.0 without any modifications (excepting
++configurations that use `EntityLinker.v1`, see below). However, spaCy 4.0
++introduces some (minor) API changes that are discussed in the remainder of this
++section.
++
++### Removal of the `EntityRuler` class
++
++The `EntityRuler` class is removed. The entity ruler is implemented as a special
++case of the `SpanRuler` component.
++
++See the [migration guide](/api/entityruler#migrating) for differences between
++the v3 `EntityRuler` and v4 `SpanRuler` implementations of the `entity_ruler`
++component.
++
++### Renamed language codes: `is` -> `isl` and `xx` to `mul`
++
++The language code for Icelandic has been changed from `is` to `isl` to avoid
++incompatibilities with the Python `is` keyword. The language code for
++multilingual models has been changed from `xx` to `mul`. Existing code that uses
++these language codes should be adjusted accordingly.
++
++### Removal of the `sentiment` attribute
++
++The `sentiment` attribute is removed the `Token`, `Span`, `Doc` and `Lexeme`
++classes. If you used this attribute in a `sentiment` analysis component, we
++recommend you to store the sentiment analysis in an
++[extension attribute](/usage/processing-pipelines#custom-components-attributes)
++instead.
++
++### Removal of `get_candidates_batch`
++
++Prior to spaCy v4, `get_candidates()` returned an `Iterable` of candidates for a
++specific mention. spaCy >= 3.5 provides `get_candidates_batch()` for looking up
++multiple mentions — given an `Iterable[Span]` of mentions, it returns for each
++mention the candidates.
++
++spaCy v4 replaces both functions by a single function
++[`get_candidates`](/api/entitylinker#config) that does doc-wise batching. For an
++`Iterator[SpanGroup]` it returns for each mention in the spangroup the
++candidates. The batching is by doc since the [`Span`](/api/span)s in a",0,0,0,0,0,0,0
+explosion/spaCy,1834419349,1575350718,svlandeg,8796347,2024-04-22T20:57:17+00:00,2024-04-22T20:58:56+00:00,"```suggestion
+[`set_annotations`](/api/pipe#set_annotations) is called.
+```
+(just to be consistent though I think it'll resolve to the same thing)",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1834419349,1575352102,svlandeg,8796347,2024-04-22T20:58:51+00:00,2024-04-22T20:58:56+00:00,"```suggestion
+| **RETURNS** | Whether to save activations in the `Doc` object in [`set_annotations`](/api/pipe#set_annotations). ~~bool~~ |
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1834419349,1575350718,svlandeg,8796347,2024-04-22T20:57:17+00:00,2024-04-22T20:58:56+00:00,"```suggestion
+[`set_annotations`](/api/pipe#set_annotations) is called.
+```
+(just to be consistent though I think it'll resolve to the same thing)",True,website/docs/api/pipe.mdx,,"@@ -476,6 +476,17 @@ as an attribute to the component's model.
+ | ----------- | ---------------------------------------------------------------------------------------------- |
+ | **RETURNS** | Whether or not the output dimension of the model can be changed after initialization. ~~bool~~ |
+ 
++## TrainablePipe.save_activations {id=""save_activations"",tag=""property"",version=""4""}
++
++Check/set whether this component stores activations. When enabled, the
++activations of the pipe's model are stored in the
++[`Doc.activations`](/api/doc#attributes) dictionary when
++[`set_annotations`](set_annotations) is called.",0,0,0,0,0,0,0
+explosion/spaCy,1834419349,1575352102,svlandeg,8796347,2024-04-22T20:58:51+00:00,2024-04-22T20:58:56+00:00,"```suggestion
+| **RETURNS** | Whether to save activations in the `Doc` object in [`set_annotations`](/api/pipe#set_annotations). ~~bool~~ |
+```",True,website/docs/api/pipe.mdx,,"@@ -476,6 +476,17 @@ as an attribute to the component's model.
+ | ----------- | ---------------------------------------------------------------------------------------------- |
+ | **RETURNS** | Whether or not the output dimension of the model can be changed after initialization. ~~bool~~ |
+ 
++## TrainablePipe.save_activations {id=""save_activations"",tag=""property"",version=""4""}
++
++Check/set whether this component stores activations. When enabled, the
++activations of the pipe's model are stored in the
++[`Doc.activations`](/api/doc#attributes) dictionary when
++[`set_annotations`](set_annotations) is called.
++
++| Name        | Description                                                                                       |
++| ----------- | ------------------------------------------------------------------------------------------------- |
++| **RETURNS** | Whether to save activations in the `Doc` object in [`set_annotations`](set_annotations). ~~bool~~ |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560695445,svlandeg,8796347,2024-04-11T09:14:06+00:00,2024-04-11T09:27:27+00:00,"We can type this as `Union[str, Path]` which is also what `util.load_model()` supports.",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560696818,svlandeg,8796347,2024-04-11T09:15:11+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    # Make sure all files and paths exist if they are needed
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560698761,svlandeg,8796347,2024-04-11T09:16:42+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.divider(""Initializing student pipeline"")
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560699240,svlandeg,8796347,2024-04-11T09:17:05+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.good(""Initialized student pipeline"")
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560701753,svlandeg,8796347,2024-04-11T09:19:03+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.divider(""Distilling student pipeline from teacher"")
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560704210,svlandeg,8796347,2024-04-11T09:20:55+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+from a larger high-accuracy model. Since distillation uses the activations of the
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560704811,svlandeg,8796347,2024-04-11T09:21:25+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+teacher, distillation can be performed on a corpus of raw text without (gold standard)
+```
+(just to make it abundantly clear)",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560705769,svlandeg,8796347,2024-04-11T09:22:12+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+`distill` will save out the best performing pipeline across all epochs, as well as the final
+```
+Mostly to distinguish ""model"" from ""pipeline"" - the eval is holistic across all models in the one pipeline",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560707524,svlandeg,8796347,2024-04-11T09:23:27+00:00,2024-04-11T09:27:27+00:00,"Refer to Weasel instead: https://github.com/explosion/weasel (we should update this in other places as well, but that's outside of the scope of this PR)",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560710016,svlandeg,8796347,2024-04-11T09:25:18+00:00,2024-04-11T09:27:27+00:00,Should we add a comment that the loop still needs a dev set of gold annotations to evaluate on? To make it more clear why the example CLI statement 👇  has a `--paths.dev ./dev` overwrite part.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560711164,svlandeg,8796347,2024-04-11T09:26:12+00:00,2024-04-11T09:27:27+00:00,"This should mention that it can also be a `str` to refer to an installed pipeline, right?",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560711656,svlandeg,8796347,2024-04-11T09:26:33+00:00,2024-04-11T09:27:27+00:00,And what happens when it's `None`?,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560712400,svlandeg,8796347,2024-04-11T09:27:12+00:00,2024-04-11T09:27:27+00:00,Does it? 🤭 ,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561057055,danieldk,49398,2024-04-11T13:49:53+00:00,2024-04-11T13:49:53+00:00,Fixed.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561057454,danieldk,49398,2024-04-11T13:50:08+00:00,2024-04-11T13:50:09+00:00,Done.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561059912,danieldk,49398,2024-04-11T13:51:46+00:00,2024-04-11T13:51:47+00:00,"Yeah, good idea! Added.",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561075527,danieldk,49398,2024-04-11T14:02:10+00:00,2024-04-11T14:02:11+00:00,Done.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561080112,danieldk,49398,2024-04-11T14:04:36+00:00,2024-04-11T14:04:36+00:00,Added a remark that no pipeline is saved when this option is absent.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561080684,danieldk,49398,2024-04-11T14:04:49+00:00,2024-04-11T14:04:50+00:00,Oops 🤦 . Fixed.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561113110,svlandeg,8796347,2024-04-11T14:22:53+00:00,2024-04-11T14:22:53+00:00,"```suggestion
+If you need to manage complex multi-step training workflows, check out 
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560695445,svlandeg,8796347,2024-04-11T09:14:06+00:00,2024-04-11T09:27:27+00:00,"We can type this as `Union[str, Path]` which is also what `util.load_model()` supports.",True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560696818,svlandeg,8796347,2024-04-11T09:15:11+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    # Make sure all files and paths exist if they are needed
+```",True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,
++    student_config_path: Union[str, Path],
++    output_path: Optional[Union[str, Path]] = None,
++    *,
++    use_gpu: int = -1,
++    overrides: Dict[str, Any] = util.SimpleFrozenDict(),
++):
++    student_config_path = util.ensure_path(student_config_path)
++    output_path = util.ensure_path(output_path)
++    # Make sure all files and paths exists if they are needed",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560698761,svlandeg,8796347,2024-04-11T09:16:42+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.divider(""Initializing student pipeline"")
+```",True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,
++    student_config_path: Union[str, Path],
++    output_path: Optional[Union[str, Path]] = None,
++    *,
++    use_gpu: int = -1,
++    overrides: Dict[str, Any] = util.SimpleFrozenDict(),
++):
++    student_config_path = util.ensure_path(student_config_path)
++    output_path = util.ensure_path(output_path)
++    # Make sure all files and paths exists if they are needed
++    if not student_config_path or (
++        str(student_config_path) != ""-"" and not student_config_path.exists()
++    ):
++        msg.fail(""Student config file not found"", student_config_path, exits=1)
++    if not output_path:
++        msg.info(""No output directory provided"")
++    else:
++        if not output_path.exists():
++            output_path.mkdir(parents=True)
++            msg.good(f""Created output directory: {output_path}"")
++        msg.info(f""Saving to output directory: {output_path}"")
++    setup_gpu(use_gpu)
++    teacher = util.load_model(teacher_model)
++    with show_validation_error(student_config_path):
++        config = util.load_config(
++            student_config_path, overrides=overrides, interpolate=False
++        )
++    msg.divider(""Initializing pipeline"")",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560699240,svlandeg,8796347,2024-04-11T09:17:05+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.good(""Initialized student pipeline"")
+```",True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,
++    student_config_path: Union[str, Path],
++    output_path: Optional[Union[str, Path]] = None,
++    *,
++    use_gpu: int = -1,
++    overrides: Dict[str, Any] = util.SimpleFrozenDict(),
++):
++    student_config_path = util.ensure_path(student_config_path)
++    output_path = util.ensure_path(output_path)
++    # Make sure all files and paths exists if they are needed
++    if not student_config_path or (
++        str(student_config_path) != ""-"" and not student_config_path.exists()
++    ):
++        msg.fail(""Student config file not found"", student_config_path, exits=1)
++    if not output_path:
++        msg.info(""No output directory provided"")
++    else:
++        if not output_path.exists():
++            output_path.mkdir(parents=True)
++            msg.good(f""Created output directory: {output_path}"")
++        msg.info(f""Saving to output directory: {output_path}"")
++    setup_gpu(use_gpu)
++    teacher = util.load_model(teacher_model)
++    with show_validation_error(student_config_path):
++        config = util.load_config(
++            student_config_path, overrides=overrides, interpolate=False
++        )
++    msg.divider(""Initializing pipeline"")
++    with show_validation_error(student_config_path, hint_fill=False):
++        student = init_nlp_student(config, teacher, use_gpu=use_gpu)
++
++    msg.good(""Initialized pipeline"")",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560701753,svlandeg,8796347,2024-04-11T09:19:03+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+    msg.divider(""Distilling student pipeline from teacher"")
+```",True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,
++    student_config_path: Union[str, Path],
++    output_path: Optional[Union[str, Path]] = None,
++    *,
++    use_gpu: int = -1,
++    overrides: Dict[str, Any] = util.SimpleFrozenDict(),
++):
++    student_config_path = util.ensure_path(student_config_path)
++    output_path = util.ensure_path(output_path)
++    # Make sure all files and paths exists if they are needed
++    if not student_config_path or (
++        str(student_config_path) != ""-"" and not student_config_path.exists()
++    ):
++        msg.fail(""Student config file not found"", student_config_path, exits=1)
++    if not output_path:
++        msg.info(""No output directory provided"")
++    else:
++        if not output_path.exists():
++            output_path.mkdir(parents=True)
++            msg.good(f""Created output directory: {output_path}"")
++        msg.info(f""Saving to output directory: {output_path}"")
++    setup_gpu(use_gpu)
++    teacher = util.load_model(teacher_model)
++    with show_validation_error(student_config_path):
++        config = util.load_config(
++            student_config_path, overrides=overrides, interpolate=False
++        )
++    msg.divider(""Initializing pipeline"")
++    with show_validation_error(student_config_path, hint_fill=False):
++        student = init_nlp_student(config, teacher, use_gpu=use_gpu)
++
++    msg.good(""Initialized pipeline"")
++    msg.divider(""Distilling pipeline"")",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560704210,svlandeg,8796347,2024-04-11T09:20:55+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+from a larger high-accuracy model. Since distillation uses the activations of the
+```",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560704811,svlandeg,8796347,2024-04-11T09:21:25+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+teacher, distillation can be performed on a corpus of raw text without (gold standard)
+```
+(just to make it abundantly clear)",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560705769,svlandeg,8796347,2024-04-11T09:22:12+00:00,2024-04-11T09:27:27+00:00,"```suggestion
+`distill` will save out the best performing pipeline across all epochs, as well as the final
+```
+Mostly to distinguish ""model"" from ""pipeline"" - the eval is holistic across all models in the one pipeline",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560707524,svlandeg,8796347,2024-04-11T09:23:27+00:00,2024-04-11T09:27:27+00:00,"Refer to Weasel instead: https://github.com/explosion/weasel (we should update this in other places as well, but that's outside of the scope of this PR)",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560710016,svlandeg,8796347,2024-04-11T09:25:18+00:00,2024-04-11T09:27:27+00:00,Should we add a comment that the loop still needs a dev set of gold annotations to evaluate on? To make it more clear why the example CLI statement 👇  has a `--paths.dev ./dev` overwrite part.,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560711164,svlandeg,8796347,2024-04-11T09:26:12+00:00,2024-04-11T09:27:27+00:00,"This should mention that it can also be a `str` to refer to an installed pipeline, right?",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560711656,svlandeg,8796347,2024-04-11T09:26:33+00:00,2024-04-11T09:27:27+00:00,And what happens when it's `None`?,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |
++| `student_config_path` | The configuration of the student pipeline. ~~Path (positional)~~                                                                                                                                       |
++| `--output`, `-o`      | Directory to store the distilled pipeline in. Will be created if it doesn't exist. ~~Optional[Path] \(option)~~                                                                                        |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1560712400,svlandeg,8796347,2024-04-11T09:27:12+00:00,2024-04-11T09:27:27+00:00,Does it? 🤭 ,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |
++| `student_config_path` | The configuration of the student pipeline. ~~Path (positional)~~                                                                                                                                       |
++| `--output`, `-o`      | Directory to store the distilled pipeline in. Will be created if it doesn't exist. ~~Optional[Path] \(option)~~                                                                                        |
++| `--code`, `-c`        | Comma-separated paths to Python files with additional code to be imported. Allows [registering custom functions](/usage/training#custom-functions) for new architectures. ~~Optional[Path] \(option)~~ |
++| `--verbose`, `-V`     | Show more detailed messages during distillation. ~~bool (flag)~~                                                                                                                                       |
++| `--gpu-id`, `-g`      | GPU ID or `-1` for CPU. Defaults to `-1`. ~~int (option)~~                                                                                                                                             |
++| `--help`, `-h`        | Show help message and available arguments. ~~bool (flag)~~                                                                                                                                             |
++| **CREATES**           | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                                                                                                          |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561057055,danieldk,49398,2024-04-11T13:49:53+00:00,2024-04-11T13:49:53+00:00,Fixed.,True,spacy/cli/distill.py,,"@@ -0,0 +1,98 @@
++import logging
++import sys
++from pathlib import Path
++from typing import Any, Dict, Optional, Union
++
++import typer
++from wasabi import msg
++
++from .. import util
++from ..pipeline.trainable_pipe import TrainablePipe
++from ..schemas import ConfigSchemaDistill
++from ..training.initialize import init_nlp_student
++from ..training.loop import distill as distill_nlp
++from ._util import (
++    Arg,
++    Opt,
++    app,
++    import_code_paths,
++    parse_config_overrides,
++    setup_gpu,
++    show_validation_error,
++)
++
++
++@app.command(
++    ""distill"",
++    context_settings={""allow_extra_args"": True, ""ignore_unknown_options"": True},
++)
++def distill_cli(
++    # fmt: off
++    ctx: typer.Context,  # This is only used to read additional arguments
++    teacher_model: str = Arg(..., help=""Teacher model name or path""),
++    student_config_path: Path = Arg(..., help=""Path to config file"", exists=True, allow_dash=True),
++    output_path: Optional[Path] = Opt(None, ""--output"", ""--output-path"", ""-o"", help=""Output directory to store trained pipeline in""),
++    code_path: str = Opt("""", ""--code"", ""-c"", help=""Comma-separated paths to Python files with additional code (registered functions) to be imported""),
++    verbose: bool = Opt(False, ""--verbose"", ""-V"", ""-VV"", help=""Display more information for debugging purposes""),
++    use_gpu: int = Opt(-1, ""--gpu-id"", ""-g"", help=""GPU ID or -1 for CPU"")
++    # fmt: on
++):
++    """"""
++    Distill a spaCy pipeline from a teacher model.
++
++    DOCS: https://spacy.io/api/cli#distill
++    """"""
++    util.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
++    overrides = parse_config_overrides(ctx.args)
++    import_code_paths(code_path)
++    distill(
++        teacher_model,
++        student_config_path,
++        output_path,
++        use_gpu=use_gpu,
++        overrides=overrides,
++    )
++
++
++def distill(
++    teacher_model: str,",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561057454,danieldk,49398,2024-04-11T13:50:08+00:00,2024-04-11T13:50:09+00:00,Done.,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561059912,danieldk,49398,2024-04-11T13:51:46+00:00,2024-04-11T13:51:47+00:00,"Yeah, good idea! Added.",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561075527,danieldk,49398,2024-04-11T14:02:10+00:00,2024-04-11T14:02:11+00:00,Done.,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561080112,danieldk,49398,2024-04-11T14:04:36+00:00,2024-04-11T14:04:36+00:00,Added a remark that no pipeline is saved when this option is absent.,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |
++| `student_config_path` | The configuration of the student pipeline. ~~Path (positional)~~                                                                                                                                       |
++| `--output`, `-o`      | Directory to store the distilled pipeline in. Will be created if it doesn't exist. ~~Optional[Path] \(option)~~                                                                                        |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561080684,danieldk,49398,2024-04-11T14:04:49+00:00,2024-04-11T14:04:50+00:00,Oops 🤦 . Fixed.,True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,44 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from large high-accuracy model. Since distillation uses the activations of the
++teacher, distillation can be performed on a corpus without (gold standard)
++annotations.
++
++`distill` will save out the best model from all epochs, as well as the final
++pipeline. The `--code` argument can be used to provide a Python file that's
++imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the new
++[spaCy projects](/usage/projects).
++
++> #### Example
++>
++> ```bash
++> $ python -m spacy distill teacher-pipeline student.cfg --output ./output --paths.distill ./distill --paths.dev ./dev
++> ```
++
++```bash
++$ python -m spacy distill [teacher_model] [student_config_path] [--output] [--code] [--verbose] [--gpu-id] [overrides]
++```
++
++| Name                  | Description                                                                                                                                                                                            |
++| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
++| `teacher_model`       | The teacher pipeline to distill the student from. ~~Path (positional)~~                                                                                                                                |
++| `student_config_path` | The configuration of the student pipeline. ~~Path (positional)~~                                                                                                                                       |
++| `--output`, `-o`      | Directory to store the distilled pipeline in. Will be created if it doesn't exist. ~~Optional[Path] \(option)~~                                                                                        |
++| `--code`, `-c`        | Comma-separated paths to Python files with additional code to be imported. Allows [registering custom functions](/usage/training#custom-functions) for new architectures. ~~Optional[Path] \(option)~~ |
++| `--verbose`, `-V`     | Show more detailed messages during distillation. ~~bool (flag)~~                                                                                                                                       |
++| `--gpu-id`, `-g`      | GPU ID or `-1` for CPU. Defaults to `-1`. ~~int (option)~~                                                                                                                                             |
++| `--help`, `-h`        | Show help message and available arguments. ~~bool (flag)~~                                                                                                                                             |
++| **CREATES**           | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                                                                                                          |",0,0,0,0,0,0,0
+explosion/spaCy,1815880622,1561113110,svlandeg,8796347,2024-04-11T14:22:53+00:00,2024-04-11T14:22:53+00:00,"```suggestion
+If you need to manage complex multi-step training workflows, check out 
+```",True,website/docs/api/cli.mdx,,"@@ -1699,6 +1702,45 @@ $ python -m spacy project dvc [project_dir] [workflow] [--force] [--verbose] [--
+ | `--help`, `-h`    | Show help message and available arguments. ~~bool (flag)~~                                                    |
+ | **CREATES**       | A `dvc.yaml` file in the project directory, based on the steps defined in the given workflow.                 |
+ 
++## distill {id=""distill"", tag=""experimental"", version=""4""}
++
++Distill a _student_ pipeline from a _teacher_ pipeline. Distillation trains the
++models in the student pipeline on the activations of the teacher's models. A
++typical use case for distillation is to extract a smaller, more performant model
++from a larger high-accuracy model. Since distillation uses the activations of
++the teacher, distillation can be performed on a corpus of raw text without (gold
++standard) annotations. A development set of gold annotations _is_ needed to
++evaluate the student pipeline on during distillation.
++
++`distill` will save out the best performing pipeline across all epochs, as well
++as the final pipeline. The `--code` argument can be used to provide a Python
++file that's imported before the training process starts. This lets you register
++[custom functions](/usage/training#custom-functions) and architectures and refer
++to them in your config, all while still using spaCy's built-in `train` workflow.
++If you need to manage complex multi-step training workflows, check out the",0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668580828,svlandeg,8796347,2024-07-08T12:55:14+00:00,2024-07-08T13:13:20+00:00,"```suggestion
+            ""title"": ""GLiNER spaCy Wrapper"",
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668582510,svlandeg,8796347,2024-07-08T12:56:32+00:00,2024-07-08T13:13:20+00:00,"```suggestion
+            ""slogan"": ""Integrating GLiNER's Advanced NER with spaCy"",
+            ""description"": ""GLiNER SpaCy Wrapper is a project that brings together GLiNER, a zero-shot Named Entity Recognition (NER) model, with spaCy's NLP capabilities. It provides an easy way to integrate GLiNER within the spaCy environment, thus enhancing NER tasks with GLiNER's features."",
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668588944,svlandeg,8796347,2024-07-08T13:00:42+00:00,2024-07-08T13:13:20+00:00,"Removing too generic and too specific tags, to be more in line with other entries in the universe:
+
+```suggestion
+            ""tags"": [""NER""]
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668606981,svlandeg,8796347,2024-07-08T13:12:47+00:00,2024-07-08T13:13:20+00:00,"This import doesn't seem necessary:
+```suggestion
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668580828,svlandeg,8796347,2024-07-08T12:55:14+00:00,2024-07-08T13:13:20+00:00,"```suggestion
+            ""title"": ""GLiNER spaCy Wrapper"",
+```",True,website/meta/universe.json,,"@@ -4517,7 +4517,36 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""gliner-spacy"",
++            ""title"": ""GLiNER SpaCy Wrapper"",",0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668582510,svlandeg,8796347,2024-07-08T12:56:32+00:00,2024-07-08T13:13:20+00:00,"```suggestion
+            ""slogan"": ""Integrating GLiNER's Advanced NER with spaCy"",
+            ""description"": ""GLiNER SpaCy Wrapper is a project that brings together GLiNER, a zero-shot Named Entity Recognition (NER) model, with spaCy's NLP capabilities. It provides an easy way to integrate GLiNER within the spaCy environment, thus enhancing NER tasks with GLiNER's features."",
+```",True,website/meta/universe.json,,"@@ -4517,7 +4517,36 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""gliner-spacy"",
++            ""title"": ""GLiNER SpaCy Wrapper"",
++            ""slogan"": ""Integrating GLiNER's Advanced NER with SpaCy"",
++            ""description"": ""GLiNER SpaCy Wrapper is a project that brings together GLiNER, a zero-shot Named Entity Recognition (NER) model, with SpaCy's NLP capabilities. It provides an easy way to integrate GLiNER within the SpaCy environment, thus enhancing NER tasks with GLiNER's features."",",0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668588944,svlandeg,8796347,2024-07-08T13:00:42+00:00,2024-07-08T13:13:20+00:00,"Removing too generic and too specific tags, to be more in line with other entries in the universe:
+
+```suggestion
+            ""tags"": [""NER""]
+```",True,website/meta/universe.json,,"@@ -4517,7 +4517,36 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""gliner-spacy"",
++            ""title"": ""GLiNER SpaCy Wrapper"",
++            ""slogan"": ""Integrating GLiNER's Advanced NER with SpaCy"",
++            ""description"": ""GLiNER SpaCy Wrapper is a project that brings together GLiNER, a zero-shot Named Entity Recognition (NER) model, with SpaCy's NLP capabilities. It provides an easy way to integrate GLiNER within the SpaCy environment, thus enhancing NER tasks with GLiNER's features."",
++            ""github"": ""theirstory/gliner-spacy"",
++            ""pip"": ""gliner-spacy"",
++            ""code_example"": [
++                ""import spacy"",
++                ""from gliner_spacy.pipeline import GlinerSpacy"",
++                """",
++                ""nlp = spacy.blank('en')"",
++                ""nlp.add_pipe('gliner_spacy')"",
++                ""text = 'This is a text about Bill Gates and Microsoft.'"",
++                ""doc = nlp(text)"",
++                """",
++                ""for ent in doc.ents:"",
++                ""    print(ent.text, ent.label_)""
++            ],
++            ""code_language"": ""python"",
++            ""url"": ""https://github.com/theirstory/gliner-spacy"",
++            ""author"": ""TheirStory"",
++            ""author_links"": {
++                ""website"": ""https://theirstory.io""
++            },
++            ""category"": [""pipeline""],
++            ""tags"": [""gliner"", ""spacy"", ""nlp"", ""ner""]",0,0,0,0,0,0,0
+explosion/spaCy,1812290811,1668606981,svlandeg,8796347,2024-07-08T13:12:47+00:00,2024-07-08T13:13:20+00:00,"This import doesn't seem necessary:
+```suggestion
+```",True,website/meta/universe.json,,"@@ -4517,7 +4517,36 @@
+                 ""website"": ""https://redfield.ai""
+             },
+             ""category"": [""standalone""]
++        },
++        {
++            ""id"": ""gliner-spacy"",
++            ""title"": ""GLiNER SpaCy Wrapper"",
++            ""slogan"": ""Integrating GLiNER's Advanced NER with SpaCy"",
++            ""description"": ""GLiNER SpaCy Wrapper is a project that brings together GLiNER, a zero-shot Named Entity Recognition (NER) model, with SpaCy's NLP capabilities. It provides an easy way to integrate GLiNER within the SpaCy environment, thus enhancing NER tasks with GLiNER's features."",
++            ""github"": ""theirstory/gliner-spacy"",
++            ""pip"": ""gliner-spacy"",
++            ""code_example"": [
++                ""import spacy"",
++                ""from gliner_spacy.pipeline import GlinerSpacy"",",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1541576964,svlandeg,8796347,2024-03-27T17:47:53+00:00,2024-03-27T17:47:53+00:00,"This whole bit is surely pretty hacky, but considering bug 3 as explained in the PR, I don't see a better option other than changing the entire mechanism how evaluation/scoring of a pipeline works...",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1541578270,svlandeg,8796347,2024-03-27T17:48:45+00:00,2024-03-27T17:48:45+00:00,"Making a copy here feels safest? Not 100% about all the possible interactions with all other components in the pipeline, before or after, annotated or not, and frozen or not...",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262110,rmitsch,7152225,2024-03-30T09:42:51+00:00,2024-03-30T09:56:47+00:00,"```suggestion
+        def _score_augmented(examples: Iterable[Example], **kwargs):
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262191,rmitsch,7152225,2024-03-30T09:43:25+00:00,2024-03-30T09:56:47+00:00,"Agreed, this is not really satisfying. The workaround makes sense in this context though.",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262324,rmitsch,7152225,2024-03-30T09:44:37+00:00,2024-03-30T09:56:47+00:00,"Hm, do we manipulate examples in other components? I'm also unsure about this. Either way :+1: for copying it.",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262711,rmitsch,7152225,2024-03-30T09:47:36+00:00,2024-03-30T09:56:47+00:00,"I'm not very happy with the method name - this doesn't ""augment"" in the usual ML ""data augmentation"" sense, so this may be confusing. Maybe something like `_adopt_[predicted_]examples` or `_set_gold_ents`?",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262770,rmitsch,7152225,2024-03-30T09:48:21+00:00,2024-03-30T09:56:47+00:00,Why exactly 10 here? I don't remember the specifics about this anymore.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263004,rmitsch,7152225,2024-03-30T09:50:06+00:00,2024-03-30T09:56:47+00:00,Params in docstring would be great for public methods :grin: ,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263279,rmitsch,7152225,2024-03-30T09:52:53+00:00,2024-03-30T09:56:47+00:00,"Formatting in suggestion TBD. Ignore if you separated on purpose for easier debugging.
+```suggestion
+    assert all([metric in eval for metric in (""nel_macro_p"", ""nel_macro_r"", ""nel_macro_f"", ""nel_micro_p"", ""nel_micro_r"", ""nel_micro_f"", ""nel_f_per_type"")]
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263455,rmitsch,7152225,2024-03-30T09:54:40+00:00,2024-03-30T09:56:47+00:00,"Why `""use_gold_ents"": False` here?",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263542,rmitsch,7152225,2024-03-30T09:55:28+00:00,2024-03-30T09:56:47+00:00,TBD in this PR?,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263606,rmitsch,7152225,2024-03-30T09:55:57+00:00,2024-03-30T09:56:47+00:00,"Formatting in suggestion TBD. Ignore if you separated on purpose for easier debugging.
+```suggestion
+    assert all([metric in eval for metric in (""nel_macro_p"", ""nel_macro_r"", ""nel_macro_f"", ""nel_micro_p"", ""nel_micro_r"", ""nel_micro_f"", ""nel_f_per_type"")]
+```",False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547281271,svlandeg,8796347,2024-04-02T07:21:52+00:00,2024-04-02T07:21:52+00:00,In unit tests I prefer to test one thing per line so it's clear what fails when it does ;-),False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547282347,svlandeg,8796347,2024-04-02T07:22:47+00:00,2024-04-02T07:22:47+00:00,This is a different issue so a separate PR would be prefered,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547284550,svlandeg,8796347,2024-04-02T07:24:15+00:00,2024-04-02T07:25:05+00:00,Because there is an `ner` component in this pipeline - the point is to try and overfit when there is both an NER and an EL component.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547289505,svlandeg,8796347,2024-04-02T07:28:33+00:00,2024-04-02T07:28:34+00:00,We do this everywhere just to have some data for `model.initialize()` so that Thinc can infer the correct `nI`/`nO` dimensions.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547301769,svlandeg,8796347,2024-04-02T07:32:36+00:00,2024-04-02T07:32:36+00:00,True! I renamed it to `_ensure_ents` as the function doesn't set any ents if `use_gold_ents` is `False`.,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1541576964,svlandeg,8796347,2024-03-27T17:47:53+00:00,2024-03-27T17:47:53+00:00,"This whole bit is surely pretty hacky, but considering bug 3 as explained in the PR, I don't see a better option other than changing the entire mechanism how evaluation/scoring of a pipeline works...",True,spacy/pipeline/entity_linker.py,,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1541578270,svlandeg,8796347,2024-03-27T17:48:45+00:00,2024-03-27T17:48:45+00:00,"Making a copy here feels safest? Not 100% about all the possible interactions with all other components in the pipeline, before or after, annotated or not, and frozen or not...",True,spacy/pipeline/entity_linker.py,55.0,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented
++
++    def _augment_examples(self, examples: Iterable[Example]) -> Iterable[Example]:
++        """"""If use_gold_ents is true, set the gold entities to (a copy of) eg.predicted.""""""
++        if not self.use_gold_ents:
++            return examples
++
++        new_examples = []
++        for eg in examples:
++            ents, _ = eg.get_aligned_ents_and_ner()
++            new_eg = eg.copy()",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262110,rmitsch,7152225,2024-03-30T09:42:51+00:00,2024-03-30T09:56:47+00:00,"```suggestion
+        def _score_augmented(examples: Iterable[Example], **kwargs):
+```",True,spacy/pipeline/entity_linker.py,,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262191,rmitsch,7152225,2024-03-30T09:43:25+00:00,2024-03-30T09:56:47+00:00,"Agreed, this is not really satisfying. The workaround makes sense in this context though.",True,spacy/pipeline/entity_linker.py,,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262324,rmitsch,7152225,2024-03-30T09:44:37+00:00,2024-03-30T09:56:47+00:00,"Hm, do we manipulate examples in other components? I'm also unsure about this. Either way :+1: for copying it.",True,spacy/pipeline/entity_linker.py,55.0,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented
++
++    def _augment_examples(self, examples: Iterable[Example]) -> Iterable[Example]:
++        """"""If use_gold_ents is true, set the gold entities to (a copy of) eg.predicted.""""""
++        if not self.use_gold_ents:
++            return examples
++
++        new_examples = []
++        for eg in examples:
++            ents, _ = eg.get_aligned_ents_and_ner()
++            new_eg = eg.copy()",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262711,rmitsch,7152225,2024-03-30T09:47:36+00:00,2024-03-30T09:56:47+00:00,"I'm not very happy with the method name - this doesn't ""augment"" in the usual ML ""data augmentation"" sense, so this may be confusing. Maybe something like `_adopt_[predicted_]examples` or `_set_gold_ents`?",True,spacy/pipeline/entity_linker.py,,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented
++
++    def _augment_examples(self, examples: Iterable[Example]) -> Iterable[Example]:",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545262770,rmitsch,7152225,2024-03-30T09:48:21+00:00,2024-03-30T09:56:47+00:00,Why exactly 10 here? I don't remember the specifics about this anymore.,True,spacy/pipeline/entity_linker.py,,"@@ -284,11 +311,9 @@ def initialize(
+         nO = self.kb.entity_vector_length
+         doc_sample = []
+         vector_sample = []
+-        for eg in islice(get_examples(), 10):
++        examples = self._augment_examples(islice(get_examples(), 10))",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263004,rmitsch,7152225,2024-03-30T09:50:06+00:00,2024-03-30T09:56:47+00:00,Params in docstring would be great for public methods :grin: ,True,spacy/pipeline/entity_linker.py,,"@@ -354,41 +379,29 @@ def update(
+         losses.setdefault(self.name, 0.0)
+         if not examples:
+             return losses
++        examples = self._augment_examples(examples)
+         validate_examples(examples, ""EntityLinker.update"")
+ 
+-        set_dropout_rate(self.model, drop)
+-        docs = [eg.predicted for eg in examples]
+-        # save to restore later
+-        old_ents = [doc.ents for doc in docs]
+-
+-        for doc, ex in zip(docs, examples):
+-            if self.use_gold_ents:
+-                ents, _ = ex.get_aligned_ents_and_ner()
+-                doc.ents = ents
+-            else:
+-                # only keep matching ents
+-                doc.ents = ex.get_matching_ents()
+-
+         # make sure we have something to learn from, if not, short-circuit
+         if not self.batch_has_learnable_example(examples):
+             return losses
+ 
++        set_dropout_rate(self.model, drop)
++        docs = [eg.predicted for eg in examples]
+         sentence_encodings, bp_context = self.model.begin_update(docs)
+ 
+-        # now restore the ents
+-        for doc, old in zip(docs, old_ents):
+-            doc.ents = old
+-
+         loss, d_scores = self.get_loss(
+             sentence_encodings=sentence_encodings, examples=examples
+         )
+         bp_context(d_scores)
+         if sgd is not None:
+             self.finish_update(sgd)
+         losses[self.name] += loss
++
+         return losses
+ 
+     def get_loss(self, examples: Iterable[Example], sentence_encodings: Floats2d):
++        """"""Here, we assume that get_loss is called with augmented examples if need be""""""",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263279,rmitsch,7152225,2024-03-30T09:52:53+00:00,2024-03-30T09:56:47+00:00,"Formatting in suggestion TBD. Ignore if you separated on purpose for easier debugging.
+```suggestion
+    assert all([metric in eval for metric in (""nel_macro_p"", ""nel_macro_r"", ""nel_macro_f"", ""nel_micro_p"", ""nel_micro_r"", ""nel_micro_f"", ""nel_f_per_type"")]
+```",True,spacy/tests/pipeline/test_entity_linker.py,31.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263455,rmitsch,7152225,2024-03-30T09:54:40+00:00,2024-03-30T09:56:47+00:00,"Why `""use_gold_ents"": False` here?",True,spacy/tests/pipeline/test_entity_linker.py,67.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++
++    assert eval[""nel_macro_f""] > 0
++    assert eval[""nel_micro_f""] > 0
++
++
++def test_overfitting_IO_with_ner():
++    # Simple test to try and overfit the NER and NEL component in combination - ensuring the ML models work correctly
++    nlp = English()
++    vector_length = 3
++    assert ""Q2146908"" not in nlp.vocab.strings
++
++    # Convert the texts to docs to make sure we have doc.ents set for the training examples
++    train_examples = []
++    for text, annotation in TRAIN_DATA:
++        doc = nlp(text)
++        train_examples.append(Example.from_dict(doc, annotation))
++
++    def create_kb(vocab):
++        # create artificial KB - assign same prior weight to the two russ cochran's
++        # Q2146908 (Russ Cochran): American golfer
++        # Q7381115 (Russ Cochran): publisher
++        mykb = InMemoryLookupKB(vocab, entity_vector_length=vector_length)
++        mykb.add_entity(entity=""Q2146908"", freq=12, entity_vector=[6, -4, 3])
++        mykb.add_entity(entity=""Q7381115"", freq=12, entity_vector=[9, 1, -7])
++        mykb.add_alias(
++            alias=""Russ Cochran"",
++            entities=[""Q2146908"", ""Q7381115""],
++            probabilities=[0.5, 0.5],
++        )
++        return mykb
++
++    # Create the NER and EL components and add them to the pipeline
++    ner = nlp.add_pipe(""ner"", first=True)
++    entity_linker = nlp.add_pipe(
++        ""entity_linker"", last=True, config={""use_gold_ents"": False}",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263542,rmitsch,7152225,2024-03-30T09:55:28+00:00,2024-03-30T09:56:47+00:00,TBD in this PR?,True,spacy/tests/pipeline/test_entity_linker.py,98.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++
++    assert eval[""nel_macro_f""] > 0
++    assert eval[""nel_micro_f""] > 0
++
++
++def test_overfitting_IO_with_ner():
++    # Simple test to try and overfit the NER and NEL component in combination - ensuring the ML models work correctly
++    nlp = English()
++    vector_length = 3
++    assert ""Q2146908"" not in nlp.vocab.strings
++
++    # Convert the texts to docs to make sure we have doc.ents set for the training examples
++    train_examples = []
++    for text, annotation in TRAIN_DATA:
++        doc = nlp(text)
++        train_examples.append(Example.from_dict(doc, annotation))
++
++    def create_kb(vocab):
++        # create artificial KB - assign same prior weight to the two russ cochran's
++        # Q2146908 (Russ Cochran): American golfer
++        # Q7381115 (Russ Cochran): publisher
++        mykb = InMemoryLookupKB(vocab, entity_vector_length=vector_length)
++        mykb.add_entity(entity=""Q2146908"", freq=12, entity_vector=[6, -4, 3])
++        mykb.add_entity(entity=""Q7381115"", freq=12, entity_vector=[9, 1, -7])
++        mykb.add_alias(
++            alias=""Russ Cochran"",
++            entities=[""Q2146908"", ""Q7381115""],
++            probabilities=[0.5, 0.5],
++        )
++        return mykb
++
++    # Create the NER and EL components and add them to the pipeline
++    ner = nlp.add_pipe(""ner"", first=True)
++    entity_linker = nlp.add_pipe(
++        ""entity_linker"", last=True, config={""use_gold_ents"": False}
++    )
++    entity_linker.set_kb(create_kb)
++
++    train_examples = []
++    for text, annotations in TRAIN_DATA:
++        train_examples.append(Example.from_dict(nlp.make_doc(text), annotations))
++        for ent in annotations.get(""entities""):
++            ner.add_label(ent[2])
++    optimizer = nlp.initialize()
++
++    # train the NER and NEL pipes
++    for i in range(50):
++        losses = {}
++        nlp.update(train_examples, sgd=optimizer, losses=losses)
++    assert losses[""ner""] < 0.001
++    assert losses[""entity_linker""] < 0.001
++
++    # adding additional components that are required for the entity_linker
++    nlp.add_pipe(""sentencizer"", first=True)
++
++    # test the trained model
++    test_text = ""Russ Cochran captured his first major title with his son as caddie.""
++    doc = nlp(test_text)
++    ents = doc.ents
++    assert len(ents) == 1
++    assert ents[0].text == ""Russ Cochran""
++    assert ents[0].label_ == ""PERSON""
++    assert ents[0].kb_id_ != ""NIL""
++
++    # TODO: below assert is still flaky - EL doesn't properly overfit quite yet
++    # assert ents[0].kb_id_ == ""Q2146908""",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1545263606,rmitsch,7152225,2024-03-30T09:55:57+00:00,2024-03-30T09:56:47+00:00,"Formatting in suggestion TBD. Ignore if you separated on purpose for easier debugging.
+```suggestion
+    assert all([metric in eval for metric in (""nel_macro_p"", ""nel_macro_r"", ""nel_macro_f"", ""nel_micro_p"", ""nel_micro_r"", ""nel_micro_f"", ""nel_f_per_type"")]
+```",True,spacy/tests/pipeline/test_entity_linker.py,119.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++
++    assert eval[""nel_macro_f""] > 0
++    assert eval[""nel_micro_f""] > 0
++
++
++def test_overfitting_IO_with_ner():
++    # Simple test to try and overfit the NER and NEL component in combination - ensuring the ML models work correctly
++    nlp = English()
++    vector_length = 3
++    assert ""Q2146908"" not in nlp.vocab.strings
++
++    # Convert the texts to docs to make sure we have doc.ents set for the training examples
++    train_examples = []
++    for text, annotation in TRAIN_DATA:
++        doc = nlp(text)
++        train_examples.append(Example.from_dict(doc, annotation))
++
++    def create_kb(vocab):
++        # create artificial KB - assign same prior weight to the two russ cochran's
++        # Q2146908 (Russ Cochran): American golfer
++        # Q7381115 (Russ Cochran): publisher
++        mykb = InMemoryLookupKB(vocab, entity_vector_length=vector_length)
++        mykb.add_entity(entity=""Q2146908"", freq=12, entity_vector=[6, -4, 3])
++        mykb.add_entity(entity=""Q7381115"", freq=12, entity_vector=[9, 1, -7])
++        mykb.add_alias(
++            alias=""Russ Cochran"",
++            entities=[""Q2146908"", ""Q7381115""],
++            probabilities=[0.5, 0.5],
++        )
++        return mykb
++
++    # Create the NER and EL components and add them to the pipeline
++    ner = nlp.add_pipe(""ner"", first=True)
++    entity_linker = nlp.add_pipe(
++        ""entity_linker"", last=True, config={""use_gold_ents"": False}
++    )
++    entity_linker.set_kb(create_kb)
++
++    train_examples = []
++    for text, annotations in TRAIN_DATA:
++        train_examples.append(Example.from_dict(nlp.make_doc(text), annotations))
++        for ent in annotations.get(""entities""):
++            ner.add_label(ent[2])
++    optimizer = nlp.initialize()
++
++    # train the NER and NEL pipes
++    for i in range(50):
++        losses = {}
++        nlp.update(train_examples, sgd=optimizer, losses=losses)
++    assert losses[""ner""] < 0.001
++    assert losses[""entity_linker""] < 0.001
++
++    # adding additional components that are required for the entity_linker
++    nlp.add_pipe(""sentencizer"", first=True)
++
++    # test the trained model
++    test_text = ""Russ Cochran captured his first major title with his son as caddie.""
++    doc = nlp(test_text)
++    ents = doc.ents
++    assert len(ents) == 1
++    assert ents[0].text == ""Russ Cochran""
++    assert ents[0].label_ == ""PERSON""
++    assert ents[0].kb_id_ != ""NIL""
++
++    # TODO: below assert is still flaky - EL doesn't properly overfit quite yet
++    # assert ents[0].kb_id_ == ""Q2146908""
++
++    # Also test the results are still the same after IO
++    with make_tempdir() as tmp_dir:
++        nlp.to_disk(tmp_dir)
++        nlp2 = util.load_model_from_path(tmp_dir)
++        assert nlp2.pipe_names == nlp.pipe_names
++        doc2 = nlp2(test_text)
++        ents2 = doc2.ents
++        assert len(ents2) == 1
++        assert ents2[0].text == ""Russ Cochran""
++        assert ents2[0].label_ == ""PERSON""
++        assert ents2[0].kb_id_ != ""NIL""
++
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""ents_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""ents_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++    assert ""PERSON"" in eval[""ents_per_type""]",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547281271,svlandeg,8796347,2024-04-02T07:21:52+00:00,2024-04-02T07:21:52+00:00,In unit tests I prefer to test one thing per line so it's clear what fails when it does ;-),True,spacy/tests/pipeline/test_entity_linker.py,31.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547282347,svlandeg,8796347,2024-04-02T07:22:47+00:00,2024-04-02T07:22:47+00:00,This is a different issue so a separate PR would be prefered,True,spacy/tests/pipeline/test_entity_linker.py,98.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++
++    assert eval[""nel_macro_f""] > 0
++    assert eval[""nel_micro_f""] > 0
++
++
++def test_overfitting_IO_with_ner():
++    # Simple test to try and overfit the NER and NEL component in combination - ensuring the ML models work correctly
++    nlp = English()
++    vector_length = 3
++    assert ""Q2146908"" not in nlp.vocab.strings
++
++    # Convert the texts to docs to make sure we have doc.ents set for the training examples
++    train_examples = []
++    for text, annotation in TRAIN_DATA:
++        doc = nlp(text)
++        train_examples.append(Example.from_dict(doc, annotation))
++
++    def create_kb(vocab):
++        # create artificial KB - assign same prior weight to the two russ cochran's
++        # Q2146908 (Russ Cochran): American golfer
++        # Q7381115 (Russ Cochran): publisher
++        mykb = InMemoryLookupKB(vocab, entity_vector_length=vector_length)
++        mykb.add_entity(entity=""Q2146908"", freq=12, entity_vector=[6, -4, 3])
++        mykb.add_entity(entity=""Q7381115"", freq=12, entity_vector=[9, 1, -7])
++        mykb.add_alias(
++            alias=""Russ Cochran"",
++            entities=[""Q2146908"", ""Q7381115""],
++            probabilities=[0.5, 0.5],
++        )
++        return mykb
++
++    # Create the NER and EL components and add them to the pipeline
++    ner = nlp.add_pipe(""ner"", first=True)
++    entity_linker = nlp.add_pipe(
++        ""entity_linker"", last=True, config={""use_gold_ents"": False}
++    )
++    entity_linker.set_kb(create_kb)
++
++    train_examples = []
++    for text, annotations in TRAIN_DATA:
++        train_examples.append(Example.from_dict(nlp.make_doc(text), annotations))
++        for ent in annotations.get(""entities""):
++            ner.add_label(ent[2])
++    optimizer = nlp.initialize()
++
++    # train the NER and NEL pipes
++    for i in range(50):
++        losses = {}
++        nlp.update(train_examples, sgd=optimizer, losses=losses)
++    assert losses[""ner""] < 0.001
++    assert losses[""entity_linker""] < 0.001
++
++    # adding additional components that are required for the entity_linker
++    nlp.add_pipe(""sentencizer"", first=True)
++
++    # test the trained model
++    test_text = ""Russ Cochran captured his first major title with his son as caddie.""
++    doc = nlp(test_text)
++    ents = doc.ents
++    assert len(ents) == 1
++    assert ents[0].text == ""Russ Cochran""
++    assert ents[0].label_ == ""PERSON""
++    assert ents[0].kb_id_ != ""NIL""
++
++    # TODO: below assert is still flaky - EL doesn't properly overfit quite yet
++    # assert ents[0].kb_id_ == ""Q2146908""",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547284550,svlandeg,8796347,2024-04-02T07:24:15+00:00,2024-04-02T07:25:05+00:00,Because there is an `ner` component in this pipeline - the point is to try and overfit when there is both an NER and an EL component.,True,spacy/tests/pipeline/test_entity_linker.py,67.0,"@@ -807,6 +809,107 @@ def create_kb(vocab):
+     assert_equal(batch_deps_1, batch_deps_2)
+     assert_equal(batch_deps_1, no_batch_deps)
+ 
++    eval = nlp.evaluate(train_examples)
++    assert ""nel_macro_p"" in eval
++    assert ""nel_macro_r"" in eval
++    assert ""nel_macro_f"" in eval
++    assert ""nel_micro_p"" in eval
++    assert ""nel_micro_r"" in eval
++    assert ""nel_micro_f"" in eval
++    assert ""nel_f_per_type"" in eval
++    assert ""PERSON"" in eval[""nel_f_per_type""]
++
++    assert eval[""nel_macro_f""] > 0
++    assert eval[""nel_micro_f""] > 0
++
++
++def test_overfitting_IO_with_ner():
++    # Simple test to try and overfit the NER and NEL component in combination - ensuring the ML models work correctly
++    nlp = English()
++    vector_length = 3
++    assert ""Q2146908"" not in nlp.vocab.strings
++
++    # Convert the texts to docs to make sure we have doc.ents set for the training examples
++    train_examples = []
++    for text, annotation in TRAIN_DATA:
++        doc = nlp(text)
++        train_examples.append(Example.from_dict(doc, annotation))
++
++    def create_kb(vocab):
++        # create artificial KB - assign same prior weight to the two russ cochran's
++        # Q2146908 (Russ Cochran): American golfer
++        # Q7381115 (Russ Cochran): publisher
++        mykb = InMemoryLookupKB(vocab, entity_vector_length=vector_length)
++        mykb.add_entity(entity=""Q2146908"", freq=12, entity_vector=[6, -4, 3])
++        mykb.add_entity(entity=""Q7381115"", freq=12, entity_vector=[9, 1, -7])
++        mykb.add_alias(
++            alias=""Russ Cochran"",
++            entities=[""Q2146908"", ""Q7381115""],
++            probabilities=[0.5, 0.5],
++        )
++        return mykb
++
++    # Create the NER and EL components and add them to the pipeline
++    ner = nlp.add_pipe(""ner"", first=True)
++    entity_linker = nlp.add_pipe(
++        ""entity_linker"", last=True, config={""use_gold_ents"": False}",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547289505,svlandeg,8796347,2024-04-02T07:28:33+00:00,2024-04-02T07:28:34+00:00,We do this everywhere just to have some data for `model.initialize()` so that Thinc can infer the correct `nI`/`nO` dimensions.,True,spacy/pipeline/entity_linker.py,,"@@ -284,11 +311,9 @@ def initialize(
+         nO = self.kb.entity_vector_length
+         doc_sample = []
+         vector_sample = []
+-        for eg in islice(get_examples(), 10):
++        examples = self._augment_examples(islice(get_examples(), 10))",0,0,0,0,0,0,0
+explosion/spaCy,1794491429,1547301769,svlandeg,8796347,2024-04-02T07:32:36+00:00,2024-04-02T07:32:36+00:00,True! I renamed it to `_ensure_ents` as the function doesn't set any ents if `use_gold_ents` is `False`.,True,spacy/pipeline/entity_linker.py,,"@@ -235,14 +234,42 @@ def __init__(
+         self.cfg: Dict[str, Any] = {""overwrite"": overwrite}
+         self.distance = CosineDistance(normalize=False)
+         self.kb = generate_empty_kb(self.vocab, entity_vector_length)
+-        self.scorer = scorer
+         self.use_gold_ents = use_gold_ents
+         self.candidates_batch_size = candidates_batch_size
+         self.threshold = threshold
+ 
+         if candidates_batch_size < 1:
+             raise ValueError(Errors.E1044)
+ 
++        def _score_augmented(examples, **kwargs):
++            # Because of how spaCy works, we can't just score immediately, because Language.evaluate
++            # calls pipe() on the predicted docs, which won't have entities if there is no NER in the pipeline.
++            if not self.use_gold_ents:
++                return scorer(examples, **kwargs)
++            else:
++                examples = self._augment_examples(examples)
++                docs = self.pipe(
++                    (eg.predicted for eg in examples),
++                )
++                for eg, doc in zip(examples, docs):
++                    eg.predicted = doc
++                return scorer(examples, **kwargs)
++
++        self.scorer = _score_augmented
++
++    def _augment_examples(self, examples: Iterable[Example]) -> Iterable[Example]:",0,0,0,0,0,0,0
+explosion/spaCy,1732813366,1502298868,svlandeg,8796347,2024-02-26T09:37:20+00:00,2024-02-26T09:37:21+00:00,"We'll want to find another solution for this, because we don't want to enforce all users to have exactly this model in their environment",False,,,,1,1,0,0,0,0,0
+explosion/spaCy,1732813366,1502299802,svlandeg,8796347,2024-02-26T09:38:05+00:00,2024-02-26T09:38:05+00:00,Could you run `isort` on all files? (the test suite will fail otherwise),False,,,,1,1,0,0,0,0,0
+explosion/spaCy,1732813366,1507990078,india-kerle,46863334,2024-02-29T18:11:06+00:00,2024-02-29T18:11:06+00:00,FYI @honnibal ,False,,,,0,0,0,0,0,0,0
+explosion/spaCy,1732813366,1511133141,india-kerle,46863334,2024-03-04T13:04:34+00:00,2024-03-04T13:04:34+00:00,"doesn't account for i.e. the ""water and power meters and electrical sockets"" ",False,,,,0,0,0,0,0,0,0

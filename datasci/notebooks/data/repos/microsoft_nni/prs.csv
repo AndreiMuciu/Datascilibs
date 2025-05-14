@@ -1,0 +1,170 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+microsoft/nni,210320950,1,Add IC and build status support,,goooxu,22703054,closed,False,2018-08-23T03:29:46+00:00,2018-08-23T03:39:59+00:00,2018-08-23T03:39:59+00:00,2018-08-23T03:39:59+00:00,34f6858c9de6d4a5a73d78f3cb4da5adca5731d7,unknown,30,8,3,1,0,0,QuanluZhang;yds05;chicm-ms,,
+microsoft/nni,210355527,2,Fixed CI build issues,,goooxu,22703054,closed,False,2018-08-23T07:32:00+00:00,2018-08-23T07:47:48+00:00,2018-08-23T07:47:48+00:00,2018-08-23T07:47:48+00:00,f1f6f880a0ef96979efcae83d6510a21f75a3958,unknown,43,45,13,1,0,0,,,
+microsoft/nni,210471703,3,Modify experiment config for CI test,"- the python ran by exec in typescript is not the python in the venv of travis
+- since our sdk is installed in venv
+- this causes some import error",Crysple,20517842,closed,False,2018-08-23T14:39:19+00:00,2018-08-31T03:36:11+00:00,2018-08-31T03:36:11+00:00,2018-08-31T03:36:11+00:00,745f2520bf16c4c0f65063084401ba0a19618b74,unknown,28,28,1,33,0,2,,,
+microsoft/nni,210720512,4,[Code merge] Merge code from dogfood-v1 branch,Merge code from dogfood-v1 branch. Most of the commits are bug fixes.,yds05,1079650,closed,False,2018-08-24T12:00:45+00:00,2018-09-13T09:51:23+00:00,2018-08-24T12:03:52+00:00,2018-08-24T12:03:52+00:00,87ed70cd5fc0e88551899d07a2614def1964a84a,unknown,589,274,43,1,0,0,chicm-ms;QuanluZhang;Crysple,,
+microsoft/nni,213883592,5,Merge from dogfood branch to master,"1. code refactor(Tuner/Assessor)
+2. improve installation experiment
+3. bugs fix",yds05,1079650,closed,False,2018-09-07T10:23:42+00:00,2018-09-13T09:51:28+00:00,2018-09-07T11:49:23+00:00,2018-09-07T11:49:23+00:00,a2b2c56d93e1c65ba540fb0667e53a3f6cdc412c,unknown,3375,2419,124,3,0,0,goooxu;scarlett2018;xuehui1991,,
+microsoft/nni,213906204,6,Update README.md,trail -> trial,QuanluZhang,16907603,closed,False,2018-09-07T12:01:04+00:00,2018-09-09T07:52:48+00:00,2018-09-07T12:08:01+00:00,2018-09-07T12:08:01+00:00,adebc77639e30a987f9fe6e0a9e64627e0280858,unknown,1,1,1,1,0,0,chicm-ms,,
+microsoft/nni,213909137,7,Update README.md,update nni github repo url,QuanluZhang,16907603,closed,False,2018-09-07T12:14:06+00:00,2018-09-09T07:52:25+00:00,2018-09-07T12:28:58+00:00,2018-09-07T12:28:58+00:00,4177f713408d0a8c82cb7ecc270b5b21de92d8ef,unknown,1,1,1,1,0,0,yds05;chicm-ms;xuehui1991,,
+microsoft/nni,213909848,8,Update GetStarted.md,,QuanluZhang,16907603,closed,False,2018-09-07T12:17:14+00:00,2018-09-09T07:52:23+00:00,2018-09-07T12:29:19+00:00,2018-09-07T12:29:19+00:00,335a0a89126f784fbb03eae713ee0f04cab34033,unknown,2,2,1,1,0,0,yds05;chicm-ms;xuehui1991,,
+microsoft/nni,213912496,9,Update README.md,minor changes for Readme,scarlett2018,39592018,closed,False,2018-09-07T12:28:27+00:00,2018-09-11T05:48:39+00:00,2018-09-07T12:31:55+00:00,2018-09-07T12:31:55+00:00,7f260be2df75982dcd30ca33929f648eb0640640,unknown,9,8,1,1,0,0,yds05,,
+microsoft/nni,213916255,10,Update setup.py,update setup.py,QuanluZhang,16907603,closed,False,2018-09-07T12:43:21+00:00,2018-09-09T07:52:17+00:00,2018-09-07T12:59:50+00:00,2018-09-07T12:59:50+00:00,18c75949174ccf93ebc0f151c112389aa86e7265,unknown,1,1,1,1,0,0,scarlett2018;yds05;chicm-ms;goooxu,,
+microsoft/nni,213918772,11,Update GetStarted.md,to nni,QuanluZhang,16907603,closed,False,2018-09-07T12:53:03+00:00,2018-09-09T07:52:16+00:00,2018-09-07T13:00:30+00:00,2018-09-07T13:00:30+00:00,c8b49da87918f88b9a7a4575369b22b64ca9aa2f,unknown,1,1,1,1,0,0,scarlett2018;yds05;chicm-ms;goooxu,,
+microsoft/nni,213924204,12,add Privacy Statement,add privacy statement,xuehui1991,6280746,closed,False,2018-09-07T13:13:48+00:00,2018-09-11T05:46:39+00:00,2018-09-07T15:39:09+00:00,2018-09-07T15:39:09+00:00,4fb0a0f1d5da2cae57bec5514d385d50e3fcab95,unknown,3,0,1,1,0,0,,,
+microsoft/nni,213925234,13,Update setup.py,nni_annotation,QuanluZhang,16907603,closed,False,2018-09-07T13:17:34+00:00,2018-09-09T07:52:13+00:00,2018-09-07T13:20:38+00:00,2018-09-07T13:20:37+00:00,fa2b2f40979077fb12ebe6ee85b5a979ff7f0def,unknown,1,1,1,1,0,0,SparkSnail;yds05;xuehui1991;goooxu;chicm-ms,,
+microsoft/nni,214079749,14,fix bugs of installing from pip,,Crysple,20517842,closed,False,2018-09-08T06:02:06+00:00,2018-09-08T06:18:57+00:00,2018-09-08T06:18:57+00:00,2018-09-08T06:18:57+00:00,f1c2b70b4baf7adcd489de88bf001a2e6a4c3599,unknown,6,4,2,1,0,0,scarlett2018;goooxu;chicm-ms;xuehui1991;SparkSnail,,
+microsoft/nni,214181472,15,no need to add privacy statement in Readme,,scarlett2018,39592018,closed,False,2018-09-10T02:08:45+00:00,2018-09-11T05:48:35+00:00,2018-09-10T09:20:06+00:00,2018-09-10T09:20:06+00:00,4ed90bcb3b8430dd5447880f9785eaa4e96b48eb,unknown,0,3,1,1,0,0,QuanluZhang,,
+microsoft/nni,214184200,16,Update SearchSpaceSpec.md,,xuehui1991,6280746,closed,False,2018-09-10T02:35:39+00:00,2018-09-11T05:46:38+00:00,2018-09-10T09:16:38+00:00,2018-09-10T09:16:38+00:00,d4c75d558243e7de85462abd584f523884d89039,unknown,10,1,1,1,0,0,,,
+microsoft/nni,214184537,17,Update hyperopt_tuner.py,,xuehui1991,6280746,closed,False,2018-09-10T02:38:55+00:00,2018-09-11T05:46:38+00:00,2018-09-10T09:16:51+00:00,2018-09-10T09:16:51+00:00,5629410a8edb0fa8aaaff0001593e6daa4b8ca0b,unknown,18,17,1,3,2,0,,,
+microsoft/nni,214190059,18,Update setup.py to set url to NNI github site,Update setup.py to set url to NNI github site,yds05,1079650,closed,False,2018-09-10T03:33:45+00:00,2018-09-10T09:24:03+00:00,2018-09-10T09:23:57+00:00,2018-09-10T09:23:57+00:00,8d2eaad5819137022f356b6aaf4dd80d7cafef0c,unknown,1,1,1,1,0,0,xuehui1991;goooxu,,
+microsoft/nni,214204963,19,Fix bugs in Make pip-install action,"Issue:
+1. If use already installed an older node(<10.8), pip install will failed because yarn build will pick the older version node. 
+2. pip-install action doesn't create examples folder under $HOME. ",yds05,1079650,closed,False,2018-09-10T05:55:41+00:00,2018-09-10T09:22:21+00:00,2018-09-10T09:22:21+00:00,2018-09-10T09:22:21+00:00,19f8976114c810410bcf615ad05dac09d8798220,unknown,5,4,1,5,0,0,xuehui1991;goooxu;chicm-ms,,
+microsoft/nni,214261585,20,"update pip install command, using v0.1 tag to track","update pip install command, using v0.1 tag to track",yds05,1079650,closed,False,2018-09-10T10:06:59+00:00,2018-09-10T10:51:16+00:00,2018-09-10T10:51:16+00:00,2018-09-10T10:51:16+00:00,7a7ab75eaad6c8815623a945a0558eb2b8626f7b,unknown,1,1,1,1,0,0,xuehui1991;goooxu;SparkSnail,,
+microsoft/nni,214264871,21,Improve integration test,,liuzhe-lz,40699903,closed,False,2018-09-10T10:19:39+00:00,2018-10-23T12:36:10+00:00,2018-10-23T12:36:10+00:00,,534ffc08eee222f84f8d916b5e945be20dbb097c,dirty,69,14,7,2,1,1,,,
+microsoft/nni,214273146,22,"update pip install command, using v0.1 tag to track",,yds05,1079650,closed,False,2018-09-10T10:52:45+00:00,2018-09-11T02:00:04+00:00,2018-09-11T02:00:03+00:00,2018-09-11T02:00:03+00:00,4846c63ac613c660abfeceb6a665aa998ea0776e,unknown,1,1,1,1,0,0,goooxu,,
+microsoft/nni,214274951,24,Update RELEASE.md,,scarlett2018,39592018,closed,False,2018-09-10T10:59:51+00:00,2018-09-11T05:49:48+00:00,2018-09-11T05:49:02+00:00,2018-09-11T05:49:02+00:00,b4e9f0878d3f74742ae3acd783ddff303b4732cb,unknown,4,4,1,1,0,0,,,
+microsoft/nni,214293846,25,Update Python dependencies,,liuzhe-lz,40699903,closed,False,2018-09-10T12:16:41+00:00,2019-10-09T04:00:19+00:00,2018-09-26T02:07:43+00:00,,cd9f91bef05000853eacc30d323680676e19d4be,dirty,3,6,3,3,1,0,,,
+microsoft/nni,214309542,26,update document,,QuanluZhang,16907603,closed,False,2018-09-10T13:13:50+00:00,2018-09-11T05:43:32+00:00,2018-09-11T05:43:32+00:00,2018-09-11T05:43:32+00:00,515aa3e3bde8651e45f1e5a031730ece67567104,unknown,359,353,8,13,1,0,goooxu;chicm-ms;scarlett2018,,
+microsoft/nni,214503830,27,"Update README.md, add travis build status icon",,goooxu,22703054,closed,False,2018-09-11T03:42:53+00:00,2018-09-13T01:41:35+00:00,2018-09-13T01:41:35+00:00,2018-09-13T01:41:35+00:00,1208833d41f7905ded1f43da02e78900f316d6b1,unknown,3,1,1,1,0,0,,,
+microsoft/nni,214504167,28,"Update README.md, add travis build status icon",,goooxu,22703054,closed,False,2018-09-11T03:45:45+00:00,2018-11-05T05:47:07+00:00,2018-09-13T01:50:39+00:00,2018-09-13T01:50:39+00:00,5310b7bdf9175057d651702aa4a10fb6cbdb61ed,unknown,3,1,1,1,0,0,,,
+microsoft/nni,214532551,29,add basic auto-gbdt example,,xuehui1991,6280746,closed,False,2018-09-11T07:07:06+00:00,2018-10-24T06:27:07+00:00,2018-09-14T03:47:15+00:00,2018-09-14T03:47:15+00:00,664186759af6d507c98d1f95986684813a1d5b36,unknown,7637,0,6,4,2,0,chicm-ms,,
+microsoft/nni,214537159,30,Fix bugs when installing,- Add ~/.local/bin to PATH,Crysple,20517842,closed,False,2018-09-11T07:28:12+00:00,2018-09-11T07:50:28+00:00,2018-09-11T07:50:28+00:00,,59f78bf0ded6313487da3c2a6da9698837b9862a,unknown,15,11,3,2,0,0,,,
+microsoft/nni,214562161,31,add ~/.local/bin to PATH when installing,add ~/.local/bin to PATH when installing,Crysple,20517842,closed,False,2018-09-11T09:07:27+00:00,2018-09-27T03:35:22+00:00,2018-09-12T07:01:18+00:00,,f96c5500d5396df2c1eb871d037d19d4c32d1ce2,unknown,20,11,5,8,3,1,,,
+microsoft/nni,214823973,32,Add start time for failed trial jobs,Add start time for failed trial jobs,chicm-ms,38930155,closed,False,2018-09-12T03:15:40+00:00,2018-09-13T05:37:48+00:00,2018-09-13T05:37:48+00:00,2018-09-13T05:37:48+00:00,e0b129469da6bb80ef2656ad8937c1d06c4d019b,unknown,3,0,1,1,0,0,yds05,,
+microsoft/nni,214855266,33, add .local/bin to PATH when installing,"
+add .local/bin to PATH when installing from source code and installing from pip",Crysple,20517842,closed,False,2018-09-12T07:03:36+00:00,2018-09-27T03:35:23+00:00,2018-09-13T05:43:52+00:00,2018-09-13T05:43:52+00:00,7632ac767d9f075f321055a938cdc4ff51c56b09,unknown,9,6,2,2,0,0,,,
+microsoft/nni,214858418,34,support travis CI and installing in python virtual environment,"- undefine PIP_MODE(--user) in Makefile when make in a python virtual environment
+- specify the exact python from venv in common/utils
+- raise exception if run.py failed so travis CI will not pass",Crysple,20517842,closed,False,2018-09-12T07:18:38+00:00,2018-09-27T03:35:25+00:00,2018-09-12T13:01:57+00:00,2018-09-12T13:01:57+00:00,57cd372264878ccb296b3c50b7a4684ec5b98d24,unknown,13,5,3,3,0,0,,,
+microsoft/nni,214929585,43,Improve Makefile,,liuzhe-lz,40699903,closed,False,2018-09-12T11:38:15+00:00,2020-10-17T22:15:59+00:00,2018-09-14T05:07:59+00:00,2018-09-14T05:07:59+00:00,c015421cae0cd96974506262c3880f64950df7b1,unknown,285,404,7,14,0,0,,,
+microsoft/nni,214974280,44,Add bash completion script,,liuzhe-lz,40699903,closed,False,2018-09-12T14:05:33+00:00,2019-10-09T03:59:51+00:00,2018-09-13T12:39:28+00:00,2018-09-13T12:39:28+00:00,09ce78302ca9f48ecb446e1129f28f70ee35dc4a,unknown,84,0,1,2,0,0,,,
+microsoft/nni,215140813,45,support travis CI and installing in python virtual environment,For master,Crysple,20517842,closed,False,2018-09-13T01:35:59+00:00,2018-09-13T01:44:56+00:00,2018-09-13T01:44:56+00:00,2018-09-13T01:44:56+00:00,fd5fd5466933409d3eea791f90cf38f5c23112ac,unknown,13,5,3,3,0,0,,,
+microsoft/nni,215153349,46,Fix tensorboard issue on local,,chicm-ms,38930155,closed,False,2018-09-13T03:18:24+00:00,2018-09-13T04:52:59+00:00,2018-09-13T04:52:59+00:00,2018-09-13T04:52:59+00:00,71cd5e270575b824bdf5608dcffb23a97856e7c1,unknown,1,1,1,2,0,0,,,
+microsoft/nni,215175655,48,update learning rate distribution in search space,,xuehui1991,6280746,closed,False,2018-09-13T06:20:04+00:00,2018-09-13T06:58:21+00:00,2018-09-13T06:58:21+00:00,2018-09-13T06:58:21+00:00,3be99bc4df800d27708427fe7ac207baa64dbed7,unknown,2,2,1,1,0,0,SparkSnail;chicm-ms,,
+microsoft/nni,215181287,49,add batch_tuner,,xuehui1991,6280746,closed,False,2018-09-13T06:52:21+00:00,2018-09-14T13:16:35+00:00,2018-09-14T13:16:35+00:00,2018-09-14T13:16:35+00:00,c6683d102aaebc2674e15278ef23a84049f66282,unknown,274,6,10,5,4,0,Crysple,,
+microsoft/nni,215201769,51,Edit readme.md,add tutorial details to homepage,scarlett2018,39592018,closed,False,2018-09-13T08:25:06+00:00,2018-09-13T11:43:24+00:00,2018-09-13T11:43:24+00:00,2018-09-13T11:43:24+00:00,43e64c35f994c4f3740f8607c66d2c73a5686ece,unknown,14,2,2,4,1,0,yds05,,
+microsoft/nni,215203794,52,update doc,"update README.md
+update SearchSpaceSpec.md
+some updates to v0.1 also merge to this pr.",QuanluZhang,16907603,closed,False,2018-09-13T08:33:17+00:00,2018-09-13T12:32:55+00:00,2018-09-13T12:32:55+00:00,2018-09-13T12:32:55+00:00,a8158456281f86d1d56f90f55932f511200ce0cc,unknown,360,353,9,15,0,0,scarlett2018;xuehui1991;chicm-ms;goooxu,,
+microsoft/nni,215223532,54,Merge latest code changes into Github Master,"Merge latest code changes into Github Master:
+1. Rest server refactor
+2. nnictl refactor, change validation method
+3. NNI_manager refactor
+4. bug fix for time shown issue. Use long to replace Date",yds05,1079650,closed,False,2018-09-13T09:44:20+00:00,2018-09-19T08:26:18+00:00,2018-09-14T07:00:52+00:00,2018-09-14T07:00:52+00:00,3d221da9768c33ccd73bfa1af7bc7e27f99168f3,unknown,1163,689,49,6,0,0,xuehui1991;goooxu;scarlett2018;Crysple,,
+microsoft/nni,215277012,55,temporary modification for travis,,Crysple,20517842,closed,False,2018-09-13T13:09:53+00:00,2018-09-13T13:27:36+00:00,2018-09-13T13:27:36+00:00,2018-09-13T13:27:36+00:00,f6791cc05bd960f9c7ba212c03745a1bdab5f618,dirty,8,2,3,2,0,0,,,
+microsoft/nni,215337559,57,Ubuntu packaging scripts,,liuzhe-lz,40699903,closed,False,2018-09-13T16:14:39+00:00,2018-11-30T03:28:19+00:00,2018-11-30T03:28:19+00:00,,7402ccfee4ad3dcec4e214c3b4c1d33d0cea5974,dirty,111,14,9,19,0,0,,,
+microsoft/nni,215440426,58,Fix links in README.md ,,narumiruna,4680567,closed,False,2018-09-13T23:08:45+00:00,2020-10-21T22:51:00+00:00,2018-09-14T01:45:40+00:00,,0ec477b38678d7b4e4fc90d838207356f5818b4a,dirty,9,9,1,1,0,2,,,
+microsoft/nni,215457735,59,fix break links,,gongwuji,10485726,closed,False,2018-09-14T01:26:17+00:00,2018-09-14T01:38:24+00:00,2018-09-14T01:38:24+00:00,2018-09-14T01:38:24+00:00,58d0536b9cf8774e5e906b06bee2e7c2ab28dbdf,unknown,10,12,2,3,0,1,,,
+microsoft/nni,215476688,60,refactor experiment information,,SparkSnail,22682999,closed,False,2018-09-14T04:12:41+00:00,2018-09-14T04:23:48+00:00,2018-09-14T04:23:47+00:00,2018-09-14T04:23:47+00:00,0fc6d20fe1fd0ee07afb46bc6c0f04660c92cc4d,unknown,6,4,1,2,0,0,xuehui1991;yds05;chicm-ms,,
+microsoft/nni,215478654,62,update doc of builtin tuners,,QuanluZhang,16907603,closed,False,2018-09-14T04:30:57+00:00,2018-09-14T04:50:57+00:00,2018-09-14T04:50:57+00:00,2018-09-14T04:50:57+00:00,55f6c9e37c9cf1488345ce89113d5ff17fa2c827,unknown,8,5,1,18,0,0,chicm-ms;yds05;SparkSnail,,
+microsoft/nni,215489932,63,Update RemoteMachineMode.md,,SparkSnail,22682999,closed,False,2018-09-14T06:07:21+00:00,2018-09-18T10:53:58+00:00,2018-09-18T10:53:35+00:00,2018-09-18T10:53:35+00:00,dfef39d18ff39342dee9639ceb4beb35eac304cd,unknown,6,5,1,1,0,0,xuehui1991;goooxu;chicm-ms,,
+microsoft/nni,215498865,64,Add Makefile README,,liuzhe-lz,40699903,closed,False,2018-09-14T06:59:47+00:00,2018-09-29T01:40:26+00:00,2018-09-19T03:08:17+00:00,2018-09-19T03:08:17+00:00,eedf0955834f8e827b1c7272299d06a2b724c842,unknown,93,5,2,1,0,2,,,
+microsoft/nni,215515530,68,Update nnictl.py,,SparkSnail,22682999,closed,False,2018-09-14T08:16:49+00:00,2018-09-18T10:53:05+00:00,2018-09-14T08:21:28+00:00,,36e7c717e9c5fd73a3668f7fb9c468026d8a3bef,unknown,1,1,1,1,1,0,,,
+microsoft/nni,215523680,71,fix nnictl bug,,SparkSnail,22682999,closed,False,2018-09-14T08:49:29+00:00,2018-09-17T04:18:22+00:00,2018-09-17T04:18:22+00:00,,111e023f8f2cf7753409929a416c8bf122e9d795,unknown,4,3,2,7,0,0,xuehui1991;yds05;chicm-ms;goooxu,,
+microsoft/nni,215528018,73,Bugfix and partial pylint fix for SQuAD QA model.,This pull request fix bugs prevent SQuAD QA model from running. It also fixes some of pylint warnings.,tinytangent,6814722,closed,False,2018-09-14T09:05:58+00:00,2018-09-14T13:18:37+00:00,2018-09-14T13:18:37+00:00,2018-09-14T13:18:37+00:00,45650c41aefbedf96c0a1495eefbc28c34f896ea,unknown,100,61,7,4,1,1,chicm-ms;Crysple,,
+microsoft/nni,215529489,74,Fix stderr path issue #50,,chicm-ms,38930155,closed,False,2018-09-14T09:11:36+00:00,2018-09-14T12:13:22+00:00,2018-09-14T12:13:22+00:00,2018-09-14T12:13:22+00:00,9f7cce6366a0f9124537c06d15e3686a844cbe6e,unknown,1,43,2,2,0,2,yds05;goooxu,,
+microsoft/nni,215579414,75,Fix nnictl bugs and add new feature,"fix bug:  https://github.com/Microsoft/nni/issues/72
+
+fix issue:
+1.  https://github.com/Microsoft/nni/issues/35   add experiment status feature
+2.  https://github.com/Microsoft/nni/issues/82   add more error information in nnictl",SparkSnail,22682999,closed,False,2018-09-14T12:32:43+00:00,2018-09-19T10:20:00+00:00,2018-09-19T10:20:00+00:00,2018-09-19T10:20:00+00:00,cdee9c36909bb5e980fc560de8a088062f93b92a,unknown,79,32,8,14,6,0,yds05;goooxu;xuehui1991,,
+microsoft/nni,215667965,76,Support sudo pip install,,liuzhe-lz,40699903,closed,False,2018-09-14T17:57:41+00:00,2018-09-14T18:46:19+00:00,2018-09-14T18:41:41+00:00,,3a2f11e1bdc13f255cda37b6b195983d4d1696ec,unknown,19,42,2,1,0,0,,,
+microsoft/nni,215679488,77,Support pip install as root,,liuzhe-lz,40699903,closed,False,2018-09-14T18:45:15+00:00,2020-10-17T22:15:09+00:00,2018-09-26T02:40:15+00:00,2018-09-26T02:40:15+00:00,a20c510ca3417f572e95c6c6f39d0eca46262986,unknown,18,37,2,2,0,0,,,
+microsoft/nni,215746454,78,Code cleanup for SQuAD example.,Cleanup unused classes and functions for attention in SQuAD example.,tinytangent,6814722,closed,False,2018-09-15T03:10:40+00:00,2018-09-19T01:43:32+00:00,2018-09-19T01:43:32+00:00,2018-09-19T01:43:32+00:00,46cc2ff0206323e3dacb9ba10fa5eba6a6438f7c,unknown,2,221,2,3,0,1,,,
+microsoft/nni,215779641,81,support SMAC as a tuner on nni,"1. support SMAC, (SMAC package should be installed separately)
+2. fix the bug in sdk logging, i.e., endless logging
+3. fix bug in nnictl launcher
+4. fix bug in setup.py, i.e., incorrectly adding another entry_point",QuanluZhang,16907603,closed,False,2018-09-15T17:19:29+00:00,2018-09-21T01:53:52+00:00,2018-09-21T01:47:43+00:00,2018-09-21T01:47:43+00:00,5ef618cb3a0cf0032f0168b82594e4c3e14d3f88,dirty,465,75,14,49,15,1,,,
+microsoft/nni,215901816,86,quick fix for conda,"- specify which python to execute pip install
+- inherit environment variables in nnimanager's spawn to fully support virtual environment ",Crysple,20517842,closed,False,2018-09-17T08:15:08+00:00,2018-09-27T10:09:20+00:00,2018-09-20T07:34:44+00:00,,ccb7a641f237cfda3457ce395d1d338dc6c98712,blocked,15,15,3,3,2,0,,,
+microsoft/nni,216196937,88,Fix stderr path v0.1,,chicm-ms,38930155,closed,False,2018-09-18T06:33:28+00:00,2018-09-18T06:40:53+00:00,2018-09-18T06:40:53+00:00,2018-09-18T06:40:53+00:00,b5a50663b8721201b746547e237be51d11f5ce3d,unknown,1,1,1,4,0,0,yds05,,
+microsoft/nni,216202253,90,support conda,"- specify which python to execute pip install
+- inherit environment variables in nnimanager's spawn to fully support virtual environment",Crysple,20517842,closed,False,2018-09-18T07:01:15+00:00,2018-09-20T08:32:32+00:00,2018-09-20T08:32:31+00:00,2018-09-20T08:32:31+00:00,36edf4c28d013ed717c481cb5c0b14b8390c65ca,dirty,13,13,3,10,0,1,yds05;chicm-ms;goooxu;SparkSnail,,
+microsoft/nni,216299191,91,support package install,https://github.com/Microsoft/nni/issues/36,SparkSnail,22682999,closed,False,2018-09-18T13:01:37+00:00,2018-09-19T05:53:26+00:00,2018-09-19T05:53:26+00:00,2018-09-19T05:53:26+00:00,c5e6c6bed35fea8615661da7be1f354ab30b3d12,dirty,60,2,3,8,1,0,yds05;goooxu;chicm-ms,,
+microsoft/nni,216497056,92,update document,,scarlett2018,39592018,closed,False,2018-09-19T02:34:02+00:00,2018-09-19T07:50:04+00:00,2018-09-19T07:50:04+00:00,2018-09-19T07:50:04+00:00,b58666acefedc2ef7b38a0f9861dc16e51776af1,unknown,97,40,5,11,7,0,goooxu,,
+microsoft/nni,216507115,94,modify example config path to relative path and increase maxTrialNum,"- When nni is installed in sudo mode, the examples will not work cuz they all use absolute path.
+- Since the nni has support relative path between config.yml and specific files, the examples' path is changed to relative path
+- Another thing is to increase the maxTrialNum in examples according to some users' feedback",Crysple,20517842,closed,False,2018-09-19T03:55:26+00:00,2018-09-26T02:06:49+00:00,2018-09-26T02:06:48+00:00,2018-09-26T02:06:48+00:00,cc5218e55a688e67f0b0e63003958c5f8e36c6b2,unknown,28,21,9,3,0,0,yds05;chicm-ms;SparkSnail,,
+microsoft/nni,216534315,95,Fix package install issue,,SparkSnail,22682999,closed,False,2018-09-19T07:04:24+00:00,2018-09-19T08:02:51+00:00,2018-09-19T08:02:51+00:00,2018-09-19T08:02:51+00:00,44be8996dc360b793ea6c68a509f7aeaa631078d,dirty,3,3,1,7,0,0,,,
+microsoft/nni,216539925,96,Dev enas  - multi-phase hyper parameters support,"Support multi-phase hyper parameters, example:
+```
+nni_params = generate_default_params()
+        
+for i in range(5):
+    nni_params.update(nni.get_parameters())
+    train(args, nni_params)
+           
+```
+a test multi phase tuner
+```
+multiPhase: true
+tuner:
+  codeDir: /mnt/d/Repos/nni/src/sdk/pynni/tests  # sdk test dir
+  classFileName: test_multi_phase_tuner.py
+  className: NaiveMultiPhaseTuner
+```
+
+code changes:
+1. Add Metrics type:  REQUEST_PARAMETER
+2. Add Tuner command:  SendTrialJobParameter = b'SP'
+3. Add trial_job_id field in metrics
+4. Change parameter.cfg  to parameter_\<index\>.cfg in training service and SDK
+5. Add DataStore event:  'ADD_HYPERPARAMETER'
+6. Add index field to TrialJobApplicationForm hyperParameters field
+7. Add a multi-phase sample Tuner in test code
+",chicm-ms,38930155,closed,False,2018-09-19T07:30:09+00:00,2018-09-20T06:31:52+00:00,2018-09-20T06:31:52+00:00,2018-09-20T06:31:52+00:00,3c832bfd27a5a96ea8422cb4ccb9ee2328ec4cf5,dirty,524,39,20,7,2,0,yds05;SparkSnail,,enhancement
+microsoft/nni,216604137,98,Add trial log path,,SparkSnail,22682999,closed,False,2018-09-19T11:25:11+00:00,2018-09-20T06:10:48+00:00,2018-09-20T06:10:48+00:00,,7f637f7b424ed735074b7354c58aca9145e00970,unknown,49,0,3,20,0,1,,,
+microsoft/nni,216829595,100,remove Buffer warning,"- Remove DeprecationWarning:
+DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+
+related to issue: #99 ",Crysple,20517842,closed,False,2018-09-20T02:47:30+00:00,2018-09-27T03:35:06+00:00,2018-09-20T03:35:25+00:00,2018-09-20T03:35:25+00:00,ad32f7cb6140c75f999d957ac95750bbba762bc1,unknown,2,2,1,1,0,0,,,
+microsoft/nni,216833627,101,Update ga squad,,xuehui1991,6280746,closed,False,2018-09-20T03:20:26+00:00,2018-09-20T04:01:25+00:00,2018-09-20T04:01:25+00:00,2018-09-20T04:01:25+00:00,f1912f045ee2236dddbe9118cf0e7dbb07cf64f8,unknown,52,33,3,6,0,0,goooxu,,
+microsoft/nni,216841272,103,upgrade version to v0.1.1,,SparkSnail,22682999,closed,False,2018-09-20T04:25:06+00:00,2018-09-20T06:26:54+00:00,2018-09-20T06:26:54+00:00,2018-09-20T06:26:54+00:00,9fe3578bad75f1a5a67badeee22ff8877e8fbe7a,unknown,3,3,3,4,0,0,chicm-ms;QuanluZhang,,
+microsoft/nni,216841664,104,Update ga squad,,xuehui1991,6280746,closed,False,2018-09-20T04:28:49+00:00,2018-10-07T08:00:55+00:00,2018-10-07T08:00:55+00:00,2018-10-07T08:00:54+00:00,b7c686f649f568b45c54b8e2bfc39a8450793108,unknown,255,254,2,13,0,0,goooxu,,
+microsoft/nni,216893726,107,Add document for setting up debug environment,"Go through the steps and fix issues, then write a document to introduce how to setup debug environment",goooxu,22703054,closed,False,2018-09-20T08:58:56+00:00,2018-09-21T11:54:08+00:00,2018-09-21T11:54:08+00:00,2018-09-21T11:54:08+00:00,3f0a5647d5953a998f6478c11a4335500ea3071f,unknown,59,9,5,1,0,0,,,
+microsoft/nni,217153998,108,merge master,,SparkSnail,22682999,closed,False,2018-09-21T02:18:36+00:00,2018-09-21T02:18:41+00:00,2018-09-21T02:18:41+00:00,,95fe210f4c3d56710d8c4a73b1ec384128e440c7,unknown,0,0,0,5,0,0,,,
+microsoft/nni,217154390,109,Fix install.sh add add trial log path,,SparkSnail,22682999,closed,False,2018-09-21T02:22:05+00:00,2018-09-25T09:00:56+00:00,2018-09-25T09:00:55+00:00,2018-09-25T09:00:55+00:00,781613df62c6a6e0843ed787490d9ffe63c711dc,unknown,60,7,6,25,0,0,,,
+microsoft/nni,217161168,110,support conda (#90),Ready to merge,Crysple,20517842,closed,False,2018-09-21T03:20:51+00:00,2018-10-07T02:44:52+00:00,2018-09-26T02:07:06+00:00,2018-09-26T02:07:06+00:00,6873a3cf07349f6ef82d8d342912e6982c67a6c0,unknown,13,13,3,1,0,0,,,
+microsoft/nni,217163348,111,Update SQuAD example documentation.,"Update SQuAD example documentation for users, and adding more technical details.",tinytangent,6814722,closed,False,2018-09-21T03:39:56+00:00,2018-09-25T02:43:50+00:00,2018-09-25T02:43:50+00:00,2018-09-25T02:43:50+00:00,eeab424e87757b21d46a7beea0d2685f0976b0c0,unknown,205,3,1,3,0,0,,,
+microsoft/nni,217169338,112,Add built-in tuner test in CI,- Check whether each built-in tuner can be run normally in travis CI,Crysple,20517842,closed,False,2018-09-21T04:34:51+00:00,2018-10-18T07:46:38+00:00,2018-10-18T07:46:14+00:00,,58e9da525887f5bc7066458209f2993718b286bd,dirty,122,8,10,6,4,3,,,
+microsoft/nni,217258562,113,refactor experiment stopping,"with this functionality, after the experiment reaches maxDuration or maxTrialNum, users still could extend maxDuration and maxTrialNum to run more trials, and submit customized trials. Restserver, tuner/assessor will not stop even reaches maxDuration or maxTrialNum. The experiment only stops when `nnictl stop` is issued. This functionality is appealing because users may want to submit/run more (customized) trials even after maxDuration or maxTrialNum is reached.",QuanluZhang,16907603,closed,False,2018-09-21T11:48:54+00:00,2020-02-20T13:55:42+00:00,2018-09-27T06:50:21+00:00,2018-09-27T06:50:21+00:00,0c23ed10e9b67d8333c0a0addc2cbf4305d383b0,dirty,82,21,4,5,0,0,,,
+microsoft/nni,217579799,115,fix setup.py,"remove entry_point in setup.py;
+remove dependency_link in setup.py",QuanluZhang,16907603,closed,False,2018-09-24T08:05:29+00:00,2020-02-20T13:55:40+00:00,2018-09-25T02:35:17+00:00,2018-09-25T02:35:17+00:00,f3fd2773015de9d4926bc597526db6013a7c3d29,unknown,1,7,1,1,0,0,goooxu,,
+microsoft/nni,217582527,116,Dev smac,support smac tuner,QuanluZhang,16907603,closed,False,2018-09-24T08:19:53+00:00,2018-10-07T02:44:46+00:00,2018-09-25T11:41:33+00:00,2018-09-25T11:41:33+00:00,ff390b4d5457cd5dec9e5c1c3a98892e5f2aed2a,unknown,533,78,18,8,22,1,goooxu;SparkSnail,,
+microsoft/nni,217846719,117,Merge master to dev-enas,,chicm-ms,38930155,closed,False,2018-09-25T03:38:14+00:00,2018-09-25T05:04:25+00:00,2018-09-25T05:04:25+00:00,2018-09-25T05:04:25+00:00,176853acfde69244ea6edba0ab88b23941fa50b0,dirty,1016,162,42,23,0,0,QuanluZhang,,
+microsoft/nni,217910026,118,Merge master to dev-enas,,chicm-ms,38930155,closed,False,2018-09-25T09:22:17+00:00,2018-09-25T09:26:48+00:00,2018-09-25T09:26:48+00:00,2018-09-25T09:26:48+00:00,b693645fd0f6f27ac5d23ef25ae5a6c768378c79,dirty,60,7,6,16,0,0,QuanluZhang,,
+microsoft/nni,217913034,119,Add iterative search space example,,xuehui1991,6280746,closed,False,2018-09-25T09:32:14+00:00,2018-10-08T05:47:39+00:00,2018-10-08T05:47:39+00:00,2018-10-08T05:47:39+00:00,6ef6511736ccac0bce0f459d9c436b079174ed0d,unknown,505,254,7,20,2,0,chicm-ms;yds05,,
+microsoft/nni,217933745,120,add copy file to hdfs logic,,SparkSnail,22682999,closed,False,2018-09-25T10:43:31+00:00,2018-09-25T10:44:22+00:00,2018-09-25T10:44:22+00:00,,,dirty,2063,88,33,39,0,0,,,
+microsoft/nni,217939982,121,fix config path error message,,SparkSnail,22682999,closed,False,2018-09-25T11:07:38+00:00,2018-09-28T06:41:22+00:00,2018-09-28T06:41:22+00:00,,6a4555cfb9b282915ae7cbf185941b876c7350c8,unknown,97,1,7,38,0,1,,,
+microsoft/nni,217954269,122,Typo on #58,,kant,32717,closed,False,2018-09-25T12:02:01+00:00,2018-09-26T05:16:46+00:00,2018-09-26T05:16:46+00:00,2018-09-26T05:16:46+00:00,cc5372e205dc635494a7f50b1c30479d5cfd674d,unknown,1,1,1,1,0,0,scarlett2018,,
+microsoft/nni,218190687,125,Fix multiphase datastore problem,,chicm-ms,38930155,closed,False,2018-09-26T05:10:51+00:00,2018-09-27T01:51:33+00:00,2018-09-27T01:51:33+00:00,2018-09-27T01:51:33+00:00,1957645f4c2611689d435de5c0e10c5c81a20bdc,dirty,27,7,2,5,7,0,xuehui1991,,
+microsoft/nni,218208510,127,support multiPhase,,SparkSnail,22682999,closed,False,2018-09-26T07:02:45+00:00,2018-09-26T07:32:04+00:00,2018-09-26T07:32:04+00:00,2018-09-26T07:32:04+00:00,29e02baf5458832d97a2e19ad9319771b677692d,dirty,3,0,2,8,0,0,,,
+microsoft/nni,218268146,128,PAI Training Service implementation,"**1. Implement PAITrainingService
+**2. Add trial-keeper python module, and modify setup.py to install the module
+**3. Add PAItrainingService rest server to collect metrics from PAI container. ",yds05,1079650,closed,False,2018-09-26T10:42:19+00:00,2018-09-27T09:12:56+00:00,2018-09-27T09:12:56+00:00,2018-09-27T09:12:56+00:00,d3506e3420a06f076acb8d419beac81b1d8e98ac,unknown,2104,98,35,71,11,1,xuehui1991;Crysple;SparkSnail;chicm-ms,,
+microsoft/nni,218557839,129,fix datastore for multiple final result,,chicm-ms,38930155,closed,False,2018-09-27T07:59:20+00:00,2018-09-27T10:19:23+00:00,2018-09-27T10:19:12+00:00,2018-09-27T10:19:12+00:00,bae7e0258d7ab10d3f041032146da0ffa6c75c81,unknown,4,5,1,2,0,0,,,
+microsoft/nni,218563638,130,Update setup.py Makefile and documents,"- install requirements.txt under each tuner
+- small changes in Makefile on Colorful output
+- change pip install to python3 -m pip install to be more robust",Crysple,20517842,closed,False,2018-09-27T08:22:24+00:00,2018-09-27T11:09:28+00:00,2018-09-27T11:09:28+00:00,2018-09-27T11:09:28+00:00,9cc9c68a39a69e12b1bdca12a27f04d2824de7f4,unknown,18,22,6,7,1,0,xuehui1991;chicm-ms;SparkSnail,,
+microsoft/nni,218578423,131,Fix bugs about webui,"1. Add Experiment status
+2. Show error when users kill job failed
+3. Change some style
+4. Fix some bugs",lvybriage,35484733,closed,False,2018-09-27T09:13:12+00:00,2018-09-27T11:24:46+00:00,2018-09-27T11:21:26+00:00,2018-09-27T11:21:26+00:00,36b583b705429d39c71b01f04446404d7417da74,unknown,84,151,5,2,0,0,QuanluZhang;xuehui1991;goooxu;SparkSnail;Crysple,,
+microsoft/nni,218600726,132,Update NNI v0.2 release notes,,yds05,1079650,closed,False,2018-09-27T10:26:46+00:00,2018-09-27T11:03:29+00:00,2018-09-27T11:03:29+00:00,2018-09-27T11:03:29+00:00,a647a6c80add9d9df20d90c7282afd3537c3ac85,unknown,15,0,1,74,2,0,xuehui1991;Crysple;goooxu,,
+microsoft/nni,218611253,133,fix convert from ss to pcs,fix a bug when converting nni's search space to smac's search space,QuanluZhang,16907603,closed,False,2018-09-27T11:05:57+00:00,2020-02-20T13:55:43+00:00,2018-09-27T11:14:08+00:00,2018-09-27T11:14:08+00:00,d750246c77c405bfc75a4d7a70f4bef9a2e5eeee,unknown,8,8,1,1,0,0,xuehui1991;goooxu,,
+microsoft/nni,218891504,134,Bug fix for SQuAD example tuner.,This should fix the bug that the tuner crashes after initial population is all trained.,tinytangent,6814722,closed,False,2018-09-28T08:31:23+00:00,2018-10-06T01:36:53+00:00,2018-10-06T01:36:53+00:00,2018-10-06T01:36:53+00:00,469543448d23a5eab843570b5e6c31444601f5b3,unknown,3,3,1,1,0,0,,,
+microsoft/nni,218910945,135,webui logpath and document,"1. update ant design version
+2. add webui document
+3. make logpath is a clickable hyperlink when it's http or https
+4. add feedback button",lvybriage,35484733,closed,False,2018-09-28T09:43:23+00:00,2018-10-09T06:55:01+00:00,2018-09-28T11:32:05+00:00,2018-09-28T11:32:05+00:00,4c12435d06f20c56b3dfd5036149148ea587566e,unknown,150,48,16,3,6,0,QuanluZhang;SparkSnail;Crysple;xuehui1991;goooxu,,
+microsoft/nni,218916195,136,Pai training service bug fix and enhancement,"1. Create nnioutput dir in container to store output files
+2. Create a shell script to detect if nni package is already installed in PAI container. If not, pip install NN from github
+3. Move trial.log from NNI_SYS_DIR to NNI_OUTPUT_DIR",yds05,1079650,closed,False,2018-09-28T10:02:13+00:00,2018-09-28T11:46:11+00:00,2018-09-28T11:46:11+00:00,2018-09-28T11:46:11+00:00,70be7d0fa5194552298380deef0078c385a32b28,unknown,33,14,5,81,1,0,xuehui1991;Crysple;goooxu,,
+microsoft/nni,218966757,137,fix paiTrainingService bugs,,SparkSnail,22682999,closed,False,2018-09-28T13:23:11+00:00,2018-09-29T10:57:46+00:00,2018-09-29T10:57:46+00:00,2018-09-29T10:57:46+00:00,2b8cf2ee8ed96ed725c4b6d4c2ce412c8a41b917,unknown,120,47,8,26,1,0,QuanluZhang;goooxu,,
+microsoft/nni,219087125,138,Improve annotation,"Modify generated search space key from ""path/#123/type"" to ""path/__line123/type"".
+Use original user code directory (instead of generated code directory) as `codeDir` when search space is generated but NNI annotation is not used.",liuzhe-lz,40699903,closed,False,2018-09-28T21:12:04+00:00,2019-10-09T04:03:28+00:00,2018-09-29T09:09:58+00:00,2018-09-29T09:09:57+00:00,0619de20b7bac20a71e423e9888f4bec8022641e,unknown,1666,22,16,2,5,0,yds05;chicm-ms;goooxu;SparkSnail,,

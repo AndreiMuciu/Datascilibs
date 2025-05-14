@@ -1,0 +1,269 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+iterative/dvc,114918902,12,requirements / osx executable,"add development / deployment instructions in README;
+add single file build for osx",earlh,194240,closed,False,2017-04-07T23:33:45+00:00,2018-05-30T00:28:33+00:00,2017-04-07T23:40:57+00:00,2017-04-07T23:40:57+00:00,9d97704ca4277297185a56cd4f8d83424ede465d,dirty,75,3,6,1,0,0,,,
+iterative/dvc,114923231,14,command parsing,,earlh,194240,closed,False,2017-04-08T00:37:49+00:00,2018-05-30T00:28:34+00:00,2017-04-08T00:43:05+00:00,2017-04-08T00:43:05+00:00,fd33f7a0e38bf6f437ec3a2c7875f5ef7e1ecee9,dirty,77,4,2,1,0,0,,,
+iterative/dvc,114939696,15,bug -- where do command arguments start in argv,,earlh,194240,closed,False,2017-04-08T10:05:07+00:00,2018-05-30T00:28:34+00:00,2017-04-10T19:27:01+00:00,2017-04-10T19:27:00+00:00,12ff96f964876bbb6e3037561f01a7a7b37b513d,dirty,3,2,1,1,0,0,,,
+iterative/dvc,114966422,16,Windows symlink,,dmpetrov,10081867,closed,False,2017-04-09T00:08:29+00:00,2018-05-30T00:28:34+00:00,2017-04-12T02:40:13+00:00,2017-04-12T02:40:13+00:00,5b7977e47bab2894fa17f96a3adbd422fd286439,dirty,342,138,20,24,0,0,,,
+iterative/dvc,115463849,18,Repro dependencie fix #17,,dmpetrov,10081867,closed,False,2017-04-12T04:56:00+00:00,2018-05-30T00:28:34+00:00,2017-04-12T05:15:38+00:00,2017-04-12T05:15:38+00:00,a33ea34e8f385354bb67ed3775a62dcc86f8e3da,dirty,19,21,3,1,0,0,,,
+iterative/dvc,116083990,24,gc support (and lots more),,earlh,194240,closed,False,2017-04-17T02:53:06+00:00,2018-05-30T00:28:34+00:00,2017-04-18T00:08:39+00:00,2017-04-18T00:08:39+00:00,717befa02ddea4cf8a0ed9d6c417f0de30f43964,dirty,457,55,10,9,0,0,,,
+iterative/dvc,116229660,33,config modifications,"aws creds: look for path in dvc.conf, or look at ~/.aws/credentials",earlh,194240,closed,False,2017-04-18T00:35:33+00:00,2018-05-30T00:28:34+00:00,2017-04-23T00:44:17+00:00,2017-04-23T00:44:17+00:00,037758e20dadf38be86ad6581115797c346c18c9,dirty,273,34,8,3,1,0,,,
+iterative/dvc,116512085,35,Status file command issue,,dmpetrov,10081867,closed,False,2017-04-19T10:08:03+00:00,2018-05-30T00:28:34+00:00,2017-04-19T10:50:58+00:00,2017-04-19T10:50:58+00:00,10a954447806835fad8d5e26c5a5723170814173,dirty,352,159,14,4,0,0,,,
+iterative/dvc,117877604,48,Include implicit code dependencies from argv. Close #46,,dmpetrov,10081867,closed,False,2017-04-27T07:43:01+00:00,2018-05-30T00:28:35+00:00,2017-04-27T16:35:08+00:00,2017-04-27T16:35:08+00:00,ea51a8856d0f5ce97960100a2bec2384a6956078,dirty,36,13,4,1,0,0,,,
+iterative/dvc,118112757,52,Sync small fixes,,dmpetrov,10081867,closed,False,2017-04-28T09:25:21+00:00,2018-05-30T00:28:35+00:00,2017-04-28T18:08:25+00:00,2017-04-28T18:08:25+00:00,dc0d4b60544975f96bc83ae256de6691875691b3,dirty,76,41,9,4,0,0,,,
+iterative/dvc,118242112,55,Repro cached files,,dmpetrov,10081867,closed,False,2017-04-28T21:59:05+00:00,2018-05-30T00:28:35+00:00,2017-04-29T04:41:20+00:00,2017-04-29T04:41:20+00:00,b9a7c737e1d7feb5c145ad1584bf2c06ffe264bc,dirty,104,62,3,5,0,0,,,
+iterative/dvc,118492367,56,add setup.py,,efiop,5367102,closed,False,2017-05-02T06:23:12+00:00,2018-05-30T00:28:35+00:00,2017-05-02T07:12:31+00:00,,8b73eea7cf23586550a294ad9ed689424b10e667,dirty,130,2,5,2,2,0,,,
+iterative/dvc,118497599,57,add setup.py v2,,efiop,5367102,closed,False,2017-05-02T07:13:37+00:00,2018-05-30T00:28:35+00:00,2017-05-02T07:14:57+00:00,2017-05-02T07:14:57+00:00,45a430e60d2bac8589d734acd2a4f889b1673865,dirty,130,2,5,2,0,0,,,
+iterative/dvc,118501773,58,dvc: automatically create scripts,"Had to rename dvc.py to dvc_main.py to avoid conflict with dvc package.
+Also moved to main function to allow automatic script creation.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-05-02T07:47:47+00:00,2018-05-30T00:28:35+00:00,2017-05-02T16:12:01+00:00,2017-05-02T16:12:01+00:00,6debf8e276390da3c8a16e0fba2cedb54b4608bd,dirty,98,100,4,1,1,0,,,
+iterative/dvc,118862230,59,build: add builder for windows,"It uses nuitka to convert dvc.py into standalone dvc.exe and then
+uses Inno Setup script to create an installer.",efiop,5367102,closed,False,2017-05-03T21:46:56+00:00,2018-05-30T00:28:35+00:00,2017-05-03T22:16:57+00:00,2017-05-03T22:16:57+00:00,49299ce2ff8df2bbe87981e4a186834d7cb59877,dirty,279,0,3,1,0,0,,,
+iterative/dvc,119087130,60,Miniconda-based installer for standalone distribution of dvc,,efiop,5367102,closed,False,2017-05-04T23:28:15+00:00,2018-05-30T00:28:35+00:00,2017-05-05T00:43:48+00:00,2017-05-05T00:43:48+00:00,f13b4cbfeea18ccec33e85cb22150701bcc37237,dirty,338,233,5,2,0,0,,,
+iterative/dvc,119299498,62,build: use winpython and fix bugs,"This will allow us to make our installer ~4 times smaller(120MB ->
+30MB). This patch also has fix for PATH bug and installs dvc to whatever
+direstory user specified.",efiop,5367102,closed,False,2017-05-06T12:58:09+00:00,2018-05-30T00:28:35+00:00,2017-05-06T18:41:33+00:00,2017-05-06T18:41:33+00:00,bf844426abcb47f2511472652a86ad7c309c85cb,dirty,29,30,4,1,0,0,,,
+iterative/dvc,119324246,66,build: add ability to tweak PATH and CreateSymLinkPermission,,efiop,5367102,closed,False,2017-05-07T03:00:11+00:00,2018-05-30T00:28:35+00:00,2017-05-07T05:36:56+00:00,2017-05-07T05:36:56+00:00,61a62d5ca17b9b309369ee144fbc2f42bf0550a2,dirty,262,235,5,1,0,0,,,
+iterative/dvc,119361619,67,"build: use well-knows SID instead of ""Everyone""","This will fix CreateSymLinkPermission modification in systems with
+locale that is other than english.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-05-08T00:40:05+00:00,2018-05-30T00:28:35+00:00,2017-05-08T07:47:21+00:00,2017-05-08T07:47:21+00:00,3b87e228de0a2d407320262e1658af1834e2f4fe,dirty,12,8,1,1,0,0,,,
+iterative/dvc,119454574,69,build: add popup msgs about CreateSymLinkPrivilege,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-05-08T14:01:54+00:00,2018-05-30T00:28:35+00:00,2017-05-10T06:13:26+00:00,2017-05-10T06:13:26+00:00,e89603069bde1dac9383c3a0f65eb9ce55f30b33,dirty,10,5,1,1,0,0,,,
+iterative/dvc,120968882,76,build: improve windows installer,"1) Automatically update installer version by using dvc.main.VERSION
+2) Make build.cmd more verbose and handle errors better",efiop,5367102,closed,False,2017-05-17T03:39:08+00:00,2018-05-30T00:28:35+00:00,2017-05-17T03:45:01+00:00,2017-05-17T03:45:00+00:00,d03f3128c459522db2d5b1a7c55811273e2940d8,dirty,47,15,3,1,0,0,,,
+iterative/dvc,121642492,79,dvc: fix --help,"Currently dvc prints ""Unimplemented or unrecognized command: --help""
+and returns error code when calling dvc --help.
+
+Fixes #71
+
+Signed-off-by: Ruslan Kuprieiev <rkuprieiev@cloudlinux.com>",efiop,5367102,closed,False,2017-05-20T23:55:28+00:00,2018-05-30T00:28:35+00:00,2017-05-20T23:55:33+00:00,2017-05-20T23:55:33+00:00,ff3e4d21e1e83aa612634286ea2f2b14dff51a92,dirty,4,2,1,1,0,0,,,
+iterative/dvc,121759232,80,"Logging, color and usage","This pull request fixes usage output, replaces our print's with standard logging module, colorizes output and adds --verbose and --quiet options for cmdline.",efiop,5367102,closed,False,2017-05-22T11:49:54+00:00,2018-05-30T00:28:36+00:00,2017-05-22T16:54:53+00:00,2017-05-22T16:54:53+00:00,c8bdb128cc9064f78e704b7c5a07fe9ac51fd20c,dirty,59,30,5,4,0,0,,,
+iterative/dvc,122456891,83,logger: don't forget to call colorama.init(),"It is fine to not call it in Linux and MacOs, but in windows it results in colors not working in vanilla cmd  prompt.",efiop,5367102,closed,False,2017-05-25T14:55:13+00:00,2018-05-30T00:28:36+00:00,2017-05-25T14:55:27+00:00,2017-05-25T14:55:27+00:00,a05a259656aa40cb89df4ec012364e808a67d2aa,dirty,2,0,1,1,0,0,,,
+iterative/dvc,122807344,84,"Bugfixes, DataCloud class, multithread data-sync and Travis",,efiop,5367102,closed,False,2017-05-28T20:08:52+00:00,2018-05-30T00:28:36+00:00,2017-05-29T09:31:32+00:00,2017-05-29T09:31:32+00:00,342532838f89cdbab844de5014866b4f1b393827,dirty,430,402,10,4,2,1,,,
+iterative/dvc,123570770,88,Build rpm and deb packages using PyInstaller and FPM,"This patch-set allows us to build deb and rpm packages for linux with standalone dvc binary in them.
+It was made possible by using PyInstaller, troubleshooting it's errors for google modules and introducing custom hooks to resolve them. I also created a pull request for PyInstaller [1], so I hope that one day PyInstaller is going to be able to build dvc without additional hooks.
+
+[1] https://github.com/pyinstaller/pyinstaller/pull/2637 ",efiop,5367102,closed,False,2017-06-01T19:03:20+00:00,2018-05-30T00:28:36+00:00,2017-06-01T19:05:51+00:00,2017-06-01T19:05:51+00:00,3499bc32d696884d2fa600a3302162737fc26280,dirty,80,0,4,2,0,1,,,
+iterative/dvc,123576789,89,build_linux: hotfix for build,"Wrong INSTALL_DIR resulted in dvc being installed into /build/usr/bin.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-06-01T19:35:31+00:00,2018-05-30T00:28:36+00:00,2017-06-01T19:35:39+00:00,2017-06-01T19:35:39+00:00,e70aa8eec194508a15601ce4a7ba6e5815cbbfd0,dirty,4,3,1,1,0,0,,,
+iterative/dvc,124320465,90,dvc: introduce multithreaded import and RFC,"This allows us to download files in a few threads.
+Also includes RFC, as we can now get rid of import-bulk.py.
+Fixes #85.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-06-07T01:42:18+00:00,2018-05-30T00:28:36+00:00,2017-06-07T11:35:05+00:00,2017-06-07T11:35:05+00:00,08d897a7c5173b3e400f0e6770f2e762a213c4dc,dirty,141,122,4,1,1,1,,,
+iterative/dvc,125034999,92,[WIP] Misc changes for build and testing,,efiop,5367102,closed,False,2017-06-11T18:16:50+00:00,2018-05-30T00:28:36+00:00,2017-06-11T21:28:36+00:00,2017-06-11T21:28:36+00:00,619d9691b9ce7c63255620af80c182abf609155a,dirty,47,17,6,11,1,5,,,
+iterative/dvc,125046860,93,innosetup: add logos for installer,"This way it looks so much nicer.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-06-12T00:41:15+00:00,2018-05-30T00:28:36+00:00,2017-06-12T00:49:08+00:00,2017-06-12T00:49:08+00:00,5e4c11e8b5ab4451624b67596a20f71fd0ebd493,dirty,4,0,4,1,0,0,,,
+iterative/dvc,126175825,95,progress: add progress bar to 'import',"This one is a bit like the one you see in yum/dnf.
+It has one single line updating current progress
+for different targets and once they are finished
+prints them as standalone line. So it looks smth
+like this:
+
+  $ dvc import https://foo.bar/one.data \
+               https://foo.bar/two.data \
+               https://foo.bar/three.data
+  (1/3): [########################################] 100% one.data
+  (2/3): [#########################                              ] 60% three.data
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-06-18T03:38:22+00:00,2018-05-30T00:28:36+00:00,2017-06-19T01:52:05+00:00,2017-06-19T01:52:05+00:00,57691297a85d690d0f9cef4a473b00318daf2de6,dirty,97,7,2,1,0,2,,,
+iterative/dvc,126428761,98,Sync subfolder fix,,dmpetrov,10081867,closed,False,2017-06-20T01:14:47+00:00,2018-05-30T00:28:36+00:00,2017-06-20T05:07:32+00:00,2017-06-20T05:07:32+00:00,fc576f3d77fb4fc64444399688d4dfeb99db2203,dirty,187,61,12,11,0,0,,,
+iterative/dvc,127348861,99,"Progress bar improvements, --jobs and progress bar for LOCAL cloud and AWS",Fixes #96 . Fixes #97 . Fixes #73 ,efiop,5367102,closed,False,2017-06-25T01:09:00+00:00,2018-05-30T00:28:36+00:00,2017-06-25T01:51:04+00:00,2017-06-25T01:51:04+00:00,a96b61bd4eb4eb4159d3e21ded004aef3062132d,dirty,78,25,6,4,0,0,,,
+iterative/dvc,128508160,105,aws: don't forget to finish_target() after sync is done,"Fixes #101
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-07-02T03:37:28+00:00,2018-05-30T00:28:36+00:00,2017-07-02T03:44:13+00:00,2017-07-02T03:44:13+00:00,13b83faff5a1558feddb87c79de7b76d28908dee,dirty,2,0,1,1,0,0,,,
+iterative/dvc,128509670,107,aws: typo fixup for #105,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-02T05:13:46+00:00,2018-05-30T00:28:36+00:00,2017-07-02T09:12:48+00:00,2017-07-02T09:12:48+00:00,3e0b148c444be7c6ce249a05a6354b30a6072e1e,dirty,1,1,1,1,0,0,,,
+iterative/dvc,128537445,109,sync: handle exceptions,"I.e. if network is gone for some reason, report that we're
+able to sync some targets instead of just throwing exceptions
+about broken pipe or something.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-07-02T23:06:02+00:00,2018-05-30T00:28:36+00:00,2017-07-02T23:20:05+00:00,2017-07-02T23:20:05+00:00,671d87be523e757fbb346213f74e3243304de556,dirty,21,4,2,1,0,0,,,
+iterative/dvc,128813516,112,fix for allow using iam roles with s3 storage #111,,ophiry,5228696,closed,False,2017-07-04T14:20:34+00:00,2018-05-30T00:28:36+00:00,2017-07-06T05:40:11+00:00,2017-07-06T05:40:11+00:00,a4daf3200d78e2eb6cbce4d2907dd3c8c97a1dff,dirty,5,2,1,2,0,1,,,
+iterative/dvc,130470342,114,"download file to temp file, and rename only if success","This is a partial solution to #110 
+as it solves the case where the local file gets corrupted by a partial download
+(other cases of corruption can still be an issue)",ophiry,5228696,closed,False,2017-07-13T21:21:06+00:00,2018-05-30T00:28:36+00:00,2017-07-13T21:26:24+00:00,2017-07-13T21:26:24+00:00,d578ae74a9eb8d9f75acb22eb8f6a46d54bbf079,dirty,6,1,1,1,0,0,,,
+iterative/dvc,132236055,121,Target cmd,,dmpetrov,10081867,closed,False,2017-07-25T09:30:35+00:00,2018-05-30T00:28:37+00:00,2017-07-25T12:06:18+00:00,2017-07-25T12:06:18+00:00,57ec8075a407b01a688c5888b32a03d14c018d4c,dirty,235,26,11,6,0,0,,,
+iterative/dvc,133142982,123,RFC: move cmdline parsing to cli.py and settings RFC,"This will make the structure of dvc more linear
+making it easier to read. Plus, these changes
+are needed in preparation for libdvc, as they
+move all cmdline parsing to one common place.
+
+This patch also refactors our settings system
+also make it more linear and remove abstraction
+levels that are not needed and only cause confusion.
+There is a lot more to be done in preparation for
+dvc lib and RFC overall, but this a first step
+in that long journey.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-07-30T21:05:00+00:00,2018-05-30T00:28:37+00:00,2017-07-30T22:47:37+00:00,2017-07-30T22:47:37+00:00,4f2d9579752a25f69d9c50b45b12f918cb36f68d,dirty,522,442,28,1,0,0,,,
+iterative/dvc,133146596,124,travis: test on osx,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-30T23:01:07+00:00,2018-05-30T00:28:37+00:00,2017-07-30T23:15:20+00:00,,fe0b1433e012457bc1ecc128bc39dbd7e021e23f,dirty,718,428,34,10,0,0,,,
+iterative/dvc,133147084,125,travis: build linux packages,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-30T23:16:30+00:00,2018-05-30T00:28:37+00:00,2017-07-31T00:48:53+00:00,2017-07-31T00:48:53+00:00,3045fa23ae0b6ffb2e18551899bff8cb1aa1892f,dirty,196,183,7,1,0,0,,,
+iterative/dvc,133157754,126,cleanup: remove junk file,"Added by mistake.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-07-31T02:58:39+00:00,2018-05-30T00:28:37+00:00,2017-07-31T03:06:37+00:00,2017-07-31T03:06:37+00:00,6708c1a017d1dc79a647956ad65252ddf6ca1fea,dirty,0,90,1,1,0,0,,,
+iterative/dvc,133160446,127,appveyor: add windows build,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-31T03:37:30+00:00,2018-05-30T00:28:37+00:00,2017-07-31T03:47:40+00:00,2017-07-31T03:47:40+00:00,25a80e2a8cc8a68562bc532a0e071e2fccc03e21,dirty,29,0,1,1,0,0,,,
+iterative/dvc,133162598,128,innosetup: fix setup.iss semicolons,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-31T04:09:39+00:00,2018-05-30T00:28:37+00:00,2017-07-31T04:14:45+00:00,2017-07-31T04:14:45+00:00,c1ebe910ce53cf5bb65b6884221ecd05ee4d419c,dirty,2,2,1,1,0,0,,,
+iterative/dvc,133164083,129,Add appveyor icon to README,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-07-31T04:32:09+00:00,2018-05-30T00:28:37+00:00,2017-07-31T04:43:21+00:00,2017-07-31T04:43:21+00:00,4c996b7ea52105a444edb129d71503f0ef3796aa,dirty,1,1,1,1,0,0,,,
+iterative/dvc,133530285,137,travis: publish dvc rpm and deb installers on releases,"Travis is able to automatically build and upload releases
+to github, so when we will release next dvc version, travis
+will automatically upload deb and rpm packages to github.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-01T17:37:51+00:00,2018-05-30T00:28:37+00:00,2017-08-01T17:48:21+00:00,2017-08-01T17:48:21+00:00,920fbec90250959d4c60b99c2d701e50600eee0b,dirty,12,0,1,1,0,0,,,
+iterative/dvc,133534646,138,travis: fix secure token,"I made a mistake of generating tokens on my repo
+efiop/dvc, so it was not correct for official repo
+and thus travis couldn't upload packages.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-01T17:59:02+00:00,2018-05-30T00:28:37+00:00,2017-08-01T18:02:51+00:00,2017-08-01T18:02:51+00:00,02ad3863fc1bef2ee17a33823c82166141bf8459,dirty,1,1,1,1,0,0,,,
+iterative/dvc,133578849,139,appveyor: deploy dvc windows installer,"Same as with travis, appveyor will push dvc installer
+for windows, when new dvc is being released on github.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-01T21:42:41+00:00,2018-05-30T00:28:37+00:00,2017-08-01T21:46:23+00:00,2017-08-01T21:46:23+00:00,4908337219f6370b92af0b9943be3ae50981d140,dirty,11,0,1,1,0,0,,,
+iterative/dvc,133582245,140,appveyor: rename yml and add 'branches',Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-08-01T22:02:31+00:00,2018-05-30T00:28:37+00:00,2017-08-01T22:02:43+00:00,2017-08-01T22:02:43+00:00,1854ac5e2335080ce0b45f2f7d29dfdef86a4ec3,dirty,4,0,1,1,0,0,,,
+iterative/dvc,133661165,141,[WIP] Cloud instance basic,,dmpetrov,10081867,closed,False,2017-08-02T09:27:22+00:00,2018-05-30T00:28:37+00:00,2017-08-04T11:40:57+00:00,,00ec1c88869ccd146fb828274b168c951acfb2cb,dirty,328,33,12,11,0,0,,,
+iterative/dvc,133683549,142,appveyor: rename yml back,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-08-02T11:21:53+00:00,2018-05-30T00:28:37+00:00,2017-08-02T11:43:20+00:00,2017-08-02T11:43:20+00:00,b3ab1036803426f8575f0876b4ab55ae6a3c7007,dirty,0,0,1,1,0,0,,,
+iterative/dvc,133843111,143,"cli: fix help, 'run', 'repro' and 'sync'","Adding metavar='' is a legacy from previous design and should
+be removed to achieve better help msgs.
+
+'run' should have 'command' as a positional and _required_ argument and 'args'
+as a remainder.
+
+'repro' had CmdRun triggered when called from cli.
+
+'sync' should have 'targets' as a positional and _required_ argument.
+
+Fixes #136.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-03T01:42:04+00:00,2018-05-30T00:28:37+00:00,2017-08-03T02:10:13+00:00,2017-08-03T02:10:13+00:00,4df6e1bdbf407e811303a87022ea1a725d603007,dirty,11,13,3,1,0,0,,,
+iterative/dvc,133889538,146,cli: set dvc prog name to 'dvc',"Fixes #145
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-03T08:48:19+00:00,2018-05-30T00:28:37+00:00,2017-08-03T09:01:16+00:00,2017-08-03T09:01:16+00:00,0f2a672804f8e9b0ae71e0a6a29a72d910a38bcc,dirty,6,2,1,1,0,0,,,
+iterative/dvc,134024132,147,dvc: get rid of pathlib,"Fixes #118
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-03T19:34:28+00:00,2018-05-30T00:28:37+00:00,2017-08-03T20:54:46+00:00,2017-08-03T20:54:46+00:00,4a66bf2d951060132e4d9542a616b72980761147,dirty,24,31,4,1,0,0,,,
+iterative/dvc,134148857,149,[WIP] Cloud basic 2,,dmpetrov,10081867,closed,False,2017-08-04T11:40:28+00:00,2018-05-30T00:28:37+00:00,2017-08-23T07:48:37+00:00,2017-08-23T07:48:37+00:00,ee0e012f86eecd5b2d22d51955ea2baaf187ea62,dirty,812,147,13,7,0,0,,,
+iterative/dvc,134309321,151,"init: check user.{name,email} to make sure git is ready","Making sure git is configured at least with name and email,
+so our commits can be commited without any problems.
+
+Fixes #64.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-06T00:07:18+00:00,2018-05-30T00:28:38+00:00,2017-08-06T00:21:41+00:00,2017-08-06T00:21:41+00:00,bfd208570760952ea9af36806803d3b13500f2c7,dirty,20,0,1,1,0,0,,,
+iterative/dvc,134343176,152,tests: add test for utils.py,"Some sanity tests to make sure something like #132
+doesn't happen anymore.
+
+Fixes #132.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-06T22:29:46+00:00,2018-05-30T00:28:38+00:00,2017-08-06T22:56:02+00:00,2017-08-06T22:56:02+00:00,fa9996fe307139981e4e81375830d1bef078d168,dirty,60,0,1,1,0,0,,,
+iterative/dvc,134345172,153,RFC: fix codeclimate warnings,"codeclimate noted a few similiar code chunks and it looks
+like it is worth fixing them.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-06T23:38:15+00:00,2018-05-30T00:28:38+00:00,2017-08-07T00:07:19+00:00,2017-08-07T00:07:19+00:00,7a5a17e9c6f4e32fa70d48785e2c68656ce7f34b,dirty,17,21,3,1,0,0,,,
+iterative/dvc,135470906,160,"Sync/cloud RFC, pull/push commands",,efiop,5367102,closed,False,2017-08-12T19:53:35+00:00,2018-05-30T00:28:38+00:00,2017-08-12T20:07:42+00:00,2017-08-12T20:07:42+00:00,2454b899636233c53e1538b7484f12593521a0bc,dirty,139,70,6,5,0,0,,,
+iterative/dvc,135473711,161,build: cleanup build_macos.sh,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-08-12T21:39:23+00:00,2018-05-30T00:28:38+00:00,2017-08-12T21:57:40+00:00,2017-08-12T21:57:40+00:00,990c72fcf73df2f8015f46053d54819467b5a834,dirty,3,12,1,1,0,0,,,
+iterative/dvc,135478179,162,travis: add workaround for mac build,"Travis doesn't natively support python builds on Mac yet,
+so we need to workaround it by installing everything ourselves.
+Luckily, there are third-party scripts that will make it much
+easier for us.
+
+Fixes #133.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-13T01:11:28+00:00,2018-05-30T00:28:38+00:00,2017-08-13T04:10:22+00:00,2017-08-13T04:10:22+00:00,04bb836fe00a451110f4823f6b1ee490794dd61a,dirty,26,2,2,1,0,0,,,
+iterative/dvc,135510290,164,import: resume download,"Download to .part file first and rename at the very end,
+so if we lose connection we could resume download.
+Note: not all servers support 'Range' header, so this
+feature is not going to work everywhere.
+
+This feature is activated by -c/--continue cmdline option.
+
+Fixes #108
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-13T22:18:38+00:00,2018-05-30T00:28:38+00:00,2017-08-13T22:33:14+00:00,2017-08-13T22:33:14+00:00,348f04462fef327c90e799498648fe8a94013a45,dirty,35,3,2,1,0,2,,,
+iterative/dvc,135512205,165,"cli: replace ""dvc instance-create"" with ""dvc cloud create""","This looks and sounds much better.
+
+Fixes #156 
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-13T23:24:49+00:00,2018-05-30T00:28:38+00:00,2017-08-13T23:35:16+00:00,2017-08-13T23:35:16+00:00,4fa18884d7bd3a213c99e0d3f9546717b6544a59,dirty,12,3,1,1,0,0,dmpetrov,,
+iterative/dvc,135514783,166,[WIP]build: save binary when building for macos,"This is needed for upcoming brew package.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-14T00:50:11+00:00,2018-05-30T00:28:38+00:00,2017-08-16T16:39:22+00:00,,c6b2017aa25f18ca5e1d5dd85684abb82b02cce2,dirty,178,174,2,1,0,0,,,
+iterative/dvc,135679944,170,return empty md5 if file doesnt exist,"currently, an exception was thrown if the file was missing.",ophiry,5228696,closed,False,2017-08-14T20:29:28+00:00,2018-05-30T00:28:38+00:00,2017-08-14T22:08:28+00:00,2017-08-14T22:08:28+00:00,49d286e5ade5cfbd8cbc00aaf49076bb6d098589,dirty,8,5,1,1,0,1,,,
+iterative/dvc,135739880,171,replace eq\neq to is is not none,"testing for using == and != can be buggy when testing for None
+specifically got exceptions with the args object, where the overloaded eq operator didn't handle None
+
+",ophiry,5228696,closed,False,2017-08-15T06:02:33+00:00,2018-05-30T00:28:38+00:00,2017-08-15T06:03:05+00:00,2017-08-15T06:03:05+00:00,f3001dc2e1fe409d47dfbdf9f8f995ad293511c6,dirty,5,5,1,1,3,0,,,
+iterative/dvc,135740133,172,replace eq\neq to is is not none - bug fix,,ophiry,5228696,closed,False,2017-08-15T06:05:48+00:00,2018-05-30T00:28:38+00:00,2017-08-15T06:05:53+00:00,2017-08-15T06:05:53+00:00,ed797b0998c6a90eb91700e995ba32869a90e8ce,dirty,1,1,1,1,0,0,,,
+iterative/dvc,136070638,174,dvc: bring back frozen versions for deps,"Fixes #173.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-16T16:40:03+00:00,2018-05-30T00:28:38+00:00,2017-08-16T19:43:00+00:00,2017-08-16T19:43:00+00:00,552b571bb299f294e373c60cdd85ec6085e275d7,dirty,178,174,2,1,0,0,,,
+iterative/dvc,136613870,176,Misc improvements and features,,efiop,5367102,closed,False,2017-08-19T16:57:30+00:00,2018-05-30T00:28:38+00:00,2017-08-20T07:11:22+00:00,2017-08-20T07:11:22+00:00,78b337034d3bb1643457b05281d4d8183ad120e8,dirty,642,222,21,12,0,0,,,
+iterative/dvc,136642916,178,aws: use multipart to push changes,Fixes #100.,efiop,5367102,closed,False,2017-08-20T13:19:12+00:00,2018-05-30T00:28:38+00:00,2017-08-20T13:36:16+00:00,2017-08-20T13:36:15+00:00,b5866962a8b832e9e02dfc5224decd436a31b72b,dirty,24,2,1,1,0,0,,,
+iterative/dvc,136646292,179,"Revert ""aws: use multipart to push changes""",Reverts dataversioncontrol/dvc#178,efiop,5367102,closed,False,2017-08-20T14:55:31+00:00,2018-05-30T00:28:38+00:00,2017-08-20T14:56:17+00:00,2017-08-20T14:56:17+00:00,8b84d098cb78f00dd3e8fe84f0b42c0ff9fb8776,dirty,2,24,1,1,0,0,,,
+iterative/dvc,136646439,180,cloud: fix typo,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-08-20T14:59:14+00:00,2018-05-30T00:28:39+00:00,2017-08-20T15:37:24+00:00,2017-08-20T15:37:24+00:00,a86a83146758643afc908cfd3799ac4b7de829b5,dirty,1,1,1,1,0,0,,,
+iterative/dvc,136648699,181,"aws: use multipart to push changes, v2","Fixes #100
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-20T16:07:13+00:00,2018-05-30T00:28:39+00:00,2017-08-20T16:23:26+00:00,2017-08-20T16:23:25+00:00,b1679118227cc2fee5ef1580ee631a68f304dd97,dirty,32,3,1,1,0,0,,,
+iterative/dvc,136683151,182,aws: fix progress and chunk size for multipart upload,"With such a huge chunk size upload took too long. Related to #100 
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-08-21T05:33:51+00:00,2018-05-30T00:28:39+00:00,2017-08-21T05:51:15+00:00,2017-08-21T05:51:15+00:00,f0b75172e7a0d4b14191354e8d0960a41a56ccb6,dirty,12,5,1,1,0,0,,,
+iterative/dvc,136831921,183,misc patches,,efiop,5367102,closed,False,2017-08-21T20:02:38+00:00,2018-05-30T00:28:39+00:00,2017-08-26T08:34:38+00:00,2017-08-26T08:34:38+00:00,4625368acb0a4edbb22628f934de6cd91404051e,dirty,218,65,10,5,0,0,,,
+iterative/dvc,137809917,187,travis: enable aws tests,Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>,efiop,5367102,closed,False,2017-08-26T19:49:09+00:00,2018-05-30T00:28:39+00:00,2017-08-26T21:37:26+00:00,2017-08-26T21:37:26+00:00,126505e25bd2ed54c256edf04eac751c3e4e6818,dirty,2,7,3,1,0,0,,,
+iterative/dvc,137847253,191,misc,,efiop,5367102,closed,False,2017-08-27T20:35:51+00:00,2018-05-30T00:28:39+00:00,2017-08-27T21:02:08+00:00,2017-08-27T21:02:08+00:00,8256e0b104ec19485afcee4ab4181aa254f348f8,dirty,5,5,3,2,0,0,,,
+iterative/dvc,139004943,192,First workflow graph,"
+![workflow](https://user-images.githubusercontent.com/10081867/30038190-de752f9a-9176-11e7-9ca0-3422741e53b2.jpeg)
+",dmpetrov,10081867,closed,False,2017-09-02T08:28:25+00:00,2018-05-30T00:28:39+00:00,2017-09-04T21:02:01+00:00,2017-09-04T21:02:01+00:00,76287f629a740c3b78cdbb0707881582e826a07e,dirty,619,16,13,15,0,0,,,
+iterative/dvc,139013834,194,aws: resume download/upload,"Fixes #163
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-02T14:18:55+00:00,2018-05-30T00:28:39+00:00,2017-09-02T14:36:46+00:00,2017-09-02T14:36:45+00:00,506df4895e9777bf2fa39ffe523c202616a78c0d,dirty,79,5,1,1,0,0,,,
+iterative/dvc,139029861,195,Misc enhancements ,"Fixes #190
+Fixes #196 
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-02T23:24:22+00:00,2018-05-30T00:28:39+00:00,2017-09-03T00:08:24+00:00,2017-09-03T00:08:24+00:00,76aab6f6c3b762b0dc4e1790f449c54cf1cb5c04,dirty,34,14,3,2,0,0,,,
+iterative/dvc,139031145,197,build: fix errors on python3,"These wasn't caught in pull-request as it doesn't
+have secure env vars to test sync/pull/push/status.
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-03T00:28:13+00:00,2018-05-30T00:28:39+00:00,2017-09-03T00:51:11+00:00,2017-09-03T00:51:11+00:00,7180e3311904e9f1f80471c80823202877155535,dirty,2,1,2,1,0,0,,,
+iterative/dvc,139045435,199,Logger and state files,,efiop,5367102,closed,False,2017-09-03T12:20:41+00:00,2018-05-30T00:28:39+00:00,2017-09-03T19:12:56+00:00,2017-09-03T19:12:56+00:00,992c37613dc76c13bd9c7feb411422414e75c726,dirty,60,28,2,2,0,0,,,
+iterative/dvc,140870949,202,pull: create dirs before pulling,"Fixes #201
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-13T16:19:19+00:00,2018-05-30T00:28:39+00:00,2017-09-13T21:00:49+00:00,2017-09-13T21:00:49+00:00,94532c869d6458ca8b5361ca358f4ea4c51e353d,dirty,24,11,4,3,0,0,,,
+iterative/dvc,141157093,206,"Misc data-related changes(GCP, tests and status)",,efiop,5367102,closed,False,2017-09-14T19:26:15+00:00,2018-05-30T00:28:39+00:00,2017-09-14T23:41:03+00:00,2017-09-14T23:41:03+00:00,9593de06679201866dbb19843c562bec1bdcbb1f,dirty,56,17,7,4,0,0,,,
+iterative/dvc,141450459,207,dvc: move config/cache/state/target to .dvc,"This is a more natural way to store dvc-related files and dirs
+and follows git-logic much better.
+
+Fixes #200
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-16T15:25:44+00:00,2018-05-30T00:28:39+00:00,2017-09-16T19:01:44+00:00,2017-09-16T19:01:44+00:00,6ad073a0382b3efd5cf05b47854f97039eb48327,dirty,95,116,11,1,0,0,,,
+iterative/dvc,141460383,210,git: save and use target commit in state files,"Fixes #193
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-16T20:12:06+00:00,2018-05-30T00:28:40+00:00,2017-09-24T14:18:44+00:00,2017-09-24T14:18:44+00:00,31c86d15b2eab524064d1d0be8a6f477c95310a7,dirty,55,24,4,2,0,7,,,
+iterative/dvc,141466303,212,target: remove 'target' command,"Fixes #209
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-16T23:42:34+00:00,2018-05-30T00:28:40+00:00,2017-09-17T01:00:47+00:00,2017-09-17T01:00:47+00:00,e02d45b3f301ad770a9e5bf201959c02da90e6e1,dirty,14,193,6,1,0,0,,,
+iterative/dvc,141472217,213,Show target metrics deltas only in workflow graph,"![workflow](https://user-images.githubusercontent.com/10081867/30517955-3d303a3c-9b24-11e7-9f99-10c34be87ba5.jpeg)
+",dmpetrov,10081867,closed,False,2017-09-17T04:16:04+00:00,2018-05-30T00:28:40+00:00,2017-09-17T06:13:29+00:00,2017-09-17T06:13:29+00:00,82b51efe1902e55056eca2503d9b4d08d9ff7913,dirty,202,60,6,6,0,0,,,
+iterative/dvc,141483286,216,target: fix bugs and add repro test,"Fixes #215
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-17T11:52:20+00:00,2018-05-30T00:28:40+00:00,2017-09-17T12:32:46+00:00,2017-09-17T12:32:46+00:00,7286f8074d3897777a8af9bd7394723183fc001f,dirty,14,9,3,1,0,0,,,
+iterative/dvc,141484548,218,workflow: extract float before converting,"Fixes #217
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-17T12:33:22+00:00,2018-05-30T00:28:40+00:00,2017-09-17T14:06:11+00:00,2017-09-17T14:06:11+00:00,f88bdc281998ca6b67b0f62fe77f3918e9e8d312,dirty,16,8,1,1,0,0,,,
+iterative/dvc,141492635,220,RFC: find and fix errors and some warning reported by pylint,"Fixes #219
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-17T16:26:24+00:00,2018-05-30T00:28:40+00:00,2017-09-17T16:51:15+00:00,2017-09-17T16:51:15+00:00,a66a4089eccfc016689c22e39a05c8c61059fea7,dirty,361,182,12,1,0,0,,,
+iterative/dvc,141500419,222,dvc: get rid of 'test' command,"Fixes #221
+
+Signed-off-by: Ruslan Kuprieiev <kupruser@gmail.com>",efiop,5367102,closed,False,2017-09-17T20:08:12+00:00,2018-05-30T00:28:40+00:00,2017-09-17T20:30:04+00:00,2017-09-17T20:30:04+00:00,10c7bd2252290f019d86f050e5ecde9f795ce351,dirty,0,49,2,1,0,0,,,
+iterative/dvc,141538746,223,Misc: config and show workflows,,dmpetrov,10081867,closed,False,2017-09-18T07:41:52+00:00,2018-05-30T00:28:40+00:00,2017-09-18T08:36:17+00:00,2017-09-18T08:36:17+00:00,786da4d79409567259ee5618df8799536a2d55a0,dirty,55,14,7,5,0,0,,,
+iterative/dvc,141549491,224,Extract target metric to state files,It is much better to have the metrics in DAG and Git repository then in clouds or local disks.,dmpetrov,10081867,closed,False,2017-09-18T08:52:40+00:00,2018-05-30T00:28:40+00:00,2017-09-18T12:15:30+00:00,2017-09-18T12:15:30+00:00,68c392b8cfdd702935a9f91b9b35c41ca28a229a,dirty,152,101,14,7,0,0,,,enhancement
+iterative/dvc,142644642,228,specify dvc config root dir as enviroment variable,"implements: https://github.com/dataversioncontrol/dvc/issues/169
+
+allows using an environment variable DVC_ROOT to specify the location of the dvc config files
+the location will be: <git>/DVC_ROOT/.dvc
+
+this is useful for cases where a git repo is used for more then one project",ophiry,5228696,closed,False,2017-09-22T18:45:15+00:00,2018-05-30T00:28:40+00:00,2017-11-01T06:36:04+00:00,,59350aa35c7ea5ef754ece89e18dbeef88ad4a8b,dirty,2,2,2,1,0,6,efiop,,
+iterative/dvc,142758733,231,Misc logging and exceptions,,efiop,5367102,closed,False,2017-09-24T15:38:44+00:00,2018-05-30T00:28:40+00:00,2017-09-24T17:39:44+00:00,2017-09-24T17:39:44+00:00,dfb5250914a79835ba89ada4747a8cd517d31c75,dirty,18,2,2,2,0,0,,,
+iterative/dvc,142893998,233,"Revert ""git: save and use target commit in state files""",Reverts dataversioncontrol/dvc#210,efiop,5367102,closed,False,2017-09-25T14:13:58+00:00,2018-05-30T00:28:40+00:00,2017-09-25T14:21:01+00:00,,1ae5364b67bc2c561d80c609692988334628f4a3,dirty,24,55,4,1,0,0,,,
+iterative/dvc,142899628,234,"Revert ""run: save target commit in state files""","This reverts commit 3ec49f56efe1040c5fb03fb9074387e1ca280114.
+
+Didn't solve the issue, need to research a bit more.",efiop,5367102,closed,False,2017-09-25T14:35:42+00:00,2018-05-30T00:28:40+00:00,2017-09-26T15:34:09+00:00,2017-09-26T15:34:09+00:00,2929e91bd4060aa4069f8be1a58b3660d4109285,dirty,23,54,3,1,0,0,,,
+iterative/dvc,142998806,235,Added the initial version of DVC product documentation,!I: added the initial version of DVC product documentation,gvyshnya,1868795,closed,False,2017-09-25T22:26:13+00:00,2018-05-30T00:28:41+00:00,2017-09-28T02:02:51+00:00,,42eb162c47ce5c5ddbdfe1ed1f4008cc4be252db,dirty,1778,0,9,1,0,1,,,

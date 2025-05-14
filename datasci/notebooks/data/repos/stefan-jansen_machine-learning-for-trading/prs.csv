@@ -1,0 +1,122 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+stefan-jansen/machine-learning-for-trading,272176005,6,Master,@stefan-jansen - please reject this pull request; accidentally created.,msarm,1042633,closed,False,2019-04-20T20:42:35+00:00,2019-04-20T21:06:29+00:00,2019-04-20T21:06:29+00:00,,8e43e80e931880c985c21ba8512394a7c6afaf17,dirty,10814,490,18,2,0,0,,,
+stefan-jansen/machine-learning-for-trading,333179790,13,windows environment file,"Hi Stefan.
+this is the environment.yml file I was able to use on my windows machine and it worked. All I did was I deleted all the packages that were not able to resolve and then it worked without a hitch. check it out and if you think it would help the readers who use windows and are having troubles, you could include it in your repo.",ssilverac,51388814,closed,False,2019-10-28T15:33:16+00:00,2019-11-07T02:49:02+00:00,2019-11-07T02:48:46+00:00,2019-11-07T02:48:46+00:00,90a4d5ce7502efa43764ccb28425290f8ef74fab,dirty,409,0,1,2,0,1,,,
+stefan-jansen/machine-learning-for-trading,461781245,31,Correct typo in README file,Correcting type in README.md file.,jmprathab,11979066,closed,False,2020-08-02T09:09:24+00:00,2020-08-04T17:42:21+00:00,2020-08-04T17:42:21+00:00,2020-08-04T17:42:21+00:00,6cf4821403b9a99e043258e6e22fb3107ec1a968,dirty,2,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,482773454,35,Encoding parameter not availabe in pandas 1.0.5,"Excellent book.  I had issues running chapter 1 code.  This commit fixed it for me.
+
+INSTALLED VERSIONS
+------------------
+commit           : None
+python           : 3.8.3.final.0
+python-bits      : 64
+OS               : Linux
+OS-release       : 5.4.0-47-generic
+machine          : x86_64
+processor        : x86_64
+byteorder        : little
+LC_ALL           : None
+LANG             : en_GB.UTF-8
+LOCALE           : en_GB.UTF-8
+
+pandas           : 1.0.5
+numpy            : 1.18.5
+pytz             : 2020.1
+dateutil         : 2.8.1
+pip              : 20.1.1
+setuptools       : 49.2.0.post20200714
+Cython           : 0.29.21
+pytest           : 5.4.3
+hypothesis       : None
+sphinx           : 3.1.2
+blosc            : None
+feather          : None
+xlsxwriter       : 1.2.9
+lxml.etree       : 4.5.2
+html5lib         : 1.1
+pymysql          : None
+psycopg2         : None
+jinja2           : 2.11.2
+IPython          : 7.16.1
+pandas_datareader: None
+bs4              : 4.9.1
+bottleneck       : 1.3.2
+fastparquet      : None
+gcsfs            : None
+lxml.etree       : 4.5.2
+matplotlib       : 3.2.2
+numexpr          : 2.7.1
+odfpy            : None
+openpyxl         : 3.0.4
+pandas_gbq       : None
+pyarrow          : None
+pytables         : None
+pytest           : 5.4.3
+pyxlsb           : None
+s3fs             : None
+scipy            : 1.5.0
+sqlalchemy       : 1.3.18
+tables           : 3.6.1
+tabulate         : None
+xarray           : None
+xlrd             : 1.2.0
+xlwt             : 1.3.0
+xlsxwriter       : 1.2.9
+numba            : 0.50.1",leehbi,8226987,closed,False,2020-09-09T11:26:17+00:00,2020-09-09T15:17:11+00:00,2020-09-09T15:17:11+00:00,2020-09-09T15:17:10+00:00,e78e159c7ac9067f76d76351b49d594c915915d3,dirty,1,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,507063632,54,Fix some links in readme of chapter 2,"This PR fix some links in readme file of chapter 2
+
+Thanks for share your work 😄 ",KarlosQ,15233913,closed,False,2020-10-20T20:06:00+00:00,2020-10-21T15:06:45+00:00,2020-10-21T15:06:35+00:00,2020-10-21T15:06:35+00:00,dd2e230fb010cea12cc79f908250a40396c0f8ae,dirty,8,8,1,2,0,1,,,
+stefan-jansen/machine-learning-for-trading,561369630,92,"Fixed missing ""="" in argument","I think an ""="" got dropped in a recent commit. Adding it back in got my ml4t environment working.",geoffworks17,12812931,closed,False,2021-01-25T21:16:40+00:00,2021-02-07T00:47:43+00:00,2021-02-07T00:47:16+00:00,2021-02-07T00:47:16+00:00,79015d092c38fe7e3d4774eb9c1c77ceeacecac9,dirty,1,1,1,1,0,2,,,
+stefan-jansen/machine-learning-for-trading,595011739,125,Missing quotation mark - syntax fix,,shlomiku,7924802,closed,False,2021-03-17T19:55:44+00:00,2021-03-17T20:04:06+00:00,2021-03-17T20:04:06+00:00,2021-03-17T20:04:06+00:00,df04bea29b174f336925366943e19bb110b90e5b,dirty,1,1,1,2,0,0,,,
+stefan-jansen/machine-learning-for-trading,595043821,126,edgar - fix download code,"* fix variable names
+* download all (remove `[-4: -3]`)
+* also doesn't seem to require special url for any quarter in 2020
+
+Also, take a look at: https://github.com/shlomikushchi/zipline-trader :)",shlomiku,7924802,closed,False,2021-03-17T20:53:06+00:00,2021-06-07T16:36:57+00:00,2021-06-07T16:36:55+00:00,,451c5dbb2f558a49c21ddf09d6ca84bb6d237ac8,dirty,6,6,1,2,0,2,,,
+stefan-jansen/machine-learning-for-trading,612719358,143,use self.date_idx for selecting train_idx and test_idx,Fix needed when using different date index name ,norbertraus,75402,closed,False,2021-04-09T20:44:08+00:00,2021-04-11T19:19:48+00:00,2021-04-09T23:41:39+00:00,2021-04-09T23:41:39+00:00,1078e7f88983c1c61120e6976b6d542801204852,dirty,3,3,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,657428874,167,Fixed dead link in time series resources,"The original link:
+https://letianquant.com/kalman-filter-pairs-trading.htmln leads to a 404.
+I found the new link is hosted on the author's GitHub so less like to change as well.
+
+Please confirm it's the correct one:
+https://letianzj.github.io/kalman-filter-pairs-trading.html",franz101,18228395,closed,False,2021-05-29T08:38:01+00:00,2021-06-01T16:00:49+00:00,2021-06-01T16:00:49+00:00,2021-06-01T16:00:48+00:00,f4ee6e8ec5289709c1acbdad23aed5eb16d8a014,dirty,2,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,701695794,184,Update NASDAQ ITCH FTP Address,The file `10302019.NASDAQ_ITCH50.gz` has been moved to a new folder on the FTP server.,mgh-ding,2201698,closed,False,2021-08-02T18:38:24+00:00,2021-08-04T19:47:42+00:00,2021-08-04T19:47:42+00:00,2021-08-04T19:47:42+00:00,a84f5e1856b1fdfee3117d0084d0529270baecb4,dirty,1,1,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,702855080,188,fix: AttributeError from feature_name[duplicate],The attribute of 'model' CatBoostRegressor  should simply be 'feature_names_' rather than using as a method. Please refer to [catboost](https://catboost.ai/docs/concepts/python-reference_catboostregressor.html) API and accept this PR.,sherrytp,52416649,closed,False,2021-08-04T01:40:09+00:00,2021-08-04T01:43:39+00:00,2021-08-04T01:41:16+00:00,,8722240b0b6d22237b5869ed969c607028d5d01a,dirty,1,1,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,702856936,189,fix: AttributeError from feature_name,The attribute of 'model' CatBoostRegressor  should simply be 'feature_names_' rather than using as a method. Please refer to [catboost](https://catboost.ai/docs/concepts/python-reference_catboostregressor.html) API and accept this PR.,sherrytp,52416649,closed,False,2021-08-04T01:42:26+00:00,2021-08-04T19:47:25+00:00,2021-08-04T19:47:25+00:00,2021-08-04T19:47:25+00:00,766e982038b0789e578101cb643383b1154981e0,dirty,1,1,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,728966956,198,Update 02_yfinance_demo.ipynb,"Propose the minor changes on how to access ticker values using dictionary keys, otherwise an error is encountered",minggnim,38852608,closed,False,2021-09-07T21:29:00+00:00,2021-09-09T00:40:12+00:00,2021-09-09T00:40:12+00:00,2021-09-09T00:40:12+00:00,44231c26ad33037d2e66249bcfc92c5ec5f2f08e,dirty,2,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,730033529,199,a couple minor updates to fix errors,"added `--no-benchmark` in the magic command line 
+remove `to_frame` as df is already a dataframe",minggnim,38852608,closed,False,2021-09-08T22:45:41+00:00,2021-09-09T00:40:25+00:00,2021-09-09T00:40:25+00:00,2021-09-09T00:40:25+00:00,c6e7c571807206edf1d0153af64336ebbf31f621,dirty,3,3,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,730924012,201,Replace df.ix by df.loc,df.ix has been deprecated from pandas 0.20.0,minggnim,38852608,closed,False,2021-09-09T20:46:43+00:00,2021-09-10T16:31:51+00:00,2021-09-10T16:31:50+00:00,2021-09-10T16:31:50+00:00,9b224b77de6b815cc9182f9cfe8cfeb36db708d5,unknown,5,5,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,730924672,202,Replace pandas df.ix by df.loc,,minggnim,38852608,closed,True,2021-09-09T20:47:42+00:00,2021-09-09T20:48:03+00:00,2021-09-09T20:47:55+00:00,,77e28c968c74842f74ef44f9ab4a5a682c92fb60,dirty,6,6,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,730926119,203,Add --no-benchmark in zipline magic command,,minggnim,38852608,closed,False,2021-09-09T20:50:11+00:00,2021-09-10T16:31:32+00:00,2021-09-10T16:31:31+00:00,2021-09-10T16:31:31+00:00,572b0573d77c3e9174bdfd9ca00bf5a0f6fe7b17,unknown,1,1,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,824317950,217,Update date and participants scraper,"Update ""sa_selenium.py"" to account for changes in the HTML tree of seekingalpha.com
+
+In particular:
+- update earnings call pages link
+- update procedure to get date
+- update procedure to get participants",fabbro-rada,45919685,closed,False,2022-01-17T08:50:02+00:00,2024-08-11T20:35:34+00:00,2024-08-11T20:35:34+00:00,,6583246618f87705b8025931f3ed086a6732526e,blocked,22,24,1,1,0,1,,,
+stefan-jansen/machine-learning-for-trading,835184464,222,Update README.md,updated broken links to juniper notebooks for chapter 18,thebetauser,56662889,closed,False,2022-01-29T18:19:47+00:00,2022-02-11T01:24:43+00:00,2022-02-11T01:24:43+00:00,2022-02-11T01:24:43+00:00,d938ca42b136ac93eb78e25c86cc27d330cc03d9,unknown,2,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,918738995,240,docs(19.04): Fix Typoes,,ryanrussell,523300,closed,False,2022-04-26T00:00:09+00:00,2022-07-26T02:48:48+00:00,2022-07-26T02:48:48+00:00,2022-07-26T02:48:48+00:00,c77c797403e3cc1388aa3fc39b397785fb547c40,unknown,2,2,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,918740205,241,docs(19.01): Typo,,ryanrussell,523300,closed,False,2022-04-26T00:02:42+00:00,2022-07-26T02:49:18+00:00,2022-07-26T02:49:17+00:00,2022-07-26T02:49:17+00:00,c5738be99badc05a46777bc9f8900677a160091a,unknown,1,1,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,918799525,242,docs(various): Fix typos. Also closes #233,"Rather than continue making tiny PR's, these are all combined. 
+
+One file had to be renamed because the typo was in the filename.",ryanrussell,523300,closed,False,2022-04-26T01:36:12+00:00,2022-07-26T02:26:27+00:00,2022-07-26T02:26:26+00:00,2022-07-26T02:26:26+00:00,f4b4f2d71273bc101b1edbeee415029e10553334,unknown,22,22,13,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,1029536796,254,Minor fixes regarding connecting Nasdaq sample data storage,This PR fixes minor things regarding connection to Nasdaq ITCH sample data storage.,tomas-rampas,930520,closed,False,2022-08-18T05:29:03+00:00,2023-01-03T00:56:36+00:00,2023-01-03T00:56:36+00:00,2023-01-03T00:56:36+00:00,6f1f4fe967ae83f42acf7110c97ca321631e43c1,unknown,8,9,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,1081474300,260,Seek help to address zipline installation problem,"Hi,
+
+I am a reader of the book ""Machine learning for algorithmic trading"". I encountered a problem when installing/using the zipline library (as described in details in the pull request). I will be very grateful if I can get some help. 
+
+Actually, I am not sure how to reach out for such problems--not sure if it's appropriate to create a pull request either, and my apology if that is the case! I have also sent an email to feedback@packtpub.com and questions@packtpub.com asking the same question.
+
+Thanks a lot!
+JC",jianjiu-chen,115439040,closed,False,2022-10-10T02:52:08+00:00,2023-01-01T21:37:55+00:00,2023-01-01T21:37:55+00:00,,1d87d21dfbcccaf944d185ae2c3fb27535888761,unknown,68,21,1,1,0,2,,,
+stefan-jansen/machine-learning-for-trading,1175648104,274,README update,"Just wanted to play around with some of your notebooks, particularly the budgeting section.
+
+Thanks for this.",calvinceecee,96885737,closed,False,2022-12-22T20:05:25+00:00,2023-01-01T21:36:58+00:00,2023-01-01T21:36:58+00:00,,,dirty,1,3,1,1,0,1,,,
+stefan-jansen/machine-learning-for-trading,1401083792,292,Update README.md,update links,LilianYe,4162125,closed,False,2023-06-21T07:16:12+00:00,2023-07-18T21:39:18+00:00,2023-07-18T21:39:18+00:00,,79d52a8bb3c0c850f8d532fbb5e8c70740e8230b,blocked,4,5,1,1,0,0,,,
+stefan-jansen/machine-learning-for-trading,1888312552,320,update,,mtrshirazi21,84249699,closed,False,2024-05-25T13:36:43+00:00,2024-08-06T20:25:53+00:00,2024-08-06T20:25:53+00:00,,2202461cd8f0eb84292eda0948e7d4a443ff17bd,blocked,0,0,0,2,0,2,,,
+stefan-jansen/machine-learning-for-trading,2020523938,325,Versioning updates,"- Added dockerfile
+- Added pyproject.toml, since poetry has better dependency resolution than pip or conda
+- Added dockerfile for x86 as well as m1 mac
+- Tested on notebooks till ch7, no issues",0xrushi,6279035,open,False,2024-08-15T04:53:28+00:00,2024-09-23T11:07:41+00:00,,,8e26b5966197be5266952a34ee0170f72a0f5086,blocked,539,496,6,6,0,1,,,
+stefan-jansen/machine-learning-for-trading,2109572917,329,Update 00_data_prep.ipynb,,JosueAjavon,168900729,open,False,2024-10-06T21:09:51+00:00,2024-10-06T21:09:51+00:00,,,b2d63d0b4a0277dea0a965225839dcb2c262c9ea,blocked,1,1,1,1,0,0,,,

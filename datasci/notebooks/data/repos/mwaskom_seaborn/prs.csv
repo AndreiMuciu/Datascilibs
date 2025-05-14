@@ -1,0 +1,628 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+mwaskom/seaborn,8195662,3,added context for larger poster fonts,,sgagnon,2769923,closed,False,2013-09-09T23:23:34+00:00,2013-09-16T20:13:36+00:00,2013-09-16T20:13:36+00:00,,a5b5a9fe32ba76e306e3cec624033239bc00d419,dirty,7,0,1,1,0,0,,,
+mwaskom/seaborn,8195734,4,larger fonts option for context,,sgagnon,2769923,closed,False,2013-09-09T23:27:31+00:00,2013-09-16T20:14:06+00:00,2013-09-16T20:14:06+00:00,,4d64971ba7076c09cacf0c82eb9548db5e06a65f,dirty,7,0,1,3,0,0,,,
+mwaskom/seaborn,9549964,8,added requirements.txt for convenience,"Makes it easier to install dependencies with pip install -r requirements.txt
+",tyarkoni,303932,closed,False,2013-10-31T00:59:25+00:00,2014-07-24T17:15:45+00:00,2013-10-31T02:13:59+00:00,2013-10-31T02:13:59+00:00,c16dca2cd170fa16b13d2711039504342b1acc2a,unknown,7,0,1,1,0,2,,,
+mwaskom/seaborn,10157755,15,Fix bug in xtick names for boxplot/violin using groupby (closes #14),"I also updated the distributions notebook with a test of this functionality, and fixed two examples where the second positional argument was not a groupby (a holdover from the old versions of these functions).
+",mwaskom,315810,closed,False,2013-11-21T03:46:50+00:00,2013-11-21T03:46:59+00:00,2013-11-21T03:46:55+00:00,2013-11-21T03:46:55+00:00,01e1a196e8dda3a33d50e59d0cb362f23afbcef7,unknown,134,67,2,1,0,0,,,
+mwaskom/seaborn,10239972,18,Python 3 compatibility changes,"Made a couple changes to allow this to run with Python 3. All tests pass and I was able to run the example notebooks in both Python 3.3 and Python 2.7. However, some changes are required to the moss and pyhusl libraries which I have forked and updated to make the necessary changes to run on Python 3. 
+
+I'm not sure what the best way to deal with other libraries being behind for others trying to install seaborn. 
+",chadheyne,3517547,closed,False,2013-11-24T04:55:36+00:00,2013-12-22T19:51:38+00:00,2013-12-22T19:51:38+00:00,,85d077b32214f4832fabdeb03a28ea02cc403730,dirty,734,335,10,8,0,5,,,enhancement
+mwaskom/seaborn,10308230,19,Enhancements to tsplot,"The main enhancement here is that `tsplot` can now accept a long-form DataFrame as  the input data, along with strings identifying the fields containing information about time, units, etc. Additionally, for both array and DataFrame inputs it can take data structured into conditions and plot each condition separately. This required a mild backwards-incompatible change to the calling syntax, but the workaround is easy. I also substantially overhauled the timeseries doc notebook. A couple of other unrelated small things that popped up got fixed in here too.
+",mwaskom,315810,closed,False,2013-11-26T17:47:06+00:00,2013-11-26T21:03:17+00:00,2013-11-26T21:03:13+00:00,2013-11-26T21:03:13+00:00,6c8e502ce40fcf150c0d26531c4e73215e012c3f,unknown,1051,498,9,9,0,0,,,
+mwaskom/seaborn,10602078,24,Added legend support to kdeplot(),"I've added a legend keyword to kdeplot() so that users can toggle legends on or off when displaying, e.g., multiple densities on the same plot. Labels do not override the legend setting, so you need to assign labels and set legend to ""True"" in order to see the legend as expected.
+
+![pta_sce_with_legend](https://f.cloud.github.com/assets/369992/1694332/74131378-5e9f-11e3-9a3b-b762b76d26df.png)
+
+This plot was created by modifying one of the examples from the IPython notebooks to read:
+
+```
+sns.kdeplot(nm_gen0, shade=True, color=c1, ax=ax1, label='AA', legend=True)
+sns.kdeplot(nm_gen1, shade=True, color=c2, ax=ax1, label='Aa', legend=True)
+sns.kdeplot(nm_gen2, shade=True, color=c3, ax=ax1, label='aa', legend=True)
+```
+",wintermind,369992,closed,False,2013-12-06T17:56:31+00:00,2013-12-13T00:28:59+00:00,2013-12-13T00:27:41+00:00,2013-12-13T00:27:41+00:00,f1d37425185f5e28901539e66687086bca7ab894,unknown,262,545,2,8,12,21,,,enhancement
+mwaskom/seaborn,10672847,26,Add travis CI to seaborn,"This now runs and claims the build is passing, but that's a bit of a lie at the moment. Two reasons:
+- ipynbdoctest exits with 0 even when cells do not replicate, so currently things that should count as failures are masked (I'm not sure what happens when cells error)
+- one cell per notebook is currently not replicating, with the following message. I cannot reproduce this on my laptop (all cells reproduce). The failure seems to happen near, but not at, the beginning of each notebook. Maybe the first plotting cell?
+  
+  ```
+  mismatch output_type:
+  stream
+    !=  
+  display_data
+  ```
+
+Nevertheless, merging now as it's running and at least the `nosetests` suite should trigger failures.
+",mwaskom,315810,closed,False,2013-12-10T04:31:00+00:00,2013-12-10T04:33:25+00:00,2013-12-10T04:31:05+00:00,2013-12-10T04:31:05+00:00,4f78e015ec2f8fae6fe5f2a0962d6075f9dba57d,unknown,13,8,1,3,0,0,,,
+mwaskom/seaborn,10688175,29,Fix the links to the examples in README,,miikka,34607,closed,False,2013-12-10T15:05:40+00:00,2013-12-10T16:03:54+00:00,2013-12-10T15:49:26+00:00,2013-12-10T15:49:26+00:00,623c9fa906131850d7631f7b3ef70cea776b7f61,unknown,2,2,1,1,0,1,,,
+mwaskom/seaborn,10704491,30,"Add grid option, 'ticks'.","I need to use ticks. I appreciate that the grid serves the same purpose. And, moreover, your design choices reflect a sensibility much more refined than my own. (I love this project!)
+
+But I can't do without them: my PhD adviser insists, which is reason enough for me. As for others, in my opinion ticks can be less intrusive that a grid in some cases, especially on the printed page. If you agree, here is a PR.
+
+Since one would never want both ticks _and_ a grid, it seems natural to add ""ticks"" alongside ""whitegrid"", ""darkgrid"", and ""nogrid"".
+",danielballan,2279598,closed,False,2013-12-10T21:50:29+00:00,2013-12-23T22:45:00+00:00,2013-12-20T22:40:33+00:00,2013-12-20T22:40:33+00:00,6a162543e31e9cd81088aba1b9a29ac221fe9feb,unknown,18,6,1,1,0,9,,,enhancement
+mwaskom/seaborn,10716632,31,Adding `interactplot` function,"The `interactplot` function is being added to help visualize models with two-way interactions between continuous variables. The plot is made by fitting an interaction model and then drawing a contour plot with the two predictor variables on each axis and the fitted values (y hats) color-encoded in the contours. So the joint distribution of the data observations is clear, a scatterplot is then drawn over the contours. The resulting image looks like this:
+
+![screen shot 2013-12-10 at 11 18 39 pm](https://f.cloud.github.com/assets/315810/1721953/f32a2c80-6234-11e3-8cf3-c3125e0cf417.png)
+
+This PR has the new function and some additions to the linear models notebook (including an example for an alternative presentation that bins one of the variables).
+",mwaskom,315810,closed,False,2013-12-11T07:22:52+00:00,2016-10-21T13:21:36+00:00,2013-12-11T16:42:11+00:00,2013-12-11T16:42:11+00:00,9f301d4469646af48d39656441a7f654958a38b1,unknown,348,44,2,4,0,7,,,
+mwaskom/seaborn,10791020,32,Split the plotobjs.py into component modules,"No substantive changes here, just reorganization. Possibly hosed the git history, but it had to be done.
+",mwaskom,315810,closed,False,2013-12-13T00:57:24+00:00,2013-12-13T07:48:16+00:00,2013-12-13T00:58:58+00:00,2013-12-13T00:58:58+00:00,,unknown,1684,1667,6,4,0,0,,,
+mwaskom/seaborn,10793732,33,Make some changes/enhancements to interactplot,"- Plot with unfilled contours by default, but allow for filled contours
+- Change the default colormap to `RdBu_r`
+- Set the midpoint of the colormap to `y.mean()` by default.
+- Add an example of `interactplot` when the data contain no interaction.
+",mwaskom,315810,closed,False,2013-12-13T03:37:43+00:00,2013-12-13T03:38:05+00:00,2013-12-13T03:37:55+00:00,2013-12-13T03:37:55+00:00,ff04f923d28ff44fb807f0cdc3408a4b9fc79c48,unknown,83,65,2,1,0,0,,,
+mwaskom/seaborn,10800044,35,Update setup.py for `pip install seaborn==dev`,"This should make it possibly (after updating at pypi) to use `pip install seaborn==dev` for installing the current master directly from github (instead of taking the detour to grab the master zipball url for github and using that for `pip install`).
+",megies,1842780,closed,False,2013-12-13T10:18:00+00:00,2013-12-15T19:18:22+00:00,2013-12-14T00:21:14+00:00,2013-12-14T00:21:14+00:00,f631ebe463d363d08c0f4cdc1b05a871b18a5674,unknown,2,1,1,1,0,6,,,
+mwaskom/seaborn,10800317,36,setup.py: add missing dependencies,,megies,1842780,closed,False,2013-12-13T10:28:26+00:00,2013-12-14T00:16:01+00:00,2013-12-14T00:14:53+00:00,2013-12-14T00:14:53+00:00,ea594bb574318cf782dadb20c9bba69d07e283b6,unknown,2,2,1,1,0,3,,,
+mwaskom/seaborn,10829386,37,Add option to bin continuous predictor variable in lmplot,"This PR also includes a tweak to wrap facet titles when plots are small with a column and row facets
+",mwaskom,315810,closed,False,2013-12-14T08:37:25+00:00,2014-06-18T20:17:26+00:00,2013-12-14T08:44:52+00:00,2013-12-14T08:44:52+00:00,c2860e4c42d05680e052d00e29e64e891ca1f6aa,unknown,148,94,2,3,0,0,,,
+mwaskom/seaborn,10839374,39,Improve testing of tutorial notebooks,"This is the first step in an overhaul of `ipnbdoctest.py`. Step two will be to release it as a separate package and make seaborn depend on it. It's not quite clean or featured enough for that yet.
+
+As part of improving the testing, I caught and fixed some bugs, and also reorganized the linear models notebook a bit, both for didactic purposes and to improve test stability.
+
+I also added a Make rule to strip the object identifier hexes from the notebook for cleaner diffs. ~~Buuut, this seems to trigger test failures when I run it, so it exists but is not used in the notebooks pushed as part of this PR.~~
+
+~~The tests are also failing because two cells (the one-tailed test corrplot cells) are stochastically nonreproducible. I imagine this has to do with randomness in the correlation permutation test, but I do not understand why it is not reproducible from run to run. (Actually in writing this I had an idea and will be testing it shortly).~~
+
+~~The good news is that the currently failing status actually exercises Travis, which now fail when the notebooks don't reproduce.~~
+
+This is an ugly pull request because getting the Travis build to pass required a lot of debugging of things. But it seems to be good to go. The `ipnbdoctest.py` updates might still be somewhat brittle, but we shall see.
+",mwaskom,315810,closed,False,2013-12-15T19:35:24+00:00,2014-06-19T07:13:40+00:00,2013-12-16T05:59:16+00:00,2013-12-16T05:59:16+00:00,6f215e4a2fc9602b0b555ba702028cfd7a5e5101,unknown,521,445,12,32,0,0,,,
+mwaskom/seaborn,10865357,42,Change how PIL is installed in conda,,mwaskom,315810,closed,False,2013-12-16T18:26:43+00:00,2013-12-20T02:04:19+00:00,2013-12-16T18:30:24+00:00,2013-12-16T18:30:24+00:00,cc54cf893269387812382ad0fed6e491eef27c69,unknown,1,1,1,1,0,0,,,
+mwaskom/seaborn,10865714,43,Violin improvements,"Added `bw_method` and `linewidth` as options to `violin()`
+
+example notebook: http://nbviewer.ipython.org/gist/olgabot/7992081
+",olgabot,806256,closed,False,2013-12-16T18:36:38+00:00,2014-07-30T17:47:23+00:00,2013-12-18T19:05:52+00:00,2013-12-18T19:05:52+00:00,c986d8df62d6251c650b4befad0881fddf5b0ea9,unknown,14,3,1,4,3,3,,,enhancement
+mwaskom/seaborn,10948560,44,WIP: Omnibus KDE changes,"This PR is for a number of planned changes relevant to KDE
+- [x] Rename `sns.violin` to `sns.violinplot` for consistency (closes #34)
+- [x] Use statsmodels KDE instead of scipy for more flexibility (ref #12)
+- [x] Allow for `sns.kdeplot` to plot bivariate KDE when input data is `n x 2` (closes #40)
+
+Possibly in this or in separate PR
+- ~~Addition of higher-level `sns.jointplot` to draw joint distribution with KDE or hexbin and marginal plots~~
+",mwaskom,315810,closed,False,2013-12-18T19:42:06+00:00,2014-08-09T23:18:44+00:00,2013-12-20T21:18:54+00:00,2013-12-20T21:18:54+00:00,41076f29121076573a877031fc1ef94a0ca3bc00,unknown,507,213,9,9,0,0,,,enhancement
+mwaskom/seaborn,11039222,46,Py3k compatability changes,"~~All tests currently pass on my computer, but it's failing on Travis due to some problem with `pillow` I have not been able to understand.~~
+
+Now passing on Travis as well. I had to `pip install pillow` instead of using conda, which unfortunately makes the build take a while. But it should be good to go for now.
+",mwaskom,315810,closed,False,2013-12-22T07:17:04+00:00,2013-12-23T17:39:07+00:00,2013-12-22T19:50:04+00:00,2013-12-22T19:50:04+00:00,6e79973204ad30e61d7e4c8c82be9e8cf61f2181,unknown,69,42,13,10,0,0,,,
+mwaskom/seaborn,11042498,47,Fix Python 3 tests,"Not sure why they started failing, but increasing the cell timeout seemed to do the trick. Also caught a bug in the image dimension mismatch reporting.
+",mwaskom,315810,closed,False,2013-12-22T20:16:11+00:00,2013-12-22T20:33:23+00:00,2013-12-22T20:33:21+00:00,2013-12-22T20:33:21+00:00,6dde810c56d7daaed294a2abf7fd21e4ad4a77b8,unknown,2,2,1,2,0,0,,,
+mwaskom/seaborn,11043200,48,Order parameter in boxplot and violinplot,"This mainly addresses #17, but does not fix #16, which remains to be done. The full diff is a little noninformative as I moved the `violinplot` code next to the `boxplot` code to make going back and forth easier. I also caught a bug where using `vert=False` in `boxplot` was ignored when adding semantic information to the plot.
+",mwaskom,315810,closed,False,2013-12-22T22:32:06+00:00,2013-12-23T00:02:53+00:00,2013-12-23T00:02:50+00:00,2013-12-23T00:02:50+00:00,66cecdec626a3a3d01f4aece37c73ee9c7f6b88f,unknown,365,249,3,4,0,0,,,
+mwaskom/seaborn,11082922,53,V0.2,"Tried to fix stuff with violinplot on a grouped series. IT's possible that I didn't remove all my old changes on violin_improvements so let me know and I'll try to fix it.
+",olgabot,806256,closed,False,2013-12-25T06:50:24+00:00,2013-12-26T04:19:56+00:00,2013-12-26T04:19:56+00:00,,6b8d06c3eb78dd043beb09447da0d58f46bde40a,dirty,13,5,4,5,0,1,,,
+mwaskom/seaborn,11090369,54,Refactor boxplot/violinplot setup,"In addition to cleaning up the code (#16) and adding copious tests, this also fixes some problems where not all styles of groupby parameters were being handled correctly by the setup code (#52).
+",mwaskom,315810,closed,False,2013-12-26T04:05:45+00:00,2014-06-26T16:53:21+00:00,2013-12-26T22:50:23+00:00,2013-12-26T22:50:23+00:00,d47928150ae201269ec6da1d520ff87f674ef0a8,unknown,297,143,4,3,0,0,,,refactor
+mwaskom/seaborn,11199315,62,Adding a kwarg to `set` for custom gridweights,"Here's a small PR for allowing the user to specify a custom grid line width. Current values are maintained as a default.
+
+How should we go about the tests? my current setup is pretty noisy when it comes to the notebooks. Here's an nbviewer link (`In[]` cells 7 though 9):
+http://nbviewer.ipython.org/gist/phobson/8231880
+",phobson,1163939,closed,False,2014-01-03T03:03:41+00:00,2016-05-26T23:15:26+00:00,2014-01-04T19:43:00+00:00,2014-01-04T19:43:00+00:00,297ed6de93c37c3e2a2cf06a34fb406caf79236f,unknown,31,6,1,5,2,2,,,enhancement;themes
+mwaskom/seaborn,11228941,65,DOC: docstring examples,"Closes #45
+
+Let me know if you see any things you dislike systematically.  I'm trying to keep the number of lines per example small. The linear model ones are a tougher.
+
+still WIP for now.
+",TomAugspurger,1312546,closed,False,2014-01-04T15:19:44+00:00,2014-04-28T16:33:10+00:00,2014-04-26T17:05:24+00:00,,b9c9c618482f1fd6be96c1104d759a38bb6950be,dirty,73,0,2,5,0,5,,,enhancement;docs
+mwaskom/seaborn,11277076,70,Dotplot,"This is a basic dotplot function that I think might be a useful addition to seaborn.
+
+The term ""dotplot"" is used in various ways, these are dotplots in the style of Bill Cleveland's book, similar to what is implemented in this R package:
+
+http://stat.ethz.ch/R-manual/R-patched/library/graphics/html/dotchart.html
+
+Additional examples can be found in the appendix of this manuscript:
+
+http://polisci.msu.edu/jacoby/research/dotplots/tpm/Jacoby,%20Dotplots,%20TPM%20Draft.pdf
+
+The test_dotplot file (in seaborn/tests) shows how it works with simulated data. These are the plots generated by the test file:
+
+http://dept.stat.lsa.umich.edu/~kshedden/seaborn/test_dotplot.pdf
+
+Some examples with real data are here:
+
+http://dept.stat.lsa.umich.edu/~kshedden/seaborn/dotplot_gdp_example.pdf
+http://dept.stat.lsa.umich.edu/~kshedden/seaborn/dotplot_gas_prices.pdf
+
+Scripts:
+
+http://dept.stat.lsa.umich.edu/~kshedden/seaborn/dotplot_gdp_example.py
+http://dept.stat.lsa.umich.edu/~kshedden/seaborn/dotplot_gas_prices.py
+
+Comments and suggestions are welcome.
+",kshedden,2666691,closed,False,2014-01-07T08:00:34+00:00,2014-07-28T18:19:40+00:00,2014-04-26T17:05:14+00:00,,57ff28966a4a0d453e6261173d1815e7faa83bac,dirty,1109,0,5,10,0,2,,,enhancement;plots
+mwaskom/seaborn,11377605,73,Clustered heatmap,"Here's an initial version of the clustered heatmap
+
+Examples: http://nbviewer.ipython.org/gist/olgabot/8341784
+
+Todos:
+- [x] Reformat params with `heatmap_kws`, `row_kws` and `col_kws` or something to clean up the arguments
+- [x] Is there a way to `set_axis_style('nogrid')` within a single plot? I couldn't find a way to detect the current `axis_style` to switch, and then return the `rcParams` to what they were.
+- [ ] Allow for several levels of labeling groups in the heatmap (multiple levels of colors)
+- [x] Allow for user to specify their own linkage matrices
+- [ ] Constrain colorbar scale to have at most 3 labels. Currently this works only for divergent, linear maps.
+
+Suggestions?
+",olgabot,806256,closed,False,2014-01-09T20:52:59+00:00,2014-07-02T18:43:02+00:00,2014-07-02T18:43:02+00:00,,4059fa9e6b5957333b94244eb7b594fff7eac7ac,dirty,11984,3105,86,205,0,26,,,enhancement;plots
+mwaskom/seaborn,11418039,80,Regplot xlim and ylim,"Specify `xlim` and `ylim` directly in `regplot`
+
+Todo:
+- [ ] Write tests :)
+
+Sorry for the `v0.2` noise again.. I did this a few days ago but never PR'd it
+",olgabot,806256,closed,False,2014-01-10T21:50:56+00:00,2014-01-11T17:24:52+00:00,2014-01-11T17:24:52+00:00,,,dirty,27,25,4,6,0,1,,,
+mwaskom/seaborn,11482974,83,Improve kde computation,"This addresses several issues with the distribution plots
+- The statsmodels density estimate fails on data that isn't double-typed
+- The density estimate can become slightly negative (probably due to the FFT-based computation statsmodels uses)
+
+These problems are detailed in #78  and are fixed here.
+
+Additionally, kde data gets passed down to the computation functions as arrays instead of series (addressing #58, although I think that's actually a statsmodels problem)
+
+This fix also changes the default `distplot` bin computation slightly by taking the ceiling of the bin number estimate.
+
+This also adds scipy-based kde computation back, paving the way for making statsmodels an optional dependency.
+
+@sjobeek do you want to give this a spin?
+",mwaskom,315810,closed,False,2014-01-14T07:38:53+00:00,2014-06-14T16:00:49+00:00,2014-01-15T05:47:49+00:00,,6323730386a24882daeb8abbe4f83b65020baad0,dirty,158,41,3,1,0,2,,,
+mwaskom/seaborn,11523793,84,Fix KDE computation and (re)add scipy kde,"This addresses several issues with the distribution plots
+- The statsmodels density estimate fails on data that isn't double-typed
+- The density estimate can become slightly negative (probably due to the FFT-based computation statsmodels uses)
+
+These problems are detailed in #78  and are fixed here.
+
+Additionally, kde data gets passed down to the computation functions as arrays instead of series (addressing #58, although I think that's actually a statsmodels problem)
+
+This fix also changes the default `distplot` bin computation slightly by taking the ceiling of the bin number estimate.
+
+This also adds scipy-based kde computation back, paving the way for making statsmodels an optional dependency.
+",mwaskom,315810,closed,False,2014-01-15T05:48:20+00:00,2014-06-14T16:00:31+00:00,2014-01-15T05:48:47+00:00,,,dirty,472,192,8,9,0,1,,,
+mwaskom/seaborn,11523855,85,Improve kde computation and (re)-add scipy KDE,"This addresses several issues with the distribution plots
+- The statsmodels density estimate fails on data that isn't double-typed
+- The density estimate can become slightly negative (probably due to the FFT-based computation statsmodels uses)
+
+These problems are detailed in #78  and are fixed here.
+
+Additionally, kde data gets passed down to the computation functions as arrays instead of series (addressing #58, although I think that's actually a statsmodels problem)
+
+This fix also changes the default `distplot` bin computation slightly by taking the ceiling of the bin number estimate.
+
+This also adds scipy-based kde computation back, paving the way for making statsmodels an optional dependency.
+",mwaskom,315810,closed,False,2014-01-15T05:53:09+00:00,2014-01-15T06:16:20+00:00,2014-01-15T05:58:37+00:00,2014-01-15T05:58:37+00:00,0376209ab28547b4a0f1c95ccb33a261e6490c1a,unknown,158,41,3,1,0,1,,,
+mwaskom/seaborn,12015157,92,"ENH: Added ""spine_offset""  function to utils","Simple PR to add a `spinesep` kwarg to `utils.despinse`.
+
+Right now, the input is the outward offset in points -- so that leaves all of the tweaking up to the user if the figure size changes. It might make sense to specify it in axes fraction, but that require a little more logic. Feedback is much appreciated.
+
+Tests to follow later.
+
+![capture](https://f.cloud.github.com/assets/1163939/2035437/2246634a-893a-11e3-8239-c9ea1f1ff1cf.PNG)
+",phobson,1163939,closed,False,2014-01-29T23:04:15+00:00,2014-06-15T09:57:55+00:00,2014-03-05T06:40:31+00:00,,e5b18beb2f4b62f8c9ffb42d642b84bd05ec171f,dirty,291,133,6,28,1,43,,,enhancement;themes
+mwaskom/seaborn,12038124,93,ENH: add cumulative to kdeplot,"Closes #91
+
+statsmodels backend only right now. I'll take a look at how much work it would be to copy how they calculate the cdf from the kde.
+
+One aesthetic thing. What do you think of the gap between the right side of the cdf and the right side of the grid?
+
+``` python
+In [1]: np.random.seed(0)
+
+In [2]: df = pd.DataFrame(np.random.randn(100, 2))
+
+In [3]: import seaborn as sns
+
+In [4]: sns.kdeplot(df[0], shade=True, cumulative=True)
+Out[4]: <matplotlib.axes._subplots.AxesSubplot at 0x10d86b090>
+```
+
+![sns_cummulative](https://f.cloud.github.com/assets/1312546/2040884/4a4c74fe-89be-11e3-9cad-7f5592f06387.png)
+
+EDIT: here the statsmodels cdf code: https://github.com/statsmodels/statsmodels/blob/master/statsmodels/nonparametric/kde.py#L161
+",TomAugspurger,1312546,closed,False,2014-01-30T14:55:19+00:00,2014-06-13T17:12:50+00:00,2014-02-01T20:15:27+00:00,,36a15fb66f8af905fb2add2aa57f4d59763b7dbe,dirty,40,6,2,1,2,17,,,enhancement;plots
+mwaskom/seaborn,12108462,97,Fix matplotlib tests on Travis,"Matplotlib doesn't work out of the box on Travis because there is no `$DISPLAY` variable (well, there's no graphics in general) and the default backend is `QtAgg`. This PR is to get that working so the unittests can cover the plotting functions too.
+
+---
+
+What eventually worked:
+
+I added a matplotlibrc file under `testing/` with only the line
+
+```
+backend : Agg
+```
+
+And then as part of the `install` section of the Travis config I copy this into the working directory so it gets picked up by the `nosetests` process.
+",mwaskom,315810,closed,False,2014-02-01T18:01:46+00:00,2014-09-10T03:55:38+00:00,2014-02-01T18:33:24+00:00,2014-02-01T18:33:23+00:00,368c8825b849f9fe88911e10ef601fab0bdfe057,unknown,31,1,4,5,0,0,,,
+mwaskom/seaborn,12109083,98,Revert changes to default grid widths,"@phobson I hadn't noticed this when the gridweight PR landed but the default grid widths ended up changing. I think there's something to be said for your choices (the plots did look nicer) but it was causing problems because changes to the example notebooks that were meant to only add a cell or two produced diffs which touched every figure.
+
+In the interest of a) having the small changes I'm working on now produce informative diffs and b) holding off on doc updates that touch all of the figures, I'm reverting that change in `rcmod.py`.
+
+It's definitely worth revisiting the default style before I release 0.3, but I'd like to have changes that cause widespread changes to the examples happen all at once, just to keep a handle on the size of the repository.
+",mwaskom,315810,closed,False,2014-02-01T19:23:23+00:00,2014-02-01T19:28:51+00:00,2014-02-01T19:28:48+00:00,2014-02-01T19:28:48+00:00,35347bc592050ada1fe7c7ef7d66948bb01de202,unknown,5,4,2,1,0,0,,,
+mwaskom/seaborn,12109185,99,Add cumulative density option to kdeplot,"@TomAugspurger let's see how this works.
+
+Closes #93 
+",mwaskom,315810,closed,False,2014-02-01T19:35:21+00:00,2014-06-13T17:14:42+00:00,2014-02-01T20:15:27+00:00,2014-02-01T20:15:27+00:00,4daa80bcf6cb9a9b1841d1983b0e662ebd275bc6,unknown,99,37,3,3,0,3,,,
+mwaskom/seaborn,12109895,100,Improve automatic checking of code,"Automate some things (coverage, PEP8/Pyflakes) to make life easier.
+",mwaskom,315810,closed,False,2014-02-01T21:10:57+00:00,2014-02-01T23:16:40+00:00,2014-02-01T23:16:35+00:00,2014-02-01T23:16:35+00:00,879a8f232b1c72042aec29ab89dc21afcc4298a0,unknown,17,1,3,3,0,0,,,testing
+mwaskom/seaborn,12544156,106,Omnibus enhancements to linear model plotting and structured plot grids,"This has a few large changes all at once, as they are interrelated:
+- The `FacetGrid` class, which abstracts the data-aware structured grid out of the previous version of `lmplot` such that it can be used to facet arbitrary plots very easily (using `FacetGrid.map()`). There are a few other nice new things about `FacetGrid`, primarily that it can draw its legend outside of the axes, and `despine` is called automatically. Here's a simple example:
+
+![FacetGrid](https://f.cloud.github.com/assets/315810/2172956/968e3ff4-959a-11e3-80ca-148d480f2341.png)
+- Correspondingly, the `lmplot` and `regplot` functions have been completely rewritten to take advantage of this new machinery. The `lmplot` interface should mostly be the same, save a few things that were broken in the interest of making progress on unifying APIs across the package, and a couple of advantages here and there. There is a more dramatic change to `regplot`, which now is an ""Axes-level"" function. This should be good going forward in that `regplot` and `lmplot` can do all the same things (plot with different regression models, remove confounding variables, etc.), but `regplot` can now do them flexibly into an existing Axes. It also means that `lmplot` is just a thin wrapper around `regplot` and `FacetGrid`, making for overall much cleaner code. As discussed in #101, this will mean the current behavior of `regplot` will vanish on `master` for a while, but the next task will be to introduce `jointplot` which will return the marginal histrograms, etc.
+- There are three new related functions, `barplot`, `pointplot`, and `factorplot` for visualizing linear models with discrete or categorical independent variables. The `barplot` and `pointplot` functions have a similar relationship to `factorplot` that `regplot` has to `lmplot`, although `factorplot` can also draw boxplots. (The current `boxplot` API cannot be straightforwardly used with `FacetGrid`, but the addition of `kind=""box""` in `factorplot` should avoid the need to break it). Here are some examples:
+
+![factorplot_1](https://f.cloud.github.com/assets/315810/2174205/bd0c3020-95ac-11e3-957d-5c6ee333cbbd.png)
+
+![factorplot_2](https://f.cloud.github.com/assets/315810/2174209/c674ea94-95ac-11e3-9228-5e58fb62d8a5.png)
+
+![factorplot_3](https://f.cloud.github.com/assets/315810/2174212/e9393760-95ac-11e3-9013-13e97865b4a4.png)
+
+![factorplot_4](https://f.cloud.github.com/assets/315810/2176841/abdbe7c0-95e1-11e3-9249-d77234487aa9.png)
+- As a an internal detail, the implementation of the new plotting functions has been changed substantially, with the outward facing interface functions serving as very lightweight wrappers around new `_Plotter` objects. This has overall allowed for _much_ cleaner code, and importantly, far better unit-test coverage of the internal computations. Going forward, this is how I would like all, or most, of the plotting code to work. We'll continue to test the docs using `ipnbdoctest.py` (which I also intend to separate out and release as a standalone tool, when I get a chance), but this relieves a lot of the pressure on the docs to also serve as a test suite.
+
+The major remaining task is to update the docs to reflect the changes. In the meantime, my [Titanic](http://nbviewer.ipython.org/8224591) notebook shows off most of the goodies.
+
+This is going to continue to get rounded out over the next few days/weeks, but all of the heavy lifting is done. The tests fail because it breaks the docs and I have not updated them yet, but all of the new code is well-covered by unit-tests, which pass.
+
+Also, at some point the commit history got borked, but I didn't catch it until later. The diff is clean, so I'm inclined to leave it, but if there is a git guru who wants to help me drop the duplicated commits that would be excellent.
+
+I'd definitely like some adventurous users to try this out before I merge to help me round out the corners of the APIs, and see if anything obvious is missing. @twiecki I know you were working on this branch before, it should be pretty stable now. @olgabot, there's stuff in here you've expressed interest in previously.
+
+---
+
+TODO's / subordinate issues
+- [x] Improve test coverage for `*plot` functions involved in this commit
+- [x] `factorplot` y axis is not labeled when plotting a count
+- [x] The variable order in the `FacetGrid` legend does not respect the `hue_order` parameter
+- [x] Cast label to string (to fix #107)
+- [x] Move all `kws.pop()` code to `kws.setdefault()` to play better with map (to fix #108)
+- [x] Complete docstrings for plotting functions
+- ~~[ ] Add option to link linestyle and markerstyle to the `hue` variable in `factorplot`, etc.~~ Punting to #120
+- [x] Update broken example notebooks
+- [x] Write narrative docs
+",mwaskom,315810,closed,False,2014-02-14T06:48:07+00:00,2014-06-12T23:02:53+00:00,2014-03-05T00:15:11+00:00,2014-03-05T00:15:11+00:00,54a3931e6cbcc9d08bbec22f9dd1643bf6de51dd,unknown,5686,812,23,131,0,20,,,enhancement;refactor;testing;plots
+mwaskom/seaborn,13171543,119,MNT: Change minconda URL and env spec,"All of my [travis builds are erroring out](https://travis-ci.org/mwaskom/seaborn/jobs/20024477). I think this might be due to the conda version being a bit stale now. 
+
+This is just me taking a stab fixing that.
+
+Relevant portion of the travis log:
+
+```
+Extracting packages ...
+ |                                                                        |   0%
+[freetype            ] |################                                  |  33%
+[imaging             ] |#################################                 |  66%
+[jpeg                ] |##################################################| 100%
+[      COMPLETE      ] |##################################################| 100%
+
+Linking packages ...
+[      COMPLETE      ] |                                                  |   0%
+[freetype            ] |################                                  |  33%
+[imaging             ] |#################################                 |  66%
+[jpeg                ] |##################################################| 100%
+[      COMPLETE      ] |##################################################| 100%
+
+travis_fold:end:install.3
+travis_fold:start:install.4
+$ conda install --yes ipython==1.1.0 pyzmq numpy scipy nose matplotlib pandas statsmodels scikit-learn
+Error: Unsatisfiable package specifications
+Hint: numpy 1.7* has a conflict with the remaining packages
+
+The command ""conda install --yes ipython==1.1.0 pyzmq numpy scipy nose matplotlib pandas statsmodels scikit-learn"" failed and exited with 1 during install.
+
+Your build has been stopped.
+```
+",phobson,1163939,closed,False,2014-03-04T17:21:48+00:00,2014-03-04T21:32:53+00:00,2014-03-04T21:32:50+00:00,,4f4e83ced19ce83b6641c847ead28f17690be022,dirty,2,2,1,1,0,3,,,enhancement;testing
+mwaskom/seaborn,13191278,122,Improve Travis config,"- Reorganize where things happen a big
+- Build the docs on Py2.7
+",mwaskom,315810,closed,False,2014-03-05T00:55:06+00:00,2014-03-05T01:37:48+00:00,2014-03-05T01:37:46+00:00,2014-03-05T01:37:46+00:00,54c47646e0b734a2a7bb88432ca07d300cf92c2f,unknown,51,24,2,5,0,1,,,testing
+mwaskom/seaborn,13198358,123,ENH: function to offset spines,"This is just a clean version of https://github.com/mwaskom/seaborn/pull/92 after rebasing with master after all the facet_grid work.
+",phobson,1163939,closed,False,2014-03-05T06:40:16+00:00,2014-03-05T17:31:46+00:00,2014-03-05T17:26:21+00:00,,fb11ccf88c4b0e90e9ee86aaef9882607bf6bcc6,dirty,124,60,2,2,0,0,,,enhancement;themes
+mwaskom/seaborn,13221479,124,ENH: function to offset spines,"I updated the docs and added some unit tests.
+
+Closes #123
+",mwaskom,315810,closed,False,2014-03-05T17:25:51+00:00,2014-03-05T17:32:06+00:00,2014-03-05T17:26:21+00:00,2014-03-05T17:26:21+00:00,b366b0a3ef02c233d82cee49e08a26abbeff09aa,unknown,181,33,6,4,0,1,,,
+mwaskom/seaborn,13235325,125,Add default value for offset_spines,"Defaults are good.
+",mwaskom,315810,closed,False,2014-03-05T22:10:58+00:00,2014-03-05T22:23:34+00:00,2014-03-05T22:23:32+00:00,2014-03-05T22:23:32+00:00,24a4f8a54e5271120b8ee29ffee6165b0f23a2b5,unknown,2,2,1,1,0,0,,,
+mwaskom/seaborn,13292381,126,Add seaborn.apionly pseudomodule to get the api without the style,"I'm not sure this is the right way to do this, but it seems to work. The idea is that if you have you own rc parameters and don't want seaborn to mess with them, you can do `import seaborn.apionly as sns` (or `from seaborn.api import regplot`, etc.) and carry on as normal.
+
+This works by importing seaborn as usual and then calling the new `reset_orig()` function, which updates the rcParams with `matplotlib.rcParamsOrig`, which I think respects any custom `matplotlibrc` files.
+
+Closes #10 and #13.
+",mwaskom,315810,closed,False,2014-03-07T01:26:04+00:00,2015-08-25T13:49:35+00:00,2014-03-07T19:07:29+00:00,2014-03-07T19:07:29+00:00,0331020fd46e54553a58a6bca13806667659c415,unknown,9,0,3,3,0,1,,,enhancement;themes;infrastructure
+mwaskom/seaborn,13296038,127,Reduce dependency load,"Closes #67. See there for details.
+",mwaskom,315810,closed,False,2014-03-07T04:32:43+00:00,2014-07-25T11:39:39+00:00,2014-03-07T05:05:04+00:00,2014-03-07T05:05:04+00:00,a928b6c1561b6947a270d56b6acd6840b6d788e6,unknown,1568,77,20,10,0,0,,,infrastructure
+mwaskom/seaborn,13316938,128,Use robust range in default interactplot color scale,"Closes #59 
+",mwaskom,315810,closed,False,2014-03-07T16:34:01+00:00,2014-07-25T11:40:03+00:00,2014-03-07T17:02:39+00:00,2014-03-07T17:02:39+00:00,00375d6336ea9c843a582f78343e8ed7d89d2be0,unknown,3,5,2,3,0,0,,,plots
+mwaskom/seaborn,13324224,129,WIP: Use joblib to cache computationally intensive parts of plotting functions,"This is a proof of concept using `regplot`. The basic idea is that a lot of the plotting functions do a significant amount of computation to fit the model used in the plot. But, often, a user is going to want to iterate over the plot to tweak the aesthetics, etc.
+
+To make this easier, plotting functions that are compute-intensive will have an optional argument called `mem` that takes a `joblib.Memory` instance. Internally, the function will cache the compute-intensive methods. Basically, you'd get something like:
+
+``` python
+In [1]: mem = Memory(""."", verbose=2)
+In [2]: sns.regplot(x, y, mem=mem)
+
+    [Memory] Calling seaborn.linearmodels._RegressionPlotter.fit_fast...
+    fit_fast(array([-0.042867, ..., -1.340816]), array([ 0.886475, ...,  0.291993]), array([-4., ...,  4.]))
+    _________________________________________________________fit_fast - 0.3s, 0.0min
+
+In [3]: sns.regplot(x, y, color=""salmon"", mem=mem)
+
+    [Memory]   14.1s, 0.2min: Loading seaborn.linearmodels._RegressionPlotter.fit_fast...
+```
+
+Currently tests fail as this requires a bit of change to the `regplot` fitting functions (moving the data access from `self` attributes inside the methods to method arguments), and I haven't updated the tests to reflect that.
+
+Ideas on this are very appreciated.
+",mwaskom,315810,closed,False,2014-03-07T19:17:15+00:00,2016-02-11T17:56:45+00:00,2015-07-04T18:16:49+00:00,,99e635779080019abc5f2137edc5a5399e933ed3,dirty,9,6,1,1,0,6,,,enhancement;api;plots
+mwaskom/seaborn,13345851,130,Add JointGrid and jointplot,"This brings back the functionality of `regplot` in version 0.2, but in a much more flexible way.
+
+Two new objects: `JointGrid` and `jointplot`. (Currently, `JointGrid` is implemented).
+
+`JointGrid` is a high-level class to abstract plotting a bivariate and univariate marginal plots. Here's a basic example:
+
+``` python
+g = JointGrid(""x"", ""y"", data)
+g.plot_marginals(sns.distplot)
+g.plot_joint(sns.regplot)
+g.annotate(stats.pearsonr)
+```
+
+![margingrid](https://f.cloud.github.com/assets/315810/2366530/6b664366-a70c-11e3-9f78-2b0cad8d29d4.png)
+
+More complicated example:
+
+``` python
+g = JointGrid(""x"", ""y"", data)
+g.plot_marginals(sns.kdeplot, color=sns.color_palette(""Greens"")[-2], shade=True)
+cmap = sns.blend_palette([""white""] + sns.color_palette(""Greens"", 10), as_cmap=True)
+g.plot_joint(sns.kdeplot, shade=True, cmap=cmap)
+```
+
+![margin_grid](https://f.cloud.github.com/assets/315810/2367211/fe9247a8-a747-11e3-9fa3-ffc0468d59f3.png)
+
+The work on this is mostly done (but feedback would be good).
+
+---
+
+Now comes time to decide how `jointplot` should work. The basic signature would look like:
+
+``` python
+sns.jointplot(""x"", ""y"", data)
+```
+- What's the default bivariate plot? `plt.scatter`? `seaborn.regplot`, `seaborn.kdeplot`?
+- How do we let the user change the bivariate plot? Pass a plotting function?
+
+``` python
+sns.jointplot(""x"", ""y"", data, kind=sns.regplot)
+```
+
+Or a string key?
+
+``` python
+sns.jointplot(""x"", ""y"", data, kind=""regression"")
+```
+
+The former is more flexible, but quite overlapping with using `JointGrid` directly. The latter makes it easier to specify a few limited choices, and point the user at `JointGrid` if they want more flexibility. I'm leaning towards the latter.
+
+cc: @twiecki 
+",mwaskom,315810,closed,False,2014-03-08T22:00:11+00:00,2014-07-16T17:59:23+00:00,2014-03-10T23:54:00+00:00,2014-03-10T23:54:00+00:00,fc8296f6c3548487fc6a00ba57f40315c80fc619,unknown,932,90,10,9,0,18,,,enhancement;plots
+mwaskom/seaborn,13551756,134,Add residplot function,"This is a pretty simple function for calculating and plotting the residuals of a linear regression:
+
+``` python
+mean = [0, 0]
+cov = [(1, .5), (.5, 1)]
+x, y = np.random.multivariate_normal(mean, cov, 100).T
+sns.residplot(x, y, lowess=True)
+```
+
+![residplot](https://f.cloud.github.com/assets/315810/2416690/09b8a4cc-ab0a-11e3-8014-e4318bf97166.png)
+
+Hopefully it makes life better for everyone.
+",mwaskom,315810,closed,False,2014-03-13T23:49:47+00:00,2014-03-14T02:10:45+00:00,2014-03-14T02:10:41+00:00,2014-03-14T02:10:41+00:00,3a17cb63f47645724bfba9a0c20aae3a3224a9c6,unknown,241,13,7,2,0,0,,,enhancement;plots
+mwaskom/seaborn,13596194,135,Allow quick setting of FacetGrid xtick step,,mwaskom,315810,closed,False,2014-03-14T22:53:40+00:00,2014-03-17T01:53:49+00:00,2014-03-14T22:53:45+00:00,2014-03-14T22:53:45+00:00,bc330abff0e452a979f88c20184dc37a32d38ece,unknown,13,1,2,1,0,0,,,enhancement;plots
+mwaskom/seaborn,13613938,136,Add example gallery and reorganize doc homepage,"Closes #51 
+
+![screenshot 2014-03-16 09 57 22](https://f.cloud.github.com/assets/315810/2431384/16c0804e-ad2c-11e3-8cf0-34d1a5f6d0ff.png)
+",mwaskom,315810,closed,False,2014-03-16T16:57:54+00:00,2014-07-25T22:25:38+00:00,2014-03-16T17:12:17+00:00,2014-03-16T17:12:17+00:00,402645b882b534cd3930fb0fcb3ad8f2414e7e9b,unknown,849,9,27,12,0,0,,,enhancement;docs
+mwaskom/seaborn,13617061,137,Copy regplot kwargs to avoid issues with facets,,mwaskom,315810,closed,False,2014-03-16T22:33:34+00:00,2014-07-11T08:46:46+00:00,2014-03-16T22:59:17+00:00,2014-03-16T22:59:17+00:00,ff1c344508d41f3a4a5abfebb64d95f8b543a592,unknown,18,3,4,2,0,0,,,plots
+mwaskom/seaborn,13618876,138,Map factorplot hue variable with marker/linestyle,"Closes #120
+
+Example:
+
+![screenshot 2014-03-16 18 22 04](https://f.cloud.github.com/assets/315810/2432806/5340290e-ad75-11e3-8d7f-459077bd7c52.png)
+",mwaskom,315810,closed,False,2014-03-17T01:41:36+00:00,2014-07-29T12:04:39+00:00,2014-03-17T01:52:38+00:00,2014-03-17T01:52:38+00:00,93c120f76f7c2da1d4139cd034a0cea597f057cb,unknown,95,14,3,1,0,0,,,enhancement;plots
+mwaskom/seaborn,13860711,140,"Add bias-corrected, accelerated (BCa) conf. intervals","I pulled the `known_ci_bca` values in the tests from the [referenced paper](http://staff.ustc.edu.cn/~zwp/teach/Stat-Comp/Efron_Bootstrap_CIs.pdf), but had to tweak them _inward_ (narrower) but 0.1 on each side. Not sure if that's because slight numeric differences in computation from 1996 vs now, or what, but I feel ok about it. I've validated this algorithm before with one of Efron's other papers (can't find it at the moment.
+
+I figure after we iterate on this and get it in a good spot, I'll think more about this https://github.com/mwaskom/moss/issues/7#issuecomment-38298687 and add in the ABC method
+",phobson,1163939,closed,False,2014-03-21T22:43:53+00:00,2015-02-18T18:25:12+00:00,2015-02-18T06:56:22+00:00,,4b8453ce1476803c9850bff675cb1edf22d2da8a,unknown,218,0,2,7,0,8,,,enhancement;algorithms
+mwaskom/seaborn,13860920,141,Overhaul style functions,"This is a relatively large change to the style machinery. To quote from the release notes:
+- The functions that interact with matplotlib rc parameters have been updated and standardized. There are now three pairs of functions, :func:`axes_style` and :func:`set_style`, :func:`plotting_context` and :func:`set_context`, and :func:`color_palette` and :func:`set_palette`. In each case, the pairs take the exact same arguments. The first function defines and returns the parameters, and the second sets the matplotlib defaults. Additionally, the first function in each pair can be used in a `with` statement to temporarily change the defaults. Both the style and context functions also now accept a dictionary of matplotlib rc parameters to override the seaborn defaults, and :func:`set` now also takes a dictionary to update any of the matplotlib defaults. See the :ref:`tutorial <aesthetics_tutorial>` for more information.
+- The `nogrid` style has been deprecated and changed to `white` for more uniformity (i.e. there are now `darkgrid`, `dark`, `whitegrid`, and `white` styles).
+
+This closes #121, closes #74, and closes #112.
+
+Also @phobson this reverts the addition of the `gridweight` parameter. Because `set()` and `set_style()` accept an `rc` dict with params to override the seaborn themes, it didn't seem necessary to have the additional layer of complexity where some but not all matplotlib parameters are aliased and get special treatment. Sorry if that breaks some code.
+
+This also standardizes the set of parameters that are part of a seaborn style and a seaborn context (and enforces independence between those groups), which should make it easy to integrate with the stylesheet functionality in matplotlib 1.4 (although to be honest I haven't looked too closely at that stuff).
+
+I also took this opportunity to make some tweaks to the styles, with things like thinner gridlines and replacing black elements with dark gray where appropriate.
+
+Because this required rerunning the test notebooks, this PR also includes a downsizing of the aesthetics and linear model notebooks. I'm keeping them around because a lot of links out there on the internet point at the nbviewer versions, but now they're brief introductions with links to the longer version in the online docs.
+",mwaskom,315810,closed,False,2014-03-21T22:50:48+00:00,2014-06-28T16:37:30+00:00,2014-03-22T17:18:03+00:00,2014-03-22T17:18:03+00:00,a02089ce8210a856a118a3c2bba4bb1e9080c69b,unknown,2150,2293,31,12,0,2,,,enhancement;docs;themes
+mwaskom/seaborn,13873735,143,Finalize 0.3,"Closes #50 
+",mwaskom,315810,closed,False,2014-03-23T00:21:50+00:00,2014-08-08T16:59:49+00:00,2014-03-23T00:30:48+00:00,2014-03-23T00:30:48+00:00,3dbc33237e76f2d7bfeea14f562e59cd3b31b118,unknown,400,465,27,5,0,0,,,
+mwaskom/seaborn,13935350,145,ENH: to make two Michaels into one,"After the merge it would look like this:
+
+```
+$> git shortlog -sn             
+   668  Michael Waskom
+     8  John B. Cole
+     7  Paul Hobson
+     4  Olga Botvinnik
+     2  Tobias Megies
+     1  Daniel B. Allan
+     1  Miikka Koskinen
+     1  Tal Yarkoni
+     1  Tom Augspurger
+     1  Yaroslav Halchenko
+```
+",yarikoptic,39889,closed,False,2014-03-25T03:19:37+00:00,2014-03-25T04:10:39+00:00,2014-03-25T04:06:09+00:00,2014-03-25T04:06:09+00:00,ac5c132bd68bfd0cbaf57781ebcb9953d42fe761,unknown,3,0,1,1,0,2,,,
+mwaskom/seaborn,13935923,146,BF: few missed import six from external,,yarikoptic,39889,closed,False,2014-03-25T03:50:04+00:00,2014-03-25T04:06:42+00:00,2014-03-25T04:06:42+00:00,2014-03-25T04:06:42+00:00,ec9eeadc5d41cf4d295765554ab06f540a19bbe3,unknown,2,2,2,1,0,0,,,
+mwaskom/seaborn,13936669,147,BF: make some non-functioning doctests correct smoke tests,"now `nosetests -s -v --with-doctest seaborn/` seems to be happy
+",yarikoptic,39889,closed,False,2014-03-25T04:37:57+00:00,2014-03-26T06:20:17+00:00,2014-03-26T06:20:17+00:00,2014-03-26T06:20:17+00:00,4e0bab21fba14b53701984e851f3b54250d03d04,unknown,14,11,3,2,2,5,,,docs;testing
+mwaskom/seaborn,13976368,149,Add a method parameter to corrplot,"This commit provides a new optional argument to `sns.corrplot`, in order to use Kendall Tau and Spearman rank correlation methods. It's just a proxy for the `method` parameter of `pandas.DataFrame.corr`.
+",cynddl,847215,closed,False,2014-03-25T20:57:21+00:00,2014-03-25T22:50:19+00:00,2014-03-25T22:47:55+00:00,2014-03-25T22:47:55+00:00,384639830cb118496b60bb3594e8583081468438,unknown,7,2,1,2,2,1,,,enhancement;plots
+mwaskom/seaborn,14039318,151,Fix palette truncation in with statement,,mwaskom,315810,closed,False,2014-03-27T01:54:13+00:00,2014-03-29T21:06:52+00:00,2014-03-27T16:32:52+00:00,,66c13b8173d3bff95904c2039a175f69199102b4,dirty,12,2,2,1,0,0,,,
+mwaskom/seaborn,14039724,152,Fix new pep8 rules,,mwaskom,315810,closed,False,2014-03-27T02:13:50+00:00,2014-03-27T16:15:44+00:00,2014-03-27T16:15:41+00:00,2014-03-27T16:15:41+00:00,6c228eb45c7ab74a0397d90797f3070d2b999a20,unknown,3,3,2,1,0,0,,,testing
+mwaskom/seaborn,14068006,153,Fix palette truncation in with statement,,mwaskom,315810,closed,False,2014-03-27T16:34:34+00:00,2014-03-29T21:06:52+00:00,2014-03-27T16:56:59+00:00,2014-03-27T16:56:59+00:00,e0de46b9a03afe186a9ad1bee257ad635e908346,unknown,12,2,2,1,0,0,,,
+mwaskom/seaborn,14122834,155,Fix density support calculation using scipy kde,"Fixes #150 
+",mwaskom,315810,closed,False,2014-03-28T18:05:28+00:00,2014-08-13T17:36:12+00:00,2014-03-28T18:29:21+00:00,2014-03-28T18:29:21+00:00,d9cfb53cf364bc83b108385b7883377ab2ff4f81,unknown,11,7,1,1,0,0,,,
+mwaskom/seaborn,14146344,156,Fix FacetGrid legend with non-string hue levels,"Closes #144 
+",mwaskom,315810,closed,False,2014-03-29T21:06:04+00:00,2014-08-06T08:58:50+00:00,2014-03-29T21:06:12+00:00,,8bc9927e595fce2647aadbb27f781bbe5b152df6,dirty,55,1,2,1,0,0,,,
+mwaskom/seaborn,14146353,157,Fix FacetGrid legend with non-string hue levels,"Closes #144
+",mwaskom,315810,closed,False,2014-03-29T21:06:41+00:00,2014-08-06T07:44:55+00:00,2014-03-29T21:32:54+00:00,2014-03-29T21:32:54+00:00,a483083df75e60cf4e23dd30f85572850e5938d6,unknown,55,1,2,1,0,0,,,
+mwaskom/seaborn,14240315,158,Spine offsets with despine,"Someone piped in on my matplotlib email list question about offset the spines. He included a simple function that allows use to offset the spines at any point (not just immediately after creation). Short version is that moving spines makes a call to `ax.cla`. The function just redefines `cla` as `reset_ticks`, moves the spine, and restores `cla` to its original state. Why that works is a great matplotlib mystery.
+
+Sucks that we went through all that work and ended up with a, IMO, subpar API, but this PR cleans it up well.
+
+Question: Should we keep the old `offset_spines` function or is the seaborn API in a state of sufficiently rapid flux that we can get rid of it (a la ""there should be one way to do things"").
+",phobson,1163939,closed,False,2014-04-01T17:44:10+00:00,2014-04-26T18:20:31+00:00,2014-04-26T17:01:28+00:00,2014-04-26T17:01:28+00:00,dc6ba36520559a1881bdad585f4732c0747d9399,unknown,105,18,3,6,2,6,,,enhancement;themes
+mwaskom/seaborn,14277641,159,Add method to change fontsize separately,"This commit adds a new function set_fontsize which adjusts the fontsize parameter independently of the context.
+",parantapa,398897,closed,False,2014-04-02T13:12:21+00:00,2014-06-16T04:06:47+00:00,2014-04-26T19:01:48+00:00,,8bade02aadffbb01a4aad324c52a111b542beb85,dirty,27,0,1,1,0,1,,,question;themes
+mwaskom/seaborn,14416556,161,Make pointplot points adjust with linewidth,,mwaskom,315810,closed,False,2014-04-05T16:41:06+00:00,2014-04-26T19:38:17+00:00,2014-04-07T16:48:56+00:00,2014-04-07T16:48:56+00:00,e88ead940b60436d6a52242e85e0b90417734087,unknown,18,5,3,2,0,0,,,
+mwaskom/seaborn,14484481,163,ENH: allow for setting a lists of labels with FacetGrid.set_axis_labels,"This allows for easily setting different x or y axis labels to different
+facets, without needing to use the matplotlib interface.
+
+It does not break the API, aside from renaming the single argument
+to `set_{x, y}labels` from ""label"" to ""labels"".
+
+I also added a unit test for this method since I noticed it didn't have any
+direct test coverage.
+",shoyer,1217238,closed,False,2014-04-08T06:00:04+00:00,2014-06-16T13:23:21+00:00,2014-04-08T23:38:38+00:00,,aa1c1bdc656f08a936955a4494db0d2971a099db,dirty,45,9,2,1,0,5,,,
+mwaskom/seaborn,14529321,165,Unit test for FacetGrid.set_axis_labels,"Adapted from #163.
+",shoyer,1217238,closed,False,2014-04-08T23:43:41+00:00,2014-04-09T00:43:48+00:00,2014-04-09T00:43:21+00:00,2014-04-09T00:43:21+00:00,d241fafcaa8fd899b6d501bcb867a38551fa94ed,unknown,14,0,1,1,0,1,,,
+mwaskom/seaborn,14551014,167,Test on Python 3.4,,mwaskom,315810,closed,False,2014-04-09T13:30:42+00:00,2014-06-28T16:39:43+00:00,2014-04-30T18:23:03+00:00,2014-04-30T18:23:03+00:00,613b2d280faa7df247d2419bb8a0b3fb289a339b,unknown,1,0,1,1,0,1,,,testing
+mwaskom/seaborn,14885072,171,"Add Arial and Liberation Sans to mpl.rcParams[""font.sans-serif""] #55","#55
+",westurner,50891,closed,False,2014-04-17T16:56:14+00:00,2014-06-28T01:36:15+00:00,2014-05-13T16:02:43+00:00,,98d22a925e07986917dd75e6458daa914ea8cd78,dirty,10,1,1,1,0,0,,,rough-edge;themes
+mwaskom/seaborn,14921949,172,Fix col_wrap issues with odd number of facets,"Closes #168 
+
+@shoyer I think this should fix your issue if you want to take a look at it.
+",mwaskom,315810,closed,False,2014-04-18T15:21:27+00:00,2014-07-08T06:14:10+00:00,2014-04-18T16:44:59+00:00,,82cdf22f7c783af779cb2209544bf1d5c7909391,dirty,171,13,5,2,0,1,,,
+mwaskom/seaborn,14924751,173,Fix FacetGrid col_wrap when facets don't evenly factor into cols,"Closes #168
+",mwaskom,315810,closed,False,2014-04-18T16:45:39+00:00,2014-04-26T19:38:14+00:00,2014-04-21T15:17:20+00:00,2014-04-21T15:17:20+00:00,22891ca6d3ff971d4e9c849007c7ec7155f258b8,unknown,171,13,5,2,0,1,,,plots
+mwaskom/seaborn,15048432,176,Make font fallback work better,"Closes #171  (cf #55)
+
+I think this is a robust solution to the font issues. @westurner do you want to take a look?
+",mwaskom,315810,closed,False,2014-04-23T04:12:14+00:00,2014-08-28T06:04:40+00:00,2014-08-27T17:22:51+00:00,2014-08-27T17:22:51+00:00,b6f26342a9f093813545c6bfcf63f1ef77a9d6c2,unknown,54,4,3,2,0,11,,,rough-edge;themes
+mwaskom/seaborn,15151848,179,Add hist_norm argument to distplot,"Closes #178 
+",mwaskom,315810,closed,False,2014-04-25T02:02:32+00:00,2014-06-14T09:17:00+00:00,2014-04-25T02:14:46+00:00,2014-04-25T02:14:46+00:00,77039c2e066fabc46e343fbc563cd1791f052394,unknown,19,2,2,1,0,0,,,
+mwaskom/seaborn,15179327,180,Add cubehelix_palette function,"This provides a flexible interface to the cubehelix palette system, which exists in matplotlib but is for some reason hidden.
+
+Here are a few examples:
+
+``` python
+f, axes = plt.subplots(9, figsize=(8, 8))
+for ax, s in zip(axes, np.linspace(0, 3, 10)):
+    pal = sns.cubehelix_palette(10, s)
+    ax.imshow([pal], interpolation=""nearest"")
+    ax.set(yticks=[], xticklabels=[])
+```
+
+![cubehelix_pal](https://cloud.githubusercontent.com/assets/315810/2803265/02a27a2c-cc99-11e3-9d44-edbef2f36ffa.png)
+
+``` python
+f, axes = plt.subplots(3, 3, figsize=(8, 8))
+x, y = np.random.multivariate_normal([0, 0], [(1, .5), (.5, 1)], 1000).T
+for ax, s in zip(axes.flat, np.linspace(0, 3, 9)):
+    cmap = sns.cubehelix_palette(start=s, rot=-.3, light=.98, as_cmap=True)
+    ax.hexbin(x, y, gridsize=20, cmap=cmap)
+    ax.set_axis_off()
+f.tight_layout(h_pad=.5, w_pad=.5)
+```
+
+![cubehelix_hex](https://cloud.githubusercontent.com/assets/315810/2803292/6913c84c-cc99-11e3-9091-28b7de32c119.png)
+",mwaskom,315810,closed,False,2014-04-25T16:48:28+00:00,2014-07-19T21:58:30+00:00,2014-04-25T17:18:01+00:00,2014-04-25T17:18:01+00:00,df47b5c7fcc67fe8fe7be2d40a1cc92fec86d1dd,unknown,219,4,5,1,0,0,,,
+mwaskom/seaborn,15204980,182,Add the scale_font option to plotting_context,"This should make it easier to change the fontsize of the plots. `set`, `set_context`, and `plotting_context` now take a `font_scale` option to make all the font elements larger or smaller. (e.g. `font_scale=2` makes the fonts twice as large as they would otherwise be in that context.
+
+This closes #159 
+",mwaskom,315810,closed,False,2014-04-26T18:36:42+00:00,2016-11-02T08:02:34+00:00,2014-04-26T19:01:48+00:00,2014-04-26T19:01:48+00:00,358947ffe53b881e7cacc51f4e334e3404b7ccc9,unknown,101,22,6,1,0,1,,,enhancement;themes
+mwaskom/seaborn,15205338,183,Make setup behave more politely about dependencies (GH #169),"This raises ImportErrors when dependencies don't exist, but doesn't try to install them. This is better than default setuptools behavior because all of the required dependencies are annoying to install with pip.
+
+Closes #169 
+",mwaskom,315810,closed,False,2014-04-26T19:20:42+00:00,2014-06-28T16:41:37+00:00,2014-04-26T19:32:01+00:00,2014-04-26T19:32:01+00:00,f51a71a30d4c86cc59129d8e5c3d20b905a3b1a2,unknown,34,2,1,1,0,0,,,infrastructure
+mwaskom/seaborn,15208276,184,Changes to make tests run on older versions of dependencies,"Cf: #174 and #175 
+",mwaskom,315810,closed,False,2014-04-27T02:11:23+00:00,2014-07-15T07:47:49+00:00,2014-04-27T17:19:12+00:00,2014-04-27T17:19:12+00:00,728359730bcbf3847d475d8f554b837cd337bea4,unknown,73,20,9,1,0,0,,,testing;infrastructure
+mwaskom/seaborn,15285372,186,Make it possible to override gridsize with hex jointplot,"Here's a pull request enabling support for various customisations within the jointplot() function. The changes avoid clobbering any possible keyword arguments that could get passed through to the underlying plotting functions for each plot component. 
+
+See also #185 (original issue).
+",alimanfoo,703554,closed,False,2014-04-29T12:24:51+00:00,2014-06-18T18:52:45+00:00,2014-04-29T17:03:42+00:00,2014-04-29T17:03:42+00:00,325ac0449a36fe7c56c876a06dc784bdd3b4208d,unknown,47,12,3,2,0,14,,,enhancement;plots
+mwaskom/seaborn,15388328,189,fix violinplot doco,"Minor correction to violinplot() docstring.
+",alimanfoo,703554,closed,False,2014-05-01T13:59:54+00:00,2014-06-28T16:40:31+00:00,2014-05-01T14:42:09+00:00,2014-05-01T14:42:09+00:00,a2ee354b7a2348eddb2763bf98a0580c7ea85a9d,unknown,3,3,1,2,0,1,,,docs
+mwaskom/seaborn,15829734,196,Be safer about trying to operate on possible strings,"Fixes #193 
+",mwaskom,315810,closed,False,2014-05-13T15:44:48+00:00,2014-06-28T16:41:09+00:00,2014-05-13T16:01:44+00:00,2014-05-13T16:01:44+00:00,6c95782fedaad706d3ffb89ce7fbd75bd81ed83c,unknown,4,1,1,1,0,0,,,
+mwaskom/seaborn,15844943,197,BUG: col row and hue names should always be lists,"I found this while trying to plot a facet grid without dropping nans
+",cpcloud,417981,closed,False,2014-05-13T20:23:43+00:00,2014-06-28T16:39:34+00:00,2014-05-14T00:49:40+00:00,2014-05-14T00:49:40+00:00,3291d8a1ca9d0ea71ba0874b9637d54df9177670,unknown,8,4,2,1,0,16,,,
+mwaskom/seaborn,15924335,199,Added pdf.fonttype=42 to rcmod for Illustrator-editable text,"Fixes issue #195
+",swederik,607793,closed,False,2014-05-15T09:38:29+00:00,2014-06-28T21:43:38+00:00,2014-05-15T20:28:13+00:00,2014-05-15T20:28:13+00:00,2ee944e651f65babcd8c0312c78d3799114aba9f,unknown,6,0,2,2,0,3,,,enhancement;themes
+mwaskom/seaborn,16063949,201,ENH Draw horizontal violin plots,"The interface is analogous to the one for boxplots from matplotlib,
+using an option called `vert` to distinguish vertical (default) and
+horizontal plots.
+",luispedro,79334,closed,False,2014-05-19T16:43:37+00:00,2014-06-14T05:51:27+00:00,2014-05-23T15:40:44+00:00,2014-05-23T15:40:44+00:00,d0dbc0a277b327834396ab5c2c0bb00a2f176dbb,unknown,48,16,1,2,0,2,,,
+mwaskom/seaborn,16263541,204,Update color_palettes.ipynb,"The names of the default palettes have changed in the mean time.
+",zyv,607401,closed,False,2014-05-23T09:12:57+00:00,2014-06-28T16:57:06+00:00,2014-05-23T15:38:51+00:00,2014-05-23T15:38:51+00:00,86312155a61d2b3e88e2d9fee2e5c07deabfdf6c,unknown,2,2,1,1,0,1,,,docs
+mwaskom/seaborn,16547830,212,add hbox kind of factorplot,"I wanted to propose a feature, but i thought it might be interesting to propose a solution (even if i am not sure i made the best choice).
+
+Using factorplot in boxplot mode usually involve categorical names that i feel better to present in horizontal mode (more space for labels, more place to view results).
+
+The easiest way to add that features was to add a kind of plot. 
+Tell me what do you think of that, and if you have already a solution that you are more comfortable with, i could try to help...
+",fdeheeger,473756,closed,False,2014-05-30T18:33:58+00:00,2014-06-17T17:12:02+00:00,2014-06-02T15:18:05+00:00,,3cf86f2544155601270e2c74ea15fdd67325b994,dirty,0,0,0,0,0,6,,,
+mwaskom/seaborn,16551590,213,Fixed a typo fix in the comments.,,thoppe,2707106,closed,False,2014-05-30T19:52:38+00:00,2014-06-28T16:41:22+00:00,2014-06-02T03:03:10+00:00,2014-06-02T03:03:10+00:00,976be78782c1eb03c64fc631d2df4fffadd5e95d,unknown,1,1,1,1,0,3,,,
+mwaskom/seaborn,16604820,214,add flip_axes option to factorplot,"I create a new PR so it comes from a specific branch instead of master.
+
+From the previous discussion #212, i know it is not your preferred option, but it might help.
+",fdeheeger,473756,closed,False,2014-06-02T15:17:10+00:00,2015-01-22T22:36:12+00:00,2015-01-22T22:36:12+00:00,,c56b857f748d1132d8347910ce54de1fd133f643,dirty,122,46,2,6,0,2,,,enhancement;plots
+mwaskom/seaborn,16659254,217,Revert change to functions that reset RC params,"Closes #215 
+",mwaskom,315810,closed,False,2014-06-03T15:22:52+00:00,2014-06-24T05:09:18+00:00,2014-06-04T01:48:50+00:00,2014-06-04T01:48:50+00:00,bd49e49ef0d136fb59e126ef33b03cd2003f1353,unknown,35,16,2,3,0,0,,,testing
+mwaskom/seaborn,17191030,222,fixed alpha setting bug in _RegressionPlotter scatter,"There's a known issue in matplotlib where if alpha is explicitly set for an axis globally, the 4th column in an RGBA array passed to the color argument in plots is ignored. Because seaborn sets a default alpha value in _RegressionPlotter, the alpha is always ignored even when passed. This PR just adds a check to see if the color property in scatter_kws is 4D (i.e., RGBA), and omits setting the default if so. All tests pass.
+",tyarkoni,303932,closed,False,2014-06-16T17:28:01+00:00,2014-06-17T01:12:35+00:00,2014-06-17T01:12:30+00:00,2014-06-17T01:12:30+00:00,313dfd11bb4e99edb5cdf0f246777fb791a46357,unknown,25,1,2,2,1,8,,,rough-edge;plots
+mwaskom/seaborn,17213390,223,Skip image diff when testing notebooks,"Changes to IPython and other aspects of the testing environment have broken the notebook tests. Rather than rerunning the reference notebooks (and inflating the repository size), I'm choosing to disable the image diff for now so that Travis gives useful feedback.
+",mwaskom,315810,closed,False,2014-06-17T02:14:26+00:00,2014-06-24T05:09:15+00:00,2014-06-17T03:13:22+00:00,2014-06-17T03:13:22+00:00,9856a6dc688a28353c510e824d8c43611f869941,unknown,8,0,2,2,0,0,,,
+mwaskom/seaborn,17626268,225,Add xkcd color dictionary and palette function,"Matplotlib can accept a lot of named colors, but haven't you ever wanted to make a plot with ""greyish blue"", ""terracotta"", and ""dusty green""? Thanks to the [xkcd color survey](http://xkcd.com/color/rgb/) now you can:
+
+``` python
+colors = [""butter yellow"", ""windows blue"", ""faded green"", ""greyish"", ""dusty purple""]
+sns.palplot(sns.xkcd_palette(colors))
+```
+
+![screenshot 2014-06-25 18 29 12](https://cloud.githubusercontent.com/assets/315810/3393900/50fe68ee-fcd1-11e3-867f-75d3d796fa81.png)
+
+``` python
+plt.plot(x, y, sns.xkcd_rgb[""soft green""], lw=3);
+```
+
+![screenshot 2014-06-25 18 29 47](https://cloud.githubusercontent.com/assets/315810/3393903/739f4f12-fcd1-11e3-9303-485d39ca069b.png)
+
+[This](http://www.luminoso.com/colors/) is useful if you want to browse what colors are available.
+",mwaskom,315810,closed,False,2014-06-26T01:30:30+00:00,2014-08-02T23:23:34+00:00,2014-06-26T18:48:12+00:00,2014-06-26T18:48:12+00:00,0cb7aacd0af0bbb0495dc92c2ecc6d66f21d9930,unknown,972,0,4,1,0,1,,,enhancement;themes
+mwaskom/seaborn,17733146,227,Add logx option to regplot,"To plot the linearized model `y ~ log(x)`.
+",mwaskom,315810,closed,False,2014-06-28T01:01:19+00:00,2014-06-28T01:19:45+00:00,2014-06-28T01:19:17+00:00,2014-06-28T01:19:17+00:00,d61419360aaf88aadeece6462606e85a72712734,unknown,43,4,3,1,0,0,,,
+mwaskom/seaborn,17745179,228,add a small error message if an invalid kind was passed to jointplot,"In case you used an invalid value for joinplot you get back just an empty plot.
+Let's add a really simple help message for the user, see http://nbviewer.ipython.org/b2bf2c98d8339b39000d
+",dawehner,29678,closed,False,2014-06-29T08:09:54+00:00,2014-08-02T23:33:51+00:00,2014-08-02T23:33:51+00:00,2014-08-02T23:33:51+00:00,7b6d42ee376621961684d558b123a9f4c1284fa2,unknown,3,0,1,2,0,1,,,enhancement;rough-edge
+mwaskom/seaborn,17903983,230,Reboot of clustering,"This is pulled off of `master` this time instead of `dev`, fixing weird merging issues occurring in https://github.com/mwaskom/seaborn/pull/73
+
+Trailing Todos:
+- [x] Reformat params with `heatmap_kws`, `row_kws` and `col_kws` or something to clean up the arguments
+- [x] Is there a way to `set_axis_style('nogrid')` within a single plot? I couldn't find a way to detect the current `axis_style` to switch, and then return the `rcParams` to what they were.
+- [ ] Allow for several levels of labeling groups in the heatmap (multiple levels of colors) [probably not in this release]
+- [x] Allow for user to specify their own linkage matrices
+- [x] Constrain colorbar scale to have at most 3 labels. Currently this works only for divergent, linear maps. [probably not in this release]
+
+Here's a notebook of the current abilities: http://nbviewer.ipython.org/gist/anonymous/10da01312dc2486888f5
+",olgabot,806256,closed,False,2014-07-02T18:38:59+00:00,2014-10-17T00:30:26+00:00,2014-10-17T00:30:26+00:00,,6413b59f50ca6ae42076386ec709ec4c8c3004f3,dirty,3081,2595,37,4502,0,61,,,enhancement;plots

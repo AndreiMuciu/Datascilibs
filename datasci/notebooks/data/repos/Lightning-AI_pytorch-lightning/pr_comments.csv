@@ -1,0 +1,2970 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+Lightning-AI/pytorch-lightning,2490518542,2069915446,mauvilsa,5780272,2025-05-01T06:57:04+00:00,2025-05-01T06:57:05+00:00,I think the tests that fail is because the newer version of jsonargparse is not installed.,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2490518542,2069915446,mauvilsa,5780272,2025-05-01T06:57:04+00:00,2025-05-01T06:57:05+00:00,I think the tests that fail is because the newer version of jsonargparse is not installed.,True,requirements/pytorch/extra.txt,5.0,"@@ -5,7 +5,7 @@
+ matplotlib>3.1, <3.9.0
+ omegaconf >=2.2.3, <2.4.0
+ hydra-core >=1.2.0, <1.4.0
+-jsonargparse[signatures] >=4.27.7, <=4.35.0
++jsonargparse[signatures] >=4.39.0, <4.40.0",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2067881717,Borda,6035284,2025-04-30T05:33:49+00:00,2025-04-30T05:33:49+00:00,"```suggestion
+from lightning.pytorch import Trainer
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2084121741,Borda,6035284,2025-05-12T08:29:00+00:00,2025-05-12T08:29:01+00:00,"```suggestion
+        # Only call `iter()` if all following cases:
+        # 1. Not restarting
+        # 2. Not resuming from checkpoint (not _is_resuming)
+        # 3. Past first epoch (current_epoch > 0)
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2084127187,Borda,6035284,2025-05-12T08:31:49+00:00,2025-05-12T08:31:49+00:00,how or when it would return trainer as None?,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2067881717,Borda,6035284,2025-04-30T05:33:49+00:00,2025-04-30T05:33:49+00:00,"```suggestion
+from lightning.pytorch import Trainer
+```",True,tests/tests_pytorch/loops/test_double_iter_in_iterable_dataset.py,,"@@ -0,0 +1,81 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++#
++# This test tests the resuming of training from a checkpoint file using an IterableDataset.
++# And contains code mentioned in the issue: #19427.
++# Ref: https://github.com/Lightning-AI/pytorch-lightning/issues/19427
++import multiprocessing as mp
++import os
++from collections.abc import Iterator
++from pathlib import Path
++from queue import Queue
++
++import numpy as np
++from torch.utils.data import DataLoader, IterableDataset
++
++from lightning import Trainer",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2084121741,Borda,6035284,2025-05-12T08:29:00+00:00,2025-05-12T08:29:01+00:00,"```suggestion
+        # Only call `iter()` if all following cases:
+        # 1. Not restarting
+        # 2. Not resuming from checkpoint (not _is_resuming)
+        # 3. Past first epoch (current_epoch > 0)
+```",True,src/lightning/pytorch/loops/training_epoch_loop.py,8.0,"@@ -235,7 +235,11 @@ def reset(self) -> None:
+ 
+     def on_run_start(self, data_fetcher: _DataFetcher) -> None:
+         # `iter()` was called once in `FitLoop.setup_data()` already
+-        if self.trainer.current_epoch > 0 and not self.restarting:
++        # Only call iter() if:
++        # 1. Not restarting AND
++        # 2. Not resuming from checkpoint (not _is_resuming) AND
++        # 3. Past first epoch (current_epoch > 0)",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2489671943,2084127187,Borda,6035284,2025-05-12T08:31:49+00:00,2025-05-12T08:31:49+00:00,how or when it would return trainer as None?,True,tests/tests_pytorch/loops/test_double_iter_in_iterable_dataset.py,73.0,"@@ -0,0 +1,81 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++#
++# This test tests the resuming of training from a checkpoint file using an IterableDataset.
++# And contains code mentioned in the issue: #19427.
++# Ref: https://github.com/Lightning-AI/pytorch-lightning/issues/19427
++import multiprocessing as mp
++import os
++from collections.abc import Iterator
++from pathlib import Path
++from queue import Queue
++
++import numpy as np
++from torch.utils.data import DataLoader, IterableDataset
++
++from lightning.pytorch import Trainer
++from lightning.pytorch.demos.boring_classes import BoringModel
++
++
++class QueueDataset(IterableDataset):
++    def __init__(self, queue: Queue) -> None:
++        super().__init__()
++        self.queue = queue
++
++    def __iter__(self) -> Iterator:
++        for _ in range(5):
++            tensor, _ = self.queue.get(timeout=5)
++            yield tensor
++
++
++def create_queue() -> Queue:
++    q = mp.Queue()
++    arr = np.random.random([1, 32]).astype(np.float32)
++    for ind in range(20):
++        q.put((arr, ind))
++    return q
++
++
++def train_model(queue: Queue, max_epochs: int, ckpt_path: Path) -> Trainer:
++    dataloader = DataLoader(QueueDataset(queue), num_workers=1, batch_size=None, persistent_workers=True)
++    trainer = Trainer(
++        max_epochs=max_epochs,
++        enable_progress_bar=False,
++        enable_checkpointing=False,
++        devices=1,
++        logger=False,
++    )
++    if ckpt_path.exists():
++        trainer.fit(BoringModel(), dataloader, ckpt_path=str(ckpt_path))
++    else:
++        trainer.fit(BoringModel(), dataloader)
++        trainer.save_checkpoint(str(ckpt_path))
++    return trainer
++
++
++def test_resume_training_with(tmp_path):
++    """"""Test resuming training from checkpoint file using a IterableDataset.""""""
++    queue = create_queue()
++    max_epoch = 2
++    ckpt_path = tmp_path / ""model.ckpt""
++    trainer = train_model(queue, max_epoch, ckpt_path)
++    assert trainer is not None",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2053788264,Borda,6035284,2025-04-22T10:01:38+00:00,2025-04-22T10:01:39+00:00,"```suggestion
+            dl = DataLoader(
+                dataset=dl.dataset,
+                batch_size=dl.batch_size,
+                sampler=sampler,
+                num_workers=dl.num_workers,
+                collate_fn=dl.collate_fn,
+                pin_memory=dl.pin_memory,
+                drop_last=dl.drop_last,
+                timeout=dl.timeout,
+                worker_init_fn=dl.worker_init_fn,
+                multiprocessing_context=dl.multiprocessing_context,
+                generator=dl.generator,
+                prefetch_factor=dl.prefetch_factor,
+                persistent_workers=dl.persistent_workers,
+            )
+        updated.append(dl)
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063881262,adosar,110358278,2025-04-28T15:10:27+00:00,2025-04-28T15:10:49+00:00,"I still insist that the case `overfit_batches=1` doesn't need any special handling. Model debugging, overfitting and sanity checks can all be achieved with the current implementation, i.e. training and validation use different batches even for `overfit_batches=1`. ",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063889129,adosar,110358278,2025-04-28T15:13:10+00:00,2025-04-28T15:13:10+00:00,"LGTM since it makes explicit that ""same"" refers to training and validation, respectively.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063890058,adosar,110358278,2025-04-28T15:13:32+00:00,2025-04-28T15:13:33+00:00,Same as https://github.com/Lightning-AI/pytorch-lightning/pull/20731/files/01ce1c130a52b6bcf7983fc7d7ca432ee26f421a#r2063881262.,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2053788264,Borda,6035284,2025-04-22T10:01:38+00:00,2025-04-22T10:01:39+00:00,"```suggestion
+            dl = DataLoader(
+                dataset=dl.dataset,
+                batch_size=dl.batch_size,
+                sampler=sampler,
+                num_workers=dl.num_workers,
+                collate_fn=dl.collate_fn,
+                pin_memory=dl.pin_memory,
+                drop_last=dl.drop_last,
+                timeout=dl.timeout,
+                worker_init_fn=dl.worker_init_fn,
+                multiprocessing_context=dl.multiprocessing_context,
+                generator=dl.generator,
+                prefetch_factor=dl.prefetch_factor,
+                persistent_workers=dl.persistent_workers,
+            )
+        updated.append(dl)
+```",True,src/lightning/pytorch/trainer/connectors/data_connector.py,,"@@ -244,19 +244,66 @@ def _get_distributed_sampler(
+ 
+ 
+ def _resolve_overfit_batches(combined_loader: CombinedLoader, mode: RunningStage) -> None:
++    """"""Resolve overfit batches by ensuring the same batch is used for both training and validation.""""""
+     all_have_sequential_sampler = all(
+         isinstance(dl.sampler, SequentialSampler) for dl in combined_loader.flattened if hasattr(dl, ""sampler"")
+     )
+     if all_have_sequential_sampler:
+         return
++
+     rank_zero_warn(
+         f""You requested to overfit but enabled {mode.dataloader_prefix} dataloader shuffling.""
+         f"" We are turning off the {mode.dataloader_prefix} dataloader shuffling for you.""
+     )
+-    updated = [
+-        _update_dataloader(dl, sampler=SequentialSampler(dl.dataset), mode=mode) if hasattr(dl, ""dataset"") else dl
+-        for dl in combined_loader.flattened
+-    ]
++
++    # Get the first batch from the training dataloader
++    first_batch = None
++    if mode == RunningStage.TRAINING:
++        for dl in combined_loader.flattened:
++            if hasattr(dl, ""dataset""):
++                first_batch = next(iter(dl))
++                break
++
++    # Create new dataloaders with SequentialSampler
++    updated = []
++    for dl in combined_loader.flattened:
++        if hasattr(dl, ""dataset""):
++            if mode == RunningStage.VALIDATING and first_batch is not None:
++                # For validation, create a custom sampler that always returns the first batch
++                class SingleBatchSampler(Sampler):
++                    def __init__(self, batch):
++                        self.batch = batch
++
++                    def __iter__(self):
++                        yield self.batch
++
++                    def __len__(self):
++                        return 1
++
++                sampler = SingleBatchSampler(first_batch)
++            else:
++                sampler = SequentialSampler(dl.dataset)
++
++            # Create a new dataloader with the new sampler
++            new_dl = DataLoader(
++                dataset=dl.dataset,
++                batch_size=dl.batch_size,
++                sampler=sampler,
++                num_workers=dl.num_workers,
++                collate_fn=dl.collate_fn,
++                pin_memory=dl.pin_memory,
++                drop_last=dl.drop_last,
++                timeout=dl.timeout,
++                worker_init_fn=dl.worker_init_fn,
++                multiprocessing_context=dl.multiprocessing_context,
++                generator=dl.generator,
++                prefetch_factor=dl.prefetch_factor,
++                persistent_workers=dl.persistent_workers,
++            )
++            updated.append(new_dl)
++        else:
++            updated.append(dl)",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063881262,adosar,110358278,2025-04-28T15:10:27+00:00,2025-04-28T15:10:49+00:00,"I still insist that the case `overfit_batches=1` doesn't need any special handling. Model debugging, overfitting and sanity checks can all be achieved with the current implementation, i.e. training and validation use different batches even for `overfit_batches=1`. ",True,docs/source-pytorch/common/trainer.rst,,"@@ -759,6 +759,9 @@ overfit_batches
+ Uses this much data of the training & validation set.
+ If the training & validation dataloaders have ``shuffle=True``, Lightning will automatically disable it.
+ 
++* When set to exactly 1, the same batch is used for both training and validation steps, which is useful for debugging model implementation
++* For other values, sequential sampling (no shuffling) is used
++",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063889129,adosar,110358278,2025-04-28T15:13:10+00:00,2025-04-28T15:13:10+00:00,"LGTM since it makes explicit that ""same"" refers to training and validation, respectively.",True,docs/source-pytorch/common/trainer.rst,,"@@ -769,9 +772,13 @@ Useful for quickly debugging or trying to overfit on purpose.
+     # use only 1% of the train & val set
+     trainer = Trainer(overfit_batches=0.01)
+ 
+-    # overfit on 10 of the same batches
++    # overfit on 10 (same) train batches & 10 (same) val batches",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2470057042,2063890058,adosar,110358278,2025-04-28T15:13:32+00:00,2025-04-28T15:13:33+00:00,Same as https://github.com/Lightning-AI/pytorch-lightning/pull/20731/files/01ce1c130a52b6bcf7983fc7d7ca432ee26f421a#r2063881262.,True,docs/source-pytorch/common/trainer.rst,,"@@ -769,9 +772,13 @@ Useful for quickly debugging or trying to overfit on purpose.
+     # use only 1% of the train & val set
+     trainer = Trainer(overfit_batches=0.01)
+ 
+-    # overfit on 10 of the same batches
++    # overfit on 10 (same) train batches & 10 (same) val batches
+     trainer = Trainer(overfit_batches=10)
+ 
++    # debug by training and validating on exactly the same single batch
++    # (useful for verifying model implementation)
++    trainer = Trainer(overfit_batches=1)
++",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2468991395,2055648850,Borda,6035284,2025-04-23T09:29:58+00:00,2025-04-23T09:29:58+00:00,convert this tests to validate the warning,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2468991395,2055648850,Borda,6035284,2025-04-23T09:29:58+00:00,2025-04-23T09:29:58+00:00,convert this tests to validate the warning,True,tests/tests_pytorch/loops/optimization/test_automatic_loop.py,14.0,"@@ -84,27 +83,3 @@ def training_step(self, batch, batch_idx):
+ 
+     with pytest.raises(MisconfigurationException, match=match):
+         trainer.fit(model)
+-
+-
+-@pytest.mark.parametrize(""world_size"", [1, 2])",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2046642186,ali-alshaar7,45029495,2025-04-16T10:34:43+00:00,2025-04-16T10:36:02+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/4150ea7650ba4df191894cfe30ff9b3c).
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2046643865,ali-alshaar7,45029495,2025-04-16T10:35:51+00:00,2025-04-16T10:36:02+00:00,"```suggestion
+        In the special case when the issue can't be reproduced in a studio, provide steps and example code here.
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2060322969,Borda,6035284,2025-04-25T14:10:25+00:00,2025-04-25T14:10:25+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/fc4761c2fcd04cff896ea3d630fcb419).
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2078583516,Borda,6035284,2025-05-07T22:34:42+00:00,2025-05-07T22:34:43+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.youtube.com/watch?v=YcW-2Zt_bFg&ab_channel=LightningAI).
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2046642186,ali-alshaar7,45029495,2025-04-16T10:34:43+00:00,2025-04-16T10:36:02+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/4150ea7650ba4df191894cfe30ff9b3c).
+```",True,.github/ISSUE_TEMPLATE/1_bug_report.yaml,,"@@ -46,12 +46,22 @@ body:
+     attributes:
+       value: ""**Note: The rest of this form is optional, but filling it out may help us to provide better support.**""
+ 
++  - type: input
++    attributes:
++      label: Reproduced in studio
++      description: >
++        Create a new Lightning Studio with code that reproduces the issue and share the link.
++        Also include all the relevant files and data required to reproduce shared issue.
++        In case the code does not crash, please add assert statements to show what is the real and expected output.
++        Simple guide on how to create such studio can be found [here](https://www.loom.com/share/4150ea7650ba4df191894cfe30ff9b3c).",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2046643865,ali-alshaar7,45029495,2025-04-16T10:35:51+00:00,2025-04-16T10:36:02+00:00,"```suggestion
+        In the special case when the issue can't be reproduced in a studio, provide steps and example code here.
+```",True,.github/ISSUE_TEMPLATE/1_bug_report.yaml,,"@@ -46,12 +46,22 @@ body:
+     attributes:
+       value: ""**Note: The rest of this form is optional, but filling it out may help us to provide better support.**""
+ 
++  - type: input
++    attributes:
++      label: Reproduced in studio
++      description: >
++        Create a new Lightning Studio with code that reproduces the issue and share the link.
++        Also include all the relevant files and data required to reproduce shared issue.
++        In case the code does not crash, please add assert statements to show what is the real and expected output.
++        Simple guide on how to create such studio can be found [here](https://www.loom.com/share/4150ea7650ba4df191894cfe30ff9b3c).
++      placeholder: https://lightning.ai/live-session/...
++    validations:
++      required: false
+   - type: textarea
+     attributes:
+       label: How to reproduce the bug
+       description: >
+-        Provide steps and example code here.
+-        You can also paste a link to Google Colab (see our [Colab bug report template](https://colab.research.google.com/github/Lightning-AI/lightning/blob/master/examples/pytorch/bug_report/bug_report_model.ipynb)) or adapt this minimal [snippet](https://github.com/Lightning-AI/lightning/blob/master/examples/pytorch/bug_report/bug_report_model.py).
++        In a special case when the issues can't be reproduced in a studio, provide steps and example code here.",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2060322969,Borda,6035284,2025-04-25T14:10:25+00:00,2025-04-25T14:10:25+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/fc4761c2fcd04cff896ea3d630fcb419).
+```",True,.github/ISSUE_TEMPLATE/1_bug_report.yaml,,"@@ -46,12 +46,22 @@ body:
+     attributes:
+       value: ""**Note: The rest of this form is optional, but filling it out may help us to provide better support.**""
+ 
++  - type: input
++    attributes:
++      label: Reproduced in studio
++      description: >
++        Create a new Lightning Studio with code that reproduces the issue and share the link.
++        Also include all the relevant files and data required to reproduce shared issue.
++        In case the code does not crash, please add assert statements to show what is the real and expected output.
++        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/4150ea7650ba4df191894cfe30ff9b3c).",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2463171759,2078583516,Borda,6035284,2025-05-07T22:34:42+00:00,2025-05-07T22:34:43+00:00,"```suggestion
+        A simple guide on how to create such a studio can be found [here](https://www.youtube.com/watch?v=YcW-2Zt_bFg&ab_channel=LightningAI).
+```",True,.github/ISSUE_TEMPLATE/1_bug_report.yaml,,"@@ -46,12 +46,22 @@ body:
+     attributes:
+       value: ""**Note: The rest of this form is optional, but filling it out may help us to provide better support.**""
+ 
++  - type: input
++    attributes:
++      label: Reproduced in studio
++      description: >
++        Create a new Lightning Studio with code that reproduces the issue and share the link.
++        Also include all the relevant files and data required to reproduce shared issue.
++        In case the code does not crash, please add assert statements to show what is the real and expected output.
++        A simple guide on how to create such a studio can be found [here](https://www.loom.com/share/fc4761c2fcd04cff896ea3d630fcb419).",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2038194045,Borda,6035284,2025-04-10T19:41:12+00:00,2025-04-10T19:41:12+00:00,"```suggestion
+```
+
+this is not needed :)",False,,,,1,1,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2038425369,iyilmaz24,128280383,2025-04-10T22:15:31+00:00,2025-04-10T22:15:31+00:00,Sounds good. I went ahead and made these changes 🙂,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2041675405,Borda,6035284,2025-04-14T08:36:45+00:00,2025-04-14T08:36:45+00:00,"```suggestion
+    assert os.path.exists(ckpt_path), f""Checkpoint file '{ckpt_path}' wasn't created""
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2038194045,Borda,6035284,2025-04-10T19:41:12+00:00,2025-04-10T19:41:12+00:00,"```suggestion
+```
+
+this is not needed :)",True,tests/tests_pytorch/loops/test_trainer_iterable_dataset_double_iter.py,,"@@ -0,0 +1,63 @@
++import multiprocessing as mp
++import os
++from collections.abc import Iterator
++from queue import Queue
++
++import numpy as np
++from torch.utils.data import DataLoader, IterableDataset
++
++from lightning import Trainer
++from lightning.pytorch.demos.boring_classes import BoringModel
++
++
++class QueueDataset(IterableDataset):
++    def __init__(self, queue: Queue) -> None:
++        super().__init__()
++        self.queue = queue
++
++    def __iter__(self) -> Iterator:
++        for _ in range(5):
++            tensor, _ = self.queue.get(timeout=10)
++            yield tensor
++
++
++def create_queue():
++    q = mp.Queue()
++    arr = np.random.random([1, 32]).astype(np.float32)
++    for ind in range(10):
++        q.put((arr, ind))
++    return q
++
++
++def train_model(queue, maxEpochs, ckptPath):
++    dataloader = DataLoader(QueueDataset(queue), num_workers=1, batch_size=None, persistent_workers=True)
++    trainer = Trainer(max_epochs=maxEpochs, enable_progress_bar=False, devices=1)
++    trainer.fit(BoringModel(), dataloader)
++    if os.path.exists(ckptPath):
++        trainer.fit(BoringModel(), dataloader, ckpt_path=ckptPath)
++    else:
++        trainer.fit(BoringModel(), dataloader)
++        trainer.save_checkpoint(ckptPath)
++    return trainer
++
++
++def test_training():
++    """"""Test that reproduces issue in calling iter twice on a queue-based IterableDataset leads to Queue Empty errors
++    when resuming from a checkpoint.""""""
++    queue = create_queue()
++
++    ckpt_path = ""model.ckpt""
++    trainer = train_model(queue, 1, ckpt_path)
++    assert trainer is not None
++
++    assert os.path.exists(ckpt_path), ""Checkpoint file wasn't created""
++
++    ckpt_size = os.path.getsize(ckpt_path)
++    assert ckpt_size > 0, f""Checkpoint file is empty (size: {ckpt_size} bytes)""
++
++    trainer = train_model(queue, 1, ckpt_path)
++    assert trainer is not None
++
++
++if __name__ == ""__main__"":
++    test_training()",1,1,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2038425369,iyilmaz24,128280383,2025-04-10T22:15:31+00:00,2025-04-10T22:15:31+00:00,Sounds good. I went ahead and made these changes 🙂,True,tests/tests_pytorch/loops/test_trainer_iterable_dataset_double_iter.py,,"@@ -0,0 +1,63 @@
++import multiprocessing as mp
++import os
++from collections.abc import Iterator
++from queue import Queue
++
++import numpy as np
++from torch.utils.data import DataLoader, IterableDataset
++
++from lightning import Trainer
++from lightning.pytorch.demos.boring_classes import BoringModel
++
++
++class QueueDataset(IterableDataset):
++    def __init__(self, queue: Queue) -> None:
++        super().__init__()
++        self.queue = queue
++
++    def __iter__(self) -> Iterator:
++        for _ in range(5):
++            tensor, _ = self.queue.get(timeout=10)
++            yield tensor
++
++
++def create_queue():
++    q = mp.Queue()
++    arr = np.random.random([1, 32]).astype(np.float32)
++    for ind in range(10):
++        q.put((arr, ind))
++    return q
++
++
++def train_model(queue, maxEpochs, ckptPath):
++    dataloader = DataLoader(QueueDataset(queue), num_workers=1, batch_size=None, persistent_workers=True)
++    trainer = Trainer(max_epochs=maxEpochs, enable_progress_bar=False, devices=1)
++    trainer.fit(BoringModel(), dataloader)
++    if os.path.exists(ckptPath):
++        trainer.fit(BoringModel(), dataloader, ckpt_path=ckptPath)
++    else:
++        trainer.fit(BoringModel(), dataloader)
++        trainer.save_checkpoint(ckptPath)
++    return trainer
++
++
++def test_training():
++    """"""Test that reproduces issue in calling iter twice on a queue-based IterableDataset leads to Queue Empty errors
++    when resuming from a checkpoint.""""""
++    queue = create_queue()
++
++    ckpt_path = ""model.ckpt""
++    trainer = train_model(queue, 1, ckpt_path)
++    assert trainer is not None
++
++    assert os.path.exists(ckpt_path), ""Checkpoint file wasn't created""
++
++    ckpt_size = os.path.getsize(ckpt_path)
++    assert ckpt_size > 0, f""Checkpoint file is empty (size: {ckpt_size} bytes)""
++
++    trainer = train_model(queue, 1, ckpt_path)
++    assert trainer is not None
++
++
++if __name__ == ""__main__"":
++    test_training()",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2449228413,2041675405,Borda,6035284,2025-04-14T08:36:45+00:00,2025-04-14T08:36:45+00:00,"```suggestion
+    assert os.path.exists(ckpt_path), f""Checkpoint file '{ckpt_path}' wasn't created""
+```",True,tests/tests_pytorch/loops/test_trainer_iterable_dataset_double_iter.py,,"@@ -0,0 +1,58 @@
++import multiprocessing as mp
++import os
++from collections.abc import Iterator
++from queue import Queue
++
++import numpy as np
++from torch.utils.data import DataLoader, IterableDataset
++
++from lightning import Trainer
++from lightning.pytorch.demos.boring_classes import BoringModel
++
++
++class QueueDataset(IterableDataset):
++    def __init__(self, queue: Queue) -> None:
++        super().__init__()
++        self.queue = queue
++
++    def __iter__(self) -> Iterator:
++        for _ in range(5):
++            tensor, _ = self.queue.get(timeout=5)
++            yield tensor
++
++
++def create_queue():
++    q = mp.Queue()
++    arr = np.random.random([1, 32]).astype(np.float32)
++    for ind in range(10):
++        q.put((arr, ind))
++    return q
++
++
++def train_model(queue, maxEpochs, ckptPath):
++    dataloader = DataLoader(QueueDataset(queue), num_workers=1, batch_size=None, persistent_workers=True)
++    trainer = Trainer(max_epochs=maxEpochs, enable_progress_bar=False, devices=1)
++    if os.path.exists(ckptPath):
++        trainer.fit(BoringModel(), dataloader, ckpt_path=ckptPath)
++    else:
++        trainer.fit(BoringModel(), dataloader)
++        trainer.save_checkpoint(ckptPath)
++    return trainer
++
++
++def test_training():
++    """"""Test that reproduces issue in calling iter twice on a queue-based IterableDataset leads to Queue Empty errors
++    when resuming from a checkpoint.""""""
++    queue = create_queue()
++
++    ckpt_path = ""model.ckpt""
++    trainer = train_model(queue, 1, ckpt_path)
++    assert trainer is not None
++
++    assert os.path.exists(ckpt_path), ""Checkpoint file wasn't created""",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2444273779,2032851868,Borda,6035284,2025-04-08T10:05:27+00:00,2025-04-08T10:05:27+00:00,"```suggestion
+    rev: 06907d0267368b49b9180eed423fae5697c1e909 # todo: fix for docformatter after last 1.7.5
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2444273779,2032852434,Borda,6035284,2025-04-08T10:05:49+00:00,2025-04-08T10:05:49+00:00,"```suggestion
+    rev: v3.1.0
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2444273779,2032851868,Borda,6035284,2025-04-08T10:05:27+00:00,2025-04-08T10:05:27+00:00,"```suggestion
+    rev: 06907d0267368b49b9180eed423fae5697c1e909 # todo: fix for docformatter after last 1.7.5
+```",True,.pre-commit-config.yaml,,"@@ -51,14 +51,14 @@ repos:
+       - id: detect-private-key
+ 
+   - repo: https://github.com/codespell-project/codespell
+-    rev: v2.3.0
++    rev: v2.4.1
+     hooks:
+       - id: codespell
+         additional_dependencies: [tomli]
+         #args: [""--write-changes""] # uncomment if you want to get automatic fixing
+ 
+   - repo: https://github.com/PyCQA/docformatter
+-    rev: 06907d0267368b49b9180eed423fae5697c1e909 # todo: fix for docformatter after last 1.7.5
++    rev: v1.7.5 # todo: fix for docformatter after last 1.7.5",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2444273779,2032852434,Borda,6035284,2025-04-08T10:05:49+00:00,2025-04-08T10:05:49+00:00,"```suggestion
+    rev: v3.1.0
+```",True,.pre-commit-config.yaml,,"@@ -96,7 +96,7 @@ repos:
+           )$
+ 
+   - repo: https://github.com/pre-commit/mirrors-prettier
+-    rev: v3.1.0
++    rev: v4.0.0-alpha.8",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2442036655,2031015296,Borda,6035284,2025-04-07T11:11:36+00:00,2025-04-07T11:11:37+00:00,"```suggestion
+      scripts-ref: v0.14.3
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2442036655,2031015431,Borda,6035284,2025-04-07T11:11:42+00:00,2025-04-07T11:11:43+00:00,"```suggestion
+      scripts-ref: v0.14.3
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2442036655,2031015296,Borda,6035284,2025-04-07T11:11:36+00:00,2025-04-07T11:11:37+00:00,"```suggestion
+      scripts-ref: v0.14.3
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -23,7 +23,7 @@ on:
+ jobs:
+   cron-clear:
+     if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.2
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.3
+     with:
+       scripts-ref: v0.14.2",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2442036655,2031015431,Borda,6035284,2025-04-07T11:11:42+00:00,2025-04-07T11:11:43+00:00,"```suggestion
+      scripts-ref: v0.14.3
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -32,7 +32,7 @@ jobs:
+ 
+   direct-clear:
+     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.2
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.3
+     with:
+       scripts-ref: v0.14.2",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2421550122,2016270191,ethanwharris,9592806,2025-03-27T11:13:39+00:00,2025-03-27T11:13:41+00:00,Seems like this only removes it from the test requirements?,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2421550122,2016302917,Borda,6035284,2025-03-27T11:24:23+00:00,2025-03-27T11:24:23+00:00,"yes, I was thinking about removing it also from PT but that would be a breaking change so we would need to do it later...
+@lantiga or is fine to drop it also from PL where we had it for a long time as a compatibility patch since we cut out Tm to the separate package?",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2421550122,2016270191,ethanwharris,9592806,2025-03-27T11:13:39+00:00,2025-03-27T11:13:41+00:00,Seems like this only removes it from the test requirements?,True,requirements/fabric/test.txt,4.0,"@@ -7,4 +7,3 @@ pytest-rerunfailures ==12.0
+ pytest-random-order ==1.1.0
+ click ==8.1.7
+ tensorboardX >=2.2, <2.7.0  # min version is set by torch.onnx missing attribute
+-torchmetrics >=0.7.0, <1.5.0 # needed for using fixed compare_version",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2421550122,2016302917,Borda,6035284,2025-03-27T11:24:23+00:00,2025-03-27T11:24:23+00:00,"yes, I was thinking about removing it also from PT but that would be a breaking change so we would need to do it later...
+@lantiga or is fine to drop it also from PL where we had it for a long time as a compatibility patch since we cut out Tm to the separate package?",True,requirements/fabric/test.txt,4.0,"@@ -7,4 +7,3 @@ pytest-rerunfailures ==12.0
+ pytest-random-order ==1.1.0
+ click ==8.1.7
+ tensorboardX >=2.2, <2.7.0  # min version is set by torch.onnx missing attribute
+-torchmetrics >=0.7.0, <1.5.0 # needed for using fixed compare_version",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2010804988,niander,4544122,2025-03-24T19:27:44+00:00,2025-03-24T19:37:13+00:00,"Instead of doing this string conversion, why not call the `as_posix()` function from the `Path` object. This should make this working on Windows as well. Please check this bug I filed: #20664 
+
+`MLFlowClient` implementation expects paths in the POSIX format.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011045544,yxtay,5795122,2025-03-24T23:13:00+00:00,2025-03-24T23:13:00+00:00,"```suggestion
+            artifact_path = Path(self._checkpoint_path_prefix, Path(p).stem).as_posix()
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011049013,yxtay,5795122,2025-03-24T23:17:44+00:00,2025-03-24T23:17:44+00:00,"Based on the comment on the issue, does it mean that it is necessary to call `resolve()` on the `artifact_path`?",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011058487,niander,4544122,2025-03-24T23:30:36+00:00,2025-03-24T23:30:36+00:00,"I believe `resolve()` is for resolving symlinks and special path components. `artifact_path` is holds the path for the artifact in the `MLFlow` tracking system, not the real local filesystem path. I would argue that using `as_posix` is enough and there is no need to use `resolve()`.",False,,,,1,1,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2010804988,niander,4544122,2025-03-24T19:27:44+00:00,2025-03-24T19:37:13+00:00,"Instead of doing this string conversion, why not call the `as_posix()` function from the `Path` object. This should make this working on Windows as well. Please check this bug I filed: #20664 
+
+`MLFlowClient` implementation expects paths in the POSIX format.",True,src/lightning/pytorch/loggers/mlflow.py,,"@@ -363,7 +363,7 @@ def _scan_and_log_checkpoints(self, checkpoint_callback: ModelCheckpoint) -> Non
+             aliases = [""latest"", ""best""] if p == checkpoint_callback.best_model_path else [""latest""]
+ 
+             # Artifact path on mlflow
+-            artifact_path = Path(self._checkpoint_path_prefix) / Path(p).stem
++            artifact_path = str(Path(self._checkpoint_path_prefix, Path(p).stem))",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011045544,yxtay,5795122,2025-03-24T23:13:00+00:00,2025-03-24T23:13:00+00:00,"```suggestion
+            artifact_path = Path(self._checkpoint_path_prefix, Path(p).stem).as_posix()
+```",True,src/lightning/pytorch/loggers/mlflow.py,,"@@ -363,7 +363,7 @@ def _scan_and_log_checkpoints(self, checkpoint_callback: ModelCheckpoint) -> Non
+             aliases = [""latest"", ""best""] if p == checkpoint_callback.best_model_path else [""latest""]
+ 
+             # Artifact path on mlflow
+-            artifact_path = Path(self._checkpoint_path_prefix) / Path(p).stem
++            artifact_path = str(Path(self._checkpoint_path_prefix, Path(p).stem))",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011049013,yxtay,5795122,2025-03-24T23:17:44+00:00,2025-03-24T23:17:44+00:00,"Based on the comment on the issue, does it mean that it is necessary to call `resolve()` on the `artifact_path`?",True,src/lightning/pytorch/loggers/mlflow.py,,"@@ -363,7 +363,7 @@ def _scan_and_log_checkpoints(self, checkpoint_callback: ModelCheckpoint) -> Non
+             aliases = [""latest"", ""best""] if p == checkpoint_callback.best_model_path else [""latest""]
+ 
+             # Artifact path on mlflow
+-            artifact_path = Path(self._checkpoint_path_prefix) / Path(p).stem
++            artifact_path = str(Path(self._checkpoint_path_prefix, Path(p).stem))",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2413683199,2011058487,niander,4544122,2025-03-24T23:30:36+00:00,2025-03-24T23:30:36+00:00,"I believe `resolve()` is for resolving symlinks and special path components. `artifact_path` is holds the path for the artifact in the `MLFlow` tracking system, not the real local filesystem path. I would argue that using `as_posix` is enough and there is no need to use `resolve()`.",True,src/lightning/pytorch/loggers/mlflow.py,,"@@ -363,7 +363,7 @@ def _scan_and_log_checkpoints(self, checkpoint_callback: ModelCheckpoint) -> Non
+             aliases = [""latest"", ""best""] if p == checkpoint_callback.best_model_path else [""latest""]
+ 
+             # Artifact path on mlflow
+-            artifact_path = Path(self._checkpoint_path_prefix) / Path(p).stem
++            artifact_path = str(Path(self._checkpoint_path_prefix, Path(p).stem))",1,1,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2412409979,2010846036,Borda,6035284,2025-03-24T19:59:49+00:00,2025-03-24T19:59:49+00:00,"```suggestion
+      scripts-ref: v0.14.2
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2412409979,2010846170,Borda,6035284,2025-03-24T19:59:56+00:00,2025-03-24T19:59:56+00:00,"```suggestion
+      scripts-ref: v0.14.2
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2412409979,2010846036,Borda,6035284,2025-03-24T19:59:49+00:00,2025-03-24T19:59:49+00:00,"```suggestion
+      scripts-ref: v0.14.2
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -23,7 +23,7 @@ on:
+ jobs:
+   cron-clear:
+     if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.1
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.2
+     with:
+       scripts-ref: v0.14.1",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2412409979,2010846170,Borda,6035284,2025-03-24T19:59:56+00:00,2025-03-24T19:59:56+00:00,"```suggestion
+      scripts-ref: v0.14.2
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -32,7 +32,7 @@ jobs:
+ 
+   direct-clear:
+     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.1
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.2
+     with:
+       scripts-ref: v0.14.1",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2408124057,2006572426,RixhersAjazi,5511749,2025-03-20T22:53:02+00:00,2025-03-20T22:53:02+00:00,Should we add a test to verify naming? ,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2408124057,2006971984,Borda,6035284,2025-03-21T07:03:13+00:00,2025-03-21T07:03:14+00:00,there is docstring,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2408124057,2006572426,RixhersAjazi,5511749,2025-03-20T22:53:02+00:00,2025-03-20T22:53:02+00:00,Should we add a test to verify naming? ,True,src/lightning/pytorch/utilities/model_registry.py,5.0,"@@ -63,24 +63,24 @@ def _parse_registry_model_version(ckpt_path: Optional[_PATH]) -> tuple[str, str]
+     ('model-name', '1.0')
+     >>> _parse_registry_model_version(""registry:model-name"")
+     ('model-name', '')
+-    >>> _parse_registry_model_version(""registry:version:v2"")
++    >>> _parse_registry_model_version(""registry:VERSION:v2"")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2408124057,2006971984,Borda,6035284,2025-03-21T07:03:13+00:00,2025-03-21T07:03:14+00:00,there is docstring,True,src/lightning/pytorch/utilities/model_registry.py,5.0,"@@ -63,24 +63,24 @@ def _parse_registry_model_version(ckpt_path: Optional[_PATH]) -> tuple[str, str]
+     ('model-name', '1.0')
+     >>> _parse_registry_model_version(""registry:model-name"")
+     ('model-name', '')
+-    >>> _parse_registry_model_version(""registry:version:v2"")
++    >>> _parse_registry_model_version(""registry:VERSION:v2"")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2396462240,1998544080,Borda,6035284,2025-03-17T11:34:59+00:00,2025-03-17T11:34:59+00:00,"```suggestion
+      scripts-ref: v0.14.1
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2396462240,1998544294,Borda,6035284,2025-03-17T11:35:08+00:00,2025-03-17T11:35:09+00:00,"```suggestion
+      scripts-ref: v0.14.1
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2396462240,1998544080,Borda,6035284,2025-03-17T11:34:59+00:00,2025-03-17T11:34:59+00:00,"```suggestion
+      scripts-ref: v0.14.1
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -23,7 +23,7 @@ on:
+ jobs:
+   cron-clear:
+     if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.0
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.1
+     with:
+       scripts-ref: v0.14.0",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2396462240,1998544294,Borda,6035284,2025-03-17T11:35:08+00:00,2025-03-17T11:35:09+00:00,"```suggestion
+      scripts-ref: v0.14.1
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -32,7 +32,7 @@ jobs:
+ 
+   direct-clear:
+     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.0
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.1
+     with:
+       scripts-ref: v0.14.0",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2380997165,1987200299,Borda,6035284,2025-03-10T12:35:14+00:00,2025-03-10T12:35:14+00:00,"```suggestion
+      scripts-ref: v0.14.0
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2380997165,1987200432,Borda,6035284,2025-03-10T12:35:20+00:00,2025-03-10T12:35:20+00:00,"```suggestion
+      scripts-ref: v0.14.0
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2380997165,1987200299,Borda,6035284,2025-03-10T12:35:14+00:00,2025-03-10T12:35:14+00:00,"```suggestion
+      scripts-ref: v0.14.0
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -23,7 +23,7 @@ on:
+ jobs:
+   cron-clear:
+     if: github.event_name == 'schedule' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.12.0
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.0
+     with:
+       scripts-ref: v0.11.8",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2380997165,1987200432,Borda,6035284,2025-03-10T12:35:20+00:00,2025-03-10T12:35:20+00:00,"```suggestion
+      scripts-ref: v0.14.0
+```",True,.github/workflows/call-clear-cache.yml,,"@@ -32,7 +32,7 @@ jobs:
+ 
+   direct-clear:
+     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+-    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.12.0
++    uses: Lightning-AI/utilities/.github/workflows/cleanup-caches.yml@v0.14.0
+     with:
+       scripts-ref: v0.11.8",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1946174315,Borda,6035284,2025-02-07T08:52:51+00:00,2025-02-07T08:52:52+00:00,"this seems like just a filter, but the original code validates that no warning was raised...",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1946918672,haifeng-jin,5476582,2025-02-07T17:39:18+00:00,2025-02-07T17:39:18+00:00,"Hi Borda,
+
+According to the [doc](https://docs.python.org/3/library/warnings.html#warning-filter), the `simplefilter(""error"")`  would turn any warning into an error.
+
+So, when a warning occurs, the test would error out.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1959350188,lantiga,191033,2025-02-18T09:16:23+00:00,2025-02-18T09:16:28+00:00,"looks good to me, good use of `catch_warnings` to reset behavior back to default outside the context manager",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1946174315,Borda,6035284,2025-02-07T08:52:51+00:00,2025-02-07T08:52:52+00:00,"this seems like just a filter, but the original code validates that no warning was raised...",True,tests/tests_fabric/utilities/test_seed.py,13.0,"@@ -30,9 +31,9 @@ def test_seed_stays_same_with_multiple_seed_everything_calls():
+         seed_everything()
+     initial_seed = os.environ.get(""PL_GLOBAL_SEED"")
+ 
+-    with pytest.warns(None) as record:
++    with warnings.catch_warnings():
++        warnings.simplefilter(""error"")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1946918672,haifeng-jin,5476582,2025-02-07T17:39:18+00:00,2025-02-07T17:39:18+00:00,"Hi Borda,
+
+According to the [doc](https://docs.python.org/3/library/warnings.html#warning-filter), the `simplefilter(""error"")`  would turn any warning into an error.
+
+So, when a warning occurs, the test would error out.",True,tests/tests_fabric/utilities/test_seed.py,13.0,"@@ -30,9 +31,9 @@ def test_seed_stays_same_with_multiple_seed_everything_calls():
+         seed_everything()
+     initial_seed = os.environ.get(""PL_GLOBAL_SEED"")
+ 
+-    with pytest.warns(None) as record:
++    with warnings.catch_warnings():
++        warnings.simplefilter(""error"")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2318655221,1959350188,lantiga,191033,2025-02-18T09:16:23+00:00,2025-02-18T09:16:28+00:00,"looks good to me, good use of `catch_warnings` to reset behavior back to default outside the context manager",True,tests/tests_fabric/utilities/test_seed.py,13.0,"@@ -30,9 +31,9 @@ def test_seed_stays_same_with_multiple_seed_everything_calls():
+         seed_everything()
+     initial_seed = os.environ.get(""PL_GLOBAL_SEED"")
+ 
+-    with pytest.warns(None) as record:
++    with warnings.catch_warnings():
++        warnings.simplefilter(""error"")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940243651,lantiga,191033,2025-02-03T23:01:16+00:00,2025-02-03T23:18:15+00:00,"An alternative (or an addition) could be two methods (`self.update_on_step` and `self.update_on_epoch`)  that the user needs to override. This would allow a user to get a hold of the module and the trainer, and condition saving on richer information like the value of the loss.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940247047,lantiga,191033,2025-02-03T23:05:54+00:00,2025-02-03T23:18:15+00:00,"```suggestion
+        checkpoint[""averaged_state""] = {
+```
+I get that it might be still ""averaging"" : ), but it's in fact ""averaged"" up to the current iterations. We can called it ""average"" model if it sounds better.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940251403,lantiga,191033,2025-02-03T23:12:10+00:00,2025-02-03T23:18:15+00:00,"This is hard to understand for a user if they don't know the details of the callback.
+
+```suggestion
+            raise Exception(""Trying to load a checkpoint using the WeightAveraging callback outside the `fit` stage. The WeightAveraging callback can only be used in the `fit` stage."")
+```
+
+I'm wondering: instead of raising we could just load the average model e.g. for predict. This will avoid forcing users to remove the callback from the Trainer.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940253736,lantiga,191033,2025-02-03T23:15:37+00:00,2025-02-03T23:18:15+00:00,"This tests that we can crash and resume, but afaict it doesn't test whether the resulting averaging is equivalent. We can harden this in a subsequent PR, but it is important to know for sure that averaging works if I stop training and resume while averages are being taken, irrespective of where I stop and resume in the lifecycle.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940863045,senarvi,2337787,2025-02-04T10:01:14+00:00,2025-02-04T10:01:14+00:00,"@lantiga the name is a bit confusing, but it means the state of the averaging process, not the average model. This includes the state variables of the `AveragedModel` class, excluding the `module` (i.e. `n_averaged`). The average model is saved in `state_dict`, so whatever we'll do with the checkpoint, we'll use the average model. The current model state is saved in `current_model_state`, so that we can continue training with the WeightAveraging callback from the previous state. If you have a less confusing name for the ""averaging state variables, excluding the averaged model parameters"", I can change it.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941021555,senarvi,2337787,2025-02-04T11:48:21+00:00,2025-02-04T12:07:02+00:00,"@lantiga I guess I just wasn't sure in which situation this callback would be called outside fit, but yes, if the user calls `Trainer.validate/test/predict(ckpt_path=...)`, I believe this will be called and the best thing to do would be to load the average model. The average model will be loaded if we don't do anything. Maybe just display a warning in that case.
+
+I guess `on_save_checkpoint()` can also be called outside fit - if the user calls `Trainer.save_checkpoint()` after training. In that case we also don't have to do anything.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941350417,senarvi,2337787,2025-02-04T15:02:14+00:00,2025-02-04T15:02:15+00:00,"@lantiga That's true. Overriding some method seems to be a common way of customizing callbacks in Lightning.
+
+I changed it like this. However, there's just one method for the user to override, `should_update(self, step_idx: Optional[int] = None, epoch_idx: Optional[int] = None)`. (Otherwise, if the user would override `update_on_epoch()` and not override `update_on_step()`, the callback would still update on every step.)",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941352829,senarvi,2337787,2025-02-04T15:03:38+00:00,2025-02-04T15:03:38+00:00,@lantiga This is what I did. Please check if you think the messages are clear now.,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941362705,senarvi,2337787,2025-02-04T15:09:24+00:00,2025-02-04T15:09:24+00:00,I'll try to still improve the test.,False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1947854755,senarvi,2337787,2025-02-08T15:54:58+00:00,2025-02-08T15:54:58+00:00,"@lantiga now I test that after stopping and resuming we get the same final model. The parameters are not identical - I have to use `atol=0.001` - but they are close enough so that I think that the difference comes from some random change instead of a bug in restoring the checkpoint. I don't know what could cause the difference, though. I pass `deterministic=True` to Trainer. I'm curious if you have some ideas, or if you think that that's close enough.",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940243651,lantiga,191033,2025-02-03T23:01:16+00:00,2025-02-03T23:18:15+00:00,"An alternative (or an addition) could be two methods (`self.update_on_step` and `self.update_on_epoch`)  that the user needs to override. This would allow a user to get a hold of the module and the trainer, and condition saving on richer information like the value of the loss.",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940247047,lantiga,191033,2025-02-03T23:05:54+00:00,2025-02-03T23:18:15+00:00,"```suggestion
+        checkpoint[""averaged_state""] = {
+```
+I get that it might be still ""averaging"" : ), but it's in fact ""averaged"" up to the current iterations. We can called it ""average"" model if it sounds better.",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average
++            model should be updated.
++        update_on_epoch: A function that takes the zero-based epoch number, and returns ``True`` if the average model
++            should be updated.
++
++    """"""
++
++    def __init__(
++        self,
++        device: Optional[Union[torch.device, int]] = torch.device(""cpu""),
++        avg_fn: Optional[Callable[[Tensor, Tensor, Union[Tensor, int]], Tensor]] = None,
++        update_on_step: Optional[Callable[[int], bool]] = None,
++        update_on_epoch: Optional[Callable[[int], bool]] = None,
++    ):
++        self._device = device
++        self._avg_fn = avg_fn
++
++        if (update_on_step is None) and (update_on_epoch is None):
++            self._update_on_step: Callable[[int], bool] = _return_true
++            self._update_on_epoch: Callable[[int], bool] = _return_false
++        else:
++            self._update_on_step = _return_false if update_on_step is None else update_on_step
++            self._update_on_epoch = _return_false if update_on_epoch is None else update_on_epoch
++
++        self._average_model: Optional[AveragedModel] = None
++
++        # Number of optimizer steps taken, when the average model was last updated. Initializing this with zero ensures
++        # that the average model will be first updated after the first optimizer step, which takes place after N batches
++        # when using accumulate_grad_batches=N.
++        self._latest_update_step = 0
++        # The epoch after which the average model was last updated. The first epoch is 0, so initializing this to a
++        # negative value means that if update_on_step(0) returns True, the first update is after the first epoch.
++        self._latest_update_epoch = -1
++
++    def setup(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", stage: str) -> None:
++        """"""Called when fit, validate, test, predict, or tune begins.
++
++        Creates an :class:`AveragedModel` when fit begins.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            stage: The :class:`~lightning.pytorch.trainer.trainer.Trainer` state.
++
++        """"""
++        if stage == ""fit"":
++            device = self._device or pl_module.device
++            self._average_model = AveragedModel(model=pl_module, device=device, avg_fn=self._avg_fn, use_buffers=True)
++
++    def on_train_batch_end(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", outputs: STEP_OUTPUT, batch: Any, batch_idx: int
++    ) -> None:
++        """"""Called when a training batch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_step()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            outputs: Outputs from the training batch.
++            batch: The training batch.
++            batch_idx: Index of the training batch.
++
++        """"""
++        if self._update_on_step(trainer.global_step) and (trainer.global_step > self._latest_update_step):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_step = trainer.global_step
++
++    def on_train_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a training epoch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_epoch()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._update_on_epoch(trainer.current_epoch) and (trainer.current_epoch > self._latest_update_epoch):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_epoch = trainer.current_epoch
++
++    def on_train_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when training ends.
++
++        Transfers parameters from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        assert self._average_model is not None
++        self._copy_average_to_current(pl_module)
++
++    def on_validation_epoch_start(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch begins.
++
++        Transfers parameter values from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Loading the average model parameters for validation."")
++            self._swap_models(pl_module)
++
++    def on_validation_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch ends.
++
++        Recovers the current model parameters from the :class:`AveragedModel`.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Recovering the current model parameters after validation."")
++            self._swap_models(pl_module)
++
++    def state_dict(self) -> dict[str, Any]:
++        """"""Called when saving a checkpoint.
++
++        Creates a ``state_dict`` of the callback state.
++
++        Returns:
++            A dictionary containing the callback state.
++
++        """"""
++        return {""latest_update_step"": self._latest_update_step}
++
++    def load_state_dict(self, state_dict: dict[str, Any]) -> None:
++        """"""Called when loading a checkpoint.
++
++        Reloads the callback state given a ``state_dict``.
++
++        Args:
++            state_dict: A dictionary containing the callback state.
++
++        """"""
++        self._latest_update_step = state_dict[""latest_update_step""]
++
++    def on_save_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when saving a checkpoint.
++
++        Moves the current model state to the key ``current_model_state``, and places the average model state in
++        ``state_dict`` instead. Any other state variables of the ``AveragedModel`` will be saved in
++        ``averaging_state``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The checkpoint dictionary that will be saved.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to save a checkpoint, but no average model (outside fit). Don't know what to do."")
++
++        rank_zero_info(""The average model parameters will be saved to the state_dict in the checkpoint."")
++        average_model_state = self._average_model.state_dict()
++        checkpoint[""current_model_state""] = checkpoint[""state_dict""]
++        checkpoint[""state_dict""] = {
++            name[7:]: value for name, value in average_model_state.items() if name.startswith(""module."")
++        }
++        checkpoint[""averaging_state""] = {",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940251403,lantiga,191033,2025-02-03T23:12:10+00:00,2025-02-03T23:18:15+00:00,"This is hard to understand for a user if they don't know the details of the callback.
+
+```suggestion
+            raise Exception(""Trying to load a checkpoint using the WeightAveraging callback outside the `fit` stage. The WeightAveraging callback can only be used in the `fit` stage."")
+```
+
+I'm wondering: instead of raising we could just load the average model e.g. for predict. This will avoid forcing users to remove the callback from the Trainer.",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average
++            model should be updated.
++        update_on_epoch: A function that takes the zero-based epoch number, and returns ``True`` if the average model
++            should be updated.
++
++    """"""
++
++    def __init__(
++        self,
++        device: Optional[Union[torch.device, int]] = torch.device(""cpu""),
++        avg_fn: Optional[Callable[[Tensor, Tensor, Union[Tensor, int]], Tensor]] = None,
++        update_on_step: Optional[Callable[[int], bool]] = None,
++        update_on_epoch: Optional[Callable[[int], bool]] = None,
++    ):
++        self._device = device
++        self._avg_fn = avg_fn
++
++        if (update_on_step is None) and (update_on_epoch is None):
++            self._update_on_step: Callable[[int], bool] = _return_true
++            self._update_on_epoch: Callable[[int], bool] = _return_false
++        else:
++            self._update_on_step = _return_false if update_on_step is None else update_on_step
++            self._update_on_epoch = _return_false if update_on_epoch is None else update_on_epoch
++
++        self._average_model: Optional[AveragedModel] = None
++
++        # Number of optimizer steps taken, when the average model was last updated. Initializing this with zero ensures
++        # that the average model will be first updated after the first optimizer step, which takes place after N batches
++        # when using accumulate_grad_batches=N.
++        self._latest_update_step = 0
++        # The epoch after which the average model was last updated. The first epoch is 0, so initializing this to a
++        # negative value means that if update_on_step(0) returns True, the first update is after the first epoch.
++        self._latest_update_epoch = -1
++
++    def setup(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", stage: str) -> None:
++        """"""Called when fit, validate, test, predict, or tune begins.
++
++        Creates an :class:`AveragedModel` when fit begins.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            stage: The :class:`~lightning.pytorch.trainer.trainer.Trainer` state.
++
++        """"""
++        if stage == ""fit"":
++            device = self._device or pl_module.device
++            self._average_model = AveragedModel(model=pl_module, device=device, avg_fn=self._avg_fn, use_buffers=True)
++
++    def on_train_batch_end(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", outputs: STEP_OUTPUT, batch: Any, batch_idx: int
++    ) -> None:
++        """"""Called when a training batch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_step()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            outputs: Outputs from the training batch.
++            batch: The training batch.
++            batch_idx: Index of the training batch.
++
++        """"""
++        if self._update_on_step(trainer.global_step) and (trainer.global_step > self._latest_update_step):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_step = trainer.global_step
++
++    def on_train_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a training epoch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_epoch()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._update_on_epoch(trainer.current_epoch) and (trainer.current_epoch > self._latest_update_epoch):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_epoch = trainer.current_epoch
++
++    def on_train_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when training ends.
++
++        Transfers parameters from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        assert self._average_model is not None
++        self._copy_average_to_current(pl_module)
++
++    def on_validation_epoch_start(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch begins.
++
++        Transfers parameter values from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Loading the average model parameters for validation."")
++            self._swap_models(pl_module)
++
++    def on_validation_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch ends.
++
++        Recovers the current model parameters from the :class:`AveragedModel`.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Recovering the current model parameters after validation."")
++            self._swap_models(pl_module)
++
++    def state_dict(self) -> dict[str, Any]:
++        """"""Called when saving a checkpoint.
++
++        Creates a ``state_dict`` of the callback state.
++
++        Returns:
++            A dictionary containing the callback state.
++
++        """"""
++        return {""latest_update_step"": self._latest_update_step}
++
++    def load_state_dict(self, state_dict: dict[str, Any]) -> None:
++        """"""Called when loading a checkpoint.
++
++        Reloads the callback state given a ``state_dict``.
++
++        Args:
++            state_dict: A dictionary containing the callback state.
++
++        """"""
++        self._latest_update_step = state_dict[""latest_update_step""]
++
++    def on_save_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when saving a checkpoint.
++
++        Moves the current model state to the key ``current_model_state``, and places the average model state in
++        ``state_dict`` instead. Any other state variables of the ``AveragedModel`` will be saved in
++        ``averaging_state``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The checkpoint dictionary that will be saved.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to save a checkpoint, but no average model (outside fit). Don't know what to do."")
++
++        rank_zero_info(""The average model parameters will be saved to the state_dict in the checkpoint."")
++        average_model_state = self._average_model.state_dict()
++        checkpoint[""current_model_state""] = checkpoint[""state_dict""]
++        checkpoint[""state_dict""] = {
++            name[7:]: value for name, value in average_model_state.items() if name.startswith(""module."")
++        }
++        checkpoint[""averaging_state""] = {
++            name: value for name, value in average_model_state.items() if not name.startswith(""module."")
++        }
++
++    def on_load_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when loading a model checkpoint.
++
++        Loads the current model and the :class:`AveragedModel` parameters from the checkpoint.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The full checkpoint dictionary that got loaded by the Trainer.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to load a checkpoint, but no average model (outside fit). Don't know what to do."")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940253736,lantiga,191033,2025-02-03T23:15:37+00:00,2025-02-03T23:18:15+00:00,"This tests that we can crash and resume, but afaict it doesn't test whether the resulting averaging is equivalent. We can harden this in a subsequent PR, but it is important to know for sure that averaging works if I stop training and resume while averages are being taken, irrespective of where I stop and resume in the lifecycle.",True,tests/tests_pytorch/callbacks/test_weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++import os
++from pathlib import Path
++from typing import Any, Optional
++
++import pytest
++import torch
++from torch import Tensor, nn
++from torch.optim.swa_utils import get_swa_avg_fn
++from torch.utils.data import DataLoader
++
++from lightning.pytorch import LightningModule, Trainer
++from lightning.pytorch.callbacks import WeightAveraging
++from lightning.pytorch.demos.boring_classes import BoringModel, RandomDataset, RandomIterableDataset
++from tests_pytorch.helpers.runif import RunIf
++
++
++class WeightAveragingTestModel(BoringModel):
++    def __init__(
++        self, batch_norm: bool = True, iterable_dataset: bool = False, crash_on_epoch: Optional[int] = None
++    ) -> None:
++        super().__init__()
++        layers = [nn.Linear(32, 32)]
++        if batch_norm:
++            layers.append(nn.BatchNorm1d(32))
++        layers += [nn.ReLU(), nn.Linear(32, 2)]
++        self.layer = nn.Sequential(*layers)
++        self.iterable_dataset = iterable_dataset
++        self.crash_on_epoch = crash_on_epoch
++
++    def training_step(self, batch: Tensor, batch_idx: int) -> None:
++        if self.crash_on_epoch and self.trainer.current_epoch >= self.crash_on_epoch:
++            raise Exception(""CRASH TEST"")
++        return super().training_step(batch, batch_idx)
++
++    def train_dataloader(self) -> None:
++        dataset_class = RandomIterableDataset if self.iterable_dataset else RandomDataset
++        return DataLoader(dataset_class(32, 32), batch_size=4)
++
++    def configure_optimizers(self) -> None:
++        return torch.optim.SGD(self.layer.parameters(), lr=0.1)
++
++
++class EMAAveragingFunction:
++    """"""EMA averaging function.
++
++    Functionally equivalent to the closure that ``get_ema_avg_fn()`` would return. This class is needed because we
++    cannot use a closure with ddp_spawn. (``Popen(process_obj)`` would fail with
++    ``Can't get local object 'get_ema_avg_fn.<locals>.ema_update'``).
++
++    """"""
++
++    def __init__(self, decay: float = 0.999) -> None:
++        self.decay = decay
++
++    @torch.no_grad()
++    def __call__(self, ema_param: Tensor, current_param: Tensor, num_averaged: Tensor) -> Tensor:
++        return self.decay * ema_param + (1 - self.decay) * current_param
++
++
++class EMATestCallback(WeightAveraging):
++    def __init__(self, devices: int = 1, **kwargs: Any) -> None:
++        super().__init__(avg_fn=EMAAveragingFunction(), **kwargs)
++        self.devices = devices
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        assert self._average_model.n_averaged == trainer.global_step
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        # length=32, batch_size=4, accumulate_grad_batches=2
++        # => Using one process we have 4 optimizer steps per epoch.
++        # => Using two processes we have 2 optimizer steps per epoch.
++        steps_per_epoch = 4 // self.devices
++        assert self._average_model.n_averaged == trainer.max_epochs * steps_per_epoch
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++class SWATestCallback(WeightAveraging):
++    def __init__(self, **kwargs: Any) -> None:
++        avg_fn = get_swa_avg_fn()
++        update_on_epoch = lambda x: x in (3, 5, 7)
++        super().__init__(avg_fn=avg_fn, update_on_epoch=update_on_epoch, **kwargs)
++
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        if trainer.current_epoch < 3:
++            assert self._average_model.n_averaged == 0
++        elif trainer.current_epoch < 5:
++            assert self._average_model.n_averaged == 1
++        elif trainer.current_epoch < 7:
++            assert self._average_model.n_averaged == 2
++        else:
++            assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++def test_weight_averaging_deepcopy(tmp_path):
++    """"""Ensure that WeightAveraging callback doesn't deepcopy the data loaders or the data module and consume memory
++    more than necessary.""""""
++
++    class TestCallback(WeightAveraging):
++        def __init__(self, *args, **kwargs):
++            super().__init__(*args, **kwargs)
++            self.setup_called = False
++
++        def setup(self, trainer, pl_module, stage) -> None:
++            super().setup(trainer, pl_module, stage)
++            assert self._average_model.module.train_dataloader is not pl_module.train_dataloader
++            assert self._average_model.module.train_dataloader.__self__ == self._average_model.module
++            assert self._average_model.module._trainer is None
++            self.setup_called = True
++
++    callback = TestCallback()
++    trainer = Trainer(default_root_dir=tmp_path, callbacks=callback, fast_dev_run=True)
++    trainer.fit(BoringModel(), train_dataloaders=DataLoader(RandomDataset(32, 2)))
++    assert callback.setup_called
++
++
++@pytest.mark.parametrize(""batch_norm"", [True, False])
++@pytest.mark.parametrize(""iterable_dataset"", [True, False])
++def test_ema(tmp_path, batch_norm: bool, iterable_dataset: bool):
++    _train(tmp_path, EMATestCallback(), batch_norm=batch_norm, iterable_dataset=iterable_dataset)
++
++
++@pytest.mark.parametrize(
++    ""accelerator"", [pytest.param(""gpu"", marks=RunIf(min_cuda_gpus=1)), pytest.param(""mps"", marks=RunIf(mps=True))]
++)
++def test_ema_accelerator(tmp_path, accelerator):
++    _train(tmp_path, EMATestCallback(), accelerator=accelerator, devices=1)
++
++
++@RunIf(min_cuda_gpus=2, standalone=True)
++def test_ema_ddp(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(min_cuda_gpus=2)
++def test_ema_ddp_spawn(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(skip_windows=True)
++def test_ema_ddp_spawn_cpu(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""cpu"", devices=2)
++
++
++@pytest.mark.parametrize(""crash_on_epoch"", [1, 3])
++def test_ema_resume(tmp_path, crash_on_epoch):
++    _train_and_resume(tmp_path, crash_on_epoch=crash_on_epoch)
++
++
++@RunIf(skip_windows=True)
++def test_ema_resume_ddp(tmp_path):
++    _train_and_resume(tmp_path, crash_on_epoch=3, use_ddp=True)
++
++
++def test_swa(tmp_path):
++    _train(tmp_path, SWATestCallback())
++
++
++def _train(
++    tmp_path: str,
++    callback: WeightAveraging,
++    batch_norm: bool = True,
++    strategy: str = ""auto"",
++    accelerator: str = ""cpu"",
++    devices: int = 1,
++    iterable_dataset: bool = False,
++    checkpoint_path: Optional[str] = None,
++    crash_on_epoch: Optional[int] = None,
++) -> None:
++    trainer = Trainer(
++        default_root_dir=tmp_path,
++        enable_progress_bar=False,
++        enable_model_summary=False,
++        logger=False,
++        max_epochs=8,
++        num_sanity_val_steps=0,
++        callbacks=callback,
++        accumulate_grad_batches=2,
++        strategy=strategy,
++        accelerator=accelerator,
++        devices=devices,
++    )
++    model = WeightAveragingTestModel(
++        batch_norm=batch_norm, iterable_dataset=iterable_dataset, crash_on_epoch=crash_on_epoch
++    )
++
++    if crash_on_epoch is None:
++        trainer.fit(model, ckpt_path=checkpoint_path)
++    else:
++        with pytest.raises(Exception, match=""CRASH TEST""):
++            trainer.fit(model, ckpt_path=checkpoint_path)
++
++    assert trainer.lightning_module == model
++
++
++def _train_and_resume(tmp_path: str, crash_on_epoch: int, use_ddp: bool = False) -> None:",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1940863045,senarvi,2337787,2025-02-04T10:01:14+00:00,2025-02-04T10:01:14+00:00,"@lantiga the name is a bit confusing, but it means the state of the averaging process, not the average model. This includes the state variables of the `AveragedModel` class, excluding the `module` (i.e. `n_averaged`). The average model is saved in `state_dict`, so whatever we'll do with the checkpoint, we'll use the average model. The current model state is saved in `current_model_state`, so that we can continue training with the WeightAveraging callback from the previous state. If you have a less confusing name for the ""averaging state variables, excluding the averaged model parameters"", I can change it.",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average
++            model should be updated.
++        update_on_epoch: A function that takes the zero-based epoch number, and returns ``True`` if the average model
++            should be updated.
++
++    """"""
++
++    def __init__(
++        self,
++        device: Optional[Union[torch.device, int]] = torch.device(""cpu""),
++        avg_fn: Optional[Callable[[Tensor, Tensor, Union[Tensor, int]], Tensor]] = None,
++        update_on_step: Optional[Callable[[int], bool]] = None,
++        update_on_epoch: Optional[Callable[[int], bool]] = None,
++    ):
++        self._device = device
++        self._avg_fn = avg_fn
++
++        if (update_on_step is None) and (update_on_epoch is None):
++            self._update_on_step: Callable[[int], bool] = _return_true
++            self._update_on_epoch: Callable[[int], bool] = _return_false
++        else:
++            self._update_on_step = _return_false if update_on_step is None else update_on_step
++            self._update_on_epoch = _return_false if update_on_epoch is None else update_on_epoch
++
++        self._average_model: Optional[AveragedModel] = None
++
++        # Number of optimizer steps taken, when the average model was last updated. Initializing this with zero ensures
++        # that the average model will be first updated after the first optimizer step, which takes place after N batches
++        # when using accumulate_grad_batches=N.
++        self._latest_update_step = 0
++        # The epoch after which the average model was last updated. The first epoch is 0, so initializing this to a
++        # negative value means that if update_on_step(0) returns True, the first update is after the first epoch.
++        self._latest_update_epoch = -1
++
++    def setup(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", stage: str) -> None:
++        """"""Called when fit, validate, test, predict, or tune begins.
++
++        Creates an :class:`AveragedModel` when fit begins.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            stage: The :class:`~lightning.pytorch.trainer.trainer.Trainer` state.
++
++        """"""
++        if stage == ""fit"":
++            device = self._device or pl_module.device
++            self._average_model = AveragedModel(model=pl_module, device=device, avg_fn=self._avg_fn, use_buffers=True)
++
++    def on_train_batch_end(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", outputs: STEP_OUTPUT, batch: Any, batch_idx: int
++    ) -> None:
++        """"""Called when a training batch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_step()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            outputs: Outputs from the training batch.
++            batch: The training batch.
++            batch_idx: Index of the training batch.
++
++        """"""
++        if self._update_on_step(trainer.global_step) and (trainer.global_step > self._latest_update_step):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_step = trainer.global_step
++
++    def on_train_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a training epoch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_epoch()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._update_on_epoch(trainer.current_epoch) and (trainer.current_epoch > self._latest_update_epoch):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_epoch = trainer.current_epoch
++
++    def on_train_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when training ends.
++
++        Transfers parameters from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        assert self._average_model is not None
++        self._copy_average_to_current(pl_module)
++
++    def on_validation_epoch_start(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch begins.
++
++        Transfers parameter values from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Loading the average model parameters for validation."")
++            self._swap_models(pl_module)
++
++    def on_validation_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch ends.
++
++        Recovers the current model parameters from the :class:`AveragedModel`.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Recovering the current model parameters after validation."")
++            self._swap_models(pl_module)
++
++    def state_dict(self) -> dict[str, Any]:
++        """"""Called when saving a checkpoint.
++
++        Creates a ``state_dict`` of the callback state.
++
++        Returns:
++            A dictionary containing the callback state.
++
++        """"""
++        return {""latest_update_step"": self._latest_update_step}
++
++    def load_state_dict(self, state_dict: dict[str, Any]) -> None:
++        """"""Called when loading a checkpoint.
++
++        Reloads the callback state given a ``state_dict``.
++
++        Args:
++            state_dict: A dictionary containing the callback state.
++
++        """"""
++        self._latest_update_step = state_dict[""latest_update_step""]
++
++    def on_save_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when saving a checkpoint.
++
++        Moves the current model state to the key ``current_model_state``, and places the average model state in
++        ``state_dict`` instead. Any other state variables of the ``AveragedModel`` will be saved in
++        ``averaging_state``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The checkpoint dictionary that will be saved.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to save a checkpoint, but no average model (outside fit). Don't know what to do."")
++
++        rank_zero_info(""The average model parameters will be saved to the state_dict in the checkpoint."")
++        average_model_state = self._average_model.state_dict()
++        checkpoint[""current_model_state""] = checkpoint[""state_dict""]
++        checkpoint[""state_dict""] = {
++            name[7:]: value for name, value in average_model_state.items() if name.startswith(""module."")
++        }
++        checkpoint[""averaging_state""] = {",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941021555,senarvi,2337787,2025-02-04T11:48:21+00:00,2025-02-04T12:07:02+00:00,"@lantiga I guess I just wasn't sure in which situation this callback would be called outside fit, but yes, if the user calls `Trainer.validate/test/predict(ckpt_path=...)`, I believe this will be called and the best thing to do would be to load the average model. The average model will be loaded if we don't do anything. Maybe just display a warning in that case.
+
+I guess `on_save_checkpoint()` can also be called outside fit - if the user calls `Trainer.save_checkpoint()` after training. In that case we also don't have to do anything.",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average
++            model should be updated.
++        update_on_epoch: A function that takes the zero-based epoch number, and returns ``True`` if the average model
++            should be updated.
++
++    """"""
++
++    def __init__(
++        self,
++        device: Optional[Union[torch.device, int]] = torch.device(""cpu""),
++        avg_fn: Optional[Callable[[Tensor, Tensor, Union[Tensor, int]], Tensor]] = None,
++        update_on_step: Optional[Callable[[int], bool]] = None,
++        update_on_epoch: Optional[Callable[[int], bool]] = None,
++    ):
++        self._device = device
++        self._avg_fn = avg_fn
++
++        if (update_on_step is None) and (update_on_epoch is None):
++            self._update_on_step: Callable[[int], bool] = _return_true
++            self._update_on_epoch: Callable[[int], bool] = _return_false
++        else:
++            self._update_on_step = _return_false if update_on_step is None else update_on_step
++            self._update_on_epoch = _return_false if update_on_epoch is None else update_on_epoch
++
++        self._average_model: Optional[AveragedModel] = None
++
++        # Number of optimizer steps taken, when the average model was last updated. Initializing this with zero ensures
++        # that the average model will be first updated after the first optimizer step, which takes place after N batches
++        # when using accumulate_grad_batches=N.
++        self._latest_update_step = 0
++        # The epoch after which the average model was last updated. The first epoch is 0, so initializing this to a
++        # negative value means that if update_on_step(0) returns True, the first update is after the first epoch.
++        self._latest_update_epoch = -1
++
++    def setup(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", stage: str) -> None:
++        """"""Called when fit, validate, test, predict, or tune begins.
++
++        Creates an :class:`AveragedModel` when fit begins.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            stage: The :class:`~lightning.pytorch.trainer.trainer.Trainer` state.
++
++        """"""
++        if stage == ""fit"":
++            device = self._device or pl_module.device
++            self._average_model = AveragedModel(model=pl_module, device=device, avg_fn=self._avg_fn, use_buffers=True)
++
++    def on_train_batch_end(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", outputs: STEP_OUTPUT, batch: Any, batch_idx: int
++    ) -> None:
++        """"""Called when a training batch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_step()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            outputs: Outputs from the training batch.
++            batch: The training batch.
++            batch_idx: Index of the training batch.
++
++        """"""
++        if self._update_on_step(trainer.global_step) and (trainer.global_step > self._latest_update_step):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_step = trainer.global_step
++
++    def on_train_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a training epoch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_epoch()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._update_on_epoch(trainer.current_epoch) and (trainer.current_epoch > self._latest_update_epoch):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_epoch = trainer.current_epoch
++
++    def on_train_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when training ends.
++
++        Transfers parameters from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        assert self._average_model is not None
++        self._copy_average_to_current(pl_module)
++
++    def on_validation_epoch_start(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch begins.
++
++        Transfers parameter values from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Loading the average model parameters for validation."")
++            self._swap_models(pl_module)
++
++    def on_validation_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch ends.
++
++        Recovers the current model parameters from the :class:`AveragedModel`.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Recovering the current model parameters after validation."")
++            self._swap_models(pl_module)
++
++    def state_dict(self) -> dict[str, Any]:
++        """"""Called when saving a checkpoint.
++
++        Creates a ``state_dict`` of the callback state.
++
++        Returns:
++            A dictionary containing the callback state.
++
++        """"""
++        return {""latest_update_step"": self._latest_update_step}
++
++    def load_state_dict(self, state_dict: dict[str, Any]) -> None:
++        """"""Called when loading a checkpoint.
++
++        Reloads the callback state given a ``state_dict``.
++
++        Args:
++            state_dict: A dictionary containing the callback state.
++
++        """"""
++        self._latest_update_step = state_dict[""latest_update_step""]
++
++    def on_save_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when saving a checkpoint.
++
++        Moves the current model state to the key ``current_model_state``, and places the average model state in
++        ``state_dict`` instead. Any other state variables of the ``AveragedModel`` will be saved in
++        ``averaging_state``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The checkpoint dictionary that will be saved.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to save a checkpoint, but no average model (outside fit). Don't know what to do."")
++
++        rank_zero_info(""The average model parameters will be saved to the state_dict in the checkpoint."")
++        average_model_state = self._average_model.state_dict()
++        checkpoint[""current_model_state""] = checkpoint[""state_dict""]
++        checkpoint[""state_dict""] = {
++            name[7:]: value for name, value in average_model_state.items() if name.startswith(""module."")
++        }
++        checkpoint[""averaging_state""] = {
++            name: value for name, value in average_model_state.items() if not name.startswith(""module."")
++        }
++
++    def on_load_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when loading a model checkpoint.
++
++        Loads the current model and the :class:`AveragedModel` parameters from the checkpoint.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The full checkpoint dictionary that got loaded by the Trainer.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to load a checkpoint, but no average model (outside fit). Don't know what to do."")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941350417,senarvi,2337787,2025-02-04T15:02:14+00:00,2025-02-04T15:02:15+00:00,"@lantiga That's true. Overriding some method seems to be a common way of customizing callbacks in Lightning.
+
+I changed it like this. However, there's just one method for the user to override, `should_update(self, step_idx: Optional[int] = None, epoch_idx: Optional[int] = None)`. (Otherwise, if the user would override `update_on_epoch()` and not override `update_on_step()`, the callback would still update on every step.)",True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941352829,senarvi,2337787,2025-02-04T15:03:38+00:00,2025-02-04T15:03:38+00:00,@lantiga This is what I did. Please check if you think the messages are clear now.,True,src/lightning/pytorch/callbacks/weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++r""""""
++Weight Averaging Callback
++^^^^^^^^^^^^^^^^^^^^^^^^^
++""""""
++
++import itertools
++from copy import deepcopy
++from typing import Any, Callable, Optional, Union
++
++import torch
++from torch import Tensor
++from torch.optim.swa_utils import AveragedModel
++
++import lightning.pytorch as pl
++from lightning.pytorch.callbacks.callback import Callback
++from lightning.pytorch.utilities.rank_zero import rank_zero_info, rank_zero_warn
++from lightning.pytorch.utilities.types import STEP_OUTPUT
++
++
++def _return_true(x: int) -> bool:
++    return True
++
++
++def _return_false(x: int) -> bool:
++    return False
++
++
++class WeightAveraging(Callback):
++    r""""""A callback that updates an averaged model for Stochastic Weight Averaging (SWA) or Exponential Moving Average
++    (EMA) after each training step.
++
++    The user should provide either `update_on_step` or `update_on_epoch`, a function that determines when the average
++    model should be updated. If neither function is provided, the average model will be updated after every optimizer
++    step.
++
++    During validation and after the training finishes, the current model parameters will be replaced with the averaged
++    values.
++
++    Args:
++        device: If provided, the :class:`AveragedModel` will be stored on the ``device``. If ``None`` the device will be
++            inferred from the original model.
++        avg_fn: The averaging function used to update the parameters. The function must take in an
++            :class:`AveragedModel` parameter, a current model parameter, and the number of models already averaged. If
++            ``None``, an equally weighted average will be used.
++        update_on_step: A function that takes the number of optimizer steps taken, and returns ``True`` if the average
++            model should be updated.
++        update_on_epoch: A function that takes the zero-based epoch number, and returns ``True`` if the average model
++            should be updated.
++
++    """"""
++
++    def __init__(
++        self,
++        device: Optional[Union[torch.device, int]] = torch.device(""cpu""),
++        avg_fn: Optional[Callable[[Tensor, Tensor, Union[Tensor, int]], Tensor]] = None,
++        update_on_step: Optional[Callable[[int], bool]] = None,
++        update_on_epoch: Optional[Callable[[int], bool]] = None,
++    ):
++        self._device = device
++        self._avg_fn = avg_fn
++
++        if (update_on_step is None) and (update_on_epoch is None):
++            self._update_on_step: Callable[[int], bool] = _return_true
++            self._update_on_epoch: Callable[[int], bool] = _return_false
++        else:
++            self._update_on_step = _return_false if update_on_step is None else update_on_step
++            self._update_on_epoch = _return_false if update_on_epoch is None else update_on_epoch
++
++        self._average_model: Optional[AveragedModel] = None
++
++        # Number of optimizer steps taken, when the average model was last updated. Initializing this with zero ensures
++        # that the average model will be first updated after the first optimizer step, which takes place after N batches
++        # when using accumulate_grad_batches=N.
++        self._latest_update_step = 0
++        # The epoch after which the average model was last updated. The first epoch is 0, so initializing this to a
++        # negative value means that if update_on_step(0) returns True, the first update is after the first epoch.
++        self._latest_update_epoch = -1
++
++    def setup(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", stage: str) -> None:
++        """"""Called when fit, validate, test, predict, or tune begins.
++
++        Creates an :class:`AveragedModel` when fit begins.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            stage: The :class:`~lightning.pytorch.trainer.trainer.Trainer` state.
++
++        """"""
++        if stage == ""fit"":
++            device = self._device or pl_module.device
++            self._average_model = AveragedModel(model=pl_module, device=device, avg_fn=self._avg_fn, use_buffers=True)
++
++    def on_train_batch_end(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", outputs: STEP_OUTPUT, batch: Any, batch_idx: int
++    ) -> None:
++        """"""Called when a training batch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_step()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            outputs: Outputs from the training batch.
++            batch: The training batch.
++            batch_idx: Index of the training batch.
++
++        """"""
++        if self._update_on_step(trainer.global_step) and (trainer.global_step > self._latest_update_step):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_step = trainer.global_step
++
++    def on_train_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a training epoch ends.
++
++        Updates the :class:`AveragedModel` parameters, if requested by ``update_on_epoch()``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._update_on_epoch(trainer.current_epoch) and (trainer.current_epoch > self._latest_update_epoch):
++            assert self._average_model is not None
++            self._average_model.update_parameters(pl_module)
++            self._latest_update_epoch = trainer.current_epoch
++
++    def on_train_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when training ends.
++
++        Transfers parameters from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        assert self._average_model is not None
++        self._copy_average_to_current(pl_module)
++
++    def on_validation_epoch_start(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch begins.
++
++        Transfers parameter values from the :class:`AveragedModel` to the current model.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Loading the average model parameters for validation."")
++            self._swap_models(pl_module)
++
++    def on_validation_epoch_end(self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"") -> None:
++        """"""Called when a validation epoch ends.
++
++        Recovers the current model parameters from the :class:`AveragedModel`.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++
++        """"""
++        if self._average_model is not None:
++            rank_zero_info(""Recovering the current model parameters after validation."")
++            self._swap_models(pl_module)
++
++    def state_dict(self) -> dict[str, Any]:
++        """"""Called when saving a checkpoint.
++
++        Creates a ``state_dict`` of the callback state.
++
++        Returns:
++            A dictionary containing the callback state.
++
++        """"""
++        return {""latest_update_step"": self._latest_update_step}
++
++    def load_state_dict(self, state_dict: dict[str, Any]) -> None:
++        """"""Called when loading a checkpoint.
++
++        Reloads the callback state given a ``state_dict``.
++
++        Args:
++            state_dict: A dictionary containing the callback state.
++
++        """"""
++        self._latest_update_step = state_dict[""latest_update_step""]
++
++    def on_save_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when saving a checkpoint.
++
++        Moves the current model state to the key ``current_model_state``, and places the average model state in
++        ``state_dict`` instead. Any other state variables of the ``AveragedModel`` will be saved in
++        ``averaging_state``.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The checkpoint dictionary that will be saved.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to save a checkpoint, but no average model (outside fit). Don't know what to do."")
++
++        rank_zero_info(""The average model parameters will be saved to the state_dict in the checkpoint."")
++        average_model_state = self._average_model.state_dict()
++        checkpoint[""current_model_state""] = checkpoint[""state_dict""]
++        checkpoint[""state_dict""] = {
++            name[7:]: value for name, value in average_model_state.items() if name.startswith(""module."")
++        }
++        checkpoint[""averaging_state""] = {
++            name: value for name, value in average_model_state.items() if not name.startswith(""module."")
++        }
++
++    def on_load_checkpoint(
++        self, trainer: ""pl.Trainer"", pl_module: ""pl.LightningModule"", checkpoint: dict[str, Any]
++    ) -> None:
++        r""""""Called when loading a model checkpoint.
++
++        Loads the current model and the :class:`AveragedModel` parameters from the checkpoint.
++
++        Args:
++            trainer: The current :class:`~lightning.pytorch.trainer.trainer.Trainer` instance.
++            pl_module: The current :class:`~lightning.pytorch.core.LightningModule` instance.
++            checkpoint: The full checkpoint dictionary that got loaded by the Trainer.
++
++        """"""
++        if self._average_model is None:
++            raise Exception(""Trying to load a checkpoint, but no average model (outside fit). Don't know what to do."")",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1941362705,senarvi,2337787,2025-02-04T15:09:24+00:00,2025-02-04T15:09:24+00:00,I'll try to still improve the test.,True,tests/tests_pytorch/callbacks/test_weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++import os
++from pathlib import Path
++from typing import Any, Optional
++
++import pytest
++import torch
++from torch import Tensor, nn
++from torch.optim.swa_utils import get_swa_avg_fn
++from torch.utils.data import DataLoader
++
++from lightning.pytorch import LightningModule, Trainer
++from lightning.pytorch.callbacks import WeightAveraging
++from lightning.pytorch.demos.boring_classes import BoringModel, RandomDataset, RandomIterableDataset
++from tests_pytorch.helpers.runif import RunIf
++
++
++class WeightAveragingTestModel(BoringModel):
++    def __init__(
++        self, batch_norm: bool = True, iterable_dataset: bool = False, crash_on_epoch: Optional[int] = None
++    ) -> None:
++        super().__init__()
++        layers = [nn.Linear(32, 32)]
++        if batch_norm:
++            layers.append(nn.BatchNorm1d(32))
++        layers += [nn.ReLU(), nn.Linear(32, 2)]
++        self.layer = nn.Sequential(*layers)
++        self.iterable_dataset = iterable_dataset
++        self.crash_on_epoch = crash_on_epoch
++
++    def training_step(self, batch: Tensor, batch_idx: int) -> None:
++        if self.crash_on_epoch and self.trainer.current_epoch >= self.crash_on_epoch:
++            raise Exception(""CRASH TEST"")
++        return super().training_step(batch, batch_idx)
++
++    def train_dataloader(self) -> None:
++        dataset_class = RandomIterableDataset if self.iterable_dataset else RandomDataset
++        return DataLoader(dataset_class(32, 32), batch_size=4)
++
++    def configure_optimizers(self) -> None:
++        return torch.optim.SGD(self.layer.parameters(), lr=0.1)
++
++
++class EMAAveragingFunction:
++    """"""EMA averaging function.
++
++    Functionally equivalent to the closure that ``get_ema_avg_fn()`` would return. This class is needed because we
++    cannot use a closure with ddp_spawn. (``Popen(process_obj)`` would fail with
++    ``Can't get local object 'get_ema_avg_fn.<locals>.ema_update'``).
++
++    """"""
++
++    def __init__(self, decay: float = 0.999) -> None:
++        self.decay = decay
++
++    @torch.no_grad()
++    def __call__(self, ema_param: Tensor, current_param: Tensor, num_averaged: Tensor) -> Tensor:
++        return self.decay * ema_param + (1 - self.decay) * current_param
++
++
++class EMATestCallback(WeightAveraging):
++    def __init__(self, devices: int = 1, **kwargs: Any) -> None:
++        super().__init__(avg_fn=EMAAveragingFunction(), **kwargs)
++        self.devices = devices
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        assert self._average_model.n_averaged == trainer.global_step
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        # length=32, batch_size=4, accumulate_grad_batches=2
++        # => Using one process we have 4 optimizer steps per epoch.
++        # => Using two processes we have 2 optimizer steps per epoch.
++        steps_per_epoch = 4 // self.devices
++        assert self._average_model.n_averaged == trainer.max_epochs * steps_per_epoch
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++class SWATestCallback(WeightAveraging):
++    def __init__(self, **kwargs: Any) -> None:
++        avg_fn = get_swa_avg_fn()
++        update_on_epoch = lambda x: x in (3, 5, 7)
++        super().__init__(avg_fn=avg_fn, update_on_epoch=update_on_epoch, **kwargs)
++
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        if trainer.current_epoch < 3:
++            assert self._average_model.n_averaged == 0
++        elif trainer.current_epoch < 5:
++            assert self._average_model.n_averaged == 1
++        elif trainer.current_epoch < 7:
++            assert self._average_model.n_averaged == 2
++        else:
++            assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++def test_weight_averaging_deepcopy(tmp_path):
++    """"""Ensure that WeightAveraging callback doesn't deepcopy the data loaders or the data module and consume memory
++    more than necessary.""""""
++
++    class TestCallback(WeightAveraging):
++        def __init__(self, *args, **kwargs):
++            super().__init__(*args, **kwargs)
++            self.setup_called = False
++
++        def setup(self, trainer, pl_module, stage) -> None:
++            super().setup(trainer, pl_module, stage)
++            assert self._average_model.module.train_dataloader is not pl_module.train_dataloader
++            assert self._average_model.module.train_dataloader.__self__ == self._average_model.module
++            assert self._average_model.module._trainer is None
++            self.setup_called = True
++
++    callback = TestCallback()
++    trainer = Trainer(default_root_dir=tmp_path, callbacks=callback, fast_dev_run=True)
++    trainer.fit(BoringModel(), train_dataloaders=DataLoader(RandomDataset(32, 2)))
++    assert callback.setup_called
++
++
++@pytest.mark.parametrize(""batch_norm"", [True, False])
++@pytest.mark.parametrize(""iterable_dataset"", [True, False])
++def test_ema(tmp_path, batch_norm: bool, iterable_dataset: bool):
++    _train(tmp_path, EMATestCallback(), batch_norm=batch_norm, iterable_dataset=iterable_dataset)
++
++
++@pytest.mark.parametrize(
++    ""accelerator"", [pytest.param(""gpu"", marks=RunIf(min_cuda_gpus=1)), pytest.param(""mps"", marks=RunIf(mps=True))]
++)
++def test_ema_accelerator(tmp_path, accelerator):
++    _train(tmp_path, EMATestCallback(), accelerator=accelerator, devices=1)
++
++
++@RunIf(min_cuda_gpus=2, standalone=True)
++def test_ema_ddp(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(min_cuda_gpus=2)
++def test_ema_ddp_spawn(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(skip_windows=True)
++def test_ema_ddp_spawn_cpu(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""cpu"", devices=2)
++
++
++@pytest.mark.parametrize(""crash_on_epoch"", [1, 3])
++def test_ema_resume(tmp_path, crash_on_epoch):
++    _train_and_resume(tmp_path, crash_on_epoch=crash_on_epoch)
++
++
++@RunIf(skip_windows=True)
++def test_ema_resume_ddp(tmp_path):
++    _train_and_resume(tmp_path, crash_on_epoch=3, use_ddp=True)
++
++
++def test_swa(tmp_path):
++    _train(tmp_path, SWATestCallback())
++
++
++def _train(
++    tmp_path: str,
++    callback: WeightAveraging,
++    batch_norm: bool = True,
++    strategy: str = ""auto"",
++    accelerator: str = ""cpu"",
++    devices: int = 1,
++    iterable_dataset: bool = False,
++    checkpoint_path: Optional[str] = None,
++    crash_on_epoch: Optional[int] = None,
++) -> None:
++    trainer = Trainer(
++        default_root_dir=tmp_path,
++        enable_progress_bar=False,
++        enable_model_summary=False,
++        logger=False,
++        max_epochs=8,
++        num_sanity_val_steps=0,
++        callbacks=callback,
++        accumulate_grad_batches=2,
++        strategy=strategy,
++        accelerator=accelerator,
++        devices=devices,
++    )
++    model = WeightAveragingTestModel(
++        batch_norm=batch_norm, iterable_dataset=iterable_dataset, crash_on_epoch=crash_on_epoch
++    )
++
++    if crash_on_epoch is None:
++        trainer.fit(model, ckpt_path=checkpoint_path)
++    else:
++        with pytest.raises(Exception, match=""CRASH TEST""):
++            trainer.fit(model, ckpt_path=checkpoint_path)
++
++    assert trainer.lightning_module == model
++
++
++def _train_and_resume(tmp_path: str, crash_on_epoch: int, use_ddp: bool = False) -> None:",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2276616729,1947854755,senarvi,2337787,2025-02-08T15:54:58+00:00,2025-02-08T15:54:58+00:00,"@lantiga now I test that after stopping and resuming we get the same final model. The parameters are not identical - I have to use `atol=0.001` - but they are close enough so that I think that the difference comes from some random change instead of a bug in restoring the checkpoint. I don't know what could cause the difference, though. I pass `deterministic=True` to Trainer. I'm curious if you have some ideas, or if you think that that's close enough.",True,tests/tests_pytorch/callbacks/test_weight_averaging.py,,"@@ -0,0 +1,288 @@
++# Copyright The Lightning AI team.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++import os
++from pathlib import Path
++from typing import Any, Optional
++
++import pytest
++import torch
++from torch import Tensor, nn
++from torch.optim.swa_utils import get_swa_avg_fn
++from torch.utils.data import DataLoader
++
++from lightning.pytorch import LightningModule, Trainer
++from lightning.pytorch.callbacks import WeightAveraging
++from lightning.pytorch.demos.boring_classes import BoringModel, RandomDataset, RandomIterableDataset
++from tests_pytorch.helpers.runif import RunIf
++
++
++class WeightAveragingTestModel(BoringModel):
++    def __init__(
++        self, batch_norm: bool = True, iterable_dataset: bool = False, crash_on_epoch: Optional[int] = None
++    ) -> None:
++        super().__init__()
++        layers = [nn.Linear(32, 32)]
++        if batch_norm:
++            layers.append(nn.BatchNorm1d(32))
++        layers += [nn.ReLU(), nn.Linear(32, 2)]
++        self.layer = nn.Sequential(*layers)
++        self.iterable_dataset = iterable_dataset
++        self.crash_on_epoch = crash_on_epoch
++
++    def training_step(self, batch: Tensor, batch_idx: int) -> None:
++        if self.crash_on_epoch and self.trainer.current_epoch >= self.crash_on_epoch:
++            raise Exception(""CRASH TEST"")
++        return super().training_step(batch, batch_idx)
++
++    def train_dataloader(self) -> None:
++        dataset_class = RandomIterableDataset if self.iterable_dataset else RandomDataset
++        return DataLoader(dataset_class(32, 32), batch_size=4)
++
++    def configure_optimizers(self) -> None:
++        return torch.optim.SGD(self.layer.parameters(), lr=0.1)
++
++
++class EMAAveragingFunction:
++    """"""EMA averaging function.
++
++    Functionally equivalent to the closure that ``get_ema_avg_fn()`` would return. This class is needed because we
++    cannot use a closure with ddp_spawn. (``Popen(process_obj)`` would fail with
++    ``Can't get local object 'get_ema_avg_fn.<locals>.ema_update'``).
++
++    """"""
++
++    def __init__(self, decay: float = 0.999) -> None:
++        self.decay = decay
++
++    @torch.no_grad()
++    def __call__(self, ema_param: Tensor, current_param: Tensor, num_averaged: Tensor) -> Tensor:
++        return self.decay * ema_param + (1 - self.decay) * current_param
++
++
++class EMATestCallback(WeightAveraging):
++    def __init__(self, devices: int = 1, **kwargs: Any) -> None:
++        super().__init__(avg_fn=EMAAveragingFunction(), **kwargs)
++        self.devices = devices
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        assert self._average_model.n_averaged == trainer.global_step
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        # length=32, batch_size=4, accumulate_grad_batches=2
++        # => Using one process we have 4 optimizer steps per epoch.
++        # => Using two processes we have 2 optimizer steps per epoch.
++        steps_per_epoch = 4 // self.devices
++        assert self._average_model.n_averaged == trainer.max_epochs * steps_per_epoch
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++class SWATestCallback(WeightAveraging):
++    def __init__(self, **kwargs: Any) -> None:
++        avg_fn = get_swa_avg_fn()
++        update_on_epoch = lambda x: x in (3, 5, 7)
++        super().__init__(avg_fn=avg_fn, update_on_epoch=update_on_epoch, **kwargs)
++
++        self.swap_calls = 0
++        self.copy_calls = 0
++        # Record the first epoch, as if we are resuming from a checkpoint this may not be equal to 0.
++        self.first_epoch: Optional[int] = None
++
++    def _swap_models(self, *args: Any, **kwargs: Any):
++        self.swap_calls += 1
++        return super()._swap_models(*args, **kwargs)
++
++    def _copy_average_to_current(self, *args: Any, **kwargs: Any):
++        self.copy_calls += 1
++        return super()._copy_average_to_current(*args, **kwargs)
++
++    def on_train_start(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_start(trainer, pl_module)
++        assert self.swap_calls == 0
++        assert self.copy_calls == 0
++
++    def on_train_epoch_start(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_start(trainer, *args)
++        # Since the checkpoint loaded was saved `on_train_epoch_end`, the first `FitLoop` iteration will not update the
++        # model and will just call the epoch-level hooks. For that reason, we check that we are not restarting before
++        # choosing the first epoch.
++        if self.first_epoch is None and not trainer.fit_loop.restarting:
++            self.first_epoch = trainer.current_epoch
++
++    def on_train_epoch_end(self, trainer: Trainer, *args: Any) -> None:
++        super().on_train_epoch_end(trainer, *args)
++        if trainer.current_epoch < 3:
++            assert self._average_model.n_averaged == 0
++        elif trainer.current_epoch < 5:
++            assert self._average_model.n_averaged == 1
++        elif trainer.current_epoch < 7:
++            assert self._average_model.n_averaged == 2
++        else:
++            assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.current_epoch + 1 - self.first_epoch) * 2
++        assert self.copy_calls == 0
++
++    def on_train_end(self, trainer: Trainer, pl_module: LightningModule) -> None:
++        super().on_train_end(trainer, pl_module)
++        assert self._average_model.n_averaged == 3
++        assert self.swap_calls == (trainer.max_epochs - self.first_epoch) * 2
++        assert self.copy_calls == 1
++
++
++def test_weight_averaging_deepcopy(tmp_path):
++    """"""Ensure that WeightAveraging callback doesn't deepcopy the data loaders or the data module and consume memory
++    more than necessary.""""""
++
++    class TestCallback(WeightAveraging):
++        def __init__(self, *args, **kwargs):
++            super().__init__(*args, **kwargs)
++            self.setup_called = False
++
++        def setup(self, trainer, pl_module, stage) -> None:
++            super().setup(trainer, pl_module, stage)
++            assert self._average_model.module.train_dataloader is not pl_module.train_dataloader
++            assert self._average_model.module.train_dataloader.__self__ == self._average_model.module
++            assert self._average_model.module._trainer is None
++            self.setup_called = True
++
++    callback = TestCallback()
++    trainer = Trainer(default_root_dir=tmp_path, callbacks=callback, fast_dev_run=True)
++    trainer.fit(BoringModel(), train_dataloaders=DataLoader(RandomDataset(32, 2)))
++    assert callback.setup_called
++
++
++@pytest.mark.parametrize(""batch_norm"", [True, False])
++@pytest.mark.parametrize(""iterable_dataset"", [True, False])
++def test_ema(tmp_path, batch_norm: bool, iterable_dataset: bool):
++    _train(tmp_path, EMATestCallback(), batch_norm=batch_norm, iterable_dataset=iterable_dataset)
++
++
++@pytest.mark.parametrize(
++    ""accelerator"", [pytest.param(""gpu"", marks=RunIf(min_cuda_gpus=1)), pytest.param(""mps"", marks=RunIf(mps=True))]
++)
++def test_ema_accelerator(tmp_path, accelerator):
++    _train(tmp_path, EMATestCallback(), accelerator=accelerator, devices=1)
++
++
++@RunIf(min_cuda_gpus=2, standalone=True)
++def test_ema_ddp(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(min_cuda_gpus=2)
++def test_ema_ddp_spawn(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""gpu"", devices=2)
++
++
++@RunIf(skip_windows=True)
++def test_ema_ddp_spawn_cpu(tmp_path):
++    _train(tmp_path, EMATestCallback(devices=2), strategy=""ddp_spawn"", accelerator=""cpu"", devices=2)
++
++
++@pytest.mark.parametrize(""crash_on_epoch"", [1, 3])
++def test_ema_resume(tmp_path, crash_on_epoch):
++    _train_and_resume(tmp_path, crash_on_epoch=crash_on_epoch)
++
++
++@RunIf(skip_windows=True)
++def test_ema_resume_ddp(tmp_path):
++    _train_and_resume(tmp_path, crash_on_epoch=3, use_ddp=True)
++
++
++def test_swa(tmp_path):
++    _train(tmp_path, SWATestCallback())
++
++
++def _train(
++    tmp_path: str,
++    callback: WeightAveraging,
++    batch_norm: bool = True,
++    strategy: str = ""auto"",
++    accelerator: str = ""cpu"",
++    devices: int = 1,
++    iterable_dataset: bool = False,
++    checkpoint_path: Optional[str] = None,
++    crash_on_epoch: Optional[int] = None,
++) -> None:
++    trainer = Trainer(
++        default_root_dir=tmp_path,
++        enable_progress_bar=False,
++        enable_model_summary=False,
++        logger=False,
++        max_epochs=8,
++        num_sanity_val_steps=0,
++        callbacks=callback,
++        accumulate_grad_batches=2,
++        strategy=strategy,
++        accelerator=accelerator,
++        devices=devices,
++    )
++    model = WeightAveragingTestModel(
++        batch_norm=batch_norm, iterable_dataset=iterable_dataset, crash_on_epoch=crash_on_epoch
++    )
++
++    if crash_on_epoch is None:
++        trainer.fit(model, ckpt_path=checkpoint_path)
++    else:
++        with pytest.raises(Exception, match=""CRASH TEST""):
++            trainer.fit(model, ckpt_path=checkpoint_path)
++
++    assert trainer.lightning_module == model
++
++
++def _train_and_resume(tmp_path: str, crash_on_epoch: int, use_ddp: bool = False) -> None:",0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1913880031,lantiga,191033,2025-01-13T22:24:19+00:00,2025-01-13T22:31:06+00:00,"```suggestion
+    import lightning as L
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1913880182,lantiga,191033,2025-01-13T22:24:30+00:00,2025-01-13T22:31:06+00:00,"```suggestion
+    trainer = L.Trainer(logger=mlf_logger)
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1913880312,lantiga,191033,2025-01-13T22:24:39+00:00,2025-01-13T22:31:06+00:00,"```suggestion
+    class LitModel(L.LightningModule):
+```",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1913881482,lantiga,191033,2025-01-13T22:26:03+00:00,2025-01-13T22:31:06+00:00,"I would simplify the name of the argument to be `checkpoint_path_prefix`. The extra `artifact` doesn't add much imo and simpler is better, wdyt?",False,,,,0,0,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1914384591,benglewis,3817460,2025-01-14T07:52:16+00:00,2025-01-14T09:16:08+00:00,"Personally, I thought that `artifact` was indicating that it was the path on MLflow... but given that the context is the `MLFlowLogger`, I guess that it doesn't actually add anything. I will change it",False,,,,1,1,0,0,0,0,0
+Lightning-AI/pytorch-lightning,2265938780,1946645811,joncarter1,42900403,2025-02-07T14:46:30+00:00,2025-02-07T14:46:30+00:00,"@benglewis doc and example are stale but otherwise looks great, thanks for fixing this!
+
+I'd just complained on the original PR (https://github.com/Lightning-AI/pytorch-lightning/pull/20325#issuecomment-2637363515) that caused this as it silently broke my code innocuously too!",False,,,,0,0,0,0,0,0,0

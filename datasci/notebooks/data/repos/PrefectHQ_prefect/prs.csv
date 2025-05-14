@@ -1,0 +1,489 @@
+repo_full_name,pr_id,number,title,body,user_login,user_id,state,draft,created_at,updated_at,closed_at,merged_at,merge_commit_sha,mergeable_state,additions,deletions,changed_files,commits_count,review_comments_count,comments_count,requested_reviewers,requested_teams,labels
+PrefectHQ/prefect,198489188,31,Add circleci config,,jlowin,153965,closed,False,2018-06-30T18:42:35+00:00,2018-06-30T18:51:52+00:00,2018-06-30T18:51:26+00:00,2018-06-30T18:51:26+00:00,5350a86c771098a8010f1ab321239a1da617ecdd,dirty,14,0,1,1,0,1,,,
+PrefectHQ/prefect,198490179,32,Add formatting check in CI as well as fix invalid syntax,,jlowin,153965,closed,False,2018-06-30T19:07:44+00:00,2018-06-30T19:39:45+00:00,2018-06-30T19:32:10+00:00,2018-06-30T19:32:10+00:00,1a6bc1c78c0ae312dfaaa8087ae16ec3c577eff6,dirty,31,3,2,5,0,1,,,
+PrefectHQ/prefect,198491867,33,Miscellaneous cleanup related to GitHub move,,jlowin,153965,closed,False,2018-06-30T19:56:59+00:00,2018-06-30T20:03:06+00:00,2018-06-30T19:59:39+00:00,2018-06-30T19:59:39+00:00,e8bf6a56f8fd741d4de36498b93fdcf1599d0897,dirty,5,24,3,4,0,0,,,
+PrefectHQ/prefect,198535575,34,Remove gitlabci config,,jlowin,153965,closed,False,2018-07-01T18:07:52+00:00,2018-07-01T18:08:57+00:00,2018-07-01T18:08:55+00:00,2018-07-01T18:08:55+00:00,57f09b25b404315c2d3a930b5d05c3e7ce00e5fa,dirty,0,23,1,1,0,0,,,
+PrefectHQ/prefect,198535920,35,pre_commit is no longer required,,jlowin,153965,closed,False,2018-07-01T18:16:26+00:00,2018-07-01T23:00:00+00:00,2018-07-01T22:59:56+00:00,2018-07-01T22:59:56+00:00,7669dc1257d927a31d56bc339da68be0a2812583,dirty,0,1,1,1,0,0,,,
+PrefectHQ/prefect,198547281,36,Add unit test to check that prefect version is updated in both places it appears,"Prefect's version is defined as a string in setup.py and also as `prefect.__version__`. In order to avoid a situation in which one would be updated but the other isn't, we add a unit test to make sure they're the same.",jlowin,153965,closed,False,2018-07-01T22:55:17+00:00,2018-07-03T13:39:02+00:00,2018-07-03T13:38:55+00:00,2018-07-03T13:38:55+00:00,6df314c44622eb1fca386692a116d8b6726769b3,dirty,17,0,1,1,0,0,,,
+PrefectHQ/prefect,198713487,37,Updated README to correct repo URL and removed precommit comments,Was set to _prefect_ however we do not have that name yet.,joshmeek,40716964,closed,False,2018-07-02T15:24:36+00:00,2018-07-02T18:43:35+00:00,2018-07-02T18:43:17+00:00,2018-07-02T18:43:17+00:00,70db9f24fe85c762539d18ce21ff3608616603e1,dirty,2,14,1,3,0,0,,,
+PrefectHQ/prefect,198968351,40,Change to semantic versioning,,joshmeek,40716964,closed,False,2018-07-03T13:44:37+00:00,2018-07-03T13:49:11+00:00,2018-07-03T13:46:30+00:00,,b5bae0688bc226e565acc253bcec72c7a9b31d36,dirty,1,1,1,2,0,1,jlowin,,
+PrefectHQ/prefect,198968859,41,#38: Changed prefect versioning to follow semantic versioning style ,"e.g. instead of 0.2, we switched to 0.2.0",joshmeek,40716964,closed,False,2018-07-03T13:46:05+00:00,2018-07-03T13:50:48+00:00,2018-07-03T13:49:48+00:00,2018-07-03T13:49:48+00:00,044f96a94c056e64ed1e5f66659009dd09c4905b,dirty,2,2,2,1,0,0,,,enhancement
+PrefectHQ/prefect,199097267,47,Update task/group with better defaults and fix contexts,Closes #46 ,jlowin,153965,closed,False,2018-07-03T22:22:19+00:00,2018-07-04T03:22:21+00:00,2018-07-03T22:23:43+00:00,2018-07-03T22:23:43+00:00,85359a5cdfc8254904f34f2fdc80a14215de1e9a,dirty,69,21,4,1,0,0,,,
+PrefectHQ/prefect,200256454,49,Rename PrefectContext to Context,"The `Context` is a very useful object, and I'm using it to solve some issues in other libraries. Propose renaming the class a more general `Context` instead of `PrefectContext`.",jlowin,153965,closed,False,2018-07-10T00:53:48+00:00,2018-07-10T00:59:23+00:00,2018-07-10T00:58:35+00:00,2018-07-10T00:58:35+00:00,cf3c26411b5bfca25ebe517d76301509eae23235,dirty,4,6,1,2,0,1,,,
+PrefectHQ/prefect,200451819,51,Run unit tests in python 3.4-3.7,"Currently we are only testing on 3.4 (the minimum we support). @joshmeek found an unusual regression in a library that only caused an error in 3.7 but not 3.6, so I think it is worthwhile to test under all versions -- as long as it's not too onerous.",jlowin,153965,closed,False,2018-07-10T16:18:23+00:00,2018-07-14T22:11:27+00:00,2018-07-14T22:11:24+00:00,2018-07-14T22:11:24+00:00,b10cb8660e5a2c27fa51c1dbee8346317bb4cca1,dirty,55,18,1,1,0,4,,,
+PrefectHQ/prefect,200454815,52,Remove error that prevents reassigning json codecs,"This error is raised if a user tries to register a `JSONCodec` with a key already registered to another `JSONCodec`. It ends up being more frustrating than helpful, as it is raised any time Prefect is reloaded (common during dev)",jlowin,153965,closed,False,2018-07-10T16:29:07+00:00,2018-07-17T02:37:44+00:00,2018-07-17T02:37:41+00:00,2018-07-17T02:37:41+00:00,94eca451c144cf44cfa3e822824de513ad41230f,dirty,41,29,2,1,0,3,,,
+PrefectHQ/prefect,200733135,53,Fix bug in to_dotdict,"`to_dotdict` didn't actually transform `dicts` into `DotDicts`; it only transformed their values. Fixed bug and added unit test.
+
+For example:
+
+```python
+d = {'hi': 5}
+assert isinstance(to_dotdict(d), DotDict) # this failed  :face_palm:
+```",jlowin,153965,closed,False,2018-07-11T15:06:43+00:00,2018-07-11T20:36:31+00:00,2018-07-11T19:48:10+00:00,2018-07-11T19:48:10+00:00,e072733c86a2aff21204d56903a41e62bee961da,dirty,10,4,2,3,0,0,,,
+PrefectHQ/prefect,201134483,54,Minor fixes for ci,,jlowin,153965,closed,False,2018-07-12T21:44:46+00:00,2018-07-12T21:45:59+00:00,2018-07-12T21:45:57+00:00,2018-07-12T21:45:57+00:00,7753ec3e463357f35af270b1e2abd6b62a1e489d,dirty,1,3,2,2,0,0,,,
+PrefectHQ/prefect,201470827,55,Add Chris to CODEOWNERS,,jlowin,153965,closed,False,2018-07-14T21:58:28+00:00,2018-07-14T22:01:05+00:00,2018-07-14T22:01:00+00:00,2018-07-14T22:01:00+00:00,9e341af0224378a747d0223feea10e95a1d5216b,dirty,1,1,1,1,0,0,,,
+PrefectHQ/prefect,202066881,59,State refactor,"Closes #45, #30, #44
+
+Something about how `State` objects are passed around / manipulated feels unsatisfying to me.  For example, in our current setup, when the `State` for a given `Task` is propagated through the code, we almost always ignore the `.data` attribute when the `State` changes type (e.g., `Pending -> Retrying`).  This might prevent us from accruing information (for example, with every subsequent retry we might want to document / log why it couldn't run).  I don't have a constructive suggestion yet for how to change this, but I wanted to throw it out there for discussion.",cicdw,13255838,closed,False,2018-07-17T20:54:53+00:00,2018-07-18T15:06:31+00:00,2018-07-18T15:06:27+00:00,2018-07-18T15:06:26+00:00,4cc8be40b342fbef234f1dd78e10181ac0f673a5,dirty,225,274,10,13,4,1,,,
+PrefectHQ/prefect,202124728,60,Greatly simplify Configuration object,"Configuration was a large object inspired by some work I was doing on Airflow at the time. This refactors it to use our new `DotDict` class (only modifying the `repr()`) and removes many magic and unused functions it had, like auto-generating encryption keys.
+
+The majority of the rest of the changes are adding comments / simplifying code, and unit tests",jlowin,153965,closed,False,2018-07-18T02:51:07+00:00,2018-07-18T19:20:37+00:00,2018-07-18T19:20:33+00:00,2018-07-18T19:20:33+00:00,84779279ba6e61fbe48e55a78f3b6725f5800321,dirty,146,223,8,8,7,0,,,
+PrefectHQ/prefect,202336385,62,Errors can now bubble up!,"Closes #29 
+
+Tagging @joshmeek as a reviewer too just out of curiosity.",cicdw,13255838,closed,False,2018-07-18T18:10:07+00:00,2018-07-18T18:53:06+00:00,2018-07-18T18:53:02+00:00,2018-07-18T18:53:02+00:00,2fc035f969a8345c59fdfee632d50a75704306df,dirty,111,6,4,5,3,1,joshmeek,,
+PrefectHQ/prefect,202362381,63,Fix Manifest.in to point at correct config file,,jlowin,153965,closed,False,2018-07-18T19:56:11+00:00,2018-07-18T20:11:19+00:00,2018-07-18T20:11:15+00:00,2018-07-18T20:11:15+00:00,8c3d96ceb5ef3f75a3484baf1a18fed895fdde99,dirty,1,1,1,1,0,0,,,
+PrefectHQ/prefect,202390101,65,Fix bug with merging configuration files,"There is a function in `collections.py` that merges two dictionaries, and is used to load a user configuration into an existing default configuration.
+
+The basic logic is that it iterates over each key of the user config, and if that key has a non-dict value, it updates that key in the default config with the user value. However, if the key is a dict, then it recurses into that dict and performs a nested merge. The idea is that this allows merging of nested dictionaries without forcing the user dict to have every key in the default dict.
+
+However, the merge function only recursed if `isinstance(config, dict)` was True... and `Configs` are not, in fact, `dicts`. This resulted in very bad merges whenever a user config was present that was at all different from the default config, since the merge function wouldn't treat the `config` as a `dict` and do a nested merge. 
+
+This PR adjusts the merge function to test for `isinstance(config, MutableMapping)`, adds merge unit tests, and also adds a unit test to make sure user configs are loaded appropriately.",jlowin,153965,closed,False,2018-07-18T21:49:16+00:00,2018-07-19T01:50:38+00:00,2018-07-18T22:01:43+00:00,2018-07-18T22:01:43+00:00,726868ec02cb12040410043b241153994d4def93,dirty,83,20,4,4,0,1,,,
+PrefectHQ/prefect,202438962,67,"Raise TriggerFail from triggers and add a ""message"" attribute to all states","Following up on #59, this PR does two major things:
+1. Converts triggers to raise a new `TRIGGERFAIL` signal that, in turn, sets a `TriggerFail` state, which closes #61. 
+
+2. Trapping this error highlighted the importance of being able to pass an optional `message` with each state, *in addition* to its data attribute, that helps explain how and why it came to be. So state now takes two (optional) arguments: `data` and `message`. 
+
+In addition, it adds a bunch of tests for states",jlowin,153965,closed,False,2018-07-19T03:57:36+00:00,2018-07-19T16:28:14+00:00,2018-07-19T16:28:10+00:00,2018-07-19T16:28:10+00:00,47fcefbf6f18ca0c567dfe74348dfd296cb280d0,dirty,251,148,10,17,5,1,,,
+PrefectHQ/prefect,202624859,68,Default versioneer install,"If accepted, closes #42 
+
+Tagged as [WIP] for discussion (**cc**: @jlowin @joshmeek).
+
+This PR includes a standard `versioneer` install; if you work off this branch, you should see the following behavior (with an editable install of `prefect`):
+```python
+In [1]: import prefect
+
+In [2]: prefect.__version__
+Out[2]: '0+untagged.735.g5aa992b'
+```
+
+Once we tag what we consider version `0.2`, it would look something like `0.2.735.g5aa992b`.
+
+If you work off this branch, and make _any_ edit (e.g., `rm MANIFEST.in`), you will now see:
+```python
+In [1]: import prefect
+
+In [2]: prefect.__version__
+Out[2]: '0+untagged.735.g5aa992b.dirty'
+```
+
+Additionally, if a customer were to install this from pypi / conda / where-ever, the version would be clean, like `0.2.0`.
+
+I personally like this fine-grained version tracking for when we are managing flows running on possible multiple versions / testing flows on unreleased versions between each other but wanted to open this for feedback.",cicdw,13255838,closed,False,2018-07-19T17:01:25+00:00,2018-07-20T20:32:04+00:00,2018-07-20T20:31:59+00:00,,cc68aefb7da6ec3be6172b3e8f4ffcecfa7d62ec,dirty,2488,44,59,12,2,5,,,
+PrefectHQ/prefect,202677868,69,WIP Executor/State refactor,"This PR refactors the interplay of Executors and Runners to minimize their dependencies. 
+
+One of the difficulties is that whenever a `Runner` class updates state, we want to make sure that gets communicated to an executor. In the current code, the `TaskRunner.run()` and `FlowRunner.run()` methods both manipulate state, and so require access to an `Executor` object that they explicitly call `set_state()` on. This is confusing.
+
+## Contributions of this PR
+
+### Executors
+The `Executor` classes are now thin clients that exist purely to facilitate the running of arbitrary functions in different execution environments. 
+
+For example, the default `Executor` is the `LocalExecutor` which runs functions synchronously in the local client. With some work, we could support `ThreadExecutors` and `ProcessExecutors`, and we have a `DaskExecutor` waiting in the wings.
+
+Previously, `Executor.run_flow()` and `Executor.run_task()` were the main entry points for running those classes, which was confusing. Now, Executors are simple objects that can be passed around to interface with the appropriate environment. Users may not need to deal with them at all.
+
+Moreover, `Executors` used to play a role in getting/setting state, which is no longer the case. They are now purely for function execution.
+
+### Runners
+
+The `TaskRunner` and `FlowRunner` have been refactored from one large `run()` function to a few smaller `get_X_state()` functions.
+
+However, most importantly, `TaskRunner.run()` and `FlowRunner.run()` are the main entry points for any operation that involves running Tasks/Flows. No more confusion between Runners and Executors - always use a Runner, and just pass it a different Executor if you need to operate in a different environment.
+
+Each `get_X_state()` function (for example, `get_pre_run_state()`, `get_run_state()`, `get_post_run_state()`) accepts the current `State` of the run and returns a new `State` that the run should transition to. It may also raise a `DONTRUN` signal, in which case the runner aborts the current operation and returns the most recently seen state.
+
+In addition, runners have a `handle_signals` decorator that helps them trap and react to Prefect signals that could be raised by any function. The signals are transformed into appropriate State classes (except for `DONTRUN`, which is allowed to bubble up to the runner). 
+
+### Signals
+
+Prefect `Signals` have been moved to the engine directory and are now explicitly used to indicate that the run should transition to a new state (they automatically create `State` objects now)
+
+### Unit tests
+71 new ones 😄 , mostly testing the broken-out functionality of the `get_X_state()` functions. Some of them are repetitive with the functions that test the `Runner.run()` methods, but allow more nuanced tests.",jlowin,153965,closed,False,2018-07-19T20:42:00+00:00,2018-07-23T23:10:11+00:00,2018-07-23T23:10:09+00:00,2018-07-23T23:10:09+00:00,70452b3bb331d6530c6e29831cdf95d8d2d34e79,dirty,990,531,30,25,5,5,,,
+PrefectHQ/prefect,203398816,70,Versioneer + src/,Pushes `prefect/` -> `src/` and adds `versioneer`.  Closes #42 and addresses pieces of #64 ,cicdw,13255838,closed,False,2018-07-24T03:17:48+00:00,2018-07-24T06:34:17+00:00,2018-07-24T06:34:14+00:00,2018-07-24T06:34:14+00:00,603fb88fa00086a3a9e4b1713b9012e67535d99d,dirty,2467,7,57,2,0,0,,,
+PrefectHQ/prefect,203627076,71,Docker Container Environment WIP,"Initial PR to discuss/evaluate method of container creation. The method taken here is to create a Dockerfile that is to be used to create a container. As per a discussion with @jlowin we are currently taking the route of requiring users who create an environment to choose a base image which would work with python3.6/pip
+
+Also in this PR: minimal unit tests",joshmeek,40716964,closed,False,2018-07-24T19:14:04+00:00,2018-07-26T15:08:03+00:00,2018-07-25T17:15:20+00:00,2018-07-25T17:15:20+00:00,c9f410cc5ae2f172aa338d10f00eb106ab175118,dirty,262,9,6,24,7,0,,,enhancement
+PrefectHQ/prefect,203952449,72,[WIP] Markdown Documentation,"This PR is a first pass at autogenerating markdown documentation from docstrings; I wanted to open it up to start getting feedback on what's good / not good.  Keep in mind this currently generates _raw_ markdown; we will eventually apply post-processing to this with `MkDocs` or `vuepress`.
+
+Collecting questions here:
+- should `generate_docs.py` be compatible with all versions of `python` we support (currently it relies on f-strings)?
+- ~~where do we intend to host these docs?  This decision might affect the ""flavor"" of markdown we support and any tweaks we need to make so the docs look pretty.~~ because we intend to host with `vuepress`, I'm going to subjectively ""optimize"" the look of the markdown as rendered by vuepress.
+
+Currently the only way of specifying what to document is by assigning to `__all__` in a file, and then adding that file to the `OUTLINE` list in `docs/generate_docs.py` . I went this route because it encourages good practice of explicitly listing `__all__` and gives a nice endpoint for listing what should be documented / user-facing.
+
+**NOTE**: the ``[Source]`` links point to code on `master`, so many of them will be a few lines displaced from where they should be.
+
+There are still some kinks to work out:
+- [x] aliased functions (such as those in `triggers.py`) are hard to handle
+- [x] some markdown renderers interpret deep indentation as code blocks
+- [x] the current implementation ignores `*args` and `**kwargs` in call signatures
+
+Closes #48 and closes #43 ",cicdw,13255838,closed,False,2018-07-25T20:23:12+00:00,2018-08-07T19:28:36+00:00,2018-08-02T20:45:35+00:00,,edf32612920c64f19afa49977bd646985ff3761f,dirty,1397,73,49,27,4,7,joshmeek,,
+PrefectHQ/prefect,204146428,73,Small updates,"Contains the following changes:
+- rename `function_task.py` -> `function.py`, which is more in line with how other modules are named
+- make the `tags` and `group` context managers importable from prefect's top-level (these are useful utilities that are purely for information and will be used in server for querying and display)
+	```python
+	from prefect import task, tags, group, Flow
+
+	@task
+	def my_task():
+        return 1
+
+    with Flow():
+		with group('a group'):
+	        with tags('ETL', 'nightly'):
+    	        t1 = my_task()
+
+	        with tags('data science', 'hourly'):
+    	        t2 = my_task()
+    ```
+- add a unit test for invalid `return_tasks` in the `FlowRunner` (it errors) - tricky situation because it may have, in fact, run correctly -- but the user asked for the wrong thing after it ran. Perhaps this behavior should change, but the unit test checks the current behavior
+- adds an example of what serializers could look like 
+- changes how `Edge` hashes are computed so that identical `Edges` share the same hash. The most common reason to create an edge (other than actually adding it to a Flow) is to check if the edge exists, and by having identical edges share hashes, it allows behavior like `edge in flow.edges`.",jlowin,153965,closed,False,2018-07-26T13:41:48+00:00,2018-07-26T15:16:34+00:00,2018-07-26T15:16:31+00:00,2018-07-26T15:16:31+00:00,adb279a16535d90c4b92f16b5b0124e7531183a9,dirty,210,18,18,9,5,6,,,
+PrefectHQ/prefect,204248440,74,Add unit test for updating contexts,"Tests that if a context is modified by a function inside a `with context():` block, the changes are reset with the context exits",jlowin,153965,closed,False,2018-07-26T19:50:30+00:00,2018-07-26T22:04:39+00:00,2018-07-26T22:04:37+00:00,2018-07-26T22:04:37+00:00,fb602ead121de90c6922cf602fbf7f6097f91bbb,dirty,26,3,1,2,0,0,,,
+PrefectHQ/prefect,204279473,76,Remove cache and add tests for sorted_tasks,"The cache had a bug in it (:sheep:) that ignored the values of any keyword arguments. Fortunately this didn't affect any functionality currently in Prefect (or tests), but it speaks to the adage of ""first make it run, then make it run fast"". This PR rips out the cache as a premature optimization. 
+
+Closes #75",jlowin,153965,closed,False,2018-07-26T22:03:36+00:00,2018-07-27T00:58:04+00:00,2018-07-27T00:58:01+00:00,2018-07-27T00:58:01+00:00,0c8c2d49abe9158471a8d128e7891045f0300c06,dirty,65,42,4,2,1,0,,,
+PrefectHQ/prefect,204491412,77,Changed flow serialization to represent server changes,,joshmeek,40716964,closed,False,2018-07-27T17:19:34+00:00,2018-07-27T19:23:29+00:00,2018-07-27T17:32:09+00:00,2018-07-27T17:32:09+00:00,39e2fb6a02d182eb9f0f7788e444c75b6a404c46,dirty,28,29,2,2,0,0,jlowin,,enhancement
+PrefectHQ/prefect,204520852,78,Input cacheing,"Addresses half of #56 w/ input cacheing.
+
+Use cases:
+- `Retrying` states
+- `manual_only` triggers
+
+Also updates `Parameter` repr.
+
+Question for @jlowin: should we just let `cached_inputs` be an attribute of the `State` class (defaulting to `None`)?  Reaching into the `data` attribute sometimes feels like unnecessary work.",cicdw,13255838,closed,False,2018-07-27T19:31:47+00:00,2018-07-30T19:45:44+00:00,2018-07-30T19:45:41+00:00,2018-07-30T19:45:41+00:00,7f113981e1942710c6137d3f5dc26cc7423c33e8,dirty,231,83,10,12,12,5,,,
+PrefectHQ/prefect,204525616,79,Remove environment.yml,"I'm proposing to remove the `environment.yml` file that I put in the repo with my first commit; I don't think it adds enough value to justify maintaining it in the repo and I don't like stale code.  If we ever need it back, it will be easy enough to do so.
+
+Closes #64 ",cicdw,13255838,closed,False,2018-07-27T19:55:31+00:00,2018-07-27T20:34:20+00:00,2018-07-27T20:34:17+00:00,2018-07-27T20:34:16+00:00,9bbd14be53187e5396f423add15bae8268b12736,dirty,0,29,1,1,0,1,,,
+PrefectHQ/prefect,204563702,80,State class refactor,"Hear me out:
+
+after the [discussion](https://github.com/PrefectHQ/prefect/pull/78#issuecomment-408547555) in #78 , I started looking at the `State` class and realized that the `data` attribute was now _only_ be used for storing ""output""-type things, i.e., `result`s.   All of the context-related ""data"" of the `State` would now be an instance attribute of the class.
+
+Here I am PR'ing the proposed name changes into the `cache-inputs` branch to be merged in prior to #78 .
+
+If accepted, there are two other things to tidy up:
+- [x] update equality testing of states + tests
+- [x] add serialization tests",cicdw,13255838,closed,False,2018-07-28T00:00:04+00:00,2018-07-30T17:56:00+00:00,2018-07-30T17:55:57+00:00,2018-07-30T17:55:57+00:00,f79410de00d96ed225b054fd3a4f6051c264e5ef,dirty,128,97,9,4,3,4,,,
+PrefectHQ/prefect,204892503,82,Dask executor,"Basic implementation of a _sequential_ `dask` executor.  **NOTE** that this implementation assumes all submitted functions are _pure_.
+
+If you swap out the default `executor` in the `flow_runner.run` method to `DaskExecutor`, you will find all tests still pass ✅ 
+
+Immediate benefits to using this executor:
+- no redundant computations performed
+- progress bars, [and many other diagnostic tools](http://dask.pydata.org/en/latest/diagnostics-local.html) all work off-the-shelf
+
+Examples:
+```python
+from prefect.engine.executors import DaskExecutor
+
+de = DaskExecutor()
+class Function:
+    def __init__(self):
+        self.call_count = 0
+    def __call__(self):
+        self.call_count += 1
+        return 1
+f = Function()
+print(f.call_count) # 0
+futures = [de.submit(f) for _ in range(10)]
+output = de.wait(futures)
+print(output) # [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+print(f.call_count) # 1
+```
+
+```python
+from prefect import *
+from prefect.engine.executors import DaskExecutor
+from time import sleep
+from dask.diagnostics import ProgressBar
+
+@task
+def e():
+    sleep(3)
+    return [1, 0, 2]
+
+@task
+def t(inputs):
+    sleep(1.5)
+    return [2 * x for x in inputs]
+
+with Flow() as f:
+    result = t(e())
+
+with ProgressBar():
+    f.run(executor=DaskExecutor())
+```",cicdw,13255838,closed,False,2018-07-30T18:35:29+00:00,2018-07-31T20:04:35+00:00,2018-07-31T20:04:33+00:00,2018-07-31T20:04:32+00:00,1078240dd9f5a7b41a8d09fe4280a2a8eff234a6,dirty,86,3,6,7,3,3,,,
+PrefectHQ/prefect,204957332,84,Output Caching,"Closes #56
+
+This PR implements a `CachedState` for tasks which have their outputs cached.  Moreover, it introduces a `cached` attribute of `Success` states in which `CachedState`s are stored.  The mechanism for deciding if a given `Task` should be cached is via the `Task.cache_validator` attribute (which defaults to `never_use`).",cicdw,13255838,closed,False,2018-07-30T23:25:52+00:00,2018-08-01T21:34:19+00:00,2018-08-01T21:34:15+00:00,2018-08-01T21:34:15+00:00,a4c6baf28cd06b2f54d8b6e02d22ccce7abb0bb3,dirty,493,18,11,19,10,0,,,
+PrefectHQ/prefect,205802157,85,Pickle Environment,,joshmeek,40716964,closed,False,2018-08-02T17:05:55+00:00,2018-08-02T18:13:50+00:00,2018-08-02T18:13:47+00:00,2018-08-02T18:13:47+00:00,6e01a34bfd960d31599990005a76497fdb7aefe9,dirty,102,12,3,3,8,0,jlowin,,
+PrefectHQ/prefect,205821247,86,DaskExecutor is default,with a few minor fixes to the `submit / wait` code in `flow_runner.py`.,cicdw,13255838,closed,False,2018-08-02T18:23:24+00:00,2018-08-02T18:29:37+00:00,2018-08-02T18:29:35+00:00,2018-08-02T18:29:35+00:00,c997f25d2839b711914ed16e6d4ed5b14f4b27cc,dirty,41,15,3,1,0,1,,,
+PrefectHQ/prefect,206207398,89,Small fixes from getting ready to do core / server handoffs,"I came across some of these while preparing to set up the ID generation / handoff from core to server, and figured they were better in their own small PR than as part of that one, since I think they're not controversial:
+
+- remove unused `config.toml` settings (clean up)
+- flows should set a default version (specified in config) rather than None. The default version is ""1"". This is a cosmetic change, but allows us to display the version in the flow's `repr()`, which drives awareness of the fact that flows can be versioned.
+- add a `project` field to flows. Like `version`, this field is purely for information inside the core library, but will be used by server to automatically build projects for flows.
+- pin all dependency versions in `setup.py`
+- stop monkey-patching the builtin `json` library. This was intended to help users with serialization, but is much more likely to create unintended and unwanted consequences. Also, it turns out that if you pass any arguments to `json.dumps()` or `json.loads()`, they don't even use the monkey-patched serializers anyway! Better to be explicit and use our prefect serializers only when required.
+- support safe json serialization of arbitrary functions with `LoadObjectCodec` by referencing their qualified names
+- fix bug with `BytesCodec` when bytes couldn't be safely decoded in `utf-8`",jlowin,153965,closed,False,2018-08-04T19:54:11+00:00,2018-08-06T01:06:05+00:00,2018-08-06T01:06:02+00:00,2018-08-06T01:06:02+00:00,57e3bf1cd153deb58fee720e5a51999e0d4b545f,dirty,132,134,10,10,0,0,,,
+PrefectHQ/prefect,206444987,90,Registry,"This introduces a standardized way for flows to be ""registered"" and for registered flows to become available to other prefect processes, including the CLI.
+
+
+- A global `REGISTRY` object tracks any flow thats opt-in (either by passing `register=True` at creation, or by calling `flow.register()`). The `REGISTRY` can be serialized at any time. A Prefect config setting can be set that tells Prefect to automatically load a serialized registry on startup (like all configs, it can be set by environment variable as well).
+- The Prefect CLI interacts with the registry, and can be used to query it for information or run registered flows. In addition to using the aforementioned config setting, the Prefect CLI has a global `--registry-path` flag that can load serialized registries on demand.
+- Prefect environments now have a standardized way of interacting with flows: they register them and serialize the registry. Users then interact with environments via CLI; the environment is responsible for making sure the prefect CLI has the appropriate registry information available.
+
+Other helpful changes in this PR:
+- All flows are assigned a random UUID on creation. Because we are dealing with serialized registries, we can assign an ID at creation and know it will remain with the flow forever. This ID will also be used by the server.
+- Flows assign random UUIDs to tasks when they are added to the flow. We can't assign the ID to the task when the task is created, because tasks can live in multiple Flows and we can't submit multiple tasks to the server with the same ID. However, we can assign a new ID to the task once it has been added to a single flow (and assign a different ID if/when it gets added to a different flow).
+- Flows can compute ""local ids"" for tasks as well. Local IDs are near-stable IDs that are computed first using information only about a Task, then with information about increasingly distant neighbors. This means that if a flow changes, there's a good chance the local ids of most tasks won't change, allowing us to track tasks across multiple versions of a flow.
+- Flow.serialize() is taking shape; this is the handoff point to server.",jlowin,153965,closed,False,2018-08-06T15:59:40+00:00,2018-08-13T18:46:38+00:00,2018-08-13T18:46:35+00:00,2018-08-13T18:46:35+00:00,1c4b32760c2724ae13fdbc4ea3777168fcf749a7,dirty,1650,619,26,29,11,1,,,
+PrefectHQ/prefect,206470445,91,Code to deploy the docs,"This includes steps to manually build/deploy docs to a private location on GAE, for testing. It doesn't include CI steps (but they could be added relatively easily).
+
+In addition, it excludes all auto-generated docs from the repo (since they will be built with every commit, in theory, and don't serve any value).
+
+Users must have permissions on a GAE project called `prefect-docs` to deploy:
+
+```bash
+cd prefect
+yarn docs:build
+yarn docs:deploy
+```",jlowin,153965,closed,False,2018-08-06T17:46:38+00:00,2018-08-06T23:26:31+00:00,2018-08-06T23:26:25+00:00,,3950e706b93ee9e7a3cdec92277debae67891d42,dirty,68,246,13,4,0,1,cicdw,,
+PrefectHQ/prefect,206498107,92,Conditional functions: ifelse and switch,"This PR adds two helper functions, `ifelse` and a more general `switch` that can be used to automate switching between branches of tasks.
+
+In implementing it, I reconsidered a current task property called `propagate_skip`, which defaulted to False. I renamed it (what I believe to be more obvious) `skip_if_upstream_skips` and defaulted it to True. The reason for inverting the behavior is that in the event that we want to automatically create a domino effect of skips, we can't hope users opt-in for every affected task; it should be the default behavior and users can opt-out if they choose. Using this feature as newly implemented, conditional branches skip every task in the branch if they are not executed.
+
+Please see tests for examples.",jlowin,153965,closed,False,2018-08-06T19:46:30+00:00,2018-08-06T21:26:57+00:00,2018-08-06T21:26:54+00:00,2018-08-06T21:26:54+00:00,4be3c8b8c292a3a9808dd49ac5d3655ae98e1137,dirty,165,31,8,5,4,0,,,
+PrefectHQ/prefect,206531602,93,Remove eager edge validation (remains possible via config),"- Removes eager edge validation (meaning checking for cycles as soon as an edge is added to the flow), but leaves it is as a kwarg to `add_edge()` or configurable via `prefect.config.flows.eager_edge_validation`
+- Improves docstrings for `conditional.py`
+- Removes unused `run_flow_runner_test` function",jlowin,153965,closed,False,2018-08-06T22:18:42+00:00,2018-08-07T00:42:41+00:00,2018-08-07T00:42:39+00:00,2018-08-07T00:42:39+00:00,ff21f5329085ce061b17247e6fe5f40b1ef1c9c9,dirty,171,212,6,5,6,3,,,
+PrefectHQ/prefect,206534568,94,Docs (the sequel),"Supersedes #91 (I had to wipe the `docs` branch and start this one)
+
+Only thing left to do is include doc building + doc deployment in CI.  I will open a number of follow-up issues for future work, including (but not limited to):
+- unit tests for auto-documentation functions + refactor so the code is less spaghetti-like
+- syntax highlighting within tables
+- writing documentation covering the rules of writing docstrings and adding to the documentation sites
+- possibly better font
+- should we fall back to parent class documentation whenever a method is overwritten but no new docstring is provided?
+- ~should we require `Args:` lists to have backticks, or should we auto-format them?~ [answer: auto-format]
+- how to handle `None` args
+
+Closes #48, closes #43, closes #9 
+
+**cc:** @joshmeek for reviewing the docstring standards (in `README.md`)",cicdw,13255838,closed,False,2018-08-06T22:36:25+00:00,2018-08-12T22:59:34+00:00,2018-08-12T22:59:29+00:00,2018-08-12T22:59:29+00:00,c36f1a2bc58e1e3b18e2a63f8a6ac1d92e045f10,dirty,790,226,21,32,23,1,,,
+PrefectHQ/prefect,206559721,95,"Allow flows to set run state from ""key_tasks""","Closes #26 
+
+Introduces a new method for flows called `set_key_tasks()`. ""Key tasks"" are tasks that determine the state of the flow when it runs. By default, they are the flow's terminal tasks. However, the user may specify any other tasks in the flow.
+
+Operationally, this changes almost none of the flow run logic, except that it looks at the key tasks to determine state instead of the terminal tasks. The only change is that terminal tasks are still waited on (by the executor) and checked to make sure they're in a `Finished` state. If - and only if - they have finished, the key tasks are checked to determine state. In other words: the flow must still be completely done before state is checked, even if the tasks that determine state are finished, themselves.
+
+",jlowin,153965,closed,False,2018-08-07T01:57:22+00:00,2018-08-07T19:51:56+00:00,2018-08-07T19:51:53+00:00,2018-08-07T19:51:53+00:00,75b69292c7c11137bc4c5fa724a30e8de22b6544,dirty,360,21,6,5,1,0,,,
+PrefectHQ/prefect,206865159,97,Change default cache_validator in the presence of cache_for,"It felt unnatural that 
+
+```python
+@task(cache_for=timedelta(minutes=1))
+def my_fun():
+    ...
+```
+
+wasn't caching (because the `cache_validator` wasn't _explicitly_ set).
+
+This PR changes that default behavior.",cicdw,13255838,closed,False,2018-08-08T00:56:02+00:00,2018-08-08T00:59:45+00:00,2018-08-08T00:59:42+00:00,2018-08-08T00:59:42+00:00,b51001383ea0da397276bde70d41f714136b3728,dirty,9,4,2,2,0,0,,,
+PrefectHQ/prefect,207389454,98,FlowRunner return_tasks are sorted by default,"In Python 3.6+, dictionaries are sorted by default, so we can get a minor UX benefit by making the `return_tasks` dictionary come back sorted.
+
+For example, in the ETL example, you could type `state.result` and see a naturally ordered dictionary of  (pseudo code to illustrate ordering):
+```python
+{
+	e_task : e_task_state,
+	t_task: t_task_state,
+	l_task: l_task_state,
+}
+```",jlowin,153965,closed,False,2018-08-09T17:31:36+00:00,2018-08-10T15:43:40+00:00,2018-08-10T15:43:37+00:00,2018-08-10T15:43:37+00:00,56289cd32e21864b25f242c93f116b4a75dbac1a,dirty,20,2,2,3,0,0,,,
+PrefectHQ/prefect,207847889,100,Initialize DEFAULT_EXECUTOR elsewhere,Closes #99 ,cicdw,13255838,closed,False,2018-08-13T00:10:52+00:00,2018-08-13T15:24:14+00:00,2018-08-13T15:24:10+00:00,2018-08-13T15:24:10+00:00,d45452ff91e36f6708da5b9e3ae6121bfa2601a2,dirty,13,10,4,1,0,0,,,
+PrefectHQ/prefect,207849192,101,flow.visualize() renders inline,"Closes #96 
+
+Question: do we want to make `graphviz` an optional requirement?  It seems we only use it for this single feature.",cicdw,13255838,closed,False,2018-08-13T00:37:12+00:00,2018-08-13T15:23:31+00:00,2018-08-13T15:23:25+00:00,2018-08-13T15:23:24+00:00,c2be655c48658638700cf4afe373b01f11c4e15c,dirty,9,0,1,1,0,0,,,
+PrefectHQ/prefect,208013626,102,Allow for module-level docstrings,"This is a minimal PR implementing module-level docstrings so that others can access this functionality sooner rather than later.  Uses `triggers.py` as an example.
+
+It formats like this:
+<img width=""845"" alt=""screen shot 2018-08-13 at 8 22 14 am"" src=""https://user-images.githubusercontent.com/13255838/44041190-08b5542e-9ed2-11e8-8ad6-8031e2bfd054.png"">
+",cicdw,13255838,closed,False,2018-08-13T15:21:35+00:00,2018-08-13T15:43:53+00:00,2018-08-13T15:43:50+00:00,2018-08-13T15:43:50+00:00,fca51d4592571610d08e59e0aab3dc8b482f9fd3,dirty,12,0,1,1,0,0,,,docs
+PrefectHQ/prefect,208071832,103,Clean up docs following registry PR,,jlowin,153965,closed,False,2018-08-13T19:00:53+00:00,2018-08-13T22:05:17+00:00,2018-08-13T22:05:14+00:00,2018-08-13T22:05:14+00:00,f745e755ca10a01c8c77a0fba1b5a9f3a6323e5e,dirty,93,101,5,9,0,2,,,
+PrefectHQ/prefect,208080210,104,Bokeh tool,"Implements a `BokehRunner` for visually inspecting / demo'ing Prefect Flows.
+
+Also, I cleaned up some random unused imports, so it looks like I touched more files than I ""really"" did.",cicdw,13255838,closed,False,2018-08-13T19:34:43+00:00,2018-08-13T20:58:23+00:00,2018-08-13T20:58:20+00:00,2018-08-13T20:58:20+00:00,b212d2beb3866b9c52aa4880af5922b22ab816a8,dirty,264,10,9,7,1,0,,,
+PrefectHQ/prefect,208088505,105,First Round of A Few Docstrings,"Took a stab at a few classes
+
+- Serializers
+- Triggers
+- State
+- Collections",joshmeek,40716964,closed,False,2018-08-13T20:07:14+00:00,2018-08-14T12:57:48+00:00,2018-08-14T12:57:44+00:00,2018-08-14T12:57:44+00:00,0514248df0d98563742c2ff8a935320b5673d6a2,dirty,142,48,5,9,11,0,,,docs
+PrefectHQ/prefect,208112027,107,Cache Validator documentation,Documentation for cache validators + a new test / warning.,cicdw,13255838,closed,False,2018-08-13T21:40:35+00:00,2018-08-14T15:44:36+00:00,2018-08-14T15:44:33+00:00,2018-08-14T15:44:33+00:00,9a20c202d059fa3c665e917199e8527d96e85bb9,dirty,184,8,7,7,2,0,joshmeek,,
+PrefectHQ/prefect,208118625,109,Remove reference to client in vuepress config,Will fix https://circleci.com/gh/PrefectHQ/prefect/1245?utm_campaign=build-failed&utm_content=failing-command&utm_medium=email#tests/containers/0/actions/106,cicdw,13255838,closed,False,2018-08-13T22:12:32+00:00,2018-08-13T22:17:09+00:00,2018-08-13T22:17:06+00:00,2018-08-13T22:17:06+00:00,2fe71125c827b7f24404c070a05ecd4fee24ebc5,dirty,2,2,1,1,0,0,,,
+PrefectHQ/prefect,208136676,110,Executor Docs + small doc changes,Documentation for prefect Executors + some minor tweaks to documentation generation.,cicdw,13255838,closed,False,2018-08-14T00:07:34+00:00,2018-08-14T01:22:57+00:00,2018-08-14T01:22:54+00:00,2018-08-14T01:22:54+00:00,80f509ea481e533096bd9c548b96f3e7e5f883dc,dirty,75,10,6,6,0,0,,,docs
+PrefectHQ/prefect,208301102,111,Docstrings for Flow and Task (draft),,joshmeek,40716964,closed,False,2018-08-14T14:28:07+00:00,2018-08-14T16:44:34+00:00,2018-08-14T16:44:31+00:00,2018-08-14T16:44:31+00:00,f1a9c913d6be00f6d848ad2585d99e5faa126713,dirty,280,40,2,5,21,0,,,docs
+PrefectHQ/prefect,208301719,112,Add introduction to docs + touch up auto-generated docs,"- Adds front page with logo to docs
+- Adds introduction to docs (not final!)
+- Links auto-generated source code to appropriate commit, not master
+- Adds auto-generated footer to all api docs",jlowin,153965,closed,False,2018-08-14T14:29:49+00:00,2018-08-14T16:45:35+00:00,2018-08-14T16:45:34+00:00,2018-08-14T16:45:34+00:00,1a7eee165c49e1c20c4f05e1d8eef121e7227e8b,dirty,1256,2416,9,12,0,1,,,docs
+PrefectHQ/prefect,208349498,113,Install VuePress dependencies from package.json,"CircleCI was hardcoded to install only VuePress 0.12, but we can let NPM install all necessary dependencies from `package.json`",jlowin,153965,closed,False,2018-08-14T17:04:41+00:00,2018-08-14T17:07:20+00:00,2018-08-14T17:07:09+00:00,2018-08-14T17:07:09+00:00,eaba24f5f2efc90e16bf69de9b0e6bf71441d991,dirty,5,7,1,1,0,0,,,
+PrefectHQ/prefect,208351343,114,Yarn instead of NPM,,jlowin,153965,closed,False,2018-08-14T17:12:28+00:00,2018-08-14T17:13:04+00:00,2018-08-14T17:12:59+00:00,2018-08-14T17:12:59+00:00,3a340f9d493973eaa7dc6eb9874febe366c591f1,dirty,1,1,1,1,0,0,,,
+PrefectHQ/prefect,208353007,115,"This time, with yarn actually installed",,jlowin,153965,closed,False,2018-08-14T17:19:17+00:00,2018-08-14T17:20:03+00:00,2018-08-14T17:19:59+00:00,2018-08-14T17:19:59+00:00,043f2af40f0eda09a881d08bf5c834ab6901f092,dirty,2,0,1,1,0,0,,,
+PrefectHQ/prefect,208356104,116,Runner docs,"Docs for `Edge`, `TaskRunner` and `FlowRunner`",cicdw,13255838,closed,False,2018-08-14T17:32:21+00:00,2018-08-14T19:06:35+00:00,2018-08-14T19:06:32+00:00,2018-08-14T19:06:32+00:00,fd808a6cf7d7bc650e0abcaa0822d2c8ad7573d3,dirty,119,9,4,7,0,0,,,docs
+PrefectHQ/prefect,208369767,117,Environments Documentation,,joshmeek,40716964,closed,False,2018-08-14T18:26:48+00:00,2018-08-14T19:28:50+00:00,2018-08-14T19:28:47+00:00,2018-08-14T19:28:47+00:00,fc9a585a292471600fe9265f26b41ff2556f215b,dirty,68,14,2,1,0,0,jlowin,,docs
+PrefectHQ/prefect,208372367,118,Add FunctionTaskGenerator to @task,"While writing tutorials, I realized that task's created with @task were ONLY compatible with the functional API (couldn't be called outside a Flow context). This formalizes their construction a bit with a proper `FunctionTaskGenerator` class that provides an `as_task()` method for accessing tasks imperatively.",jlowin,153965,closed,False,2018-08-14T18:36:39+00:00,2018-08-14T20:39:27+00:00,2018-08-14T20:39:24+00:00,2018-08-14T20:39:24+00:00,f268bee7259462f9780f581d7bcf9a847b87c58b,dirty,125,19,2,3,0,2,,,
+PrefectHQ/prefect,208390385,119,Task utils docs,,cicdw,13255838,closed,False,2018-08-14T19:48:22+00:00,2018-08-14T21:14:36+00:00,2018-08-14T21:14:34+00:00,2018-08-14T21:14:34+00:00,2d20bb39cdfd8e0706829943fc5af56723566a41,dirty,66,0,1,5,2,0,,,docs
+PrefectHQ/prefect,208393050,120,Signals,This is a very small PR - it just adds the `Args:` section for all signals; not sure if there's anything else users really need to know about signals?,cicdw,13255838,closed,False,2018-08-14T19:58:44+00:00,2018-08-14T20:11:36+00:00,2018-08-14T20:11:33+00:00,2018-08-14T20:11:33+00:00,74ef0a3763a055b3f1e8a5172f2caad2fe3ac4b9,dirty,19,2,1,1,0,0,,,docs
+PrefectHQ/prefect,208393840,121,Add Concepts doc,,jlowin,153965,closed,False,2018-08-14T20:01:48+00:00,2018-08-15T00:13:10+00:00,2018-08-15T00:13:06+00:00,2018-08-15T00:13:06+00:00,974a969e79d7e283a14c95de83157f72a8dbf29e,dirty,259,8,5,2,7,0,,,docs
+PrefectHQ/prefect,208425687,122,Add getting_started (general tutorial),,jlowin,153965,closed,False,2018-08-14T22:14:25+00:00,2018-08-15T01:07:31+00:00,2018-08-15T01:07:27+00:00,2018-08-15T01:07:27+00:00,c9148bb823e7973656dfc4a51911c65b580919ee,dirty,181,1,2,3,7,0,,,docs
+PrefectHQ/prefect,208444935,123,Add signature validation for upstream_tasks,"In support of https://github.com/PrefectHQ/prefect/pull/122#discussion_r210124160
+
+Ensures that users can't use the `upstream_tasks` argument name so that it can be used functionally.",cicdw,13255838,closed,False,2018-08-15T00:23:21+00:00,2018-08-15T20:30:11+00:00,2018-08-15T20:30:07+00:00,2018-08-15T20:30:07+00:00,41f33060f4d750f2675d911c6b29701562d301cd,dirty,116,21,8,4,0,5,,,
+PrefectHQ/prefect,208459357,125,Add cache to flow graph methods for performance,"We removed an earlier cache due to some performance/implementation issues in the past, but I think this new version is robust and effective. Potentially-slow flow methods (sorted_tasks, building environments, upstream/downstream edges) are automatically cached, and the cache is invalidated if the flow changes.
+
+The cache even survives pickling, which means serialized flows could benefit from serialized caches. ",jlowin,153965,closed,False,2018-08-15T02:39:51+00:00,2018-08-16T02:45:20+00:00,2018-08-16T02:45:17+00:00,2018-08-16T02:45:17+00:00,f1e62d268055e8477f4de336eb87a61355f24023,dirty,249,17,2,5,1,0,,,enhancement
+PrefectHQ/prefect,208610517,127,Doc tweaks,"- formats `Raises:` lists
+- ensures that code formatting doesn't mistakenly apply to dictionaries in `Args` lists (`{key: value}`)
+- tweaks the `Task` doc",cicdw,13255838,closed,False,2018-08-15T16:18:44+00:00,2018-08-15T20:22:30+00:00,2018-08-15T20:22:25+00:00,2018-08-15T20:22:25+00:00,2b14bb5c1eeab41bb1a21cffaefaa7ddadb700c7,dirty,24,28,3,2,0,0,,,docs
+PrefectHQ/prefect,208667588,128,Enhancements to the BokehRunner,"Now features a legend for state colors and a circle for overall flow state.
+
+Screenshot from Demo:
+<img width=""1152"" alt=""screen shot 2018-08-15 at 1 09 15 pm"" src=""https://user-images.githubusercontent.com/13255838/44170509-7266b780-a08c-11e8-984b-bdda87e88eb8.png"">
+",cicdw,13255838,closed,False,2018-08-15T20:09:44+00:00,2018-08-15T20:32:36+00:00,2018-08-15T20:32:33+00:00,2018-08-15T20:32:33+00:00,36ab20a05f1717eb0884420a6a281d8f95a712e4,dirty,78,31,1,5,5,2,,,
+PrefectHQ/prefect,208677082,130,Trap warning when pytest runs,"Something in this test raised a warning, though the test appears to run fine -- it gives the impression of a test that had an issue. I added a trap for the warning so all tests pass.",jlowin,153965,closed,False,2018-08-15T20:48:16+00:00,2018-08-16T02:46:06+00:00,2018-08-16T02:46:03+00:00,2018-08-16T02:46:03+00:00,cea6e790cf3228b68862604f7db0574fd9c70297,dirty,2,1,1,1,0,1,,,
+PrefectHQ/prefect,208688321,131,Refactor requirements,"Closes #129 
+
+I also removed `toolz` because `dask` requires it.",cicdw,13255838,closed,False,2018-08-15T21:35:50+00:00,2018-08-16T15:36:05+00:00,2018-08-16T15:36:02+00:00,2018-08-16T15:36:01+00:00,3bce38c498a519d9fd85c616da16a1ef8b583d99,dirty,38,4,4,3,0,3,,,
+PrefectHQ/prefect,208712073,132,"Call, copy and bind","Implements two new Task methods:
+- copy
+- bind
+- and replaces `__call__` with `copy + bind`.  
+
+This allows for Task _instances_ to be used functionally, like mini-task factories.  I.e.,
+```python
+from prefect import *
+
+class Add(Task):
+    def run(self, x, y):
+        return x + y
+
+a = Add()
+
+with Flow() as f:
+    first = a(1, 2)
+    second = a(5, 7)
+```
+would _not_ have worked prior to this PR, because the arguments to `run` were bound to `a` in the first call.  Now, `a(1, 2)` returns a _new_ task with all of the same properties as `a`.
+
+To use the ""old-style"" API, users can call `a.bind(1, 2)`.
+
+Tests now pass with surprisingly little change (which IMO is a good sign), but I still need to 
+- [x] update documentation
+- [x] write new tests
+
+Opening a WIP just in case anything stands out, or if @jlowin wants to start working off this branch for documentation.",cicdw,13255838,closed,False,2018-08-15T23:54:53+00:00,2018-08-16T19:14:47+00:00,2018-08-16T19:14:44+00:00,2018-08-16T19:14:44+00:00,d70315748cc66e72889df605ec84fbe9087680aa,dirty,161,94,6,7,7,2,,,
+PrefectHQ/prefect,208736815,133,Add comparison to airflow,,jlowin,153965,closed,False,2018-08-16T03:33:28+00:00,2018-08-16T22:01:45+00:00,2018-08-16T22:01:42+00:00,2018-08-16T22:01:42+00:00,51024a9c563923f98dcf88422a149b3b5974214e,dirty,406,2,4,2,2,0,,,docs
+PrefectHQ/prefect,208938939,134,Coverage report,Closes #126 ,cicdw,13255838,closed,False,2018-08-16T18:02:04+00:00,2018-08-16T18:09:27+00:00,2018-08-16T18:09:25+00:00,2018-08-16T18:09:24+00:00,479ba3eec4b095ff9245b3da4e1b33f7e1e79b6a,dirty,36,0,2,2,0,0,,,
+PrefectHQ/prefect,208945274,135,Add pytest-cov to setup.py,Fixes https://circleci.com/gh/PrefectHQ/prefect/1689,cicdw,13255838,closed,False,2018-08-16T18:27:49+00:00,2018-08-16T18:35:51+00:00,2018-08-16T18:35:48+00:00,2018-08-16T18:35:48+00:00,6fe1102cd0f077767bbf57608e5883090fa98f66,dirty,4,1,1,1,0,0,,,
+PrefectHQ/prefect,208956834,136,Task Retry demo,"- adds a `Tutorials` section to the Getting started Sidebar
+- draft of a task retry demo
+
+Happy to change formatting / layout / content as needed.",cicdw,13255838,closed,False,2018-08-16T19:12:59+00:00,2018-08-17T16:14:07+00:00,2018-08-17T16:14:05+00:00,2018-08-17T16:14:05+00:00,720f6e63dae46afd0a977fd97fd404a5c5e0289f,dirty,645,76,14,19,15,1,,,
+PrefectHQ/prefect,209006776,137,key tasks -> reference tasks,,cicdw,13255838,closed,False,2018-08-16T23:01:21+00:00,2018-08-17T02:36:11+00:00,2018-08-17T02:36:08+00:00,2018-08-17T02:36:07+00:00,27ff568ccab2dab5d20434ec7c1d7723fcdcd0d3,dirty,84,81,7,4,0,0,,,
+PrefectHQ/prefect,209011363,138,Task usability updates,"1. Fix bug when tasks accept `**kwargs` (https://github.com/PrefectHQ/prefect/compare/update-tasks?expand=1#diff-b73360c88c1c1fac2cecd1c05790f019L241)
+1. Add all operators to `prefect.tasks.core.operators` and add magic methods to Task
+1. Also support `__getitem__` for indexing tasks
+1. Get all tasks in `prefect.tasks.core.collections` working and tested
+1. Add support for ""piping"" tasks
+ ```python
+(
+	Task()
+	| Task()
+	| Task()
+	| Task()
+)
+```
+6. Add warning if users copy tasks that have dependencies
+7. Add ""set_upstream()"" and ""set_downstream()"" functions
+8. Make sure when a task is called on a collection of tasks, it automatically (and recursively) transforms those collections into collection tasks:
+```python
+Task()([Task(), Task()) 
+
+# becomes
+arg = List()(Task(), Task())
+Task()(arg)
+```",jlowin,153965,closed,False,2018-08-16T23:34:25+00:00,2018-08-17T20:53:44+00:00,2018-08-17T20:53:41+00:00,2018-08-17T20:53:41+00:00,564c94f652420eb28ad238c3084e91dcb8b53bf2,dirty,1108,87,9,9,6,0,,,
+PrefectHQ/prefect,209032476,139,Groups and tags,"- changes `group (str)` attribute to `groups (set)` 
+- ensures `groups` and `tags` are _always_ updated / appended to",cicdw,13255838,closed,False,2018-08-17T02:45:27+00:00,2018-08-17T22:05:23+00:00,2018-08-17T22:05:19+00:00,2018-08-17T22:05:19+00:00,643e3e7ead937dd5d6470181ec0c26f9f401657e,dirty,41,99,7,8,1,3,,,
+PrefectHQ/prefect,209246622,140,"Calculator tutorial + ""merge"" task in control flow",Depends on #138 ,jlowin,153965,closed,False,2018-08-17T20:12:57+00:00,2018-08-18T22:49:02+00:00,2018-08-18T22:48:59+00:00,2018-08-18T22:48:59+00:00,a3488491e65c3c50b60c0be5d549bbbad0073ab2,dirty,502,128,16,9,1,1,,,
+PrefectHQ/prefect,209286799,141,Prefect syntax highlighting,"This PR implements vuepress syntax highlighting that closely follows our corporate color scheme.
+
+My intent is definitely not to force this into the docs if others don't want it, I'm just opening this as an option; happy to edit / hold off / etc.
+
+Here are some screenshots from the docs of what this looks like:
+
+<img width=""478"" alt=""screen shot 2018-08-17 at 6 10 43 pm"" src=""https://user-images.githubusercontent.com/13255838/44294225-e352ce80-a248-11e8-9c70-66029efd578b.png"">
+
+<img width=""338"" alt=""screen shot 2018-08-17 at 6 11 34 pm"" src=""https://user-images.githubusercontent.com/13255838/44294238-08474180-a249-11e8-98e0-f6abc7856801.png"">",cicdw,13255838,closed,False,2018-08-18T01:13:50+00:00,2018-08-18T18:59:41+00:00,2018-08-18T18:56:59+00:00,2018-08-18T18:56:59+00:00,d4c10ad35ec3c1b985e0d6112a2ecee8ecbffec8,dirty,162,3,2,4,0,2,joshmeek,,docs
+PrefectHQ/prefect,209324425,142,Tweak syntax highlighting,"Love this -- here are my suggestions, essentially adding a little more ""Prefect blue"" and fixing a bug that affected me for some reason where the CSS was getting overridden (added `!important` tag to fix it)
+
+Screenshot:
+
+![image](https://user-images.githubusercontent.com/153965/44302191-d3db9000-a2f1-11e8-9098-9b2beb41aed5.png)
+",jlowin,153965,closed,False,2018-08-18T18:22:18+00:00,2018-08-18T18:48:57+00:00,2018-08-18T18:48:53+00:00,2018-08-18T18:48:53+00:00,e81f2ad5b315f78dfea2d1f61fffc7b368ba94a5,dirty,26,18,1,1,0,0,,,
+PrefectHQ/prefect,209331848,143,Add alpha license + license headers,,jlowin,153965,closed,False,2018-08-18T21:42:57+00:00,2018-08-18T22:58:12+00:00,2018-08-18T22:58:08+00:00,2018-08-18T22:58:08+00:00,39e4ac6137d6b190f4df75a4c7bc08bf9d0ff759,dirty,10672,10416,61,8,0,0,,,
+PrefectHQ/prefect,209335793,144,Touchups for 0.3.0,,jlowin,153965,closed,False,2018-08-19T00:02:49+00:00,2018-08-19T01:07:09+00:00,2018-08-19T01:07:05+00:00,2018-08-19T01:07:05+00:00,3c90d4bb81866282f80ad6f2fb4dbc069d249d74,dirty,102,747,40,8,2,1,,,
+PrefectHQ/prefect,209339420,145,WIP: Use Netlify to deploy docs,"Netlify can both build and host our docs. This PR:
+- removes CircleCI jobs that built/deployed docs
+- adds all necessary files for Netlify to take over
+
+Once accepted, we can enable CI on the Netlify side and have it build on every push to master.",jlowin,153965,closed,False,2018-08-19T02:30:29+00:00,2018-08-22T15:29:47+00:00,2018-08-22T15:29:43+00:00,,c5396a1c9f5ee87a69253d77f3082b572a22028b,dirty,6222,102,6,2,0,1,cicdw,,docs
+PrefectHQ/prefect,209339834,146,Versioneer fix,"Diagnosis:
+- `tag_prefix` looks only for tags with the given prefix
+- `parentdir_prefix`: maps to whatever is contained in `packages={""name"": ""directory""}` in `setup.py`; in our case, it's `packages={"""": ""src""}`",cicdw,13255838,closed,False,2018-08-19T02:48:01+00:00,2018-08-19T23:29:11+00:00,2018-08-19T16:55:02+00:00,2018-08-19T16:55:02+00:00,ef80cb4cf0a1ae444fb0f52bb29eca593ac5e63e,dirty,13,9,4,3,1,0,,,
+PrefectHQ/prefect,209365449,147,Update docs home page with license agreement,,jlowin,153965,closed,False,2018-08-19T15:29:04+00:00,2018-08-19T23:17:40+00:00,2018-08-19T23:17:38+00:00,2018-08-19T23:17:38+00:00,813f17d331bf7dba2e36607b4717bf23fc357dd0,dirty,118,44,5,5,3,0,,,
+PrefectHQ/prefect,209919954,150,Lean implementation of a `ShellTask`,"Basic implementation of a `ShellTask` w/ tests:
+- executes arbitrary commands
+- fails on command failure with informative message
+- always returns output
+
+I didn't want to push too far in a vacuum, but other things on the roadmap for this task that we might want to discuss / write issues for:
+- ability to kill the task externally
+- templating for `prefect.context` variables",cicdw,13255838,closed,False,2018-08-21T18:44:22+00:00,2018-08-22T00:39:38+00:00,2018-08-22T00:39:34+00:00,2018-08-22T00:39:34+00:00,74ba05e1b12f9f8cb83b1a3fc59887510e2d4c39,dirty,186,58,8,11,8,0,,,
+PrefectHQ/prefect,209987195,151,Dask upgrade,Allows users to specify which dask scheduler to use in the `__init__()` of the `DaskExecutor`.  We can now say prefect has some off-the-shelf parallelism!,cicdw,13255838,closed,False,2018-08-21T23:58:21+00:00,2018-08-22T01:59:23+00:00,2018-08-22T01:59:21+00:00,2018-08-22T01:59:21+00:00,090178fc664a6b053ca04c1a52ef12f684b807f4,dirty,54,12,5,6,1,2,,,enhancement
+PrefectHQ/prefect,210137033,153,Add changelog,"Adds a changelog to Prefect. The version numbers have VuePress badges that won't render in GitHub but would if/when this is incorporated into the docs.
+
+As a guideline, doesn't require every PR, but should include noteworthy changes. Each item should reference one or more PRs, and a PR can be referenced multiple times. 
+
+Basic format:
+
+## Version Number
+
+### Major Features
+- A short description followed by (#PR1, #PR2)
+
+### Minor Features
+
+### Fixes
+
+### Breaking Changes
+",jlowin,153965,closed,False,2018-08-22T13:39:16+00:00,2018-08-22T13:43:52+00:00,2018-08-22T13:43:45+00:00,2018-08-22T13:43:45+00:00,8f047c87cf30278eeaf66d3769c1bc5c52f81515,dirty,45,0,1,2,0,0,,,docs
+PrefectHQ/prefect,210174495,156,Docs updates - bring in line with preview repo,"- Use Netlify to deploy docs instead of GAE
+- Add authentication to docs (overridden in dev mode)",jlowin,153965,closed,False,2018-08-22T15:29:24+00:00,2018-08-22T20:08:45+00:00,2018-08-22T20:08:42+00:00,2018-08-22T20:08:42+00:00,2437285d3f15c881257179e1f90cb6a6c9e6c6ef,dirty,6380,10804,17,9,0,0,,,docs
+PrefectHQ/prefect,210176109,157,Add early headline features,,jlowin,153965,closed,False,2018-08-22T15:34:22+00:00,2018-08-22T20:08:33+00:00,2018-08-22T20:08:30+00:00,2018-08-22T20:08:30+00:00,92f92ec2bd26ddd84915d66f69469d0250653354,dirty,3,0,1,1,0,0,,,
+PrefectHQ/prefect,210244477,158,Resource Throttling,"Closes #152 
+
+How cool is this",cicdw,13255838,closed,False,2018-08-22T19:48:27+00:00,2018-08-23T00:59:41+00:00,2018-08-23T00:59:35+00:00,2018-08-23T00:59:35+00:00,8c131d2fd8236f69c5286dc812d2b02540cd6825,dirty,180,6,11,11,14,3,,,
+PrefectHQ/prefect,210307788,160,usedevelop=True,"Naturally.
+
+Sorry, I can't explain this one because I don't understand it myself.",cicdw,13255838,closed,False,2018-08-23T01:38:32+00:00,2018-08-23T01:44:35+00:00,2018-08-23T01:44:32+00:00,2018-08-23T01:44:32+00:00,e184b3c96696602391eb742d6f2599387fd08d94,dirty,1,0,1,1,0,1,,,
+PrefectHQ/prefect,210310677,161,Add some debugs,,cicdw,13255838,closed,False,2018-08-23T02:02:48+00:00,2018-08-23T02:09:02+00:00,2018-08-23T02:09:00+00:00,2018-08-23T02:09:00+00:00,40ba182b3d3e3b3f050230419ae4712e654da604,dirty,10,6,2,1,0,0,,,
+PrefectHQ/prefect,210485964,166,Call coverage directly instead of going through pytest,"Final attempt at fixing the docs; as we've had weird path issues with `pytest` before, I thought we should call `coverage` directly instead of indirectly through `pytest`.
+
+Addresses #165 ",cicdw,13255838,closed,False,2018-08-23T15:21:25+00:00,2018-08-23T19:54:44+00:00,2018-08-23T19:54:41+00:00,2018-08-23T19:54:41+00:00,de73163cee56833f5f030dbaa94a53bf9f253475,dirty,6,5,3,4,0,0,,,docs
+PrefectHQ/prefect,210519223,168,Visualization tutorial,This will be added to the `preview` repo if accepted here.,cicdw,13255838,closed,False,2018-08-23T17:21:33+00:00,2018-08-23T18:58:41+00:00,2018-08-23T18:58:38+00:00,2018-08-23T18:58:38+00:00,b068bf6eafce86a75ea16b340474d3e0d8a4f28f,dirty,281,4,9,5,11,1,joshmeek,,docs

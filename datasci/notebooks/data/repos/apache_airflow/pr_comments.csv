@@ -1,0 +1,1977 @@
+repo_full_name,pr_id,comment_id,user_login,user_id,created_at,updated_at,body,is_review_comment,path,position,diff_hunk,reactions_total,reactions_plus1,reactions_minus1,reactions_laugh,reactions_hooray,reactions_confused,reactions_heart
+apache/airflow,2515598983,2086043119,eladkal,45845474,2025-05-13T06:45:58+00:00,2025-05-13T06:45:58+00:00,Tests looks pretty the same. Wouldn't it be simpler to use parameterized test?,False,,,,0,0,0,0,0,0,0
+apache/airflow,2515598983,2086057259,guan404ming,105915352,2025-05-13T06:54:05+00:00,2025-05-13T06:54:05+00:00,Make sense and updated. Thanks for the suggestion.,False,,,,0,0,0,0,0,0,0
+apache/airflow,2515598983,2086043119,eladkal,45845474,2025-05-13T06:45:58+00:00,2025-05-13T06:45:58+00:00,Tests looks pretty the same. Wouldn't it be simpler to use parameterized test?,True,providers/databricks/tests/unit/databricks/hooks/test_databricks_sql.py,,"@@ -504,3 +506,56 @@ def test_get_openlineage_database_specific_lineage_with_old_openlineage_provider
+     )
+     with pytest.raises(AirflowOptionalProviderFeatureException, match=expected_err):
+         hook.get_openlineage_database_specific_lineage(mock.MagicMock())
++
++
++def test_get_df_pandas():",0,0,0,0,0,0,0
+apache/airflow,2515598983,2086057259,guan404ming,105915352,2025-05-13T06:54:05+00:00,2025-05-13T06:54:05+00:00,Make sense and updated. Thanks for the suggestion.,True,providers/databricks/tests/unit/databricks/hooks/test_databricks_sql.py,,"@@ -504,3 +506,56 @@ def test_get_openlineage_database_specific_lineage_with_old_openlineage_provider
+     )
+     with pytest.raises(AirflowOptionalProviderFeatureException, match=expected_err):
+         hook.get_openlineage_database_specific_lineage(mock.MagicMock())
++
++
++def test_get_df_pandas():",0,0,0,0,0,0,0
+apache/airflow,2515088117,2086030500,eladkal,45845474,2025-05-13T06:38:33+00:00,2025-05-13T06:38:33+00:00,This needs to be under version check as needs to be compatible with Airflow 2.10.0 and sdk path did not exist in 2.10,False,,,,0,0,0,0,0,0,0
+apache/airflow,2515088117,2086030500,eladkal,45845474,2025-05-13T06:38:33+00:00,2025-05-13T06:38:33+00:00,This needs to be under version check as needs to be compatible with Airflow 2.10.0 and sdk path did not exist in 2.10,True,providers/amazon/src/airflow/providers/amazon/aws/hooks/base_aws.py,4.0,"@@ -59,6 +59,7 @@
+ from airflow.providers.amazon.aws.utils.identifiers import generate_uuid
+ from airflow.providers.amazon.aws.utils.suppress import return_on_error
+ from airflow.providers_manager import ProvidersManager
++from airflow.sdk.exceptions import AirflowRuntimeError",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085035587,jedcunningham,66968678,2025-05-12T16:21:47+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+Airflow 3 is released in several packages. The ``apache-airflow`` package is a meta-package that installs
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085036907,jedcunningham,66968678,2025-05-12T16:22:40+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+all the other packages when you run Airflow as a standalone installation, and it also has several extras
+that are not extending Airflow core functionality, but they are useful for the users who want to install
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085038860,jedcunningham,66968678,2025-05-12T16:23:55+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+| s3fs                | ``pip install 'apache-airflow[s3fs]'``              | Support for S3 as Airflow FS                                               |
++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+| saml                | ``pip install 'apache-airflow[saml]'``              | Support for SAML authentication in Amazon provider                         |
+```
+
+Let's do alphabetical.",False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085041653,jedcunningham,66968678,2025-05-12T16:25:39+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+These are core Airflow extras that extend capabilities of core Airflow. They do not install provider
+packages, they just install necessary
+```
+
+We don't have celery of k8s in the list, so we can probably simplify this a bit?",False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085162208,potiuk,595491,2025-05-12T17:46:07+00:00,2025-05-12T17:46:07+00:00,Ah.. left-over :),False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085162793,potiuk,595491,2025-05-12T17:46:35+00:00,2025-05-12T17:46:35+00:00,Depending which alphabet you choose :) ,False,,,,0,0,0,0,0,0,0
+apache/airflow,2514317005,2085035587,jedcunningham,66968678,2025-05-12T16:21:47+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+Airflow 3 is released in several packages. The ``apache-airflow`` package is a meta-package that installs
+```",True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary
+-python dependencies for the provided package.
++python dependencies for the provided package. The same extras are available as ``airflow-core`` package extras.
++
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| extra               | install command                                     | enables                                                                    |
+++=====================+=====================================================+============================================================================+
++| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| standard            | ``pip install apache-airflow[standard]'``           | Standard hooks and operators                                               |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| statsd              | ``pip install 'apache-airflow[statsd]'``            | Needed by StatsD metrics                                                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++
++Meta-airflow package extras
++---------------------------
++
++Airflow 3 is released in several packages. the ``apache-airflow`` package is a meta-package that installs",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085036907,jedcunningham,66968678,2025-05-12T16:22:40+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+all the other packages when you run Airflow as a standalone installation, and it also has several extras
+that are not extending Airflow core functionality, but they are useful for the users who want to install
+```",True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary
+-python dependencies for the provided package.
++python dependencies for the provided package. The same extras are available as ``airflow-core`` package extras.
++
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| extra               | install command                                     | enables                                                                    |
+++=====================+=====================================================+============================================================================+
++| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| standard            | ``pip install apache-airflow[standard]'``           | Standard hooks and operators                                               |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| statsd              | ``pip install 'apache-airflow[statsd]'``            | Needed by StatsD metrics                                                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++
++Meta-airflow package extras
++---------------------------
++
++Airflow 3 is released in several packages. the ``apache-airflow`` package is a meta-package that installs
++all the other packages when you run airflow as a standalone installation, and it also has several extras
++that are not extending airflow core functionality, but they are useful for the users who want to install",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085038860,jedcunningham,66968678,2025-05-12T16:23:55+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+| s3fs                | ``pip install 'apache-airflow[s3fs]'``              | Support for S3 as Airflow FS                                               |
++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+| saml                | ``pip install 'apache-airflow[saml]'``              | Support for SAML authentication in Amazon provider                         |
+```
+
+Let's do alphabetical.",True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary
+-python dependencies for the provided package.
++python dependencies for the provided package. The same extras are available as ``airflow-core`` package extras.
++
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| extra               | install command                                     | enables                                                                    |
+++=====================+=====================================================+============================================================================+
++| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| standard            | ``pip install apache-airflow[standard]'``           | Standard hooks and operators                                               |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| statsd              | ``pip install 'apache-airflow[statsd]'``            | Needed by StatsD metrics                                                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++
++Meta-airflow package extras
++---------------------------
++
++Airflow 3 is released in several packages. the ``apache-airflow`` package is a meta-package that installs
++all the other packages when you run airflow as a standalone installation, and it also has several extras
++that are not extending airflow core functionality, but they are useful for the users who want to install
++other packages that can be used by airflow or some of its providers.
+ 
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | extra               | install command                                     | enables                                                                    |
+ +=====================+=====================================================+============================================================================+
+ | aiobotocore         | ``pip install 'apache-airflow[aiobotocore]'``       | Support for asynchronous (deferrable) operators for Amazon integration     |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
++| cloudpickle         | ``pip install apache-airflow[cloudpickle]``         | Cloudpickle hooks and operators                                            |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | github-enterprise   | ``pip install 'apache-airflow[github-enterprise]'`` | GitHub Enterprise auth backend                                             |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | google-auth         | ``pip install 'apache-airflow[google-auth]'``       | Google auth backend                                                        |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+-+---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | ldap                | ``pip install 'apache-airflow[ldap]'``              | LDAP authentication for users                                              |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | leveldb             | ``pip install 'apache-airflow[leveldb]'``           | Required for use leveldb extra in google provider                          |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+-+---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | pandas              | ``pip install 'apache-airflow[pandas]'``            | Install Pandas library compatible with Airflow                             |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | polars              | ``pip install 'apache-airflow[polars]'``            | Polars hooks and operators                                                 |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | rabbitmq            | ``pip install 'apache-airflow[rabbitmq]'``          | RabbitMQ support as a Celery backend                                       |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
++| saml                | ``pip install 'apache-airflow[saml]'``              | Support for SAML authentication in Amazon provider                         |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | s3fs                | ``pip install 'apache-airflow[s3fs]'``              | Support for S3 as Airflow FS                                               |",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085041653,jedcunningham,66968678,2025-05-12T16:25:39+00:00,2025-05-12T16:26:18+00:00,"```suggestion
+These are core Airflow extras that extend capabilities of core Airflow. They do not install provider
+packages, they just install necessary
+```
+
+We don't have celery of k8s in the list, so we can probably simplify this a bit?",True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085162208,potiuk,595491,2025-05-12T17:46:07+00:00,2025-05-12T17:46:07+00:00,Ah.. left-over :),True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary",0,0,0,0,0,0,0
+apache/airflow,2514317005,2085162793,potiuk,595491,2025-05-12T17:46:35+00:00,2025-05-12T17:46:35+00:00,Depending which alphabet you choose :) ,True,airflow-core/docs/extra-packages-ref.rst,,"@@ -81,49 +81,63 @@ Core Airflow extras
+ 
+ These are core Airflow extras that extend capabilities of core Airflow. They usually do not install provider
+ packages (with the exception of ``celery`` and ``cncf.kubernetes`` extras), they just install necessary
+-python dependencies for the provided package.
++python dependencies for the provided package. The same extras are available as ``airflow-core`` package extras.
++
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| extra               | install command                                     | enables                                                                    |
+++=====================+=====================================================+============================================================================+
++| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| standard            | ``pip install apache-airflow[standard]'``           | Standard hooks and operators                                               |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++| statsd              | ``pip install 'apache-airflow[statsd]'``            | Needed by StatsD metrics                                                   |
+++---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
++
++Meta-airflow package extras
++---------------------------
++
++Airflow 3 is released in several packages. the ``apache-airflow`` package is a meta-package that installs
++all the other packages when you run airflow as a standalone installation, and it also has several extras
++that are not extending airflow core functionality, but they are useful for the users who want to install
++other packages that can be used by airflow or some of its providers.
+ 
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | extra               | install command                                     | enables                                                                    |
+ +=====================+=====================================================+============================================================================+
+ | aiobotocore         | ``pip install 'apache-airflow[aiobotocore]'``       | Support for asynchronous (deferrable) operators for Amazon integration     |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| async               | ``pip install 'apache-airflow[async]'``             | Async worker classes for Gunicorn                                          |
++| cloudpickle         | ``pip install apache-airflow[cloudpickle]``         | Cloudpickle hooks and operators                                            |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | github-enterprise   | ``pip install 'apache-airflow[github-enterprise]'`` | GitHub Enterprise auth backend                                             |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | google-auth         | ``pip install 'apache-airflow[google-auth]'``       | Google auth backend                                                        |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | graphviz            | ``pip install 'apache-airflow[graphviz]'``          | Graphviz renderer for converting DAG to graphical output                   |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| kerberos            | ``pip install 'apache-airflow[kerberos]'``          | Kerberos integration for Kerberized services (Hadoop, Presto, Trino)       |
+-+---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | ldap                | ``pip install 'apache-airflow[ldap]'``              | LDAP authentication for users                                              |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | leveldb             | ``pip install 'apache-airflow[leveldb]'``           | Required for use leveldb extra in google provider                          |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| otel                | ``pip install 'apache-airflow[otel]'``              | Required for OpenTelemetry metrics                                         |
+-+---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | pandas              | ``pip install 'apache-airflow[pandas]'``            | Install Pandas library compatible with Airflow                             |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | polars              | ``pip install 'apache-airflow[polars]'``            | Polars hooks and operators                                                 |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | rabbitmq            | ``pip install 'apache-airflow[rabbitmq]'``          | RabbitMQ support as a Celery backend                                       |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+-| sentry              | ``pip install 'apache-airflow[sentry]'``            | Sentry service for application logging and monitoring                      |
++| saml                | ``pip install 'apache-airflow[saml]'``              | Support for SAML authentication in Amazon provider                         |
+ +---------------------+-----------------------------------------------------+----------------------------------------------------------------------------+
+ | s3fs                | ``pip install 'apache-airflow[s3fs]'``              | Support for S3 as Airflow FS                                               |",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084726523,Lee-W,5144808,2025-05-12T13:51:01+00:00,2025-05-12T13:51:07+00:00,It would be better if we could add a new exception instead of using `AirflowExceptiuon`.,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084835463,guan404ming,105915352,2025-05-12T14:37:17+00:00,2025-05-12T14:37:18+00:00,"Sure, I've updated.",False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084837866,eladkal,45845474,2025-05-12T14:38:35+00:00,2025-05-12T14:38:36+00:00,"If we do please set it with exceptions.py in the provider itself (not in airflow-core)
+example: 
+https://github.com/apache/airflow/blob/1cde11a447e60d0738b0c317c3d3e8265360014f/providers/databricks/src/airflow/providers/databricks/exceptions.py#L27-L28",False,,,,2,2,0,0,0,0,0
+apache/airflow,2513790576,2084841870,guan404ming,105915352,2025-05-12T14:40:28+00:00,2025-05-12T14:40:28+00:00,let me fix it,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084855929,guan404ming,105915352,2025-05-12T14:46:41+00:00,2025-05-12T14:46:42+00:00,Updated. Hope everything good.,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084915007,Lee-W,5144808,2025-05-12T15:15:44+00:00,2025-05-12T15:17:56+00:00,"```suggestion
+from airflow.exceptions import AirflowSkipException
+```
+
+nit",False,,,,1,1,0,0,0,0,0
+apache/airflow,2513790576,2084918140,Lee-W,5144808,2025-05-12T15:17:22+00:00,2025-05-12T15:17:56+00:00,The exception created here is not a description and does not help much. Maybe something like `ExternalDagNotExistsError` would be better,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084919545,Lee-W,5144808,2025-05-12T15:17:53+00:00,2025-05-12T15:17:56+00:00,and we can create multiple exceptions for different kinds of errors,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2085047153,guan404ming,105915352,2025-05-12T16:29:14+00:00,2025-05-12T16:45:53+00:00,I've created multiple exceptions for different cases and also update the test cases. Thanks for the suggestions!,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513790576,2084726523,Lee-W,5144808,2025-05-12T13:51:01+00:00,2025-05-12T13:51:07+00:00,It would be better if we could add a new exception instead of using `AirflowExceptiuon`.,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -443,6 +443,10 @@ def execute_complete(self, context, event=None):
+             self.log.info(""External tasks %s has executed successfully."", self.external_task_ids)
+         elif event[""status""] == ""skipped"":
+             raise AirflowSkipException(""External job has skipped skipping."")
++        elif event[""status""] == ""failed"":
++            if self.soft_fail:
++                raise AirflowSkipException(""External job has failed skipping."")
++            raise AirflowException(""External job has failed."")",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084835463,guan404ming,105915352,2025-05-12T14:37:17+00:00,2025-05-12T14:37:18+00:00,"Sure, I've updated.",True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -443,6 +443,10 @@ def execute_complete(self, context, event=None):
+             self.log.info(""External tasks %s has executed successfully."", self.external_task_ids)
+         elif event[""status""] == ""skipped"":
+             raise AirflowSkipException(""External job has skipped skipping."")
++        elif event[""status""] == ""failed"":
++            if self.soft_fail:
++                raise AirflowSkipException(""External job has failed skipping."")
++            raise AirflowException(""External job has failed."")",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084837866,eladkal,45845474,2025-05-12T14:38:35+00:00,2025-05-12T14:38:36+00:00,"If we do please set it with exceptions.py in the provider itself (not in airflow-core)
+example: 
+https://github.com/apache/airflow/blob/1cde11a447e60d0738b0c317c3d3e8265360014f/providers/databricks/src/airflow/providers/databricks/exceptions.py#L27-L28",True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -443,6 +443,10 @@ def execute_complete(self, context, event=None):
+             self.log.info(""External tasks %s has executed successfully."", self.external_task_ids)
+         elif event[""status""] == ""skipped"":
+             raise AirflowSkipException(""External job has skipped skipping."")
++        elif event[""status""] == ""failed"":
++            if self.soft_fail:
++                raise AirflowSkipException(""External job has failed skipping."")
++            raise AirflowException(""External job has failed."")",2,2,0,0,0,0,0
+apache/airflow,2513790576,2084841870,guan404ming,105915352,2025-05-12T14:40:28+00:00,2025-05-12T14:40:28+00:00,let me fix it,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -443,6 +443,10 @@ def execute_complete(self, context, event=None):
+             self.log.info(""External tasks %s has executed successfully."", self.external_task_ids)
+         elif event[""status""] == ""skipped"":
+             raise AirflowSkipException(""External job has skipped skipping."")
++        elif event[""status""] == ""failed"":
++            if self.soft_fail:
++                raise AirflowSkipException(""External job has failed skipping."")
++            raise AirflowException(""External job has failed."")",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084855929,guan404ming,105915352,2025-05-12T14:46:41+00:00,2025-05-12T14:46:42+00:00,Updated. Hope everything good.,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -443,6 +443,10 @@ def execute_complete(self, context, event=None):
+             self.log.info(""External tasks %s has executed successfully."", self.external_task_ids)
+         elif event[""status""] == ""skipped"":
+             raise AirflowSkipException(""External job has skipped skipping."")
++        elif event[""status""] == ""failed"":
++            if self.soft_fail:
++                raise AirflowSkipException(""External job has failed skipping."")
++            raise AirflowException(""External job has failed."")",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084915007,Lee-W,5144808,2025-05-12T15:15:44+00:00,2025-05-12T15:17:56+00:00,"```suggestion
+from airflow.exceptions import AirflowSkipException
+```
+
+nit",True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -24,9 +23,12 @@
+ from typing import TYPE_CHECKING, Any, Callable, ClassVar
+ 
+ from airflow.configuration import conf
+-from airflow.exceptions import AirflowException, AirflowSkipException
++from airflow.exceptions import (
++    AirflowSkipException,
++)",1,1,0,0,0,0,0
+apache/airflow,2513790576,2084918140,Lee-W,5144808,2025-05-12T15:17:22+00:00,2025-05-12T15:17:56+00:00,The exception created here is not a description and does not help much. Maybe something like `ExternalDagNotExistsError` would be better,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -455,23 +461,25 @@ def _check_for_existence(self, session) -> None:
+         dag_to_wait = DagModel.get_current(self.external_dag_id, session)
+ 
+         if not dag_to_wait:
+-            raise AirflowException(f""The external DAG {self.external_dag_id} does not exist."")
++            raise AirflowExternalTaskSensorException(
++                f""The external DAG {self.external_dag_id} does not exist.""
++            )
+ 
+         if not os.path.exists(correct_maybe_zipped(dag_to_wait.fileloc)):
+-            raise AirflowException(f""The external DAG {self.external_dag_id} was deleted."")
++            raise AirflowExternalTaskSensorException(f""The external DAG {self.external_dag_id} was deleted."")
+ 
+         if self.external_task_ids:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             for external_task_id in self.external_task_ids:
+                 if not refreshed_dag_info.has_task(external_task_id):
+-                    raise AirflowException(
++                    raise AirflowExternalTaskSensorException(
+                         f""The external task {external_task_id} in DAG {self.external_dag_id} does not exist.""
+                     )
+ 
+         if self.external_task_group_id:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             if not refreshed_dag_info.has_task_group(self.external_task_group_id):
+-                raise AirflowException(
++                raise AirflowExternalTaskSensorException(",0,0,0,0,0,0,0
+apache/airflow,2513790576,2084919545,Lee-W,5144808,2025-05-12T15:17:53+00:00,2025-05-12T15:17:56+00:00,and we can create multiple exceptions for different kinds of errors,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -455,23 +461,25 @@ def _check_for_existence(self, session) -> None:
+         dag_to_wait = DagModel.get_current(self.external_dag_id, session)
+ 
+         if not dag_to_wait:
+-            raise AirflowException(f""The external DAG {self.external_dag_id} does not exist."")
++            raise AirflowExternalTaskSensorException(
++                f""The external DAG {self.external_dag_id} does not exist.""
++            )
+ 
+         if not os.path.exists(correct_maybe_zipped(dag_to_wait.fileloc)):
+-            raise AirflowException(f""The external DAG {self.external_dag_id} was deleted."")
++            raise AirflowExternalTaskSensorException(f""The external DAG {self.external_dag_id} was deleted."")
+ 
+         if self.external_task_ids:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             for external_task_id in self.external_task_ids:
+                 if not refreshed_dag_info.has_task(external_task_id):
+-                    raise AirflowException(
++                    raise AirflowExternalTaskSensorException(
+                         f""The external task {external_task_id} in DAG {self.external_dag_id} does not exist.""
+                     )
+ 
+         if self.external_task_group_id:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             if not refreshed_dag_info.has_task_group(self.external_task_group_id):
+-                raise AirflowException(
++                raise AirflowExternalTaskSensorException(",0,0,0,0,0,0,0
+apache/airflow,2513790576,2085047153,guan404ming,105915352,2025-05-12T16:29:14+00:00,2025-05-12T16:45:53+00:00,I've created multiple exceptions for different cases and also update the test cases. Thanks for the suggestions!,True,providers/standard/src/airflow/providers/standard/sensors/external_task.py,,"@@ -455,23 +461,25 @@ def _check_for_existence(self, session) -> None:
+         dag_to_wait = DagModel.get_current(self.external_dag_id, session)
+ 
+         if not dag_to_wait:
+-            raise AirflowException(f""The external DAG {self.external_dag_id} does not exist."")
++            raise AirflowExternalTaskSensorException(
++                f""The external DAG {self.external_dag_id} does not exist.""
++            )
+ 
+         if not os.path.exists(correct_maybe_zipped(dag_to_wait.fileloc)):
+-            raise AirflowException(f""The external DAG {self.external_dag_id} was deleted."")
++            raise AirflowExternalTaskSensorException(f""The external DAG {self.external_dag_id} was deleted."")
+ 
+         if self.external_task_ids:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             for external_task_id in self.external_task_ids:
+                 if not refreshed_dag_info.has_task(external_task_id):
+-                    raise AirflowException(
++                    raise AirflowExternalTaskSensorException(
+                         f""The external task {external_task_id} in DAG {self.external_dag_id} does not exist.""
+                     )
+ 
+         if self.external_task_group_id:
+             refreshed_dag_info = DagBag(dag_to_wait.fileloc).get_dag(self.external_dag_id)
+             if not refreshed_dag_info.has_task_group(self.external_task_group_id):
+-                raise AirflowException(
++                raise AirflowExternalTaskSensorException(",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085018993,amoghrajesh,35884252,2025-05-12T16:10:56+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085019238,amoghrajesh,35884252,2025-05-12T16:11:06+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085019493,amoghrajesh,35884252,2025-05-12T16:11:15+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039069,sunank200,8670962,2025-05-12T16:24:03+00:00,2025-05-12T16:24:03+00:00,Done,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039228,sunank200,8670962,2025-05-12T16:24:10+00:00,2025-05-12T16:24:10+00:00,Done,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039386,sunank200,8670962,2025-05-12T16:24:16+00:00,2025-05-12T16:24:17+00:00,Done,False,,,,0,0,0,0,0,0,0
+apache/airflow,2513523036,2085018993,amoghrajesh,35884252,2025-05-12T16:10:56+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,True,airflow-core/src/airflow/models/baseoperatorlink.py,,"@@ -20,3 +20,11 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.bases.operatorlink import BaseOperatorLink as BaseOperatorLink",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085019238,amoghrajesh,35884252,2025-05-12T16:11:06+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,True,airflow-core/src/airflow/models/param.py,,"@@ -20,3 +20,13 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.definitions.param import Param as Param, ParamsDict as ParamsDict",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085019493,amoghrajesh,35884252,2025-05-12T16:11:15+00:00,2025-05-12T16:12:05+00:00,Lets remove this import,True,airflow-core/src/airflow/secrets/cache.py,,"@@ -20,3 +20,11 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.execution_time.cache import SecretCache as SecretCache",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039069,sunank200,8670962,2025-05-12T16:24:03+00:00,2025-05-12T16:24:03+00:00,Done,True,airflow-core/src/airflow/secrets/cache.py,,"@@ -20,3 +20,11 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.execution_time.cache import SecretCache as SecretCache",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039228,sunank200,8670962,2025-05-12T16:24:10+00:00,2025-05-12T16:24:10+00:00,Done,True,airflow-core/src/airflow/models/param.py,,"@@ -20,3 +20,13 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.definitions.param import Param as Param, ParamsDict as ParamsDict",0,0,0,0,0,0,0
+apache/airflow,2513523036,2085039386,sunank200,8670962,2025-05-12T16:24:16+00:00,2025-05-12T16:24:17+00:00,Done,True,airflow-core/src/airflow/models/baseoperatorlink.py,,"@@ -20,3 +20,11 @@
+ from __future__ import annotations
+ 
+ from airflow.sdk.bases.operatorlink import BaseOperatorLink as BaseOperatorLink",0,0,0,0,0,0,0
+apache/airflow,2512268800,2083605965,eladkal,45845474,2025-05-11T19:53:38+00:00,2025-05-11T19:53:38+00:00,"Whats the difference?
+Generally speaking the all option would be rarely used. Most often at least one provider has rc2.",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512268800,2083606737,potiuk,595491,2025-05-11T19:57:09+00:00,2025-05-11T19:57:10+00:00,"""all"" means ""ALL"" - provders, airflow, helm chart , docker-stack.
+
+We never publish them all together. ",False,,,,1,1,0,0,0,0,0
+apache/airflow,2512268800,2083607271,potiuk,595491,2025-05-11T19:59:20+00:00,2025-05-11T19:59:20+00:00,"> Generally speaking the all option would be rarely used. Most often at least one provider has rc2.
+
+It's not for RC2 - it's for publishing docs after release is done. Not sure what `rc2` has to do with it ?",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512268800,2083605965,eladkal,45845474,2025-05-11T19:53:38+00:00,2025-05-11T19:53:38+00:00,"Whats the difference?
+Generally speaking the all option would be rarely used. Most often at least one provider has rc2.",True,.github/workflows/publish-docs-to-s3.yml,5.0,"@@ -31,7 +31,7 @@ on:  # yamllint disable-line rule:truthy
+           eg: amazon common.messaging apache.kafka
+ 
+         required: false
+-        default: ""all""
++        default: ""all-providers""",0,0,0,0,0,0,0
+apache/airflow,2512268800,2083606737,potiuk,595491,2025-05-11T19:57:09+00:00,2025-05-11T19:57:10+00:00,"""all"" means ""ALL"" - provders, airflow, helm chart , docker-stack.
+
+We never publish them all together. ",True,.github/workflows/publish-docs-to-s3.yml,5.0,"@@ -31,7 +31,7 @@ on:  # yamllint disable-line rule:truthy
+           eg: amazon common.messaging apache.kafka
+ 
+         required: false
+-        default: ""all""
++        default: ""all-providers""",1,1,0,0,0,0,0
+apache/airflow,2512268800,2083607271,potiuk,595491,2025-05-11T19:59:20+00:00,2025-05-11T19:59:20+00:00,"> Generally speaking the all option would be rarely used. Most often at least one provider has rc2.
+
+It's not for RC2 - it's for publishing docs after release is done. Not sure what `rc2` has to do with it ?",True,.github/workflows/publish-docs-to-s3.yml,5.0,"@@ -31,7 +31,7 @@ on:  # yamllint disable-line rule:truthy
+           eg: amazon common.messaging apache.kafka
+ 
+         required: false
+-        default: ""all""
++        default: ""all-providers""",0,0,0,0,0,0,0
+apache/airflow,2512264648,2083615920,gopidesupavan,31437079,2025-05-11T20:39:06+00:00,2025-05-11T20:39:06+00:00,"We can add a note about dry running a when using manual `breeze release-management publish-docs-to-s3` would better always.
+",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2083625286,potiuk,595491,2025-05-11T21:26:57+00:00,2025-05-11T21:26:57+00:00,yeah. I am also adding another manual method - without the need of S3 credentials - via archive repo,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2083628581,potiuk,595491,2025-05-11T21:45:57+00:00,2025-05-11T21:45:57+00:00,Added the second manual update option and mentioned `--dry-run`,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084147683,kaxil,8811558,2025-05-12T08:40:41+00:00,2025-05-12T08:40:42+00:00,"```suggestion
+This is the diagram of live documentation architecture:
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084147828,kaxil,8811558,2025-05-12T08:40:46+00:00,2025-05-12T08:40:46+00:00,"```suggestion
+* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it work
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084150164,kaxil,8811558,2025-05-12T08:41:33+00:00,2025-05-12T08:41:33+00:00,"```suggestion
+via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same workflow can be used to publish Airflow, Helm chart and providers documentation.
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084151834,kaxil,8811558,2025-05-12T08:42:20+00:00,2025-05-12T08:42:21+00:00,"```suggestion
+repository is automatically synchronized with the live S3 bucket. TODO: IMPLEMENT THIS, FOR NOW IT HAS
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084153505,kaxil,8811558,2025-05-12T08:43:01+00:00,2025-05-12T08:43:02+00:00,"```suggestion
+The workflows in `apache-airflow` only update the documentation for the packages (Airflow, Helm chart,
+```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084937356,eladkal,45845474,2025-05-12T15:27:09+00:00,2025-05-12T15:27:09+00:00,We still need to do this if we add new provider or change his index place ,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084940243,eladkal,45845474,2025-05-12T15:28:05+00:00,2025-05-12T15:28:06+00:00,"We should describe on which S3 path we do that.
+As far as i remember you asked to do it on stage, review the docs and only if looks good rerun on live?",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084950436,eladkal,45845474,2025-05-12T15:31:41+00:00,2025-05-12T15:31:46+00:00,"Should we have a section that explains how to get permission to the S3?
+I assume only specific persons have access to the account",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084968415,potiuk,595491,2025-05-12T15:41:11+00:00,2025-05-12T15:41:11+00:00,Right!,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084977656,potiuk,595491,2025-05-12T15:46:22+00:00,2025-05-12T15:46:23+00:00,"We do not have yet ""staging"" workflow enabled. Live is the only one that works - we will update it later, but live should be used only for now. I will add it.",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2084979151,potiuk,595491,2025-05-12T15:47:16+00:00,2025-05-12T15:47:16+00:00,"Sure. We can add ""Ask in #internal-airflow-ci-cd channel on slack""",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512264648,2083615920,gopidesupavan,31437079,2025-05-11T20:39:06+00:00,2025-05-11T20:39:06+00:00,"We can add a note about dry running a when using manual `breeze release-management publish-docs-to-s3` would better always.
+",True,docs/README.md,180.0,"@@ -37,3 +53,162 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow](images/publish_airflow.png)
++
++Right after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TO DO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++Also another thing that is triggered automatically (TODO: IMPLEMENT THIS) is building the `airflow-site`
++and re-publishing it. This is needed in order to refresh version numbers of published documentation. After
++you publish new version of the documentation, the ""stable"" version of the documentation is automatically
++replaced with the new version, however building the `airflow-site` is needed to make sure that the drop-down
++version numbers are updated properly.
++
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the documentation packages (Airflow, Helm chart,
++Providers, Docker Stack) that we publish from airflow sources. If we want to publish changes to the website
++itself or to the theme (css, javascript) we need to do it in `airflow-site` repository.
++
++Publishing of airflow-site happens automatically when a PR from `airflow-site` is merged to `main` or when
++the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml) workflow is triggered
++manually in the main branch of `airflow-site` repository. The workflow builds the website and publishes it to
++`publish` branch of `airflow-site` repository, which in turn gets picked up by the ASF servers and is
++published as the official website. This includes any changes to `.htaccess` of the website.
++
++Such a main build also publishes latest ""sphinx-airflow-theme"" package to GitHub so that the next build
++of documentation can automatically pick it up from there. This means that if you want to make changes to
++`javascript` or `css` that are part of the theme, you need to do it in `ariflow-site` repository and
++merge it to `main` branch in order to be able to run the documentation build in `apache-airflow` repository
++and pick up the latest version of the theme.
++
++The version of sphinx theme is fixed in both repositories:
++
++* https://github.com/apache/airflow-site/blob/main/sphinx_airflow_theme/sphinx_airflow_theme/__init__.py#L21
++* https://github.com/apache/airflow/blob/main/devel-common/pyproject.toml#L77 in ""docs"" section
++
++In case of bigger changes to the theme, we
++can first iterate on the website and merge a new theme version, and only after that we can switch to the new
++version of the theme.
++
++
++# Fixing historical documentation
++
++Sometimes we need to update historical documentation (modify generated `html`) - for example when we find
++bad links or when we change some of the structure in the documentation. This can be done via the
++`airflow-site-archive` repository. The workflow is as follows:
++
++* Get the latest version of the documentation from S3 to `airflow-site-archive` repository using
++  `Sync s3 to GitHub` workflow. This will download the latest version of the documentation from S3 to
++  `airflow-site-archive` repository (this should be normally not needed, if automated synchronization works).
++
++* Make the changes to the documentation in `airflow-site-archive` repository. This can be done using any
++  text editors, scripts etc. Those files are generated as `html` files and are not meant to be regenerated,
++  they should be modified as `html` files in-place
++
++* Commit the changes to `airflow-site-archive` repository and push them to `some` branch of the repository.
++
++* Run `Sync GitHub to S3` workflow in `airflow-site-archive` repository. This will upload the modified
++  documentation to S3 bucket.
++
++* You can choose, whether to sync the changes to `live` or `staging` bucket. The default is `live`.
++
++* By default the workflow will synchronize all documentation modified in single - last commit pushed to
++  the branch you specified. You can also specify ""full_sync"" to synchronize all files in the repository.
++
++* In case you specify ""full_sync"", you can also synchronize `all` docs or only selected documentation
++  packages (for example `apache-airflow` or `docker-stack` or `amazon` or `helm-chart`) - you can specify
++ more than one package separated by  spaces.
++
++* After you synchronize the changes to S3, the Sync `S3 to GitHub` workflow will be triggered
++  automatically and the changes will be synchronized to `airflow-site-archive` `main` branch - so there
++  is no need to merge your changes to `main` branch of `airflow-site-archive` repository.
++
++![Sync GitHub to S3](images/sync_github_to_s3.png)
++
++
++## Manually publishing documentation
++
++The regular publishing workflows involve running Github Actions workflow and they cover majority of cases,
++however sometimes some manual updates and cherry-picks are needed, when we discover problems with the
++publishing and doc building code - for example when we find that we need to fix extensions to sphinx.
++
++In such case, release manager or a committer can build and publish documentation locally - providing that
++they configure AWS credentials to be able to upload files to S3.
++
++You can checkout locally a version of airflow repo that you need and apply any cherry-picks you need before
++running publishing.
++
++This is done using breeze. You also need to have aws CLI installed and configured credentials to be able
++to upload files to S3. You can get credentials from one of the admins of Airflow's AWS account. The
++region to set for AWS is `us-east-2`.
++",0,0,0,0,0,0,0
+apache/airflow,2512264648,2083625286,potiuk,595491,2025-05-11T21:26:57+00:00,2025-05-11T21:26:57+00:00,yeah. I am also adding another manual method - without the need of S3 credentials - via archive repo,True,docs/README.md,180.0,"@@ -37,3 +53,162 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow](images/publish_airflow.png)
++
++Right after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TO DO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++Also another thing that is triggered automatically (TODO: IMPLEMENT THIS) is building the `airflow-site`
++and re-publishing it. This is needed in order to refresh version numbers of published documentation. After
++you publish new version of the documentation, the ""stable"" version of the documentation is automatically
++replaced with the new version, however building the `airflow-site` is needed to make sure that the drop-down
++version numbers are updated properly.
++
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the documentation packages (Airflow, Helm chart,
++Providers, Docker Stack) that we publish from airflow sources. If we want to publish changes to the website
++itself or to the theme (css, javascript) we need to do it in `airflow-site` repository.
++
++Publishing of airflow-site happens automatically when a PR from `airflow-site` is merged to `main` or when
++the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml) workflow is triggered
++manually in the main branch of `airflow-site` repository. The workflow builds the website and publishes it to
++`publish` branch of `airflow-site` repository, which in turn gets picked up by the ASF servers and is
++published as the official website. This includes any changes to `.htaccess` of the website.
++
++Such a main build also publishes latest ""sphinx-airflow-theme"" package to GitHub so that the next build
++of documentation can automatically pick it up from there. This means that if you want to make changes to
++`javascript` or `css` that are part of the theme, you need to do it in `ariflow-site` repository and
++merge it to `main` branch in order to be able to run the documentation build in `apache-airflow` repository
++and pick up the latest version of the theme.
++
++The version of sphinx theme is fixed in both repositories:
++
++* https://github.com/apache/airflow-site/blob/main/sphinx_airflow_theme/sphinx_airflow_theme/__init__.py#L21
++* https://github.com/apache/airflow/blob/main/devel-common/pyproject.toml#L77 in ""docs"" section
++
++In case of bigger changes to the theme, we
++can first iterate on the website and merge a new theme version, and only after that we can switch to the new
++version of the theme.
++
++
++# Fixing historical documentation
++
++Sometimes we need to update historical documentation (modify generated `html`) - for example when we find
++bad links or when we change some of the structure in the documentation. This can be done via the
++`airflow-site-archive` repository. The workflow is as follows:
++
++* Get the latest version of the documentation from S3 to `airflow-site-archive` repository using
++  `Sync s3 to GitHub` workflow. This will download the latest version of the documentation from S3 to
++  `airflow-site-archive` repository (this should be normally not needed, if automated synchronization works).
++
++* Make the changes to the documentation in `airflow-site-archive` repository. This can be done using any
++  text editors, scripts etc. Those files are generated as `html` files and are not meant to be regenerated,
++  they should be modified as `html` files in-place
++
++* Commit the changes to `airflow-site-archive` repository and push them to `some` branch of the repository.
++
++* Run `Sync GitHub to S3` workflow in `airflow-site-archive` repository. This will upload the modified
++  documentation to S3 bucket.
++
++* You can choose, whether to sync the changes to `live` or `staging` bucket. The default is `live`.
++
++* By default the workflow will synchronize all documentation modified in single - last commit pushed to
++  the branch you specified. You can also specify ""full_sync"" to synchronize all files in the repository.
++
++* In case you specify ""full_sync"", you can also synchronize `all` docs or only selected documentation
++  packages (for example `apache-airflow` or `docker-stack` or `amazon` or `helm-chart`) - you can specify
++ more than one package separated by  spaces.
++
++* After you synchronize the changes to S3, the Sync `S3 to GitHub` workflow will be triggered
++  automatically and the changes will be synchronized to `airflow-site-archive` `main` branch - so there
++  is no need to merge your changes to `main` branch of `airflow-site-archive` repository.
++
++![Sync GitHub to S3](images/sync_github_to_s3.png)
++
++
++## Manually publishing documentation
++
++The regular publishing workflows involve running Github Actions workflow and they cover majority of cases,
++however sometimes some manual updates and cherry-picks are needed, when we discover problems with the
++publishing and doc building code - for example when we find that we need to fix extensions to sphinx.
++
++In such case, release manager or a committer can build and publish documentation locally - providing that
++they configure AWS credentials to be able to upload files to S3.
++
++You can checkout locally a version of airflow repo that you need and apply any cherry-picks you need before
++running publishing.
++
++This is done using breeze. You also need to have aws CLI installed and configured credentials to be able
++to upload files to S3. You can get credentials from one of the admins of Airflow's AWS account. The
++region to set for AWS is `us-east-2`.
++",0,0,0,0,0,0,0
+apache/airflow,2512264648,2083628581,potiuk,595491,2025-05-11T21:45:57+00:00,2025-05-11T21:45:57+00:00,Added the second manual update option and mentioned `--dry-run`,True,docs/README.md,180.0,"@@ -37,3 +53,162 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow](images/publish_airflow.png)
++
++Right after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TO DO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++Also another thing that is triggered automatically (TODO: IMPLEMENT THIS) is building the `airflow-site`
++and re-publishing it. This is needed in order to refresh version numbers of published documentation. After
++you publish new version of the documentation, the ""stable"" version of the documentation is automatically
++replaced with the new version, however building the `airflow-site` is needed to make sure that the drop-down
++version numbers are updated properly.
++
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the documentation packages (Airflow, Helm chart,
++Providers, Docker Stack) that we publish from airflow sources. If we want to publish changes to the website
++itself or to the theme (css, javascript) we need to do it in `airflow-site` repository.
++
++Publishing of airflow-site happens automatically when a PR from `airflow-site` is merged to `main` or when
++the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml) workflow is triggered
++manually in the main branch of `airflow-site` repository. The workflow builds the website and publishes it to
++`publish` branch of `airflow-site` repository, which in turn gets picked up by the ASF servers and is
++published as the official website. This includes any changes to `.htaccess` of the website.
++
++Such a main build also publishes latest ""sphinx-airflow-theme"" package to GitHub so that the next build
++of documentation can automatically pick it up from there. This means that if you want to make changes to
++`javascript` or `css` that are part of the theme, you need to do it in `ariflow-site` repository and
++merge it to `main` branch in order to be able to run the documentation build in `apache-airflow` repository
++and pick up the latest version of the theme.
++
++The version of sphinx theme is fixed in both repositories:
++
++* https://github.com/apache/airflow-site/blob/main/sphinx_airflow_theme/sphinx_airflow_theme/__init__.py#L21
++* https://github.com/apache/airflow/blob/main/devel-common/pyproject.toml#L77 in ""docs"" section
++
++In case of bigger changes to the theme, we
++can first iterate on the website and merge a new theme version, and only after that we can switch to the new
++version of the theme.
++
++
++# Fixing historical documentation
++
++Sometimes we need to update historical documentation (modify generated `html`) - for example when we find
++bad links or when we change some of the structure in the documentation. This can be done via the
++`airflow-site-archive` repository. The workflow is as follows:
++
++* Get the latest version of the documentation from S3 to `airflow-site-archive` repository using
++  `Sync s3 to GitHub` workflow. This will download the latest version of the documentation from S3 to
++  `airflow-site-archive` repository (this should be normally not needed, if automated synchronization works).
++
++* Make the changes to the documentation in `airflow-site-archive` repository. This can be done using any
++  text editors, scripts etc. Those files are generated as `html` files and are not meant to be regenerated,
++  they should be modified as `html` files in-place
++
++* Commit the changes to `airflow-site-archive` repository and push them to `some` branch of the repository.
++
++* Run `Sync GitHub to S3` workflow in `airflow-site-archive` repository. This will upload the modified
++  documentation to S3 bucket.
++
++* You can choose, whether to sync the changes to `live` or `staging` bucket. The default is `live`.
++
++* By default the workflow will synchronize all documentation modified in single - last commit pushed to
++  the branch you specified. You can also specify ""full_sync"" to synchronize all files in the repository.
++
++* In case you specify ""full_sync"", you can also synchronize `all` docs or only selected documentation
++  packages (for example `apache-airflow` or `docker-stack` or `amazon` or `helm-chart`) - you can specify
++ more than one package separated by  spaces.
++
++* After you synchronize the changes to S3, the Sync `S3 to GitHub` workflow will be triggered
++  automatically and the changes will be synchronized to `airflow-site-archive` `main` branch - so there
++  is no need to merge your changes to `main` branch of `airflow-site-archive` repository.
++
++![Sync GitHub to S3](images/sync_github_to_s3.png)
++
++
++## Manually publishing documentation
++
++The regular publishing workflows involve running Github Actions workflow and they cover majority of cases,
++however sometimes some manual updates and cherry-picks are needed, when we discover problems with the
++publishing and doc building code - for example when we find that we need to fix extensions to sphinx.
++
++In such case, release manager or a committer can build and publish documentation locally - providing that
++they configure AWS credentials to be able to upload files to S3.
++
++You can checkout locally a version of airflow repo that you need and apply any cherry-picks you need before
++running publishing.
++
++This is done using breeze. You also need to have aws CLI installed and configured credentials to be able
++to upload files to S3. You can get credentials from one of the admins of Airflow's AWS account. The
++region to set for AWS is `us-east-2`.
++",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084147683,kaxil,8811558,2025-05-12T08:40:41+00:00,2025-05-12T08:40:42+00:00,"```suggestion
+This is the diagram of live documentation architecture:
+```",True,docs/README.md,,"@@ -37,3 +54,189 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084147828,kaxil,8811558,2025-05-12T08:40:46+00:00,2025-05-12T08:40:46+00:00,"```suggestion
+* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it work
+```",True,docs/README.md,,"@@ -37,3 +54,189 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084150164,kaxil,8811558,2025-05-12T08:41:33+00:00,2025-05-12T08:41:33+00:00,"```suggestion
+via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same workflow can be used to publish Airflow, Helm chart and providers documentation.
+```",True,docs/README.md,,"@@ -37,3 +54,189 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084151834,kaxil,8811558,2025-05-12T08:42:20+00:00,2025-05-12T08:42:21+00:00,"```suggestion
+repository is automatically synchronized with the live S3 bucket. TODO: IMPLEMENT THIS, FOR NOW IT HAS
+```",True,docs/README.md,,"@@ -37,3 +54,189 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow](images/publish_airflow.png)
++
++Right after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TO DO: IMPLEMENT THIS, FOR NOW IT HAS",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084153505,kaxil,8811558,2025-05-12T08:43:01+00:00,2025-05-12T08:43:02+00:00,"```suggestion
+The workflows in `apache-airflow` only update the documentation for the packages (Airflow, Helm chart,
+```",True,docs/README.md,,"@@ -37,3 +54,189 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it works
++
++# Diagrams of the documentation architecture
++
++This is the diagram od live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using `Publish Docs to S3` GitHub Action (accessible
++via [GitHub UI](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml). The same  workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow](images/publish_airflow.png)
++
++Right after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TO DO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++Also another thing that is triggered automatically (TODO: IMPLEMENT THIS) is building the `airflow-site`
++and re-publishing it. This is needed in order to refresh version numbers of published documentation. After
++you publish new version of the documentation, the ""stable"" version of the documentation is automatically
++replaced with the new version, however building the `airflow-site` is needed to make sure that the drop-down
++version numbers are updated properly.
++
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the documentation packages (Airflow, Helm chart,",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084937356,eladkal,45845474,2025-05-12T15:27:09+00:00,2025-05-12T15:27:09+00:00,We still need to do this if we add new provider or change his index place ,True,dev/README_RELEASE_PROVIDERS.md,151.0,"@@ -486,137 +485,6 @@ If you want to disable this behaviour, set the env **CLEAN_LOCAL_TAGS** to false
+ breeze release-management tag-providers
+ ```
+ 
+-## Prepare documentation
+-
+-Documentation is an essential part of the product and should be made available to users.
+-In our cases, documentation  for the released versions is published in a separate repository -
+-[`apache/airflow-site`](https://github.com/apache/airflow-site), but the documentation source code
+-and build tools are available in the `apache/airflow` repository, so you have to coordinate between
+-the two repositories to be able to build the documentation.
+-
+-Documentation for providers can be found in the `/docs/apache-airflow-providers` directory
+-and the `/docs/apache-airflow-providers-*/` directory. The first directory contains the package contents
+-lists and should be updated every time a new version of Provider distributions is released.
+-
+-- First, copy the airflow-site repository and set the environment variable ``AIRFLOW_SITE_DIRECTORY``.
+-
+-```shell script
+-git clone https://github.com/apache/airflow-site.git airflow-site
+-cd airflow-site
+-export AIRFLOW_SITE_DIRECTORY=""$(pwd -P)""
+-```
+-
+-Note if this is not the first time you clone the repo make sure main branch is rebased:
+-
+-```shell script
+-cd ""${AIRFLOW_SITE_DIRECTORY}""
+-git checkout main
+-git pull --rebase
+-```
+-
+-- Then you can go to the directory and build the necessary documentation packages
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs --clean-build apache-airflow-providers all-providers --include-removed-providers --include-commits
+-```
+-
+-Usually when we release packages we also build documentation for the ""documentation-only"" packages. This
+-means that unless we release just few selected packages or if we need to deliberately skip some packages
+-we should release documentation for all Provider distributions and the above command is the one to use.
+-
+-If we want to just release some providers you can release them using package names:
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs apache-airflow-providers cncf.kubernetes sftp --clean-build --include-commits
+-```
+-
+-Alternatively, if you have set the environment variable: `DISTRIBUTIONS_LIST` above, just run the command:
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs --clean-build --include-commits
+-```
+-
+-Or using `--distributions-list` argument:
+-
+-```shell script
+-breeze build-docs --distributions-list PACKAGE1,PACKAGE2 --include-commits
+-```
+-
+-- Now you can preview the documentation.
+-
+-```shell script
+-./docs/start_doc_server.sh
+-```
+-
+-If you encounter error like:
+-
+-```shell script
+-airflow git:(main) ./docs/start_doc_server.sh
+-./docs/start_doc_server.sh: line 22: cd: /Users/eladkal/PycharmProjects/airflow/docs/_build: No such file or directory
+-```
+-
+-That probably means that the doc folder is empty thus it can not build the doc server.
+-This indicates that previous step of building the docs did not work.
+-
+-- Copy the documentation to the ``airflow-site`` repository
+-
+-All providers (including overriding documentation for doc-only changes) - note that publishing is
+-way faster on multi-cpu machines when you are publishing multiple providers:
+-
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-
+-breeze release-management publish-docs apache-airflow-providers all-providers --include-removed-providers \
+-    --override-versioned --run-in-parallel
+-
+-breeze release-management add-back-references all-providers
+-```
+-
+-If you have providers as list of provider ids because you just released them you can build them with
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-
+-breeze release-management publish-docs amazon apache.beam google ....
+-breeze release-management add-back-references all-providers
+-```
+-
+-Alternatively, if you have set the environment variable: `DISTRIBUTIONS_LIST` above, just run the command:
+-
+-```shell script
+-breeze release-management publish-docs
+-breeze release-management add-back-references all-providers
+-```
+-
+-Or using `--distributions-list` argument:
+-
+-```shell script
+-breeze release-management publish-docs --distributions-list PACKAGE1,PACKAGE2
+-breeze release-management add-back-references all-providers
+-```
+-
+-
+-Review the state of removed, suspended, new packages in
+-[the docs index](https://github.com/apache/airflow-site/blob/master/landing-pages/site/content/en/docs/_index.md):
+-
+-- If you publish a new package, you must add it to the list of packages in the index.
+-- If there are changes to suspension or removal status of a package  you must move it appropriate section.
+-
+-- Create the commit and push changes.
+-
+-```shell script
+-cd ""${AIRFLOW_SITE_DIRECTORY}""
+-branch=""add-documentation-$(date ""+%Y-%m-%d%n"")""
+-git checkout -b ""${branch}""
+-git add .
+-git commit -m ""Add documentation for packages - $(date ""+%Y-%m-%d%n"")""
+-git push --set-upstream origin ""${branch}""
+-```",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084940243,eladkal,45845474,2025-05-12T15:28:05+00:00,2025-05-12T15:28:06+00:00,"We should describe on which S3 path we do that.
+As far as i remember you asked to do it on stage, review the docs and only if looks good rerun on live?",True,dev/README_RELEASE_PROVIDERS.md,204.0,"@@ -1283,6 +1136,38 @@ If you want to disable this behaviour, set the env **CLEAN_LOCAL_TAGS** to false
+ breeze release-management tag-providers
+ ```
+ 
++## Publish documentation
++
++Documentation is an essential part of the product and should be made available to users.
++In our cases, documentation for the released versions is published in S3 bucket, and the site is
++kept in a separate repository - [`apache/airflow-site`](https://github.com/apache/airflow-site),
++but the documentation source code and build tools are available in the `apache/airflow` repository, so
++you need to run several workflows to publish the documentation. More details about it can be found in
++[Docs README](../docs/README.md) showing the architecture and workflows including manual workflows for
++emergency cases.
++
++There are two steps to publish the documentation:
++
++1. Publish the documentation to S3 bucket.
++
++The release manager publishes the documentation using GitHub Actions workflow
++[Publish Docs to S3](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml).
++
++You can specify the tag to use to build the docs and list of providers to publish (separated by spaces) or
++``all-providers`` in case you want to publish all providers (optionally you can exclude
++some of those providers)
++
++After that step, the provider documentation should be available under the usual urls (same as in PyPI packages)
++but stable links and drop-down boxes should not be updated.",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084950436,eladkal,45845474,2025-05-12T15:31:41+00:00,2025-05-12T15:31:46+00:00,"Should we have a section that explains how to get permission to the S3?
+I assume only specific persons have access to the account",True,docs/README.md,164.0,"@@ -37,3 +54,196 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it work
++
++# Diagrams of the documentation architecture
++
++This is the diagram of live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using GitHub Actions workflow
++[Publish Docs to S3](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml).
++The same workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow or providers](images/publish_airflow.png)
++
++Note that this just publishes the documentation but does not update the ""site"" with version numbers or
++stable links to providers and airflow - if you release a new documentation version it will be available
++with direct URL (say https://apache.airflow.org/docs/apache-airflow/3.0.1/) but the main site will still
++point to previous version of the documentation as `stable` and the version drop-downs will not be updated.
++
++In order to do it, you need to run the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml)
++workflow in `airflow-site` repository. This will build the website and publish it to the `publish`
++branch of `airflow-site` repository, including refreshing of the version numbers in the drop-downs and
++stable links.
++
++![Publishing site](images/publish_site.png)
++
++
++Some time after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TODO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the packages (Airflow, Helm chart,
++Providers, Docker Stack) that we publish from airflow sources. If we want to publish changes to the website
++itself or to the theme (css, javascript) we need to do it in `airflow-site` repository.
++
++Publishing of airflow-site happens automatically when a PR from `airflow-site` is merged to `main` or when
++the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml) workflow is triggered
++manually in the main branch of `airflow-site` repository. The workflow builds the website and publishes it to
++`publish` branch of `airflow-site` repository, which in turn gets picked up by the ASF servers and is
++published as the official website. This includes any changes to `.htaccess` of the website.
++
++Such a main build also publishes latest ""sphinx-airflow-theme"" package to GitHub so that the next build
++of documentation can automatically pick it up from there. This means that if you want to make changes to
++`javascript` or `css` that are part of the theme, you need to do it in `ariflow-site` repository and
++merge it to `main` branch in order to be able to run the documentation build in `apache-airflow` repository
++and pick up the latest version of the theme.
++
++The version of sphinx theme is fixed in both repositories:
++
++* https://github.com/apache/airflow-site/blob/main/sphinx_airflow_theme/sphinx_airflow_theme/__init__.py#L21
++* https://github.com/apache/airflow/blob/main/devel-common/pyproject.toml#L77 in ""docs"" section
++
++In case of bigger changes to the theme, we
++can first iterate on the website and merge a new theme version, and only after that we can switch to the new
++version of the theme.
++
++
++# Fixing historical documentation
++
++Sometimes we need to update historical documentation (modify generated `html`) - for example when we find
++bad links or when we change some of the structure in the documentation. This can be done via the
++`airflow-site-archive` repository. The workflow is as follows:
++
++1. Get the latest version of the documentation from S3 to `airflow-site-archive` repository using
++   `Sync s3 to GitHub` workflow. This will download the latest version of the documentation from S3 to
++   `airflow-site-archive` repository (this should be normally not needed, if automated synchronization works).
++2. Make the changes to the documentation in `airflow-site-archive` repository. This can be done using any
++   text editors, scripts etc. Those files are generated as `html` files and are not meant to be regenerated,
++   they should be modified as `html` files in-place
++3. Commit the changes to `airflow-site-archive` repository and push them to `some` branch of the repository.
++4. Run `Sync GitHub to S3` workflow in `airflow-site-archive` repository. This will upload the modified
++   documentation to S3 bucket.
++5. You can choose, whether to sync the changes to `live` or `staging` bucket. The default is `live`.
++6. By default the workflow will synchronize all documentation modified in single - last commit pushed to
++   the branch you specified. You can also specify ""full_sync"" to synchronize all files in the repository.
++7. In case you specify ""full_sync"", you can also synchronize `all` docs or only selected documentation
++   packages (for example `apache-airflow` or `docker-stack` or `amazon` or `helm-chart`) - you can specify
++   more than one package separated by  spaces.
++8. After you synchronize the changes to S3, the Sync `S3 to GitHub` workflow will be triggered
++   automatically and the changes will be synchronized to `airflow-site-archive` `main` branch - so there
++   is no need to merge your changes to `main` branch of `airflow-site-archive` repository. You can safely
++   delete the branch you created in step 3.
++
++![Sync GitHub to S3](images/sync_github_to_s3.png)
++
++
++## Manually publishing documentation directly to S3",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084968415,potiuk,595491,2025-05-12T15:41:11+00:00,2025-05-12T15:41:11+00:00,Right!,True,dev/README_RELEASE_PROVIDERS.md,151.0,"@@ -486,137 +485,6 @@ If you want to disable this behaviour, set the env **CLEAN_LOCAL_TAGS** to false
+ breeze release-management tag-providers
+ ```
+ 
+-## Prepare documentation
+-
+-Documentation is an essential part of the product and should be made available to users.
+-In our cases, documentation  for the released versions is published in a separate repository -
+-[`apache/airflow-site`](https://github.com/apache/airflow-site), but the documentation source code
+-and build tools are available in the `apache/airflow` repository, so you have to coordinate between
+-the two repositories to be able to build the documentation.
+-
+-Documentation for providers can be found in the `/docs/apache-airflow-providers` directory
+-and the `/docs/apache-airflow-providers-*/` directory. The first directory contains the package contents
+-lists and should be updated every time a new version of Provider distributions is released.
+-
+-- First, copy the airflow-site repository and set the environment variable ``AIRFLOW_SITE_DIRECTORY``.
+-
+-```shell script
+-git clone https://github.com/apache/airflow-site.git airflow-site
+-cd airflow-site
+-export AIRFLOW_SITE_DIRECTORY=""$(pwd -P)""
+-```
+-
+-Note if this is not the first time you clone the repo make sure main branch is rebased:
+-
+-```shell script
+-cd ""${AIRFLOW_SITE_DIRECTORY}""
+-git checkout main
+-git pull --rebase
+-```
+-
+-- Then you can go to the directory and build the necessary documentation packages
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs --clean-build apache-airflow-providers all-providers --include-removed-providers --include-commits
+-```
+-
+-Usually when we release packages we also build documentation for the ""documentation-only"" packages. This
+-means that unless we release just few selected packages or if we need to deliberately skip some packages
+-we should release documentation for all Provider distributions and the above command is the one to use.
+-
+-If we want to just release some providers you can release them using package names:
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs apache-airflow-providers cncf.kubernetes sftp --clean-build --include-commits
+-```
+-
+-Alternatively, if you have set the environment variable: `DISTRIBUTIONS_LIST` above, just run the command:
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-breeze build-docs --clean-build --include-commits
+-```
+-
+-Or using `--distributions-list` argument:
+-
+-```shell script
+-breeze build-docs --distributions-list PACKAGE1,PACKAGE2 --include-commits
+-```
+-
+-- Now you can preview the documentation.
+-
+-```shell script
+-./docs/start_doc_server.sh
+-```
+-
+-If you encounter error like:
+-
+-```shell script
+-airflow git:(main) ./docs/start_doc_server.sh
+-./docs/start_doc_server.sh: line 22: cd: /Users/eladkal/PycharmProjects/airflow/docs/_build: No such file or directory
+-```
+-
+-That probably means that the doc folder is empty thus it can not build the doc server.
+-This indicates that previous step of building the docs did not work.
+-
+-- Copy the documentation to the ``airflow-site`` repository
+-
+-All providers (including overriding documentation for doc-only changes) - note that publishing is
+-way faster on multi-cpu machines when you are publishing multiple providers:
+-
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-
+-breeze release-management publish-docs apache-airflow-providers all-providers --include-removed-providers \
+-    --override-versioned --run-in-parallel
+-
+-breeze release-management add-back-references all-providers
+-```
+-
+-If you have providers as list of provider ids because you just released them you can build them with
+-
+-```shell script
+-cd ""${AIRFLOW_REPO_ROOT}""
+-
+-breeze release-management publish-docs amazon apache.beam google ....
+-breeze release-management add-back-references all-providers
+-```
+-
+-Alternatively, if you have set the environment variable: `DISTRIBUTIONS_LIST` above, just run the command:
+-
+-```shell script
+-breeze release-management publish-docs
+-breeze release-management add-back-references all-providers
+-```
+-
+-Or using `--distributions-list` argument:
+-
+-```shell script
+-breeze release-management publish-docs --distributions-list PACKAGE1,PACKAGE2
+-breeze release-management add-back-references all-providers
+-```
+-
+-
+-Review the state of removed, suspended, new packages in
+-[the docs index](https://github.com/apache/airflow-site/blob/master/landing-pages/site/content/en/docs/_index.md):
+-
+-- If you publish a new package, you must add it to the list of packages in the index.
+-- If there are changes to suspension or removal status of a package  you must move it appropriate section.
+-
+-- Create the commit and push changes.
+-
+-```shell script
+-cd ""${AIRFLOW_SITE_DIRECTORY}""
+-branch=""add-documentation-$(date ""+%Y-%m-%d%n"")""
+-git checkout -b ""${branch}""
+-git add .
+-git commit -m ""Add documentation for packages - $(date ""+%Y-%m-%d%n"")""
+-git push --set-upstream origin ""${branch}""
+-```",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084977656,potiuk,595491,2025-05-12T15:46:22+00:00,2025-05-12T15:46:23+00:00,"We do not have yet ""staging"" workflow enabled. Live is the only one that works - we will update it later, but live should be used only for now. I will add it.",True,dev/README_RELEASE_PROVIDERS.md,204.0,"@@ -1283,6 +1136,38 @@ If you want to disable this behaviour, set the env **CLEAN_LOCAL_TAGS** to false
+ breeze release-management tag-providers
+ ```
+ 
++## Publish documentation
++
++Documentation is an essential part of the product and should be made available to users.
++In our cases, documentation for the released versions is published in S3 bucket, and the site is
++kept in a separate repository - [`apache/airflow-site`](https://github.com/apache/airflow-site),
++but the documentation source code and build tools are available in the `apache/airflow` repository, so
++you need to run several workflows to publish the documentation. More details about it can be found in
++[Docs README](../docs/README.md) showing the architecture and workflows including manual workflows for
++emergency cases.
++
++There are two steps to publish the documentation:
++
++1. Publish the documentation to S3 bucket.
++
++The release manager publishes the documentation using GitHub Actions workflow
++[Publish Docs to S3](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml).
++
++You can specify the tag to use to build the docs and list of providers to publish (separated by spaces) or
++``all-providers`` in case you want to publish all providers (optionally you can exclude
++some of those providers)
++
++After that step, the provider documentation should be available under the usual urls (same as in PyPI packages)
++but stable links and drop-down boxes should not be updated.",0,0,0,0,0,0,0
+apache/airflow,2512264648,2084979151,potiuk,595491,2025-05-12T15:47:16+00:00,2025-05-12T15:47:16+00:00,"Sure. We can add ""Ask in #internal-airflow-ci-cd channel on slack""",True,docs/README.md,164.0,"@@ -37,3 +54,196 @@ Documentation for general overview and summaries not connected with any specific
+ 
+ * `docker-stack-docs` - documentation for Docker Stack'
+ * `providers-summary-docs` - documentation for provider summary page
++
++# Architecture of documentation for Airflow
++
++Building documentation for Airflow is optimized for speed and for convenience workflows of the release
++managers and committers who publish and fix the documentation - that's why it's a little complex, as we have
++multiple repositories and multiple sources of the documentation involved.
++
++There are few repositories under `apache` organization which are used to build the documentation for Airflow:
++
++* `apache-airflow` - the repository with the code and the documentation sources for Airflow distributions,
++   provider distributions, providers summary and docker summary: [apache-airflow](https://github.com/apache/airflow)
++   from here we publish the documentation to S3 bucket where the documentation is hosted.
++* `airflow-site` - the repository with the website theme and content where we keep sources of the website
++   structure, navigation, theme for the website [airflow-site](https://github.com/apache/airflow). From here
++   we publish the website to the ASF servers so they are publish as the [official website](https://airflow.apache.org)
++* `airflow-site-archive` - here we keep the archived historical versions of the generated documentation
++   of all the documentation packages that we keep on S3. This repository is automatically synchronized from
++   the S3 buckets and is only used in case we need to perform a bulk update of historical documentation. Here only
++   generated `html`, `css`, `js` and `images` files are kept, no sources of the documentation are kept here.
++
++We have two S3 buckets where we can publish the documentation generated from `apache-airflow` repository:
++
++* `s3://live-docs-airflow-apache-org/docs/` - live, [official documentation](https://airflow.apache.org/docs/)
++* `s3://staging-docs-airflow-apache-org/docs/` - staging documentation [official documentation](https://staging-airflow.apache.org/docs/) TODO: make it work
++
++# Diagrams of the documentation architecture
++
++This is the diagram of live documentation architecture:
++
++![Live documentation architecture](images/documentation_architecture.png)
++
++Staging documentation architecture is similar, but uses staging bucket and staging Apache Website.
++
++# Typical workflows
++
++There are a few typical workflows that we support:
++
++## Publishing the documentation by the release manager
++
++The release manager publishes the documentation using GitHub Actions workflow
++[Publish Docs to S3](https://github.com/apache/airflow/actions/workflows/publish-docs-to-s3.yml).
++The same workflow can be used to publish Airflow, Helm chart and providers documentation.
++
++The person who triggers the build (release manager) should specify the tag name of the docs to be published
++and the list of documentation packages to be published. Usually it is:
++
++* Airflow: `apache-airflow docker-stack` (later we will add `airflow-ctl` and `task-sdk`)
++* Helm chart: `helm-chart`
++* Providers: `provider_id1 provider_id2` or `all providers` if all providers should be published.
++
++Optionally - specifically if we run `all-providers` and release manager wants to exclude some providers,
++they can specify documentation packages to exclude. Leaving ""no-docs-excluded"" will publish all packages
++specified to be published without exclusions.
++
++You can also specify whether ""live"" or ""staging"" documentation should be published. The default is ""live"".
++
++Example screenshot of the workflow triggered from the GitHub UI:
++
++![Publishing airflow or providers](images/publish_airflow.png)
++
++Note that this just publishes the documentation but does not update the ""site"" with version numbers or
++stable links to providers and airflow - if you release a new documentation version it will be available
++with direct URL (say https://apache.airflow.org/docs/apache-airflow/3.0.1/) but the main site will still
++point to previous version of the documentation as `stable` and the version drop-downs will not be updated.
++
++In order to do it, you need to run the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml)
++workflow in `airflow-site` repository. This will build the website and publish it to the `publish`
++branch of `airflow-site` repository, including refreshing of the version numbers in the drop-downs and
++stable links.
++
++![Publishing site](images/publish_site.png)
++
++
++Some time after the workflow succeeds and documentation is published, in live bucket, the `airflow-site-archive`
++repository is automatically synchronized with the live S3 bucket. TODO: IMPLEMENT THIS, FOR NOW IT HAS
++TO BE MANUALLY SYNCHRONIZED VIA [Sync s3 to GitHub](https://github.com/apache/airflow-site-archive/actions/workflows/s3-to-github.yml)
++workflow in `airflow-site-archive` repository. The `airflow-site-archive` essentially keeps the history of
++snapshots of the `live` documentation.
++
++## Publishing changes to the website (including theme)
++
++The workflows in `apache-airflow` only update the documentation for the packages (Airflow, Helm chart,
++Providers, Docker Stack) that we publish from airflow sources. If we want to publish changes to the website
++itself or to the theme (css, javascript) we need to do it in `airflow-site` repository.
++
++Publishing of airflow-site happens automatically when a PR from `airflow-site` is merged to `main` or when
++the [Build docs](https://github.com/apache/airflow-site/actions/workflows/build.yml) workflow is triggered
++manually in the main branch of `airflow-site` repository. The workflow builds the website and publishes it to
++`publish` branch of `airflow-site` repository, which in turn gets picked up by the ASF servers and is
++published as the official website. This includes any changes to `.htaccess` of the website.
++
++Such a main build also publishes latest ""sphinx-airflow-theme"" package to GitHub so that the next build
++of documentation can automatically pick it up from there. This means that if you want to make changes to
++`javascript` or `css` that are part of the theme, you need to do it in `ariflow-site` repository and
++merge it to `main` branch in order to be able to run the documentation build in `apache-airflow` repository
++and pick up the latest version of the theme.
++
++The version of sphinx theme is fixed in both repositories:
++
++* https://github.com/apache/airflow-site/blob/main/sphinx_airflow_theme/sphinx_airflow_theme/__init__.py#L21
++* https://github.com/apache/airflow/blob/main/devel-common/pyproject.toml#L77 in ""docs"" section
++
++In case of bigger changes to the theme, we
++can first iterate on the website and merge a new theme version, and only after that we can switch to the new
++version of the theme.
++
++
++# Fixing historical documentation
++
++Sometimes we need to update historical documentation (modify generated `html`) - for example when we find
++bad links or when we change some of the structure in the documentation. This can be done via the
++`airflow-site-archive` repository. The workflow is as follows:
++
++1. Get the latest version of the documentation from S3 to `airflow-site-archive` repository using
++   `Sync s3 to GitHub` workflow. This will download the latest version of the documentation from S3 to
++   `airflow-site-archive` repository (this should be normally not needed, if automated synchronization works).
++2. Make the changes to the documentation in `airflow-site-archive` repository. This can be done using any
++   text editors, scripts etc. Those files are generated as `html` files and are not meant to be regenerated,
++   they should be modified as `html` files in-place
++3. Commit the changes to `airflow-site-archive` repository and push them to `some` branch of the repository.
++4. Run `Sync GitHub to S3` workflow in `airflow-site-archive` repository. This will upload the modified
++   documentation to S3 bucket.
++5. You can choose, whether to sync the changes to `live` or `staging` bucket. The default is `live`.
++6. By default the workflow will synchronize all documentation modified in single - last commit pushed to
++   the branch you specified. You can also specify ""full_sync"" to synchronize all files in the repository.
++7. In case you specify ""full_sync"", you can also synchronize `all` docs or only selected documentation
++   packages (for example `apache-airflow` or `docker-stack` or `amazon` or `helm-chart`) - you can specify
++   more than one package separated by  spaces.
++8. After you synchronize the changes to S3, the Sync `S3 to GitHub` workflow will be triggered
++   automatically and the changes will be synchronized to `airflow-site-archive` `main` branch - so there
++   is no need to merge your changes to `main` branch of `airflow-site-archive` repository. You can safely
++   delete the branch you created in step 3.
++
++![Sync GitHub to S3](images/sync_github_to_s3.png)
++
++
++## Manually publishing documentation directly to S3",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083499815,eladkal,45845474,2025-05-11T11:44:02+00:00,2025-05-11T11:44:31+00:00,"Do we need to have specific implementation?
+The hook doesn't implement specific implementation for pandas so why would it need one for polars?",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083499888,eladkal,45845474,2025-05-11T11:44:27+00:00,2025-05-11T11:44:31+00:00,I think if you parameterized the `test_get_df_pandas` to include polars that would work,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083501851,guan404ming,105915352,2025-05-11T11:53:12+00:00,2025-05-11T11:56:59+00:00,"Since the `ElasticsearchSQLHook`has its own `ElasticsearchSQLCursor` which is not compatable with polars thus if we comment the implementation above and try like 
+
+```python
+@pytest.mark.parametrize(
+        ""df_type"",
+        [""pandas"", ""polars""],
+    )
+    def test_get_df(self, df_type):
+        statement = ""SELECT * FROM hollywood.actors""
+        df = self.db_hook.get_df(statement, df_type=df_type)
+
+        assert list(df.columns) == [""index"", ""name"", ""firstname"", ""age""]
+        assert df.values.tolist() == ROWS
+
+        self.conn.close.assert_called_once_with()
+        self.spy_agency.assert_spy_called(self.cur.close)
+        self.spy_agency.assert_spy_called(self.cur.execute)
+```
+
+
+would get this error
+```
+___________________________________________________________ TestElasticsearchSQLHook.test_get_df[polars] ___________________________________________________________
+providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py:175: in test_get_df
+    df = self.db_hook.get_df(statement, df_type=df_type)
+providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:458: in get_df
+    return self._get_polars_df(sql, parameters, **kwargs)
+providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:513: in _get_polars_df
+    return pl.read_database(sql, connection=conn, execute_options=execute_options, **kwargs)
+.venv/lib/python3.12/site-packages/polars/io/database/functions.py:251: in read_database
+    ).to_polars(
+.venv/lib/python3.12/site-packages/polars/io/database/_executor.py:563: in to_polars
+    raise NotImplementedError(msg)
+ ```",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083502123,guan404ming,105915352,2025-05-11T11:54:21+00:00,2025-05-11T11:55:28+00:00,I implement it to prevent user to use the `df_type=polars` when using `get_df` since there is incompatible issue which would lead to error below.,False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083507819,eladkal,45845474,2025-05-11T12:12:29+00:00,2025-05-11T12:12:44+00:00,OK can you just add a todo comment in the `_get_polars_df` provide some context about why it's incompatible and what needs to be done to make it work (just leaving instructions to whoever decide to tackle this),False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083510135,guan404ming,105915352,2025-05-11T12:23:35+00:00,2025-05-11T12:24:29+00:00,"Sure, I've updated with todo comment and this pr link hoping that would help.
+If there are more information or discussion about this integration on whether polars or Elasticsearch document in the future, I would get back here and try implement it.",False,,,,0,0,0,0,0,0,0
+apache/airflow,2512064060,2083499815,eladkal,45845474,2025-05-11T11:44:02+00:00,2025-05-11T11:44:31+00:00,"Do we need to have specific implementation?
+The hook doesn't implement specific implementation for pandas so why would it need one for polars?",True,providers/elasticsearch/src/airflow/providers/elasticsearch/hooks/elasticsearch.py,,"@@ -219,6 +219,14 @@ def get_uri(self) -> str:
+ 
+         return uri
+ 
++    def _get_polars_df(
++        self,
++        sql,
++        parameters: list | tuple | Mapping[str, Any] | None = None,
++        **kwargs,
++    ):
++        raise NotImplementedError(""Polars is not supported for Elasticsearch"")",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083499888,eladkal,45845474,2025-05-11T11:44:27+00:00,2025-05-11T11:44:31+00:00,I think if you parameterized the `test_get_df_pandas` to include polars that would work,True,providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py,4.0,"@@ -177,6 +177,10 @@ def test_get_df_pandas(self):
+         self.spy_agency.assert_spy_called(self.cur.close)
+         self.spy_agency.assert_spy_called(self.cur.execute)
+ 
++    def test_get_df_polars(self):",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083501851,guan404ming,105915352,2025-05-11T11:53:12+00:00,2025-05-11T11:56:59+00:00,"Since the `ElasticsearchSQLHook`has its own `ElasticsearchSQLCursor` which is not compatable with polars thus if we comment the implementation above and try like 
+
+```python
+@pytest.mark.parametrize(
+        ""df_type"",
+        [""pandas"", ""polars""],
+    )
+    def test_get_df(self, df_type):
+        statement = ""SELECT * FROM hollywood.actors""
+        df = self.db_hook.get_df(statement, df_type=df_type)
+
+        assert list(df.columns) == [""index"", ""name"", ""firstname"", ""age""]
+        assert df.values.tolist() == ROWS
+
+        self.conn.close.assert_called_once_with()
+        self.spy_agency.assert_spy_called(self.cur.close)
+        self.spy_agency.assert_spy_called(self.cur.execute)
+```
+
+
+would get this error
+```
+___________________________________________________________ TestElasticsearchSQLHook.test_get_df[polars] ___________________________________________________________
+providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py:175: in test_get_df
+    df = self.db_hook.get_df(statement, df_type=df_type)
+providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:458: in get_df
+    return self._get_polars_df(sql, parameters, **kwargs)
+providers/common/sql/src/airflow/providers/common/sql/hooks/sql.py:513: in _get_polars_df
+    return pl.read_database(sql, connection=conn, execute_options=execute_options, **kwargs)
+.venv/lib/python3.12/site-packages/polars/io/database/functions.py:251: in read_database
+    ).to_polars(
+.venv/lib/python3.12/site-packages/polars/io/database/_executor.py:563: in to_polars
+    raise NotImplementedError(msg)
+ ```",True,providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py,4.0,"@@ -177,6 +177,10 @@ def test_get_df_pandas(self):
+         self.spy_agency.assert_spy_called(self.cur.close)
+         self.spy_agency.assert_spy_called(self.cur.execute)
+ 
++    def test_get_df_polars(self):",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083502123,guan404ming,105915352,2025-05-11T11:54:21+00:00,2025-05-11T11:55:28+00:00,I implement it to prevent user to use the `df_type=polars` when using `get_df` since there is incompatible issue which would lead to error below.,True,providers/elasticsearch/src/airflow/providers/elasticsearch/hooks/elasticsearch.py,,"@@ -219,6 +219,14 @@ def get_uri(self) -> str:
+ 
+         return uri
+ 
++    def _get_polars_df(
++        self,
++        sql,
++        parameters: list | tuple | Mapping[str, Any] | None = None,
++        **kwargs,
++    ):
++        raise NotImplementedError(""Polars is not supported for Elasticsearch"")",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083507819,eladkal,45845474,2025-05-11T12:12:29+00:00,2025-05-11T12:12:44+00:00,OK can you just add a todo comment in the `_get_polars_df` provide some context about why it's incompatible and what needs to be done to make it work (just leaving instructions to whoever decide to tackle this),True,providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py,4.0,"@@ -177,6 +177,10 @@ def test_get_df_pandas(self):
+         self.spy_agency.assert_spy_called(self.cur.close)
+         self.spy_agency.assert_spy_called(self.cur.execute)
+ 
++    def test_get_df_polars(self):",0,0,0,0,0,0,0
+apache/airflow,2512064060,2083510135,guan404ming,105915352,2025-05-11T12:23:35+00:00,2025-05-11T12:24:29+00:00,"Sure, I've updated with todo comment and this pr link hoping that would help.
+If there are more information or discussion about this integration on whether polars or Elasticsearch document in the future, I would get back here and try implement it.",True,providers/elasticsearch/tests/unit/elasticsearch/hooks/test_elasticsearch.py,4.0,"@@ -177,6 +177,10 @@ def test_get_df_pandas(self):
+         self.spy_agency.assert_spy_called(self.cur.close)
+         self.spy_agency.assert_spy_called(self.cur.execute)
+ 
++    def test_get_df_polars(self):",0,0,0,0,0,0,0
+apache/airflow,2511928488,2083855483,amoghrajesh,35884252,2025-05-12T05:41:41+00:00,2025-05-12T05:42:53+00:00,Should this not be `ser_input`?,False,,,,1,1,0,0,0,0,0
+apache/airflow,2511928488,2083855989,amoghrajesh,35884252,2025-05-12T05:42:18+00:00,2025-05-12T05:42:53+00:00,"Lets just rename the `content_json_for_volume` -- its not that anymore.
+https://github.com/apache/airflow/pull/50448/files#diff-a82432d2e0fd9cf3be813faa6d4361eb102df82c56583caab8ebe30f10a7eb1dR290",False,,,,0,0,0,0,0,0,0
+apache/airflow,2511928488,2083855483,amoghrajesh,35884252,2025-05-12T05:41:41+00:00,2025-05-12T05:42:53+00:00,Should this not be `ser_input`?,True,providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/executors/kubernetes_executor_utils.py,,"@@ -398,8 +398,8 @@ def run_next(self, next_job: KubernetesJobType) -> None:
+                     ""python"",
+                     ""-m"",
+                     ""airflow.sdk.execution_time.execute_workload"",
+-                    ""--json-path"",
+-                    ""/tmp/execute/input.json"",
++                    ""--json-string"",
++                    ""temp"",",1,1,0,0,0,0,0
+apache/airflow,2511928488,2083855989,amoghrajesh,35884252,2025-05-12T05:42:18+00:00,2025-05-12T05:42:53+00:00,"Lets just rename the `content_json_for_volume` -- its not that anymore.
+https://github.com/apache/airflow/pull/50448/files#diff-a82432d2e0fd9cf3be813faa6d4361eb102df82c56583caab8ebe30f10a7eb1dR290",True,providers/cncf/kubernetes/src/airflow/providers/cncf/kubernetes/pod_generator.py,,"@@ -358,35 +358,9 @@ def construct_pod(
+         if content_json_for_volume:
+             import shlex
+ 
+-            input_file_path = ""/tmp/execute/input.json""
+-            execute_volume = V1Volume(
+-                name=""execute-volume"",
+-                empty_dir=V1EmptyDirVolumeSource(),
+-            )
+-
+-            execute_volume_mount = V1VolumeMount(
+-                name=""execute-volume"",
+-                mount_path=""/tmp/execute"",
+-                read_only=False,
+-            )
+-
+             escaped_json = shlex.quote(content_json_for_volume)",0,0,0,0,0,0,0
+apache/airflow,2511811713,2083465079,ashb,34150,2025-05-11T09:26:18+00:00,2025-05-11T09:26:26+00:00,Waaaait. Webserver should never parse DAGs. What's going on here?,False,,,,0,0,0,0,0,0,0
+apache/airflow,2511811713,2083465727,rawwar,20266953,2025-05-11T09:28:50+00:00,2025-05-11T09:28:51+00:00,"read_dags_from_db is set to True. So, its not actually parsing DAGs, right?",False,,,,0,0,0,0,0,0,0
